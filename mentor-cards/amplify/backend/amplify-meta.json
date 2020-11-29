@@ -1,0 +1,66 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mentorcards-dev-03537-authRole",
+      "UnauthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-dev-03537-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-dev-03537-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-mentorcards-dev-03537-deployment",
+      "UnauthRoleName": "amplify-mentorcards-dev-03537-unauthRole",
+      "StackName": "amplify-mentorcards-dev-03537",
+      "StackId": "arn:aws:cloudformation:eu-west-2:150827790089:stack/amplify-mentorcards-dev-03537/0b1914c0-31ca-11eb-b90c-02b4f1dcccde",
+      "AmplifyAppId": "d3gjd00p4ivw9w"
+    }
+  },
+  "api": {
+    "CardsAPI": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": "card"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "t3b4chi7ffdvnkvndecvpsqnku",
+        "GraphQLAPIEndpointOutput": "https://nhhvgwzzgrbbnakway47crydfq.appsync-api.eu-west-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-zmgqcgce5fhy5loxjqknwhy5jq"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-mentorcards-dev-03537-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiCardsAPI"
+      },
+      "lastPushTimeStamp": "2020-11-29T11:12:07.656Z",
+      "lastPushDirHash": "0pVgyIrWMKqjD9/i3l+rTfd0b+E="
+    }
+  },
+  "auth": {
+    "mentorcardse579a8ce": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-mentorcards-dev-03537-deployment/amplify-cfn-templates/auth/mentorcardse579a8ce-cloudformation-template.yml",
+        "logicalId": "authmentorcardse579a8ce"
+      },
+      "lastPushTimeStamp": "2020-11-29T11:12:07.664Z",
+      "output": {
+        "AppClientSecret": "1m7k62v6942a4r36poe5nr8dbi1a6rdvhf6n7ms0ppne19gjg55s",
+        "UserPoolId": "eu-west-2_9ILT9G770",
+        "AppClientIDWeb": "1lmjh7nqv6qfsvd9i9glfse97m",
+        "AppClientID": "3mc77uqgko6jn1l4td38aipgto",
+        "IdentityPoolId": "eu-west-2:00327961-7c50-467d-8e04-d82e29ed8cba",
+        "IdentityPoolName": "mentorcardse579a8ce_identitypool_e579a8ce__dev",
+        "UserPoolName": "mentorcardse579a8ce_userpool_e579a8ce"
+      },
+      "lastPushDirHash": "wWkzSAfBdbQ3OJDTPc777PWEIWU="
+    }
+  },
+  "storage": {}
+}
