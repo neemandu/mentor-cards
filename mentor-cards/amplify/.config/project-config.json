@@ -1,7 +1,4 @@
 {
-<<<<<<< HEAD
-  "version": "3.0"
-=======
   "projectName": "mentorcards",
   "version": "3.0",
   "frontend": "javascript",
@@ -17,5 +14,4 @@
   "providers": [
     "awscloudformation"
   ]
->>>>>>> main
 }
