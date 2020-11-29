@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mentorcards-dev-03537-authRole",
+      "UnauthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-dev-03537-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-dev-03537-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-mentorcards-dev-03537-deployment",
+      "UnauthRoleName": "amplify-mentorcards-dev-03537-unauthRole",
+      "StackName": "amplify-mentorcards-dev-03537",
+      "StackId": "arn:aws:cloudformation:eu-west-2:150827790089:stack/amplify-mentorcards-dev-03537/0b1914c0-31ca-11eb-b90c-02b4f1dcccde",
+      "AmplifyAppId": "d3gjd00p4ivw9w"
+    },
+    "categories": {
+      "auth": {
+        "mentorcardse579a8ce": {}
+      }
+    }
+  }
+}

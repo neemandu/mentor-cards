@@ -1,0 +1,28 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateCard {
+  onCreateCard {
+    id
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCard {
+  onUpdateCard {
+    id
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCard {
+  onDeleteCard {
+    id
+    name
+    description
+    createdAt
+    updatedAt
+  }
+}

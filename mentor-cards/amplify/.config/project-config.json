@@ -1,3 +1,21 @@
 {
+<<<<<<< HEAD
   "version": "3.0"
+=======
+  "projectName": "mentorcards",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "angular",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist/mentor-cards",
+      "BuildCommand": "npm.cmd run-script build",
+      "StartCommand": "ng serve"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+>>>>>>> main
 }
