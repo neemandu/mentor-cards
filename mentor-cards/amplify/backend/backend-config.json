@@ -18,17 +18,12 @@
     }
   },
   "auth": {
-    "mentorcards1b334cfa": {
+    "mentorcardse579a8ce": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false
     }
   },
-  "storage": {
-    "cardsPacks": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
-    }
-  }
+  "storage": {}
 }

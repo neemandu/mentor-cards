@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "mentorcards1b334cfa_identitypool_1b334cfa",
+    "identityPoolName": "mentorcardse579a8ce_identitypool_e579a8ce",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "mentor1b334cfa",
-    "userPoolName": "mentorcards1b334cfa_userpool_1b334cfa",
+    "resourceNameTruncated": "mentore579a8ce",
+    "userPoolName": "mentorcardse579a8ce_userpool_e579a8ce",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "mentor1b334cfa_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "mentore579a8ce_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "1b334cfa",
-    "resourceName": "mentorcards1b334cfa",
+    "sharedId": "e579a8ce",
+    "resourceName": "mentorcardse579a8ce",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -45,13 +45,7 @@
             "Arn"
         ]
     },
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
-    "hostedUIDomainName": "mentorcards1b334cfa-1b334cfa",
-    "authProvidersUserPool": [
-    ],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.mentor-cards.com/\"],\"LogoutURLs\":[\"https://www.mentor-cards.com/\"]}",
+    "useDefault": "default",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "dependsOn": []
