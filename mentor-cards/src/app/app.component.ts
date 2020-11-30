@@ -16,16 +16,14 @@ export class AppComponent {
   constructor(private api: APIService, private fb: FormBuilder) { }
 
   async ngOnInit() {
-    this.createForm = this.fb.group({
+    /*this.createForm = this.fb.group({
       'name': ['', Validators.required],
       'description': ['', Validators.required]
     });
-    /* fetch restaurants when app loads */
     this.api.ListCards().then(event => {
       this.cards = event.items;
     });
 
-    /* subscribe to new restaurants being created */
   this.api.OnCreateCardListener.subscribe( (event: any) => {
     const newCard = event.value.data.onCreateCard;
     this.cards = [newCard, ...this.cards];
@@ -39,6 +37,6 @@ export class AppComponent {
     })
     .catch(e => {
       console.log('error creating card...', e);
-    });
+    });*/
   }
 }

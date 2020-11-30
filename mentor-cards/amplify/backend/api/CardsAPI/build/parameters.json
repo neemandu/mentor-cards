@@ -1,8 +1,0 @@
-{
-    "CreateAPIKey": 1,
-    "AppSyncApiName": "CardsAPI",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": false,
-    "S3DeploymentBucket": "amplify-mentorcards-dev-03537-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/e9694a4b15357c1fccea3bd4a30c0289e946487f"
-}

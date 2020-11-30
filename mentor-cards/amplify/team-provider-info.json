@@ -28,11 +28,6 @@
       "StackName": "amplify-mentorcards-prod-225859",
       "StackId": "arn:aws:cloudformation:eu-west-2:150827790089:stack/amplify-mentorcards-prod-225859/b56de750-3285-11eb-ab7b-0a00689a5e78",
       "AmplifyAppId": "d3gjd00p4ivw9w"
-    },
-    "categories": {
-      "auth": {
-        "mentorcardse579a8ce": {}
-      }
     }
   }
 }
