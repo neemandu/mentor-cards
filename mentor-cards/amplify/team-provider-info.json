@@ -1,0 +1,15 @@
+{
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mentorcards-prod-230156-authRole",
+      "UnauthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-prod-230156-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-prod-230156-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-mentorcards-prod-230156-deployment",
+      "UnauthRoleName": "amplify-mentorcards-prod-230156-unauthRole",
+      "StackName": "amplify-mentorcards-prod-230156",
+      "StackId": "arn:aws:cloudformation:eu-west-2:150827790089:stack/amplify-mentorcards-prod-230156/49870330-334f-11eb-b1f3-02acc1d4543c",
+      "AmplifyAppId": "d1it5eo108irpo"
+    }
+  }
+}
