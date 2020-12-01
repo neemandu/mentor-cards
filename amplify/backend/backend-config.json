@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "mentorcards3fbd875a": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
