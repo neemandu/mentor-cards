@@ -334,7 +334,6 @@ export class APIService {
             description
             tags
             categories
-            cards
             createdAt
             updatedAt
           }
