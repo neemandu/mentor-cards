@@ -326,7 +326,10 @@
 </div>
 
 <div *ngFor="let cardsPack of cardsPacks">
-  <div>{{ cardsPack.imgUrl }}</div>
+    <div *ngFor="let card of cardsPack.cards">
+      {{card}}
+      <img ng-src="{{card}}">
+    </div>
 </div>
 
 <div class="content" role="main">
