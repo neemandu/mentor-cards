@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "cardspacks",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authmentorcardsdb9f8281",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

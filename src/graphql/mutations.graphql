@@ -1,0 +1,46 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateCardsPack(
+  $input: CreateCardsPackInput!
+  $condition: ModelCardsPackConditionInput
+) {
+  createCardsPack(input: $input, condition: $condition) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCardsPack(
+  $input: UpdateCardsPackInput!
+  $condition: ModelCardsPackConditionInput
+) {
+  updateCardsPack(input: $input, condition: $condition) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCardsPack(
+  $input: DeleteCardsPackInput!
+  $condition: ModelCardsPackConditionInput
+) {
+  deleteCardsPack(input: $input, condition: $condition) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    createdAt
+    updatedAt
+  }
+}

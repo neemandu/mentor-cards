@@ -1,0 +1,8 @@
+type CardsPack @model {
+  id: ID!
+  imgUrl: String!
+  description: String
+  tags: [String]
+  categories: [String]
+  cards: [String]
+}
