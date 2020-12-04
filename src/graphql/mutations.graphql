@@ -11,6 +11,7 @@ mutation CreateCardsPack(
     categories
     cards
     usersIds
+    groupsIds
     users {
       items {
         id
@@ -37,6 +38,7 @@ mutation UpdateCardsPack(
     categories
     cards
     usersIds
+    groupsIds
     users {
       items {
         id
@@ -63,6 +65,7 @@ mutation DeleteCardsPack(
     categories
     cards
     usersIds
+    groupsIds
     users {
       items {
         id
@@ -93,6 +96,7 @@ mutation CreatePackOwner(
       categories
       cards
       usersIds
+      groupsIds
       users {
         nextToken
       }
@@ -105,6 +109,9 @@ mutation CreatePackOwner(
       cardsPacks {
         nextToken
       }
+      status
+      paymentMethod
+      paymentTransactionId
       createdAt
       updatedAt
     }
@@ -128,6 +135,7 @@ mutation UpdatePackOwner(
       categories
       cards
       usersIds
+      groupsIds
       users {
         nextToken
       }
@@ -140,6 +148,9 @@ mutation UpdatePackOwner(
       cardsPacks {
         nextToken
       }
+      status
+      paymentMethod
+      paymentTransactionId
       createdAt
       updatedAt
     }
@@ -163,6 +174,7 @@ mutation DeletePackOwner(
       categories
       cards
       usersIds
+      groupsIds
       users {
         nextToken
       }
@@ -175,6 +187,9 @@ mutation DeletePackOwner(
       cardsPacks {
         nextToken
       }
+      status
+      paymentMethod
+      paymentTransactionId
       createdAt
       updatedAt
     }
@@ -199,6 +214,9 @@ mutation CreateUser(
       }
       nextToken
     }
+    status
+    paymentMethod
+    paymentTransactionId
     createdAt
     updatedAt
   }
@@ -220,6 +238,9 @@ mutation UpdateUser(
       }
       nextToken
     }
+    status
+    paymentMethod
+    paymentTransactionId
     createdAt
     updatedAt
   }
@@ -241,6 +262,9 @@ mutation DeleteUser(
       }
       nextToken
     }
+    status
+    paymentMethod
+    paymentTransactionId
     createdAt
     updatedAt
   }

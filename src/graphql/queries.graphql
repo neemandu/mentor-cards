@@ -8,6 +8,7 @@ query GetCardsPack($id: ID!) {
     categories
     cards
     usersIds
+    groupsIds
     users {
       items {
         id
@@ -36,6 +37,7 @@ query ListCardsPacks(
       categories
       cards
       usersIds
+      groupsIds
       users {
         nextToken
       }
@@ -59,6 +61,9 @@ query GetUser($id: ID!) {
       }
       nextToken
     }
+    status
+    paymentMethod
+    paymentTransactionId
     createdAt
     updatedAt
   }
@@ -75,6 +80,9 @@ query ListUsers(
       cardsPacks {
         nextToken
       }
+      status
+      paymentMethod
+      paymentTransactionId
       createdAt
       updatedAt
     }

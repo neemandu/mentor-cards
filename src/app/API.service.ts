@@ -17,6 +17,7 @@ export type CreateCardsPackInput = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   usersIds?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
 };
 
 export type ModelCardsPackConditionInput = {
@@ -26,6 +27,7 @@ export type ModelCardsPackConditionInput = {
   categories?: ModelStringInput | null;
   cards?: ModelStringInput | null;
   usersIds?: ModelStringInput | null;
+  groupsIds?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -78,6 +80,7 @@ export type UpdateCardsPackInput = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   usersIds?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -127,10 +130,15 @@ export type DeletePackOwnerInput = {
 export type CreateUserInput = {
   id?: string | null;
   username: string;
+  status?: string | null;
+  paymentMethod?: string | null;
+  paymentTransactionId?: string | null;
 };
 
 export type ModelUserConditionInput = {
-  username?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  paymentMethod?: ModelStringInput | null;
+  paymentTransactionId?: ModelStringInput | null;
   and?: Array<ModelUserConditionInput | null> | null;
   or?: Array<ModelUserConditionInput | null> | null;
   not?: ModelUserConditionInput | null;
@@ -139,6 +147,9 @@ export type ModelUserConditionInput = {
 export type UpdateUserInput = {
   id: string;
   username?: string | null;
+  status?: string | null;
+  paymentMethod?: string | null;
+  paymentTransactionId?: string | null;
 };
 
 export type DeleteUserInput = {
@@ -153,6 +164,7 @@ export type ModelCardsPackFilterInput = {
   categories?: ModelStringInput | null;
   cards?: ModelStringInput | null;
   usersIds?: ModelStringInput | null;
+  groupsIds?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -161,6 +173,9 @@ export type ModelCardsPackFilterInput = {
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null;
   username?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  paymentMethod?: ModelStringInput | null;
+  paymentTransactionId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -175,6 +190,7 @@ export type CreateCardsPackMutation = {
   categories: Array<string | null> | null;
   cards: Array<string | null> | null;
   usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
   users: {
     __typename: "ModelPackOwnerConnection";
     items: Array<{
@@ -200,6 +216,7 @@ export type UpdateCardsPackMutation = {
   categories: Array<string | null> | null;
   cards: Array<string | null> | null;
   usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
   users: {
     __typename: "ModelPackOwnerConnection";
     items: Array<{
@@ -225,6 +242,7 @@ export type DeleteCardsPackMutation = {
   categories: Array<string | null> | null;
   cards: Array<string | null> | null;
   usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
   users: {
     __typename: "ModelPackOwnerConnection";
     items: Array<{
@@ -255,6 +273,7 @@ export type CreatePackOwnerMutation = {
     categories: Array<string | null> | null;
     cards: Array<string | null> | null;
     usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
     users: {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
@@ -270,6 +289,9 @@ export type CreatePackOwnerMutation = {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
     } | null;
+    status: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -291,6 +313,7 @@ export type UpdatePackOwnerMutation = {
     categories: Array<string | null> | null;
     cards: Array<string | null> | null;
     usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
     users: {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
@@ -306,6 +329,9 @@ export type UpdatePackOwnerMutation = {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
     } | null;
+    status: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -327,6 +353,7 @@ export type DeletePackOwnerMutation = {
     categories: Array<string | null> | null;
     cards: Array<string | null> | null;
     usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
     users: {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
@@ -342,6 +369,9 @@ export type DeletePackOwnerMutation = {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
     } | null;
+    status: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -365,6 +395,9 @@ export type CreateUserMutation = {
     } | null> | null;
     nextToken: string | null;
   } | null;
+  status: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -385,6 +418,9 @@ export type UpdateUserMutation = {
     } | null> | null;
     nextToken: string | null;
   } | null;
+  status: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -405,6 +441,9 @@ export type DeleteUserMutation = {
     } | null> | null;
     nextToken: string | null;
   } | null;
+  status: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -418,6 +457,7 @@ export type GetCardsPackQuery = {
   categories: Array<string | null> | null;
   cards: Array<string | null> | null;
   usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
   users: {
     __typename: "ModelPackOwnerConnection";
     items: Array<{
@@ -445,6 +485,7 @@ export type ListCardsPacksQuery = {
     categories: Array<string | null> | null;
     cards: Array<string | null> | null;
     usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
     users: {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
@@ -471,6 +512,9 @@ export type GetUserQuery = {
     } | null> | null;
     nextToken: string | null;
   } | null;
+  status: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -485,6 +529,9 @@ export type ListUsersQuery = {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
     } | null;
+    status: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -500,6 +547,7 @@ export type OnCreateCardsPackSubscription = {
   categories: Array<string | null> | null;
   cards: Array<string | null> | null;
   usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
   users: {
     __typename: "ModelPackOwnerConnection";
     items: Array<{
@@ -525,6 +573,7 @@ export type OnUpdateCardsPackSubscription = {
   categories: Array<string | null> | null;
   cards: Array<string | null> | null;
   usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
   users: {
     __typename: "ModelPackOwnerConnection";
     items: Array<{
@@ -550,6 +599,7 @@ export type OnDeleteCardsPackSubscription = {
   categories: Array<string | null> | null;
   cards: Array<string | null> | null;
   usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
   users: {
     __typename: "ModelPackOwnerConnection";
     items: Array<{
@@ -580,6 +630,7 @@ export type OnCreatePackOwnerSubscription = {
     categories: Array<string | null> | null;
     cards: Array<string | null> | null;
     usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
     users: {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
@@ -595,6 +646,9 @@ export type OnCreatePackOwnerSubscription = {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
     } | null;
+    status: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -616,6 +670,7 @@ export type OnUpdatePackOwnerSubscription = {
     categories: Array<string | null> | null;
     cards: Array<string | null> | null;
     usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
     users: {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
@@ -631,6 +686,9 @@ export type OnUpdatePackOwnerSubscription = {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
     } | null;
+    status: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -652,6 +710,7 @@ export type OnDeletePackOwnerSubscription = {
     categories: Array<string | null> | null;
     cards: Array<string | null> | null;
     usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
     users: {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
@@ -667,6 +726,9 @@ export type OnDeletePackOwnerSubscription = {
       __typename: "ModelPackOwnerConnection";
       nextToken: string | null;
     } | null;
+    status: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -690,6 +752,9 @@ export type OnCreateUserSubscription = {
     } | null> | null;
     nextToken: string | null;
   } | null;
+  status: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -710,6 +775,9 @@ export type OnUpdateUserSubscription = {
     } | null> | null;
     nextToken: string | null;
   } | null;
+  status: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -730,6 +798,9 @@ export type OnDeleteUserSubscription = {
     } | null> | null;
     nextToken: string | null;
   } | null;
+  status: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -752,6 +823,7 @@ export class APIService {
           categories
           cards
           usersIds
+          groupsIds
           users {
             __typename
             items {
@@ -793,6 +865,7 @@ export class APIService {
           categories
           cards
           usersIds
+          groupsIds
           users {
             __typename
             items {
@@ -834,6 +907,7 @@ export class APIService {
           categories
           cards
           usersIds
+          groupsIds
           users {
             __typename
             items {
@@ -880,6 +954,7 @@ export class APIService {
             categories
             cards
             usersIds
+            groupsIds
             users {
               __typename
               nextToken
@@ -895,6 +970,9 @@ export class APIService {
               __typename
               nextToken
             }
+            status
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -932,6 +1010,7 @@ export class APIService {
             categories
             cards
             usersIds
+            groupsIds
             users {
               __typename
               nextToken
@@ -947,6 +1026,9 @@ export class APIService {
               __typename
               nextToken
             }
+            status
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -984,6 +1066,7 @@ export class APIService {
             categories
             cards
             usersIds
+            groupsIds
             users {
               __typename
               nextToken
@@ -999,6 +1082,9 @@ export class APIService {
               __typename
               nextToken
             }
+            status
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1038,6 +1124,9 @@ export class APIService {
             }
             nextToken
           }
+          status
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1074,6 +1163,9 @@ export class APIService {
             }
             nextToken
           }
+          status
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1110,6 +1202,9 @@ export class APIService {
             }
             nextToken
           }
+          status
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1136,6 +1231,7 @@ export class APIService {
           categories
           cards
           usersIds
+          groupsIds
           users {
             __typename
             items {
@@ -1177,6 +1273,7 @@ export class APIService {
             categories
             cards
             usersIds
+            groupsIds
             users {
               __typename
               nextToken
@@ -1220,6 +1317,9 @@ export class APIService {
             }
             nextToken
           }
+          status
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1248,6 +1348,9 @@ export class APIService {
               __typename
               nextToken
             }
+            status
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1283,6 +1386,7 @@ export class APIService {
           categories
           cards
           usersIds
+          groupsIds
           users {
             __typename
             items {
@@ -1316,6 +1420,7 @@ export class APIService {
           categories
           cards
           usersIds
+          groupsIds
           users {
             __typename
             items {
@@ -1349,6 +1454,7 @@ export class APIService {
           categories
           cards
           usersIds
+          groupsIds
           users {
             __typename
             items {
@@ -1387,6 +1493,7 @@ export class APIService {
             categories
             cards
             usersIds
+            groupsIds
             users {
               __typename
               nextToken
@@ -1402,6 +1509,9 @@ export class APIService {
               __typename
               nextToken
             }
+            status
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1431,6 +1541,7 @@ export class APIService {
             categories
             cards
             usersIds
+            groupsIds
             users {
               __typename
               nextToken
@@ -1446,6 +1557,9 @@ export class APIService {
               __typename
               nextToken
             }
+            status
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1475,6 +1589,7 @@ export class APIService {
             categories
             cards
             usersIds
+            groupsIds
             users {
               __typename
               nextToken
@@ -1490,6 +1605,9 @@ export class APIService {
               __typename
               nextToken
             }
+            status
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1504,8 +1622,8 @@ export class APIService {
     SubscriptionResponse<OnCreateUserSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnCreateUser {
-        onCreateUser {
+      `subscription OnCreateUser($username: String!) {
+        onCreateUser(username: $username) {
           __typename
           id
           username
@@ -1521,6 +1639,9 @@ export class APIService {
             }
             nextToken
           }
+          status
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1532,8 +1653,8 @@ export class APIService {
     SubscriptionResponse<OnUpdateUserSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnUpdateUser {
-        onUpdateUser {
+      `subscription OnUpdateUser($username: String!) {
+        onUpdateUser(username: $username) {
           __typename
           id
           username
@@ -1549,6 +1670,9 @@ export class APIService {
             }
             nextToken
           }
+          status
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1560,8 +1684,8 @@ export class APIService {
     SubscriptionResponse<OnDeleteUserSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnDeleteUser {
-        onDeleteUser {
+      `subscription OnDeleteUser($username: String!) {
+        onDeleteUser(username: $username) {
           __typename
           id
           username
@@ -1577,6 +1701,9 @@ export class APIService {
             }
             nextToken
           }
+          status
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }

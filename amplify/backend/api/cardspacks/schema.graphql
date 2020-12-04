@@ -4,13 +4,14 @@ type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   description: String
   tags: [String]
   categories: [String]
-  cards: [String] @auth( rules: [{ allow: owner, ownerField: "usersIds", operations: [read] }] ) @auth( rules: [{ allow: groups, groupsField: "groupsIds", operations: [read] }] ) 
+  cards: [String] @auth( rules: [{ allow: owner, ownerField: "usersIds", operations: [read] }, { allow: groups, groupsField: "groupsIds", operations: [read] }] ) 
   usersIds: [String] 
   groupsIds: [String]
   users: [PackOwner] @connection(keyName: "byPack", fields: ["id"])
 }
 
 type PackOwner
+  @auth( rules: [{ allow: private }] )
   @model(queries: null)
   @key(name: "byPack", fields: ["packID", "userID"])
   @key(name: "byOwner", fields: ["userID", "packID"]) {
@@ -21,11 +22,11 @@ type PackOwner
   owner: User! @connection(fields: ["userID"])
 }
 
-type User @model @auth( rules: [{ allow: private }] ){
+type User @model @auth( rules: [{ allow: owner, ownerField: "username", operations: [read] }] ){
   id: ID!
   username: String!
   cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
-  paymentMethod: String
-  paymentMethodId: String
+  paymentMethod: String 
+  paymentTransactionId: String 
 }
