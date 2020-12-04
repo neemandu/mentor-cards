@@ -1,8 +1,27 @@
-type CardsPack @model {
+type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   id: ID!
   imgUrl: String!
   description: String
   tags: [String]
   categories: [String]
-  cards: [String]
+  cards: [String] @auth( rules: [{ allow: owner, ownerField: "usersIds", operations: [read] }] ) 
+  usersIds: [String] 
+  users: [PackOwner] @connection(keyName: "byPack", fields: ["id"])
+}
+
+type PackOwner
+  @model(queries: null)
+  @key(name: "byPack", fields: ["packID", "userID"])
+  @key(name: "byOwner", fields: ["userID", "packID"]) {
+  id: ID!
+  packID: ID!
+  userID: ID!
+  pack: CardsPack! @connection(fields: ["packID"])
+  owner: User! @connection(fields: ["userID"])
+}
+
+type User @model @auth( rules: [{ allow: private }] ){
+  id: ID!
+  username: String!
+  cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
 }

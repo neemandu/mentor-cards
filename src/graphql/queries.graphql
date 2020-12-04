@@ -7,6 +7,17 @@ query GetCardsPack($id: ID!) {
     tags
     categories
     cards
+    usersIds
+    users {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -24,6 +35,46 @@ query ListCardsPacks(
       tags
       categories
       cards
+      usersIds
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    username
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      cardsPacks {
+        nextToken
+      }
       createdAt
       updatedAt
     }

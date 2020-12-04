@@ -10,6 +10,17 @@ mutation CreateCardsPack(
     tags
     categories
     cards
+    usersIds
+    users {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -25,6 +36,17 @@ mutation UpdateCardsPack(
     tags
     categories
     cards
+    usersIds
+    users {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -40,6 +62,185 @@ mutation DeleteCardsPack(
     tags
     categories
     cards
+    usersIds
+    users {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreatePackOwner(
+  $input: CreatePackOwnerInput!
+  $condition: ModelPackOwnerConditionInput
+) {
+  createPackOwner(input: $input, condition: $condition) {
+    id
+    packID
+    userID
+    pack {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      usersIds
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    owner {
+      id
+      username
+      cardsPacks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdatePackOwner(
+  $input: UpdatePackOwnerInput!
+  $condition: ModelPackOwnerConditionInput
+) {
+  updatePackOwner(input: $input, condition: $condition) {
+    id
+    packID
+    userID
+    pack {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      usersIds
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    owner {
+      id
+      username
+      cardsPacks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeletePackOwner(
+  $input: DeletePackOwnerInput!
+  $condition: ModelPackOwnerConditionInput
+) {
+  deletePackOwner(input: $input, condition: $condition) {
+    id
+    packID
+    userID
+    pack {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      usersIds
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    owner {
+      id
+      username
+      cardsPacks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    username
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    username
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    username
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }

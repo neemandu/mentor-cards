@@ -7,6 +7,17 @@ subscription OnCreateCardsPack {
     tags
     categories
     cards
+    usersIds
+    users {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -19,6 +30,17 @@ subscription OnUpdateCardsPack {
     tags
     categories
     cards
+    usersIds
+    users {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -31,6 +53,167 @@ subscription OnDeleteCardsPack {
     tags
     categories
     cards
+    usersIds
+    users {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreatePackOwner {
+  onCreatePackOwner {
+    id
+    packID
+    userID
+    pack {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      usersIds
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    owner {
+      id
+      username
+      cardsPacks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdatePackOwner {
+  onUpdatePackOwner {
+    id
+    packID
+    userID
+    pack {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      usersIds
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    owner {
+      id
+      username
+      cardsPacks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeletePackOwner {
+  onDeletePackOwner {
+    id
+    packID
+    userID
+    pack {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      usersIds
+      users {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    owner {
+      id
+      username
+      cardsPacks {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    username
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    username
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    username
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
