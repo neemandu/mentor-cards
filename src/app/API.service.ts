@@ -1271,7 +1271,6 @@ export class APIService {
             description
             tags
             categories
-            cards
             usersIds
             groupsIds
             users {
