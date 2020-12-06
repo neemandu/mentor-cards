@@ -4,7 +4,7 @@ type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   description: String
   tags: [String]
   categories: [String]
-  cards: [String]
+  cards: [String] @auth(rules: [{ allow: groups, groupsField: "groupsIds", operations: [read] }, { allow: owner, ownerField: "usersIds", operations: [read] }]) 
   usersIds: [String] 
   groupsIds: [String]
   users: [PackOwner] @connection(keyName: "byPack", fields: ["id"])

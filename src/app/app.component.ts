@@ -12,13 +12,20 @@ export class AppComponent implements OnInit  {
   title = 'mentor-cards';
 
   cardsPacks: Array<CardsPack>;
+  randomPackId: string;
+  randomCardPack: CardsPack;
 
   constructor(private api: APIService) { }
 
   async ngOnInit() {
     /* fetch cards when app loads */
-    this.api.ListCardsPacks().then(event => {
+    await this.api.ListCardsPacks().then(event => {
       this.cardsPacks = event.items;
+      this.randomPackId = event.items[1].id;
+    });
+
+    await this.api.GetCardsPack(this.randomPackId).then(event => {
+      this.randomCardPack = event;
     });
   }
 }

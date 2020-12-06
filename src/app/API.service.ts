@@ -1271,12 +1271,6 @@ export class APIService {
             description
             tags
             categories
-            usersIds
-            groupsIds
-            users {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
