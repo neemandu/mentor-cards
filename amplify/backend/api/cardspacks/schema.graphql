@@ -27,6 +27,14 @@ type User @model @auth( rules: [{ allow: owner, ownerField: "username", operatio
   username: String!
   cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
-  paymentMethod: String 
-  paymentTransactionId: String 
+  subscription: MonthlySubscription @connection
 }
+
+type MonthlySubscription @model  @auth( rules: [{ allow: private }] ){
+  id: ID!
+  paymentMethod: String
+  paymentProvider: String
+  providerSubscriptionId: String
+}
+
+

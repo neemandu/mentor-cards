@@ -325,19 +325,16 @@
     </a>
 </div>
 
-Packs
-<div *ngFor="let cardsPack of cardsPacks">
-  {{cardsPack.imgUrl}}
-    <div *ngFor="let card of cardsPack.cards">
-      {{card}}
-      <img ng-src="{{card}}">
-    </div>
-</div>
 
-Random Card Pack:
-id: {{randomCardPack.id}}
-img: {{randomCardPack.imgUrl}}
-cards: {{randomCardPack.cards}}
+  Packs
+  <div *ngFor="let cardsPack of cardsPacks">
+    {{cardsPack.imgUrl}}
+  </div>
+  
+  Random Card Pack:
+  id: {{randomCardPack.id}}
+  img: {{randomCardPack.imgUrl}}
+  <div *ngFor="let card of randomCardPack.cards">{{card}}</div>
 
 <div class="content" role="main">
 

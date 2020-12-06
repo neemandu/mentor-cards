@@ -20,12 +20,15 @@ export class AppComponent implements OnInit  {
   async ngOnInit() {
     /* fetch cards when app loads */
     await this.api.ListCardsPacks().then(event => {
+
       this.cardsPacks = event.items;
       this.randomPackId = event.items[1].id;
     });
 
     await this.api.GetCardsPack(this.randomPackId).then(event => {
       this.randomCardPack = event;
-    });
+    })
+    .catch();
+    
   }
 }
