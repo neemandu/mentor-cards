@@ -1,0 +1,48 @@
+* {
+  direction: rtl;
+}
+
+app-card {
+  max-width: 25vw;
+}
+
+.content {
+  display: flex;
+}
+
+.card-pre-reveal {
+  margin: 10px 10px;
+  max-height: 85vh;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+
+.card-reveal {
+  opacity: 1;
+  /* transition: opacity 0.7s linear; */
+}
+
+.closeModalButton {
+  margin-top: -3.5%;
+  margin-bottom: 1%;
+}
+
+.closeModalButton:focus {
+  outline: none;
+}
+
+::ng-deep .mat-dialog-container {
+  overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+
+  app-card {
+    max-width: 100%;
+  }
+}

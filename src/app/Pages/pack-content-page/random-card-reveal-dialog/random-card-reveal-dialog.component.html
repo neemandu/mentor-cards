@@ -1,0 +1,20 @@
+<div class="d-flex flex-column">
+  <button class="closeModalButton" mat-icon-button (click)="closeDialog()">
+    <mat-icon>highlight_off</mat-icon>
+  </button>
+  <div class="content">
+    <button type="button" class="btn btn-light" [disabled]="index == data.length" (click)="nextCard()">
+      <mat-icon class="btn-icon">chevron_right
+      </mat-icon>
+    </button>
+
+    <app-card [ngClass]="{'card-pre-reveal': true, 'card-reveal': cardLoaded}" [cardContent]="selectedCard"
+      [flipped]="true" (loaded)="cardLoaded=true">
+    </app-card>
+
+    <button type="button" class="btn btn-light" [disabled]="index == 0" (click)="prevCard()">
+      <mat-icon class="btn-icon">chevron_left</mat-icon>
+    </button>
+
+  </div>
+</div>

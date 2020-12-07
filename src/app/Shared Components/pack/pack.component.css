@@ -1,0 +1,65 @@
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  /* padding: 5px; */
+  /* width: 10vw; */
+  width: 10rem;
+  height: auto;
+  box-shadow: 0.25em 0.25em 0px 0px rgb(255 255 255), 0.25em 0.25em 0px 1px #ddd, 0.5em 0.5em 0px 0px rgb(255 255 255), 0.5em 0.5em 0px 1px #ddd;
+  transition: box-shadow 0.2s ease-out;
+}
+
+img:hover {
+  box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd, 0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd;
+}
+
+#pack-buttons {
+  margin-top: 5px;
+  /* margin-top: 14.2rem; */
+  position: relative;
+}
+
+#pack-icons {
+  margin-top: 8px;
+}
+
+mat-icon {
+  /* margin: 0px 5px 0px 5px; */
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#pack-desc {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+}
+
+/* 
+.flip-card {
+  width: 10rem;
+}
+
+.flip-card-inner {
+  position: relative;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+} */

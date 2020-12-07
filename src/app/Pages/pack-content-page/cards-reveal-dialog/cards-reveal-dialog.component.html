@@ -1,0 +1,11 @@
+<div class="d-flex flex-column">
+  <button class="closeModalButton" mat-icon-button (click)="closeDialog()">
+    <mat-icon>highlight_off</mat-icon>
+  </button>
+  <div class="content">
+    <!-- <app-card [ngClass]="{'card': true, 'card-reveal': loadedCards == data.length}" [ngStyle]="{'visibility': loadedCards == data.length ? 'visible' : 'hidden'}" class="card" -->
+    <app-card [ngClass]="{'card-pre-reveal': true, 'card-reveal': loadedCards == data.length}" 
+      *ngFor="let card of data" [cardContent]="card" [index]="card.index" [flipped]="true" (loaded)="loadedCards=loadedCards+1;">
+    </app-card>
+  </div>
+</div>

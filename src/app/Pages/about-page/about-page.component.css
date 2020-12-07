@@ -1,0 +1,79 @@
+* {
+  font-family: 'rubik';
+  font-size: 1rem;
+  direction: rtl;
+}
+
+h1,
+h2 {
+  font-family: 'rubik';
+}
+
+#introduction {
+  text-align: center;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+.flower-img {
+  opacity: 0;
+  transition: opacity 2s;
+  height: 25rem;
+  margin-top: 1.5rem;
+}
+
+.flower-img:first-child {
+  transform: rotateY(180deg);
+}
+
+#about-text {
+  margin-top: 3rem;
+}
+
+#about-content {
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+
+.person-bio {
+  width: 25%;
+  text-align: center;
+  transition: transform 1s, line-height 1s
+}
+
+.person-bio:hover {
+  transform: scale(1.1);
+  line-height: 5rem;
+}
+
+.person-bio:hover>.people-img {
+  border-radius: 30%;
+  box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.people-img {
+  opacity: 0;
+  width: 65%;
+  border-radius: 50%;
+  transition: border-radius 1s, box-shadow 1s, opacity 2s;
+}
+
+.bio-content {
+  margin-top: 1rem;
+}
+
+.bio-content>h2 {
+  font-size: 1.5rem;
+}
+
+.bio-content>p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition: line-height 0.5s
+}
+
+#introduction > p {
+  line-height: 1.5rem;
+}

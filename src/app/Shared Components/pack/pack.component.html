@@ -1,0 +1,18 @@
+<div class="d-flex flex-column">
+  <h3 id="pack-desc">{{packInfo.description}}</h3>
+  <img routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()" src={{packInfo.imgUrl}}
+    matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
+    matTooltipShowDelay="1000" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
+
+
+  <div id="pack-buttons" class="d-flex justify-content-between">
+    <div id="pack-icons">
+      <mat-icon *ngIf="this.fav" matRipple [matRippleRadius]="10" [matRippleUnbounded]="true"
+        [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'" (click)="addRemoveFavorite()"
+        [ngStyle]="{'color': '#ff5454'}">favorite</mat-icon>
+      <mat-icon *ngIf="!this.fav" matRipple [matRippleRadius]="10" [matRippleUnbounded]="true"
+        [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'" (click)="addRemoveFavorite()"
+        [ngStyle]="{'color': '#a0a0a0'}">favorite_border</mat-icon>
+    </div>
+  </div>
+</div>

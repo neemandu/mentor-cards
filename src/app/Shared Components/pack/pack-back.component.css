@@ -1,0 +1,61 @@
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  /* width: 10vw; */
+  width: 10rem;
+  height: auto;
+  /* margin: 10px 10px; */
+}
+
+#pack-buttons {
+  margin-top: 5px;
+  position: relative;
+}
+
+#pack-icons {
+  margin-top: 8px;
+}
+
+mat-icon {
+  margin: 0px 5px 0px 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#pack-desc {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+/* 
+.flip-card {
+  width: 10rem;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+  height: 100%;
+} */

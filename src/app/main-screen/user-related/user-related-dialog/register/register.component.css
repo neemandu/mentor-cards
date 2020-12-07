@@ -1,0 +1,48 @@
+* {
+  font-family: 'rubik';
+}
+
+.mat-form-field {
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+.option-btn {
+  margin-left: 10px;
+  height: 39px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 500;
+  font-size: large;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out;
+}
+
+#login-button {
+  margin-top: 10px;
+  background: #ffa800;
+  color: white;
+}
+
+#login-button:enabled:hover {
+  background: #e69900;
+  color: white;
+}
+
+#login-button:enabled:active {
+  background: #db9200;
+  color: white;
+}
+
+#login-button:disabled {
+  background: #e0e0e0;
+  color: rgb(102, 102, 102);
+}
+
+a {
+  /* font-family: 'rubik'; */
+  font-size: 1rem;
+}
+
+mat-progress-bar {
+  margin: 10px 0px;
+}
