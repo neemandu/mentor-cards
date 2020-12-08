@@ -1,0 +1,16 @@
+<div class="d-flex flex-column">
+  <div>
+    <div [ngClass]="{'flip-box-inner': true, 'flip': flipped}">
+      <div class="flip-box-front">
+        <img src="/assets/Mentor Cards Back.png" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}"
+          (contextmenu)="onRightClick();">
+      </div>
+      <div class="flip-box-back">
+        <img (load)="imgLoaded()" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}"
+          src={{cardContent.imgUrl}} data-src={{cardContent.imgUrl}} (contextmenu)="onRightClick();">
+      </div>
+    </div>
+  </div>
+  <!-- <img (load)="imgLoaded()" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}" src={{cardContent.imgUrl}}> -->
+  <span *ngIf="index" class="badge badge-pill badge-light">{{index}}</span>
+</div>

@@ -1,0 +1,66 @@
+button {
+  font-family: 'rubik';
+  font-size: 1rem;
+}
+
+.navbar-btn {
+  margin-left: 5px;
+}
+
+.navbar-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.navbar-btn:active {
+  background-color: #e2e6ea;
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem #ffcf008c;
+}
+
+.btn-icon {
+  margin-right: 5px;
+}
+
+#nav-buttons {
+  margin: 5px 10px 5px 0px;
+}
+
+button:focus {
+  outline: none;
+}
+
+#log-in-buttons {
+  width: 45%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.login-button {
+  margin-right: 5vmin;
+}
+
+.sticky-top {
+  z-index: 1000;
+  margin-bottom: 5px;
+  margin-top: -1px;
+}
+
+img {
+  height: 3rem;
+  margin: 5px;
+}
+
+#logo {
+  /* margin: 10px 10px; */
+  background-color: white;
+  text-align: center;
+  /* color: #fdcd00; */
+}
+
+h1 {
+  letter-spacing: 1px;
+  margin: 10px 15px;
+}
+

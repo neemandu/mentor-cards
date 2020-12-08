@@ -131,66 +131,28 @@ export type CreateUserInput = {
   id?: string | null;
   username: string;
   status?: string | null;
-  numberOfPacksSubstitutions?: number | null;
-  lastPackSubstitutionDate?: string | null;
-  userSubscriptionId?: string | null;
+  paymentMethod?: string | null;
+  paymentTransactionId?: string | null;
 };
 
 export type ModelUserConditionInput = {
   status?: ModelStringInput | null;
-  numberOfPacksSubstitutions?: ModelIntInput | null;
-  lastPackSubstitutionDate?: ModelStringInput | null;
+  paymentMethod?: ModelStringInput | null;
+  paymentTransactionId?: ModelStringInput | null;
   and?: Array<ModelUserConditionInput | null> | null;
   or?: Array<ModelUserConditionInput | null> | null;
   not?: ModelUserConditionInput | null;
-};
-
-export type ModelIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
 };
 
 export type UpdateUserInput = {
   id: string;
   username?: string | null;
   status?: string | null;
-  numberOfPacksSubstitutions?: number | null;
-  lastPackSubstitutionDate?: string | null;
-  userSubscriptionId?: string | null;
+  paymentMethod?: string | null;
+  paymentTransactionId?: string | null;
 };
 
 export type DeleteUserInput = {
-  id?: string | null;
-};
-
-export type CreateMonthlySubscriptionInput = {
-  id?: string | null;
-  paymentProvider?: string | null;
-  providerSubscriptionId?: string | null;
-};
-
-export type ModelMonthlySubscriptionConditionInput = {
-  paymentProvider?: ModelStringInput | null;
-  providerSubscriptionId?: ModelStringInput | null;
-  and?: Array<ModelMonthlySubscriptionConditionInput | null> | null;
-  or?: Array<ModelMonthlySubscriptionConditionInput | null> | null;
-  not?: ModelMonthlySubscriptionConditionInput | null;
-};
-
-export type UpdateMonthlySubscriptionInput = {
-  id: string;
-  paymentProvider?: string | null;
-  providerSubscriptionId?: string | null;
-};
-
-export type DeleteMonthlySubscriptionInput = {
   id?: string | null;
 };
 
@@ -212,20 +174,11 @@ export type ModelUserFilterInput = {
   id?: ModelIDInput | null;
   username?: ModelStringInput | null;
   status?: ModelStringInput | null;
-  numberOfPacksSubstitutions?: ModelIntInput | null;
-  lastPackSubstitutionDate?: ModelStringInput | null;
+  paymentMethod?: ModelStringInput | null;
+  paymentTransactionId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
-};
-
-export type ModelMonthlySubscriptionFilterInput = {
-  id?: ModelIDInput | null;
-  paymentProvider?: ModelStringInput | null;
-  providerSubscriptionId?: ModelStringInput | null;
-  and?: Array<ModelMonthlySubscriptionFilterInput | null> | null;
-  or?: Array<ModelMonthlySubscriptionFilterInput | null> | null;
-  not?: ModelMonthlySubscriptionFilterInput | null;
 };
 
 export type CreateCardsPackMutation = {
@@ -337,16 +290,8 @@ export type CreatePackOwnerMutation = {
       nextToken: string | null;
     } | null;
     status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      paymentProvider: string | null;
-      providerSubscriptionId: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -385,16 +330,8 @@ export type UpdatePackOwnerMutation = {
       nextToken: string | null;
     } | null;
     status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      paymentProvider: string | null;
-      providerSubscriptionId: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -433,16 +370,8 @@ export type DeletePackOwnerMutation = {
       nextToken: string | null;
     } | null;
     status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      paymentProvider: string | null;
-      providerSubscriptionId: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -467,16 +396,8 @@ export type CreateUserMutation = {
     nextToken: string | null;
   } | null;
   status: string | null;
-  subscription: {
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  numberOfPacksSubstitutions: number | null;
-  lastPackSubstitutionDate: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -498,16 +419,8 @@ export type UpdateUserMutation = {
     nextToken: string | null;
   } | null;
   status: string | null;
-  subscription: {
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  numberOfPacksSubstitutions: number | null;
-  lastPackSubstitutionDate: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -529,43 +442,8 @@ export type DeleteUserMutation = {
     nextToken: string | null;
   } | null;
   status: string | null;
-  subscription: {
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  numberOfPacksSubstitutions: number | null;
-  lastPackSubstitutionDate: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateMonthlySubscriptionMutation = {
-  __typename: "MonthlySubscription";
-  id: string;
-  paymentProvider: string | null;
-  providerSubscriptionId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateMonthlySubscriptionMutation = {
-  __typename: "MonthlySubscription";
-  id: string;
-  paymentProvider: string | null;
-  providerSubscriptionId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteMonthlySubscriptionMutation = {
-  __typename: "MonthlySubscription";
-  id: string;
-  paymentProvider: string | null;
-  providerSubscriptionId: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -635,16 +513,8 @@ export type GetUserQuery = {
     nextToken: string | null;
   } | null;
   status: string | null;
-  subscription: {
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  numberOfPacksSubstitutions: number | null;
-  lastPackSubstitutionDate: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -660,38 +530,8 @@ export type ListUsersQuery = {
       nextToken: string | null;
     } | null;
     status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      paymentProvider: string | null;
-      providerSubscriptionId: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-};
-
-export type GetMonthlySubscriptionQuery = {
-  __typename: "MonthlySubscription";
-  id: string;
-  paymentProvider: string | null;
-  providerSubscriptionId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListMonthlySubscriptionsQuery = {
-  __typename: "ModelMonthlySubscriptionConnection";
-  items: Array<{
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -807,16 +647,8 @@ export type OnCreatePackOwnerSubscription = {
       nextToken: string | null;
     } | null;
     status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      paymentProvider: string | null;
-      providerSubscriptionId: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -855,16 +687,8 @@ export type OnUpdatePackOwnerSubscription = {
       nextToken: string | null;
     } | null;
     status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      paymentProvider: string | null;
-      providerSubscriptionId: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -903,16 +727,8 @@ export type OnDeletePackOwnerSubscription = {
       nextToken: string | null;
     } | null;
     status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      paymentProvider: string | null;
-      providerSubscriptionId: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
+    paymentMethod: string | null;
+    paymentTransactionId: string | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -937,16 +753,8 @@ export type OnCreateUserSubscription = {
     nextToken: string | null;
   } | null;
   status: string | null;
-  subscription: {
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  numberOfPacksSubstitutions: number | null;
-  lastPackSubstitutionDate: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -968,16 +776,8 @@ export type OnUpdateUserSubscription = {
     nextToken: string | null;
   } | null;
   status: string | null;
-  subscription: {
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  numberOfPacksSubstitutions: number | null;
-  lastPackSubstitutionDate: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -999,43 +799,8 @@ export type OnDeleteUserSubscription = {
     nextToken: string | null;
   } | null;
   status: string | null;
-  subscription: {
-    __typename: "MonthlySubscription";
-    id: string;
-    paymentProvider: string | null;
-    providerSubscriptionId: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  numberOfPacksSubstitutions: number | null;
-  lastPackSubstitutionDate: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateMonthlySubscriptionSubscription = {
-  __typename: "MonthlySubscription";
-  id: string;
-  paymentProvider: string | null;
-  providerSubscriptionId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateMonthlySubscriptionSubscription = {
-  __typename: "MonthlySubscription";
-  id: string;
-  paymentProvider: string | null;
-  providerSubscriptionId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteMonthlySubscriptionSubscription = {
-  __typename: "MonthlySubscription";
-  id: string;
-  paymentProvider: string | null;
-  providerSubscriptionId: string | null;
+  paymentMethod: string | null;
+  paymentTransactionId: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1206,16 +971,8 @@ export class APIService {
               nextToken
             }
             status
-            subscription {
-              __typename
-              id
-              paymentProvider
-              providerSubscriptionId
-              createdAt
-              updatedAt
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1270,16 +1027,8 @@ export class APIService {
               nextToken
             }
             status
-            subscription {
-              __typename
-              id
-              paymentProvider
-              providerSubscriptionId
-              createdAt
-              updatedAt
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1334,16 +1083,8 @@ export class APIService {
               nextToken
             }
             status
-            subscription {
-              __typename
-              id
-              paymentProvider
-              providerSubscriptionId
-              createdAt
-              updatedAt
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1384,16 +1125,8 @@ export class APIService {
             nextToken
           }
           status
-          subscription {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1431,16 +1164,8 @@ export class APIService {
             nextToken
           }
           status
-          subscription {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1478,16 +1203,8 @@ export class APIService {
             nextToken
           }
           status
-          subscription {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1502,87 +1219,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteUserMutation>response.data.deleteUser;
-  }
-  async CreateMonthlySubscription(
-    input: CreateMonthlySubscriptionInput,
-    condition?: ModelMonthlySubscriptionConditionInput
-  ): Promise<CreateMonthlySubscriptionMutation> {
-    const statement = `mutation CreateMonthlySubscription($input: CreateMonthlySubscriptionInput!, $condition: ModelMonthlySubscriptionConditionInput) {
-        createMonthlySubscription(input: $input, condition: $condition) {
-          __typename
-          id
-          paymentProvider
-          providerSubscriptionId
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateMonthlySubscriptionMutation>(
-      response.data.createMonthlySubscription
-    );
-  }
-  async UpdateMonthlySubscription(
-    input: UpdateMonthlySubscriptionInput,
-    condition?: ModelMonthlySubscriptionConditionInput
-  ): Promise<UpdateMonthlySubscriptionMutation> {
-    const statement = `mutation UpdateMonthlySubscription($input: UpdateMonthlySubscriptionInput!, $condition: ModelMonthlySubscriptionConditionInput) {
-        updateMonthlySubscription(input: $input, condition: $condition) {
-          __typename
-          id
-          paymentProvider
-          providerSubscriptionId
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateMonthlySubscriptionMutation>(
-      response.data.updateMonthlySubscription
-    );
-  }
-  async DeleteMonthlySubscription(
-    input: DeleteMonthlySubscriptionInput,
-    condition?: ModelMonthlySubscriptionConditionInput
-  ): Promise<DeleteMonthlySubscriptionMutation> {
-    const statement = `mutation DeleteMonthlySubscription($input: DeleteMonthlySubscriptionInput!, $condition: ModelMonthlySubscriptionConditionInput) {
-        deleteMonthlySubscription(input: $input, condition: $condition) {
-          __typename
-          id
-          paymentProvider
-          providerSubscriptionId
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteMonthlySubscriptionMutation>(
-      response.data.deleteMonthlySubscription
-    );
   }
   async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!) {
@@ -1635,13 +1271,6 @@ export class APIService {
             description
             tags
             categories
-            cards
-            usersIds
-            groupsIds
-            users {
-              __typename
-              nextToken
-            }
             createdAt
             updatedAt
           }
@@ -1682,16 +1311,8 @@ export class APIService {
             nextToken
           }
           status
-          subscription {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -1721,16 +1342,8 @@ export class APIService {
               nextToken
             }
             status
-            subscription {
-              __typename
-              id
-              paymentProvider
-              providerSubscriptionId
-              createdAt
-              updatedAt
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -1751,63 +1364,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
-  }
-  async GetMonthlySubscription(
-    id: string
-  ): Promise<GetMonthlySubscriptionQuery> {
-    const statement = `query GetMonthlySubscription($id: ID!) {
-        getMonthlySubscription(id: $id) {
-          __typename
-          id
-          paymentProvider
-          providerSubscriptionId
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetMonthlySubscriptionQuery>response.data.getMonthlySubscription;
-  }
-  async ListMonthlySubscriptions(
-    filter?: ModelMonthlySubscriptionFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListMonthlySubscriptionsQuery> {
-    const statement = `query ListMonthlySubscriptions($filter: ModelMonthlySubscriptionFilterInput, $limit: Int, $nextToken: String) {
-        listMonthlySubscriptions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListMonthlySubscriptionsQuery>(
-      response.data.listMonthlySubscriptions
-    );
   }
   OnCreateCardsPackListener: Observable<
     SubscriptionResponse<OnCreateCardsPackSubscription>
@@ -1947,16 +1503,8 @@ export class APIService {
               nextToken
             }
             status
-            subscription {
-              __typename
-              id
-              paymentProvider
-              providerSubscriptionId
-              createdAt
-              updatedAt
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -2003,16 +1551,8 @@ export class APIService {
               nextToken
             }
             status
-            subscription {
-              __typename
-              id
-              paymentProvider
-              providerSubscriptionId
-              createdAt
-              updatedAt
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -2059,16 +1599,8 @@ export class APIService {
               nextToken
             }
             status
-            subscription {
-              __typename
-              id
-              paymentProvider
-              providerSubscriptionId
-              createdAt
-              updatedAt
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
+            paymentMethod
+            paymentTransactionId
             createdAt
             updatedAt
           }
@@ -2101,16 +1633,8 @@ export class APIService {
             nextToken
           }
           status
-          subscription {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -2140,16 +1664,8 @@ export class APIService {
             nextToken
           }
           status
-          subscription {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
@@ -2179,77 +1695,12 @@ export class APIService {
             nextToken
           }
           status
-          subscription {
-            __typename
-            id
-            paymentProvider
-            providerSubscriptionId
-            createdAt
-            updatedAt
-          }
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
+          paymentMethod
+          paymentTransactionId
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteUserSubscription>>;
-
-  OnCreateMonthlySubscriptionListener: Observable<
-    SubscriptionResponse<OnCreateMonthlySubscriptionSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateMonthlySubscription {
-        onCreateMonthlySubscription {
-          __typename
-          id
-          paymentProvider
-          providerSubscriptionId
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<OnCreateMonthlySubscriptionSubscription>
-  >;
-
-  OnUpdateMonthlySubscriptionListener: Observable<
-    SubscriptionResponse<OnUpdateMonthlySubscriptionSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateMonthlySubscription {
-        onUpdateMonthlySubscription {
-          __typename
-          id
-          paymentProvider
-          providerSubscriptionId
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<OnUpdateMonthlySubscriptionSubscription>
-  >;
-
-  OnDeleteMonthlySubscriptionListener: Observable<
-    SubscriptionResponse<OnDeleteMonthlySubscriptionSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteMonthlySubscription {
-        onDeleteMonthlySubscription {
-          __typename
-          id
-          paymentProvider
-          providerSubscriptionId
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<OnDeleteMonthlySubscriptionSubscription>
-  >;
 }

@@ -1,0 +1,61 @@
+* {
+  font-family: 'rubik';
+  font-size: inherit;
+}
+
+.more-less-categories-icon {
+  font-size: 1.5rem;
+  font-family: 'Material Icons';
+  /* cursor: pointer; */
+}
+
+#more-less-categories-button {
+  border-style: none;
+  background: #f8f9fa;
+}
+
+button:focus {
+  outline: none;
+}
+
+#content {
+  margin-top: 1rem;
+}
+
+app-pack {
+  margin: 15px 25px;
+}
+
+#filters {
+  max-width: 15%;
+  min-width: 10%;
+  word-break: keep-all;
+  margin-left: 10px;
+}
+
+#filter-by-text {
+  text-align: right;
+  margin: 0px 10px 0px 0px;
+}
+
+#filter-by-options-title {
+  text-align: right;
+  margin: 5px 10px 0px 0px;
+  font-weight: 700;
+}
+
+:host ::ng-deep .mat-list-item-content {
+  /* padding-right: 10px; */
+  text-align: right;
+}
+
+mat-form-field {
+  text-align: right;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.mat-list-base .mat-list-item,
+.mat-list-base .mat-list-option {
+  height: 35px;
+}

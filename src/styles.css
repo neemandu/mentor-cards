@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+  font-family: rubik;
+  /* -webkit-text-size-adjust: auto; */
+}
+
+body {
+  margin: 0;
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+  font-family: 'rubik' !important;
+  background-color: #f8f9fa !important;
+}
+
+.item {
+  transition: transform .2s;
+}
+
+.item-hidden {
+  /* visibility: hidden; */
+  opacity: 0;
+  transition: opacity 0.5s linear;
+}
+
+.item-reveal {
+  /* visibility: visible; */
+  opacity: 1;
+  transition: opacity 0.1s linear;
+}
+
+.item:hover {
+  transform: scale(1.05);
+  /* (110% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.rtl-snackbar {
+  direction: rtl !important;
+  color: black;
+  background-color: #feefd7;
+  border: 4px double #ffcf00;
+  min-width: 0 !important;
+}
+
+.rtl-error-snackbar {
+  direction: rtl !important;
+  color: black;
+  background-color: #feefd7;
+  border: 4px double #ff5e00;
+  min-width: 0 !important;
+}
+
+.shuffle-item {
+  transition: transform 1s;
+  /* transition: ease-in 2s; */
+}
+
+*:focus, button:focus {
+  outline: none;
+}
+
+@font-face {
+  font-family: rubik;
+  src: url(\assets\Fonts\Rubik-VariableFont_wght.ttf) format("opentype");
+}

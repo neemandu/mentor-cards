@@ -1,0 +1,11 @@
+<mat-tab-group [selectedIndex]="selectedTab" (selectedTabChange)="tabChanged($event)" mat-align-tabs="center" dynamicHeight>
+  <mat-tab label="התחברות">
+    <app-login (loggedIn)="loggedIn()"></app-login>
+    <!-- <app-login></app-login> -->
+  </mat-tab>
+  <mat-tab label="הרשמה">
+    <ng-template matTabContent>
+      <app-register (registered)="selectedTab = 0;"></app-register>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

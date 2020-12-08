@@ -1,0 +1,64 @@
+<!-- <div id="logInForm" *ngIf="login"> -->
+<div id="logInForm" [hidden]="!login">
+  <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" *ngIf="login">
+    <div class="d-flex flex-column">
+      <mat-form-field>
+        <mat-label>אימייל</mat-label>
+        <input autocomplete="off" formControlName="username" matInput color="primary">
+        <mat-error *ngIf="loginForm.controls.username.errors?.userNotConfirmed">משתמש לא אומת. יש להכנס למייל ולאמת
+          משתמש על מנת להתחבר</mat-error>
+        <mat-error *ngIf="loginForm.controls.username.errors?.userNotFound">משתמש לא קיים</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>סיסמא</mat-label>
+        <input autocomplete="off" formControlName="password" matInput [type]="hidePW ? 'password' : 'text'">
+        <mat-error *ngIf="loginForm.controls.password.errors?.usernamePwWrong">שם משתמש או סיסמא לא נכונים</mat-error>
+        <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
+          <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button type="submit" class="option-btn login-button" [disabled]="!loginForm.valid">התחבר</button>
+    </div>
+  </form>
+</div>
+
+<!-- <div id="forgotPasswordForm" *ngIf="!login"> -->
+<div id="forgotPasswordForm" [hidden]="login">
+  <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPasswordSubmit()">
+    <div class="d-flex flex-column">
+      <mat-form-field>
+        <mat-label>אימייל</mat-label>
+        <input autocomplete="off" formControlName="username" matInput>
+        <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.userNotFound">משתמש לא קיים</mat-error>
+        <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.limitExceeded">יותר מדי נסיונות איפוס. יש להמתין
+          ולנסות שוב בהמשך</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="newPasswordPhase">
+        <mat-label>קוד אימות</mat-label>
+        <input autocomplete="off" formControlName="confirmationCode" matInput>
+        <mat-error *ngIf="forgotPasswordForm.controls.confirmationCode.errors?.codeMismatch">קוד אימות שגוי</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="newPasswordPhase">
+        <mat-label>סיסמא</mat-label>
+        <input autocomplete="off" formControlName="newPassword" matInput [type]="hidePW ? 'password' : 'text'">
+        <mat-hint>8 ספרות לפחות, חייב להכיל ספרה, אות קטנה ואות גדולה (באנגלית)</mat-hint>
+        <mat-error *ngIf="registerForm.controls.password.errors?.badPassword">סיסמא לא חוקית, נסו שנית</mat-error>
+        <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
+          <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button type="submit" class="option-btn login-button" [disabled]="!forgotPasswordForm.valid">שחזר
+        סיסמא</button>
+    </div>
+  </form>
+</div>
+<mat-progress-bar [ngStyle]="{'visibility': showLoading ? 'visible' : 'hidden'}" mode="query"></mat-progress-bar>
+<!-- <br> -->
+<mat-divider></mat-divider>
+<br>
+<div id="formFooter">
+  <a class="underlineHover" style="cursor: pointer;" *ngIf="login" (click)="login = !login; loginForm.reset()">שכחת
+    סיסמא?</a>
+  <a class="underlineHover" style="cursor: pointer;" *ngIf="!login"
+    (click)="login = !login; forgotPasswordForm.reset(); hidePW=true;">התחברות</a>
+</div>
