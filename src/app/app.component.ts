@@ -1,7 +1,5 @@
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { APIService } from './API.service';
-import { CardsPack } from '../types/cardsPacks';
 import { UserAuthService } from './Services/user-auth.service';
 
 

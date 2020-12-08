@@ -9,7 +9,8 @@ export class Card {
     constructor(){}
 
     deseralize(input: any){
-        Object.assign(this, input);
+        // Object.assign(this, input);
+        this.imgUrl = input;
         return this;
     }
 }

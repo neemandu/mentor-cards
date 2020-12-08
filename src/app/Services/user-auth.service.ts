@@ -48,7 +48,6 @@ export class UserAuthService {
    */
   async loggedIn(userData: any) {//TODO after login, somtimes loading screen doesn't close
     this.loggedInAttributes = userData.attributes;
-    var id = userData.pool.clientId;
     this.loggedInEmmiter.emit(userData.attributes);
     await this.api.GetUser(userData.username).then(user => {
       console.log("file: all-packs-page.component.ts ~ line 68 ~ awaitthis.api.GetUser ~ user", user)

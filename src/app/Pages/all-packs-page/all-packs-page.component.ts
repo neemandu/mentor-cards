@@ -49,14 +49,14 @@ export class AllPacksPageComponent implements OnInit {
             });
             return new PackInfo().deseralize(pack)
           });
-          console.log("file: all-packs-page.component.ts ~ line 45 ~ awaitthis.api.ListCardsPacks ~ this.allPacks", this.allPacks)
+          // console.log("file: all-packs-page.component.ts ~ line 45 ~ awaitthis.api.ListCardsPacks ~ this.allPacks", this.allPacks)
           this.cardsService.allPacks = this.allPacks.map(pack => pack);
           this.cardsService.allCategories = this.allCategories.map(category => category);
           this.allFavorites = this.cardsService.favorites;
         })
       }
       catch (e) {
-        console.log("file: all-packs-page.component.ts ~ line 65 ~ ngOnInit ~ e", e)
+        // console.log("file: all-packs-page.component.ts ~ line 65 ~ ngOnInit ~ e", e)
         let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
           duration: 20000,
         });
