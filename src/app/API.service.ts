@@ -1311,10 +1311,17 @@ export class APIService {
             nextToken
           }
           status
-          paymentMethod
-          paymentTransactionId
+          lastPackSubstitutionDate
+          numberOfPacksSubstitutions
           createdAt
           updatedAt
+          subscription {
+            createdAt
+            id
+            paymentProvider
+            providerSubscriptionId
+            updatedAt
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
