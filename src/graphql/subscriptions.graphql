@@ -98,8 +98,15 @@ subscription OnCreatePackOwner {
         nextToken
       }
       status
-      paymentMethod
-      paymentTransactionId
+      subscription {
+        id
+        paymentProvider
+        providerSubscriptionId
+        createdAt
+        updatedAt
+      }
+      numberOfPacksSubstitutions
+      lastPackSubstitutionDate
       createdAt
       updatedAt
     }
@@ -134,8 +141,15 @@ subscription OnUpdatePackOwner {
         nextToken
       }
       status
-      paymentMethod
-      paymentTransactionId
+      subscription {
+        id
+        paymentProvider
+        providerSubscriptionId
+        createdAt
+        updatedAt
+      }
+      numberOfPacksSubstitutions
+      lastPackSubstitutionDate
       createdAt
       updatedAt
     }
@@ -170,8 +184,15 @@ subscription OnDeletePackOwner {
         nextToken
       }
       status
-      paymentMethod
-      paymentTransactionId
+      subscription {
+        id
+        paymentProvider
+        providerSubscriptionId
+        createdAt
+        updatedAt
+      }
+      numberOfPacksSubstitutions
+      lastPackSubstitutionDate
       createdAt
       updatedAt
     }
@@ -194,8 +215,15 @@ subscription OnCreateUser($username: String!) {
       nextToken
     }
     status
-    paymentMethod
-    paymentTransactionId
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      createdAt
+      updatedAt
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
     createdAt
     updatedAt
   }
@@ -215,8 +243,15 @@ subscription OnUpdateUser($username: String!) {
       nextToken
     }
     status
-    paymentMethod
-    paymentTransactionId
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      createdAt
+      updatedAt
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
     createdAt
     updatedAt
   }
@@ -236,8 +271,42 @@ subscription OnDeleteUser($username: String!) {
       nextToken
     }
     status
-    paymentMethod
-    paymentTransactionId
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      createdAt
+      updatedAt
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateMonthlySubscription {
+  onCreateMonthlySubscription {
+    id
+    paymentProvider
+    providerSubscriptionId
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMonthlySubscription {
+  onUpdateMonthlySubscription {
+    id
+    paymentProvider
+    providerSubscriptionId
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMonthlySubscription {
+  onDeleteMonthlySubscription {
+    id
+    paymentProvider
+    providerSubscriptionId
     createdAt
     updatedAt
   }

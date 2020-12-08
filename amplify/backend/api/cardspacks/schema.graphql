@@ -28,11 +28,12 @@ type User @model @auth( rules: [{ allow: owner, ownerField: "username", operatio
   cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
   subscription: MonthlySubscription @connection
+  numberOfPacksSubstitutions: Int
+  lastPackSubstitutionDate: String
 }
 
 type MonthlySubscription @model  @auth( rules: [{ allow: private }] ){
   id: ID!
-  paymentMethod: String
   paymentProvider: String
   providerSubscriptionId: String
 }
