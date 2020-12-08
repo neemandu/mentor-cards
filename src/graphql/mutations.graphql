@@ -110,8 +110,15 @@ mutation CreatePackOwner(
         nextToken
       }
       status
-      paymentMethod
-      paymentTransactionId
+      subscription {
+        id
+        paymentProvider
+        providerSubscriptionId
+        createdAt
+        updatedAt
+      }
+      numberOfPacksSubstitutions
+      lastPackSubstitutionDate
       createdAt
       updatedAt
     }
@@ -149,8 +156,15 @@ mutation UpdatePackOwner(
         nextToken
       }
       status
-      paymentMethod
-      paymentTransactionId
+      subscription {
+        id
+        paymentProvider
+        providerSubscriptionId
+        createdAt
+        updatedAt
+      }
+      numberOfPacksSubstitutions
+      lastPackSubstitutionDate
       createdAt
       updatedAt
     }
@@ -188,8 +202,15 @@ mutation DeletePackOwner(
         nextToken
       }
       status
-      paymentMethod
-      paymentTransactionId
+      subscription {
+        id
+        paymentProvider
+        providerSubscriptionId
+        createdAt
+        updatedAt
+      }
+      numberOfPacksSubstitutions
+      lastPackSubstitutionDate
       createdAt
       updatedAt
     }
@@ -215,8 +236,15 @@ mutation CreateUser(
       nextToken
     }
     status
-    paymentMethod
-    paymentTransactionId
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      createdAt
+      updatedAt
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
     createdAt
     updatedAt
   }
@@ -239,8 +267,15 @@ mutation UpdateUser(
       nextToken
     }
     status
-    paymentMethod
-    paymentTransactionId
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      createdAt
+      updatedAt
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
     createdAt
     updatedAt
   }
@@ -263,8 +298,51 @@ mutation DeleteUser(
       nextToken
     }
     status
-    paymentMethod
-    paymentTransactionId
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      createdAt
+      updatedAt
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateMonthlySubscription(
+  $input: CreateMonthlySubscriptionInput!
+  $condition: ModelMonthlySubscriptionConditionInput
+) {
+  createMonthlySubscription(input: $input, condition: $condition) {
+    id
+    paymentProvider
+    providerSubscriptionId
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMonthlySubscription(
+  $input: UpdateMonthlySubscriptionInput!
+  $condition: ModelMonthlySubscriptionConditionInput
+) {
+  updateMonthlySubscription(input: $input, condition: $condition) {
+    id
+    paymentProvider
+    providerSubscriptionId
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMonthlySubscription(
+  $input: DeleteMonthlySubscriptionInput!
+  $condition: ModelMonthlySubscriptionConditionInput
+) {
+  deleteMonthlySubscription(input: $input, condition: $condition) {
+    id
+    paymentProvider
+    providerSubscriptionId
     createdAt
     updatedAt
   }

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit  {
     await this.api.ListCardsPacks().then(event => {
 
       this.cardsPacks = event.items;
-      this.randomPackId = event.items[1].id;
+      //this.randomPackId = event.items[1].id;
     });
 
     await this.api.GetCardsPack(this.randomPackId).then(event => {

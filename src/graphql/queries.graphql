@@ -62,8 +62,15 @@ query GetUser($id: ID!) {
       nextToken
     }
     status
-    paymentMethod
-    paymentTransactionId
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      createdAt
+      updatedAt
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
     createdAt
     updatedAt
   }
@@ -81,8 +88,44 @@ query ListUsers(
         nextToken
       }
       status
-      paymentMethod
-      paymentTransactionId
+      subscription {
+        id
+        paymentProvider
+        providerSubscriptionId
+        createdAt
+        updatedAt
+      }
+      numberOfPacksSubstitutions
+      lastPackSubstitutionDate
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetMonthlySubscription($id: ID!) {
+  getMonthlySubscription(id: $id) {
+    id
+    paymentProvider
+    providerSubscriptionId
+    createdAt
+    updatedAt
+  }
+}
+query ListMonthlySubscriptions(
+  $filter: ModelMonthlySubscriptionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMonthlySubscriptions(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      paymentProvider
+      providerSubscriptionId
       createdAt
       updatedAt
     }
