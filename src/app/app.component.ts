@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
 
-  constructor(private api: APIService, private ref: ChangeDetectorRef, private userAuthService: UserAuthService) { }
+  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService) { }
 
   ngOnInit() {
     onAuthUIStateChange((authState, authData) => {
@@ -29,4 +29,19 @@ export class AppComponent implements OnInit {
   ngOnDestroy() {
     return onAuthUIStateChange;
   }
+
+  // async ngOnInit() {
+  //   /* fetch cards when app loads */
+  //   await this.api.ListCardsPacks().then(event => {
+ 
+  //     this.cardsPacks = event.items;
+  //     this.randomPackId = event.items[1].id;
+  //   });
+ 
+  //   await this.api.GetCardsPack(this.randomPackId).then(event => {
+  //     this.randomCardPack = event;
+  //   })
+  //   .catch();
+    
+  // }
 }

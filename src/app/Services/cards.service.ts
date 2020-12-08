@@ -2,8 +2,8 @@ import { EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PackInfo } from '../Objects/packs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PackInfo } from '../Objects/packs';
 
 @Injectable({
   providedIn: 'root'
