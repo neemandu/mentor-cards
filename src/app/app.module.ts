@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BottomBarComponent } from './main-screen/bottom-bar/bottom-bar.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { NavComponent } from './main-screen/nav/nav.component';
 import { OverlaySpinnerComponent } from './main-screen/overlay-spinner/overlay-spinner.component';
@@ -54,7 +53,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     PackComponent,
     MainScreenComponent,
     NavComponent,
-    BottomBarComponent,
     HomePageComponent,
     AboutPageComponent,
     PackContentPageComponent,

@@ -4,6 +4,7 @@ import { APIService } from 'src/app/API.service';
 import { PackInfo } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
+import { UserAuthService } from 'src/app/Services/user-auth.service';
 
 @Component({
   selector: 'app-all-packs-page',
@@ -26,11 +27,11 @@ export class AllPacksPageComponent implements OnInit {
   selectedFavorites: string[] = [];
   // selectedTags: string[] = [];
 
-  constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,) {
+  constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
     this.mobile = window.screen.width <= 600;
     this.loadedPacks = 0;
@@ -40,7 +41,7 @@ export class AllPacksPageComponent implements OnInit {
     if (!this.cardsService.allPacks) {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       try {
-        await this.api.ListCardsPacks().then(packs => {
+        this.api.ListCardsPacks().then(packs => {
           this.allPacks = packs.items.map(pack => {
             pack.categories.forEach(category => {
               if (!this.allCategories.includes(category))

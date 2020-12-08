@@ -9,15 +9,6 @@ import { OverlaySpinnerService } from '../Services/overlay-spinner.service';
 })
 export class MainScreenComponent implements OnInit, OnDestroy {
 
-  // @HostListener('window:keyup', ['$event'])
-  // keyEvent(event: KeyboardEvent) {
-  //   console.log("keyEvent -> event", event)
-  //   if (event.key === 'PrintScreen') {
-  //     event.preventDefault()
-  //     return false;
-  //   }
-  // }
-
   subs: Subscription = new Subscription();
   showSpinner: boolean = true;
 

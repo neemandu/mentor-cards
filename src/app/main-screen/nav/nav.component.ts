@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ export class NavComponent implements OnInit {
   loggedIn: boolean = false;
   loggedInName: string;
 
-  constructor(public dialog: MatDialog, private userAuthService: UserAuthService, public router: Router) {
+  constructor(public dialog: MatDialog, private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -21,6 +21,10 @@ export class NavComponent implements OnInit {
       this.loggedInName = userAttributes.name;
       this.loggedIn = true;
     })
+  }
+
+  public navigate(path: string): void {
+    this.ngZone.run(() => this.router.navigate([path]));
   }
 
   // loginRegister(): void {
@@ -40,7 +44,6 @@ export class NavComponent implements OnInit {
           duration: 3000,
           panelClass: ['rtl-snackbar']
         });
-        // this.router.navigate(['no-program-page']);
       })
       .catch(err => console.log(err));
   }

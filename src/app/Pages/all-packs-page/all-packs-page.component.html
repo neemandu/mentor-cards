@@ -19,7 +19,7 @@
         [selected]="selectedCategories.includes(category)" [value]="category">
         {{category}}
       </mat-list-option>
-      <button id="more-less-categories-button" (click)="categoriesToShowChange()">
+      <button *ngIf="allCategories.length >= 5" id="more-less-categories-button" (click)="categoriesToShowChange()">
         <mat-icon class="more-less-categories-icon" *ngIf="categoriesToShow < allCategories.length">expand_more
         </mat-icon>
         <mat-icon class="more-less-categories-icon" *ngIf="categoriesToShow >= allCategories.length">expand_less

@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   user: CognitoUserInterface | undefined;
   authState: AuthState;
+  title = 'amplify-angular-auth';
 
   constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService) { }
 
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       this.user = authData as CognitoUserInterface;
+      console.log("file: app.component.ts ~ line 27 ~ onAuthUIStateChange ~ this.user", this.user)
       this.userAuthService.loggedIn(this.user)
       this.ref.detectChanges();
     })
@@ -29,19 +31,4 @@ export class AppComponent implements OnInit {
   ngOnDestroy() {
     return onAuthUIStateChange;
   }
-
-  // async ngOnInit() {
-  //   /* fetch cards when app loads */
-  //   await this.api.ListCardsPacks().then(event => {
- 
-  //     this.cardsPacks = event.items;
-  //     this.randomPackId = event.items[1].id;
-  //   });
- 
-  //   await this.api.GetCardsPack(this.randomPackId).then(event => {
-  //     this.randomCardPack = event;
-  //   })
-  //   .catch();
-    
-  // }
 }

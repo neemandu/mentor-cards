@@ -1,7 +1,8 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
+import { APIService } from '../API.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class UserAuthService {
 
   loggedInAttributes: any;
 
-  constructor(public _snackBar: MatSnackBar, public router: Router) {
-    this.checkLoggedIn();
+  constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private ngZone: NgZone) {
+    // this.checkLoggedIn();
   }
 
   checkLoggedIn(): void {
@@ -45,10 +46,14 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(userData: any): void {//TODO after login, somtimes loading screen doesn't close
+  async loggedIn(userData: any) {//TODO after login, somtimes loading screen doesn't close
     this.loggedInAttributes = userData.attributes;
+    var id = userData.pool.clientId;
     this.loggedInEmmiter.emit(userData.attributes);
-    this.router.navigate(['all-packs-page']);
+    await this.api.GetUser(userData.username).then(user => {
+      console.log("file: all-packs-page.component.ts ~ line 68 ~ awaitthis.api.GetUser ~ user", user)
+    });
+    this.ngZone.run(() => this.router.navigate(['no-program-page']));
   }
 
   /**
@@ -82,7 +87,7 @@ export class UserAuthService {
 
   loggedOut(): void {
     this.loggedInAttributes = undefined;
-    this.router.navigate(['no-program-page']);
+    // this.router.navigate(['no-program-page']);
   }
 
 }
