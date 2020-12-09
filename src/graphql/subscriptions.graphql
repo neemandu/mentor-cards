@@ -14,6 +14,27 @@ subscription OnCreateCardsPack {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -38,6 +59,27 @@ subscription OnUpdateCardsPack {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -62,6 +104,27 @@ subscription OnDeleteCardsPack {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -86,6 +149,13 @@ subscription OnCreatePackOwner {
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -95,6 +165,13 @@ subscription OnCreatePackOwner {
       id
       username
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -129,6 +206,13 @@ subscription OnUpdatePackOwner {
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -138,6 +222,13 @@ subscription OnUpdatePackOwner {
       id
       username
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -172,6 +263,13 @@ subscription OnDeletePackOwner {
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -181,6 +279,13 @@ subscription OnDeletePackOwner {
       id
       username
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -209,6 +314,27 @@ subscription OnCreateUser($username: String!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -237,6 +363,27 @@ subscription OnUpdateUser($username: String!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -265,6 +412,27 @@ subscription OnDeleteUser($username: String!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

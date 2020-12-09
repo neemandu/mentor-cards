@@ -14,6 +14,27 @@ query GetCardsPack($id: ID!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -39,6 +60,13 @@ query ListCardsPacks(
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -56,6 +84,27 @@ query GetUser($id: ID!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -85,6 +134,13 @@ query ListUsers(
       id
       username
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status

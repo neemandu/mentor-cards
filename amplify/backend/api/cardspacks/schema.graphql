@@ -29,13 +29,20 @@ type User @model @auth( rules: [{ allow: owner, ownerField: "username", operatio
   status: String
   subscription: MonthlySubscription @connection
   numberOfPacksSubstitutions: Int
-  lastPackSubstitutionDate: String
+  lastPackSubstitutionDate: AWSDateTime!
 }
 
 type MonthlySubscription @model  @auth( rules: [{ allow: private }] ){
   id: ID!
   paymentProvider: String
-  providerSubscriptionId: String
+  providerSubscriptionId: String!
+  subscriptionPlan: SubscriptionPlan @connection
 }
 
+type SubscriptionPlan @model  @auth( rules: [{ allow: public }] ){
+  id: ID!
+  name: String
+  description: String
+  providerPlanId: String!
+}
 
