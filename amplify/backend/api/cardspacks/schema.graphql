@@ -39,7 +39,7 @@ type MonthlySubscription @model  @auth( rules: [{ allow: private }] ){
   subscriptionPlan: SubscriptionPlan @connection
 }
 
-type SubscriptionPlan @model  @auth( rules: [{ allow: public }] ){
+type SubscriptionPlan @model  @auth( rules: [{ allow: private }] ){
   id: ID!
   name: String
   description: String
