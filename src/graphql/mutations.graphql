@@ -17,6 +17,27 @@ mutation CreateCardsPack(
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -44,6 +65,27 @@ mutation UpdateCardsPack(
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -71,6 +113,27 @@ mutation DeleteCardsPack(
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -98,6 +161,13 @@ mutation CreatePackOwner(
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -107,6 +177,13 @@ mutation CreatePackOwner(
       id
       username
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -144,6 +221,13 @@ mutation UpdatePackOwner(
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -153,6 +237,13 @@ mutation UpdatePackOwner(
       id
       username
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -190,6 +281,13 @@ mutation DeletePackOwner(
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -199,6 +297,13 @@ mutation DeletePackOwner(
       id
       username
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -230,6 +335,27 @@ mutation CreateUser(
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -261,6 +387,27 @@ mutation UpdateUser(
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -292,6 +439,27 @@ mutation DeleteUser(
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
