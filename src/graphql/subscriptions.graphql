@@ -32,6 +32,8 @@ subscription OnCreateCardsPack {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -77,6 +79,8 @@ subscription OnUpdateCardsPack {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -122,6 +126,8 @@ subscription OnDeleteCardsPack {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -179,11 +185,19 @@ subscription OnCreatePackOwner {
         id
         paymentProvider
         providerSubscriptionId
-        createdAt
-        updatedAt
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
+      numberOfPlansSubstitutions
+      lastPlanSubstitutionDate
       createdAt
       updatedAt
     }
@@ -236,11 +250,19 @@ subscription OnUpdatePackOwner {
         id
         paymentProvider
         providerSubscriptionId
-        createdAt
-        updatedAt
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
+      numberOfPlansSubstitutions
+      lastPlanSubstitutionDate
       createdAt
       updatedAt
     }
@@ -293,11 +315,19 @@ subscription OnDeletePackOwner {
         id
         paymentProvider
         providerSubscriptionId
-        createdAt
-        updatedAt
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
+      numberOfPlansSubstitutions
+      lastPlanSubstitutionDate
       createdAt
       updatedAt
     }
@@ -332,6 +362,8 @@ subscription OnCreateUser($username: String!) {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -345,11 +377,19 @@ subscription OnCreateUser($username: String!) {
       id
       paymentProvider
       providerSubscriptionId
-      createdAt
-      updatedAt
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        createdAt
+        updatedAt
+      }
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
     createdAt
     updatedAt
   }
@@ -381,6 +421,8 @@ subscription OnUpdateUser($username: String!) {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -394,11 +436,19 @@ subscription OnUpdateUser($username: String!) {
       id
       paymentProvider
       providerSubscriptionId
-      createdAt
-      updatedAt
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        createdAt
+        updatedAt
+      }
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
     createdAt
     updatedAt
   }
@@ -430,6 +480,8 @@ subscription OnDeleteUser($username: String!) {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -443,38 +495,49 @@ subscription OnDeleteUser($username: String!) {
       id
       paymentProvider
       providerSubscriptionId
-      createdAt
-      updatedAt
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        createdAt
+        updatedAt
+      }
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
     createdAt
     updatedAt
   }
 }
-subscription OnCreateMonthlySubscription {
-  onCreateMonthlySubscription {
+subscription OnCreateSubscriptionPlan {
+  onCreateSubscriptionPlan {
     id
-    paymentProvider
-    providerSubscriptionId
+    name
+    description
+    providerPlanId
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateMonthlySubscription {
-  onUpdateMonthlySubscription {
+subscription OnUpdateSubscriptionPlan {
+  onUpdateSubscriptionPlan {
     id
-    paymentProvider
-    providerSubscriptionId
+    name
+    description
+    providerPlanId
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteMonthlySubscription {
-  onDeleteMonthlySubscription {
+subscription OnDeleteSubscriptionPlan {
+  onDeleteSubscriptionPlan {
     id
-    paymentProvider
-    providerSubscriptionId
+    name
+    description
+    providerPlanId
     createdAt
     updatedAt
   }

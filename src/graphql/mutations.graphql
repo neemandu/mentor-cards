@@ -35,6 +35,8 @@ mutation CreateCardsPack(
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -83,6 +85,8 @@ mutation UpdateCardsPack(
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -131,6 +135,8 @@ mutation DeleteCardsPack(
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -191,11 +197,19 @@ mutation CreatePackOwner(
         id
         paymentProvider
         providerSubscriptionId
-        createdAt
-        updatedAt
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
+      numberOfPlansSubstitutions
+      lastPlanSubstitutionDate
       createdAt
       updatedAt
     }
@@ -251,11 +265,19 @@ mutation UpdatePackOwner(
         id
         paymentProvider
         providerSubscriptionId
-        createdAt
-        updatedAt
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
+      numberOfPlansSubstitutions
+      lastPlanSubstitutionDate
       createdAt
       updatedAt
     }
@@ -311,11 +333,19 @@ mutation DeletePackOwner(
         id
         paymentProvider
         providerSubscriptionId
-        createdAt
-        updatedAt
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
+      numberOfPlansSubstitutions
+      lastPlanSubstitutionDate
       createdAt
       updatedAt
     }
@@ -353,6 +383,8 @@ mutation CreateUser(
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -366,11 +398,19 @@ mutation CreateUser(
       id
       paymentProvider
       providerSubscriptionId
-      createdAt
-      updatedAt
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        createdAt
+        updatedAt
+      }
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
     createdAt
     updatedAt
   }
@@ -405,6 +445,8 @@ mutation UpdateUser(
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -418,11 +460,19 @@ mutation UpdateUser(
       id
       paymentProvider
       providerSubscriptionId
-      createdAt
-      updatedAt
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        createdAt
+        updatedAt
+      }
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
     createdAt
     updatedAt
   }
@@ -457,6 +507,8 @@ mutation DeleteUser(
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -470,47 +522,58 @@ mutation DeleteUser(
       id
       paymentProvider
       providerSubscriptionId
-      createdAt
-      updatedAt
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        createdAt
+        updatedAt
+      }
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
     createdAt
     updatedAt
   }
 }
-mutation CreateMonthlySubscription(
-  $input: CreateMonthlySubscriptionInput!
-  $condition: ModelMonthlySubscriptionConditionInput
+mutation CreateSubscriptionPlan(
+  $input: CreateSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
 ) {
-  createMonthlySubscription(input: $input, condition: $condition) {
+  createSubscriptionPlan(input: $input, condition: $condition) {
     id
-    paymentProvider
-    providerSubscriptionId
+    name
+    description
+    providerPlanId
     createdAt
     updatedAt
   }
 }
-mutation UpdateMonthlySubscription(
-  $input: UpdateMonthlySubscriptionInput!
-  $condition: ModelMonthlySubscriptionConditionInput
+mutation UpdateSubscriptionPlan(
+  $input: UpdateSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
 ) {
-  updateMonthlySubscription(input: $input, condition: $condition) {
+  updateSubscriptionPlan(input: $input, condition: $condition) {
     id
-    paymentProvider
-    providerSubscriptionId
+    name
+    description
+    providerPlanId
     createdAt
     updatedAt
   }
 }
-mutation DeleteMonthlySubscription(
-  $input: DeleteMonthlySubscriptionInput!
-  $condition: ModelMonthlySubscriptionConditionInput
+mutation DeleteSubscriptionPlan(
+  $input: DeleteSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
 ) {
-  deleteMonthlySubscription(input: $input, condition: $condition) {
+  deleteSubscriptionPlan(input: $input, condition: $condition) {
     id
-    paymentProvider
-    providerSubscriptionId
+    name
+    description
+    providerPlanId
     createdAt
     updatedAt
   }

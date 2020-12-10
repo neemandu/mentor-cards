@@ -32,6 +32,8 @@ query GetCardsPack($id: ID!) {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -102,6 +104,8 @@ query GetUser($id: ID!) {
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
           createdAt
           updatedAt
         }
@@ -115,11 +119,19 @@ query GetUser($id: ID!) {
       id
       paymentProvider
       providerSubscriptionId
-      createdAt
-      updatedAt
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        createdAt
+        updatedAt
+      }
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
     createdAt
     updatedAt
   }
@@ -148,40 +160,46 @@ query ListUsers(
         id
         paymentProvider
         providerSubscriptionId
-        createdAt
-        updatedAt
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
+      numberOfPlansSubstitutions
+      lastPlanSubstitutionDate
       createdAt
       updatedAt
     }
     nextToken
   }
 }
-query GetMonthlySubscription($id: ID!) {
-  getMonthlySubscription(id: $id) {
+query GetSubscriptionPlan($id: ID!) {
+  getSubscriptionPlan(id: $id) {
     id
-    paymentProvider
-    providerSubscriptionId
+    name
+    description
+    providerPlanId
     createdAt
     updatedAt
   }
 }
-query ListMonthlySubscriptions(
-  $filter: ModelMonthlySubscriptionFilterInput
+query ListSubscriptionPlans(
+  $filter: ModelSubscriptionPlanFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listMonthlySubscriptions(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
+  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      paymentProvider
-      providerSubscriptionId
+      name
+      description
+      providerPlanId
       createdAt
       updatedAt
     }
