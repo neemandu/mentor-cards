@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/PayPalSubscriptions",
+            "lambdaFunction": "PayPalSubscriptionsWebHookLambda",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/PayPalSubscriptions"
+        }
+    ],
+    "resourceName": "PayPalSubscriptionsWebHook",
+    "apiName": "PayPalSubscriptionsWebHook",
+    "functionArns": [
+        {
+            "lambdaFunction": "PayPalSubscriptionsWebHookLambda"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-mentorcards-dev-214725-authRole",
+        "unAuthRoleName": "amplify-mentorcards-dev-214725-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "PayPalSubscriptionsWebHookLambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

@@ -4,7 +4,8 @@ type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   description: String
   tags: [String]
   categories: [String]
-  cards: [String] @auth(rules: [{ allow: groups, groupsField: "groupsIds", operations: [read] }, { allow: owner, ownerField: "usersIds", operations: [read] }]) 
+  cards: [String] @function(name: "GetCardsImagesResolver-${env}")
+  cardsPreview: [String] 
   usersIds: [String] 
   groupsIds: [String]
   users: [PackOwner] @connection(keyName: "byPack", fields: ["id"])
@@ -25,21 +26,28 @@ type PackOwner
 type User @model @auth( rules: [{ allow: owner, ownerField: "username", operations: [read] }] ){
   id: ID!
   username: String!
+  email: AWSEmail!
+  phone: AWSPhone!
   cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
-  subscription: MonthlySubscription @connection
+  subscription: MonthlySubscription 
   numberOfPacksSubstitutions: Int
   lastPackSubstitutionDate: AWSDateTime!
+  numberOfPlansSubstitutions: Int
+  lastPlanSubstitutionDate: AWSDateTime!
+  groupId: Int
+  isGroupOwner: Boolean
+  groupUsers: [User] @connection
 }
 
-type MonthlySubscription @model  @auth( rules: [{ allow: private }] ){
+type MonthlySubscription {
   id: ID!
   paymentProvider: String
   providerSubscriptionId: String!
-  subscriptionPlan: SubscriptionPlan @connection
+  subscriptionPlan: SubscriptionPlan 
 }
 
-type SubscriptionPlan @model  @auth( rules: [{ allow: private }] ){
+type SubscriptionPlan @model @auth( rules: [{ allow: private}] ){
   id: ID!
   name: String
   description: String
