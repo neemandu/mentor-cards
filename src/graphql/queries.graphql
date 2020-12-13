@@ -7,6 +7,7 @@ query GetCardsPack($id: ID!) {
     tags
     categories
     cards
+    cardsPreview
     usersIds
     groupsIds
     users {
@@ -21,6 +22,7 @@ query GetCardsPack($id: ID!) {
           tags
           categories
           cards
+          cardsPreview
           usersIds
           groupsIds
           createdAt
@@ -29,11 +31,15 @@ query GetCardsPack($id: ID!) {
         owner {
           id
           username
+          email
+          phone
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
           createdAt
           updatedAt
         }
@@ -59,6 +65,7 @@ query ListCardsPacks(
       tags
       categories
       cards
+      cardsPreview
       usersIds
       groupsIds
       users {
@@ -81,6 +88,8 @@ query GetUser($id: ID!) {
   getUser(id: $id) {
     id
     username
+    email
+    phone
     cardsPacks {
       items {
         id
@@ -93,6 +102,7 @@ query GetUser($id: ID!) {
           tags
           categories
           cards
+          cardsPreview
           usersIds
           groupsIds
           createdAt
@@ -101,11 +111,15 @@ query GetUser($id: ID!) {
         owner {
           id
           username
+          email
+          phone
           status
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
           createdAt
           updatedAt
         }
@@ -132,6 +146,37 @@ query GetUser($id: ID!) {
     lastPackSubstitutionDate
     numberOfPlansSubstitutions
     lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    groupUsers {
+      items {
+        id
+        username
+        email
+        phone
+        cardsPacks {
+          nextToken
+        }
+        status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
+        numberOfPacksSubstitutions
+        lastPackSubstitutionDate
+        numberOfPlansSubstitutions
+        lastPlanSubstitutionDate
+        groupId
+        isGroupOwner
+        groupUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
   }
@@ -145,6 +190,8 @@ query ListUsers(
     items {
       id
       username
+      email
+      phone
       cardsPacks {
         items {
           id
@@ -173,6 +220,26 @@ query ListUsers(
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
+      groupId
+      isGroupOwner
+      groupUsers {
+        items {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }

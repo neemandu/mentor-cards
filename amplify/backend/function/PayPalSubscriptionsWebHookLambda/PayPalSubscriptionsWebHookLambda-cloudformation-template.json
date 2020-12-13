@@ -33,12 +33,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "GetCardsImagesResolver",
+            "PayPalSubscriptionsWebHookLambda",
             {
               "Fn::Join": [
                 "",
                 [
-                  "GetCardsImagesResolver",
+                  "PayPalSubscriptionsWebHookLambda",
                   "-",
                   {
                     "Ref": "env"
@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/GetCardsImagesResolver-752f637737366d615754-build.zip"
+          "S3Key": "amplify-builds/PayPalSubscriptionsWebHookLambda-796d54504b4a736d466f-build.zip"
         }
       }
     },
@@ -79,12 +79,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole33d32cea",
+            "mentorcardsLambdaRoled7d01cda",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole33d32cea",
+                  "mentorcardsLambdaRoled7d01cda",
                   "-",
                   {
                     "Ref": "env"
