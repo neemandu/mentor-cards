@@ -1,0 +1,45 @@
+* {
+  direction: rtl;
+  font-family: 'rubik';
+  font-size: large;
+}
+
+mat-icon {
+  font-family: 'Material Icons';
+}
+
+#payment-icon {
+  margin-right: 5px;
+}
+
+#payment-button {
+  background-color: #ffa800 !important;
+  color: white !important;
+}
+
+::ng-deep .mat-step-label {
+  margin-right: 5px !important;
+  font-size: large !important;
+}
+
+::ng-deep .mat-horizontal-stepper-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin-top: 10px;
+}
+
+::ng-deep .mat-step-icon-selected,
+::ng-deep .mat-step-icon-state-edit {
+  background-color: #ffa800 !important;
+  color: white !important;
+}
+
+::ng-deep .mat-button-toggle-checked {
+  background-color: #ffa800 !important;
+  color: white !important;
+}
+
+::ng-deep .mat-button {
+  margin-top: 10px !important;
+}

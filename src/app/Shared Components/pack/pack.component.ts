@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
+import { PackPreviewComponent } from './pack-preview/pack-preview.component';
 
 @Component({
   selector: 'app-pack',
@@ -15,12 +18,12 @@ export class PackComponent implements OnInit, OnDestroy {
   @Input() packInfo: PackInfo;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
-  
-  constructor(private cardsService: CardsService) { }
-  
+
+  constructor(private cardsService: CardsService, private _bottomSheet: MatBottomSheet, public dialog: MatDialog) { }
+
   ngOnInit() {
-    // console.log("packInfo", this.packInfo)
-    this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: number[]) => {
+    console.log("packInfo", this.packInfo)
+    this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.fav = favorites.includes(this.packInfo.id)
     }));
     this.fav = this.cardsService.isFavorite(this.packInfo.id)
@@ -34,25 +37,24 @@ export class PackComponent implements OnInit, OnDestroy {
     this.loaded.emit();
   }
 
+  // openPreviewBottomSheet(): void {
+  //   this._bottomSheet.open(PackPreviewComponent, {
+  //     data: {'packInfo': this.packInfo}
+  //   });
+  // }
+
+  openPreviewDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.packInfo;
+    const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(() => {
+      dialogSub.unsubscribe();
+    });
+  }
+
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
   }
 }
-
-// @Component({
-//   selector: 'app-pack-back',
-//   templateUrl: './pack-back.component.html',
-//   styleUrls: ['./pack-back.component.css']
-// })
-// export class PackBackComponent implements OnInit {
-
-
-//   @Input() packInfo: PackInfo;
-
-//   constructor() { }
-
-//   ngOnInit() {
-//     console.log(this.packInfo)
-//   }
-
-// }

@@ -2,7 +2,7 @@
 html,
 body {
   height: 100%;
-  font-family: rubik;
+  font-family: 'rubik';
   /* -webkit-text-size-adjust: auto; */
 }
 
@@ -63,7 +63,8 @@ body {
   /* transition: ease-in 2s; */
 }
 
-*:focus, button:focus {
+*:focus,
+button:focus {
   outline: none;
 }
 

@@ -35,9 +35,16 @@
       </mat-list-option>
     </mat-selection-list>
   </div>
-  <h1 style="text-align: center; margin-left: 14rem;">הערכות שלנו</h1>
-  <div class="d-flex flex-row flex-wrap">
-    <app-pack *ngFor="let packInfo of allPacks" [packInfo]="packInfo" (loaded)="packLoaded()">
-    </app-pack>
+  <div class="all-packs-view">
+    <h1 style="text-align: center; margin-left: 14rem;">הערכות שלך</h1>
+    <div class="d-flex flex-row flex-wrap">
+      <app-pack *ngFor="let packInfo of allOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
+      </app-pack>
+    </div>
+    <h1 style="text-align: center; margin-left: 14rem;">הערכות שלנו</h1>
+    <div class="d-flex flex-row flex-wrap">
+      <app-pack *ngFor="let packInfo of allNotOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
+      </app-pack>
+    </div>
   </div>
 </div>

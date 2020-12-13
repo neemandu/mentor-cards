@@ -17,7 +17,7 @@ export class AllPacksPageComponent implements OnInit {
 
   allPacks: PackInfo[] = [];
   allCategories: string[] = [];
-  allFavorites: number[] = [];
+  allFavorites: string[] = [];
   loadedPacks: number;
   categoriesToShow: number = 5;
 
@@ -35,13 +35,14 @@ export class AllPacksPageComponent implements OnInit {
     window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
     this.mobile = window.screen.width <= 600;
     this.loadedPacks = 0;
-    this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: number[]) => {
+    this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites
     }));
     if (!this.cardsService.allPacks) {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       try {
         this.api.ListCardsPacks().then(packs => {
+          // console.log("file: all-packs-page.component.ts ~ line 45 ~ this.api.ListCardsPacks ~ packs", packs)
           this.allPacks = packs.items.map(pack => {
             pack.categories.forEach(category => {
               if (!this.allCategories.includes(category))
@@ -49,7 +50,6 @@ export class AllPacksPageComponent implements OnInit {
             });
             return new PackInfo().deseralize(pack)
           });
-          // console.log("file: all-packs-page.component.ts ~ line 45 ~ awaitthis.api.ListCardsPacks ~ this.allPacks", this.allPacks)
           this.cardsService.allPacks = this.allPacks.map(pack => pack);
           this.cardsService.allCategories = this.allCategories.map(category => category);
           this.allFavorites = this.cardsService.favorites;
@@ -90,6 +90,14 @@ export class AllPacksPageComponent implements OnInit {
       this.allCategories = this.cardsService.allCategories;
       this.allFavorites = this.cardsService.favorites
     }
+  }
+
+  allOwnedPacks(): PackInfo[] {
+    return this.allPacks.filter(pack => pack.cards.length != 0);  
+  }
+  
+  allNotOwnedPacks(): PackInfo[] {
+    return this.allPacks.filter(pack => pack.cards.length == 0);  
   }
 
   /**

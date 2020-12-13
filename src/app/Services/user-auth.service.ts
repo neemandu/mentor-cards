@@ -46,13 +46,10 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  async loggedIn(userData: any) {//TODO after login, somtimes loading screen doesn't close
+  loggedIn(userData: any) {
     this.loggedInAttributes = userData.attributes;
     this.loggedInEmmiter.emit(userData.attributes);
-    await this.api.GetUser(userData.username).then(user => {
-      console.log("file: all-packs-page.component.ts ~ line 68 ~ awaitthis.api.GetUser ~ user", user)
-    });
-    this.ngZone.run(() => this.router.navigate(['no-program-page']));
+    // this.ngZone.run(() => this.router.navigate(['no-program-page']));
   }
 
   /**

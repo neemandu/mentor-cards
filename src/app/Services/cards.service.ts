@@ -31,7 +31,7 @@ export class CardsService {
     }
   }
 
-  addRemoveFavorite(id: number): boolean {
+  addRemoveFavorite(id: string): boolean {
     if (this.favorites.includes(id)) {
       this.favorites.splice(this.favorites.findIndex(favId => favId == id), 1)
     } else {
@@ -42,7 +42,7 @@ export class CardsService {
     return this.isFavorite(id);
   }
 
-  isFavorite(id: number): boolean {
+  isFavorite(id: string): boolean {
     return this.favorites.includes(id);
   }
 

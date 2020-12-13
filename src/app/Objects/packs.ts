@@ -1,9 +1,10 @@
 import { Card } from './card';
 
 export class PackInfo {
+    cards: any[];
     categories: string[];
     description: string;
-    id: number;
+    id: string;
     imgUrl: string;
     tags: string[];
 

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       this.user = authData as CognitoUserInterface;
-      console.log("file: app.component.ts ~ line 27 ~ onAuthUIStateChange ~ this.user", this.user)
+      // console.log("file: app.component.ts ~ line 27 ~ onAuthUIStateChange ~ this.user", this.user)
       this.userAuthService.loggedIn(this.user)
       this.ref.detectChanges();
     })

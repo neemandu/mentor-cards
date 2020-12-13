@@ -5,7 +5,7 @@
         {{loggedInName}} <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before" dir="rtl">
-        <button mat-menu-item>פרטי משתמש</button>
+        <button mat-menu-item (click)="navigate('/no-program-page')">פרטי משתמש</button>
         <button mat-menu-item (click)=logout()>התנתק</button>
       </mat-menu>
     </div>
