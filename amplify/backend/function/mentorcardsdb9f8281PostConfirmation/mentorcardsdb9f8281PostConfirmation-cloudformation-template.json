@@ -1,11 +1,39 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "Lambda resource stack creation using Amplify CLI",
   "Parameters": {
-    "CloudWatchRule": {
+    "GROUP": {
       "Type": "String",
-      "Default": "NONE",
-      "Description": " Schedule Expression"
+      "Default": ""
+    },
+    "modules": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Comma-delimmited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
+    },
+    "resourceName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "trigger": {
+      "Type": "String",
+      "Default": "true"
+    },
+    "functionName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "roleName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentResource": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentStack": {
+      "Type": "String",
+      "Default": ""
     },
     "env": {
       "Type": "String"
@@ -33,12 +61,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "PayPalSubscriptionsWebHookLambda",
+            "mentorcardsdb9f8281PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "PayPalSubscriptionsWebHookLambda",
+                  "mentorcardsdb9f8281PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -53,8 +81,14 @@
             "ENV": {
               "Ref": "env"
             },
+            "MODULES": {
+              "Ref": "modules"
+            },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "GROUP": {
+              "Ref": "GROUP"
             }
           }
         },
@@ -64,12 +98,11 @@
             "Arn"
           ]
         },
-        "Runtime": "python3.8",
-        "Layers": [],
+        "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/PayPalSubscriptionsWebHookLambda-627471366e75364f3658-build.zip"
+          "S3Key": "amplify-builds/mentorcardsdb9f8281PostConfirmation-44647848492b53634866-build.zip"
         }
       }
     },
@@ -79,12 +112,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRoled7d01cda",
+            "mentorcardsdb9f8281PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRoled7d01cda",
+                  "mentorcardsdb9f8281PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -170,14 +203,14 @@
         ]
       }
     },
-    "Region": {
-      "Value": {
-        "Ref": "AWS::Region"
-      }
-    },
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
       }
     }
   }

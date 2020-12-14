@@ -26,15 +26,15 @@ type PackOwner
 type User @model @auth( rules: [{ allow: owner, ownerField: "username", operations: [read] }] ){
   id: ID!
   username: String!
-  email: AWSEmail!
-  phone: AWSPhone!
+  email: AWSEmail
+  phone: String
   cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
   subscription: MonthlySubscription 
   numberOfPacksSubstitutions: Int
-  lastPackSubstitutionDate: AWSDateTime!
+  lastPackSubstitutionDate: AWSDateTime
   numberOfPlansSubstitutions: Int
-  lastPlanSubstitutionDate: AWSDateTime!
+  lastPlanSubstitutionDate: AWSDateTime
   groupId: Int
   isGroupOwner: Boolean
   groupUsers: [User] @connection
@@ -52,5 +52,9 @@ type SubscriptionPlan @model @auth( rules: [{ allow: private}] ){
   name: String
   description: String
   providerPlanId: String!
+  numberOfUsers: Int
+  numberOfCardPacks: Int
+  price: Float
+  discount: Float
 }
 
