@@ -20,7 +20,7 @@ export class PackContent {
     cards: Card[];
     categories: string[];
     description: string;
-    id: number = 0;
+    id: string;
     imgUrl: string;
     tags: string[];
 

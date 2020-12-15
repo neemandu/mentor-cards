@@ -1,17 +1,35 @@
 * {
-    font-family: 'rubik' !important;
-    align-items: center;
+  font-family: 'rubik' !important;
+  align-items: center;
+  direction: rtl;
 }
 
 .main-header {
-    font-size: xx-large;
-    font-weight: 600;
+  font-size: xx-large;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #ffcf00;
 }
 
 .sub-header {
-    font-size: x-large;
+  font-size: x-large;
+  text-decoration: underline;
+  text-decoration-color: #ffcf00;
+}
+
+.categories-tags {
+  width: 20vw;
+  margin-top: 10px;
 }
 
 .content {
-    font-size: medium;
+  font-size: medium;
+}
+
+.card-previews {
+  max-width: 40vw;
+}
+
+app-card {
+  margin: 0px 10px;
 }

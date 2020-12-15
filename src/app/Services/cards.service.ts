@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PackInfo } from '../Objects/packs';
+import { PackContent, PackInfo } from '../Objects/packs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class CardsService {
 
   @Output() favoriteChangeEmmiter: EventEmitter<number[]> = new EventEmitter();
 
-  allPacks: PackInfo[];
+  allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
 

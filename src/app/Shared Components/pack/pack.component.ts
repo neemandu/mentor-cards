@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
@@ -19,10 +18,10 @@ export class PackComponent implements OnInit, OnDestroy {
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
 
-  constructor(private cardsService: CardsService, private _bottomSheet: MatBottomSheet, public dialog: MatDialog) { }
+  constructor(private cardsService: CardsService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log("packInfo", this.packInfo)
+    // console.log("packInfo", this.packInfo)
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.fav = favorites.includes(this.packInfo.id)
     }));

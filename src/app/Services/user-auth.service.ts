@@ -14,16 +14,6 @@ export class UserAuthService {
   loggedInAttributes: any;
 
   constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private ngZone: NgZone) {
-    // this.checkLoggedIn();
-  }
-
-  checkLoggedIn(): void {
-    Auth.currentAuthenticatedUser().then(userData => {
-      this.loggedInAttributes = userData.attributes;
-      this.loggedInEmmiter.emit(userData.attributes);
-      // console.log(userData)
-    })
-      .catch(err => console.log(err));
   }
 
   /**
@@ -47,9 +37,12 @@ export class UserAuthService {
    * @param userData - data returned from the BE for the user (tokens etc')
    */
   loggedIn(userData: any) {
+    // console.log("file: user-auth.service.ts ~ line 50 ~ loggedIn ~ userData", userData)
+    // this.api.GetUser(userData.username).then(data => {
+    //   console.log(data);
+    // })
     this.loggedInAttributes = userData.attributes;
     this.loggedInEmmiter.emit(userData.attributes);
-    // this.ngZone.run(() => this.router.navigate(['no-program-page']));
   }
 
   /**

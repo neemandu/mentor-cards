@@ -1,15 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import * as bundleConfigs from 'src/assets/Bundle Configurations/BundleConfigs.json'
 
 @Component({
   selector: 'app-program-choise-dialog',
   templateUrl: './program-choise-dialog.component.html',
-  styleUrls: ['./program-choise-dialog.component.css']
+  styleUrls: ['./program-choise-dialog.component.css'],
+  // providers: [{
+  //   provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+  // }]
 })
 export class ProgramChoiseDialogComponent implements OnInit {
 
   isLinear = true;
+  isEditable = false;
   numOfPeople: string = '1';
   numOfPacks: string = '2';
 

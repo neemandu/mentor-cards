@@ -24,6 +24,7 @@ export class PackContentPageComponent implements OnInit {
   multipileChecked: boolean = false;
 
   constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
+
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
@@ -31,33 +32,26 @@ export class PackContentPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    try {
-      this.api.GetCardsPack(this.id).then(pack => {
-        this.pack = new PackContent().deseralize(pack);
-        // console.log("ngOnInit -> this.pack", this.pack)
-      })
+    if (this.cardsService.allPacks) {
+      this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
+      // console.log("file: pack-content-page.component.ts ~ line 36 ~ ngOnInit ~ this.pack", this.pack)
     }
-    catch (e) {
-      let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
-        duration: 20000,
-      });
-      snackBarRef.onAction().subscribe(() => {
-        window.location.reload();
-      });
+    else {
+      try {
+        this.api.GetCardsPack(this.id).then(pack => {
+          this.pack = new PackContent().deseralize(pack);
+          // console.log("ngOnInit -> this.pack", this.pack)
+        })
+      }
+      catch (e) {
+        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
+          duration: 20000,
+        });
+        snackBarRef.onAction().subscribe(() => {
+          window.location.reload();
+        });
+      }
     }
-
-    // var packByIdSub = this.cardsService.getPackById(this.id).subscribe((res: any) => {
-    //   packByIdSub.unsubscribe();
-    //   this.pack = new PackContent().deseralize(res.body);
-    //   console.log("ngOnInit -> this.pack", this.pack)
-    // }, error => {
-    //   let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
-    //     duration: 20000,
-    //   });
-    //   snackBarRef.onAction().subscribe(() => {
-    //     window.location.reload();
-    //   });
-    // });
   }
 
   multipileChanged(): void {

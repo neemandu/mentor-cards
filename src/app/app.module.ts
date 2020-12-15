@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
@@ -29,6 +30,7 @@ import { PackComponent } from './Shared Components/pack/pack.component';
 import { TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
 import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
 import { ProgramChoiseDialogComponent } from './Pages/no-program-page/program-choise-dialog/program-choise-dialog.component';
+import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -48,8 +50,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatBottomSheetModule, MAT_BOTTOM_SHEET_DEFAULT_OPTIONS } from '@angular/material/bottom-sheet';
-import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 
 
 @NgModule({
@@ -78,6 +78,7 @@ import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     AmplifyUIAngularModule,
     BrowserAnimationsModule,
@@ -102,10 +103,8 @@ import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatStepperModule,
-    MatBottomSheetModule
   ],
   providers: [
-    {provide: MAT_BOTTOM_SHEET_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent]

@@ -41,7 +41,7 @@
       <app-pack *ngFor="let packInfo of allOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
       </app-pack>
     </div>
-    <h1 style="text-align: center; margin-left: 14rem;">הערכות שלנו</h1>
+    <h1 style="text-align: center; margin-left: 14rem;">ערכות נוספות</h1>
     <div class="d-flex flex-row flex-wrap">
       <app-pack *ngFor="let packInfo of allNotOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
       </app-pack>
