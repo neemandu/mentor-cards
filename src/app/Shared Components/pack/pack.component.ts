@@ -4,11 +4,13 @@ import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { PackPreviewComponent } from './pack-preview/pack-preview.component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pack',
   templateUrl: './pack.component.html',
-  styleUrls: ['./pack.component.css']
+  styleUrls: ['./pack.component.css'],
 })
 export class PackComponent implements OnInit, OnDestroy {
 

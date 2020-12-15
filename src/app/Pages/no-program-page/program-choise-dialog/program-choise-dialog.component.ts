@@ -1,5 +1,8 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
+import { APIService } from 'src/app/API.service';
+import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
+import { UserAuthService } from 'src/app/Services/user-auth.service';
 import * as bundleConfigs from 'src/assets/Bundle Configurations/BundleConfigs.json'
 
 @Component({
@@ -14,40 +17,48 @@ export class ProgramChoiseDialogComponent implements OnInit {
 
   isLinear = true;
   isEditable = false;
-  numOfPeople: string = '1';
-  numOfPacks: string = '2';
+  configAmountsOfUsers: number[] = [];
+  numOfUsersSelected: number;
+  // numOfPacksSelected: number;
+  packSelected: SubscriptionPlan;
 
-  constructor() {
-    // console.log(bundleConfigs['default'])
+  constructor(private userAuthService: UserAuthService) {
+    // console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 27 ~ ProgramChoiseDialogComponent ~ constructor ~ this.userAuthService.subPlans", this.userAuthService.subPlans)
+    this.packSelected = this.userAuthService.subPlans[0];
+    this.userAuthService.subPlans.forEach(plan => {
+      this.configAmountsOfUsers.push(plan.numberOfUsers);
+    })
+    this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
+    this.numOfUsersSelected = this.configAmountsOfUsers[0];
+
   }
 
   ngOnInit(): void {
   }
 
-  getPeopleNum(): string {
-    return amountOfPeople['u-' + this.numOfPeople];
+  getPlans(): SubscriptionPlan[] {
+    return this.userAuthService.subPlans.filter(plan => plan.numberOfUsers == this.numOfUsersSelected).sort((a, b) => {
+      if (a.numberOfCardPacks == -1)
+        return 1
+      else if (b.numberOfCardPacks == -1)
+        return -1
+      else
+        return a.numberOfCardPacks - b.numberOfCardPacks
+    })
   }
 
-  getPackNum(): string {
-    return amountOfPacks['p-' + this.numOfPacks];
+  getPrice(): number {
+    return this.packSelected.price;
   }
 
-  calcPrice(numOfPacks: number): number {
-    switch (this.numOfPeople) {
-      case '1':
-        return 1;
-      case '3':
-        return 3;
-      case '10':
-        return 10;
-      case '50':
-        return 50;
-    }
+  getDiscount(): number {
+    return this.packSelected.discount;
   }
 
-  printChange(): void {
-    // console.log(this.numOfPeople);
-    // console.log(this.numOfPacks);
+  changePack(): void {
+    this.packSelected = this.userAuthService.subPlans.find(pack =>
+      pack.numberOfUsers === this.numOfUsersSelected && pack.numberOfCardPacks == this.packSelected.numberOfCardPacks
+    )
   }
 }
 

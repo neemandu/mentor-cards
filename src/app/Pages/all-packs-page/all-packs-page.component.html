@@ -36,7 +36,7 @@
     </mat-selection-list>
   </div>
   <div class="all-packs-view">
-    <h1 style="text-align: center; margin-left: 14rem;">הערכות שלך</h1>
+    <h1 style="text-align: center; margin-left: 14rem;">הערכות שלי</h1>
     <div class="d-flex flex-row flex-wrap">
       <app-pack *ngFor="let packInfo of allOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
       </app-pack>

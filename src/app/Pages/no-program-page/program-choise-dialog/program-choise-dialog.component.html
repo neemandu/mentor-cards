@@ -1,45 +1,26 @@
 <mat-horizontal-stepper [linear]="isLinear" #stepper label="כמות אנשים">
   <mat-step class="step" state="done" label="כמות אנשים">
-    <mat-button-toggle-group [(ngModel)]="numOfPeople" name="amountOfPeople" (change)="printChange()">
-      <mat-button-toggle value="1">משתמש יחיד</mat-button-toggle>
-      <mat-button-toggle value="3">3 משתמשים</mat-button-toggle>
-      <mat-button-toggle value="10">10 משתמשים</mat-button-toggle>
-      <mat-button-toggle value="50">50 משתמשים</mat-button-toggle>
+    <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople" (change)="changePack()">
+      <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount">{{userAmount}} משתמשים
+      </mat-button-toggle>
     </mat-button-toggle-group>
     <div>
       <button mat-button matStepperNext>הבא<mat-icon>navigate_before</mat-icon></button>
 
     </div>
   </mat-step>
-  <mat-step state="done" label="כמות חפיסות">
-    <mat-button-toggle-group [(ngModel)]="numOfPacks" name="amountOfPacks" (change)="printChange()">
-      <mat-button-toggle value="2">
+  <mat-step state="done" label="כמות ערכות">
+    <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks">
+      <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan">
         <div>
           <p>
-            2 חפיסות
+            {{plan.numberOfCardPacks == -1 ? 'ללא הגבלה' : plan.numberOfCardPacks}}
           </p>
           <p>
-            {{calcPrice(2)}}
-          </p>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle value="5">
-        <div>
-          <p>
-            5 חפיסות
+            {{plan.price}} ש"ח
           </p>
           <p>
-            {{calcPrice(5)}}
-          </p>
-        </div>
-      </mat-button-toggle>
-      <mat-button-toggle value="-1">
-        <div>
-          <p>
-            ללא הגבלה
-          </p>
-          <p>
-            {{calcPrice(-1)}}
+            הנחה- {{plan.discount}}%
           </p>
         </div>
       </mat-button-toggle>
@@ -52,9 +33,10 @@
     </div>
   </mat-step>
   <mat-step state="done" label="סיכום הזמנה">
-    <p>כמות אנשים: {{getPeopleNum()}}</p>
-    <p>כמות חפיסות בחודש: {{getPackNum()}}</p>
-    <p>מחיר לחבילה זו: {{getPackNum()}}</p>
+    <p>כמות משתמשים: {{numOfUsersSelected}}</p>
+    <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p>
+    <p>מחיר סופי לחבילה זו: {{packSelected.price}} ש"ח</p>
+    <!-- <p>עבור חבילה זו חסכת: {{packSelected.discount}}%</p> -->
     <div>
       <button mat-button matStepperPrevious>
         <mat-icon>navigate_next</mat-icon>הקודם
@@ -64,11 +46,4 @@
         </mat-icon></button>
     </div>
   </mat-step>
-  <!-- Icon overrides. -->
-  <ng-template matStepperIcon="done">
-    <mat-icon>done</mat-icon>
-  </ng-template>
-  <!-- <ng-template matStepperIcon="chat">
-    <mat-icon>forum</mat-icon>
-  </ng-template> -->
 </mat-horizontal-stepper>

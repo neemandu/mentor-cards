@@ -10,6 +10,7 @@ import { ProgramChoiseDialogComponent } from './program-choise-dialog/program-ch
 })
 export class NoProgramPageComponent implements OnInit {
 
+
   constructor(private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
