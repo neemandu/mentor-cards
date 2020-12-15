@@ -211,6 +211,10 @@ subscription OnCreatePackOwner {
           name
           description
           providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
           createdAt
           updatedAt
         }
@@ -299,6 +303,10 @@ subscription OnUpdatePackOwner {
           name
           description
           providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
           createdAt
           updatedAt
         }
@@ -387,6 +395,10 @@ subscription OnDeletePackOwner {
           name
           description
           providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
           createdAt
           updatedAt
         }
@@ -476,6 +488,10 @@ subscription OnCreateUser($username: String!) {
         name
         description
         providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
         createdAt
         updatedAt
       }
@@ -573,6 +589,10 @@ subscription OnUpdateUser($username: String!) {
         name
         description
         providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
         createdAt
         updatedAt
       }
@@ -670,6 +690,10 @@ subscription OnDeleteUser($username: String!) {
         name
         description
         providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
         createdAt
         updatedAt
       }
@@ -719,6 +743,10 @@ subscription OnCreateSubscriptionPlan {
     name
     description
     providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
     createdAt
     updatedAt
   }
@@ -729,6 +757,10 @@ subscription OnUpdateSubscriptionPlan {
     name
     description
     providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
     createdAt
     updatedAt
   }
@@ -739,6 +771,10 @@ subscription OnDeleteSubscriptionPlan {
     name
     description
     providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
     createdAt
     updatedAt
   }

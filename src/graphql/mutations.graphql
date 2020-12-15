@@ -223,6 +223,10 @@ mutation CreatePackOwner(
           name
           description
           providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
           createdAt
           updatedAt
         }
@@ -314,6 +318,10 @@ mutation UpdatePackOwner(
           name
           description
           providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
           createdAt
           updatedAt
         }
@@ -405,6 +413,10 @@ mutation DeletePackOwner(
           name
           description
           providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
           createdAt
           updatedAt
         }
@@ -497,6 +509,10 @@ mutation CreateUser(
         name
         description
         providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
         createdAt
         updatedAt
       }
@@ -597,6 +613,10 @@ mutation UpdateUser(
         name
         description
         providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
         createdAt
         updatedAt
       }
@@ -697,6 +717,10 @@ mutation DeleteUser(
         name
         description
         providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
         createdAt
         updatedAt
       }
@@ -749,6 +773,10 @@ mutation CreateSubscriptionPlan(
     name
     description
     providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
     createdAt
     updatedAt
   }
@@ -762,6 +790,10 @@ mutation UpdateSubscriptionPlan(
     name
     description
     providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
     createdAt
     updatedAt
   }
@@ -775,6 +807,10 @@ mutation DeleteSubscriptionPlan(
     name
     description
     providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
     createdAt
     updatedAt
   }

@@ -138,6 +138,10 @@ query GetUser($id: ID!) {
         name
         description
         providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
         createdAt
         updatedAt
       }
@@ -212,6 +216,10 @@ query ListUsers(
           name
           description
           providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
           createdAt
           updatedAt
         }
@@ -252,6 +260,10 @@ query GetSubscriptionPlan($id: ID!) {
     name
     description
     providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
     createdAt
     updatedAt
   }
@@ -267,6 +279,10 @@ query ListSubscriptionPlans(
       name
       description
       providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
       createdAt
       updatedAt
     }

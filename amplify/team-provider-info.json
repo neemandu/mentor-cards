@@ -32,6 +32,9 @@
     "categories": {
       "auth": {
         "mentorcardsdb9f8281": {}
+      },
+      "function": {
+        "mentorcardsdb9f8281PostConfirmation": {}
       }
     }
   }
