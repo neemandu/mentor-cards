@@ -4,14 +4,16 @@
       <button *ngIf="loggedIn" type="button" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">שלום,
         {{loggedInName}} <mat-icon>arrow_drop_down</mat-icon>
       </button>
-      <mat-menu xPosition="before" #userMenu="matMenu" dir="rtl">
-        <button mat-menu-item>פרטי משתמש</button>
+      <mat-menu #userMenu="matMenu" xPosition="before" dir="rtl">
+        <button mat-menu-item (click)="navigate('/no-program-page')">פרטי משתמש</button>
+        <button mat-menu-item>ניהול קבוצה</button>
         <button mat-menu-item (click)=logout()>התנתק</button>
       </mat-menu>
     </div>
     <!-- <button *ngIf="!loggedIn" type="button" class="btn navbar-btn" (click)=loginRegister()>התחברות\הרשמה</button> -->
-    <button *ngIf="loggedIn" type="button" class="btn navbar-btn" routerLink="/all-packs-page">כל החפיסות</button>
-    <button type="button" class="btn navbar-btn" routerLink="/about-page">עלינו</button>
+    <button *ngIf="loggedIn" type="button" class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל
+      החפיסות</button>
+    <button type="button" class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
   </div>
   <div id="logo">
     <img src="/assets/Logo.png">

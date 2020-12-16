@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
@@ -11,7 +12,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BottomBarComponent } from './main-screen/bottom-bar/bottom-bar.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { NavComponent } from './main-screen/nav/nav.component';
 import { OverlaySpinnerComponent } from './main-screen/overlay-spinner/overlay-spinner.component';
@@ -20,7 +20,7 @@ import { RegisterComponent } from './main-screen/user-related/user-related-dialo
 import { UserRelatedDialogComponent } from './main-screen/user-related/user-related-dialog/user-related-dialog.component';
 import { AboutPageComponent } from './Pages/about-page/about-page.component';
 import { AllPacksPageComponent } from './Pages/all-packs-page/all-packs-page.component';
-import { HomePageComponent } from './Pages/home-page/home-page.component';
+// import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.component';
 import { CardsRevealDialogComponent } from './Pages/pack-content-page/cards-reveal-dialog/cards-reveal-dialog.component';
 import { PackContentPageComponent } from './Pages/pack-content-page/pack-content-page.component';
@@ -29,6 +29,8 @@ import { CardComponent } from './Shared Components/card/card.component';
 import { PackComponent } from './Shared Components/pack/pack.component';
 import { TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
 import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
+import { ProgramChoiseDialogComponent } from './Pages/no-program-page/program-choise-dialog/program-choise-dialog.component';
+import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -46,6 +48,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 
 @NgModule({
   declarations: [
@@ -54,8 +59,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     PackComponent,
     MainScreenComponent,
     NavComponent,
-    BottomBarComponent,
-    HomePageComponent,
+    // HomePageComponent,
     AboutPageComponent,
     PackContentPageComponent,
     TooltipListViewPipe,
@@ -68,10 +72,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     RegisterComponent,
     UserRelatedDialogComponent,
     AllPacksPageComponent,
-    NoProgramPageComponent
+    NoProgramPageComponent,
+    ProgramChoiseDialogComponent,
+    PackPreviewComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     AmplifyUIAngularModule,
     BrowserAnimationsModule,
@@ -93,10 +100,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatTabsModule,
     MatProgressBarModule,
     MatMenuModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatButtonToggleModule,
+    MatStepperModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent]
+  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent]
 })
 export class AppModule { }

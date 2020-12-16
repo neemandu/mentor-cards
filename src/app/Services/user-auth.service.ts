@@ -1,7 +1,10 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
+import { APIService } from '../API.service';
+import { SubscriptionPlan } from '../Objects/subscriptionPlans';
+import { CardsService } from './cards.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +14,9 @@ export class UserAuthService {
   @Output() loggedInEmmiter: EventEmitter<any> = new EventEmitter<any>();
 
   loggedInAttributes: any;
+  subPlans: SubscriptionPlan[];
 
-  constructor(public _snackBar: MatSnackBar, public router: Router) {
-    this.checkLoggedIn();
-  }
-
-  checkLoggedIn(): void {
-    Auth.currentAuthenticatedUser().then(userData => {
-      this.loggedInAttributes = userData.attributes;
-      this.loggedInEmmiter.emit(userData.attributes);
-      // console.log(userData)
-    })
-      .catch(err => console.log(err));
+  constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private ngZone: NgZone, private cardsService: CardsService) {
   }
 
   /**
@@ -45,10 +39,30 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(userData: any): void {//TODO after login, somtimes loading screen doesn't close
+  loggedIn(userData: any) {
     this.loggedInAttributes = userData.attributes;
+    this.getSubscriptionPlans();
     this.loggedInEmmiter.emit(userData.attributes);
-    this.router.navigate(['all-packs-page']);
+  }
+
+  /**
+   * Get all subscription plans
+   */
+  getSubscriptionPlans(): void {
+    try {
+      this.api.ListSubscriptionPlans().then(data => {
+        this.subPlans = data.items.map(plan => new SubscriptionPlan().deseralize(plan))
+        // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
+      });
+    }
+    catch (e) {
+      let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת מנוייפ, נסו שנית', 'רענן', {
+        duration: 20000,
+      });
+      snackBarRef.onAction().subscribe(() => {
+        window.location.reload();
+      });
+    }
   }
 
   /**
@@ -82,7 +96,7 @@ export class UserAuthService {
 
   loggedOut(): void {
     this.loggedInAttributes = undefined;
-    this.router.navigate(['no-program-page']);
+    // this.router.navigate(['no-program-page']);
   }
 
 }

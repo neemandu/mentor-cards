@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PackInfo } from '../Objects/packs';
+import { PackContent, PackInfo } from '../Objects/packs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class CardsService {
 
   @Output() favoriteChangeEmmiter: EventEmitter<number[]> = new EventEmitter();
 
-  allPacks: PackInfo[];
+  allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
 
@@ -31,7 +31,7 @@ export class CardsService {
     }
   }
 
-  addRemoveFavorite(id: number): boolean {
+  addRemoveFavorite(id: string): boolean {
     if (this.favorites.includes(id)) {
       this.favorites.splice(this.favorites.findIndex(favId => favId == id), 1)
     } else {
@@ -42,7 +42,7 @@ export class CardsService {
     return this.isFavorite(id);
   }
 
-  isFavorite(id: number): boolean {
+  isFavorite(id: string): boolean {
     return this.favorites.includes(id);
   }
 

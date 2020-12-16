@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { APIService } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -22,7 +23,8 @@ export class PackContentPageComponent implements OnInit {
   flipped: boolean = false;
   multipileChecked: boolean = false;
 
-  constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
+  constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
+
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
@@ -30,25 +32,31 @@ export class PackContentPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.overlaySpinnerService.changeOverlaySpinner(true);
-    var packByIdSub = this.cardsService.getPackById(this.id).subscribe((res: any) => {
-      packByIdSub.unsubscribe();
-      this.pack = new PackContent().deseralize(res.body);
-      console.log("ngOnInit -> this.pack", this.pack)
-    }, error => {
-      let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
-        duration: 20000,
-      });
-      snackBarRef.onAction().subscribe(() => {
-        window.location.reload();
-      });
-    });
+    if (this.cardsService.allPacks) {
+      this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
+      // console.log("file: pack-content-page.component.ts ~ line 36 ~ ngOnInit ~ this.pack", this.pack)
+    }
+    else {
+      try {
+        this.api.GetCardsPack(this.id).then(pack => {
+          this.pack = new PackContent().deseralize(pack);
+          // console.log("ngOnInit -> this.pack", this.pack)
+        })
+      }
+      catch (e) {
+        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
+          duration: 20000,
+        });
+        snackBarRef.onAction().subscribe(() => {
+          window.location.reload();
+        });
+      }
+    }
   }
 
   multipileChanged(): void {
     this.selectedCards = [];
     this.flipped = false;
-    console.log(this.multipileChecked)
   }
 
   cardSelected(card: CardComponent, index: number): void {

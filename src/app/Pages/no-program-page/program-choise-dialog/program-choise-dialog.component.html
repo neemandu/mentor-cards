@@ -1,0 +1,49 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper label="כמות אנשים">
+  <mat-step class="step" state="done" label="כמות אנשים">
+    <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople" (change)="changePack()">
+      <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount">{{userAmount}} משתמשים
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div>
+      <button mat-button matStepperNext>הבא<mat-icon>navigate_before</mat-icon></button>
+
+    </div>
+  </mat-step>
+  <mat-step state="done" label="כמות ערכות">
+    <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks">
+      <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan">
+        <div>
+          <p>
+            {{plan.numberOfCardPacks == -1 ? 'ללא הגבלה' : plan.numberOfCardPacks}}
+          </p>
+          <p>
+            {{plan.price}} ש"ח
+          </p>
+          <p>
+            הנחה- {{plan.discount}}%
+          </p>
+        </div>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div>
+      <button mat-button matStepperPrevious>
+        <mat-icon>navigate_next</mat-icon>הקודם
+      </button>
+      <button mat-button matStepperNext>הבא<mat-icon>navigate_before</mat-icon></button>
+    </div>
+  </mat-step>
+  <mat-step state="done" label="סיכום הזמנה">
+    <p>כמות משתמשים: {{numOfUsersSelected}}</p>
+    <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p>
+    <p>מחיר סופי לחבילה זו: {{packSelected.price}} ש"ח</p>
+    <!-- <p>עבור חבילה זו חסכת: {{packSelected.discount}}%</p> -->
+    <div>
+      <button mat-button matStepperPrevious>
+        <mat-icon>navigate_next</mat-icon>הקודם
+      </button>
+      <button id="payment-button" mat-button (click)="stepper.reset()">אישור הזמנה ותשלום<mat-icon id="payment-icon">
+          payment
+        </mat-icon></button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
