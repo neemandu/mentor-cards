@@ -37,6 +37,14 @@
     },
     "env": {
       "Type": "String"
+    },
+    "functiongraphqllayerArn": {
+      "Type": "String",
+      "Default": "functiongraphqllayerArn"
+    },
+    "functionappsynclayerArn": {
+      "Type": "String",
+      "Default": "functionappsynclayerArn"
     }
   },
   "Conditions": {
@@ -102,8 +110,13 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/mentorcardsdb9f8281PostConfirmation-44647848492b53634866-build.zip"
-        }
+          "S3Key": "amplify-builds/mentorcardsdb9f8281PostConfirmation-467a4737306834507a6e-build.zip"
+        },
+        "Layers": [
+          {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:graphqllayer-dev:6"
+          }
+        ]
       }
     },
     "LambdaExecutionRole": {

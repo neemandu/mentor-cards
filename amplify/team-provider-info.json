@@ -34,7 +34,60 @@
         "mentorcardsdb9f8281": {}
       },
       "function": {
-        "mentorcardsdb9f8281PostConfirmation": {}
+        "mentorcardsdb9f8281PostConfirmation": {},
+        "graphqllayer": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/graphqllayer-build.zip"
+        },
+        "appsynclayer": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/appsynclayer-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "graphqllayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "bx9ZMD+rPcOLVSImFBf2rGkLdCAR2YJaggZV22vMPNU="
+            },
+            "6": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "SxQxnt2LQ9jPnRn2j/ySJZTsZbUGSlf58Ua450oGXyw="
+            }
+          }
+        },
+        "appsynclayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "+Dnz8Mq5ImhJpelTNm5FK+ZbCE+nQnVivXRjeFUVwi4="
+            }
+          }
+        }
       }
     }
   }
