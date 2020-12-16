@@ -1,7 +1,20 @@
-const axios = require('axios');
-const gql = require('graphql-tag');
-const graphql = require('graphql');
-const { print } = graphql;
+import { AWSAppSyncClient } from 'aws-appsync';
+import gql from 'graphql-tag';
+import 'cross-fetch/polyfill';
+
+const graphqlClient = new AWSAppSyncClient({
+  url: 'https://762j67oetrgifg7pt3breun46q.appsync-api.eu-west-2.amazonaws.com/graphql',
+  region: process.env.AWS_REGION,
+  auth: {
+    type: 'AWS_IAM',
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      sessionToken: process.env.AWS_SESSION_TOKEN
+    }
+  },
+  disableOffline: true
+});
 
 const createUser = gql`
 mutation CreateUser($input: CreateUserInput!) {
@@ -10,28 +23,24 @@ mutation CreateUser($input: CreateUserInput!) {
   }
 }`;
 
-exports.handler = async (event) => {
+export async function handler(event) {
   try {
-    const graphqlData = await axios({
-      url: process.env.API_URL,
-      method: 'post',
-      headers: {
-        'x-api-key': process.env.API_<YOUR_API_NAME>_GRAPHQLAPIKEYOUTPUT
-      },
-      data: {
-        query: print(createUser),
-        variables: {
-          input: {
-            status: "NOPLAN",
-            username: event.userName,
-            numberOfPlansSubstitutions: 0,
-            numberOfPacksSubstitutions: 0,
-            email: event.request.userAttributes.email,
-            phone: event.request.userAttributes.phone
-          }
+    console.log('start create user ');
+    await graphqlClient.mutate({
+      createUser,
+      variables: {
+        input: {
+          status: "NOPLAN",
+          username: event.userName,
+          numberOfPlansSubstitutions: 0,
+          numberOfPacksSubstitutions: 0,
+          email: event.request.userAttributes.email,
+          phone: event.request.userAttributes.phone_number
         }
       }
     });
+
+    
     const body = {
       message: "successfully created user!"
     }
@@ -43,6 +52,6 @@ exports.handler = async (event) => {
       }
     }
   } catch (err) {
-    console.log('error creating todo: ', err);
+    console.log('error creating user: ', err);
   } 
 }

@@ -5,6 +5,9 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "latest"
+    "aws-appsync": "^1.8.1",
+    "axios": "latest",
+    "cross-fetch": "^3.0.4",
+    "graphql-tag": "^2.10.1"
   }
 }
