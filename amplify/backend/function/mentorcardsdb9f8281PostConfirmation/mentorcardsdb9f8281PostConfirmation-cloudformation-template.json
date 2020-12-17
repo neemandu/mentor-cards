@@ -37,14 +37,6 @@
     },
     "env": {
       "Type": "String"
-    },
-    "functiongraphqllayerArn": {
-      "Type": "String",
-      "Default": "functiongraphqllayerArn"
-    },
-    "functionappsynclayerArn": {
-      "Type": "String",
-      "Default": "functionappsynclayerArn"
     }
   },
   "Conditions": {

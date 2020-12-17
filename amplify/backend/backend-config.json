@@ -64,13 +64,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "appsynclayer",
-          "attributes": [
-            "Arn"
-          ]
-        }
       ]
     }
   }
