@@ -13,12 +13,6 @@
   "roleName": "mentorcardsdb9f8281PostConfirmation",
   "skipEdit": true,
   "enableCors": false,
-  "lambdaLayers": [
-    {
-      "type": "ProjectLayer",
-      "resourceName": "appsynclayer",
-      "version": 1
-    }
-  ],
+  "lambdaLayers": [],
   "triggerEventPath": "PostConfirmation.event.json"
 }
