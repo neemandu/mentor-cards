@@ -161,6 +161,10 @@ Parameters:
   permissions:
     Type: CommaDelimitedList
       
+  
+  thirdPartyAuth:
+    Type: String
+            
             
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
