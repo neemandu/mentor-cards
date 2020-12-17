@@ -7,7 +7,7 @@
   "functionName": "mentorcardsdb9f8281PostConfirmation",
   "resourceName": "mentorcardsdb9f8281PostConfirmation",
   "parentStack": "auth",
-  "triggerEnvs": [],
+  "triggerEnvs": "[]",
   "triggerDir": "C:\\Users\\dneeman\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PostConfirmation",
   "triggerTemplate": "PostConfirmation.json.ejs",
   "roleName": "mentorcardsdb9f8281PostConfirmation",
@@ -16,8 +16,9 @@
   "lambdaLayers": [
     {
       "type": "ProjectLayer",
-      "resourceName": "graphqllayer",
-      "version": 6
+      "resourceName": "appsynclayer",
+      "version": 1
     }
-  ]
+  ],
+  "triggerEventPath": "PostConfirmation.event.json"
 }

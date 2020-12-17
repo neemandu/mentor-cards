@@ -25,7 +25,7 @@ mutation CreateUser($input: CreateUserInput!) {
 
 export async function handler(event) {
   try {
-    console.log('start create user ');
+    console.log('start creating user');
     await graphqlClient.mutate({
       createUser,
       variables: {

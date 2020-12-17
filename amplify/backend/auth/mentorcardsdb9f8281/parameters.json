@@ -10,10 +10,10 @@
     "mfaTypes": [
         "SMS Text Message"
     ],
-    "smsAuthenticationMessage": "Mentor-Cards: Your authentication code is {####}",
-    "smsVerificationMessage": "Hi! Your verification code is {####}",
-    "emailVerificationSubject": "Mentor-Cards: Your verification code",
-    "emailVerificationMessage": "Hi! Your verification code is {####}",
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
@@ -45,7 +45,7 @@
             "Arn"
         ]
     },
-    "useDefault": "manual",
+    "useDefault": "default",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "dependsOn": [
@@ -59,15 +59,10 @@
             ]
         }
     ],
-    "thirdPartyAuth": false,
     "userPoolGroups": false,
     "adminQueries": false,
     "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
     "hostedUI": true,
-    "hostedUIDomainName": "mentorcards62c71adc-62c71adc",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.mentor-cards.com/\"],\"LogoutURLs\":[\"https://mentor-cards.com/\"]}",
     "parentStack": {
         "Ref": "AWS::StackId"
     },

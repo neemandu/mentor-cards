@@ -66,24 +66,12 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "graphqllayer",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
-          "category": "function",
           "resourceName": "appsynclayer",
           "attributes": [
             "Arn"
           ]
         }
       ]
-    },
-    "graphqllayer": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
     },
     "appsynclayer": {
       "providerPlugin": "awscloudformation",

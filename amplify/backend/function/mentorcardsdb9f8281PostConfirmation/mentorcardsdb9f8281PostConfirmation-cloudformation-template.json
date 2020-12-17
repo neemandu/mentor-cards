@@ -110,11 +110,11 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/mentorcardsdb9f8281PostConfirmation-547a646c71525a466244-build.zip"
+          "S3Key": "amplify-builds/mentorcardsdb9f8281PostConfirmation-2b7076437a676d316257-build.zip"
         },
         "Layers": [
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:graphqllayer-dev:6"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:appsynclayer-dev:1"
           }
         ]
       }

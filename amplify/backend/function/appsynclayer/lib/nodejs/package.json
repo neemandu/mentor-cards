@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aws-appsync": "^4.0.1",
+    "cross-fetch": "^3.0.6",
+    "graphql-tag": "^2.11.0"
+  },
+  "devDependencies": {}
+}
