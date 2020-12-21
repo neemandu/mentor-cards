@@ -13,11 +13,15 @@ mutation CreateCardsPack(
     cardsPreview
     usersIds
     groupsIds
+    createdAt
+    updatedAt
     users {
       items {
         id
         packID
         userID
+        createdAt
+        updatedAt
         pack {
           id
           imgUrl
@@ -46,13 +50,9 @@ mutation CreateCardsPack(
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    createdAt
-    updatedAt
   }
 }
 mutation UpdateCardsPack(
@@ -69,11 +69,15 @@ mutation UpdateCardsPack(
     cardsPreview
     usersIds
     groupsIds
+    createdAt
+    updatedAt
     users {
       items {
         id
         packID
         userID
+        createdAt
+        updatedAt
         pack {
           id
           imgUrl
@@ -102,13 +106,9 @@ mutation UpdateCardsPack(
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    createdAt
-    updatedAt
   }
 }
 mutation DeleteCardsPack(
@@ -125,11 +125,15 @@ mutation DeleteCardsPack(
     cardsPreview
     usersIds
     groupsIds
+    createdAt
+    updatedAt
     users {
       items {
         id
         packID
         userID
+        createdAt
+        updatedAt
         pack {
           id
           imgUrl
@@ -158,13 +162,9 @@ mutation DeleteCardsPack(
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    createdAt
-    updatedAt
   }
 }
 mutation CreatePackOwner(
@@ -175,6 +175,8 @@ mutation CreatePackOwner(
     id
     packID
     userID
+    createdAt
+    updatedAt
     pack {
       id
       imgUrl
@@ -185,6 +187,8 @@ mutation CreatePackOwner(
       cardsPreview
       usersIds
       groupsIds
+      createdAt
+      updatedAt
       users {
         items {
           id
@@ -195,24 +199,12 @@ mutation CreatePackOwner(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
     owner {
       id
       username
       email
       phone
-      cardsPacks {
-        items {
-          id
-          packID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       status
       subscription {
         id
@@ -237,6 +229,18 @@ mutation CreatePackOwner(
       lastPlanSubstitutionDate
       groupId
       isGroupOwner
+      createdAt
+      updatedAt
+      cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       groupUsers {
         items {
           id
@@ -255,11 +259,7 @@ mutation CreatePackOwner(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
-    createdAt
-    updatedAt
   }
 }
 mutation UpdatePackOwner(
@@ -270,6 +270,8 @@ mutation UpdatePackOwner(
     id
     packID
     userID
+    createdAt
+    updatedAt
     pack {
       id
       imgUrl
@@ -280,6 +282,8 @@ mutation UpdatePackOwner(
       cardsPreview
       usersIds
       groupsIds
+      createdAt
+      updatedAt
       users {
         items {
           id
@@ -290,24 +294,12 @@ mutation UpdatePackOwner(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
     owner {
       id
       username
       email
       phone
-      cardsPacks {
-        items {
-          id
-          packID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       status
       subscription {
         id
@@ -332,6 +324,18 @@ mutation UpdatePackOwner(
       lastPlanSubstitutionDate
       groupId
       isGroupOwner
+      createdAt
+      updatedAt
+      cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       groupUsers {
         items {
           id
@@ -350,11 +354,7 @@ mutation UpdatePackOwner(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
-    createdAt
-    updatedAt
   }
 }
 mutation DeletePackOwner(
@@ -365,6 +365,8 @@ mutation DeletePackOwner(
     id
     packID
     userID
+    createdAt
+    updatedAt
     pack {
       id
       imgUrl
@@ -375,6 +377,8 @@ mutation DeletePackOwner(
       cardsPreview
       usersIds
       groupsIds
+      createdAt
+      updatedAt
       users {
         items {
           id
@@ -385,24 +389,12 @@ mutation DeletePackOwner(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
     owner {
       id
       username
       email
       phone
-      cardsPacks {
-        items {
-          id
-          packID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       status
       subscription {
         id
@@ -427,6 +419,18 @@ mutation DeletePackOwner(
       lastPlanSubstitutionDate
       groupId
       isGroupOwner
+      createdAt
+      updatedAt
+      cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       groupUsers {
         items {
           id
@@ -445,11 +449,7 @@ mutation DeletePackOwner(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
-    createdAt
-    updatedAt
   }
 }
 mutation CreateUser(
@@ -461,11 +461,39 @@ mutation CreateUser(
     username
     email
     phone
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    createdAt
+    updatedAt
     cardsPacks {
       items {
         id
         packID
         userID
+        createdAt
+        updatedAt
         pack {
           id
           imgUrl
@@ -494,44 +522,15 @@ mutation CreateUser(
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    status
-    subscription {
-      id
-      paymentProvider
-      providerSubscriptionId
-      subscriptionPlan {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        price
-        discount
-        createdAt
-        updatedAt
-      }
-    }
-    numberOfPacksSubstitutions
-    lastPackSubstitutionDate
-    numberOfPlansSubstitutions
-    lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
     groupUsers {
       items {
         id
         username
         email
         phone
-        cardsPacks {
-          nextToken
-        }
         status
         subscription {
           id
@@ -544,16 +543,17 @@ mutation CreateUser(
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        createdAt
+        updatedAt
+        cardsPacks {
+          nextToken
+        }
         groupUsers {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    createdAt
-    updatedAt
   }
 }
 mutation UpdateUser(
@@ -565,11 +565,39 @@ mutation UpdateUser(
     username
     email
     phone
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    createdAt
+    updatedAt
     cardsPacks {
       items {
         id
         packID
         userID
+        createdAt
+        updatedAt
         pack {
           id
           imgUrl
@@ -598,44 +626,15 @@ mutation UpdateUser(
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    status
-    subscription {
-      id
-      paymentProvider
-      providerSubscriptionId
-      subscriptionPlan {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        price
-        discount
-        createdAt
-        updatedAt
-      }
-    }
-    numberOfPacksSubstitutions
-    lastPackSubstitutionDate
-    numberOfPlansSubstitutions
-    lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
     groupUsers {
       items {
         id
         username
         email
         phone
-        cardsPacks {
-          nextToken
-        }
         status
         subscription {
           id
@@ -648,16 +647,17 @@ mutation UpdateUser(
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        createdAt
+        updatedAt
+        cardsPacks {
+          nextToken
+        }
         groupUsers {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    createdAt
-    updatedAt
   }
 }
 mutation DeleteUser(
@@ -669,11 +669,39 @@ mutation DeleteUser(
     username
     email
     phone
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    createdAt
+    updatedAt
     cardsPacks {
       items {
         id
         packID
         userID
+        createdAt
+        updatedAt
         pack {
           id
           imgUrl
@@ -702,44 +730,15 @@ mutation DeleteUser(
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    status
-    subscription {
-      id
-      paymentProvider
-      providerSubscriptionId
-      subscriptionPlan {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        price
-        discount
-        createdAt
-        updatedAt
-      }
-    }
-    numberOfPacksSubstitutions
-    lastPackSubstitutionDate
-    numberOfPlansSubstitutions
-    lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
     groupUsers {
       items {
         id
         username
         email
         phone
-        cardsPacks {
-          nextToken
-        }
         status
         subscription {
           id
@@ -752,16 +751,17 @@ mutation DeleteUser(
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        createdAt
+        updatedAt
+        cardsPacks {
+          nextToken
+        }
         groupUsers {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    createdAt
-    updatedAt
   }
 }
 mutation CreateSubscriptionPlan(

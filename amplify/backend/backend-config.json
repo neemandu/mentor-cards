@@ -1,22 +1,5 @@
 {
-  "auth": {
-    "mentorcardsdb9f8281": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "mentorcardsdb9f8281PostConfirmation",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ],
-      "customAuth": false
-    }
-  },
+  "auth": {},
   "api": {
     "cardspacks": {
       "service": "AppSync",
@@ -29,7 +12,11 @@
               "userPoolId": "authmentorcardsdb9f8281"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
         }
       }
     },
@@ -59,11 +46,15 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "mentorcardsdb9f8281PostConfirmation": {
+    "apollolayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "mentorcardsec1b1523": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
+      "service": "Lambda"
     }
   }
 }

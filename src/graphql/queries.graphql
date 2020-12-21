@@ -1,57 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query GetCardsPack($id: ID!) {
-  getCardsPack(id: $id) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users {
-      items {
-        id
-        packID
-        userID
-        pack {
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          createdAt
-          updatedAt
-        }
-        owner {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
 query ListCardsPacks(
   $filter: ModelCardsPackFilterInput
   $limit: Int
@@ -68,6 +15,8 @@ query ListCardsPacks(
       cardsPreview
       usersIds
       groupsIds
+      createdAt
+      updatedAt
       users {
         items {
           id
@@ -78,23 +27,30 @@ query ListCardsPacks(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
     nextToken
   }
 }
-query GetUser($id: ID!) {
-  getUser(id: $id) {
+query GetCardsPack($id: ID!) {
+  getCardsPack(id: $id) {
     id
-    username
-    email
-    phone
-    cardsPacks {
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    createdAt
+    updatedAt
+    users {
       items {
         id
         packID
         userID
+        createdAt
+        updatedAt
         pack {
           id
           imgUrl
@@ -123,11 +79,17 @@ query GetUser($id: ID!) {
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
+  }
+}
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    username
+    email
+    phone
     status
     subscription {
       id
@@ -152,15 +114,52 @@ query GetUser($id: ID!) {
     lastPlanSubstitutionDate
     groupId
     isGroupOwner
+    createdAt
+    updatedAt
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        createdAt
+        updatedAt
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
     groupUsers {
       items {
         id
         username
         email
         phone
-        cardsPacks {
-          nextToken
-        }
         status
         subscription {
           id
@@ -173,16 +172,17 @@ query GetUser($id: ID!) {
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        createdAt
+        updatedAt
+        cardsPacks {
+          nextToken
+        }
         groupUsers {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
-    createdAt
-    updatedAt
   }
 }
 query ListUsers(
@@ -196,16 +196,6 @@ query ListUsers(
       username
       email
       phone
-      cardsPacks {
-        items {
-          id
-          packID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       status
       subscription {
         id
@@ -230,6 +220,18 @@ query ListUsers(
       lastPlanSubstitutionDate
       groupId
       isGroupOwner
+      createdAt
+      updatedAt
+      cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       groupUsers {
         items {
           id
@@ -248,8 +250,6 @@ query ListUsers(
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
     nextToken
   }

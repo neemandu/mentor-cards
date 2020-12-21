@@ -1,39 +1,11 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda resource stack creation using Amplify CLI",
+  "Description": "Lambda Function resource stack creation using Amplify CLI",
   "Parameters": {
-    "GROUP": {
+    "CloudWatchRule": {
       "Type": "String",
-      "Default": ""
-    },
-    "modules": {
-      "Type": "String",
-      "Default": "",
-      "Description": "Comma-delimmited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
-    },
-    "resourceName": {
-      "Type": "String",
-      "Default": ""
-    },
-    "trigger": {
-      "Type": "String",
-      "Default": "true"
-    },
-    "functionName": {
-      "Type": "String",
-      "Default": ""
-    },
-    "roleName": {
-      "Type": "String",
-      "Default": ""
-    },
-    "parentResource": {
-      "Type": "String",
-      "Default": ""
-    },
-    "parentStack": {
-      "Type": "String",
-      "Default": ""
+      "Default": "NONE",
+      "Description": " Schedule Expression"
     },
     "env": {
       "Type": "String"
@@ -61,12 +33,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsdb9f8281PostConfirmation",
+            "mentorcardsec1b1523",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsdb9f8281PostConfirmation",
+                  "mentorcardsec1b1523",
                   "-",
                   {
                     "Ref": "env"
@@ -81,14 +53,8 @@
             "ENV": {
               "Ref": "env"
             },
-            "MODULES": {
-              "Ref": "modules"
-            },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "GROUP": {
-              "Ref": "GROUP"
             }
           }
         },
@@ -98,13 +64,13 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs10.x",
+        "Runtime": "nodejs12.x",
+        "Layers": [],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/mentorcardsdb9f8281PostConfirmation-2b7076437a676d316257-build.zip"
-        },
-        "Layers": []
+          "S3Key": "amplify-builds/mentorcardsec1b1523-44434546654968523946-build.zip"
+        }
       }
     },
     "LambdaExecutionRole": {
@@ -113,12 +79,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsdb9f8281PostConfirmation",
+            "mentorcardsLambdaRole08e0ec90",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsdb9f8281PostConfirmation",
+                  "mentorcardsLambdaRole08e0ec90",
                   "-",
                   {
                     "Ref": "env"
@@ -204,14 +170,14 @@
         ]
       }
     },
-    "LambdaExecutionRole": {
-      "Value": {
-        "Ref": "LambdaExecutionRole"
-      }
-    },
     "Region": {
       "Value": {
         "Ref": "AWS::Region"
+      }
+    },
+    "LambdaExecutionRole": {
+      "Value": {
+        "Ref": "LambdaExecutionRole"
       }
     }
   }
