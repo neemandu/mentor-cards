@@ -1,0 +1,26 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "mentorcards91f3dc29",
+  "functionName": "mentorcards91f3dc29PostConfirmation",
+  "resourceName": "mentorcards91f3dc29PostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "C:\\Users\\dneeman\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "roleName": "mentorcards91f3dc29PostConfirmation",
+  "skipEdit": true,
+  "enableCors": false,
+  "permissions": {
+    "api": {
+      "cardspacks": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}

@@ -1,25 +1,23 @@
 {
-  "auth": {},
-  "api": {
-    "cardspacks": {
-      "service": "AppSync",
+  "auth": {
+    "mentorcards91f3dc29": {
+      "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authmentorcardsdb9f8281"
-            }
-          },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards91f3dc29PostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
           ]
         }
-      }
-    },
+      ],
+      "customAuth": false
+    }
+  },
+  "api": {
     "PayPalSubscriptionsWebHook": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
@@ -33,6 +31,21 @@
           ]
         }
       ]
+    },
+    "cardspacks": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authmentorcards91f3dc29"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
     }
   },
   "function": {
@@ -51,10 +64,20 @@
       "service": "LambdaLayer",
       "build": true
     },
-    "mentorcardsec1b1523": {
+    "mentorcards91f3dc29PostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
     }
   }
 }

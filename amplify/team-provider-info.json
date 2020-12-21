@@ -34,7 +34,11 @@
         "apollolayer": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/apollolayer-build.zip"
-        }
+        },
+        "mentorcards91f3dc29PostConfirmation": {}
+      },
+      "auth": {
+        "mentorcards91f3dc29": {}
       }
     },
     "nonCFNdata": {

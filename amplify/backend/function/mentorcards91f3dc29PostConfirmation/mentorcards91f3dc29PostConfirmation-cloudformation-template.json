@@ -1,14 +1,50 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "Lambda resource stack creation using Amplify CLI",
   "Parameters": {
-    "CloudWatchRule": {
+    "GROUP": {
       "Type": "String",
-      "Default": "NONE",
-      "Description": " Schedule Expression"
+      "Default": ""
+    },
+    "modules": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Comma-delimmited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
+    },
+    "resourceName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "trigger": {
+      "Type": "String",
+      "Default": "true"
+    },
+    "functionName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "roleName": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentResource": {
+      "Type": "String",
+      "Default": ""
+    },
+    "parentStack": {
+      "Type": "String",
+      "Default": ""
     },
     "env": {
       "Type": "String"
+    },
+    "apicardspacksGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apicardspacksGraphQLAPIIdOutput"
+    },
+    "apicardspacksGraphQLAPIEndpointOutput": {
+      "Type": "String",
+      "Default": "apicardspacksGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -33,12 +69,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsec1b1523",
+            "mentorcards91f3dc29PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsec1b1523",
+                  "mentorcards91f3dc29PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -53,8 +89,20 @@
             "ENV": {
               "Ref": "env"
             },
+            "MODULES": {
+              "Ref": "modules"
+            },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "GROUP": {
+              "Ref": "GROUP"
+            },
+            "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apicardspacksGraphQLAPIIdOutput"
+            },
+            "API_CARDSPACKS_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apicardspacksGraphQLAPIEndpointOutput"
             }
           }
         },
@@ -64,12 +112,11 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs12.x",
-        "Layers": [],
+        "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/mentorcardsec1b1523-44434546654968523946-build.zip"
+          "S3Key": "amplify-builds/mentorcards91f3dc29PostConfirmation-745754776d4461426e48-build.zip"
         }
       }
     },
@@ -79,12 +126,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole08e0ec90",
+            "mentorcards91f3dc29PostConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole08e0ec90",
+                  "mentorcards91f3dc29PostConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -154,6 +201,59 @@
           ]
         }
       }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "appsync:Create*",
+                "appsync:StartSchemaCreation",
+                "appsync:GraphQL",
+                "appsync:Get*",
+                "appsync:List*",
+                "appsync:Update*",
+                "appsync:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apicardspacksGraphQLAPIIdOutput"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -170,14 +270,14 @@
         ]
       }
     },
-    "Region": {
-      "Value": {
-        "Ref": "AWS::Region"
-      }
-    },
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
       }
     }
   }
