@@ -13,14 +13,5 @@
   "roleName": "mentorcards91f3dc29PostConfirmation",
   "skipEdit": true,
   "enableCors": false,
-  "permissions": {
-    "api": {
-      "cardspacks": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ]
-    }
-  }
+  "permissions": {}
 }
