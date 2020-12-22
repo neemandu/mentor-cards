@@ -43,3 +43,8 @@ mat-icon {
 ::ng-deep .mat-button {
   margin-top: 10px !important;
 }
+
+#real_price {
+  font-size: larger;
+  font-weight: 600;
+}

@@ -23,7 +23,9 @@ type PackOwner
   owner: User! @connection(fields: ["userID"])
 }
 
-type User @model @auth( rules: [{ allow: owner, ownerField: "username", operations: [read] }] ){
+type User 
+@model 
+@auth( rules: [{ allow: owner, ownerField: "username", operations: [read] }] ){
   id: ID!
   username: String!
   email: AWSEmail

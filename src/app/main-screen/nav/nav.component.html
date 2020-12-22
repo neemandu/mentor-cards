@@ -1,8 +1,7 @@
 <nav class="nav navbar-light align-items-center justify-content-between sticky-top" style="background-color: white;">
   <div id="nav-buttons" class="d-flex flex-row">
     <div dir="rtl">
-      <button *ngIf="loggedIn" type="button" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">שלום,
-        {{loggedInName}} <mat-icon>arrow_drop_down</mat-icon>
+      <button *ngIf="loggedIn" type="button" class="btn navbar-btn" [matMenuTriggerFor]="userMenu"><mat-icon>account_circle</mat-icon><mat-icon>arrow_drop_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before" dir="rtl">
         <button mat-menu-item (click)="navigate('/no-program-page')">פרטי משתמש</button>
@@ -12,7 +11,7 @@
     </div>
     <!-- <button *ngIf="!loggedIn" type="button" class="btn navbar-btn" (click)=loginRegister()>התחברות\הרשמה</button> -->
     <button *ngIf="loggedIn" type="button" class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל
-      החפיסות</button>
+      הערכות</button>
     <button type="button" class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
   </div>
   <div id="logo">

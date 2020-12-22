@@ -47,6 +47,10 @@ export class ProgramChoiseDialogComponent implements OnInit {
     })
   }
 
+  getOriginalPrice(plan: SubscriptionPlan): any {
+    return (plan.price + plan.price*(plan.discount/100));
+  }
+
   getPrice(): number {
     return this.packSelected.price;
   }

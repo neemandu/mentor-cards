@@ -13,10 +13,31 @@
     },
     "categories": {
       "auth": {
-        "mentorcardsdb9f8281": {}
+        "mentorcardsdb9f8281": {},
+        "mentorcards91f3dc29": {}
       },
       "function": {
-        "mentorcardsdb9f8281PostConfirmation": {}
+        "mentorcardsdb9f8281PostConfirmation": {},
+        "apollolayer": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/apollolayer-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "apollolayer": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "ih2jO44DAhdJh+y3poZWQBH4QA+8c3I7z3lwEIyx0Vw="
+            }
+          }
+        }
       }
     }
   },
