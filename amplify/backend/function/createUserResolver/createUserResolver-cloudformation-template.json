@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/createUserResolver-66686c4454344f317675-build.zip"
+          "S3Key": "amplify-builds/createUserResolver-4d45686f797145644b63-build.zip"
         }
       }
     },
@@ -79,12 +79,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole1c78cc4e",
+            "mentorcardsLambdaRole81c722c4",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole1c78cc4e",
+                  "mentorcardsLambdaRole81c722c4",
                   "-",
                   {
                     "Ref": "env"

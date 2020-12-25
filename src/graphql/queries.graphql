@@ -40,6 +40,7 @@ query GetCardsPack($id: ID!) {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -120,6 +121,7 @@ query GetUser($id: ID!) {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -173,6 +175,9 @@ query GetUser($id: ID!) {
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        groupUsers {
+          nextToken
+        }
         action
         createdAt
         updatedAt
@@ -242,6 +247,7 @@ query ListUsers(
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }

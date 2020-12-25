@@ -1,4 +1,218 @@
 # this is an auto generated file. This will be overwritten
+mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    phone
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          action
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    groupUsers {
+      items {
+        id
+        username
+        email
+        phone
+        cardsPacks {
+          nextToken
+        }
+        status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
+        numberOfPacksSubstitutions
+        lastPackSubstitutionDate
+        numberOfPlansSubstitutions
+        lastPlanSubstitutionDate
+        groupId
+        isGroupOwner
+        groupUsers {
+          nextToken
+        }
+        action
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    action
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    phone
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          action
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    groupUsers {
+      items {
+        id
+        username
+        email
+        phone
+        cardsPacks {
+          nextToken
+        }
+        status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
+        numberOfPacksSubstitutions
+        lastPackSubstitutionDate
+        numberOfPlansSubstitutions
+        lastPlanSubstitutionDate
+        groupId
+        isGroupOwner
+        groupUsers {
+          nextToken
+        }
+        action
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    action
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateCardsPack(
   $input: CreateCardsPackInput!
   $condition: ModelCardsPackConditionInput
@@ -43,6 +257,7 @@ mutation CreateCardsPack(
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -99,6 +314,7 @@ mutation UpdateCardsPack(
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -155,6 +371,7 @@ mutation DeleteCardsPack(
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -250,6 +467,7 @@ mutation CreatePackOwner(
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -346,6 +564,7 @@ mutation UpdatePackOwner(
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -442,6 +661,7 @@ mutation DeletePackOwner(
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
+          action
           createdAt
           updatedAt
         }
@@ -451,315 +671,6 @@ mutation DeletePackOwner(
       createdAt
       updatedAt
     }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateUser(
-  $input: CreateUserInput!
-  $condition: ModelUserConditionInput
-) {
-  createUser(input: $input, condition: $condition) {
-    id
-    username
-    email
-    phone
-    cardsPacks {
-      items {
-        id
-        packID
-        userID
-        pack {
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          createdAt
-          updatedAt
-        }
-        owner {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    status
-    subscription {
-      id
-      paymentProvider
-      providerSubscriptionId
-      subscriptionPlan {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        price
-        discount
-        createdAt
-        updatedAt
-      }
-    }
-    numberOfPacksSubstitutions
-    lastPackSubstitutionDate
-    numberOfPlansSubstitutions
-    lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
-    groupUsers {
-      items {
-        id
-        username
-        email
-        phone
-        cardsPacks {
-          nextToken
-        }
-        status
-        subscription {
-          id
-          paymentProvider
-          providerSubscriptionId
-        }
-        numberOfPacksSubstitutions
-        lastPackSubstitutionDate
-        numberOfPlansSubstitutions
-        lastPlanSubstitutionDate
-        groupId
-        isGroupOwner
-        action
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    action
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateUser(
-  $input: UpdateUserInput!
-  $condition: ModelUserConditionInput
-) {
-  updateUser(input: $input, condition: $condition) {
-    id
-    username
-    email
-    phone
-    cardsPacks {
-      items {
-        id
-        packID
-        userID
-        pack {
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          createdAt
-          updatedAt
-        }
-        owner {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    status
-    subscription {
-      id
-      paymentProvider
-      providerSubscriptionId
-      subscriptionPlan {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        price
-        discount
-        createdAt
-        updatedAt
-      }
-    }
-    numberOfPacksSubstitutions
-    lastPackSubstitutionDate
-    numberOfPlansSubstitutions
-    lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
-    groupUsers {
-      items {
-        id
-        username
-        email
-        phone
-        cardsPacks {
-          nextToken
-        }
-        status
-        subscription {
-          id
-          paymentProvider
-          providerSubscriptionId
-        }
-        numberOfPacksSubstitutions
-        lastPackSubstitutionDate
-        numberOfPlansSubstitutions
-        lastPlanSubstitutionDate
-        groupId
-        isGroupOwner
-        action
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    action
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteUser(
-  $input: DeleteUserInput!
-  $condition: ModelUserConditionInput
-) {
-  deleteUser(input: $input, condition: $condition) {
-    id
-    username
-    email
-    phone
-    cardsPacks {
-      items {
-        id
-        packID
-        userID
-        pack {
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          createdAt
-          updatedAt
-        }
-        owner {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    status
-    subscription {
-      id
-      paymentProvider
-      providerSubscriptionId
-      subscriptionPlan {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        price
-        discount
-        createdAt
-        updatedAt
-      }
-    }
-    numberOfPacksSubstitutions
-    lastPackSubstitutionDate
-    numberOfPlansSubstitutions
-    lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
-    groupUsers {
-      items {
-        id
-        username
-        email
-        phone
-        cardsPacks {
-          nextToken
-        }
-        status
-        subscription {
-          id
-          paymentProvider
-          providerSubscriptionId
-        }
-        numberOfPacksSubstitutions
-        lastPackSubstitutionDate
-        numberOfPlansSubstitutions
-        lastPlanSubstitutionDate
-        groupId
-        isGroupOwner
-        action
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    action
     createdAt
     updatedAt
   }

@@ -3,5 +3,5 @@ def handler(event, context):
   print('received event:')
   print(event)
   return {
-    'message': 'updateUserResolver - Hello from your new Amplify Python lambda!'
+    'message': 'updateUserResolver -  Hello from your new Amplify Python lambda!'
   }

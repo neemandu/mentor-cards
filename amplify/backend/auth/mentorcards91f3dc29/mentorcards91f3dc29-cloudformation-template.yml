@@ -9,18 +9,6 @@ Parameters:
     Type: String
   
   
-  
-  
-  functionmentorcards91f3dc29PostConfirmationArn: 
-    Type: String
-    Default: functionmentorcards91f3dc29PostConfirmationArn
-  
-  functionmentorcards91f3dc29PostConfirmationName: 
-    Type: String
-    Default: functionmentorcards91f3dc29PostConfirmationName
-  
-  
-  
 
     
   resourceNameTruncated:
@@ -207,19 +195,6 @@ Resources:
         
       
       
-      LambdaConfig:
-        
-        
-        
-        
-        
-          PostConfirmation: !Ref functionmentorcards91f3dc29PostConfirmationArn
-        
-        
-        
-        
-        
-      
       
       AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
@@ -246,15 +221,6 @@ Resources:
     
   
     
-  
-  UserPoolPostConfirmationLambdaInvokePermission: 
-    Type: "AWS::Lambda::Permission"
-    DependsOn: UserPool
-    Properties: 
-      Action: "lambda:invokeFunction"
-      Principal: "cognito-idp.amazonaws.com"
-      FunctionName: !Ref functionmentorcards91f3dc29PostConfirmationName
-      SourceArn: !GetAtt UserPool.Arn
     
   
   
