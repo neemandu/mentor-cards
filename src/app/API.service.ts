@@ -120,6 +120,13 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null;
 };
 
+export enum UserAction {
+  SWITCH_CARDS_PACK = "SWITCH_CARDS_PACK",
+  SWITCH_PAYMENT_PROGRAM = "SWITCH_PAYMENT_PROGRAM",
+  ADD_CARDS_PACK = "ADD_CARDS_PACK",
+  CREATE_USER = "CREATE_USER"
+}
+
 export type UpdatePackOwnerInput = {
   id: string;
   packID?: string | null;
@@ -143,6 +150,7 @@ export type CreateUserInput = {
   lastPlanSubstitutionDate?: string | null;
   groupId?: number | null;
   isGroupOwner?: boolean | null;
+  action: UserAction;
   userGroupUsersId?: string | null;
 };
 
@@ -162,6 +170,7 @@ export type ModelUserConditionInput = {
   lastPlanSubstitutionDate?: ModelStringInput | null;
   groupId?: ModelIntInput | null;
   isGroupOwner?: ModelBooleanInput | null;
+  action?: ModelUserActionInput | null;
   and?: Array<ModelUserConditionInput | null> | null;
   or?: Array<ModelUserConditionInput | null> | null;
   not?: ModelUserConditionInput | null;
@@ -186,6 +195,11 @@ export type ModelBooleanInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
+export type ModelUserActionInput = {
+  eq?: UserAction | null;
+  ne?: UserAction | null;
+};
+
 export type UpdateUserInput = {
   id: string;
   username?: string | null;
@@ -199,6 +213,7 @@ export type UpdateUserInput = {
   lastPlanSubstitutionDate?: string | null;
   groupId?: number | null;
   isGroupOwner?: boolean | null;
+  action?: UserAction | null;
   userGroupUsersId?: string | null;
 };
 
@@ -284,6 +299,7 @@ export type ModelUserFilterInput = {
   lastPlanSubstitutionDate?: ModelStringInput | null;
   groupId?: ModelIntInput | null;
   isGroupOwner?: ModelBooleanInput | null;
+  action?: ModelUserActionInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -434,6 +450,7 @@ export type CreatePackOwnerMutation = {
       __typename: "ModelUserConnection";
       nextToken: string | null;
     } | null;
+    action: UserAction;
     createdAt: string;
     updatedAt: string;
   };
@@ -491,6 +508,7 @@ export type UpdatePackOwnerMutation = {
       __typename: "ModelUserConnection";
       nextToken: string | null;
     } | null;
+    action: UserAction;
     createdAt: string;
     updatedAt: string;
   };
@@ -548,6 +566,7 @@ export type DeletePackOwnerMutation = {
       __typename: "ModelUserConnection";
       nextToken: string | null;
     } | null;
+    action: UserAction;
     createdAt: string;
     updatedAt: string;
   };
@@ -614,11 +633,13 @@ export type CreateUserMutation = {
       lastPlanSubstitutionDate: string | null;
       groupId: number | null;
       isGroupOwner: boolean | null;
+      action: UserAction;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  action: UserAction;
   createdAt: string;
   updatedAt: string;
 };
@@ -682,11 +703,13 @@ export type UpdateUserMutation = {
       lastPlanSubstitutionDate: string | null;
       groupId: number | null;
       isGroupOwner: boolean | null;
+      action: UserAction;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  action: UserAction;
   createdAt: string;
   updatedAt: string;
 };
@@ -750,11 +773,13 @@ export type DeleteUserMutation = {
       lastPlanSubstitutionDate: string | null;
       groupId: number | null;
       isGroupOwner: boolean | null;
+      action: UserAction;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  action: UserAction;
   createdAt: string;
   updatedAt: string;
 };
@@ -910,11 +935,13 @@ export type GetUserQuery = {
       lastPlanSubstitutionDate: string | null;
       groupId: number | null;
       isGroupOwner: boolean | null;
+      action: UserAction;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  action: UserAction;
   createdAt: string;
   updatedAt: string;
 };
@@ -948,6 +975,7 @@ export type ListUsersQuery = {
       __typename: "ModelUserConnection";
       nextToken: string | null;
     } | null;
+    action: UserAction;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1117,6 +1145,7 @@ export type OnCreatePackOwnerSubscription = {
       __typename: "ModelUserConnection";
       nextToken: string | null;
     } | null;
+    action: UserAction;
     createdAt: string;
     updatedAt: string;
   };
@@ -1174,6 +1203,7 @@ export type OnUpdatePackOwnerSubscription = {
       __typename: "ModelUserConnection";
       nextToken: string | null;
     } | null;
+    action: UserAction;
     createdAt: string;
     updatedAt: string;
   };
@@ -1231,6 +1261,7 @@ export type OnDeletePackOwnerSubscription = {
       __typename: "ModelUserConnection";
       nextToken: string | null;
     } | null;
+    action: UserAction;
     createdAt: string;
     updatedAt: string;
   };
@@ -1297,11 +1328,13 @@ export type OnCreateUserSubscription = {
       lastPlanSubstitutionDate: string | null;
       groupId: number | null;
       isGroupOwner: boolean | null;
+      action: UserAction;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  action: UserAction;
   createdAt: string;
   updatedAt: string;
 };
@@ -1365,11 +1398,13 @@ export type OnUpdateUserSubscription = {
       lastPlanSubstitutionDate: string | null;
       groupId: number | null;
       isGroupOwner: boolean | null;
+      action: UserAction;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  action: UserAction;
   createdAt: string;
   updatedAt: string;
 };
@@ -1433,11 +1468,13 @@ export type OnDeleteUserSubscription = {
       lastPlanSubstitutionDate: string | null;
       groupId: number | null;
       isGroupOwner: boolean | null;
+      action: UserAction;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     nextToken: string | null;
   } | null;
+  action: UserAction;
   createdAt: string;
   updatedAt: string;
 };
@@ -1672,6 +1709,7 @@ export class APIService {
               __typename
               nextToken
             }
+            action
             createdAt
             updatedAt
           }
@@ -1745,6 +1783,7 @@ export class APIService {
               __typename
               nextToken
             }
+            action
             createdAt
             updatedAt
           }
@@ -1818,6 +1857,7 @@ export class APIService {
               __typename
               nextToken
             }
+            action
             createdAt
             updatedAt
           }
@@ -1900,11 +1940,13 @@ export class APIService {
               lastPlanSubstitutionDate
               groupId
               isGroupOwner
+              action
               createdAt
               updatedAt
             }
             nextToken
           }
+          action
           createdAt
           updatedAt
         }
@@ -1984,11 +2026,13 @@ export class APIService {
               lastPlanSubstitutionDate
               groupId
               isGroupOwner
+              action
               createdAt
               updatedAt
             }
             nextToken
           }
+          action
           createdAt
           updatedAt
         }
@@ -2068,11 +2112,13 @@ export class APIService {
               lastPlanSubstitutionDate
               groupId
               isGroupOwner
+              action
               createdAt
               updatedAt
             }
             nextToken
           }
+          action
           createdAt
           updatedAt
         }
@@ -2320,11 +2366,13 @@ export class APIService {
               lastPlanSubstitutionDate
               groupId
               isGroupOwner
+              action
               createdAt
               updatedAt
             }
             nextToken
           }
+          action
           createdAt
           updatedAt
         }
@@ -2372,6 +2420,7 @@ export class APIService {
               __typename
               nextToken
             }
+            action
             createdAt
             updatedAt
           }
@@ -2616,6 +2665,7 @@ export class APIService {
               __typename
               nextToken
             }
+            action
             createdAt
             updatedAt
           }
@@ -2681,6 +2731,7 @@ export class APIService {
               __typename
               nextToken
             }
+            action
             createdAt
             updatedAt
           }
@@ -2746,6 +2797,7 @@ export class APIService {
               __typename
               nextToken
             }
+            action
             createdAt
             updatedAt
           }
@@ -2820,11 +2872,13 @@ export class APIService {
               lastPlanSubstitutionDate
               groupId
               isGroupOwner
+              action
               createdAt
               updatedAt
             }
             nextToken
           }
+          action
           createdAt
           updatedAt
         }
@@ -2896,11 +2950,13 @@ export class APIService {
               lastPlanSubstitutionDate
               groupId
               isGroupOwner
+              action
               createdAt
               updatedAt
             }
             nextToken
           }
+          action
           createdAt
           updatedAt
         }
@@ -2972,11 +3028,13 @@ export class APIService {
               lastPlanSubstitutionDate
               groupId
               isGroupOwner
+              action
               createdAt
               updatedAt
             }
             nextToken
           }
+          action
           createdAt
           updatedAt
         }

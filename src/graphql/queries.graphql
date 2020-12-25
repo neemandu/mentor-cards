@@ -102,11 +102,13 @@ query GetUser($id: ID!) {
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        action
         createdAt
         updatedAt
       }
       nextToken
     }
+    action
     createdAt
     updatedAt
   }
@@ -140,6 +142,7 @@ query ListUsers(
       groupUsers {
         nextToken
       }
+      action
       createdAt
       updatedAt
     }

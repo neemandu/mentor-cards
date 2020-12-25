@@ -130,6 +130,7 @@ mutation CreatePackOwner(
       groupUsers {
         nextToken
       }
+      action
       createdAt
       updatedAt
     }
@@ -184,6 +185,7 @@ mutation UpdatePackOwner(
       groupUsers {
         nextToken
       }
+      action
       createdAt
       updatedAt
     }
@@ -238,6 +240,7 @@ mutation DeletePackOwner(
       groupUsers {
         nextToken
       }
+      action
       createdAt
       updatedAt
     }
@@ -301,11 +304,13 @@ mutation CreateUser(
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        action
         createdAt
         updatedAt
       }
       nextToken
     }
+    action
     createdAt
     updatedAt
   }
@@ -366,11 +371,13 @@ mutation UpdateUser(
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        action
         createdAt
         updatedAt
       }
       nextToken
     }
+    action
     createdAt
     updatedAt
   }
@@ -431,11 +438,13 @@ mutation DeleteUser(
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        action
         createdAt
         updatedAt
       }
       nextToken
     }
+    action
     createdAt
     updatedAt
   }

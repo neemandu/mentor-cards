@@ -25,7 +25,8 @@ type PackOwner
 
 type User 
 @model 
-@auth( rules: [{ allow: owner, ownerField: "username", operations: [read] }] ){
+@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update] },
+                { allow: private, operations: [create] }] ){
   id: ID!
   username: String!
   email: AWSEmail
@@ -39,7 +40,15 @@ type User
   lastPlanSubstitutionDate: AWSDateTime
   groupId: Int
   isGroupOwner: Boolean
-  groupUsers: [User] @connection
+  groupUsers: [User] @connection,
+  action: UserAction!
+}
+
+enum UserAction{
+  SWITCH_CARDS_PACK
+  SWITCH_PAYMENT_PROGRAM
+  ADD_CARDS_PACK
+  CREATE_USER
 }
 
 type MonthlySubscription {

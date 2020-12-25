@@ -118,6 +118,7 @@ subscription OnCreatePackOwner {
       groupUsers {
         nextToken
       }
+      action
       createdAt
       updatedAt
     }
@@ -169,6 +170,7 @@ subscription OnUpdatePackOwner {
       groupUsers {
         nextToken
       }
+      action
       createdAt
       updatedAt
     }
@@ -220,6 +222,7 @@ subscription OnDeletePackOwner {
       groupUsers {
         nextToken
       }
+      action
       createdAt
       updatedAt
     }
@@ -280,11 +283,13 @@ subscription OnCreateUser($username: String!) {
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        action
         createdAt
         updatedAt
       }
       nextToken
     }
+    action
     createdAt
     updatedAt
   }
@@ -342,11 +347,13 @@ subscription OnUpdateUser($username: String!) {
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        action
         createdAt
         updatedAt
       }
       nextToken
     }
+    action
     createdAt
     updatedAt
   }
@@ -404,11 +411,13 @@ subscription OnDeleteUser($username: String!) {
         lastPlanSubstitutionDate
         groupId
         isGroupOwner
+        action
         createdAt
         updatedAt
       }
       nextToken
     }
+    action
     createdAt
     updatedAt
   }
