@@ -15,6 +15,34 @@ subscription OnCreateCardsPack {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -40,6 +68,34 @@ subscription OnUpdateCardsPack {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -65,6 +121,34 @@ subscription OnDeleteCardsPack {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -90,6 +174,13 @@ subscription OnCreatePackOwner {
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -101,6 +192,13 @@ subscription OnCreatePackOwner {
       email
       phone
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -108,6 +206,18 @@ subscription OnCreatePackOwner {
         id
         paymentProvider
         providerSubscriptionId
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
@@ -116,6 +226,21 @@ subscription OnCreatePackOwner {
       groupId
       isGroupOwner
       groupUsers {
+        items {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       action
@@ -142,6 +267,13 @@ subscription OnUpdatePackOwner {
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -153,6 +285,13 @@ subscription OnUpdatePackOwner {
       email
       phone
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -160,6 +299,18 @@ subscription OnUpdatePackOwner {
         id
         paymentProvider
         providerSubscriptionId
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
@@ -168,6 +319,21 @@ subscription OnUpdatePackOwner {
       groupId
       isGroupOwner
       groupUsers {
+        items {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       action
@@ -194,6 +360,13 @@ subscription OnDeletePackOwner {
       usersIds
       groupsIds
       users {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -205,6 +378,13 @@ subscription OnDeletePackOwner {
       email
       phone
       cardsPacks {
+        items {
+          id
+          packID
+          userID
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       status
@@ -212,6 +392,18 @@ subscription OnDeletePackOwner {
         id
         paymentProvider
         providerSubscriptionId
+        subscriptionPlan {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
+          createdAt
+          updatedAt
+        }
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
@@ -220,6 +412,21 @@ subscription OnDeletePackOwner {
       groupId
       isGroupOwner
       groupUsers {
+        items {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       action
@@ -241,6 +448,34 @@ subscription OnCreateUser($username: String!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -276,7 +511,15 @@ subscription OnCreateUser($username: String!) {
         username
         email
         phone
+        cardsPacks {
+          nextToken
+        }
         status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
         numberOfPacksSubstitutions
         lastPackSubstitutionDate
         numberOfPlansSubstitutions
@@ -305,6 +548,34 @@ subscription OnUpdateUser($username: String!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -340,7 +611,15 @@ subscription OnUpdateUser($username: String!) {
         username
         email
         phone
+        cardsPacks {
+          nextToken
+        }
         status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
         numberOfPacksSubstitutions
         lastPackSubstitutionDate
         numberOfPlansSubstitutions
@@ -369,6 +648,34 @@ subscription OnDeleteUser($username: String!) {
         id
         packID
         userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -404,7 +711,15 @@ subscription OnDeleteUser($username: String!) {
         username
         email
         phone
+        cardsPacks {
+          nextToken
+        }
         status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
         numberOfPacksSubstitutions
         lastPackSubstitutionDate
         numberOfPlansSubstitutions

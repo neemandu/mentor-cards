@@ -5,7 +5,9 @@
       </mat-button-toggle>
     </mat-button-toggle-group>
     <div>
-      <button mat-button matStepperNext>הבא<mat-icon>navigate_before</mat-icon></button>
+      <button mat-button matStepperNext>הבא
+        <mat-icon>navigate_before</mat-icon>
+      </button>
 
     </div>
   </mat-step>
@@ -16,11 +18,11 @@
           <p>
             {{plan.numberOfCardPacks == -1 ? 'ללא הגבלה' : plan.numberOfCardPacks}}
           </p>
-          <p>
-            {{plan.price}} ש"ח
+          <p id="original_price" *ngIf="getOriginalPrice(plan) !== plan.price">
+            <s>{{getOriginalPrice(plan).toFixed(2)}} ש"ח</s>
           </p>
-          <p>
-            הנחה- {{plan.discount}}%
+          <p id="real_price">
+            {{plan.price}} ש"ח
           </p>
         </div>
       </mat-button-toggle>
@@ -35,8 +37,8 @@
   <mat-step state="done" label="סיכום הזמנה">
     <p>כמות משתמשים: {{numOfUsersSelected}}</p>
     <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p>
-    <p>מחיר סופי לחבילה זו: {{packSelected.price}} ש"ח</p>
-    <!-- <p>עבור חבילה זו חסכת: {{packSelected.discount}}%</p> -->
+    <p *ngIf="getOriginalPrice(packSelected) !== packSelected.price">מחיר לפני הנחה: {{getOriginalPrice(packSelected).toFixed(2)}} ש"ח</p>
+    <p id="real_price">מחיר סופי לחבילה זו: {{packSelected.price}} ש"ח</p>
     <div>
       <button mat-button matStepperPrevious>
         <mat-icon>navigate_next</mat-icon>הקודם
