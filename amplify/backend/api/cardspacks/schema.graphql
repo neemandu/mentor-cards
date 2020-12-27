@@ -1,136 +1,33 @@
 type Mutation{
-  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @function(name: "updateUserResolver-${env}")
-  createUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @function(name: "createUserResolver-${env}")
+  createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
+  addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
+  changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
+  updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
+  updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
 }
 
-input ModelUserConditionInput {
-  email: ModelStringInput
-  phone: ModelStringInput
-  status: ModelStringInput
-  numberOfPacksSubstitutions: ModelIntInput
-  lastPackSubstitutionDate: ModelStringInput
-  numberOfPlansSubstitutions: ModelIntInput
-  lastPlanSubstitutionDate: ModelStringInput
-  groupId: ModelIntInput
-  isGroupOwner: ModelBooleanInput
-  action: ModelUserActionInput
-  and: [ModelUserConditionInput]
-  or: [ModelUserConditionInput]
-  not: ModelUserConditionInput
+input groupUsersListInput {
+  usernamesList: [String]
 }
 
-enum ModelAttributeTypes {
-  binary
-  binarySet
-  bool
-  list
-  map
-  number
-  numberSet
-  string
-  stringSet
-  _null
+input updatePaymentProgramInput {
+  paymentProgramId: String
 }
 
-input ModelUserActionInput {
-  eq: UserAction
-  ne: UserAction
+input addCardsPackInput {
+  cardsPackId: String
 }
 
-input MonthlySubscriptionInput {
-  id: ID!
-  paymentProvider: String
-  providerSubscriptionId: String!
+input changeCardsPackInput {
+  oldCardsPackId: String
+  newCardsPackId: String
 }
 
-input UpdateUserInput {
-  id: ID!
+
+
+input CreateUserInput {
   username: String
   email: AWSEmail
-  phone: String
-  status: String
-  subscription: MonthlySubscriptionInput
-  numberOfPacksSubstitutions: Int
-  lastPackSubstitutionDate: AWSDateTime
-  numberOfPlansSubstitutions: Int
-  lastPlanSubstitutionDate: AWSDateTime
-  groupId: Int
-  isGroupOwner: Boolean
-  action: UserAction
-  userGroupUsersId: ID
-}
-
-input ModelIntInput {
-  ne: Int
-  eq: Int
-  le: Int
-  lt: Int
-  ge: Int
-  gt: Int
-  between: [Int]
-  attributeExists: Boolean
-  attributeType: ModelAttributeTypes
-}
-
-input ModelStringInput {
-  ne: String
-  eq: String
-  le: String
-  lt: String
-  ge: String
-  gt: String
-  contains: String
-  notContains: String
-  between: [String]
-  beginsWith: String
-  attributeExists: Boolean
-  attributeType: ModelAttributeTypes
-  size: ModelSizeInput
-}
-
-input ModelIDInput {
-  ne: ID
-  eq: ID
-  le: ID
-  lt: ID
-  ge: ID
-  gt: ID
-  contains: ID
-  notContains: ID
-  between: [ID]
-  beginsWith: ID
-  attributeExists: Boolean
-  attributeType: ModelAttributeTypes
-  size: ModelSizeInput
-}
-
-input ModelSizeInput {
-  ne: Int
-  eq: Int
-  le: Int
-  lt: Int
-  ge: Int
-  gt: Int
-  between: [Int]
-}
-
-input ModelFloatInput {
-  ne: Float
-  eq: Float
-  le: Float
-  lt: Float
-  ge: Float
-  gt: Float
-  between: [Float]
-  attributeExists: Boolean
-  attributeType: ModelAttributeTypes
-}
-
-input ModelBooleanInput {
-  ne: Boolean
-  eq: Boolean
-  attributeExists: Boolean
-  attributeType: ModelAttributeTypes
 }
 
 type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
@@ -175,15 +72,7 @@ type User
   lastPlanSubstitutionDate: AWSDateTime
   groupId: Int
   isGroupOwner: Boolean
-  groupUsers: [User] @connection,
-  action: UserAction!
-}
-
-enum UserAction{
-  SWITCH_CARDS_PACK
-  SWITCH_PAYMENT_PROGRAM
-  ADD_CARDS_PACK
-  CREATE_USER
+  groupUsers: [User] @connection
 }
 
 type MonthlySubscription {

@@ -40,7 +40,6 @@ subscription OnCreateCardsPack {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
-          action
           createdAt
           updatedAt
         }
@@ -94,7 +93,6 @@ subscription OnUpdateCardsPack {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
-          action
           createdAt
           updatedAt
         }
@@ -148,7 +146,6 @@ subscription OnDeleteCardsPack {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
-          action
           createdAt
           updatedAt
         }
@@ -241,13 +238,11 @@ subscription OnCreatePackOwner {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
-          action
           createdAt
           updatedAt
         }
         nextToken
       }
-      action
       createdAt
       updatedAt
     }
@@ -335,13 +330,11 @@ subscription OnUpdatePackOwner {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
-          action
           createdAt
           updatedAt
         }
         nextToken
       }
-      action
       createdAt
       updatedAt
     }
@@ -429,13 +422,11 @@ subscription OnDeletePackOwner {
           lastPlanSubstitutionDate
           groupId
           isGroupOwner
-          action
           createdAt
           updatedAt
         }
         nextToken
       }
-      action
       createdAt
       updatedAt
     }

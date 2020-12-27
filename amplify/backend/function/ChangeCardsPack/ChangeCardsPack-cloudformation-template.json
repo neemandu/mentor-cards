@@ -37,12 +37,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "updateUserResolver",
+            "ChangeCardsPack",
             {
               "Fn::Join": [
                 "",
                 [
-                  "updateUserResolver",
+                  "ChangeCardsPack",
                   "-",
                   {
                     "Ref": "env"
@@ -59,6 +59,32 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "API_CARDSPACKS_CARDSPACKTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:CardsPackTable:Name"
+              }
+            },
+            "API_CARDSPACKS_CARDSPACKTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:CardsPackTable:Name"
+                    }
+                  }
+                ]
+              ]
             },
             "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apicardspacksGraphQLAPIIdOutput"
@@ -88,32 +114,6 @@
                   }
                 ]
               ]
-            },
-            "API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
-              }
-            },
-            "API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
-                    }
-                  }
-                ]
-              ]
             }
           }
         },
@@ -123,12 +123,12 @@
             "Arn"
           ]
         },
-        "Runtime": "python3.8",
+        "Runtime": "nodejs12.x",
         "Layers": [],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/updateUserResolver-596735693564786b5359-build.zip"
+          "S3Key": "amplify-builds/ChangeCardsPack-514b6e6a4f6c36493872-build.zip"
         }
       }
     },
@@ -138,12 +138,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole19d55134",
+            "mentorcardsLambdaRoled8cc547c",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole19d55134",
+                  "mentorcardsLambdaRoled8cc547c",
                   "-",
                   {
                     "Ref": "env"
@@ -260,7 +260,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:CardsPackTable:Name"
                         }
                       }
                     ]
@@ -281,7 +281,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:CardsPackTable:Name"
                         }
                       },
                       "/index/*"
@@ -321,7 +321,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       }
                     ]
@@ -342,7 +342,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       },
                       "/index/*"
