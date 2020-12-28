@@ -6,9 +6,7 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-const { env } = require("process");
-
-exports.handler = (event) => {
+exports.handler = async (event) => {
     var AWS = require("aws-sdk");
 
     var username = event.identity.claims['cognito:username'];
@@ -60,5 +58,5 @@ exports.handler = (event) => {
 
     const data = Item
 
-    return data;
+    return Item;
 };

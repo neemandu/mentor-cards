@@ -77,8 +77,8 @@ type User
 
 type MonthlySubscription {
   id: ID!
+  startDate: AWSDateTime
   paymentProvider: String
-  providerSubscriptionId: String!
   subscriptionPlan: SubscriptionPlan 
 }
 
