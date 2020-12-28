@@ -1,12 +1,16 @@
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN
+	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
+	AUTH_MENTORCARDS91F3DC29_USERPOOLID
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
 
 const { env } = require("process");
+require("boto3");
 
 exports.handler = (event) => {
     var AWS = require("aws-sdk");
@@ -42,7 +46,7 @@ exports.handler = (event) => {
         }
     });
 
-    if(user === undefined){
+    if(!user){
         throw Error ('no such user - ' + username);
     }
 
@@ -66,7 +70,7 @@ exports.handler = (event) => {
         }
     });
 
-    if(subscription === undefined){
+    if(!subscription){
         throw Error ('no such subscription - ' + subId);
     }
 
@@ -77,7 +81,8 @@ exports.handler = (event) => {
         startDate = new Date(),
         paymentProvider = "PayPal",
         subscriptionPlan: subscription
-    }
+    };
+
     var params = {
         TableName: userTable,
         Item:{
@@ -102,7 +107,36 @@ exports.handler = (event) => {
     });
 
 
+    CreateUserGroup(username);
+
+
+
     const data = Item
 
     return Item;
 };
+
+function CreateUserGroup(username){
+    var name = username + "_Group";
+    var userPoolId = env.AUTH_MENTORCARDS91F3DC29_USERPOOLID;
+    console.log("Trying to create group in cognito: " + name);
+
+    response = client.get_group(
+        GroupName=name,
+        UserPoolId=userPoolId
+    );
+
+    if(!response || !response.Group){
+        console.log("Creating group in cognito: " + name);
+        client = boto3.client('cognito-idp')
+
+        response = client.create_group(
+            GroupName=name,
+            UserPoolId=env.AUTH_MENTORCARDS91F3DC29_USERPOOLID,
+            Precedence=1
+        );
+    }
+    else{
+        console.log("group " + name + " already exists");
+    }
+}

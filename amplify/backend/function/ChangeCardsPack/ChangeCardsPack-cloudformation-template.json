@@ -128,7 +128,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/ChangeCardsPack-514b6e6a4f6c36493872-build.zip"
+          "S3Key": "amplify-builds/ChangeCardsPack-306d6d6754357a464471-build.zip"
         }
       }
     },

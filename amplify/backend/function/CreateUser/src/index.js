@@ -8,6 +8,7 @@ Amplify Params - DO NOT EDIT */
 
 exports.handler = async (event) => {
     var AWS = require("aws-sdk");
+    console.log(event);
 
     var username = event.identity.claims['cognito:username'];
     var email = event.identity.claims['email'];
