@@ -1,3 +1,35 @@
+type Mutation{
+  createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
+  addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
+  changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
+  updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
+  updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
+}
+
+input groupUsersListInput {
+  usernamesList: [String]
+}
+
+input updatePaymentProgramInput {
+  paymentProgramId: String
+}
+
+input addCardsPackInput {
+  cardsPackId: String
+}
+
+input changeCardsPackInput {
+  oldCardsPackId: String
+  newCardsPackId: String
+}
+
+
+
+input CreateUserInput {
+  username: String
+  email: AWSEmail
+}
+
 type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   id: ID!
   imgUrl: String!
@@ -24,8 +56,9 @@ type PackOwner
 }
 
 type User 
-@model 
-@auth( rules: [{ allow: owner, ownerField: "username", operations: [read] }] ){
+@model (mutations: null)
+@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update] },
+                { allow: private, operations: [create] }] ){
   id: ID!
   username: String!
   email: AWSEmail
@@ -44,8 +77,8 @@ type User
 
 type MonthlySubscription {
   id: ID!
+  startDate: AWSDateTime
   paymentProvider: String
-  providerSubscriptionId: String!
   subscriptionPlan: SubscriptionPlan 
 }
 

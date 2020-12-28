@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "storage": {
+      "CardsPack:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

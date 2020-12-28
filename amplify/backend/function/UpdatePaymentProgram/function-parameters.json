@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "auth": {
+      "mentorcards91f3dc29": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "SubscriptionPlan:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

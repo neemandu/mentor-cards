@@ -4,8 +4,6 @@ import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { PackPreviewComponent } from './pack-preview/pack-preview.component';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pack',
@@ -18,6 +16,7 @@ export class PackComponent implements OnInit, OnDestroy {
 
   @Input() packInfo: PackInfo;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() favoriteChangedEmmiter: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
 
   constructor(private cardsService: CardsService, public dialog: MatDialog) { }
@@ -32,17 +31,12 @@ export class PackComponent implements OnInit, OnDestroy {
 
   addRemoveFavorite(): void {
     this.fav = this.cardsService.addRemoveFavorite(this.packInfo.id)
+    // this.favoriteChangedEmmiter.emit();
   }
 
   imgLoaded(): any {
     this.loaded.emit();
   }
-
-  // openPreviewBottomSheet(): void {
-  //   this._bottomSheet.open(PackPreviewComponent, {
-  //     data: {'packInfo': this.packInfo}
-  //   });
-  // }
 
   openPreviewDialog(): void {
     const dialogConfig = new MatDialogConfig();

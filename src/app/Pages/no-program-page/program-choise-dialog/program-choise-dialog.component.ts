@@ -9,9 +9,6 @@ import * as bundleConfigs from 'src/assets/Bundle Configurations/BundleConfigs.j
   selector: 'app-program-choise-dialog',
   templateUrl: './program-choise-dialog.component.html',
   styleUrls: ['./program-choise-dialog.component.css'],
-  // providers: [{
-  //   provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
-  // }]
 })
 export class ProgramChoiseDialogComponent implements OnInit {
 
@@ -22,8 +19,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
   // numOfPacksSelected: number;
   packSelected: SubscriptionPlan;
 
-  constructor(private userAuthService: UserAuthService) {
-    // console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 27 ~ ProgramChoiseDialogComponent ~ constructor ~ this.userAuthService.subPlans", this.userAuthService.subPlans)
+  constructor(private userAuthService: UserAuthService) {//TODO fix prices (price - discount)
     this.packSelected = this.userAuthService.subPlans[0];
     this.userAuthService.subPlans.forEach(plan => {
       this.configAmountsOfUsers.push(plan.numberOfUsers);

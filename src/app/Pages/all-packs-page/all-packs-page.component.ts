@@ -36,13 +36,13 @@ export class AllPacksPageComponent implements OnInit {
     this.mobile = window.screen.width <= 600;
     this.loadedPacks = 0;
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
-      this.allFavorites = favorites
+      this.allFavorites = favorites;
+      this.sortPacks();
     }));
     if (!this.cardsService.allPacks) {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       try {
         this.api.ListCardsPacks().then(packs => {
-          // console.log("file: all-packs-page.component.ts ~ line 45 ~ this.api.ListCardsPacks ~ packs", packs)
           this.allPacks = packs.items.map(pack => {
             pack.categories.forEach(category => {
               if (!this.allCategories.includes(category))
@@ -50,16 +50,14 @@ export class AllPacksPageComponent implements OnInit {
             });
             return new PackContent().deseralize(pack)
           });
-          this.sortPacks();
           this.cardsService.allPacks = this.allPacks.map(pack => pack);
-          // console.log("file: all-packs-page.component.ts ~ line 54 ~ this.api.ListCardsPacks ~ this.cardsService.allPacks", this.cardsService.allPacks)
           this.cardsService.allCategories = this.allCategories.map(category => category);
           this.allFavorites = this.cardsService.favorites;
+          this.sortPacks();
           this.allPacks.length == 0 ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
         })
       }
       catch (e) {
-        // console.log("file: all-packs-page.component.ts ~ line 65 ~ ngOnInit ~ e", e)
         this.overlaySpinnerService.changeOverlaySpinner(false);
         let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
           duration: 20000,
@@ -72,6 +70,7 @@ export class AllPacksPageComponent implements OnInit {
       this.allPacks = this.cardsService.allPacks;
       this.allCategories = this.cardsService.allCategories;
       this.allFavorites = this.cardsService.favorites
+      this.sortPacks();
       this.allPacks.length == 0 ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
     }
   }
@@ -88,6 +87,7 @@ export class AllPacksPageComponent implements OnInit {
       else
         return 1;
     })
+    this.cardsService.allPacks = this.allPacks.map(pack => pack);
   }
 
   /**
