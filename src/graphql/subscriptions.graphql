@@ -434,6 +434,309 @@ subscription OnDeletePackOwner {
     updatedAt
   }
 }
+subscription OnCreateUser($username: String!) {
+  onCreateUser(username: $username) {
+    id
+    username
+    email
+    phone
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    groupUsers {
+      items {
+        id
+        username
+        email
+        phone
+        cardsPacks {
+          nextToken
+        }
+        status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
+        numberOfPacksSubstitutions
+        lastPackSubstitutionDate
+        numberOfPlansSubstitutions
+        lastPlanSubstitutionDate
+        groupId
+        isGroupOwner
+        groupUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUser($username: String!) {
+  onUpdateUser(username: $username) {
+    id
+    username
+    email
+    phone
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    groupUsers {
+      items {
+        id
+        username
+        email
+        phone
+        cardsPacks {
+          nextToken
+        }
+        status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
+        numberOfPacksSubstitutions
+        lastPackSubstitutionDate
+        numberOfPlansSubstitutions
+        lastPlanSubstitutionDate
+        groupId
+        isGroupOwner
+        groupUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUser($username: String!) {
+  onDeleteUser(username: $username) {
+    id
+    username
+    email
+    phone
+    cardsPacks {
+      items {
+        id
+        packID
+        userID
+        pack {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          createdAt
+          updatedAt
+        }
+        owner {
+          id
+          username
+          email
+          phone
+          status
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          groupId
+          isGroupOwner
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    status
+    subscription {
+      id
+      paymentProvider
+      providerSubscriptionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
+      }
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    groupId
+    isGroupOwner
+    groupUsers {
+      items {
+        id
+        username
+        email
+        phone
+        cardsPacks {
+          nextToken
+        }
+        status
+        subscription {
+          id
+          paymentProvider
+          providerSubscriptionId
+        }
+        numberOfPacksSubstitutions
+        lastPackSubstitutionDate
+        numberOfPlansSubstitutions
+        lastPlanSubstitutionDate
+        groupId
+        isGroupOwner
+        groupUsers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id

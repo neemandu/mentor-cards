@@ -2,9 +2,11 @@ import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
-import { APIService } from '../API.service';
+import { APIService, CreateUserInput } from '../API.service';
 import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { CardsService } from './cards.service';
+import { CognitoUserInterface } from '@aws-amplify/ui-components';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +25,27 @@ export class UserAuthService {
    * Preform sign up process
    * @param newUser - new user data (name, lname, username (email), password)
    */
-  signUp(newUser): Promise<any> {
-    return Auth.signUp(newUser);
+  signUp(username: string, email: string): Promise<any> {
+    // try {
+    //   this.api.CreateUser({ 'username': username, 'email': email }).then(data => {
+    //     console.log("🚀 ~ file: user-auth.service.ts ~ line 31 ~ UserAuthService ~ this.api.CreateUser ~ data", data)
+    //   }).error(e => {
+
+    //   });
+    // }
+    // catch(e) {
+    //   console.log("🚀 ~ file: user-auth.service.ts ~ line 35 ~ UserAuthService ~ signUp ~ e", e)
+    //   // let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת מנויים, נסו שנית', 'רענן', {
+    //   //   duration: 20000,
+    //   // });
+    //   // snackBarRef.onAction().subscribe(() => {
+    //   //   window.location.reload();
+    //   // });
+    // }
+    var user: CreateUserInput = { 'username': username, 'email': email };
+    user.username = username;
+    user.email = email;
+    return this.api.CreateUser(user);
   }
 
   /**
@@ -39,7 +60,8 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(userData: any) {
+  loggedIn(userData: CognitoUserInterface) {
+    console.log("🚀 ~ file: user-auth.service.ts ~ line 45 ~ UserAuthService ~ loggedIn ~ userData", userData)
     this.loggedInAttributes = userData.attributes;
     this.getSubscriptionPlans();
     this.loggedInEmmiter.emit(userData.attributes);
@@ -49,20 +71,31 @@ export class UserAuthService {
    * Get all subscription plans
    */
   getSubscriptionPlans(): void {
-    try {
-      this.api.ListSubscriptionPlans().then(data => {
-        this.subPlans = data.items.map(plan => new SubscriptionPlan().deseralize(plan))
-        // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
-      });
-    }
-    catch (e) {
-      let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת מנוייפ, נסו שנית', 'רענן', {
+    this.api.ListSubscriptionPlans().then(value => {
+      this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+      // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
+    }, reject => {
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
+      let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
         duration: 20000,
       });
       snackBarRef.onAction().subscribe(() => {
         window.location.reload();
       });
-    }
+    });
+    // try {
+    //   this.api.GetUser(this.loggedInAttributes.username).then(data => {
+    //     console.log("🚀 ~ file: user-auth.service.ts ~ line 61 ~ UserAuthService ~ this.api.GetUser ~ data", data)
+    //   })
+    // }
+    // catch (e) {
+    //   let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת מנויים, נסו שנית', 'רענן', {
+    //     duration: 20000,
+    //   });
+    //   snackBarRef.onAction().subscribe(() => {
+    //     window.location.reload();
+    //   });
+    // }
   }
 
   /**
