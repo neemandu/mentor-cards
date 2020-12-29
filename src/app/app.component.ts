@@ -23,16 +23,6 @@ export class AppComponent implements OnInit {
         this.user = authData as CognitoUserInterface;
         this.userAuthService.loggedIn(this.user);
       }
-      else if (this.authState === 'confirmSignUp') {
-        this.user = authData as CognitoUserInterface;
-        var newUsername: string = this.user.username;
-        var newUserEmail: string = this.user.signUpAttrs.attributes['email']
-        this.userAuthService.signUp(newUsername, newUserEmail).then(value => {
-          console.log("🚀 ~ file: app.component.ts ~ line 31 ~ AppComponent ~ this.userAuthService.signUp ~ value", value);
-        }, reason => {
-          console.log("🚀 ~ file: app.component.ts ~ line 33 ~ AppComponent ~ this.userAuthService.signUp ~ reason", reason);
-        });
-      }
       this.ref.detectChanges();
     })
   }

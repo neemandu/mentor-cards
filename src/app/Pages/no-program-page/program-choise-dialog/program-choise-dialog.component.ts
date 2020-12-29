@@ -1,6 +1,6 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
-import { APIService } from 'src/app/API.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { APIService, updatePaymentProgramInput } from 'src/app/API.service';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import * as bundleConfigs from 'src/assets/Bundle Configurations/BundleConfigs.json'
@@ -19,14 +19,13 @@ export class ProgramChoiseDialogComponent implements OnInit {
   // numOfPacksSelected: number;
   packSelected: SubscriptionPlan;
 
-  constructor(private userAuthService: UserAuthService) {//TODO fix prices (price - discount)
+  constructor(private userAuthService: UserAuthService, private api: APIService) {
     this.packSelected = this.userAuthService.subPlans[0];
     this.userAuthService.subPlans.forEach(plan => {
       this.configAmountsOfUsers.push(plan.numberOfUsers);
     })
     this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
     this.numOfUsersSelected = this.configAmountsOfUsers[0];
-
   }
 
   ngOnInit(): void {
@@ -43,22 +42,20 @@ export class ProgramChoiseDialogComponent implements OnInit {
     })
   }
 
-  getOriginalPrice(plan: SubscriptionPlan): any {
-    return (plan.price + plan.price*(plan.discount/100));
-  }
-
-  getPrice(): number {
-    return this.packSelected.price;
-  }
-
-  getDiscount(): number {
-    return this.packSelected.discount;
-  }
-
   changePack(): void {
     this.packSelected = this.userAuthService.subPlans.find(pack =>
       pack.numberOfUsers === this.numOfUsersSelected && pack.numberOfCardPacks == this.packSelected.numberOfCardPacks
     )
+  }
+
+  payForPack(): void {
+    console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 67 ~ ProgramChoiseDialogComponent ~ payForPack ~ this.packSelected", this.packSelected)
+    var paymentProgramId: updatePaymentProgramInput = { 'paymentProgramId': this.packSelected.id }
+    this.api.UpdatePaymentProgram(paymentProgramId).then(data => {
+
+    }, reject => {
+
+    })
   }
 }
 
