@@ -206,6 +206,7 @@ subscription OnCreatePackOwner {
         id
         startDate
         paymentProvider
+        providerTransactionId
         subscriptionPlan {
           id
           name
@@ -298,6 +299,7 @@ subscription OnUpdatePackOwner {
         id
         startDate
         paymentProvider
+        providerTransactionId
         subscriptionPlan {
           id
           name
@@ -390,6 +392,7 @@ subscription OnDeletePackOwner {
         id
         startDate
         paymentProvider
+        providerTransactionId
         subscriptionPlan {
           id
           name

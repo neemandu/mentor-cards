@@ -48,6 +48,7 @@ mutation CreateUser($input: CreateUserInput!) {
       id
       startDate
       paymentProvider
+      providerTransactionId
       subscriptionPlan {
         id
         name
@@ -81,6 +82,7 @@ mutation CreateUser($input: CreateUserInput!) {
           id
           startDate
           paymentProvider
+          providerTransactionId
         }
         numberOfPacksSubstitutions
         lastPackSubstitutionDate
@@ -331,6 +333,7 @@ mutation CreatePackOwner(
         id
         startDate
         paymentProvider
+        providerTransactionId
         subscriptionPlan {
           id
           name
@@ -426,6 +429,7 @@ mutation UpdatePackOwner(
         id
         startDate
         paymentProvider
+        providerTransactionId
         subscriptionPlan {
           id
           name
@@ -521,6 +525,7 @@ mutation DeletePackOwner(
         id
         startDate
         paymentProvider
+        providerTransactionId
         subscriptionPlan {
           id
           name

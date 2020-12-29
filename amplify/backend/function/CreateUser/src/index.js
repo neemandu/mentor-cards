@@ -6,13 +6,16 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-exports.handler = async (event) => {
+
+const { env } = require("process");
+
+exports.handler = (event) => {
     var AWS = require("aws-sdk");
     console.log(event); 
 
-    var username = event.identity.claims['cognito:username'];
-    var email = event.identity.claims['email'];
-    var phone = event.identity.claims['phone_number'];
+    var username = event.arguments.input['username'];
+    var email = event.arguments.input['email'];
+    var phone = event.arguments.input['phone'];
 
     AWS.config.update({
         region: env.REGION
@@ -39,7 +42,9 @@ exports.handler = async (event) => {
             "lastPlanSubstitutionDate": null,
             "groupId": -1,
             "isGroupOwner": false,
-            "groupUsers": []
+            "groupUsers": [],
+            "createdAt": new Date(),
+            "updatedAt": new Date()
         }
     };
 
@@ -57,7 +62,5 @@ exports.handler = async (event) => {
 
     console.log("Done adding a new user...");
 
-    const data = Item
-
-    return Item;
+    return params["Item"];
 };

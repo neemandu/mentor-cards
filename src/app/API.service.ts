@@ -25,7 +25,8 @@ export type changeCardsPackInput = {
 };
 
 export type updatePaymentProgramInput = {
-  paymentProgramId?: string | null;
+  paymentProgramId: string;
+  providerTransactionId?: string | null;
 };
 
 export type groupUsersListInput = {
@@ -323,6 +324,7 @@ export type CreateUserMutation = {
     id: string;
     startDate: string | null;
     paymentProvider: string | null;
+    providerTransactionId: string | null;
     subscriptionPlan: {
       __typename: "SubscriptionPlan";
       id: string;
@@ -361,6 +363,7 @@ export type CreateUserMutation = {
         id: string;
         startDate: string | null;
         paymentProvider: string | null;
+        providerTransactionId: string | null;
       } | null;
       numberOfPacksSubstitutions: number | null;
       lastPackSubstitutionDate: string | null;
@@ -607,6 +610,7 @@ export type CreatePackOwnerMutation = {
       id: string;
       startDate: string | null;
       paymentProvider: string | null;
+      providerTransactionId: string | null;
       subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
@@ -709,6 +713,7 @@ export type UpdatePackOwnerMutation = {
       id: string;
       startDate: string | null;
       paymentProvider: string | null;
+      providerTransactionId: string | null;
       subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
@@ -811,6 +816,7 @@ export type DeletePackOwnerMutation = {
       id: string;
       startDate: string | null;
       paymentProvider: string | null;
+      providerTransactionId: string | null;
       subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
@@ -1042,6 +1048,7 @@ export type GetUserQuery = {
     id: string;
     startDate: string | null;
     paymentProvider: string | null;
+    providerTransactionId: string | null;
     subscriptionPlan: {
       __typename: "SubscriptionPlan";
       id: string;
@@ -1080,6 +1087,7 @@ export type GetUserQuery = {
         id: string;
         startDate: string | null;
         paymentProvider: string | null;
+        providerTransactionId: string | null;
       } | null;
       numberOfPacksSubstitutions: number | null;
       lastPackSubstitutionDate: string | null;
@@ -1126,6 +1134,7 @@ export type ListUsersQuery = {
       id: string;
       startDate: string | null;
       paymentProvider: string | null;
+      providerTransactionId: string | null;
       subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
@@ -1430,6 +1439,7 @@ export type OnCreatePackOwnerSubscription = {
       id: string;
       startDate: string | null;
       paymentProvider: string | null;
+      providerTransactionId: string | null;
       subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
@@ -1532,6 +1542,7 @@ export type OnUpdatePackOwnerSubscription = {
       id: string;
       startDate: string | null;
       paymentProvider: string | null;
+      providerTransactionId: string | null;
       subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
@@ -1634,6 +1645,7 @@ export type OnDeletePackOwnerSubscription = {
       id: string;
       startDate: string | null;
       paymentProvider: string | null;
+      providerTransactionId: string | null;
       subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
@@ -1783,6 +1795,7 @@ export class APIService {
             id
             startDate
             paymentProvider
+            providerTransactionId
             subscriptionPlan {
               __typename
               id
@@ -1821,6 +1834,7 @@ export class APIService {
                 id
                 startDate
                 paymentProvider
+                providerTransactionId
               }
               numberOfPacksSubstitutions
               lastPackSubstitutionDate
@@ -2180,6 +2194,7 @@ export class APIService {
               id
               startDate
               paymentProvider
+              providerTransactionId
               subscriptionPlan {
                 __typename
                 id
@@ -2298,6 +2313,7 @@ export class APIService {
               id
               startDate
               paymentProvider
+              providerTransactionId
               subscriptionPlan {
                 __typename
                 id
@@ -2416,6 +2432,7 @@ export class APIService {
               id
               startDate
               paymentProvider
+              providerTransactionId
               subscriptionPlan {
                 __typename
                 id
@@ -2739,6 +2756,7 @@ export class APIService {
             id
             startDate
             paymentProvider
+            providerTransactionId
             subscriptionPlan {
               __typename
               id
@@ -2777,6 +2795,7 @@ export class APIService {
                 id
                 startDate
                 paymentProvider
+                providerTransactionId
               }
               numberOfPacksSubstitutions
               lastPackSubstitutionDate
@@ -2837,6 +2856,7 @@ export class APIService {
               id
               startDate
               paymentProvider
+              providerTransactionId
               subscriptionPlan {
                 __typename
                 id
@@ -3216,6 +3236,7 @@ export class APIService {
               id
               startDate
               paymentProvider
+              providerTransactionId
               subscriptionPlan {
                 __typename
                 id
@@ -3326,6 +3347,7 @@ export class APIService {
               id
               startDate
               paymentProvider
+              providerTransactionId
               subscriptionPlan {
                 __typename
                 id
@@ -3436,6 +3458,7 @@ export class APIService {
               id
               startDate
               paymentProvider
+              providerTransactionId
               subscriptionPlan {
                 __typename
                 id
