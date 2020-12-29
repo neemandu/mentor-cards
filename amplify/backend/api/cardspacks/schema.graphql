@@ -1,4 +1,4 @@
-type Mutation{
+type Mutation {
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
@@ -11,7 +11,8 @@ input groupUsersListInput {
 }
 
 input updatePaymentProgramInput {
-  paymentProgramId: String
+  paymentProgramId: String!
+  providerTransactionId: String
 }
 
 input addCardsPackInput {
@@ -79,6 +80,7 @@ type MonthlySubscription {
   id: ID!
   startDate: AWSDateTime
   paymentProvider: String
+  providerTransactionId: String
   subscriptionPlan: SubscriptionPlan 
 }
 

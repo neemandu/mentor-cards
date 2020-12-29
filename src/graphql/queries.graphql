@@ -133,6 +133,7 @@ query GetUser($id: ID!) {
       id
       startDate
       paymentProvider
+      providerTransactionId
       subscriptionPlan {
         id
         name
@@ -166,6 +167,7 @@ query GetUser($id: ID!) {
           id
           startDate
           paymentProvider
+          providerTransactionId
         }
         numberOfPacksSubstitutions
         lastPackSubstitutionDate
@@ -211,6 +213,7 @@ query ListUsers(
         id
         startDate
         paymentProvider
+        providerTransactionId
         subscriptionPlan {
           id
           name

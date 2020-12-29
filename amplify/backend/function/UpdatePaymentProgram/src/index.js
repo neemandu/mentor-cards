@@ -10,18 +10,22 @@
 Amplify Params - DO NOT EDIT */
 
 const { env } = require("process");
-require("boto3");
+const { AWS } = require("aws-sdk");
 
 exports.handler = (event) => {
-    var AWS = require("aws-sdk");
+   // var AWS = require("aws-sdk");
 
     var username = event.identity.claims['cognito:username'];
+    if(!username){
+        username = event.identity.claims['username'];
+    }
+    
 
     AWS.config.update({
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
-
+    
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
@@ -76,10 +80,12 @@ exports.handler = (event) => {
 
     user.numberOfPlansSubstitutions++;
 
+    var transId = event.arguments['providerTransactionId'];
 
     var monthlySub = {
         startDate = new Date(),
         paymentProvider = "PayPal",
+        providerTransactionId = transId,
         subscriptionPlan: subscription
     };
 
@@ -109,8 +115,6 @@ exports.handler = (event) => {
 
     CreateUserGroup(username);
 
-
-
     const data = Item
 
     return Item;
@@ -126,9 +130,12 @@ function CreateUserGroup(username){
         UserPoolId=userPoolId
     );
 
+    var client = AWS.boto3.client('cognito-idp')
+
+
     if(!response || !response.Group){
         console.log("Creating group in cognito: " + name);
-        client = boto3.client('cognito-idp')
+        //client = boto3.client('cognito-idp')
 
         response = client.create_group(
             GroupName=name,
