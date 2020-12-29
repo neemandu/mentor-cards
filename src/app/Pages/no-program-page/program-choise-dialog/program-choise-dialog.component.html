@@ -39,13 +39,17 @@
     <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p>
     <p *ngIf="packSelected.discount !== 0">מחיר לפני הנחה: {{packSelected.price.toFixed(2)}} ש"ח</p>
     <p id="real_price">מחיר סופי לחבילה זו: {{(packSelected.price - packSelected.discount).toFixed(2)}} ש"ח</p>
+    <button mat-button matStepperPrevious>
+      <mat-icon>navigate_next</mat-icon>הקודם
+    </button>
     <div>
-      <button mat-button matStepperPrevious>
+      <!-- <button mat-button matStepperPrevious >
         <mat-icon>navigate_next</mat-icon>הקודם
-      </button>
-      <button id="payment-button" mat-button>אישור הזמנה ותשלום<mat-icon id="payment-icon">
+      </button> -->
+      <button id="payment-button" mat-button (click)="payForPack()">אישור הזמנה ותשלום<mat-icon id="payment-icon">
           payment
         </mat-icon></button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
+<div #paypal></div>

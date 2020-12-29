@@ -12,6 +12,8 @@ import * as bundleConfigs from 'src/assets/Bundle Configurations/BundleConfigs.j
 })
 export class ProgramChoiseDialogComponent implements OnInit {
 
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
+
   isLinear = true;
   isEditable = false;
   configAmountsOfUsers: number[] = [];
@@ -21,6 +23,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
 
   constructor(private userAuthService: UserAuthService, private api: APIService) {
     this.packSelected = this.userAuthService.subPlans[0];
+    console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 26 ~ ProgramChoiseDialogComponent ~ constructor ~ this.userAuthService.subPlans", this.userAuthService.subPlans)
     this.userAuthService.subPlans.forEach(plan => {
       this.configAmountsOfUsers.push(plan.numberOfUsers);
     })
@@ -29,6 +32,27 @@ export class ProgramChoiseDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    paypal
+      .Buttons({
+        createSubscription: (data, actions) => {
+          return actions.subscription.create({
+            'plan_id': this.packSelected.providerPlanId
+          });
+        },
+        onApprove: async (data, actions) => {
+          alert(data.subscriptionID);
+        },
+        onError: err => {
+          console.log(err);
+        },
+        style: {
+          layout: 'vertical',
+          color: 'gold',
+          shape: 'pill',
+          label: 'checkout'
+        }
+      })
+      .render(this.paypalElement.nativeElement);
   }
 
   getPlans(): SubscriptionPlan[] {
@@ -49,11 +73,12 @@ export class ProgramChoiseDialogComponent implements OnInit {
   }
 
   payForPack(): void {
-    console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 67 ~ ProgramChoiseDialogComponent ~ payForPack ~ this.packSelected", this.packSelected)
-    var paymentProgramId: updatePaymentProgramInput = { 'paymentProgramId': this.packSelected.id }
+    var paymentProgramId: updatePaymentProgramInput = { 'paymentProgramId': this.packSelected.id, 'providerTransactionId': '123123' }
     this.api.UpdatePaymentProgram(paymentProgramId).then(data => {
+      console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 78 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ data", data)
 
     }, reject => {
+      console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 81 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ reject", reject)
 
     })
   }
