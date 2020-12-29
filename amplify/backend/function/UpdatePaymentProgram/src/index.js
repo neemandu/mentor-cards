@@ -113,14 +113,6 @@ exports.handler = (event) => {
     });
 
 
-    CreateUserGroup(username);
-
-    const data = Item
-
-    return Item;
-};
-
-function CreateUserGroup(username){
     var name = username + "_Group";
     var userPoolId = env.AUTH_MENTORCARDS91F3DC29_USERPOOLID;
     console.log("Trying to create group in cognito: " + name);
@@ -146,4 +138,6 @@ function CreateUserGroup(username){
     else{
         console.log("group " + name + " already exists");
     }
-}
+
+    return Item;
+};
