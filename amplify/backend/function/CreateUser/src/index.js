@@ -9,7 +9,7 @@ Amplify Params - DO NOT EDIT */
 
 const { env } = require("process");
 
-exports.handler = (event) => {
+exports.handler = async (event) => {
     var AWS = require("aws-sdk");
     console.log(event); 
 
@@ -43,14 +43,14 @@ exports.handler = (event) => {
             "groupId": -1,
             "isGroupOwner": false,
             "groupUsers": [],
-            "createdAt": new Date(),
-            "updatedAt": new Date()
+            "createdAt": new Date().toISOString(),
+            "updatedAt": new Date().toISOString()
         }
     };
 
     console.log("Adding a new user...");
 
-    docClient.put(params, function(err, data) {
+    await docClient.put(params, function(err, data) {
         if (err) {
             console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -58,7 +58,7 @@ exports.handler = (event) => {
             console.log("Added item:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
-    });
+    }).promise();
 
     console.log("Done adding a new user...");
 
