@@ -8,22 +8,15 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-const { env } = require("process");
+const { env, ppid } = require("process");
+var AWS = require("aws-sdk");
 
-exports.handler = async (event) => {
-    var AWS = require("aws-sdk");
-
-    var username = event.identity.claims['cognito:username'];
-
-    AWS.config.update({
-        region: env.REGION
-        //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-    });
-
+async function getUser(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
+    
     var userParams = {
         TableName:userTable,
         Key:{
@@ -35,30 +28,36 @@ exports.handler = async (event) => {
 
     var user;
 
-    docClient.get(userParams, function(err, data) {
+    await docClient.get(userParams, function(err, data) {
         if (err) {
+            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Get user succeeded:", JSON.stringify(data, null, 2));
             user = data["Item"];
         }
-    });
+    }).promise();
 
     if(!user){
         throw Error ('no such user - ' + username);
     }
 
+    return user;
 
-    if(user.cardsPacks && user.cardsPacks.length == subscriptionPlan.numberOfCardPacks){
-        throw Error ('no more packs are allowed');
-    }
+}
 
+function userReachedMaximumPacks(user){
+    return user.cardsPacks && user.cardsPacks.length == user.subscriptionPlan.subscriptionPlan.numberOfCardPacks;
+}
+
+async function getCardsPack(cardsPackId){
+    var docClient = new AWS.DynamoDB.DocumentClient();
 
     var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
     var cardsParams = {
         TableName: cardPackTable,
         Key:{
-            "id": event.arguments.cardsPackId
+            "id": cardsPackId
         }
     };
 
@@ -66,38 +65,67 @@ exports.handler = async (event) => {
 
     var cardPack;
 
-    docClient.get(cardsParams, function(err, data) {
+    await docClient.get(cardsParams, function(err, data) {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Get card succeeded:", JSON.stringify(data, null, 2));
             cardPack = data["Item"];
         }
-    });
+    }).promise();
 
     if(!cardPack){
         throw Error ('no such card - ' + event.arguments.cardsPackId);
     }
 
-    cardPack.usersIds.push(username);
+    return cardPack;
+}
 
-    var newPackId = username + event.arguments.cardsPackId;
-    var newPack = {
-        id: newPackId,
-        packID: event.arguments.cardsPackId,
-        userID: username,
-        pack: cardPack,
-        owner: username
+async function pushUserToCardsPack(cardsPack, username){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
+
+    cardsPack.usersIds.push(username);
+    var cardPackParams = {
+        TableName: cardPackTable,
+        Item: cardsPack
     };
 
-    user.cardPack.push(newPack);
+    console.log("updating pack with new user : " +username);
 
+    await docClient.put(cardPackParams, function(err, data) {
+        if (err) {
+            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
+}
+
+async function pushCardsPackToUser(user, cardsPack){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var newPackId = user.id + cardsPack.id;
+    var newPack = {
+        id: newPackId,
+        packID: cardsPack.id,
+        userID: user.id,
+        pack: cardsPack,
+        owner: user.id
+    };
+
+    user.cardsPacks.push(newPack);
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
     var updatedUserParams = {
         TableName: userTable,
         Item: user
     };
 
-    console.log("updating user with new pack : " + event.arguments.cardsPackId);
+    console.log("updating user with new pack : " +cardsPack.id);
 
     docClient.put(updatedUserParams, function(err, data) {
         if (err) {
@@ -107,24 +135,29 @@ exports.handler = async (event) => {
             console.log("updated user with new pack:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
+    }).promise();
+}
+
+exports.handler = async (event) => {
+    AWS.config.update({
+        region: env.REGION
+        //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
 
-    var cardPackParams = {
-        TableName: cardPackTable,
-        Item: cardPack
-    };
+    var username = event.identity.claims['cognito:username'];
+    
+    var user = await getUser(username);
 
-    console.log("updating pack with new user : " +username);
+    if(userReachedMaximumPacks(user)){
+        throw Error ('no more packs are allowed');
+    }
 
-    docClient.put(cardPackParams, function(err, data) {
-        if (err) {
-            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    });
+    var cardsPackId = event.arguments.cardsPackId;
+    var cardsPack = await getCardsPack(cardsPackId);
+
+    await pushUserToCardsPack(cardsPack, username);
+    
+    await pushCardsPackToUser(user, cardsPack);
 
     return true;
 };

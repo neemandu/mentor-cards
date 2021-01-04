@@ -10,26 +10,14 @@
 Amplify Params - DO NOT EDIT */
 
 const { env } = require("process");
-const { AWS } = require("aws-sdk");
+var AWS = require("aws-sdk");
 
-exports.handler = (event) => {
-   // var AWS = require("aws-sdk");
-
-    var username = event.identity.claims['cognito:username'];
-    if(!username){
-        username = event.identity.claims['username'];
-    }
-    
-
-    AWS.config.update({
-        region: env.REGION
-        //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-    });
-    
+async function getUser(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
+    
     var userParams = {
         TableName:userTable,
         Key:{
@@ -41,22 +29,27 @@ exports.handler = (event) => {
 
     var user;
 
-    docClient.get(userParams, function(err, data) {
+    await docClient.get(userParams, function(err, data) {
         if (err) {
+            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Get user succeeded:", JSON.stringify(data, null, 2));
             user = data["Item"];
         }
-    });
+    }).promise();
 
     if(!user){
         throw Error ('no such user - ' + username);
     }
 
-    var subTable = env.API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME;
-    var subId = event.arguments['paymentProgramId'];
+    return user;
 
+}
+
+async function getPaymentProgram(subId){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var subTable = env.API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME;
     var subParams = {
         TableName:subTable,
         Key:{
@@ -65,44 +58,53 @@ exports.handler = (event) => {
     };
 
     var subscription;
-    docClient.get(subParams, function(err, data) {
+    await docClient.get(subParams, function(err, data) {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+            console.log("Get PaymentProgram succeeded:", JSON.stringify(data, null, 2));
             subscription = data["Item"];
         }
-    });
+    }).promise();
 
     if(!subscription){
         throw Error ('no such subscription - ' + subId);
     }
 
-    user.numberOfPlansSubstitutions++;
+    return subscription;
+}
 
-    var transId = event.arguments['providerTransactionId'];
+function userReachedMaximumProgramsSwitch(user){
+    var date =new Date();
+    date.setDate(date.getDate() - 30);
+    return user.lastPlanSubstitutionDate > date;
+}
+
+async function updateMonthlySubscription(user, paymentProgram, transId){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
     var monthlySub = {
-        startDate = new Date(),
-        paymentProvider = "PayPal",
-        providerTransactionId = transId,
-        subscriptionPlan: subscription
+        startDate : new Date().toISOString(),
+        paymentProvider : "PayPal",
+        providerTransactionId : transId,
+        subscriptionPlan: paymentProgram
     };
 
     var params = {
         TableName: userTable,
         Item:{
-            "id": username,
+            "id": user.id,
             "status": "PLAN",
             "subscription": monthlySub ,
             "numberOfPlansSubstitutions": user.numberOfPlansSubstitutions,
-            "lastPlanSubstitutionDate": new Date()
+            "lastPlanSubstitutionDate": new Date().toISOString()
         }
     };
 
-    console.log("Adding a new user...");
+    console.log("Adding a new subscription plan to user: " + user.id + "...");
 
-    docClient.put(params, function(err, data) {
+    await docClient.put(params, function(err, data) {
         if (err) {
             console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -110,34 +112,62 @@ exports.handler = (event) => {
             console.log("Added item:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
-    });
+    }).promise();
+}
 
-
+async function createIncognitoGroup(username){
     var name = username + "_Group";
     var userPoolId = env.AUTH_MENTORCARDS91F3DC29_USERPOOLID;
     console.log("Trying to create group in cognito: " + name);
 
-    response = client.get_group(
-        GroupName=name,
-        UserPoolId=userPoolId
-    );
+    
+    var client = new AWS.CognitoIdentity();
+    var response = await client.getGroup(
+        name,
+        userPoolId
+    ).promise();
 
-    var client = AWS.boto3.client('cognito-idp')
 
 
     if(!response || !response.Group){
         console.log("Creating group in cognito: " + name);
-        //client = boto3.client('cognito-idp')
 
-        response = client.create_group(
-            GroupName=name,
-            UserPoolId=env.AUTH_MENTORCARDS91F3DC29_USERPOOLID,
-            Precedence=1
-        );
+        response = await client.create_group(
+            name,
+            env.AUTH_MENTORCARDS91F3DC29_USERPOOLID,
+            1
+        ).promise();
     }
     else{
         console.log("group " + name + " already exists");
     }
+}
 
-    return Item;
+exports.handler = async (event) => {
+    AWS.config.update({
+        region: env.REGION
+        //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+    });
+
+    var username = event.identity.claims['cognito:username'];
+    if(!username){
+        username = event.identity.claims['username'];
+    }
+
+    var user = await getUser(username);
+
+    if(userReachedMaximumProgramsSwitch(user)){
+        throw Error ('no more programs switches are allowed');
+    }
+
+    var subId = event.arguments['paymentProgramId'];
+    var paymentProgram = await getPaymentProgram(subId);
+
+    var transId = event.arguments['providerTransactionId'];
+
+     await updateMonthlySubscription(user, paymentProgram, transId);
+
+    if(paymentProgram.numberOfUsers > 1){
+        await createIncognitoGroup(username);
+    }
 };
