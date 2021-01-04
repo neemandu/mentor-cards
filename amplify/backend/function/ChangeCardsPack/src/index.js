@@ -35,22 +35,22 @@ exports.handler = async (event) => {
 
     var user;
 
-    docClient.get(userParams, function(err, data) {
+    await docClient.get(userParams, function(err, data) {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Get user succeeded:", JSON.stringify(data, null, 2));
             user = data["Item"];
         }
-    });
+    }).promise();
 
     if(!user){
         throw Error ('no such user - ' + username);
     }
     
 
-    var oldPackId = event.arguments.oldCardsPackId;
-    var newPackId = event.arguments.newCardsPackId;
+    var oldPackId = event.arguments.input['oldCardsPackId'];
+    var newPackId = event.arguments.input['newCardsPackId'];
 
     var i;
     for (i = 0; i < user.cardsPacks.length; i++) {
@@ -74,14 +74,14 @@ exports.handler = async (event) => {
 
     var cardPack;
 
-    docClient.get(cardsParams, function(err, data) {
+    await docClient.get(cardsParams, function(err, data) {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Get card succeeded:", JSON.stringify(data, null, 2));
             cardPack = data["Item"];
         }
-    });
+    }).promise();
 
     if(!cardPack){
         throw Error ('no such card - ' + oldPackId);
@@ -103,14 +103,14 @@ exports.handler = async (event) => {
 
     console.log("searching for card - " + newCardsPackId);
 
-    docClient.get(cardsParams, function(err, data) {
+    await docClient.get(cardsParams, function(err, data) {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Get card succeeded:", JSON.stringify(data, null, 2));
             cardPack = data["Item"];
         }
-    });
+    }).promise();
 
     if(!cardPack){
         throw Error ('no such card - ' + newCardsPackId);
@@ -136,9 +136,9 @@ exports.handler = async (event) => {
         Item: user
     };
 
-    console.log("updating user with new pack : " + event.arguments.cardsPackId);
+    console.log("updating user with new pack : " + event.arguments.input['cardsPackId']);
 
-    docClient.put(updatedUserParams, function(err, data) {
+    await docClient.put(updatedUserParams, function(err, data) {
         if (err) {
             console.error("Unable to updating user with new pack. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -146,7 +146,7 @@ exports.handler = async (event) => {
             console.log("updated user with new pack:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
-    });
+    }).promise();
 
     cardPackParams = {
         TableName: cardPackTable,
@@ -155,7 +155,7 @@ exports.handler = async (event) => {
 
     console.log("updating pack with new user : " +username);
 
-    docClient.put(cardPackParams, function(err, data) {
+    await docClient.put(cardPackParams, function(err, data) {
         if (err) {
             console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -163,7 +163,7 @@ exports.handler = async (event) => {
             console.log("updated pack with new user:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
-    });
+    }).promise();
 
     return true;
 };

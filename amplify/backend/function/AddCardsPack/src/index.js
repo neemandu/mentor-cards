@@ -47,7 +47,7 @@ async function getUser(username){
 }
 
 function userReachedMaximumPacks(user){
-    return user.cardsPacks && user.cardsPacks.length == user.subscriptionPlan.subscriptionPlan.numberOfCardPacks;
+    return user.cardsPacks && user.cardsPacks.length == user.subscription.subscriptionPlan.numberOfCardPacks;
 }
 
 async function getCardsPack(cardsPackId){
@@ -61,7 +61,7 @@ async function getCardsPack(cardsPackId){
         }
     };
 
-    console.log("searching for card - " + event.arguments.cardsPackId);
+    console.log("searching for card - " + cardsPackId);
 
     var cardPack;
 
@@ -75,7 +75,7 @@ async function getCardsPack(cardsPackId){
     }).promise();
 
     if(!cardPack){
-        throw Error ('no such card - ' + event.arguments.cardsPackId);
+        throw Error ('no such card - ' + cardsPackId);
     }
 
     return cardPack;
@@ -114,7 +114,9 @@ async function pushCardsPackToUser(user, cardsPack){
         packID: cardsPack.id,
         userID: user.id,
         pack: cardsPack,
-        owner: user.id
+        owner: user.id,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
     };
 
     user.cardsPacks.push(newPack);
@@ -127,12 +129,28 @@ async function pushCardsPackToUser(user, cardsPack){
 
     console.log("updating user with new pack : " +cardsPack.id);
 
-    docClient.put(updatedUserParams, function(err, data) {
+    await docClient.put(updatedUserParams, function(err, data) {
         if (err) {
             console.error("Unable to updating user with new pack. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
         } else {
             console.log("updated user with new pack:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
+
+    console.log("updating new pack owner : " +cardsPack.id);
+    var packOwnerTable = env.API_CARDSPACKS_PACKOWNERTABLE_NAME;
+    var updatedPackOwner = {
+        TableName: packOwnerTable,
+        Item: newPack
+    };
+    await docClient.put(updatedPackOwner, function(err, data) {
+        if (err) {
+            console.error("Unable to updating pack owner. Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("updated new pack owner:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
     }).promise();
@@ -145,14 +163,17 @@ exports.handler = async (event) => {
     });
 
     var username = event.identity.claims['cognito:username'];
-    
+    if(!username){
+        username = event.identity.claims['username'];
+    }
+
     var user = await getUser(username);
 
     if(userReachedMaximumPacks(user)){
         throw Error ('no more packs are allowed');
     }
 
-    var cardsPackId = event.arguments.cardsPackId;
+    var cardsPackId = event.arguments.input['cardsPackId'];
     var cardsPack = await getCardsPack(cardsPackId);
 
     await pushUserToCardsPack(cardsPack, username);
