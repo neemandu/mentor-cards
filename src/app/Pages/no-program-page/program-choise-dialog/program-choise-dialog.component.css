@@ -8,6 +8,10 @@ mat-icon {
   font-family: 'Material Icons';
 }
 
+mat-button-toggle p {
+  margin: 0px;
+}
+
 #payment-icon {
   margin-right: 5px;
 }
@@ -47,4 +51,36 @@ mat-icon {
 #real_price {
   font-size: larger;
   font-weight: 600;
+}
+
+.iconButton {
+  top: -1rem;
+  right: -95%;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: rtl !important;
+}
+
+mat-horizontal-stepper {
+  margin-top: -5%;
+}
+
+#extraProgramData {
+  text-align: center;
+  max-width: 30vw;
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+.instruction {
+  font-size: medium;
+}
+
+#cantChangePlanLabel {
+  font-size: xx-large;
+  font-weight: 900;
+  color: red;
+  margin-top: 5%;
 }

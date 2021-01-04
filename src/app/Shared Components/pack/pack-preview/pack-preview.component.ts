@@ -37,4 +37,8 @@ export class PackPreviewComponent implements OnInit {
     });
   }
 
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
 }

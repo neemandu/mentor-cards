@@ -5,8 +5,12 @@
   position: relative;
 }
 
-span {
+#top {
   font-size: xx-large;
+}
+
+#bottom {
+  font-size: medium;
 }
 
 button {

@@ -17,6 +17,7 @@ export class UserAuthService {
 
   loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
+  userData: any;
 
   constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private ngZone: NgZone, private cardsService: CardsService) {
   }
@@ -55,8 +56,21 @@ export class UserAuthService {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
     });
     this.loggedInAttributes = userData;
+    this.updateUserData();
     this.getSubscriptionPlans();
     this.loggedInEmmiter.emit(userData.attributes);
+  }
+
+  /**
+   * Get all data from BE about user
+   */
+  updateUserData(): void {
+    this.api.GetUser(this.loggedInAttributes.username).then(data => {
+      this.userData = data;
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 58 ~ UserAuthService ~ this.api.GetUser ~ data", data)
+    }, reject => {
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
+    })
   }
 
   /**
@@ -75,11 +89,6 @@ export class UserAuthService {
         window.location.reload();
       });
     });
-    this.api.GetUser(this.loggedInAttributes.username).then(data => {
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 61 ~ UserAuthService ~ this.api.GetUser ~ data", data)
-    }, reject => {
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 81 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
-    })
   }
 
   /**

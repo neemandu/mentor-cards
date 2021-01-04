@@ -1,3 +1,6 @@
+<button class="iconButton" mat-icon-button (click)="closeDialog()">
+  <mat-icon>highlight_off</mat-icon>
+</button>
 <div class="d-flex flex-column">
   <p class="main-header">{{data.description}}</p>
   <div class="d-flex justify-content-around categories-tags">
@@ -20,9 +23,8 @@
     </div>
   </div>
   <div id="actions" class="d-flex flex-row">
-    <button type="button" (click)="choosePack()">בחר ערכה זו</button>
-    <button type="button" (click)="exchangePack()">החלף ערכה קיימת בזו</button>
-    <button type="button" (click)="openChooseProgramModal()">שדרג תכנית ערכות</button>
+    <button class="action-button" type="button" (click)="choosePack()">בחר ערכה זו</button>
+    <button class="action-button" type="button" (click)="exchangePack()">החלף ערכה קיימת בזו</button>
+    <button class="action-button" type="button" (click)="openChooseProgramModal()">שדרג תכנית ערכות</button>
   </div>
 </div>
-
