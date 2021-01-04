@@ -17,6 +17,7 @@ export class UserAuthService {
 
   loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
+  userData: any;
 
   constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private ngZone: NgZone, private cardsService: CardsService) {
   }
@@ -26,22 +27,7 @@ export class UserAuthService {
    * @param newUser - new user data (name, lname, username (email), password)
    */
   signUp(username: string, email: string): Promise<any> {
-    // try {
-    //   this.api.CreateUser({ 'username': username, 'email': email }).then(data => {
-    //     console.log("🚀 ~ file: user-auth.service.ts ~ line 31 ~ UserAuthService ~ this.api.CreateUser ~ data", data)
-    //   }).error(e => {
-
-    //   });
-    // }
-    // catch(e) {
-    //   console.log("🚀 ~ file: user-auth.service.ts ~ line 35 ~ UserAuthService ~ signUp ~ e", e)
-    //   // let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת מנויים, נסו שנית', 'רענן', {
-    //   //   duration: 20000,
-    //   // });
-    //   // snackBarRef.onAction().subscribe(() => {
-    //   //   window.location.reload();
-    //   // });
-    // }
+    var session = Auth.currentSession();
     var user: CreateUserInput = { 'username': username, 'email': email };
     user.username = username;
     user.email = email;
@@ -61,10 +47,30 @@ export class UserAuthService {
    * @param userData - data returned from the BE for the user (tokens etc')
    */
   loggedIn(userData: CognitoUserInterface) {
-    console.log("🚀 ~ file: user-auth.service.ts ~ line 45 ~ UserAuthService ~ loggedIn ~ userData", userData)
-    this.loggedInAttributes = userData.attributes;
+    var newUsername: string = userData.username;
+    var newUserEmail: string = userData.attributes['email'];
+    var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
+    this.api.CreateUser(user).then(value => {
+      // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.CreateUser ~ value", value)
+    }, reject => {
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
+    });
+    this.loggedInAttributes = userData;
+    this.updateUserData();
     this.getSubscriptionPlans();
     this.loggedInEmmiter.emit(userData.attributes);
+  }
+
+  /**
+   * Get all data from BE about user
+   */
+  updateUserData(): void {
+    this.api.GetUser(this.loggedInAttributes.username).then(data => {
+      this.userData = data;
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 58 ~ UserAuthService ~ this.api.GetUser ~ data", data)
+    }, reject => {
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
+    })
   }
 
   /**
@@ -75,7 +81,7 @@ export class UserAuthService {
       this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
       // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
     }, reject => {
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
+      // console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
       let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
         duration: 20000,
       });
@@ -83,19 +89,6 @@ export class UserAuthService {
         window.location.reload();
       });
     });
-    // try {
-    //   this.api.GetUser(this.loggedInAttributes.username).then(data => {
-    //     console.log("🚀 ~ file: user-auth.service.ts ~ line 61 ~ UserAuthService ~ this.api.GetUser ~ data", data)
-    //   })
-    // }
-    // catch (e) {
-    //   let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת מנויים, נסו שנית', 'רענן', {
-    //     duration: 20000,
-    //   });
-    //   snackBarRef.onAction().subscribe(() => {
-    //     window.location.reload();
-    //   });
-    // }
   }
 
   /**

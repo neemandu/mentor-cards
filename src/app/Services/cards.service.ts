@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackContent, PackInfo } from '../Objects/packs';
+import { addCardsPackInput, APIService } from '../API.service';
 
 @Injectable({
   providedIn: 'root'

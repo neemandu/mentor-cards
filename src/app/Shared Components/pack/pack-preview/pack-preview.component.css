@@ -34,7 +34,7 @@ app-card {
   margin: 0px 10px;
 }
 
-button {
+.action-button {
   height: 3rem;
   width: 10rem;
   border-radius: 5px;
@@ -46,19 +46,28 @@ button {
   margin: 0 1%;
 }
 
-button:hover {
+.action-button:hover {
   background: #e69900;
 }
 
-button:active {
+.action-button:active {
   background: #db9200;
 }
 
-button:focus {
+.action-button:focus {
   outline: none;
 }
 
 #actions {
   align-items: center;
-  padding-top: 3%; 
+  padding-top: 3%;
+}
+
+.iconButton {
+  top: -1rem;
+  right: -95%;
+}
+
+mat-icon {
+  font-family: 'Material Icons' !important;
 }

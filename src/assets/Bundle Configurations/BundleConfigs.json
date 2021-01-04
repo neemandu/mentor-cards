@@ -1,22 +1,24 @@
 {
-    "Bundles":[
-        {"amountOfPeople":1, "amountOfPacks":2, "price":19.90},
-        {"amountOfPeople":1, "amountOfPacks":5, "price":19.90},
-        {"amountOfPeople":1, "amountOfPacks":-1, "price":19.90},
-        {"amountOfPeople":3, "amountOfPacks":2, "price":19.90},
-        {"amountOfPeople":3, "amountOfPacks":5, "price":19.90},
-        {"amountOfPeople":3, "amountOfPacks":-1, "price":19.90},
-        {"amountOfPeople":10, "amountOfPacks":2, "price":19.90},
-        {"amountOfPeople":10, "amountOfPacks":5, "price":19.90},
-        {"amountOfPeople":10, "amountOfPacks":-1, "price":19.90},
-        {"amountOfPeople":50, "amountOfPacks":2, "price":19.90},
-        {"amountOfPeople":50, "amountOfPacks":5, "price":19.90},
-        {"amountOfPeople":50, "amountOfPacks":-1, "price":19.90}
-    ],
-    "amountsOfPeople": [
-        1,3,10,50
-    ],
-    "amountsOfPacks": [
-        2,5,-1
-    ]
+  "packDescriptions": [{
+      "amountOfPeople": 1,
+      "description": "משתמש בודד",
+      "extra": ""
+    },
+    {
+      "amountOfPeople": 3,
+      "description": "התכנית מומלצת לחברים/קולגות/עסק קטן",
+      "extra": "האדם שבוחר את התכנית הוא המשתמש-מנהל קבוע ובעל הרשאות לביצוע שינויים והתאמות במידת הצורך."
+    },
+    {
+      "amountOfPeople": 10,
+      "description": "התכנית מומלצת לעסק/מרכז קטן-בינוני או לקבוצת קולגות מאורגנת",
+      "extra": "האדם שבוחר את התכנית הוא המשתמש-מנהל קבוע ובעל הרשאות לביצוע שינויים והתאמות במידת הצורך."
+    },
+    {
+      "amountOfPeople": 50,
+      "description": "התכנית מומלצת לארגון בינוני/גדול או לקבוצת קולגות מאורגנת",
+      "extra": "האדם שבוחר את התכנית הוא המשתמש-מנהל קבוע והוא יכול להגדיר אדם נוסף כמנהל משותף. לשניהם הרשאות לביצוע שינויים והתאמות במידת הצורך."
+    }
+
+  ]
 }

@@ -65,7 +65,7 @@ body {
 
 *:focus,
 button:focus {
-  outline: none;
+  outline: none !important;
 }
 
 @font-face {

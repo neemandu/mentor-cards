@@ -1,51 +1,64 @@
-<mat-horizontal-stepper [linear]="isLinear" #stepper label="כמות אנשים">
-  <mat-step class="step" state="done" label="כמות אנשים">
-    <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople" (change)="changePack()">
-      <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount">{{userAmount}} משתמשים
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-    <div>
-      <button mat-button matStepperNext>הבא
-        <mat-icon>navigate_before</mat-icon>
-      </button>
-
-    </div>
-  </mat-step>
-  <mat-step state="done" label="כמות ערכות">
-    <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks">
-      <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan">
-        <div>
+<div style="position: relative;">
+  <button class="iconButton" mat-icon-button (click)="closeDialog()">
+    <mat-icon>highlight_off</mat-icon>
+  </button>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper label="כמות אנשים" (selectionChange)="stepChanged($event)">
+    <mat-step class="step" state="done" label="כמות אנשים">
+      <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople" (change)="changePack();fixParameters();">
+        <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount"
+          matTooltip="{{getProgramJsonDescription(userAmount)}}" [matTooltipClass]="{'tooltip-class' : true}">
+          {{userAmount}}
+          משתמשים
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <div id="extraProgramData" *ngIf="programJsonExtra !== ''">
+        <p>דגשים לתכנית:</p>
+        <p class="instruction">{{programJsonExtra}}</p>
+        <p class="instruction">לאחר תהליך הרישום תתאפשר הזנה של פרטי המשתמשים הנוספים.</p>
+      </div>
+      <div>
+        <button mat-button matStepperNext>הבא
+          <mat-icon>navigate_before</mat-icon>
+        </button><br>
+      </div>
+    </mat-step>
+    <mat-step state="done" label="כמות ערכות">
+      <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks" (change)="fixParameters();">
+        <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan">
+          <!-- <div> -->
           <p>
             {{plan.numberOfCardPacks == -1 ? 'ללא הגבלה' : plan.numberOfCardPacks}}
           </p>
-          <p id="original_price" *ngIf="getOriginalPrice(plan) !== plan.price">
-            <s>{{getOriginalPrice(plan).toFixed(2)}} ש"ח</s>
+          <p id="original_price" *ngIf="plan.discount != 0">
+            <s>{{plan.price}} ש"ח</s>
           </p>
           <p id="real_price">
-            {{plan.price}} ש"ח
+            {{(plan.price - plan.discount).toFixed(2)}} ש"ח
           </p>
-        </div>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-    <div>
+          <p style="font-size: medium;">
+            לחודש
+          </p>
+          <!-- </div> -->
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <div>
+        <button mat-button matStepperPrevious>
+          <mat-icon>navigate_next</mat-icon>הקודם
+        </button>
+        <button mat-button matStepperNext>הבא<mat-icon>navigate_before</mat-icon></button>
+      </div>
+    </mat-step>
+    <mat-step state="done" label="סיכום הזמנה">
+      <p>כמות משתמשים: {{numOfUsersSelected}}</p>
+      <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p>
+      <p *ngIf="packSelected.discount !== 0">מחיר לפני הנחה: {{packSelected.price.toFixed(2)}} ש"ח</p>
+      <p id="real_price">מחיר סופי לחבילה זו: {{(packSelected.price - packSelected.discount).toFixed(2)}} ש"ח</p>
       <button mat-button matStepperPrevious>
         <mat-icon>navigate_next</mat-icon>הקודם
       </button>
-      <button mat-button matStepperNext>הבא<mat-icon>navigate_before</mat-icon></button>
-    </div>
-  </mat-step>
-  <mat-step state="done" label="סיכום הזמנה">
-    <p>כמות משתמשים: {{numOfUsersSelected}}</p>
-    <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p>
-    <p *ngIf="getOriginalPrice(packSelected) !== packSelected.price">מחיר לפני הנחה: {{getOriginalPrice(packSelected).toFixed(2)}} ש"ח</p>
-    <p id="real_price">מחיר סופי לחבילה זו: {{packSelected.price}} ש"ח</p>
-    <div>
-      <button mat-button matStepperPrevious>
-        <mat-icon>navigate_next</mat-icon>הקודם
-      </button>
-      <button id="payment-button" mat-button (click)="stepper.reset()">אישור הזמנה ותשלום<mat-icon id="payment-icon">
-          payment
-        </mat-icon></button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+      <div id="paypal" [hidden]="changedPlansThisMonth || ownsCurrentPlanLabel" style="width: 70%; margin-top: 2%; margin-bottom: -3%;" #paypal></div>
+      <p id="cantChangePlanLabel" *ngIf="changedPlansThisMonth"><mat-icon [inline]=true>block</mat-icon>אין להחליף חבילה יותר מפעם בחודש</p>
+      <p id="ownsCurrentPlanLabel" *ngIf="ownsCurrentPlanLabel"><mat-icon [inline]=true>done</mat-icon>את\ה רשום לחבילה זו כבר</p>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
