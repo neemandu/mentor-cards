@@ -84,3 +84,10 @@ mat-horizontal-stepper {
   color: red;
   margin-top: 5%;
 }
+
+#ownsCurrentPlanLabel {
+  font-size: xx-large;
+  font-weight: 900;
+  color: #ffa800;
+  margin-top: 5%;
+}

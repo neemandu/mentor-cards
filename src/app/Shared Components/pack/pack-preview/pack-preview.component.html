@@ -23,8 +23,8 @@
     </div>
   </div>
   <div id="actions" class="d-flex flex-row">
-    <button class="action-button" type="button" (click)="choosePack()">בחר ערכה זו</button>
-    <button class="action-button" type="button" (click)="exchangePack()">החלף ערכה קיימת בזו</button>
-    <button class="action-button" type="button" (click)="openChooseProgramModal()">שדרג תכנית ערכות</button>
+    <button class="action-button" type="button" (click)="choosePack()" *ngIf="choosePackButtonVisible">בחר ערכה זו</button>
+    <button class="action-button" type="button" (click)="exchangePack()" *ngIf="exchangePackButtonVisible">החלף ערכה קיימת בזו</button>
+    <button class="action-button" type="button" (click)="openChooseProgramModal()" *ngIf="upgradePackButtonVisible">שדרג תכנית ערכות</button>
   </div>
 </div>
