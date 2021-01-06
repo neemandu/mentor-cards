@@ -37,20 +37,18 @@ export class PackContentPageComponent implements OnInit {
       // console.log("file: pack-content-page.component.ts ~ line 36 ~ ngOnInit ~ this.pack", this.pack)
     }
     else {
-      try {
-        this.api.GetCardsPack(this.id).then(pack => {
-          this.pack = new PackContent().deseralize(pack);
-          // console.log("ngOnInit -> this.pack", this.pack)
-        })
-      }
-      catch (e) {
-        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
-          duration: 20000,
-        });
-        snackBarRef.onAction().subscribe(() => {
-          window.location.reload();
-        });
-      }
+      this.api.GetCardsPack(this.id).then(pack => {
+        this.pack = new PackContent().deseralize(pack);
+        // console.log("ngOnInit -> this.pack", this.pack)
+      }, reject => {
+        console.log("🚀 ~ file: pack-content-page.component.ts ~ line 75 ~ PackContentPageComponent ~ this.api.GetCardsPack ~ reject", reject)
+        // let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
+        //   duration: 20000,
+        // });
+        // snackBarRef.onAction().subscribe(() => {
+        //   window.location.reload();
+        // });
+      })
     }
   }
 

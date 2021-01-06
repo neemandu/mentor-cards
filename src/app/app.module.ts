@@ -31,6 +31,8 @@ import { TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view
 import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
 import { ProgramChoiseDialogComponent } from './Pages/no-program-page/program-choise-dialog/program-choise-dialog.component';
 import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
+import { DynamicDialogYesNoComponent } from './Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { UserPageComponent } from './Pages/user-page/user-page.component';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -50,6 +52,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -74,7 +77,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     AllPacksPageComponent,
     NoProgramPageComponent,
     ProgramChoiseDialogComponent,
-    PackPreviewComponent
+    PackPreviewComponent,
+    DynamicDialogYesNoComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +108,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatStepperModule,
+    MatToolbarModule
   ],
   providers: [
   ],
