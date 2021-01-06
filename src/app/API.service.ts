@@ -33,6 +33,10 @@ export type groupUsersListInput = {
   usernamesList?: Array<string | null> | null;
 };
 
+export type unSubscribeInput = {
+  username: string;
+};
+
 export type CreateCardsPackInput = {
   id?: string | null;
   imgUrl: string;
@@ -1914,6 +1918,18 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.updateGroupUsersList;
+  }
+  async Unsubscribe(input: unSubscribeInput): Promise<boolean | null> {
+    const statement = `mutation Unsubscribe($input: unSubscribeInput!) {
+        Unsubscribe(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.Unsubscribe;
   }
   async CreateCardsPack(
     input: CreateCardsPackInput,

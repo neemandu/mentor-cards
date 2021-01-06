@@ -114,6 +114,9 @@ mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
 mutation UpdateGroupUsersList($input: groupUsersListInput!) {
   updateGroupUsersList(input: $input)
 }
+mutation Unsubscribe($input: unSubscribeInput!) {
+  Unsubscribe(input: $input)
+}
 mutation CreateCardsPack(
   $input: CreateCardsPackInput!
   $condition: ModelCardsPackConditionInput
