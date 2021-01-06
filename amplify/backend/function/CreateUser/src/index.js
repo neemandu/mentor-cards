@@ -74,8 +74,7 @@ exports.handler = async (event) => {
                 "lastPackSubstitutionDate": null,
                 "numberOfPlansSubstitutions": 0,
                 "lastPlanSubstitutionDate": null,
-                "groupId": -1,
-                "isGroupOwner": false,
+                "groupsRoles": [],
                 "groupUsers": [],
                 "createdAt": new Date().toISOString(),
                 "updatedAt": new Date().toISOString()
