@@ -4,6 +4,11 @@ type Mutation {
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
   updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
+  Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
+}
+
+input unSubscribeInput {
+  username: String!
 }
 
 input groupUsersListInput {
@@ -71,9 +76,18 @@ type User
   lastPackSubstitutionDate: AWSDateTime
   numberOfPlansSubstitutions: Int
   lastPlanSubstitutionDate: AWSDateTime
-  groupId: Int
-  isGroupOwner: Boolean
+  groupsRoles: [GroupRole]
   groupUsers: [User] @connection
+}
+
+type GroupRole{
+  groupId: String
+  groupRole: Roles
+}
+
+enum Roles{
+  GROUP_ADMIN,
+  SINGLE_USER
 }
 
 type MonthlySubscription {

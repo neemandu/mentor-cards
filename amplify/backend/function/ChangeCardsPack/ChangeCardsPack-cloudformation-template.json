@@ -114,6 +114,32 @@
                   }
                 ]
               ]
+            },
+            "API_CARDSPACKS_PACKOWNERTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:PackOwnerTable:Name"
+              }
+            },
+            "API_CARDSPACKS_PACKOWNERTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:PackOwnerTable:Name"
+                    }
+                  }
+                ]
+              ]
             }
           }
         },
@@ -128,7 +154,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/ChangeCardsPack-306d6d6754357a464471-build.zip"
+          "S3Key": "amplify-builds/ChangeCardsPack-7a6843742b3034585434-build.zip"
         }
       }
     },
@@ -282,6 +308,68 @@
                       {
                         "Fn::ImportValue": {
                           "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:CardsPackTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:PackOwnerTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:PackOwnerTable:Name"
                         }
                       },
                       "/index/*"

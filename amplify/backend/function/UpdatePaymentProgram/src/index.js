@@ -48,8 +48,11 @@ async function getUser(username){
 }
 
 async function getPaymentProgram(subId){
+    console.log("getPaymentProgram: " + subId);
     var docClient = new AWS.DynamoDB.DocumentClient();
     var subTable = env.API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME;
+    
+    console.log("check against table: " + subTable);
     var subParams = {
         TableName:subTable,
         Key:{
@@ -85,21 +88,31 @@ async function updateMonthlySubscription(user, paymentProgram, transId){
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
     var monthlySub = {
+        id: 1,
         startDate : new Date().toISOString(),
         paymentProvider : "PayPal",
         providerTransactionId : transId,
         subscriptionPlan: paymentProgram
     };
 
+    console.log("updating new subscription in DB");
+    console.log("user before change: ");
+    console.log(user);
+    console.log("monthlySub: ");
+    console.log(monthlySub);
+
+    user.status = "PLAN";
+    user.subscription = monthlySub;
+    user.lastPlanSubstitutionDate = new Date().toISOString();
+    user.updateAt = new Date().toISOString();
+    user.numberOfPlansSubstitutions++;
+    user.isGroupOwner = paymentProgram.numberOfUsers > 1 ? true : false;
+
+    console.log("user AFTER change: ");
+    console.log(user);
     var params = {
         TableName: userTable,
-        Item:{
-            "id": user.id,
-            "status": "PLAN",
-            "subscription": monthlySub ,
-            "numberOfPlansSubstitutions": user.numberOfPlansSubstitutions,
-            "lastPlanSubstitutionDate": new Date().toISOString()
-        }
+        Item: user
     };
 
     console.log("Adding a new subscription plan to user: " + user.id + "...");
@@ -149,6 +162,9 @@ exports.handler = async (event) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
 
+    console.log("event's arguments:");
+    var args = event.arguments.input;
+    console.log(event.arguments);
     var username = event.identity.claims['cognito:username'];
     if(!username){
         username = event.identity.claims['username'];
@@ -159,11 +175,11 @@ exports.handler = async (event) => {
     if(userReachedMaximumProgramsSwitch(user)){
         throw Error ('no more programs switches are allowed');
     }
-
-    var subId = event.arguments['paymentProgramId'];
+    
+    var subId = args['paymentProgramId'];
     var paymentProgram = await getPaymentProgram(subId);
 
-    var transId = event.arguments['providerTransactionId'];
+    var transId = args['providerTransactionId'];
 
      await updateMonthlySubscription(user, paymentProgram, transId);
 

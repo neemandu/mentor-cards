@@ -6,6 +6,12 @@
         "read",
         "update"
       ],
+      "PackOwner:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
       "User:@model(appsync)": [
         "create",
         "read",
