@@ -106,7 +106,7 @@ async function updateMonthlySubscription(user, paymentProgram, transId){
     user.lastPlanSubstitutionDate = new Date().toISOString();
     user.updateAt = new Date().toISOString();
     user.numberOfPlansSubstitutions++;
-    user.isGroupOwner = paymentProgram.numberOfUsers > 1 ? true : false;
+    //user.isGroupOwner = paymentProgram.numberOfUsers > 1 ? true : false;
 
     console.log("user AFTER change: ");
     console.log(user);
@@ -133,27 +133,41 @@ async function createIncognitoGroup(username){
     var userPoolId = env.AUTH_MENTORCARDS91F3DC29_USERPOOLID;
     console.log("Trying to create group in cognito: " + name);
 
-    
-    var client = new AWS.CognitoIdentity();
-    var response = await client.getGroup(
-        name,
-        userPoolId
-    ).promise();
+    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
+    var group;
+    var params = {
+        GroupName: name, 
+        UserPoolId: userPoolId
+      };
+      cognitoidentityserviceprovider.getGroup(params, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else{
+            group = data;
+        }            
+      });
 
 
-
-    if(!response || !response.Group){
+    if(!group){
         console.log("Creating group in cognito: " + name);
 
-        response = await client.create_group(
-            name,
-            env.AUTH_MENTORCARDS91F3DC29_USERPOOLID,
-            1
-        ).promise();
+        var params = {
+            GroupName: name, 
+            UserPoolId: userPoolId, 
+            Precedence: 1
+          };
+          cognitoidentityserviceprovider.createGroup(params, function(err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else{    
+                group = data; 
+                console.log(data);     
+            }     
+          });
     }
     else{
         console.log("group " + name + " already exists");
     }
+
+    return name;
 }
 
 exports.handler = async (event) => {
@@ -181,9 +195,16 @@ exports.handler = async (event) => {
 
     var transId = args['providerTransactionId'];
 
-     await updateMonthlySubscription(user, paymentProgram, transId);
-
     if(paymentProgram.numberOfUsers > 1){
-        await createIncognitoGroup(username);
+        var groupId = await createIncognitoGroup(username);
     }
+
+    var newRole = {
+        groupId: name,
+        groupRole: [Roles.GROUP_ADMIN]
+    };
+    user.groupsRoles.push(newRole);
+    await updateMonthlySubscription(user, paymentProgram, transId);
+
+
 };

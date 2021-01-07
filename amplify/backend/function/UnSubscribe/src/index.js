@@ -51,7 +51,7 @@ async function saveUser(user){
 
     console.log("updating user " + user.id + " as unsubscribed" );
 
-    await docClient.put(updatedUserParams, function(err, data) {
+    await docClient.update(updatedUserParams, function(err, data) {
         if (err) {
             console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -79,9 +79,9 @@ exports.handler = async (event) => {
     await saveUser(user);
 
     // Removing all group users
-    if(user.usergroupUsers){
-        for(var i =0 ; user.usergroupUsers.length; i++){
-            username = user.usergroupUsers[i].id;
+    if(user.groupUsers){
+        for(var i =0 ; user.groupUsers.length; i++){
+            username = user.groupUsers[i].id;
             var groupUser = await getUser(username);
             groupUser.status = "Unsubscribed";
             groupUser.subscription = null;
