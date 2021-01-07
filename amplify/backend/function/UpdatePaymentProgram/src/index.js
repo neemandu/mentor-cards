@@ -197,13 +197,14 @@ exports.handler = async (event) => {
 
     if(paymentProgram.numberOfUsers > 1){
         var groupId = await createIncognitoGroup(username);
+        var newRole = {
+            groupId: groupId,
+            groupRole: [Roles.GROUP_ADMIN]
+        };
+        user.groupsRoles.push(newRole);
     }
 
-    var newRole = {
-        groupId: name,
-        groupRole: [Roles.GROUP_ADMIN]
-    };
-    user.groupsRoles.push(newRole);
+
     await updateMonthlySubscription(user, paymentProgram, transId);
 
 

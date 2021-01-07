@@ -33,8 +33,6 @@ mutation CreateUser($input: CreateUserInput!) {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -66,8 +64,10 @@ mutation CreateUser($input: CreateUserInput!) {
     lastPackSubstitutionDate
     numberOfPlansSubstitutions
     lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
+    groupsRoles {
+      groupId
+      groupRole
+    }
     groupUsers {
       items {
         id
@@ -88,8 +88,10 @@ mutation CreateUser($input: CreateUserInput!) {
         lastPackSubstitutionDate
         numberOfPlansSubstitutions
         lastPlanSubstitutionDate
-        groupId
-        isGroupOwner
+        groupsRoles {
+          groupId
+          groupRole
+        }
         groupUsers {
           nextToken
         }
@@ -159,8 +161,6 @@ mutation CreateCardsPack(
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -215,8 +215,6 @@ mutation UpdateCardsPack(
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -271,8 +269,6 @@ mutation DeleteCardsPack(
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -354,8 +350,10 @@ mutation CreatePackOwner(
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupId
-      isGroupOwner
+      groupsRoles {
+        groupId
+        groupRole
+      }
       groupUsers {
         items {
           id
@@ -367,8 +365,6 @@ mutation CreatePackOwner(
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -450,8 +446,10 @@ mutation UpdatePackOwner(
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupId
-      isGroupOwner
+      groupsRoles {
+        groupId
+        groupRole
+      }
       groupUsers {
         items {
           id
@@ -463,8 +461,6 @@ mutation UpdatePackOwner(
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -546,8 +542,10 @@ mutation DeletePackOwner(
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupId
-      isGroupOwner
+      groupsRoles {
+        groupId
+        groupRole
+      }
       groupUsers {
         items {
           id
@@ -559,8 +557,6 @@ mutation DeletePackOwner(
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }

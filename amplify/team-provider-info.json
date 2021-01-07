@@ -49,6 +49,17 @@
                 }
               ],
               "hash": "QUq2d6AF1TpIEqZbky+Fb2AC+13GzZKUVsVqezgnHUc="
+            },
+            "3": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "MVXcbMBPmmLgyAHwBPEirT936hN1/iduMjtdssgEJIk="
             }
           }
         }
