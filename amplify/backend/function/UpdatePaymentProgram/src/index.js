@@ -166,6 +166,8 @@ async function createIncognitoGroup(username){
     else{
         console.log("group " + name + " already exists");
     }
+
+    return name;
 }
 
 exports.handler = async (event) => {
@@ -193,9 +195,16 @@ exports.handler = async (event) => {
 
     var transId = args['providerTransactionId'];
 
-     await updateMonthlySubscription(user, paymentProgram, transId);
-
     if(paymentProgram.numberOfUsers > 1){
-        await createIncognitoGroup(username);
+        var groupId = await createIncognitoGroup(username);
     }
+
+    var newRole = {
+        groupId: name,
+        groupRole: [Roles.GROUP_ADMIN]
+    };
+    user.groupsRoles.push(newRole);
+    await updateMonthlySubscription(user, paymentProgram, transId);
+
+
 };
