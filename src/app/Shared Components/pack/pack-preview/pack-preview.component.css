@@ -58,6 +58,10 @@ app-card {
   outline: none;
 }
 
+.action-button:disabled {
+  background: #cccccc;
+}
+
 #actions {
   align-items: center;
   padding-top: 3%;

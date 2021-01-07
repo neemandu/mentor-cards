@@ -18,7 +18,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog) {
     this.userData = this.userAuthService.userData;
-    this.userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
+    this.userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : undefined;
   }
 
   ngOnInit(): void {//TODO doesn't work!
@@ -26,6 +26,7 @@ export class UserPageComponent implements OnInit {
       sub.unsubscribe();
       console.log("🚀 ~ file: user-page.component.ts ~ line 21 ~ UserPageComponent ~ this.userAuthService.loggedInEmmiter.subscribe ~ userData", userData)
       this.userData = userData;
+      // setTimeout(() => { this.overlaySpinnerService.changeOverlaySpinner(false); }, 1000);//TODO fix this weird bug 
       this.overlaySpinnerService.changeOverlaySpinner(false);
     })
   }
@@ -60,6 +61,7 @@ export class UserPageComponent implements OnInit {
       dialogSub.unsubscribe();
       if (res) {
         console.log("🚀 ~ file: user-page.component.ts ~ line 54 ~ UserPageComponent ~ dialogSub ~ res", res)
+        //TODO
       }
     });
   }

@@ -23,12 +23,22 @@
     </div>
   </div>
   <div id="actions" class="d-flex flex-row">
-    <button class="action-button" type="button" (click)="choosePack()" *ngIf="choosePackButtonVisible">בחר ערכה
-      זו</button>
+    <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
+      זו
+      <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
+        נוצלו כל החבילות החודש
+      </span></button>
     <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu" (click)="exchangePack()"
-      *ngIf="exchangePackButtonVisible">החלף ערכה קיימת בזו</button>
-    <button class="action-button" type="button" (click)="openChooseProgramModal()" *ngIf="upgradePackButtonVisible">שדרג
-      תכנית ערכות</button>
+      [disabled]="!exchangePackButtonVisible">החלף ערכה בזו
+      <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
+        הוחלפה חבילה החודש
+      </span></button>
+    <button class="action-button" type="button" (click)="openChooseProgramModal()"
+      [disabled]="!upgradePackButtonVisible">שדרג
+      תכנית
+      <span style="font-size: small;" *ngIf="!upgradePackButtonVisible"><br>
+        הוחלפה תכנית החודש
+      </span></button>
   </div>
 </div>
 
