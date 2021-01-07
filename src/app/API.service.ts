@@ -15,6 +15,11 @@ export type CreateUserInput = {
   userGroupUsersId?: string | null;
 };
 
+export enum Roles {
+  GROUP_ADMIN = "GROUP_ADMIN",
+  SINGLE_USER = "SINGLE_USER"
+}
+
 export type addCardsPackInput = {
   cardsPackId?: string | null;
 };
@@ -246,18 +251,9 @@ export type ModelUserFilterInput = {
   lastPackSubstitutionDate?: ModelStringInput | null;
   numberOfPlansSubstitutions?: ModelIntInput | null;
   lastPlanSubstitutionDate?: ModelStringInput | null;
-  groupId?: ModelIntInput | null;
-  isGroupOwner?: ModelBooleanInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
 };
 
 export type ModelSubscriptionPlanFilterInput = {
@@ -312,8 +308,6 @@ export type CreateUserMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -347,8 +341,11 @@ export type CreateUserMutation = {
   lastPackSubstitutionDate: string | null;
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
-  groupId: number | null;
-  isGroupOwner: boolean | null;
+  groupsRoles: Array<{
+    __typename: "GroupRole";
+    groupId: string | null;
+    groupRole: Roles | null;
+  } | null> | null;
   groupUsers: {
     __typename: "ModelUserConnection";
     items: Array<{
@@ -373,8 +370,11 @@ export type CreateUserMutation = {
       lastPackSubstitutionDate: string | null;
       numberOfPlansSubstitutions: number | null;
       lastPlanSubstitutionDate: string | null;
-      groupId: number | null;
-      isGroupOwner: boolean | null;
+      groupsRoles: Array<{
+        __typename: "GroupRole";
+        groupId: string | null;
+        groupRole: Roles | null;
+      } | null> | null;
       groupUsers: {
         __typename: "ModelUserConnection";
         nextToken: string | null;
@@ -431,8 +431,6 @@ export type CreateCardsPackMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -488,8 +486,6 @@ export type UpdateCardsPackMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -545,8 +541,6 @@ export type DeleteCardsPackMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -633,8 +627,11 @@ export type CreatePackOwnerMutation = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupId: number | null;
-    isGroupOwner: boolean | null;
+    groupsRoles: Array<{
+      __typename: "GroupRole";
+      groupId: string | null;
+      groupRole: Roles | null;
+    } | null> | null;
     groupUsers: {
       __typename: "ModelUserConnection";
       items: Array<{
@@ -648,8 +645,6 @@ export type CreatePackOwnerMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -736,8 +731,11 @@ export type UpdatePackOwnerMutation = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupId: number | null;
-    isGroupOwner: boolean | null;
+    groupsRoles: Array<{
+      __typename: "GroupRole";
+      groupId: string | null;
+      groupRole: Roles | null;
+    } | null> | null;
     groupUsers: {
       __typename: "ModelUserConnection";
       items: Array<{
@@ -751,8 +749,6 @@ export type UpdatePackOwnerMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -839,8 +835,11 @@ export type DeletePackOwnerMutation = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupId: number | null;
-    isGroupOwner: boolean | null;
+    groupsRoles: Array<{
+      __typename: "GroupRole";
+      groupId: string | null;
+      groupRole: Roles | null;
+    } | null> | null;
     groupUsers: {
       __typename: "ModelUserConnection";
       items: Array<{
@@ -854,8 +853,6 @@ export type DeletePackOwnerMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -953,8 +950,6 @@ export type GetCardsPackQuery = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1036,8 +1031,6 @@ export type GetUserQuery = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1071,8 +1064,11 @@ export type GetUserQuery = {
   lastPackSubstitutionDate: string | null;
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
-  groupId: number | null;
-  isGroupOwner: boolean | null;
+  groupsRoles: Array<{
+    __typename: "GroupRole";
+    groupId: string | null;
+    groupRole: Roles | null;
+  } | null> | null;
   groupUsers: {
     __typename: "ModelUserConnection";
     items: Array<{
@@ -1097,8 +1093,11 @@ export type GetUserQuery = {
       lastPackSubstitutionDate: string | null;
       numberOfPlansSubstitutions: number | null;
       lastPlanSubstitutionDate: string | null;
-      groupId: number | null;
-      isGroupOwner: boolean | null;
+      groupsRoles: Array<{
+        __typename: "GroupRole";
+        groupId: string | null;
+        groupRole: Roles | null;
+      } | null> | null;
       groupUsers: {
         __typename: "ModelUserConnection";
         nextToken: string | null;
@@ -1157,8 +1156,11 @@ export type ListUsersQuery = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupId: number | null;
-    isGroupOwner: boolean | null;
+    groupsRoles: Array<{
+      __typename: "GroupRole";
+      groupId: string | null;
+      groupRole: Roles | null;
+    } | null> | null;
     groupUsers: {
       __typename: "ModelUserConnection";
       items: Array<{
@@ -1172,8 +1174,6 @@ export type ListUsersQuery = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -1260,8 +1260,6 @@ export type OnCreateCardsPackSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1317,8 +1315,6 @@ export type OnUpdateCardsPackSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1374,8 +1370,6 @@ export type OnDeleteCardsPackSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1462,8 +1456,11 @@ export type OnCreatePackOwnerSubscription = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupId: number | null;
-    isGroupOwner: boolean | null;
+    groupsRoles: Array<{
+      __typename: "GroupRole";
+      groupId: string | null;
+      groupRole: Roles | null;
+    } | null> | null;
     groupUsers: {
       __typename: "ModelUserConnection";
       items: Array<{
@@ -1477,8 +1474,6 @@ export type OnCreatePackOwnerSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -1565,8 +1560,11 @@ export type OnUpdatePackOwnerSubscription = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupId: number | null;
-    isGroupOwner: boolean | null;
+    groupsRoles: Array<{
+      __typename: "GroupRole";
+      groupId: string | null;
+      groupRole: Roles | null;
+    } | null> | null;
     groupUsers: {
       __typename: "ModelUserConnection";
       items: Array<{
@@ -1580,8 +1578,6 @@ export type OnUpdatePackOwnerSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -1668,8 +1664,11 @@ export type OnDeletePackOwnerSubscription = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupId: number | null;
-    isGroupOwner: boolean | null;
+    groupsRoles: Array<{
+      __typename: "GroupRole";
+      groupId: string | null;
+      groupRole: Roles | null;
+    } | null> | null;
     groupUsers: {
       __typename: "ModelUserConnection";
       items: Array<{
@@ -1683,8 +1682,6 @@ export type OnDeletePackOwnerSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
-        groupId: number | null;
-        isGroupOwner: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -1783,8 +1780,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -1818,8 +1813,11 @@ export class APIService {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
+          groupsRoles {
+            __typename
+            groupId
+            groupRole
+          }
           groupUsers {
             __typename
             items {
@@ -1844,8 +1842,11 @@ export class APIService {
               lastPackSubstitutionDate
               numberOfPlansSubstitutions
               lastPlanSubstitutionDate
-              groupId
-              isGroupOwner
+              groupsRoles {
+                __typename
+                groupId
+                groupRole
+              }
               groupUsers {
                 __typename
                 nextToken
@@ -1979,8 +1980,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2052,8 +2051,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2125,8 +2122,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2229,8 +2224,11 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupId
-            isGroupOwner
+            groupsRoles {
+              __typename
+              groupId
+              groupRole
+            }
             groupUsers {
               __typename
               items {
@@ -2244,8 +2242,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2348,8 +2344,11 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupId
-            isGroupOwner
+            groupsRoles {
+              __typename
+              groupId
+              groupRole
+            }
             groupUsers {
               __typename
               items {
@@ -2363,8 +2362,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2467,8 +2464,11 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupId
-            isGroupOwner
+            groupsRoles {
+              __typename
+              groupId
+              groupRole
+            }
             groupUsers {
               __typename
               items {
@@ -2482,8 +2482,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2642,8 +2640,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2756,8 +2752,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -2791,8 +2785,11 @@ export class APIService {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
+          groupsRoles {
+            __typename
+            groupId
+            groupRole
+          }
           groupUsers {
             __typename
             items {
@@ -2817,8 +2814,11 @@ export class APIService {
               lastPackSubstitutionDate
               numberOfPlansSubstitutions
               lastPlanSubstitutionDate
-              groupId
-              isGroupOwner
+              groupsRoles {
+                __typename
+                groupId
+                groupRole
+              }
               groupUsers {
                 __typename
                 nextToken
@@ -2891,8 +2891,11 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupId
-            isGroupOwner
+            groupsRoles {
+              __typename
+              groupId
+              groupRole
+            }
             groupUsers {
               __typename
               items {
@@ -2906,8 +2909,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -3045,8 +3046,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -3110,8 +3109,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -3175,8 +3172,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -3271,8 +3266,11 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupId
-            isGroupOwner
+            groupsRoles {
+              __typename
+              groupId
+              groupRole
+            }
             groupUsers {
               __typename
               items {
@@ -3286,8 +3284,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -3382,8 +3378,11 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupId
-            isGroupOwner
+            groupsRoles {
+              __typename
+              groupId
+              groupRole
+            }
             groupUsers {
               __typename
               items {
@@ -3397,8 +3396,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }
@@ -3493,8 +3490,11 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupId
-            isGroupOwner
+            groupsRoles {
+              __typename
+              groupId
+              groupRole
+            }
             groupUsers {
               __typename
               items {
@@ -3508,8 +3508,6 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
-                groupId
-                isGroupOwner
                 createdAt
                 updatedAt
               }

@@ -38,8 +38,6 @@ query GetCardsPack($id: ID!) {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -118,8 +116,6 @@ query GetUser($id: ID!) {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -151,8 +147,10 @@ query GetUser($id: ID!) {
     lastPackSubstitutionDate
     numberOfPlansSubstitutions
     lastPlanSubstitutionDate
-    groupId
-    isGroupOwner
+    groupsRoles {
+      groupId
+      groupRole
+    }
     groupUsers {
       items {
         id
@@ -173,8 +171,10 @@ query GetUser($id: ID!) {
         lastPackSubstitutionDate
         numberOfPlansSubstitutions
         lastPlanSubstitutionDate
-        groupId
-        isGroupOwner
+        groupsRoles {
+          groupId
+          groupRole
+        }
         groupUsers {
           nextToken
         }
@@ -231,8 +231,10 @@ query ListUsers(
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupId
-      isGroupOwner
+      groupsRoles {
+        groupId
+        groupRole
+      }
       groupUsers {
         items {
           id
@@ -244,8 +246,6 @@ query ListUsers(
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }

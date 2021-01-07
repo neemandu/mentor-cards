@@ -38,8 +38,6 @@ subscription OnCreateCardsPack {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -91,8 +89,6 @@ subscription OnUpdateCardsPack {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -144,8 +140,6 @@ subscription OnDeleteCardsPack {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -224,8 +218,10 @@ subscription OnCreatePackOwner {
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupId
-      isGroupOwner
+      groupsRoles {
+        groupId
+        groupRole
+      }
       groupUsers {
         items {
           id
@@ -237,8 +233,6 @@ subscription OnCreatePackOwner {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -317,8 +311,10 @@ subscription OnUpdatePackOwner {
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupId
-      isGroupOwner
+      groupsRoles {
+        groupId
+        groupRole
+      }
       groupUsers {
         items {
           id
@@ -330,8 +326,6 @@ subscription OnUpdatePackOwner {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
@@ -410,8 +404,10 @@ subscription OnDeletePackOwner {
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupId
-      isGroupOwner
+      groupsRoles {
+        groupId
+        groupRole
+      }
       groupUsers {
         items {
           id
@@ -423,8 +419,6 @@ subscription OnDeletePackOwner {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupId
-          isGroupOwner
           createdAt
           updatedAt
         }
