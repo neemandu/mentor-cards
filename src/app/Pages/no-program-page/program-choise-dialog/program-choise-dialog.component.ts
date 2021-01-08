@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@an
 import { MatDialogRef } from '@angular/material/dialog';
 import { APIService, updatePaymentProgramInput } from 'src/app/API.service';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
+import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import * as programData from '../../../../assets/Bundle Configurations/BundleConfigs.json';
 declare var paypal;
@@ -26,7 +27,8 @@ export class ProgramChoiseDialogComponent implements OnInit {
   changedPlansThisMonth: boolean = false;
   ownsCurrentPlanLabel: boolean = false;
 
-  constructor(private userAuthService: UserAuthService, public dialogRef: MatDialogRef<ProgramChoiseDialogComponent>, private api: APIService) {
+  constructor(private userAuthService: UserAuthService, public dialogRef: MatDialogRef<ProgramChoiseDialogComponent>, private api: APIService,
+    private overlaySpinnerService: OverlaySpinnerService) {
     this.userAuthService.subPlans.forEach(plan => {
       this.configAmountsOfUsers.push(plan.numberOfUsers);
     })
@@ -46,7 +48,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
       new Date(this.userAuthService.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData.numberOfPlansSubstitutions > 1) {
       this.changedPlansThisMonth = true;
     } else {
-      this.ownsCurrentPlanLabel = true
+      this.ownsCurrentPlanLabel = false;
     }
   }
 
@@ -90,7 +92,6 @@ export class ProgramChoiseDialogComponent implements OnInit {
           //   !this.changedPlansThisMonth ? actions.disable() : null;
           // },
           createSubscription: (data, actions) => {//lastPlanSubstitutionDate - once in last 30 days
-            // debugger;
             if (this.userAuthService.userData.status === "NOPLAN")
               return actions.subscription.create({
                 'plan_id': this.packSelected.providerPlanId
@@ -101,29 +102,26 @@ export class ProgramChoiseDialogComponent implements OnInit {
               });
           },
           onApprove: async (data, actions) => {
+            this.overlaySpinnerService.changeOverlaySpinner(true);
             var ids: updatePaymentProgramInput = { 'paymentProgramId': this.packSelected.id, 'providerTransactionId': data.subscriptionID }
             this.api.UpdatePaymentProgram(ids).then(data => {
-              // console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 68 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ data", data)
               this.userAuthService._snackBar.open('הרשמתך לחבילה בוצעה בהצלחה!', '', {
                 duration: 4000,
                 panelClass: ['rtl-snackbar']
               });
               this.userAuthService.updateUserData();
+              this.overlaySpinnerService.changeOverlaySpinner(false);
               this.dialogRef.close(this.packSelected);
             }, error => {
               console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 71 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ error", error)
-              // this.userAuthService._snackBar.open(error, '', {
-              //   duration: 3000,
-              //   panelClass: ['rtl-snackbar']
-              // });
             })
           },
           onError: err => {
             console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 77 ~ ProgramChoiseDialogComponent ~ stepChanged ~ err", err)
-            this.userAuthService._snackBar.open(err, '', {
-              duration: 3000,
-              panelClass: ['rtl-snackbar']
-            });
+            // this.userAuthService._snackBar.open(err, '', {
+            //   duration: 3000,
+            //   panelClass: ['rtl-snackbar']
+            // });
           },
           style: {
             layout: 'horizontal',

@@ -4,7 +4,8 @@
   </button>
   <mat-horizontal-stepper [linear]="isLinear" #stepper label="כמות אנשים" (selectionChange)="stepChanged($event)">
     <mat-step class="step" state="done" label="כמות אנשים">
-      <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople" (change)="changePack();fixParameters();">
+      <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople"
+        (change)="changePack();fixParameters();">
         <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount"
           matTooltip="{{getProgramJsonDescription(userAmount)}}" [matTooltipClass]="{'tooltip-class' : true}">
           {{userAmount}}
@@ -56,9 +57,14 @@
       <button mat-button matStepperPrevious>
         <mat-icon>navigate_next</mat-icon>הקודם
       </button>
-      <div id="paypal" [hidden]="changedPlansThisMonth || ownsCurrentPlanLabel" style="width: 70%; margin-top: 2%; margin-bottom: -3%;" #paypal></div>
-      <p id="cantChangePlanLabel" *ngIf="changedPlansThisMonth"><mat-icon [inline]=true>block</mat-icon>אין להחליף חבילה יותר מפעם בחודש</p>
-      <p id="ownsCurrentPlanLabel" *ngIf="ownsCurrentPlanLabel"><mat-icon [inline]=true>done</mat-icon>את\ה רשום לחבילה זו כבר</p>
+      <div id="paypal" [hidden]="changedPlansThisMonth || ownsCurrentPlanLabel"
+        style="width: 70%; margin-top: 2%; margin-bottom: -3%;" #paypal></div>
+      <p id="cantChangePlanLabel" *ngIf="changedPlansThisMonth">
+        <mat-icon [inline]=true>block</mat-icon>אין להחליף חבילה יותר מפעם בחודש
+      </p>
+      <p id="ownsCurrentPlanLabel" *ngIf="ownsCurrentPlanLabel">
+        <mat-icon [inline]=true>done</mat-icon>את\ה רשום לחבילה זו כבר
+      </p>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

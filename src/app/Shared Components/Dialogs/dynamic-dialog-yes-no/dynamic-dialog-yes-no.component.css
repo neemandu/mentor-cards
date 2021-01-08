@@ -1,0 +1,44 @@
+* {
+  font-family: 'rubik';
+  direction: rtl;
+}
+
+p {
+  margin: 10px 0px 5px 0px;
+  font-size: medium;
+}
+
+.buttons {
+  margin: 0px;
+}
+
+button {
+  font-size: medium;
+  margin-left: 1rem;
+}
+
+button:hover {
+  background-color: #ffe2a7;
+}
+
+mat-toolbar {
+  margin-top: -10px;
+  background-color: transparent;
+}
+
+.title {
+  font-size: larger;
+  margin-right: -15px;
+}
+
+.line {
+  background-color: #ffa800;
+  width: auto;
+  height: 3px;
+  margin-top: -15px;
+}
+
+.iconButton {
+  /* margin-top: -15px; */
+  margin-left: -20px;
+}

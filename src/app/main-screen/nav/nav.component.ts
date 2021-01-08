@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
 
+  userAttributes: any;
   loggedIn: boolean = false;
   loggedInName: string;
 
@@ -18,7 +19,8 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
-      this.loggedInName = userAttributes.name;
+      this.userAttributes = userAttributes;
+      // console.log("🚀 ~ file: nav.component.ts ~ line 21 ~ NavComponent ~ this.userAuthService.loggedInEmmiter.subscribe ~ userAttributes", userAttributes)
       this.loggedIn = true;
     })
   }

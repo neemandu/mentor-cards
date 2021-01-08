@@ -58,7 +58,6 @@ export class UserAuthService {
     this.loggedInAttributes = userData;
     this.updateUserData();
     this.getSubscriptionPlans();
-    this.loggedInEmmiter.emit(userData.attributes);
   }
 
   /**
@@ -67,7 +66,8 @@ export class UserAuthService {
   updateUserData(): void {
     this.api.GetUser(this.loggedInAttributes.username).then(data => {
       this.userData = data;
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 58 ~ UserAuthService ~ this.api.GetUser ~ data", data)
+      // console.log("🚀 ~ file: user-auth.service.ts ~ line 58 ~ UserAuthService ~ this.api.GetUser ~ data", data)
+      this.loggedInEmmiter.emit(this.userData);
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
     })

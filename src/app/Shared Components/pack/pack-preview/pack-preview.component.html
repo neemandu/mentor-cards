@@ -23,8 +23,31 @@
     </div>
   </div>
   <div id="actions" class="d-flex flex-row">
-    <button class="action-button" type="button" (click)="choosePack()" *ngIf="choosePackButtonVisible">בחר ערכה זו</button>
-    <button class="action-button" type="button" (click)="exchangePack()" *ngIf="exchangePackButtonVisible">החלף ערכה קיימת בזו</button>
-    <button class="action-button" type="button" (click)="openChooseProgramModal()" *ngIf="upgradePackButtonVisible">שדרג תכנית ערכות</button>
+    <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
+      זו
+      <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
+        נוצלו כל החבילות החודש
+      </span></button>
+    <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu" (click)="exchangePack()"
+      [disabled]="!exchangePackButtonVisible">החלף ערכה בזו
+      <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
+        הוחלפה חבילה החודש
+      </span></button>
+    <button class="action-button" type="button" (click)="openChooseProgramModal()"
+      [disabled]="!upgradePackButtonVisible">שדרג
+      תכנית
+      <span style="font-size: small;" *ngIf="!upgradePackButtonVisible"><br>
+        הוחלפה תכנית החודש
+      </span></button>
   </div>
 </div>
+
+<mat-menu #exchangeMenu="matMenu" xPosition="before" dir="rtl">
+  <button mat-menu-item *ngFor="let pack of currentPacksOwned" style="height: 100%;"
+    matTooltip="קטגוריות: {{pack.pack.categories | tooltipListView}} | תגיות: {{pack.pack.tags | tooltipListView}}"
+    matTooltipShowDelay="1000" [matTooltipClass]="{'tooltip-class' : true}"
+    (click)="openExchangePackApprovalModal(pack)">
+    <img src={{pack.pack.imgUrl}} style="height: 4rem; margin: 5px 0px 5px 5px;">
+    {{pack.pack.description}}
+  </button>
+</mat-menu>
