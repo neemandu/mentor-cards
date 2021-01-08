@@ -5,6 +5,16 @@ type Mutation {
   updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
   Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
+  JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
+  DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
+}
+
+input joinExistingGroupInput {
+  groupId: String!
+}
+
+input deleteGroupInput {
+  groupId: String!
 }
 
 input unSubscribeInput {
@@ -12,7 +22,7 @@ input unSubscribeInput {
 }
 
 input groupUsersListInput {
-  usernamesList: [String]
+  usernamesList: [GroupUserRoleInput]
 }
 
 input updatePaymentProgramInput {
@@ -29,7 +39,10 @@ input changeCardsPackInput {
   newCardsPackId: String
 }
 
-
+input GroupUserRoleInput{
+  username: String
+  role: String
+}
 
 input CreateUserInput {
   username: String
@@ -71,23 +84,26 @@ type User
   phone: String
   cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
-  subscription: MonthlySubscription 
+  subscription: MonthlySubscription @function(name: "GetUserSubscription-${env}") 
   numberOfPacksSubstitutions: Int
   lastPackSubstitutionDate: AWSDateTime
   numberOfPlansSubstitutions: Int
   lastPlanSubstitutionDate: AWSDateTime
-  groupsRoles: [GroupRole]
-  groupUsers: [User] @connection
+  startPayingSinceDate: AWSDateTime
+  groupId: Int
 }
 
-type GroupRole{
-  groupId: String
-  groupRole: Roles
+type Group
+@model
+@auth( rules: [ { allow: private, operations: [create,read, update] }] ){
+  id: ID!
+  groupUsers: [GroupUserRole] 
+  paymentProgram: SubscriptionPlan
 }
 
-enum Roles{
-  GROUP_ADMIN,
-  SINGLE_USER
+type GroupUserRole{
+  username: String
+  role: String
 }
 
 type MonthlySubscription {

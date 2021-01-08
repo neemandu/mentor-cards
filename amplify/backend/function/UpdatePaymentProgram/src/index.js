@@ -83,41 +83,46 @@ function userReachedMaximumProgramsSwitch(user){
     return user.lastPlanSubstitutionDate > date;
 }
 
-async function updateMonthlySubscription(user, paymentProgram, transId){
+async function getGroup(groupId){
+    console.log("getGroup: " + groupId);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
+    
+    console.log("check against table: " + groupTable);
+    var groupParams = {
+        TableName:groupTable,
+        Key:{
+            "id": groupId
+        }
+    };
+
+    var group;
+    await docClient.get(groupParams, function(err, data) {
+        if (err) {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+            group = data["Item"];
+        }
+    }).promise();
+
+    if(!group){
+        throw Error ('no such Group - ' + groupId);
+    }
+
+    return group;
+}
+
+async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
-    var monthlySub = {
-        id: 1,
-        startDate : new Date().toISOString(),
-        paymentProvider : "PayPal",
-        providerTransactionId : transId,
-        subscriptionPlan: paymentProgram
-    };
-
-    console.log("updating new subscription in DB");
-    console.log("user before change: ");
-    console.log(user);
-    console.log("monthlySub: ");
-    console.log(monthlySub);
-
-    user.status = "PLAN";
-    user.subscription = monthlySub;
-    user.lastPlanSubstitutionDate = new Date().toISOString();
-    user.updateAt = new Date().toISOString();
-    user.numberOfPlansSubstitutions++;
-    //user.isGroupOwner = paymentProgram.numberOfUsers > 1 ? true : false;
-
-    console.log("user AFTER change: ");
-    console.log(user);
     var params = {
         TableName: userTable,
         Item: user
     };
 
-    console.log("Adding a new subscription plan to user: " + user.id + "...");
-
-    await docClient.put(params, function(err, data) {
+    await docClient.update(params, function(err, data) {
         if (err) {
             console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -128,6 +133,34 @@ async function updateMonthlySubscription(user, paymentProgram, transId){
     }).promise();
 }
 
+async function updateMonthlySubscription(user, paymentProgram, transId){
+    var monthlySub = {
+        id: 1,
+        startDate : new Date().toISOString(),
+        paymentProvider : "PayPal",
+        providerTransactionId : transId,
+        subscriptionPlan: paymentProgram
+    };
+
+    console.log("updating new subscription in DB");
+
+    user.startPayingSinceDate = user.startPayingSinceDate ? 
+                                user.startPayingSinceDate : 
+                                new Date().toISOString();
+    user.status = "PLAN";
+    user.subscription = monthlySub;
+    user.lastPlanSubstitutionDate = new Date().toISOString();
+    user.updateAt = new Date().toISOString();
+    user.numberOfPlansSubstitutions++;
+    //user.isGroupOwner = paymentProgram.numberOfUsers > 1 ? true : false;
+
+    console.log("user AFTER change: ");
+    console.log(user);
+
+    console.log("Adding a new subscription plan to user: " + user.id + "...");
+    await saveUser(user);
+}
+/*
 async function createIncognitoGroup(username){
     var name = username + "_Group";
     var userPoolId = env.AUTH_MENTORCARDS91F3DC29_USERPOOLID;
@@ -139,12 +172,16 @@ async function createIncognitoGroup(username){
         GroupName: name, 
         UserPoolId: userPoolId
       };
-      cognitoidentityserviceprovider.getGroup(params, function(err, data) {
-        if (err) console.log(err, err.stack); // an error occurred
+
+      console.log("Getting group in cognito: " + name);
+      await cognitoidentityserviceprovider.getGroup(params, function(err, data) {
+        if (err) {
+            console.log(err, err.stack);
+        } // an error occurred
         else{
             group = data;
         }            
-      });
+      }).promise();
 
 
     if(!group){
@@ -155,19 +192,57 @@ async function createIncognitoGroup(username){
             UserPoolId: userPoolId, 
             Precedence: 1
           };
-          cognitoidentityserviceprovider.createGroup(params, function(err, data) {
+          await cognitoidentityserviceprovider.createGroup(params, function(err, data) {
             if (err) console.log(err, err.stack); // an error occurred
             else{    
                 group = data; 
                 console.log(data);     
             }     
-          });
+          }).promise();
+          console.log("Creating group in cognito: " + name);
     }
     else{
         console.log("group " + name + " already exists");
     }
 
     return name;
+}*/
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
+
+async function createGroup(username, subscriptionPlan){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
+    var id = makeid(10);
+    var users = [];
+    users.push(username);
+    var params = {
+        TableName: groupTable,
+        Item: {
+            "id": id,
+            "groupUsers": users,
+            "subscriptionPlan": subscriptionPlan,
+            "createdAt": new Date().toISOString(),
+            "updatedAt": new Date().toISOString()
+        }
+    };
+
+    await docClient.put(params, function(err, data) {
+        if (err) {
+            console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("Added item:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
 }
 
 exports.handler = async (event) => {
@@ -185,27 +260,51 @@ exports.handler = async (event) => {
     }
 
     var user = await getUser(username);
+    var canUpdateProgram = false;
+    if(user.groupId){
+        var group = await getGroup(user.groupId);
+        for(var i = 0; i < group.groupUsers.length ; i++){
+            var currUserName = group.groupUsers[i].username;
+            if(username == currUserName){
+                if(group.groupUsers[i].role == "ADMIN"){
+                    canUpdateProgram = true;
+                    break;
+                }
+            }
+        }
+    }
+    else{
+        canUpdateProgram = true;
+    }
 
-    if(userReachedMaximumProgramsSwitch(user)){
-        throw Error ('no more programs switches are allowed');
+    if(!canUpdateProgram){
+        throw Error('User Is now authorized to switch program');
+    }
+    else{
+        if(userReachedMaximumProgramsSwitch(user)){
+            throw Error ('no more programs switches are allowed');
+        }
+        
+        var subId = args['paymentProgramId'];
+        var paymentProgram = await getPaymentProgram(subId);
+    
+        var transId = args['providerTransactionId'];
+
+        // Update all users in the group with the same program
+        if(user.groupId){
+            for(var i = 0; i < group.groupUsers.length ; i++){
+                var currUserName = group.groupUsers[i].username;
+                var currUser = await getUser(currUserName);
+                await updateMonthlySubscription(currUser, paymentProgram, transId);
+            }
+        }
+        else{ // No group yet
+            if(paymentProgram.numberOfUsers > 1){
+                var groupId = await createGroup(username, paymentProgram);
+                user.groupId = groupId;
+            }
+        }
+        await updateMonthlySubscription(user, paymentProgram, transId);
     }
     
-    var subId = args['paymentProgramId'];
-    var paymentProgram = await getPaymentProgram(subId);
-
-    var transId = args['providerTransactionId'];
-
-    if(paymentProgram.numberOfUsers > 1){
-        var groupId = await createIncognitoGroup(username);
-        var newRole = {
-            groupId: groupId,
-            groupRole: [Roles.GROUP_ADMIN]
-        };
-        user.groupsRoles.push(newRole);
-    }
-
-
-    await updateMonthlySubscription(user, paymentProgram, transId);
-
-
 };

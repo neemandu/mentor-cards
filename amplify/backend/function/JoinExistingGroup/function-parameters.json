@@ -1,4 +1,5 @@
 {
+  "lambdaLayers": [],
   "permissions": {
     "storage": {
       "User:@model(appsync)": [
@@ -6,10 +7,11 @@
         "update"
       ],
       "Group:@model(appsync)": [
-        "read",
-        "update"
+        "read"
+      ],
+      "SubscriptionPlan:@model(appsync)": [
+        "read"
       ]
     }
-  },
-  "lambdaLayers": []
+  }
 }

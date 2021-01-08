@@ -38,6 +38,8 @@ subscription OnCreateCardsPack {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
+          startPayingSinceDate
+          groupId
           createdAt
           updatedAt
         }
@@ -89,6 +91,8 @@ subscription OnUpdateCardsPack {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
+          startPayingSinceDate
+          groupId
           createdAt
           updatedAt
         }
@@ -140,6 +144,8 @@ subscription OnDeleteCardsPack {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
+          startPayingSinceDate
+          groupId
           createdAt
           updatedAt
         }
@@ -218,26 +224,8 @@ subscription OnCreatePackOwner {
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupsRoles {
-        groupId
-        groupRole
-      }
-      groupUsers {
-        items {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      startPayingSinceDate
+      groupId
       createdAt
       updatedAt
     }
@@ -311,26 +299,8 @@ subscription OnUpdatePackOwner {
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupsRoles {
-        groupId
-        groupRole
-      }
-      groupUsers {
-        items {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      startPayingSinceDate
+      groupId
       createdAt
       updatedAt
     }
@@ -404,26 +374,77 @@ subscription OnDeletePackOwner {
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupsRoles {
-        groupId
-        groupRole
-      }
-      groupUsers {
-        items {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      startPayingSinceDate
+      groupId
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateGroup {
+  onCreateGroup {
+    id
+    groupUsers {
+      username
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateGroup {
+  onUpdateGroup {
+    id
+    groupUsers {
+      username
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteGroup {
+  onDeleteGroup {
+    id
+    groupUsers {
+      username
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
       createdAt
       updatedAt
     }

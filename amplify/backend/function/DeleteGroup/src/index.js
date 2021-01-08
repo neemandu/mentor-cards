@@ -2,14 +2,6 @@
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_GROUPTABLE_ARN
 	API_CARDSPACKS_GROUPTABLE_NAME
-	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN
-	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
@@ -70,6 +62,28 @@ async function getUser(username){
 
 }
 
+async function deleteGroup(group){
+    console.log("deleteGroup: " + group.id);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
+    
+    console.log("check against table: " + groupTable);
+    var groupParams = {
+        TableName:groupTable,
+        Key:{
+            "id": group.id
+        }
+    };
+
+    await docClient.delete(groupParams, function(err, data) {
+        if (err) {
+            console.error("Unable to deleteGroup: " + group.id + ". Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("deleteGroup" + group.id+ " succeeded:", JSON.stringify(data, null, 2));
+        }
+    }).promise();
+}
+
 async function getGroup(groupId){
     console.log("getGroup: " + groupId);
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -100,81 +114,34 @@ async function getGroup(groupId){
     return group;
 }
 
-async function unsubscribeOldUsers(userlist, groupUsers){
+async function unsubscribeOldUsers(groupUsers){
     for(var i = 0 ; i < groupUsers.length ; i++){
-        var shouldBeDeleted = true;
-        for(var j = 0 ; j < userlist.length ; j++){
-            if(userlist[j].username == groupUsers[i]){
-                shouldBeDeleted = false;
-            }
-        }
-        if(shouldBeDeleted){
-            var groupUser = await getUser(groupUsers[i]);
-            groupUser.status = "Unsubscribed";
-            groupUser.subscription = null;
-            groupUser.groupId = null;
-            await saveUser(groupUser);
-        }
+        var groupUser = await getUser(groupUsers[i].username);
+        groupUser.status = "Unsubscribed";
+        groupUser.subscription = null;
+        groupUser.groupId = null;
+        await saveUser(groupUser);
     }
 }
 
-async function subscribeNewUsers(userlist, groupUsers, subscription, groupId){
-    for(var j = 0 ; j < userlist.length ; j++){
-        var shouldBeAdded = true;
-        for(var i = 0 ; i < groupUsers.length ; i++){
-            if(userlist[j].username == groupUsers[i]){
-                shouldBeDeleted = false;
-            }
-        }
-        if(shouldBeAdded){
-            var groupUser = await getUser(userlist[j].username);
-            groupUser.status = "PLAN";
-            groupUser.subscription = subscription;
-            groupUser.groupId = groupId;
-            await saveUser(groupUser);
-        }
-    }
-}
-
-function canUSerPerformAction(user, group){
-    var canUpdateProgram = false;
+function canUserPerformAction(user, group){
+    var canDeleteProgram = false;
     if(user.groupId){
         for(var i = 0; i < group.groupUsers.length ; i++){
             var currUserName = group.groupUsers[i].username;
             if(user.id == currUserName){
                 if(group.groupUsers[i].role == "ADMIN"){
-                    canUpdateProgram = true;
+                    canDeleteProgram = true;
                     break;
                 }
             }
         }
     }
     else{
-        canUpdateProgram = true;
+        canDeleteProgram = true;
     }
 
-    return canUpdateProgram;
-}
-
-async function updateGroup(group, userlist){
-    console.log("updateGroup: " + group.id);
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
-    group.groupUsers = userlist;
-
-    var groupParams = {
-        TableName:groupTable,
-        Item: group
-    };
-
-    var group;
-    await docClient.update(groupParams, function(err, data) {
-        if (err) {
-            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Updated Group succeeded:", JSON.stringify(data, null, 2));
-        }
-    }).promise();
+    return canDeleteProgram;
 }
 
 exports.handler = async (event) => {
@@ -183,10 +150,11 @@ exports.handler = async (event) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
 
-    console.log("Update Group user list");
+    console.log("Delete Group");
     console.log("event's arguments:");
     console.log(event.arguments);
     var args = event.arguments.input;
+    var groupId = args['groupId'];
     var username = event.identity.claims['cognito:username'];
     if(!username){
         username = event.identity.claims['username'];
@@ -197,20 +165,21 @@ exports.handler = async (event) => {
     var userlist = args['usernamesList'];
     console.log("Update Group user list with: ");
     console.log(userlist);
-    
-    if(user.groupId){
+    if(user.groupId != groupId){
+        throw Error('User Is now authorized to change users');
+    }
+    else{
 
         var group = await getGroup(user.groupId);
 
-        var canUpdateProgram = canUSerPerformAction(user, group);
+        var canDeleteGroup = canUserPerformAction(user, group);
 
-        if(!canUpdateProgram){
-            throw Error('User Is now authorized to change users');
+        if(!canDeleteGroup){
+            throw Error('User' + user.id + ' Is now authorized to delete the group: ' + user.groupId);
         }
         else{
-            await unsubscribeOldUsers(userlist, group.groupUsers);
-            await subscribeNewUsers(userlist, group.groupUsers, user.subscription, user.groupId);      
-            await updateGroup(group, userlist);  
+            await unsubscribeOldUsers(group.groupUsers);   
+            await deleteGroup(group);  
         }
     }
 };

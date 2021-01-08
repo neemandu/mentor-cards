@@ -1,12 +1,20 @@
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
 
-const { env } = require("process");
+const { env, getgroups } = require("process");
 var AWS = require("aws-sdk");
 
 async function getUser(username){
@@ -62,6 +70,26 @@ async function saveUser(user){
     }).promise();
 }
 
+async function updateGroup(group, userlist){
+    console.log("updateGroup: " + group.id);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
+    group.groupUsers = userlist;
+
+    var groupParams = {
+        TableName:groupTable,
+        Item: group
+    };
+
+    var group;
+    await docClient.update(groupParams, function(err, data) {
+        if (err) {
+            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Updated Group succeeded:", JSON.stringify(data, null, 2));
+        }
+    }).promise();
+}
 
 exports.handler = async (event) => {
     AWS.config.update({
@@ -76,16 +104,21 @@ exports.handler = async (event) => {
     var user = await getUser(username);
     user.status = "Unsubscribed";
     user.subscription = null;
+    user.groupId = null;
     await saveUser(user);
 
     // Removing all group users
-    if(user.groupUsers){
-        for(var i =0 ; user.groupUsers.length; i++){
-            username = user.groupUsers[i].id;
+    if(user.groupId){
+        var group = await getGroup(user.groupId);
+
+        for(var i =0 ; group.groupUsers.length; i++){
+            username = group.groupUsers[i].username;
             var groupUser = await getUser(username);
             groupUser.status = "Unsubscribed";
             groupUser.subscription = null;
+            groupUser.groupId = null;
             await saveUser(groupUser);
         }
+
     }
 };

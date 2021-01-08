@@ -6,6 +6,17 @@
         "read",
         "update",
         "delete"
+      ],
+      "Group:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "SubscriptionPlan:@model(appsync)": [
+        "create",
+        "read",
+        "update"
       ]
     }
   },

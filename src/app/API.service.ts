@@ -12,13 +12,7 @@ export interface SubscriptionResponse<T> {
 export type CreateUserInput = {
   username?: string | null;
   email?: string | null;
-  userGroupUsersId?: string | null;
 };
-
-export enum Roles {
-  GROUP_ADMIN = "GROUP_ADMIN",
-  SINGLE_USER = "SINGLE_USER"
-}
 
 export type addCardsPackInput = {
   cardsPackId?: string | null;
@@ -35,11 +29,24 @@ export type updatePaymentProgramInput = {
 };
 
 export type groupUsersListInput = {
-  usernamesList?: Array<string | null> | null;
+  usernamesList?: Array<GroupUserRoleInput | null> | null;
+};
+
+export type GroupUserRoleInput = {
+  username?: string | null;
+  role?: string | null;
 };
 
 export type unSubscribeInput = {
   username: string;
+};
+
+export type joinExistingGroupInput = {
+  groupId: string;
+};
+
+export type deleteGroupInput = {
+  groupId: string;
 };
 
 export type CreateCardsPackInput = {
@@ -163,6 +170,26 @@ export type DeletePackOwnerInput = {
   id?: string | null;
 };
 
+export type CreateGroupInput = {
+  id?: string | null;
+  groupUsers?: Array<GroupUserRoleInput | null> | null;
+};
+
+export type ModelGroupConditionInput = {
+  and?: Array<ModelGroupConditionInput | null> | null;
+  or?: Array<ModelGroupConditionInput | null> | null;
+  not?: ModelGroupConditionInput | null;
+};
+
+export type UpdateGroupInput = {
+  id: string;
+  groupUsers?: Array<GroupUserRoleInput | null> | null;
+};
+
+export type DeleteGroupInput = {
+  id?: string | null;
+};
+
 export type CreateSubscriptionPlanInput = {
   id?: string | null;
   name?: string | null;
@@ -251,9 +278,18 @@ export type ModelUserFilterInput = {
   lastPackSubstitutionDate?: ModelStringInput | null;
   numberOfPlansSubstitutions?: ModelIntInput | null;
   lastPlanSubstitutionDate?: ModelStringInput | null;
+  startPayingSinceDate?: ModelStringInput | null;
+  groupId?: ModelIntInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
+};
+
+export type ModelGroupFilterInput = {
+  id?: ModelIDInput | null;
+  and?: Array<ModelGroupFilterInput | null> | null;
+  or?: Array<ModelGroupFilterInput | null> | null;
+  not?: ModelGroupFilterInput | null;
 };
 
 export type ModelSubscriptionPlanFilterInput = {
@@ -308,6 +344,8 @@ export type CreateUserMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -341,49 +379,8 @@ export type CreateUserMutation = {
   lastPackSubstitutionDate: string | null;
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
-  groupsRoles: Array<{
-    __typename: "GroupRole";
-    groupId: string | null;
-    groupRole: Roles | null;
-  } | null> | null;
-  groupUsers: {
-    __typename: "ModelUserConnection";
-    items: Array<{
-      __typename: "User";
-      id: string;
-      username: string;
-      email: string | null;
-      phone: string | null;
-      cardsPacks: {
-        __typename: "ModelPackOwnerConnection";
-        nextToken: string | null;
-      } | null;
-      status: string | null;
-      subscription: {
-        __typename: "MonthlySubscription";
-        id: string;
-        startDate: string | null;
-        paymentProvider: string | null;
-        providerTransactionId: string | null;
-      } | null;
-      numberOfPacksSubstitutions: number | null;
-      lastPackSubstitutionDate: string | null;
-      numberOfPlansSubstitutions: number | null;
-      lastPlanSubstitutionDate: string | null;
-      groupsRoles: Array<{
-        __typename: "GroupRole";
-        groupId: string | null;
-        groupRole: Roles | null;
-      } | null> | null;
-      groupUsers: {
-        __typename: "ModelUserConnection";
-        nextToken: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  startPayingSinceDate: string | null;
+  groupId: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -431,6 +428,8 @@ export type CreateCardsPackMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -486,6 +485,8 @@ export type UpdateCardsPackMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -541,6 +542,8 @@ export type DeleteCardsPackMutation = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -627,29 +630,8 @@ export type CreatePackOwnerMutation = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupsRoles: Array<{
-      __typename: "GroupRole";
-      groupId: string | null;
-      groupRole: Roles | null;
-    } | null> | null;
-    groupUsers: {
-      __typename: "ModelUserConnection";
-      items: Array<{
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
+    startPayingSinceDate: string | null;
+    groupId: number | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -731,29 +713,8 @@ export type UpdatePackOwnerMutation = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupsRoles: Array<{
-      __typename: "GroupRole";
-      groupId: string | null;
-      groupRole: Roles | null;
-    } | null> | null;
-    groupUsers: {
-      __typename: "ModelUserConnection";
-      items: Array<{
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
+    startPayingSinceDate: string | null;
+    groupId: number | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -835,32 +796,86 @@ export type DeletePackOwnerMutation = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupsRoles: Array<{
-      __typename: "GroupRole";
-      groupId: string | null;
-      groupRole: Roles | null;
-    } | null> | null;
-    groupUsers: {
-      __typename: "ModelUserConnection";
-      items: Array<{
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
+    startPayingSinceDate: string | null;
+    groupId: number | null;
     createdAt: string;
     updatedAt: string;
   };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateGroupMutation = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateGroupMutation = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteGroupMutation = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -950,6 +965,8 @@ export type GetCardsPackQuery = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1031,6 +1048,8 @@ export type GetUserQuery = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1064,49 +1083,8 @@ export type GetUserQuery = {
   lastPackSubstitutionDate: string | null;
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
-  groupsRoles: Array<{
-    __typename: "GroupRole";
-    groupId: string | null;
-    groupRole: Roles | null;
-  } | null> | null;
-  groupUsers: {
-    __typename: "ModelUserConnection";
-    items: Array<{
-      __typename: "User";
-      id: string;
-      username: string;
-      email: string | null;
-      phone: string | null;
-      cardsPacks: {
-        __typename: "ModelPackOwnerConnection";
-        nextToken: string | null;
-      } | null;
-      status: string | null;
-      subscription: {
-        __typename: "MonthlySubscription";
-        id: string;
-        startDate: string | null;
-        paymentProvider: string | null;
-        providerTransactionId: string | null;
-      } | null;
-      numberOfPacksSubstitutions: number | null;
-      lastPackSubstitutionDate: string | null;
-      numberOfPlansSubstitutions: number | null;
-      lastPlanSubstitutionDate: string | null;
-      groupsRoles: Array<{
-        __typename: "GroupRole";
-        groupId: string | null;
-        groupRole: Roles | null;
-      } | null> | null;
-      groupUsers: {
-        __typename: "ModelUserConnection";
-        nextToken: string | null;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  startPayingSinceDate: string | null;
+  groupId: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1156,28 +1134,61 @@ export type ListUsersQuery = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupsRoles: Array<{
-      __typename: "GroupRole";
-      groupId: string | null;
-      groupRole: Roles | null;
+    startPayingSinceDate: string | null;
+    groupId: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetGroupQuery = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListGroupsQuery = {
+  __typename: "ModelGroupConnection";
+  items: Array<{
+    __typename: "Group";
+    id: string;
+    groupUsers: Array<{
+      __typename: "GroupUserRole";
+      username: string | null;
+      role: string | null;
     } | null> | null;
-    groupUsers: {
-      __typename: "ModelUserConnection";
-      items: Array<{
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
+    paymentProgram: {
+      __typename: "SubscriptionPlan";
+      id: string;
+      name: string | null;
+      description: string | null;
+      providerPlanId: string;
+      numberOfUsers: number | null;
+      numberOfCardPacks: number | null;
+      price: number | null;
+      discount: number | null;
+      createdAt: string;
+      updatedAt: string;
     } | null;
     createdAt: string;
     updatedAt: string;
@@ -1260,6 +1271,8 @@ export type OnCreateCardsPackSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1315,6 +1328,8 @@ export type OnUpdateCardsPackSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1370,6 +1385,8 @@ export type OnDeleteCardsPackSubscription = {
         lastPackSubstitutionDate: string | null;
         numberOfPlansSubstitutions: number | null;
         lastPlanSubstitutionDate: string | null;
+        startPayingSinceDate: string | null;
+        groupId: number | null;
         createdAt: string;
         updatedAt: string;
       };
@@ -1456,29 +1473,8 @@ export type OnCreatePackOwnerSubscription = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupsRoles: Array<{
-      __typename: "GroupRole";
-      groupId: string | null;
-      groupRole: Roles | null;
-    } | null> | null;
-    groupUsers: {
-      __typename: "ModelUserConnection";
-      items: Array<{
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
+    startPayingSinceDate: string | null;
+    groupId: number | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -1560,29 +1556,8 @@ export type OnUpdatePackOwnerSubscription = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupsRoles: Array<{
-      __typename: "GroupRole";
-      groupId: string | null;
-      groupRole: Roles | null;
-    } | null> | null;
-    groupUsers: {
-      __typename: "ModelUserConnection";
-      items: Array<{
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
+    startPayingSinceDate: string | null;
+    groupId: number | null;
     createdAt: string;
     updatedAt: string;
   };
@@ -1664,32 +1639,86 @@ export type OnDeletePackOwnerSubscription = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    groupsRoles: Array<{
-      __typename: "GroupRole";
-      groupId: string | null;
-      groupRole: Roles | null;
-    } | null> | null;
-    groupUsers: {
-      __typename: "ModelUserConnection";
-      items: Array<{
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
+    startPayingSinceDate: string | null;
+    groupId: number | null;
     createdAt: string;
     updatedAt: string;
   };
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateGroupSubscription = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateGroupSubscription = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteGroupSubscription = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1780,6 +1809,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -1813,49 +1844,8 @@ export class APIService {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupsRoles {
-            __typename
-            groupId
-            groupRole
-          }
-          groupUsers {
-            __typename
-            items {
-              __typename
-              id
-              username
-              email
-              phone
-              cardsPacks {
-                __typename
-                nextToken
-              }
-              status
-              subscription {
-                __typename
-                id
-                startDate
-                paymentProvider
-                providerTransactionId
-              }
-              numberOfPacksSubstitutions
-              lastPackSubstitutionDate
-              numberOfPlansSubstitutions
-              lastPlanSubstitutionDate
-              groupsRoles {
-                __typename
-                groupId
-                groupRole
-              }
-              groupUsers {
-                __typename
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          startPayingSinceDate
+          groupId
           createdAt
           updatedAt
         }
@@ -1932,6 +1922,32 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.Unsubscribe;
   }
+  async JoinExistingGroup(
+    input: joinExistingGroupInput
+  ): Promise<boolean | null> {
+    const statement = `mutation JoinExistingGroup($input: joinExistingGroupInput!) {
+        JoinExistingGroup(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.JoinExistingGroup;
+  }
+  async DeleteGroupById(input: deleteGroupInput): Promise<boolean | null> {
+    const statement = `mutation DeleteGroupById($input: deleteGroupInput!) {
+        DeleteGroupById(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.DeleteGroupById;
+  }
   async CreateCardsPack(
     input: CreateCardsPackInput,
     condition?: ModelCardsPackConditionInput
@@ -1980,6 +1996,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -2051,6 +2069,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -2122,6 +2142,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -2224,29 +2246,8 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupsRoles {
-              __typename
-              groupId
-              groupRole
-            }
-            groupUsers {
-              __typename
-              items {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            startPayingSinceDate
+            groupId
             createdAt
             updatedAt
           }
@@ -2344,29 +2345,8 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupsRoles {
-              __typename
-              groupId
-              groupRole
-            }
-            groupUsers {
-              __typename
-              items {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            startPayingSinceDate
+            groupId
             createdAt
             updatedAt
           }
@@ -2464,29 +2444,8 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupsRoles {
-              __typename
-              groupId
-              groupRole
-            }
-            groupUsers {
-              __typename
-              items {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            startPayingSinceDate
+            groupId
             createdAt
             updatedAt
           }
@@ -2504,6 +2463,129 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeletePackOwnerMutation>response.data.deletePackOwner;
+  }
+  async CreateGroup(
+    input: CreateGroupInput,
+    condition?: ModelGroupConditionInput
+  ): Promise<CreateGroupMutation> {
+    const statement = `mutation CreateGroup($input: CreateGroupInput!, $condition: ModelGroupConditionInput) {
+        createGroup(input: $input, condition: $condition) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateGroupMutation>response.data.createGroup;
+  }
+  async UpdateGroup(
+    input: UpdateGroupInput,
+    condition?: ModelGroupConditionInput
+  ): Promise<UpdateGroupMutation> {
+    const statement = `mutation UpdateGroup($input: UpdateGroupInput!, $condition: ModelGroupConditionInput) {
+        updateGroup(input: $input, condition: $condition) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateGroupMutation>response.data.updateGroup;
+  }
+  async DeleteGroup(
+    input: DeleteGroupInput,
+    condition?: ModelGroupConditionInput
+  ): Promise<DeleteGroupMutation> {
+    const statement = `mutation DeleteGroup($input: DeleteGroupInput!, $condition: ModelGroupConditionInput) {
+        deleteGroup(input: $input, condition: $condition) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteGroupMutation>response.data.deleteGroup;
   }
   async CreateSubscriptionPlan(
     input: CreateSubscriptionPlanInput,
@@ -2640,6 +2722,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -2752,6 +2836,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -2785,49 +2871,8 @@ export class APIService {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          groupsRoles {
-            __typename
-            groupId
-            groupRole
-          }
-          groupUsers {
-            __typename
-            items {
-              __typename
-              id
-              username
-              email
-              phone
-              cardsPacks {
-                __typename
-                nextToken
-              }
-              status
-              subscription {
-                __typename
-                id
-                startDate
-                paymentProvider
-                providerTransactionId
-              }
-              numberOfPacksSubstitutions
-              lastPackSubstitutionDate
-              numberOfPlansSubstitutions
-              lastPlanSubstitutionDate
-              groupsRoles {
-                __typename
-                groupId
-                groupRole
-              }
-              groupUsers {
-                __typename
-                nextToken
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          startPayingSinceDate
+          groupId
           createdAt
           updatedAt
         }
@@ -2891,29 +2936,8 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupsRoles {
-              __typename
-              groupId
-              groupRole
-            }
-            groupUsers {
-              __typename
-              items {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            startPayingSinceDate
+            groupId
             createdAt
             updatedAt
           }
@@ -2934,6 +2958,91 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
+  }
+  async GetGroup(id: string): Promise<GetGroupQuery> {
+    const statement = `query GetGroup($id: ID!) {
+        getGroup(id: $id) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetGroupQuery>response.data.getGroup;
+  }
+  async ListGroups(
+    filter?: ModelGroupFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListGroupsQuery> {
+    const statement = `query ListGroups($filter: ModelGroupFilterInput, $limit: Int, $nextToken: String) {
+        listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            groupUsers {
+              __typename
+              username
+              role
+            }
+            paymentProgram {
+              __typename
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              price
+              discount
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListGroupsQuery>response.data.listGroups;
   }
   async GetSubscriptionPlan(id: string): Promise<GetSubscriptionPlanQuery> {
     const statement = `query GetSubscriptionPlan($id: ID!) {
@@ -3046,6 +3155,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -3109,6 +3220,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -3172,6 +3285,8 @@ export class APIService {
                 lastPackSubstitutionDate
                 numberOfPlansSubstitutions
                 lastPlanSubstitutionDate
+                startPayingSinceDate
+                groupId
                 createdAt
                 updatedAt
               }
@@ -3266,29 +3381,8 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupsRoles {
-              __typename
-              groupId
-              groupRole
-            }
-            groupUsers {
-              __typename
-              items {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            startPayingSinceDate
+            groupId
             createdAt
             updatedAt
           }
@@ -3378,29 +3472,8 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupsRoles {
-              __typename
-              groupId
-              groupRole
-            }
-            groupUsers {
-              __typename
-              items {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            startPayingSinceDate
+            groupId
             createdAt
             updatedAt
           }
@@ -3490,29 +3563,8 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            groupsRoles {
-              __typename
-              groupId
-              groupRole
-            }
-            groupUsers {
-              __typename
-              items {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            startPayingSinceDate
+            groupId
             createdAt
             updatedAt
           }
@@ -3522,6 +3574,105 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeletePackOwnerSubscription>>;
+
+  OnCreateGroupListener: Observable<
+    SubscriptionResponse<OnCreateGroupSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateGroup {
+        onCreateGroup {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateGroupSubscription>>;
+
+  OnUpdateGroupListener: Observable<
+    SubscriptionResponse<OnUpdateGroupSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateGroup {
+        onUpdateGroup {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateGroupSubscription>>;
+
+  OnDeleteGroupListener: Observable<
+    SubscriptionResponse<OnDeleteGroupSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteGroup {
+        onDeleteGroup {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteGroupSubscription>>;
 
   OnCreateSubscriptionPlanListener: Observable<
     SubscriptionResponse<OnCreateSubscriptionPlanSubscription>

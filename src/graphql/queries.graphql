@@ -38,6 +38,8 @@ query GetCardsPack($id: ID!) {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
+          startPayingSinceDate
+          groupId
           createdAt
           updatedAt
         }
@@ -116,6 +118,8 @@ query GetUser($id: ID!) {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
+          startPayingSinceDate
+          groupId
           createdAt
           updatedAt
         }
@@ -147,42 +151,8 @@ query GetUser($id: ID!) {
     lastPackSubstitutionDate
     numberOfPlansSubstitutions
     lastPlanSubstitutionDate
-    groupsRoles {
-      groupId
-      groupRole
-    }
-    groupUsers {
-      items {
-        id
-        username
-        email
-        phone
-        cardsPacks {
-          nextToken
-        }
-        status
-        subscription {
-          id
-          startDate
-          paymentProvider
-          providerTransactionId
-        }
-        numberOfPacksSubstitutions
-        lastPackSubstitutionDate
-        numberOfPlansSubstitutions
-        lastPlanSubstitutionDate
-        groupsRoles {
-          groupId
-          groupRole
-        }
-        groupUsers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    startPayingSinceDate
+    groupId
     createdAt
     updatedAt
   }
@@ -231,25 +201,60 @@ query ListUsers(
       lastPackSubstitutionDate
       numberOfPlansSubstitutions
       lastPlanSubstitutionDate
-      groupsRoles {
-        groupId
-        groupRole
-      }
+      startPayingSinceDate
+      groupId
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetGroup($id: ID!) {
+  getGroup(id: $id) {
+    id
+    groupUsers {
+      username
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListGroups(
+  $filter: ModelGroupFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
       groupUsers {
-        items {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          createdAt
-          updatedAt
-        }
-        nextToken
+        username
+        role
+      }
+      paymentProgram {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        price
+        discount
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
