@@ -119,6 +119,9 @@ async function saveUser(user){
 
     var params = {
         TableName: userTable,
+        Key: {
+            "id" : user.id
+        },
         Item: user
     };
 
@@ -234,7 +237,7 @@ async function createGroup(username, subscriptionPlan){
         }
     };
 
-    await docClient.put(params, function(err, data) {
+    await docClient.update(params, function(err, data) {
         if (err) {
             console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");

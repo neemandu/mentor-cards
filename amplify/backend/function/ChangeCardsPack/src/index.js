@@ -92,7 +92,7 @@ async function pushUserToCardsPack(cardsPack, username){
 
     console.log("updating pack with new user : " +username);
 
-    await docClient.put(cardPackParams, function(err, data) {
+    await docClient.update(cardPackParams, function(err, data) {
         if (err) {
             console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -125,7 +125,7 @@ async function removeUserFromCardsPack(cardsPack, username){
     };
 
 
-    await docClient.put(cardPackParams, function(err, data) {
+    await docClient.update(cardPackParams, function(err, data) {
         if (err) {
             console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -170,7 +170,7 @@ async function replaceCardsPacksInUser(user, oldCardsPack, newCardsPack){
 
     console.log("updating user with new pack : " +newCardsPack.id);
 
-    await docClient.put(updatedUserParams, function(err, data) {
+    await docClient.update(updatedUserParams, function(err, data) {
         if (err) {
             console.error("Unable to updating user with new pack. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -186,7 +186,7 @@ async function replaceCardsPacksInUser(user, oldCardsPack, newCardsPack){
         TableName: packOwnerTable,
         Item: newPack
     };
-    await docClient.put(updatedPackOwner, function(err, data) {
+    await docClient.update(updatedPackOwner, function(err, data) {
         if (err) {
             console.error("Unable to updating pack owner. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");

@@ -9,6 +9,10 @@ type Mutation {
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
 }
 
+type Query {
+  getGroup(id: ID!): Group
+}
+
 input joinExistingGroupInput {
   groupId: String!
 }
@@ -55,7 +59,7 @@ type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   description: String
   tags: [String]
   categories: [String]
-  cards: [String] @function(name: "GetCardsImagesResolver-${env}")
+  cards: [String] @function(name: "GetCardsImages-${env}")
   cardsPreview: [String] 
   usersIds: [String] 
   groupsIds: [String]
@@ -84,7 +88,7 @@ type User
   phone: String
   cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
-  subscription: MonthlySubscription @function(name: "GetUserSubscription-${env}") 
+  subscription: MonthlySubscription 
   numberOfPacksSubstitutions: Int
   lastPackSubstitutionDate: AWSDateTime
   numberOfPlansSubstitutions: Int
@@ -94,7 +98,7 @@ type User
 }
 
 type Group
-@model
+@model (queries: null, mutations: null)
 @auth( rules: [ { allow: private, operations: [create,read, update] }] ){
   id: ID!
   groupUsers: [GroupUserRole] 

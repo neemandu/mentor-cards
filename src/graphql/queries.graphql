@@ -1,4 +1,27 @@
 # this is an auto generated file. This will be overwritten
+query GetGroup($id: ID!) {
+  getGroup(id: $id) {
+    id
+    groupUsers {
+      username
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
 query GetCardsPack($id: ID!) {
   getCardsPack(id: $id) {
     id
@@ -203,59 +226,6 @@ query ListUsers(
       lastPlanSubstitutionDate
       startPayingSinceDate
       groupId
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetGroup($id: ID!) {
-  getGroup(id: $id) {
-    id
-    groupUsers {
-      username
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListGroups(
-  $filter: ModelGroupFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      groupUsers {
-        username
-        role
-      }
-      paymentProgram {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        price
-        discount
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }

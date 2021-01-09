@@ -170,26 +170,6 @@ export type DeletePackOwnerInput = {
   id?: string | null;
 };
 
-export type CreateGroupInput = {
-  id?: string | null;
-  groupUsers?: Array<GroupUserRoleInput | null> | null;
-};
-
-export type ModelGroupConditionInput = {
-  and?: Array<ModelGroupConditionInput | null> | null;
-  or?: Array<ModelGroupConditionInput | null> | null;
-  not?: ModelGroupConditionInput | null;
-};
-
-export type UpdateGroupInput = {
-  id: string;
-  groupUsers?: Array<GroupUserRoleInput | null> | null;
-};
-
-export type DeleteGroupInput = {
-  id?: string | null;
-};
-
 export type CreateSubscriptionPlanInput = {
   id?: string | null;
   name?: string | null;
@@ -283,13 +263,6 @@ export type ModelUserFilterInput = {
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
-};
-
-export type ModelGroupFilterInput = {
-  id?: ModelIDInput | null;
-  and?: Array<ModelGroupFilterInput | null> | null;
-  or?: Array<ModelGroupFilterInput | null> | null;
-  not?: ModelGroupFilterInput | null;
 };
 
 export type ModelSubscriptionPlanFilterInput = {
@@ -805,81 +778,6 @@ export type DeletePackOwnerMutation = {
   updatedAt: string;
 };
 
-export type CreateGroupMutation = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    username: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateGroupMutation = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    username: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteGroupMutation = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    username: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type CreateSubscriptionPlanMutation = {
   __typename: "SubscriptionPlan";
   id: string;
@@ -918,6 +816,31 @@ export type DeleteSubscriptionPlanMutation = {
   numberOfCardPacks: number | null;
   price: number | null;
   discount: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GetGroupQuery = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    username: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1136,60 +1059,6 @@ export type ListUsersQuery = {
     lastPlanSubstitutionDate: string | null;
     startPayingSinceDate: string | null;
     groupId: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
-};
-
-export type GetGroupQuery = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    username: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListGroupsQuery = {
-  __typename: "ModelGroupConnection";
-  items: Array<{
-    __typename: "Group";
-    id: string;
-    groupUsers: Array<{
-      __typename: "GroupUserRole";
-      username: string | null;
-      role: string | null;
-    } | null> | null;
-    paymentProgram: {
-      __typename: "SubscriptionPlan";
-      id: string;
-      name: string | null;
-      description: string | null;
-      providerPlanId: string;
-      numberOfUsers: number | null;
-      numberOfCardPacks: number | null;
-      price: number | null;
-      discount: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1644,81 +1513,6 @@ export type OnDeletePackOwnerSubscription = {
     createdAt: string;
     updatedAt: string;
   };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateGroupSubscription = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    username: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateGroupSubscription = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    username: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteGroupSubscription = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    username: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2464,129 +2258,6 @@ export class APIService {
     )) as any;
     return <DeletePackOwnerMutation>response.data.deletePackOwner;
   }
-  async CreateGroup(
-    input: CreateGroupInput,
-    condition?: ModelGroupConditionInput
-  ): Promise<CreateGroupMutation> {
-    const statement = `mutation CreateGroup($input: CreateGroupInput!, $condition: ModelGroupConditionInput) {
-        createGroup(input: $input, condition: $condition) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            username
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateGroupMutation>response.data.createGroup;
-  }
-  async UpdateGroup(
-    input: UpdateGroupInput,
-    condition?: ModelGroupConditionInput
-  ): Promise<UpdateGroupMutation> {
-    const statement = `mutation UpdateGroup($input: UpdateGroupInput!, $condition: ModelGroupConditionInput) {
-        updateGroup(input: $input, condition: $condition) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            username
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateGroupMutation>response.data.updateGroup;
-  }
-  async DeleteGroup(
-    input: DeleteGroupInput,
-    condition?: ModelGroupConditionInput
-  ): Promise<DeleteGroupMutation> {
-    const statement = `mutation DeleteGroup($input: DeleteGroupInput!, $condition: ModelGroupConditionInput) {
-        deleteGroup(input: $input, condition: $condition) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            username
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteGroupMutation>response.data.deleteGroup;
-  }
   async CreateSubscriptionPlan(
     input: CreateSubscriptionPlanInput,
     condition?: ModelSubscriptionPlanConditionInput
@@ -2676,6 +2347,41 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
+  }
+  async GetGroup(id: string): Promise<GetGroupQuery> {
+    const statement = `query GetGroup($id: ID!) {
+        getGroup(id: $id) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            username
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetGroupQuery>response.data.getGroup;
   }
   async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!) {
@@ -2958,91 +2664,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
-  }
-  async GetGroup(id: string): Promise<GetGroupQuery> {
-    const statement = `query GetGroup($id: ID!) {
-        getGroup(id: $id) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            username
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetGroupQuery>response.data.getGroup;
-  }
-  async ListGroups(
-    filter?: ModelGroupFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListGroupsQuery> {
-    const statement = `query ListGroups($filter: ModelGroupFilterInput, $limit: Int, $nextToken: String) {
-        listGroups(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            groupUsers {
-              __typename
-              username
-              role
-            }
-            paymentProgram {
-              __typename
-              id
-              name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              price
-              discount
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListGroupsQuery>response.data.listGroups;
   }
   async GetSubscriptionPlan(id: string): Promise<GetSubscriptionPlanQuery> {
     const statement = `query GetSubscriptionPlan($id: ID!) {
@@ -3574,105 +3195,6 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeletePackOwnerSubscription>>;
-
-  OnCreateGroupListener: Observable<
-    SubscriptionResponse<OnCreateGroupSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateGroup {
-        onCreateGroup {
-          __typename
-          id
-          groupUsers {
-            __typename
-            username
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnCreateGroupSubscription>>;
-
-  OnUpdateGroupListener: Observable<
-    SubscriptionResponse<OnUpdateGroupSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateGroup {
-        onUpdateGroup {
-          __typename
-          id
-          groupUsers {
-            __typename
-            username
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdateGroupSubscription>>;
-
-  OnDeleteGroupListener: Observable<
-    SubscriptionResponse<OnDeleteGroupSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteGroup {
-        onDeleteGroup {
-          __typename
-          id
-          groupUsers {
-            __typename
-            username
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnDeleteGroupSubscription>>;
 
   OnCreateSubscriptionPlanListener: Observable<
     SubscriptionResponse<OnCreateSubscriptionPlanSubscription>
