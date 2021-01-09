@@ -16,21 +16,22 @@ export class AuthGuardAllPacksPageService implements CanActivate {
       if (this.userAuthService.userData.status === "PLAN")
         return true;
       else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        // this.ngZone.run(() => this.router.navigate(['no-program-page']));
         return false;
       }
     }
-    this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+      sub.unsubscribe();
       if (userData.status === "PLAN") {
         this.ngZone.run(() => this.router.navigate(['all-packs-page']));
         return true;
       }
       else {
         this.ngZone.run(() => this.router.navigate(['no-program-page']));
-        return false;
+        // return false;
       }
     })
-    return false;
+    // return false;
   }
 }
 
@@ -46,21 +47,23 @@ export class AuthGuardUserPageService implements CanActivate {
     if (this.userAuthService.userData) {
       if (this.userAuthService.userData.status === "PLAN") {
         this.ngZone.run(() => this.router.navigate(['user-page']));
-        return false;
+        // return false;
       }
       else {
         return true;
       }
     }
-    this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+      sub.unsubscribe();
       if (userData.status === "PLAN") {
         this.ngZone.run(() => this.router.navigate(['user-page']));
-        return false;
+        // return false;
       }
       else {
-        return true;
+        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        // return true;
       }
     })
-    return false;
+    // return false;
   }
 }
