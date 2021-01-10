@@ -28,7 +28,7 @@ async function saveUser(user){
         Item: user
     };
 
-    await docClient.update(updatedUserParams, function(err, data) {
+    await docClient.put(updatedUserParams, function(err, data) {
         if (err) {
             console.error("Unable to update " + user.id + ". Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -168,7 +168,7 @@ async function updateGroup(group, userlist){
     };
 
     var group;
-    await docClient.update(groupParams, function(err, data) {
+    await docClient.put(groupParams, function(err, data) {
         if (err) {
             console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
         } else {

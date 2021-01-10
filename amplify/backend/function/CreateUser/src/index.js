@@ -108,11 +108,11 @@ exports.handler = async (event) => {
 
         var table = env.API_CARDSPACKS_USERTABLE_NAME;
         
-        var group = await getUserGroup(username);
+       /* var group = await getUserGroup(username);
         var subscription;
         if(group){
             subscription = group.subscription
-        }
+        }*/
 
         var params = {
             TableName:table,
@@ -121,14 +121,13 @@ exports.handler = async (event) => {
                 "username": username,
                 "email": email,
                 "phone": phone,
-                "cardsPacks": [],
-                "status": subscription ? "PLAN" : "NOPLAN",
-                "subscription": subscription,
+                "status": "NOPLAN",
+                "subscription": null,
                 "numberOfPacksSubstitutions": 0,
                 "lastPackSubstitutionDate": null,
                 "numberOfPlansSubstitutions": 0,
                 "lastPlanSubstitutionDate": null,
-                "groupId": group ? group.id : null,
+                "groupId": null,
                 "startPayingSinceDate": new Date().toISOString(),
                 "createdAt": new Date().toISOString(),
                 "updatedAt": new Date().toISOString()

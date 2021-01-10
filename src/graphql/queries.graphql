@@ -33,44 +33,7 @@ query GetCardsPack($id: ID!) {
     cardsPreview
     usersIds
     groupsIds
-    users {
-      items {
-        id
-        packID
-        userID
-        pack {
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          createdAt
-          updatedAt
-        }
-        owner {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          startPayingSinceDate
-          groupId
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    users
     createdAt
     updatedAt
   }
@@ -91,16 +54,7 @@ query ListCardsPacks(
       cardsPreview
       usersIds
       groupsIds
-      users {
-        items {
-          id
-          packID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      users
       createdAt
       updatedAt
     }
@@ -113,44 +67,6 @@ query GetUser($id: ID!) {
     username
     email
     phone
-    cardsPacks {
-      items {
-        id
-        packID
-        userID
-        pack {
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          createdAt
-          updatedAt
-        }
-        owner {
-          id
-          username
-          email
-          phone
-          status
-          numberOfPacksSubstitutions
-          lastPackSubstitutionDate
-          numberOfPlansSubstitutions
-          lastPlanSubstitutionDate
-          startPayingSinceDate
-          groupId
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
     status
     subscription {
       id
@@ -191,16 +107,6 @@ query ListUsers(
       username
       email
       phone
-      cardsPacks {
-        items {
-          id
-          packID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       status
       subscription {
         id

@@ -1,5 +1,7 @@
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
 	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN
 	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME
 	API_CARDSPACKS_USERTABLE_ARN
@@ -119,13 +121,10 @@ async function saveUser(user){
 
     var params = {
         TableName: userTable,
-        Key: {
-            "id" : user.id
-        },
         Item: user
     };
 
-    await docClient.update(params, function(err, data) {
+    await docClient.put(params, function(err, data) {
         if (err) {
             console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -228,6 +227,9 @@ async function createGroup(username, subscriptionPlan){
     users.push(username);
     var params = {
         TableName: groupTable,
+        Key: {
+            "id" : id
+        },
         Item: {
             "id": id,
             "groupUsers": users,
@@ -237,12 +239,12 @@ async function createGroup(username, subscriptionPlan){
         }
     };
 
-    await docClient.update(params, function(err, data) {
+    await docClient.put(params, function(err, data) {
         if (err) {
-            console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
+            console.error("Unable to create group. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
         } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
+            console.log("Added group:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
     }).promise();

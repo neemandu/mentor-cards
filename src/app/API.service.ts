@@ -59,6 +59,7 @@ export type CreateCardsPackInput = {
   cardsPreview?: Array<string | null> | null;
   usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
+  users?: Array<string | null> | null;
 };
 
 export type ModelCardsPackConditionInput = {
@@ -70,6 +71,7 @@ export type ModelCardsPackConditionInput = {
   cardsPreview?: ModelStringInput | null;
   usersIds?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
+  users?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -124,49 +126,10 @@ export type UpdateCardsPackInput = {
   cardsPreview?: Array<string | null> | null;
   usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
+  users?: Array<string | null> | null;
 };
 
 export type DeleteCardsPackInput = {
-  id?: string | null;
-};
-
-export type CreatePackOwnerInput = {
-  id?: string | null;
-  packID: string;
-  userID: string;
-};
-
-export type ModelPackOwnerConditionInput = {
-  packID?: ModelIDInput | null;
-  userID?: ModelIDInput | null;
-  and?: Array<ModelPackOwnerConditionInput | null> | null;
-  or?: Array<ModelPackOwnerConditionInput | null> | null;
-  not?: ModelPackOwnerConditionInput | null;
-};
-
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
-export type UpdatePackOwnerInput = {
-  id: string;
-  packID?: string | null;
-  userID?: string | null;
-};
-
-export type DeletePackOwnerInput = {
   id?: string | null;
 };
 
@@ -243,9 +206,26 @@ export type ModelCardsPackFilterInput = {
   cardsPreview?: ModelStringInput | null;
   usersIds?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
+  users?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
+};
+
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
 };
 
 export type ModelUserFilterInput = {
@@ -285,48 +265,6 @@ export type CreateUserMutation = {
   username: string;
   email: string | null;
   phone: string | null;
-  cardsPacks: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
   status: string | null;
   subscription: {
     __typename: "MonthlySubscription";
@@ -369,48 +307,7 @@ export type CreateCardsPackMutation = {
   cardsPreview: Array<string | null> | null;
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
-  users: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  users: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -426,48 +323,7 @@ export type UpdateCardsPackMutation = {
   cardsPreview: Array<string | null> | null;
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
-  users: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  users: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -483,297 +339,7 @@ export type DeleteCardsPackMutation = {
   cardsPreview: Array<string | null> | null;
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
-  users: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreatePackOwnerMutation = {
-  __typename: "PackOwner";
-  id: string;
-  packID: string;
-  userID: string;
-  pack: {
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description: string | null;
-    tags: Array<string | null> | null;
-    categories: Array<string | null> | null;
-    cards: Array<string | null> | null;
-    cardsPreview: Array<string | null> | null;
-    usersIds: Array<string | null> | null;
-    groupsIds: Array<string | null> | null;
-    users: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  owner: {
-    __typename: "User";
-    id: string;
-    username: string;
-    email: string | null;
-    phone: string | null;
-    cardsPacks: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      startDate: string | null;
-      paymentProvider: string | null;
-      providerTransactionId: string | null;
-      subscriptionPlan: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name: string | null;
-        description: string | null;
-        providerPlanId: string;
-        numberOfUsers: number | null;
-        numberOfCardPacks: number | null;
-        price: number | null;
-        discount: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
-    numberOfPlansSubstitutions: number | null;
-    lastPlanSubstitutionDate: string | null;
-    startPayingSinceDate: string | null;
-    groupId: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdatePackOwnerMutation = {
-  __typename: "PackOwner";
-  id: string;
-  packID: string;
-  userID: string;
-  pack: {
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description: string | null;
-    tags: Array<string | null> | null;
-    categories: Array<string | null> | null;
-    cards: Array<string | null> | null;
-    cardsPreview: Array<string | null> | null;
-    usersIds: Array<string | null> | null;
-    groupsIds: Array<string | null> | null;
-    users: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  owner: {
-    __typename: "User";
-    id: string;
-    username: string;
-    email: string | null;
-    phone: string | null;
-    cardsPacks: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      startDate: string | null;
-      paymentProvider: string | null;
-      providerTransactionId: string | null;
-      subscriptionPlan: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name: string | null;
-        description: string | null;
-        providerPlanId: string;
-        numberOfUsers: number | null;
-        numberOfCardPacks: number | null;
-        price: number | null;
-        discount: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
-    numberOfPlansSubstitutions: number | null;
-    lastPlanSubstitutionDate: string | null;
-    startPayingSinceDate: string | null;
-    groupId: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeletePackOwnerMutation = {
-  __typename: "PackOwner";
-  id: string;
-  packID: string;
-  userID: string;
-  pack: {
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description: string | null;
-    tags: Array<string | null> | null;
-    categories: Array<string | null> | null;
-    cards: Array<string | null> | null;
-    cardsPreview: Array<string | null> | null;
-    usersIds: Array<string | null> | null;
-    groupsIds: Array<string | null> | null;
-    users: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  owner: {
-    __typename: "User";
-    id: string;
-    username: string;
-    email: string | null;
-    phone: string | null;
-    cardsPacks: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      startDate: string | null;
-      paymentProvider: string | null;
-      providerTransactionId: string | null;
-      subscriptionPlan: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name: string | null;
-        description: string | null;
-        providerPlanId: string;
-        numberOfUsers: number | null;
-        numberOfCardPacks: number | null;
-        price: number | null;
-        discount: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
-    numberOfPlansSubstitutions: number | null;
-    lastPlanSubstitutionDate: string | null;
-    startPayingSinceDate: string | null;
-    groupId: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
+  users: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -856,48 +422,7 @@ export type GetCardsPackQuery = {
   cardsPreview: Array<string | null> | null;
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
-  users: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  users: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -915,18 +440,7 @@ export type ListCardsPacksQuery = {
     cardsPreview: Array<string | null> | null;
     usersIds: Array<string | null> | null;
     groupsIds: Array<string | null> | null;
-    users: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
+    users: Array<string | null> | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -939,48 +453,6 @@ export type GetUserQuery = {
   username: string;
   email: string | null;
   phone: string | null;
-  cardsPacks: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
   status: string | null;
   subscription: {
     __typename: "MonthlySubscription";
@@ -1020,18 +492,6 @@ export type ListUsersQuery = {
     username: string;
     email: string | null;
     phone: string | null;
-    cardsPacks: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
     status: string | null;
     subscription: {
       __typename: "MonthlySubscription";
@@ -1108,48 +568,7 @@ export type OnCreateCardsPackSubscription = {
   cardsPreview: Array<string | null> | null;
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
-  users: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  users: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1165,48 +584,7 @@ export type OnUpdateCardsPackSubscription = {
   cardsPreview: Array<string | null> | null;
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
-  users: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
+  users: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1222,297 +600,7 @@ export type OnDeleteCardsPackSubscription = {
   cardsPreview: Array<string | null> | null;
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
-  users: {
-    __typename: "ModelPackOwnerConnection";
-    items: Array<{
-      __typename: "PackOwner";
-      id: string;
-      packID: string;
-      userID: string;
-      pack: {
-        __typename: "CardsPack";
-        id: string;
-        imgUrl: string;
-        description: string | null;
-        tags: Array<string | null> | null;
-        categories: Array<string | null> | null;
-        cards: Array<string | null> | null;
-        cardsPreview: Array<string | null> | null;
-        usersIds: Array<string | null> | null;
-        groupsIds: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      owner: {
-        __typename: "User";
-        id: string;
-        username: string;
-        email: string | null;
-        phone: string | null;
-        status: string | null;
-        numberOfPacksSubstitutions: number | null;
-        lastPackSubstitutionDate: string | null;
-        numberOfPlansSubstitutions: number | null;
-        lastPlanSubstitutionDate: string | null;
-        startPayingSinceDate: string | null;
-        groupId: number | null;
-        createdAt: string;
-        updatedAt: string;
-      };
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    nextToken: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreatePackOwnerSubscription = {
-  __typename: "PackOwner";
-  id: string;
-  packID: string;
-  userID: string;
-  pack: {
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description: string | null;
-    tags: Array<string | null> | null;
-    categories: Array<string | null> | null;
-    cards: Array<string | null> | null;
-    cardsPreview: Array<string | null> | null;
-    usersIds: Array<string | null> | null;
-    groupsIds: Array<string | null> | null;
-    users: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  owner: {
-    __typename: "User";
-    id: string;
-    username: string;
-    email: string | null;
-    phone: string | null;
-    cardsPacks: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      startDate: string | null;
-      paymentProvider: string | null;
-      providerTransactionId: string | null;
-      subscriptionPlan: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name: string | null;
-        description: string | null;
-        providerPlanId: string;
-        numberOfUsers: number | null;
-        numberOfCardPacks: number | null;
-        price: number | null;
-        discount: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
-    numberOfPlansSubstitutions: number | null;
-    lastPlanSubstitutionDate: string | null;
-    startPayingSinceDate: string | null;
-    groupId: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdatePackOwnerSubscription = {
-  __typename: "PackOwner";
-  id: string;
-  packID: string;
-  userID: string;
-  pack: {
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description: string | null;
-    tags: Array<string | null> | null;
-    categories: Array<string | null> | null;
-    cards: Array<string | null> | null;
-    cardsPreview: Array<string | null> | null;
-    usersIds: Array<string | null> | null;
-    groupsIds: Array<string | null> | null;
-    users: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  owner: {
-    __typename: "User";
-    id: string;
-    username: string;
-    email: string | null;
-    phone: string | null;
-    cardsPacks: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      startDate: string | null;
-      paymentProvider: string | null;
-      providerTransactionId: string | null;
-      subscriptionPlan: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name: string | null;
-        description: string | null;
-        providerPlanId: string;
-        numberOfUsers: number | null;
-        numberOfCardPacks: number | null;
-        price: number | null;
-        discount: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
-    numberOfPlansSubstitutions: number | null;
-    lastPlanSubstitutionDate: string | null;
-    startPayingSinceDate: string | null;
-    groupId: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeletePackOwnerSubscription = {
-  __typename: "PackOwner";
-  id: string;
-  packID: string;
-  userID: string;
-  pack: {
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description: string | null;
-    tags: Array<string | null> | null;
-    categories: Array<string | null> | null;
-    cards: Array<string | null> | null;
-    cardsPreview: Array<string | null> | null;
-    usersIds: Array<string | null> | null;
-    groupsIds: Array<string | null> | null;
-    users: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  };
-  owner: {
-    __typename: "User";
-    id: string;
-    username: string;
-    email: string | null;
-    phone: string | null;
-    cardsPacks: {
-      __typename: "ModelPackOwnerConnection";
-      items: Array<{
-        __typename: "PackOwner";
-        id: string;
-        packID: string;
-        userID: string;
-        createdAt: string;
-        updatedAt: string;
-      } | null> | null;
-      nextToken: string | null;
-    } | null;
-    status: string | null;
-    subscription: {
-      __typename: "MonthlySubscription";
-      id: string;
-      startDate: string | null;
-      paymentProvider: string | null;
-      providerTransactionId: string | null;
-      subscriptionPlan: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name: string | null;
-        description: string | null;
-        providerPlanId: string;
-        numberOfUsers: number | null;
-        numberOfCardPacks: number | null;
-        price: number | null;
-        discount: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
-    } | null;
-    numberOfPacksSubstitutions: number | null;
-    lastPackSubstitutionDate: string | null;
-    numberOfPlansSubstitutions: number | null;
-    lastPlanSubstitutionDate: string | null;
-    startPayingSinceDate: string | null;
-    groupId: number | null;
-    createdAt: string;
-    updatedAt: string;
-  };
+  users: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1571,48 +659,6 @@ export class APIService {
           username
           email
           phone
-          cardsPacks {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           status
           subscription {
             __typename
@@ -1758,48 +804,7 @@ export class APIService {
           cardsPreview
           usersIds
           groupsIds
-          users {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          users
           createdAt
           updatedAt
         }
@@ -1831,48 +836,7 @@ export class APIService {
           cardsPreview
           usersIds
           groupsIds
-          users {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          users
           createdAt
           updatedAt
         }
@@ -1904,48 +868,7 @@ export class APIService {
           cardsPreview
           usersIds
           groupsIds
-          users {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          users
           createdAt
           updatedAt
         }
@@ -1960,303 +883,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteCardsPackMutation>response.data.deleteCardsPack;
-  }
-  async CreatePackOwner(
-    input: CreatePackOwnerInput,
-    condition?: ModelPackOwnerConditionInput
-  ): Promise<CreatePackOwnerMutation> {
-    const statement = `mutation CreatePackOwner($input: CreatePackOwnerInput!, $condition: ModelPackOwnerConditionInput) {
-        createPackOwner(input: $input, condition: $condition) {
-          __typename
-          id
-          packID
-          userID
-          pack {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner {
-            __typename
-            id
-            username
-            email
-            phone
-            cardsPacks {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            status
-            subscription {
-              __typename
-              id
-              startDate
-              paymentProvider
-              providerTransactionId
-              subscriptionPlan {
-                __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                price
-                discount
-                createdAt
-                updatedAt
-              }
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
-            numberOfPlansSubstitutions
-            lastPlanSubstitutionDate
-            startPayingSinceDate
-            groupId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreatePackOwnerMutation>response.data.createPackOwner;
-  }
-  async UpdatePackOwner(
-    input: UpdatePackOwnerInput,
-    condition?: ModelPackOwnerConditionInput
-  ): Promise<UpdatePackOwnerMutation> {
-    const statement = `mutation UpdatePackOwner($input: UpdatePackOwnerInput!, $condition: ModelPackOwnerConditionInput) {
-        updatePackOwner(input: $input, condition: $condition) {
-          __typename
-          id
-          packID
-          userID
-          pack {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner {
-            __typename
-            id
-            username
-            email
-            phone
-            cardsPacks {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            status
-            subscription {
-              __typename
-              id
-              startDate
-              paymentProvider
-              providerTransactionId
-              subscriptionPlan {
-                __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                price
-                discount
-                createdAt
-                updatedAt
-              }
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
-            numberOfPlansSubstitutions
-            lastPlanSubstitutionDate
-            startPayingSinceDate
-            groupId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdatePackOwnerMutation>response.data.updatePackOwner;
-  }
-  async DeletePackOwner(
-    input: DeletePackOwnerInput,
-    condition?: ModelPackOwnerConditionInput
-  ): Promise<DeletePackOwnerMutation> {
-    const statement = `mutation DeletePackOwner($input: DeletePackOwnerInput!, $condition: ModelPackOwnerConditionInput) {
-        deletePackOwner(input: $input, condition: $condition) {
-          __typename
-          id
-          packID
-          userID
-          pack {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner {
-            __typename
-            id
-            username
-            email
-            phone
-            cardsPacks {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            status
-            subscription {
-              __typename
-              id
-              startDate
-              paymentProvider
-              providerTransactionId
-              subscriptionPlan {
-                __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                price
-                discount
-                createdAt
-                updatedAt
-              }
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
-            numberOfPlansSubstitutions
-            lastPlanSubstitutionDate
-            startPayingSinceDate
-            groupId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeletePackOwnerMutation>response.data.deletePackOwner;
   }
   async CreateSubscriptionPlan(
     input: CreateSubscriptionPlanInput,
@@ -2396,48 +1022,7 @@ export class APIService {
           cardsPreview
           usersIds
           groupsIds
-          users {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          users
           createdAt
           updatedAt
         }
@@ -2469,18 +1054,7 @@ export class APIService {
             cardsPreview
             usersIds
             groupsIds
-            users {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
+            users
             createdAt
             updatedAt
           }
@@ -2510,48 +1084,6 @@ export class APIService {
           username
           email
           phone
-          cardsPacks {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
           status
           subscription {
             __typename
@@ -2605,18 +1137,6 @@ export class APIService {
             username
             email
             phone
-            cardsPacks {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
             status
             subscription {
               __typename
@@ -2744,48 +1264,7 @@ export class APIService {
           cardsPreview
           usersIds
           groupsIds
-          users {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          users
           createdAt
           updatedAt
         }
@@ -2809,48 +1288,7 @@ export class APIService {
           cardsPreview
           usersIds
           groupsIds
-          users {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          users
           createdAt
           updatedAt
         }
@@ -2874,327 +1312,13 @@ export class APIService {
           cardsPreview
           usersIds
           groupsIds
-          users {
-            __typename
-            items {
-              __typename
-              id
-              packID
-              userID
-              pack {
-                __typename
-                id
-                imgUrl
-                description
-                tags
-                categories
-                cards
-                cardsPreview
-                usersIds
-                groupsIds
-                createdAt
-                updatedAt
-              }
-              owner {
-                __typename
-                id
-                username
-                email
-                phone
-                status
-                numberOfPacksSubstitutions
-                lastPackSubstitutionDate
-                numberOfPlansSubstitutions
-                lastPlanSubstitutionDate
-                startPayingSinceDate
-                groupId
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          users
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteCardsPackSubscription>>;
-
-  OnCreatePackOwnerListener: Observable<
-    SubscriptionResponse<OnCreatePackOwnerSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreatePackOwner {
-        onCreatePackOwner {
-          __typename
-          id
-          packID
-          userID
-          pack {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner {
-            __typename
-            id
-            username
-            email
-            phone
-            cardsPacks {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            status
-            subscription {
-              __typename
-              id
-              startDate
-              paymentProvider
-              providerTransactionId
-              subscriptionPlan {
-                __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                price
-                discount
-                createdAt
-                updatedAt
-              }
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
-            numberOfPlansSubstitutions
-            lastPlanSubstitutionDate
-            startPayingSinceDate
-            groupId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnCreatePackOwnerSubscription>>;
-
-  OnUpdatePackOwnerListener: Observable<
-    SubscriptionResponse<OnUpdatePackOwnerSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdatePackOwner {
-        onUpdatePackOwner {
-          __typename
-          id
-          packID
-          userID
-          pack {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner {
-            __typename
-            id
-            username
-            email
-            phone
-            cardsPacks {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            status
-            subscription {
-              __typename
-              id
-              startDate
-              paymentProvider
-              providerTransactionId
-              subscriptionPlan {
-                __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                price
-                discount
-                createdAt
-                updatedAt
-              }
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
-            numberOfPlansSubstitutions
-            lastPlanSubstitutionDate
-            startPayingSinceDate
-            groupId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdatePackOwnerSubscription>>;
-
-  OnDeletePackOwnerListener: Observable<
-    SubscriptionResponse<OnDeletePackOwnerSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeletePackOwner {
-        onDeletePackOwner {
-          __typename
-          id
-          packID
-          userID
-          pack {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          owner {
-            __typename
-            id
-            username
-            email
-            phone
-            cardsPacks {
-              __typename
-              items {
-                __typename
-                id
-                packID
-                userID
-                createdAt
-                updatedAt
-              }
-              nextToken
-            }
-            status
-            subscription {
-              __typename
-              id
-              startDate
-              paymentProvider
-              providerTransactionId
-              subscriptionPlan {
-                __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                price
-                discount
-                createdAt
-                updatedAt
-              }
-            }
-            numberOfPacksSubstitutions
-            lastPackSubstitutionDate
-            numberOfPlansSubstitutions
-            lastPlanSubstitutionDate
-            startPayingSinceDate
-            groupId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnDeletePackOwnerSubscription>>;
 
   OnCreateSubscriptionPlanListener: Observable<
     SubscriptionResponse<OnCreateSubscriptionPlanSubscription>

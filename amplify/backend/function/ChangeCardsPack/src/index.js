@@ -87,12 +87,15 @@ async function pushUserToCardsPack(cardsPack, username){
     cardsPack.usersIds.push(username);
     var cardPackParams = {
         TableName: cardPackTable,
+        Key:{
+            "id" : cardsPack.id
+        },
         Item: cardsPack
     };
 
     console.log("updating pack with new user : " +username);
 
-    await docClient.update(cardPackParams, function(err, data) {
+    await docClient.put(cardPackParams, function(err, data) {
         if (err) {
             console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
@@ -121,95 +124,19 @@ async function removeUserFromCardsPack(cardsPack, username){
     
     var cardPackParams = {
         TableName: cardPackTable,
+        Key:{
+            "id" : cardsPack.id
+        },
         Item: cardsPack
     };
 
 
-    await docClient.update(cardPackParams, function(err, data) {
+    await docClient.put(cardPackParams, function(err, data) {
         if (err) {
             console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
         } else {
             console.log("updated pack with new user:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-}
-
-async function replaceCardsPacksInUser(user, oldCardsPack, newCardsPack){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-
-    var newPackId = user.id + newCardsPack.id;
-    var newPack = {
-        id: newPackId,
-        packID: newCardsPack.id,
-        userID: user.id,
-        pack: newCardsPack,
-        owner: user.id,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-    };
-
-    user.cardsPacks.push(newPack);
-    user.lastPackSubstitutionDate = new Date().toISOString();
-    user.numberOfPacksSubstitutions++;
-
-    var i;
-    for (i = 0; i < user.cardsPacks.length; i++) {
-        if(user.cardsPacks[i].packID == oldCardsPack.id){
-            user.cardsPacks.splice(i, 1);
-            break;
-        }
-    }
-
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
-    var updatedUserParams = {
-        TableName: userTable,
-        Item: user
-    };
-
-    console.log("updating user with new pack : " +newCardsPack.id);
-
-    await docClient.update(updatedUserParams, function(err, data) {
-        if (err) {
-            console.error("Unable to updating user with new pack. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated user with new pack:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-
-    console.log("updating new pack owner : " +newCardsPack.id);
-    var packOwnerTable = env.API_CARDSPACKS_PACKOWNERTABLE_NAME;
-    var updatedPackOwner = {
-        TableName: packOwnerTable,
-        Item: newPack
-    };
-    await docClient.update(updatedPackOwner, function(err, data) {
-        if (err) {
-            console.error("Unable to updating pack owner. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated new pack owner:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-
-    var oldId = user.id + oldCardsPack.id;
-    var deletedPackOwner = {
-        TableName: packOwnerTable,
-        Key:{
-            "id": oldId
-        }
-    };
-
-    await docClient.delete(deletedPackOwner, function(err, data) {
-        if (err) {
-            console.error("Unable to delete pack owner. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("deleted pack owner:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
     }).promise();
@@ -237,6 +164,4 @@ exports.handler = async (event) => {
 
     await pushUserToCardsPack(newPack, user.id);
     await removeUserFromCardsPack(oldPack, user.id);
-
-    await replaceCardsPacksInUser(user, oldPack, newPack);
 };

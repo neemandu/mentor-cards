@@ -63,19 +63,7 @@ type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   cardsPreview: [String] 
   usersIds: [String] 
   groupsIds: [String]
-  users: [PackOwner] @connection(keyName: "byPack", fields: ["id"])
-}
-
-type PackOwner
-  @auth( rules: [{ allow: private }] )
-  @model(queries: null)
-  @key(name: "byPack", fields: ["packID", "userID"])
-  @key(name: "byOwner", fields: ["userID", "packID"]) {
-  id: ID!
-  packID: ID!
-  userID: ID!
-  pack: CardsPack! @connection(fields: ["packID"])
-  owner: User! @connection(fields: ["userID"])
+  users: [String] 
 }
 
 type User 
@@ -86,7 +74,6 @@ type User
   username: String!
   email: AWSEmail
   phone: String
-  cardsPacks: [PackOwner] @connection(keyName: "byOwner", fields: ["id"])
   status: String
   subscription: MonthlySubscription 
   numberOfPacksSubstitutions: Int

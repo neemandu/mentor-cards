@@ -91,6 +91,9 @@ async function pushUserToCardsPack(cardsPack, username){
     cardsPack.usersIds.push(username);
     var cardPackParams = {
         TableName: cardPackTable,
+        Key:{
+            "id" : cardsPack.id
+        },
         Item: cardsPack
     };
 
@@ -102,57 +105,6 @@ async function pushUserToCardsPack(cardsPack, username){
             //callback("Failed");
         } else {
             console.log("updated pack with new user:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-}
-
-async function pushCardsPackToUser(user, cardsPack){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-
-    var newPackId = user.id + cardsPack.id;
-    var newPack = {
-        id: newPackId,
-        packID: cardsPack.id,
-        userID: user.id,
-        pack: cardsPack,
-        owner: user.id,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-    };
-
-    user.cardsPacks.push(newPack);
-
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
-    var updatedUserParams = {
-        TableName: userTable,
-        Item: user
-    };
-
-    console.log("updating user with new pack : " +cardsPack.id);
-
-    await docClient.put(updatedUserParams, function(err, data) {
-        if (err) {
-            console.error("Unable to updating user with new pack. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated user with new pack:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-
-    console.log("updating new pack owner : " +cardsPack.id);
-    var packOwnerTable = env.API_CARDSPACKS_PACKOWNERTABLE_NAME;
-    var updatedPackOwner = {
-        TableName: packOwnerTable,
-        Item: newPack
-    };
-    await docClient.put(updatedPackOwner, function(err, data) {
-        if (err) {
-            console.error("Unable to updating pack owner. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated new pack owner:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
     }).promise();
@@ -179,8 +131,6 @@ exports.handler = async (event) => {
     var cardsPack = await getCardsPack(cardsPackId);
 
     await pushUserToCardsPack(cardsPack, username);
-    
-    await pushCardsPackToUser(user, cardsPack);
 
     return true;
 };

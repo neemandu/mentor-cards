@@ -21,7 +21,7 @@ async function saveUser(user){
         Item: user
     };
 
-    await docClient.update(updatedUserParams, function(err, data) {
+    await docClient.put(updatedUserParams, function(err, data) {
         if (err) {
             console.error("Unable to update " + user.id + ". Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
