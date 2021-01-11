@@ -93,6 +93,7 @@ query GetUser($id: ID!) {
     startPayingSinceDate
     groupId
     numberOfUsedPacks
+    test
     createdAt
     updatedAt
   }
@@ -134,6 +135,7 @@ query ListUsers(
       startPayingSinceDate
       groupId
       numberOfUsedPacks
+      test
       createdAt
       updatedAt
     }

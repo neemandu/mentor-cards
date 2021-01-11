@@ -113,6 +113,7 @@ async function pushUserToCardsPack(cardsPack, username){
 async function addUserPacksCounter(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
     user.numberOfUsedPacks++;
+    user.updatedAt = new Date().toISOString();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
     var params = {
@@ -124,10 +125,10 @@ async function addUserPacksCounter(user){
 
     await docClient.put(params, function(err, data) {
         if (err) {
-            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+            console.error("Unable to addUserPacksCounter. Error JSON:", JSON.stringify(err, null, 2));
             //callback("Failed");
         } else {
-            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+            console.log("updated addUserPacksCounter:", JSON.stringify(data, null, 2));
             //callback(null, data);
         }
     }).promise();

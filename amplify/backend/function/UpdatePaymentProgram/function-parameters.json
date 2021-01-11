@@ -10,8 +10,10 @@
     },
     "storage": {
       "CardsPack:@model(appsync)": [
+        "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ],
       "User:@model(appsync)": [
         "create",
