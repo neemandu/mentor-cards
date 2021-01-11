@@ -19,7 +19,7 @@ export class PackPreviewComponent implements OnInit {
   loadedCards: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
-    private userAuthService: UserAuthService, private api: APIService, private overlaySpinnerService: OverlaySpinnerService) { }
+    private userAuthService: UserAuthService, private api: APIService, private overlaySpinnerService: OverlaySpinnerService, private cardsService: CardsService) { }
 
   ngOnInit(): void {
     // console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
@@ -36,13 +36,13 @@ export class PackPreviewComponent implements OnInit {
     })
   }
 
-  get choosePackButtonVisible() {
+  get choosePackButtonVisible() {//TODO fix after Dudi adds amount of packs owned
     return this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks == -1 ||
-      this.userAuthService.userData.cardsPacks.items.length < this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks;
+      this.userAuthService.userData.numberOfUsedPacks < this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks;
   }
 
   get exchangePackButtonVisible() {
-    return this.userAuthService.userData.cardsPacks.items.length != 0 && (!this.userAuthService.userData.lastPackSubstitutionDate ||
+    return this.userAuthService.userData.numberOfUsedPacks != 0 && (!this.userAuthService.userData.lastPackSubstitutionDate ||
       new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime())
   }
 
@@ -53,7 +53,8 @@ export class PackPreviewComponent implements OnInit {
   }
 
   get currentPacksOwned() {
-    return this.userAuthService.userData.cardsPacks.items;
+    return this.cardsService.allPacks.filter(pack => pack.cards.length !== 0);
+    // return this.userAuthService.userData.numberOfUsedPacks;
   }
 
   openChooseProgramModal(): void {
@@ -64,7 +65,7 @@ export class PackPreviewComponent implements OnInit {
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
       if (res) {
-        this.closeDialog();
+        this.dialogRef.close(true);
       }
     });
   }
@@ -73,13 +74,13 @@ export class PackPreviewComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData('החלפת ערכות', 'ערכת `' + pack.pack.description + '` תוחלף בערכת `' + this.data.description + '`', 'אישור', 'ביטול')
+    dialogConfig.data = new DynamicDialogData('החלפת ערכות', 'ערכת `' + pack.description + '` תוחלף בערכת `' + this.data.description + '`', 'אישור', 'ביטול')
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
       if (res) {
         this.overlaySpinnerService.changeOverlaySpinner(true);
-        var packChange: changeCardsPackInput = { "oldCardsPackId": pack.pack.id, "newCardsPackId": this.data.id };
+        var packChange: changeCardsPackInput = { "oldCardsPackId": pack.id, "newCardsPackId": this.data.id };
         this.api.ChangeCardsPack(packChange).then(value => {
           this.dialogRef.close(true);
         }, reject => {

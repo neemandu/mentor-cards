@@ -42,31 +42,6 @@ export class AllPacksPageComponent implements OnInit {
     if (!this.cardsService.allPacks) {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       this.getAllPacks();
-      // try {
-      //   this.api.ListCardsPacks().then(packs => {
-      //     this.allPacks = packs.items.map(pack => {
-      //       pack.categories.forEach(category => {
-      //         if (!this.allCategories.includes(category))
-      //           this.allCategories.push(category);
-      //       });
-      //       return new PackContent().deseralize(pack)
-      //     });
-      //     this.cardsService.allPacks = this.allPacks.map(pack => pack);
-      //     this.cardsService.allCategories = this.allCategories.map(category => category);
-      //     this.allFavorites = this.cardsService.favorites;
-      //     this.sortPacks();
-      //     this.allPacks.length == 0 ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
-      //   })
-      // }
-      // catch (e) {
-      //   this.overlaySpinnerService.changeOverlaySpinner(false);
-      //   let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
-      //     duration: 20000,
-      //   });
-      //   snackBarRef.onAction().subscribe(() => {
-      //     window.location.reload();
-      //   });
-      // };
     } else {
       this.allPacks = this.cardsService.allPacks;
       this.allCategories = this.cardsService.allCategories;
@@ -76,9 +51,12 @@ export class AllPacksPageComponent implements OnInit {
     }
   }
 
+  /**
+   * Retrive all packs
+   */
   getAllPacks(): void {
     this.api.ListCardsPacks().then(packs => {
-      console.log("🚀 ~ file: all-packs-page.component.ts ~ line 81 ~ AllPacksPageComponent ~ this.api.ListCardsPacks ~ packs", packs)
+      // console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))

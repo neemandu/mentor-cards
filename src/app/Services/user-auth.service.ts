@@ -6,6 +6,7 @@ import { APIService, CreateUserInput } from '../API.service';
 import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { CardsService } from './cards.service';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
+import { UserData } from '../Objects/user-related';
 
 
 @Injectable({
@@ -13,13 +14,15 @@ import { CognitoUserInterface } from '@aws-amplify/ui-components';
 })
 export class UserAuthService {
 
-  @Output() loggedInEmmiter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
 
   loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
-  userData: any;
+  userData: UserData;
+  // userData: any;
+  groupData: any;
 
-  constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private ngZone: NgZone, private cardsService: CardsService) {
+  constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private cardsService: CardsService) {
   }
 
   /**
@@ -65,11 +68,26 @@ export class UserAuthService {
    */
   updateUserData(): void {
     this.api.GetUser(this.loggedInAttributes.username).then(data => {
-      this.userData = data;
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 58 ~ UserAuthService ~ this.api.GetUser ~ data", data)
+      // this.userData = data;
+      this.userData = new UserData().deseralize(data);
+      console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+      if (this.userData.groupId)
+        this.updateGroupData();
       this.loggedInEmmiter.emit(this.userData);
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
+    })
+  }
+
+  /**
+   * Get all data about current group
+   */
+  updateGroupData(): void {
+    this.api.GetGroup(this.userData.groupId).then(data => {
+      this.groupData = data;
+      console.log("file: user-auth.service.ts ~ line 85 ~ this.api.GetGroup ~ this.groupData", this.groupData)
+    }, reject => {
+      console.log("file: user-auth.service.ts ~ line 101 ~ this.api.GetGroup ~ reject", reject)
     })
   }
 
