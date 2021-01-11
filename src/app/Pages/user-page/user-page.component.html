@@ -1,21 +1,22 @@
 <div class="content">
-    <video width="1920px" height="600px" autoplay loop oncanplay="this.play()" onloadedmetadata="this.muted = true">
+    <video #videoPlayer width="1920px" height="600px" autoplay loop oncanplay="this.play()" onloadedmetadata="this.muted = true">
         <source src="assets\About video.mp4" type="video/mp4">
     </video>
-    <div class="content user-info" *ngIf="userData">
+    <div class="content user-info" *ngIf="userData !== undefined">
         <div class="user-info-section">
             <h1>פרטי משתמש</h1>
             <div class="line"></div>
-            <p>שם משתמש: {{userData?.username}}</p>
-            <p>מייל: {{userData?.email}}</p>
+            <p>שם משתמש: {{userData.username}}</p>
+            <p>מייל: {{userData.email}}</p>
         </div>
         <div class="user-info-section">
             <h1>פרטי חבילה</h1>
             <div class="line"></div>
-            <p>כמות משתמשים: {{userData?.subscription.subscriptionPlan.numberOfUsers}}</p>
-            <p>כמות חבילות: {{userData?.subscription.subscriptionPlan.numberOfCardPacks}}</p>
-            <p>תאריך הרשמה לחבילה: {{userData?.subscription.startDate | date:'shortDate'}}</p>
-            <p>מחיר עבור חבילה נוכחית: {{userData?.subscription.subscriptionPlan.price - userData?.subscription.subscriptionPlan.discount}}₪</p>
+            <p>כמות משתמשים: {{userData.subscription.subscriptionPlan.numberOfUsers}}</p>
+            <p>כמות ערכות: {{userData.subscription.subscriptionPlan.numberOfCardPacks | amountOfPacksView}}</p>
+            <p>תאריך הרשמה לחבילה: {{userData.subscription.startDate | date:'shortDate'}}</p>
+            <p>מחיר עבור חבילה נוכחית: {{(userData.subscription.subscriptionPlan.price -
+                userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
             <p>ערכות נותרות להחלפה החודש: {{amountOfPacksToChangeThisMonth}}</p>
         </div>

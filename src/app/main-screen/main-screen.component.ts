@@ -15,7 +15,9 @@ export class MainScreenComponent implements OnInit, OnDestroy {
   constructor(private overlaySpinnerService: OverlaySpinnerService) { }
 
   ngOnInit() {
-    this.subs.add(this.overlaySpinnerService.changeOverlaySpinnerEmmiter.subscribe((show: boolean) => this.showSpinner = show));
+    this.subs.add(this.overlaySpinnerService.changeOverlaySpinnerEmmiter.subscribe((show: boolean) => {
+      this.showSpinner = show
+    }));
   }
 
   ngOnDestroy(): void {

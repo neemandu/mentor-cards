@@ -10,3 +10,14 @@ export class TooltipListViewPipe implements PipeTransform {
   }
 
 }
+
+@Pipe({
+  name: 'amountOfPacksView'
+})
+export class AmountOfPacksViewPipe implements PipeTransform {
+
+  transform(value: number): unknown { 
+    return value == -1? 'ללא הגבלה' : value;
+  }
+
+}

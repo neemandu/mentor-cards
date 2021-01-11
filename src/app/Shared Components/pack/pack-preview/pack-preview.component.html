@@ -28,7 +28,7 @@
       <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
         נוצלו כל החבילות החודש
       </span></button>
-    <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu" (click)="exchangePack()"
+    <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu"
       [disabled]="!exchangePackButtonVisible">החלף ערכה בזו
       <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
         הוחלפה חבילה החודש
@@ -44,10 +44,10 @@
 
 <mat-menu #exchangeMenu="matMenu" xPosition="before" dir="rtl">
   <button mat-menu-item *ngFor="let pack of currentPacksOwned" style="height: 100%;"
-    matTooltip="קטגוריות: {{pack.pack.categories | tooltipListView}} | תגיות: {{pack.pack.tags | tooltipListView}}"
+    matTooltip="קטגוריות: {{pack.categories | tooltipListView}} | תגיות: {{pack.tags | tooltipListView}}"
     matTooltipShowDelay="1000" [matTooltipClass]="{'tooltip-class' : true}"
     (click)="openExchangePackApprovalModal(pack)">
-    <img src={{pack.pack.imgUrl}} style="height: 4rem; margin: 5px 0px 5px 5px;">
-    {{pack.pack.description}}
+    <img src={{pack.imgUrl}} style="height: 4rem; margin: 5px 0px 5px 5px;">
+    {{pack.description}}
   </button>
 </mat-menu>

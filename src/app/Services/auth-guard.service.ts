@@ -38,7 +38,7 @@ export class AuthGuardAllPacksPageService implements CanActivate {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardUserPageService implements CanActivate {
+export class AuthGuardNoProgramPageService implements CanActivate {
 
   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
@@ -51,6 +51,38 @@ export class AuthGuardUserPageService implements CanActivate {
       }
       else {
         return true;
+      }
+    }
+    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+      sub.unsubscribe();
+      if (userData.status === "PLAN") {
+        this.ngZone.run(() => this.router.navigate(['user-page']));
+        // return false;
+      }
+      else {
+        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        return true;
+      }
+    })
+    // return false;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardUserPageService implements CanActivate {
+
+  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+
+  canActivate(): boolean {
+    // debugger;
+    if (this.userAuthService.userData) {
+      if (this.userAuthService.userData.status === "PLAN") {
+        return true;
+      }
+      else {
+        this.ngZone.run(() => this.router.navigate(['no-program-page']));
       }
     }
     var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {

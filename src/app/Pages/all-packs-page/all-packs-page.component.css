@@ -34,6 +34,8 @@ app-pack {
 }
 
 #filters {
+  position: sticky;
+  top: 10%;
   max-width: 15%;
   min-width: 10%;
   word-break: keep-all;

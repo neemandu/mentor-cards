@@ -27,8 +27,9 @@ export class PackContent {
     constructor() {}
     
     deseralize(input: any){
+        // console.log("🚀 ~ file: packs.ts ~ line 30 ~ PackContent ~ deseralize ~ input", input)
         Object.assign(this, input);
-        this.cards = input.cards.map(card => new Card().deseralize(card))
+        input.cards ? this.cards = input.cards.map(card => new Card().deseralize(card)) : null;
         return this;
     }
 }
