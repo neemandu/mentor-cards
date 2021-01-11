@@ -82,7 +82,8 @@ type User
   lastPlanSubstitutionDate: AWSDateTime
   startPayingSinceDate: AWSDateTime
   groupId: Int
-  numberOfUsedPacks: Int @function(name: "GetNumberOfUsedPacks-${env}")
+  numberOfUsedPacks: Int 
+  test: String
 }
 
 type Group
