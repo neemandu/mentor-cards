@@ -16,7 +16,7 @@ Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
 
-async function getUser(username){
+async function getUserByUSerName(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
@@ -45,6 +45,41 @@ async function getUser(username){
 
     if(!user){
         throw Error ('no such user - ' + username);
+    }
+
+    return user;
+
+}
+
+async function getUserByEmail(email){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "email": email
+        }
+    };
+
+    console.log("searching for user - " + email);
+
+    var user;
+
+    await docClient.get(userParams, function(err, data) {
+        if (err) {
+            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+            user = data["Item"];
+        }
+    }).promise();
+
+    if(!user){
+        throw Error ('no such user - ' + email);
     }
 
     return user;
@@ -291,12 +326,16 @@ function makeid(length) {
     return result;
  }
 
-async function createGroup(username, subscriptionPlan){
+async function createGroup(email, subscriptionPlan){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
     var id = makeid(10);
+    var user = {
+        email: email,
+        role: "ADMIN"
+    }
     var users = [];
-    users.push(username);
+    users.push(user);
     var params = {
         TableName: groupTable,
         Key: {
@@ -338,13 +377,13 @@ exports.handler = async (event) => {
         username = event.identity.claims['username'];
     }
 
-    var user = await getUser(username);
+    var user = await getUserByUSerName(username);
     var canUpdateProgram = false;
     if(user.groupId){
         var group = await getGroup(user.groupId);
         for(var i = 0; i < group.groupUsers.length ; i++){
-            var currUserName = group.groupUsers[i].username;
-            if(username == currUserName){
+            var currUserName = group.groupUsers[i].email;
+            if(user.email == currUserName){
                 if(group.groupUsers[i].role == "ADMIN"){
                     canUpdateProgram = true;
                     break;
@@ -372,14 +411,14 @@ exports.handler = async (event) => {
         // Update all users in the group with the same program
         if(user.groupId){
             for(var i = 0; i < group.groupUsers.length ; i++){
-                var currUserName = group.groupUsers[i].username;
-                var currUser = await getUser(currUserName);
+                var curremail = group.groupUsers[i].email;
+                var currUser = await getUserByEmail(curremail);
                 await updateMonthlySubscription(currUser, paymentProgram, transId);
             }
         }
         else{ // No group yet
             if(paymentProgram.numberOfUsers > 1){
-                var groupId = await createGroup(username, paymentProgram);
+                var groupId = await createGroup(user.email, paymentProgram);
                 user.groupId = groupId;
             }
         }

@@ -9,6 +9,7 @@ Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
 
+
 async function getGroup(groupId){
     console.log("getGroup: " + groupId);
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -39,19 +40,6 @@ async function getGroup(groupId){
     return group;
 }
 
-function canUserGetGroupDetails(email, group){
-    var canRead = false;
-    for(var i = 0; i < group.groupUsers.length ; i++){
-        var currEmail = group.groupUsers[i].email;
-        if(email == currEmail && group.groupUsers[i].role == "ADMIN"){
-            canRead = true;
-            break;
-        }
-    }
-
-    return canRead;
-}
-
 exports.handler = async (event) => {
     AWS.config.update({
         region: env.REGION
@@ -62,16 +50,15 @@ exports.handler = async (event) => {
     if(!email){
         email = event.identity.claims['email'];
     }
+    var args = event.arguments.input;
+    var group = await getGroup(args['id']);
 
-    var groupId = event.arguments.input["id"];
-    var group = await getGroup(groupId);
-    var canRead = canUserGetGroupDetails(email, group);
-
-    if(canRead){
-        console.log('user: ' + email + ' is authorized to read the group details because he is an admin.' );
-        return group;
+    for(var i = 0; i < group.groupUsers.length ; i++){
+        var curremail = group.groupUsers[i].email;
+        if(email == curremail){
+            return true;
+        }
     }
-    console.log('user: ' + email + ' is not authorized to read the group details.' );
-    return null;
 
+    return false;
 };

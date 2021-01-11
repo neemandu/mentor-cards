@@ -11,6 +11,7 @@ type Mutation {
 
 type Query {
   getGroup(id: ID!): Group
+  IsInGroup(id: ID!): Boolean
 }
 
 input joinExistingGroupInput {
@@ -44,7 +45,7 @@ input changeCardsPackInput {
 }
 
 input GroupUserRoleInput{
-  username: String
+  email: String
   role: String
 }
 
@@ -71,8 +72,8 @@ type User
 @auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update] },
                 { allow: private, operations: [create] }] ){
   id: ID!
-  username: String!
-  email: AWSEmail
+  username: ID!
+  email: ID!
   phone: String
   status: String
   subscription: MonthlySubscription 
@@ -95,7 +96,7 @@ type Group
 }
 
 type GroupUserRole{
-  username: String
+  email: String
   role: String
 }
 

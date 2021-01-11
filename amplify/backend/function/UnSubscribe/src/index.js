@@ -17,7 +17,7 @@ Amplify Params - DO NOT EDIT */
 const { env, getgroups } = require("process");
 var AWS = require("aws-sdk");
 
-async function getUser(username){
+async function getUserByUSerName(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
@@ -44,6 +44,41 @@ async function getUser(username){
         }
     }).promise();
 
+    if(!user){
+        throw Error ('no such user - ' + username);
+    }
+
+    return user;
+
+}
+
+async function getUserByEmail(email){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "email": email
+        }
+    };
+
+    console.log("searching for user - " + email);
+
+    var user;
+
+    await docClient.get(userParams, function(err, data) {
+        if (err) {
+            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+            user = data["Item"];
+        }
+    }).promise();
+
     return user;
 
 }
@@ -51,6 +86,7 @@ async function getUser(username){
 async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
+    user.updatedAt = new Date().toISOString();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
     var updatedUserParams = {
         TableName: userTable,
@@ -101,7 +137,7 @@ exports.handler = async (event) => {
     if(!username){
         username = event.identity.claims['username'];
     }
-    var user = await getUser(username);
+    var user = await getUserByUSerName(username);
     user.status = "Unsubscribed";
     user.subscription = null;
     user.groupId = null;
@@ -112,8 +148,8 @@ exports.handler = async (event) => {
         var group = await getGroup(user.groupId);
 
         for(var i =0 ; group.groupUsers.length; i++){
-            username = group.groupUsers[i].username;
-            var groupUser = await getUser(username);
+            email = group.groupUsers[i].email;
+            var groupUser = await getUserByEmail(email);
             groupUser.status = "Unsubscribed";
             groupUser.subscription = null;
             groupUser.groupId = null;

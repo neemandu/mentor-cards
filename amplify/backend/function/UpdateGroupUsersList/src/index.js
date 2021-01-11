@@ -39,7 +39,7 @@ async function saveUser(user){
     }).promise();
 }
 
-async function getUser(username){
+async function getUserByUSerName(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
@@ -53,6 +53,41 @@ async function getUser(username){
     };
 
     console.log("searching for user - " + username);
+
+    var user;
+
+    await docClient.get(userParams, function(err, data) {
+        if (err) {
+            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+            user = data["Item"];
+        }
+    }).promise();
+
+    if(!user){
+        throw Error ('no such user - ' + username);
+    }
+
+    return user;
+
+}
+
+async function getUserByEmail(email){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "email": email
+        }
+    };
+
+    console.log("searching for user - " + email);
 
     var user;
 
@@ -104,12 +139,12 @@ async function unsubscribeOldUsers(userlist, groupUsers){
     for(var i = 0 ; i < groupUsers.length ; i++){
         var shouldBeDeleted = true;
         for(var j = 0 ; j < userlist.length ; j++){
-            if(userlist[j].username == groupUsers[i]){
+            if(userlist[j].email == groupUsers[i].email){
                 shouldBeDeleted = false;
             }
         }
         if(shouldBeDeleted){
-            var groupUser = await getUser(groupUsers[i]);
+            var groupUser = await getUserByEmail(groupUsers[i].email);
             groupUser.status = "Unsubscribed";
             groupUser.subscription = null;
             groupUser.groupId = null;
@@ -122,12 +157,12 @@ async function subscribeNewUsers(userlist, groupUsers, subscription, groupId){
     for(var j = 0 ; j < userlist.length ; j++){
         var shouldBeAdded = true;
         for(var i = 0 ; i < groupUsers.length ; i++){
-            if(userlist[j].username == groupUsers[i]){
+            if(userlist[j].email == groupUsers[i].email){
                 shouldBeDeleted = false;
             }
         }
         if(shouldBeAdded){
-            var groupUser = await getUser(userlist[j].username);
+            var groupUser = await getUserByEmail(userlist[j].email);
             groupUser.status = "PLAN";
             groupUser.subscription = subscription;
             groupUser.groupId = groupId;
@@ -138,10 +173,10 @@ async function subscribeNewUsers(userlist, groupUsers, subscription, groupId){
 
 function canUSerPerformAction(user, group){
     var canUpdateProgram = false;
-    if(user.groupId){
+    if(user.groupId == group.id){
         for(var i = 0; i < group.groupUsers.length ; i++){
-            var currUserName = group.groupUsers[i].username;
-            if(user.id == currUserName){
+            var currUserEmail = group.groupUsers[i].email;
+            if(user.email == currUserEmail){
                 if(group.groupUsers[i].role == "ADMIN"){
                     canUpdateProgram = true;
                     break;
@@ -193,7 +228,7 @@ exports.handler = async (event) => {
         username = event.identity.claims['username'];
     }
 
-    var user = await getUser(username);
+    var user = await getUserByUSerName(username);
 
     var userlist = args['usernamesList'];
     console.log("Update Group user list with: ");

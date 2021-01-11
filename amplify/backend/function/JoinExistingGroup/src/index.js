@@ -14,6 +14,7 @@ var AWS = require("aws-sdk");
 
 async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
+    user.updatedAt = new Date().toISOString();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
     var updatedUserParams = {
@@ -32,7 +33,7 @@ async function saveUser(user){
     }).promise();
 }
 
-async function updateUser(user){
+async function updateUser(user, groupId){
     user.groupId = groupId;
     user.status = "PLAN";
     user.subscription = group.subscription;
@@ -42,14 +43,49 @@ async function updateUser(user){
 function canJoinGroupFunc(user, group){
     var canJoinGroup = false;
     for(var i = 0; i < group.groupUsers.length ; i++){
-        var currUserName = group.groupUsers[i].username;
-        if(user.id == currUserName){
+        var curremail = group.groupUsers[i].email;
+        if(user.email == curremail){
             canJoinGroup = true;
             break;
         }
     }
 
     return canJoinGroup;
+}
+
+async function getUser(username){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "id": username
+        }
+    };
+
+    console.log("searching for user - " + username);
+
+    var user;
+
+    await docClient.get(userParams, function(err, data) {
+        if (err) {
+            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+            user = data["Item"];
+        }
+    }).promise();
+
+    if(!user){
+        throw Error ('no such user - ' + username);
+    }
+
+    return user;
+
 }
 
 exports.handler = async (event) => {
@@ -77,7 +113,7 @@ exports.handler = async (event) => {
     }
     else{
 
-        await updateUser(user);     
+        await updateUser(user, groupId);     
     }
 
 };
