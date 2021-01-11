@@ -33,7 +33,7 @@ export type groupUsersListInput = {
 };
 
 export type GroupUserRoleInput = {
-  username?: string | null;
+  email?: string | null;
   role?: string | null;
 };
 
@@ -230,8 +230,8 @@ export type ModelIDInput = {
 
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null;
-  username?: ModelStringInput | null;
-  email?: ModelStringInput | null;
+  username?: ModelIDInput | null;
+  email?: ModelIDInput | null;
   phone?: ModelStringInput | null;
   status?: ModelStringInput | null;
   numberOfPacksSubstitutions?: ModelIntInput | null;
@@ -241,7 +241,6 @@ export type ModelUserFilterInput = {
   startPayingSinceDate?: ModelStringInput | null;
   groupId?: ModelStringInput | null;
   numberOfUsedPacks?: ModelIntInput | null;
-  test?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -265,7 +264,7 @@ export type CreateUserMutation = {
   __typename: "User";
   id: string;
   username: string;
-  email: string | null;
+  email: string;
   phone: string | null;
   status: string | null;
   subscription: {
@@ -295,7 +294,6 @@ export type CreateUserMutation = {
   startPayingSinceDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
-  test: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -395,7 +393,7 @@ export type GetGroupQuery = {
   id: string;
   groupUsers: Array<{
     __typename: "GroupUserRole";
-    username: string | null;
+    email: string | null;
     role: string | null;
   } | null> | null;
   paymentProgram: {
@@ -455,7 +453,7 @@ export type GetUserQuery = {
   __typename: "User";
   id: string;
   username: string;
-  email: string | null;
+  email: string;
   phone: string | null;
   status: string | null;
   subscription: {
@@ -485,7 +483,6 @@ export type GetUserQuery = {
   startPayingSinceDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
-  test: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -496,7 +493,7 @@ export type ListUsersQuery = {
     __typename: "User";
     id: string;
     username: string;
-    email: string | null;
+    email: string;
     phone: string | null;
     status: string | null;
     subscription: {
@@ -526,7 +523,6 @@ export type ListUsersQuery = {
     startPayingSinceDate: string | null;
     groupId: string | null;
     numberOfUsedPacks: number | null;
-    test: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -695,7 +691,6 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
-          test
           createdAt
           updatedAt
         }
@@ -991,7 +986,7 @@ export class APIService {
           id
           groupUsers {
             __typename
-            username
+            email
             role
           }
           paymentProgram {
@@ -1018,6 +1013,18 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetGroupQuery>response.data.getGroup;
+  }
+  async IsInGroup(id: string): Promise<boolean | null> {
+    const statement = `query IsInGroup($id: ID!) {
+        IsInGroup(id: $id)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.IsInGroup;
   }
   async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!) {
@@ -1122,7 +1129,6 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
-          test
           createdAt
           updatedAt
         }
@@ -1177,7 +1183,6 @@ export class APIService {
             startPayingSinceDate
             groupId
             numberOfUsedPacks
-            test
             createdAt
             updatedAt
           }

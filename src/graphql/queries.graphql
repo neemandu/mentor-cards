@@ -3,7 +3,7 @@ query GetGroup($id: ID!) {
   getGroup(id: $id) {
     id
     groupUsers {
-      username
+      email
       role
     }
     paymentProgram {
@@ -21,6 +21,9 @@ query GetGroup($id: ID!) {
     createdAt
     updatedAt
   }
+}
+query IsInGroup($id: ID!) {
+  IsInGroup(id: $id)
 }
 query GetCardsPack($id: ID!) {
   getCardsPack(id: $id) {
@@ -93,7 +96,6 @@ query GetUser($id: ID!) {
     startPayingSinceDate
     groupId
     numberOfUsedPacks
-    test
     createdAt
     updatedAt
   }
@@ -135,7 +137,6 @@ query ListUsers(
       startPayingSinceDate
       groupId
       numberOfUsedPacks
-      test
       createdAt
       updatedAt
     }

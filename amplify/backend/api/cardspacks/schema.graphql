@@ -84,7 +84,6 @@ type User
   startPayingSinceDate: AWSDateTime
   groupId: String
   numberOfUsedPacks: Int 
-  test: String
 }
 
 type Group
