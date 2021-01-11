@@ -1,0 +1,74 @@
+* {
+  direction: rtl;
+  font-family: 'rubik' !important;
+}
+
+mat-icon {
+  font-family: 'Material Icons' !important;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+p {
+  font-size: medium;
+}
+
+h1 {
+  align-self: center;
+}
+
+.user-info-section {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.user-info {
+  margin-bottom: 5vh;
+}
+
+video {
+  width: 70%;
+  height: 100%;
+  z-index: 0;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  border-radius: 20px;
+}
+
+.line {
+  background-color: #ffa800;
+  width: 30vw;
+  height: 3px;
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+
+.changePlanBtn {
+  height: 3rem;
+  width: 10rem;
+  border-radius: 5px;
+  background: #ffa800;
+  color: white;
+  border: none;
+  font-weight: 500;
+  font-size: x-large;
+}
+
+.changePlanBtn:hover {
+  background: #e69900;
+}
+
+.changePlanBtn:active {
+  background: #db9200;
+}
+
+.changePlanBtn:focus {
+  outline: none;
+}

@@ -28,9 +28,7 @@ export class PackPreviewComponent implements OnInit {
   choosePack(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.api.AddCardsPack({ "cardsPackId": this.data.id }).then(value => {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
       this.dialogRef.close(value);
-      window.location.reload();
       // console.log("🚀 ~ file: cards.service.ts ~ line 60 ~ CardsService ~ returnthis.api.AddCardsPack ~ value", value)
     }, reject => {
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -38,12 +36,9 @@ export class PackPreviewComponent implements OnInit {
     })
   }
 
-  exchangePack(): void {
-
-  }
-
   get choosePackButtonVisible() {
-    return this.userAuthService.userData.cardsPacks.items.length < this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks;
+    return this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks == -1 ||
+      this.userAuthService.userData.cardsPacks.items.length < this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks;
   }
 
   get exchangePackButtonVisible() {
@@ -86,14 +81,11 @@ export class PackPreviewComponent implements OnInit {
         this.overlaySpinnerService.changeOverlaySpinner(true);
         var packChange: changeCardsPackInput = { "oldCardsPackId": pack.pack.id, "newCardsPackId": this.data.id };
         this.api.ChangeCardsPack(packChange).then(value => {
-          this.overlaySpinnerService.changeOverlaySpinner(false);
-          this.dialogRef.close(value);
-          window.location.reload();
+          this.dialogRef.close(true);
         }, reject => {
           this.overlaySpinnerService.changeOverlaySpinner(false);
-          console.log("🚀 ~ file: cards.service.ts ~ line 63 ~ CardsService ~ returnthis.api.AddCardsPack ~ reject", reject)
+          console.log("🚀 ~ file: pack-preview.component.ts ~ line 95 ~ PackPreviewComponent ~ this.api.ChangeCardsPack ~ reject", reject)
         })
-        this.closeDialog();
       }
     });
   }

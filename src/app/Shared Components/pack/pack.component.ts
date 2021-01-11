@@ -16,7 +16,7 @@ export class PackComponent implements OnInit, OnDestroy {
 
   @Input() packInfo: PackInfo;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
-  // @Output() favoriteChangedEmmiter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() packChange: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
 
   constructor(private cardsService: CardsService, public dialog: MatDialog) { }
@@ -44,8 +44,11 @@ export class PackComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.packInfo;
     const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(() => {
+    var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
+      if(res) {
+        this.packChange.emit();
+      }
     });
   }
 

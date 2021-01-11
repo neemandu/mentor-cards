@@ -27,7 +27,7 @@ import { PackContentPageComponent } from './Pages/pack-content-page/pack-content
 import { RandomCardRevealDialogComponent } from './Pages/pack-content-page/random-card-reveal-dialog/random-card-reveal-dialog.component';
 import { CardComponent } from './Shared Components/card/card.component';
 import { PackComponent } from './Shared Components/pack/pack.component';
-import { TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
+import { AmountOfPacksViewPipe, TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
 import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
 import { ProgramChoiseDialogComponent } from './Pages/no-program-page/program-choise-dialog/program-choise-dialog.component';
 import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
@@ -53,6 +53,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { GroupManagementComponent } from './Pages/group-management/group-management.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AboutPageComponent,
     PackContentPageComponent,
     TooltipListViewPipe,
+    AmountOfPacksViewPipe,
     CardsRevealDialogComponent,
     OverlaySpinnerComponent,
     RandomCardRevealDialogComponent,
@@ -79,7 +81,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ProgramChoiseDialogComponent,
     PackPreviewComponent,
     DynamicDialogYesNoComponent,
-    UserPageComponent
+    UserPageComponent,
+    GroupManagementComponent
   ],
   imports: [
     BrowserModule,
