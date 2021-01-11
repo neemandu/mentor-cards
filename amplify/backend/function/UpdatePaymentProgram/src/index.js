@@ -11,17 +11,6 @@
 	AUTH_MENTORCARDS91F3DC29_USERPOOLID
 	ENV
 	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_GROUPTABLE_ARN
-	API_CARDSPACKS_GROUPTABLE_NAME
-	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN
-	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	AUTH_MENTORCARDS91F3DC29_USERPOOLID
-	ENV
-	REGION
 Amplify Params - DO NOT EDIT */
 
 const { env } = require("process");
@@ -129,6 +118,8 @@ async function getGroup(groupId){
 }
 
 async function saveUser(user){
+    
+    user.updatedAt = new Date().toISOString();
     var docClient = new AWS.DynamoDB.DocumentClient();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
@@ -156,32 +147,35 @@ async function removeUserFromCardsPack(cardsPack, username){
 
     var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
 
-
+    isChanged = false;
     for (var i = 0; i < cardsPack.usersIds.length; i++) {
         if(cardsPack.usersIds == username){
             cardsPack.usersIds.splice(i, 1);
+            isChanged = true;
             break;
         }
     }
     
-    var cardPackParams = {
-        TableName: cardPackTable,
-        Key:{
-            "id" : cardsPack.id
-        },
-        Item: cardsPack
-    };
-
-
-    await docClient.put(cardPackParams, function(err, data) {
-        if (err) {
-            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    if(isChanged){
+        var cardPackParams = {
+            TableName: cardPackTable,
+            Key:{
+                "id" : cardsPack.id
+            },
+            Item: cardsPack
+        };
+    
+    
+        await docClient.put(cardPackParams, function(err, data) {
+            if (err) {
+                console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+                //callback("Failed");
+            } else {
+                console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+                //callback(null, data);
+            }
+        }).promise();
+    }  
 }
 
 async function removeUserFromAllPacks(user){
@@ -190,18 +184,11 @@ async function removeUserFromAllPacks(user){
 
     var username = user.username;
     var params = {
-        TableName : packsTable,
-        FilterExpression: "#us contains (username, :username)",
-        ExpressionAttributeValues : {   
-            ':username' : username
-        },
-        ExpressionAttributeNames:{
-            "#us": "users"
-        },
+        TableName : packsTable
     };
     console.log("searching for number of used packs for - " + user.username);
     
-    await docClient.query(params, function(err, data) {
+    await docClient.scan(params, function(err, data) {
         if (err) {
             console.error("Unable to read packs. Error JSON:", JSON.stringify(err, null, 2));
         } else {
@@ -333,6 +320,8 @@ async function createGroup(username, subscriptionPlan){
             //callback(null, data);
         }
     }).promise();
+
+    return id;
 }
 
 exports.handler = async (event) => {

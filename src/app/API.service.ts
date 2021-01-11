@@ -239,8 +239,9 @@ export type ModelUserFilterInput = {
   numberOfPlansSubstitutions?: ModelIntInput | null;
   lastPlanSubstitutionDate?: ModelStringInput | null;
   startPayingSinceDate?: ModelStringInput | null;
-  groupId?: ModelIntInput | null;
+  groupId?: ModelStringInput | null;
   numberOfUsedPacks?: ModelIntInput | null;
+  test?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -292,8 +293,9 @@ export type CreateUserMutation = {
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
   startPayingSinceDate: string | null;
-  groupId: number | null;
+  groupId: string | null;
   numberOfUsedPacks: number | null;
+  test: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -481,8 +483,9 @@ export type GetUserQuery = {
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
   startPayingSinceDate: string | null;
-  groupId: number | null;
+  groupId: string | null;
   numberOfUsedPacks: number | null;
+  test: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -521,8 +524,9 @@ export type ListUsersQuery = {
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
     startPayingSinceDate: string | null;
-    groupId: number | null;
+    groupId: string | null;
     numberOfUsedPacks: number | null;
+    test: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -691,6 +695,7 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
+          test
           createdAt
           updatedAt
         }
@@ -1117,6 +1122,7 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
+          test
           createdAt
           updatedAt
         }
@@ -1171,6 +1177,7 @@ export class APIService {
             startPayingSinceDate
             groupId
             numberOfUsedPacks
+            test
             createdAt
             updatedAt
           }

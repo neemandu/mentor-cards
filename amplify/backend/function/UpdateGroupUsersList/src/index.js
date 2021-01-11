@@ -161,6 +161,7 @@ async function updateGroup(group, userlist){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
     group.groupUsers = userlist;
+    group.updatedAt = new Date().toISOString();
 
     var groupParams = {
         TableName:groupTable,

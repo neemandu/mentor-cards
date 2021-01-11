@@ -142,6 +142,34 @@ async function removeUserFromCardsPack(cardsPack, username){
     }).promise();
 }
 
+async function updateUserPackSubstitution(user){
+    user.lastPackSubstitutionDate = new Date().toISOString();   
+    user.updatedAt = new Date().toISOString();
+
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var table = env.API_CARDSPACKS_USERTABLE_NAME;
+    var params = {
+        TableName:table,
+        Item: user
+    };
+
+    console.log("Adding a new user...");
+    
+        await docClient.put(params, function(err, data) {
+            if (err) {
+                console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
+                //callback("Failed");
+            } else {
+                console.log("Added item:", JSON.stringify(data, null, 2));
+                //callback(null, data);
+            }
+        }).promise();
+    
+        console.log("Done adding a new user...");
+}
+
+
 exports.handler = async (event) => {
     var AWS = require("aws-sdk");
 
@@ -164,4 +192,5 @@ exports.handler = async (event) => {
 
     await pushUserToCardsPack(newPack, user.id);
     await removeUserFromCardsPack(oldPack, user.id);
+    await updateUserPackSubstitution(user);
 };
