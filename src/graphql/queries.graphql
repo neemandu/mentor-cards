@@ -92,6 +92,7 @@ query GetUser($id: ID!) {
     lastPlanSubstitutionDate
     startPayingSinceDate
     groupId
+    numberOfUsedPacks
     createdAt
     updatedAt
   }
@@ -132,6 +133,7 @@ query ListUsers(
       lastPlanSubstitutionDate
       startPayingSinceDate
       groupId
+      numberOfUsedPacks
       createdAt
       updatedAt
     }

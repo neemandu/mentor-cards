@@ -110,6 +110,29 @@ async function pushUserToCardsPack(cardsPack, username){
     }).promise();
 }
 
+async function addUserPacksCounter(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    user.numberOfUsedPacks++;
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    var params = {
+        TableName: userTable,
+        Item: user
+    };
+
+    console.log("addUserPacksCounter " +user.username);
+
+    await docClient.put(params, function(err, data) {
+        if (err) {
+            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
+}
+
 exports.handler = async (event) => {
     AWS.config.update({
         region: env.REGION
@@ -131,6 +154,7 @@ exports.handler = async (event) => {
     var cardsPack = await getCardsPack(cardsPackId);
 
     await pushUserToCardsPack(cardsPack, username);
+    await addUserPacksCounter(user);
 
     return true;
 };
