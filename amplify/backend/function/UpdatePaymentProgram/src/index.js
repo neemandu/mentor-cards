@@ -1,4 +1,17 @@
 /* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
+	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN
+	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	AUTH_MENTORCARDS91F3DC29_USERPOOLID
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_GROUPTABLE_ARN
 	API_CARDSPACKS_GROUPTABLE_NAME
@@ -135,6 +148,71 @@ async function saveUser(user){
     }).promise();
 }
 
+async function removeUserFromCardsPack(cardsPack, username){
+    
+    console.log("removing user: " + username + " from pack: " +cardsPack.id);
+
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
+
+
+    for (var i = 0; i < cardsPack.usersIds.length; i++) {
+        if(cardsPack.usersIds == username){
+            cardsPack.usersIds.splice(i, 1);
+            break;
+        }
+    }
+    
+    var cardPackParams = {
+        TableName: cardPackTable,
+        Key:{
+            "id" : cardsPack.id
+        },
+        Item: cardsPack
+    };
+
+
+    await docClient.put(cardPackParams, function(err, data) {
+        if (err) {
+            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
+}
+
+async function removeUserFromAllPacks(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var packsTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
+
+    var username = user.username;
+    var params = {
+        TableName : packsTable,
+        FilterExpression: "#us contains (username, :username)",
+        ExpressionAttributeValues : {   
+            ':username' : username
+        },
+        ExpressionAttributeNames:{
+            "#us": "users"
+        },
+    };
+    console.log("searching for number of used packs for - " + user.username);
+    
+    await docClient.query(params, function(err, data) {
+        if (err) {
+            console.error("Unable to read packs. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get packs succeeded:", JSON.stringify(data, null, 2));
+            data.Items.forEach(async function(item) {
+                await removeUserFromCardsPack(item, user.username);
+            });
+        }
+    }).promise();
+}
+
 async function updateMonthlySubscription(user, paymentProgram, transId){
     var monthlySub = {
         id: 1,
@@ -149,11 +227,18 @@ async function updateMonthlySubscription(user, paymentProgram, transId){
     user.startPayingSinceDate = user.startPayingSinceDate ? 
                                 user.startPayingSinceDate : 
                                 new Date().toISOString();
+
+    if(user.subscription && user.subscription.subscriptionPlan && 
+        user.subscription.subscriptionPlan.numberOfCardPacks > paymentProgram.numberOfCardPacks){
+            user.numberOfUsedPacks = 0;
+            await removeUserFromAllPacks(user);
+        }
     user.status = "PLAN";
     user.subscription = monthlySub;
     user.lastPlanSubstitutionDate = new Date().toISOString();
     user.updateAt = new Date().toISOString();
     user.numberOfPlansSubstitutions++;
+    
     //user.isGroupOwner = paymentProgram.numberOfUsers > 1 ? true : false;
 
     console.log("user AFTER change: ");

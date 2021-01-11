@@ -240,6 +240,7 @@ export type ModelUserFilterInput = {
   lastPlanSubstitutionDate?: ModelStringInput | null;
   startPayingSinceDate?: ModelStringInput | null;
   groupId?: ModelIntInput | null;
+  numberOfUsedPacks?: ModelIntInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -292,6 +293,7 @@ export type CreateUserMutation = {
   lastPlanSubstitutionDate: string | null;
   startPayingSinceDate: string | null;
   groupId: number | null;
+  numberOfUsedPacks: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -480,6 +482,7 @@ export type GetUserQuery = {
   lastPlanSubstitutionDate: string | null;
   startPayingSinceDate: string | null;
   groupId: number | null;
+  numberOfUsedPacks: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -519,6 +522,7 @@ export type ListUsersQuery = {
     lastPlanSubstitutionDate: string | null;
     startPayingSinceDate: string | null;
     groupId: number | null;
+    numberOfUsedPacks: number | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -686,6 +690,7 @@ export class APIService {
           lastPlanSubstitutionDate
           startPayingSinceDate
           groupId
+          numberOfUsedPacks
           createdAt
           updatedAt
         }
@@ -1111,6 +1116,7 @@ export class APIService {
           lastPlanSubstitutionDate
           startPayingSinceDate
           groupId
+          numberOfUsedPacks
           createdAt
           updatedAt
         }
@@ -1164,6 +1170,7 @@ export class APIService {
             lastPlanSubstitutionDate
             startPayingSinceDate
             groupId
+            numberOfUsedPacks
             createdAt
             updatedAt
           }

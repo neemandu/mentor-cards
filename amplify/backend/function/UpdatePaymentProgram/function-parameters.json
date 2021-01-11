@@ -9,6 +9,10 @@
       ]
     },
     "storage": {
+      "CardsPack:@model(appsync)": [
+        "read",
+        "update"
+      ],
       "User:@model(appsync)": [
         "create",
         "read",

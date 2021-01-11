@@ -130,7 +130,8 @@ exports.handler = async (event) => {
                 "groupId": null,
                 "startPayingSinceDate": new Date().toISOString(),
                 "createdAt": new Date().toISOString(),
-                "updatedAt": new Date().toISOString()
+                "updatedAt": new Date().toISOString(),
+                "numberOfUsedPacks": 0
             }
         };
     
