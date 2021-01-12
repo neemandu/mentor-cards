@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { UserData } from 'src/app/Objects/user-related';
+import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -18,9 +19,9 @@ export class UserPageComponent implements OnInit {
 
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   Subscription: Subscription = new Subscription();
-  userData: any;
+  userData: UserData;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog) {
+  constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog, private cardsService: CardsService) {
     this.userData = this.userAuthService.userData;
     this.overlaySpinnerService.changeOverlaySpinner(false)
   }
@@ -46,6 +47,7 @@ export class UserPageComponent implements OnInit {
       this.videoplayer.nativeElement.play();
       dialogSub.unsubscribe();
       if (res) {
+        this.cardsService.allPacks = undefined;
         // this.router.navigate(['all-packs-page']);
       }
     });

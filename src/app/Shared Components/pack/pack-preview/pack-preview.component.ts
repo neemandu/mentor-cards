@@ -42,8 +42,12 @@ export class PackPreviewComponent implements OnInit {
   }
 
   get exchangePackButtonVisible() {
-    return this.userAuthService.userData.numberOfUsedPacks != 0 && (!this.userAuthService.userData.lastPackSubstitutionDate ||
+    return (!this.userAuthService.userData.lastPackSubstitutionDate ||
       new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime())
+  }
+
+  get exchangePackButtonVisibleNothingToChange() {
+    return this.userAuthService.userData.numberOfUsedPacks == 0;
   }
 
   get upgradePackButtonVisible() {

@@ -19,6 +19,19 @@ export class UserData {
 }
 
 export class GroupData {
+    groupUsers: GroupUser[];
+    id: string;
+
+    deseralize(input: any) {
+        Object.assign(this, input);
+        return this;
+    }
+}
+
+export class GroupUser {
+    email: string;
+    role: string;
+
     deseralize(input: any) {
         Object.assign(this, input);
         return this;

@@ -29,10 +29,14 @@
         נוצלו כל החבילות החודש
       </span></button>
     <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu"
-      [disabled]="!exchangePackButtonVisible">החלף ערכה בזו
+      [disabled]="!exchangePackButtonVisible || exchangePackButtonVisibleNothingToChange">החלף ערכה בזו
       <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
         הוחלפה חבילה החודש
-      </span></button>
+      </span>
+      <span style="font-size: small;" *ngIf="exchangePackButtonVisible && exchangePackButtonVisibleNothingToChange"><br>
+        אין חבילות ברשותך
+      </span>
+    </button>
     <button class="action-button" type="button" (click)="openChooseProgramModal()"
       [disabled]="!upgradePackButtonVisible">שדרג
       תכנית

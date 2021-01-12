@@ -7,7 +7,8 @@
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before" dir="rtl">
         <button mat-menu-item (click)="navigate('/no-program-page')">פרטי משתמש</button>
-        <button mat-menu-item *ngIf="userAttributes?.groupId">ניהול קבוצה</button>
+        <button mat-menu-item *ngIf="userAttributes?.groupId" (click)="navigate('/app-group-management')">ניהול
+          קבוצה</button>
         <button mat-menu-item (click)=logout()>התנתק</button>
       </mat-menu>
     </div>

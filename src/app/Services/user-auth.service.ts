@@ -2,11 +2,11 @@ import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
-import { APIService, CreateUserInput } from '../API.service';
+import { APIService, CreateUserInput, GetGroupInput } from '../API.service';
 import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { CardsService } from './cards.service';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
-import { UserData } from '../Objects/user-related';
+import { GroupData, UserData } from '../Objects/user-related';
 
 
 @Injectable({
@@ -15,12 +15,13 @@ import { UserData } from '../Objects/user-related';
 export class UserAuthService {
 
   @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
+  @Output() groupDataEmmiter: EventEmitter<GroupData> = new EventEmitter<GroupData>();
 
   loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
   userData: UserData;
   // userData: any;
-  groupData: any;
+  groupData: GroupData;
 
   constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private cardsService: CardsService) {
   }
@@ -84,10 +85,11 @@ export class UserAuthService {
    */
   updateGroupData(): void {
     this.api.GetGroup(this.userData.groupId).then(data => {
-      this.groupData = data;
-      console.log("file: user-auth.service.ts ~ line 85 ~ this.api.GetGroup ~ this.groupData", this.groupData)
+      this.groupData = new GroupData().deseralize(data);
+      this.groupDataEmmiter.emit(this.groupData);
+      // console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetGroup ~ this.groupData", this.groupData)
     }, reject => {
-      console.log("file: user-auth.service.ts ~ line 101 ~ this.api.GetGroup ~ reject", reject)
+      console.log("file: user-auth.service.ts ~ line 103 ~ this.api.GetGroup ~ reject", reject)
     })
   }
 
