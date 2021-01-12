@@ -196,6 +196,10 @@ export type DeleteSubscriptionPlanInput = {
   id?: string | null;
 };
 
+export type GetGroupInput = {
+  id: string;
+};
+
 export type ModelCardsPackFilterInput = {
   id?: ModelIDInput | null;
   imgUrl?: ModelStringInput | null;
@@ -979,9 +983,9 @@ export class APIService {
     )) as any;
     return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
   }
-  async GetGroup(id: string): Promise<GetGroupQuery> {
-    const statement = `query GetGroup($id: ID!) {
-        getGroup(id: $id) {
+  async GetGroup(input: GetGroupInput): Promise<GetGroupQuery> {
+    const statement = `query GetGroup($input: GetGroupInput!) {
+        getGroup(input: $input) {
           __typename
           id
           groupUsers {
@@ -1007,19 +1011,19 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      input
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetGroupQuery>response.data.getGroup;
   }
-  async IsInGroup(id: string): Promise<boolean | null> {
-    const statement = `query IsInGroup($id: ID!) {
-        IsInGroup(id: $id)
+  async IsInGroup(input: GetGroupInput): Promise<boolean | null> {
+    const statement = `query IsInGroup($input: GetGroupInput!) {
+        IsInGroup(input: $input)
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      input
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)

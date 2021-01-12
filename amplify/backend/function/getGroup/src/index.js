@@ -104,7 +104,8 @@ exports.handler = async (event) => {
     var groupId = event.arguments.input["id"];
     var group = await getGroup(groupId);
     var canRead = canUserGetGroupDetails(user.email, group);
-
+    console.log('group');
+    console.log(group);
     if(canRead){
         console.log('user: ' + username + ' is authorized to read the group details because he is an admin.' );
         return group;

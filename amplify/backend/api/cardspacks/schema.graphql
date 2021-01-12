@@ -10,12 +10,16 @@ type Mutation {
 }
 
 type Query {
-  getGroup(id: ID!): Group
-  IsInGroup(id: ID!): Boolean
+  getGroup(input: GetGroupInput!): Group
+  IsInGroup(input: GetGroupInput!): Boolean
 }
 
 input joinExistingGroupInput {
   groupId: String!
+}
+
+input GetGroupInput {
+  id: String!
 }
 
 input deleteGroupInput {
