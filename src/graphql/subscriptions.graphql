@@ -11,6 +11,27 @@ subscription OnCreateCardsPack {
     usersIds
     groupsIds
     users
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
     createdAt
     updatedAt
   }
@@ -27,6 +48,27 @@ subscription OnUpdateCardsPack {
     usersIds
     groupsIds
     users
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
     createdAt
     updatedAt
   }
@@ -43,6 +85,27 @@ subscription OnDeleteCardsPack {
     usersIds
     groupsIds
     users
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
     createdAt
     updatedAt
   }

@@ -71,6 +71,27 @@ mutation CreateCardsPack(
     usersIds
     groupsIds
     users
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
     createdAt
     updatedAt
   }
@@ -90,6 +111,27 @@ mutation UpdateCardsPack(
     usersIds
     groupsIds
     users
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
     createdAt
     updatedAt
   }
@@ -109,6 +151,27 @@ mutation DeleteCardsPack(
     usersIds
     groupsIds
     users
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
     createdAt
     updatedAt
   }

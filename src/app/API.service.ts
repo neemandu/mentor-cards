@@ -60,6 +60,25 @@ export type CreateCardsPackInput = {
   usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   users?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
+};
+
+export type GuideBookInput = {
+  id: string;
+  oneOnOneQuestions?: Array<GuideBookSubjectInput | null> | null;
+  oneOnManyQuestions?: Array<GuideBookSubjectInput | null> | null;
+};
+
+export type GuideBookSubjectInput = {
+  id: string;
+  subjectName?: string | null;
+  subSubjects?: Array<SubSubjectInput | null> | null;
+};
+
+export type SubSubjectInput = {
+  id: string;
+  subSubjectName?: string | null;
+  questions?: Array<string | null> | null;
 };
 
 export type ModelCardsPackConditionInput = {
@@ -127,6 +146,7 @@ export type UpdateCardsPackInput = {
   usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   users?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -341,6 +361,32 @@ export type CreateCardsPackMutation = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -357,6 +403,32 @@ export type UpdateCardsPackMutation = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -373,6 +445,32 @@ export type DeleteCardsPackMutation = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -531,6 +629,32 @@ export type GetCardsPackQuery = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -549,6 +673,20 @@ export type ListCardsPacksQuery = {
     usersIds: Array<string | null> | null;
     groupsIds: Array<string | null> | null;
     users: Array<string | null> | null;
+    guideBook: {
+      __typename: "GuideBook";
+      id: string;
+      oneOnOneQuestions: Array<{
+        __typename: "GuideBookSubject";
+        id: string;
+        subjectName: string | null;
+      } | null> | null;
+      oneOnManyQuestions: Array<{
+        __typename: "GuideBookSubject";
+        id: string;
+        subjectName: string | null;
+      } | null> | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -733,6 +871,32 @@ export type OnCreateCardsPackSubscription = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -749,6 +913,32 @@ export type OnUpdateCardsPackSubscription = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -765,6 +955,32 @@ export type OnDeleteCardsPackSubscription = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1045,6 +1261,32 @@ export class APIService {
           usersIds
           groupsIds
           users
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -1077,6 +1319,32 @@ export class APIService {
           usersIds
           groupsIds
           users
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -1109,6 +1377,32 @@ export class APIService {
           usersIds
           groupsIds
           users
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -1398,6 +1692,32 @@ export class APIService {
           usersIds
           groupsIds
           users
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -1430,6 +1750,20 @@ export class APIService {
             usersIds
             groupsIds
             users
+            guideBook {
+              __typename
+              id
+              oneOnOneQuestions {
+                __typename
+                id
+                subjectName
+              }
+              oneOnManyQuestions {
+                __typename
+                id
+                subjectName
+              }
+            }
             createdAt
             updatedAt
           }
@@ -1727,6 +2061,32 @@ export class APIService {
           usersIds
           groupsIds
           users
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -1751,6 +2111,32 @@ export class APIService {
           usersIds
           groupsIds
           users
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -1775,6 +2161,32 @@ export class APIService {
           usersIds
           groupsIds
           users
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
           createdAt
           updatedAt
         }

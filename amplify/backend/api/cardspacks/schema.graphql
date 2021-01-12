@@ -69,6 +69,25 @@ type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   usersIds: [String] 
   groupsIds: [String]
   users: [String] 
+  guideBook: GuideBook
+}
+
+type GuideBook{
+  id: ID!
+  oneOnOneQuestions: [GuideBookSubject]
+  oneOnManyQuestions: [GuideBookSubject]
+}
+
+type GuideBookSubject{
+  id: ID!
+  subjectName: String
+  subSubjects: [SubSubject]
+}
+
+type SubSubject{
+  id: ID!
+  subSubjectName: String
+  questions: [String]
 }
 
 type User 

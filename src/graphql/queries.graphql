@@ -37,6 +37,27 @@ query GetCardsPack($id: ID!) {
     usersIds
     groupsIds
     users
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
     createdAt
     updatedAt
   }
@@ -58,6 +79,17 @@ query ListCardsPacks(
       usersIds
       groupsIds
       users
+      guideBook {
+        id
+        oneOnOneQuestions {
+          id
+          subjectName
+        }
+        oneOnManyQuestions {
+          id
+          subjectName
+        }
+      }
       createdAt
       updatedAt
     }
