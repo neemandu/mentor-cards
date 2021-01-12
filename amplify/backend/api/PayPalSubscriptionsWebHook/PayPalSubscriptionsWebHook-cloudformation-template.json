@@ -14,15 +14,15 @@
         },
     
     
-          "functionPayPalSubscriptionsWebHookLambdaName": {
+          "functionPayPalCancelWebhookName": {
             "Type": "String",
-            "Default": "functionPayPalSubscriptionsWebHookLambdaName"
+            "Default": "functionPayPalCancelWebhookName"
           },
         
           
-          "functionPayPalSubscriptionsWebHookLambdaArn": {
+          "functionPayPalCancelWebhookArn": {
             "Type": "String",
-            "Default": "functionPayPalSubscriptionsWebHookLambdaArn"
+            "Default": "functionPayPalCancelWebhookArn"
           }
         
           
@@ -176,7 +176,7 @@
                             
                             {
                                 
-                                "Ref": "functionPayPalSubscriptionsWebHookLambdaArn"
+                                "Ref": "functionPayPalCancelWebhookArn"
                             },
                             
                             "/invocations"
@@ -275,7 +275,7 @@
                           
                           {
                             
-                            "Ref": "functionPayPalSubscriptionsWebHookLambdaArn"
+                            "Ref": "functionPayPalCancelWebhookArn"
                           },
                           
                           "/invocations"
@@ -332,12 +332,12 @@
                   
         
         
-        "functionPayPalSubscriptionsWebHookLambdaPermissionPayPalSubscriptionsWebHook": {
+        "functionPayPalCancelWebhookPermissionPayPalSubscriptionsWebHook": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functionPayPalSubscriptionsWebHookLambdaName"
+                        "Ref":  "functionPayPalCancelWebhookName"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -367,7 +367,7 @@
         
         
         
-      "DeploymentAPIGWPayPalSubscriptionsWebHook": {
+      "DeploymentAPIGWPayPalSubscriptionsWebHook6c832bec": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",

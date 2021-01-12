@@ -2,18 +2,17 @@
     "paths": [
         {
             "name": "/PayPalSubscriptions",
-            "lambdaFunction": "PayPalSubscriptionsWebHookLambda",
+            "lambdaFunction": "PayPalCancelWebhook",
             "privacy": {
                 "open": true
-            },
-            "policyResourceName": "/PayPalSubscriptions"
+            }
         }
     ],
     "resourceName": "PayPalSubscriptionsWebHook",
     "apiName": "PayPalSubscriptionsWebHook",
     "functionArns": [
         {
-            "lambdaFunction": "PayPalSubscriptionsWebHookLambda"
+            "lambdaFunction": "PayPalCancelWebhook"
         }
     ],
     "privacy": {
@@ -25,11 +24,12 @@
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "PayPalSubscriptionsWebHookLambda",
+            "resourceName": "PayPalCancelWebhook",
             "attributes": [
                 "Name",
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "6c832bec"
 }

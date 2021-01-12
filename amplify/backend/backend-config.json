@@ -14,7 +14,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "PayPalSubscriptionsWebHookLambda",
+          "resourceName": "PayPalCancelWebhook",
           "attributes": [
             "Name",
             "Arn"
@@ -39,21 +39,6 @@
     }
   },
   "function": {
-    "GetCardsImagesResolver": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "PayPalSubscriptionsWebHookLambda": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "apollolayer": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
-    },
     "CreateUser": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -202,6 +187,20 @@
       ]
     },
     "IsInGroup": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "PayPalCancelWebhook": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

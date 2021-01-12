@@ -87,8 +87,7 @@ type User
   lastPlanSubstitutionDate: AWSDateTime
   startPayingSinceDate: AWSDateTime
   groupId: String
-  numberOfUsedPacks: Int 
-  test: String
+  numberOfUsedPacks: Int
 }
 
 type Group
