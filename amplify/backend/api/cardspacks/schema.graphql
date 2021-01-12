@@ -10,7 +10,7 @@ type Mutation {
 }
 
 type Query {
-  getGroup(input: GetGroupInput!): Group
+  GetGroupById(input: GetGroupInput!): Group
   IsInGroup(input: GetGroupInput!): Boolean
 }
 
@@ -88,6 +88,7 @@ type User
   startPayingSinceDate: AWSDateTime
   groupId: String
   numberOfUsedPacks: Int 
+  test: String
 }
 
 type Group

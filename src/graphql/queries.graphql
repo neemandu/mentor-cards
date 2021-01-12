@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-query GetGroup($input: GetGroupInput!) {
-  getGroup(input: $input) {
+query GetGroupById($input: GetGroupInput!) {
+  GetGroupById(input: $input) {
     id
     groupUsers {
       email
@@ -96,6 +96,7 @@ query GetUser($id: ID!) {
     startPayingSinceDate
     groupId
     numberOfUsedPacks
+    test
     createdAt
     updatedAt
   }
@@ -137,6 +138,7 @@ query ListUsers(
       startPayingSinceDate
       groupId
       numberOfUsedPacks
+      test
       createdAt
       updatedAt
     }

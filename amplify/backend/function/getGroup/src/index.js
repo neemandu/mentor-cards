@@ -90,6 +90,8 @@ async function getUserByUSerName(username){
 }
 
 exports.handler = async (event) => {
+    console.log('get group');
+    console.log(event)
     AWS.config.update({
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT

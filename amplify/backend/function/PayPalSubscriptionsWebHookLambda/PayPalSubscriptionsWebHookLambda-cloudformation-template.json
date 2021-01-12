@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/PayPalSubscriptionsWebHookLambda-5675306261653055462f-build.zip"
+          "S3Key": "amplify-builds/PayPalSubscriptionsWebHookLambda-47682f47462f78467449-build.zip"
         }
       }
     },

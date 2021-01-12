@@ -245,6 +245,7 @@ export type ModelUserFilterInput = {
   startPayingSinceDate?: ModelStringInput | null;
   groupId?: ModelStringInput | null;
   numberOfUsedPacks?: ModelIntInput | null;
+  test?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -298,6 +299,7 @@ export type CreateUserMutation = {
   startPayingSinceDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
+  test: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -392,7 +394,7 @@ export type DeleteSubscriptionPlanMutation = {
   updatedAt: string;
 };
 
-export type GetGroupQuery = {
+export type GetGroupByIdQuery = {
   __typename: "Group";
   id: string;
   groupUsers: Array<{
@@ -487,6 +489,7 @@ export type GetUserQuery = {
   startPayingSinceDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
+  test: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -527,6 +530,7 @@ export type ListUsersQuery = {
     startPayingSinceDate: string | null;
     groupId: string | null;
     numberOfUsedPacks: number | null;
+    test: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -695,6 +699,7 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
+          test
           createdAt
           updatedAt
         }
@@ -983,9 +988,9 @@ export class APIService {
     )) as any;
     return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
   }
-  async GetGroup(input: GetGroupInput): Promise<GetGroupQuery> {
-    const statement = `query GetGroup($input: GetGroupInput!) {
-        getGroup(input: $input) {
+  async GetGroupById(input: GetGroupInput): Promise<GetGroupByIdQuery> {
+    const statement = `query GetGroupById($input: GetGroupInput!) {
+        GetGroupById(input: $input) {
           __typename
           id
           groupUsers {
@@ -1016,7 +1021,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetGroupQuery>response.data.getGroup;
+    return <GetGroupByIdQuery>response.data.GetGroupById;
   }
   async IsInGroup(input: GetGroupInput): Promise<boolean | null> {
     const statement = `query IsInGroup($input: GetGroupInput!) {
@@ -1133,6 +1138,7 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
+          test
           createdAt
           updatedAt
         }
@@ -1187,6 +1193,7 @@ export class APIService {
             startPayingSinceDate
             groupId
             numberOfUsedPacks
+            test
             createdAt
             updatedAt
           }
