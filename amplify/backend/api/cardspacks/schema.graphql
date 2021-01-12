@@ -92,7 +92,7 @@ type User
 }
 
 type Group
-@model (queries: null, mutations: null)
+@model
 @auth( rules: [ { allow: private, operations: [create,read, update] }] ){
   id: ID!
   groupUsers: [GroupUserRole] 

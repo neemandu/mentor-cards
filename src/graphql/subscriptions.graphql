@@ -47,6 +47,75 @@ subscription OnDeleteCardsPack {
     updatedAt
   }
 }
+subscription OnCreateGroup {
+  onCreateGroup {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateGroup {
+  onUpdateGroup {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteGroup {
+  onDeleteGroup {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id
