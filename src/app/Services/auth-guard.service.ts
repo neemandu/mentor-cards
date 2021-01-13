@@ -117,10 +117,13 @@ export class AuthGuardGroupManagementService implements CanActivate {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
     }
-    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
-      sub.unsubscribe();
+    var subUser = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+      subUser.unsubscribe();
       if (userData.groupId) {
-        this.ngZone.run(() => this.router.navigate(['app-group-management']));
+        var subGroup = this.userAuthService.groupDataEmmiter.subscribe((groupData) => {
+          subGroup.unsubscribe();
+          this.ngZone.run(() => this.router.navigate(['app-group-management']));
+        });
       }
       else {
         this.ngZone.run(() => this.router.navigate(['user-page']));

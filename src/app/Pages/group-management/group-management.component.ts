@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { APIService, groupUsersListInput } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { GroupData, GroupUser, UserData } from 'src/app/Objects/user-related';
-import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -31,7 +30,6 @@ export class GroupManagementComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
     }
     this.overlaySpinnerService.changeOverlaySpinner(false)
-    //TODO create table and modals for editing users
   }
 
   ngOnInit(): void {
