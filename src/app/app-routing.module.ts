@@ -7,7 +7,7 @@ import { GroupManagementComponent } from './Pages/group-management/group-managem
 import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.component';
 import { PackContentPageComponent } from './Pages/pack-content-page/pack-content-page.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
-import { AuthGuardAllPacksPageService, AuthGuardNoProgramPageService, AuthGuardUserPageService } from './Services/auth-guard.service';
+import { AuthGuardAllPacksPageService, AuthGuardGroupManagementService, AuthGuardNoProgramPageService, AuthGuardUserPageService } from './Services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/all-packs-page', pathMatch: 'full' },
@@ -15,7 +15,7 @@ const routes: Routes = [
   // { path: 'all-packs-page', component: AllPacksPageComponent },
   { path: 'no-program-page', component: NoProgramPageComponent, canActivate: [AuthGuardNoProgramPageService] },
   { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuardUserPageService] },
-  { path: 'app-group-management', component: GroupManagementComponent },
+  { path: 'app-group-management', component: GroupManagementComponent, canActivate: [AuthGuardGroupManagementService] },
   { path: 'all-packs-page', component: AllPacksPageComponent, canActivate: [AuthGuardAllPacksPageService] },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'pack-view/:id', component: PackContentPageComponent },

@@ -99,3 +99,32 @@ export class AuthGuardUserPageService implements CanActivate {
     // return false;
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardGroupManagementService implements CanActivate {
+
+  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+
+  canActivate(): boolean {
+    // debugger;
+    if (this.userAuthService.userData) {
+      if (this.userAuthService.userData.groupId) {
+        return true;
+      }
+      else {
+        this.ngZone.run(() => this.router.navigate(['user-page']));
+      }
+    }
+    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+      sub.unsubscribe();
+      if (userData.groupId) {
+        this.ngZone.run(() => this.router.navigate(['app-group-management']));
+      }
+      else {
+        this.ngZone.run(() => this.router.navigate(['user-page']));
+      }
+    })
+  }
+}

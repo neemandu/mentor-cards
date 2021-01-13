@@ -4,8 +4,8 @@ export class UserData {
     email: string;
     groupId: string | null;
     id: string;
-    lastPackSubstitutionDate: string | any;//TODO check if date or string
-    lastPlanSubstitutionDate: string | any;//TODO check if date or string
+    lastPackSubstitutionDate: string | any;
+    lastPlanSubstitutionDate: string | any;
     numberOfPacksSubstitutions: number | null;
     numberOfPlansSubstitutions: number | null;
     numberOfUsedPacks: number;
@@ -24,6 +24,7 @@ export class GroupData {
 
     deseralize(input: any) {
         Object.assign(this, input);
+        this.groupUsers = input.groupUsers.map(groupUser => new GroupUser().deseralize(groupUser));
         return this;
     }
 }
@@ -33,7 +34,9 @@ export class GroupUser {
     role: string;
 
     deseralize(input: any) {
-        Object.assign(this, input);
+        this.email = input.email;
+        this.role = input.role;
+        // Object.assign(this, input);
         return this;
     }
 }
