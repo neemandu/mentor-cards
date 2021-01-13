@@ -5,52 +5,74 @@
             <div class="line"></div>
         </div>
 
-        <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
-            <!-- Email Column -->
-            <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> אימייל </th>
-                <td mat-cell *matCellDef="let groupUser">
-                    {{groupUser.email}}
-                </td>
-            </ng-container>
+        <div class="d-flex flex-row">
+            <div id="instructions" style="margin-left: 5rem;">
+                <div class="user-info-section">
+                    <h2>הוראות שימוש</h2>
+                    <div class="line"></div>
+                </div>
+                <div id="instructions-content">
+                    <ol>
+                        <li>ניתן ללחוץ על כפתור 'הוספת משתמש' על מנת להוסיף משתמש חדש לקבוצה</li>
+                        <ul>
+                            <li>יש לתת למשתמש את קוד הקבוצה: {{userData.groupId}}</li>
+                            <li>יש לשמור על קוד הקבוצה חשאי ולא להפיצו</li>
+                        </ul>
+                        <li>ניתן ללחוץ על כפתור העיפרון בטבלה על מנת לערוך משתמש קיים</li>
+                        <li>ניתן ללחוץ על כפתור הפח על מנת למחוק משתמש קיים מהקבוצה</li>
+                        <li>כל שינוי יבקש אימות ובסופו תתבצע שמירה במערכת</li>
+                    </ol>
+                </div>
+            </div>
+            <div>
+                <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef> אימייל </th>
+                        <td mat-cell *matCellDef="let groupUser">
+                            {{groupUser.email}}
+                        </td>
+                    </ng-container>
 
-            <!-- Role Column -->
-            <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef> תפקיד </th>
-                <td mat-cell *matCellDef="let groupUser">
-                    {{groupUser.role === 'ADMIN' ? 'מנהל' : 'משתמש'}}
-                </td>
-            </ng-container>
+                    <!-- Role Column -->
+                    <ng-container matColumnDef="role">
+                        <th mat-header-cell *matHeaderCellDef> תפקיד </th>
+                        <td mat-cell *matCellDef="let groupUser">
+                            {{groupUser.role === 'ADMIN' ? 'מנהל' : 'משתמש'}}
+                        </td>
+                    </ng-container>
 
-            <!-- Edit Column -->
-            <ng-container matColumnDef="edit">
-                <th mat-header-cell *matHeaderCellDef> עריכה </th>
-                <td mat-cell *matCellDef="let groupUser">
-                    <div *ngIf="groupUser.email !== userData.email" (click)="addEditGroupUser(groupUser)">
-                        <mat-icon class="iconButton"> edit </mat-icon>
-                    </div>
-                </td>
-            </ng-container>
+                    <!-- Edit Column -->
+                    <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef> עריכה </th>
+                        <td mat-cell *matCellDef="let groupUser">
+                            <div *ngIf="groupUser.email !== userData.email" (click)="addEditGroupUser(groupUser)">
+                                <mat-icon class="iconButton"> edit </mat-icon>
+                            </div>
+                        </td>
+                    </ng-container>
 
-            <!-- Delete Column -->
-            <ng-container matColumnDef="delete">
-                <th mat-header-cell *matHeaderCellDef> מחיקה </th>
-                <td mat-cell *matCellDef="let groupUser">
-                    <div *ngIf="groupUser.email !== userData.email" (click)="deleteGroupMember(groupUser)">
-                        <mat-icon class="iconButton">
-                            delete
-                        </mat-icon>
-                    </div>
-                </td>
-            </ng-container>
+                    <!-- Delete Column -->
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef> מחיקה </th>
+                        <td mat-cell *matCellDef="let groupUser">
+                            <div *ngIf="groupUser.email !== userData.email" (click)="deleteGroupMember(groupUser)">
+                                <mat-icon class="iconButton">
+                                    delete
+                                </mat-icon>
+                            </div>
+                        </td>
+                    </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <button class="action-button" type="button" (click)="addEditGroupUser()" [disabled]="groupData.groupUsers.length == userData.subscription.subscriptionPlan.numberOfUsers">
+                    הוספת משתמש
+                </button>
+            </div>
+        </div>
 
-        <button class="action-button" type="button" (click)="addEditGroupUser()" [disabled]="false">
-            הוספת משתמש
-        </button>
 
     </div>
 </div>

@@ -34,7 +34,6 @@ export class GroupManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.Subscription.add(this.userAuthService.groupDataEmmiter.subscribe((groupData: GroupData) => {
-      console.log("file: group-management.component.ts ~ line 31 ~ this.Subscription.add ~ groupData", groupData)
       this.groupData = groupData;
       this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -47,24 +46,38 @@ export class GroupManagementComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = groupUser;
     const dialogRef = this.dialog.open(NewEditGroupUserDialogComponent, dialogConfig);
-    var sub = dialogRef.afterClosed().subscribe((res: GroupUser) => {
-      console.log("file: group-management.component.ts ~ line 49 ~ sub ~ res", res)
+    var sub = dialogRef.afterClosed().subscribe((newGroupUser: GroupUser) => {
+      // console.log("file: group-management.component.ts ~ line 50 ~ sub ~ newGroupUser", newGroupUser)
       sub.unsubscribe();
-      if (res) {
+      if (newGroupUser) {
         this.overlaySpinnerService.changeOverlaySpinner(true)
         if (groupUser) {
-          groupUser = res;
+          var i = this.groupData.groupUsers.findIndex(user => user.email === groupUser.email);
+          this.groupData.groupUsers[i] = newGroupUser;
         }
         else {
-          this.groupData.groupUsers.push(res);
-          this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
+          this.groupData.groupUsers.push(newGroupUser);
         }
-        this.saveGroup();
+        var groupList: groupUsersListInput = { 'usernamesList': this.groupData.groupUsers }
+        this.api.UpdateGroupUsersList(groupList).then(res => {
+          this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+          this.userAuthService._snackBar.open('קבוצה נשמרה בהצלחה', '', {
+            duration: 3000,
+            panelClass: ['rtl-snackbar']
+          });
+        }, reject => {
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+          this.userAuthService._snackBar.open('שגיאה בשמירת הקבוצה, יש לרענן עמוד ולנסות שנית', '', {
+            duration: 3000,
+            panelClass: ['rtl-snackbar']
+          });
+        })
       }
     });
   }
 
-  deleteGroupMember(groupUser?: GroupUser): void {
+  deleteGroupMember(groupUser: GroupUser): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -75,20 +88,15 @@ export class GroupManagementComponent implements OnInit {
       if (res) {
         this.overlaySpinnerService.changeOverlaySpinner(true)
         this.groupData.groupUsers.splice(this.groupData.groupUsers.indexOf(groupUser), 1);
-        this.saveGroup();
+        var groupList: groupUsersListInput = { 'usernamesList': this.groupData.groupUsers }
+        this.api.UpdateGroupUsersList(groupList).then(res => {
+          this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+        }, reject => {
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+        })
       }
     });
-  }
-
-  saveGroup(): void {
-    var groupList: groupUsersListInput = { 'usernamesList': this.groupData.groupUsers }
-    this.api.UpdateGroupUsersList(groupList).then(res => {
-      console.log("file: group-management.component.ts ~ line 61 ~ this.api.UpdateGroupUsersList ~ res", res)
-      this.overlaySpinnerService.changeOverlaySpinner(false)
-    }, reject => {
-      console.log("file: group-management.component.ts ~ line 64 ~ this.api.UpdateGroupUsersList ~ reject", reject)
-      this.overlaySpinnerService.changeOverlaySpinner(false)
-    })
   }
 
 }
