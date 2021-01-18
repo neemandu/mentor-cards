@@ -9,7 +9,7 @@
             <p>שם משתמש: {{userData.username}}</p>
             <p>מייל: {{userData.email}}</p>
         </div>
-        <div class="user-info-section">
+        <div class="user-info-section" *ngIf="userData.subscription">
             <h1>פרטי חבילה</h1>
             <div class="line"></div>
             <p>כמות משתמשים: {{userData.subscription.subscriptionPlan.numberOfUsers}}</p>

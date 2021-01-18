@@ -103,6 +103,10 @@ video {
   margin-bottom: 10px;
 }
 
+.line-short {
+  width: 10vw;
+}
+
 .changePlanBtn {
   height: 3rem;
   width: 10rem;

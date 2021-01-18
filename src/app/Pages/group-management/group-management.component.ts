@@ -26,6 +26,7 @@ export class GroupManagementComponent implements OnInit {
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog, private api: APIService) {
     if (this.userAuthService.groupData) {
       this.userData = this.userAuthService.userData;
+      console.log("file: group-management.component.ts ~ line 29 ~ constructor ~ this.userData", this.userData)
       this.groupData = this.userAuthService.groupData;
       this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
     }

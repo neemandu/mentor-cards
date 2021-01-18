@@ -1,0 +1,26 @@
+<mat-toolbar class="d-flex justify-content-between">
+    <span class="title">הזנת קוד קבוצה</span>
+    <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
+        <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="line"></div>
+<div mat-dialog-content>
+    <form class="d-flex flex-column" [formGroup]="userForm">
+        <mat-form-field>
+            <mat-label>קוד קבוצה</mat-label>
+            <input type="text" matInput formControlName="groupId">
+            <mat-error *ngIf="formControls.groupId.hasError('userNotInGroup')">
+                אינך רשום לקבוצה זו
+            </mat-error>
+            <mat-error *ngIf="formControls.groupId.hasError('noSuchGroup')">
+                קבוצה כזו לא קיימת
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+
+<div class="buttons" mat-dialog-actions>
+    <button class="action-button" type="button" (click)="enterGroup()"
+        [disabled]="userForm.invalid || !inGroup">הצטרף</button>
+</div>

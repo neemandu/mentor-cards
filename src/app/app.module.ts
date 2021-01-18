@@ -57,6 +57,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new-edit-group-user-dialog/new-edit-group-user-dialog.component';
+import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new
     DynamicDialogYesNoComponent,
     UserPageComponent,
     GroupManagementComponent,
-    NewEditGroupUserDialogComponent
+    NewEditGroupUserDialogComponent,
+    EnterGroupIdDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -124,6 +126,6 @@ import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent,
-    NewEditGroupUserDialogComponent]
+    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent]
 })
 export class AppModule { }
