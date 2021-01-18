@@ -13,6 +13,10 @@
     "apicardspacksGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apicardspacksGraphQLAPIIdOutput"
+    },
+    "functionUserLayerArn": {
+      "Type": "String",
+      "Default": "functionUserLayerArn"
     }
   },
   "Conditions": {
@@ -154,7 +158,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/UpdateGroupUsersList-67516d52526530715146-build.zip"
+          "S3Key": "amplify-builds/UpdateGroupUsersList-72565a3770784d554b42-build.zip"
         }
       }
     },

@@ -128,6 +128,7 @@ exports.handler = async (event) => {
                 "numberOfPlansSubstitutions": 0,
                 "lastPlanSubstitutionDate": null,
                 "groupId": null,
+                "groupRole": null,
                 "startPayingSinceDate": new Date().toISOString(),
                 "createdAt": new Date().toISOString(),
                 "updatedAt": new Date().toISOString(),

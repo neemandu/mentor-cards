@@ -126,8 +126,9 @@ async function unsubscribeOldUsers(groupUsers){
 
 function canUserPerformAction(user, group){
     var canDeleteProgram = false;
-    if(user.groupId){
-        for(var i = 0; i < group.groupUsers.length ; i++){
+    if(user.role && user.role == "ADMIN"){
+        canDeleteProgram = true;
+        /*for(var i = 0; i < group.groupUsers.length ; i++){
             var currUserName = group.groupUsers[i].username;
             if(user.id == currUserName){
                 if(group.groupUsers[i].role == "ADMIN"){
@@ -135,10 +136,10 @@ function canUserPerformAction(user, group){
                     break;
                 }
             }
-        }
+        }*/
     }
     else{
-        canDeleteProgram = true;
+        canDeleteProgram = false;
     }
 
     return canDeleteProgram;

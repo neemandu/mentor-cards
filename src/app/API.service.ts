@@ -285,6 +285,7 @@ export type ModelUserFilterInput = {
   startPayingSinceDate?: ModelStringInput | null;
   groupId?: ModelStringInput | null;
   numberOfUsedPacks?: ModelIntInput | null;
+  groupRole?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -345,6 +346,7 @@ export type CreateUserMutation = {
   startPayingSinceDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
+  groupRole: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -727,6 +729,7 @@ export type GetUserQuery = {
   startPayingSinceDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
+  groupRole: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -767,6 +770,7 @@ export type ListUsersQuery = {
     startPayingSinceDate: string | null;
     groupId: string | null;
     numberOfUsedPacks: number | null;
+    groupRole: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1142,6 +1146,7 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
+          groupRole
           createdAt
           updatedAt
         }
@@ -1821,6 +1826,7 @@ export class APIService {
           startPayingSinceDate
           groupId
           numberOfUsedPacks
+          groupRole
           createdAt
           updatedAt
         }
@@ -1875,6 +1881,7 @@ export class APIService {
             startPayingSinceDate
             groupId
             numberOfUsedPacks
+            groupRole
             createdAt
             updatedAt
           }

@@ -82,22 +82,23 @@ async function getUserByEmail(email){
     
     var userParams = {
         TableName:userTable,
-        Key:{
-            "email": email
+        IndexName: "email-index",
+        KeyConditionExpression: "email = :email",
+        ExpressionAttributeValues: {
+            ":email": email
         }
     };
-
+    var user;
     console.log("searching for user - " + email);
 
-    var user;
-
-    await docClient.get(userParams, function(err, data) {
+    await docClient.query(userParams, function(err, data) {
         if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
+            console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+            if(data["Items"] && data["Items"].length > 0){
+                user = data["Items"][0];
+            }
         }
     }).promise();
 
@@ -145,10 +146,13 @@ async function unsubscribeOldUsers(userlist, groupUsers){
         }
         if(shouldBeDeleted){
             var groupUser = await getUserByEmail(groupUsers[i].email);
-            groupUser.status = "Unsubscribed";
-            groupUser.subscription = null;
-            groupUser.groupId = null;
-            await saveUser(groupUser);
+            if(groupUser){
+                groupUser.status = "Unsubscribed";
+                groupUser.subscription = null;
+                groupUser.groupId = null;
+                groupUser.groupRole = null;
+                await saveUser(groupUser);
+            }
         }
     }
 }
@@ -158,23 +162,27 @@ async function subscribeNewUsers(userlist, groupUsers, subscription, groupId){
         var shouldBeAdded = true;
         for(var i = 0 ; i < groupUsers.length ; i++){
             if(userlist[j].email == groupUsers[i].email){
-                shouldBeDeleted = false;
+                shouldBeAdded = false;
             }
         }
         if(shouldBeAdded){
             var groupUser = await getUserByEmail(userlist[j].email);
-            groupUser.status = "PLAN";
-            groupUser.subscription = subscription;
-            groupUser.groupId = groupId;
-            await saveUser(groupUser);
+            if(groupUser){
+                groupUser.status = "PLAN";
+                groupUser.subscription = subscription;
+                groupUser.groupId = groupId;
+                groupUser.groupRole = userlist[j].role;
+                await saveUser(groupUser);
+            }
         }
     }
 }
 
 function canUSerPerformAction(user, group){
     var canUpdateProgram = false;
-    if(user.groupId == group.id){
-        for(var i = 0; i < group.groupUsers.length ; i++){
+    if(user.groupId == group.id && user.role == "ADMIN"){
+        canUpdateProgram = true;
+        /*for(var i = 0; i < group.groupUsers.length ; i++){
             var currUserEmail = group.groupUsers[i].email;
             if(user.email == currUserEmail){
                 if(group.groupUsers[i].role == "ADMIN"){
@@ -182,10 +190,10 @@ function canUSerPerformAction(user, group){
                     break;
                 }
             }
-        }
+        }*/
     }
     else{
-        canUpdateProgram = true;
+        canUpdateProgram = false;
     }
 
     return canUpdateProgram;

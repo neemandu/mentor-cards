@@ -59,27 +59,28 @@ async function getUserByEmail(email){
     
     var userParams = {
         TableName:userTable,
-        Key:{
-            "email": email
+        IndexName: "email-index",
+        KeyConditionExpression: "email = :email",
+        ExpressionAttributeValues: {
+            ":email": email
         }
     };
-
+    var user;
     console.log("searching for user - " + email);
 
-    var user;
-
-    await docClient.get(userParams, function(err, data) {
+    await docClient.query(userParams, function(err, data) {
         if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
+            console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+            if(data["Items"] && data["Items"].length > 0){
+                user = data["Items"][0];
+            }
         }
     }).promise();
 
     if(!user){
-        throw Error ('no such user - ' + email);
+        throw Error ('no such email - ' + email);
     }
 
     return user;
@@ -379,8 +380,9 @@ exports.handler = async (event) => {
 
     var user = await getUserByUSerName(username);
     var canUpdateProgram = false;
-    if(user.groupId){
-        var group = await getGroup(user.groupId);
+    if(user.role && (user.role == "ADMIN" || user.role == "CREATOR")){
+        canUpdateProgram = true;
+        /*var group = await getGroup(user.groupId);
         for(var i = 0; i < group.groupUsers.length ; i++){
             var currUserName = group.groupUsers[i].email;
             if(user.email == currUserName){
@@ -389,10 +391,10 @@ exports.handler = async (event) => {
                     break;
                 }
             }
-        }
+        }*/
     }
     else{
-        canUpdateProgram = true;
+        canUpdateProgram = false;
     }
 
     if(!canUpdateProgram){
@@ -420,6 +422,7 @@ exports.handler = async (event) => {
             if(paymentProgram.numberOfUsers > 1){
                 var groupId = await createGroup(user.email, paymentProgram);
                 user.groupId = groupId;
+                user.groupRole = "ADMIN";
             }
         }
         await updateMonthlySubscription(user, paymentProgram, transId);

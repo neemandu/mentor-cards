@@ -113,6 +113,13 @@
           "attributes": [
             "GraphQLAPIIdOutput"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "UserLayer",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },
@@ -213,6 +220,11 @@
           ]
         }
       ]
+    },
+    "UserLayer": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   }
 }

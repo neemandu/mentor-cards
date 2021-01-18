@@ -33,24 +33,23 @@ async function saveUser(user){
     }).promise();
 }
 
-async function updateUser(user, groupId){
-    user.groupId = groupId;
+async function updateUser(user, group, groupUser){
+    user.groupId = group.id;
+    user.groupRole = groupUser.role;
     user.status = "PLAN";
     user.subscription = group.subscription;
     await saveUser(user);
 }
 
-function canJoinGroupFunc(user, group){
-    var canJoinGroup = false;
+function getGroupUser(user, group){
     for(var i = 0; i < group.groupUsers.length ; i++){
         var curremail = group.groupUsers[i].email;
         if(user.email == curremail){
-            canJoinGroup = true;
-            break;
+            return group.groupUsers[i];
         }
     }
 
-    return canJoinGroup;
+    return null;
 }
 
 async function getUser(username){
@@ -88,6 +87,37 @@ async function getUser(username){
 
 }
 
+async function getGroup(groupId){
+    console.log("getGroup: " + groupId);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
+    
+    console.log("check against table: " + groupTable);
+    var groupParams = {
+        TableName:groupTable,
+        Key:{
+            "id": groupId
+        }
+    };
+
+    var group;
+    await docClient.get(groupParams, function(err, data) {
+        if (err) {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+            group = data["Item"];
+        }
+    }).promise();
+
+    if(!group){
+        throw Error ('no such Group - ' + groupId);
+    }
+
+    return group;
+}
+
+
 exports.handler = async (event) => {
     AWS.config.update({
         region: env.REGION
@@ -106,14 +136,14 @@ exports.handler = async (event) => {
 
     var group = await getGroup(groupId);
 
-    var canJoinGroup = canJoinGroupFunc(user, group);
+    var groupUser = getGroupUser(user, group);
 
-    if(!canJoinGroup){
+    if(!groupUser){
         throw Error('User is not authorized to join group');
     }
     else{
-
-        await updateUser(user, groupId);     
+        
+        await updateUser(user, group, groupUser);     
     }
 
 };
