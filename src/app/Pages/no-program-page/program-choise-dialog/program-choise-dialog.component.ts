@@ -29,6 +29,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
 
   constructor(private userAuthService: UserAuthService, public dialogRef: MatDialogRef<ProgramChoiseDialogComponent>, private api: APIService,
     private overlaySpinnerService: OverlaySpinnerService) {
+    console.log("file: program-choise-dialog.component.ts ~ line 33 ~ this.userAuthService.subPlans", this.userAuthService.subPlans)
     this.userAuthService.subPlans.forEach(plan => {
       this.configAmountsOfUsers.push(plan.numberOfUsers);
     })
@@ -113,6 +114,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
               this.overlaySpinnerService.changeOverlaySpinner(false);
               this.dialogRef.close(this.packSelected);
             }, error => {
+              this.overlaySpinnerService.changeOverlaySpinner(false);
               console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 71 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ error", error)
             })
           },

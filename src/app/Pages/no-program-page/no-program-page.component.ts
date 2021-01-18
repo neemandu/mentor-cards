@@ -33,6 +33,7 @@ export class NoProgramPageComponent implements OnInit {
       dialogSub.unsubscribe();
       if (res) {
         this.router.navigate(['all-packs-page']);
+        window.location.reload();
       }
     });
   }
