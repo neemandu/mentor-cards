@@ -1,0 +1,35 @@
+<mat-toolbar class="d-flex justify-content-between">
+    <span class="title" *ngIf="!data">הוספת משתמש חדש לקבוצה</span>
+    <span class="title" *ngIf="data">עריכת משתמש קיים</span>
+    <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
+        <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="line"></div>
+
+<div mat-dialog-content>
+    <form class="d-flex flex-column" [formGroup]="groupUserForm" style="margin-top: 1rem;">
+        <mat-form-field>
+            <mat-label>מייל</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
+            <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
+                יש להזין מייל תקין
+            </mat-error>
+            <mat-error *ngIf="formControls.email.hasError('required')">
+                חובה להזין מייל
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>תפקיד</mat-label>
+            <mat-select formControlName="role">
+                <mat-option value="ADMIN">מנהל</mat-option>
+                <mat-option value="SINGLE_USER">משתמש רגיל</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
+
+<div class="buttons" mat-dialog-actions>
+    <button class="action-button" type="button" (click)="saveChanges()"
+        [disabled]="groupUserForm.invalid || !groupUserForm.dirty">שמור</button>
+</div>

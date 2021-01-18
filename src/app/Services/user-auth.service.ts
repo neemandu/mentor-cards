@@ -71,7 +71,7 @@ export class UserAuthService {
     this.api.GetUser(this.loggedInAttributes.username).then(data => {
       // this.userData = data;
       this.userData = new UserData().deseralize(data);
-      console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+      // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
       if (this.userData.groupId)
         this.updateGroupData();
       this.loggedInEmmiter.emit(this.userData);

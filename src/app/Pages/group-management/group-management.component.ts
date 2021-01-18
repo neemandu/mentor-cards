@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { GroupData } from 'src/app/Objects/user-related';
-import { CardsService } from 'src/app/Services/cards.service';
+import { APIService, groupUsersListInput } from 'src/app/API.service';
+import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
+import { GroupData, GroupUser, UserData } from 'src/app/Objects/user-related';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
+import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { NewEditGroupUserDialogComponent } from 'src/app/Shared Components/Dialogs/new-edit-group-user-dialog/new-edit-group-user-dialog.component';
 
 @Component({
   selector: 'app-group-management',
@@ -14,19 +18,85 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 export class GroupManagementComponent implements OnInit {
 
   groupData: GroupData;
+  userData: UserData;
+  dataSource: MatTableDataSource<GroupUser>;
   Subscription: Subscription = new Subscription();
+  displayedColumns: string[] = ['email', 'role', 'edit', 'delete'];
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog, private cardsService: CardsService) {
-    this.groupData = this.userAuthService.groupData;
+  constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog, private api: APIService) {
+    if (this.userAuthService.groupData) {
+      this.userData = this.userAuthService.userData;
+      this.groupData = this.userAuthService.groupData;
+      this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
+    }
     this.overlaySpinnerService.changeOverlaySpinner(false)
-    //TODO create table and modals for editing users
   }
 
   ngOnInit(): void {
     this.Subscription.add(this.userAuthService.groupDataEmmiter.subscribe((groupData: GroupData) => {
-      this.groupData = this.userAuthService.groupData;
+      this.groupData = groupData;
+      this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
       this.overlaySpinnerService.changeOverlaySpinner(false);
     }));
+  }
+
+  addEditGroupUser(groupUser?: GroupUser): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = groupUser;
+    const dialogRef = this.dialog.open(NewEditGroupUserDialogComponent, dialogConfig);
+    var sub = dialogRef.afterClosed().subscribe((newGroupUser: GroupUser) => {
+      // console.log("file: group-management.component.ts ~ line 50 ~ sub ~ newGroupUser", newGroupUser)
+      sub.unsubscribe();
+      if (newGroupUser) {
+        this.overlaySpinnerService.changeOverlaySpinner(true)
+        if (groupUser) {
+          var i = this.groupData.groupUsers.findIndex(user => user.email === groupUser.email);
+          this.groupData.groupUsers[i] = newGroupUser;
+        }
+        else {
+          this.groupData.groupUsers.push(newGroupUser);
+        }
+        var groupList: groupUsersListInput = { 'usernamesList': this.groupData.groupUsers }
+        this.api.UpdateGroupUsersList(groupList).then(res => {
+          this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+          this.userAuthService._snackBar.open('קבוצה נשמרה בהצלחה', '', {
+            duration: 3000,
+            panelClass: ['rtl-snackbar']
+          });
+        }, reject => {
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+          this.userAuthService._snackBar.open('שגיאה בשמירת הקבוצה, יש לרענן עמוד ולנסות שנית', '', {
+            duration: 3000,
+            panelClass: ['rtl-snackbar']
+          });
+        })
+      }
+    });
+  }
+
+  deleteGroupMember(groupUser: GroupUser): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = new DynamicDialogData("מחיקת משתמש", "האם למחוק משתמש זה?", "אישור", "ביטול")
+    const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
+      dialogSub.unsubscribe();
+      if (res) {
+        this.overlaySpinnerService.changeOverlaySpinner(true)
+        this.groupData.groupUsers.splice(this.groupData.groupUsers.indexOf(groupUser), 1);
+        var groupList: groupUsersListInput = { 'usernamesList': this.groupData.groupUsers }
+        this.api.UpdateGroupUsersList(groupList).then(res => {
+          this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+        }, reject => {
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+        })
+      }
+    });
   }
 
 }

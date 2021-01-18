@@ -33,6 +33,7 @@ import { ProgramChoiseDialogComponent } from './Pages/no-program-page/program-ch
 import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 import { DynamicDialogYesNoComponent } from './Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
+import { GroupManagementComponent } from './Pages/group-management/group-management.component';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -53,7 +54,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { GroupManagementComponent } from './Pages/group-management/group-management.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new-edit-group-user-dialog/new-edit-group-user-dialog.component';
 
 
 @NgModule({
@@ -82,7 +85,8 @@ import { GroupManagementComponent } from './Pages/group-management/group-managem
     PackPreviewComponent,
     DynamicDialogYesNoComponent,
     UserPageComponent,
-    GroupManagementComponent
+    GroupManagementComponent,
+    NewEditGroupUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -111,11 +115,15 @@ import { GroupManagementComponent } from './Pages/group-management/group-managem
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatStepperModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule,
+    MatSelectModule
+
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent]
+  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent,
+    NewEditGroupUserDialogComponent]
 })
 export class AppModule { }
