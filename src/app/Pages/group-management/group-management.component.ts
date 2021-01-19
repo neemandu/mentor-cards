@@ -90,12 +90,15 @@ export class GroupManagementComponent implements OnInit {
       dialogSub.unsubscribe();
       if (res) {
         this.overlaySpinnerService.changeOverlaySpinner(true)
-        this.groupData.groupUsers.splice(this.groupData.groupUsers.indexOf(groupUser), 1);
-        var groupList: groupUsersListInput = { 'usernamesList': this.groupData.groupUsers }
+        var listToSend = this.groupData.groupUsers.map(user => user);
+        listToSend.splice(this.groupData.groupUsers.indexOf(groupUser), 1);
+        var groupList: groupUsersListInput = { 'usernamesList': listToSend }
         this.api.UpdateGroupUsersList(groupList).then(res => {
+          this.groupData.groupUsers = listToSend.map(user => user);
           this.dataSource = new MatTableDataSource(this.groupData.groupUsers);
           this.overlaySpinnerService.changeOverlaySpinner(false)
         }, reject => {
+          console.log("file: group-management.component.ts ~ line 99 ~ this.api.UpdateGroupUsersList ~ reject", reject)
           this.overlaySpinnerService.changeOverlaySpinner(false)
         })
       }

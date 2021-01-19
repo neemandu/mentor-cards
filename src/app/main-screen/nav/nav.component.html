@@ -6,7 +6,8 @@
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before" dir="rtl">
-        <button mat-menu-item (click)="navigate('/no-program-page')">פרטי משתמש</button>
+        <button mat-menu-item *ngIf="userAttributes?.subscription || userAttributes?.status === 'PLAN'" (click)="navigate('/user-page')">פרטי משתמש</button>
+        <button mat-menu-item *ngIf="!userAttributes?.subscription || userAttributes?.status === 'NO PLAN'" (click)="navigate('/no-program-page')">הרשמה לתכנית</button>
         <button mat-menu-item *ngIf="userAttributes?.groupId && userAttributes?.groupRole === 'ADMIN'" (click)="navigate('/app-group-management')">ניהול
           קבוצה</button>
         <button mat-menu-item (click)=logout()>התנתק</button>
@@ -17,6 +18,7 @@
     <!-- <button type="button" class="btn navbar-btn" *ngIf="userAttributes?.status === 'PLAN'" (click)="navigate('/all-packs-page')">כל
       הערכות</button> -->
     <button type="button" class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
+    <button type="button" class="btn navbar-btn" (click)="navigate('/contact-us')">צור קשר</button>
   </div>
   <div id="logo">
     <img src="/assets/Logo.png">

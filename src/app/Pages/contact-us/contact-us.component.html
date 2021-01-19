@@ -1,0 +1,45 @@
+<div class="content">
+    <div class="contact-form">
+        <div style="text-align: center; margin-bottom: 5%;">
+            <span class="title">תרצו לשתף אותנו במשהו?</span>
+            <div class="line"></div>
+        </div>
+        <mat-card>
+            <mat-card-content>
+                <form class="d-flex flex-column" [formGroup]="contactForm">
+                    <mat-form-field>
+                        <mat-label>שם</mat-label>
+                        <input type="text" matInput formControlName="name">
+                        <mat-error *ngIf="formControls.name.hasError('required')">
+                            חובה להזין שם
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>מייל</mat-label>
+                        <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
+                        <mat-error
+                            *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
+                            יש להזין מייל תקין
+                        </mat-error>
+                        <mat-error *ngIf="formControls.email.hasError('required')">
+                            חובה להזין מייל
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>תוכן</mat-label>
+                        <textarea matInput formControlName="content"></textarea>
+                        <mat-error *ngIf="formControls.content.hasError('required')">
+                            חובה להזין תוכן
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button class="action-button" type="button" (click)="saveChanges()"
+                    [disabled]="contactForm.invalid || !contactForm.dirty">שלח</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <img class="img" matTooltip="Photo by Nikita Kachanovsky on Unsplash" matTooltipShowDelay="1000"
+    onload="this.style.opacity='0.8'" src="../../../assets/contact-us.jpg">
+</div>

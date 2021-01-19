@@ -34,6 +34,9 @@ import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack
 import { DynamicDialogYesNoComponent } from './Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
 import { GroupManagementComponent } from './Pages/group-management/group-management.component';
+import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new-edit-group-user-dialog/new-edit-group-user-dialog.component';
+import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
+import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -56,8 +59,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
-import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new-edit-group-user-dialog/new-edit-group-user-dialog.component';
-import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -88,7 +90,8 @@ import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group
     UserPageComponent,
     GroupManagementComponent,
     NewEditGroupUserDialogComponent,
-    EnterGroupIdDialogComponent
+    EnterGroupIdDialogComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,8 @@ import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group
     MatStepperModule,
     MatToolbarModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
 
   ],
   providers: [
