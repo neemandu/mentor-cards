@@ -21,7 +21,6 @@ button {
   color: white;
   border: none;
   font-weight: 500;
-  font-size: x-large;
 }
 
 button:hover {
@@ -44,10 +43,12 @@ button:focus {
 }
 
 video {
-  width: 80%;
+  width: 60%;
   height: 100%;
   z-index: 0;
   margin-top: 1%;
   margin-bottom: 2%;
   border-radius: 20px;
+  opacity: 0;
+  transition: opacity 3s;
 }

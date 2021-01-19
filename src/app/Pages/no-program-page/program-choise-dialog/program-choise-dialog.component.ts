@@ -29,6 +29,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
 
   constructor(private userAuthService: UserAuthService, public dialogRef: MatDialogRef<ProgramChoiseDialogComponent>, private api: APIService,
     private overlaySpinnerService: OverlaySpinnerService) {
+    console.log("file: program-choise-dialog.component.ts ~ line 33 ~ this.userAuthService.subPlans", this.userAuthService.subPlans)
     this.userAuthService.subPlans.forEach(plan => {
       this.configAmountsOfUsers.push(plan.numberOfUsers);
     })
@@ -92,6 +93,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
           //   !this.changedPlansThisMonth ? actions.disable() : null;
           // },
           createSubscription: (data, actions) => {//lastPlanSubstitutionDate - once in last 30 days
+            // debugger
             if (this.userAuthService.userData.status === "NOPLAN")
               return actions.subscription.create({
                 'plan_id': this.packSelected.providerPlanId
@@ -113,6 +115,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
               this.overlaySpinnerService.changeOverlaySpinner(false);
               this.dialogRef.close(this.packSelected);
             }, error => {
+              this.overlaySpinnerService.changeOverlaySpinner(false);
               console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 71 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ error", error)
             })
           },
@@ -136,6 +139,28 @@ export class ProgramChoiseDialogComponent implements OnInit {
 
   getProgramJsonDescription(userAmount): string {
     return programData.packDescriptions.find(data => data.amountOfPeople == userAmount).description;
+  }
+
+  getNumOfPacksDesc(numberOfCardPacks): string {
+    if(numberOfCardPacks == -1)
+      return 'כל הערכות'
+    else
+      return numberOfCardPacks + ' ערכות'
+  }
+
+  getAmountOfUsersDesc(userAmount): string {
+    if(userAmount == 1)
+      return 'משתמש יחיד'
+    else
+      return userAmount + ' משתמשים'
+  }
+
+  getDiscountAmount(userAmount): string {//TODO fix the %!
+    var plan = this.userAuthService.subPlans.find(plan => plan.numberOfUsers == userAmount)
+    if(plan.discount != 0)
+      return Math.floor((plan.discount/plan.price) * 100) + '% הנחה'
+    else 
+      return 'אין הנחה';
   }
 
   get programJsonExtra(): string {

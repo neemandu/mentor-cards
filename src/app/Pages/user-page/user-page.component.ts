@@ -23,6 +23,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog, private cardsService: CardsService) {
     this.userData = this.userAuthService.userData;
+    console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
   }
 
@@ -86,7 +87,7 @@ export class UserPageComponent implements OnInit {
 
   /**1- if pack wasn't changed this month, else 0 */
   get amountOfPacksToChangeThisMonth() {
-    return this.userAuthService.userData.lastPackSubstitutionDate && new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ? 1 : 0;
+    return !this.userAuthService.userData.lastPackSubstitutionDate && new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ? 1 : 0;
   }
 
   ngOnDestroy(): void {

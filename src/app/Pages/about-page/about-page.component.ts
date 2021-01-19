@@ -9,10 +9,11 @@ import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service'
 export class AboutPageComponent implements OnInit {
 
   constructor(private overlaySpinnerService: OverlaySpinnerService) {
+    this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
   ngOnInit(): void {
-    setTimeout(() => { this.overlaySpinnerService.changeOverlaySpinner(false); }, 20);
+    // setTimeout(() => { this.overlaySpinnerService.changeOverlaySpinner(false); }, 20);
   }
 
 }
