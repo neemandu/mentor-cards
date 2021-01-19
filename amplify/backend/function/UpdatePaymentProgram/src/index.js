@@ -183,7 +183,7 @@ async function removeUserFromCardsPack(cardsPack, username){
 
     var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
 
-    isChanged = false;
+    var isChanged = false;
     for (var i = 0; i < cardsPack.usersIds.length; i++) {
         if(cardsPack.usersIds == username){
             cardsPack.usersIds.splice(i, 1);
@@ -369,7 +369,7 @@ exports.handler = async (event) => {
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
-
+    console.log('update payment');
     console.log("event's arguments:");
     var args = event.arguments.input;
     console.log(event.arguments);
@@ -380,25 +380,32 @@ exports.handler = async (event) => {
 
     var user = await getUserByUSerName(username);
     var canUpdateProgram = false;
-    if(user.role && (user.role == "ADMIN" || user.role == "CREATOR")){
-        canUpdateProgram = true;
-        /*var group = await getGroup(user.groupId);
-        for(var i = 0; i < group.groupUsers.length ; i++){
-            var currUserName = group.groupUsers[i].email;
-            if(user.email == currUserName){
-                if(group.groupUsers[i].role == "ADMIN"){
-                    canUpdateProgram = true;
-                    break;
+    if(user.groupRole && user.groupId ){
+        if (user.groupRole == "ADMIN" || user.groupRole == "CREATOR"){
+            console.log('update payment for group');
+            canUpdateProgram = true;
+            /*var group = await getGroup(user.groupId);
+            for(var i = 0; i < group.groupUsers.length ; i++){
+                var currUserName = group.groupUsers[i].email;
+                if(user.email == currUserName){
+                    if(group.groupUsers[i].role == "ADMIN"){
+                        canUpdateProgram = true;
+                        break;
+                    }
                 }
-            }
-        }*/
+            }*/
+        }
+        else{
+            console.log('update payment for group but user is not admin');
+            canUpdateProgram = false;
+        }
     }
     else{
-        canUpdateProgram = false;
+        canUpdateProgram = true;
     }
 
     if(!canUpdateProgram){
-        throw Error('User Is now authorized to switch program');
+        throw Error('User is not authorized to switch program');
     }
     else{
         if(userReachedMaximumProgramsSwitch(user)){
@@ -412,6 +419,7 @@ exports.handler = async (event) => {
 
         // Update all users in the group with the same program
         if(user.groupId){
+            var group = await getGroup(user.groupId);
             for(var i = 0; i < group.groupUsers.length ; i++){
                 var curremail = group.groupUsers[i].email;
                 var currUser = await getUserByEmail(curremail);
