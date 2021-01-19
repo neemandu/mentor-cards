@@ -11,12 +11,12 @@
             <p>שם משתמש: {{userData.username}}</p>
             <p>מייל: {{userData.email}}</p>
         </div>
-        <div class="user-info-section" *ngIf="userData.subscription">
+        <div class="user-info-section">
             <h1>פרטי חבילה</h1>
             <div class="line"></div>
             <p>כמות משתמשים: {{userData.subscription.subscriptionPlan.numberOfUsers}}</p>
             <p>כמות ערכות: {{userData.subscription.subscriptionPlan.numberOfCardPacks | amountOfPacksView}}</p>
-            <p>תאריך הרשמה לחבילה: {{userData.subscription.startDate | date:'shortDate'}}</p>
+            <p>תאריך הרשמה לחבילה: {{userData.subscription.startDate | date:'d/M/y'}}</p>
             <p>מחיר עבור חבילה נוכחית: {{(userData.subscription.subscriptionPlan.price -
                 userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->

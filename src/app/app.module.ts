@@ -60,6 +60,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 
 
 @NgModule({
@@ -91,7 +92,8 @@ import { MatCardModule } from '@angular/material/card';
     GroupManagementComponent,
     NewEditGroupUserDialogComponent,
     EnterGroupIdDialogComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    PostPurchaseSummeryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -130,6 +132,6 @@ import { MatCardModule } from '@angular/material/card';
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent,
-    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent]
+    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent]
 })
 export class AppModule { }

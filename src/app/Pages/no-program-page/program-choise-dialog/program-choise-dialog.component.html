@@ -8,8 +8,14 @@
         (change)="changePack();fixParameters();">
         <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount"
           matTooltip="{{getProgramJsonDescription(userAmount)}}" [matTooltipClass]="{'tooltip-class' : true}">
-          {{userAmount}}
-          משתמשים
+          <!-- {{userAmount}}
+          משתמשים -->
+          <p>
+            {{getAmountOfUsersDesc(userAmount)}}
+          </p>
+          <p style="font-size: medium;">
+            {{getDiscountAmount(userAmount)}}
+          </p>
         </mat-button-toggle>
       </mat-button-toggle-group>
       <div id="extraProgramData" *ngIf="programJsonExtra !== ''">
@@ -27,8 +33,11 @@
       <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks" (change)="fixParameters();">
         <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan">
           <!-- <div> -->
+          <!-- <p>
+            {{plan.numberOfCardPacks == -1 ? 'כל הערכות' : plan.numberOfCardPacks}}
+          </p> -->
           <p>
-            {{plan.numberOfCardPacks == -1 ? 'ללא הגבלה' : plan.numberOfCardPacks}}
+            {{getNumOfPacksDesc(plan.numberOfCardPacks)}}
           </p>
           <p id="original_price" *ngIf="plan.discount != 0">
             <s>{{plan.price}} ש"ח</s>
@@ -42,6 +51,15 @@
           <!-- </div> -->
         </mat-button-toggle>
       </mat-button-toggle-group>
+      <div id="extraProgramData">
+        <p>כל ערכה כוללת:</p>
+        <ul style="text-align: initial; margin-right: -15%;">
+          <li class="instruction">לפחות 40 קלפים</li>
+          <li class="instruction">ספר הדרכה</li>
+        </ul>
+        <!-- <p class="instruction">לפחות 40 קלפים</p>
+        <p class="instruction">ספר הדרכה</p> -->
+      </div>
       <div>
         <button mat-button matStepperPrevious>
           <mat-icon>navigate_next</mat-icon>הקודם

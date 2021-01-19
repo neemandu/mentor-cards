@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
+import { PostPurchaseSummeryDialogComponent } from 'src/app/Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 import { EnterGroupIdDialogComponent } from './enter-group-id-dialog/enter-group-id-dialog.component';
 import { ProgramChoiseDialogComponent } from './program-choise-dialog/program-choise-dialog.component';
 
@@ -28,13 +30,27 @@ export class NoProgramPageComponent implements OnInit {
     // dialogConfig.maxHeight = '85vh';
     this.videoplayer.nativeElement.pause();
     const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(res => {
+    var dialogSub = dialogRef.afterClosed().subscribe((res: SubscriptionPlan) => {
       this.videoplayer.nativeElement.play();
       dialogSub.unsubscribe();
       if (res) {
+        this.openPostPurchaseSummeryModal(res);
         this.router.navigate(['all-packs-page']);
         window.location.reload();
       }
+    });
+  }
+
+  openPostPurchaseSummeryModal(packSelected: SubscriptionPlan): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = packSelected;
+    this.videoplayer.nativeElement.pause();
+    const dialogRef = this.dialog.open(PostPurchaseSummeryDialogComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(() => {
+      dialogSub.unsubscribe();
+      this.videoplayer.nativeElement.play();
     });
   }
 

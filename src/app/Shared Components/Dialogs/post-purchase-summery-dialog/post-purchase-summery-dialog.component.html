@@ -1,0 +1,8 @@
+<div style="text-align: center;">
+    <span class="title">תשלום על הערכה בוצע בהצלחה</span>
+    <div class="line"></div>
+</div>
+<p>כמות משתמשים: {{data.numberOfUsers}}</p>
+<p>כמות ערכות בחודש: {{data.numberOfCardPacks == -1 ? 'ללא הגבלה' : data.numberOfCardPacks}}</p>
+<p *ngIf="data.discount !== 0">מחיר לפני הנחה: {{data.price.toFixed(2)}} ש"ח</p>
+<p id="real_price">מחיר לחבילה זו: {{(data.price - data.discount).toFixed(2)}} ש"ח</p>
