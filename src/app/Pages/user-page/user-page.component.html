@@ -17,6 +17,7 @@
             <p>כמות משתמשים: {{userData.subscription.subscriptionPlan.numberOfUsers}}</p>
             <p>כמות ערכות: {{userData.subscription.subscriptionPlan.numberOfCardPacks | amountOfPacksView}}</p>
             <p>תאריך הרשמה לחבילה: {{userData.subscription.startDate | date:'d/M/y'}}</p>
+            <!-- <p>תאריך תחילת תשלום: {{userData.subscription.startDate | date:'d/M/y'}}</p> -->
             <p>מחיר עבור חבילה נוכחית: {{(userData.subscription.subscriptionPlan.price -
                 userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
@@ -27,3 +28,6 @@
         <!-- <button class="changePlanBtn" type="button" (click)="openCancelDialogModal()">בטל הרשמה לתכנית</button> -->
     </div>
 </div>
+<!-- <button (click)="openPostPurchaseSummeryModal()">
+    openPostPurchaseSummeryModal
+</button> -->

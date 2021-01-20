@@ -35,11 +35,11 @@
                 </form>
             </mat-card-content>
             <mat-card-actions>
-                <button class="action-button" type="button"
-                    [disabled]="contactForm.invalid || !contactForm.dirty">שלח</button>
+                <button class="action-button" type="button" [disabled]="contactForm.invalid || !contactForm.dirty"
+                    (click)="sendEmail()">שלח</button>
             </mat-card-actions>
         </mat-card>
     </div>
     <img class="img" matTooltip="Photo by Nikita Kachanovsky on Unsplash" matTooltipShowDelay="1000"
-    onload="this.style.opacity='0.8'" src="../../../assets/contact-us.jpg">
+        onload="this.style.opacity='0.8'" src="../../../assets/contact-us.jpg">
 </div>

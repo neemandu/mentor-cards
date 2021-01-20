@@ -25,5 +25,9 @@ export class ContactUsComponent implements OnInit {
 
   get formControls() { return this.contactForm.controls; }
 
+  sendEmail(): void {
+    
+  }
+
   //https://medium.com/@sobus.piotr/integrate-google-api-with-your-angular-application-f06f8b879369
 }

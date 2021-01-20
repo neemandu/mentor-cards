@@ -72,3 +72,9 @@ button:focus {
   font-family: rubik;
   src: url(\assets\Fonts\Rubik-VariableFont_wght.ttf) format("opentype");
 }
+
+::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: rtl;
+  text-align: right;
+}
