@@ -117,7 +117,7 @@ async function getGroup(groupId){
 async function unsubscribeOldUsers(groupUsers){
     for(var i = 0 ; i < groupUsers.length ; i++){
         var groupUser = await getUser(groupUsers[i].username);
-        groupUser.status = "Unsubscribed";
+        groupUser.status = "NOPLAN";
         groupUser.subscription = null;
         groupUser.groupId = null;
         await saveUser(groupUser);
@@ -126,7 +126,7 @@ async function unsubscribeOldUsers(groupUsers){
 
 function canUserPerformAction(user, group){
     var canDeleteProgram = false;
-    if(user.role && user.role == "ADMIN"){
+    if(user.groupRole && user.groupRole == "ADMIN"){
         canDeleteProgram = true;
         /*for(var i = 0; i < group.groupUsers.length ; i++){
             var currUserName = group.groupUsers[i].username;
@@ -167,7 +167,7 @@ exports.handler = async (event) => {
     console.log("Update Group user list with: ");
     console.log(userlist);
     if(user.groupId != groupId){
-        throw Error('User Is now authorized to change users');
+        throw Error('User Is not authorized to change users');
     }
     else{
 

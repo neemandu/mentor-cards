@@ -143,7 +143,7 @@ exports.handler = async (event) => {
         username = event.identity.claims['username'];
     }
     var user = await getUserByUSerName(username);
-    user.status = "Unsubscribed";
+    user.status = "NOPLAN";
     user.subscription = null;
     user.groupId = null;
     user.groupRole = null;
@@ -156,7 +156,7 @@ exports.handler = async (event) => {
         for(var i =0 ; group.groupUsers.length; i++){
             email = group.groupUsers[i].email;
             var groupUser = await getUserByEmail(email);
-            groupUser.status = "Unsubscribed";
+            groupUser.status = "NOPLAN";
             groupUser.subscription = null;
             groupUser.groupId = null;
             groupUser.groupRole = null;

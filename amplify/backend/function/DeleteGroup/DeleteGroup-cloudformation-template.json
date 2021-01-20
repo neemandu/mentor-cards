@@ -128,7 +128,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/DeleteGroup-73714c41574c5672386b-build.zip"
+          "S3Key": "amplify-builds/DeleteGroup-6a6262324445566d7369-build.zip"
         }
       }
     },

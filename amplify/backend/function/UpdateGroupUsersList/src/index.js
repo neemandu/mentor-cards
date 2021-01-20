@@ -147,7 +147,7 @@ async function unsubscribeOldUsers(userlist, groupUsers){
         if(shouldBeDeleted){
             var groupUser = await getUserByEmail(groupUsers[i].email);
             if(groupUser){
-                groupUser.status = "Unsubscribed";
+                groupUser.status = "NOPLAN";
                 groupUser.subscription = null;
                 groupUser.groupId = null;
                 groupUser.groupRole = null;
@@ -180,7 +180,10 @@ async function subscribeNewUsers(userlist, groupUsers, subscription, groupId){
 
 function canUSerPerformAction(user, group){
     var canUpdateProgram = false;
-    if(user.groupId == group.id && user.role == "ADMIN"){
+    console.log("update group user list: canUSerPerformAction");
+    console.log(user);
+    console.log(group);
+    if(user.groupId == group.id && user.groupRole == "ADMIN"){
         canUpdateProgram = true;
         /*for(var i = 0; i < group.groupUsers.length ; i++){
             var currUserEmail = group.groupUsers[i].email;
@@ -242,19 +245,22 @@ exports.handler = async (event) => {
     console.log("Update Group user list with: ");
     console.log(userlist);
     
-    if(user.groupId){
+    if(user.groupId && user.groupRole){
 
         var group = await getGroup(user.groupId);
 
         var canUpdateProgram = canUSerPerformAction(user, group);
 
         if(!canUpdateProgram){
-            throw Error('User Is now authorized to change users');
+            throw Error('User Is not authorized to change users');
         }
         else{
             await unsubscribeOldUsers(userlist, group.groupUsers);
             await subscribeNewUsers(userlist, group.groupUsers, user.subscription, user.groupId);      
             await updateGroup(group, userlist);  
         }
+    }
+    else{
+        throw Error('User is not in the group');
     }
 };

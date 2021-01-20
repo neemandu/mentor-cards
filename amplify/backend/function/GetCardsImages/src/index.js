@@ -62,16 +62,23 @@ exports.handler = async (event) => {
 
     var user = await getUser(username);
     var now = new Date();
-    var allPackagesDate = new Date(now.getFullYear(),now.getMonth()-1);
+    var allPackagesDate = new Date();
+    allPackagesDate.setDate(allPackagesDate.getDate()-30);
+    //var allPackagesDate = new Date(now.getFullYear(),now.getMonth()-1, now.getMonth()-1);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
+    console.log('user.startPayingSinceDate');
+    console.log(user.startPayingSinceDate);
+    var udate = new Date(user.startPayingSinceDate);
+    console.log('udate');
+    console.log(udate);
     if(user && 
         (   user.subscription && 
             user.subscription.subscriptionPlan && 
             user.subscription.subscriptionPlan.numberOfCardPacks== -1) 
         || 
-        (user.startPayingSinceDate < allPackagesDate)){
-        return event.source['cards'];
+        (udate > allPackagesDate)){
+            return event.source['cards'];
     }
 
     var usersList = event.source['usersIds'];
