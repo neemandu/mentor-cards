@@ -1,9 +1,9 @@
 <div class="content">
-    <video #videoPlayer width="1920px" height="600px" autoplay loop oncanplay="this.play()"
+    <!-- <video #videoPlayer width="1920px" height="600px" autoplay loop oncanplay="this.play()"
         onloadedmetadata="this.muted = true; this.style.opacity='1'">
         <source src="assets\About video.mp4" type="video/mp4">
         <source src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4" type="video/mp4">
-    </video>
+    </video> -->
     <div class="content user-info" *ngIf="userData !== undefined">
         <div class="user-info-section">
             <h1>פרטי משתמש</h1>
@@ -17,11 +17,12 @@
             <p>כמות משתמשים: {{userData.subscription.subscriptionPlan.numberOfUsers}}</p>
             <p>כמות ערכות: {{userData.subscription.subscriptionPlan.numberOfCardPacks | amountOfPacksView}}</p>
             <p>תאריך הרשמה לחבילה: {{userData.subscription.startDate | date:'d/M/y'}}</p>
-            <!-- <p>תאריך תחילת תשלום: {{userData.subscription.startDate | date:'d/M/y'}}</p> -->
+            <p>תאריך תחילת תשלום: {{userData.startPayingSinceDate | date:'d/M/y'}}</p>
             <p>מחיר עבור חבילה נוכחית: {{(userData.subscription.subscriptionPlan.price -
                 userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
-            <p>ערכות נותרות להחלפה החודש: {{amountOfPacksToChangeThisMonth}}</p>
+            <p *ngIf="!inTrialMonth">ערכות נותרות להחלפה החודש: {{amountOfPacksToChangeThisMonth}}</p>
+            <p style="font-weight: 600;" *ngIf="inTrialMonth">החודש תוכלו להשתמש בכל הערכות ללא הגבלה</p>
         </div>
         <button class="changePlanBtn" *ngIf="amountOfPlansToChangeThisMonth == 1" type="button"
             (click)="openChooseProgramModal()">החלף תכנית</button>

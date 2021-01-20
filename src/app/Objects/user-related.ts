@@ -11,6 +11,7 @@ export class UserData {
     numberOfUsedPacks: number;
     status: string;
     subscription: Subscription;
+    startPayingSinceDate: Date;
 
     deseralize(input: any) {
         Object.assign(this, input);

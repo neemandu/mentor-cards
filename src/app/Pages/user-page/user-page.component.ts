@@ -92,6 +92,10 @@ export class UserPageComponent implements OnInit {
     return !this.userAuthService.userData.lastPackSubstitutionDate && new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ? 1 : 0;
   }
 
+  get inTrialMonth() {
+    return new Date() <= new Date(this.userData.startPayingSinceDate);
+  }
+
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
   }
