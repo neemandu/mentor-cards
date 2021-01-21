@@ -1,8 +1,35 @@
-<div style="text-align: center;">
-    <span class="title">תשלום על הערכה בוצע בהצלחה</span>
+<mat-toolbar class="d-flex justify-content-between">
+    <span class="title">הרכישה בוצעה בהצלחה!</span>
+    <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
+        <mat-icon style="font-family: 'Material Icons'; font-size: large;">highlight_off</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="line"></div>
+<div id='summery' mat-dialog-content>
+    <p>איזה כיף... אז מה היה לנו:</p>
+    <ul style="padding-right: 1rem;">
+        <li style="font-size: large;">
+            כמות משתמשים: {{data.numberOfUsers}}
+        </li>
+        <li>
+            כמות ערכות בשימוש חודשי: {{data.numberOfCardPacks == -1 ? 'ללא הגבלה' : data.numberOfCardPacks}}
+        </li>
+    </ul>
+    <p style="font-size: larger;">חודש ראשון כולל את כל ערכות הקלפים, תהנו!</p>
     <div class="line"></div>
 </div>
-<p>כמות משתמשים: {{data.numberOfUsers}}</p>
-<p>כמות ערכות בחודש: {{data.numberOfCardPacks == -1 ? 'ללא הגבלה' : data.numberOfCardPacks}}</p>
-<p *ngIf="data.discount !== 0">מחיר לפני הנחה: {{data.price.toFixed(2)}} ש"ח</p>
-<p id="real_price">מחיר לחבילה זו: {{(data.price - data.discount).toFixed(2)}} ש"ח</p>
+<div class="actions" mat-dialog-actions>
+    <p>מה הלאה?</p>
+    <div class="buttons d-flex flex-column">
+        <div style="margin-bottom: 1rem;" class="d-flex flex-row align-items-center">
+            <button class="action-button" type="button" (click)="navigate('/all-packs-page')">לכל ערכות הקלפים</button>
+            <p class="instruction">או דרך כפתור "כל הערכות" בסרגל הכלים העליון</p>
+        </div>
+        <div *ngIf="data.numberOfUsers != 1" class="d-flex flex-row align-items-center">
+            <button class="action-button" type="button" (click)="navigate('/app-group-management')">להגדרת שאר חברי
+                הקבוצה</button>
+            <p class="instruction">או דרך אייקון המשתמש בצד ימין למעלה</p>
+        </div>
+    </div>
+    <p style="font-size: x-large;">עבודה נעימה!</p>
+</div>

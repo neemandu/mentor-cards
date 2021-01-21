@@ -25,5 +25,13 @@ export class ContactUsComponent implements OnInit {
 
   get formControls() { return this.contactForm.controls; }
 
+  sendEmail(): void {
+    var yourMessage = this.formControls.content.value;
+    var subject = this.formControls.name.value + ' - ' + this.formControls.email.value;;
+    document.location.href = "mailto:yanivknobel@googlemail.com?subject="
+        + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(yourMessage);
+  }
+
   //https://medium.com/@sobus.piotr/integrate-google-api-with-your-angular-application-f06f8b879369
 }

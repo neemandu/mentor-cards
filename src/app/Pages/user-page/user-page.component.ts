@@ -2,11 +2,13 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
+import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { PostPurchaseSummeryDialogComponent } from 'src/app/Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 import { ProgramChoiseDialogComponent } from '../no-program-page/program-choise-dialog/program-choise-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 
@@ -88,6 +90,10 @@ export class UserPageComponent implements OnInit {
   /**1- if pack wasn't changed this month, else 0 */
   get amountOfPacksToChangeThisMonth() {
     return !this.userAuthService.userData.lastPackSubstitutionDate && new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ? 1 : 0;
+  }
+
+  get inTrialMonth() {
+    return new Date() <= new Date(this.userData.startPayingSinceDate);
   }
 
   ngOnDestroy(): void {

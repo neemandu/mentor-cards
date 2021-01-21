@@ -35,8 +35,6 @@ export class NoProgramPageComponent implements OnInit {
       dialogSub.unsubscribe();
       if (res) {
         this.openPostPurchaseSummeryModal(res);
-        this.router.navigate(['all-packs-page']);
-        window.location.reload();
       }
     });
   }
