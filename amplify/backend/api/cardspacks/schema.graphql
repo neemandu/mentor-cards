@@ -90,6 +90,15 @@ type SubSubject{
   questions: [String]
 }
 
+type ContactUsModel 
+@model 
+@auth( rules: [ { allow: private, operations: [read, create] }] ){
+  id: ID!
+  name: String
+  content: String
+  email: String
+}
+
 type User 
 @model (mutations: null)
 @auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update] },
