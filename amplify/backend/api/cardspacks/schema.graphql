@@ -58,7 +58,9 @@ input CreateUserInput {
   email: AWSEmail
 }
 
-type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
+type CardsPack 
+@model 
+@auth( rules: [{ allow: private, operations: [read] }] ) {
   id: ID!
   imgUrl: String!
   description: String
@@ -69,6 +71,14 @@ type CardsPack @model @auth( rules: [{ allow: private, operations: [read] }] ) {
   usersIds: [String] 
   groupsIds: [String]
   users: [String] 
+  guideBook: GuideBook
+}
+
+type ExampleCardsPack 
+@model 
+@auth( rules: [{ allow: private, operations: [read] }] ) {
+  id: ID!
+  cards: [String]
   guideBook: GuideBook
 }
 
