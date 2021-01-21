@@ -96,6 +96,33 @@ query ListCardsPacks(
     nextToken
   }
 }
+query GetContactUsModel($id: ID!) {
+  getContactUsModel(id: $id) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+query ListContactUsModels(
+  $filter: ModelContactUsModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listContactUsModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      content
+      email
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetUser($id: ID!) {
   getUser(id: $id) {
     id

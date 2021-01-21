@@ -110,6 +110,36 @@ subscription OnDeleteCardsPack {
     updatedAt
   }
 }
+subscription OnCreateContactUsModel {
+  onCreateContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateContactUsModel {
+  onUpdateContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteContactUsModel {
+  onDeleteContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateGroup {
   onCreateGroup {
     id

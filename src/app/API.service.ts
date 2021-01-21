@@ -153,6 +153,33 @@ export type DeleteCardsPackInput = {
   id?: string | null;
 };
 
+export type CreateContactUsModelInput = {
+  id?: string | null;
+  name?: string | null;
+  content?: string | null;
+  email?: string | null;
+};
+
+export type ModelContactUsModelConditionInput = {
+  name?: ModelStringInput | null;
+  content?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  and?: Array<ModelContactUsModelConditionInput | null> | null;
+  or?: Array<ModelContactUsModelConditionInput | null> | null;
+  not?: ModelContactUsModelConditionInput | null;
+};
+
+export type UpdateContactUsModelInput = {
+  id: string;
+  name?: string | null;
+  content?: string | null;
+  email?: string | null;
+};
+
+export type DeleteContactUsModelInput = {
+  id?: string | null;
+};
+
 export type CreateGroupInput = {
   id?: string | null;
   groupUsers?: Array<GroupUserRoleInput | null> | null;
@@ -270,6 +297,16 @@ export type ModelIDInput = {
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
   size?: ModelSizeInput | null;
+};
+
+export type ModelContactUsModelFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  content?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  and?: Array<ModelContactUsModelFilterInput | null> | null;
+  or?: Array<ModelContactUsModelFilterInput | null> | null;
+  not?: ModelContactUsModelFilterInput | null;
 };
 
 export type ModelUserFilterInput = {
@@ -473,6 +510,36 @@ export type DeleteCardsPackMutation = {
       } | null> | null;
     } | null> | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateContactUsModelMutation = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateContactUsModelMutation = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteContactUsModelMutation = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -689,6 +756,30 @@ export type ListCardsPacksQuery = {
         subjectName: string | null;
       } | null> | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetContactUsModelQuery = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListContactUsModelsQuery = {
+  __typename: "ModelContactUsModelConnection";
+  items: Array<{
+    __typename: "ContactUsModel";
+    id: string;
+    name: string | null;
+    content: string | null;
+    email: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -985,6 +1076,36 @@ export type OnDeleteCardsPackSubscription = {
       } | null> | null;
     } | null> | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateContactUsModelSubscription = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateContactUsModelSubscription = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteContactUsModelSubscription = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1423,6 +1544,84 @@ export class APIService {
     )) as any;
     return <DeleteCardsPackMutation>response.data.deleteCardsPack;
   }
+  async CreateContactUsModel(
+    input: CreateContactUsModelInput,
+    condition?: ModelContactUsModelConditionInput
+  ): Promise<CreateContactUsModelMutation> {
+    const statement = `mutation CreateContactUsModel($input: CreateContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
+        createContactUsModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateContactUsModelMutation>response.data.createContactUsModel;
+  }
+  async UpdateContactUsModel(
+    input: UpdateContactUsModelInput,
+    condition?: ModelContactUsModelConditionInput
+  ): Promise<UpdateContactUsModelMutation> {
+    const statement = `mutation UpdateContactUsModel($input: UpdateContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
+        updateContactUsModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateContactUsModelMutation>response.data.updateContactUsModel;
+  }
+  async DeleteContactUsModel(
+    input: DeleteContactUsModelInput,
+    condition?: ModelContactUsModelConditionInput
+  ): Promise<DeleteContactUsModelMutation> {
+    const statement = `mutation DeleteContactUsModel($input: DeleteContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
+        deleteContactUsModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
+  }
   async CreateGroup(
     input: CreateGroupInput,
     condition?: ModelGroupConditionInput
@@ -1789,6 +1988,61 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
+  }
+  async GetContactUsModel(id: string): Promise<GetContactUsModelQuery> {
+    const statement = `query GetContactUsModel($id: ID!) {
+        getContactUsModel(id: $id) {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetContactUsModelQuery>response.data.getContactUsModel;
+  }
+  async ListContactUsModels(
+    filter?: ModelContactUsModelFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListContactUsModelsQuery> {
+    const statement = `query ListContactUsModels($filter: ModelContactUsModelFilterInput, $limit: Int, $nextToken: String) {
+        listContactUsModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            content
+            email
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListContactUsModelsQuery>response.data.listContactUsModels;
   }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: ID!) {
@@ -2200,6 +2454,60 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteCardsPackSubscription>>;
+
+  OnCreateContactUsModelListener: Observable<
+    SubscriptionResponse<OnCreateContactUsModelSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateContactUsModel {
+        onCreateContactUsModel {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateContactUsModelSubscription>>;
+
+  OnUpdateContactUsModelListener: Observable<
+    SubscriptionResponse<OnUpdateContactUsModelSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateContactUsModel {
+        onUpdateContactUsModel {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateContactUsModelSubscription>>;
+
+  OnDeleteContactUsModelListener: Observable<
+    SubscriptionResponse<OnDeleteContactUsModelSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteContactUsModel {
+        onDeleteContactUsModel {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteContactUsModelSubscription>>;
 
   OnCreateGroupListener: Observable<
     SubscriptionResponse<OnCreateGroupSubscription>

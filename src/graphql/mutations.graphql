@@ -177,6 +177,45 @@ mutation DeleteCardsPack(
     updatedAt
   }
 }
+mutation CreateContactUsModel(
+  $input: CreateContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  createContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateContactUsModel(
+  $input: UpdateContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  updateContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteContactUsModel(
+  $input: DeleteContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  deleteContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateGroup(
   $input: CreateGroupInput!
   $condition: ModelGroupConditionInput
