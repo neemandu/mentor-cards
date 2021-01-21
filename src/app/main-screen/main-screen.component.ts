@@ -10,7 +10,7 @@ import { OverlaySpinnerService } from '../Services/overlay-spinner.service';
 export class MainScreenComponent implements OnInit, OnDestroy {
 
   subs: Subscription = new Subscription();
-  showSpinner: boolean = true;
+  showSpinner: boolean = false;
 
   constructor(private overlaySpinnerService: OverlaySpinnerService) { }
 

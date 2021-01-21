@@ -38,7 +38,7 @@ button:focus {
 #actions {
   align-items: center;
   background: #ffba3b2d;
-  padding: 2%;
+  padding: 1.5%;
   border-radius: 20px;
 }
 
@@ -47,7 +47,7 @@ video {
   height: 100%;
   z-index: 0;
   margin-top: 1%;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
   border-radius: 20px;
   opacity: 0;
   transition: opacity 3s;
