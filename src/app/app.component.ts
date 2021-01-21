@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     onAuthUIStateChange((authState, authData) => {
+      // debugger
       this.authState = authState;
       if (this.authState === 'signedin') {
         this.showLogin = false;
