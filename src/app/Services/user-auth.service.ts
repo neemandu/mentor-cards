@@ -16,6 +16,8 @@ export class UserAuthService {
 
   @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
   @Output() groupDataEmmiter: EventEmitter<GroupData> = new EventEmitter<GroupData>();
+  @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
 
   loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
@@ -23,7 +25,7 @@ export class UserAuthService {
   // userData: any;
   groupData: GroupData;
 
-  constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService, private cardsService: CardsService) {
+  constructor(public _snackBar: MatSnackBar, public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService) {
   }
 
   /**
@@ -59,9 +61,12 @@ export class UserAuthService {
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
     });
-    this.loggedInAttributes = userData;
     this.updateUserData();
     this.getSubscriptionPlans();
+    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.id, '', {
+      duration: 5000,
+      panelClass: ['rtl-snackbar']
+    });
   }
 
   /**
@@ -75,6 +80,7 @@ export class UserAuthService {
       if (this.userData.groupId)
         this.updateGroupData();
       this.loggedInEmmiter.emit(this.userData);
+      this.userData.status === 'NOPLAN' ? this.ngZone.run(() => this.router.navigate(['/no-program-page'])) : this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
     })
@@ -136,13 +142,26 @@ export class UserAuthService {
     return Auth.forgotPasswordSubmit(user, confirmationCode, newPassword);
   }
 
-  logOut(): Promise<any> {
-    return Auth.signOut();
+  logOut(): void {
+    Auth.signOut().then(data => {
+      this.loggedOut();
+      this._snackBar.open('להתראות, ועד הפעם הבאה!', '', {
+        duration: 3000,
+        panelClass: ['rtl-snackbar']
+      });
+    })
+      .catch(err => console.log(err));
+    // return Auth.signOut();
   }
 
   loggedOut(): void {
-    this.loggedInAttributes = undefined;
+    this.userData = undefined;
+    this.signedOutEmmiter.emit(true);
     // this.router.navigate(['no-program-page']);
+  }
+
+  showSignInModal(): void {
+    this.showSignInModalEmitter.emit(true);
   }
 
 }

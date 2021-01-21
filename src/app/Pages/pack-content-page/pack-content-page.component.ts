@@ -8,6 +8,8 @@ import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service'
 import { CardComponent } from 'src/app/Shared Components/card/card.component';
 import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-dialog.component';
 import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
+import * as exampleCards from '../../../assets/Bundle Configurations/ExmaplePack.json';
+
 
 @Component({
   selector: 'app-pack-content-page',
@@ -24,7 +26,6 @@ export class PackContentPageComponent implements OnInit {
   multipileChecked: boolean = false;
 
   constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
-
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
@@ -32,23 +33,24 @@ export class PackContentPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.cardsService.allPacks) {
-      this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
-      // console.log("file: pack-content-page.component.ts ~ line 36 ~ ngOnInit ~ this.pack", this.pack)
+    if (this.id) {//a specific pack
+      if (this.cardsService.allPacks) {
+        this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
+        // console.log("file: pack-content-page.component.ts ~ line 36 ~ ngOnInit ~ this.pack", this.pack)
+      }
+      else {
+        this.api.GetCardsPack(this.id).then(pack => {
+          this.pack = new PackContent().deseralize(pack);
+          console.log("ngOnInit -> this.pack", this.pack)
+        }, reject => {
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+          console.log("file: pack-content-page.component.ts ~ line 76 ~ this.api.GetCardsPack ~ reject", reject);
+        })
+      }
     }
-    else {
-      this.api.GetCardsPack(this.id).then(pack => {
-        this.pack = new PackContent().deseralize(pack);
-        // console.log("ngOnInit -> this.pack", this.pack)
-      }, reject => {
-        console.log("🚀 ~ file: pack-content-page.component.ts ~ line 75 ~ PackContentPageComponent ~ this.api.GetCardsPack ~ reject", reject)
-        // let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסת הקלפים, נסו שנית', 'רענן', {
-        //   duration: 20000,
-        // });
-        // snackBarRef.onAction().subscribe(() => {
-        //   window.location.reload();
-        // });
-      })
+    else {//example pack
+      // console.log(exampleCards['default'])
+      this.pack = new PackContent().deseralize(exampleCards['default'])
     }
   }
 

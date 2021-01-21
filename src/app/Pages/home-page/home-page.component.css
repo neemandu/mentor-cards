@@ -1,61 +1,67 @@
-* {
-  font-family: 'rubik';
-  font-size: inherit;
+video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 
-.more-less-categories-icon {
-  font-size: 1.5rem;
-  font-family: 'Material Icons';
-  /* cursor: pointer; */
+#logo-div {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  background-color: white;
 }
 
-#more-less-categories-button {
-  border-style: none;
-  background: #f8f9fa;
+#logo {
+  width: 23%;
+}
+
+#actions {
+  align-items: center;
+  background: #fff1d6de;
+  padding: 5%;
+  border-radius: 20px;
+}
+
+#top {
+  font-size: xx-large;
+}
+
+#middle {
+  font-size: x-large;
+}
+
+#bottom {
+  font-size: medium;
+}
+
+.content {
+  position: absolute;
+  top: 30%;
+  left: 25vw;
+  width: 50%;
+}
+
+button {
+  height: 3rem;
+  /* width: 10rem; */
+  border-radius: 5px;
+  background: #ffa800;
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+button:hover {
+  background: #e69900;
+}
+
+button:active {
+  background: #db9200;
 }
 
 button:focus {
   outline: none;
-}
-
-#content {
-  margin-top: 1rem;
-}
-
-app-pack {
-  margin: 15px 25px;
-}
-
-#filters {
-  max-width: 15%;
-  min-width: 10%;
-  word-break: keep-all;
-  margin-left: 10px;
-}
-
-#filter-by-text {
-  text-align: right;
-  margin: 0px 10px 0px 0px;
-}
-
-#filter-by-options-title {
-  text-align: right;
-  margin: 5px 10px 0px 0px;
-  font-weight: 700;
-}
-
-:host ::ng-deep .mat-list-item-content {
-  /* padding-right: 10px; */
-  text-align: right;
-}
-
-mat-form-field {
-  text-align: right;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-.mat-list-base .mat-list-item,
-.mat-list-base .mat-list-option {
-  height: 35px;
 }
