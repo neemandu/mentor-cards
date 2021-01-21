@@ -75,8 +75,7 @@ type CardsPack
 }
 
 type ExampleCardsPack 
-@model 
-@auth( rules: [{ allow: private, operations: [read] }] ) {
+@model {
   id: ID!
   cards: [String]
   guideBook: GuideBook
