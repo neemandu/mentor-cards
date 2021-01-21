@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Router } from '@angular/router';
+import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 
 @Component({
   selector: 'app-nav',
@@ -14,7 +15,7 @@ export class NavComponent implements OnInit {
   loggedIn: boolean = false;
   loggedInName: string;
 
-  constructor(public dialog: MatDialog, private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) {
+  constructor(public dialog: MatDialog, private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone, private overlaySpinnerService: OverlaySpinnerService) {
   }
 
   ngOnInit() {
@@ -40,8 +41,10 @@ export class NavComponent implements OnInit {
   logout(): void {
     this.userAuthService.logOut()
       .then(data => {
+        this.overlaySpinnerService.changeOverlaySpinner(false)
         this.loggedInName = undefined;
         this.loggedIn = false;
+        this.navigate('/no-program-page')
         this.userAuthService._snackBar.open('להתראות, ועד הפעם הבאה!', '', {
           duration: 3000,
           panelClass: ['rtl-snackbar']
