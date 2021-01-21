@@ -153,6 +153,29 @@ export type DeleteCardsPackInput = {
   id?: string | null;
 };
 
+export type CreateExampleCardsPackInput = {
+  id?: string | null;
+  cards?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
+};
+
+export type ModelExampleCardsPackConditionInput = {
+  cards?: ModelStringInput | null;
+  and?: Array<ModelExampleCardsPackConditionInput | null> | null;
+  or?: Array<ModelExampleCardsPackConditionInput | null> | null;
+  not?: ModelExampleCardsPackConditionInput | null;
+};
+
+export type UpdateExampleCardsPackInput = {
+  id: string;
+  cards?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
+};
+
+export type DeleteExampleCardsPackInput = {
+  id?: string | null;
+};
+
 export type CreateContactUsModelInput = {
   id?: string | null;
   name?: string | null;
@@ -297,6 +320,14 @@ export type ModelIDInput = {
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
   size?: ModelSizeInput | null;
+};
+
+export type ModelExampleCardsPackFilterInput = {
+  id?: ModelIDInput | null;
+  cards?: ModelStringInput | null;
+  and?: Array<ModelExampleCardsPackFilterInput | null> | null;
+  or?: Array<ModelExampleCardsPackFilterInput | null> | null;
+  not?: ModelExampleCardsPackFilterInput | null;
 };
 
 export type ModelContactUsModelFilterInput = {
@@ -484,6 +515,108 @@ export type DeleteCardsPackMutation = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateExampleCardsPackMutation = {
+  __typename: "ExampleCardsPack";
+  id: string;
+  cards: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateExampleCardsPackMutation = {
+  __typename: "ExampleCardsPack";
+  id: string;
+  cards: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteExampleCardsPackMutation = {
+  __typename: "ExampleCardsPack";
+  id: string;
+  cards: Array<string | null> | null;
   guideBook: {
     __typename: "GuideBook";
     id: string;
@@ -742,6 +875,66 @@ export type ListCardsPacksQuery = {
     usersIds: Array<string | null> | null;
     groupsIds: Array<string | null> | null;
     users: Array<string | null> | null;
+    guideBook: {
+      __typename: "GuideBook";
+      id: string;
+      oneOnOneQuestions: Array<{
+        __typename: "GuideBookSubject";
+        id: string;
+        subjectName: string | null;
+      } | null> | null;
+      oneOnManyQuestions: Array<{
+        __typename: "GuideBookSubject";
+        id: string;
+        subjectName: string | null;
+      } | null> | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetExampleCardsPackQuery = {
+  __typename: "ExampleCardsPack";
+  id: string;
+  cards: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListExampleCardsPacksQuery = {
+  __typename: "ModelExampleCardsPackConnection";
+  items: Array<{
+    __typename: "ExampleCardsPack";
+    id: string;
+    cards: Array<string | null> | null;
     guideBook: {
       __typename: "GuideBook";
       id: string;
@@ -1050,6 +1243,108 @@ export type OnDeleteCardsPackSubscription = {
   usersIds: Array<string | null> | null;
   groupsIds: Array<string | null> | null;
   users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateExampleCardsPackSubscription = {
+  __typename: "ExampleCardsPack";
+  id: string;
+  cards: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateExampleCardsPackSubscription = {
+  __typename: "ExampleCardsPack";
+  id: string;
+  cards: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    id: string;
+    oneOnOneQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+    oneOnManyQuestions: Array<{
+      __typename: "GuideBookSubject";
+      id: string;
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        id: string;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteExampleCardsPackSubscription = {
+  __typename: "ExampleCardsPack";
+  id: string;
+  cards: Array<string | null> | null;
   guideBook: {
     __typename: "GuideBook";
     id: string;
@@ -1544,6 +1839,156 @@ export class APIService {
     )) as any;
     return <DeleteCardsPackMutation>response.data.deleteCardsPack;
   }
+  async CreateExampleCardsPack(
+    input: CreateExampleCardsPackInput,
+    condition?: ModelExampleCardsPackConditionInput
+  ): Promise<CreateExampleCardsPackMutation> {
+    const statement = `mutation CreateExampleCardsPack($input: CreateExampleCardsPackInput!, $condition: ModelExampleCardsPackConditionInput) {
+        createExampleCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          cards
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateExampleCardsPackMutation>response.data.createExampleCardsPack;
+  }
+  async UpdateExampleCardsPack(
+    input: UpdateExampleCardsPackInput,
+    condition?: ModelExampleCardsPackConditionInput
+  ): Promise<UpdateExampleCardsPackMutation> {
+    const statement = `mutation UpdateExampleCardsPack($input: UpdateExampleCardsPackInput!, $condition: ModelExampleCardsPackConditionInput) {
+        updateExampleCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          cards
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateExampleCardsPackMutation>response.data.updateExampleCardsPack;
+  }
+  async DeleteExampleCardsPack(
+    input: DeleteExampleCardsPackInput,
+    condition?: ModelExampleCardsPackConditionInput
+  ): Promise<DeleteExampleCardsPackMutation> {
+    const statement = `mutation DeleteExampleCardsPack($input: DeleteExampleCardsPackInput!, $condition: ModelExampleCardsPackConditionInput) {
+        deleteExampleCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          cards
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteExampleCardsPackMutation>response.data.deleteExampleCardsPack;
+  }
   async CreateContactUsModel(
     input: CreateContactUsModelInput,
     condition?: ModelContactUsModelConditionInput
@@ -1988,6 +2433,97 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
+  }
+  async GetExampleCardsPack(id: string): Promise<GetExampleCardsPackQuery> {
+    const statement = `query GetExampleCardsPack($id: ID!) {
+        getExampleCardsPack(id: $id) {
+          __typename
+          id
+          cards
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetExampleCardsPackQuery>response.data.getExampleCardsPack;
+  }
+  async ListExampleCardsPacks(
+    filter?: ModelExampleCardsPackFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListExampleCardsPacksQuery> {
+    const statement = `query ListExampleCardsPacks($filter: ModelExampleCardsPackFilterInput, $limit: Int, $nextToken: String) {
+        listExampleCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            cards
+            guideBook {
+              __typename
+              id
+              oneOnOneQuestions {
+                __typename
+                id
+                subjectName
+              }
+              oneOnManyQuestions {
+                __typename
+                id
+                subjectName
+              }
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListExampleCardsPacksQuery>response.data.listExampleCardsPacks;
   }
   async GetContactUsModel(id: string): Promise<GetContactUsModelQuery> {
     const statement = `query GetContactUsModel($id: ID!) {
@@ -2454,6 +2990,132 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteCardsPackSubscription>>;
+
+  OnCreateExampleCardsPackListener: Observable<
+    SubscriptionResponse<OnCreateExampleCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateExampleCardsPack {
+        onCreateExampleCardsPack {
+          __typename
+          id
+          cards
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateExampleCardsPackSubscription>>;
+
+  OnUpdateExampleCardsPackListener: Observable<
+    SubscriptionResponse<OnUpdateExampleCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateExampleCardsPack {
+        onUpdateExampleCardsPack {
+          __typename
+          id
+          cards
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateExampleCardsPackSubscription>>;
+
+  OnDeleteExampleCardsPackListener: Observable<
+    SubscriptionResponse<OnDeleteExampleCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteExampleCardsPack {
+        onDeleteExampleCardsPack {
+          __typename
+          id
+          cards
+          guideBook {
+            __typename
+            id
+            oneOnOneQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+            oneOnManyQuestions {
+              __typename
+              id
+              subjectName
+              subSubjects {
+                __typename
+                id
+                subSubjectName
+                questions
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteExampleCardsPackSubscription>>;
 
   OnCreateContactUsModelListener: Observable<
     SubscriptionResponse<OnCreateContactUsModelSubscription>

@@ -96,6 +96,61 @@ query ListCardsPacks(
     nextToken
   }
 }
+query GetExampleCardsPack($id: ID!) {
+  getExampleCardsPack(id: $id) {
+    id
+    cards
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListExampleCardsPacks(
+  $filter: ModelExampleCardsPackFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listExampleCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      cards
+      guideBook {
+        id
+        oneOnOneQuestions {
+          id
+          subjectName
+        }
+        oneOnManyQuestions {
+          id
+          subjectName
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetContactUsModel($id: ID!) {
   getContactUsModel(id: $id) {
     id

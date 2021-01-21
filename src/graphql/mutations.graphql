@@ -177,6 +177,102 @@ mutation DeleteCardsPack(
     updatedAt
   }
 }
+mutation CreateExampleCardsPack(
+  $input: CreateExampleCardsPackInput!
+  $condition: ModelExampleCardsPackConditionInput
+) {
+  createExampleCardsPack(input: $input, condition: $condition) {
+    id
+    cards
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateExampleCardsPack(
+  $input: UpdateExampleCardsPackInput!
+  $condition: ModelExampleCardsPackConditionInput
+) {
+  updateExampleCardsPack(input: $input, condition: $condition) {
+    id
+    cards
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteExampleCardsPack(
+  $input: DeleteExampleCardsPackInput!
+  $condition: ModelExampleCardsPackConditionInput
+) {
+  deleteExampleCardsPack(input: $input, condition: $condition) {
+    id
+    cards
+    guideBook {
+      id
+      oneOnOneQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+      oneOnManyQuestions {
+        id
+        subjectName
+        subSubjects {
+          id
+          subSubjectName
+          questions
+        }
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
   $condition: ModelContactUsModelConditionInput
