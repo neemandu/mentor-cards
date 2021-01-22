@@ -12,26 +12,15 @@ subscription OnCreateCardsPack {
     groupsIds
     users
     guideBook {
-      id
-      oneOnOneQuestions {
-        id
+      subjects {
         subjectName
         subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
           subSubjectName
           questions
         }
       }
     }
+    name
     createdAt
     updatedAt
   }
@@ -49,26 +38,15 @@ subscription OnUpdateCardsPack {
     groupsIds
     users
     guideBook {
-      id
-      oneOnOneQuestions {
-        id
+      subjects {
         subjectName
         subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
           subSubjectName
           questions
         }
       }
     }
+    name
     createdAt
     updatedAt
   }
@@ -86,113 +64,15 @@ subscription OnDeleteCardsPack {
     groupsIds
     users
     guideBook {
-      id
-      oneOnOneQuestions {
-        id
+      subjects {
         subjectName
         subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
           subSubjectName
           questions
         }
       }
     }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateExampleCardsPack {
-  onCreateExampleCardsPack {
-    id
-    cards
-    guideBook {
-      id
-      oneOnOneQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateExampleCardsPack {
-  onUpdateExampleCardsPack {
-    id
-    cards
-    guideBook {
-      id
-      oneOnOneQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteExampleCardsPack {
-  onDeleteExampleCardsPack {
-    id
-    cards
-    guideBook {
-      id
-      oneOnOneQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-    }
+    name
     createdAt
     updatedAt
   }

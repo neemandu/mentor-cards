@@ -73,26 +73,15 @@ mutation CreateCardsPack(
     groupsIds
     users
     guideBook {
-      id
-      oneOnOneQuestions {
-        id
+      subjects {
         subjectName
         subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
           subSubjectName
           questions
         }
       }
     }
+    name
     createdAt
     updatedAt
   }
@@ -113,26 +102,15 @@ mutation UpdateCardsPack(
     groupsIds
     users
     guideBook {
-      id
-      oneOnOneQuestions {
-        id
+      subjects {
         subjectName
         subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
           subSubjectName
           questions
         }
       }
     }
+    name
     createdAt
     updatedAt
   }
@@ -153,122 +131,15 @@ mutation DeleteCardsPack(
     groupsIds
     users
     guideBook {
-      id
-      oneOnOneQuestions {
-        id
+      subjects {
         subjectName
         subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
           subSubjectName
           questions
         }
       }
     }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateExampleCardsPack(
-  $input: CreateExampleCardsPackInput!
-  $condition: ModelExampleCardsPackConditionInput
-) {
-  createExampleCardsPack(input: $input, condition: $condition) {
-    id
-    cards
-    guideBook {
-      id
-      oneOnOneQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateExampleCardsPack(
-  $input: UpdateExampleCardsPackInput!
-  $condition: ModelExampleCardsPackConditionInput
-) {
-  updateExampleCardsPack(input: $input, condition: $condition) {
-    id
-    cards
-    guideBook {
-      id
-      oneOnOneQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteExampleCardsPack(
-  $input: DeleteExampleCardsPackInput!
-  $condition: ModelExampleCardsPackConditionInput
-) {
-  deleteExampleCardsPack(input: $input, condition: $condition) {
-    id
-    cards
-    guideBook {
-      id
-      oneOnOneQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-    }
+    name
     createdAt
     updatedAt
   }

@@ -38,26 +38,15 @@ query GetCardsPack($id: ID!) {
     groupsIds
     users
     guideBook {
-      id
-      oneOnOneQuestions {
-        id
+      subjects {
         subjectName
         subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
           subSubjectName
           questions
         }
       }
     }
+    name
     createdAt
     updatedAt
   }
@@ -80,71 +69,11 @@ query ListCardsPacks(
       groupsIds
       users
       guideBook {
-        id
-        oneOnOneQuestions {
-          id
-          subjectName
-        }
-        oneOnManyQuestions {
-          id
+        subjects {
           subjectName
         }
       }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetExampleCardsPack($id: ID!) {
-  getExampleCardsPack(id: $id) {
-    id
-    cards
-    guideBook {
-      id
-      oneOnOneQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-      oneOnManyQuestions {
-        id
-        subjectName
-        subSubjects {
-          id
-          subSubjectName
-          questions
-        }
-      }
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListExampleCardsPacks(
-  $filter: ModelExampleCardsPackFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listExampleCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      cards
-      guideBook {
-        id
-        oneOnOneQuestions {
-          id
-          subjectName
-        }
-        oneOnManyQuestions {
-          id
-          subjectName
-        }
-      }
+      name
       createdAt
       updatedAt
     }
