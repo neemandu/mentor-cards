@@ -74,27 +74,16 @@ type CardsPack
   guideBook: GuideBook
 }
 
-type ExampleCardsPack 
-@model {
-  id: ID!
-  cards: [String]
-  guideBook: GuideBook
-}
-
 type GuideBook{
-  id: ID!
-  oneOnOneQuestions: [GuideBookSubject]
-  oneOnManyQuestions: [GuideBookSubject]
+  subjects: [GuideBookSubject]
 }
 
 type GuideBookSubject{
-  id: ID!
   subjectName: String
   subSubjects: [SubSubject]
 }
 
 type SubSubject{
-  id: ID!
   subSubjectName: String
   questions: [String]
 }
