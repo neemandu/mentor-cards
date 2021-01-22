@@ -2,9 +2,22 @@
   direction: rtl;
 }
 
-amplify-sign-in {
+amplify-authenticator {
   position: absolute;
-  left: 35vw;
+  top: 0;
+  width: 100%;
+}
+
+/* amplify-sign-up {
+  position: absolute;
+  top: 12vh;
+} */
+
+amplify-authenticator,
+amplify-forgot-password,
+amplify-confirm-sign-up,
+amplify-sign-up,
+amplify-sign-in {
   z-index: 2000;
 }
 
@@ -28,11 +41,9 @@ video {
   width: 23%;
 }
 
-/* .content {
-  position: fixed;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: #f1f1f1;
-  width: 100%;
-  padding: 20px;
-} */
+.closeLoginButton {
+  position: absolute;
+  z-index: 2001;
+  top: 22%;
+  left: 62%;
+}

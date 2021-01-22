@@ -125,8 +125,7 @@ import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/
     MatToolbarModule,
     MatTableModule,
     MatSelectModule,
-    MatCardModule
-
+    MatCardModule,
   ],
   providers: [
   ],

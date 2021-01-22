@@ -56,7 +56,16 @@ img {
   /* margin: 10px 10px; */
   background-color: white;
   text-align: center;
+  cursor: pointer;
   /* color: #fdcd00; */
+}
+
+#logo:hover {
+  opacity: 0.8;
+}
+
+#logo:active {
+  opacity: 0.8;
 }
 
 h1 {

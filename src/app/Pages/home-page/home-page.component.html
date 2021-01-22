@@ -1,43 +1,29 @@
-<!-- <div id="content">
-  <div *ngIf="!mobile" id="filters" class="float-right d-flex flex-column">
-    <h1 style="text-align: center;">סינון וחיפוש</h1>
-    <h3 id="filter-by-options-title">חיפוש</h3>
-    <mat-form-field>
-      <mat-label>הקלד מילת מפתח, נושא...</mat-label>
-      <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
-        (keyup)="filterPacks()">
-      <button mat-button [ngStyle]="{'visibility': filterText.value ? 'visible' : 'hidden'}" matSuffix mat-icon-button
-        aria-label="Clear" (click)="freeTextFilterSelected = ''; filterPacks()">
-        <mat-icon style="font-family: 'Material Icons';">close</mat-icon>
-      </button>
-    </mat-form-field>
+<video #videoPlayer width="1920px" height="600px" autoplay loop oncanplay="this.play()"
+  onloadedmetadata="this.muted = true; this.style.opacity='0.5'">
+  <source src="assets\About video.mp4" type="video/mp4">
+  <source src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4" type="video/mp4">
+</video>
+
+<div class=content>
+  <div id="actions" class="d-flex flex-column">
+    <span id="top">רוצים לאמן לבד? אתם חלק מקבוצה?</span>
     <br>
-    <h3 id="filter-by-options-title">קטגוריות</h3>
-    <mat-selection-list #categories (selectionChange)="categoriesSelectedChange($event); filterPacks()">
-      <mat-list-option disableRipple style="direction: ltr;"
-        *ngFor="let category of allCategories|slice:0:categoriesToShow"
-        [selected]="selectedCategories.includes(category)" [value]="category">
-        {{category}}
-      </mat-list-option>
-      <button id="more-less-categories-button" (click)="categoriesToShowChange()">
-        <mat-icon class="more-less-categories-icon" *ngIf="categoriesToShow < allCategories.length">expand_more
-        </mat-icon>
-        <mat-icon class="more-less-categories-icon" *ngIf="categoriesToShow >= allCategories.length">expand_less
-        </mat-icon>
-      </button>
-    </mat-selection-list>
+    <span id="middle">{{!userData ? 'הירשמו, בחרו תכנית והתחילו את תקופת הניסיון':'אתם כבר מחוברים, למה אתם מחכים? לכו לאמן!'}}</span>
     <br>
-    <h3 id="filter-by-options-title">המועדפים שלי</h3>
-    <mat-selection-list #favorites (selectionChange)="favoritesSelectedChange($event); filterPacks()">
-      <mat-list-option disableRipple style="direction: ltr;" *ngFor="let fav of getAllFavoritesDesc()"
-        [selected]="selectedFavorites.includes(fav)" [value]="fav">
-        {{fav}}
-      </mat-list-option>
-    </mat-selection-list>
+    <button style="font-size: x-large;" type="button" (click)="signInSignUp()">{{userData ? 'לכל הערכות' :
+      'התחברות/הרשמה'}}</button>
+    <br>
+    <span id="middle">רוצים לראות איך זה עובד?</span>
+    <br>
+    <button style="font-size: x-large;" type="button" (click)="navigate('/example-pack')">ערכה לדוגמא</button>
+    <br>
+    <span id="bottom">החל מ-19.90 ש"ח לחודש לאחר 30 ימי ניסיון חינם. בטלו בכל עת.</span>
   </div>
-  <h1 style="text-align: center; margin-left: 14rem;">הערכות שלנו</h1>
-  <div class="d-flex flex-row flex-wrap">
-    <app-pack *ngFor="let packInfo of allPacks" [packInfo]="packInfo" (loaded)="packLoaded()">
-    </app-pack>
-  </div>
-</div> -->
+  <!-- <div style="margin-top: 1rem; margin-bottom: 1rem;" id="actions" class="d-flex flex-column">
+    <span id="top">אתם חלק מקבוצה?</span>
+    <br>
+    <button style="font-size: large;" type="button" (click)="openEnterGroupIdModal()">הזנת קוד קבוצה</button>
+    <br>
+    <span id="bottom">הירשמו, והצטרפו לחבריכם</span>
+  </div> -->
+</div>

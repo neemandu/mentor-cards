@@ -1,26 +1,37 @@
 <nav class="nav navbar-light align-items-center justify-content-between sticky-top" style="background-color: white;">
   <div id="nav-buttons" class="d-flex flex-row">
     <div dir="rtl">
+      <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/home-page')">
+        <mat-icon>home</mat-icon>
+      </button>
       <button type="button" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">
         <mat-icon>account_circle</mat-icon>
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before" dir="rtl">
-        <button mat-menu-item *ngIf="userAttributes?.subscription || userAttributes?.status === 'PLAN'" (click)="navigate('/user-page')">פרטי משתמש</button>
-        <button mat-menu-item *ngIf="!userAttributes?.subscription || userAttributes?.status === 'NO PLAN'" (click)="navigate('/no-program-page')">הרשמה לתכנית</button>
-        <button mat-menu-item *ngIf="userAttributes?.groupId && userAttributes?.groupRole === 'ADMIN'" (click)="navigate('/app-group-management')">ניהול
+        <button mat-menu-item *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
+          (click)="navigate('/user-page')">פרטי משתמש</button>
+        <button mat-menu-item *ngIf="loggedIn && (!userAttributes?.subscription || userAttributes?.status === 'NOPLAN')"
+          (click)="navigate('/no-program-page')">הרשמה לתכנית</button>
+        <button mat-menu-item *ngIf="loggedIn && (userAttributes?.groupId && userAttributes?.groupRole === 'ADMIN')"
+          (click)="navigate('/app-group-management')">ניהול
           קבוצה</button>
-        <button mat-menu-item (click)=logout()>התנתק</button>
+        <button mat-menu-item *ngIf="loggedIn" (click)=logout()>התנתק</button>
+        <button mat-menu-item *ngIf="!loggedIn" (click)=signInSignUp()>התחברות\הרשמה</button>
       </mat-menu>
     </div>
-    <button type="button" class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל
+    <button type="button" *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
+      class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל
       הערכות</button>
+    <button type="button" *ngIf="!loggedIn || !userAttributes?.subscription || userAttributes?.status === 'NOPLAN'"
+      class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
+      לדוגמא</button>
     <!-- <button type="button" class="btn navbar-btn" *ngIf="userAttributes?.status === 'PLAN'" (click)="navigate('/all-packs-page')">כל
       הערכות</button> -->
     <button type="button" class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
     <button type="button" class="btn navbar-btn" (click)="navigate('/contact-us')">צור קשר</button>
   </div>
-  <div id="logo">
+  <div id="logo" matRipple [matRippleCentered]="true" [matRippleRadius]="30" (click)="navigate('/home-page')">
     <img src="/assets/Logo.png">
   </div>
 </nav>
