@@ -19,7 +19,7 @@ export class UserAuthService {
   @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
 
-  // loggedInAttributes: any;
+  loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
   userData: UserData;
   // userData: any;
@@ -44,25 +44,27 @@ export class UserAuthService {
    * Preform log in using User data
    * @param user - all user data to log in 
    */
-  // logIn(user): Promise<any> {
-  //   return Auth.signIn(user);
-  // }
+  logIn(user): Promise<any> {
+    return Auth.signIn(user);
+  }
 
   /**
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(userData: CognitoUserInterface) {
+  loggedIn(cognitoUserserData: CognitoUserInterface) {
+    // console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
     // debugger
-    var newUsername: string = userData.username;
-    var newUserEmail: string = userData.attributes['email'];
+    this.loggedInAttributes = cognitoUserserData
+    var newUsername: string = cognitoUserserData.username;
+    var newUserEmail: string = cognitoUserserData.attributes['email'];
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
     this.api.CreateUser(user).then(value => {
       // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.CreateUser ~ value", value)
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
     });
-    this.updateUserData(userData);
+    this.updateUserData();
     this.getSubscriptionPlans();
     this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.id, '', {
       duration: 5000,
@@ -73,8 +75,8 @@ export class UserAuthService {
   /**
    * Get all data from BE about user
    */
-  updateUserData(userData: CognitoUserInterface): void {
-    this.api.GetUser(userData.username).then(data => {
+  updateUserData(): void {
+    this.api.GetUser(this.loggedInAttributes.username).then(data => {
       // this.userData = data;
       this.userData = new UserData().deseralize(data);
       // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
