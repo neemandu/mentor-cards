@@ -71,6 +71,10 @@ query ListCardsPacks(
       guideBook {
         subjects {
           subjectName
+          subSubjects {
+            subSubjectName
+            questions
+          }
         }
       }
       name

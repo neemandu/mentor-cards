@@ -695,6 +695,11 @@ export type ListCardsPacksQuery = {
       subjects: Array<{
         __typename: "GuideBookSubject";
         subjectName: string | null;
+        subSubjects: Array<{
+          __typename: "SubSubject";
+          subSubjectName: string | null;
+          questions: Array<string | null> | null;
+        } | null> | null;
       } | null> | null;
     } | null;
     name: string | null;
@@ -1810,6 +1815,11 @@ export class APIService {
               subjects {
                 __typename
                 subjectName
+                subSubjects {
+                  __typename
+                  subSubjectName
+                  questions
+                }
               }
             }
             name
