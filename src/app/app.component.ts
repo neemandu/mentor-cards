@@ -25,9 +25,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     onAuthUIStateChange((authState, authData) => {
-      // debugger
       this.authState = authState;
       if (this.authState === 'signedin') {
+        debugger
         this.showLogin = false;
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;
@@ -57,8 +57,8 @@ export class AppComponent implements OnInit {
 const dict = {
   'he': {
     //Sign in modal
-    'Username *': "שם משתמש*",
-    'Password *': "סיסמא*",
+    'Username *': "שם משתמש *",
+    'Password *': "סיסמא *",
     'Enter your username': "הזן את שם המשתמש",
     'Enter your password': "הזן את סיסמתך",
     'Forgot your password?': "שכחת סיסמא?",
@@ -68,9 +68,9 @@ const dict = {
     'Create account': "צור משתמש",
     //Sign up modal
     'Password': "סיסמא",
-    'Email Address *': "כתובת אימייל",
+    'Email Address *': "כתובת אימייל *",
     'Email': "אימייל",
-    'Phone Number *': "מספר טלפון",
+    'Phone Number *': "מספר טלפון *",
     'Create Account': "צור משתמש",
     'Have an account?': "יש לך משתמש קיים?",
     'Sign in': "להתחברות",

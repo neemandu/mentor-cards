@@ -55,6 +55,7 @@ export class AllPacksPageComponent implements OnInit {
    * Retrive all packs
    */
   getAllPacks(): void {
+    // debugger
     this.api.ListCardsPacks().then(packs => {
       console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
