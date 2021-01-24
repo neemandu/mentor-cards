@@ -57,7 +57,7 @@ export class AllPacksPageComponent implements OnInit {
   getAllPacks(): void {
     // debugger
     this.api.ListCardsPacks().then(packs => {
-      console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
+      // console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))
@@ -65,6 +65,7 @@ export class AllPacksPageComponent implements OnInit {
         });
         return new PackContent().deseralize(pack)
       });
+      console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacks ~ this.allPacks", this.allPacks)
       this.cardsService.allPacks = this.allPacks.map(pack => pack);
       this.cardsService.allCategories = this.allCategories.map(category => category);
       this.allFavorites = this.cardsService.favorites;

@@ -12,11 +12,14 @@
     <button type="button" class="option-btn top-option-btn" (click)="openRandomCardsModal()">הצג קלף אקראי</button>
   </div>
   <!-- just for balance -->
-  <div style="visibility: hidden;" id="multipileToggle" class="d-flex flex-row">
+  <button type="button" class="option-btn top-option-btn" (click)="openGuideBook()">
+    <mat-icon style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
+  </button>
+  <!-- <div style="visibility: hidden;" id="multipileToggle" class="d-flex flex-row">
     <div style="font-size: 1rem; margin-left: 5px;">בחירה מרובה </div>
     <mat-slide-toggle>
     </mat-slide-toggle>
-  </div>
+  </div> -->
   <!-- just for balance -->
 </div>
 <div *ngIf="pack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">

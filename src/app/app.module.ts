@@ -7,6 +7,32 @@ import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
 Amplify.configure(awsconfig);
 
+//Material
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatRippleModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { PortalModule } from '@angular/cdk/portal';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+//Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,30 +63,9 @@ import { GroupManagementComponent } from './Pages/group-management/group-managem
 import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new-edit-group-user-dialog/new-edit-group-user-dialog.component';
 import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
-
-//Material
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
-import { MatRippleModule } from '@angular/material/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTableModule } from '@angular/material/table';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCardModule } from '@angular/material/card';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
+import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
+
 
 
 @NgModule({
@@ -93,7 +98,8 @@ import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/
     NewEditGroupUserDialogComponent,
     EnterGroupIdDialogComponent,
     ContactUsComponent,
-    PostPurchaseSummeryDialogComponent
+    PostPurchaseSummeryDialogComponent,
+    GuideBookComponent
   ],
   imports: [
     BrowserModule,
@@ -104,6 +110,7 @@ import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    PortalModule,
     //Material
     MatButtonModule,
     MatIconModule,
@@ -126,11 +133,12 @@ import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/
     MatTableModule,
     MatSelectModule,
     MatCardModule,
+    MatExpansionModule
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent,
-    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent]
+    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, GuideBookComponent]
 })
 export class AppModule { }

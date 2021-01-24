@@ -1,0 +1,32 @@
+<mat-card>
+    <img style="height: 6vh;" src="/assets/Logo.png">
+    <div class="line"></div>
+    <h1>ספר הדרכה - {{packName}}</h1>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let subject of guideBook.subjects">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{subject.subjectName}}
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+                {{subject.subSubjects.length}} אפשרויות
+            </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let subSubject of subject.subSubjects">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{subSubject.subSubjectName}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{subSubject.questions.length}} שאלות
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let question of subSubject.questions">{{question}}</li>
+                    </ul>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-expansion-panel>
+    </mat-accordion>
+</mat-card>

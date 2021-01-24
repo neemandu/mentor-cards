@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/API.service';
@@ -9,14 +9,14 @@ import { CardComponent } from 'src/app/Shared Components/card/card.component';
 import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-dialog.component';
 import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
 import * as exampleCards from '../../../assets/Bundle Configurations/ExmaplePack.json';
-
+import { PopoutService } from 'src/app/Services/popout.service';
 
 @Component({
   selector: 'app-pack-content-page',
   templateUrl: './pack-content-page.component.html',
   styleUrls: ['./pack-content-page.component.css']
 })
-export class PackContentPageComponent implements OnInit {
+export class PackContentPageComponent implements OnInit, OnDestroy {
 
   id: any;
   pack: PackContent;
@@ -24,8 +24,13 @@ export class PackContentPageComponent implements OnInit {
   loadedCards: number = 0;
   flipped: boolean = false;
   multipileChecked: boolean = false;
+  showGuideBook: boolean = false;
 
-  constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
+  constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog,
+    private overlaySpinnerService: OverlaySpinnerService, private api: APIService, public popoutService: PopoutService,
+    public componentFactoryResolver: ComponentFactoryResolver,
+    private applicationRef: ApplicationRef,
+    private injector: Injector) {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
@@ -121,6 +126,15 @@ export class PackContentPageComponent implements OnInit {
     });
   }
 
+  openGuideBook(): void {
+    const modalData = {
+      modalName: 'GUIDE_BOOK',
+      guideBook: this.pack.guideBook,
+      packName: this.pack.description
+    };
+    this.popoutService.openPopoutModal(modalData);
+  }
+
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -132,4 +146,7 @@ export class PackContentPageComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.popoutService.closePopoutModal();
+  }
 }

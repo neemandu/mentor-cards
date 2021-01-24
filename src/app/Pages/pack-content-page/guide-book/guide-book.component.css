@@ -1,0 +1,29 @@
+* {
+  font-family: 'rubik' !important;
+  direction: rtl;
+}
+
+li {
+  text-align: right;
+  font-size: medium;
+}
+
+li:hover {
+  background-color: blanchedalmond;
+}
+
+mat-panel-title {
+  font-size: large;
+}
+
+mat-card {
+  text-align: center;
+}
+
+.line {
+  background-color: #ffa800;
+  width: auto;
+  height: 3px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}

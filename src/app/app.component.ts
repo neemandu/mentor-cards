@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       if (this.authState === 'signedin') {
-        debugger
+        // debugger
         this.showLogin = false;
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;

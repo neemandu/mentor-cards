@@ -1,0 +1,130 @@
+import { ComponentPortal, DomPortalOutlet, PortalInjector } from '@angular/cdk/portal';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Injector } from '@angular/core';
+import { InjectionToken } from '@angular/core';
+import { GuideBook, PackContent } from '../Objects/packs';
+import { GuideBookComponent } from '../Pages/pack-content-page/guide-book/guide-book.component';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PopoutService {
+
+  styleSheetElement;
+  data;
+  modalName: string = 'GUIDE_BOOK';
+
+  constructor(
+    private injector: Injector,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private applicationRef: ApplicationRef
+  ) { }
+
+  openPopoutModal(data) {
+    if (this.isPopoutWindowOpen())
+      this.focusPopoutWindow();
+    else {
+      const windowInstance = this.openOnce(
+        'GUIDE_BOOK',
+        `${this.modalName}`
+      );
+
+      // Wait for window instance to be created
+      setTimeout(() => {
+        this.createCDKPortal(data, windowInstance);
+      }, 200);
+    }
+  }
+
+  closePopoutModal() {
+    POPOUT_MODALS[this.modalName] ? POPOUT_MODALS[this.modalName]['windowInstance'].close() : null;
+  }
+
+  openOnce(url, target) {
+    // open a blank "target" window
+    // or get the reference to the existing "target" window
+    const winRef = window.open('', target, "height=700,width=1000", false);
+    // if the "target" window was just opened, change its url
+    if (winRef.location.href === 'about:blank') {
+      winRef.location.href = url;
+    }
+    return winRef;
+  }
+
+  createCDKPortal(data, windowInstance) {
+    this.data = data;
+    if (windowInstance) {
+      // debugger
+      // Create a PortalOutlet with the body of the new window document
+      const outlet = new DomPortalOutlet(windowInstance.document.body, this.componentFactoryResolver, this.applicationRef, this.injector);
+      // Copy styles from parent window
+      document.querySelectorAll('style').forEach(htmlElement => {
+        windowInstance.document.head.appendChild(htmlElement.cloneNode(true));
+      });
+      // Copy stylesheet link from parent window
+      this.styleSheetElement = this.getStyleSheetElement();
+      // this.styleSheetElement = styleSheetList;
+      windowInstance.document.head.appendChild(this.styleSheetElement);
+
+      this.styleSheetElement.onload = () => {
+        // Clear popout modal content
+        windowInstance.document.body.innerText = '';
+
+        // Create an injector with modal data
+        const injector = this.createInjector(data);
+
+        // Attach the portal
+        let componentInstance;
+        windowInstance.document.title = 'ספר הדרכה';
+        componentInstance = this.attachGuidebookContainer(outlet, injector);
+
+        POPOUT_MODALS[this.modalName] = { windowInstance, outlet, componentInstance };
+      };
+    }
+  }
+
+  isPopoutWindowOpen() {
+    return POPOUT_MODALS && POPOUT_MODALS[this.modalName] && POPOUT_MODALS[this.modalName]['windowInstance'] && !POPOUT_MODALS[this.modalName]['windowInstance'].closed
+  }
+
+  focusPopoutWindow() {
+    POPOUT_MODALS[this.modalName] ? POPOUT_MODALS[this.modalName]['windowInstance'].focus() : null;
+  }
+
+  //Create data for GuideBook page
+  createInjector(data): PortalInjector {
+    const injectionTokens = new WeakMap();
+    injectionTokens.set(POPOUT_MODAL_DATA, data);
+    return new PortalInjector(this.injector, injectionTokens);
+  }
+
+  attachGuidebookContainer(outlet, injector) {
+    const containerPortal = new ComponentPortal(GuideBookComponent, null, injector);
+    const containerRef: ComponentRef<GuideBookComponent> = outlet.attach(containerPortal);
+    return containerRef.instance;
+  }
+
+  getStyleSheetElement() {
+    // debugger
+    const styleSheetElement = document.createElement('link');
+    document.querySelectorAll('link').forEach(htmlElement => {
+      if (htmlElement.rel === 'stylesheet') {
+        const absoluteUrl = new URL(htmlElement.href).href;
+        styleSheetElement.rel = 'stylesheet';
+        styleSheetElement.href = absoluteUrl;
+      }
+    });
+    // console.log(styleSheetElement);
+    return styleSheetElement;
+  }
+}
+
+export interface PopoutData {
+  modalName: string;
+  guideBook: GuideBook;
+  packName: string;
+}
+
+export const POPOUT_MODAL_DATA = new InjectionToken<PopoutData>('POPOUT_MODAL_DATA');
+
+export let POPOUT_MODALS = {
+};
