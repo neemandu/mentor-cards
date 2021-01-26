@@ -1,6 +1,6 @@
 import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
@@ -28,7 +28,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog,
     private overlaySpinnerService: OverlaySpinnerService, private api: APIService, public popoutService: PopoutService,
-    public componentFactoryResolver: ComponentFactoryResolver,
+    public componentFactoryResolver: ComponentFactoryResolver, private router: Router,
     private applicationRef: ApplicationRef,
     private injector: Injector) {
     this.route.params.subscribe(params => {
@@ -128,7 +128,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   openGuideBook(): void {
     const modalData = {
-      modalName: 'GUIDE_BOOK',
+      modalName: 'guide-book',
       guideBook: this.pack.guideBook,
       packName: this.pack.description
     };

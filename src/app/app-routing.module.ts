@@ -5,8 +5,8 @@ import { AllPacksPageComponent } from './Pages/all-packs-page/all-packs-page.com
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { GroupManagementComponent } from './Pages/group-management/group-management.component';
 import { HomePageComponent } from './Pages/home-page/home-page.component';
-// import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.component';
+import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
 import { PackContentPageComponent } from './Pages/pack-content-page/pack-content-page.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
 import { AuthGuardAllPacksPageService, AuthGuardGroupManagementService, AuthGuardNoProgramPageService, AuthGuardUserPageService } from './Services/auth-guard.service';
@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'pack-view/:id', component: PackContentPageComponent },
   { path: 'example-pack', component: PackContentPageComponent },
+  { path: 'guide-book', component: GuideBookComponent },
   { path: '**', redirectTo: '/all-packs-page' },
 
 ];

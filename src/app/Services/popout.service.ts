@@ -3,7 +3,7 @@ import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Inj
 import { InjectionToken } from '@angular/core';
 import { GuideBook, PackContent } from '../Objects/packs';
 import { GuideBookComponent } from '../Pages/pack-content-page/guide-book/guide-book.component';
-
+//chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#ttl=Open%20Angular%20components%20dynamically%20in%20new%20browser%20tab%20without%20bootstrapping%20the%20whole%20app%20again%20%7C%20by%20Saranya%20Thangaraj%20%7C%20Medium&pos=8699.0908203125&uri=https://medium.com/@saranya.thangaraj/open-angular-component-in-a-new-tab-without-bootstrapping-the-whole-app-again-e329af460e92
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class PopoutService {
 
   styleSheetElement;
   data;
-  modalName: string = 'GUIDE_BOOK';
+  modalName: string;
 
   constructor(
     private injector: Injector,
@@ -20,11 +20,12 @@ export class PopoutService {
   ) { }
 
   openPopoutModal(data) {
+    this.modalName = data.modalName;
     if (this.isPopoutWindowOpen())
       this.focusPopoutWindow();
     else {
       const windowInstance = this.openOnce(
-        'GUIDE_BOOK',
+        this.modalName,
         `${this.modalName}`
       );
 
