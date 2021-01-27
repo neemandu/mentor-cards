@@ -30,8 +30,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { PortalModule } from '@angular/cdk/portal';
-import { MatExpansionModule } from '@angular/material/expansion';
-// import { DragDropModule } from '@angular/cdk/drag-drop';
 
 //Components
 import { AppRoutingModule } from './app-routing.module';
@@ -66,7 +64,6 @@ import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
-import { GuideBook } from './Objects/packs';
 
 
 
@@ -135,8 +132,6 @@ import { GuideBook } from './Objects/packs';
     MatTableModule,
     MatSelectModule,
     MatCardModule,
-    MatExpansionModule,
-    // DragDropModule
   ],
   providers: [
   ],
