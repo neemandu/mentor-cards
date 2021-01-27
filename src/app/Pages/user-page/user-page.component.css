@@ -61,6 +61,7 @@ video {
   border: none;
   font-weight: 500;
   font-size: x-large;
+  margin-left: 1vw;
 }
 
 .changePlanBtn:hover {
@@ -73,4 +74,8 @@ video {
 
 .changePlanBtn:focus {
   outline: none;
+}
+
+.changePlanBtn:disabled {
+  background: #cccccc;
 }
