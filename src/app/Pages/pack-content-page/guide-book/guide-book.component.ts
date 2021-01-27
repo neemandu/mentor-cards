@@ -37,7 +37,7 @@ export class GuideBookComponent implements OnInit {
       panel.style.padding = "0vh 0vw"
       subjectDivRef.style.marginTop = "0vh"
     } else {
-      panel.style.maxHeight = "100%";
+      panel.style.maxHeight = "1000%";
       panel.style.padding = "1vh 0vw"
       subjectDivRef.style.marginTop = "2vh"
     }

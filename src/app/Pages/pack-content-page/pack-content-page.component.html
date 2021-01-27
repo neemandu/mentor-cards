@@ -12,10 +12,10 @@
     <button type="button" class="option-btn top-option-btn" (click)="openRandomCardsModal()">הצג קלף אקראי</button>
   </div>
   <!-- just for balance -->
-  <button type="button" *ngIf="pack?.guideBook" class="option-btn top-option-btn" (click)="openGuideBook()">
+  <button type="button" *ngIf="pack && pack.guideBook" class="option-btn top-option-btn" (click)="openGuideBook()">
     <mat-icon style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
   </button>
-  <div *ngIf="!pack.guideBook" style="visibility: hidden;" id="multipileToggle" class="d-flex flex-row">
+  <div *ngIf="!pack || !pack.guideBook" style="visibility: hidden;" id="multipileToggle" class="d-flex flex-row">
     <div style="font-size: 1rem; margin-left: 5px;">בחירה מרובה </div>
     <mat-slide-toggle>
     </mat-slide-toggle>
