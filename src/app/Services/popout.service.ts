@@ -45,9 +45,9 @@ export class PopoutService {
     // or get the reference to the existing "target" window
     const winRef = window.open('', target, "height=700,width=1000", false);
     // if the "target" window was just opened, change its url
-    if (winRef.location.href === 'about:blank') {
-      winRef.location.href = url;
-    }
+    // if (winRef.location.href === 'about:blank') {
+    //   winRef.location.href = 'about:blank';
+    // }
     return winRef;
   }
 
@@ -58,28 +58,46 @@ export class PopoutService {
       // Create a PortalOutlet with the body of the new window document
       const outlet = new DomPortalOutlet(windowInstance.document.body, this.componentFactoryResolver, this.applicationRef, this.injector);
       // Copy styles from parent window
-      document.querySelectorAll('style').forEach(htmlElement => {
-        windowInstance.document.head.appendChild(htmlElement.cloneNode(true));
-      });
+      // document.querySelectorAll('style').forEach(htmlElement => {
+      //   windowInstance.document.head.appendChild(htmlElement.cloneNode(true));
+      // });
+
+      // var s1 = document.createElement('script');
+      // s1.setAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"');
+      // s1.setAttribute('integrity', 'sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj');
+      // s1.setAttribute('crossorigin', 'anonymous');
+      // windowInstance.document.head.appendChild(s1);
+
+      // windowInstance.document.body.innerText = '';
+
+      // Create an injector with modal data
+      const injector = this.createInjector(data);
+
+      // Attach the portal
+      let componentInstance;
+      windowInstance.document.title = 'ספר הדרכה';
+      componentInstance = this.attachGuidebookContainer(outlet, injector);
+
+      POPOUT_MODALS[this.modalName] = { windowInstance, outlet, componentInstance };
       // Copy stylesheet link from parent window
-      this.styleSheetElement = this.getStyleSheetElement();
-      // this.styleSheetElement = styleSheetList;
-      windowInstance.document.head.appendChild(this.styleSheetElement);
+      // this.styleSheetElement = this.getStyleSheetElement();
+      // // this.styleSheetElement = styleSheetList;
+      // windowInstance.document.head.appendChild(this.styleSheetElement);
 
-      this.styleSheetElement.onload = () => {
-        // Clear popout modal content
-        windowInstance.document.body.innerText = '';
+      // this.styleSheetElement.onload = () => {
+      //   // Clear popout modal content
+      //   windowInstance.document.body.innerText = '';
 
-        // Create an injector with modal data
-        const injector = this.createInjector(data);
+      //   // Create an injector with modal data
+      //   const injector = this.createInjector(data);
 
-        // Attach the portal
-        let componentInstance;
-        windowInstance.document.title = 'ספר הדרכה';
-        componentInstance = this.attachGuidebookContainer(outlet, injector);
+      //   // Attach the portal
+      //   let componentInstance;
+      //   windowInstance.document.title = 'ספר הדרכה';
+      //   componentInstance = this.attachGuidebookContainer(outlet, injector);
 
-        POPOUT_MODALS[this.modalName] = { windowInstance, outlet, componentInstance };
-      };
+      //   POPOUT_MODALS[this.modalName] = { windowInstance, outlet, componentInstance };
+      // };
     }
   }
 
@@ -104,19 +122,19 @@ export class PopoutService {
     return containerRef.instance;
   }
 
-  getStyleSheetElement() {
-    // debugger
-    const styleSheetElement = document.createElement('link');
-    document.querySelectorAll('link').forEach(htmlElement => {
-      if (htmlElement.rel === 'stylesheet') {
-        const absoluteUrl = new URL(htmlElement.href).href;
-        styleSheetElement.rel = 'stylesheet';
-        styleSheetElement.href = absoluteUrl;
-      }
-    });
-    // console.log(styleSheetElement);
-    return styleSheetElement;
-  }
+  // getStyleSheetElement() {
+  //   // debugger
+  //   const styleSheetElement = document.createElement('link');
+  //   document.querySelectorAll('link').forEach(htmlElement => {
+  //     if (htmlElement.rel === 'stylesheet') {
+  //       const absoluteUrl = new URL(htmlElement.href).href;
+  //       styleSheetElement.rel = 'stylesheet';
+  //       styleSheetElement.href = absoluteUrl;
+  //     }
+  //   });
+  //   // console.log(styleSheetElement);
+  //   return styleSheetElement;
+  // }
 }
 
 export interface PopoutData {

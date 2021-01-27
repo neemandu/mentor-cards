@@ -45,6 +45,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       }
       else {
         this.api.GetCardsPack(this.id).then(pack => {
+          console.log("file: pack-content-page.component.ts ~ line 48 ~ this.api.GetCardsPack ~ pack", pack)
           this.pack = new PackContent().deseralize(pack);
           console.log("ngOnInit -> this.pack", this.pack)
         }, reject => {

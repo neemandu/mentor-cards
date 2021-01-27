@@ -1,6 +1,7 @@
-* {
+content {
   font-family: 'rubik' !important;
   direction: rtl;
+  text-align: right;
 }
 
 li {
@@ -12,13 +13,13 @@ li:hover {
   background-color: blanchedalmond;
 }
 
-mat-panel-title {
+/* mat-panel-title {
   font-size: large;
 }
 
 mat-card {
   text-align: center;
-}
+} */
 
 .line {
   background-color: #ffa800;
