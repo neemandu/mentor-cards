@@ -62,7 +62,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   multipileChanged(): void {
     this.selectedCards = [];
-    this.flipped = false;
+    // this.flipped = false;
   }
 
   cardSelected(card: CardComponent, index: number): void {

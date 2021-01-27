@@ -17,6 +17,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public router: Router, private ngZone: NgZone) {
         this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(()=> {
+            this.userData = undefined;
+        }))
     }
 
     ngOnInit(): void {

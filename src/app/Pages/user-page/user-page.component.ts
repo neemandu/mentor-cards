@@ -25,7 +25,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog, private cardsService: CardsService) {
     this.userData = this.userAuthService.userData;
-    // console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
+    console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
   }
 
@@ -64,10 +64,8 @@ export class UserPageComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.data = new DynamicDialogData("ביטול חבילה", "האם לבטל הרשמה לחבילה זו?", "אישור", "ביטול")
-    this.videoplayer.nativeElement.pause();
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
-      this.videoplayer.nativeElement.play();
       dialogSub.unsubscribe();
       if (res) {
         console.log("🚀 ~ file: user-page.component.ts ~ line 54 ~ UserPageComponent ~ dialogSub ~ res", res)
