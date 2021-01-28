@@ -44,10 +44,10 @@ export class UserPageComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
-    this.videoplayer.nativeElement.pause();
+    // this.videoplayer.nativeElement.pause();
     const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
-      this.videoplayer.nativeElement.play();
+      // this.videoplayer.nativeElement.play();
       dialogSub.unsubscribe();
       if (res) {
         this.cardsService.allPacks = undefined;
