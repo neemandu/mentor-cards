@@ -17,13 +17,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public router: Router, private ngZone: NgZone) {
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(()=> {
+        this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
             this.userData = undefined;
         }))
     }
 
     ngOnInit(): void {
-        this.userData = this.userAuthService.userData; 
+        this.userData = this.userAuthService.userData;
     }
 
     public navigate(path: string): void {
@@ -31,11 +31,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
     }
 
     signInSignUp(): void {
-        if (!this.userAuthService.userData)
-            this.userAuthService.showSignInModal();
-        else {
-            this.navigate('/all-packs-page')
-        }
+        // if (!this.userAuthService.userData)
+        this.userAuthService.showSignInModal();
+        // else {
+        //     this.navigate('/all-packs-page')
+        // }
     }
 
     ngOnDestroy(): void {

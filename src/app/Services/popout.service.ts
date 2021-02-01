@@ -1,7 +1,7 @@
 import { ComponentPortal, DomPortalOutlet, PortalInjector } from '@angular/cdk/portal';
 import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Injector } from '@angular/core';
 import { InjectionToken } from '@angular/core';
-import { GuideBook, PackContent } from '../Objects/packs';
+import { GuideBook } from '../Objects/packs';
 import { GuideBookComponent } from '../Pages/pack-content-page/guide-book/guide-book.component';
 //chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#ttl=Open%20Angular%20components%20dynamically%20in%20new%20browser%20tab%20without%20bootstrapping%20the%20whole%20app%20again%20%7C%20by%20Saranya%20Thangaraj%20%7C%20Medium&pos=8699.0908203125&uri=https://medium.com/@saranya.thangaraj/open-angular-component-in-a-new-tab-without-bootstrapping-the-whole-app-again-e329af460e92
 @Injectable({
@@ -44,10 +44,6 @@ export class PopoutService {
     // open a blank "target" window
     // or get the reference to the existing "target" window
     const winRef = window.open('', target, "height=700,width=1000", false);
-    // if the "target" window was just opened, change its url
-    // if (winRef.location.href === 'about:blank') {
-    //   winRef.location.href = 'about:blank';
-    // }
     return winRef;
   }
 
@@ -57,20 +53,6 @@ export class PopoutService {
       // debugger
       // Create a PortalOutlet with the body of the new window document
       const outlet = new DomPortalOutlet(windowInstance.document.body, this.componentFactoryResolver, this.applicationRef, this.injector);
-      // Copy styles from parent window
-      // document.querySelectorAll('style').forEach(htmlElement => {
-      //   windowInstance.document.head.appendChild(htmlElement.cloneNode(true));
-      // });
-
-      // var s1 = document.createElement('script');
-      // s1.setAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"');
-      // s1.setAttribute('integrity', 'sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj');
-      // s1.setAttribute('crossorigin', 'anonymous');
-      // windowInstance.document.head.appendChild(s1);
-
-      // windowInstance.document.body.innerText = '';
-
-      // Create an injector with modal data
       const injector = this.createInjector(data);
 
       // Attach the portal
@@ -79,25 +61,6 @@ export class PopoutService {
       componentInstance = this.attachGuidebookContainer(outlet, injector);
 
       POPOUT_MODALS[this.modalName] = { windowInstance, outlet, componentInstance };
-      // Copy stylesheet link from parent window
-      // this.styleSheetElement = this.getStyleSheetElement();
-      // // this.styleSheetElement = styleSheetList;
-      // windowInstance.document.head.appendChild(this.styleSheetElement);
-
-      // this.styleSheetElement.onload = () => {
-      //   // Clear popout modal content
-      //   windowInstance.document.body.innerText = '';
-
-      //   // Create an injector with modal data
-      //   const injector = this.createInjector(data);
-
-      //   // Attach the portal
-      //   let componentInstance;
-      //   windowInstance.document.title = 'ספר הדרכה';
-      //   componentInstance = this.attachGuidebookContainer(outlet, injector);
-
-      //   POPOUT_MODALS[this.modalName] = { windowInstance, outlet, componentInstance };
-      // };
     }
   }
 
@@ -121,20 +84,6 @@ export class PopoutService {
     const containerRef: ComponentRef<GuideBookComponent> = outlet.attach(containerPortal);
     return containerRef.instance;
   }
-
-  // getStyleSheetElement() {
-  //   // debugger
-  //   const styleSheetElement = document.createElement('link');
-  //   document.querySelectorAll('link').forEach(htmlElement => {
-  //     if (htmlElement.rel === 'stylesheet') {
-  //       const absoluteUrl = new URL(htmlElement.href).href;
-  //       styleSheetElement.rel = 'stylesheet';
-  //       styleSheetElement.href = absoluteUrl;
-  //     }
-  //   });
-  //   // console.log(styleSheetElement);
-  //   return styleSheetElement;
-  // }
 }
 
 export interface PopoutData {

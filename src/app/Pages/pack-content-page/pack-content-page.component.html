@@ -22,14 +22,28 @@
   </div>
   <!-- just for balance -->
 </div>
-<div *ngIf="pack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">
-  <app-card
-    [ngClass]="{'clickable': true, 'shuffle-item': true, 'item-hidden': true, 'item-reveal': loadedCards == pack.cards.length}"
-    *ngFor="let card of pack.cards; let i = index" transition-group-item [cardContent]="card"
-    [selected]="selectedCards.includes(card)" [index]="i+1"
-    [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)"
-    (loaded)="cardLoaded()">
-  </app-card>
+<div class="d-flex flex-column align-items-center">
+  <div *ngIf="pack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">
+    <app-card
+      [ngClass]="{'clickable': true, 'shuffle-item': true, 'item-hidden': true, 'item-reveal': loadedCards == pack.cards.length}"
+      *ngFor="let card of pack.cards; let i = index" transition-group-item [cardContent]="card"
+      [selected]="selectedCards.includes(card)" [index]="i+1"
+      [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)"
+      (loaded)="cardLoaded()">
+    </app-card>
+  </div>
+  <div id="introduction" *ngIf="!id">
+    <p style="text-align: center; font-size: 2rem; margin-bottom: 1.5rem; font-weight: 700;">שימו <span
+        style="color: coral;">&#10084;</span>
+    </p>
+    <ul>
+      <li><span>ערכה זו היא ערכה לדוגמא ולכן כוללת רק 10 קלפים</span></li>
+      <li><span>באתר קיימות עשרות ערכות קלפים לבחירתכם</span></li>
+      <li><span>כל ערכה כוללת מעל ל-40 קלפים</span></li>
+      <li><span>כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים</span></li>
+      <li><span>במסגרת 30 יום הניסיון כל ערכות הקלפים לרשותכם</span></li>
+    </ul>
+  </div>
 </div>
 
 <nav *ngIf="pack && loadedCards==pack.cards.length"

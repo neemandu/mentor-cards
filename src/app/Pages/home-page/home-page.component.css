@@ -29,6 +29,11 @@ video {
   font-size: xx-large;
 }
 
+#top-logo {
+  font-size: xxx-large;
+  font-weight: 600;
+}
+
 #middle {
   font-size: x-large;
 }

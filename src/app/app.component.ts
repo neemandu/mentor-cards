@@ -57,38 +57,43 @@ export class AppComponent implements OnInit {
 const dict = {
   'he': {
     //Sign in modal
-    'Username *': "שם משתמש *",
+    'Username *': "כתובת אימייל *",
     'Password *': "סיסמא *",
-    'Enter your username': "הזן את שם המשתמש",
-    'Enter your password': "הזן את סיסמתך",
+    'Enter your username': "כתובת אימייל",
+    'Enter your password': "סיסמא",
     'Forgot your password?': "שכחת סיסמא?",
-    'Reset password': "אפס סיסמא",
+    'Reset password': "איפוס סיסמא",
     'Sign In': "התחברות",
-    'No account?': "אין משתמש?",
-    'Create account': "צור משתמש",
+    'No account?': "עדיין אין לך משתמש?",
+    'Create account': "יצירת משתמש",
     //Sign up modal
     'Password': "סיסמא",
-    'Email Address *': "כתובת אימייל *",
-    'Email': "אימייל",
+    'Email Address *': "כתובת אימייל לאימות *",
+    'Email': "כתובת אימייל",
     'Phone Number *': "מספר טלפון *",
     'Create Account': "צור משתמש",
     'Have an account?': "יש לך משתמש קיים?",
     'Sign in': "להתחברות",
+    '(555) 555-1212': "051-2345678",
     //Confirm Sign up
-    'Confirmation Code': "קוד אימות (נשלח במייל)",
-    'Enter your code': "הזן קוד אימות (נשלח במייל)",
+    'Confirmation Code': "קוד אימות (נשלח למייל)",
+    'Enter your code': "קוד אימות (נשלח למייל)",
     'Resend Code': "שליחת קוד מחדש",
-    'Lost your code?': "הקוד נאבד או לא הגיע למייל?",
+    'Lost your code?': "הקוד לא הגיע למייל?",
     'Confirm': 'אימות משתמש',
     //Forgot password modal
     'Send Code': "שלח קוד אימות למייל שלי",
-    'Username': "שם משתמש",
+    'Username': "כתובת אימייל",
     'Back to Sign In': "חזרה להתחברות",
     'Verification code': "קוד אימות שהתקבל במייל",
-    'Enter code': "הזן קוד שהתקבל במייל",
+    'Enter code': "קוד שהתקבל במייל",
     'New password': "סיסמא חדשה",
-    'Enter your new password': "הזן סיסמא חדשה",
-    'Submit': 'החלפת סיסמא'
+    'Enter your new password': "סיסמא חדשה",
+    'Submit': 'החלפת סיסמא',
+    //Errors
+    'Incorrect username or password.': 'שם משתמש או סיסמא אינם נכונים',
+    'User does not exist.': 'שם משתמש זה לא קיים',
+    'Custom auth lambda trigger is not configured for the user pool.':'שגיאה בהתחברות, נסה שנית'
   }
 };
 

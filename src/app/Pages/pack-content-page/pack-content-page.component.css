@@ -96,3 +96,29 @@ p {
     font-size: inherit;
   }
 }
+
+ul {
+  list-style: none;
+  line-height: 2rem;
+  text-align: right;
+  font-size: 1rem;
+  padding-right: 0rem;
+}
+
+ul li:before {
+  content: '✓';
+}
+
+li span {
+  position: relative;
+  left: -10px;
+}
+
+
+#introduction {
+  align-items: center;
+  background: #fff1d6de;
+  padding: 2%;
+  border-radius: 20px;
+  width: fit-content;
+}

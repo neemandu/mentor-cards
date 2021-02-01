@@ -45,7 +45,7 @@ import { RegisterComponent } from './main-screen/user-related/user-related-dialo
 import { UserRelatedDialogComponent } from './main-screen/user-related/user-related-dialog/user-related-dialog.component';
 import { AboutPageComponent } from './Pages/about-page/about-page.component';
 import { AllPacksPageComponent } from './Pages/all-packs-page/all-packs-page.component';
-// import { HomePageComponent } from './Pages/home-page/home-page.component';
+import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.component';
 import { CardsRevealDialogComponent } from './Pages/pack-content-page/cards-reveal-dialog/cards-reveal-dialog.component';
 import { PackContentPageComponent } from './Pages/pack-content-page/pack-content-page.component';
@@ -74,7 +74,7 @@ import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-b
     PackComponent,
     MainScreenComponent,
     NavComponent,
-    // HomePageComponent,
+    HomePageComponent,
     AboutPageComponent,
     PackContentPageComponent,
     TooltipListViewPipe,
