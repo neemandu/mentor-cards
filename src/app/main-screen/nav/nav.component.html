@@ -12,7 +12,7 @@
         <button mat-menu-item *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
           (click)="navigate('/user-page')">פרטי משתמש</button>
         <button mat-menu-item *ngIf="loggedIn && (!userAttributes?.subscription || userAttributes?.status === 'NOPLAN')"
-          (click)="navigate('/no-program-page')">הרשמה לתכנית</button>
+          (click)="navigate('/no-program-page')">הרשמה לתוכנית</button>
         <button mat-menu-item *ngIf="loggedIn && (userAttributes?.groupId && userAttributes?.groupRole === 'ADMIN')"
           (click)="navigate('/app-group-management')">ניהול
           קבוצה</button>

@@ -26,7 +26,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.userData = this.userAuthService.userData;
     }
 
-    public navigate(path: string): void {
+    navigate(path: string): void {
         this.ngZone.run(() => this.router.navigate([path]));
     }
 

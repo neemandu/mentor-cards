@@ -26,11 +26,11 @@
         </div>
         <div class="d-flex flex-row" *ngIf="userData.groupRole === 'ADMIN' || userData.subscription.subscriptionPlan.numberOfUsers == 1">
             <button class="changePlanBtn" [disabled]="amountOfPlansToChangeThisMonth == 0" type="button"
-                (click)="openChooseProgramModal()">החלף תכנית
+                (click)="openChooseProgramModal()">החלף תוכנית
                 <span style="font-size: small;" *ngIf="amountOfPlansToChangeThisMonth == 0"><br>
-                    הוחלפה תכנית החודש
+                    הוחלפה תוכנית החודש
                   </span></button>
-            <button class="changePlanBtn" type="button" (click)="openCancelDialogModal()">בטל הרשמה לתכנית</button>
+            <button class="changePlanBtn" type="button" (click)="openCancelDialogModal()">בטל הרשמה לתוכנית</button>
         </div>
     </div>
 </div>

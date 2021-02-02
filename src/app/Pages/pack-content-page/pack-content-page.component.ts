@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, ComponentFactoryResolver, Injector, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';
@@ -10,6 +10,9 @@ import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-d
 import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
 import * as exampleCards from '../../../assets/Bundle Configurations/ExmaplePack.json';
 import { PopoutService } from 'src/app/Services/popout.service';
+import { UserData } from 'src/app/Objects/user-related';
+import { UserAuthService } from 'src/app/Services/user-auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -18,6 +21,7 @@ import { PopoutService } from 'src/app/Services/popout.service';
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
 
+  Subscription: Subscription = new Subscription();
   id: any;
   pack: PackContent;
   selectedCards: any[] = []
@@ -25,15 +29,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   flipped: boolean = false;
   multipileChecked: boolean = false;
   showGuideBook: boolean = false;
+  userData: UserData;
 
   constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog,
     private overlaySpinnerService: OverlaySpinnerService, private api: APIService, public popoutService: PopoutService,
-    public componentFactoryResolver: ComponentFactoryResolver, private router: Router,
-    private applicationRef: ApplicationRef,
-    private injector: Injector) {
+    public componentFactoryResolver: ComponentFactoryResolver, private router: Router, private userAuthService: UserAuthService, private ngZone: NgZone) {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
+    this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
+      this.userData = undefined;
+    }));
+    this.userData = this.userAuthService.userData;
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
@@ -45,12 +52,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       }
       else {
         this.api.GetCardsPack(this.id).then(pack => {
-          console.log("file: pack-content-page.component.ts ~ line 48 ~ this.api.GetCardsPack ~ pack", pack)
           this.pack = new PackContent().deseralize(pack);
           console.log("ngOnInit -> this.pack", this.pack)
         }, reject => {
           this.overlaySpinnerService.changeOverlaySpinner(false);
-          console.log("file: pack-content-page.component.ts ~ line 76 ~ this.api.GetCardsPack ~ reject", reject);
         })
       }
     }
@@ -147,7 +152,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  signInSignUp(): void {
+    this.userAuthService.showSignInModal();
+  }
+
+  navigate(path: string): void {
+    this.ngZone.run(() => this.router.navigate([path]));
+  }
+
   ngOnDestroy(): void {
     this.popoutService.closePopoutModal();
+    this.Subscription.unsubscribe();
   }
 }

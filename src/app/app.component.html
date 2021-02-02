@@ -8,10 +8,10 @@
   integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 <app-main-screen></app-main-screen>
-<button [hidden]="!showLogin" class="closeLoginButton" mat-icon-button (click)="closeAmplify()" cdkFocusInitial>
+<button style="position: fixed;" [hidden]="!showLogin" class="closeLoginButton" mat-icon-button (click)="closeAmplify()" cdkFocusInitial>
   <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
 </button>
-<amplify-authenticator [hidden]="!showLogin">
+<amplify-authenticator style="position: fixed;" [hidden]="!showLogin">
   <amplify-sign-in header-text="התחברו ל-Mentor Cards" slot="sign-in">
   </amplify-sign-in>
   <amplify-sign-up header-text="הרשמו ל-Mentor Cards" slot="sign-up">
