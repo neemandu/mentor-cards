@@ -1,0 +1,91 @@
+mat-icon {
+  font-family: 'Material Icons';
+}
+
+* {
+  font-family: 'rubik';
+  direction: rtl;
+  text-align: right;
+}
+
+/* .actions {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0px;
+} */
+
+.buttons {
+  margin-bottom: 1%;
+  justify-content: center;
+}
+
+.iconButton {
+  /* margin-top: -15px; */
+  margin-left: -20px;
+}
+
+.action-button {
+  margin-left: 1rem;
+  border-radius: 5px;
+  border: none;
+  font-size: large;
+  background: #ffa800;
+  width: 5vw;
+  text-align: center;
+  height: 2rem;
+  text-align: center;
+}
+
+.action-button:hover {
+  background: #e69900;
+}
+
+.action-button:active {
+  background: #db9200;
+}
+
+.action-button:focus {
+  outline: none;
+}
+
+.action-button:disabled {
+  background: #cccccc;
+  color: rgb(82, 82, 82);
+  cursor: not-allowed;
+}
+
+mat-toolbar {
+  margin-top: -10px;
+  background-color: transparent;
+}
+
+.title {
+  font-size: x-large;
+}
+
+.line {
+  background-color: #ffa800;
+  width: auto;
+  height: 3px;
+  margin-bottom: 1rem;
+}
+
+#summery {
+  font-size: larger;
+}
+
+p,
+li {
+  font-size: large;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: rtl;
+  text-align: right;
+}
+
+ul {
+  line-height: 1.5rem;
+  padding-right: 1rem;
+}

@@ -1,9 +1,18 @@
-  <app-nav></app-nav>
+<app-nav></app-nav>
 
-  <div class="overlay" *ngIf="showSpinner">
-    <div class="spinner-wrapper">
-      <app-overlay-spinner></app-overlay-spinner>
-    </div>
+<div class="overlay" *ngIf="showSpinner">
+  <div class="spinner-wrapper">
+    <app-overlay-spinner></app-overlay-spinner>
   </div>
+</div>
 
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
+
+<div class="footer">
+  <!-- <span>
+    Copyright © 2021 Mentor-Cards. All rights reserved.
+  </span> -->
+  <span>
+    זכויות יוצרים © 2021 Mentor-Cards. כל הזכויות שמורות. <span (click)='openSiteRulesModal()' id="site-rules">(לתקנון האתר)</span>
+  </span>
+</div>

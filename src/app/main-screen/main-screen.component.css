@@ -25,3 +25,27 @@ app-bottom-bar {
   justify-content: center;
   margin-top: 25rem;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(255, 203, 126);
+  color: white;
+  text-align: center;
+}
+
+#site-rules {
+  /* color: rgb(86, 86, 255); */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#site-rules:hover {
+  color: rgb(193 193 193);
+}
+
+#site-rules:active {
+  color: rgb(107 107 107);
+}

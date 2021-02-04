@@ -64,6 +64,7 @@ import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
+import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
 
 
 
@@ -98,7 +99,8 @@ import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-b
     EnterGroupIdDialogComponent,
     ContactUsComponent,
     PostPurchaseSummeryDialogComponent,
-    GuideBookComponent
+    GuideBookComponent,
+    SiteRulesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -137,6 +139,6 @@ import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-b
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent,
-    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, GuideBookComponent]
+    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, GuideBookComponent, SiteRulesDialogComponent]
 })
 export class AppModule { }
