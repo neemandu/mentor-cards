@@ -53,6 +53,12 @@ mat-button-toggle p {
   font-weight: 600;
 }
 
+#reminder {
+  margin-top: 1rem;
+  font-size: large;
+  font-weight: 600;
+}
+
 .iconButton {
   top: -1rem;
   right: -95%;
@@ -72,6 +78,7 @@ mat-horizontal-stepper {
   max-width: 30vw;
   margin-top: 10px;
   margin-bottom: -10px;
+  font-weight: 600;
 }
 
 .instruction {

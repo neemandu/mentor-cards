@@ -160,7 +160,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
     if(plan.discount != 0)
       return Math.floor((plan.discount/plan.price) * 100) + '% הנחה'
     else 
-      return 'אין הנחה';
+      return '- - - -';
   }
 
   get programJsonExtra(): string {

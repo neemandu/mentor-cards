@@ -2,8 +2,8 @@
   <button class="iconButton" mat-icon-button (click)="closeDialog()">
     <mat-icon>highlight_off</mat-icon>
   </button>
-  <mat-horizontal-stepper [linear]="isLinear" #stepper label="כמות אנשים" (selectionChange)="stepChanged($event)">
-    <mat-step class="step" state="done" label="כמות אנשים">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper label="כמה תהיו?" (selectionChange)="stepChanged($event)">
+    <mat-step class="step" state="done" label="כמה תהיו?">
       <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople"
         (change)="changePack();fixParameters();">
         <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount"
@@ -21,7 +21,8 @@
       <div id="extraProgramData" *ngIf="programJsonExtra !== ''">
         <p>דגשים לתוכנית:</p>
         <p class="instruction">{{programJsonExtra}}</p>
-        <p class="instruction">לאחר תהליך הרישום תתאפשר הזנה של פרטי המשתמשים הנוספים.</p>
+        <!-- <p class="instruction">האדם שבוחר\ת את התוכנית הוא\היא המשתמש\ת-מנהל\ת קבוע\ה ובעל\ת הרשאות לביצוע שינויים</p> -->
+        <p class="instruction">תמיד אפשר להתחיל בעצמכם ובהמשך לשדרג תכנית</p>
       </div>
       <div>
         <button mat-button matStepperNext>הבא
@@ -29,7 +30,7 @@
         </button><br>
       </div>
     </mat-step>
-    <mat-step state="done" label="כמות ערכות">
+    <mat-step state="done" label="בכמה ערכות תשתמשו?">
       <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks" (change)="fixParameters();">
         <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan">
           <!-- <div> -->
@@ -52,13 +53,8 @@
         </mat-button-toggle>
       </mat-button-toggle-group>
       <div id="extraProgramData">
-        <p>כל ערכה כוללת:</p>
-        <ul style="text-align: initial; margin-right: -15%;">
-          <li class="instruction">לפחות 40 קלפים</li>
-          <li class="instruction">ספר הדרכה</li>
-        </ul>
-        <!-- <p class="instruction">לפחות 40 קלפים</p>
-        <p class="instruction">ספר הדרכה</p> -->
+        <p>בתקופת הניסיון, כל הערכות פתוחות לשימושכם!</p>
+        <p>לא אהבתם ערכה מסוימת? לא נורא! כל חודש אתם יכולים להחליף ערכה!</p>
       </div>
       <div>
         <button mat-button matStepperPrevious>
@@ -67,22 +63,24 @@
         <button mat-button matStepperNext>הבא<mat-icon>navigate_before</mat-icon></button>
       </div>
     </mat-step>
-    <mat-step state="done" label="סיכום הזמנה">
+    <mat-step state="done" label="אז מה סיכמנו?">
       <p>כמות משתמשים: {{numOfUsersSelected}}</p>
       <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p>
       <p *ngIf="packSelected.discount !== 0">מחיר לפני הנחה: {{packSelected.price.toFixed(2)}} ש"ח</p>
       <p id="real_price">מחיר סופי לחבילה זו: {{(packSelected.price - packSelected.discount).toFixed(2)}} ש"ח</p>
-      <button mat-button matStepperPrevious>
-        <mat-icon>navigate_next</mat-icon>הקודם
-      </button>
+      <p id="reminder" style="margin-top: 1rem;font-size: revert;">30 ימי ניסיון חינם. בטלו בכל עת.</p>
+      <p style="font-size: 1rem;">למעבר לתשלום באמצעות PayPal או אשראי לחצו על הכפתור</p>
       <div id="paypal" [hidden]="changedPlansThisMonth || ownsCurrentPlanLabel"
-        style="width: 70%; margin-top: 2%; margin-bottom: -3%;" #paypal></div>
+        style="width: 70%;" #paypal></div>
       <p id="cantChangePlanLabel" *ngIf="changedPlansThisMonth">
         <mat-icon [inline]=true>block</mat-icon>אין להחליף חבילה יותר מפעם בחודש
       </p>
       <p id="ownsCurrentPlanLabel" *ngIf="ownsCurrentPlanLabel">
         <mat-icon [inline]=true>done</mat-icon>את\ה רשום לחבילה זו כבר
       </p>
+      <button mat-button matStepperPrevious>
+        <mat-icon>navigate_next</mat-icon>הקודם
+      </button>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
