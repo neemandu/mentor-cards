@@ -6,21 +6,36 @@
         </div>
 
         <div class="d-flex flex-row">
-            <div id="instructions" style="margin-left: 5rem;">
+            <div id="instructions">
                 <div class="user-info-section">
-                    <h2>הוראות שימוש</h2>
+                    <h2>הוראות לניהול הקבוצה</h2>
                     <div class="line line-short"></div>
                 </div>
                 <div id="instructions-content">
                     <ol>
-                        <li>ניתן ללחוץ על כפתור 'הוספת משתמש' על מנת להוסיף משתמש חדש לקבוצה</li>
-                        <ul>
-                            <li>יש לתת למשתמש את קוד הקבוצה: <b>{{userData.groupId}}</b></li>
+                        <li>להוספת משתמש חדש לקבוצה לחצו על 'הוספת משתמש'</li>
+                        <!-- <ul>
+                            <li>יש לשלוח למשתמשים שנוספו את קוד הקבוצה: <b>{{userData.groupId}}</b></li>
+                            <li>על המשתמש להרשם לאתר באמצעות המייל שהוזן עבורו בקבוצה</li>
+                            <li>לאחר ההרשמה, על המשתמש להזין את הקוד הקבוצה בעמוד ההרשמה לחבילה תחת הכותרת 'אתם חלק מקבוצה?'
+                            </li>
                             <li>יש לשמור על קוד הקבוצה חשאי ולא להפיצו</li>
-                        </ul>
+                        </ul> -->
                         <li>ניתן ללחוץ על כפתור העיפרון בטבלה על מנת לערוך משתמש קיים</li>
                         <li>ניתן ללחוץ על כפתור הפח על מנת למחוק משתמש קיים מהקבוצה</li>
                         <li>כל שינוי יבקש אימות ובסופו תתבצע שמירה במערכת</li>
+                    </ol>
+                </div>
+                <div class="user-info-section">
+                    <h2>הוראות לצירוף משתמשים חדשים</h2>
+                    <div class="line line-medium"></div>
+                </div>
+                <div id="instructions-content">
+                    <ol>
+                        <li>בקש מהמשתמשים החדשים להיכנס לאתר ולהירשם באמצעות כתובת המייל שהוזנה עבורם בדף זה</li>
+                        <li>בעמוד הראשי באתר בקש מהמשתמשים ללחוץ על כפתור "אתם חלק מקבוצה?" ולהזין את קוד הקבוצה:
+                            <b>{{userData.groupId}}</b></li>
+                        <li>המשתמשים החדשים יכולים להתחיל להשתמש בקלפים!</li>
                     </ol>
                 </div>
             </div>
@@ -67,7 +82,8 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-                <button class="action-button" type="button" (click)="addEditGroupUser()" [disabled]="groupData.groupUsers.length == userData.subscription.subscriptionPlan.numberOfUsers">
+                <button class="action-button" type="button" (click)="addEditGroupUser()"
+                    [disabled]="groupData.groupUsers.length == userData.subscription.subscriptionPlan.numberOfUsers">
                     הוספת משתמש
                 </button>
             </div>

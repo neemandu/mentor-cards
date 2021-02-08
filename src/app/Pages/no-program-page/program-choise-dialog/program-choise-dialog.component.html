@@ -8,8 +8,6 @@
         (change)="changePack();fixParameters();">
         <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount"
           matTooltip="{{getProgramJsonDescription(userAmount)}}" [matTooltipClass]="{'tooltip-class' : true}">
-          <!-- {{userAmount}}
-          משתמשים -->
           <p>
             {{getAmountOfUsersDesc(userAmount)}}
           </p>
@@ -21,7 +19,6 @@
       <div id="extraProgramData" *ngIf="programJsonExtra !== ''">
         <p>דגשים לתוכנית:</p>
         <p class="instruction">{{programJsonExtra}}</p>
-        <!-- <p class="instruction">האדם שבוחר\ת את התוכנית הוא\היא המשתמש\ת-מנהל\ת קבוע\ה ובעל\ת הרשאות לביצוע שינויים</p> -->
         <p class="instruction">תמיד אפשר להתחיל בעצמכם ובהמשך לשדרג תכנית</p>
       </div>
       <div>
@@ -33,10 +30,6 @@
     <mat-step state="done" label="בכמה ערכות תשתמשו?">
       <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks" (change)="fixParameters();">
         <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan">
-          <!-- <div> -->
-          <!-- <p>
-            {{plan.numberOfCardPacks == -1 ? 'כל הערכות' : plan.numberOfCardPacks}}
-          </p> -->
           <p>
             {{getNumOfPacksDesc(plan.numberOfCardPacks)}}
           </p>

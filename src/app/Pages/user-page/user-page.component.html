@@ -18,7 +18,7 @@
             <p>כמות ערכות: {{userData.subscription.subscriptionPlan.numberOfCardPacks | amountOfPacksView}}</p>
             <p>תאריך הרשמה לחבילה: {{userData.subscription.startDate | date:'d/M/y'}}</p>
             <p>תאריך תחילת תשלום: {{userData.startPayingSinceDate | date:'d/M/y'}}</p>
-            <p>מחיר עבור חבילה נוכחית: {{(userData.subscription.subscriptionPlan.price -
+            <p>מחיר עבור החבילה הנוכחית: {{(userData.subscription.subscriptionPlan.price -
                 userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
             <p *ngIf="!inTrialMonth">ערכות נותרות להחלפה החודש: {{amountOfPacksToChangeThisMonth}}</p>

@@ -107,6 +107,10 @@ video {
   width: 10vw;
 }
 
+.line-medium {
+  width: 15vw;
+}
+
 .changePlanBtn {
   height: 3rem;
   width: 10rem;
@@ -134,4 +138,9 @@ ol {
   text-align: initial;
   font-size: medium;
   line-height: 2rem;
+}
+
+#instructions {
+  margin-left: 5rem;
+  max-width: 26vw;
 }

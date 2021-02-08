@@ -1,9 +1,9 @@
 <mat-toolbar class="d-flex justify-content-between">
-    <span class="title" *ngIf="!data">הוספת משתמש חדש לקבוצה</span>
-    <span class="title" *ngIf="data">עריכת משתמש קיים</span>
     <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
+    <span class="title" *ngIf="!data">הוספת משתמש חדש לקבוצה</span>
+    <span class="title" *ngIf="data">עריכת משתמש קיים</span>
 </mat-toolbar>
 <div class="line"></div>
 
@@ -22,8 +22,9 @@
         <mat-form-field>
             <mat-label>תפקיד</mat-label>
             <mat-select formControlName="role">
-                <mat-option value="ADMIN">מנהל</mat-option>
-                <mat-option value="SINGLE_USER">משתמש רגיל</mat-option>
+                <mat-option value="ADMIN" [matTooltipClass]="{'tooltip-class' : true}" [matTooltipPosition]="'left'"
+                    matTooltip="בעל הרשאות לעריכה של משתמשי הקבוצה">מנהל</mat-option>
+                <mat-option value="SINGLE_USER">משתמש</mat-option>
             </mat-select>
         </mat-form-field>
     </form>
