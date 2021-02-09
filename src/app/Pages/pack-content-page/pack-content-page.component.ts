@@ -80,7 +80,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         if (this.selectedCards.length < 5)
           this.selectedCards.push(card)
         else {
-          this.cardsService._snackBar.open('יש לבחור עד 5 קלפים', '', {
+          this.cardsService._snackBar.open('ניתן לבחור עד 5 קלפים', '', {
             duration: 1500,
             panelClass: ['rtl-snackbar']
           });
