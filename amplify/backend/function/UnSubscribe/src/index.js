@@ -25,6 +25,67 @@ Amplify Params - DO NOT EDIT */
 const { env, getgroups } = require("process");
 var AWS = require("aws-sdk");
 
+async function removeUserFromCardsPack(cardsPack, username){
+    
+    console.log("removing user: " + username + " from pack: " +cardsPack.id);
+
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
+
+    var isChanged = false;
+    for (var i = 0; i < cardsPack.usersIds.length; i++) {
+        if(cardsPack.usersIds == username){
+            cardsPack.usersIds.splice(i, 1);
+            isChanged = true;
+            break;
+        }
+    }
+    
+    if(isChanged){
+        var cardPackParams = {
+            TableName: cardPackTable,
+            Key:{
+                "id" : cardsPack.id
+            },
+            Item: cardsPack
+        };
+    
+    
+        await docClient.put(cardPackParams, function(err, data) {
+            if (err) {
+                console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+                //callback("Failed");
+            } else {
+                console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+                //callback(null, data);
+            }
+        }).promise();
+    }  
+}
+
+async function removeUserFromAllPacks(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var packsTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
+
+    var username = user.username;
+    var params = {
+        TableName : packsTable
+    };
+    console.log("searching for number of used packs for - " + user.username);
+    
+    await docClient.scan(params, function(err, data) {
+        if (err) {
+            console.error("Unable to read packs. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get packs succeeded:", JSON.stringify(data, null, 2));
+            data.Items.forEach(async function(item) {
+                await removeUserFromCardsPack(item, user.username);
+            });
+        }
+    }).promise();
+}
+
 async function getUserByUSerName(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
@@ -172,4 +233,6 @@ exports.handler = async (event) => {
         }
 
     }
+
+    await removeUserFromAllPacks(user);
 };
