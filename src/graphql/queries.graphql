@@ -25,65 +25,6 @@ query GetGroupById($input: GetGroupInput!) {
 query IsInGroup($input: GetGroupInput!) {
   IsInGroup(input: $input)
 }
-query GetCardsPack($id: ID!) {
-  getCardsPack(id: $id) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
-query ListCardsPacks(
-  $filter: ModelCardsPackFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      imgUrl
-      description
-      tags
-      categories
-      cards
-      cardsPreview
-      usersIds
-      groupsIds
-      users
-      guideBook {
-        subjects {
-          subjectName
-          subSubjects {
-            subSubjectName
-            questions
-          }
-        }
-      }
-      name
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetContactUsModel($id: ID!) {
   getContactUsModel(id: $id) {
     id
@@ -274,6 +215,65 @@ query ListSubscriptionPlans(
       numberOfCardPacks
       price
       discount
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCardsPack($id: ID!) {
+  getCardsPack(id: $id) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    createdAt
+    updatedAt
+  }
+}
+query ListCardsPacks(
+  $filter: ModelCardsPackFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      cardsPreview
+      usersIds
+      groupsIds
+      users
+      guideBook {
+        subjects {
+          subjectName
+          subSubjects {
+            subSubjectName
+            questions
+          }
+        }
+      }
+      name
       createdAt
       updatedAt
     }

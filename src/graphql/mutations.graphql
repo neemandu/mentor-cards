@@ -57,93 +57,6 @@ mutation JoinExistingGroup($input: joinExistingGroupInput!) {
 mutation DeleteGroupById($input: deleteGroupInput!) {
   DeleteGroupById(input: $input)
 }
-mutation CreateCardsPack(
-  $input: CreateCardsPackInput!
-  $condition: ModelCardsPackConditionInput
-) {
-  createCardsPack(input: $input, condition: $condition) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateCardsPack(
-  $input: UpdateCardsPackInput!
-  $condition: ModelCardsPackConditionInput
-) {
-  updateCardsPack(input: $input, condition: $condition) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteCardsPack(
-  $input: DeleteCardsPackInput!
-  $condition: ModelCardsPackConditionInput
-) {
-  deleteCardsPack(input: $input, condition: $condition) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
   $condition: ModelContactUsModelConditionInput
@@ -308,6 +221,93 @@ mutation DeleteSubscriptionPlan(
     numberOfCardPacks
     price
     discount
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateCardsPack(
+  $input: CreateCardsPackInput!
+  $condition: ModelCardsPackConditionInput
+) {
+  createCardsPack(input: $input, condition: $condition) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCardsPack(
+  $input: UpdateCardsPackInput!
+  $condition: ModelCardsPackConditionInput
+) {
+  updateCardsPack(input: $input, condition: $condition) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCardsPack(
+  $input: DeleteCardsPackInput!
+  $condition: ModelCardsPackConditionInput
+) {
+  deleteCardsPack(input: $input, condition: $condition) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
     createdAt
     updatedAt
   }

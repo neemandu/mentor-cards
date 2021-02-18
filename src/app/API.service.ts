@@ -49,49 +49,20 @@ export type deleteGroupInput = {
   groupId: string;
 };
 
-export type CreateCardsPackInput = {
+export type CreateContactUsModelInput = {
   id?: string | null;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
   name?: string | null;
+  content?: string | null;
+  email?: string | null;
 };
 
-export type GuideBookInput = {
-  subjects?: Array<GuideBookSubjectInput | null> | null;
-};
-
-export type GuideBookSubjectInput = {
-  subjectName?: string | null;
-  subSubjects?: Array<SubSubjectInput | null> | null;
-};
-
-export type SubSubjectInput = {
-  subSubjectName?: string | null;
-  questions?: Array<string | null> | null;
-};
-
-export type ModelCardsPackConditionInput = {
-  imgUrl?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  tags?: ModelStringInput | null;
-  categories?: ModelStringInput | null;
-  cards?: ModelStringInput | null;
-  cardsPreview?: ModelStringInput | null;
-  usersIds?: ModelStringInput | null;
-  groupsIds?: ModelStringInput | null;
-  users?: ModelStringInput | null;
+export type ModelContactUsModelConditionInput = {
   name?: ModelStringInput | null;
-  and?: Array<ModelCardsPackConditionInput | null> | null;
-  or?: Array<ModelCardsPackConditionInput | null> | null;
-  not?: ModelCardsPackConditionInput | null;
+  content?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  and?: Array<ModelContactUsModelConditionInput | null> | null;
+  or?: Array<ModelContactUsModelConditionInput | null> | null;
+  not?: ModelContactUsModelConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -131,41 +102,6 @@ export type ModelSizeInput = {
   ge?: number | null;
   gt?: number | null;
   between?: Array<number | null> | null;
-};
-
-export type UpdateCardsPackInput = {
-  id: string;
-  imgUrl?: string | null;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
-  name?: string | null;
-};
-
-export type DeleteCardsPackInput = {
-  id?: string | null;
-};
-
-export type CreateContactUsModelInput = {
-  id?: string | null;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
-};
-
-export type ModelContactUsModelConditionInput = {
-  name?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  and?: Array<ModelContactUsModelConditionInput | null> | null;
-  or?: Array<ModelContactUsModelConditionInput | null> | null;
-  not?: ModelContactUsModelConditionInput | null;
 };
 
 export type UpdateContactUsModelInput = {
@@ -262,12 +198,36 @@ export type DeleteSubscriptionPlanInput = {
   id?: string | null;
 };
 
-export type GetGroupInput = {
-  id: string;
+export type CreateCardsPackInput = {
+  id?: string | null;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  usersIds?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  users?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
+  name?: string | null;
 };
 
-export type ModelCardsPackFilterInput = {
-  id?: ModelIDInput | null;
+export type GuideBookInput = {
+  subjects?: Array<GuideBookSubjectInput | null> | null;
+};
+
+export type GuideBookSubjectInput = {
+  subjectName?: string | null;
+  subSubjects?: Array<SubSubjectInput | null> | null;
+};
+
+export type SubSubjectInput = {
+  subSubjectName?: string | null;
+  questions?: Array<string | null> | null;
+};
+
+export type ModelCardsPackConditionInput = {
   imgUrl?: ModelStringInput | null;
   description?: ModelStringInput | null;
   tags?: ModelStringInput | null;
@@ -278,9 +238,42 @@ export type ModelCardsPackFilterInput = {
   groupsIds?: ModelStringInput | null;
   users?: ModelStringInput | null;
   name?: ModelStringInput | null;
-  and?: Array<ModelCardsPackFilterInput | null> | null;
-  or?: Array<ModelCardsPackFilterInput | null> | null;
-  not?: ModelCardsPackFilterInput | null;
+  and?: Array<ModelCardsPackConditionInput | null> | null;
+  or?: Array<ModelCardsPackConditionInput | null> | null;
+  not?: ModelCardsPackConditionInput | null;
+};
+
+export type UpdateCardsPackInput = {
+  id: string;
+  imgUrl?: string | null;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  usersIds?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  users?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
+  name?: string | null;
+};
+
+export type DeleteCardsPackInput = {
+  id?: string | null;
+};
+
+export type GetGroupInput = {
+  id: string;
+};
+
+export type ModelContactUsModelFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  content?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  and?: Array<ModelContactUsModelFilterInput | null> | null;
+  or?: Array<ModelContactUsModelFilterInput | null> | null;
+  not?: ModelContactUsModelFilterInput | null;
 };
 
 export type ModelIDInput = {
@@ -297,16 +290,6 @@ export type ModelIDInput = {
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
   size?: ModelSizeInput | null;
-};
-
-export type ModelContactUsModelFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  and?: Array<ModelContactUsModelFilterInput | null> | null;
-  or?: Array<ModelContactUsModelFilterInput | null> | null;
-  not?: ModelContactUsModelFilterInput | null;
 };
 
 export type ModelUserFilterInput = {
@@ -349,6 +332,23 @@ export type ModelSubscriptionPlanFilterInput = {
   not?: ModelSubscriptionPlanFilterInput | null;
 };
 
+export type ModelCardsPackFilterInput = {
+  id?: ModelIDInput | null;
+  imgUrl?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  tags?: ModelStringInput | null;
+  categories?: ModelStringInput | null;
+  cards?: ModelStringInput | null;
+  cardsPreview?: ModelStringInput | null;
+  usersIds?: ModelStringInput | null;
+  groupsIds?: ModelStringInput | null;
+  users?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  and?: Array<ModelCardsPackFilterInput | null> | null;
+  or?: Array<ModelCardsPackFilterInput | null> | null;
+  not?: ModelCardsPackFilterInput | null;
+};
+
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
@@ -384,93 +384,6 @@ export type CreateUserMutation = {
   groupId: string | null;
   numberOfUsedPacks: number | null;
   groupRole: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description: string | null;
-  tags: Array<string | null> | null;
-  categories: Array<string | null> | null;
-  cards: Array<string | null> | null;
-  cardsPreview: Array<string | null> | null;
-  usersIds: Array<string | null> | null;
-  groupsIds: Array<string | null> | null;
-  users: Array<string | null> | null;
-  guideBook: {
-    __typename: "GuideBook";
-    subjects: Array<{
-      __typename: "GuideBookSubject";
-      subjectName: string | null;
-      subSubjects: Array<{
-        __typename: "SubSubject";
-        subSubjectName: string | null;
-        questions: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description: string | null;
-  tags: Array<string | null> | null;
-  categories: Array<string | null> | null;
-  cards: Array<string | null> | null;
-  cardsPreview: Array<string | null> | null;
-  usersIds: Array<string | null> | null;
-  groupsIds: Array<string | null> | null;
-  users: Array<string | null> | null;
-  guideBook: {
-    __typename: "GuideBook";
-    subjects: Array<{
-      __typename: "GuideBookSubject";
-      subjectName: string | null;
-      subSubjects: Array<{
-        __typename: "SubSubject";
-        subSubjectName: string | null;
-        questions: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description: string | null;
-  tags: Array<string | null> | null;
-  categories: Array<string | null> | null;
-  cards: Array<string | null> | null;
-  cardsPreview: Array<string | null> | null;
-  usersIds: Array<string | null> | null;
-  groupsIds: Array<string | null> | null;
-  users: Array<string | null> | null;
-  guideBook: {
-    __typename: "GuideBook";
-    subjects: Array<{
-      __typename: "GuideBookSubject";
-      subjectName: string | null;
-      subSubjects: Array<{
-        __typename: "SubSubject";
-        subSubjectName: string | null;
-        questions: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -622,32 +535,7 @@ export type DeleteSubscriptionPlanMutation = {
   updatedAt: string;
 };
 
-export type GetGroupByIdQuery = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    email: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type GetCardsPackQuery = {
+export type CreateCardsPackMutation = {
   __typename: "CardsPack";
   id: string;
   imgUrl: string;
@@ -676,37 +564,87 @@ export type GetCardsPackQuery = {
   updatedAt: string;
 };
 
-export type ListCardsPacksQuery = {
-  __typename: "ModelCardsPackConnection";
-  items: Array<{
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description: string | null;
-    tags: Array<string | null> | null;
-    categories: Array<string | null> | null;
-    cards: Array<string | null> | null;
-    cardsPreview: Array<string | null> | null;
-    usersIds: Array<string | null> | null;
-    groupsIds: Array<string | null> | null;
-    users: Array<string | null> | null;
-    guideBook: {
-      __typename: "GuideBook";
-      subjects: Array<{
-        __typename: "GuideBookSubject";
-        subjectName: string | null;
-        subSubjects: Array<{
-          __typename: "SubSubject";
-          subSubjectName: string | null;
-          questions: Array<string | null> | null;
-        } | null> | null;
+export type UpdateCardsPackMutation = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
       } | null> | null;
-    } | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteCardsPackMutation = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GetGroupByIdQuery = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    email: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
     name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
-  } | null> | null;
-  nextToken: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type GetContactUsModelQuery = {
@@ -901,7 +839,7 @@ export type ListSubscriptionPlansQuery = {
   nextToken: string | null;
 };
 
-export type OnCreateCardsPackSubscription = {
+export type GetCardsPackQuery = {
   __typename: "CardsPack";
   id: string;
   imgUrl: string;
@@ -930,62 +868,37 @@ export type OnCreateCardsPackSubscription = {
   updatedAt: string;
 };
 
-export type OnUpdateCardsPackSubscription = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description: string | null;
-  tags: Array<string | null> | null;
-  categories: Array<string | null> | null;
-  cards: Array<string | null> | null;
-  cardsPreview: Array<string | null> | null;
-  usersIds: Array<string | null> | null;
-  groupsIds: Array<string | null> | null;
-  users: Array<string | null> | null;
-  guideBook: {
-    __typename: "GuideBook";
-    subjects: Array<{
-      __typename: "GuideBookSubject";
-      subjectName: string | null;
-      subSubjects: Array<{
-        __typename: "SubSubject";
-        subSubjectName: string | null;
-        questions: Array<string | null> | null;
+export type ListCardsPacksQuery = {
+  __typename: "ModelCardsPackConnection";
+  items: Array<{
+    __typename: "CardsPack";
+    id: string;
+    imgUrl: string;
+    description: string | null;
+    tags: Array<string | null> | null;
+    categories: Array<string | null> | null;
+    cards: Array<string | null> | null;
+    cardsPreview: Array<string | null> | null;
+    usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
+    users: Array<string | null> | null;
+    guideBook: {
+      __typename: "GuideBook";
+      subjects: Array<{
+        __typename: "GuideBookSubject";
+        subjectName: string | null;
+        subSubjects: Array<{
+          __typename: "SubSubject";
+          subSubjectName: string | null;
+          questions: Array<string | null> | null;
+        } | null> | null;
       } | null> | null;
-    } | null> | null;
-  } | null;
-  name: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteCardsPackSubscription = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description: string | null;
-  tags: Array<string | null> | null;
-  categories: Array<string | null> | null;
-  cards: Array<string | null> | null;
-  cardsPreview: Array<string | null> | null;
-  usersIds: Array<string | null> | null;
-  groupsIds: Array<string | null> | null;
-  users: Array<string | null> | null;
-  guideBook: {
-    __typename: "GuideBook";
-    subjects: Array<{
-      __typename: "GuideBookSubject";
-      subjectName: string | null;
-      subSubjects: Array<{
-        __typename: "SubSubject";
-        subSubjectName: string | null;
-        questions: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name: string | null;
-  createdAt: string;
-  updatedAt: string;
+    } | null;
+    name: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
 };
 
 export type OnCreateContactUsModelSubscription = {
@@ -1135,6 +1048,93 @@ export type OnDeleteSubscriptionPlanSubscription = {
   updatedAt: string;
 };
 
+export type OnCreateCardsPackSubscription = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateCardsPackSubscription = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteCardsPackSubscription = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 @Injectable({
   providedIn: "root"
 })
@@ -1277,141 +1277,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
-  }
-  async CreateCardsPack(
-    input: CreateCardsPackInput,
-    condition?: ModelCardsPackConditionInput
-  ): Promise<CreateCardsPackMutation> {
-    const statement = `mutation CreateCardsPack($input: CreateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
-        createCardsPack(input: $input, condition: $condition) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          users
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateCardsPackMutation>response.data.createCardsPack;
-  }
-  async UpdateCardsPack(
-    input: UpdateCardsPackInput,
-    condition?: ModelCardsPackConditionInput
-  ): Promise<UpdateCardsPackMutation> {
-    const statement = `mutation UpdateCardsPack($input: UpdateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
-        updateCardsPack(input: $input, condition: $condition) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          users
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateCardsPackMutation>response.data.updateCardsPack;
-  }
-  async DeleteCardsPack(
-    input: DeleteCardsPackInput,
-    condition?: ModelCardsPackConditionInput
-  ): Promise<DeleteCardsPackMutation> {
-    const statement = `mutation DeleteCardsPack($input: DeleteCardsPackInput!, $condition: ModelCardsPackConditionInput) {
-        deleteCardsPack(input: $input, condition: $condition) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          users
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteCardsPackMutation>response.data.deleteCardsPack;
   }
   async CreateContactUsModel(
     input: CreateContactUsModelInput,
@@ -1704,6 +1569,141 @@ export class APIService {
     )) as any;
     return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
   }
+  async CreateCardsPack(
+    input: CreateCardsPackInput,
+    condition?: ModelCardsPackConditionInput
+  ): Promise<CreateCardsPackMutation> {
+    const statement = `mutation CreateCardsPack($input: CreateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
+        createCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          users
+          guideBook {
+            __typename
+            subjects {
+              __typename
+              subjectName
+              subSubjects {
+                __typename
+                subSubjectName
+                questions
+              }
+            }
+          }
+          name
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateCardsPackMutation>response.data.createCardsPack;
+  }
+  async UpdateCardsPack(
+    input: UpdateCardsPackInput,
+    condition?: ModelCardsPackConditionInput
+  ): Promise<UpdateCardsPackMutation> {
+    const statement = `mutation UpdateCardsPack($input: UpdateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
+        updateCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          users
+          guideBook {
+            __typename
+            subjects {
+              __typename
+              subjectName
+              subSubjects {
+                __typename
+                subSubjectName
+                questions
+              }
+            }
+          }
+          name
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCardsPackMutation>response.data.updateCardsPack;
+  }
+  async DeleteCardsPack(
+    input: DeleteCardsPackInput,
+    condition?: ModelCardsPackConditionInput
+  ): Promise<DeleteCardsPackMutation> {
+    const statement = `mutation DeleteCardsPack($input: DeleteCardsPackInput!, $condition: ModelCardsPackConditionInput) {
+        deleteCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          users
+          guideBook {
+            __typename
+            subjects {
+              __typename
+              subjectName
+              subSubjects {
+                __typename
+                subSubjectName
+                questions
+              }
+            }
+          }
+          name
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteCardsPackMutation>response.data.deleteCardsPack;
+  }
   async GetGroupById(input: GetGroupInput): Promise<GetGroupByIdQuery> {
     const statement = `query GetGroupById($input: GetGroupInput!) {
         GetGroupById(input: $input) {
@@ -1750,99 +1750,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.IsInGroup;
-  }
-  async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
-    const statement = `query GetCardsPack($id: ID!) {
-        getCardsPack(id: $id) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          users
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetCardsPackQuery>response.data.getCardsPack;
-  }
-  async ListCardsPacks(
-    filter?: ModelCardsPackFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCardsPacksQuery> {
-    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users
-            guideBook {
-              __typename
-              subjects {
-                __typename
-                subjectName
-                subSubjects {
-                  __typename
-                  subSubjectName
-                  questions
-                }
-              }
-            }
-            name
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async GetContactUsModel(id: string): Promise<GetContactUsModelQuery> {
     const statement = `query GetContactUsModel($id: ID!) {
@@ -2160,12 +2067,9 @@ export class APIService {
     )) as any;
     return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
   }
-  OnCreateCardsPackListener: Observable<
-    SubscriptionResponse<OnCreateCardsPackSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateCardsPack {
-        onCreateCardsPack {
+  async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
+    const statement = `query GetCardsPack($id: ID!) {
+        getCardsPack(id: $id) {
           __typename
           id
           imgUrl
@@ -2193,84 +2097,69 @@ export class APIService {
           createdAt
           updatedAt
         }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnCreateCardsPackSubscription>>;
-
-  OnUpdateCardsPackListener: Observable<
-    SubscriptionResponse<OnUpdateCardsPackSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateCardsPack {
-        onUpdateCardsPack {
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetCardsPackQuery>response.data.getCardsPack;
+  }
+  async ListCardsPacks(
+    filter?: ModelCardsPackFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCardsPacksQuery> {
+    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
+        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          users
-          guideBook {
+          items {
             __typename
-            subjects {
+            id
+            imgUrl
+            description
+            tags
+            categories
+            cards
+            cardsPreview
+            usersIds
+            groupsIds
+            users
+            guideBook {
               __typename
-              subjectName
-              subSubjects {
+              subjects {
                 __typename
-                subSubjectName
-                questions
+                subjectName
+                subSubjects {
+                  __typename
+                  subSubjectName
+                  questions
+                }
               }
             }
+            name
+            createdAt
+            updatedAt
           }
-          name
-          createdAt
-          updatedAt
+          nextToken
         }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdateCardsPackSubscription>>;
-
-  OnDeleteCardsPackListener: Observable<
-    SubscriptionResponse<OnDeleteCardsPackSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteCardsPack {
-        onDeleteCardsPack {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          users
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnDeleteCardsPackSubscription>>;
-
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCardsPacksQuery>response.data.listCardsPacks;
+  }
   OnCreateContactUsModelListener: Observable<
     SubscriptionResponse<OnCreateContactUsModelSubscription>
   > = API.graphql(
@@ -2489,4 +2378,115 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteSubscriptionPlanSubscription>>;
+
+  OnCreateCardsPackListener: Observable<
+    SubscriptionResponse<OnCreateCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateCardsPack {
+        onCreateCardsPack {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          users
+          guideBook {
+            __typename
+            subjects {
+              __typename
+              subjectName
+              subSubjects {
+                __typename
+                subSubjectName
+                questions
+              }
+            }
+          }
+          name
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateCardsPackSubscription>>;
+
+  OnUpdateCardsPackListener: Observable<
+    SubscriptionResponse<OnUpdateCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateCardsPack {
+        onUpdateCardsPack {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          users
+          guideBook {
+            __typename
+            subjects {
+              __typename
+              subjectName
+              subSubjects {
+                __typename
+                subSubjectName
+                questions
+              }
+            }
+          }
+          name
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateCardsPackSubscription>>;
+
+  OnDeleteCardsPackListener: Observable<
+    SubscriptionResponse<OnDeleteCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteCardsPack {
+        onDeleteCardsPack {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          users
+          guideBook {
+            __typename
+            subjects {
+              __typename
+              subjectName
+              subSubjects {
+                __typename
+                subSubjectName
+                questions
+              }
+            }
+          }
+          name
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteCardsPackSubscription>>;
 }

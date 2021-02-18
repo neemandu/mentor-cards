@@ -60,19 +60,31 @@ input CreateUserInput {
 
 type CardsPack 
 @model 
+@auth(rules: [{ allow: public, provider: apiKey }])
 {
-  id: ID! @aws_api_key
-  imgUrl: String! @aws_api_key
-  description: String @aws_api_key
-  tags: [String] @aws_api_key
-  categories: [String] @aws_api_key
-  cards: [String] @aws_cognito_user_pools @function(name: "GetCardsImages-${env}")
-  cardsPreview: [String] @aws_api_key
-  usersIds: [String] @aws_cognito_user_pools
-  groupsIds: [String] @aws_cognito_user_pools
-  users: [String] @aws_cognito_user_pools
-  guideBook: GuideBook @aws_cognito_user_pools 
-  name: String @aws_api_key
+  id: ID! 
+  imgUrl: String! 
+  description: String 
+  tags: [String] 
+  categories: [String] 
+  cards: [String] @auth(rules: [{ allow: private, 
+                                  operations: [read, create], 
+                                  provider: userPools  }]) 
+                  @function(name: "GetCardsImages-${env}")
+  cardsPreview: [String] 
+  usersIds: [String] @auth(rules: [{ allow: private, 
+                                  operations: [read, create], 
+                                  provider: userPools  }]) 
+  groupsIds: [String] @auth(rules: [{ allow: private, 
+                                  operations: [read, create], 
+                                  provider: userPools  }]) 
+  users: [String] @auth(rules: [{ allow: private, 
+                                  operations: [read, create], 
+                                  provider: userPools  }]) 
+  guideBook: GuideBook @auth(rules: [{ allow: private, 
+                                  operations: [read, create], 
+                                  provider: userPools  }]) 
+  name: String 
 }
 
 type GuideBook{

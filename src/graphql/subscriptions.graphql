@@ -1,82 +1,4 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateCardsPack {
-  onCreateCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateCardsPack {
-  onUpdateCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCardsPack {
-  onDeleteCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateContactUsModel {
   onCreateContactUsModel {
     id
@@ -214,6 +136,84 @@ subscription OnDeleteSubscriptionPlan {
     numberOfCardPacks
     price
     discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCardsPack {
+  onCreateCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCardsPack {
+  onUpdateCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCardsPack {
+  onDeleteCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
     createdAt
     updatedAt
   }

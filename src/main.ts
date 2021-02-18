@@ -8,6 +8,14 @@ import Amplify from "aws-amplify";
 import aws_exports from "./aws-exports";
 Amplify.configure(aws_exports);
 
+Amplify.configure({
+  API: {
+    graphql_headers: async () => ({
+        'x-api-key': aws_exports.aws_appsync_apiKey
+    })
+  }
+});
+
 if (environment.production) {
   enableProdMode();
 }

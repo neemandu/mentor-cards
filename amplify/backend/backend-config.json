@@ -33,7 +33,15 @@
               "userPoolId": "authmentorcards91f3dc29"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "description": "public info"
+              }
+            }
+          ]
         }
       }
     }
