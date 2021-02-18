@@ -22,7 +22,7 @@ export class PackComponent implements OnInit, OnDestroy {
   constructor(private cardsService: CardsService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    // console.log("packInfo", this.packInfo)
+    console.log("packInfo", this.packInfo)
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.fav = favorites.includes(this.packInfo.id)
     }));

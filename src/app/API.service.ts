@@ -2111,6 +2111,7 @@ export class APIService {
     limit?: number,
     nextToken?: string
   ): Promise<ListCardsPacksQuery> {
+    debugger
     const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
         listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
