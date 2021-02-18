@@ -3,7 +3,7 @@
         onloadedmetadata="this.muted = true; this.style.opacity='1'">
         <source src="assets\About video.mp4" type="video/mp4">
         <source src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4" type="video/mp4">
-    </video> -->
+        </video> -->
     <div class="content user-info" *ngIf="userData !== undefined">
         <div class="user-info-section">
             <h1>פרטי משתמש</h1>
@@ -22,15 +22,18 @@
                 userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
             <p *ngIf="!inTrialMonth">ערכות נותרות להחלפה החודש: {{amountOfPacksToChangeThisMonth}}</p>
+            <p (click)="openCancelDialogModal()" style="cursor: pointer; text-decoration: underline;">לביטול התוכנית לחץ
+                כאן</p>
             <p style="font-weight: 600;" *ngIf="inTrialMonth">החודש תוכלו להשתמש בכל הערכות ללא הגבלה</p>
         </div>
-        <div class="d-flex flex-row" *ngIf="userData.groupRole === 'ADMIN' || userData.subscription.subscriptionPlan.numberOfUsers == 1">
+        <div class="d-flex flex-row"
+            *ngIf="userData.groupRole === 'ADMIN' || userData.subscription.subscriptionPlan.numberOfUsers == 1">
             <button class="changePlanBtn" [disabled]="amountOfPlansToChangeThisMonth == 0" type="button"
-                (click)="openChooseProgramModal()">החלף תוכנית
+                (click)="openChooseProgramModal()">החליפו תוכנית
                 <span style="font-size: small;" *ngIf="amountOfPlansToChangeThisMonth == 0"><br>
                     הוחלפה תוכנית החודש
-                  </span></button>
-            <button class="changePlanBtn" type="button" (click)="openCancelDialogModal()">בטל הרשמה לתוכנית</button>
+                </span></button>
+            <!-- <button class="changePlanBtn" type="button" (click)="openCancelDialogModal()">לביטול התוכנית לחץ כאן</button> -->
         </div>
     </div>
 </div>

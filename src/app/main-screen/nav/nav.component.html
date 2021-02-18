@@ -4,7 +4,7 @@
       <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/home-page')">
         <mat-icon>home</mat-icon>
       </button>
-      <button type="button" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">
+      <button *ngIf="loggedIn" type="button" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">
         <mat-icon>account_circle</mat-icon>
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
@@ -17,15 +17,17 @@
           (click)="navigate('/app-group-management')">ניהול
           קבוצה</button>
         <button mat-menu-item *ngIf="loggedIn" (click)=logout()>התנתק</button>
-        <button mat-menu-item *ngIf="!loggedIn" (click)=signInSignUp()>התחברות\הרשמה</button>
+        <!-- <button mat-menu-item *ngIf="!loggedIn" (click)=signInSignUp()>התחברות\הרשמה</button> -->
       </mat-menu>
     </div>
-    <button type="button" *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
-      class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל
-      הערכות</button>
+    <button type="button" *ngIf="!loggedIn"
+      class="btn navbar-btn" (click)=signInSignUp()>התחברות\הרשמה</button>
+    <button type="button" class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button>
+    <!-- <button type="button" *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
+      class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button> -->
     <button type="button" *ngIf="!loggedIn || !userAttributes?.subscription || userAttributes?.status === 'NOPLAN'"
       class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
-      לדוגמא</button>
+      להתנסות</button>
     <!-- <button type="button" class="btn navbar-btn" *ngIf="userAttributes?.status === 'PLAN'" (click)="navigate('/all-packs-page')">כל
       הערכות</button> -->
     <button type="button" class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>

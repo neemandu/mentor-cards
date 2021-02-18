@@ -27,6 +27,7 @@ video {
 
 #top {
   font-size: xx-large;
+  line-height: 2rem;
 }
 
 #top-logo {
@@ -47,6 +48,7 @@ video {
   top: 30%;
   left: 25vw;
   width: 50%;
+  text-align: center;
 }
 
 button {

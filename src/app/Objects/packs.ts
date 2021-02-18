@@ -65,5 +65,4 @@ export class SubSubject {
         Object.assign(this, input);
         return this;
     }
-
 }

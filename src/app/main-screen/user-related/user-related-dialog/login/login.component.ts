@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       // console.log(userData);
       this.showHideLoading();
       this.userAuthService._snackBar.open('התחברות מוצלחת, ברוך הבא ' + userData.attributes.name + '!', '', {
-        duration: 3000,
+        duration: 5000,
         panelClass: ['rtl-snackbar']
       });
       this.userAuthService.loggedIn(userData);
@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit {
       this.newPasswordPhaseDisable();
       this.login = true;
       this.userAuthService._snackBar.open('סיסמתך שונתה בהצלחה. יש לבצע התחברות', '', {
-        duration: 3000,
+        duration: 5000,
         panelClass: ['rtl-snackbar']
       });
     })

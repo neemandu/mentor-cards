@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
   title = 'amplify-angular-auth';
-  showLogin: boolean = false;
+  showLogin: boolean = true;
 
 
   constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService) {
@@ -24,17 +24,20 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       if (this.authState === 'signedin') {
         // debugger
         this.showLogin = false;
+        localStorage.setItem('signedin','true')
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;
         this.userAuthService.loggedIn(this.user);
       }
       else if (this.authState === 'signin') {
         this.userAuthService.loggedOut();
+        localStorage.removeItem('signedin')
       }
       this.ref.detectChanges();
     })
@@ -70,7 +73,7 @@ const dict = {
     'Password': "סיסמא",
     'Email Address *': "כתובת אימייל לאימות *",
     'Email': "כתובת אימייל",
-    'Phone Number *': "מספר טלפון *",
+    'Phone Number *': "מספר טלפון * (לישראל בחר +972)",
     'Create Account': "צור משתמש",
     'Have an account?': "יש לך משתמש קיים?",
     'Sign in': "להתחברות",
@@ -93,6 +96,9 @@ const dict = {
     //Errors
     'Incorrect username or password.': 'שם משתמש או סיסמא אינם נכונים',
     'User does not exist.': 'שם משתמש זה לא קיים',
+    'User already exists.': 'משתמש כזה כבר קיים',
+    'Username/client id combination not found.': 'שם משתמש זה לא קיים',
+    'Confirmation code cannot be empty': 'קוד אימות אינו יכול להיות ריק',
     'Custom auth lambda trigger is not configured for the user pool.':'שגיאה בהתחברות, נסה שנית'
   }
 };

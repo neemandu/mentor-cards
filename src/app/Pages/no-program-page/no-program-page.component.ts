@@ -25,7 +25,7 @@ export class NoProgramPageComponent implements OnInit {
 
   openChooseProgramModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
     this.videoplayer.nativeElement.pause();
@@ -41,7 +41,7 @@ export class NoProgramPageComponent implements OnInit {
 
   openPostPurchaseSummeryModal(packSelected: SubscriptionPlan): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = packSelected;
     this.videoplayer.nativeElement.pause();
@@ -54,7 +54,7 @@ export class NoProgramPageComponent implements OnInit {
 
   openEnterGroupIdModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
     this.videoplayer.nativeElement.pause();

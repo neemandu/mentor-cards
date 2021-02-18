@@ -67,6 +67,7 @@ mat-button-toggle p {
 ::ng-deep .tooltip-class {
   font-size: 0.8rem;
   direction: rtl !important;
+  text-align: right;
 }
 
 mat-horizontal-stepper {

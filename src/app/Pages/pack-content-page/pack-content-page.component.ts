@@ -81,7 +81,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
           this.selectedCards.push(card)
         else {
           this.cardsService._snackBar.open('ניתן לבחור עד 5 קלפים', '', {
-            duration: 1500,
+            duration: 3000,
             panelClass: ['rtl-snackbar']
           });
         }
@@ -102,7 +102,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   openChosenCardsModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.maxHeight = '85vh';
     dialogConfig.data = this.selectedCards;
@@ -120,7 +120,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
     this.shuffle();
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.maxHeight = '85vh';
     dialogConfig.data = this.pack.cards;

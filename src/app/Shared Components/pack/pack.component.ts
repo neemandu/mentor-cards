@@ -40,7 +40,7 @@ export class PackComponent implements OnInit, OnDestroy {
 
   openPreviewDialog(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.packInfo;
     const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);

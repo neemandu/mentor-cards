@@ -43,7 +43,7 @@ export class GroupManagementComponent implements OnInit {
 
   addEditGroupUser(groupUser?: GroupUser): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = groupUser;
     const dialogRef = this.dialog.open(NewEditGroupUserDialogComponent, dialogConfig);
@@ -72,7 +72,7 @@ export class GroupManagementComponent implements OnInit {
           console.log("file: group-management.component.ts ~ line 73 ~ this.api.UpdateGroupUsersList ~ reject", reject)
           this.overlaySpinnerService.changeOverlaySpinner(false)
           this.userAuthService._snackBar.open('שגיאה בשמירת הקבוצה, יש לרענן עמוד ולנסות שנית', '', {
-            duration: 3000,
+            duration: 5000,
             panelClass: ['rtl-snackbar']
           });
         })
@@ -82,9 +82,9 @@ export class GroupManagementComponent implements OnInit {
 
   deleteGroupMember(groupUser: GroupUser): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("מחיקת משתמש", "האם למחוק משתמש זה?", "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("מחיקת משתמש", ["האם למחוק משתמש זה?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
       dialogSub.unsubscribe();
