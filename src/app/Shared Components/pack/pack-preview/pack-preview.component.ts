@@ -63,7 +63,7 @@ export class PackPreviewComponent implements OnInit {
 
   openChooseProgramModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
@@ -76,9 +76,9 @@ export class PackPreviewComponent implements OnInit {
 
   openExchangePackApprovalModal(pack): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData('החלפת ערכות', 'ערכת `' + pack.description + '` תוחלף בערכת `' + this.data.description + '`', 'אישור', 'ביטול')
+    dialogConfig.data = new DynamicDialogData('החלפת ערכות',[ 'ערכת `' + pack.description + '` תוחלף בערכת `' + this.data.description + '`','שימו לב - ניתן להחליף ערכת קלפים אחת פעם בחודש בהתאם למועד החיוב'], 'אישור', 'ביטול')
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();

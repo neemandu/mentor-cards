@@ -9,8 +9,8 @@
       <p class="content">{{data.categories}}</p>
     </div>
     <div class="d-flex flex-column justify-content-center">
-      <p class="sub-header">תגיות</p>
-      <p class="content">{{data.tags}}</p>
+      <p class="sub-header">תיאור</p>
+      <p class="content">{{data.description}}</p>
     </div>
   </div>
   <div id="example-cards" style="display: contents;">
@@ -31,10 +31,10 @@
     <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu"
       [disabled]="!exchangePackButtonVisible || exchangePackButtonVisibleNothingToChange">החלף ערכה בזו
       <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
-        הוחלפה חבילה החודש
+        הוחלפה ערכה החודש
       </span>
       <span style="font-size: small;" *ngIf="exchangePackButtonVisible && exchangePackButtonVisibleNothingToChange"><br>
-        אין חבילות ברשותך
+        אין ערכות ברשותך
       </span>
     </button>
     <button class="action-button" type="button" (click)="openChooseProgramModal()"

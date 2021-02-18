@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserData } from 'src/app/Objects/user-related';
@@ -23,7 +24,8 @@ export class UserPageComponent implements OnInit {
   Subscription: Subscription = new Subscription();
   userData: UserData;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog, private cardsService: CardsService) {
+  constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog,
+    private cardsService: CardsService, private api: APIService) {
     this.userData = this.userAuthService.userData;
     console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
@@ -41,7 +43,7 @@ export class UserPageComponent implements OnInit {
    */
   openChooseProgramModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
     // this.videoplayer.nativeElement.pause();
@@ -61,14 +63,34 @@ export class UserPageComponent implements OnInit {
    */
   openCancelDialogModal(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ביטול חבילה", "האם לבטל הרשמה לחבילה זו?", "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("ביטול חבילה", ["האם לבטל הרשמה לחבילה זו?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
       if (res) {
-        console.log("🚀 ~ file: user-page.component.ts ~ line 54 ~ UserPageComponent ~ dialogSub ~ res", res)
+        this.overlaySpinnerService.changeOverlaySpinner(true)
+        this.userAuthService.cancelPayPalSubscription().subscribe(res => {
+          // console.log("file: user-page.component.ts ~ line 75 ~ this.userAuthService.cancelPayPalSubscription ~ res", res)
+          this.api.Unsubscribe({ 'username': this.userData.username }).then(() => {
+            this.overlaySpinnerService.changeOverlaySpinner(false)
+            window.location.reload();
+            this.userAuthService._snackBar.open('בוטלה התכנית. עצוב לנו לראות אתכם עוזבים, ואנו מקווים לראותכם שוב בעתיד', '', {
+              duration: 10000,
+              panelClass: ['rtl-snackbar']
+            });
+          }, reject => {
+            console.log("file: user-page.component.ts ~ line 77 ~ this.api.Unsubscribe ~ reject", reject)
+            this.overlaySpinnerService.changeOverlaySpinner(false)
+            this.userAuthService._snackBar.open('שגיאה בביטול התכנית. נסו שנית בעוד מספר דקות', '', {
+              duration: 10000,
+              panelClass: ['rtl-snackbar']
+            });
+          })
+        }, error => {
+          console.log("file: user-page.component.ts ~ line 91 ~ this.userAuthService.cancelPayPalSubscription ~ error", error)
+        })
         /** TODO
          * 1. Cancel button
          * 2. Add myself to group modal (here and in no-program-page)

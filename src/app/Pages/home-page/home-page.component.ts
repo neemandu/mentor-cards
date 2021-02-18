@@ -31,11 +31,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     }
 
     signInSignUp(): void {
-        // if (!this.userAuthService.userData)
         this.userAuthService.showSignInModal();
-        // else {
-        //     this.navigate('/all-packs-page')
-        // }
     }
 
     ngOnDestroy(): void {

@@ -7,9 +7,11 @@
 <div class="line"></div>
 
 <div mat-dialog-content>
-    <p style="text-align: right;">{{data.content}}</p>
+    <p *ngFor="let line of data.content" style="text-align: right;">{{line}}</p>
 </div>
 <div class="buttons" mat-dialog-actions>
-    <button id="approveBtn" *ngIf="data.acceptButton !== ''" mat-raised-button [mat-dialog-close]="true">{{data.acceptButton}}</button>
-    <button id="denyBtn" *ngIf="data.denyButton !== ''" mat-raised-button (click)="closeDialog()">{{data.denyButton}}</button>
+    <button id="approveBtn" *ngIf="data.acceptButton !== ''" mat-raised-button
+        [mat-dialog-close]="true">{{data.acceptButton}}</button>
+    <button id="denyBtn" *ngIf="data.denyButton !== ''" mat-raised-button
+        (click)="closeDialog()">{{data.denyButton}}</button>
 </div>

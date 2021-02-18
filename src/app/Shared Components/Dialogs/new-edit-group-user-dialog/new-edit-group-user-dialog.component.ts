@@ -30,9 +30,9 @@ export class NewEditGroupUserDialogComponent implements OnInit {
 
   saveChanges(): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("שמירת משתמש", "האם לשמור משתמש זה?", "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("שמירת משתמש", ["האם לשמור משתמש זה?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
       dialogSub.unsubscribe();

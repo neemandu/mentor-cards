@@ -12,6 +12,7 @@ export class UserData {
     status: string;
     subscription: Subscription;
     startPayingSinceDate: Date;
+    username: string;
 
     deseralize(input: any) {
         Object.assign(this, input);

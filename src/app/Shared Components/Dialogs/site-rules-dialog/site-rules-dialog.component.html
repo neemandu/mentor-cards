@@ -1,26 +1,26 @@
 <mat-toolbar class="d-flex justify-content-between">
-    <button *ngIf="!data" class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
+    <button *ngIf="!data" class="iconButton" mat-icon-button (click)="closeDialog()">
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
     <span class="title">כל הזכויות שמורות ליוצרי האתר Mentor-Cards ©</span>
+    <button *ngIf="!data" style="opacity: 0;" class="iconButton" mat-icon-button >
+        <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+    </button>
 </mat-toolbar>
 <div class="line"></div>
 <div id='summery' mat-dialog-content>
     <ul>
-        <li>
+        <!-- <li>
             אין להעתיק, להפיץ, להציג בפומבי או למסור לצד שלישי כל חלק מן הנ"ל בלא קבלת הסכמתם של המחברים בכתב ומראש.
-        </li>
-        <li>
-            אין להעתיק או לשכפל תמונות ופרטים מהאתר.
-        </li>
+        </li> -->
         <li>
             כל מידע ו/או תצוגה באתר לרבות גרפיקה, עיצוב, הצגה מילולית, סימני מסחר, סימני “לוגו” וכן עריכתם והצגתם של
-            אלה, הנם בבעלות הבלעדית של האתר ואין להעתיק, לשכפל, להפיץ, לפרסם או להשתמש בכל דרך אחרת בתכנים המופיעים
-            באתר, אלא אם האתר נתן את הסכמתו לכך בכתב ומראש.
+            אלה, הינם בבעלות הבלעדית של האתר ואין להעתיק, לשכפל, להפיץ, להציג בפומבי, למסור לצד שלישי, לפרסם או להשתמש
+            בכל דרך אחרת בתכנים המופיעים באתר, אלא אם האתר נתן את הסכמתו לכך בכתב ומראש.
         </li>
         <li>
-            האתר לא יהיו אחראי לשום נזק ישיר או עקיף, נזק גוף, כספי או אחר, שייגרם לאדם או למבקר באתר כתוצאה משימוש על
-            המידע שמופיע באתר.
+            האתר לא יהיו אחראי לשום נזק ישיר או עקיף, נזק גוף, כספי או אחר, שייגרם לאדם או למבקר באתר כתוצאה משימוש
+            במידע המופיע באתר.
         </li>
         <li>
             יש לראות את המידע המופיע באתר כמידע עזר בלבד.
@@ -30,7 +30,7 @@
             להשתמש בתכנים.
         </li>
         <li>
-            Mentor-cards שומרת על זכויות יוצרים וכל התוכן של האתר הינו מקורי או בעל אישורים מתאימים.
+            Mentor-cards שומרת על זכויות יוצרים וכל תוכנו של האתר הינו מקורי או בעל אישורים מתאימים.
         </li>
     </ul>
     <div class="line"></div>

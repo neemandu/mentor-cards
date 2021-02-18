@@ -7,6 +7,8 @@ import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { CardsService } from './cards.service';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -25,7 +27,7 @@ export class UserAuthService {
   // userData: any;
   groupData: GroupData;
 
-  constructor(public _snackBar: MatSnackBar, public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService) {
+  constructor(public _snackBar: MatSnackBar, public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService, private http: HttpClient) {
   }
 
   /**
@@ -53,7 +55,7 @@ export class UserAuthService {
    * @param userData - data returned from the BE for the user (tokens etc')
    */
   loggedIn(cognitoUserserData: CognitoUserInterface) {
-    // console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
+    console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
     // debugger
     this.loggedInAttributes = cognitoUserserData
     var newUsername: string = cognitoUserserData.username;
@@ -82,7 +84,7 @@ export class UserAuthService {
       // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
       if (this.userData.groupId)
         this.updateGroupData();
-      this.loggedInEmmiter.emit(this.userData);
+      this.loggedInEmmiter.emit(this.userData);//TODO check why doesn't move to other page after login
       this.userData.status === 'NOPLAN' ? this.ngZone.run(() => this.router.navigate(['/no-program-page'])) : this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
@@ -149,7 +151,7 @@ export class UserAuthService {
     Auth.signOut().then(data => {
       this.loggedOut();
       this._snackBar.open('להתראות, ועד הפעם הבאה!', '', {
-        duration: 3000,
+        duration: 5000,
         panelClass: ['rtl-snackbar']
       });
     })
@@ -165,6 +167,19 @@ export class UserAuthService {
 
   showSignInModal(): void {
     this.showSignInModalEmitter.emit(true);
+  }
+
+  cancelPayPalSubscription(): Observable<any> {
+    // debugger
+    // var paypalId = JSON.parse(localStorage.getItem('__paypal_storage__'))['id'];
+    const headerDict = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic AajKId4yhuxUIoiCACPOR1khrbbj_to72pJXnALF1AKkF8KgvCy5cS1XOzeMdTW_ZLOUCULxQRvdCi:ELehBqsZxxwGCYltNs46T7pLns-GajPfbJngCF0vtnrxFCzQZX0Vzh9m5SLGqYF1mzbTyYxJtkxoYwun',
+      // 'Access-Control-Allow-Origin': '*',
+    }
+    var reason = { 'reason': 'Just because' }
+    // https://api-m.paypal.com/v1/billing/subscriptions/I-SMT78NK37030/cancel
+    return this.http.post<any>('https://api-m.paypal.com/v1/billing/subscriptions/' + this.userData.subscription.providerTransactionId + '/cancel', reason, { headers: headerDict });
   }
 
 }

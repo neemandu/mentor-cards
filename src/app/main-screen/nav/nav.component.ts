@@ -37,28 +37,9 @@ export class NavComponent implements OnInit {
     this.ngZone.run(() => this.router.navigate([path]));
   }
 
-  // loginRegister(): void {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = false;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.maxHeight = '85vh';
-  //   this.dialog.open(UserRelatedDialogComponent, dialogConfig);
-  // }
-
   logout(): void {
     this.userAuthService.logOut();
     this.navigate('/home-page');
-    // .then(data => {
-    //   this.overlaySpinnerService.changeOverlaySpinner(false)
-    //   this.loggedInName = undefined;
-    //   this.loggedIn = false;
-    //   this.navigate('/no-program-page')
-    //   this.userAuthService._snackBar.open('להתראות, ועד הפעם הבאה!', '', {
-    //     duration: 3000,
-    //     panelClass: ['rtl-snackbar']
-    //   });
-    // })
-    // .catch(err => console.log(err));
   }
 
   signInSignUp(): void {

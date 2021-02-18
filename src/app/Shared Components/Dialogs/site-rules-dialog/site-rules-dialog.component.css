@@ -19,11 +19,6 @@ mat-icon {
   justify-content: center;
 }
 
-.iconButton {
-  /* margin-top: -15px; */
-  margin-left: -20px;
-}
-
 .action-button {
   margin-left: 1rem;
   border-radius: 5px;
