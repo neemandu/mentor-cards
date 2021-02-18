@@ -60,19 +60,19 @@ input CreateUserInput {
 
 type CardsPack 
 @model 
-@auth( rules: [{ allow: private, operations: [read] }] ) {
-  id: ID!
-  imgUrl: String!
-  description: String
-  tags: [String]
-  categories: [String]
-  cards: [String] @function(name: "GetCardsImages-${env}")
-  cardsPreview: [String] 
-  usersIds: [String] 
-  groupsIds: [String]
-  users: [String] 
-  guideBook: GuideBook
-  name: String
+{
+  id: ID! @aws_api_key
+  imgUrl: String! @aws_api_key
+  description: String @aws_api_key
+  tags: [String] @aws_api_key
+  categories: [String] @aws_api_key
+  cards: [String] @aws_cognito_user_pools @function(name: "GetCardsImages-${env}")
+  cardsPreview: [String] @aws_api_key
+  usersIds: [String] @aws_cognito_user_pools
+  groupsIds: [String] @aws_cognito_user_pools
+  users: [String] @aws_cognito_user_pools
+  guideBook: GuideBook @aws_cognito_user_pools 
+  name: String @aws_api_key
 }
 
 type GuideBook{
