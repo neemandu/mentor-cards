@@ -72,6 +72,7 @@ export class AllPacksPageComponent implements OnInit {
       this.sortPacks();
       this.overlaySpinnerService.changeOverlaySpinner(false);
     }, reject => {
+      console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
       this.overlaySpinnerService.changeOverlaySpinner(false);
       let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
         duration: 20000,
