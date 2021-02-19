@@ -78,17 +78,20 @@ export class UserAuthService {
    * Get all data from BE about user
    */
   updateUserData(): void {
-    this.api.GetUser(this.loggedInAttributes.username).then(data => {
-      // this.userData = data;
-      this.userData = new UserData().deseralize(data);
-      // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
-      if (this.userData.groupId)
-        this.updateGroupData();
-      this.loggedInEmmiter.emit(this.userData);//TODO check why doesn't move to other page after login
-      this.userData.status === 'NOPLAN' ? this.ngZone.run(() => this.router.navigate(['/no-program-page'])) : this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
-    }, reject => {
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
-    })
+    console.log('this.loggedInAttributes');
+    if(!this.loggedInAttributes == null && !this.loggedInAttributes.Session == null){
+      this.api.GetUser(this.loggedInAttributes.username).then(data => {
+        // this.userData = data;
+        this.userData = new UserData().deseralize(data);
+        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+        if (this.userData.groupId)
+          this.updateGroupData();
+        this.loggedInEmmiter.emit(this.userData);//TODO check why doesn't move to other page after login
+        this.userData.status === 'NOPLAN' ? this.ngZone.run(() => this.router.navigate(['/no-program-page'])) : this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
+      }, reject => {
+        console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
+      })
+    }
   }
 
   /**
@@ -108,18 +111,20 @@ export class UserAuthService {
    * Get all subscription plans
    */
   getSubscriptionPlans(): void {
-    this.api.ListSubscriptionPlans().then(value => {
-      this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
-      // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
-    }, reject => {
-      // console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
-      let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
-        duration: 20000,
+    if(!this.loggedInAttributes == null && !this.loggedInAttributes.Session == null){
+      this.api.ListSubscriptionPlans().then(value => {
+        this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+        // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
+      }, reject => {
+        // console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
+        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
+          duration: 20000,
+        });
+        snackBarRef.onAction().subscribe(() => {
+          window.location.reload();
+        });
       });
-      snackBarRef.onAction().subscribe(() => {
-        window.location.reload();
-      });
-    });
+    }
   }
 
   /**

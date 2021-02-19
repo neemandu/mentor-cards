@@ -59,31 +59,21 @@ input CreateUserInput {
 }
 
 type CardsPack 
-@model 
-@auth(rules: [{ allow: public, provider: apiKey }])
+@model (subscriptions: null)
+@auth(rules: [{ allow: private, operations: [read], provider: userPools },
+              { allow: public }])
 {
   id: ID! 
   imgUrl: String! 
   description: String 
   tags: [String] 
   categories: [String] 
-  cards: [String] @auth(rules: [{ allow: private, 
-                                  operations: [read, create], 
-                                  provider: userPools  }]) 
-                  @function(name: "GetCardsImages-${env}")
+  cards: [String]  @function(name: "GetCardsImages-${env}")
   cardsPreview: [String] 
-  usersIds: [String] @auth(rules: [{ allow: private, 
-                                  operations: [read, create], 
-                                  provider: userPools  }]) 
-  groupsIds: [String] @auth(rules: [{ allow: private, 
-                                  operations: [read, create], 
-                                  provider: userPools  }]) 
-  users: [String] @auth(rules: [{ allow: private, 
-                                  operations: [read, create], 
-                                  provider: userPools  }]) 
-  guideBook: GuideBook @auth(rules: [{ allow: private, 
-                                  operations: [read, create], 
-                                  provider: userPools  }]) 
+  usersIds: [String] 
+  groupsIds: [String] 
+  users: [String] 
+  guideBook: GuideBook 
   name: String 
 }
 

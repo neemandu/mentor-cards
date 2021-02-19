@@ -50,6 +50,14 @@ exports.handler = async (event) => {
     console.log('getCardsImages');
     console.log(event);
 
+    if(!("identity" in event)){
+        return [];
+    }
+
+    if(event.identity == null){
+        return [];
+    }
+
     AWS.config.update({
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
