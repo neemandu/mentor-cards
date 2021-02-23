@@ -1,30 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query GetGroupById($input: GetGroupInput!) {
-  GetGroupById(input: $input) {
-    id
-    groupUsers {
-      email
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-query IsInGroup($input: GetGroupInput!) {
-  IsInGroup(input: $input)
-}
 query GetCardsPack($id: ID!) {
   getCardsPack(id: $id) {
     id

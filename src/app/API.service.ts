@@ -262,10 +262,6 @@ export type DeleteSubscriptionPlanInput = {
   id?: string | null;
 };
 
-export type GetGroupInput = {
-  id: string;
-};
-
 export type ModelCardsPackFilterInput = {
   id?: ModelIDInput | null;
   imgUrl?: ModelStringInput | null;
@@ -618,31 +614,6 @@ export type DeleteSubscriptionPlanMutation = {
   numberOfCardPacks: number | null;
   price: number | null;
   discount: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type GetGroupByIdQuery = {
-  __typename: "Group";
-  id: string;
-  groupUsers: Array<{
-    __typename: "GroupUserRole";
-    email: string | null;
-    role: string | null;
-  } | null> | null;
-  paymentProgram: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name: string | null;
-    description: string | null;
-    providerPlanId: string;
-    numberOfUsers: number | null;
-    numberOfCardPacks: number | null;
-    price: number | null;
-    discount: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1616,53 +1587,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
-  }
-  async GetGroupById(input: GetGroupInput): Promise<GetGroupByIdQuery> {
-    const statement = `query GetGroupById($input: GetGroupInput!) {
-        GetGroupById(input: $input) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            email
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetGroupByIdQuery>response.data.GetGroupById;
-  }
-  async IsInGroup(input: GetGroupInput): Promise<boolean | null> {
-    const statement = `query IsInGroup($input: GetGroupInput!) {
-        IsInGroup(input: $input)
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <boolean | null>response.data.IsInGroup;
   }
   async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!) {

@@ -9,11 +9,6 @@ type Mutation {
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
 }
 
-type Query {
-  GetGroupById(input: GetGroupInput!): Group
-  IsInGroup(input: GetGroupInput!): Boolean
-}
-
 input joinExistingGroupInput {
   groupId: String!
 }
@@ -93,7 +88,7 @@ type SubSubject{
 
 type ContactUsModel 
 @model 
-@auth( rules: [ { allow: private, operations: [read, create] }] ){
+@auth( rules: [ { allow: private, operations: [read, create], provider: userPools  }] ){
   id: ID!
   name: String
   content: String
@@ -102,8 +97,8 @@ type ContactUsModel
 
 type User 
 @model (mutations: null)
-@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update] },
-                { allow: private, operations: [create] }] ){
+@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update], provider: userPools },
+                { allow: public,  operations: [create] }] ){
   id: ID!
   username: ID!
   email: ID!
@@ -122,7 +117,7 @@ type User
 
 type Group
 @model
-@auth( rules: [ { allow: private, operations: [create,read, update] }] ){
+@auth( rules: [ { allow: private, operations: [create,read, update], provider: userPools }] ){
   id: ID!
   groupUsers: [GroupUserRole] 
   paymentProgram: SubscriptionPlan
@@ -141,7 +136,7 @@ type MonthlySubscription {
   subscriptionPlan: SubscriptionPlan 
 }
 
-type SubscriptionPlan @model @auth( rules: [{ allow: private}] ){
+type SubscriptionPlan @model @auth( rules: [{ allow: private, provider: userPools}] ){
   id: ID!
   name: String
   description: String
