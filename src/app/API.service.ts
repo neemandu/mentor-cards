@@ -1624,8 +1624,9 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+    const response = (await API.graphql({ query: statement,
+      variables: gqlAPIServiceArguments,
+      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }

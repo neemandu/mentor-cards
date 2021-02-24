@@ -136,7 +136,10 @@ type MonthlySubscription {
   subscriptionPlan: SubscriptionPlan 
 }
 
-type SubscriptionPlan @model @auth( rules: [{ allow: private, provider: userPools}] ){
+type SubscriptionPlan 
+@model 
+@auth( rules: [ { allow: private, provider: userPools},
+                { allow: public,  operations: [read] }] ){
   id: ID!
   name: String
   description: String

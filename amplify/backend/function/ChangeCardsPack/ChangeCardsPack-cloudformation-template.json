@@ -13,6 +13,12 @@
     "apicardspacksGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apicardspacksGraphQLAPIIdOutput"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -153,8 +159,12 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/ChangeCardsPack-6b354b37717542457441-build.zip"
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
         }
       }
     },

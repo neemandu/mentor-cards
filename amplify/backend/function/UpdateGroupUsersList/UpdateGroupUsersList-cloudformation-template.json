@@ -17,6 +17,12 @@
     "functionUserLayerArn": {
       "Type": "String",
       "Default": "functionUserLayerArn"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -157,8 +163,12 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-mentorcards-dev-214725-deployment",
-          "S3Key": "amplify-builds/UpdateGroupUsersList-7636466d633547394c47-build.zip"
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
         }
       }
     },

@@ -21,6 +21,54 @@
         "UserLayer": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/UserLayer-build.zip"
+        },
+        "AddCardsPack": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/AddCardsPack-39535145366f386b776e-build.zip"
+        },
+        "CreateUser": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/CreateUser-78587a754753387a4673-build.zip"
+        },
+        "UpdateGroupUsersList": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/UpdateGroupUsersList-7636466d633547394c47-build.zip"
+        },
+        "UnSubscribe": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/UnSubscribe-5077546c513358775068-build.zip"
+        },
+        "ChangeCardsPack": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/ChangeCardsPack-6b354b37717542457441-build.zip"
+        },
+        "GetCardsImages": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/GetCardsImages-31432b333649516f4559-build.zip"
+        },
+        "UpdatePaymentProgram": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/UpdatePaymentProgram-62424457354c4156682b-build.zip"
+        },
+        "getGroup": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/getGroup-31682b4f4b61722b6b47-build.zip"
+        },
+        "JoinExistingGroup": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/JoinExistingGroup-314868412b6c4178686a-build.zip"
+        },
+        "IsInGroup": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/IsInGroup-6b3574564b4a4d645357-build.zip"
+        },
+        "DeleteGroup": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/DeleteGroup-6a6262324445566d7369-build.zip"
+        },
+        "PayPalCancelWebhook": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/PayPalCancelWebhook-3067477a344232357850-build.zip"
         }
       }
     },
