@@ -1082,7 +1082,9 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <boolean | null>response.data.addCardsPack;
   }
@@ -1094,7 +1096,9 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <boolean | null>response.data.changeCardsPack;
   }
@@ -1108,7 +1112,9 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <boolean | null>response.data.updatePaymentProgram;
   }
@@ -1122,7 +1128,9 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <boolean | null>response.data.updateGroupUsersList;
   }
@@ -1134,7 +1142,9 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <boolean | null>response.data.Unsubscribe;
   }
@@ -1148,7 +1158,9 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <boolean | null>response.data.JoinExistingGroup;
   }
@@ -1160,7 +1172,9 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
   }
