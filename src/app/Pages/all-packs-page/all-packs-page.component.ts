@@ -166,17 +166,18 @@ export class AllPacksPageComponent implements OnInit {
 
   freeTextFilter(): void {
     this.allPacks = this.allPacks.filter((pack: PackInfo) => {
+      let contains: boolean = false;
       if (pack.description.includes(this.freeTextFilterSelected))
-        return true;
+        contains = true;
       pack.categories.forEach(category => {
         if (category.includes(this.freeTextFilterSelected))
-          return true;
+          contains = true;
       })
       pack.tags.forEach(tag => {
         if (tag.includes(this.freeTextFilterSelected))
-          return true;
+          contains = true;
       })
-      return false;
+      return contains;
     })
   }
 

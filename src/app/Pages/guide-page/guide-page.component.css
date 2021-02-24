@@ -1,0 +1,50 @@
+#title {
+  text-align: center;
+  font-size: xx-large;
+}
+
+#line {
+  background-color: #ffa800;
+  width: 3px;
+  height: 80vh;
+}
+
+#buttons {
+  margin: 1% 1%;
+  width: 20vw;
+}
+
+#content {
+  margin: 2% 2%;
+  text-align: right;
+  font-size: larger;
+  line-height: 4vh;
+  width: 50vw;
+}
+
+.btn {
+  margin-bottom: 1vh;
+}
+
+.btn:hover {
+  background-color: white;
+}
+
+.btn:active {
+  background-color: #e2e6ea;
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem #ffcf008c;
+}
+
+.selected-btn {
+  font-weight: 600;
+}
+
+.flower-img {
+  opacity: 0;
+  transition: opacity 2s;
+  height: 23rem;
+  margin-top: 12vh;
+}

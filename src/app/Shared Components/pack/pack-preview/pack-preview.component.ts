@@ -61,6 +61,10 @@ export class PackPreviewComponent implements OnInit {
     // return this.userAuthService.userData.numberOfUsedPacks;
   }
 
+  get signedIn() {
+    return this.userAuthService.userData;
+  }
+
   openChooseProgramModal(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

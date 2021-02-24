@@ -22,7 +22,7 @@
       </app-card>
     </div>
   </div>
-  <div id="actions" class="d-flex flex-row">
+  <div id="actions" class="d-flex flex-row" *ngIf="signedIn">
     <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
       זו
       <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
