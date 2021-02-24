@@ -28,17 +28,17 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "public api key"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authmentorcards91f3dc29"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authmentorcards91f3dc29"
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "description": "public api"
               }
             }
           ]
