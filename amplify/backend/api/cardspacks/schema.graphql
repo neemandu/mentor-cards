@@ -63,7 +63,7 @@ type CardsPack
   description: String 
   tags: [String] 
   categories: [String] 
-  cards: [String]  @function(name: "GetCardsImages-${env}")
+  cards: [String] @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetCardsImages-${env}")
   cardsPreview: [String] 
   usersIds: [String] 
   groupsIds: [String] 

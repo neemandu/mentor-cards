@@ -61,7 +61,7 @@ exports.handler = async (event) => {
     AWS.config.update({
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-    });
+    }); 
 
     var username = event.identity.claims['cognito:username'];
     if(!username){

@@ -39,7 +39,7 @@ export class AllPacksPageComponent implements OnInit {
       this.allFavorites = favorites;
       this.sortPacks();
     }));
-    if (!this.cardsService.allPacks) {
+    /*if (!this.cardsService.allPacks) {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       this.getAllPacks();
     } else {
@@ -48,40 +48,75 @@ export class AllPacksPageComponent implements OnInit {
       this.allFavorites = this.cardsService.favorites
       this.sortPacks();
       this.overlaySpinnerService.changeOverlaySpinner(false);
-    }
+    }*/
+    this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.getAllPacks();
   }
 
   /**
    * Retrive all packs
    */
   getAllPacks(): void {
-    // debugger
-    this.api.ListCardsPacks().then(packs => {
-      // console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
-      this.allPacks = packs.items.map(pack => {
-        pack.categories.forEach(category => {
-          if (!this.allCategories.includes(category))
-            this.allCategories.push(category);
-        });
-        return new PackContent().deseralize(pack)
-      });
-      console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacks ~ this.allPacks", this.allPacks)
-      this.cardsService.allPacks = this.allPacks.map(pack => pack);
-      this.cardsService.allCategories = this.allCategories.map(category => category);
-      this.allFavorites = this.cardsService.favorites;
-      this.sortPacks();
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-    }, reject => {
-      console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
-        duration: 20000,
-      });
-      snackBarRef.onAction().subscribe(() => {
-        window.location.reload();
-      });
-    })
+  let authStatus = localStorage.getItem('signedin');
+  if(authStatus == 'true'){
+        // debugger
+        this.api.ListCardsPacks().then(packs => {
+          // console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
+          this.allPacks = packs.items.map(pack => {
+            pack.categories.forEach(category => {
+              if (!this.allCategories.includes(category))
+                this.allCategories.push(category);
+            });
+            return new PackContent().deseralize(pack)
+          });
+          console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacks ~ this.allPacks", this.allPacks)
+          this.cardsService.allPacks = this.allPacks.map(pack => pack);
+          this.cardsService.allCategories = this.allCategories.map(category => category);
+          this.allFavorites = this.cardsService.favorites;
+          this.sortPacks();
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+        }, reject => {
+          console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+          let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
+            duration: 20000,
+          });
+          snackBarRef.onAction().subscribe(() => {
+            window.location.reload();
+          });
+        })
   }
+  else{
+      // debugger
+      this.api.ListCardsPacksForPreview().then(packs => {
+        // console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
+        this.allPacks = packs.items.map(pack => {
+          pack.categories.forEach(category => {
+            if (!this.allCategories.includes(category))
+              this.allCategories.push(category);
+          });
+          return new PackContent().deseralize(pack)
+        });
+        console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacksForPreview ~ this.allPacks", this.allPacks)
+        this.cardsService.allPacks = this.allPacks.map(pack => pack);
+        this.cardsService.allCategories = this.allCategories.map(category => category);
+        this.allFavorites = this.cardsService.favorites;
+        this.sortPacks();
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+      }, reject => {
+        console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
+          duration: 20000,
+        });
+        snackBarRef.onAction().subscribe(() => {
+          window.location.reload();
+        });
+      })
+    }
+  }
+  
+
 
   updateUserData(): void {
     this.userAuthService.updateUserData();
