@@ -28,7 +28,6 @@ export class PackContent {
     constructor() { }
 
     deseralize(input: any) {
-        // console.log("🚀 ~ file: packs.ts ~ line 30 ~ PackContent ~ deseralize ~ input", input)
         Object.assign(this, input);
         input.cards ? this.cards = input.cards.map(card => new Card().deseralize(card)) : null;
         input.guideBook ? this.guideBook = new GuideBook().deseralize(input.guideBook) : null;
@@ -38,6 +37,11 @@ export class PackContent {
 
 export class GuideBook {
     subjects: GuideBookSubject[];
+
+    setDefault() {
+        this.subjects = [new GuideBookSubject().setDefault("נושא ראשון"), new GuideBookSubject().setDefault("נושא שני"), new GuideBookSubject().setDefault("נושא שלישי")]
+        return this;
+    }
 
     deseralize(input: any) {
         this.subjects = input.subjects.map(subject => new GuideBookSubject().deseralize(subject))
@@ -50,6 +54,12 @@ export class GuideBookSubject {
     subjectName: string;
     subSubjects: SubSubject[];
 
+    setDefault(subjectName: string) {
+        this.subjectName = subjectName;
+        this.subSubjects = [new SubSubject().setDefault("תת נושא ראשון"), new SubSubject().setDefault("תת נושא שני"), new SubSubject().setDefault("תת נושא שלישי")]
+        return this;
+    }
+
     deseralize(input: any) {
         Object.assign(this, input);
         this.subSubjects = input.subSubjects.map(subSubject => new SubSubject().deseralize(subSubject))
@@ -60,6 +70,12 @@ export class GuideBookSubject {
 export class SubSubject {
     subSubjectName: string;
     questions: string[];
+
+    setDefault(subjectName: string) {
+        this.subSubjectName = subjectName;
+        this.questions = ["שאלה מכווינה ראשונה", "שאלה מכווינה שנייה", "שאלה מכווינה שלישית"];
+        return this;
+    }
 
     deseralize(input: any) {
         Object.assign(this, input);

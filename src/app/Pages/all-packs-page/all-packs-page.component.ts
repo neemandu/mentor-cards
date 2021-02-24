@@ -118,6 +118,22 @@ export class AllPacksPageComponent implements OnInit {
     // return this.allPacks.filter(pack => !pack.cards);
   }
 
+  get signedIn() {
+    return this.userAuthService.userData;
+  }
+
+  get hasProgram() {
+    return this.userAuthService.userData.subscription;
+  }
+
+  get trialMonth() {
+    var nowDate = new Date();
+    var res = this.userAuthService.userData.startPayingSinceDate > nowDate;
+    // debugger
+    return res;
+    // return this.userAuthService.userData.startPayingSinceDate > new Date();
+  }
+
   /**
    * Show more or less categories
    */

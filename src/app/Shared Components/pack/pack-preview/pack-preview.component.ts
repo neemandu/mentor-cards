@@ -64,6 +64,10 @@ export class PackPreviewComponent implements OnInit {
   get signedIn() {
     return this.userAuthService.userData;
   }
+  
+  get hasProgram() {
+    return this.userAuthService.userData.subscription;
+  }
 
   openChooseProgramModal(): void {
     const dialogConfig = new MatDialogConfig();

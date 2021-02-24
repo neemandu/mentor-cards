@@ -43,8 +43,11 @@
       </div>
     </div>
     <div *ngIf="allNotOwnedPacks().length != 0">
-      <h1 *ngIf="allOwnedPacks().length == 0" style="text-align: center; margin-left: 14rem;">מקווים שהספקתם ליהנות מכל הערכות שלנו! זה הזמן לבחור את הערכות שלכם</h1>
-      <h1 *ngIf="allOwnedPacks().length != 0" style="text-align: center; margin-left: 14rem;">ערכות נוספות</h1>
+      <h1 *ngIf="signedIn && allOwnedPacks().length != 0" style="text-align: center; margin-left: 14rem;">ערכות נוספות</h1>
+      <!-- TODO figure out which title shows when -->
+      <h1 *ngIf="signedIn && hasProgram && trialMonth" style="text-align: center; margin-left: 14rem;">כל הערכות לרשותכם בחודש הראשון</h1>
+      <h1 *ngIf="signedIn && hasProgram && !trialMonth && allOwnedPacks().length == 0" style="text-align: center; margin-left: 14rem;">מקווים שהספקתם ליהנות מכל הערכות שלנו! זה הזמן לבחור את הערכות שלכם</h1>
+      <h1 *ngIf="!signedIn || !hasProgram" style="text-align: center; margin-left: 14rem;">כל הערכות שלנו</h1>
       <div class="d-flex flex-row flex-wrap">
         <app-pack *ngFor="let packInfo of allNotOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded();"
           (packChange)="getAllPacks(); updateUserData();">

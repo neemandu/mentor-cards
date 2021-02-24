@@ -57,49 +57,29 @@
                             (click)="accordion(subSubjectRef, subSubjectDivRef)">{{subSubject.subSubjectName}}</span>
                         <ul class="list-group list-group-flush"
                             style="overflow: hidden; max-height: 0; transition: max-height 0.5s linear; transition-delay: 0s;">
-                            <li class="list-group-item" *ngFor="let question of subSubject.questions"
+                            <li class="list-group-item" *ngFor="let question of subSubject.questions; let k = index"
+                                style="margin-left: 2vw;">
+                                <input style="width: 1rem; height: 1rem; margin-left: 1rem;" type="checkbox"
+                                    id={{i}}+{{j}}+{{k}}>
+                                <label for={{i}}+{{j}}+{{k}}>{{question}}</label>
+                            </li>
+                            <!-- <li class="list-group-item" *ngFor="let question of subSubject.questions"
                                 onmouseover='this.style.backgroundColor= "blanchedalmond"'
                                 onmouseout='this.style.backgroundColor= "white"' style="margin-left: 2vw;">
                                 {{question}}
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div class="accordion" id="accordionExample">
-        <div class="card" *ngFor="let subject of guideBook.subjects; let i = index">
-            <div class="card-header">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" [attr.data-target]="'#subj'+i"
-                        aria-expanded="true" aria-controls="collapseOne">
-                        {{subject.subjectName}}
-                    </button>
-                </h2>
-            </div>
-
-            <div [attr.id]="'#subj'+i" class="collapse show" data-parent="#accordionExample">
-                <div class="card" *ngFor="let subSubject of subject.subSubjects; let j = index">
-                    <div class="card-header">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                [attr.data-target]="'#subSubj'+j" aria-expanded="true" aria-controls="collapseOne">
-                                {{subSubject.subSubjectName}}
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div [attr.id]="'#subSubj'+j" class="collapse show" data-parent="#accordionExample">
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item" *ngFor="let question of subSubject.questions">{{question}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div style="text-align: center;">
+        <div id="title" style="margin: 2vh 3vh;">
+            <h3 style="text-align: center;">הערות לעצמך</h3>
+            <div style="background-color: #ffa800; width: auto; height: 3px; margin-top: -10px;"></div>
         </div>
-    </div> -->
+        <textarea style="width: 96vw;min-height: 20vh;" matInput
+            placeholder="דברים שעולים לך במהלך האימון..."></textarea>
+    </div>
 </content>

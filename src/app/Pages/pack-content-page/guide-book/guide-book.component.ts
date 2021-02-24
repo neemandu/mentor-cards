@@ -21,10 +21,15 @@ export class GuideBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.guideBook = this.data.guideBook;
-    this.packName = this.data.packName;
-    var acc = document.getElementsByClassName("accordion");
-    var i;
+    // debugger
+    if(this.data.guideBook){
+      this.guideBook = this.data.guideBook;
+      this.packName = this.data.packName;
+    }
+    else{
+      this.guideBook = new GuideBook().setDefault();
+      this.packName = "ערכה לדוגמא"
+    }
   }
 
   accordion(subjectRef, subjectDivRef): void {

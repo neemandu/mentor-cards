@@ -60,8 +60,8 @@ mat-button-toggle p {
 }
 
 .iconButton {
-  top: -1rem;
-  right: -95%;
+  top: -1.5rem;
+  right: -97%;
 }
 
 ::ng-deep .tooltip-class {
@@ -71,7 +71,7 @@ mat-button-toggle p {
 }
 
 mat-horizontal-stepper {
-  margin-top: -5%;
+  margin-top: -4%;
 }
 
 #extraProgramData {
