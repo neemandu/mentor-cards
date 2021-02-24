@@ -16,7 +16,7 @@ export class UserData {
 
     deseralize(input: any) {
         Object.assign(this, input);
-        this.startPayingSinceDate = new Date(input.startPayingSinceDate);
+        this.firstProgramRegistrationDate = new Date(input.firstProgramRegistrationDate);
         return this;
     }
 }

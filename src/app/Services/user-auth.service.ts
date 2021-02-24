@@ -9,6 +9,7 @@ import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+const millisecondsInMonth: number = 2505600000;
 
 
 @Injectable({
@@ -187,6 +188,10 @@ export class UserAuthService {
     var reason = { 'reason': 'Just because' }
     // https://api-m.paypal.com/v1/billing/subscriptions/I-SMT78NK37030/cancel
     return this.http.post<any>('https://api-m.paypal.com/v1/billing/subscriptions/' + this.userData.subscription.providerTransactionId + '/cancel', reason, { headers: headerDict });
+  }
+
+  get trialMonth(): boolean {
+    return this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth >= new Date().getTime();
   }
 
 }

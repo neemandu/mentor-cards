@@ -104,7 +104,8 @@ export class UserPageComponent implements OnInit {
 
   /**1- if plan wasn't changed this month, else 0 */
   get amountOfPlansToChangeThisMonth() {
-    return this.userAuthService.userData.lastPlanSubstitutionDate && new Date(this.userAuthService.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ? 1 : 0;
+    // return this.userAuthService.userData.lastPlanSubstitutionDate && new Date(this.userAuthService.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ? 1 : 0;
+    return (new Date(this.userAuthService.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth < new Date().getTime()) || this.userAuthService.userData.numberOfPlansSubstitutions == 1 ? 1 : 0;
   }
 
   /**1- if pack wasn't changed this month, else 0 */
@@ -112,8 +113,13 @@ export class UserPageComponent implements OnInit {
     return !this.userAuthService.userData.lastPackSubstitutionDate && new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ? 1 : 0;
   }
 
-  get inTrialMonth() {
-    return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
+  get paymentStartDate() {
+    return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth);
+  }
+
+  get trialMonth() {
+    // return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
+    return this.userAuthService.trialMonth
   }
 
   ngOnDestroy(): void {
