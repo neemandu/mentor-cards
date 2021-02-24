@@ -2,7 +2,7 @@ import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
-import { APIService, CreateUserInput, GetGroupInput } from '../API.service';
+import { APIService, CreateUserInput } from '../API.service';
 import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { CardsService } from './cards.service';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
@@ -62,7 +62,7 @@ export class UserAuthService {
     var newUserEmail: string = cognitoUserserData.attributes['email'];
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
     this.api.CreateUser(user).then(value => {
-      // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.CreateUser ~ value", value)
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.CreateUser ~ value", value)
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
     });
