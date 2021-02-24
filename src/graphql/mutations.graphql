@@ -28,7 +28,7 @@ mutation CreateUser($input: CreateUserInput!) {
     lastPackSubstitutionDate
     numberOfPlansSubstitutions
     lastPlanSubstitutionDate
-    startPayingSinceDate
+    firstProgramRegistrationDate
     groupId
     numberOfUsedPacks
     groupRole

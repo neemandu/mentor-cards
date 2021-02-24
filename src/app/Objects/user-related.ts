@@ -11,7 +11,7 @@ export class UserData {
     numberOfUsedPacks: number;
     status: string;
     subscription: Subscription;
-    startPayingSinceDate: Date;
+    firstProgramRegistrationDate: Date;
     username: string;
 
     deseralize(input: any) {

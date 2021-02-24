@@ -113,7 +113,7 @@ export class UserPageComponent implements OnInit {
   }
 
   get inTrialMonth() {
-    return new Date() <= new Date(this.userData.startPayingSinceDate);
+    return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
   }
 
   ngOnDestroy(): void {

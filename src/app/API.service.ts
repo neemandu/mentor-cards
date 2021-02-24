@@ -317,7 +317,7 @@ export type ModelUserFilterInput = {
   lastPackSubstitutionDate?: ModelStringInput | null;
   numberOfPlansSubstitutions?: ModelIntInput | null;
   lastPlanSubstitutionDate?: ModelStringInput | null;
-  startPayingSinceDate?: ModelStringInput | null;
+  firstProgramRegistrationDate?: ModelStringInput | null;
   groupId?: ModelStringInput | null;
   numberOfUsedPacks?: ModelIntInput | null;
   groupRole?: ModelStringInput | null;
@@ -378,7 +378,7 @@ export type CreateUserMutation = {
   lastPackSubstitutionDate: string | null;
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
-  startPayingSinceDate: string | null;
+  firstProgramRegistrationDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
   groupRole: string | null;
@@ -737,7 +737,7 @@ export type GetUserQuery = {
   lastPackSubstitutionDate: string | null;
   numberOfPlansSubstitutions: number | null;
   lastPlanSubstitutionDate: string | null;
-  startPayingSinceDate: string | null;
+  firstProgramRegistrationDate: string | null;
   groupId: string | null;
   numberOfUsedPacks: number | null;
   groupRole: string | null;
@@ -778,7 +778,7 @@ export type ListUsersQuery = {
     lastPackSubstitutionDate: string | null;
     numberOfPlansSubstitutions: number | null;
     lastPlanSubstitutionDate: string | null;
-    startPayingSinceDate: string | null;
+    firstProgramRegistrationDate: string | null;
     groupId: string | null;
     numberOfUsedPacks: number | null;
     groupRole: string | null;
@@ -1058,7 +1058,7 @@ export class APIService {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          startPayingSinceDate
+          firstProgramRegistrationDate
           groupId
           numberOfUsedPacks
           groupRole
@@ -1772,7 +1772,7 @@ export class APIService {
           lastPackSubstitutionDate
           numberOfPlansSubstitutions
           lastPlanSubstitutionDate
-          startPayingSinceDate
+          firstProgramRegistrationDate
           groupId
           numberOfUsedPacks
           groupRole
@@ -1827,7 +1827,7 @@ export class APIService {
             lastPackSubstitutionDate
             numberOfPlansSubstitutions
             lastPlanSubstitutionDate
-            startPayingSinceDate
+            firstProgramRegistrationDate
             groupId
             numberOfUsedPacks
             groupRole
