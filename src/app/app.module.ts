@@ -65,6 +65,8 @@ import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
 import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
+import { PricePageComponent } from './Pages/price-page/price-page.component';
+import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
 
 
 
@@ -100,7 +102,9 @@ import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules
     ContactUsComponent,
     PostPurchaseSummeryDialogComponent,
     GuideBookComponent,
-    SiteRulesDialogComponent
+    SiteRulesDialogComponent,
+    PricePageComponent,
+    GuidePageComponent
   ],
   imports: [
     BrowserModule,

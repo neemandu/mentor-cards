@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
+      // debugger
       if (this.authState === 'signedin') {
         // debugger
         this.showLogin = false;

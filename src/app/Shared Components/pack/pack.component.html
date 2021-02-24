@@ -4,11 +4,11 @@
   <img *ngIf="packInfo.cards.length != 0" routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()"
     src={{packInfo.imgUrl}}
     matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
-    matTooltipShowDelay="1000" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
+    matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
   <!-- Not owned -->
   <img *ngIf="packInfo.cards.length == 0" (click)="openPreviewDialog()" (load)="imgLoaded()" src={{packInfo.imgUrl}}
     matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
-    matTooltipShowDelay="1000" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
+    matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
 
   <!-- Owned - null -->
   <!-- <img *ngIf="packInfo.cards" routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()" src={{packInfo.imgUrl}}

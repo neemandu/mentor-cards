@@ -37,6 +37,7 @@ mat-icon {
 ::ng-deep .tooltip-class {
   font-size: 0.8rem;
   direction: rtl;
+  text-align: right;
 }
 
 /* 

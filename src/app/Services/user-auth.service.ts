@@ -55,7 +55,7 @@ export class UserAuthService {
    * @param userData - data returned from the BE for the user (tokens etc')
    */
   loggedIn(cognitoUserserData: CognitoUserInterface) {
-    console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
+    // console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
     // debugger
     this.loggedInAttributes = cognitoUserserData
     var newUsername: string = cognitoUserserData.username;
@@ -78,8 +78,9 @@ export class UserAuthService {
    * Get all data from BE about user
    */
   updateUserData(): void {
-    console.log('this.loggedInAttributes');
-    if(!this.loggedInAttributes == null && !this.loggedInAttributes.Session == null){
+    // console.log(this.loggedInAttributes);
+    // if(!this.loggedInAttributes == null && !this.loggedInAttributes.Session == null){
+    if(this.loggedInAttributes != null){
       this.api.GetUser(this.loggedInAttributes.username).then(data => {
         // this.userData = data;
         this.userData = new UserData().deseralize(data);
