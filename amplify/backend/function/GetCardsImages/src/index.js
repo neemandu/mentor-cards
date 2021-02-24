@@ -75,9 +75,9 @@ exports.handler = async (event) => {
     //var allPackagesDate = new Date(now.getFullYear(),now.getMonth()-1, now.getMonth()-1);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
-    console.log('user.startPayingSinceDate');
-    console.log(user.startPayingSinceDate);
-    var udate = new Date(user.startPayingSinceDate);
+    console.log('user.firstProgramRegistrationDate');
+    console.log(user.firstProgramRegistrationDate);
+    var udate = new Date(user.firstProgramRegistrationDate);
     console.log('udate');
     console.log(udate);
     if(user && 

@@ -109,7 +109,7 @@ type User
   lastPackSubstitutionDate: AWSDateTime
   numberOfPlansSubstitutions: Int
   lastPlanSubstitutionDate: AWSDateTime
-  startPayingSinceDate: AWSDateTime
+  firstProgramRegistrationDate: AWSDateTime
   groupId: String
   numberOfUsedPacks: Int
   groupRole: String
