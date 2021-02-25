@@ -18,12 +18,13 @@
 }
 
 .categories-tags {
-  width: 20vw;
+  max-width: 35vw;
   margin-top: 10px;
 }
 
 .content {
   font-size: medium;
+  text-align: center;
 }
 
 .card-previews {
@@ -43,6 +44,9 @@ app-card {
   border: none;
   font-weight: 500;
   font-size: large;
+}
+
+.action-btn-div {
   margin: 0 1%;
 }
 
@@ -74,4 +78,10 @@ app-card {
 
 mat-icon {
   font-family: 'Material Icons' !important;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: rtl;
+  text-align: right;
 }

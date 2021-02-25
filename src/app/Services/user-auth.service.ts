@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
 import { APIService, CreateUserInput } from '../API.service';
 import { SubscriptionPlan } from '../Objects/subscriptionPlans';
-import { CardsService } from './cards.service';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
@@ -28,7 +27,7 @@ export class UserAuthService {
   // userData: any;
   groupData: GroupData;
 
-  constructor(public _snackBar: MatSnackBar, public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService, private http: HttpClient) {
+  constructor(public _snackBar: MatSnackBar, public router: Router, private ngZone: NgZone, private api: APIService, private http: HttpClient) {
     this.getSubscriptionPlans();
   }
 
@@ -120,8 +119,9 @@ export class UserAuthService {
         // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
-        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
+        let snackBarRef = this._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
           duration: 20000,
+          panelClass: ['rtl-snackbar']
         });
         snackBarRef.onAction().subscribe(() => {
           window.location.reload();

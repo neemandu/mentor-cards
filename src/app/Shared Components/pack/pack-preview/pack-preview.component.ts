@@ -36,7 +36,7 @@ export class PackPreviewComponent implements OnInit {
     })
   }
 
-  get choosePackButtonVisible() {//TODO fix after Dudi adds amount of packs owned
+  get choosePackButtonVisible() {
     return this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks == -1 ||
       this.userAuthService.userData.numberOfUsedPacks < this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks;
   }
@@ -46,6 +46,13 @@ export class PackPreviewComponent implements OnInit {
       new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime())
   }
 
+  get nextPackSubstitutionDate() {
+    return new Date(new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth);
+  }
+
+  /**
+   * return true if user has 0 packs selected so far
+   */
   get exchangePackButtonVisibleNothingToChange() {
     return this.userAuthService.userData.numberOfUsedPacks == 0;
   }
@@ -108,5 +115,3 @@ export class PackPreviewComponent implements OnInit {
   }
 
 }
-
-//TODO change button appirance

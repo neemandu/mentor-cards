@@ -3,7 +3,8 @@
 </button>
 <div class="d-flex flex-column">
   <p class="main-header">{{data.description}}</p>
-  <div class="d-flex justify-content-around categories-tags">
+  <p class="content categories-tags">{{data.description}}</p>
+  <!-- <div class="d-flex justify-content-around categories-tags">
     <div class="d-flex flex-column justify-content-center">
       <p class="sub-header">קטגוריות</p>
       <p class="content">{{data.categories}}</p>
@@ -12,7 +13,7 @@
       <p class="sub-header">תיאור</p>
       <p class="content">{{data.description}}</p>
     </div>
-  </div>
+  </div> -->
   <div id="example-cards" style="display: contents;">
     <p class="sub-header">קלפים לדוגמא</p>
     <div class="d-flex flex-row card-previews">
@@ -22,27 +23,35 @@
       </app-card>
     </div>
   </div>
-  <div id="actions" class="d-flex flex-row" *ngIf="signedIn && hasProgram">
-    <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
-      זו
-      <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
-        נוצלו כל החבילות החודש
-      </span></button>
-    <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu"
-      [disabled]="!exchangePackButtonVisible || exchangePackButtonVisibleNothingToChange">החלף ערכה בזו
-      <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
-        הוחלפה ערכה החודש
-      </span>
-      <span style="font-size: small;" *ngIf="exchangePackButtonVisible && exchangePackButtonVisibleNothingToChange"><br>
-        אין ערכות ברשותך
-      </span>
-    </button>
-    <button class="action-button" type="button" (click)="openChooseProgramModal()"
-      [disabled]="!upgradePackButtonVisible">שדרג
-      תוכנית
-      <span style="font-size: small;" *ngIf="!upgradePackButtonVisible"><br>
-        הוחלפה תוכנית החודש
-      </span></button>
+  <div id="actions" class="d-flex flex-row justify-content-around" *ngIf="signedIn && hasProgram">
+    <div class="action-btn-div">
+      <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
+        זו
+        <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
+          נוצלו כל החבילות
+        </span></button>
+    </div>
+    <div class="action-btn-div" matTooltip="תאריך הבא להחלפת ערכה: {{nextPackSubstitutionDate | date:'d/M/y'}}" matTooltipShowDelay="500"
+      [matTooltipClass]="{'tooltip-class' : true}">
+      <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu"
+        [disabled]="!exchangePackButtonVisible || exchangePackButtonVisibleNothingToChange">החלף ערכה בזו
+        <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
+          הוחלפה ערכה החודש
+        </span>
+        <span style="font-size: small;"
+          *ngIf="exchangePackButtonVisible && exchangePackButtonVisibleNothingToChange"><br>
+          אין ערכות ברשותך
+        </span>
+      </button>
+    </div>
+    <div class="action-btn-div">
+      <button class="action-button" type="button" (click)="openChooseProgramModal()"
+        [disabled]="!upgradePackButtonVisible">שדרג
+        תוכנית
+        <span style="font-size: small;" *ngIf="!upgradePackButtonVisible"><br>
+          הוחלפה תוכנית החודש
+        </span></button>
+    </div>
   </div>
 </div>
 

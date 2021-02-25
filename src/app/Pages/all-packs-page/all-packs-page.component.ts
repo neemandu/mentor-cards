@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { PackContent, PackInfo } from 'src/app/Objects/packs';
+import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
@@ -32,6 +33,10 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+      // this.overlaySpinnerService.changeOverlaySpinner(true);
+      this.getAllPacks();
+    }));
     window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
     this.mobile = window.screen.width <= 600;
     this.loadedPacks = 0;
@@ -39,16 +44,6 @@ export class AllPacksPageComponent implements OnInit {
       this.allFavorites = favorites;
       this.sortPacks();
     }));
-    /*if (!this.cardsService.allPacks) {
-      this.overlaySpinnerService.changeOverlaySpinner(true);
-      this.getAllPacks();
-    } else {
-      this.allPacks = this.cardsService.allPacks;
-      this.allCategories = this.cardsService.allCategories;
-      this.allFavorites = this.cardsService.favorites
-      this.sortPacks();
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-    }*/
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.getAllPacks();
   }
@@ -57,39 +52,13 @@ export class AllPacksPageComponent implements OnInit {
    * Retrive all packs
    */
   getAllPacks(): void {
-  let authStatus = localStorage.getItem('signedin');
-  if(authStatus == 'true'){
-        // debugger
-        this.api.ListCardsPacks().then(packs => {
-          // console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
-          this.allPacks = packs.items.map(pack => {
-            pack.categories.forEach(category => {
-              if (!this.allCategories.includes(category))
-                this.allCategories.push(category);
-            });
-            return new PackContent().deseralize(pack)
-          });
-          console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacks ~ this.allPacks", this.allPacks)
-          this.cardsService.allPacks = this.allPacks.map(pack => pack);
-          this.cardsService.allCategories = this.allCategories.map(category => category);
-          this.allFavorites = this.cardsService.favorites;
-          this.sortPacks();
-          this.overlaySpinnerService.changeOverlaySpinner(false);
-        }, reject => {
-          console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
-          this.overlaySpinnerService.changeOverlaySpinner(false);
-          let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
-            duration: 20000,
-          });
-          snackBarRef.onAction().subscribe(() => {
-            window.location.reload();
-          });
-        })
-  }
-  else{
-      // debugger
-      this.api.ListCardsPacksForPreview().then(packs => {
-        // console.log("file: all-packs-page.component.ts ~ line 59 ~ this.api.ListCardsPacks ~ packs", packs)
+    if (this.cardsService.allPacks) {
+      this.allPacks = this.cardsService.allPacks.map(pack => pack);
+      this.allCategories = this.cardsService.allCategories.map(category => category);
+      this.allFavorites = this.cardsService.favorites;
+    } else {
+      let authStatus = localStorage.getItem('signedin');
+      (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then(packs => {
         this.allPacks = packs.items.map(pack => {
           pack.categories.forEach(category => {
             if (!this.allCategories.includes(category))
@@ -97,7 +66,7 @@ export class AllPacksPageComponent implements OnInit {
           });
           return new PackContent().deseralize(pack)
         });
-        console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacksForPreview ~ this.allPacks", this.allPacks)
+        console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacks ~ this.allPacks", this.allPacks)
         this.cardsService.allPacks = this.allPacks.map(pack => pack);
         this.cardsService.allCategories = this.allCategories.map(category => category);
         this.allFavorites = this.cardsService.favorites;
@@ -115,8 +84,6 @@ export class AllPacksPageComponent implements OnInit {
       })
     }
   }
-  
-
 
   updateUserData(): void {
     this.userAuthService.updateUserData();

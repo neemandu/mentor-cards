@@ -3,7 +3,7 @@
 }
 
 amplify-authenticator {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
 }
@@ -42,8 +42,8 @@ video {
 }
 
 .closeLoginButton {
-  position: absolute;
+  position: fixed;
   z-index: 2001;
-  top: 22%;
-  left: 62%;
+  top: 28%;
+  left: 59.5%;
 }

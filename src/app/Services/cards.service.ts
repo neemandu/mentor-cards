@@ -1,10 +1,12 @@
 import { EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackContent, PackInfo } from '../Objects/packs';
 import { addCardsPackInput, APIService } from '../API.service';
+import { UserAuthService } from './user-auth.service';
+import { UserData } from '../Objects/user-related';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +22,18 @@ export class CardsService {
 
   @Output() favoriteChangeEmmiter: EventEmitter<number[]> = new EventEmitter();
 
+  Subscription: Subscription = new Subscription();
   allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
 
-  constructor(private http: HttpClient, public _snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService) {
+    this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
+      this.allPacks = undefined;
+    }))
+    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+      this.allPacks = undefined;
+    }));
     var favs = localStorage.getItem("MentorCardFavorites")
     if (favs) {
       this.favorites = favs.split(',');
