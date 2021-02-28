@@ -20,6 +20,7 @@ export class UserAuthService {
   @Output() groupDataEmmiter: EventEmitter<GroupData> = new EventEmitter<GroupData>();
   @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
 
   loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
@@ -116,6 +117,7 @@ export class UserAuthService {
     if(!this.subPlans){
       this.api.ListSubscriptionPlans().then(value => {
         this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+        this.subPlansEmmiter.emit();
         // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
