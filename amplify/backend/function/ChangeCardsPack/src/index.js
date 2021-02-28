@@ -143,7 +143,8 @@ async function removeUserFromCardsPack(cardsPack, username){
 }
 
 async function updateUserPackSubstitution(user){
-    user.lastPackSubstitutionDate = new Date().toISOString();   
+    user.lastPackSubstitutionDate = new Date().toISOString(); 
+    user.numberOfPacksSubstitutions++;
     user.updatedAt = new Date().toISOString();
 
     var docClient = new AWS.DynamoDB.DocumentClient();
