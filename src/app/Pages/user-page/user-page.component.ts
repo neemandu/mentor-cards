@@ -70,6 +70,7 @@ export class UserPageComponent implements OnInit {
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
       if (res) {
+        // window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ELGU8J265XCBN&switch_classic=true', "_blank");
         this.overlaySpinnerService.changeOverlaySpinner(true)
         this.userAuthService.cancelPayPalSubscription().subscribe(res => {
           // console.log("file: user-page.component.ts ~ line 75 ~ this.userAuthService.cancelPayPalSubscription ~ res", res)
@@ -91,13 +92,6 @@ export class UserPageComponent implements OnInit {
         }, error => {
           console.log("file: user-page.component.ts ~ line 91 ~ this.userAuthService.cancelPayPalSubscription ~ error", error)
         })
-        /** TODO
-         * 1. Cancel button
-         * 2. Add myself to group modal (here and in no-program-page)
-         * 3. Change what a SIMAPLEUSER can see on this page (amount of packs, change left)
-         * 4. Add group managment page with table and adding\changing\deleting\saving users functions
-         * 5. Make modal to enter group ID to enter it 
-         */
       }
     });
   }
