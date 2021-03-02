@@ -65,32 +65,26 @@ export class UserPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ביטול חבילה", ["האם לבטל הרשמה לחבילה זו?"], "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("ביטול תכנית", ["האם לבטל הרשמה לתכנית זו?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
       if (res) {
-        // window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ELGU8J265XCBN&switch_classic=true', "_blank");
         this.overlaySpinnerService.changeOverlaySpinner(true)
-        this.userAuthService.cancelPayPalSubscription().subscribe(res => {
-          // console.log("file: user-page.component.ts ~ line 75 ~ this.userAuthService.cancelPayPalSubscription ~ res", res)
-          this.api.Unsubscribe({ 'username': this.userData.username }).then(() => {
-            this.overlaySpinnerService.changeOverlaySpinner(false)
-            window.location.reload();
-            this.userAuthService._snackBar.open('בוטלה התכנית. עצוב לנו לראות אתכם עוזבים, ואנו מקווים לראותכם שוב בעתיד', '', {
-              duration: 10000,
-              panelClass: ['rtl-snackbar']
-            });
-          }, reject => {
-            console.log("file: user-page.component.ts ~ line 77 ~ this.api.Unsubscribe ~ reject", reject)
-            this.overlaySpinnerService.changeOverlaySpinner(false)
-            this.userAuthService._snackBar.open('שגיאה בביטול התכנית. נסו שנית בעוד מספר דקות', '', {
-              duration: 10000,
-              panelClass: ['rtl-snackbar']
-            });
-          })
-        }, error => {
-          console.log("file: user-page.component.ts ~ line 91 ~ this.userAuthService.cancelPayPalSubscription ~ error", error)
+        this.api.Unsubscribe({ 'username': this.userData.username }).then(() => {
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+          window.location.reload();
+          this.userAuthService._snackBar.open('בוטלה התכנית. עצוב לנו לראות אתכם עוזבים, ואנו מקווים לראותכם שוב בעתיד', '', {
+            duration: 10000,
+            panelClass: ['rtl-snackbar']
+          });
+        }, reject => {
+          console.log("file: user-page.component.ts ~ line 77 ~ this.api.Unsubscribe ~ reject", reject)
+          this.overlaySpinnerService.changeOverlaySpinner(false)
+          this.userAuthService._snackBar.open('שגיאה בביטול התכנית. נסו שנית בעוד מספר דקות', '', {
+            duration: 10000,
+            panelClass: ['rtl-snackbar']
+          });
         })
       }
     });

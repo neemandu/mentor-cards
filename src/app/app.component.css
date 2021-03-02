@@ -44,6 +44,40 @@ video {
 .closeLoginButton {
   position: fixed;
   z-index: 2001;
-  top: 28%;
-  left: 59.5%;
 }
+
+@media screen and (min-width: 1400px) {
+  .sign-in {
+    top: 23%;
+    left: 62%;
+  }
+  
+  .sign-up {
+    top: 12%;
+    left: 62%;
+  }
+  
+  .forgot-password {
+    top: 30%;
+    left: 62%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .sign-in {
+    top: 28%;
+    left: 59%;
+  }
+  
+  .sign-up {
+    top: 20%;
+    left: 59%;
+  }
+  
+  .forgot-password {
+    top: 35%;
+    left: 59%;
+  }
+}
+
+

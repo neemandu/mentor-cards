@@ -27,18 +27,19 @@ export class AppComponent implements OnInit {
     localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
+      console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
       // debugger
       if (this.authState === 'signedin') {
         // debugger
         this.showLogin = false;
-        localStorage.setItem('signedin','true')
+        localStorage.setItem('signedin', 'true')
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;
         this.userAuthService.loggedIn(this.user);
       }
       else if (this.authState === 'signin') {
         this.userAuthService.loggedOut();
-        localStorage.removeItem('signedin')
+        localStorage.removeItem('signedin');
       }
       this.ref.detectChanges();
     })
@@ -100,7 +101,7 @@ const dict = {
     'User already exists.': 'משתמש כזה כבר קיים',
     'Username/client id combination not found.': 'שם משתמש זה לא קיים',
     'Confirmation code cannot be empty': 'קוד אימות אינו יכול להיות ריק',
-    'Custom auth lambda trigger is not configured for the user pool.':'שגיאה בהתחברות, נסה שנית'
+    'Custom auth lambda trigger is not configured for the user pool.': 'שגיאה בהתחברות, נסה שנית'
   }
 };
 

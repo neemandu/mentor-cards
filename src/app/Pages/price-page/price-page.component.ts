@@ -37,8 +37,8 @@ export class PricePageComponent implements OnInit {
       this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
       this.overlaySpinnerService.changeOverlaySpinner(false);
       if (!this.userAuthService.userData) {
-        this.packSelected = this.userAuthService.subPlans[1];
-        this.numOfUsersSelected = this.configAmountsOfUsers[0];
+        this.packSelected = this.userAuthService.subPlans[5];
+        this.numOfUsersSelected = this.configAmountsOfUsers[1];
       }
     }));
     if (this.userAuthService.userData || this.userAuthService.subPlans) {
@@ -52,8 +52,9 @@ export class PricePageComponent implements OnInit {
         this.overlaySpinnerService.changeOverlaySpinner(false);
       }
       else {//No plan for current user
-        this.packSelected = this.userAuthService.subPlans[1];
-        this.numOfUsersSelected = this.configAmountsOfUsers[0];
+        // debugger
+        this.packSelected = this.userAuthService.subPlans[5];
+        this.numOfUsersSelected = this.configAmountsOfUsers[1];
         this.overlaySpinnerService.changeOverlaySpinner(false);
       }
     }
@@ -145,12 +146,16 @@ export class PricePageComponent implements OnInit {
     return this.userAuthService.userData;
   }
 
-  get planChangedThisMonth() {
-    return this.userAuthService.planChangedThisMonth;
-  }
-
   get nextPlanChangeDate() {
     return this.userAuthService.nextPlanChangeDate;
+  }
+
+  get purchaseBtnVisible() {
+    return this.userSingedIn && (this.userAuthService.userData.status !== 'PLAN' || !this.userAuthService.planChangedThisMonth)
+  }
+
+  get noChangingProgramThisMonth() {
+    return this.userSingedIn && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
   }
 
   openApprovePurchaseDialog(): void {

@@ -12,7 +12,9 @@
   
 </div> -->
 <!-- <div> -->
-<button *ngIf="showLogin" class="closeLoginButton" mat-icon-button (click)="closeAmplify()">
+<button *ngIf="showLogin"
+  [ngClass]="{'closeLoginButton': true, 'sign-in': authState==='signin','sign-up': authState==='signup', 'forgot-password': authState==='forgotpassword'}"
+  mat-icon-button (click)="closeAmplify()">
   <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
 </button>
 <amplify-authenticator *ngIf="showLogin">

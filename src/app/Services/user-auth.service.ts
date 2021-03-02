@@ -117,6 +117,16 @@ export class UserAuthService {
     if (!this.subPlans) {
       this.api.ListSubscriptionPlans().then(value => {
         this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+        this.subPlans.sort((planA, planB) => {
+          if (planA.numberOfUsers - planB.numberOfUsers > 0)
+            return 1;
+          if (planA.numberOfUsers - planB.numberOfUsers < 0)
+            return -1;
+          if (planA.numberOfCardPacks - planB.numberOfCardPacks > 0)
+            return 1;
+          else
+            return -1;
+        })
         this.subPlansEmmiter.emit();
         // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
       }, reject => {
