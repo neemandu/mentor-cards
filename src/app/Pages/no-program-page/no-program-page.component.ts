@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
@@ -16,7 +16,7 @@ export class NoProgramPageComponent implements OnInit {
 
   @ViewChild('videoPlayer') videoplayer: ElementRef;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog, public router: Router) {
+  constructor(private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog, public router: Router, private ngZone: NgZone) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
@@ -67,6 +67,10 @@ export class NoProgramPageComponent implements OnInit {
         window.location.reload();
       }
     });
+  }
+
+  navigate(path: string): void {
+    this.ngZone.run(() => this.router.navigate([path]));
   }
 
 }

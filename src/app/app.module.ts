@@ -67,6 +67,7 @@ import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-b
 import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
 import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
+import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purchase-dialog/approve-purchase-dialog.component';
 
 
 
@@ -104,7 +105,8 @@ import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
     GuideBookComponent,
     SiteRulesDialogComponent,
     PricePageComponent,
-    GuidePageComponent
+    GuidePageComponent,
+    ApprovePurchaseDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -143,6 +145,6 @@ import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent,
-    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, GuideBookComponent, SiteRulesDialogComponent]
+    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent]
 })
 export class AppModule { }

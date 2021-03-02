@@ -71,7 +71,13 @@
         <p id="reminder" style="font-size: medium;font-weight: 600;">30 ימי ניסיון חינם. בטלו בכל עת.
         </p>
     </div>
-    <button id="purchase-btn" class="action-button" type="button">
-        לרכישת החבילה לחצו כאן
+    <button *ngIf="userSingedIn && !planChangedThisMonth" id="purchase-btn" class="action-button" type="button"
+        (click)="openApprovePurchaseDialog()">
+        לרכישת התכנית לחצו כאן
     </button>
+    <p *ngIf="userSingedIn && planChangedThisMonth" id="purchase-btn" style="font-size: medium;font-weight: 600;">הוחלפה
+        חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}
+    <p *ngIf="!userSingedIn" id="purchase-btn" style="font-size: medium;font-weight: 600;">יש להתחבר על מנת לבצע רכישת
+        תכנית
+    </p>
 </div>

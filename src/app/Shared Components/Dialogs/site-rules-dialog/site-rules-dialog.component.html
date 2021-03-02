@@ -1,9 +1,9 @@
 <mat-toolbar class="d-flex justify-content-between">
-    <button *ngIf="!data" class="iconButton" mat-icon-button (click)="closeDialog()">
+    <button class="iconButton" mat-icon-button (click)="closeDialog()">
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
     <span class="title">כל הזכויות שמורות ליוצרי האתר Mentor-Cards ©</span>
-    <button *ngIf="!data" style="opacity: 0;" class="iconButton" mat-icon-button >
+    <button style="opacity: 0;" class="iconButton" mat-icon-button>
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
 </mat-toolbar>
@@ -35,8 +35,8 @@
     </ul>
     <div class="line"></div>
 </div>
-<div *ngIf="data" class="buttons d-flex flex-column" mat-dialog-actions>
+<!-- <div *ngIf="data" class="buttons d-flex flex-column" mat-dialog-actions>
     <p>יש להסכים לתנאים על מנת להתחיל להשתמש באתר</p>
     <p>התראה זו לא תופיע שוב לאחר האישור</p>
     <button class="action-button" type="button" [mat-dialog-close]="true">אישור</button>
-</div>
+</div> -->

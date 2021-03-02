@@ -26,15 +26,14 @@
                 כאן</p>
             <p style="font-weight: 600;" *ngIf="trialMonth">החודש תוכלו להשתמש בכל הערכות ללא הגבלה</p>
         </div>
-        <div class="d-flex flex-row"
+        <!-- <div class="d-flex flex-row"
             *ngIf="userData.groupRole === 'ADMIN' || userData.subscription.subscriptionPlan.numberOfUsers == 1">
             <button class="changePlanBtn" [disabled]="amountOfPlansToChangeThisMonth == 0" type="button"
                 (click)="openChooseProgramModal()">החליפו תוכנית
                 <span style="font-size: small;" *ngIf="amountOfPlansToChangeThisMonth == 0"><br>
                     הוחלפה תוכנית החודש
                 </span></button>
-            <!-- <button class="changePlanBtn" type="button" (click)="openCancelDialogModal()">לביטול התוכנית לחץ כאן</button> -->
-        </div>
+        </div> -->
     </div>
 </div>
 <!-- <button (click)="openPostPurchaseSummeryModal()">

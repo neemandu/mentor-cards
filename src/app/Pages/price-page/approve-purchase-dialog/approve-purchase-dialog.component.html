@@ -1,0 +1,38 @@
+<mat-toolbar class="d-flex justify-content-between">
+    <button class="iconButton" mat-icon-button (click)="closeDialog()">
+        <mat-icon>highlight_off</mat-icon>
+    </button>
+    <span id="title">תשלום באמצעות Paypal או כרטיס אשראי</span>
+    <button style="opacity: 0;" class="iconButton" mat-icon-button>
+        <mat-icon>highlight_off</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="line"></div>
+<div id='summery' mat-dialog-content>
+    <ul>
+        <li>
+            החיוב יתחיל ב-{{data.paymentStartDate | date:'d/M/y'}}, בסוף תקופת הניסיון בחינם, ויתחדש אוטומטית מדי חודש.
+        </li>
+        <li>
+            ניתן לבטל את החיוב האוטומטי בכל עת דרך אזור "פרטי המשתמש" באתר.
+        </li>
+        <li>
+            לא יינתנו החזרים כספיים על תשלומים תמורת תקופות חיוב חלקיות. </li>
+        <li>
+            הבנק עשוי לגבות עמלת דמי העברה או עמלת המרה.
+        </li>
+        <li>
+            ​ הבחירה להמשיך מבטאת את אישורך לכך שגילך מעל 18 שנים ואת הסכמתך ל<a (click)="openSiteRulesModal();">תנאים
+                האלה.</a>
+        </li>
+        <li>
+            לסיום הרכישה באמצעות PayPal או ע"י כרטיס אשראי לחץ על כפתור הPayPal.
+        </li>
+    </ul>
+</div>
+<div class="line"></div>
+<div mat-dialog-actions>
+    <div id="paypal" style="width: 100%;" #paypal
+        [matTooltipClass]="{'tooltip-class' : true}" [matTooltipPosition]="'left'"
+        matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
+</div>

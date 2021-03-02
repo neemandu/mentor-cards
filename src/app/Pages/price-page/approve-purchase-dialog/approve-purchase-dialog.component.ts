@@ -1,0 +1,74 @@
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { APIService, updatePaymentProgramInput } from 'src/app/API.service';
+import { PurchaseData } from 'src/app/Objects/purchase-data';
+import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
+import { SharedDialogsService } from 'src/app/Services/shared-dialogs.service';
+import { UserAuthService } from 'src/app/Services/user-auth.service';
+declare var paypal;
+
+@Component({
+  selector: 'app-approve-purchase-dialog',
+  templateUrl: './approve-purchase-dialog.component.html',
+  styleUrls: ['./approve-purchase-dialog.component.css']
+})
+export class ApprovePurchaseDialogComponent implements OnInit {
+
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
+
+  constructor(public dialogRef: MatDialogRef<ApprovePurchaseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PurchaseData,
+    private userAuthService: UserAuthService, private sharedDialogsService: SharedDialogsService, private overlaySpinnerService: OverlaySpinnerService,
+    private api: APIService) { }
+
+  ngOnInit(): void {
+    paypal
+      .Buttons({
+        createSubscription: (data, actions) => {//lastPlanSubstitutionDate - once in last 30 days
+          // debugger
+          if (this.userAuthService.userData.status === "NOPLAN")
+            return actions.subscription.create({
+              'plan_id': this.data.packSelected.providerPlanId
+            });
+          else if (this.userAuthService.userData.status === "PLAN")
+            return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
+              'plan_id': this.data.packSelected.providerPlanId
+            });
+        },
+        onApprove: async (data, actions) => {
+          this.overlaySpinnerService.changeOverlaySpinner(true);
+          var ids: updatePaymentProgramInput = { 'paymentProgramId': this.data.packSelected.id, 'providerTransactionId': data.subscriptionID }
+          this.api.UpdatePaymentProgram(ids).then(data => {
+            this.userAuthService._snackBar.open('הרשמתך לחבילה בוצעה בהצלחה!', '', {
+              duration: 4000,
+              panelClass: ['rtl-snackbar']
+            });
+            this.userAuthService.updateUserData();
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+            this.dialogRef.close();
+            this.sharedDialogsService.openPostPurchaseSummeryDialog(this.data.packSelected);
+          }, error => {
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+            console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 71 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ error", error)
+          })
+        },
+        onError: err => {
+          console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 77 ~ ProgramChoiseDialogComponent ~ stepChanged ~ err", err)
+        },
+        style: {
+          layout: 'horizontal',
+          color: 'gold',
+          shape: 'pill',
+          label: 'pay',
+        }
+      })
+      .render(this.paypalElement.nativeElement);
+  }
+
+  openSiteRulesModal(): void {
+    this.sharedDialogsService.openSiteRulesDialog();
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+}

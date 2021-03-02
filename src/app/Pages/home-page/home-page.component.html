@@ -16,7 +16,7 @@
     <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">התחברות/הרשמה</button>
     <button style="font-size: x-large;" *ngIf="userData && userData.status === 'NOPLAN'" type="button"
-      (click)="navigate('/no-program-page')">להרשמה לתוכנית</button>
+      (click)="navigate('/price-page')">להרשמה לתוכנית</button>
     <button style="font-size: x-large;" *ngIf="userData && userData.status === 'PLAN'" type="button"
       (click)="navigate('/all-packs-page')">לכל הערכות</button>
     <br>

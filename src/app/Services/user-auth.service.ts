@@ -82,7 +82,7 @@ export class UserAuthService {
   updateUserData(): void {
     // console.log(this.loggedInAttributes);
     // if(!this.loggedInAttributes == null && !this.loggedInAttributes.Session == null){
-    if(this.loggedInAttributes != null){
+    if (this.loggedInAttributes != null) {
       this.api.GetUser(this.loggedInAttributes.username).then(data => {
         // this.userData = data;
         this.userData = new UserData().deseralize(data);
@@ -114,7 +114,7 @@ export class UserAuthService {
    * Get all subscription plans
    */
   getSubscriptionPlans(): void {
-    if(!this.subPlans){
+    if (!this.subPlans) {
       this.api.ListSubscriptionPlans().then(value => {
         this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
         this.subPlansEmmiter.emit();
@@ -192,8 +192,26 @@ export class UserAuthService {
     return this.http.post<any>('https://api-m.paypal.com/v1/billing/subscriptions/' + this.userData.subscription.providerTransactionId + '/cancel', reason, { headers: headerDict });
   }
 
+  /**
+   * return if in trial month
+   */
   get trialMonth(): boolean {
     return this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth >= new Date().getTime();
+  }
+
+  /**
+   * Return true if plan was changed this month 
+   */
+  get planChangedThisMonth() {
+    return (this.userData.lastPlanSubstitutionDate &&
+      new Date(this.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime());
+  }
+
+  /**
+   * Return next date when changing a plan will be available 
+   */
+  get nextPlanChangeDate() {
+    return new Date(this.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth;
   }
 
 }

@@ -1,0 +1,46 @@
+mat-icon {
+  font-family: 'Material Icons';
+}
+
+* {
+  font-family: 'rubik';
+  direction: rtl;
+  text-align: right;
+}
+
+mat-toolbar {
+  margin-top: -10px;
+  background-color: transparent;
+}
+
+a {
+  color: #007bff !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}
+
+.line {
+  background-color: #ffa800;
+  width: auto;
+  height: 3px;
+  margin-bottom: 1rem;
+}
+
+li {
+  font-size: medium;
+}
+
+#title {
+  font-size: large;
+}
+
+ul {
+  line-height: 1.5rem;
+  padding-right: 1rem;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: rtl !important;
+  text-align: right;
+}

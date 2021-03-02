@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { PurchaseData } from 'src/app/Objects/purchase-data';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserData } from 'src/app/Objects/user-related';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
+import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 
 
@@ -24,8 +27,9 @@ export class PricePageComponent implements OnInit {
   Subscription: Subscription = new Subscription();
 
 
-  constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService) {
+  constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
+    // debugger
     this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
       this.userAuthService.subPlans.forEach(plan => {
         this.configAmountsOfUsers.push(plan.numberOfUsers);
@@ -37,7 +41,7 @@ export class PricePageComponent implements OnInit {
         this.numOfUsersSelected = this.configAmountsOfUsers[0];
       }
     }));
-    if (this.userAuthService.userData) {
+    if (this.userAuthService.userData || this.userAuthService.subPlans) {
       this.userAuthService.subPlans.forEach(plan => {
         this.configAmountsOfUsers.push(plan.numberOfUsers);
       })
@@ -84,8 +88,8 @@ export class PricePageComponent implements OnInit {
   }
 
   /**
- * Change pack after changing amount of users
- */
+   * Change pack after changing amount of users
+   */
   changePack(): void {
     this.packSelected = this.userAuthService.subPlans.find(pack =>
       pack.numberOfUsers === this.numOfUsersSelected && pack.numberOfCardPacks == this.packSelected.numberOfCardPacks
@@ -135,6 +139,33 @@ export class PricePageComponent implements OnInit {
       return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth);
     }
     return new Date(new Date().getTime() + millisecondsInMonth);
+  }
+
+  get userSingedIn() {
+    return this.userAuthService.userData;
+  }
+
+  get planChangedThisMonth() {
+    return this.userAuthService.planChangedThisMonth;
+  }
+
+  get nextPlanChangeDate() {
+    return this.userAuthService.nextPlanChangeDate;
+  }
+
+  openApprovePurchaseDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxHeight = '85vh';
+    dialogConfig.maxWidth = '30vw';
+    dialogConfig.data = new PurchaseData(this.paymentStartDate, this.packSelected);
+    const dialogRef = this.dialog.open(ApprovePurchaseDialogComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(res => {
+      dialogSub.unsubscribe();
+      if (res) {
+      }
+    });
   }
 
   ngOnDestroy(): void {

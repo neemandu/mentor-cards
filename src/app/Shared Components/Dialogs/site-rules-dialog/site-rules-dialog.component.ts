@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class SiteRulesDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<SiteRulesDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<SiteRulesDialogComponent>) { }
 
   ngOnInit(): void {
   }
