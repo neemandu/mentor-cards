@@ -45,7 +45,8 @@
       </button>
     </div>
     <div class="action-btn-div">
-      <button class="action-button" type="button" (click)="openChooseProgramModal()"
+      <!-- <button class="action-button" type="button" (click)="openChooseProgramModal()" -->
+      <button class="action-button" type="button" (click)="navigate('/price-page')"
         [disabled]="!upgradePackButtonVisible">שדרג
         תוכנית
         <span style="font-size: small;" *ngIf="!upgradePackButtonVisible"><br>

@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { APIService, changeCardsPackInput } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { ProgramChoiseDialogComponent } from 'src/app/Pages/no-program-page/program-choise-dialog/program-choise-dialog.component';
@@ -19,7 +20,8 @@ export class PackPreviewComponent implements OnInit {
   loadedCards: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
-    private userAuthService: UserAuthService, private api: APIService, private overlaySpinnerService: OverlaySpinnerService, private cardsService: CardsService) { }
+    private userAuthService: UserAuthService, private api: APIService, private overlaySpinnerService: OverlaySpinnerService, 
+    private cardsService: CardsService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
     // console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
@@ -55,6 +57,10 @@ export class PackPreviewComponent implements OnInit {
    */
   get exchangePackButtonVisibleNothingToChange() {
     return this.userAuthService.userData.numberOfUsedPacks == 0;
+  }
+
+  get noChangingProgramThisMonth() {
+    return this.userAuthService.userData && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
   }
 
   get upgradePackButtonVisible() {
@@ -108,6 +114,11 @@ export class PackPreviewComponent implements OnInit {
         })
       }
     });
+  }
+
+  navigate(path: string): void {
+    this.ngZone.run(() => this.router.navigate([path]));
+    this.closeDialog();
   }
 
   closeDialog(): void {

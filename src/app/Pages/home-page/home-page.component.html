@@ -16,14 +16,19 @@
     <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">התחברות/הרשמה</button>
     <button style="font-size: x-large;" *ngIf="userData && userData.status === 'NOPLAN'" type="button"
-      (click)="navigate('/price-page')">להרשמה לתוכנית</button>
+    (click)="navigate('/price-page')">להרשמה לתוכנית</button>
     <button style="font-size: x-large;" *ngIf="userData && userData.status === 'PLAN'" type="button"
-      (click)="navigate('/all-packs-page')">לכל הערכות</button>
+    (click)="navigate('/all-packs-page')">לכל הערכות</button>
+    <br *ngIf="userData && userData.status === 'NOPLAN'">
+    <span id="bottom" *ngIf="userData && userData.status === 'NOPLAN'">החל מ-19.90 ש"ח לחודש לאחר 30 ימי ניסיון חינם. בטלו בכל עת.</span>
     <br>
     <span id="middle">רוצים לראות איך זה עובד?</span>
     <br>
     <button style="font-size: x-large;" type="button" (click)="navigate('/example-pack')">ערכה לדוגמא</button>
     <br>
-    <span id="bottom">החל מ-19.90 ש"ח לחודש לאחר 30 ימי ניסיון חינם. בטלו בכל עת.</span>
+    <span id="middle">יש לכם ערכה ואתם רוצים שהיא תופיע באתר?</span>
+    <span style="font-size: large;">נשמח לשתף פעולה!</span>
+    <br>
+    <button style="font-size: x-large;" type="button" (click)="navigate('/contact-us')">צור קשר</button>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UserAuthService } from './Services/user-auth.service';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { I18n } from 'aws-amplify';
+import LogRocket from 'logrocket';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit {
         localStorage.setItem('signedin', 'true')
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;
+        LogRocket.identify(this.user.username);//TODO
         this.userAuthService.loggedIn(this.user);
       }
       else if (this.authState === 'signin') {

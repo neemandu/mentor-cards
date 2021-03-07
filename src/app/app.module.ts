@@ -6,6 +6,8 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
 Amplify.configure(awsconfig);
+import LogRocket from 'logrocket';
+LogRocket.init('cyu6kh/mentor-cards');
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -68,8 +70,6 @@ import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules
 import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
 import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purchase-dialog/approve-purchase-dialog.component';
-
-
 
 @NgModule({
   declarations: [
