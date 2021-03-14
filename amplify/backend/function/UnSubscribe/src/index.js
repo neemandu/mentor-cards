@@ -1,21 +1,9 @@
 /* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_GROUPTABLE_ARN
 	API_CARDSPACKS_GROUPTABLE_NAME
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_GROUPTABLE_ARN
-	API_CARDSPACKS_GROUPTABLE_NAME
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
@@ -24,6 +12,7 @@ Amplify Params - DO NOT EDIT */
 
 const { env, getgroups } = require("process");
 var AWS = require("aws-sdk");
+const http = require('https'); // or https 
 
 async function removeUserFromCardsPack(cardsPack, username){
     
@@ -201,6 +190,64 @@ async function updateGroup(group, userlist){
     }).promise();
 }
 
+
+
+const post = (defaultOptions, path, payload) => new Promise((resolve, reject) => {
+    console.log('post payload: ' + payload);
+    console.log('post path: ' + path);
+    console.log('post defaultOptions: ');
+    console.log(defaultOptions);
+    const options = { ...defaultOptions, path, method: 'POST' };
+    const req = http.request(options, res => {
+        let buffer = "";
+        res.on('data', chunk => buffer += chunk)
+        res.on('end', () => {
+            var buf = "";
+            if(buffer != ""){
+                buf = JSON.parse(buffer);
+            }
+            resolve(buf);
+            })
+    });
+    req.on('error', e => reject(e.message));
+    req.write(payload);
+    req.end();
+})
+
+async function cancelPayPalSubscription(transactionId, access_token){
+    console.log("cancelPayPalSubscription: " + transactionId);
+
+    var defaultOptions = {
+        host: 'api.paypal.com',
+        port: 443, 
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + access_token
+        }
+    }
+
+    await post(defaultOptions, "/v1/billing/subscriptions/" + transactionId + "/cancel", "");
+}
+
+async function getPayPalAccessToken(){
+    console.log("getPayPalAccessToken");
+
+    var defaultOptions = {
+        host: 'api.paypal.com',
+        port: 443, 
+        headers: {
+            'Content-Type': 'text/plain',
+            'Authorization': 'Basic QVRleGlMUFZFWG9meXF6aXNVOU1UMk54bFV1bTJYdnVwNktad0hVc2tVajk5VDRzblZCLU55M3hkMUw4NTFQTVY0OEJoVUktSkZYbk56a3Q6RUxPd3pkOFZ0M0lCWHVwQzBLMDJhckFhbENpRl95WW9HTWo0cm9CVEV5Sk5vLTZxNXBNdEhOYTNZY3F1Y2hSWWwxZTFoYjRMc1lzSk9HWEI='
+        }
+    }
+
+    var response = await post(defaultOptions, "/v1/oauth2/token", "grant_type=client_credentials");
+    console.log("getPayPalAccessToken response");
+    console.log(response);
+    console.log(response["access_token"]);
+    return response["access_token"];   
+}
+
 exports.handler = async (event) => {
     AWS.config.update({
         region: env.REGION
@@ -211,11 +258,18 @@ exports.handler = async (event) => {
     if(!username){
         username = event.identity.claims['username'];
     }
+
     var user = await getUserByUSerName(username);
+
+    var access_token = await getPayPalAccessToken();
+    await cancelPayPalSubscription(user.subscription.providerTransactionId, access_token);
+
     user.status = "NOPLAN";
     user.subscription = null;
     user.groupId = null;
     user.groupRole = null;
+    user.cancellationDate = new Date().toISOString();
+
     await saveUser(user);
 
     // Removing all group users
@@ -229,6 +283,7 @@ exports.handler = async (event) => {
             groupUser.subscription = null;
             groupUser.groupId = null;
             groupUser.groupRole = null;
+            groupUser.cancellationDate = new Date().toISOString();
             await saveUser(groupUser);
         }
 

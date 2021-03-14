@@ -247,9 +247,11 @@ async function updateMonthlySubscription(user, paymentProgram, transId){
 
     console.log("updating new subscription in DB");
 
+    user.cancellationDate = null;
+
     user.firstProgramRegistrationDate = user.firstProgramRegistrationDate ? 
-                                user.firstProgramRegistrationDate : 
-                                new Date().toISOString();
+    user.firstProgramRegistrationDate : 
+    new Date().toISOString();
 
     if(user.subscription && user.subscription.subscriptionPlan && 
         user.subscription.subscriptionPlan.numberOfCardPacks > paymentProgram.numberOfCardPacks){
