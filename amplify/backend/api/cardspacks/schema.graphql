@@ -113,6 +113,7 @@ type User
   groupId: String
   numberOfUsedPacks: Int
   groupRole: String
+  cancellationDate: AWSDateTime
 }
 
 type Group

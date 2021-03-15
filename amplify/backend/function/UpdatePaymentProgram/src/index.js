@@ -272,6 +272,7 @@ async function updateMonthlySubscription(user, paymentProgram, transId){
     console.log("Adding a new subscription plan to user: " + user.id + "...");
     await saveUser(user);
 }
+
 /*
 async function createIncognitoGroup(username){
     var name = username + "_Group";
