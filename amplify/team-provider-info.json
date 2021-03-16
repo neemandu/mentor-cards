@@ -153,7 +153,7 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-51585859744455697566-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-306e39743341726c6e72-build.zip"
         },
         "UpdateGroupUsersList": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -173,7 +173,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-4e61792b525049584979-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-4a7668455a3971365a64-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
