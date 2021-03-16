@@ -10,6 +10,7 @@ Amplify Params - DO NOT EDIT */
 
 const { env, ppid } = require("process");
 var AWS = require("aws-sdk");
+const millisecondsInMonth = 2505600000;
 
 async function getUser(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -46,10 +47,64 @@ async function getUser(username){
 
 }
 
+function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    if(d2.getDate() < d1.getDate()){
+        months--;
+    }
+    return months <= 0 ? 0 : months;
+}
+
+function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
+    console.log('getBillingEndDate');
+    console.log('cancellationDate is: ');
+    console.log(cancellationDate);
+    var monthsDiff = monthDiff(firstProgramRegistrationDate, cancellationDate) + 1;
+    var endPaymentDate = new Date(firstProgramRegistrationDate);
+    endPaymentDate.setMonth(endPaymentDate.getMonth() + monthsDiff);
+    console.log('End of billing cycle dae is: ');
+    console.log(endPaymentDate);
+    return new Date(endPaymentDate);  
+}
+
+
+function isPackageBelongToUser(usersList, username) {
+    console.log('Checking if package belong to user: ' + username);
+    var canView = false;
+    for(var i = 0; i < usersList.length; i++){
+        if(username == usersList[i]){
+            canView = true;
+            break;
+        }
+    }
+    console.log('package belong to user ' + username + ': ' + canView);
+    return canView;
+}
+
+function isFirstMonth(firstProgramRegistrationDate, allPackagesDate) {
+    console.log('isFirstMonth');
+    console.log('firstProgramRegistrationDate');
+    console.log(firstProgramRegistrationDate);
+    console.log('allPackagesDate');
+    console.log(allPackagesDate);
+    var first = new Date(firstProgramRegistrationDate);
+    var all = new Date(allPackagesDate);
+    if (first > all){
+        console.log('First month of use!');
+        return true;
+    }
+    console.log('Not the first month of use');
+    return false;
+}
+
 exports.handler = async (event) => {
     console.log('getCardsImages');
     console.log(event);
 
+    // user was not identified in cognito
     if(!("identity" in event)){
         return [];
     }
@@ -69,39 +124,46 @@ exports.handler = async (event) => {
     }
 
     var user = await getUser(username);
-    var now = new Date();
     var allPackagesDate = new Date();
+    var now = new Date();
     allPackagesDate.setDate(allPackagesDate.getDate()-30);
-    //var allPackagesDate = new Date(now.getFullYear(),now.getMonth()-1, now.getMonth()-1);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
     console.log(user.firstProgramRegistrationDate);
-    var udate = new Date(user.firstProgramRegistrationDate);
-    console.log('udate');
-    console.log(udate);
-    if(user && 
-        (   user.subscription && 
-            user.subscription.subscriptionPlan && 
-            user.subscription.subscriptionPlan.numberOfCardPacks== -1) 
-        || 
-        (udate > allPackagesDate)){
-            return event.source['cards'];
-    }
 
-    var usersList = event.source['usersIds'];
-    var canView = false;
-    for(var i = 0; i < usersList.length; i++){
-        if(username == usersList[i]){
-            canView = true;
-            break;
-        }
-    }
-
-    if(!canView){
-        return [];
-    }
-    else{
+    if(user &&    // unlimited sunscription
+       user.status == "PLAN" &&
+       user.subscription && 
+       user.subscription.subscriptionPlan && 
+       user.subscription.subscriptionPlan.numberOfCardPacks== -1              
+    ){
+        console.log('Limitless program');
         return event.source['cards'];
     }
+    if(user &&    // first 30 days all packs are available
+       user.status == "PLAN" &&
+       isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
+    ){
+        console.log('First Month');
+        return event.source['cards'];
+    }
+    if(user && // does the package belong to the user?
+       user.status == "PLAN" &&
+       isPackageBelongToUser(event.source['usersIds'], username)     
+    ){
+        console.log('Package belong to user');
+        return event.source['cards'];
+    }
+    if(user &&    // canceled subscription but before billing cycle ended
+       user.status == "NOPLAN" && 
+       user.cancellationDate != null && 
+       now < getBillingEndDate(user.firstProgramRegistrationDate, user.cancellationDate)
+    ){
+        console.log('getBillingEndDate');
+        return event.source['cards'];
+    }
+    console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
+    return [];
+    
 };
