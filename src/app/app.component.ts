@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
-      console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
+      // console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
       // debugger
       if (this.authState === 'signedin') {
         // debugger
@@ -103,7 +103,16 @@ const dict = {
     'User already exists.': 'משתמש כזה כבר קיים',
     'Username/client id combination not found.': 'שם משתמש זה לא קיים',
     'Confirmation code cannot be empty': 'קוד אימות אינו יכול להיות ריק',
-    'Custom auth lambda trigger is not configured for the user pool.': 'שגיאה בהתחברות, נסה שנית'
+    'Custom auth lambda trigger is not configured for the user pool.': 'שגיאה בהתחברות, נסה שנית',
+    'Invalid email address format.': 'שגיאה בפורמט המייל, נסו שנית',
+    'Password cannot be empty': 'שדה סיסמא לא יכול להיות ריק',
+    'Username cannot be empty': 'שדה כתובת מייל לא יכול להיות ריק',
+    'User already exists': 'מייל זה כבר רשום במערכת',
+    "2 validation errors detected: Value at 'password' failed to satisfy constraint: Member must have length greater than or equal to 6; Value at 'password' failed to satisfy constraint: Member must satisfy regular expression pattern: ^[\S]+.*[\S]+$": 'יש למלא את כל השדות על מנת לבצע הרשמה',
+    "1 validation error detected: Value at 'password' failed to satisfy constraint: Member must have length greater than or equal to 6": 'הסיסמא חייבת להיות 8 תווים ומעלה',
+    'Attributes did not conform to the schema: email: The attribute is required': 'יש לאמת את המייל על מנת לבצע הרשמה',
+    'Password did not conform with policy: Password not long enough': 'הסיסמא חייבת להיות 8 תווים ומעלה',
+    'Invalid phone number format.': 'שגיאה בפורמט הטלפון, נסו שנית',
   }
 };
 

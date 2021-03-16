@@ -65,6 +65,7 @@ export class UserAuthService {
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
     this.api.CreateUser(user).then(value => {
       // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.CreateUser ~ value", value)
+      this.updateUserData();
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
     });
@@ -80,13 +81,12 @@ export class UserAuthService {
    * Get all data from BE about user
    */
   updateUserData(): void {
-    // console.log(this.loggedInAttributes);
-    // if(!this.loggedInAttributes == null && !this.loggedInAttributes.Session == null){
-    if (this.loggedInAttributes != null) {
+    if (this.loggedInAttributes != null && !this.userData) {
       this.api.GetUser(this.loggedInAttributes.username).then(data => {
-        // this.userData = data;
+        if(!data)
+          return;
         this.userData = new UserData().deseralize(data);
-        console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
         this.loggedInEmmiter.emit(this.userData);//TODO check why doesn't move to other page after login
