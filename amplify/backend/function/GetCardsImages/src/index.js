@@ -72,7 +72,7 @@ function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
 
 
 function isPackageBelongToUser(usersList, username) {
-    console.log('package belong to user: ' + username);
+    console.log('Checking if package belong to user: ' + username);
     var canView = false;
     for(var i = 0; i < usersList.length; i++){
         if(username == usersList[i]){
@@ -80,8 +80,24 @@ function isPackageBelongToUser(usersList, username) {
             break;
         }
     }
-
+    console.log('package belong to user ' + username + ': ' + canView);
     return canView;
+}
+
+function isFirstMonth(firstProgramRegistrationDate, allPackagesDate) {
+    console.log('isFirstMonth');
+    console.log('firstProgramRegistrationDate');
+    console.log(firstProgramRegistrationDate);
+    console.log('allPackagesDate');
+    console.log(allPackagesDate);
+    var first = new Date(firstProgramRegistrationDate);
+    var all = new Date(allPackagesDate);
+    if (first > all){
+        console.log('First month of use!');
+        return true;
+    }
+    console.log('Not the first month of use');
+    return false;
 }
 
 exports.handler = async (event) => {
@@ -116,33 +132,38 @@ exports.handler = async (event) => {
     console.log('user.firstProgramRegistrationDate');
     console.log(user.firstProgramRegistrationDate);
 
-    if(user && 
-        (    // unlimited sunscription
-            user.status == "PLAN" &&
-            user.subscription && 
-            user.subscription.subscriptionPlan && 
-            user.subscription.subscriptionPlan.numberOfCardPacks== -1
-        ) 
-        || 
-        (   // first 30 days all packs are available
-            user.status == "PLAN" &&
-            user.firstProgramRegistrationDate > allPackagesDate
-        )
-        ||
-        (   // does the package belong to the user?
-            user.status == "PLAN" &&
-            isPackageBelongToUser(event.source['usersIds'], username)
-        )
-        ||
-        (   // canceled subscription but before billing cycle ended
-            user.status == "NOPLAN" && 
-            user.cancellationDate != null && 
-            now < getBillingEndDate(user.firstProgramRegistrationDate, user.cancellationDate)
-        )
+    if(user &&    // unlimited sunscription
+       user.status == "PLAN" &&
+       user.subscription && 
+       user.subscription.subscriptionPlan && 
+       user.subscription.subscriptionPlan.numberOfCardPacks== -1              
     ){
-            return event.source['cards'];
+        console.log('Limitless program');
+        return event.source['cards'];
     }
-
+    if(user &&    // first 30 days all packs are available
+       user.status == "PLAN" &&
+       isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
+    ){
+        console.log('First Month');
+        return event.source['cards'];
+    }
+    if(user && // does the package belong to the user?
+       user.status == "PLAN" &&
+       isPackageBelongToUser(event.source['usersIds'], username)     
+    ){
+        console.log('Package belong to user');
+        return event.source['cards'];
+    }
+    if(user &&    // canceled subscription but before billing cycle ended
+       user.status == "NOPLAN" && 
+       user.cancellationDate != null && 
+       now < getBillingEndDate(user.firstProgramRegistrationDate, user.cancellationDate)
+    ){
+        console.log('getBillingEndDate');
+        return event.source['cards'];
+    }
+    console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
     return [];
     
 };
