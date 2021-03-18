@@ -29,7 +29,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
 
   constructor(private userAuthService: UserAuthService, public dialogRef: MatDialogRef<ProgramChoiseDialogComponent>, private api: APIService,
     private overlaySpinnerService: OverlaySpinnerService) {
-    console.log("file: program-choise-dialog.component.ts ~ line 33 ~ this.userAuthService.subPlans", this.userAuthService.subPlans)
+    // console.log("file: program-choise-dialog.component.ts ~ line 33 ~ this.userAuthService.subPlans", this.userAuthService.subPlans)
     this.userAuthService.subPlans.forEach(plan => {
       this.configAmountsOfUsers.push(plan.numberOfUsers);
     })

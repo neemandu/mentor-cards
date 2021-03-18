@@ -81,7 +81,7 @@ export class UserAuthService {
    * Get all data from BE about user
    */
   updateUserData(): void {
-    if (this.loggedInAttributes != null && !this.userData) {
+    if (this.loggedInAttributes != null) {
       this.api.GetUser(this.loggedInAttributes.username).then(data => {
         if(!data)
           return;
@@ -89,7 +89,7 @@ export class UserAuthService {
         // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
-        this.loggedInEmmiter.emit(this.userData);//TODO check why doesn't move to other page after login
+        this.loggedInEmmiter.emit(this.userData);
         this.userData.status === 'NOPLAN' ? this.ngZone.run(() => this.router.navigate(['/no-program-page'])) : this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)

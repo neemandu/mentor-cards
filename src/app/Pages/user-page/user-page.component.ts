@@ -27,7 +27,7 @@ export class UserPageComponent implements OnInit {
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog,
     private cardsService: CardsService, private api: APIService) {
     this.userData = this.userAuthService.userData;
-    console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
+    // console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
   }
 
