@@ -59,6 +59,7 @@ export class AllPacksPageComponent implements OnInit {
     } else {
       let authStatus = localStorage.getItem('signedin');
       (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then(packs => {
+        // console.log("file: all-packs-page.component.ts ~ line 62 ~ packs", packs)
         this.allPacks = packs.items.map(pack => {
           pack.categories.forEach(category => {
             if (!this.allCategories.includes(category))

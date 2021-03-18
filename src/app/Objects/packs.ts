@@ -7,6 +7,7 @@ export class PackInfo {
     id: string;
     imgUrl: string;
     tags: string[];
+    name: string;
 
     constructor() { }
 
@@ -24,6 +25,7 @@ export class PackContent {
     imgUrl: string;
     tags: string[];
     guideBook: GuideBook;
+    name: string;
 
     constructor() { }
 
