@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuidePageComponent implements OnInit {
   selectedBtn: number = 1;
+  title: string = "מהות העבודה עם קלפים";
 
   constructor() { }
 

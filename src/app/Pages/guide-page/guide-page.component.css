@@ -8,11 +8,20 @@
   background-color: #ffa800;
   width: 3px;
   height: 80vh;
+  position: sticky;
+  top: 16%;
 }
 
 #buttons {
   margin: 1% 1%;
   width: 20vw;
+  position: sticky;
+  top: 18%;
+  height: fit-content;
+}
+
+button {
+  height: auto;
 }
 
 #content {
@@ -48,4 +57,13 @@
   transition: opacity 2s;
   height: 23rem;
   margin-top: 12vh;
+  position: sticky;
+  top: 28%;
+}
+
+.screen-share-img {
+  opacity: 0;
+  transition: opacity 2s;
+  /* height: 23rem; */
+  /* margin-top: 12vh; */
 }

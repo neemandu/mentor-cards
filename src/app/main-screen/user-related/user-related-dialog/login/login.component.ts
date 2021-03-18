@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
   forgotPasswordVarifyEmail(): void {
     var user = this.forgotPasswordForm.get("username").value;
     this.userAuthService.forgotPasswordVarifyEmail(user).then(res => {
-      console.log(res);
+      // console.log(res);
       this.forgotPasswordForm.enable();
       this.showHideLoading();
       this.newPasswordPhaseEnable();
@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
     var confirmationCode = this.forgotPasswordForm.get("confirmationCode").value;
     var newPassword = this.forgotPasswordForm.get("newPassword").value;
     this.userAuthService.forgotPasswordReset(user, confirmationCode, newPassword).then(res => {
-      console.log(res);
+      // console.log(res);
       this.forgotPasswordForm.enable();
       this.showHideLoading();
       this.newPasswordPhaseDisable();

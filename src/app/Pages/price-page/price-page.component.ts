@@ -111,17 +111,36 @@ export class PricePageComponent implements OnInit {
 
   getNumOfPacksDesc(numberOfCardPacks): string {
     if (numberOfCardPacks == -1)
-      return 'כל הערכות'
-    else
-      return numberOfCardPacks + ' ערכות'
+      return 'כל מה שיש לכם!'
+    else if(numberOfCardPacks == 2)
+      return numberOfCardPacks + '- בקטנה'
+    else if(numberOfCardPacks == 5)
+      return numberOfCardPacks + '- מספיק לי'
   }
+  // getNumOfPacksDesc(numberOfCardPacks): string {
+  //   if (numberOfCardPacks == -1)
+  //     return 'כל הערכות'
+  //   else
+  //     return numberOfCardPacks + ' ערכות'
+  // }
 
   getAmountOfUsersDesc(userAmount): string {
     if (userAmount == 1)
-      return 'משתמש יחיד'
-    else
-      return userAmount + ' משתמשים'
+      return userAmount +'- אני'
+    else if(userAmount ==3)
+      return userAmount +'- חברים קרובים'
+    else if(userAmount ==10)
+      return userAmount +'- כל החבר\'ה'
+    else if(userAmount ==50)
+      return userAmount +'- כל הארגון'
   }
+
+  // getAmountOfUsersDesc(userAmount): string {
+  //   if (userAmount == 1)
+  //     return 'משתמש יחיד'
+  //   else
+  //     return userAmount + ' משתמשים'
+  // }
 
   getDiscountAmount(userAmount): string {
     var plan = this.userAuthService.subPlans.find(plan => plan.numberOfUsers == userAmount)

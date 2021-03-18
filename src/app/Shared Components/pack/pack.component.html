@@ -1,5 +1,5 @@
 <div class="d-flex flex-column">
-  <h3 id="pack-desc">{{packInfo.description}}</h3>
+  <h3 id="pack-desc">{{packInfo.name}}</h3>
   <!-- Owned - list-->
   <img *ngIf="packInfo.cards.length != 0" routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()"
     src={{packInfo.imgUrl}}

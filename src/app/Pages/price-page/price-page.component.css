@@ -76,6 +76,9 @@ p {
 
 #purchase-btn {
   margin-bottom: 4vh;
+  width: 20vw;
+  height: 6vh;
+  font-size: x-large;
 }
 
 .action-button:hover {

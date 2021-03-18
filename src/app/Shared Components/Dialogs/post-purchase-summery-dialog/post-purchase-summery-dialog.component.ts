@@ -13,7 +13,7 @@ export class PostPurchaseSummeryDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: SubscriptionPlan, public dialogRef: MatDialogRef<PostPurchaseSummeryDialogComponent>, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-  console.log("file: post-purchase-summery-dialog.component.ts ~ line 15 ~ data", this.data)
+  // console.log("file: post-purchase-summery-dialog.component.ts ~ line 15 ~ data", this.data)
   }
 
   public navigate(path: string): void {

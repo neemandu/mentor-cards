@@ -21,9 +21,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
-      // console.log("file: nav.component.ts ~ line 24 ~ this.userAuthService.loggedInEmmiter.subscribe ~ userAttributes", userAttributes)
       this.userAttributes = userAttributes;
-      // console.log("🚀 ~ file: nav.component.ts ~ line 21 ~ NavComponent ~ this.userAuthService.loggedInEmmiter.subscribe ~ userAttributes", userAttributes)
       this.loggedIn = true;
     })
     this.userAuthService.signedOutEmmiter.subscribe(() => {
