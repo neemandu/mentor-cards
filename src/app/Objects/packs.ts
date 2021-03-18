@@ -7,6 +7,7 @@ export class PackInfo {
     id: string;
     imgUrl: string;
     tags: string[];
+    name: string;
 
     constructor() { }
 
@@ -24,6 +25,7 @@ export class PackContent {
     imgUrl: string;
     tags: string[];
     guideBook: GuideBook;
+    name: string;
 
     constructor() { }
 
@@ -39,7 +41,25 @@ export class GuideBook {
     subjects: GuideBookSubject[];
 
     setDefault() {
-        this.subjects = [new GuideBookSubject().setDefault("נושא ראשון"), new GuideBookSubject().setDefault("נושא שני"), new GuideBookSubject().setDefault("נושא שלישי")]
+        var sub1 = new GuideBookSubject();
+        sub1.subjectName = "הנחיות/הצעות לעבודה אישית (אחד על אחד)";
+        var subsub11 = new SubSubject();
+        subsub11.subSubjectName = "עבודה עם קלפים במצב גלוי"
+        subsub11.questions = ["בחר את הקלף שיכול להיות סימן ההיכר שלך. מה הופך את הקלף למשמעותי עבורך?", "איזה 2 קלפים היית שמח לקבל עכשיו במתנה. מדוע?"]
+        var subsub12 = new SubSubject();
+        subsub12.subSubjectName = "עבודה עם קלפים במצב סמוי"
+        subsub12.questions = ["בחר 3 קלפים. מה הקלפים היו אומרים לך לו יכלו להביע דעתם?", "בחר 2 קלפים. קלף אחד מסמן איך אנשים רואים אותך והקלף השני איך אתה רואה את עצמך. מה הדמיון בין הקלפים? מה השוני?"]
+        sub1.subSubjects = [subsub11, subsub12];
+        var sub2 = new GuideBookSubject();
+        sub2.subjectName = "הנחיות/הצעות לעבודה קבוצתית/ארגונית";
+        var subsub21 = new SubSubject();
+        subsub21.subSubjectName = "עבודה עם קלפים במצב גלוי"
+        subsub21.questions = ["כל משתתף בוחר את הקלף שהכי היה רוצה לקבל/להוסיף לעצמו במסגרת הקבוצה.", "כל משתתף בוחר קלף ומשתף דבר אחד שיפתיע את כולם."]
+        var subsub22 = new SubSubject();
+        subsub22.subSubjectName = "תהליך - עבודה עם יותר מקלף אחד (קלפים סמויים)."
+        subsub22.questions = ["בחר תחום מסוים והתמקד בו. שלוף 2 קלפים – הראשון מייצג תובנות ושיעורים שלמדת והשני שיעורים שעתידים להגיע.", "להאיר תהליך מסוים, שהתחיל בעבר, ממשיך בהווה ואמור להימשך גם בעתיד. מאפשר התבוננות רחבה יותר על ציר הזמן."]
+        sub2.subSubjects = [subsub21, subsub22];
+        this.subjects = [sub1, sub2]
         return this;
     }
 
