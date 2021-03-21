@@ -9,7 +9,7 @@ import { CardComponent } from 'src/app/Shared Components/card/card.component';
 import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-dialog.component';
 import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
 import * as exampleCards from '../../../assets/Bundle Configurations/ExmaplePack.json';
-import { PopoutService } from 'src/app/Services/popout.service';
+import { PopoutData, PopoutService } from 'src/app/Services/popout.service';
 import { UserData } from 'src/app/Objects/user-related';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Subscription } from 'rxjs';
@@ -137,10 +137,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   openGuideBook(): void {
     // debugger
-    const modalData = {
+    const modalData: PopoutData = {
       modalName: 'guide-book',
       guideBook: this.pack.guideBook,
-      packName: this.pack.name
+      packName: this.pack.name,
+      packDesc: this.pack.description
     };
     this.popoutService.openPopoutModal(modalData);
   }

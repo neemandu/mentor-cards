@@ -19,7 +19,7 @@ export class PopoutService {
     private applicationRef: ApplicationRef
   ) { }
 
-  openPopoutModal(data) {
+  openPopoutModal(data: PopoutData) {
     this.modalName = data.modalName;
     if (this.isPopoutWindowOpen())
       this.focusPopoutWindow();
@@ -90,6 +90,7 @@ export interface PopoutData {
   modalName: string;
   guideBook: GuideBook;
   packName: string;
+  packDesc: string;
 }
 
 export const POPOUT_MODAL_DATA = new InjectionToken<PopoutData>('POPOUT_MODAL_DATA');

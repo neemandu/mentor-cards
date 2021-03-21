@@ -12,6 +12,7 @@ export class GuideBookComponent implements OnInit {
 
   guideBook: GuideBook;
   packName: string;
+  packDesc: string;
 
   constructor(
     @Inject(POPOUT_MODAL_DATA) public data: PopoutData,
@@ -25,10 +26,12 @@ export class GuideBookComponent implements OnInit {
     if(this.data.guideBook){
       this.guideBook = this.data.guideBook;
       this.packName = this.data.packName;
+      this.packDesc = this.data.packDesc;
     }
     else{
       this.guideBook = new GuideBook().setDefault();
-      this.packName = "ערכה לדוגמא"
+      this.packName = "ערכה לדוגמא",
+      this.packDesc = "תאור ערכה לדוגמא";
     }
   }
 
