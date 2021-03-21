@@ -90,6 +90,7 @@ export interface PopoutData {
   modalName: string;
   guideBook: GuideBook;
   packName: string;
+  packDesc: string;
 }
 
 export const POPOUT_MODAL_DATA = new InjectionToken<PopoutData>('POPOUT_MODAL_DATA');
