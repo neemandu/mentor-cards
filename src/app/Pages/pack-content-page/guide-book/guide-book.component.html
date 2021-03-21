@@ -59,8 +59,8 @@
                         <ul class="list-group list-group-flush"
                             style="overflow: hidden; max-height: 0; transition: max-height 0.5s linear; transition-delay: 0s;">
                             <li class="list-group-item" *ngFor="let question of subSubject.questions; let k = index"
-                                style="margin-left: 2vw;">
-                                <input style="width: 1rem; height: 1rem; margin-left: 1rem;" type="checkbox"
+                                style="margin-left: 2vw; align-items: center; display: flex;">
+                                <input style="margin-left: 1rem;" type="checkbox"
                                     id={{i}}+{{j}}+{{k}}>
                                 <label for={{i}}+{{j}}+{{k}}>{{question}}</label>
                             </li>
