@@ -136,10 +136,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   openGuideBook(): void {
+    // debugger
     const modalData = {
       modalName: 'guide-book',
       guideBook: this.pack.guideBook,
-      packName: this.pack.description
+      packName: this.pack.name
     };
     this.popoutService.openPopoutModal(modalData);
   }
