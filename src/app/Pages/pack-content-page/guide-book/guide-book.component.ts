@@ -13,6 +13,7 @@ export class GuideBookComponent implements OnInit {
   guideBook: GuideBook;
   packName: string;
   packDesc: string;
+  title: string;
 
   constructor(
     @Inject(POPOUT_MODAL_DATA) public data: PopoutData,
@@ -24,12 +25,14 @@ export class GuideBookComponent implements OnInit {
   ngOnInit(): void {
     // debugger
     if(this.data.guideBook){
+      this.title = "ספר הדרכה"
       this.guideBook = this.data.guideBook;
       this.packName = this.data.packName;
       this.packDesc = this.data.packDesc;
     }
     else{
       this.guideBook = new GuideBook().setDefault();
+      this.title = "ספר הדרכה לדוגמא"
       this.packName = "ערכה לדוגמא",
       this.packDesc = "תאור ערכה לדוגמא";
     }
