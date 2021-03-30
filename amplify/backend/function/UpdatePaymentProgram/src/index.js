@@ -224,16 +224,21 @@ async function removeUserFromAllPacks(user){
     };
     console.log("searching for number of used packs for - " + user.username);
     
-    await docClient.scan(params, function(err, data) {
+    var packs = [];
+
+    docClient.scan(params, function(err, data) {
         if (err) {
             console.error("Unable to read packs. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Get packs succeeded:", JSON.stringify(data, null, 2));
-            data.Items.forEach(async function(item) {
-                await removeUserFromCardsPack(item, user.username);
-            });
+            console.log("Get packs succeeded");
+            packs = data.Items;
         }
-    }).promise();
+    });
+
+    for(var pack in packs){
+        console.log("removeUserFromCardsPack");
+        await removeUserFromCardsPack(pack, user.username);
+    }
 }
 
 async function updateMonthlySubscription(user, paymentProgram, transId){
@@ -426,7 +431,13 @@ exports.handler = async (event) => {
             for(var i = 0; i < group.groupUsers.length ; i++){
                 var curremail = group.groupUsers[i].email;
                 var currUser = await getUserByEmail(curremail);
-                await updateMonthlySubscription(currUser, paymentProgram, transId);
+                console.log('checking if user from group is not the updated by user');
+                console.log('updated user: ' + currUser.username);
+                console.log('currnt user: ' + username);
+                if(currUser.username != username){              
+                    console.log('Updating program to user user: ' + currUser.username);
+                    await updateMonthlySubscription(currUser, paymentProgram, transId);
+                }
             }
         }
         else{ // No group yet
@@ -436,6 +447,7 @@ exports.handler = async (event) => {
                 user.groupRole = "ADMIN";
             }
         }
+        console.log('Updating program to updated by user: ' + username);
         await updateMonthlySubscription(user, paymentProgram, transId);
     }
     
