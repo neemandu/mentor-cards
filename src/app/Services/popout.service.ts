@@ -19,7 +19,7 @@ export class PopoutService {
     private applicationRef: ApplicationRef
   ) { }
 
-  openPopoutModal(data) {
+  openPopoutModal(data: PopoutData) {
     this.modalName = data.modalName;
     if (this.isPopoutWindowOpen())
       this.focusPopoutWindow();
