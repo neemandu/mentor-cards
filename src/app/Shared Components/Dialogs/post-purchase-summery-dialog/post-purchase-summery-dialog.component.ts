@@ -2,6 +2,7 @@ import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
+import { UserAuthService } from 'src/app/Services/user-auth.service';
 
 @Component({
   selector: 'app-post-purchase-summery-dialog',
@@ -10,7 +11,8 @@ import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 })
 export class PostPurchaseSummeryDialogComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: SubscriptionPlan, public dialogRef: MatDialogRef<PostPurchaseSummeryDialogComponent>, public router: Router, private ngZone: NgZone) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: SubscriptionPlan, public dialogRef: MatDialogRef<PostPurchaseSummeryDialogComponent>, 
+  public router: Router, private ngZone: NgZone, private userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
   // console.log("file: post-purchase-summery-dialog.component.ts ~ line 15 ~ data", this.data)
@@ -19,6 +21,10 @@ export class PostPurchaseSummeryDialogComponent implements OnInit {
   public navigate(path: string): void {
     this.closeDialog();
     this.ngZone.run(() => this.router.navigate([path]));
+  }
+
+  get trialMonth() {
+    return this.userAuthService.trialMonth;
   }
 
   closeDialog(): void {
