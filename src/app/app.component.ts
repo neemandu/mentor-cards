@@ -1,9 +1,10 @@
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { UserAuthService } from './Services/user-auth.service';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { I18n } from 'aws-amplify';
 import LogRocket from 'logrocket';
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
   showLogin: boolean = true;
 
 
-  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService) {
+  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
+    public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
     I18n.putVocabularies(dict);
     I18n.setLanguage('he');
@@ -49,6 +51,18 @@ export class AppComponent implements OnInit {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       this.showLogin = true;
     })
+    var ua = navigator.userAgent;
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
+      this.openMobileErrorModal();
+  }
+
+  openMobileErrorModal(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxHeight = '85vh';
+    dialogConfig.maxWidth = '85vw';
+    const dialogRef = this.dialog.open(MobileWarningDialogComponent, dialogConfig);
   }
 
   closeAmplify(): void {
@@ -115,5 +129,20 @@ const dict = {
     'Invalid phone number format.': 'שגיאה בפורמט הטלפון, נסו שנית',
   }
 };
+
+@Component({
+  selector: 'mobile-warning-dialog',
+  templateUrl: './mobile-warning-dialog.html',
+})
+export class MobileWarningDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<MobileWarningDialogComponent>) { }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+}
 
 

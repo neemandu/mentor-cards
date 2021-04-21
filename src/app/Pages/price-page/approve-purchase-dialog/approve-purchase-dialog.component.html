@@ -25,14 +25,25 @@
             ​ הבחירה להמשיך מבטאת את אישורך לכך שגילך מעל 18 שנים ואת הסכמתך ל<a (click)="openSiteRulesModal();">תנאים
                 האלה.</a>
         </li>
-        <li>
+        <!-- <li>
             לסיום הרכישה באמצעות <b>PayPal או ע"י כרטיס אשראי</b> לחץ על כפתור ה PayPal.
+        </li> -->
+    </ul>
+    <p id="payment-title">
+        ניתן לשלם דרך חשבון ה-PayPal או על ידי הזנת פרטי האשראי.
+    </p>
+    <ul id="payment-inst-list">
+        <li>
+            לתשלום באמצעות כרטיס האשראי, לחצו על כפתור "Pay with PayPal" ולאחר מכן לחצו על "Pay with Credit Card".
+        </li>
+        <li>
+            לתשלום באמצעות חשבון ה-PayPal, לחצו על "Pay with PayPal" ולאחר מכן הזינו את פרטי ההתחברות לחשבון ה-PayPal
+            שלכם.
         </li>
     </ul>
 </div>
 <div class="line"></div>
 <div mat-dialog-actions>
-    <div id="paypal" style="width: 100%;" #paypal
-        [matTooltipClass]="{'tooltip-class' : true}" [matTooltipPosition]="'left'"
-        matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
+    <div id="paypal" style="width: 100%;" #paypal [matTooltipClass]="{'tooltip-class' : true}"
+        [matTooltipPosition]="'left'" matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
 </div>

@@ -6,11 +6,12 @@ img {
   width: 10rem;
   height: auto;
   box-shadow: 0.25em 0.25em 0px 0px rgb(255 255 255), 0.25em 0.25em 0px 1px #ddd, 0.5em 0.5em 0px 0px rgb(255 255 255), 0.5em 0.5em 0px 1px #ddd;
-  transition: box-shadow 0.2s ease-out;
+  transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
 }
 
 img:hover {
   box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd, 0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd;
+  transform: scale(1.05);
 }
 
 #pack-buttons {

@@ -35,7 +35,7 @@ import { PortalModule } from '@angular/cdk/portal';
 
 //Components
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent, MobileWarningDialogComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -106,7 +106,8 @@ import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purch
     SiteRulesDialogComponent,
     PricePageComponent,
     GuidePageComponent,
-    ApprovePurchaseDialogComponent
+    ApprovePurchaseDialogComponent,
+    MobileWarningDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -144,7 +145,8 @@ import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purch
   providers: [
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, PackPreviewComponent,
-    NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent]
+  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, 
+    PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, 
+    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, MobileWarningDialogComponent]
 })
 export class AppModule { }

@@ -79,4 +79,6 @@
         חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}
     <p *ngIf="!userSingedIn" id="purchase-btn" style="font-size: medium;font-weight: 600;">יש להתחבר על מנת להצטרף לתכנית
     </p>
+    <p *ngIf="userSingedIn && selectedProgramOwned" id="purchase-btn" style="font-size: medium;font-weight: 600;">אתם רשומים לתכנית זו
+    </p>
 </div>

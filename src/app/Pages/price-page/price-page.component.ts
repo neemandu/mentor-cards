@@ -170,11 +170,16 @@ export class PricePageComponent implements OnInit {
   }
 
   get purchaseBtnVisible() {
-    return this.userSingedIn && (this.userAuthService.userData.status !== 'PLAN' || !this.userAuthService.planChangedThisMonth)
+    return this.userSingedIn && !this.selectedProgramOwned && (this.userAuthService.userData.status !== 'PLAN' || !this.userAuthService.planChangedThisMonth)
   }
 
   get noChangingProgramThisMonth() {
-    return this.userSingedIn && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
+    return this.userSingedIn && !this.selectedProgramOwned && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
+  }
+
+  get selectedProgramOwned() {
+    return this.userSingedIn && this.packSelected.id == this.userAuthService.userData.subscription.subscriptionPlan.id;
+
   }
 
   openApprovePurchaseDialog(): void {
