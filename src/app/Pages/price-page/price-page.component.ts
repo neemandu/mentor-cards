@@ -178,7 +178,7 @@ export class PricePageComponent implements OnInit {
   }
 
   get selectedProgramOwned() {
-    return this.userSingedIn && this.packSelected.id == this.userAuthService.userData.subscription.subscriptionPlan.id;
+    return this.userSingedIn && this.packSelected.id == this.userAuthService.userData?.subscription?.subscriptionPlan?.id;
 
   }
 
