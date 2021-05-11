@@ -39,8 +39,6 @@ export class GuideBookComponent implements OnInit {
   }
 
   accordion(subjectRef, subjectDivRef): void {
-    // debugger
-    // console.log("file: guide-book.component.ts ~ line 49 ~ accordion ~ $event", subjectRef)
     /* Toggle between hiding and showing the active panel */
     var panel = subjectRef.nextElementSibling;
     if (panel.style.maxHeight !== "0px") {

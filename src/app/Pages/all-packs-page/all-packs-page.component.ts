@@ -210,7 +210,7 @@ export class AllPacksPageComponent implements OnInit {
 
   favoritesFilter(): void {
     this.allPacks = this.allPacks.filter((pack: PackInfo) => {
-      return this.selectedFavorites.includes(pack.description);
+      return this.selectedFavorites.includes(pack.name);
     })
   }
 
