@@ -32,6 +32,7 @@ mutation CreateUser($input: CreateUserInput!) {
     groupId
     numberOfUsedPacks
     groupRole
+    cancellationDate
     createdAt
     updatedAt
   }
@@ -56,6 +57,210 @@ mutation JoinExistingGroup($input: joinExistingGroupInput!) {
 }
 mutation DeleteGroupById($input: deleteGroupInput!) {
   DeleteGroupById(input: $input)
+}
+mutation CreateContactUsModel(
+  $input: CreateContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  createContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateContactUsModel(
+  $input: UpdateContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  updateContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteContactUsModel(
+  $input: DeleteContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  deleteContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateGroup(
+  $input: CreateGroupInput!
+  $condition: ModelGroupConditionInput
+) {
+  createGroup(input: $input, condition: $condition) {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateGroup(
+  $input: UpdateGroupInput!
+  $condition: ModelGroupConditionInput
+) {
+  updateGroup(input: $input, condition: $condition) {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteGroup(
+  $input: DeleteGroupInput!
+  $condition: ModelGroupConditionInput
+) {
+  deleteGroup(input: $input, condition: $condition) {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateSubscriptionPlan(
+  $input: CreateSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
+) {
+  createSubscriptionPlan(input: $input, condition: $condition) {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateSubscriptionPlan(
+  $input: UpdateSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
+) {
+  updateSubscriptionPlan(input: $input, condition: $condition) {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteSubscriptionPlan(
+  $input: DeleteSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
+) {
+  deleteSubscriptionPlan(input: $input, condition: $condition) {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateNews(
+  $input: CreateNewsInput!
+  $condition: ModelNewsConditionInput
+) {
+  createNews(input: $input, condition: $condition) {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateNews(
+  $input: UpdateNewsInput!
+  $condition: ModelNewsConditionInput
+) {
+  updateNews(input: $input, condition: $condition) {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteNews(
+  $input: DeleteNewsInput!
+  $condition: ModelNewsConditionInput
+) {
+  deleteNews(input: $input, condition: $condition) {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
 }
 mutation CreateCardsPack(
   $input: CreateCardsPackInput!
@@ -140,174 +345,6 @@ mutation DeleteCardsPack(
       }
     }
     name
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateContactUsModel(
-  $input: UpdateContactUsModelInput!
-  $condition: ModelContactUsModelConditionInput
-) {
-  updateContactUsModel(input: $input, condition: $condition) {
-    id
-    name
-    content
-    email
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteContactUsModel(
-  $input: DeleteContactUsModelInput!
-  $condition: ModelContactUsModelConditionInput
-) {
-  deleteContactUsModel(input: $input, condition: $condition) {
-    id
-    name
-    content
-    email
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteGroup(
-  $input: DeleteGroupInput!
-  $condition: ModelGroupConditionInput
-) {
-  deleteGroup(input: $input, condition: $condition) {
-    id
-    groupUsers {
-      email
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateContactUsModel(
-  $input: CreateContactUsModelInput!
-  $condition: ModelContactUsModelConditionInput
-) {
-  createContactUsModel(input: $input, condition: $condition) {
-    id
-    name
-    content
-    email
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateGroup(
-  $input: CreateGroupInput!
-  $condition: ModelGroupConditionInput
-) {
-  createGroup(input: $input, condition: $condition) {
-    id
-    groupUsers {
-      email
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateGroup(
-  $input: UpdateGroupInput!
-  $condition: ModelGroupConditionInput
-) {
-  updateGroup(input: $input, condition: $condition) {
-    id
-    groupUsers {
-      email
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateSubscriptionPlan(
-  $input: CreateSubscriptionPlanInput!
-  $condition: ModelSubscriptionPlanConditionInput
-) {
-  createSubscriptionPlan(input: $input, condition: $condition) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateSubscriptionPlan(
-  $input: UpdateSubscriptionPlanInput!
-  $condition: ModelSubscriptionPlanConditionInput
-) {
-  updateSubscriptionPlan(input: $input, condition: $condition) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteSubscriptionPlan(
-  $input: DeleteSubscriptionPlanInput!
-  $condition: ModelSubscriptionPlanConditionInput
-) {
-  deleteSubscriptionPlan(input: $input, condition: $condition) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
     createdAt
     updatedAt
   }

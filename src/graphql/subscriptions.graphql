@@ -98,6 +98,33 @@ subscription OnDeleteGroup {
     updatedAt
   }
 }
+subscription OnCreateNews {
+  onCreateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateNews {
+  onUpdateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteNews {
+  onDeleteNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id
