@@ -11,7 +11,7 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 import { NewEditGroupUserDialogComponent } from 'src/app/Shared Components/Dialogs/new-edit-group-user-dialog/new-edit-group-user-dialog.component';
 
 @Component({
-  selector: 'app-group-management',
+  selector: 'group-management',
   templateUrl: './group-management.component.html',
   styleUrls: ['./group-management.component.css']
 })

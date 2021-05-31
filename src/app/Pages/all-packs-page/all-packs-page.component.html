@@ -36,8 +36,8 @@
   </div>
   <div class="all-packs-view">
     <div *ngIf="allOwnedPacks().length != 0">
-      <h1 *ngIf="signedIn && hasProgram && !trialMonth" style="text-align: center; margin-left: 14rem;">הערכות שלי</h1>
-      <h1 *ngIf="signedIn && hasProgram && trialMonth" style="text-align: center; margin-left: 14rem;">כל הערכות לרשותכם בחודש הראשון</h1>
+      <h1 *ngIf="signedIn && hasProgram && !trialMonth" style="text-align: center; margin-left: 14rem;" i18n="all packs page title">הערכות שלי</h1>
+      <h1 *ngIf="signedIn && hasProgram && trialMonth" style="text-align: center; margin-left: 14rem;" i18n="first month title|all packs page title">כל הערכות לרשותכם בחודש הראשון</h1>
       <div class="d-flex flex-row flex-wrap">
         <app-pack *ngFor="let packInfo of allOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
         </app-pack>

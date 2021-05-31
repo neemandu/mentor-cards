@@ -21,8 +21,16 @@ video {
 #actions {
   align-items: center;
   background: #fff1d6de;
-  padding: 5%;
+  padding: 4%;
   border-radius: 20px;
+}
+
+.actions-top {
+  margin-bottom: 1%;
+}
+
+.actions-bottom {
+  padding: 2%;
 }
 
 #top {
@@ -45,7 +53,7 @@ video {
 
 .content {
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 25vw;
   width: 50%;
   text-align: center;
