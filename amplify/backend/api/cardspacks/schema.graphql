@@ -151,3 +151,10 @@ type SubscriptionPlan
   discount: Float
 }
 
+type News
+@model
+@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools }] ){
+  id: ID!
+  message: String
+  order: Int
+}

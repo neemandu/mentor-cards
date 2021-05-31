@@ -1,63 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query GetCardsPack($id: ID!) {
-  getCardsPack(id: $id) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    usersIds
-    groupsIds
-    users
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    createdAt
-    updatedAt
-  }
-}
-query ListCardsPacks(
-  $filter: ModelCardsPackFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      imgUrl
-      description
-      tags
-      categories
-      cards
-      cardsPreview
-      usersIds
-      groupsIds
-      users
-      guideBook {
-        subjects {
-          subjectName
-          subSubjects {
-            subSubjectName
-            questions
-          }
-        }
-      }
-      name
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetContactUsModel($id: ID!) {
   getContactUsModel(id: $id) {
     id
@@ -118,6 +59,7 @@ query GetUser($id: ID!) {
     groupId
     numberOfUsedPacks
     groupRole
+    cancellationDate
     createdAt
     updatedAt
   }
@@ -160,6 +102,7 @@ query ListUsers(
       groupId
       numberOfUsedPacks
       groupRole
+      cancellationDate
       createdAt
       updatedAt
     }
@@ -213,6 +156,90 @@ query ListGroups(
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetNews($id: ID!) {
+  getNews(id: $id) {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+query ListNewss(
+  $filter: ModelNewsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      message
+      order
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCardsPack($id: ID!) {
+  getCardsPack(id: $id) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    usersIds
+    groupsIds
+    users
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    createdAt
+    updatedAt
+  }
+}
+query ListCardsPacks(
+  $filter: ModelCardsPackFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      cardsPreview
+      usersIds
+      groupsIds
+      users
+      guideBook {
+        subjects {
+          subjectName
+          subSubjects {
+            subSubjectName
+            questions
+          }
+        }
+      }
+      name
       createdAt
       updatedAt
     }
