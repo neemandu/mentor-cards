@@ -16,11 +16,12 @@
     <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">התחברות/הרשמה</button>
     <button style="font-size: x-large;" *ngIf="userData && userData.status === 'NOPLAN'" type="button"
-    (click)="navigate('/price-page')">להרשמה לתוכנית</button>
+      (click)="navigate('/price-page')">להרשמה לתוכנית</button>
     <button style="font-size: x-large;" *ngIf="userData && userData.status === 'PLAN'" type="button"
-    (click)="navigate('/all-packs-page')">לכל הערכות</button>
+      (click)="navigate('/all-packs-page')">לכל הערכות</button>
     <br *ngIf="userData && userData.status === 'NOPLAN'">
-    <span id="bottom" *ngIf="userData && userData.status === 'NOPLAN'">החל מ-19.90 ש"ח לחודש לאחר 30 ימי ניסיון חינם. בטלו בכל עת.</span>
+    <span id="bottom" *ngIf="userData && userData.status === 'NOPLAN'">החל מ-19.90 ש"ח לחודש לאחר 30 ימי ניסיון חינם.
+      בטלו בכל עת.</span>
     <br>
     <span id="middle">רוצים לראות איך זה עובד?</span>
     <br>
@@ -32,8 +33,14 @@
     <button style="font-size: x-large;" type="button" (click)="navigate('/contact-us')">צור קשר</button>
   </div>
   <div id="actions" class="d-flex flex-column actions-bottom">
-    <span id="middle">חדשות</span>
-    <marquee style="font-size: 1rem;" vspace="1%" direction="down" width="90%" height="50px" 
-    scrollamount="1" onmouseover="this.stop();" onmouseout="this.start();">יש חפיסה חדשה בשם שךםדקץ נשרמ ףשרנשחרה ץחשנרץחהנשרמלגךמה ךלשמרגךלה משךלרגמה יש חפיסה חדשה בשם שךםדקץ נשרמ ףשרנשחרה ץחשנרץחהנשרמלגךמה ךלשמרגךלה משךלרגמה </marquee>
+    <span id="news-title">חדשות ועדכונים</span>
+    <marquee style="font-size: 1rem;" vspace="1%" direction="down" width="90%" height="50px" scrollamount="1"
+      onmouseover="this.stop();" onmouseout="this.start();">
+      <ul>
+        <li *ngFor="let new of news">
+          {{new.message}}
+        </li>
+      </ul>
+    </marquee>
   </div>
 </div>

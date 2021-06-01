@@ -1,6 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -13,33 +14,50 @@ import { NewEditNewsComponent } from 'src/app/Shared Components/Dialogs/new-edit
 })
 export class SiteContentManagementComponent implements OnInit {
 
-  data: any[] = [
-    { 'value': '1 line' },
-    { 'value': '2 line' },
-    { 'value': '3 line' },
-    { 'value': '4 line' },
-    { 'value': '5 line' },
-  ]
+  data: any[] = [];
 
-  newsChanged: boolean = false;
-
-  constructor(public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) { }
+  constructor(public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService, private api: APIService) { }
 
   ngOnInit(): void {
-
+    this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.api.ListNewss().then(news => {
+      this.data = news.items.sort((a, b) => a.order - b.order);
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+    }, error => {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.ListNewss ~ error", error)
+    })
   }
 
   addEditNews(index?: any): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = '50%';
     dialogConfig.data = this.data[index];
     const dialogRef = this.dialog.open(NewEditNewsComponent, dialogConfig);
     var sub = dialogRef.afterClosed().subscribe((newNewsValue: any) => {
       sub.unsubscribe();
       if (newNewsValue) {
-        index != undefined ? this.data[index].value = newNewsValue : this.data.push({ 'value': newNewsValue });
-        this.newsChanged = true;
+        this.overlaySpinnerService.changeOverlaySpinner(true);
+        if (index != undefined) {//has id
+          this.api.UpdateNews({ 'id': this.data[index].id, 'message': newNewsValue, 'order': this.data[index].order }).then(res => {
+            this.data[index].message = newNewsValue;
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+          }, error => {
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+            console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.UpdateNews ~ error", error)
+          })
+        }
+        else {//has no id
+          this.api.CreateNews({ 'message': newNewsValue, 'order': this.data.length }).then(res => {
+            this.data.push(res);
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+          }, error => {
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+            console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.UpdateNews ~ error", error)
+          })
+        }
       }
     });
   }
@@ -53,20 +71,29 @@ export class SiteContentManagementComponent implements OnInit {
     var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
       dialogSub.unsubscribe();
       if (res) {
-        this.data.splice(index, 1);
-        this.newsChanged = true;
+        this.overlaySpinnerService.changeOverlaySpinner(true);
+        this.api.DeleteNews({ 'id': this.data[index].id }).then(res => {
+          this.data.splice(index, 1);
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+        }, error => {
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+          console.log(error)
+        })
       }
     });
   }
-
-  saveNews(): void {
-    this.newsChanged = false;
-  }
-
+  
   drop(event: CdkDragDrop<any>) {
-    // debugger
     moveItemInArray(this.data, event.previousIndex, event.currentIndex);
-    this.newsChanged = true;
+    this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.data.forEach((element, index) => {
+      element.order = index;//TODO fix save of order to be better
+      this.api.UpdateNews({ 'id': element.id, 'message': element.message, 'order': element.order }).then(res => {
+        index == this.data.length-1 ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
+      }, error => {
+        console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.UpdateNews ~ error", error)
+      })
+    })
   }
 
 }

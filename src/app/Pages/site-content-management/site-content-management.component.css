@@ -13,15 +13,6 @@
   margin-bottom: 10px;
 }
 
-/* .table td,
-.table th {
-  text-align: center;
-}
-
-table {
-  width: 90%;
-} */
-
 .drag-button {
   cursor: move;
 }
@@ -35,8 +26,8 @@ table {
   -o-user-select: none;
 }
 
-.example-list {
-  width: 500px;
+.news-list {
+  width: 50vw;
   max-width: 100%;
   border: solid 1px #ccc;
   min-height: 60px;
@@ -46,17 +37,17 @@ table {
   overflow: hidden;
 }
 
-.example-box {
+.news-box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   box-sizing: border-box;
   background: white;
-  font-size: 14px;
+  /* font-size: 1rem; */
 }
 
 .cdk-drag-preview {
@@ -76,10 +67,16 @@ table {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.example-box:last-child {
+.news-box:last-child {
   border: none;
 }
 
-.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+.news-list.cdk-drop-list-dragging .news-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+#message {
+  margin-right: 1vw;
+  text-align: start;
+  font-size: 1rem;
 }

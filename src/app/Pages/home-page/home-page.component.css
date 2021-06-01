@@ -20,13 +20,17 @@ video {
 
 #actions {
   align-items: center;
-  background: #fff1d6de;
-  padding: 4%;
+  /* background: #fff1d6de; */
+  background: linear-gradient(-45deg, #fff1d6de, #fff5d6de, #ffe9bed5, #ffe7c7de);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .actions-top {
   margin-bottom: 1%;
+  padding: 4%;
 }
 
 .actions-bottom {
@@ -45,6 +49,11 @@ video {
 
 #middle {
   font-size: x-large;
+}
+
+#news-title {
+  font-size: x-large;
+  font-weight: 600;
 }
 
 #bottom {
@@ -79,4 +88,18 @@ button:active {
 
 button:focus {
   outline: none;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
