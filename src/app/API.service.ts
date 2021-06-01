@@ -1355,7 +1355,7 @@ export class APIService {
     return <boolean | null>response.data.updatePaymentProgram;
   }
   async UpdateAllNewsList(
-    input: groupUsersListInput
+    input: newsListInput
   ): Promise<boolean | null> {
     const statement = `mutation UpdateAllNewsList($input: newsListInput!) {
         updateAllNewsList(input: $input)
