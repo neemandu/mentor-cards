@@ -162,7 +162,7 @@ async function subscribeNewUsers(userlist, groupUsers, subscription, groupId){
         var shouldBeAdded = true;
         for(var i = 0 ; i < groupUsers.length ; i++){
             if(userlist[j].email == groupUsers[i].email){
-                shouldBeAdded = false;
+                shouldBeAdded = false;//
             }
         }
         if(shouldBeAdded){

@@ -1158,7 +1158,32 @@ export type OnDeleteSubscriptionPlanSubscription = {
   providedIn: "root"
 })
 export class APIService {
-async UpdateNews(
+  async CreateNews(
+    input: CreateNewsInput,
+    condition?: ModelNewsConditionInput
+  ): Promise<CreateNewsMutation> {
+    const statement = `mutation CreateNews($input: CreateNewsInput!, $condition: ModelNewsConditionInput) {
+        createNews(input: $input, condition: $condition) {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateNewsMutation>response.data.createNews;
+  }  
+  async UpdateNews(
     input: UpdateNewsInput,
     condition?: ModelNewsConditionInput
   ): Promise<UpdateNewsMutation> {
