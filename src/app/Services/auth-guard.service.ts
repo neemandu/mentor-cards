@@ -122,12 +122,47 @@ export class AuthGuardGroupManagementService implements CanActivate {
       if (userData.groupId) {
         var subGroup = this.userAuthService.groupDataEmmiter.subscribe((groupData) => {
           subGroup.unsubscribe();
-          this.ngZone.run(() => this.router.navigate(['app-group-management']));
+          this.ngZone.run(() => this.router.navigate(['group-management']));
         });
       }
       else {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
     })
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardSiteContentManagementService implements CanActivate {
+
+  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+
+  canActivate(): boolean {
+    // debugger;
+    if (this.userAuthService.userData) {
+      if (this.userAuthService.userData.groupRole === 'SUPER_USER') {
+        return true;
+      }
+      else {
+        this.ngZone.run(() => this.router.navigate(['home-page']));
+      }
+    }
+    else {
+      this.ngZone.run(() => this.router.navigate(['home-page']));
+    }
+    // var subUser = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+    //   subUser.unsubscribe();
+    //   if (userData.groupId) {
+    //     var subGroup = this.userAuthService.groupDataEmmiter.subscribe((groupData) => {
+    //       subGroup.unsubscribe();
+    //       this.ngZone.run(() => this.router.navigate(['group-management']));
+    //     });
+    //   }
+    //   else {
+    //     this.ngZone.run(() => this.router.navigate(['home-page']));
+    //   }
+    // })
   }
 }

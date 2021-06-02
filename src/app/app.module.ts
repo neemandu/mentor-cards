@@ -32,6 +32,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { PortalModule } from '@angular/cdk/portal';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 //Components
 import { AppRoutingModule } from './app-routing.module';
@@ -70,6 +72,8 @@ import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules
 import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
 import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purchase-dialog/approve-purchase-dialog.component';
+import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
+import { NewEditNewsComponent } from './Shared Components/Dialogs/new-edit-news/new-edit-news.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +111,9 @@ import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purch
     PricePageComponent,
     GuidePageComponent,
     ApprovePurchaseDialogComponent,
-    MobileWarningDialogComponent
+    MobileWarningDialogComponent,
+    SiteContentManagementComponent,
+    NewEditNewsComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,12 +147,13 @@ import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purch
     MatTableModule,
     MatSelectModule,
     MatCardModule,
+    DragDropModule
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent, 
-    PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent, 
-    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, MobileWarningDialogComponent]
+  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent,
+    PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
+    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, MobileWarningDialogComponent, NewEditNewsComponent]
 })
 export class AppModule { }

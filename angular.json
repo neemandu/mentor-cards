@@ -9,6 +9,12 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": { 
+        "sourceLocale": "he", 
+        "locales": { 
+          "en": "src/i18n/messages.en.xlf" 
+        } 
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -16,7 +22,7 @@
             "allowedCommonJsDependencies": [
               "lodash"
             ],
-            "outputPath": "dist/mentor-cards",
+            "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -33,6 +39,9 @@
             "scripts": []
           },
           "configurations": {
+            "en": { 
+              "localize": ["en"] 
+            },
             "production": {
               "fileReplacements": [{
                 "replace": "src/environments/environment.ts",
@@ -68,6 +77,9 @@
           "configurations": {
             "production": {
               "browserTarget": "mentor-cards:build:production"
+            },
+            "en": { 
+              "browserTarget": "mentor-cards:build:en" 
             }
           }
         },

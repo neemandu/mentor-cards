@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="he" datatype="plaintext" original="ng2.template" target-language="en">
+    <body>
+      <trans-unit id="fd7740303202c5714538d6957a25d55e84b06b24" datatype="html">
+        <source>הערכות שלי</source>
+        <target>My Packs</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/all-packs-page/all-packs-page.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <note priority="1" from="description">all packs page title</note>
+      </trans-unit>
+      <trans-unit id="9122236c42f944ce74fa8a4db045bb84f9da9590" datatype="html">
+        <source>כל הערכות לרשותכם בחודש הראשון</source>
+        <source>All packs are available during the first month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/all-packs-page/all-packs-page.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <note priority="1" from="description">all packs page title</note>
+        <note priority="1" from="meaning">first month title</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

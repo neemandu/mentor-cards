@@ -59,7 +59,7 @@ export class UserAuthService {
   loggedIn(cognitoUserserData: CognitoUserInterface) {
     // console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
     // debugger
-    this.loggedInAttributes = cognitoUserserData
+    this.loggedInAttributes = cognitoUserserData;
     var newUsername: string = cognitoUserserData.username;
     var newUserEmail: string = cognitoUserserData.attributes['email'];
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
@@ -83,7 +83,7 @@ export class UserAuthService {
   updateUserData(): void {
     if (this.loggedInAttributes != null) {
       this.api.GetUser(this.loggedInAttributes.username).then(data => {
-        if(!data)
+        if (!data)
           return;
         this.userData = new UserData().deseralize(data);
         // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)

@@ -1,0 +1,26 @@
+<mat-toolbar class="d-flex justify-content-between">
+    <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
+        <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+    </button>
+    <span class="title" *ngIf="!data">הוספת חדשות</span>
+    <span class="title" *ngIf="data">עריכת חדשות</span>
+    <span class="title" style="visibility: hidden;"></span>
+</mat-toolbar>
+<div class="line"></div>
+
+<div mat-dialog-content>
+    <form class="d-flex flex-column" [formGroup]="newsForm" style="margin-top: 1rem;">
+        <mat-form-field>
+            <mat-label>תוכן חדשות</mat-label>
+            <input type="text" matInput formControlName="value" placeholder="תוכן החדשות">
+            <mat-error *ngIf="formControls.value.hasError('required')">
+                חובה להזין תוכן
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+
+<div class="buttons" mat-dialog-actions>
+    <button class="action-button" type="button" (click)="saveChanges()"
+        [disabled]="newsForm.invalid || !newsForm.dirty">שמור</button>
+</div>

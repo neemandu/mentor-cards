@@ -1,0 +1,81 @@
+* {
+  font-family: 'rubik';
+  direction: rtl;
+}
+
+p {
+  margin: 10px 0px 5px 0px;
+  font-size: medium;
+}
+
+.buttons {
+  margin: 0px;
+}
+
+.action-button {
+  font-size: medium;
+  margin-left: 1rem;
+  border-radius: 5px;
+  border: none;
+  font-size: large;
+  background: #ffa800;
+  color: white;
+  height: 2rem;
+  width: 4rem;
+}
+
+.action-button:hover {
+  background: #e69900;
+}
+
+.action-button:active {
+  background: #db9200;
+}
+
+.action-button:focus {
+  outline: none;
+}
+
+.action-button:disabled {
+  background: #cccccc;
+  color: rgb(82, 82, 82);
+  cursor: not-allowed;
+}
+
+mat-toolbar {
+  margin-top: -10px;
+  background-color: transparent;
+}
+
+.title {
+  font-size: large;
+  /* margin-right: -15px; */
+}
+
+.line {
+  background-color: #ffa800;
+  width: auto;
+  height: 3px;
+  margin-top: -15px;
+}
+
+.iconButton {
+  margin-right: -20px;
+  /* margin-left: -20px; */
+}
+
+.mat-form-field {
+  text-align: center;
+  font-size: medium;
+}
+
+mat-option {
+  text-align: initial;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: rtl;
+  text-align: right;
+  /* margin-left: 100px; */
+}

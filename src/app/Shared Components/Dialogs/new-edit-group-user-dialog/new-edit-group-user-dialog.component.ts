@@ -14,7 +14,6 @@ export class NewEditGroupUserDialogComponent implements OnInit {
 
   groupUserForm: FormGroup;
 
-
   constructor(public dialogRef: MatDialogRef<NewEditGroupUserDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: GroupUser,
     private formBuilder: FormBuilder, public dialog: MatDialog) { }
 

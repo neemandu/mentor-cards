@@ -3,6 +3,7 @@ import { Subscription } from "./subscriptionPlans";
 export class UserData {
     email: string;
     groupId: string | null;
+    groupRole: string | null;
     id: string;
     lastPackSubstitutionDate: string | any;
     lastPlanSubstitutionDate: string | any;

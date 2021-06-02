@@ -34,6 +34,7 @@ app-bottom-bar {
   background-color: rgb(255 238 213);
   color: white;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
 .footer:hover {

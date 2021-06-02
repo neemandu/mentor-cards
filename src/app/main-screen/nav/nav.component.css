@@ -9,6 +9,7 @@ button {
 
 .navbar-btn:hover {
   background-color: #f8f9fa;
+  /* text-shadow: 2px 2px 2px rgba(255, 192, 75, 0.685); */
 }
 
 .navbar-btn:active {
@@ -35,6 +36,14 @@ button:focus {
   width: 45%;
   display: flex;
   justify-content: flex-start;
+}
+
+#account_circle {
+  transition: transform 0.5s
+}
+
+#user-drop-down:hover>#account_circle {
+  transform: scale(1.2);
 }
 
 .login-button {
@@ -73,3 +82,82 @@ h1 {
   margin: 10px 15px;
 }
 
+.iconButton {
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+#notificationIcon {
+  align-self: center;
+  opacity: 0.6;
+  transition: transform 0.3s, opacity 0.5s;
+}
+
+#notificationIcon:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+.shake {
+  animation: shake 3s cubic-bezier(.36, .07, .19, .97) both;
+  transform: translate3d(0, 0, 0);
+  animation-iteration-count: infinite;
+  animation-delay: 2s;
+}
+
+@keyframes shake {
+
+  5% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  10% {
+    transform: translate3d(1px, 0, 0);
+  }
+
+  15%,
+  25% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  20%,
+  30% {
+    transform: translate3d(3px, 0, 0);
+  }
+
+  35% {
+    transform: translate3d(0px, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0px, 0, 0);
+  }
+}
+
+#news-list {
+  direction: rtl;
+  text-align: initial;
+  padding-left: 5%;
+}
+
+#news-list-item {
+  font-size: 1rem;
+}
+
+#news-title {
+  font-size: large;
+  font-weight: 600;
+  direction: rtl;
+}
+
+::ng-deep .mat-menu-panel {
+  max-width: 35vw !important;
+}
+
+.tooltip-class {
+  font-size: 1rem;
+}
