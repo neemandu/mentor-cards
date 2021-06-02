@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
       if (this.authState === 'signedin') {
         // debugger
         this.showLogin = false;
-        localStorage.setItem('signedin', 'true')
+        localStorage.setItem('signedin', 'true');
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;
         LogRocket.identify(this.user.username);//TODO
