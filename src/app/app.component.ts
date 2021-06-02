@@ -2,7 +2,7 @@ import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-ampli
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { UserAuthService } from './Services/user-auth.service';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
-import { I18n } from 'aws-amplify';
+// import { I18n } from 'aws-amplify';
 import LogRocket from 'logrocket';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
   constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
     public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
-    I18n.putVocabularies(dict);
-    I18n.setLanguage('he');
+    // I18n.putVocabularies(dict);
+    // I18n.setLanguage('he');
   }
 
   ngOnInit() {
