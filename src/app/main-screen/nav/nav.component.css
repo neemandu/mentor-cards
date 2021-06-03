@@ -103,10 +103,10 @@ h1 {
 }
 
 .shake {
-  animation: shake 3s cubic-bezier(.36, .07, .19, .97) both;
+  animation: shake 2s cubic-bezier(.36, .07, .19, .97) both;
   transform: translate3d(0, 0, 0);
   animation-iteration-count: infinite;
-  animation-delay: 2s;
+  /* animation-delay: 2s; */
 }
 
 @keyframes shake {
@@ -124,12 +124,11 @@ h1 {
     transform: translate3d(-3px, 0, 0);
   }
 
-  20%,
-  30% {
+  20% {
     transform: translate3d(3px, 0, 0);
   }
 
-  35% {
+  30% {
     transform: translate3d(0px, 0, 0);
   }
 
