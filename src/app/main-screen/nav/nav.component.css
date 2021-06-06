@@ -143,7 +143,7 @@ h1 {
   padding-left: 5%;
 }
 
-#news-list-item {
+.news-list-item {
   font-size: 1rem;
 }
 
@@ -155,6 +155,7 @@ h1 {
 
 ::ng-deep .mat-menu-panel {
   max-width: 35vw !important;
+  min-width: 15vw !important;
 }
 
 .tooltip-class {

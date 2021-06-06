@@ -42,8 +42,10 @@
   <div class="d-flex flex-row">
     <button mat-icon-button color="primary" id="notificationIcon" *ngIf="news" [matMenuTriggerFor]="newsMenu"
       (click)="viewNotifications()" matTooltip="חדשות ועדכונים" [matTooltipClass]="{'tooltip-class' : true}">
-      <mat-icon class="shake bell-icon" style="color: #ffcc6c" *ngIf="newsNotification">notifications_active</mat-icon>
-      <mat-icon class="bell-icon" style="color: rgb(93, 93, 93);" *ngIf="!newsNotification">notifications</mat-icon>
+      <mat-icon class="shake bell-icon" style="color: #ffcc6c" *ngIf="newsNotification && news.length!=0">
+        notifications_active</mat-icon>
+      <mat-icon class="bell-icon" style="color: rgb(93, 93, 93);" *ngIf="!newsNotification || news.length==0">
+        notifications</mat-icon>
     </button>
     <div id="logo" matRipple [matRippleCentered]="true" [matRippleRadius]="30" (click)="navigate('/home-page')">
       <!-- <ul>
@@ -62,8 +64,11 @@
   <div style="text-align: center;">
     <span id="news-title">חדשות ועדכונים</span>
     <ul id="news-list">
-      <li id="news-list-item" *ngFor="let n of news">
+      <li class="news-list-item" *ngFor="let n of news">
         {{n.message}}
+      </li>
+      <li class="news-list-item" *ngIf="news.length==0">
+        אין חדשות ועדכונים
       </li>
     </ul>
   </div>

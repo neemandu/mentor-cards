@@ -40,6 +40,9 @@
         <li *ngFor="let new of news">
           {{new.message}}
         </li>
+        <li *ngIf="news.length == 0">
+          אין חדשות ועדכונים
+        </li>
       </ul>
     </marquee>
   </div>
