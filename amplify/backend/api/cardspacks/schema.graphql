@@ -7,6 +7,7 @@ type Mutation {
   Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
+  UpdateAllNewsList(input: newsListInput!): Boolean @function(name: "UpdateAllNewsList-${env}")
 }
 
 input joinExistingGroupInput {
@@ -151,3 +152,10 @@ type SubscriptionPlan
   discount: Float
 }
 
+type News
+@model
+@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools }] ){
+  id: ID!
+  message: String
+  order: Int
+}
