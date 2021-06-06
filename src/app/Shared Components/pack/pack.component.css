@@ -11,7 +11,7 @@ img {
 
 img:hover {
   box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd, 0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd;
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 #pack-buttons {
