@@ -1139,7 +1139,7 @@ export type OnUpdateSubscriptionPlanSubscription = {
   createdAt: string;
   updatedAt: string;
 };
-
+// nothing
 export type OnDeleteSubscriptionPlanSubscription = {
   __typename: "SubscriptionPlan";
   id: string;
