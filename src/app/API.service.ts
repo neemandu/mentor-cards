@@ -1,4 +1,4 @@
-/* tslint:disable */
+  /* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
@@ -1139,7 +1139,7 @@ export type OnUpdateSubscriptionPlanSubscription = {
   createdAt: string;
   updatedAt: string;
 };
-// nothing
+
 export type OnDeleteSubscriptionPlanSubscription = {
   __typename: "SubscriptionPlan";
   id: string;
@@ -1353,20 +1353,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.updatePaymentProgram;
-  }
-  async UpdateAllNewsList(
-    input: newsListInput
-  ): Promise<boolean | null> {
-    const statement = `mutation UpdateAllNewsList($input: newsListInput!) {
-        updateAllNewsList(input: $input)
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <boolean | null>response.data.updateAllNewsList;
   }
   async UpdateGroupUsersList(
     input: groupUsersListInput

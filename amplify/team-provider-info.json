@@ -34,7 +34,7 @@
         },
         "UpdateGroupUsersList": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdateGroupUsersList-49566a5a68455437634e-build.zip"
+          "s3Key": "amplify-builds/UpdateGroupUsersList-5346322f635348444a66-build.zip"
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
