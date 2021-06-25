@@ -67,10 +67,6 @@
         "UserLayer": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/UserLayer-build.zip"
-        },
-        "UpdateAllNewsList": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdateAllNewsList-6a4634474f6d426f5331-build.zip"
         }
       }
     },

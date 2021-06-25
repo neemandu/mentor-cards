@@ -84,13 +84,13 @@ function isPackageBelongToUser(usersList, username) {
     return canView;
 }
 
-function isFirstMonth(firstProgramRegistrationDate, allPackagesDate) {
+function isFirstMonth(firstDate, allPackagesDate) {
     console.log('isFirstMonth');
-    console.log('firstProgramRegistrationDate');
-    console.log(firstProgramRegistrationDate);
+    console.log('first Date');
+    console.log(firstDate);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
-    var first = new Date(firstProgramRegistrationDate);
+    var first = new Date(firstDate);
     var all = new Date(allPackagesDate);
     if (first > all){
         console.log('First month of use!');
@@ -163,6 +163,13 @@ exports.handler = async (event) => {
         console.log('getBillingEndDate');
         return event.source['cards'];
     }
+    if(user &&    // first month from registration
+        user.status == "NOPLAN" && 
+        isFirstMonth(user.createdAt, allPackagesDate)
+     ){
+         console.log('first month from registration');
+         return event.source['cards'];
+     }
     console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
     return [];
     
