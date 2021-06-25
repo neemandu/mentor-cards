@@ -141,13 +141,19 @@ exports.handler = async (event) => {
         console.log('Limitless program');
         return event.source['cards'];
     }
-    if(user &&    // first 30 days all packs are available
+    if(user &&    // first month from registration
+        isFirstMonth(user.createdAt, allPackagesDate)
+     ){
+         console.log('first month from registration');
+         return event.source['cards'];
+     }
+    /*if(user &&    // first 30 days all packs are available
        user.status == "PLAN" &&
        isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
     ){
         console.log('First Month');
         return event.source['cards'];
-    }
+    }*/
     if(user && // does the package belong to the user?
        user.status == "PLAN" &&
        isPackageBelongToUser(event.source['usersIds'], username)     
@@ -163,13 +169,6 @@ exports.handler = async (event) => {
         console.log('getBillingEndDate');
         return event.source['cards'];
     }
-    if(user &&    // first month from registration
-        user.status == "NOPLAN" && 
-        isFirstMonth(user.createdAt, allPackagesDate)
-     ){
-         console.log('first month from registration');
-         return event.source['cards'];
-     }
     console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
     return [];
     
