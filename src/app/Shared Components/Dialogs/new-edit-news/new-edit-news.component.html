@@ -1,5 +1,5 @@
 <mat-toolbar class="d-flex justify-content-between">
-    <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
+    <button class="iconButton" mat-icon-button (click)="closeDialog()">
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
     <span class="title" *ngIf="!data">הוספת חדשות</span>
@@ -12,7 +12,7 @@
     <form class="d-flex flex-column" [formGroup]="newsForm" style="margin-top: 1rem;">
         <mat-form-field>
             <mat-label>תוכן חדשות</mat-label>
-            <input type="text" matInput formControlName="value" placeholder="תוכן החדשות">
+            <input type="text" matInput formControlName="value" placeholder="תוכן החדשות" cdkFocusInitial>
             <mat-error *ngIf="formControls.value.hasError('required')">
                 חובה להזין תוכן
             </mat-error>
