@@ -8,10 +8,15 @@ type Mutation {
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
   UpdateAllNewsList(input: newsListInput!): Boolean @function(name: "UpdateAllNewsList-${env}")
+  AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
 }
 
 input joinExistingGroupInput {
   groupId: String!
+}
+
+input couponCodeInput {
+  couponCode: String!
 }
 
 input GetGroupInput {
@@ -125,6 +130,7 @@ type User
   numberOfUsedPacks: Int
   groupRole: String
   cancellationDate: AWSDateTime
+  couponCode: CouponCodes
 }
 
 type Group

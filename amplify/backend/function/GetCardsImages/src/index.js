@@ -84,7 +84,7 @@ function isPackageBelongToUser(usersList, username) {
     return canView;
 }
 
-function isFirstMonth(firstDate, allPackagesDate) {
+function isFreeTrialPeriod(firstDate, allPackagesDate) {
     console.log('isFirstMonth');
     console.log('first Date');
     console.log(firstDate);
@@ -93,10 +93,10 @@ function isFirstMonth(firstDate, allPackagesDate) {
     var first = new Date(firstDate);
     var all = new Date(allPackagesDate);
     if (first > all){
-        console.log('First month of use!');
+        console.log('Free Trial Period!');
         return true;
     }
-    console.log('Not the first month of use');
+    console.log('Not the Free Trial Period');
     return false;
 }
 
@@ -126,7 +126,15 @@ exports.handler = async (event) => {
     var user = await getUser(username);
     var allPackagesDate = new Date();
     var now = new Date();
-    allPackagesDate.setDate(allPackagesDate.getDate()-30);
+    var trialPeriodInDays = 30;
+
+    if (user && user.couponCode){
+        trialPeriodInDays = user.couponCode.trialPeriodInDays;
+    }
+
+
+
+    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
@@ -142,7 +150,7 @@ exports.handler = async (event) => {
         return event.source['cards'];
     }
     if(user &&    // first month from registration
-        isFirstMonth(user.createdAt, allPackagesDate)
+        isFreeTrialPeriod(user.createdAt, allPackagesDate)
      ){
          console.log('first month from registration');
          return event.source['cards'];

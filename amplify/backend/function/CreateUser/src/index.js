@@ -133,7 +133,8 @@ exports.handler = async (event) => {
                 "createdAt": new Date().toISOString(),
                 "updatedAt": new Date().toISOString(),
                 "numberOfUsedPacks": 0,
-                "cancellationDate": null
+                "cancellationDate": null,
+                "couponCodes": null
             }
         };
     

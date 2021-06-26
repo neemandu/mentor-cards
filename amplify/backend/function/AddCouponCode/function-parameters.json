@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "storage": {
+      "User:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "CouponCodes:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
