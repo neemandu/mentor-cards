@@ -34,7 +34,7 @@
         },
         "UpdateGroupUsersList": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdateGroupUsersList-49566a5a68455437634e-build.zip"
+          "s3Key": "amplify-builds/UpdateGroupUsersList-594978364b4b634b4d4a-build.zip"
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -81,6 +81,14 @@
                 }
               ],
               "hash": "uKswk94XEsONPFfloLynzKJI49FnbrgYhkx62298T4c="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "QBOJ45l4vl2wYh1cgmrFglHuHdUvaSg6bOPt45wuNJE="
             }
           }
         }

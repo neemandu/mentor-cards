@@ -4,6 +4,131 @@
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
+import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
+
+export type CreateNewsInput = {
+  id?: string | null;
+  message?: string | null;
+  order?: number | null;
+};
+
+export type ModelNewsConditionInput = {
+  message?: ModelStringInput | null;
+  order?: ModelIntInput | null;
+  and?: Array<ModelNewsConditionInput | null> | null;
+  or?: Array<ModelNewsConditionInput | null> | null;
+  not?: ModelNewsConditionInput | null;
+};
+
+export type News = {
+  __typename: "News";
+  id?: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type UpdateNewsInput = {
+  id: string;
+  message?: string | null;
+  order?: number | null;
+};
+
+export type DeleteNewsInput = {
+  id: string;
+};
+
+export type ModelNewsFilterInput = {
+  id?: ModelIDInput | null;
+  message?: ModelStringInput | null;
+  order?: ModelIntInput | null;
+  and?: Array<ModelNewsFilterInput | null> | null;
+  or?: Array<ModelNewsFilterInput | null> | null;
+  not?: ModelNewsFilterInput | null;
+};
+
+export type ModelNewsConnection = {
+  __typename: "ModelNewsConnection";
+  items?: Array<News | null> | null;
+  nextToken?: string | null;
+};
+
+export type CreateNewsMutation = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateNewsMutation = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteNewsMutation = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GetNewsQuery = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListNewssQuery = {
+  __typename: "ModelNewsConnection";
+  items?: Array<{
+    __typename: "News";
+    id: string;
+    message?: string | null;
+    order?: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
+export type OnCreateNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -12,50 +137,6 @@ export interface SubscriptionResponse<T> {
 export type CreateUserInput = {
   username?: string | null;
   email?: string | null;
-};
-
-export type User = {
-  __typename: "User";
-  id?: string;
-  username?: string;
-  email?: string;
-  phone?: string | null;
-  status?: string | null;
-  subscription?: MonthlySubscription;
-  numberOfPacksSubstitutions?: number | null;
-  lastPackSubstitutionDate?: string | null;
-  numberOfPlansSubstitutions?: number | null;
-  lastPlanSubstitutionDate?: string | null;
-  firstProgramRegistrationDate?: string | null;
-  groupId?: string | null;
-  numberOfUsedPacks?: number | null;
-  groupRole?: string | null;
-  cancellationDate?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type MonthlySubscription = {
-  __typename: "MonthlySubscription";
-  id?: string;
-  startDate?: string | null;
-  paymentProvider?: string | null;
-  providerTransactionId?: string | null;
-  subscriptionPlan?: SubscriptionPlan;
-};
-
-export type SubscriptionPlan = {
-  __typename: "SubscriptionPlan";
-  id?: string;
-  name?: string | null;
-  description?: string | null;
-  providerPlanId?: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
-  createdAt?: string;
-  updatedAt?: string;
 };
 
 export type addCardsPackInput = {
@@ -70,6 +151,16 @@ export type changeCardsPackInput = {
 export type updatePaymentProgramInput = {
   paymentProgramId: string;
   providerTransactionId?: string | null;
+};
+
+export type newsListInput = {
+  news?: Array<NewsInput | null> | null;
+};
+
+export type NewsInput = {
+  id?: string | null;
+  message?: string | null;
+  order?: number | null;
 };
 
 export type groupUsersListInput = {
@@ -93,30 +184,49 @@ export type deleteGroupInput = {
   groupId: string;
 };
 
-export type newsListInput = {
-  news?: Array<NewsInput | null> | null;
-};
-
-export type NewsInput = {
-  id: string;
-  message?: string | null;
-  order?: number | null;
-};
-
-export type CreateContactUsModelInput = {
+export type CreateCardsPackInput = {
   id?: string | null;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  usersIds?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  users?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
   name?: string | null;
-  content?: string | null;
-  email?: string | null;
 };
 
-export type ModelContactUsModelConditionInput = {
+export type GuideBookInput = {
+  subjects?: Array<GuideBookSubjectInput | null> | null;
+};
+
+export type GuideBookSubjectInput = {
+  subjectName?: string | null;
+  subSubjects?: Array<SubSubjectInput | null> | null;
+};
+
+export type SubSubjectInput = {
+  subSubjectName?: string | null;
+  questions?: Array<string | null> | null;
+};
+
+export type ModelCardsPackConditionInput = {
+  imgUrl?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  tags?: ModelStringInput | null;
+  categories?: ModelStringInput | null;
+  cards?: ModelStringInput | null;
+  cardsPreview?: ModelStringInput | null;
+  usersIds?: ModelStringInput | null;
+  groupsIds?: ModelStringInput | null;
+  users?: ModelStringInput | null;
   name?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  and?: Array<ModelContactUsModelConditionInput | null> | null;
-  or?: Array<ModelContactUsModelConditionInput | null> | null;
-  not?: ModelContactUsModelConditionInput | null;
+  and?: Array<ModelCardsPackConditionInput | null> | null;
+  or?: Array<ModelCardsPackConditionInput | null> | null;
+  not?: ModelCardsPackConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -158,14 +268,23 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type ContactUsModel = {
-  __typename: "ContactUsModel";
-  id?: string;
+export type UpdateCardsPackInput = {
+  id: string;
+  imgUrl?: string | null;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  usersIds?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  users?: Array<string | null> | null;
+  guideBook?: GuideBookInput | null;
   name?: string | null;
-  content?: string | null;
-  email?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+};
+
+export type DeleteCardsPackInput = {
+  id?: string | null;
 };
 
 export type UpdateContactUsModelInput = {
@@ -175,13 +294,21 @@ export type UpdateContactUsModelInput = {
   email?: string | null;
 };
 
-export type DeleteContactUsModelInput = {
-  id: string;
+export type ModelContactUsModelConditionInput = {
+  name?: ModelStringInput | null;
+  content?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  and?: Array<ModelContactUsModelConditionInput | null> | null;
+  or?: Array<ModelContactUsModelConditionInput | null> | null;
+  not?: ModelContactUsModelConditionInput | null;
 };
 
-export type CreateGroupInput = {
+export type DeleteContactUsModelInput = {
   id?: string | null;
-  groupUsers?: Array<GroupUserRoleInput | null> | null;
+};
+
+export type DeleteGroupInput = {
+  id?: string | null;
 };
 
 export type ModelGroupConditionInput = {
@@ -190,28 +317,21 @@ export type ModelGroupConditionInput = {
   not?: ModelGroupConditionInput | null;
 };
 
-export type Group = {
-  __typename: "Group";
-  id?: string;
-  groupUsers?: Array<GroupUserRole | null> | null;
-  paymentProgram?: SubscriptionPlan;
-  createdAt?: string;
-  updatedAt?: string;
+export type CreateContactUsModelInput = {
+  id?: string | null;
+  name?: string | null;
+  content?: string | null;
+  email?: string | null;
 };
 
-export type GroupUserRole = {
-  __typename: "GroupUserRole";
-  email?: string | null;
-  role?: string | null;
+export type CreateGroupInput = {
+  id?: string | null;
+  groupUsers?: Array<GroupUserRoleInput | null> | null;
 };
 
 export type UpdateGroupInput = {
   id: string;
   groupUsers?: Array<GroupUserRoleInput | null> | null;
-};
-
-export type DeleteGroupInput = {
-  id: string;
 };
 
 export type CreateSubscriptionPlanInput = {
@@ -274,283 +394,7 @@ export type UpdateSubscriptionPlanInput = {
 };
 
 export type DeleteSubscriptionPlanInput = {
-  id: string;
-};
-
-export type CreateNewsInput = {
   id?: string | null;
-  message?: string | null;
-  order?: number | null;
-};
-
-export type ModelNewsConditionInput = {
-  message?: ModelStringInput | null;
-  order?: ModelIntInput | null;
-  and?: Array<ModelNewsConditionInput | null> | null;
-  or?: Array<ModelNewsConditionInput | null> | null;
-  not?: ModelNewsConditionInput | null;
-};
-
-export type News = {
-  __typename: "News";
-  id?: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type UpdateNewsInput = {
-  id: string;
-  message?: string | null;
-  order?: number | null;
-};
-
-export type DeleteNewsInput = {
-  id: string;
-};
-
-export type CreateCouponCodesInput = {
-  id?: string | null;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-};
-
-export type ModelCouponCodesConditionInput = {
-  organization?: ModelStringInput | null;
-  couponCode?: ModelStringInput | null;
-  discount?: ModelFloatInput | null;
-  trialPeriodInDays?: ModelIntInput | null;
-  and?: Array<ModelCouponCodesConditionInput | null> | null;
-  or?: Array<ModelCouponCodesConditionInput | null> | null;
-  not?: ModelCouponCodesConditionInput | null;
-};
-
-export type CouponCodes = {
-  __typename: "CouponCodes";
-  id?: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type UpdateCouponCodesInput = {
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-};
-
-export type DeleteCouponCodesInput = {
-  id: string;
-};
-
-export type CreateCardsPackInput = {
-  id?: string | null;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
-  name?: string | null;
-};
-
-export type GuideBookInput = {
-  subjects?: Array<GuideBookSubjectInput | null> | null;
-};
-
-export type GuideBookSubjectInput = {
-  subjectName?: string | null;
-  subSubjects?: Array<SubSubjectInput | null> | null;
-};
-
-export type SubSubjectInput = {
-  subSubjectName?: string | null;
-  questions?: Array<string | null> | null;
-};
-
-export type ModelCardsPackConditionInput = {
-  imgUrl?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  tags?: ModelStringInput | null;
-  categories?: ModelStringInput | null;
-  cards?: ModelStringInput | null;
-  cardsPreview?: ModelStringInput | null;
-  usersIds?: ModelStringInput | null;
-  groupsIds?: ModelStringInput | null;
-  users?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  and?: Array<ModelCardsPackConditionInput | null> | null;
-  or?: Array<ModelCardsPackConditionInput | null> | null;
-  not?: ModelCardsPackConditionInput | null;
-};
-
-export type CardsPack = {
-  __typename: "CardsPack";
-  id?: string;
-  imgUrl?: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: GuideBook;
-  name?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type GuideBook = {
-  __typename: "GuideBook";
-  subjects?: Array<GuideBookSubject | null> | null;
-};
-
-export type GuideBookSubject = {
-  __typename: "GuideBookSubject";
-  subjectName?: string | null;
-  subSubjects?: Array<SubSubject | null> | null;
-};
-
-export type SubSubject = {
-  __typename: "SubSubject";
-  subSubjectName?: string | null;
-  questions?: Array<string | null> | null;
-};
-
-export type UpdateCardsPackInput = {
-  id: string;
-  imgUrl?: string | null;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
-  name?: string | null;
-};
-
-export type DeleteCardsPackInput = {
-  id: string;
-};
-
-export type ModelContactUsModelFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  content?: ModelStringInput | null;
-  email?: ModelStringInput | null;
-  and?: Array<ModelContactUsModelFilterInput | null> | null;
-  or?: Array<ModelContactUsModelFilterInput | null> | null;
-  not?: ModelContactUsModelFilterInput | null;
-};
-
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
-export type ModelContactUsModelConnection = {
-  __typename: "ModelContactUsModelConnection";
-  items?: Array<ContactUsModel | null> | null;
-  nextToken?: string | null;
-};
-
-export type ModelUserFilterInput = {
-  id?: ModelIDInput | null;
-  username?: ModelIDInput | null;
-  email?: ModelIDInput | null;
-  phone?: ModelStringInput | null;
-  status?: ModelStringInput | null;
-  numberOfPacksSubstitutions?: ModelIntInput | null;
-  lastPackSubstitutionDate?: ModelStringInput | null;
-  numberOfPlansSubstitutions?: ModelIntInput | null;
-  lastPlanSubstitutionDate?: ModelStringInput | null;
-  firstProgramRegistrationDate?: ModelStringInput | null;
-  groupId?: ModelStringInput | null;
-  numberOfUsedPacks?: ModelIntInput | null;
-  groupRole?: ModelStringInput | null;
-  cancellationDate?: ModelStringInput | null;
-  and?: Array<ModelUserFilterInput | null> | null;
-  or?: Array<ModelUserFilterInput | null> | null;
-  not?: ModelUserFilterInput | null;
-};
-
-export type ModelUserConnection = {
-  __typename: "ModelUserConnection";
-  items?: Array<User | null> | null;
-  nextToken?: string | null;
-};
-
-export type ModelGroupFilterInput = {
-  id?: ModelIDInput | null;
-  and?: Array<ModelGroupFilterInput | null> | null;
-  or?: Array<ModelGroupFilterInput | null> | null;
-  not?: ModelGroupFilterInput | null;
-};
-
-export type ModelGroupConnection = {
-  __typename: "ModelGroupConnection";
-  items?: Array<Group | null> | null;
-  nextToken?: string | null;
-};
-
-export type ModelNewsFilterInput = {
-  id?: ModelIDInput | null;
-  message?: ModelStringInput | null;
-  order?: ModelIntInput | null;
-  and?: Array<ModelNewsFilterInput | null> | null;
-  or?: Array<ModelNewsFilterInput | null> | null;
-  not?: ModelNewsFilterInput | null;
-};
-
-export type ModelNewsConnection = {
-  __typename: "ModelNewsConnection";
-  items?: Array<News | null> | null;
-  nextToken?: string | null;
-};
-
-export type ModelCouponCodesFilterInput = {
-  id?: ModelIDInput | null;
-  organization?: ModelStringInput | null;
-  couponCode?: ModelStringInput | null;
-  discount?: ModelFloatInput | null;
-  trialPeriodInDays?: ModelIntInput | null;
-  and?: Array<ModelCouponCodesFilterInput | null> | null;
-  or?: Array<ModelCouponCodesFilterInput | null> | null;
-  not?: ModelCouponCodesFilterInput | null;
-};
-
-export type ModelCouponCodesConnection = {
-  __typename: "ModelCouponCodesConnection";
-  items?: Array<CouponCodes | null> | null;
-  nextToken?: string | null;
 };
 
 export type ModelCardsPackFilterInput = {
@@ -570,10 +414,56 @@ export type ModelCardsPackFilterInput = {
   not?: ModelCardsPackFilterInput | null;
 };
 
-export type ModelCardsPackConnection = {
-  __typename: "ModelCardsPackConnection";
-  items?: Array<CardsPack | null> | null;
-  nextToken?: string | null;
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export type ModelContactUsModelFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  content?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  and?: Array<ModelContactUsModelFilterInput | null> | null;
+  or?: Array<ModelContactUsModelFilterInput | null> | null;
+  not?: ModelContactUsModelFilterInput | null;
+};
+
+export type ModelUserFilterInput = {
+  id?: ModelIDInput | null;
+  username?: ModelIDInput | null;
+  email?: ModelIDInput | null;
+  phone?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  numberOfPacksSubstitutions?: ModelIntInput | null;
+  lastPackSubstitutionDate?: ModelStringInput | null;
+  numberOfPlansSubstitutions?: ModelIntInput | null;
+  lastPlanSubstitutionDate?: ModelStringInput | null;
+  firstProgramRegistrationDate?: ModelStringInput | null;
+  groupId?: ModelStringInput | null;
+  numberOfUsedPacks?: ModelIntInput | null;
+  groupRole?: ModelStringInput | null;
+  and?: Array<ModelUserFilterInput | null> | null;
+  or?: Array<ModelUserFilterInput | null> | null;
+  not?: ModelUserFilterInput | null;
+};
+
+export type ModelGroupFilterInput = {
+  id?: ModelIDInput | null;
+  and?: Array<ModelGroupFilterInput | null> | null;
+  or?: Array<ModelGroupFilterInput | null> | null;
+  not?: ModelGroupFilterInput | null;
 };
 
 export type ModelSubscriptionPlanFilterInput = {
@@ -590,58 +480,128 @@ export type ModelSubscriptionPlanFilterInput = {
   not?: ModelSubscriptionPlanFilterInput | null;
 };
 
-export type ModelSubscriptionPlanConnection = {
-  __typename: "ModelSubscriptionPlanConnection";
-  items?: Array<SubscriptionPlan | null> | null;
-  nextToken?: string | null;
-};
-
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
   username: string;
   email: string;
-  phone?: string | null;
-  status?: string | null;
-  subscription?: {
+  phone: string | null;
+  status: string | null;
+  subscription: {
     __typename: "MonthlySubscription";
     id: string;
-    startDate?: string | null;
-    paymentProvider?: string | null;
-    providerTransactionId?: string | null;
-    subscriptionPlan?: {
+    startDate: string | null;
+    paymentProvider: string | null;
+    providerTransactionId: string | null;
+    subscriptionPlan: {
       __typename: "SubscriptionPlan";
       id: string;
-      name?: string | null;
-      description?: string | null;
+      name: string | null;
+      description: string | null;
       providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      price?: number | null;
-      discount?: number | null;
+      numberOfUsers: number | null;
+      numberOfCardPacks: number | null;
+      price: number | null;
+      discount: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
   } | null;
-  numberOfPacksSubstitutions?: number | null;
-  lastPackSubstitutionDate?: string | null;
-  numberOfPlansSubstitutions?: number | null;
-  lastPlanSubstitutionDate?: string | null;
-  firstProgramRegistrationDate?: string | null;
-  groupId?: string | null;
-  numberOfUsedPacks?: number | null;
-  groupRole?: string | null;
-  cancellationDate?: string | null;
+  numberOfPacksSubstitutions: number | null;
+  lastPackSubstitutionDate: string | null;
+  numberOfPlansSubstitutions: number | null;
+  lastPlanSubstitutionDate: string | null;
+  firstProgramRegistrationDate: string | null;
+  groupId: string | null;
+  numberOfUsedPacks: number | null;
+  groupRole: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type CreateContactUsModelMutation = {
-  __typename: "ContactUsModel";
+export type CreateCardsPackMutation = {
+  __typename: "CardsPack";
   id: string;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCardsPackMutation = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteCardsPackMutation = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
+    __typename: "GuideBook";
+    subjects: Array<{
+      __typename: "GuideBookSubject";
+      subjectName: string | null;
+      subSubjects: Array<{
+        __typename: "SubSubject";
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+  name: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -649,9 +609,9 @@ export type CreateContactUsModelMutation = {
 export type UpdateContactUsModelMutation = {
   __typename: "ContactUsModel";
   id: string;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -659,9 +619,44 @@ export type UpdateContactUsModelMutation = {
 export type DeleteContactUsModelMutation = {
   __typename: "ContactUsModel";
   id: string;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
+  name: string | null;
+  content: string | null;
+  email: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteGroupMutation = {
+  __typename: "Group";
+  id: string;
+  groupUsers: Array<{
+    __typename: "GroupUserRole";
+    email: string | null;
+    role: string | null;
+  } | null> | null;
+  paymentProgram: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name: string | null;
+    description: string | null;
+    providerPlanId: string;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateContactUsModelMutation = {
+  __typename: "ContactUsModel";
+  id: string;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -669,21 +664,21 @@ export type DeleteContactUsModelMutation = {
 export type CreateGroupMutation = {
   __typename: "Group";
   id: string;
-  groupUsers?: Array<{
+  groupUsers: Array<{
     __typename: "GroupUserRole";
-    email?: string | null;
-    role?: string | null;
+    email: string | null;
+    role: string | null;
   } | null> | null;
-  paymentProgram?: {
+  paymentProgram: {
     __typename: "SubscriptionPlan";
     id: string;
-    name?: string | null;
-    description?: string | null;
+    name: string | null;
+    description: string | null;
     providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -694,46 +689,21 @@ export type CreateGroupMutation = {
 export type UpdateGroupMutation = {
   __typename: "Group";
   id: string;
-  groupUsers?: Array<{
+  groupUsers: Array<{
     __typename: "GroupUserRole";
-    email?: string | null;
-    role?: string | null;
+    email: string | null;
+    role: string | null;
   } | null> | null;
-  paymentProgram?: {
+  paymentProgram: {
     __typename: "SubscriptionPlan";
     id: string;
-    name?: string | null;
-    description?: string | null;
+    name: string | null;
+    description: string | null;
     providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteGroupMutation = {
-  __typename: "Group";
-  id: string;
-  groupUsers?: Array<{
-    __typename: "GroupUserRole";
-    email?: string | null;
-    role?: string | null;
-  } | null> | null;
-  paymentProgram?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -744,13 +714,13 @@ export type DeleteGroupMutation = {
 export type CreateSubscriptionPlanMutation = {
   __typename: "SubscriptionPlan";
   id: string;
-  name?: string | null;
-  description?: string | null;
+  name: string | null;
+  description: string | null;
   providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
+  numberOfUsers: number | null;
+  numberOfCardPacks: number | null;
+  price: number | null;
+  discount: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -758,13 +728,13 @@ export type CreateSubscriptionPlanMutation = {
 export type UpdateSubscriptionPlanMutation = {
   __typename: "SubscriptionPlan";
   id: string;
-  name?: string | null;
-  description?: string | null;
+  name: string | null;
+  description: string | null;
   providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
+  numberOfUsers: number | null;
+  numberOfCardPacks: number | null;
+  price: number | null;
+  discount: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -772,186 +742,101 @@ export type UpdateSubscriptionPlanMutation = {
 export type DeleteSubscriptionPlanMutation = {
   __typename: "SubscriptionPlan";
   id: string;
-  name?: string | null;
-  description?: string | null;
+  name: string | null;
+  description: string | null;
   providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
+  numberOfUsers: number | null;
+  numberOfCardPacks: number | null;
+  price: number | null;
+  discount: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type CreateNewsMutation = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateNewsMutation = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteNewsMutation = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateCouponCodesMutation = {
-  __typename: "CouponCodes";
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateCouponCodesMutation = {
-  __typename: "CouponCodes";
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteCouponCodesMutation = {
-  __typename: "CouponCodes";
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateCardsPackMutation = {
+export type GetCardsPackQuery = {
   __typename: "CardsPack";
   id: string;
   imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: {
+  description: string | null;
+  tags: Array<string | null> | null;
+  categories: Array<string | null> | null;
+  cards: Array<string | null> | null;
+  cardsPreview: Array<string | null> | null;
+  usersIds: Array<string | null> | null;
+  groupsIds: Array<string | null> | null;
+  users: Array<string | null> | null;
+  guideBook: {
     __typename: "GuideBook";
-    subjects?: Array<{
+    subjects: Array<{
       __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
+      subjectName: string | null;
+      subSubjects: Array<{
         __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
+        subSubjectName: string | null;
+        questions: Array<string | null> | null;
       } | null> | null;
     } | null> | null;
   } | null;
-  name?: string | null;
+  name: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
-export type UpdateCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    subjects?: Array<{
-      __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
-        __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
+export type ListCardsPacksQuery = {
+  __typename: "ModelCardsPackConnection";
+  items: Array<{
+    __typename: "CardsPack";
+    id: string;
+    imgUrl: string;
+    description: string | null;
+    tags: Array<string | null> | null;
+    categories: Array<string | null> | null;
+    cards: Array<string | null> | null;
+    cardsPreview: Array<string | null> | null;
+    usersIds: Array<string | null> | null;
+    groupsIds: Array<string | null> | null;
+    users: Array<string | null> | null;
+    guideBook: {
+      __typename: "GuideBook";
+      subjects: Array<{
+        __typename: "GuideBookSubject";
+        subjectName: string | null;
+        subSubjects: Array<{
+          __typename: "SubSubject";
+          subSubjectName: string | null;
+          questions: Array<string | null> | null;
+        } | null> | null;
       } | null> | null;
-    } | null> | null;
-  } | null;
-  name?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    subjects?: Array<{
-      __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
-        __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name?: string | null;
-  createdAt: string;
-  updatedAt: string;
+    } | null;
+    name: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken: string | null;
 };
 
 export type GetContactUsModelQuery = {
   __typename: "ContactUsModel";
   id: string;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type ListContactUsModelsQuery = {
   __typename: "ModelContactUsModelConnection";
-  items?: Array<{
+  items: Array<{
     __typename: "ContactUsModel";
     id: string;
-    name?: string | null;
-    content?: string | null;
-    email?: string | null;
+    name: string | null;
+    content: string | null;
+    email: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
-  nextToken?: string | null;
+  nextToken: string | null;
 };
 
 export type GetUserQuery = {
@@ -959,103 +844,101 @@ export type GetUserQuery = {
   id: string;
   username: string;
   email: string;
-  phone?: string | null;
-  status?: string | null;
-  subscription?: {
+  phone: string | null;
+  status: string | null;
+  subscription: {
     __typename: "MonthlySubscription";
     id: string;
-    startDate?: string | null;
-    paymentProvider?: string | null;
-    providerTransactionId?: string | null;
-    subscriptionPlan?: {
+    startDate: string | null;
+    paymentProvider: string | null;
+    providerTransactionId: string | null;
+    subscriptionPlan: {
       __typename: "SubscriptionPlan";
       id: string;
-      name?: string | null;
-      description?: string | null;
+      name: string | null;
+      description: string | null;
       providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      price?: number | null;
-      discount?: number | null;
+      numberOfUsers: number | null;
+      numberOfCardPacks: number | null;
+      price: number | null;
+      discount: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
   } | null;
-  numberOfPacksSubstitutions?: number | null;
-  lastPackSubstitutionDate?: string | null;
-  numberOfPlansSubstitutions?: number | null;
-  lastPlanSubstitutionDate?: string | null;
-  firstProgramRegistrationDate?: string | null;
-  groupId?: string | null;
-  numberOfUsedPacks?: number | null;
-  groupRole?: string | null;
-  cancellationDate?: string | null;
+  numberOfPacksSubstitutions: number | null;
+  lastPackSubstitutionDate: string | null;
+  numberOfPlansSubstitutions: number | null;
+  lastPlanSubstitutionDate: string | null;
+  firstProgramRegistrationDate: string | null;
+  groupId: string | null;
+  numberOfUsedPacks: number | null;
+  groupRole: string | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type ListUsersQuery = {
   __typename: "ModelUserConnection";
-  items?: Array<{
+  items: Array<{
     __typename: "User";
     id: string;
     username: string;
     email: string;
-    phone?: string | null;
-    status?: string | null;
-    subscription?: {
+    phone: string | null;
+    status: string | null;
+    subscription: {
       __typename: "MonthlySubscription";
       id: string;
-      startDate?: string | null;
-      paymentProvider?: string | null;
-      providerTransactionId?: string | null;
-      subscriptionPlan?: {
+      startDate: string | null;
+      paymentProvider: string | null;
+      providerTransactionId: string | null;
+      subscriptionPlan: {
         __typename: "SubscriptionPlan";
         id: string;
-        name?: string | null;
-        description?: string | null;
+        name: string | null;
+        description: string | null;
         providerPlanId: string;
-        numberOfUsers?: number | null;
-        numberOfCardPacks?: number | null;
-        price?: number | null;
-        discount?: number | null;
+        numberOfUsers: number | null;
+        numberOfCardPacks: number | null;
+        price: number | null;
+        discount: number | null;
         createdAt: string;
         updatedAt: string;
       } | null;
     } | null;
-    numberOfPacksSubstitutions?: number | null;
-    lastPackSubstitutionDate?: string | null;
-    numberOfPlansSubstitutions?: number | null;
-    lastPlanSubstitutionDate?: string | null;
-    firstProgramRegistrationDate?: string | null;
-    groupId?: string | null;
-    numberOfUsedPacks?: number | null;
-    groupRole?: string | null;
-    cancellationDate?: string | null;
+    numberOfPacksSubstitutions: number | null;
+    lastPackSubstitutionDate: string | null;
+    numberOfPlansSubstitutions: number | null;
+    lastPlanSubstitutionDate: string | null;
+    firstProgramRegistrationDate: string | null;
+    groupId: string | null;
+    numberOfUsedPacks: number | null;
+    groupRole: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
-  nextToken?: string | null;
+  nextToken: string | null;
 };
 
 export type GetGroupQuery = {
   __typename: "Group";
   id: string;
-  groupUsers?: Array<{
+  groupUsers: Array<{
     __typename: "GroupUserRole";
-    email?: string | null;
-    role?: string | null;
+    email: string | null;
+    role: string | null;
   } | null> | null;
-  paymentProgram?: {
+  paymentProgram: {
     __typename: "SubscriptionPlan";
     id: string;
-    name?: string | null;
-    description?: string | null;
+    name: string | null;
+    description: string | null;
     providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1065,181 +948,71 @@ export type GetGroupQuery = {
 
 export type ListGroupsQuery = {
   __typename: "ModelGroupConnection";
-  items?: Array<{
+  items: Array<{
     __typename: "Group";
     id: string;
-    groupUsers?: Array<{
+    groupUsers: Array<{
       __typename: "GroupUserRole";
-      email?: string | null;
-      role?: string | null;
+      email: string | null;
+      role: string | null;
     } | null> | null;
-    paymentProgram?: {
+    paymentProgram: {
       __typename: "SubscriptionPlan";
       id: string;
-      name?: string | null;
-      description?: string | null;
+      name: string | null;
+      description: string | null;
       providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      price?: number | null;
-      discount?: number | null;
+      numberOfUsers: number | null;
+      numberOfCardPacks: number | null;
+      price: number | null;
+      discount: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
-  nextToken?: string | null;
-};
-
-export type GetNewsQuery = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListNewssQuery = {
-  __typename: "ModelNewsConnection";
-  items?: Array<{
-    __typename: "News";
-    id: string;
-    message?: string | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken?: string | null;
-};
-
-export type GetCouponCodesQuery = {
-  __typename: "CouponCodes";
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListCouponCodessQuery = {
-  __typename: "ModelCouponCodesConnection";
-  items?: Array<{
-    __typename: "CouponCodes";
-    id: string;
-    organization?: string | null;
-    couponCode?: string | null;
-    discount?: number | null;
-    trialPeriodInDays?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken?: string | null;
-};
-
-export type GetCardsPackQuery = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    subjects?: Array<{
-      __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
-        __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListCardsPacksQuery = {
-  __typename: "ModelCardsPackConnection";
-  items?: Array<{
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description?: string | null;
-    tags?: Array<string | null> | null;
-    categories?: Array<string | null> | null;
-    cards?: Array<string | null> | null;
-    cardsPreview?: Array<string | null> | null;
-    usersIds?: Array<string | null> | null;
-    groupsIds?: Array<string | null> | null;
-    users?: Array<string | null> | null;
-    guideBook?: {
-      __typename: "GuideBook";
-      subjects?: Array<{
-        __typename: "GuideBookSubject";
-        subjectName?: string | null;
-        subSubjects?: Array<{
-          __typename: "SubSubject";
-          subSubjectName?: string | null;
-          questions?: Array<string | null> | null;
-        } | null> | null;
-      } | null> | null;
-    } | null;
-    name?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken?: string | null;
+  nextToken: string | null;
 };
 
 export type GetSubscriptionPlanQuery = {
   __typename: "SubscriptionPlan";
   id: string;
-  name?: string | null;
-  description?: string | null;
+  name: string | null;
+  description: string | null;
   providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
+  numberOfUsers: number | null;
+  numberOfCardPacks: number | null;
+  price: number | null;
+  discount: number | null;
   createdAt: string;
   updatedAt: string;
 };
 
 export type ListSubscriptionPlansQuery = {
   __typename: "ModelSubscriptionPlanConnection";
-  items?: Array<{
+  items: Array<{
     __typename: "SubscriptionPlan";
     id: string;
-    name?: string | null;
-    description?: string | null;
+    name: string | null;
+    description: string | null;
     providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
-  nextToken?: string | null;
+  nextToken: string | null;
 };
 
 export type OnCreateContactUsModelSubscription = {
   __typename: "ContactUsModel";
   id: string;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1247,9 +1020,9 @@ export type OnCreateContactUsModelSubscription = {
 export type OnUpdateContactUsModelSubscription = {
   __typename: "ContactUsModel";
   id: string;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1257,9 +1030,9 @@ export type OnUpdateContactUsModelSubscription = {
 export type OnDeleteContactUsModelSubscription = {
   __typename: "ContactUsModel";
   id: string;
-  name?: string | null;
-  content?: string | null;
-  email?: string | null;
+  name: string | null;
+  content: string | null;
+  email: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1267,21 +1040,21 @@ export type OnDeleteContactUsModelSubscription = {
 export type OnCreateGroupSubscription = {
   __typename: "Group";
   id: string;
-  groupUsers?: Array<{
+  groupUsers: Array<{
     __typename: "GroupUserRole";
-    email?: string | null;
-    role?: string | null;
+    email: string | null;
+    role: string | null;
   } | null> | null;
-  paymentProgram?: {
+  paymentProgram: {
     __typename: "SubscriptionPlan";
     id: string;
-    name?: string | null;
-    description?: string | null;
+    name: string | null;
+    description: string | null;
     providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1292,21 +1065,21 @@ export type OnCreateGroupSubscription = {
 export type OnUpdateGroupSubscription = {
   __typename: "Group";
   id: string;
-  groupUsers?: Array<{
+  groupUsers: Array<{
     __typename: "GroupUserRole";
-    email?: string | null;
-    role?: string | null;
+    email: string | null;
+    role: string | null;
   } | null> | null;
-  paymentProgram?: {
+  paymentProgram: {
     __typename: "SubscriptionPlan";
     id: string;
-    name?: string | null;
-    description?: string | null;
+    name: string | null;
+    description: string | null;
     providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1317,21 +1090,21 @@ export type OnUpdateGroupSubscription = {
 export type OnDeleteGroupSubscription = {
   __typename: "Group";
   id: string;
-  groupUsers?: Array<{
+  groupUsers: Array<{
     __typename: "GroupUserRole";
-    email?: string | null;
-    role?: string | null;
+    email: string | null;
+    role: string | null;
   } | null> | null;
-  paymentProgram?: {
+  paymentProgram: {
     __typename: "SubscriptionPlan";
     id: string;
-    name?: string | null;
-    description?: string | null;
+    name: string | null;
+    description: string | null;
     providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
+    numberOfUsers: number | null;
+    numberOfCardPacks: number | null;
+    price: number | null;
+    discount: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1339,76 +1112,16 @@ export type OnDeleteGroupSubscription = {
   updatedAt: string;
 };
 
-export type OnCreateNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateCouponCodesSubscription = {
-  __typename: "CouponCodes";
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateCouponCodesSubscription = {
-  __typename: "CouponCodes";
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteCouponCodesSubscription = {
-  __typename: "CouponCodes";
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type OnCreateSubscriptionPlanSubscription = {
   __typename: "SubscriptionPlan";
   id: string;
-  name?: string | null;
-  description?: string | null;
+  name: string | null;
+  description: string | null;
   providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
+  numberOfUsers: number | null;
+  numberOfCardPacks: number | null;
+  price: number | null;
+  discount: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1416,13 +1129,13 @@ export type OnCreateSubscriptionPlanSubscription = {
 export type OnUpdateSubscriptionPlanSubscription = {
   __typename: "SubscriptionPlan";
   id: string;
-  name?: string | null;
-  description?: string | null;
+  name: string | null;
+  description: string | null;
   providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
+  numberOfUsers: number | null;
+  numberOfCardPacks: number | null;
+  price: number | null;
+  discount: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1430,13 +1143,13 @@ export type OnUpdateSubscriptionPlanSubscription = {
 export type OnDeleteSubscriptionPlanSubscription = {
   __typename: "SubscriptionPlan";
   id: string;
-  name?: string | null;
-  description?: string | null;
+  name: string | null;
+  description: string | null;
   providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
+  numberOfUsers: number | null;
+  numberOfCardPacks: number | null;
+  price: number | null;
+  discount: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1445,6 +1158,115 @@ export type OnDeleteSubscriptionPlanSubscription = {
   providedIn: "root"
 })
 export class APIService {
+  async CreateNews(
+    input: CreateNewsInput,
+    condition?: ModelNewsConditionInput
+  ): Promise<CreateNewsMutation> {
+    const statement = `mutation CreateNews($input: CreateNewsInput!, $condition: ModelNewsConditionInput) {
+        createNews(input: $input, condition: $condition) {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateNewsMutation>response.data.createNews;
+  }  
+  async UpdateNews(
+    input: UpdateNewsInput,
+    condition?: ModelNewsConditionInput
+  ): Promise<UpdateNewsMutation> {
+    const statement = `mutation UpdateNews($input: UpdateNewsInput!, $condition: ModelNewsConditionInput) {
+        updateNews(input: $input, condition: $condition) {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateNewsMutation>response.data.updateNews;
+  }
+  async DeleteNews(
+    input: DeleteNewsInput,
+    condition?: ModelNewsConditionInput
+  ): Promise<DeleteNewsMutation> {
+    const statement = `mutation DeleteNews($input: DeleteNewsInput!, $condition: ModelNewsConditionInput) {
+        deleteNews(input: $input, condition: $condition) {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteNewsMutation>response.data.deleteNews;
+  }
+  async ListNewss(
+    filter?: ModelNewsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListNewssQuery> {
+    const statement = `query ListNewss($filter: ModelNewsFilterInput, $limit: Int, $nextToken: String) {
+        listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            message
+            order
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListNewssQuery>response.data.listNewss;
+  }
   async CreateUser(input: CreateUserInput): Promise<CreateUserMutation> {
     const statement = `mutation CreateUser($input: CreateUserInput!) {
         createUser(input: $input) {
@@ -1482,7 +1304,6 @@ export class APIService {
           groupId
           numberOfUsedPacks
           groupRole
-          cancellationDate
           createdAt
           updatedAt
         }
@@ -1532,6 +1353,20 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.updatePaymentProgram;
+  }
+  async UpdateAllNewsList(
+    input: newsListInput
+  ): Promise<boolean | null> {
+    const statement = `mutation UpdateAllNewsList($input: newsListInput!) {
+        updateAllNewsList(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.updateAllNewsList;
   }
   async UpdateGroupUsersList(
     input: groupUsersListInput
@@ -1584,465 +1419,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
-  }
-  async UpdateAllNewsList(input: newsListInput): Promise<boolean | null> {
-    const statement = `mutation UpdateAllNewsList($input: newsListInput!) {
-        UpdateAllNewsList(input: $input)
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <boolean | null>response.data.UpdateAllNewsList;
-  }
-  async CreateContactUsModel(
-    input: CreateContactUsModelInput,
-    condition?: ModelContactUsModelConditionInput
-  ): Promise<CreateContactUsModelMutation> {
-    const statement = `mutation CreateContactUsModel($input: CreateContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
-        createContactUsModel(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          content
-          email
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateContactUsModelMutation>response.data.createContactUsModel;
-  }
-  async UpdateContactUsModel(
-    input: UpdateContactUsModelInput,
-    condition?: ModelContactUsModelConditionInput
-  ): Promise<UpdateContactUsModelMutation> {
-    const statement = `mutation UpdateContactUsModel($input: UpdateContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
-        updateContactUsModel(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          content
-          email
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateContactUsModelMutation>response.data.updateContactUsModel;
-  }
-  async DeleteContactUsModel(
-    input: DeleteContactUsModelInput,
-    condition?: ModelContactUsModelConditionInput
-  ): Promise<DeleteContactUsModelMutation> {
-    const statement = `mutation DeleteContactUsModel($input: DeleteContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
-        deleteContactUsModel(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          content
-          email
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
-  }
-  async CreateGroup(
-    input: CreateGroupInput,
-    condition?: ModelGroupConditionInput
-  ): Promise<CreateGroupMutation> {
-    const statement = `mutation CreateGroup($input: CreateGroupInput!, $condition: ModelGroupConditionInput) {
-        createGroup(input: $input, condition: $condition) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            email
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateGroupMutation>response.data.createGroup;
-  }
-  async UpdateGroup(
-    input: UpdateGroupInput,
-    condition?: ModelGroupConditionInput
-  ): Promise<UpdateGroupMutation> {
-    const statement = `mutation UpdateGroup($input: UpdateGroupInput!, $condition: ModelGroupConditionInput) {
-        updateGroup(input: $input, condition: $condition) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            email
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateGroupMutation>response.data.updateGroup;
-  }
-  async DeleteGroup(
-    input: DeleteGroupInput,
-    condition?: ModelGroupConditionInput
-  ): Promise<DeleteGroupMutation> {
-    const statement = `mutation DeleteGroup($input: DeleteGroupInput!, $condition: ModelGroupConditionInput) {
-        deleteGroup(input: $input, condition: $condition) {
-          __typename
-          id
-          groupUsers {
-            __typename
-            email
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteGroupMutation>response.data.deleteGroup;
-  }
-  async CreateSubscriptionPlan(
-    input: CreateSubscriptionPlanInput,
-    condition?: ModelSubscriptionPlanConditionInput
-  ): Promise<CreateSubscriptionPlanMutation> {
-    const statement = `mutation CreateSubscriptionPlan($input: CreateSubscriptionPlanInput!, $condition: ModelSubscriptionPlanConditionInput) {
-        createSubscriptionPlan(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          price
-          discount
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateSubscriptionPlanMutation>response.data.createSubscriptionPlan;
-  }
-  async UpdateSubscriptionPlan(
-    input: UpdateSubscriptionPlanInput,
-    condition?: ModelSubscriptionPlanConditionInput
-  ): Promise<UpdateSubscriptionPlanMutation> {
-    const statement = `mutation UpdateSubscriptionPlan($input: UpdateSubscriptionPlanInput!, $condition: ModelSubscriptionPlanConditionInput) {
-        updateSubscriptionPlan(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          price
-          discount
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateSubscriptionPlanMutation>response.data.updateSubscriptionPlan;
-  }
-  async DeleteSubscriptionPlan(
-    input: DeleteSubscriptionPlanInput,
-    condition?: ModelSubscriptionPlanConditionInput
-  ): Promise<DeleteSubscriptionPlanMutation> {
-    const statement = `mutation DeleteSubscriptionPlan($input: DeleteSubscriptionPlanInput!, $condition: ModelSubscriptionPlanConditionInput) {
-        deleteSubscriptionPlan(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          price
-          discount
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
-  }
-  async CreateNews(
-    input: CreateNewsInput,
-    condition?: ModelNewsConditionInput
-  ): Promise<CreateNewsMutation> {
-    const statement = `mutation CreateNews($input: CreateNewsInput!, $condition: ModelNewsConditionInput) {
-        createNews(input: $input, condition: $condition) {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateNewsMutation>response.data.createNews;
-  }
-  async UpdateNews(
-    input: UpdateNewsInput,
-    condition?: ModelNewsConditionInput
-  ): Promise<UpdateNewsMutation> {
-    const statement = `mutation UpdateNews($input: UpdateNewsInput!, $condition: ModelNewsConditionInput) {
-        updateNews(input: $input, condition: $condition) {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateNewsMutation>response.data.updateNews;
-  }
-  async DeleteNews(
-    input: DeleteNewsInput,
-    condition?: ModelNewsConditionInput
-  ): Promise<DeleteNewsMutation> {
-    const statement = `mutation DeleteNews($input: DeleteNewsInput!, $condition: ModelNewsConditionInput) {
-        deleteNews(input: $input, condition: $condition) {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteNewsMutation>response.data.deleteNews;
-  }
-  async CreateCouponCodes(
-    input: CreateCouponCodesInput,
-    condition?: ModelCouponCodesConditionInput
-  ): Promise<CreateCouponCodesMutation> {
-    const statement = `mutation CreateCouponCodes($input: CreateCouponCodesInput!, $condition: ModelCouponCodesConditionInput) {
-        createCouponCodes(input: $input, condition: $condition) {
-          __typename
-          id
-          organization
-          couponCode
-          discount
-          trialPeriodInDays
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateCouponCodesMutation>response.data.createCouponCodes;
-  }
-  async UpdateCouponCodes(
-    input: UpdateCouponCodesInput,
-    condition?: ModelCouponCodesConditionInput
-  ): Promise<UpdateCouponCodesMutation> {
-    const statement = `mutation UpdateCouponCodes($input: UpdateCouponCodesInput!, $condition: ModelCouponCodesConditionInput) {
-        updateCouponCodes(input: $input, condition: $condition) {
-          __typename
-          id
-          organization
-          couponCode
-          discount
-          trialPeriodInDays
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateCouponCodesMutation>response.data.updateCouponCodes;
-  }
-  async DeleteCouponCodes(
-    input: DeleteCouponCodesInput,
-    condition?: ModelCouponCodesConditionInput
-  ): Promise<DeleteCouponCodesMutation> {
-    const statement = `mutation DeleteCouponCodes($input: DeleteCouponCodesInput!, $condition: ModelCouponCodesConditionInput) {
-        deleteCouponCodes(input: $input, condition: $condition) {
-          __typename
-          id
-          organization
-          couponCode
-          discount
-          trialPeriodInDays
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteCouponCodesMutation>response.data.deleteCouponCodes;
   }
   async CreateCardsPack(
     input: CreateCardsPackInput,
@@ -2179,6 +1555,444 @@ export class APIService {
     )) as any;
     return <DeleteCardsPackMutation>response.data.deleteCardsPack;
   }
+  async UpdateContactUsModel(
+    input: UpdateContactUsModelInput,
+    condition?: ModelContactUsModelConditionInput
+  ): Promise<UpdateContactUsModelMutation> {
+    const statement = `mutation UpdateContactUsModel($input: UpdateContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
+        updateContactUsModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateContactUsModelMutation>response.data.updateContactUsModel;
+  }
+  async DeleteContactUsModel(
+    input: DeleteContactUsModelInput,
+    condition?: ModelContactUsModelConditionInput
+  ): Promise<DeleteContactUsModelMutation> {
+    const statement = `mutation DeleteContactUsModel($input: DeleteContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
+        deleteContactUsModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
+  }
+  async DeleteGroup(
+    input: DeleteGroupInput,
+    condition?: ModelGroupConditionInput
+  ): Promise<DeleteGroupMutation> {
+    const statement = `mutation DeleteGroup($input: DeleteGroupInput!, $condition: ModelGroupConditionInput) {
+        deleteGroup(input: $input, condition: $condition) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            email
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteGroupMutation>response.data.deleteGroup;
+  }
+  async CreateContactUsModel(
+    input: CreateContactUsModelInput,
+    condition?: ModelContactUsModelConditionInput
+  ): Promise<CreateContactUsModelMutation> {
+    const statement = `mutation CreateContactUsModel($input: CreateContactUsModelInput!, $condition: ModelContactUsModelConditionInput) {
+        createContactUsModel(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          content
+          email
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateContactUsModelMutation>response.data.createContactUsModel;
+  }
+  async CreateGroup(
+    input: CreateGroupInput,
+    condition?: ModelGroupConditionInput
+  ): Promise<CreateGroupMutation> {
+    const statement = `mutation CreateGroup($input: CreateGroupInput!, $condition: ModelGroupConditionInput) {
+        createGroup(input: $input, condition: $condition) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            email
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateGroupMutation>response.data.createGroup;
+  }
+  async UpdateGroup(
+    input: UpdateGroupInput,
+    condition?: ModelGroupConditionInput
+  ): Promise<UpdateGroupMutation> {
+    const statement = `mutation UpdateGroup($input: UpdateGroupInput!, $condition: ModelGroupConditionInput) {
+        updateGroup(input: $input, condition: $condition) {
+          __typename
+          id
+          groupUsers {
+            __typename
+            email
+            role
+          }
+          paymentProgram {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            price
+            discount
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateGroupMutation>response.data.updateGroup;
+  }
+  async CreateSubscriptionPlan(
+    input: CreateSubscriptionPlanInput,
+    condition?: ModelSubscriptionPlanConditionInput
+  ): Promise<CreateSubscriptionPlanMutation> {
+    const statement = `mutation CreateSubscriptionPlan($input: CreateSubscriptionPlanInput!, $condition: ModelSubscriptionPlanConditionInput) {
+        createSubscriptionPlan(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateSubscriptionPlanMutation>response.data.createSubscriptionPlan;
+  }
+  async UpdateSubscriptionPlan(
+    input: UpdateSubscriptionPlanInput,
+    condition?: ModelSubscriptionPlanConditionInput
+  ): Promise<UpdateSubscriptionPlanMutation> {
+    const statement = `mutation UpdateSubscriptionPlan($input: UpdateSubscriptionPlanInput!, $condition: ModelSubscriptionPlanConditionInput) {
+        updateSubscriptionPlan(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateSubscriptionPlanMutation>response.data.updateSubscriptionPlan;
+  }
+  async DeleteSubscriptionPlan(
+    input: DeleteSubscriptionPlanInput,
+    condition?: ModelSubscriptionPlanConditionInput
+  ): Promise<DeleteSubscriptionPlanMutation> {
+    const statement = `mutation DeleteSubscriptionPlan($input: DeleteSubscriptionPlanInput!, $condition: ModelSubscriptionPlanConditionInput) {
+        deleteSubscriptionPlan(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
+  }
+  async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
+    const statement = `query GetCardsPack($id: ID!) {
+        getCardsPack(id: $id) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          usersIds
+          groupsIds
+          users
+          guideBook {
+            __typename
+            subjects {
+              __typename
+              subjectName
+              subSubjects {
+                __typename
+                subSubjectName
+                questions
+              }
+            }
+          }
+          name
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(  { query: statement,
+      variables: gqlAPIServiceArguments,
+      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
+    )) as any;
+    return <GetCardsPackQuery>response.data.getCardsPack;
+  }
+  async ListCardsPacksForPreview(
+    filter?: ModelCardsPackFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCardsPacksQuery> {
+    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
+        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            imgUrl
+            description
+            cards
+            tags
+            categories
+            cardsPreview
+            guideBook {
+              __typename
+              subjects {
+                __typename
+                subjectName
+                subSubjects {
+                  __typename
+                  subSubjectName
+                  questions
+                }
+              }
+            }
+            name
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+    )) as any;
+    return <ListCardsPacksQuery>response.data.listCardsPacks;
+  }
+  async ListCardsPacks(
+    filter?: ModelCardsPackFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCardsPacksQuery> {
+    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
+        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            imgUrl
+            description
+            tags
+            categories
+            cards
+            cardsPreview
+            usersIds
+            groupsIds
+            users
+            guideBook {
+              __typename
+              subjects {
+                __typename
+                subjectName
+                subSubjects {
+                  __typename
+                  subSubjectName
+                  questions
+                }
+              }
+            }
+            name
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCardsPacksQuery>response.data.listCardsPacks;
+  }
   async GetContactUsModel(id: string): Promise<GetContactUsModelQuery> {
     const statement = `query GetContactUsModel($id: ID!) {
         getContactUsModel(id: $id) {
@@ -2271,7 +2085,6 @@ export class APIService {
           groupId
           numberOfUsedPacks
           groupRole
-          cancellationDate
           createdAt
           updatedAt
         }
@@ -2327,7 +2140,6 @@ export class APIService {
             groupId
             numberOfUsedPacks
             groupRole
-            cancellationDate
             createdAt
             updatedAt
           }
@@ -2434,209 +2246,6 @@ export class APIService {
     )) as any;
     return <ListGroupsQuery>response.data.listGroups;
   }
-  async GetNews(id: string): Promise<GetNewsQuery> {
-    const statement = `query GetNews($id: ID!) {
-        getNews(id: $id) {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetNewsQuery>response.data.getNews;
-  }
-  async ListNewss(
-    filter?: ModelNewsFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListNewssQuery> {
-    const statement = `query ListNewss($filter: ModelNewsFilterInput, $limit: Int, $nextToken: String) {
-        listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            message
-            order
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListNewssQuery>response.data.listNewss;
-  }
-  async GetCouponCodes(id: string): Promise<GetCouponCodesQuery> {
-    const statement = `query GetCouponCodes($id: ID!) {
-        getCouponCodes(id: $id) {
-          __typename
-          id
-          organization
-          couponCode
-          discount
-          trialPeriodInDays
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetCouponCodesQuery>response.data.getCouponCodes;
-  }
-  async ListCouponCodess(
-    filter?: ModelCouponCodesFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCouponCodessQuery> {
-    const statement = `query ListCouponCodess($filter: ModelCouponCodesFilterInput, $limit: Int, $nextToken: String) {
-        listCouponCodess(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            organization
-            couponCode
-            discount
-            trialPeriodInDays
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListCouponCodessQuery>response.data.listCouponCodess;
-  }
-  async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
-    const statement = `query GetCardsPack($id: ID!) {
-        getCardsPack(id: $id) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          usersIds
-          groupsIds
-          users
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetCardsPackQuery>response.data.getCardsPack;
-  }
-  async ListCardsPacks(
-    filter?: ModelCardsPackFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCardsPacksQuery> {
-    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards
-            cardsPreview
-            usersIds
-            groupsIds
-            users
-            guideBook {
-              __typename
-              subjects {
-                __typename
-                subjectName
-                subSubjects {
-                  __typename
-                  subSubjectName
-                  questions
-                }
-              }
-            }
-            name
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListCardsPacksQuery>response.data.listCardsPacks;
-  }
   async GetSubscriptionPlan(id: string): Promise<GetSubscriptionPlanQuery> {
     const statement = `query GetSubscriptionPlan($id: ID!) {
         getSubscriptionPlan(id: $id) {
@@ -2696,7 +2305,9 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
     )) as any;
     return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
   }
@@ -2852,7 +2463,6 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteGroupSubscription>>;
-
   OnCreateNewsListener: Observable<
     SubscriptionResponse<OnCreateNewsSubscription>
   > = API.graphql(
@@ -2903,64 +2513,6 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteNewsSubscription>>;
-
-  OnCreateCouponCodesListener: Observable<
-    SubscriptionResponse<OnCreateCouponCodesSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateCouponCodes {
-        onCreateCouponCodes {
-          __typename
-          id
-          organization
-          couponCode
-          discount
-          trialPeriodInDays
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnCreateCouponCodesSubscription>>;
-
-  OnUpdateCouponCodesListener: Observable<
-    SubscriptionResponse<OnUpdateCouponCodesSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateCouponCodes {
-        onUpdateCouponCodes {
-          __typename
-          id
-          organization
-          couponCode
-          discount
-          trialPeriodInDays
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdateCouponCodesSubscription>>;
-
-  OnDeleteCouponCodesListener: Observable<
-    SubscriptionResponse<OnDeleteCouponCodesSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteCouponCodes {
-        onDeleteCouponCodes {
-          __typename
-          id
-          organization
-          couponCode
-          discount
-          trialPeriodInDays
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnDeleteCouponCodesSubscription>>;
-
   OnCreateSubscriptionPlanListener: Observable<
     SubscriptionResponse<OnCreateSubscriptionPlanSubscription>
   > = API.graphql(

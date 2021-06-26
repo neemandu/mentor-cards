@@ -187,6 +187,35 @@ query ListNewss(
     nextToken
   }
 }
+query GetCouponCodes($id: ID!) {
+  getCouponCodes(id: $id) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    createdAt
+    updatedAt
+  }
+}
+query ListCouponCodess(
+  $filter: ModelCouponCodesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCouponCodess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      organization
+      couponCode
+      discount
+      trialPeriodInDays
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetCardsPack($id: ID!) {
   getCardsPack(id: $id) {
     id

@@ -169,3 +169,13 @@ type News
   message: String
   order: Int
 }
+
+type CouponCodes
+@model
+@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools }] ){
+  id: ID!
+  organization: String
+  couponCode: String
+  discount: Float
+  trialPeriodInDays: Int
+}
