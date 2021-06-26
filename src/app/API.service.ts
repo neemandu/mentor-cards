@@ -39,6 +39,47 @@ export type DeleteNewsInput = {
   id: string;
 };
 
+export type CreateCouponCodesInput = {
+  id?: string | null;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+};
+
+export type ModelCouponCodesConditionInput = {
+  organization?: ModelStringInput | null;
+  couponCode?: ModelStringInput | null;
+  discount?: ModelFloatInput | null;
+  trialPeriodInDays?: ModelIntInput | null;
+  and?: Array<ModelCouponCodesConditionInput | null> | null;
+  or?: Array<ModelCouponCodesConditionInput | null> | null;
+  not?: ModelCouponCodesConditionInput | null;
+};
+
+export type CouponCodes = {
+  __typename: "CouponCodes";
+  id?: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type UpdateCouponCodesInput = {
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+};
+
+export type DeleteCouponCodesInput = {
+  id: string;
+};
+
 export type ModelNewsFilterInput = {
   id?: ModelIDInput | null;
   message?: ModelStringInput | null;
@@ -51,6 +92,23 @@ export type ModelNewsFilterInput = {
 export type ModelNewsConnection = {
   __typename: "ModelNewsConnection";
   items?: Array<News | null> | null;
+  nextToken?: string | null;
+};
+
+export type ModelCouponCodesFilterInput = {
+  id?: ModelIDInput | null;
+  organization?: ModelStringInput | null;
+  couponCode?: ModelStringInput | null;
+  discount?: ModelFloatInput | null;
+  trialPeriodInDays?: ModelIntInput | null;
+  and?: Array<ModelCouponCodesFilterInput | null> | null;
+  or?: Array<ModelCouponCodesFilterInput | null> | null;
+  not?: ModelCouponCodesFilterInput | null;
+};
+
+export type ModelCouponCodesConnection = {
+  __typename: "ModelCouponCodesConnection";
+  items?: Array<CouponCodes | null> | null;
   nextToken?: string | null;
 };
 
@@ -519,6 +577,39 @@ export type CreateUserMutation = {
   updatedAt: string;
 };
 
+export type CreateCouponCodesMutation = {
+  __typename: "CouponCodes";
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCouponCodesMutation = {
+  __typename: "CouponCodes";
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteCouponCodesMutation = {
+  __typename: "CouponCodes";
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type CreateCardsPackMutation = {
   __typename: "CardsPack";
   id: string;
@@ -751,6 +842,32 @@ export type DeleteSubscriptionPlanMutation = {
   discount: number | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type GetCouponCodesQuery = {
+  __typename: "CouponCodes";
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListCouponCodessQuery = {
+  __typename: "ModelCouponCodesConnection";
+  items?: Array<{
+    __typename: "CouponCodes";
+    id: string;
+    organization?: string | null;
+    couponCode?: string | null;
+    discount?: number | null;
+    trialPeriodInDays?: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
 };
 
 export type GetCardsPackQuery = {
@@ -1112,6 +1229,39 @@ export type OnDeleteGroupSubscription = {
   updatedAt: string;
 };
 
+export type OnCreateCouponCodesSubscription = {
+  __typename: "CouponCodes";
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateCouponCodesSubscription = {
+  __typename: "CouponCodes";
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteCouponCodesSubscription = {
+  __typename: "CouponCodes";
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type OnCreateSubscriptionPlanSubscription = {
   __typename: "SubscriptionPlan";
   id: string;
@@ -1419,6 +1569,87 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
+  }
+  async CreateCouponCodes(
+    input: CreateCouponCodesInput,
+    condition?: ModelCouponCodesConditionInput
+  ): Promise<CreateCouponCodesMutation> {
+    const statement = `mutation CreateCouponCodes($input: CreateCouponCodesInput!, $condition: ModelCouponCodesConditionInput) {
+        createCouponCodes(input: $input, condition: $condition) {
+          __typename
+          id
+          organization
+          couponCode
+          discount
+          trialPeriodInDays
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateCouponCodesMutation>response.data.createCouponCodes;
+  }
+  async UpdateCouponCodes(
+    input: UpdateCouponCodesInput,
+    condition?: ModelCouponCodesConditionInput
+  ): Promise<UpdateCouponCodesMutation> {
+    const statement = `mutation UpdateCouponCodes($input: UpdateCouponCodesInput!, $condition: ModelCouponCodesConditionInput) {
+        updateCouponCodes(input: $input, condition: $condition) {
+          __typename
+          id
+          organization
+          couponCode
+          discount
+          trialPeriodInDays
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCouponCodesMutation>response.data.updateCouponCodes;
+  }
+  async DeleteCouponCodes(
+    input: DeleteCouponCodesInput,
+    condition?: ModelCouponCodesConditionInput
+  ): Promise<DeleteCouponCodesMutation> {
+    const statement = `mutation DeleteCouponCodes($input: DeleteCouponCodesInput!, $condition: ModelCouponCodesConditionInput) {
+        deleteCouponCodes(input: $input, condition: $condition) {
+          __typename
+          id
+          organization
+          couponCode
+          discount
+          trialPeriodInDays
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteCouponCodesMutation>response.data.deleteCouponCodes;
   }
   async CreateCardsPack(
     input: CreateCardsPackInput,
@@ -1845,6 +2076,63 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
+  }
+  async GetCouponCodes(id: string): Promise<GetCouponCodesQuery> {
+    const statement = `query GetCouponCodes($id: ID!) {
+        getCouponCodes(id: $id) {
+          __typename
+          id
+          organization
+          couponCode
+          discount
+          trialPeriodInDays
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetCouponCodesQuery>response.data.getCouponCodes;
+  }
+  async ListCouponCodess(
+    filter?: ModelCouponCodesFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCouponCodessQuery> {
+    const statement = `query ListCouponCodess($filter: ModelCouponCodesFilterInput, $limit: Int, $nextToken: String) {
+        listCouponCodess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            organization
+            couponCode
+            discount
+            trialPeriodInDays
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCouponCodessQuery>response.data.listCouponCodess;
   }
   async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!) {
@@ -2535,6 +2823,85 @@ export class APIService {
     )
   ) as Observable<SubscriptionResponse<OnCreateSubscriptionPlanSubscription>>;
 
+  OnCreateCouponCodesListener: Observable<
+    SubscriptionResponse<OnCreateCouponCodesSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateCouponCodes {
+        onCreateCouponCodes {
+          __typename
+          id
+          organization
+          couponCode
+          discount
+          trialPeriodInDays
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateCouponCodesSubscription>>;
+
+  OnUpdateCouponCodesListener: Observable<
+    SubscriptionResponse<OnUpdateCouponCodesSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateCouponCodes {
+        onUpdateCouponCodes {
+          __typename
+          id
+          organization
+          couponCode
+          discount
+          trialPeriodInDays
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateCouponCodesSubscription>>;
+
+  OnDeleteCouponCodesListener: Observable<
+    SubscriptionResponse<OnDeleteCouponCodesSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteCouponCodes {
+        onDeleteCouponCodes {
+          __typename
+          id
+          organization
+          couponCode
+          discount
+          trialPeriodInDays
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteCouponCodesSubscription>>;
+
+  OnCreateSubscriptionPlanListener: Observable<
+    SubscriptionResponse<OnCreateSubscriptionPlanSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateSubscriptionPlan {
+        onCreateSubscriptionPlan {
+          __typename
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          price
+          discount
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateSubscriptionPlanSubscription>>;
+  
   OnUpdateSubscriptionPlanListener: Observable<
     SubscriptionResponse<OnUpdateSubscriptionPlanSubscription>
   > = API.graphql(
