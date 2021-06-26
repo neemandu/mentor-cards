@@ -33,6 +33,15 @@ mutation CreateUser($input: CreateUserInput!) {
     numberOfUsedPacks
     groupRole
     cancellationDate
+    couponCode {
+      id
+      organization
+      couponCode
+      discount
+      trialPeriodInDays
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -60,6 +69,9 @@ mutation DeleteGroupById($input: deleteGroupInput!) {
 }
 mutation UpdateAllNewsList($input: newsListInput!) {
   UpdateAllNewsList(input: $input)
+}
+mutation AddCouponCode($input: couponCodeInput!) {
+  AddCouponCode(input: $input)
 }
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!

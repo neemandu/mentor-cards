@@ -60,6 +60,15 @@ query GetUser($id: ID!) {
     numberOfUsedPacks
     groupRole
     cancellationDate
+    couponCode {
+      id
+      organization
+      couponCode
+      discount
+      trialPeriodInDays
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -103,6 +112,15 @@ query ListUsers(
       numberOfUsedPacks
       groupRole
       cancellationDate
+      couponCode {
+        id
+        organization
+        couponCode
+        discount
+        trialPeriodInDays
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
