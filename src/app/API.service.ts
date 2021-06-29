@@ -2330,7 +2330,7 @@ export class APIService {
           numberOfUsedPacks
           groupRole
           cancellationDate
-          couponCodes {
+          couponCode {
             __typename
             id
             organization
