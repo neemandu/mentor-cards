@@ -9,6 +9,7 @@ import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 const millisecondsInMonth: number = 2505600000;
+const millisecondsInDay: number = 86400000;
 
 
 @Injectable({
@@ -86,7 +87,7 @@ export class UserAuthService {
         if (!data)
           return;
         this.userData = new UserData().deseralize(data);
-        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+        console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
         this.loggedInEmmiter.emit(this.userData);
@@ -203,10 +204,26 @@ export class UserAuthService {
   }
 
   /**
-   * return if in trial month
+   * return if in trial month (first month after register)
    */
-  get trialMonth(): boolean {
-    return this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth >= new Date().getTime();
+  get trialMonthExpDate(): Date {
+    return this.userData.createdAt.getTime() + millisecondsInMonth >= new Date().getTime() ? new Date(this.userData.createdAt.getTime() + millisecondsInMonth) : null;
+  }
+
+  /**
+   * return if in trial month (first month after register)
+   */
+  get codeCouponExpDate(): Date {
+    // return this.userData.createdAt.getTime() + millisecondsInMonth >= new Date().getTime();
+    return this.userData.couponCode ? new Date(this.userData.couponCode.createdAt.getTime() + millisecondsInDay * this.userData.couponCode.trialPeriodInDays) : null;
+    // return this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth >= new Date().getTime();
+  }
+
+  /**
+   * Returns actual exp date
+   */
+  get expDate() {
+    return (this.codeCouponExpDate ? this.codeCouponExpDate : this.trialMonthExpDate).toLocaleDateString('he-IL');
   }
 
   /**
