@@ -91,7 +91,7 @@ export class UserAuthService {
         if (this.userData.groupId)
           this.updateGroupData();
         this.loggedInEmmiter.emit(this.userData);
-        this.userData.status === 'NOPLAN' ? this.ngZone.run(() => this.router.navigate(['/no-program-page'])) : this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
+        (this.userData.status === 'PLAN' || this.trialMonthExpDate || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
       })

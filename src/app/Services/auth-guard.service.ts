@@ -1,36 +1,35 @@
 import { Injectable, NgZone } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { UserAuthService } from './user-auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuardAllPacksPageService implements CanActivate {
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class AuthGuardAllPacksPageService implements CanActivate {
 
-  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+//   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
-  canActivate(): boolean {
-    // debugger;
-    if (this.userAuthService.userData) {
-      if (this.userAuthService.userData.status === "PLAN")
-        return true;
-      else {
-        return false;
-      }
-    }
-    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
-      sub.unsubscribe();
-      if (userData.status === "PLAN" || this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate) {
-        this.ngZone.run(() => this.router.navigate(['all-packs-page']));
-        return true;
-      }
-      else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
-      }
-    })
-  }
-}
+//   canActivate(): boolean {
+//     // debugger;
+//     if (this.userAuthService.userData) {
+//       if (this.userAuthService.userData.status === "PLAN" || this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate)
+//         return true;
+//       else {
+//         return false;
+//       }
+//     }
+//     var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+//       sub.unsubscribe();
+//       if (userData.status === "PLAN" || this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate) {
+//         this.ngZone.run(() => this.router.navigate(['all-packs-page']));
+//         return true;
+//       }
+//       else {
+//         this.ngZone.run(() => this.router.navigate(['no-program-page']));
+//       }
+//     })
+//   }
+// }
 
 @Injectable({
   providedIn: 'root'
