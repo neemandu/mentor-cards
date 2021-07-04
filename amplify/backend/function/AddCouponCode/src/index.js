@@ -115,6 +115,12 @@ exports.handler = async (event) => {
     var user = await getUserByUSerName(username);
 
     if(user && 
+        user.couponCode){
+                console.warn('user already has a coupon code - ' + user.couponCode);
+                throw Error ('user already has a coupon code - ' + user.couponCode);
+        }
+
+    if(user && 
         !user.couponCode){
             var couponCode = args['couponCode'];
             var dbCouponCode = await getCouponCode(couponCode);
@@ -125,4 +131,6 @@ exports.handler = async (event) => {
             user.couponCode = dbCouponCode;
             await saveUser(user); 
         }
+    
+    return true;
 };

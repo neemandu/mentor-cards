@@ -132,7 +132,7 @@ exports.handler = async (event) => {
         trialPeriodInDays = user.couponCode.trialPeriodInDays;
     }
 
-
+    user.createdAt >= now .getDate()-trialPeriodInDays
 
     allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
     console.log('allPackagesDate');
@@ -149,8 +149,16 @@ exports.handler = async (event) => {
         console.log('Limitless program');
         return event.source['cards'];
     }
+    
+    var startFreePeriodDate = user.createdAt;
+    if(user &&
+        user.couponCode){
+            console.log('user has a coupon code since - ' + user.couponCode.createdAt);
+            startFreePeriodDate = user.couponCode.createdAt;
+        }
+
     if(user &&    // first month from registration
-        isFreeTrialPeriod(user.createdAt, allPackagesDate)
+        isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
      ){
          console.log('first month from registration');
          return event.source['cards'];
