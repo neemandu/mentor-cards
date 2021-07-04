@@ -8,6 +8,9 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
+const { env, ppid } = require("process");
+var AWS = require("aws-sdk");
+
 async function getUserByUSerName(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
