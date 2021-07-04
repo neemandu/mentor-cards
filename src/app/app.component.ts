@@ -13,6 +13,29 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 })
 export class AppComponent implements OnInit {
 
+  //https://docs.amplify.aws/ui/auth/authenticator/q/framework/angular#sign-out
+  //https://www.unimedia.tech/2020/12/12/aws-amplify-authentication-with-angular/
+  // signUpFormFields = [
+  //   {
+  //     type: "email",
+  //     label: "Custom email Label",
+  //     placeholder: "custom email placeholder",
+  //     required: true,
+  //   },
+  //   {
+  //     type: "password",
+  //     label: "Custom Password Label",
+  //     placeholder: "custom password placeholder",
+  //     required: true,
+  //   },
+  //   {
+  //     type: "phone_number",
+  //     label: "Custom Phone Label",
+  //     placeholder: "custom Phone placeholder",
+  //     required: true,
+  //   },
+  // ];//TODO
+
   user: CognitoUserInterface | undefined;
   authState: AuthState;
   title = 'amplify-angular-auth';

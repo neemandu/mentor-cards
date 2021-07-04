@@ -13,11 +13,15 @@ export class UserData {
     status: string;
     subscription: Subscription;
     firstProgramRegistrationDate: Date;
+    createdAt: Date;
     username: string;
+    couponCode: CouponCode
 
     deseralize(input: any) {
         Object.assign(this, input);
         this.firstProgramRegistrationDate = new Date(input.firstProgramRegistrationDate);
+        this.createdAt = new Date(input.createdAt);
+        this.couponCode = new CouponCode(input.couponCode);
         return this;
     }
 }
@@ -42,5 +46,21 @@ export class GroupUser {
         this.role = input.role;
         // Object.assign(this, input);
         return this;
+    }
+}
+
+export class CouponCode {//TODO
+    id: string;
+    organization: string;
+    couponCode: string;
+    discount: number;
+    trialPeriodInDays: number;
+    createdAt: Date;
+    updatedAt: Date;
+
+    constructor(input) {
+        Object.assign(this, input);
+        this.createdAt = new Date(input.createdAt);
+        this.updatedAt = new Date(input.updatedAt);
     }
 }

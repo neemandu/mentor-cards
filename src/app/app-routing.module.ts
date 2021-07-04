@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'no-program-page', component: NoProgramPageComponent, canActivate: [AuthGuardNoProgramPageService] },
   { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuardUserPageService] },
   { path: 'group-management', component: GroupManagementComponent, canActivate: [AuthGuardGroupManagementService] },
-  { path: 'site-content-management', component: SiteContentManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },//TODO CANACTIVATE
+  { path: 'site-content-management', component: SiteContentManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
   { path: 'all-packs-page', component: AllPacksPageComponent },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },
