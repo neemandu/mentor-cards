@@ -4,19 +4,28 @@
     <source src="assets\About video.mp4" type="video/mp4">
     <source src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4" type="video/mp4">
   </video>
-  <div id="actions" class="d-flex flex-column">
-    <span id="top">בחרו את התוכנית שלכם והתחילו לאמן</span>
+  <div class="d-flex flex-column actions">
+    <span class="top">בחרו את התוכנית שלכם והתחילו לאמן</span>
     <br>
     <!-- <button style="font-size: x-large;" type="button" (click)="openChooseProgramModal()">בחרו תוכנית</button> -->
     <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">בחרו תוכנית</button>
     <br>
-    <span id="bottom">החל מ-19.90 ש"ח לחודש. בטלו בכל עת.</span>
+    <span class="bottom">החל מ-19.90 ש"ח לחודש. בטלו בכל עת.</span>
   </div>
-  <div style="margin-top: 1rem; margin-bottom: 2rem;" id="actions" class="d-flex flex-column">
-    <span id="top">אתם חלק מקבוצה?</span>
-    <br>
-    <button style="font-size: large;" type="button" (click)="openEnterGroupIdModal()">הזנת קוד קבוצה</button>
-    <br>
-    <span id="bottom">הצטרפו לחבריכם והתחילו לעבוד</span>
+  <div class="d-flex flex-row">
+    <div class="d-flex flex-column actions bottom-actions">
+      <span class="top">אתם חלק מקבוצה?</span>
+      <br>
+      <button style="font-size: large;" type="button" (click)="openEnterGroupIdModal()">הזנת קוד קבוצה</button>
+      <br>
+      <span class="bottom">הצטרפו לחבריכם והתחילו לעבוד</span>
+    </div>
+    <div class="d-flex flex-column actions bottom-actions">
+      <span class="top">יש לכם קוד הטבה?</span>
+      <br>
+      <button style="font-size: large;" type="button" (click)="openEnterCouponCodeModal()">הזנת קוד קופון</button>
+      <br>
+      <span class="bottom">הזינו את הקוד והתחילו לעבוד</span>
+    </div>
   </div>
 </div>
