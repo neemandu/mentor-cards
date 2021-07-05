@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
         localStorage.setItem('signedin', 'true');
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;
-        LogRocket.identify(this.user.username);//TODO
+        LogRocket.identify(this.user.username);
         this.userAuthService.loggedIn(this.user);
       }
       else if (this.authState === 'signin') {
