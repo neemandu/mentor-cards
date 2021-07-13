@@ -125,6 +125,39 @@ subscription OnDeleteNews {
     updatedAt
   }
 }
+subscription OnCreateCouponCodes {
+  onCreateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCouponCodes {
+  onUpdateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCouponCodes {
+  onDeleteCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id

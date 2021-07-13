@@ -105,9 +105,9 @@ export class UserPageComponent implements OnInit {
     return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth);
   }
 
-  get trialMonth() {
+  get trialMonthExpDate() {
     // return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
-    return this.userAuthService.trialMonth
+    return this.userAuthService.trialMonthExpDate
   }
 
   ngOnDestroy(): void {

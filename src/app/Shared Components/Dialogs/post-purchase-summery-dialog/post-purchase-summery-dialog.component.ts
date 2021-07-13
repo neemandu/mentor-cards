@@ -23,8 +23,8 @@ export class PostPurchaseSummeryDialogComponent implements OnInit {
     this.ngZone.run(() => this.router.navigate([path]));
   }
 
-  get trialMonth() {
-    return this.userAuthService.trialMonth;
+  get trialMonthExpDate() {
+    return this.userAuthService.trialMonthExpDate;
   }
 
   closeDialog(): void {

@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, ComponentFactoryResolver, Injector, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';
@@ -46,16 +46,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.id) {//a specific pack
-      // console.log("cardsService.allPacks:  " + this.cardsService.allPacks);
       if (this.cardsService.allPacks) {
         this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
-        // console.log("file: pack-content-page.component.ts ~ line 36 ~ ngOnInit ~ this.pack", this.pack)
       }
       else {
-        // console.log("GetCardsPack:  " + this.id);
         this.api.GetCardsPack(this.id).then(pack => {
           this.pack = new PackContent().deseralize(pack);
-          // console.log("ngOnInit -> this.pack", this.pack)
         }, reject => {
           console.log("file: pack-content-page.component.ts ~ line 86 ~ this.api.GetCardsPack ~ reject", reject)
           this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -63,14 +59,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       }
     }
     else {//example pack
-      // console.log(exampleCards['default'])
       this.pack = new PackContent().deseralize(exampleCards['default'])
     }
   }
 
   multipileChanged(): void {
     this.selectedCards = [];
-    // this.flipped = false;
   }
 
   cardSelected(card: CardComponent, index: number): void {

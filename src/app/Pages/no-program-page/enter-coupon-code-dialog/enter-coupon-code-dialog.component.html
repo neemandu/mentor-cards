@@ -1,0 +1,26 @@
+<mat-toolbar class="d-flex justify-content-between">
+    <span class="title">הזנת קוד הטבה</span>
+    <button class="iconButton" mat-icon-button (click)="closeDialog()">
+        <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="line"></div>
+<div mat-dialog-content>
+    <form class="d-flex flex-column" [formGroup]="userForm">
+        <mat-form-field>
+            <mat-label>קוד הטבה</mat-label>
+            <input type="text" matInput formControlName="couponCode" cdkFocusInitial>
+            <mat-error *ngIf="formControls.couponCode.hasError('noSuchCoupon')">
+                קוד הטבה זה לא קיים
+            </mat-error>
+            <mat-error *ngIf="formControls.couponCode.hasError('userHasCoupon')">
+                קיים לך כבר קוד הטבה
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+
+<div class="buttons" mat-dialog-actions>
+    <button class="action-button" type="button" (click)="enterGroup()"
+        [disabled]="userForm.invalid || !inGroup">הצטרף</button>
+</div>

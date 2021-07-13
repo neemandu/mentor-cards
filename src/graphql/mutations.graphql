@@ -33,6 +33,15 @@ mutation CreateUser($input: CreateUserInput!) {
     numberOfUsedPacks
     groupRole
     cancellationDate
+    couponCode {
+      id
+      organization
+      couponCode
+      discount
+      trialPeriodInDays
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -57,6 +66,12 @@ mutation JoinExistingGroup($input: joinExistingGroupInput!) {
 }
 mutation DeleteGroupById($input: deleteGroupInput!) {
   DeleteGroupById(input: $input)
+}
+mutation UpdateAllNewsList($input: newsListInput!) {
+  UpdateAllNewsList(input: $input)
+}
+mutation AddCouponCode($input: couponCodeInput!) {
+  AddCouponCode(input: $input)
 }
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
@@ -258,6 +273,48 @@ mutation DeleteNews(
     id
     message
     order
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateCouponCodes(
+  $input: CreateCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  createCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCouponCodes(
+  $input: UpdateCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  updateCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCouponCodes(
+  $input: DeleteCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  deleteCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
     createdAt
     updatedAt
   }

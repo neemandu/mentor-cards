@@ -42,6 +42,7 @@ export class AllPacksPageComponent implements OnInit {
     this.loadedPacks = 0;
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites;
+      this.filterPacks()
       this.sortPacks();
     }));
     this.overlaySpinnerService.changeOverlaySpinner(true);
@@ -56,6 +57,7 @@ export class AllPacksPageComponent implements OnInit {
       this.allPacks = this.cardsService.allPacks.map(pack => pack);
       this.allCategories = this.cardsService.allCategories.map(category => category);
       this.allFavorites = this.cardsService.favorites;
+      this.sortPacks();
     } else {
       let authStatus = localStorage.getItem('signedin');
       (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then(packs => {
@@ -76,7 +78,7 @@ export class AllPacksPageComponent implements OnInit {
       }, reject => {
         // console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
+        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
           duration: 20000,
         });
         snackBarRef.onAction().subscribe(() => {
@@ -102,7 +104,7 @@ export class AllPacksPageComponent implements OnInit {
       else
         return 1;
     })
-    this.cardsService.allPacks = this.allPacks.map(pack => pack);
+    // this.cardsService.allPacks = this.allPacks.map(pack => pack);
   }
 
   /**
@@ -129,8 +131,16 @@ export class AllPacksPageComponent implements OnInit {
     return this.userAuthService.userData.subscription;
   }
 
-  get trialMonth() {
-    return this.userAuthService.trialMonth;
+  get trialMonthExpDate() {
+    return this.userAuthService.trialMonthExpDate;
+  }
+
+  get codeCouponExpDate() {
+    return this.userAuthService.codeCouponExpDate;
+  }
+
+  get expDate() {
+    return this.userAuthService.expDate;
   }
 
   /**
@@ -177,6 +187,7 @@ export class AllPacksPageComponent implements OnInit {
     if (this.selectedFavorites.length != 0) {
       this.favoritesFilter()
     }
+    this.sortPacks();
   }
 
   freeTextFilter(): void {

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { PurchaseData } from 'src/app/Objects/purchase-data';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserData } from 'src/app/Objects/user-related';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
+import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
 import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
 const millisecondsInMonth: number = 2505600000;
@@ -112,9 +114,9 @@ export class PricePageComponent implements OnInit {
   getNumOfPacksDesc(numberOfCardPacks): string {
     if (numberOfCardPacks == -1)
       return 'כל מה שיש לכם!'
-    else if(numberOfCardPacks == 2)
+    else if (numberOfCardPacks == 2)
       return numberOfCardPacks + '- בקטנה'
-    else if(numberOfCardPacks == 5)
+    else if (numberOfCardPacks == 5)
       return numberOfCardPacks + '- מספיק לי'
   }
   // getNumOfPacksDesc(numberOfCardPacks): string {
@@ -126,13 +128,13 @@ export class PricePageComponent implements OnInit {
 
   getAmountOfUsersDesc(userAmount): string {
     if (userAmount == 1)
-      return userAmount +'- אני'
-    else if(userAmount ==3)
-      return userAmount +'- חברים קרובים'
-    else if(userAmount ==10)
-      return userAmount +'- כל החבר\'ה'
-    else if(userAmount ==50)
-      return userAmount +'- כל הארגון'
+      return userAmount + '- אני'
+    else if (userAmount == 3)
+      return userAmount + '- חברים קרובים'
+    else if (userAmount == 10)
+      return userAmount + '- כל החבר\'ה'
+    else if (userAmount == 50)
+      return userAmount + '- כל הארגון'
   }
 
   // getAmountOfUsersDesc(userAmount): string {
@@ -179,7 +181,32 @@ export class PricePageComponent implements OnInit {
 
   get selectedProgramOwned() {
     return this.userSingedIn && this.packSelected.id == this.userAuthService.userData?.subscription?.subscriptionPlan?.id;
+  }
 
+  /**
+   * Before prompting the purchase dialog, check if user has free period\code coupon on hand
+   */
+  checkFreePeriod(): void {
+    if (this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate != null) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.maxHeight = '85vh';
+      dialogConfig.maxWidth = '30vw';
+      let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
+      textInModal += this.userAuthService.expDate;
+      dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
+      const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+      var dialogSub = dialogRef.afterClosed().subscribe(res => {
+        dialogSub.unsubscribe();
+        if (res) {
+          this.openApprovePurchaseDialog();
+        }
+      });
+    }
+    else {
+      this.openApprovePurchaseDialog();
+    }
   }
 
   openApprovePurchaseDialog(): void {

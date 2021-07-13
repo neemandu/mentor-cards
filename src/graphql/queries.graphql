@@ -60,6 +60,15 @@ query GetUser($id: ID!) {
     numberOfUsedPacks
     groupRole
     cancellationDate
+    couponCode {
+      id
+      organization
+      couponCode
+      discount
+      trialPeriodInDays
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -103,6 +112,15 @@ query ListUsers(
       numberOfUsedPacks
       groupRole
       cancellationDate
+      couponCode {
+        id
+        organization
+        couponCode
+        discount
+        trialPeriodInDays
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -181,6 +199,35 @@ query ListNewss(
       id
       message
       order
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCouponCodes($id: ID!) {
+  getCouponCodes(id: $id) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    createdAt
+    updatedAt
+  }
+}
+query ListCouponCodess(
+  $filter: ModelCouponCodesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCouponCodess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      organization
+      couponCode
+      discount
+      trialPeriodInDays
       createdAt
       updatedAt
     }

@@ -84,19 +84,19 @@ function isPackageBelongToUser(usersList, username) {
     return canView;
 }
 
-function isFirstMonth(firstProgramRegistrationDate, allPackagesDate) {
+function isFreeTrialPeriod(firstDate, allPackagesDate) {
     console.log('isFirstMonth');
-    console.log('firstProgramRegistrationDate');
-    console.log(firstProgramRegistrationDate);
+    console.log('first Date');
+    console.log(firstDate);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
-    var first = new Date(firstProgramRegistrationDate);
+    var first = new Date(firstDate);
     var all = new Date(allPackagesDate);
     if (first > all){
-        console.log('First month of use!');
+        console.log('Free Trial Period!');
         return true;
     }
-    console.log('Not the first month of use');
+    console.log('Not the Free Trial Period');
     return false;
 }
 
@@ -126,7 +126,13 @@ exports.handler = async (event) => {
     var user = await getUser(username);
     var allPackagesDate = new Date();
     var now = new Date();
-    allPackagesDate.setDate(allPackagesDate.getDate()-30);
+    var trialPeriodInDays = 30;
+
+    if (user && user.couponCode){
+        trialPeriodInDays = user.couponCode.trialPeriodInDays;
+    }
+
+    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
@@ -141,13 +147,27 @@ exports.handler = async (event) => {
         console.log('Limitless program');
         return event.source['cards'];
     }
-    if(user &&    // first 30 days all packs are available
+    
+    var startFreePeriodDate = user.createdAt;
+    if(user &&
+        user.couponCode){
+            console.log('user has a coupon code since - ' + user.couponCode.createdAt);
+            startFreePeriodDate = user.couponCode.createdAt;
+        }
+
+    if(user &&    // first month from registration
+        isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
+     ){
+         console.log('first month from registration');
+         return event.source['cards'];
+     }
+    /*if(user &&    // first 30 days all packs are available
        user.status == "PLAN" &&
        isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
     ){
         console.log('First Month');
         return event.source['cards'];
-    }
+    }*/
     if(user && // does the package belong to the user?
        user.status == "PLAN" &&
        isPackageBelongToUser(event.source['usersIds'], username)     

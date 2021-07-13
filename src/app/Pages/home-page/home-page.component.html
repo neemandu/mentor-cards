@@ -10,18 +10,22 @@
     <br><br>
     <span id="top">פלטפורמת הקלפים הווירטואליים הגדולה בישראל</span>
     <br>
-    <span id="middle" *ngIf="!userData">הירשמו, בחרו תוכנית והתחילו את תקופת הניסיון</span>
-    <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">עדין לא נרשמתם לתוכנית?</span>
-    <span id="middle" *ngIf="userData && userData.status === 'PLAN'">אתם כבר מחוברים, למה אתם מחכים? לכו לאמן!</span>
+    <span id="middle" *ngIf="!userData">הירשמו והתחילו את תקופת הניסיון</span>
+    <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">עדין לא נרשמתם לתוכנית?</span>
+    <span id="middle" *ngIf="userData && userData.status === 'PLAN'">אתם כבר מחוברים, למה אתם מחכים? לכו
+      לאמן!</span>
+    <span id="middle" *ngIf="userData && trialMonthExpDate">אתם כבר מחוברים ויש לכם חודש מתנה, לכו
+      לאמן!</span>
     <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">התחברות/הרשמה</button>
-    <button style="font-size: x-large;" *ngIf="userData && userData.status === 'NOPLAN'" type="button"
-      (click)="navigate('/price-page')">להרשמה לתוכנית</button>
-    <button style="font-size: x-large;" *ngIf="userData && userData.status === 'PLAN'" type="button"
+    <div *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">
+      <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
+      <br>
+      <span id="bottom">החל מ-19.90 ש"ח לחודש.
+        בטלו בכל עת.</span>
+    </div>
+    <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialMonthExpDate)" type="button"
       (click)="navigate('/all-packs-page')">לכל הערכות</button>
-    <br *ngIf="userData && userData.status === 'NOPLAN'">
-    <span id="bottom" *ngIf="userData && userData.status === 'NOPLAN'">החל מ-19.90 ש"ח לחודש לאחר 30 ימי ניסיון חינם.
-      בטלו בכל עת.</span>
     <br>
     <span id="middle">רוצים לראות איך זה עובד?</span>
     <br>

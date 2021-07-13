@@ -7,10 +7,16 @@ type Mutation {
   Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
+  UpdateAllNewsList(input: newsListInput!): Boolean @function(name: "UpdateAllNewsList-${env}")
+  AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
 }
 
 input joinExistingGroupInput {
   groupId: String!
+}
+
+input couponCodeInput {
+  couponCode: String!
 }
 
 input GetGroupInput {
@@ -114,6 +120,7 @@ type User
   numberOfUsedPacks: Int
   groupRole: String
   cancellationDate: AWSDateTime
+  couponCode: CouponCodes
 }
 
 type Group
@@ -157,4 +164,14 @@ type News
   id: ID!
   message: String
   order: Int
+}
+
+type CouponCodes
+@model
+@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools }] ){
+  id: ID!
+  organization: String
+  couponCode: String
+  discount: Float
+  trialPeriodInDays: Int
 }

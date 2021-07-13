@@ -17,8 +17,8 @@
       },
       "function": {
         "CreateUser": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-326a73456b5331473062-build.zip"
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/CreateUser-4438703847705950572b-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -33,8 +33,8 @@
           "s3Key": "amplify-builds/UpdatePaymentProgram-45352b38465a544f6e67-build.zip"
         },
         "UpdateGroupUsersList": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdateGroupUsersList-5346322f635348444a66-build.zip"
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/UpdateGroupUsersList-594978364b4b634b4d4a-build.zip"
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -49,8 +49,8 @@
           "s3Key": "amplify-builds/DeleteGroup-6a6262324445566d7369-build.zip"
         },
         "GetCardsImages": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-4c4a4e744d696f316561-build.zip"
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/GetCardsImages-366c51754e7a704e796c-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -67,6 +67,10 @@
         "UserLayer": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/UserLayer-build.zip"
+        },
+        "AddCouponCode": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/AddCouponCode-39636d545539614e586e-build.zip"
         }
       }
     },
@@ -81,6 +85,14 @@
                 }
               ],
               "hash": "uKswk94XEsONPFfloLynzKJI49FnbrgYhkx62298T4c="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "QBOJ45l4vl2wYh1cgmrFglHuHdUvaSg6bOPt45wuNJE="
             }
           }
         }

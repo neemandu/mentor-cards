@@ -67,12 +67,12 @@
             packSelected.discount)/numOfUsersSelected).toFixed(2)}} ש"ח</p><br>
         <p class="conclusion-line">מחיר סופי לחבילה זו: {{(packSelected.price - packSelected.discount).toFixed(2)}} ש"ח
         </p><br>
-        <p class="conclusion-line">תאריך חיוב ראשון: {{paymentStartDate | date:'d/M/y'}}</p><br>
-        <p id="reminder" style="font-size: medium;font-weight: 600;">30 ימי ניסיון חינם. בטלו בכל עת.
+        <!-- <p class="conclusion-line">תאריך חיוב ראשון: {{paymentStartDate | date:'d/M/y'}}</p><br> -->
+        <p id="reminder" style="font-size: medium;font-weight: 600;">בטלו בכל עת.
         </p>
     </div>
-    <button *ngIf="purchaseBtnVisible" id="purchase-btn" class="action-button" type="button"
-        (click)="openApprovePurchaseDialog()">
+    <button *ngIf="purchaseBtnVisible" id="purchase-btn" class="action-button" type="button" (click)="checkFreePeriod()">
+        <!-- (click)="openApprovePurchaseDialog()"> -->
         להצטרפות לתכנית לחצו כאן
     </button>
     <p *ngIf="noChangingProgramThisMonth" id="purchase-btn" style="font-size: medium;font-weight: 600;">הוחלפה
