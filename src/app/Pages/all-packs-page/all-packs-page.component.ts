@@ -57,6 +57,7 @@ export class AllPacksPageComponent implements OnInit {
       this.allPacks = this.cardsService.allPacks.map(pack => pack);
       this.allCategories = this.cardsService.allCategories.map(category => category);
       this.allFavorites = this.cardsService.favorites;
+      this.sortPacks();
     } else {
       let authStatus = localStorage.getItem('signedin');
       (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then(packs => {
@@ -77,7 +78,7 @@ export class AllPacksPageComponent implements OnInit {
       }, reject => {
         // console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת חפיסות הקלפים, נסו שנית', 'רענן', {
+        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
           duration: 20000,
         });
         snackBarRef.onAction().subscribe(() => {

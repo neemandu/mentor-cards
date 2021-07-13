@@ -87,7 +87,7 @@ export class UserAuthService {
         if (!data)
           return;
         this.userData = new UserData().deseralize(data);
-        console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
         this.loggedInEmmiter.emit(this.userData);
@@ -207,7 +207,7 @@ export class UserAuthService {
    * return if in trial month (first month after register)
    */
   get trialMonthExpDate(): Date {
-    return this.userData.createdAt.getTime() + millisecondsInMonth >= new Date().getTime() ? new Date(this.userData.createdAt.getTime() + millisecondsInMonth) : null;
+    return this.userData.createdAt?.getTime() + millisecondsInMonth >= new Date().getTime() ? new Date(this.userData.createdAt?.getTime() + millisecondsInMonth) : null;
   }
 
   /**
@@ -215,7 +215,7 @@ export class UserAuthService {
    */
   get codeCouponExpDate(): Date {
     // return this.userData.createdAt.getTime() + millisecondsInMonth >= new Date().getTime();
-    return this.userData.couponCode ? new Date(this.userData.couponCode.createdAt.getTime() + millisecondsInDay * this.userData.couponCode.trialPeriodInDays) : null;
+    return this.userData.couponCode ? new Date(this.userData.couponCode.createdAt?.getTime() + millisecondsInDay * this.userData.couponCode.trialPeriodInDays) : null;
     // return this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth >= new Date().getTime();
   }
 

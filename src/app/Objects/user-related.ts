@@ -20,8 +20,8 @@ export class UserData {
     deseralize(input: any) {
         Object.assign(this, input);
         this.firstProgramRegistrationDate = new Date(input.firstProgramRegistrationDate);
-        this.createdAt = new Date(input.createdAt);
-        this.couponCode = new CouponCode(input.couponCode);
+        this.createdAt = input.createdAt ? new Date(input.createdAt) : undefined;
+        this.couponCode = input.couponCode ? new CouponCode(input.couponCode) : undefined;
         return this;
     }
 }
