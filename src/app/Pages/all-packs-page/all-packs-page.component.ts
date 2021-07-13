@@ -17,6 +17,8 @@ export class AllPacksPageComponent implements OnInit {
   mobile: boolean;
 
   allPacks: PackContent[] = [];
+  // allPacksOwned: PackContent[] = [];
+  // allPacksNotOwned: PackContent[] = [];
   allCategories: string[] = [];
   allFavorites: string[] = [];
   loadedPacks: number;
@@ -69,11 +71,14 @@ export class AllPacksPageComponent implements OnInit {
           });
           return new PackContent().deseralize(pack)
         });
-        // console.log("file: all-packs-page.component.ts ~ line 68 ~ this.api.ListCardsPacks ~ this.allPacks", this.allPacks)
         this.cardsService.allPacks = this.allPacks.map(pack => pack);
+
+        // console.log("file: all-packs-page.component.ts ~ line 82 ~ this.allPacks", this.allPacks)
         this.cardsService.allCategories = this.allCategories.map(category => category);
         this.allFavorites = this.cardsService.favorites;
         this.sortPacks();
+        // this.allPacksOwned = this.allPacks.filter(pack => pack.cards.length != 0);
+        // this.allPacksNotOwned = this.allPacks.filter(pack => pack.cards.length == 0);
         this.overlaySpinnerService.changeOverlaySpinner(false);
       }, reject => {
         // console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
