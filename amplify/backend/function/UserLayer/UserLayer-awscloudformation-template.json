@@ -36,6 +36,7 @@
         },
         "Description": {
           "Ref": "description"
+<<<<<<< HEAD
         },
         "LayerName": {
           "Fn::Sub": [
@@ -74,6 +75,8 @@
             "Ref": "deploymentBucketName"
           },
           "S3Key": "amplify-builds/UserLayer-LambdaLayerVersion562c7bb7-build.zip"
+=======
+>>>>>>> main
         },
         "Description": "Updated layer version 2021-07-13T11:56:19.833Z",
         "LayerName": {
@@ -90,6 +93,7 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
+<<<<<<< HEAD
     "LambdaLayerPermissionPrivate562c7bb7": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
@@ -148,6 +152,14 @@
             "Ref": "deploymentBucketName"
           },
           "S3Key": "amplify-builds/UserLayer-LambdaLayerVersione7a3136a-build.zip"
+=======
+    "LambdaLayerPermissionPrivate6f5ab955": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "LambdaLayerVersion6f5ab955"
+>>>>>>> main
         },
         "Description": "Updated layer version 2021-07-04T20:02:51.503Z",
         "LayerName": {
@@ -174,6 +186,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "LambdaLayerVersion2d1e54ed": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
@@ -243,11 +256,19 @@
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": "arn:aws:lambda:eu-west-2:150827790089:layer:UserLayer-dev:53",
+=======
+    "LambdaLayerPermissionPrivateLegacy3": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:eu-west-2:150827790089:layer:UserLayer-prod:3",
+>>>>>>> main
         "Principal": {
           "Ref": "AWS::AccountId"
         }
       }
     },
+<<<<<<< HEAD
     "LambdaLayerVersion42e6c8ec": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
@@ -834,13 +855,37 @@
         "Principal": {
           "Ref": "AWS::AccountId"
         }
+=======
+    "LambdaLayerPermissionPrivateLegacy2": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:eu-west-2:150827790089:layer:UserLayer-prod:2",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerPermissionPrivateLegacy1": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:eu-west-2:150827790089:layer:UserLayer-prod:1",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+>>>>>>> main
       }
     }
   },
   "Outputs": {
     "Arn": {
       "Value": {
+<<<<<<< HEAD
         "Ref": "LambdaLayerVersiond7f69dce"
+=======
+        "Ref": "LambdaLayerVersion6f5ab955"
+>>>>>>> main
       }
     }
   }
