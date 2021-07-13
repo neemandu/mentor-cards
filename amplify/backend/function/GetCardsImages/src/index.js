@@ -132,8 +132,6 @@ exports.handler = async (event) => {
         trialPeriodInDays = user.couponCode.trialPeriodInDays;
     }
 
-    user.createdAt >= now .getDate()-trialPeriodInDays
-
     allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
