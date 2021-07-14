@@ -20,7 +20,11 @@
     }
   },
   "Resources": {
+<<<<<<< HEAD
     "LambdaLayerVersionc3c55001": {
+=======
+    "LambdaLayerVersiond7f69dce": {
+>>>>>>> dev
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": {
@@ -34,9 +38,7 @@
             "Ref": "s3Key"
           }
         },
-        "Description": {
-          "Ref": "description"
-        },
+        "Description": "Updated layer version 2021-07-13T11:56:19.833Z",
         "LayerName": {
           "Fn::Sub": [
             "UserLayer-${env}",
@@ -58,6 +60,26 @@
         "LayerVersionArn": {
           "Ref": "LambdaLayerVersionc3c55001"
         },
+        "Description": "Updated layer version 2021-07-04T20:02:51.503Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "UserLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPrivatee7a3136a": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:eu-west-2:150827790089:layer:UserLayer-dev:55",
         "Principal": {
           "Ref": "AWS::AccountId"
         }

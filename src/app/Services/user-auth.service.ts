@@ -214,16 +214,15 @@ export class UserAuthService {
    * return if in trial month (first month after register)
    */
   get codeCouponExpDate(): Date {
-    // return this.userData.createdAt.getTime() + millisecondsInMonth >= new Date().getTime();
     return this.userData.couponCode ? new Date(this.userData.couponCode.createdAt?.getTime() + millisecondsInDay * this.userData.couponCode.trialPeriodInDays) : null;
-    // return this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth >= new Date().getTime();
   }
 
   /**
    * Returns actual exp date
    */
   get expDate() {
-    return (this.codeCouponExpDate ? this.codeCouponExpDate : this.trialMonthExpDate).toLocaleDateString('he-IL');
+    let date = (this.codeCouponExpDate ? this.codeCouponExpDate : this.trialMonthExpDate)
+    return date ? date.toLocaleDateString('he-IL') : null;
   }
 
   /**
