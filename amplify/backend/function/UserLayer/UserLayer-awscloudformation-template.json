@@ -34,9 +34,6 @@
             "Ref": "s3Key"
           }
         },
-        "Description": {
-          "Ref": "description"
-        },
         "Description": "Updated layer version 2021-07-13T11:56:19.833Z",
         "LayerName": {
           "Fn::Sub": [
