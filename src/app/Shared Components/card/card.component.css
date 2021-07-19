@@ -40,4 +40,5 @@ img {
   -webkit-backface-visibility: hidden;
   /* Safari */
   backface-visibility: hidden;
+  min-height: 225px;
 }
