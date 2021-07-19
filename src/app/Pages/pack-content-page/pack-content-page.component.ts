@@ -102,6 +102,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.maxHeight = '85vh';
+    dialogConfig.minHeight = '40vh';
     dialogConfig.data = this.selectedCards;
     const dialogRef = this.dialog.open(CardsRevealDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(() => {

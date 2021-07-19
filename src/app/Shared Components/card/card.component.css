@@ -5,13 +5,13 @@ img {
 .img-unselected {
   border: 2px solid #ddd;
   border-radius: 4px;
-  transition: border 0.1s linear ;
+  transition: border 0.1s linear;
 }
 
 .img-selected {
   border: 4px solid #ffcf00;
   border-radius: 4px;
-  transition: border 0.1s linear ;
+  transition: border 0.1s linear;
 }
 
 .badge-light {
@@ -22,6 +22,9 @@ img {
 .flip-box-inner {
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  min-height: 225px;
 }
 
 .flip {
@@ -40,5 +43,4 @@ img {
   -webkit-backface-visibility: hidden;
   /* Safari */
   backface-visibility: hidden;
-  min-height: 225px;
 }

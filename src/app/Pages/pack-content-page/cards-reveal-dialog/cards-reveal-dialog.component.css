@@ -29,7 +29,8 @@ app-card {
 }
 
 .closeModalButton {
-  margin-top: -3%;
+  /* margin-top: -3%; */
+  margin-top: 0px;
 }
 
 .closeModalButton:focus {
