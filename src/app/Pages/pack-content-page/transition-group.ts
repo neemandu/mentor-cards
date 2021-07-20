@@ -27,6 +27,7 @@ export class TransitionGroupItemDirective {
 export class TransitionGroupComponent {
   @Input('transition-group') class;
   //https://embed.plnkr.co/VhEn6FKMrwwSnCDejaFs/
+  //https://stackblitz.com/edit/angular-so-1-62vp4h?file=src%2Fapp%2Fapp.module.ts
 
   @ContentChildren(TransitionGroupItemDirective) items: QueryList<TransitionGroupItemDirective>;
 
@@ -48,7 +49,7 @@ export class TransitionGroupComponent {
   }
 
   runCallback(item: TransitionGroupItemDirective) {
-    if(item.moveCallback) {
+    if (item.moveCallback) {
       item.moveCallback();
     }
   }

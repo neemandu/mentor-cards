@@ -10,11 +10,16 @@
 app-card {
   margin: 10px 10px;
   width: 10rem;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, translate 1s ease-in;
 }
 
 app-card:hover {
   transform: scale(1.03);
+}
+
+/* Speed of shuffle */
+.flip-list-move {
+  transition: transform 2s;
 }
 
 .nav-buttons {
