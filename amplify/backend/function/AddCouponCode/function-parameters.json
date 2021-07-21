@@ -2,11 +2,14 @@
   "permissions": {
     "storage": {
       "User:@model(appsync)": [
+        "create",
         "read",
         "update"
       ],
       "CouponCodes:@model(appsync)": [
-        "read"
+        "create",
+        "read",
+        "update"
       ]
     }
   },
