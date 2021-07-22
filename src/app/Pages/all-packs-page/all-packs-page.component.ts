@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { PackContent, PackInfo } from 'src/app/Objects/packs';
@@ -30,7 +31,8 @@ export class AllPacksPageComponent implements OnInit {
   selectedFavorites: string[] = [];
   // selectedTags: string[] = [];
 
-  constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService, private userAuthService: UserAuthService) {
+  constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
+     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
@@ -228,6 +230,11 @@ export class AllPacksPageComponent implements OnInit {
     this.allPacks = this.allPacks.filter((pack: PackInfo) => {
       return this.selectedFavorites.includes(pack.name);
     })
+  }
+
+  public navigate(path: string): void {
+    // console.log(path)
+    this.ngZone.run(() => this.router.navigate([path]));
   }
 
   ngOnDestroy(): void {

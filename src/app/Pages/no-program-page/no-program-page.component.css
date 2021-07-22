@@ -43,7 +43,7 @@ button:focus {
 }
 
 .bottom-actions {
-  margin: 1rem 0.5rem 1.5rem 0.5rem; 
+  margin: 1rem 0.5rem 1.5rem 0.5rem;
   width: 20vw;
 }
 
@@ -56,4 +56,18 @@ video {
   border-radius: 20px;
   opacity: 0;
   transition: opacity 3s;
+}
+
+.info-icon {
+  opacity: 0.8;
+  font-size: x-large;
+  cursor: help;
+  margin-right: 5px;
+  transition: transform 0.5s;
+  color: #ffaa00;
+}
+
+.info-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
 }

@@ -86,3 +86,16 @@ mat-form-field {
 .mat-list-base .mat-list-option {
   height: 35px;
 }
+
+#couponCodeBtn {
+  width: 90%;
+  align-self: center;
+  height: 2rem;
+  font-size: larger;
+  border-radius: 5px;
+  background: #ffa800;
+  color: white;
+  border: none;
+  font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
