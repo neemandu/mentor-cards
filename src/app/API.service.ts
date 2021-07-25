@@ -1,4 +1,4 @@
-  /* tslint:disable */
+/* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
@@ -32,7 +32,8 @@ export type User = {
   numberOfUsedPacks?: number | null;
   groupRole?: string | null;
   cancellationDate?: string | null;
-  couponCode?: CouponCodes;
+  couponCodes?: Array<CouponCodes | null> | null;
+  cardsPacksIds?: Array<string | null> | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -67,6 +68,7 @@ export type CouponCodes = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -104,16 +106,6 @@ export type joinExistingGroupInput = {
 
 export type deleteGroupInput = {
   groupId: string;
-};
-
-export type newsListInput = {
-  news?: Array<NewsInput | null> | null;
-};
-
-export type NewsInput = {
-  id: string;
-  message?: string | null;
-  order?: number | null;
 };
 
 export type couponCodeInput = {
@@ -333,6 +325,7 @@ export type CreateCouponCodesInput = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
 };
 
 export type ModelCouponCodesConditionInput = {
@@ -340,6 +333,7 @@ export type ModelCouponCodesConditionInput = {
   couponCode?: ModelStringInput | null;
   discount?: ModelFloatInput | null;
   trialPeriodInDays?: ModelIntInput | null;
+  allowedCardsPacks?: ModelStringInput | null;
   and?: Array<ModelCouponCodesConditionInput | null> | null;
   or?: Array<ModelCouponCodesConditionInput | null> | null;
   not?: ModelCouponCodesConditionInput | null;
@@ -351,6 +345,7 @@ export type UpdateCouponCodesInput = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
 };
 
 export type DeleteCouponCodesInput = {
@@ -365,9 +360,7 @@ export type CreateCardsPackInput = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
   guideBook?: GuideBookInput | null;
   name?: string | null;
 };
@@ -393,9 +386,7 @@ export type ModelCardsPackConditionInput = {
   categories?: ModelStringInput | null;
   cards?: ModelStringInput | null;
   cardsPreview?: ModelStringInput | null;
-  usersIds?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
-  users?: ModelStringInput | null;
   name?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
@@ -411,9 +402,7 @@ export type CardsPack = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
   guideBook?: GuideBook;
   name?: string | null;
   createdAt?: string;
@@ -445,9 +434,7 @@ export type UpdateCardsPackInput = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
   guideBook?: GuideBookInput | null;
   name?: string | null;
 };
@@ -503,6 +490,7 @@ export type ModelUserFilterInput = {
   numberOfUsedPacks?: ModelIntInput | null;
   groupRole?: ModelStringInput | null;
   cancellationDate?: ModelStringInput | null;
+  cardsPacksIds?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -548,6 +536,7 @@ export type ModelCouponCodesFilterInput = {
   couponCode?: ModelStringInput | null;
   discount?: ModelFloatInput | null;
   trialPeriodInDays?: ModelIntInput | null;
+  allowedCardsPacks?: ModelStringInput | null;
   and?: Array<ModelCouponCodesFilterInput | null> | null;
   or?: Array<ModelCouponCodesFilterInput | null> | null;
   not?: ModelCouponCodesFilterInput | null;
@@ -567,9 +556,7 @@ export type ModelCardsPackFilterInput = {
   categories?: ModelStringInput | null;
   cards?: ModelStringInput | null;
   cardsPreview?: ModelStringInput | null;
-  usersIds?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
-  users?: ModelStringInput | null;
   name?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
@@ -638,16 +625,18 @@ export type CreateUserMutation = {
   numberOfUsedPacks?: number | null;
   groupRole?: string | null;
   cancellationDate?: string | null;
-  couponCode?: {
+  couponCodes?: Array<{
     __typename: "CouponCodes";
     id: string;
     organization?: string | null;
     couponCode?: string | null;
     discount?: number | null;
     trialPeriodInDays?: number | null;
+    allowedCardsPacks?: Array<string | null> | null;
     createdAt: string;
     updatedAt: string;
-  } | null;
+  } | null> | null;
+  cardsPacksIds?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -833,6 +822,7 @@ export type CreateCouponCodesMutation = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -844,6 +834,7 @@ export type UpdateCouponCodesMutation = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -855,6 +846,7 @@ export type DeleteCouponCodesMutation = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -868,9 +860,7 @@ export type CreateCardsPackMutation = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
   guideBook?: {
     __typename: "GuideBook";
     subjects?: Array<{
@@ -897,9 +887,7 @@ export type UpdateCardsPackMutation = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
   guideBook?: {
     __typename: "GuideBook";
     subjects?: Array<{
@@ -926,9 +914,7 @@ export type DeleteCardsPackMutation = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
   guideBook?: {
     __typename: "GuideBook";
     subjects?: Array<{
@@ -1006,16 +992,18 @@ export type GetUserQuery = {
   numberOfUsedPacks?: number | null;
   groupRole?: string | null;
   cancellationDate?: string | null;
-  couponCode?: {
+  couponCodes?: Array<{
     __typename: "CouponCodes";
     id: string;
     organization?: string | null;
     couponCode?: string | null;
     discount?: number | null;
     trialPeriodInDays?: number | null;
+    allowedCardsPacks?: Array<string | null> | null;
     createdAt: string;
     updatedAt: string;
-  } | null;
+  } | null> | null;
+  cardsPacksIds?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1058,16 +1046,18 @@ export type ListUsersQuery = {
     numberOfUsedPacks?: number | null;
     groupRole?: string | null;
     cancellationDate?: string | null;
-    couponCode?: {
+    couponCodes?: Array<{
       __typename: "CouponCodes";
       id: string;
       organization?: string | null;
       couponCode?: string | null;
       discount?: number | null;
       trialPeriodInDays?: number | null;
+      allowedCardsPacks?: Array<string | null> | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
+    } | null> | null;
+    cardsPacksIds?: Array<string | null> | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1157,6 +1147,7 @@ export type GetCouponCodesQuery = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1170,6 +1161,7 @@ export type ListCouponCodessQuery = {
     couponCode?: string | null;
     discount?: number | null;
     trialPeriodInDays?: number | null;
+    allowedCardsPacks?: Array<string | null> | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1185,9 +1177,7 @@ export type GetCardsPackQuery = {
   categories?: Array<string | null> | null;
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
-  usersIds?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  users?: Array<string | null> | null;
   guideBook?: {
     __typename: "GuideBook";
     subjects?: Array<{
@@ -1216,9 +1206,7 @@ export type ListCardsPacksQuery = {
     categories?: Array<string | null> | null;
     cards?: Array<string | null> | null;
     cardsPreview?: Array<string | null> | null;
-    usersIds?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
-    users?: Array<string | null> | null;
     guideBook?: {
       __typename: "GuideBook";
       subjects?: Array<{
@@ -1409,6 +1397,7 @@ export type OnCreateCouponCodesSubscription = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1420,6 +1409,7 @@ export type OnUpdateCouponCodesSubscription = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1431,6 +1421,7 @@ export type OnDeleteCouponCodesSubscription = {
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1519,16 +1510,18 @@ export class APIService {
           numberOfUsedPacks
           groupRole
           cancellationDate
-          couponCode {
+          couponCodes {
             __typename
             id
             organization
             couponCode
             discount
             trialPeriodInDays
+            allowedCardsPacks
             createdAt
             updatedAt
           }
+          cardsPacksIds
           createdAt
           updatedAt
         }
@@ -1630,18 +1623,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
-  }
-  async UpdateAllNewsList(input: newsListInput): Promise<boolean | null> {
-    const statement = `mutation UpdateAllNewsList($input: newsListInput!) {
-        UpdateAllNewsList(input: $input)
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <boolean | null>response.data.UpdateAllNewsList;
   }
   async AddCouponCode(input: couponCodeInput): Promise<boolean | null> {
     const statement = `mutation AddCouponCode($input: couponCodeInput!) {
@@ -2033,6 +2014,7 @@ export class APIService {
           couponCode
           discount
           trialPeriodInDays
+          allowedCardsPacks
           createdAt
           updatedAt
         }
@@ -2060,6 +2042,7 @@ export class APIService {
           couponCode
           discount
           trialPeriodInDays
+          allowedCardsPacks
           createdAt
           updatedAt
         }
@@ -2087,6 +2070,7 @@ export class APIService {
           couponCode
           discount
           trialPeriodInDays
+          allowedCardsPacks
           createdAt
           updatedAt
         }
@@ -2116,9 +2100,7 @@ export class APIService {
           categories
           cards
           cardsPreview
-          usersIds
           groupsIds
-          users
           guideBook {
             __typename
             subjects {
@@ -2161,9 +2143,7 @@ export class APIService {
           categories
           cards
           cardsPreview
-          usersIds
           groupsIds
-          users
           guideBook {
             __typename
             subjects {
@@ -2206,9 +2186,7 @@ export class APIService {
           categories
           cards
           cardsPreview
-          usersIds
           groupsIds
-          users
           guideBook {
             __typename
             subjects {
@@ -2330,16 +2308,18 @@ export class APIService {
           numberOfUsedPacks
           groupRole
           cancellationDate
-          couponCode {
+          couponCodes {
             __typename
             id
             organization
             couponCode
             discount
             trialPeriodInDays
+            allowedCardsPacks
             createdAt
             updatedAt
           }
+          cardsPacksIds
           createdAt
           updatedAt
         }
@@ -2396,16 +2376,18 @@ export class APIService {
             numberOfUsedPacks
             groupRole
             cancellationDate
-            couponCode {
+            couponCodes {
               __typename
               id
               organization
               couponCode
               discount
               trialPeriodInDays
+              allowedCardsPacks
               createdAt
               updatedAt
             }
+            cardsPacksIds
             createdAt
             updatedAt
           }
@@ -2574,6 +2556,7 @@ export class APIService {
           couponCode
           discount
           trialPeriodInDays
+          allowedCardsPacks
           createdAt
           updatedAt
         }
@@ -2601,6 +2584,7 @@ export class APIService {
             couponCode
             discount
             trialPeriodInDays
+            allowedCardsPacks
             createdAt
             updatedAt
           }
@@ -2633,9 +2617,7 @@ export class APIService {
           categories
           cards
           cardsPreview
-          usersIds
           groupsIds
-          users
           guideBook {
             __typename
             subjects {
@@ -2732,9 +2714,7 @@ export class APIService {
             categories
             cards
             cardsPreview
-            usersIds
             groupsIds
-            users
             guideBook {
               __typename
               subjects {
@@ -3050,6 +3030,7 @@ export class APIService {
           couponCode
           discount
           trialPeriodInDays
+          allowedCardsPacks
           createdAt
           updatedAt
         }
@@ -3069,6 +3050,7 @@ export class APIService {
           couponCode
           discount
           trialPeriodInDays
+          allowedCardsPacks
           createdAt
           updatedAt
         }
@@ -3088,6 +3070,7 @@ export class APIService {
           couponCode
           discount
           trialPeriodInDays
+          allowedCardsPacks
           createdAt
           updatedAt
         }

@@ -70,9 +70,7 @@ type CardsPack
   categories: [String] 
   cards: [String] @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetCardsImages-${env}")
   cardsPreview: [String] 
-  usersIds: [String] 
   groupsIds: [String] 
-  users: [String] 
   guideBook: GuideBook 
   name: String 
 }
@@ -119,7 +117,8 @@ type User
   numberOfUsedPacks: Int
   groupRole: String
   cancellationDate: AWSDateTime
-  couponCode: CouponCodes
+  couponCodes: [CouponCodes]
+  cardsPacksIds: [String]
 }
 
 type Group
@@ -173,4 +172,5 @@ type CouponCodes
   couponCode: String
   discount: Float
   trialPeriodInDays: Int
+  allowedCardsPacks: [String]
 }

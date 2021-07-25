@@ -122,23 +122,16 @@ exports.handler = async (event) => {
     console.log('username: ' + username);
     var user = await getUserByUSerName(username);
 
-    if(user && 
-        user.couponCode){
-                console.warn('user already has a coupon code - ' + user.couponCode);
-                throw Error ('user already has a coupon code - ' + user.couponCode);
+    if(user){
+        var couponCode = args['couponCode'];
+        var dbCouponCode = await getCouponCode(couponCode);
+        if(!dbCouponCode){
+            console.warn('no such coupon code - ' + couponCode);
+            throw Error ('no such coupon code - ' + couponCode);
         }
-
-    if(user && 
-        !user.couponCode){
-            var couponCode = args['couponCode'];
-            var dbCouponCode = await getCouponCode(couponCode);
-            if(!dbCouponCode){
-                console.warn('no such coupon code - ' + couponCode);
-                throw Error ('no such coupon code - ' + couponCode);
-            }
-            user.couponCode = dbCouponCode;
-            await saveUser(user); 
-        }
+        user.couponCodes.push(dbCouponCode);
+        await saveUser(user); 
+    }
     
     return true;
 };

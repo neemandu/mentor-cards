@@ -169,29 +169,6 @@ async function saveUser(user){
     }).promise();
 }
 
-async function updateGroup(group, userlist){
-    console.log("updateGroup: " + group.id);
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
-    group.groupUsers = userlist;
-
-    var groupParams = {
-        TableName:groupTable,
-        Item: group
-    };
-
-    var group;
-    await docClient.put(groupParams, function(err, data) {
-        if (err) {
-            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Updated Group succeeded:", JSON.stringify(data, null, 2));
-        }
-    }).promise();
-}
-
-
-
 const post = (defaultOptions, path, payload) => new Promise((resolve, reject) => {
     console.log('post payload: ' + payload);
     console.log('post path: ' + path);
@@ -269,6 +246,7 @@ exports.handler = async (event) => {
     user.groupId = null;
     user.groupRole = null;
     user.cancellationDate = new Date().toISOString();
+    user.cardsPacksIds = []
 
     await saveUser(user);
 
@@ -284,10 +262,11 @@ exports.handler = async (event) => {
             groupUser.groupId = null;
             groupUser.groupRole = null;
             groupUser.cancellationDate = new Date().toISOString();
+            groupUser.cardsPacksIds = []
             await saveUser(groupUser);
         }
 
     }
 
-    await removeUserFromAllPacks(user);
+    await saveUser(groupUser);
 };
