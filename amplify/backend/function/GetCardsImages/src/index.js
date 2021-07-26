@@ -157,7 +157,7 @@ exports.handler = async (event) => {
         user.couponCodes &&
         user.couponCodes.length > 0){
             startFreePeriodDate = user.couponCodes[user.couponCodes.length-1].createdAt
-            console.log('user has a coupon code since - ' + user.couponCode.createdAt);
+            console.log('user has a coupon code since - ' + user.couponCodes[user.couponCodes.length-1].createdAt);
         }
 
     if(user &&    // first month from registration
