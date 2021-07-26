@@ -122,8 +122,21 @@ exports.handler = async (event) => {
     console.log('username: ' + username);
     var user = await getUserByUSerName(username);
 
+    var couponCode = args['couponCode'];
+
+    if(user && 
+        user.couponCodes && 
+        user.couponCodes.length > 0){
+        
+        for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+            if(user.couponCodes[i].id == couponCode){
+                console.warn('Coupon code already used - ' + couponCode);
+                throw Error ('קוד ההטבה כבר מומש');
+            }
+        } 
+    }
+
     if(user){
-        var couponCode = args['couponCode'];
         var dbCouponCode = await getCouponCode(couponCode);
         if(!dbCouponCode){
             console.warn('no such coupon code - ' + couponCode);
