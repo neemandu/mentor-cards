@@ -71,7 +71,7 @@ function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
 }
 
 
-function isPackageBelongToUser(id, cardsPacksIds) {
+function isPackageBelongToUser(id, cardsPacksIds, username) {
     console.log('Checking if package belong to user: ' + username);
     var canView = false;
     if(cardsPacksIds && cardsPacksIds.length > 0){
@@ -171,7 +171,7 @@ exports.handler = async (event) => {
         user.couponCodes &&
         user.couponCodes.length > 0){
             for(var i = 0 ; i < user.couponCodes.length ; i++){ 
-                if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks)){
+                if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPack, username)){
                     console.log('User has a coupon code with this package');
                     return event.source['cards'];
                 }
@@ -186,7 +186,7 @@ exports.handler = async (event) => {
     }*/
     if(user && // does the package belong to the user?
        user.status == "PLAN" &&
-       isPackageBelongToUser(event.source['id'], user.cardsPacksIds)     
+       isPackageBelongToUser(event.source['id'], user.cardsPacksIds, username)     
     ){
         console.log('Package belong to user');
         return event.source['cards'];
