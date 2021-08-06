@@ -15,13 +15,14 @@ export class UserData {
     firstProgramRegistrationDate: Date;
     createdAt: Date;
     username: string;
-    couponCode: CouponCode
+    couponCodes: CouponCode[];
+    cardsPacksIds: string[];
 
     deseralize(input: any) {
         Object.assign(this, input);
         this.firstProgramRegistrationDate = new Date(input.firstProgramRegistrationDate);
         this.createdAt = input.createdAt ? new Date(input.createdAt) : undefined;
-        this.couponCode = input.couponCode ? new CouponCode(input.couponCode) : undefined;
+        this.couponCodes = input.couponCodes?.map(couponCode => new CouponCode(couponCode));
         return this;
     }
 }
@@ -49,7 +50,7 @@ export class GroupUser {
     }
 }
 
-export class CouponCode {//TODO
+export class CouponCode {
     id: string;
     organization: string;
     couponCode: string;

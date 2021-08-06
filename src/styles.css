@@ -6,6 +6,11 @@ body {
   /* -webkit-text-size-adjust: auto; */
 }
 
+:root {
+  --amplify-secondary-tint: #ffa800!important;
+  --amplify-font-family: rubik;
+}
+
 body {
   margin: 0;
   /* font-family: Roboto, "Helvetica Neue", sans-serif; */
