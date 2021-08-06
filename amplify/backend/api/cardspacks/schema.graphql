@@ -73,6 +73,8 @@ type CardsPack
   groupsIds: [String] 
   guideBook: GuideBook 
   name: String 
+  isFree: Boolean
+  freeUntilDate: AWSDateTime
 }
 
 type GuideBook{

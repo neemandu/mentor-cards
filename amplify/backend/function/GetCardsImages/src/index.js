@@ -140,7 +140,18 @@ exports.handler = async (event) => {
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
-    console.log(user.firstProgramRegistrationDate);
+    console.log(user.firstProgramRegistrationDate); 
+
+    if(user &&    // Free Pack!
+       user.status == "PLAN" &&
+       'isFree' in event.source &&
+       'freeUntilDate' in event.source &&
+       event.source['isFree'] &&
+       (new Date(event.source['freeUntilDate'])) > now
+    ){
+        console.log('Free Pack!');
+        return event.source['cards'];
+    }
 
     if(user &&    // unlimited sunscription
        user.status == "PLAN" &&
