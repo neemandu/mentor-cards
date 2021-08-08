@@ -72,7 +72,7 @@ function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
 
 
 function isPackageBelongToUser(id, cardsPacksIds, username) {
-    console.log('Checking if package belong to user: ' + username);
+    console.log('Checking if package belong to user: ' + username + ' and package ID: ' + id);
     var canView = false;
     if(cardsPacksIds && cardsPacksIds.length > 0){
         for(var i = 0; i < cardsPacksIds.length; i++){
