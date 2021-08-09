@@ -147,9 +147,7 @@ exports.handler = async (event) => {
 
     if(user &&    // Free Pack!
        user.status == "PLAN" &&
-       'isFree' in event.source &&
        'freeUntilDate' in event.source &&
-       event.source['isFree'] &&
        (new Date(event.source['freeUntilDate'])) > now
     ){
         console.log('Free Pack!');
