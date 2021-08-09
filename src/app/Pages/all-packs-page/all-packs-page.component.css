@@ -28,7 +28,12 @@ button:focus {
 }
 
 app-pack {
-  margin: 15px 25px;
+  margin: 5px 20px;
+  /* margin: 15px 25px; */
+}
+
+app-pack:last-child {
+  margin-bottom: 25px;
 }
 
 #filters {

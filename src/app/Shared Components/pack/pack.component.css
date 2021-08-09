@@ -73,6 +73,49 @@ mat-icon {
   text-align: right;
 }
 
+.free-until-label {
+  /* position: relative;
+  padding: 2%;
+  margin-top: -55px;
+  margin-right: 6px;
+  width: 80%;
+  text-align: center;
+  border-radius: 10px;
+  background: #ffa800;
+  color: white;
+  border: none;
+  font-weight: 600;
+  animation: heartbeat 2s infinite; */
+
+  position: relative;
+  padding: 2%;
+  right: 15px;
+  margin-left: -20px;
+  margin-top: -55px;
+  width: 80%;
+  text-align: center;
+  border-radius: 10px;
+  background: #ffa800;
+  color: white;
+  border: none;
+  font-weight: 600;
+  animation: heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+
+  25%,
+  75% {
+    transform: scale(.95);
+  }
+
+  0%,
+  50%,
+  100% {
+    transform: scale(1);
+  }
+}
+
 /* 
 .flip-card {
   width: 10rem;

@@ -38,6 +38,14 @@ export class PackComponent implements OnInit, OnDestroy {
     this.loaded.emit();
   }
 
+  get isStillFree() {
+    return new Date() < new Date(this.packInfo.freeUntilDate);
+  }
+
+  get freeUntilDate() {//TODO
+    return new Date(this.packInfo.freeUntilDate).toLocaleDateString('he-IL');
+  }
+
   openPreviewDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -46,7 +54,7 @@ export class PackComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
-      if(res) {
+      if (res) {
         this.packChange.emit();
       }
     });

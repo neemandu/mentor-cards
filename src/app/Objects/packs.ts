@@ -8,11 +8,13 @@ export class PackInfo {
     imgUrl: string;
     tags: string[];
     name: string;
+    freeUntilDate: Date;
 
     constructor() { }
 
     deseralize(input: any) {
         Object.assign(this, input);
+        this.freeUntilDate = new Date(input.freeUntilDate);
         return this;
     }
 }
@@ -26,6 +28,7 @@ export class PackContent {
     tags: string[];
     guideBook: GuideBook;
     name: string;
+    freeUntilDate: Date;
 
     constructor() { }
 
@@ -33,6 +36,7 @@ export class PackContent {
         Object.assign(this, input);
         input.cards ? this.cards = input.cards.map(card => new Card().deseralize(card)) : null;
         input.guideBook ? this.guideBook = new GuideBook().deseralize(input.guideBook) : null;
+        input.freeUntilDate ? this.freeUntilDate = new Date(input.freeUntilDate) : null;
         return this;
     }
 }

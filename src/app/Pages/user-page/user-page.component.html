@@ -22,7 +22,7 @@
                 userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
             <p *ngIf="!trialMonthExpDate">ערכות נותרות להחלפה החודש: {{amountOfPacksToChangeThisMonth}}</p>
-            <p *ngIf="userData.groupRole==='ADMIN'" (click)="openCancelDialogModal()"
+            <p *ngIf="!userData.groupRole || userData.groupRole!=='USER'" (click)="openCancelDialogModal()"
                 style="cursor: pointer; text-decoration: underline;">לביטול התוכנית לחץ
                 כאן</p>
             <p style="font-weight: 600;" *ngIf="trialMonthExpDate">החודש תוכלו להשתמש בכל הערכות ללא הגבלה</p>

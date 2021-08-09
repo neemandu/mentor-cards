@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
-import { PackContent, PackInfo } from 'src/app/Objects/packs';
+import { PackContent } from 'src/app/Objects/packs';
 import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -32,7 +32,7 @@ export class AllPacksPageComponent implements OnInit {
   // selectedTags: string[] = [];
 
   constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
-     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,) {
+    private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
@@ -65,7 +65,6 @@ export class AllPacksPageComponent implements OnInit {
     } else {
       let authStatus = localStorage.getItem('signedin');
       (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then(packs => {
-        // console.log("file: all-packs-page.component.ts ~ line 62 ~ packs", packs)
         this.allPacks = packs.items.map(pack => {
           pack.categories.forEach(category => {
             if (!this.allCategories.includes(category))
@@ -74,16 +73,12 @@ export class AllPacksPageComponent implements OnInit {
           return new PackContent().deseralize(pack)
         });
         this.cardsService.allPacks = this.allPacks.map(pack => pack);
-
-        // console.log("file: all-packs-page.component.ts ~ line 82 ~ this.allPacks", this.allPacks)
         this.cardsService.allCategories = this.allCategories.map(category => category);
         this.allFavorites = this.cardsService.favorites;
+        // console.log("file: all-packs-page.component.ts ~ line 83 ~ this.allPacks", this.allPacks)
         this.sortPacks();
-        // this.allPacksOwned = this.allPacks.filter(pack => pack.cards.length != 0);
-        // this.allPacksNotOwned = this.allPacks.filter(pack => pack.cards.length == 0);
         this.overlaySpinnerService.changeOverlaySpinner(false);
       }, reject => {
-        // console.log("file: all-packs-page.component.ts ~ line 77 ~ this.api.ListCardsPacks ~ reject", reject)
         this.overlaySpinnerService.changeOverlaySpinner(false);
         let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
           duration: 20000,
@@ -104,6 +99,12 @@ export class AllPacksPageComponent implements OnInit {
    */
   sortPacks(): void {
     this.allPacks.sort((packA, packB) => {
+      //free packs
+      if (packA.freeUntilDate > new Date())
+        return -1;
+      if (packB.freeUntilDate > new Date())
+        return 1;
+      //favorites
       if (this.allFavorites.includes(packA.id) && this.allFavorites.includes(packB.id))
         return 0;
       if (this.allFavorites.includes(packA.id))
@@ -111,7 +112,6 @@ export class AllPacksPageComponent implements OnInit {
       else
         return 1;
     })
-    // this.cardsService.allPacks = this.allPacks.map(pack => pack);
   }
 
   /**
@@ -198,7 +198,7 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   freeTextFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackInfo) => {
+    this.allPacks = this.allPacks.filter((pack: PackContent) => {
       let contains: boolean = false;
       if (pack.description.includes(this.freeTextFilterSelected))
         contains = true;
@@ -215,7 +215,7 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   categoryFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackInfo) => {
+    this.allPacks = this.allPacks.filter((pack: PackContent) => {
       let res = false;
       pack.categories.forEach(category => {
         if (this.selectedCategories.includes(category)) {
@@ -227,7 +227,7 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   favoritesFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackInfo) => {
+    this.allPacks = this.allPacks.filter((pack: PackContent) => {
       return this.selectedFavorites.includes(pack.name);
     })
   }
