@@ -13,6 +13,7 @@ import { PopoutData, PopoutService } from 'src/app/Services/popout.service';
 import { UserData } from 'src/app/Objects/user-related';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Subscription } from 'rxjs';
+import { AboutAuthorComponent } from 'src/app/Shared Components/pack/about-author/about-author.component';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -154,6 +155,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   signInSignUp(): void {
     this.userAuthService.showSignInModal();
+  }
+
+  openAboutDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxWidth = '30vw';
+    dialogConfig.data = this.pack;
+    this.dialog.open(AboutAuthorComponent, dialogConfig);
   }
 
   navigate(path: string): void {

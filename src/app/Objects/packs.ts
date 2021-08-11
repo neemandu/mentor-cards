@@ -9,6 +9,7 @@ export class PackInfo {
     tags: string[];
     name: string;
     freeUntilDate: Date;
+    about: string;
 
     constructor() { }
 
@@ -29,6 +30,7 @@ export class PackContent {
     guideBook: GuideBook;
     name: string;
     freeUntilDate: Date;
+    about: string;
 
     constructor() { }
 

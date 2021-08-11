@@ -1,0 +1,18 @@
+p {
+  text-align: center;
+  font-size: medium;
+  line-height: 1.5rem;
+}
+
+.line {
+  background-color: #ffa800;
+  width: auto;
+  height: 3px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+mat-toolbar {
+  margin-top: -10px;
+  background-color: transparent;
+}

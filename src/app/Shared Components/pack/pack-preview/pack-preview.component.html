@@ -4,16 +4,6 @@
 <div class="d-flex flex-column">
   <p class="main-header">{{data.name}}</p>
   <p class="content categories-tags">{{data.description}}</p>
-  <!-- <div class="d-flex justify-content-around categories-tags">
-    <div class="d-flex flex-column justify-content-center">
-      <p class="sub-header">קטגוריות</p>
-      <p class="content">{{data.categories}}</p>
-    </div>
-    <div class="d-flex flex-column justify-content-center">
-      <p class="sub-header">תיאור</p>
-      <p class="content">{{data.description}}</p>
-    </div>
-  </div> -->
   <div id="example-cards" style="display: contents;">
     <p class="sub-header">קלפים לדוגמא</p>
     <div class="d-flex flex-row card-previews">
@@ -23,15 +13,16 @@
       </app-card>
     </div>
   </div>
-  <div id="actions" class="d-flex flex-row justify-content-around" *ngIf="signedIn && hasProgram">
-    <div class="action-btn-div">
+  <div id="actions" class="d-flex flex-row justify-content-around">
+    <div *ngIf="signedIn && hasProgram" class="action-btn-div">
       <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
         זו
         <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
           נוצלו כל החבילות
         </span></button>
     </div>
-    <div class="action-btn-div" matTooltip="תאריך הבא להחלפת ערכה: {{nextPackSubstitutionDate | date:'d/M/y'}}" matTooltipShowDelay="500"
+    <div *ngIf="signedIn && hasProgram" class="action-btn-div"
+      matTooltip="תאריך הבא להחלפת ערכה: {{nextPackSubstitutionDate | date:'d/M/y'}}" matTooltipShowDelay="500"
       [matTooltipClass]="{'tooltip-class' : true}">
       <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu"
         [disabled]="!exchangePackButtonVisible || exchangePackButtonVisibleNothingToChange">החלף ערכה בזו
@@ -44,7 +35,7 @@
         </span>
       </button>
     </div>
-    <div class="action-btn-div">
+    <div *ngIf="signedIn && hasProgram" class="action-btn-div">
       <!-- <button class="action-button" type="button" (click)="openChooseProgramModal()" -->
       <button class="action-button" type="button" (click)="navigate('/price-page')"
         [disabled]="!upgradePackButtonVisible">שדרג
@@ -52,6 +43,10 @@
         <span style="font-size: small;" *ngIf="!upgradePackButtonVisible"><br>
           הוחלפה תוכנית החודש
         </span></button>
+    </div>
+    <div *ngIf="data.about" class="action-btn-div">
+      <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה
+      </button>
     </div>
   </div>
 </div>

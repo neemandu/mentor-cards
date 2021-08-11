@@ -72,6 +72,7 @@ export class AllPacksPageComponent implements OnInit {
           });
           return new PackContent().deseralize(pack)
         });
+        // console.log("file: all-packs-page.component.ts ~ line 75 ~ packs", packs)
         this.cardsService.allPacks = this.allPacks.map(pack => pack);
         this.cardsService.allCategories = this.allCategories.map(category => category);
         this.allFavorites = this.cardsService.favorites;

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
+import { AboutAuthorComponent } from './about-author/about-author.component';
 import { PackPreviewComponent } from './pack-preview/pack-preview.component';
 
 @Component({
@@ -59,6 +60,15 @@ export class PackComponent implements OnInit, OnDestroy {
       }
     });
   }
+  
+  // openAboutDialog(): void {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.maxWidth = '30vw';
+  //   dialogConfig.data = this.packInfo;
+  //   this.dialog.open(AboutAuthorComponent, dialogConfig);
+  // }
 
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
