@@ -1,5 +1,10 @@
 <div class="d-flex flex-column">
   <h3 id="pack-desc">{{packInfo.name}}</h3>
+  <!-- <div class="d-flex justify-content-center align-items-center">
+    <h3 id="pack-desc">{{packInfo.name}}</h3>
+    <mat-icon (click)="openAboutDialog()" matTooltip="מידע על יוצר הערכה" [matTooltipClass]="{'tooltip-class' : true}"
+      *ngIf="packInfo.about && packInfo.about.length!=0" class="clickable about-icon">info</mat-icon>
+  </div> -->
   <!-- Owned - list-->
   <img *ngIf="packInfo.cards.length != 0" routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()"
     src={{packInfo.imgUrl}}
