@@ -21,7 +21,7 @@ export class PackPreviewComponent implements OnInit {
 
   loadedCards: number = 0;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: PackInfo, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
     private userAuthService: UserAuthService, private api: APIService, private overlaySpinnerService: OverlaySpinnerService, 
     private cardsService: CardsService, public router: Router, private ngZone: NgZone) { }
 
