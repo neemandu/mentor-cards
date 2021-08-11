@@ -72,7 +72,7 @@ export class AllPacksPageComponent implements OnInit {
           });
           return new PackContent().deseralize(pack)
         });
-        // console.log("file: all-packs-page.component.ts ~ line 75 ~ packs", packs)
+        console.log("file: all-packs-page.component.ts ~ line 75 ~ packs", packs)
         this.cardsService.allPacks = this.allPacks.map(pack => pack);
         this.cardsService.allCategories = this.allCategories.map(category => category);
         this.allFavorites = this.cardsService.favorites;
@@ -200,18 +200,22 @@ export class AllPacksPageComponent implements OnInit {
 
   freeTextFilter(): void {
     this.allPacks = this.allPacks.filter((pack: PackContent) => {
-      let contains: boolean = false;
+      // let contains: boolean = false;
       if (pack.description.includes(this.freeTextFilterSelected))
-        contains = true;
+        return true;
       pack.categories.forEach(category => {
         if (category.includes(this.freeTextFilterSelected))
-          contains = true;
+          return true;
       })
       pack.tags.forEach(tag => {
         if (tag.includes(this.freeTextFilterSelected))
-          contains = true;
+          return true;
       })
-      return contains;
+      if (pack.name.includes(this.freeTextFilterSelected)) {
+        return true;
+      }
+      // return contains;
+      return false;
     })
   }
 

@@ -104,3 +104,16 @@ mat-form-field {
   font-weight: 500;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+
+#choose-program-link {
+  text-decoration: underline;
+  color: black;
+}
+
+#choose-program-link:hover {
+  color:#ffa800;
+}
+
+h1 {
+  margin-bottom: 0px;
+}
