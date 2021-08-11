@@ -133,20 +133,12 @@ exports.handler = async (event) => {
     var allPackagesDate = new Date();
     var now = new Date();
     var trialPeriodInDays = 30;
-
-    if (user && user.couponCodes &&
-        user.couponCodes.length > 0){
-        trialPeriodInDays = user.couponCodes[user.couponCodes.length - 1].trialPeriodInDays;
-    }
-
-    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
     console.log(user.firstProgramRegistrationDate); 
 
     if(user &&    // Free Pack!
-       user.status == "PLAN" &&
        'freeUntilDate' in event.source &&
        (new Date(event.source['freeUntilDate'])) > now
     ){
@@ -154,7 +146,7 @@ exports.handler = async (event) => {
         return event.source['cards'];
     }
 
-    if(user &&    // unlimited sunscription
+    if(user &&    // unlimited subscription
        user.status == "PLAN" &&
        user.subscription && 
        user.subscription.subscriptionPlan && 
@@ -168,14 +160,21 @@ exports.handler = async (event) => {
     if(user &&
         user.couponCodes &&
         user.couponCodes.length > 0){
-            startFreePeriodDate = user.couponCodes[user.couponCodes.length-1].createdAt
-            console.log('user has a coupon code since - ' + user.couponCodes[user.couponCodes.length-1].createdAt);
+            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
+                    var couponDate = user.couponCodes[i].createdAt;
+                    if(couponDate > startFreePeriodDate){
+                        startFreePeriodDate = couponDate;
+                        trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
+                    }
+                }
+            }
         }
-
-    if(user &&    // first month from registration
+    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
+    if(user &&    
         isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
      ){
-         console.log('first month from registration');
+         console.log('free trial period');
          return event.source['cards'];
      }
     
