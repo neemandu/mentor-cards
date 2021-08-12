@@ -1,10 +1,9 @@
-import { EventEmitter, Injectable, OnInit, Output } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PackContent, PackInfo } from '../Objects/packs';
-import { addCardsPackInput, APIService } from '../API.service';
+import { PackContent } from '../Objects/packs';
 import { UserAuthService } from './user-auth.service';
 import { UserData } from '../Objects/user-related';
 

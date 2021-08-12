@@ -75,6 +75,7 @@ import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purch
 import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
 import { NewEditNewsComponent } from './Shared Components/Dialogs/new-edit-news/new-edit-news.component';
 import { EnterCouponCodeDialogComponent } from './Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
+import { AboutAuthorComponent } from './Shared Components/pack/about-author/about-author.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { EnterCouponCodeDialogComponent } from './Pages/no-program-page/enter-co
     SiteContentManagementComponent,
     NewEditNewsComponent,
     EnterCouponCodeDialogComponent,
+    AboutAuthorComponent,
   ],
   imports: [
     BrowserModule,

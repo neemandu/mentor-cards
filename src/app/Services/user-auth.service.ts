@@ -87,7 +87,7 @@ export class UserAuthService {
         if (!data)
           return;
         this.userData = new UserData().deseralize(data);
-        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+        console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
         this.loggedInEmmiter.emit(this.userData);
@@ -214,7 +214,12 @@ export class UserAuthService {
    * return if in trial month (first month after register)
    */
   get codeCouponExpDate(): Date {
-    return this.userData.couponCode ? new Date(this.userData.couponCode.createdAt?.getTime() + millisecondsInDay * this.userData.couponCode.trialPeriodInDays) : null;
+    if (!this.userData.couponCodes)
+      return null;
+    let latestCreationCoupon = this.userData.couponCodes[0];
+    this.userData.couponCodes.forEach(couponCode => couponCode.createdAt > latestCreationCoupon.createdAt ? latestCreationCoupon = couponCode : null)
+    return this.userData.couponCodes ?
+      new Date(latestCreationCoupon.createdAt?.getTime() + millisecondsInDay * latestCreationCoupon.trialPeriodInDays) : null;//TODO
   }
 
   /**

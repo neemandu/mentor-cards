@@ -1,5 +1,4 @@
 import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Router } from '@angular/router';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -25,7 +24,7 @@ export class NavComponent implements OnInit {
   ]
 
   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,
-    private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
+    private api: APIService) {
   }
 
   ngOnInit() {

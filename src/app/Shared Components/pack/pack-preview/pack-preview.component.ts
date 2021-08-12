@@ -3,11 +3,13 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 import { Router } from '@angular/router';
 import { APIService, changeCardsPackInput } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
+import { PackInfo } from 'src/app/Objects/packs';
 import { ProgramChoiseDialogComponent } from 'src/app/Pages/no-program-page/program-choise-dialog/program-choise-dialog.component';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from '../../Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { AboutAuthorComponent } from '../about-author/about-author.component';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -114,6 +116,15 @@ export class PackPreviewComponent implements OnInit {
         })
       }
     });
+  }
+
+  openAboutDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxWidth = '30vw';
+    dialogConfig.data = this.data;
+    this.dialog.open(AboutAuthorComponent, dialogConfig);
   }
 
   navigate(path: string): void {

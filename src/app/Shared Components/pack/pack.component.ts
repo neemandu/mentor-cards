@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
+import { AboutAuthorComponent } from './about-author/about-author.component';
 import { PackPreviewComponent } from './pack-preview/pack-preview.component';
 
 @Component({
@@ -38,6 +39,14 @@ export class PackComponent implements OnInit, OnDestroy {
     this.loaded.emit();
   }
 
+  get isStillFree() {
+    return new Date() < new Date(this.packInfo.freeUntilDate);
+  }
+
+  get freeUntilDate() {//TODO
+    return new Date(this.packInfo.freeUntilDate).toLocaleDateString('he-IL');
+  }
+
   openPreviewDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -46,11 +55,20 @@ export class PackComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
-      if(res) {
+      if (res) {
         this.packChange.emit();
       }
     });
   }
+  
+  // openAboutDialog(): void {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.maxWidth = '30vw';
+  //   dialogConfig.data = this.packInfo;
+  //   this.dialog.open(AboutAuthorComponent, dialogConfig);
+  // }
 
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();

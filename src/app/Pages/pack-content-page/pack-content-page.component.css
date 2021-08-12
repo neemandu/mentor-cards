@@ -71,6 +71,19 @@ button:focus {
   background: #ffebc4;
 }
 
+.about-author-option-btn {
+  background: #ffbe41;
+  color: #717171;
+}
+
+.about-author-option-btn:hover {
+  background: #e6aa3b;
+}
+
+.about-author-option-btn:active {
+  background: #ca9635;
+}
+
 .bottom-option-btn {
   opacity: 1;
   background: #ffa800;
@@ -162,4 +175,14 @@ li span {
   width: auto;
   height: 3px;
   margin-bottom: 1rem;
+}
+
+#about-author {
+  font-size: medium;
+  text-decoration: underline;
+  margin-right: 10px;
+}
+
+#about-author:hover {
+  color: #717171;
 }

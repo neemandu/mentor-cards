@@ -122,23 +122,29 @@ exports.handler = async (event) => {
     console.log('username: ' + username);
     var user = await getUserByUSerName(username);
 
-    if(user && 
-        user.couponCode){
-                console.warn('user already has a coupon code - ' + user.couponCode);
-                throw Error ('user already has a coupon code - ' + user.couponCode);
-        }
+    var couponCode = args['couponCode'];
 
     if(user && 
-        !user.couponCode){
-            var couponCode = args['couponCode'];
-            var dbCouponCode = await getCouponCode(couponCode);
-            if(!dbCouponCode){
-                console.warn('no such coupon code - ' + couponCode);
-                throw Error ('no such coupon code - ' + couponCode);
+        user.couponCodes && 
+        user.couponCodes.length > 0){
+        
+        for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+            if(user.couponCodes[i].id == couponCode){
+                console.warn('Coupon code already used - ' + couponCode);
+                throw Error ('קוד ההטבה כבר מומש');
             }
-            user.couponCode = dbCouponCode;
-            await saveUser(user); 
+        } 
+    }
+
+    if(user){
+        var dbCouponCode = await getCouponCode(couponCode);
+        if(!dbCouponCode){
+            console.warn('no such coupon code - ' + couponCode);
+            throw Error ('no such coupon code - ' + couponCode);
         }
+        user.couponCodes.push(dbCouponCode);
+        await saveUser(user); 
+    }
     
     return true;
 };

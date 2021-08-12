@@ -60,15 +60,17 @@ query GetUser($id: ID!) {
     numberOfUsedPacks
     groupRole
     cancellationDate
-    couponCode {
+    couponCodes {
       id
       organization
       couponCode
       discount
       trialPeriodInDays
+      allowedCardsPacks
       createdAt
       updatedAt
     }
+    cardsPacksIds
     createdAt
     updatedAt
   }
@@ -112,15 +114,17 @@ query ListUsers(
       numberOfUsedPacks
       groupRole
       cancellationDate
-      couponCode {
+      couponCodes {
         id
         organization
         couponCode
         discount
         trialPeriodInDays
+        allowedCardsPacks
         createdAt
         updatedAt
       }
+      cardsPacksIds
       createdAt
       updatedAt
     }
@@ -212,6 +216,7 @@ query GetCouponCodes($id: ID!) {
     couponCode
     discount
     trialPeriodInDays
+    allowedCardsPacks
     createdAt
     updatedAt
   }
@@ -228,6 +233,7 @@ query ListCouponCodess(
       couponCode
       discount
       trialPeriodInDays
+      allowedCardsPacks
       createdAt
       updatedAt
     }
@@ -243,9 +249,7 @@ query GetCardsPack($id: ID!) {
     categories
     cards
     cardsPreview
-    usersIds
     groupsIds
-    users
     guideBook {
       subjects {
         subjectName
@@ -274,9 +278,7 @@ query ListCardsPacks(
       categories
       cards
       cardsPreview
-      usersIds
       groupsIds
-      users
       guideBook {
         subjects {
           subjectName

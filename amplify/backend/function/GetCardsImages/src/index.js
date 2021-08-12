@@ -71,16 +71,22 @@ function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
 }
 
 
-function isPackageBelongToUser(usersList, username) {
-    console.log('Checking if package belong to user: ' + username);
+function isPackageBelongToUser(id, cardsPacksIds, username) {
+    console.log('Checking if package belong to user: ' + username );
+    console.log('id: ' + id);
+    console.log('cardsPacksIds: ');
+    console.log(cardsPacksIds);
     var canView = false;
-    for(var i = 0; i < usersList.length; i++){
-        if(username == usersList[i]){
-            canView = true;
-            break;
+    if(cardsPacksIds && cardsPacksIds.length > 0){
+        for(var i = 0; i < cardsPacksIds.length; i++){
+            if(id == cardsPacksIds[i]){
+                canView = true;
+                console.log('package belong to user ' + username + ': ' + canView);
+                break;
+            }
         }
     }
-    console.log('package belong to user ' + username + ': ' + canView);
+    console.log('package does not belong to user ' + username + ': ' + canView);
     return canView;
 }
 
@@ -127,18 +133,20 @@ exports.handler = async (event) => {
     var allPackagesDate = new Date();
     var now = new Date();
     var trialPeriodInDays = 30;
-
-    if (user && user.couponCode){
-        trialPeriodInDays = user.couponCode.trialPeriodInDays;
-    }
-
-    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
-    console.log(user.firstProgramRegistrationDate);
+    console.log(user.firstProgramRegistrationDate); 
 
-    if(user &&    // unlimited sunscription
+    if(user &&    // Free Pack!
+       'freeUntilDate' in event.source &&
+       (new Date(event.source['freeUntilDate'])) > now
+    ){
+        console.log('Free Pack!');
+        return event.source['cards'];
+    }
+
+    if(user &&    // unlimited subscription
        user.status == "PLAN" &&
        user.subscription && 
        user.subscription.subscriptionPlan && 
@@ -150,17 +158,36 @@ exports.handler = async (event) => {
     
     var startFreePeriodDate = user.createdAt;
     if(user &&
-        user.couponCode){
-            console.log('user has a coupon code since - ' + user.couponCode.createdAt);
-            startFreePeriodDate = user.couponCode.createdAt;
+        user.couponCodes &&
+        user.couponCodes.length > 0){
+            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
+                    var couponDate = user.couponCodes[i].createdAt;
+                    if(couponDate > startFreePeriodDate){
+                        startFreePeriodDate = couponDate;
+                        trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
+                    }
+                }
+            }
         }
-
-    if(user &&    // first month from registration
+    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
+    if(user &&    
         isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
      ){
-         console.log('first month from registration');
+         console.log('free trial period');
          return event.source['cards'];
      }
+    
+    if(user &&
+        user.couponCodes &&
+        user.couponCodes.length > 0){
+            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
+                    console.log('User has a coupon code with this package');
+                    return event.source['cards'];
+                }
+            }
+        }
     /*if(user &&    // first 30 days all packs are available
        user.status == "PLAN" &&
        isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
@@ -170,7 +197,7 @@ exports.handler = async (event) => {
     }*/
     if(user && // does the package belong to the user?
        user.status == "PLAN" &&
-       isPackageBelongToUser(event.source['usersIds'], username)     
+       isPackageBelongToUser(event.source['id'], user.cardsPacksIds, username)     
     ){
         console.log('Package belong to user');
         return event.source['cards'];

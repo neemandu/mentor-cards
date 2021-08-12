@@ -10,20 +10,33 @@
     <!-- <button style="font-size: x-large;" type="button" (click)="openChooseProgramModal()">בחרו תוכנית</button> -->
     <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">בחרו תוכנית</button>
     <br>
-    <span class="bottom">החל מ-19.90 ש"ח לחודש. בטלו בכל עת.</span>
+    <span class="bottom">החל מ-19.90 ש"ח לחודש. ניתן לבטל בכל עת.</span>
   </div>
   <div class="d-flex flex-row">
     <div class="d-flex flex-column actions bottom-actions">
-      <span class="top">אתם חלק מקבוצה?</span>
+      <div class="d-flex">
+        <span class="top">אתם חלק מקבוצה?</span>
+        <mat-icon [matTooltipClass]="{'tooltip-class' : true}" class="info-icon"
+          matTooltip="נרשמתם עם חברים/קולגות דרך החבילה הקבוצתית המשתלמת שלנו? בקשו ממנהל הקבוצה את קוד הקבוצה והזינו כאן!">
+          info
+        </mat-icon>
+      </div>
       <br>
       <button style="font-size: large;" type="button" (click)="openEnterGroupIdModal()">הזנת קוד קבוצה</button>
       <br>
       <span class="bottom">הצטרפו לחבריכם והתחילו לעבוד</span>
     </div>
     <div class="d-flex flex-column actions bottom-actions">
-      <span class="top">יש לכם קוד הטבה?</span>
+      <div class="d-flex">
+        <span class="top">יש לכם קוד הטבה?</span>
+        <mat-icon [matTooltipClass]="{'tooltip-class' : true}" class="info-icon" 
+        matTooltip="קיבלתם קוד הטבה מקהילה/מוסד לימודים? 
+        הזינו אותו כאן!">
+        info
+        </mat-icon>
+      </div>
       <br>
-      <button style="font-size: large;" type="button" (click)="openEnterCouponCodeModal()">הזנת קוד קופון</button>
+      <button style="font-size: large;" type="button" (click)="openEnterCouponCodeModal()">הזנת קוד הטבה</button>
       <br>
       <span class="bottom">הזינו את הקוד והתחילו לעבוד</span>
     </div>

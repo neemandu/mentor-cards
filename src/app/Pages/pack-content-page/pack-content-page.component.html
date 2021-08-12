@@ -1,4 +1,8 @@
-<h1 style="text-align: center" *ngIf="pack">{{pack.name}}</h1>
+<title>Mentor-Cards תוכן ערכת הקלפים</title>
+<div class="d-flex justify-content-center align-items-baseline">
+  <h1 style="text-align: center" *ngIf="pack">{{pack.name}}</h1>
+  <h2 *ngIf="pack.about" id="about-author" class="clickable" (click)="openAboutDialog()">(על יוצר הערכה)</h2>
+</div>
 <div class="d-flex justify-content-between nav-buttons ">
   <div id="multipileToggle" class="d-flex flex-row">
     <div style="font-size: 1rem; margin-left: 5px;">בחירה מרובה </div>
@@ -10,6 +14,7 @@
     <button type="button" class="option-btn top-option-btn" (click)="flipped = !flipped; selectedCards = []">הפוך
       חפיסה</button>
     <button type="button" class="option-btn top-option-btn" (click)="openRandomCardsModal()">הצג קלף אקראי</button>
+    <!-- <button *ngIf="pack.about" type="button" class="option-btn about-author-option-btn" (click)="openAboutDialog()">על יוצר הערכה</button> -->
   </div>
   <!-- just for balance -->
   <button type="button" class="option-btn top-option-btn" (click)="openGuideBook()">
@@ -44,13 +49,12 @@
       <li><span>במסגרת 30 ימי הניסיון כל ערכות הקלפים לרשותכם</span></li>
     </ul>
     <div class="line"></div>
-    <div id="actions" class="d-flex flex-column align-items-center"> 
+    <div id="actions" class="d-flex flex-column align-items-center">
       <span id="middle" *ngIf="!userData">הירשמו, בחרו תוכנית והתחילו את תקופת הניסיון</span>
       <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">עדין לא נרשמתם לתוכנית?</span>
       <span id="middle" *ngIf="userData && userData.status === 'PLAN'">אתם כבר מחוברים, למה אתם מחכים? לעבודה :)</span>
       <br>
-      <button class="action-button" *ngIf="!userData" type="button"
-        (click)="signInSignUp()">התחברות/הרשמה</button>
+      <button class="action-button" *ngIf="!userData" type="button" (click)="signInSignUp()">התחברות/הרשמה</button>
       <button class="action-button" *ngIf="userData && userData.status === 'NOPLAN'" type="button"
         (click)="navigate('/no-program-page')">להרשמה לתוכנית</button>
       <button class="action-button" *ngIf="userData && userData.status === 'PLAN'" type="button"

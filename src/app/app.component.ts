@@ -12,26 +12,32 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angu
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   //https://docs.amplify.aws/ui/auth/authenticator/q/framework/angular#sign-out
   //https://www.unimedia.tech/2020/12/12/aws-amplify-authentication-with-angular/
+  // https://docs.amplify.aws/ui/auth/authenticator/q/framework/angular#hiding-form-fields
   // signUpFormFields = [
   //   {
+  //     type: "name",
+  //     label: "שם מלא *",
+  //     placeholder: "שם מלא",
+  //     required: true,
+  //   },
+  //   {
   //     type: "email",
-  //     label: "Custom email Label",
-  //     placeholder: "custom email placeholder",
+  //     label: "Email Address *",
+  //     placeholder: "Email",
   //     required: true,
   //   },
   //   {
   //     type: "password",
-  //     label: "Custom Password Label",
-  //     placeholder: "custom password placeholder",
+  //     label: "Password *",
+  //     placeholder: "Password",
   //     required: true,
   //   },
   //   {
   //     type: "phone_number",
-  //     label: "Custom Phone Label",
-  //     placeholder: "custom Phone placeholder",
+  //     label: "Phone Number *",
+  //     placeholder: "(555) 555-1212",
   //     required: true,
   //   },
   // ];//TODO
@@ -118,6 +124,8 @@ const dict = {
     'Have an account?': "יש לך משתמש קיים?",
     'Sign in': "להתחברות",
     '(555) 555-1212': "051-2345678",
+    'Full Name *': "שם מלא *",
+    'Full Name': "שם מלא",
     //Confirm Sign up
     'Confirmation Code': "קוד אימות (נשלח למייל)",
     'Enter your code': "קוד אימות (נשלח למייל)",

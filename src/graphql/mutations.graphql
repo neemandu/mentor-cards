@@ -33,15 +33,17 @@ mutation CreateUser($input: CreateUserInput!) {
     numberOfUsedPacks
     groupRole
     cancellationDate
-    couponCode {
+    couponCodes {
       id
       organization
       couponCode
       discount
       trialPeriodInDays
+      allowedCardsPacks
       createdAt
       updatedAt
     }
+    cardsPacksIds
     createdAt
     updatedAt
   }
@@ -66,9 +68,6 @@ mutation JoinExistingGroup($input: joinExistingGroupInput!) {
 }
 mutation DeleteGroupById($input: deleteGroupInput!) {
   DeleteGroupById(input: $input)
-}
-mutation UpdateAllNewsList($input: newsListInput!) {
-  UpdateAllNewsList(input: $input)
 }
 mutation AddCouponCode($input: couponCodeInput!) {
   AddCouponCode(input: $input)
@@ -287,6 +286,7 @@ mutation CreateCouponCodes(
     couponCode
     discount
     trialPeriodInDays
+    allowedCardsPacks
     createdAt
     updatedAt
   }
@@ -301,6 +301,7 @@ mutation UpdateCouponCodes(
     couponCode
     discount
     trialPeriodInDays
+    allowedCardsPacks
     createdAt
     updatedAt
   }
@@ -315,6 +316,7 @@ mutation DeleteCouponCodes(
     couponCode
     discount
     trialPeriodInDays
+    allowedCardsPacks
     createdAt
     updatedAt
   }
@@ -331,9 +333,7 @@ mutation CreateCardsPack(
     categories
     cards
     cardsPreview
-    usersIds
     groupsIds
-    users
     guideBook {
       subjects {
         subjectName
@@ -360,9 +360,7 @@ mutation UpdateCardsPack(
     categories
     cards
     cardsPreview
-    usersIds
     groupsIds
-    users
     guideBook {
       subjects {
         subjectName
@@ -389,9 +387,7 @@ mutation DeleteCardsPack(
     categories
     cards
     cardsPreview
-    usersIds
     groupsIds
-    users
     guideBook {
       subjects {
         subjectName

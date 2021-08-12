@@ -110,10 +110,8 @@ async function pushUserToCardsPack(cardsPack, username){
     }).promise();
 }
 
-async function addUserPacksCounter(user){
+async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
-    user.numberOfUsedPacks++;
-    user.updatedAt = new Date().toISOString();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
     var params = {
@@ -121,15 +119,13 @@ async function addUserPacksCounter(user){
         Item: user
     };
 
-    console.log("addUserPacksCounter " +user.username);
+    console.log("saveUser " +user.username);
 
     await docClient.put(params, function(err, data) {
         if (err) {
-            console.error("Unable to addUserPacksCounter. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
+            console.error("Unable to saveUser. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("updated addUserPacksCounter:", JSON.stringify(data, null, 2));
-            //callback(null, data);
+            console.log("updated saveUser:", JSON.stringify(data, null, 2));
         }
     }).promise();
 }
@@ -152,10 +148,10 @@ exports.handler = async (event) => {
     }
 
     var cardsPackId = event.arguments.input['cardsPackId'];
-    var cardsPack = await getCardsPack(cardsPackId);
-
-    await pushUserToCardsPack(cardsPack, username);
-    await addUserPacksCounter(user);
+    user.cardsPacksIds.push(cardsPackId);
+    user.numberOfUsedPacks++;
+    user.updatedAt = new Date().toISOString();
+    await saveUser(user);
 
     return true;
 };
