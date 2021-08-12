@@ -147,9 +147,9 @@ export class AllPacksPageComponent implements OnInit {
     return this.userAuthService.codeCouponExpDate;
   }
 
-  get expDate() {
-    return this.userAuthService.expDate;
-  }
+  // get expDate() {
+  //   return this.userAuthService.expDate;
+  // }
 
   /**
    * Show more or less categories

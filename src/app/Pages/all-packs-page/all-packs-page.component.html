@@ -40,10 +40,13 @@
     <!-- Available Packs -->
     <div *ngIf="allOwnedPacks().length != 0">
       <!-- <h1 *ngIf="signedIn && hasProgram && !trialMonthExpDate && !codeCouponExpDate" -->
-      <h1 style="text-align: center; margin-left: 14rem;">הערכות
+      <h1 *ngIf="signedIn && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">הערכות
         שלי</h1>
-      <h1 *ngIf="signedIn && (trialMonthExpDate || codeCouponExpDate)" style="text-align: center; margin-left: 14rem;">
-        כל ערכות אלו לרשותכם עד ה- {{expDate}}
+      <h1 *ngIf="signedIn && trialMonthExpDate" style="text-align: center; margin-left: 14rem;">
+        כל ערכות אלו לרשותכם עד ה- {{trialMonthExpDate}}
+      </h1>
+      <h1 *ngIf="signedIn && codeCouponExpDate" style="text-align: center; margin-left: 14rem;">
+        קוד ההטבה תקף עד- {{trialMonthExpDate}}
       </h1>
       <div class="d-flex flex-row flex-wrap">
         <app-pack *ngFor="let packInfo of allOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
@@ -52,18 +55,14 @@
     </div>
     <!-- Unavailable Packs -->
     <div *ngIf="allNotOwnedPacks().length != 0">
-      <!-- <h1 *ngIf="signedIn && !hasProgram && !trialMonthExpDate && !codeCouponExpDate"
-        style="text-align: center; margin-left: 14rem;">
-        כל הערכות לרשותכם עד ה- {{expDate}}
-      </h1> -->
-      <h1 *ngIf="signedIn && allOwnedPacks().length != 0 && allOwnedPacks().length != 0"
-        style="text-align: center; margin-left: 14rem;">מקווים שהספקתם ליהנות מכל הערכות הקלפים שלנו! זה הזמן
+      <h1 style="text-align: center; margin-left: 14rem;">כל הערכות שלנו</h1>
+      <h1 *ngIf="signedIn && !hasProgram && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">מקווים
+        שהספקתם ליהנות מכל הערכות הקלפים שלנו! זה הזמן
         <a id="choose-program-link" class="clickable" (click)="navigate('/price-page')">לבחור תכנית</a>
       </h1>
-      <h1 *ngIf="signedIn && hasProgram && allOwnedPacks().length != 0 && allOwnedPacks().length == 0"
-        style="text-align: center; margin-left: 14rem;">מקווים שהספקתם ליהנות מכל הערכות שלנו! זה הזמן לבחור את הערכות
+      <h1 *ngIf="signedIn && hasProgram && allOwnedPacks().length == 0" style="text-align: center; margin-left: 14rem;">
+        מקווים שהספקתם ליהנות מכל הערכות שלנו! זה הזמן לבחור את הערכות
         שלכם</h1>
-      <h1 *ngIf="!signedIn || !hasProgram" style="text-align: center; margin-left: 14rem;">כל הערכות שלנו</h1>
       <div class="d-flex flex-row flex-wrap" style="margin-bottom: 20px;">
         <app-pack class="pack" *ngFor="let packInfo of allNotOwnedPacks()" [packInfo]="packInfo"
           (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">
