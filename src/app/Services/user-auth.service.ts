@@ -218,7 +218,7 @@ export class UserAuthService {
       return null;
     let latestCreationCoupon = this.userData.couponCodes[0];
     this.userData.couponCodes.forEach(couponCode => couponCode.createdAt > latestCreationCoupon.createdAt ? latestCreationCoupon = couponCode : null)
-    return this.userData.couponCodes ?
+    return (this.userData.couponCodes?.length != 0) ?
       new Date(latestCreationCoupon.createdAt?.getTime() + millisecondsInDay * latestCreationCoupon.trialPeriodInDays) : null;//TODO
   }
 
