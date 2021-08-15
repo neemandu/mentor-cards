@@ -73,7 +73,7 @@ type CardsPack
   groupsIds: [String] 
   guideBook: GuideBook 
   name: String 
-  freeUntilDate: AWSDateTime
+  freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
   about: String
 }
 
