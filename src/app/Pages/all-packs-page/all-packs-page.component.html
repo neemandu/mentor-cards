@@ -45,9 +45,9 @@
       <h1 *ngIf="signedIn && trialMonthExpDate" style="text-align: center; margin-left: 14rem;">
         כל ערכות אלו לרשותכם עד ה- {{trialMonthExpDate}}
       </h1>
-      <h1 *ngIf="signedIn && codeCouponExpDate" style="text-align: center; margin-left: 14rem;">
+      <!-- <h1 *ngIf="signedIn && codeCouponExpDate" style="text-align: center; margin-left: 14rem;">
         קוד ההטבה תקף עד- {{trialMonthExpDate}}
-      </h1>
+      </h1> -->
       <div class="d-flex flex-row flex-wrap">
         <app-pack *ngFor="let packInfo of allOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
         </app-pack>
