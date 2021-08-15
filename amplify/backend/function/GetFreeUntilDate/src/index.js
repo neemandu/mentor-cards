@@ -82,6 +82,7 @@ exports.handler = async (event) => {
                 if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
                     console.log('User has a coupon code with this package');
                     var date = user.couponCodes[i].createdAt;
+                    date = new Date(date)
                     date.setDate(date.getDate()+user.couponCodes[i].trialPeriodInDays);
                     return date;
                 }
