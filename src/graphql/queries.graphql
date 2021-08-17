@@ -261,7 +261,11 @@ query GetCardsPack($id: ID!) {
     }
     name
     freeUntilDate
-    about
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -292,7 +296,11 @@ query ListCardsPacks(
       }
       name
       freeUntilDate
-      about
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }

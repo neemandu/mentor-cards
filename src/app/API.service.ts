@@ -4,7 +4,6 @@
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
-import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -364,7 +363,7 @@ export type CreateCardsPackInput = {
   guideBook?: GuideBookInput | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: string | null;
+  about?: AboutInput | null;
 };
 
 export type GuideBookInput = {
@@ -381,6 +380,12 @@ export type SubSubjectInput = {
   questions?: Array<string | null> | null;
 };
 
+export type AboutInput = {
+  text?: string | null;
+  imgUrl?: string | null;
+  link?: string | null;
+};
+
 export type ModelCardsPackConditionInput = {
   imgUrl?: ModelStringInput | null;
   description?: ModelStringInput | null;
@@ -391,7 +396,6 @@ export type ModelCardsPackConditionInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
-  about?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -410,7 +414,7 @@ export type CardsPack = {
   guideBook?: GuideBook;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: string | null;
+  about?: About;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -432,6 +436,13 @@ export type SubSubject = {
   questions?: Array<string | null> | null;
 };
 
+export type About = {
+  __typename: "About";
+  text?: string | null;
+  imgUrl?: string | null;
+  link?: string | null;
+};
+
 export type UpdateCardsPackInput = {
   id: string;
   imgUrl?: string | null;
@@ -444,7 +455,7 @@ export type UpdateCardsPackInput = {
   guideBook?: GuideBookInput | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: string | null;
+  about?: AboutInput | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -567,7 +578,6 @@ export type ModelCardsPackFilterInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
-  about?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -885,7 +895,12 @@ export type CreateCardsPackMutation = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -914,7 +929,12 @@ export type UpdateCardsPackMutation = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -943,7 +963,12 @@ export type DeleteCardsPackMutation = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1208,7 +1233,12 @@ export type GetCardsPackQuery = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1239,7 +1269,12 @@ export type ListCardsPacksQuery = {
     } | null;
     name?: string | null;
     freeUntilDate?: string | null;
-    about?: string | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -2135,7 +2170,12 @@ export class APIService {
           }
           name
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2180,7 +2220,12 @@ export class APIService {
           }
           name
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2225,7 +2270,12 @@ export class APIService {
           }
           name
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2658,7 +2708,12 @@ export class APIService {
           }
           name
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2666,71 +2721,10 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(  { query: statement,
-      variables: gqlAPIServiceArguments,
-      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
-  }
-  async ListCardsPacksForPreview(
-    filter?: ModelCardsPackFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCardsPacksQuery> {
-    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            imgUrl
-            description
-            cards
-            tags
-            categories
-            cardsPreview
-            guideBook {
-              __typename
-              subjects {
-                __typename
-                subjectName
-                subSubjects {
-                  __typename
-                  subSubjectName
-                  questions
-                }
-              }
-            }
-            name
-            freeUntilDate
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
-    )) as any;
-    return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async ListCardsPacks(
     filter?: ModelCardsPackFilterInput,
@@ -2764,7 +2758,12 @@ export class APIService {
             }
             name
             freeUntilDate
-            about
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -2845,9 +2844,7 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
   }

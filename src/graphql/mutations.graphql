@@ -345,7 +345,11 @@ mutation CreateCardsPack(
     }
     name
     freeUntilDate
-    about
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -374,7 +378,11 @@ mutation UpdateCardsPack(
     }
     name
     freeUntilDate
-    about
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -403,7 +411,11 @@ mutation DeleteCardsPack(
     }
     name
     freeUntilDate
-    about
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
