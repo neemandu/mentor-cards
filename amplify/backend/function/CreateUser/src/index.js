@@ -134,7 +134,7 @@ exports.handler = async (event) => {
                 "updatedAt": new Date().toISOString(),
                 "numberOfUsedPacks": 0,
                 "cancellationDate": null,
-                "couponCode": null,
+                "couponCodes": [],
                 "cardsPacksIds": []
             }
         };
