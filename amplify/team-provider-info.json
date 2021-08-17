@@ -67,7 +67,8 @@
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/AddCouponCode-335771584c2b61754b56-build.zip"
-        }
+        },
+        "GetFreeUntilDate": {}
       }
     }
   },
