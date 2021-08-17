@@ -352,7 +352,6 @@ export type DeleteCouponCodesInput = {
   id: string;
 };
 
-
 export type CreateCardsPackInput = {
   id?: string | null;
   imgUrl: string;
@@ -363,15 +362,9 @@ export type CreateCardsPackInput = {
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: GuideBookInput | null;
-  name?: string | null; 
-  freeUntilDate?: string | null;  
-  about?: AboutInput | null;   
-};
-
-export type AboutInput = {
-  text?: string | null;
-  imgUrl?: string | null;
-  link?: string | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: string | null;
 };
 
 export type GuideBookInput = {
@@ -397,8 +390,8 @@ export type ModelCardsPackConditionInput = {
   cardsPreview?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
-  freeUntilDate?: ModelStringInput | null;  
-  about?: ModelStringInput | null;  
+  freeUntilDate?: ModelStringInput | null;
+  about?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -415,18 +408,11 @@ export type CardsPack = {
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: GuideBook;
-  name?: string | null; 
-  freeUntilDate?: string | null;   
-  about?: About | null;   
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: string | null;
   createdAt?: string;
   updatedAt?: string;
-};
-
-export type About = {
-  __typename: "About";
-  text?: string | null;
-  imgUrl?: string | null;
-  link?: string | null;
 };
 
 export type GuideBook = {
@@ -457,8 +443,8 @@ export type UpdateCardsPackInput = {
   groupsIds?: Array<string | null> | null;
   guideBook?: GuideBookInput | null;
   name?: string | null;
-  freeUntilDate?: string | null;   
-  about?: AboutInput | null;
+  freeUntilDate?: string | null;
+  about?: string | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -580,8 +566,8 @@ export type ModelCardsPackFilterInput = {
   cardsPreview?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
-  freeUntilDate?: ModelStringInput | null;   
-  about?: ModelStringInput | null;  
+  freeUntilDate?: ModelStringInput | null;
+  about?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -898,13 +884,8 @@ export type CreateCardsPackMutation = {
     } | null> | null;
   } | null;
   name?: string | null;
-  freeUntilDate?: string | null;   
-  about?: {
-    __typename: "About";
-    text?: string | null;
-    imgUrl?: string | null;
-    link?: string | null;
-  } | null;
+  freeUntilDate?: string | null;
+  about?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -932,13 +913,8 @@ export type UpdateCardsPackMutation = {
     } | null> | null;
   } | null;
   name?: string | null;
-  freeUntilDate?: string | null;   
-  about?: {
-    __typename: "About";
-    text?: string | null;
-    imgUrl?: string | null;
-    link?: string | null;
-  } | null; 
+  freeUntilDate?: string | null;
+  about?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -966,13 +942,8 @@ export type DeleteCardsPackMutation = {
     } | null> | null;
   } | null;
   name?: string | null;
-  freeUntilDate?: string | null;  
-  about?: {
-    __typename: "About";
-    text?: string | null;
-    imgUrl?: string | null;
-    link?: string | null;
-  } | null;  
+  freeUntilDate?: string | null;
+  about?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1236,13 +1207,8 @@ export type GetCardsPackQuery = {
     } | null> | null;
   } | null;
   name?: string | null;
-  freeUntilDate?: string | null;   
-  about?: {
-    __typename: "About";
-    text?: string | null;
-    imgUrl?: string | null;
-    link?: string | null;
-  } | null;  
+  freeUntilDate?: string | null;
+  about?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1271,14 +1237,9 @@ export type ListCardsPacksQuery = {
         } | null> | null;
       } | null> | null;
     } | null;
-    name?: string | null;       
-    freeUntilDate?: string | null;   
-    about?: {
-      __typename: "About";
-      text?: string | null;
-      imgUrl?: string | null;
-      link?: string | null;
-    } | null;  
+    name?: string | null;
+    freeUntilDate?: string | null;
+    about?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -2174,12 +2135,7 @@ export class APIService {
           }
           name
           freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
+          about
           createdAt
           updatedAt
         }
@@ -2222,14 +2178,9 @@ export class APIService {
               }
             }
           }
-          name       
+          name
           freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
+          about
           createdAt
           updatedAt
         }
@@ -2274,12 +2225,7 @@ export class APIService {
           }
           name
           freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
+          about
           createdAt
           updatedAt
         }
@@ -2712,12 +2658,7 @@ export class APIService {
           }
           name
           freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
+          about
           createdAt
           updatedAt
         }
@@ -2823,12 +2764,7 @@ export class APIService {
             }
             name
             freeUntilDate
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
+            about
             createdAt
             updatedAt
           }
