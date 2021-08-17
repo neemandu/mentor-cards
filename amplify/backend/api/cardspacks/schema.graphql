@@ -74,7 +74,13 @@ type CardsPack
   guideBook: GuideBook 
   name: String 
   freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
-  about: String
+  about: About
+}
+
+type About{
+  text: String
+  imgUrl: String
+  link: String
 }
 
 type GuideBook{
