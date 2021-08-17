@@ -1,3 +1,4 @@
+import { AboutInput } from '../API.service';
 import { Card } from './card';
 
 export class PackInfo {
@@ -9,7 +10,7 @@ export class PackInfo {
     tags: string[];
     name: string;
     freeUntilDate: Date;
-    about: string;
+    about: AboutInput;
 
     constructor() { }
 
@@ -30,7 +31,7 @@ export class PackContent {
     guideBook: GuideBook;
     name: string;
     freeUntilDate: Date;
-    about: string;
+    about: AboutInput;
 
     constructor() { }
 
