@@ -352,6 +352,7 @@ export type DeleteCouponCodesInput = {
   id: string;
 };
 
+
 export type CreateCardsPackInput = {
   id?: string | null;
   imgUrl: string;
@@ -364,7 +365,13 @@ export type CreateCardsPackInput = {
   guideBook?: GuideBookInput | null;
   name?: string | null; 
   freeUntilDate?: string | null;  
-  about?: string | null;   
+  about?: AboutInput | null;   
+};
+
+export type AboutInput = {
+  text?: string | null;
+  imgUrl?: string | null;
+  link?: string | null;
 };
 
 export type GuideBookInput = {
@@ -410,9 +417,16 @@ export type CardsPack = {
   guideBook?: GuideBook;
   name?: string | null; 
   freeUntilDate?: string | null;   
-  about?: string | null;   
+  about?: About | null;   
   createdAt?: string;
   updatedAt?: string;
+};
+
+export type About = {
+  __typename: "About";
+  text?: string | null;
+  imgUrl?: string | null;
+  link?: string | null;
 };
 
 export type GuideBook = {
@@ -444,7 +458,7 @@ export type UpdateCardsPackInput = {
   guideBook?: GuideBookInput | null;
   name?: string | null;
   freeUntilDate?: string | null;   
-  about?: string | null;   
+  about?: AboutInput | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -885,7 +899,12 @@ export type CreateCardsPackMutation = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;   
-  about?: string | null;   
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -914,7 +933,12 @@ export type UpdateCardsPackMutation = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;   
-  about?: string | null;   
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null; 
   createdAt: string;
   updatedAt: string;
 };
@@ -943,7 +967,12 @@ export type DeleteCardsPackMutation = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;  
-  about?: string | null;    
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;  
   createdAt: string;
   updatedAt: string;
 };
@@ -1208,7 +1237,12 @@ export type GetCardsPackQuery = {
   } | null;
   name?: string | null;
   freeUntilDate?: string | null;   
-  about?: string | null;   
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;  
   createdAt: string;
   updatedAt: string;
 };
@@ -1239,7 +1273,12 @@ export type ListCardsPacksQuery = {
     } | null;
     name?: string | null;       
     freeUntilDate?: string | null;   
-    about?: string | null;   
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;  
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -2135,7 +2174,12 @@ export class APIService {
           }
           name
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2180,7 +2224,12 @@ export class APIService {
           }
           name       
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2225,7 +2274,12 @@ export class APIService {
           }
           name
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2658,7 +2712,12 @@ export class APIService {
           }
           name
           freeUntilDate
-          about
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -2703,7 +2762,12 @@ export class APIService {
             }
             name
             freeUntilDate
-            about
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -2759,7 +2823,12 @@ export class APIService {
             }
             name
             freeUntilDate
-            about
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
