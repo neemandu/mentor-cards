@@ -344,6 +344,13 @@ mutation CreateCardsPack(
       }
     }
     name
+    freeUntilDate
+    about {
+      __typename
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -371,6 +378,13 @@ mutation UpdateCardsPack(
       }
     }
     name
+    freeUntilDate
+    about {
+      __typename
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -398,6 +412,13 @@ mutation DeleteCardsPack(
       }
     }
     name
+    freeUntilDate
+    about {
+      __typename
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
