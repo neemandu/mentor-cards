@@ -4,6 +4,7 @@
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
+import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -2721,10 +2722,71 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+    const response = (await API.graphql(  { query: statement,
+      variables: gqlAPIServiceArguments,
+      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
+  }
+  async ListCardsPacksForPreview(
+    filter?: ModelCardsPackFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCardsPacksQuery> {
+    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
+        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            imgUrl
+            description
+            cards
+            tags
+            categories
+            cardsPreview
+            guideBook {
+              __typename
+              subjects {
+                __typename
+                subjectName
+                subSubjects {
+                  __typename
+                  subSubjectName
+                  questions
+                }
+              }
+            }
+            name
+            freeUntilDate
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+    )) as any;
+    return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async ListCardsPacks(
     filter?: ModelCardsPackFilterInput,
@@ -2844,7 +2906,9 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
     )) as any;
     return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
   }
