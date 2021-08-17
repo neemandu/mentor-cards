@@ -161,7 +161,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxWidth = '30vw';
+    dialogConfig.maxWidth = '40vw';
+    dialogConfig.maxHeight = '90vh';
     dialogConfig.data = this.pack;
     this.dialog.open(AboutAuthorComponent, dialogConfig);
   }
