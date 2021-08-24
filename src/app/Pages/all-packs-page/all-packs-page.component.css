@@ -32,9 +32,9 @@ app-pack {
   /* margin: 15px 25px; */
 }
 
-app-pack:last-child {
+/* app-pack:last-child {
   margin-bottom: 25px;
-}
+} */
 
 #filters {
   position: sticky;

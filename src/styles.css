@@ -3,6 +3,7 @@ html,
 body {
   height: 100%;
   font-family: 'rubik';
+  /* overflow-y: scroll!important; */
   /* -webkit-text-size-adjust: auto; */
 }
 
