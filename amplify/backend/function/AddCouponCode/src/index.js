@@ -142,6 +142,9 @@ exports.handler = async (event) => {
             console.warn('no such coupon code - ' + couponCode);
             throw Error ('no such coupon code - ' + couponCode);
         }
+        if(!user.couponCodes){
+            user.couponCodes = [];
+        }
         user.couponCodes.push(dbCouponCode);
         await saveUser(user); 
     }
