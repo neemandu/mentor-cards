@@ -14,7 +14,7 @@
 <div mat-dialog-content class="d-flex flex-column">
     <div class="d-flex justify-content-center align-items-center">
         <img style="max-height: 30vh; max-width: 20vw;" *ngIf="packInfo.about.imgUrl" src={{packInfo.about.imgUrl}}>
-        <p style="min-width: 5vw;">{{packInfo.about.text}}</p>
+        <p style="min-width: 5vw; text-align: right;">{{packInfo.about.text}}</p>
     </div>
 </div>
 <mat-dialog-actions align="center" *ngIf="packInfo.about.link">
