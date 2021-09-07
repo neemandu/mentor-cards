@@ -38,7 +38,7 @@ app-pack {
 
 #filters {
   position: sticky;
-  top: 10%;
+  /* top: 10%; */
   max-width: 15%;
   min-width: 10%;
   word-break: keep-all;
@@ -116,4 +116,15 @@ mat-form-field {
 
 h1 {
   margin-bottom: 0px;
+}
+
+.category {
+  margin-top: 5%!important;
+}
+
+.category-color-dot {
+  font-size: 12px;
+  font-family: 'Material Icons'
+  /* margin-right: -10px;
+  margin-bottom: -4px; */
 }

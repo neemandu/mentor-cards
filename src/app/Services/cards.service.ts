@@ -25,6 +25,8 @@ export class CardsService {
   allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
+  categoryColor = new Map<string, string>([['קלפי תמונה', '#89f4ff'], ['קלפי תמונה + מילה', '#ff3af0d1'], ['קלפי מילה', '#c789ff'], ['קלפי שאלות', '#ff8989'], ['קלפי מסרים', '#5581ff']]);
+
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService) {
     this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
@@ -53,6 +55,10 @@ export class CardsService {
 
   isFavorite(id: string): boolean {
     return this.favorites.includes(id);
+  }
+
+  getCategoryColor(category: string): string {
+    return this.categoryColor.get(category);
   }
 
   public getPackById(id: any): Observable<any> {
