@@ -49,6 +49,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     if (this.id) {//a specific pack
       if (this.cardsService.allPacks) {
         this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
+        // console.log("file: pack-content-page.component.ts ~ line 52 ~ ngOnInit ~ this.pack", this.pack)
       }
       else {
         this.api.GetCardsPack(this.id).then(pack => {

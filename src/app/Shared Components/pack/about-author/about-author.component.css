@@ -1,7 +1,8 @@
 p {
-  text-align: center;
+  text-align: right;
   font-size: medium;
   line-height: 1.5rem;
+  direction: rtl;
 }
 
 .line {
