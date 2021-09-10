@@ -76,6 +76,7 @@ import { SiteContentManagementComponent } from './Pages/site-content-management/
 import { NewEditNewsComponent } from './Shared Components/Dialogs/new-edit-news/new-edit-news.component';
 import { EnterCouponCodeDialogComponent } from './Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 import { AboutAuthorComponent } from './Shared Components/pack/about-author/about-author.component';
+import { InformationBarComponent } from './Shared Components/information-bar/information-bar.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { AboutAuthorComponent } from './Shared Components/pack/about-author/abou
     NewEditNewsComponent,
     EnterCouponCodeDialogComponent,
     AboutAuthorComponent,
+    InformationBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -2758,7 +2758,6 @@ export class APIService {
               }
             }
             name
-            freeUntilDate
             about {
               __typename
               text

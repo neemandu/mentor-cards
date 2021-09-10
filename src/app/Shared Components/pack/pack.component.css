@@ -1,17 +1,20 @@
 img {
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-style: solid;
+  border-width: 0px 4px 4px 4px;
+  border-radius: 0px 0px 4px 4px;
+  /* border: 4px solid #ddd;
+  border-radius: 4px; */
   /* padding: 5px; */
   /* width: 10vw; */
   width: 10rem;
   height: auto;
   box-shadow: 0.25em 0.25em 0px 0px rgb(255 255 255), 0.25em 0.25em 0px 1px #ddd, 0.5em 0.5em 0px 0px rgb(255 255 255), 0.5em 0.5em 0px 1px #ddd;
-  transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+  transition: box-shadow 0.2s ease-out;
 }
 
 img:hover {
   box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd, 0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd;
-  transform: scale(1.03);
+  /* transform: scale(1.03); */
 }
 
 #pack-buttons {
@@ -62,9 +65,21 @@ mat-icon {
   cursor: pointer;
 }
 
-#pack-desc {
+.pack-desc {
   text-align: center;
   margin-bottom: 0px;
+  font-family: 'rubik';
+  border-style: solid;
+  border-width: 4px 4px 0px 4px;
+  border-radius: 4px 4px 0px 0px;
+}
+
+.content {
+  transition: transform 0.2s ease-out;
+}
+
+.content:hover {
+  transform: scale(1.03);
 }
 
 ::ng-deep .tooltip-class {

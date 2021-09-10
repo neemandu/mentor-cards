@@ -105,6 +105,13 @@ button:focus {
   }
 }
 
+app-information-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 /* @keyframes shadow {
   0% {
     box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 12px;

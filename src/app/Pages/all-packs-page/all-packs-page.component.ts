@@ -65,6 +65,7 @@ export class AllPacksPageComponent implements OnInit {
     } else {
       let authStatus = localStorage.getItem('signedin');
       (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then(packs => {
+        // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
         this.allPacks = packs.items.map(pack => {
           pack.categories.forEach(category => {
             if (!this.allCategories.includes(category))
@@ -76,7 +77,7 @@ export class AllPacksPageComponent implements OnInit {
         this.cardsService.allPacks = this.allPacks.map(pack => pack);
         this.cardsService.allCategories = this.allCategories.map(category => category);
         this.allFavorites = this.cardsService.favorites;
-        console.log("file: all-packs-page.component.ts ~ line 83 ~ this.allPacks", this.allPacks)
+        // console.log("file: all-packs-page.component.ts ~ line 83 ~ this.allPacks", this.allPacks)
         this.sortPacks();
         this.overlaySpinnerService.changeOverlaySpinner(false);
       }, reject => {
@@ -110,8 +111,10 @@ export class AllPacksPageComponent implements OnInit {
         return 0;
       if (this.allFavorites.includes(packA.id))
         return -1;
-      else
+      if (this.allFavorites.includes(packB.id))
         return 1;
+      else
+        return packA.categories[0].localeCompare(packB.categories[0]);
     })
   }
 
@@ -129,6 +132,10 @@ export class AllPacksPageComponent implements OnInit {
   allNotOwnedPacks(): PackContent[] {
     return this.allPacks.filter(pack => pack.cards.length == 0);
     // return this.allPacks.filter(pack => !pack.cards);
+  }
+
+  getCategoryColor(category): string {
+    return this.cardsService.getCategoryColor(category);
   }
 
   get signedIn() {

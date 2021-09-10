@@ -1,9 +1,8 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { OverlaySpinnerService } from '../Services/overlay-spinner.service';
 import { SharedDialogsService } from '../Services/shared-dialogs.service';
-import { SiteRulesDialogComponent } from '../Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
 
 @Component({
   selector: 'app-main-screen',
@@ -23,9 +22,9 @@ export class MainScreenComponent implements OnInit, OnDestroy {
     }));
   }
 
-  openSiteRulesModal(): void {
-    this.sharedDialogsService.openSiteRulesDialog();
-  }
+  // openSiteRulesModal(): void {
+  //   this.sharedDialogsService.openSiteRulesDialog();
+  // }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();

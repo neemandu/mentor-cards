@@ -73,7 +73,7 @@ type CardsPack
   groupsIds: [String] 
   guideBook: GuideBook 
   name: String 
-  freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
+  freeUntilDate: AWSDateTime @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetFreeUntilDate-${env}")
   about: About
 }
 
