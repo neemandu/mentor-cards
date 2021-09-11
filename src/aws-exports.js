@@ -6,7 +6,32 @@ const awsmobile = {
     "aws_cognito_region": "eu-west-2",
     "aws_user_pools_id": "eu-west-2_tvxPHBNU1",
     "aws_user_pools_web_client_id": "egeu500tpklnq8md0rf6mvl19",
-    "oauth": {},
+    "oauth": {
+        "domain": "mentor-cards-dev.auth.eu-west-2.amazoncognito.com",
+        "scope": [
+            "phone",
+            "email",
+            "openid",
+            "profile",
+            "aws.cognito.signin.user.admin"
+        ],
+        "redirectSignIn": "https://www.mentor-cards.com/all-packs-page/",
+        "redirectSignOut": "https://www.mentor-cards.com/home-page/",
+        "responseType": "code"
+    },
+    "federationTarget": "COGNITO_USER_POOLS",
+    "aws_cognito_login_mechanism": [],
+    "aws_cognito_signup_attributes": [
+        "EMAIL"
+    ],
+    "aws_cognito_mfa_configuration": "OFF",
+    "aws_cognito_mfa_types": [
+        "SMS"
+    ],
+    "aws_cognito_password_protection_settings": {
+        "passwordPolicyMinLength": 8,
+        "passwordPolicyCharacters": []
+    },
     "aws_cloud_logic_custom": [
         {
             "name": "PayPalSubscriptionsWebHook",
