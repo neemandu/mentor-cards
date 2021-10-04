@@ -17,7 +17,7 @@
       לאמן!</span>
     <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
-    <span style="font-size: x-small;" id="middle">30 ימי ניסיון ללא עלות.</span>
+    <span style="font-size: small;" id="middle">30 ימי ניסיון.</span>
     <div *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">
       <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
       <br>
