@@ -126,8 +126,7 @@ exports.handler = async (event) => {
 
     if(user && 
         user.couponCodes && 
-        user.couponCodes.length > 0){
-        
+        user.couponCodes.length > 0){   
         for(var i = 0 ; i < user.couponCodes.length ; i++){ 
             if(user.couponCodes[i].id == couponCode){
                 console.warn('Coupon code already used - ' + couponCode);
@@ -145,6 +144,8 @@ exports.handler = async (event) => {
         if(!user.couponCodes){
             user.couponCodes = [];
         }
+        dbCouponCode.createdAt = new Date();
+        dbCouponCode.updatedAt = new Date();
         user.couponCodes.push(dbCouponCode);
         await saveUser(user); 
     }
