@@ -17,7 +17,7 @@
       לאמן!</span>
     <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
-    <span style="font-size: small;" id="middle">30 ימי ניסיון.</span>
+    <span style="font-size: medium;" id="middle">התחברו ותיהנו מ-30 ימי ניסיון בחינם!</span>
     <div *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">
       <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
       <br>
@@ -30,16 +30,13 @@
     <br>
     <button style="font-size: x-large;" type="button" (click)="navigate('/example-pack')">ערכה לדוגמא</button>
   </div>
-  <div id="actions" class="d-flex flex-column actions-bottom">
+  <div *ngIf="news?.length > 0" id="actions" class="d-flex flex-column actions-bottom">
     <span id="news-title">חדשות ועדכונים</span>
-    <marquee style="font-size: 1rem;" vspace="1%" direction="down" width="90%" height="50px" scrollamount="1"
+    <marquee style="font-size: 1rem;" vspace="1%" direction="up" width="90%" height="50px" scrollamount="1"
       onmouseover="this.stop();" onmouseout="this.start();">
       <ul>
         <li *ngFor="let new of news">
           {{new.message}}
-        </li>
-        <li *ngIf="news?.length == 0">
-          אין חדשות ועדכונים
         </li>
       </ul>
     </marquee>
