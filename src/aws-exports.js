@@ -7,6 +7,23 @@ const awsmobile = {
     "aws_user_pools_id": "eu-west-2_L91EfiE5N",
     "aws_user_pools_web_client_id": "56qvk3q8tq3448lbslmbsn4aho",
     "oauth": {},
+    "aws_cognito_login_mechanisms": [
+        "PREFERRED_USERNAME"
+    ],
+    "aws_cognito_signup_attributes": [
+        "EMAIL"
+    ],
+    "aws_cognito_mfa_configuration": "OFF",
+    "aws_cognito_mfa_types": [
+        "SMS"
+    ],
+    "aws_cognito_password_protection_settings": {
+        "passwordPolicyMinLength": 8,
+        "passwordPolicyCharacters": []
+    },
+    "aws_cognito_verification_mechanisms": [
+        "EMAIL"
+    ],
     "aws_cloud_logic_custom": [
         {
             "name": "PayPalSubscriptionsWebHook",

@@ -86,7 +86,9 @@ function isPackageBelongToUser(id, cardsPacksIds, username) {
             }
         }
     }
-    console.log('package does not belong to user ' + username + ': ' + canView);
+    if(!canView){
+        console.log('package does not belong to user ' + username + ': ' + canView);
+    }
     return canView;
 }
 
@@ -184,8 +186,8 @@ exports.handler = async (event) => {
             for(var i = 0 ; i < user.couponCodes.length ; i++){ 
                 if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
                     console.log('User has a coupon code with this package');
-                    var date = user.couponCodes[i].createdAt;
-                    date.setDate(date.getDate()+user.couponCodes[i].trialPeriodInDays);
+                    var date = new Date();
+                    date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
                     event.source['freeUntilDate'] = date;
                     return event.source['cards'];
                 }
