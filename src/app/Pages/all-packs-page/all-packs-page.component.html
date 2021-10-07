@@ -54,7 +54,7 @@
       <!-- <h1 *ngIf="signedIn && hasProgram && !trialMonthExpDate && !codeCouponExpDate" -->
       <h1 *ngIf="signedIn && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">ערכות הקלפים שלי</h1>
       <h1 *ngIf="signedIn && trialMonthExpDate" style="text-align: center; margin-left: 14rem;">
-        כל ערכות אלו לרשותכם עד ה- {{trialMonthExpDate}}
+        כל ערכות אלו לרשותכם עד ה- {{trialMonthExpDate | date:'d/M/yy'}}
       </h1>
       <!-- <h1 *ngIf="signedIn && codeCouponExpDate" style="text-align: center; margin-left: 14rem;">
         קוד ההטבה תקף עד- {{trialMonthExpDate}}

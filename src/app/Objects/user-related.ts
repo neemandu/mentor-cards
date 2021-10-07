@@ -58,6 +58,7 @@ export class CouponCode {
     trialPeriodInDays: number;
     createdAt: Date;
     updatedAt: Date;
+    allowedCardsPacks: string[];
 
     constructor(input) {
         Object.assign(this, input);
