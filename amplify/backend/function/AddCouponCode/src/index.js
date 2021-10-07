@@ -144,8 +144,8 @@ exports.handler = async (event) => {
         if(!user.couponCodes){
             user.couponCodes = [];
         }
-        dbCouponCode.createdAt = new Date();
-        dbCouponCode.updatedAt = new Date();
+        dbCouponCode.createdAt = new Date().toISOString();
+        dbCouponCode.updatedAt = new Date().toISOString();
         user.couponCodes.push(dbCouponCode);
         await saveUser(user); 
     }
