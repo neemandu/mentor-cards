@@ -4,7 +4,6 @@
 const awsmobile = {
     "aws_project_region": "eu-west-2",
     "aws_cognito_region": "eu-west-2",
-<<<<<<< HEAD
     "aws_user_pools_id": "eu-west-2_tvxPHBNU1",
     "aws_user_pools_web_client_id": "egeu500tpklnq8md0rf6mvl19",
     "oauth": {
@@ -22,14 +21,6 @@ const awsmobile = {
     },
     "federationTarget": "COGNITO_USER_POOLS",
     "aws_cognito_login_mechanism": [],
-=======
-    "aws_user_pools_id": "eu-west-2_L91EfiE5N",
-    "aws_user_pools_web_client_id": "56qvk3q8tq3448lbslmbsn4aho",
-    "oauth": {},
-    "aws_cognito_login_mechanisms": [
-        "PREFERRED_USERNAME"
-    ],
->>>>>>> main
     "aws_cognito_signup_attributes": [
         "EMAIL"
     ],
@@ -41,12 +32,6 @@ const awsmobile = {
         "passwordPolicyMinLength": 8,
         "passwordPolicyCharacters": []
     },
-<<<<<<< HEAD
-=======
-    "aws_cognito_verification_mechanisms": [
-        "EMAIL"
-    ],
->>>>>>> main
     "aws_cloud_logic_custom": [
         {
             "name": "PayPalSubscriptionsWebHook",

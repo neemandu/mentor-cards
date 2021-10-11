@@ -44,7 +44,7 @@
     <mat-selection-list #favorites (selectionChange)="favoritesSelectedChange($event); filterPacks()">
       <mat-list-option disableRipple style="direction: ltr;" *ngFor="let fav of getAllFavoritesDesc()"
         [selected]="selectedFavorites.includes(fav)" [value]="fav">
-        {{fav}}
+        <span style="direction: rtl;">{{fav}}</span>
       </mat-list-option>
     </mat-selection-list>
   </div>
