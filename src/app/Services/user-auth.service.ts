@@ -8,6 +8,7 @@ import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CardsService } from './cards.service';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -22,6 +23,7 @@ export class UserAuthService {
   @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() addCouponCodeToFavs: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   loggedInAttributes: any;
   subPlans: SubscriptionPlan[];
@@ -29,7 +31,8 @@ export class UserAuthService {
   // userData: any;
   groupData: GroupData;
 
-  constructor(public _snackBar: MatSnackBar, public router: Router, private ngZone: NgZone, private api: APIService, private http: HttpClient) {
+  constructor(public _snackBar: MatSnackBar, public router: Router,
+    private ngZone: NgZone, private api: APIService, private http: HttpClient) {
     this.getSubscriptionPlans();
   }
 
@@ -87,11 +90,18 @@ export class UserAuthService {
         if (!data)
           return;
         this.userData = new UserData().deseralize(data);
-        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+        console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
+        if (this.userData.couponCodes.length != 0) {
+          this.userData.couponCodes.forEach(coupon => {
+            if (coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
+              this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
+          })
+        }
         this.loggedInEmmiter.emit(this.userData);
-        (this.userData.status === 'PLAN' || this.trialMonthExpDate || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+        // (this.userData.status === 'PLAN' || this.trialMonthExpDate || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+        (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
       })
