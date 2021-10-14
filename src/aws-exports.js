@@ -20,7 +20,9 @@ const awsmobile = {
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",
-    "aws_cognito_login_mechanism": [],
+    "aws_cognito_login_mechanisms": [
+        "PREFERRED_USERNAME"
+    ],
     "aws_cognito_signup_attributes": [
         "EMAIL"
     ],
@@ -32,6 +34,9 @@ const awsmobile = {
         "passwordPolicyMinLength": 8,
         "passwordPolicyCharacters": []
     },
+    "aws_cognito_verification_mechanisms": [
+        "EMAIL"
+    ],
     "aws_cloud_logic_custom": [
         {
             "name": "PayPalSubscriptionsWebHook",
@@ -42,7 +47,8 @@ const awsmobile = {
     "aws_appsync_graphqlEndpoint": "https://5cmzkp3ucbcgrm7eflb2mg3ram.appsync-api.eu-west-2.amazonaws.com/graphql",
     "aws_appsync_region": "eu-west-2",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_appsync_apiKey": "da2-if4kb7ivarhqni4pmj56hh7oai"
+    "aws_appsync_apiKey": "da2-if4kb7ivarhqni4pmj56hh7oai",
+    "aws_cognito_login_mechanism": []
 };
 
 
