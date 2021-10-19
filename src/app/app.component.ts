@@ -1,10 +1,10 @@
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UserAuthService } from './Services/user-auth.service';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { I18n } from 'aws-amplify';
 import LogRocket from 'logrocket';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -47,7 +47,8 @@ export class AppComponent implements OnInit {
   title = 'amplify-angular-auth';
   showLogin: boolean = true;
 
-  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
+  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService,
+    private overlaySpinnerService: OverlaySpinnerService,
     public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
     I18n.putVocabularies(dict);

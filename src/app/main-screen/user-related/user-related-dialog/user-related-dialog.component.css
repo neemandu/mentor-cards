@@ -26,3 +26,16 @@ mat-tab {
   justify-content: center;
   margin-top: 25rem;
 }
+
+::ng-deep .mat-tab-label {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: #ffa800!important;
+}
+
+.iconButton {
+  margin: -10px;
+}

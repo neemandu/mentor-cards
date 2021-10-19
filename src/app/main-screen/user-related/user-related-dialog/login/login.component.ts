@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
 
@@ -11,6 +12,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 export class LoginComponent implements OnInit {
 
   @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
+  @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
 
   // emailRegex = '^[A-Za-z0-9._%+-]+@intel.com$';
   loginForm: FormGroup = this.formBuilder.group({
@@ -27,7 +29,8 @@ export class LoginComponent implements OnInit {
   login: boolean = true;
   showLoading: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService) { }
+  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
+    private overlaySpinnerService: OverlaySpinnerService,) { }
 
   ngOnInit(): void {
   }
@@ -43,24 +46,26 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit(): void {
-    this.showHideLoading();
+    // this.showHideLoading();
+    this.overlaySpinnerService.changeOverlaySpinner(true);
     this.loginForm.disable();
     var user = {
       "username": this.loginForm.get("username").value,
       "password": this.loginForm.get("password").value,
     }
     this.userAuthService.logIn(user).then(userData => {
-      // console.log(userData);
-      this.showHideLoading();
-      this.userAuthService._snackBar.open('התחברות מוצלחת, ברוך הבא ' + userData.attributes.name + '!', '', {
-        duration: 5000,
-        panelClass: ['rtl-snackbar']
-      });
+      console.log(userData);
+      // this.showHideLoading();
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      // this.userAuthService._snackBar.open('התחברות מוצלחת, ברוך הבא ' + userData.username + '!', '', {
+      //   duration: 5000,
+      //   panelClass: ['rtl-snackbar']
+      // });
       this.userAuthService.loggedIn(userData);
       this.loggedIn.emit();
     })
       .catch(err => {
-        this.showHideLoading();
+        this.overlaySpinnerService.changeOverlaySpinner(false);
         this.loginForm.enable();
         console.log(err)
         if (err.code === 'UserNotConfirmedException') {
@@ -164,8 +169,11 @@ export class LoginComponent implements OnInit {
     this.forgotPasswordForm.controls.newPassword.clearValidators();
   }
 
-
   showHideLoading(): void {
     this.showLoading = !this.showLoading;
+  }
+
+  moveToRegister(): void {
+    this.toRegister.emit();
   }
 }

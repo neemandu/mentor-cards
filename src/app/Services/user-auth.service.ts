@@ -8,7 +8,8 @@ import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CardsService } from './cards.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UserRelatedDialogComponent } from '../main-screen/user-related/user-related-dialog/user-related-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -32,7 +33,8 @@ export class UserAuthService {
   groupData: GroupData;
 
   constructor(public _snackBar: MatSnackBar, public router: Router,
-    private ngZone: NgZone, private api: APIService, private http: HttpClient) {
+    private ngZone: NgZone, private api: APIService, private http: HttpClient,
+    public dialog: MatDialog) {
     this.getSubscriptionPlans();
   }
 
@@ -75,7 +77,8 @@ export class UserAuthService {
     });
     this.updateUserData();
     this.getSubscriptionPlans();
-    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.id, '', {
+    // this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.id, '', {
+    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.username, '', {
       duration: 5000,
       panelClass: ['rtl-snackbar']
     });
@@ -196,8 +199,17 @@ export class UserAuthService {
     // this.router.navigate(['no-program-page']);
   }
 
-  showSignInModal(): void {
-    this.showSignInModalEmitter.emit(true);
+  // showSignInModal(): void {//TODO uncomment this part for cognito signin\register
+  //   this.showSignInModalEmitter.emit(true);
+  // }
+
+  showSignInModal(): void {//TODO uncomment this part for custom signin\register
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    // dialogConfig.maxHeight = '85vh';
+    // dialogConfig.maxWidth = '85vw';
+    const dialogRef = this.dialog.open(UserRelatedDialogComponent, dialogConfig);
   }
 
   cancelPayPalSubscription(): Observable<any> {

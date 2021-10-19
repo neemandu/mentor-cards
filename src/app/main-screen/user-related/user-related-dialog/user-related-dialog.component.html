@@ -1,9 +1,21 @@
-<mat-tab-group [selectedIndex]="selectedTab" (selectedTabChange)="tabChanged($event)" mat-align-tabs="center" dynamicHeight>
-  <mat-tab label="התחברות">
-    <app-login (loggedIn)="loggedIn()"></app-login>
+<div>
+  <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
+    <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+  </button>
+</div>
+<mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedTabChange)="tabChanged($event)"
+  mat-align-tabs="center" dynamicHeight>
+  <mat-tab>
+    <ng-template mat-tab-label class="tab-label">
+      התחברות
+    </ng-template>
+    <app-login (loggedIn)="closeDialog()" (toRegister)="selectedTab = 1;"></app-login>
     <!-- <app-login></app-login> -->
   </mat-tab>
-  <mat-tab label="הרשמה">
+  <mat-tab>
+    <ng-template mat-tab-label class="tab-label">
+      הרשמה
+    </ng-template>
     <ng-template matTabContent>
       <app-register (registered)="selectedTab = 0;"></app-register>
     </ng-template>

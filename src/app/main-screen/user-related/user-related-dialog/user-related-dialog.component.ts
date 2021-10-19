@@ -28,7 +28,7 @@ export class UserRelatedDialogComponent implements OnInit {
     this.registerChild.resetForms();
   }
 
-  loggedIn(): void {
-    this.dialogRef.close();
+  closeDialog(): void {
+    this.dialogRef.close(false);
   }
 }
