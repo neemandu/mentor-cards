@@ -77,8 +77,4 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-
-  simulateRegister(): void {
-    this.registeredEmitter.emit("test@gmail.com")
-  }
 }
