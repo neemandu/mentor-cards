@@ -1,25 +1,7 @@
 <div id="content">
-  <!-- <div class="d-flex flex-column align-items-center">
-    <span id="title">
-      הרשמה
-    </span>
-    <span style="font-size: 1rem;">
-      קיים כבר משתמש? <a class="underlineHover" style="cursor: pointer;" (click)="moveToLogin()">התחברות</a>
-    </span>
-  </div> -->
   <div class="d-flex" id="register-div">
-    <form id="register-form" [formGroup]="registerForm">
+    <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSignupSubmit()">
       <div class="d-flex flex-column">
-        <!-- <mat-form-field>
-          <mat-label>שם פרטי</mat-label>
-          <input autocomplete="off" formControlName="name" matInput>
-          <mat-hint>עברית\אנגלית</mat-hint>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>שם משפחה</mat-label>
-          <input autocomplete="off" formControlName="lastName" matInput>
-          <mat-hint>עברית\אנגלית</mat-hint>
-        </mat-form-field> -->
         <mat-form-field>
           <mat-label>שם מלא</mat-label>
           <input autocomplete="off" formControlName="name" matInput>
@@ -35,13 +17,18 @@
         <mat-form-field>
           <mat-label>אימייל</mat-label>
           <input autocomplete="off" formControlName="username" matInput>
-          <mat-error *ngIf="registerForm.controls.username.errors?.emailAlreadyExists">מייל קיים. נא להשתמש באחר
+          <mat-error *ngIf="registerForm.controls.username.errors?.UsernameExistsException">מייל זה קיים במערכת, נא
+            להשתמש באחר
           </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>אימות אימייל</mat-label>
           <input autocomplete="off" formControlName="usernameConfirm" matInput (focusout)="checkUsernameConfirm()">
           <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.notSameEmail">מייל לא תואם
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.UsernameExistsException">מייל זה קיים במערכת,
+            נא
+            להשתמש באחר
           </mat-error>
         </mat-form-field>
         <mat-form-field>
@@ -56,8 +43,9 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>אימות סיסמא</mat-label>
-          <input autocomplete="off" formControlName="passwordConfirm" matInput [type]="hidePWConfirm ? 'password' : 'text'"
-          onkeypress="return (event.charCode >= 33 && event.charCode <= 126)" (focusout)="checkPasswordConfirm()">
+          <input autocomplete="off" formControlName="passwordConfirm" matInput
+            [type]="hidePWConfirm ? 'password' : 'text'"
+            onkeypress="return (event.charCode >= 33 && event.charCode <= 126)" (focusout)="checkPasswordConfirm()">
           <!-- <mat-error *ngIf="registerForm.controls.password.errors?.badPassword">סיסמא לא חוקית, נסו שנית</mat-error> -->
           <mat-error *ngIf="registerForm.controls.passwordConfirm.errors?.notSamePassword">סיסמא לא תואמת</mat-error>
           <mat-hint>8 ספרות לפחות, יש להכיל ספרה, אות קטנה וגדולה (באנגלית)</mat-hint>
@@ -78,5 +66,5 @@
       </a>
     </div>
   </div>
-  <mat-progress-bar [ngStyle]="{'visibility': showLoading ? 'visible' : 'hidden'}" mode="query"></mat-progress-bar>
 </div>
+<button (click)="simulateRegister()">Press</button>

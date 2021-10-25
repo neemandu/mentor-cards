@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService, NewUser } from 'src/app/Services/auth.service';
+import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  @Output() registered: EventEmitter<any> = new EventEmitter<any>();
+  @Output() registeredEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   // pwRegex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/"
   registerForm: FormGroup = this.formBuilder.group({
@@ -23,9 +25,10 @@ export class RegisterComponent implements OnInit {
   });
   hidePW: boolean = true;
   hidePWConfirm: boolean = true;
-  showLoading: boolean = false;
+  // showLoading: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService) { }
+  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
+    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -47,7 +50,35 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
   }
 
-  moveToLogin(): void {
-    this.registered.emit();
+  onSignupSubmit(): void {
+    this.overlaySpinnerService.changeOverlaySpinner(true);
+    // this.registerForm.disable();
+    var user: NewUser = {
+      "fullName": this.registerForm.get("name").value,
+      "phone": `+972${this.registerForm.get("phone").value}`,
+      "email": this.registerForm.get("username").value,
+      "password": this.registerForm.get("password").value,
+    }
+    this.amplifyAuthService.signUp(user).then(data => {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      this.userAuthService._snackBar.open(
+        `הרשמה מוצלחת! קוד אימות נשלח למייל ${user.email}`, '', {
+        duration: 10000,
+        panelClass: ['rtl-snackbar']
+      });
+      this.registeredEmitter.emit(user.email)
+      console.log("file: register.component.ts ~ line 67 ~ this.userAuthService.signUp ~ data", data)
+    }, error => {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      console.log("file: register.component.ts ~ line 69 ~ this.userAuthService.signUp ~ error", error)
+      if (error.code === "UsernameExistsException") {
+        this.registerForm.get('username').setErrors({ 'UsernameExistsException': true });
+        this.registerForm.get('usernameConfirm').setErrors({ 'UsernameExistsException': true });
+      }
+    })
+  }
+
+  simulateRegister(): void {
+    this.registeredEmitter.emit("test@gmail.com")
   }
 }

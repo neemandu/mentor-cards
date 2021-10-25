@@ -45,18 +45,18 @@ export class AppComponent implements OnInit {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
   title = 'amplify-angular-auth';
-  showLogin: boolean = true;
+  showLogin: boolean = false;
 
   constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService,
     private overlaySpinnerService: OverlaySpinnerService,
     public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
     I18n.putVocabularies(dict);
-    I18n.setLanguage('he');
+    I18n.setLanguage('he')
   }
 
   ngOnInit() {
-    localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
+    // localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       // console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
@@ -81,7 +81,9 @@ export class AppComponent implements OnInit {
       this.showLogin = true;
     })
     var ua = navigator.userAgent;
+    console.log("file: app.component.ts ~ line 84 ~ ngOnInit ~ ua", ua)
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
+      // if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua))
       this.openMobileErrorModal();
   }
 
