@@ -1,10 +1,10 @@
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UserAuthService } from './Services/user-auth.service';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { I18n } from 'aws-amplify';
 import LogRocket from 'logrocket';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -45,17 +45,18 @@ export class AppComponent implements OnInit {
   user: CognitoUserInterface | undefined;
   authState: AuthState;
   title = 'amplify-angular-auth';
-  showLogin: boolean = true;
+  showLogin: boolean = false;
 
-  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
+  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService,
+    private overlaySpinnerService: OverlaySpinnerService,
     public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
     I18n.putVocabularies(dict);
-    I18n.setLanguage('he');
+    I18n.setLanguage('he')
   }
 
   ngOnInit() {
-    localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
+    // localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
     onAuthUIStateChange((authState, authData) => {
       this.authState = authState;
       // console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
@@ -80,7 +81,9 @@ export class AppComponent implements OnInit {
       this.showLogin = true;
     })
     var ua = navigator.userAgent;
+    console.log("file: app.component.ts ~ line 84 ~ ngOnInit ~ ua", ua)
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
+      // if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua))
       this.openMobileErrorModal();
   }
 

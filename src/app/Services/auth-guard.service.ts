@@ -48,6 +48,9 @@ export class AuthGuardNoProgramPageService implements CanActivate {
         return true;
       }
     }
+    else {
+      this.ngZone.run(() => this.router.navigate(['home-page']));
+    }
     var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
       sub.unsubscribe();
       if (userData.status === "PLAN") {

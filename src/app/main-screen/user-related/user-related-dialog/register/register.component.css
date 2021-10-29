@@ -2,6 +2,14 @@
   font-family: 'rubik';
 }
 
+#title {
+  font-size: 1.5rem;
+}
+
+#content {
+  padding-top: 1%;
+}
+
 .mat-form-field {
   text-align: right;
   margin-bottom: 5px;
@@ -41,8 +49,41 @@
 a {
   /* font-family: 'rubik'; */
   font-size: 1rem;
+  margin: 1% 0%;
 }
 
 mat-progress-bar {
   margin: 10px 0px;
+}
+
+#register-div {
+  margin: 2% 0%;
+}
+
+#register-form {
+  border-left: #ffa800 2px solid;
+  padding: 1% 1% 1% 5%;
+  width: 18vw;
+}
+
+/* add appropriate colors to fb, twitter and google buttons */
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background-color: #55ACEE;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+
+#social-media-login {
+  margin-right: 5%;
+  width: 18vw;
+  justify-content: center;
 }

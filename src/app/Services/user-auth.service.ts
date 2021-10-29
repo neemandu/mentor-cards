@@ -8,7 +8,9 @@ import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CardsService } from './cards.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UserRelatedDialogComponent } from '../main-screen/user-related/user-related-dialog/user-related-dialog.component';
+import { AuthService, NewUser } from "./auth.service";
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -32,29 +34,45 @@ export class UserAuthService {
   groupData: GroupData;
 
   constructor(public _snackBar: MatSnackBar, public router: Router,
-    private ngZone: NgZone, private api: APIService, private http: HttpClient) {
+    private ngZone: NgZone, private api: APIService, private http: HttpClient,
+    public dialog: MatDialog, private _authService: AuthService) {
     this.getSubscriptionPlans();
   }
 
-  /**
-   * Preform sign up process
-   * @param newUser - new user data (name, lname, username (email), password)
-   */
-  // signUp(username: string, email: string): Promise<any> {
-  //   var session = Auth.currentSession();
-  //   var user: CreateUserInput = { 'username': username, 'email': email };
-  //   user.username = username;
-  //   user.email = email;
-  //   return this.api.CreateUser(user);
+  // /**
+  //  * Preform sign up process
+  //  * @param newUser - new user data (name, lname, username (email), password)
+  //  */
+  // signUp(newUser: NewUser): Promise<any> {
+  //   return this._authService
+  //     .signUp(newUser)
+  //   // .then(data => {
+  //   //   return data;
+  //   // })
+  //   // .catch(error => {
+  //   //   throw error;
+  //   //   // this._snackBar.open(`Error while signing in: ${error.code}`, '', {
+  //   //   //   duration: 5000,
+  //   //   //   panelClass: ['rtl-snackbar']
+  //   //   // });
+  //   // });
   // }
 
-  /**
-   * Preform log in using User data
-   * @param user - all user data to log in 
-   */
-  logIn(user): Promise<any> {
-    return Auth.signIn(user);
-  }
+  // sendConfirmation(email: string): Promise<any> {
+  //   return this._authService.sendConfirmationCode(email);
+  // }
+
+  // confirmCode(): Promise<any> {
+  //   return 
+  // }
+
+  // /**
+  //  * Preform log in using User data
+  //  * @param user - all user data to log in 
+  //  */
+  // logIn(user): Promise<any> {
+  //   return Auth.signIn(user);
+  // }
 
   /**
    * After succesful log in, save cookies and let all components know we logged in 
@@ -75,7 +93,8 @@ export class UserAuthService {
     });
     this.updateUserData();
     this.getSubscriptionPlans();
-    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.id, '', {
+    // this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.id, '', {
+    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.username, '', {
       duration: 5000,
       panelClass: ['rtl-snackbar']
     });
@@ -196,8 +215,17 @@ export class UserAuthService {
     // this.router.navigate(['no-program-page']);
   }
 
-  showSignInModal(): void {
-    this.showSignInModalEmitter.emit(true);
+  // showSignInModal(): void {//TODO uncomment this part for cognito signin\register
+  //   this.showSignInModalEmitter.emit(true);
+  // }
+
+  showSignInModal(): void {//TODO uncomment this part for custom signin\register
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    // dialogConfig.maxHeight = '85vh';
+    // dialogConfig.maxWidth = '85vw';
+    const dialogRef = this.dialog.open(UserRelatedDialogComponent, dialogConfig);
   }
 
   cancelPayPalSubscription(): Observable<any> {
