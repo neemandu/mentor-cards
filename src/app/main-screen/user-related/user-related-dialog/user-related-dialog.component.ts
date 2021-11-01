@@ -39,6 +39,6 @@ export class UserRelatedDialogComponent implements OnInit {
   }
 
   closeDialog(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 }

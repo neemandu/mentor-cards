@@ -75,17 +75,11 @@ export class LoginComponent implements OnInit {
       "password": this.loginForm.get("password").value,
     }
     this.amplifyAuthService.logIn(user).then(userData => {
-      console.log(userData);
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      // this.userAuthService._snackBar.open('התחברות מוצלחת, ברוך הבא ' + userData.username + '!', '', {
-      //   duration: 5000,
-      //   panelClass: ['rtl-snackbar']
-      // });
       this.userAuthService.loggedIn(userData);
       this.loggedIn.emit();
     })
       .catch(err => {
-        console.log(err)
+        console.log("file: login.component.ts ~ line 84 ~ onLoginSubmit ~ err", err)
         this.overlaySpinnerService.changeOverlaySpinner(false);
         if (err.code === 'UserNotConfirmedException') {
           this.sendConfirmationCode();
@@ -139,7 +133,7 @@ export class LoginComponent implements OnInit {
       })
       .catch(err => {
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        console.log(err)
+        console.log("file: login.component.ts ~ line 137 ~ forgotPasswordVarifyEmail ~ err", err)
         this.forgotPasswordErrorHandle(err);
       });
   }
@@ -151,9 +145,6 @@ export class LoginComponent implements OnInit {
     var newPassword = this.forgotPasswordForm.get("newPassword").value;
     this.userAuthService.forgotPasswordReset(user, confirmationCode, newPassword)
       .then(res => {
-        // console.log(res);
-        // this.forgotPasswordForm.enable();
-        // this.showHideLoading();
         this.newPasswordPhaseDisable();
         this.loginForm.controls['username'].setValue(this.forgotPasswordForm.controls['username'].value)
         this.showLoginForm();
@@ -164,7 +155,7 @@ export class LoginComponent implements OnInit {
         });
       })
       .catch(err => {
-        console.log(err)
+        console.log("file: login.component.ts ~ line 163 ~ forgotPasswordReset ~ err", err)
         this.forgotPasswordErrorHandle(err);
       });
   }
@@ -244,7 +235,7 @@ export class LoginComponent implements OnInit {
     this.amplifyAuthService.confirmCode(this.confirmForm.controls['username'].value, this.confirmForm.controls['confirmationCode'].value)
       .then((data: any) => {
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        console.log(data);
+        // console.log(data);
         if (data === 'SUCCESS') {
           this.userAuthService._snackBar.open(
             `משתמש אומת! יש להתחבר על מנת להתחיל לעבוד`, '', {
@@ -256,8 +247,8 @@ export class LoginComponent implements OnInit {
       })
       .catch((error: any) => {
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        console.log(error);
         this.codeConfirmationErrorHandle(error)
+        console.log("file: login.component.ts ~ line 254 ~ onConfirmSubmit ~ error", error)
       })
   }
 

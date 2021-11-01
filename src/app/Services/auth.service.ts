@@ -46,16 +46,6 @@ export class AuthService {
     });
   }
 
-  // signIn(username: string, password: string): Promise<CognitoUser | any> {
-  //   return new Promise((resolve, reject) => {
-  //     Auth.signIn(username, password)
-  //       .then((user: CognitoUser | any) => {
-  //         this.loggedIn = true;
-  //         resolve(user);
-  //       }).catch((error: any) => reject(error));
-  //   });
-  // }
-
   logIn(user): Promise<any> {
     return Auth.signIn(user);
   }
@@ -73,8 +63,6 @@ export class AuthService {
 
   sendConfirmationCode(email: string) {
     return Auth.resendSignUp(email)
-    // .then(() => this._notification.show('A code has been emailed to you'))
-    // .catch(() => this._notification.show('An error occurred'));
   }
 
   confirmCode(email: string, confirmCode: string) {
