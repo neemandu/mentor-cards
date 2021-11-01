@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+// import { LoginComponent } from './login/login.component';
+// import { RegisterComponent } from './register/register.component';
 
 @Component({
   selector: 'app-user-related-dialog',
@@ -11,8 +11,8 @@ import { RegisterComponent } from './register/register.component';
 export class UserRelatedDialogComponent implements OnInit {
 
   // showSpinner: boolean = true;
-  @ViewChild(LoginComponent, { static: false }) loginChild: LoginComponent;
-  @ViewChild(RegisterComponent, { static: false }) registerChild: RegisterComponent;
+  // @ViewChild(LoginComponent, { static: false }) loginChild: LoginComponent;
+  // @ViewChild(RegisterComponent, { static: false }) registerChild: RegisterComponent;
 
   selectedTab: number;
   registeredEmail: string;

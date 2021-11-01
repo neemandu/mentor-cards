@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserRelatedDialogComponent } from '../main-screen/user-related/user-related-dialog/user-related-dialog.component';
-import { AuthService, NewUser } from "./auth.service";
+import { AuthService } from "./auth.service";
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -38,41 +38,6 @@ export class UserAuthService {
     public dialog: MatDialog, private _authService: AuthService) {
     this.getSubscriptionPlans();
   }
-
-  // /**
-  //  * Preform sign up process
-  //  * @param newUser - new user data (name, lname, username (email), password)
-  //  */
-  // signUp(newUser: NewUser): Promise<any> {
-  //   return this._authService
-  //     .signUp(newUser)
-  //   // .then(data => {
-  //   //   return data;
-  //   // })
-  //   // .catch(error => {
-  //   //   throw error;
-  //   //   // this._snackBar.open(`Error while signing in: ${error.code}`, '', {
-  //   //   //   duration: 5000,
-  //   //   //   panelClass: ['rtl-snackbar']
-  //   //   // });
-  //   // });
-  // }
-
-  // sendConfirmation(email: string): Promise<any> {
-  //   return this._authService.sendConfirmationCode(email);
-  // }
-
-  // confirmCode(): Promise<any> {
-  //   return 
-  // }
-
-  // /**
-  //  * Preform log in using User data
-  //  * @param user - all user data to log in 
-  //  */
-  // logIn(user): Promise<any> {
-  //   return Auth.signIn(user);
-  // }
 
   /**
    * After succesful log in, save cookies and let all components know we logged in 
