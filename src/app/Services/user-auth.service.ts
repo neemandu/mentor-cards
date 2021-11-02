@@ -83,6 +83,7 @@ export class UserAuthService {
    * Get all data from BE about user
    */
   updateUserData(): void {
+    this.rememebrMe();
     if (this.cognitoUserData != null) {
       this.api.GetUser(this.cognitoUserData.attributes['email']).then(data => {
         if (!data) {
