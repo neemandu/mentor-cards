@@ -8,7 +8,9 @@ import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CardsService } from './cards.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UserRelatedDialogComponent } from '../main-screen/user-related/user-related-dialog/user-related-dialog.component';
+import { OverlaySpinnerService } from './overlay-spinner.service';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -25,47 +27,44 @@ export class UserAuthService {
   @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() addCouponCodeToFavs: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-  loggedInAttributes: any;
+  cognitoUserData: CognitoUserInterface;
   subPlans: SubscriptionPlan[];
   userData: UserData;
   // userData: any;
   groupData: GroupData;
 
   constructor(public _snackBar: MatSnackBar, public router: Router,
-    private ngZone: NgZone, private api: APIService, private http: HttpClient) {
+    private ngZone: NgZone, private api: APIService, private http: HttpClient,
+    public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
+    this.rememebrMe();
     this.getSubscriptionPlans();
   }
 
-  /**
-   * Preform sign up process
-   * @param newUser - new user data (name, lname, username (email), password)
-   */
-  // signUp(username: string, email: string): Promise<any> {
-  //   var session = Auth.currentSession();
-  //   var user: CreateUserInput = { 'username': username, 'email': email };
-  //   user.username = username;
-  //   user.email = email;
-  //   return this.api.CreateUser(user);
-  // }
-
-  /**
-   * Preform log in using User data
-   * @param user - all user data to log in 
-   */
-  logIn(user): Promise<any> {
-    return Auth.signIn(user);
+  async rememebrMe(): Promise<void> {
+    try {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
+      this.loggedIn(user)
+    } catch (err) {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
+    }
   }
 
   /**
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(cognitoUserserData: CognitoUserInterface) {
+  loggedIn(cognitoUserData: void | CognitoUserInterface): void {
+    if (!cognitoUserData) {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      return;
+    }
     // console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
     // debugger
-    this.loggedInAttributes = cognitoUserserData;
-    var newUsername: string = cognitoUserserData.username;
-    var newUserEmail: string = cognitoUserserData.attributes['email'];
+    this.cognitoUserData = cognitoUserData;
+    var newUsername: string = cognitoUserData.username;
+    var newUserEmail: string = cognitoUserData.attributes['email'];
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
     this.api.CreateUser(user).then(value => {
       // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.CreateUser ~ value", value)
@@ -73,9 +72,8 @@ export class UserAuthService {
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
     });
-    this.updateUserData();
-    this.getSubscriptionPlans();
-    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.userData.id, '', {
+    // this.updateUserData();
+    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.cognitoUserData.attributes.given_name, '', {
       duration: 5000,
       panelClass: ['rtl-snackbar']
     });
@@ -85,12 +83,15 @@ export class UserAuthService {
    * Get all data from BE about user
    */
   updateUserData(): void {
-    if (this.loggedInAttributes != null) {
-      this.api.GetUser(this.loggedInAttributes.username).then(data => {
-        if (!data)
+    if (this.cognitoUserData != null) {
+      this.api.GetUser(this.cognitoUserData.username).then(data => {
+        if (!data) {
+          this.overlaySpinnerService.changeOverlaySpinner(false);
           return;
+        }
         this.userData = new UserData().deseralize(data);
-        console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
         if (this.userData.couponCodes.length != 0) {
@@ -196,8 +197,17 @@ export class UserAuthService {
     // this.router.navigate(['no-program-page']);
   }
 
-  showSignInModal(): void {
-    this.showSignInModalEmitter.emit(true);
+  // showSignInModal(): void {//TODO uncomment this part for cognito signin\register
+  //   this.showSignInModalEmitter.emit(true);
+  // }
+
+  showSignInModal(): void {//TODO uncomment this part for custom signin\register
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    // dialogConfig.maxHeight = '85vh';
+    // dialogConfig.maxWidth = '85vw';
+    const dialogRef = this.dialog.open(UserRelatedDialogComponent, dialogConfig);
   }
 
   cancelPayPalSubscription(): Observable<any> {

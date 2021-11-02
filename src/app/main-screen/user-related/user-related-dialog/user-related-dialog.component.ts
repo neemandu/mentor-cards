@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+// import { LoginComponent } from './login/login.component';
+// import { RegisterComponent } from './register/register.component';
 
 @Component({
   selector: 'app-user-related-dialog',
@@ -11,10 +11,11 @@ import { RegisterComponent } from './register/register.component';
 export class UserRelatedDialogComponent implements OnInit {
 
   // showSpinner: boolean = true;
-  @ViewChild(LoginComponent, { static: false }) loginChild: LoginComponent;
-  @ViewChild(RegisterComponent, { static: false }) registerChild: RegisterComponent;
+  // @ViewChild(LoginComponent, { static: false }) loginChild: LoginComponent;
+  // @ViewChild(RegisterComponent, { static: false }) registerChild: RegisterComponent;
 
   selectedTab: number;
+  registeredEmail: string;
 
   constructor(public dialogRef: MatDialogRef<UserRelatedDialogComponent>,) { }
 
@@ -22,13 +23,22 @@ export class UserRelatedDialogComponent implements OnInit {
   }
 
   tabChanged(event: any): void {
+    if (event.index == 1)
+      this.registeredEmail = undefined;
     this.selectedTab = event.index;
+    // this.selectedTab = event.index;
     // console.log("tabChanged -> this.selectedTab", this.selectedTab)
-    this.loginChild.resetForms();
-    this.registerChild.resetForms();
+    // this.loginChild.resetForms();
+    // this.registerChild.resetForms();
   }
 
-  loggedIn(): void {
+  registered(email): void {
+    this.registeredEmail = email;
+    this.selectedTab = 0;
+    // this.loginChild.showConfirmUserForm(email)
+  }
+
+  closeDialog(): void {
     this.dialogRef.close();
   }
 }

@@ -17,8 +17,8 @@ import { AuthGuardGroupManagementService, AuthGuardNoProgramPageService, AuthGua
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
   { path: 'home-page', component: HomePageComponent },
-  // { path: 'no-program-page', component: NoProgramPageComponent, canActivate: [AuthGuardNoProgramPageService] },
-  { path: 'no-program-page', component: NoProgramPageComponent },
+  { path: 'no-program-page', component: NoProgramPageComponent, canActivate: [AuthGuardNoProgramPageService] },
+  // { path: 'no-program-page', component: NoProgramPageComponent },
   { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuardUserPageService] },
   { path: 'group-management', component: GroupManagementComponent, canActivate: [AuthGuardGroupManagementService] },
   { path: 'site-content-management', component: SiteContentManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },

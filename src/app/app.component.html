@@ -9,10 +9,7 @@
 
 <app-main-screen></app-main-screen>
 <!-- <app-lang-navigator></app-lang-navigator> -->
-<!-- <div>
-  
-</div> -->
-<!-- <div> -->
+
 <button *ngIf="showLogin"
   [ngClass]="{'closeLoginButton': true, 'sign-in': authState==='signin','sign-up': authState==='signup', 'forgot-password': authState==='forgotpassword'}"
   mat-icon-button (click)="closeAmplify()">
@@ -27,4 +24,3 @@
   <amplify-confirm-sign-up header-text="הזינו כאן את קוד האימות שנשלח למייל" slot="confirm-sign-up"></amplify-confirm-sign-up>
   <amplify-forgot-password header-text="שכחתי סיסמא" slot="forgot-password"></amplify-forgot-password>
 </amplify-authenticator>
-<!-- </div> -->

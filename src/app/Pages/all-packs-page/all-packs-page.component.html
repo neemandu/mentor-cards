@@ -15,11 +15,6 @@
     <br>
     <h3 id="filter-by-options-title">קטגוריות</h3>
     <mat-selection-list #categories (selectionChange)="categoriesSelectedChange($event); filterPacks()">
-      <!-- <mat-list-option disableRipple style="direction: ltr;"
-        *ngFor="let category of allCategories|slice:0:categoriesToShow"
-        [selected]="selectedCategories.includes(category)" [value]="category">
-        {{category}}
-      </mat-list-option> -->
       <mat-list-option disableRipple style="direction: ltr;"
         *ngFor="let category of allCategories|slice:0:categoriesToShow"
         [selected]="selectedCategories.includes(category)" [value]="category">
@@ -32,12 +27,12 @@
           </div>
         <!-- </span> -->
       </mat-list-option>
-      <button *ngIf="allCategories.length >= 5" id="more-less-categories-button" (click)="categoriesToShowChange()">
+      <!-- <button *ngIf="allCategories.length >= 5" id="more-less-categories-button" (click)="categoriesToShowChange()">
         <mat-icon class="more-less-categories-icon" *ngIf="categoriesToShow < allCategories.length">expand_more
         </mat-icon>
         <mat-icon class="more-less-categories-icon" *ngIf="categoriesToShow >= allCategories.length">expand_less
         </mat-icon>
-      </button>
+      </button> -->
     </mat-selection-list>
     <br>
     <h3 id="filter-by-options-title">המועדפים שלי</h3>
@@ -51,14 +46,10 @@
   <div class="all-packs-view">
     <!-- Available Packs -->
     <div *ngIf="allOwnedPacks().length != 0">
-      <!-- <h1 *ngIf="signedIn && hasProgram && !trialMonthExpDate && !codeCouponExpDate" -->
       <h1 *ngIf="signedIn && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">ערכות הקלפים שלי</h1>
       <h1 *ngIf="signedIn && trialMonthExpDate" style="text-align: center; margin-left: 14rem;">
         כל ערכות אלו לרשותכם עד ה- {{trialMonthExpDate | date:'d/M/yy'}}
       </h1>
-      <!-- <h1 *ngIf="signedIn && codeCouponExpDate" style="text-align: center; margin-left: 14rem;">
-        קוד ההטבה תקף עד- {{trialMonthExpDate}}
-      </h1> -->
       <div class="d-flex flex-row flex-wrap">
         <app-pack *ngFor="let packInfo of allOwnedPacks()" [packInfo]="packInfo" (loaded)="packLoaded()">
         </app-pack>
