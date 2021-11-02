@@ -4,10 +4,10 @@
 const awsmobile = {
     "aws_project_region": "eu-west-2",
     "aws_cognito_region": "eu-west-2",
-    "aws_user_pools_id": "eu-west-2_tvxPHBNU1",
+    "aws_user_pools_id": "eu-west-2_L91EfiE5N",
     "aws_user_pools_web_client_id": "56qvk3q8tq3448lbslmbsn4aho",
     "oauth": {
-        "domain": "mentor-cards.auth.eu-west-2.amazoncognito.com",
+        "domain": "mentor-cards-prod.auth.eu-west-2.amazoncognito.com",
         "scope": [
             "phone",
             "email",
