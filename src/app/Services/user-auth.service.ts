@@ -84,6 +84,8 @@ export class UserAuthService {
    */
   updateUserData(): void {
     if (this.cognitoUserData != null) {
+      console.log('this.cognitoUserData');
+      console.log(this.cognitoUserData);
       this.api.GetUser(this.cognitoUserData.email).then(data => {
         if (!data) {
           this.overlaySpinnerService.changeOverlaySpinner(false);
