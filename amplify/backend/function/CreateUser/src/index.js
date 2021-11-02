@@ -118,7 +118,7 @@ exports.handler = async (event) => {
             TableName:table,
             Item:{
                 "id": email,
-                "username": email,
+                "username": username,
                 "email": email,
                 "phone": phone,
                 "status": "NOPLAN",

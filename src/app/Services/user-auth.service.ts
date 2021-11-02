@@ -73,7 +73,7 @@ export class UserAuthService {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
     });
     // this.updateUserData();
-    this._snackBar.open('התחברות מוצלחת! ברוך הבא ' + this.cognitoUserData.attributes.given_name, '', {
+    this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
       duration: 5000,
       panelClass: ['rtl-snackbar']
     });
