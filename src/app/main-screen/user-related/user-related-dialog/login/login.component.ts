@@ -280,4 +280,12 @@ export class LoginComponent implements OnInit {
       // this.confirmForm.controls['username'].disable();
     }
   }
+
+  signInWithFacebook() {
+    this.amplifyAuthService.signInWithFacebook();
+  }
+
+  signInWithGoogle() {
+    this.amplifyAuthService.signInWithGoogle();
+  }
 }
