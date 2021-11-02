@@ -35,6 +35,10 @@ export class CardsService {
     this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
       this.allPacks = undefined;
     }));
+    this.Subscription.add(this.userAuthService.addCouponCodeToFavs.subscribe((ids: string[]) => {
+      // console.log("file: cards.service.ts ~ line 39 ~ this.Subscription.add ~ ids", ids)
+      this.addFavoritesFromCouponCode(ids);
+    }));
     var favs = localStorage.getItem("MentorCardFavorites")
     if (favs) {
       this.favorites = favs.split(',');
@@ -51,6 +55,27 @@ export class CardsService {
     localStorage.setItem("MentorCardFavorites", this.favorites.join(','))
     this.favoriteChangeEmmiter.emit(this.favorites);
     return this.isFavorite(id);
+  }
+
+  addFavoritesFromCouponCode(ids: string[]): void {
+    ids.forEach(id => {
+      if (!this.favorites.includes(id) && !this.couponCodeAddedToFav(id)) {
+        this.favorites.push(id);
+        this.setCouponCodeAddedToFav(id);
+      }
+    });
+    localStorage.setItem("MentorCardFavorites", this.favorites.join(','))
+    this.favoriteChangeEmmiter.emit(this.favorites);
+  }
+
+  couponCodeAddedToFav(id: string): boolean {
+    return localStorage.getItem('couponCodeAddedToFav')?.split(',').includes(id);
+  }
+
+  setCouponCodeAddedToFav(id: string): void {
+    let couponCodes = localStorage.getItem('couponCodeAddedToFav') ? localStorage.getItem('couponCodeAddedToFav').split(',') : [];
+    couponCodes.push(id);
+    localStorage.setItem("couponCodeAddedToFav", couponCodes.join(','))
   }
 
   isFavorite(id: string): boolean {

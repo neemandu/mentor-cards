@@ -100,7 +100,7 @@ export class AllPacksPageComponent implements OnInit {
    * Sort all packs so that favorites are first 
    */
   sortPacks(): void {
-    this.allPacks.sort((packA, packB) => {
+    this.allPacks?.sort((packA, packB) => {
       //free packs
       if (packA.freeUntilDate > new Date())
         return -1;
@@ -122,7 +122,7 @@ export class AllPacksPageComponent implements OnInit {
    * Return all packs that user ownes
    */
   allOwnedPacks(): PackContent[] {
-    return this.allPacks.filter(pack => pack.cards.length != 0);
+    return this.allPacks ? this.allPacks.filter(pack => pack.cards.length != 0) : [];
     // return this.allPacks.filter(pack => pack.cards);
   }
 
@@ -130,7 +130,7 @@ export class AllPacksPageComponent implements OnInit {
    * Return all packs that user doesn't own
    */
   allNotOwnedPacks(): PackContent[] {
-    return this.allPacks.filter(pack => pack.cards.length == 0);
+    return this.allPacks ? this.allPacks.filter(pack => pack.cards.length == 0) : [];
     // return this.allPacks.filter(pack => !pack.cards);
   }
 
@@ -192,17 +192,19 @@ export class AllPacksPageComponent implements OnInit {
 
   filterPacks(): void {
     this.loadedPacks = 0;
-    this.allPacks = this.cardsService.allPacks.map(pack => pack);
-    if (this.freeTextFilterSelected !== '') {
-      this.freeTextFilter();
+    this.allPacks = this.cardsService.allPacks?.map(pack => pack);
+    if (this.allPacks) {
+      if (this.freeTextFilterSelected !== '') {
+        this.freeTextFilter();
+      }
+      if (this.selectedCategories.length != 0) {
+        this.categoryFilter();
+      }
+      if (this.selectedFavorites.length != 0) {
+        this.favoritesFilter()
+      }
+      this.sortPacks();
     }
-    if (this.selectedCategories.length != 0) {
-      this.categoryFilter();
-    }
-    if (this.selectedFavorites.length != 0) {
-      this.favoritesFilter()
-    }
-    this.sortPacks();
   }
 
   freeTextFilter(): void {
