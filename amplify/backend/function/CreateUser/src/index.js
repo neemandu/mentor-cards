@@ -99,11 +99,11 @@ exports.handler = async (event) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
 
-    var user = await getUser(username);
+    var user = await getUser(email);
 
     if(!user){
 
-        console.log('user ' + username + " was NOT found");
+        console.log('user ' + email + " was NOT found");
         var docClient = new AWS.DynamoDB.DocumentClient();
 
         var table = env.API_CARDSPACKS_USERTABLE_NAME;
@@ -157,7 +157,7 @@ exports.handler = async (event) => {
     }
 
     
-    console.log('user ' + username + " was found");
+    console.log('user ' + email + " was found");
     return user;
     
 };
