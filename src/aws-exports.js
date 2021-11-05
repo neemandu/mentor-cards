@@ -6,20 +6,7 @@ const awsmobile = {
     "aws_cognito_region": "eu-west-2",
     "aws_user_pools_id": "eu-west-2_L91EfiE5N",
     "aws_user_pools_web_client_id": "56qvk3q8tq3448lbslmbsn4aho",
-    "oauth": {
-        "domain": "mentor-cards-prod.auth.eu-west-2.amazoncognito.com",
-        "scope": [
-            "phone",
-            "email",
-            "openid",
-            "profile",
-            "aws.cognito.signin.user.admin"
-        ],
-        "redirectSignIn": "https://www.mentor-cards.com/all-packs-page/",
-        "redirectSignOut": "https://www.mentor-cards.com/home-page/",
-        "responseType": "code"
-    },
-    "federationTarget": "COGNITO_USER_POOLS",
+    "oauth": {},
     "aws_cognito_login_mechanisms": [
         "PREFERRED_USERNAME"
     ],
