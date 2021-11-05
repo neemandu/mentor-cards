@@ -77,4 +77,12 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
+
+  signInWithFacebook() {
+    this.amplifyAuthService.signInWithFacebook();
+  }
+
+  signInWithGoogle() {
+    this.amplifyAuthService.signInWithGoogle();
+  }
 }
