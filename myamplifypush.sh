@@ -94,6 +94,7 @@ CODEGEN="{\
 \"generateDocs\":false\
 }"
 
+
 AUTHCONFIG="{\
 \"facebookAppIdUserPool\":\"1041361556291458\",\
 \"facebookAppSecretUserPool\":\"4899bdbd72d767a662c012524975520e\"\
