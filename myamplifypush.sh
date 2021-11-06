@@ -97,8 +97,8 @@ CODEGEN="{\
 
 AUTHCONFIG="{\
 \"facebookAppIdUserPool\":\"1041361556291458\",\
-\"facebookAppSecretUserPool\":\"4899bdbd72d767a662c012524975520e\"\
-\"googleAppIdUserPool\":\"190819062590-9t1orgtvli8t5k0orkv885gg7h9hpjlp.apps.googleusercontent.com\"\
+\"facebookAppSecretUserPool\":\"4899bdbd72d767a662c012524975520e\",\
+\"googleAppIdUserPool\":\"190819062590-9t1orgtvli8t5k0orkv885gg7h9hpjlp.apps.googleusercontent.com\",\
 \"googleAppSecretUserPool\":\"XRl_hVA-gVWRH7IWzLQm6-dh\"\
 }"
 
