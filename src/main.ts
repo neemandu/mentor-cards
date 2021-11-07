@@ -5,9 +5,9 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 // Amplify Configuration
-import Auth from '@aws-amplify/auth';
+/*import Auth from '@aws-amplify/auth';
 import AWSConfig from './aws-exports';
-Auth.configure(AWSConfig);
+Auth.configure(AWSConfig);*/
 // End Amplify Configuration
 
 /*

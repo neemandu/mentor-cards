@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-/*import Amplify from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
-Amplify.configure(awsconfig);*/
+Amplify.configure(awsconfig);
 import LogRocket from 'logrocket';
 LogRocket.init('cyu6kh/mentor-cards');
 
