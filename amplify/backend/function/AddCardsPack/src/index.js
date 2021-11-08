@@ -135,7 +135,8 @@ exports.handler = async (event) => {
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
-
+    console.log(event);
+    console.log($context);
     var username = event.identity.claims['cognito:email'];
     if(!username){
         username = event.identity.claims['email'];
