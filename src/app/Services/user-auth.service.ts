@@ -44,6 +44,7 @@ export class UserAuthService {
     try {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
+      console.log("file: user-auth.service.ts ~ line 47 ~ rememebrMe ~ user", user)
       this.loggedIn(user)
     } catch (err) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -60,14 +61,12 @@ export class UserAuthService {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
-    // console.log("file: user-auth.service.ts ~ line 56 ~ loggedIn ~ userData", cognitoUserserData)
-    // debugger
     this.cognitoUserData = cognitoUserData;
     var newUsername: string = cognitoUserData.username;
     var newUserEmail: string = cognitoUserData.attributes['email'];
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
     this.api.CreateUser(user).then(value => {
-      // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.CreateUser ~ value", value)
+      console.log("file: user-auth.service.ts ~ line 71 ~ this.api.CreateUser ~ value", value)
       this.updateUserData();
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
@@ -85,13 +84,13 @@ export class UserAuthService {
   updateUserData(): void {
     if (this.cognitoUserData != null) {
       this.api.GetUser(this.cognitoUserData.attributes['email']).then(data => {
+        console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetUser ~ data", data)
         if (!data) {
           this.overlaySpinnerService.changeOverlaySpinner(false);
           return;
         }
         this.userData = new UserData().deseralize(data);
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
         if (this.userData.groupId)
           this.updateGroupData();
         if (this.userData.couponCodes.length != 0) {
@@ -101,7 +100,6 @@ export class UserAuthService {
           })
         }
         this.loggedInEmmiter.emit(this.userData);
-        // (this.userData.status === 'PLAN' || this.trialMonthExpDate || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
         (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
@@ -116,7 +114,6 @@ export class UserAuthService {
     this.api.GetGroup(this.userData.groupId).then(data => {
       this.groupData = new GroupData().deseralize(data);
       this.groupDataEmmiter.emit(this.groupData);
-      // console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetGroup ~ this.groupData", this.groupData)
     }, reject => {
       console.log("file: user-auth.service.ts ~ line 103 ~ this.api.GetGroup ~ reject", reject)
     })
@@ -140,7 +137,6 @@ export class UserAuthService {
             return -1;
         })
         this.subPlansEmmiter.emit();
-        // console.log("🚀 ~ file: user-auth.service.ts ~ line 54 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
         let snackBarRef = this._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
