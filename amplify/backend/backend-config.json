@@ -49,17 +49,10 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authmentorcards91f3dc29"
+              "userPoolId": "authmentorcards56dbf153"
             }
           },
           "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 365,
-                "description": "public api"
-              }
-            }
           ]
         }
       }

@@ -2,7 +2,6 @@ type Mutation {
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
-  updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
   Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
@@ -60,7 +59,8 @@ input CreateUserInput {
 
 type CardsPack 
 @model (subscriptions: null)
-@auth(rules: [{ allow: private, operations: [read], provider: userPools }])
+@auth(rules: [{ allow: private, operations: [read], provider: userPools },
+              { allow: public }])
 {
   id: ID! 
   imgUrl: String! 
