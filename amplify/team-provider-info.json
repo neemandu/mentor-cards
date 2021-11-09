@@ -91,11 +91,11 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-36745655314e364d4166-build.zip"
+          "s3Key": "amplify-builds/CreateUser-6e38567741355a797970-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCardsPack-2f726f71696d52466b33-build.zip"
+          "s3Key": "amplify-builds/AddCardsPack-49496965736e47366d53-build.zip"
         },
         "ChangeCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -139,7 +139,7 @@
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-656e4d772f486a4e7031-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-392b706733767266644f-build.zip"
         },
         "mentorcards91f3dc29CustomMessage": {
           "REDIRECTURL": "https://dev.d15egmtmsipj3q.amplifyapp.com/no-program-page/",

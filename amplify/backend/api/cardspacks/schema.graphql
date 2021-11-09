@@ -60,19 +60,20 @@ input CreateUserInput {
 
 type CardsPack 
 @model (subscriptions: null)
-@auth(rules: [{ allow: private, operations: [read], provider: userPools }])
+@auth(rules: [{ allow: private, operations: [read], provider: userPools },
+              { allow: public }])
 {
   id: ID! 
   imgUrl: String! 
   description: String 
   tags: [String] 
   categories: [String] 
-  cards: [String] @function(name: "GetCardsImages-${env}")
+  cards: [String] @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetCardsImages-${env}")
   cardsPreview: [String] 
   groupsIds: [String] 
   guideBook: GuideBook 
   name: String 
-  freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
+  freeUntilDate: AWSDateTime @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetFreeUntilDate-${env}")
   about: About
 }
 
@@ -107,7 +108,8 @@ type ContactUsModel
 
 type User 
 @model (mutations: null)
-@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update], provider: userPools }] ){
+@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update], provider: userPools },
+                { allow: public,  operations: [create] }] ){
   id: ID!
   username: ID!
   email: ID!
@@ -150,7 +152,8 @@ type MonthlySubscription {
 
 type SubscriptionPlan 
 @model 
-@auth( rules: [ { allow: private, provider: userPools}] ){
+@auth( rules: [ { allow: private, provider: userPools},
+                { allow: public,  operations: [read] }] ){
   id: ID!
   name: String
   description: String
@@ -163,7 +166,8 @@ type SubscriptionPlan
 
 type News
 @model
-@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools }] ){
+@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools },
+                { allow: public,  operations: [read] }] ){
   id: ID!
   message: String
   order: Int

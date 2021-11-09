@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
     this.amplifyAuthService.signUp(user).then(data => {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this.userAuthService._snackBar.open(
-        `הרשמה מוצלחת! קוד אימות נשלח למייל ${user.email}`, '', {
+        `הרשמה מוצלחת!`, '', {
         duration: 10000,
         panelClass: ['rtl-snackbar']
       });
