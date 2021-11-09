@@ -98,33 +98,6 @@ subscription OnDeleteGroup {
     updatedAt
   }
 }
-subscription OnCreateNews {
-  onCreateNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateNews {
-  onUpdateNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteNews {
-  onDeleteNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateCouponCodes {
   onCreateCouponCodes {
     id
@@ -199,6 +172,33 @@ subscription OnDeleteSubscriptionPlan {
     numberOfCardPacks
     price
     discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateNews {
+  onCreateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateNews {
+  onUpdateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteNews {
+  onDeleteNews {
+    id
+    message
+    order
     createdAt
     updatedAt
   }

@@ -4,7 +4,6 @@
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
-import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -80,11 +79,6 @@ export type addCardsPackInput = {
 export type changeCardsPackInput = {
   oldCardsPackId?: string | null;
   newCardsPackId?: string | null;
-};
-
-export type updatePaymentProgramInput = {
-  paymentProgramId: string;
-  providerTransactionId?: string | null;
 };
 
 export type groupUsersListInput = {
@@ -535,21 +529,6 @@ export type ModelGroupConnection = {
   nextToken?: string | null;
 };
 
-export type ModelNewsFilterInput = {
-  id?: ModelIDInput | null;
-  message?: ModelStringInput | null;
-  order?: ModelIntInput | null;
-  and?: Array<ModelNewsFilterInput | null> | null;
-  or?: Array<ModelNewsFilterInput | null> | null;
-  not?: ModelNewsFilterInput | null;
-};
-
-export type ModelNewsConnection = {
-  __typename: "ModelNewsConnection";
-  items?: Array<News | null> | null;
-  nextToken?: string | null;
-};
-
 export type ModelCouponCodesFilterInput = {
   id?: ModelIDInput | null;
   organization?: ModelStringInput | null;
@@ -607,6 +586,21 @@ export type ModelSubscriptionPlanFilterInput = {
 export type ModelSubscriptionPlanConnection = {
   __typename: "ModelSubscriptionPlanConnection";
   items?: Array<SubscriptionPlan | null> | null;
+  nextToken?: string | null;
+};
+
+export type ModelNewsFilterInput = {
+  id?: ModelIDInput | null;
+  message?: ModelStringInput | null;
+  order?: ModelIntInput | null;
+  and?: Array<ModelNewsFilterInput | null> | null;
+  or?: Array<ModelNewsFilterInput | null> | null;
+  not?: ModelNewsFilterInput | null;
+};
+
+export type ModelNewsConnection = {
+  __typename: "ModelNewsConnection";
+  items?: Array<News | null> | null;
   nextToken?: string | null;
 };
 
@@ -1160,28 +1154,6 @@ export type ListGroupsQuery = {
   nextToken?: string | null;
 };
 
-export type GetNewsQuery = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListNewssQuery = {
-  __typename: "ModelNewsConnection";
-  items?: Array<{
-    __typename: "News";
-    id: string;
-    message?: string | null;
-    order?: number | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken?: string | null;
-};
-
 export type GetCouponCodesQuery = {
   __typename: "CouponCodes";
   id: string;
@@ -1314,6 +1286,28 @@ export type ListSubscriptionPlansQuery = {
   nextToken?: string | null;
 };
 
+export type GetNewsQuery = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListNewssQuery = {
+  __typename: "ModelNewsConnection";
+  items?: Array<{
+    __typename: "News";
+    id: string;
+    message?: string | null;
+    order?: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
 export type OnCreateContactUsModelSubscription = {
   __typename: "ContactUsModel";
   id: string;
@@ -1419,33 +1413,6 @@ export type OnDeleteGroupSubscription = {
   updatedAt: string;
 };
 
-export type OnCreateNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type OnCreateCouponCodesSubscription = {
   __typename: "CouponCodes";
   id: string;
@@ -1520,6 +1487,33 @@ export type OnDeleteSubscriptionPlanSubscription = {
   numberOfCardPacks?: number | null;
   price?: number | null;
   discount?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1613,20 +1607,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.changeCardsPack;
-  }
-  async UpdatePaymentProgram(
-    input: updatePaymentProgramInput
-  ): Promise<boolean | null> {
-    const statement = `mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
-        updatePaymentProgram(input: $input)
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <boolean | null>response.data.updatePaymentProgram;
   }
   async UpdateGroupUsersList(
     input: groupUsersListInput
@@ -2571,59 +2551,6 @@ export class APIService {
     )) as any;
     return <ListGroupsQuery>response.data.listGroups;
   }
-  async GetNews(id: string): Promise<GetNewsQuery> {
-    const statement = `query GetNews($id: ID!) {
-        getNews(id: $id) {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetNewsQuery>response.data.getNews;
-  }
-  async ListNewss(
-    filter?: ModelNewsFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListNewssQuery> {
-    const statement = `query ListNewss($filter: ModelNewsFilterInput, $limit: Int, $nextToken: String) {
-        listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            message
-            order
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListNewssQuery>response.data.listNewss;
-  }
   async GetCouponCodes(id: string): Promise<GetCouponCodesQuery> {
     const statement = `query GetCouponCodes($id: ID!) {
         getCouponCodes(id: $id) {
@@ -2725,73 +2652,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    /*const response = (await API.graphql(  { query: statement,
-      variables: gqlAPIServiceArguments,
-      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
-    )) as any;*/
     return <GetCardsPackQuery>response.data.getCardsPack;
-  }
-  async ListCardsPacksForPreview(
-    filter?: ModelCardsPackFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCardsPacksQuery> {
-    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            imgUrl
-            description
-            cards
-            tags
-            categories
-            cardsPreview
-            guideBook {
-              __typename
-              subjects {
-                __typename
-                subjectName
-                subSubjects {
-                  __typename
-                  subSubjectName
-                  questions
-                }
-              }
-            }
-            name
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    /*const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
-    )) as any;*/
-    return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async ListCardsPacks(
     filter?: ModelCardsPackFilterInput,
@@ -2850,11 +2711,6 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    /*const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
-    )) as any;*/
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async GetSubscriptionPlan(id: string): Promise<GetSubscriptionPlanQuery> {
@@ -2915,15 +2771,63 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    /*const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;*/
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
+  }
+  async GetNews(id: string): Promise<GetNewsQuery> {
+    const statement = `query GetNews($id: ID!) {
+        getNews(id: $id) {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetNewsQuery>response.data.getNews;
+  }
+  async ListNewss(
+    filter?: ModelNewsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListNewssQuery> {
+    const statement = `query ListNewss($filter: ModelNewsFilterInput, $limit: Int, $nextToken: String) {
+        listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            message
+            order
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListNewssQuery>response.data.listNewss;
   }
   OnCreateContactUsModelListener: Observable<
     SubscriptionResponse<OnCreateContactUsModelSubscription>
@@ -3078,57 +2982,6 @@ export class APIService {
     )
   ) as Observable<SubscriptionResponse<OnDeleteGroupSubscription>>;
 
-  OnCreateNewsListener: Observable<
-    SubscriptionResponse<OnCreateNewsSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateNews {
-        onCreateNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnCreateNewsSubscription>>;
-
-  OnUpdateNewsListener: Observable<
-    SubscriptionResponse<OnUpdateNewsSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateNews {
-        onUpdateNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdateNewsSubscription>>;
-
-  OnDeleteNewsListener: Observable<
-    SubscriptionResponse<OnDeleteNewsSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteNews {
-        onDeleteNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnDeleteNewsSubscription>>;
-
   OnCreateCouponCodesListener: Observable<
     SubscriptionResponse<OnCreateCouponCodesSubscription>
   > = API.graphql(
@@ -3254,4 +3107,55 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteSubscriptionPlanSubscription>>;
+
+  OnCreateNewsListener: Observable<
+    SubscriptionResponse<OnCreateNewsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateNews {
+        onCreateNews {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateNewsSubscription>>;
+
+  OnUpdateNewsListener: Observable<
+    SubscriptionResponse<OnUpdateNewsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateNews {
+        onUpdateNews {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateNewsSubscription>>;
+
+  OnDeleteNewsListener: Observable<
+    SubscriptionResponse<OnDeleteNewsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteNews {
+        onDeleteNews {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteNewsSubscription>>;
 }

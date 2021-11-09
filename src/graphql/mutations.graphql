@@ -54,9 +54,6 @@ mutation AddCardsPack($input: addCardsPackInput!) {
 mutation ChangeCardsPack($input: changeCardsPackInput!) {
   changeCardsPack(input: $input)
 }
-mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
-  updatePaymentProgram(input: $input)
-}
 mutation UpdateGroupUsersList($input: groupUsersListInput!) {
   updateGroupUsersList(input: $input)
 }

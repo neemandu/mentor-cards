@@ -184,31 +184,6 @@ query ListGroups(
     nextToken
   }
 }
-query GetNews($id: ID!) {
-  getNews(id: $id) {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-query ListNewss(
-  $filter: ModelNewsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      message
-      order
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetCouponCodes($id: ID!) {
   getCouponCodes(id: $id) {
     id
@@ -336,6 +311,31 @@ query ListSubscriptionPlans(
       numberOfCardPacks
       price
       discount
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetNews($id: ID!) {
+  getNews(id: $id) {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+query ListNewss(
+  $filter: ModelNewsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      message
+      order
       createdAt
       updatedAt
     }
