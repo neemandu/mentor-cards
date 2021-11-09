@@ -52,8 +52,7 @@
               "userPoolId": "authmentorcards56dbf153"
             }
           },
-          "additionalAuthenticationProviders": [
-          ]
+          "additionalAuthenticationProviders": []
         }
       }
     }
@@ -245,6 +244,20 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "updatePaymentProgram": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
     }
   }
 }

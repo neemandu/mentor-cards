@@ -7,6 +7,7 @@ type Mutation {
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
   AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
+  updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
 }
 
 input joinExistingGroupInput {

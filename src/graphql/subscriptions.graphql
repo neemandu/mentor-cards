@@ -98,42 +98,6 @@ subscription OnDeleteGroup {
     updatedAt
   }
 }
-subscription OnCreateCouponCodes {
-  onCreateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateCouponCodes {
-  onUpdateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCouponCodes {
-  onDeleteCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id
@@ -199,6 +163,42 @@ subscription OnDeleteNews {
     id
     message
     order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCouponCodes {
+  onCreateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCouponCodes {
+  onUpdateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCouponCodes {
+  onDeleteCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
     createdAt
     updatedAt
   }
