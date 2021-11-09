@@ -234,9 +234,9 @@ exports.handler = async (event) => {
     console.log("event's arguments:");
     console.log(event.arguments);
     var args = event.arguments.input;
-    var username = event.identity.claims['cognito:email'];
+    var username = event.identity.claims['cognito:username'];
     if(!username){
-        username = event.identity.claims['email'];
+        username = event.identity.claims['username'];
     }
 
     var user = await getUserByUSerName(username);

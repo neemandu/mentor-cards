@@ -136,10 +136,9 @@ exports.handler = async (event) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
     console.log(event);
-    console.log($context);
-    var username = event.identity.claims['cognito:email'];
+    var username = event.identity.claims['cognito:username'];
     if(!username){
-        username = event.identity.claims['email'];
+        username = event.identity.claims['username'];
     }
 
     var user = await getUser(username);
