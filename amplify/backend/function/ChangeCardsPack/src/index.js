@@ -80,9 +80,9 @@ async function updateUserPackSubstitution(user){
 exports.handler = async (event) => {
     var AWS = require("aws-sdk");
 
-    var username = event.identity.claims['cognito:username'];
+    var username = event.identity.claims['cognito:email'];
     if(!username){
-        username = event.identity.claims['username'];
+        username = event.identity.claims['email'];
     }
 
     AWS.config.update({
