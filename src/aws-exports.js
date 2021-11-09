@@ -3,25 +3,13 @@
 
 const awsmobile = {
     "aws_project_region": "eu-west-2",
+    "aws_cognito_identity_pool_id": "eu-west-2:a021593d-3371-4c8d-9d42-5bc45ad6a2b3",
     "aws_cognito_region": "eu-west-2",
-    "aws_user_pools_id": "eu-west-2_tvxPHBNU1",
-    "aws_user_pools_web_client_id": "egeu500tpklnq8md0rf6mvl19",
-    "oauth": {
-        "domain": "mentor-cards-dev.auth.eu-west-2.amazoncognito.com",
-        "scope": [
-            "phone",
-            "email",
-            "openid",
-            "profile",
-            "aws.cognito.signin.user.admin"
-        ],
-        "redirectSignIn": "https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/",
-        "redirectSignOut": "https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/",
-        "responseType": "code"
-    },
-    "federationTarget": "COGNITO_USER_POOLS",
+    "aws_user_pools_id": "eu-west-2_JXCusST7A",
+    "aws_user_pools_web_client_id": "3737ho2r7qnr67nnpo8s8pts",
+    "oauth": {},
     "aws_cognito_login_mechanisms": [
-        "PREFERRED_USERNAME"
+        "EMAIL"
     ],
     "aws_cognito_signup_attributes": [
         "EMAIL"
@@ -46,8 +34,7 @@ const awsmobile = {
     ],
     "aws_appsync_graphqlEndpoint": "https://5cmzkp3ucbcgrm7eflb2mg3ram.appsync-api.eu-west-2.amazonaws.com/graphql",
     "aws_appsync_region": "eu-west-2",
-    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_appsync_apiKey": "da2-if4kb7ivarhqni4pmj56hh7oai"
+    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS"
 };
 
 

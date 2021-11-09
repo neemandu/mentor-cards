@@ -2722,10 +2722,13 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(  { query: statement,
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    /*const response = (await API.graphql(  { query: statement,
       variables: gqlAPIServiceArguments,
       authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
-    )) as any;
+    )) as any;*/
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
   async ListCardsPacksForPreview(
@@ -2781,10 +2784,13 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    /*const response = (await API.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
         authMode: GRAPHQL_AUTH_MODE.API_KEY}
-    )) as any;
+    )) as any;*/
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async ListCardsPacks(
@@ -2841,14 +2847,14 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    /*const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;*/
     const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    /*const response = (await API.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
         authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
-    )) as any;
+    )) as any;*/
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async GetSubscriptionPlan(id: string): Promise<GetSubscriptionPlanQuery> {
@@ -2909,6 +2915,9 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
+    /*const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;*/
     const response = (await API.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,

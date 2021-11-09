@@ -88,9 +88,6 @@
       "AmplifyAppId": "d15egmtmsipj3q"
     },
     "categories": {
-      "auth": {
-        "mentorcards91f3dc29": {}
-      },
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -103,10 +100,6 @@
         "ChangeCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/ChangeCardsPack-6f4b724371376441596e-build.zip"
-        },
-        "UpdatePaymentProgram": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-506a61796f326d315a4e-build.zip"
         },
         "UpdateGroupUsersList": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -155,6 +148,9 @@
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/mentorcards91f3dc29CustomMessage-332b626944416662796d-build.zip"
         }
+      },
+      "auth": {
+        "mentorcards56dbf153": {}
       }
     }
   }
