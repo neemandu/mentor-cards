@@ -162,10 +162,10 @@ Parameters:
   breakCircularDependency:
     Type: String
             
-            
   verificationBucketName:
     Type: String
   
+            
             
         
   authProviders:

@@ -2841,8 +2841,13 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    /*const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;*/
+    const response = (await API.graphql(
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }

@@ -60,8 +60,7 @@ input CreateUserInput {
 
 type CardsPack 
 @model (subscriptions: null)
-@auth(rules: [{ allow: private, operations: [read], provider: userPools },
-              { allow: public }])
+@auth(rules: [{ allow: private, operations: [read], provider: userPools }])
 {
   id: ID! 
   imgUrl: String! 

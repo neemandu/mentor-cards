@@ -44,7 +44,7 @@
             "Arn"
         ]
     },
-    "useDefault": "manual",
+    "useDefault": "default",
     "triggers": "{\n  \"CustomMessage\": [\n    \"verification-link\"\n  ]\n}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
