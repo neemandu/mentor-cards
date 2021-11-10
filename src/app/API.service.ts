@@ -2452,8 +2452,9 @@ export class APIService {
     const response = (await API.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS},
-        {"authorization": localStorage.getItem('CognitoIdentityServiceProvider.egeu500tpklnq8md0rf6mvl19.neemandu@gmail.com.accessToken')}
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
+      },
+      {'authorization': 'eyJraWQiOiIwQUJITzFcL2V1QmlcL0QxYVdpSVNKNDdQYVpIcFVJN1wvQ1d2UmtRdDk4SXBZPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhY2M5ODdjMi00ZjRjLTQzMzAtODQ0OS1hZTc5NjhkN2FiNjciLCJldmVudF9pZCI6IjMxZWQ0Nzk1LWZjYjEtNDI1Zi1hNzUzLTAzZDcxNDg3NjJjMSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MzYzNzY3MTYsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTIuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0yX3R2eFBIQk5VMSIsImV4cCI6MTYzNjQ5MDU4NSwiaWF0IjoxNjM2NDg2OTg1LCJqdGkiOiIxMzhkY2RmYy0xNjBiLTQ5OWUtYTU2MC02MDE4NmVjNzllMjkiLCJjbGllbnRfaWQiOiJlZ2V1NTAwdHBrbG5xOG1kMHJmNm12bDE5IiwidXNlcm5hbWUiOiJuZWVtYW5kdUBnbWFpbC5jb20ifQ.IAvT-M1wzezFNt9ei4jGf4McwlSUkSF07QbI9t24aG9riVBjQkBi68pGdR7Nh2KSaE9XhbQj-6WI-DsitnL2A4Z9733httApqaM56v9IxHYJ2SZBISSJiZ5z2BmBjQJOHtOVbGEPIqQ4UG1l223G-QOVYVzPHSknslvy39ORwNkh-RoDsklCV36MfXpaaahkVlc8wy0YhY0ydVhisf-wdlZI08C09GVQP7qsAQ0bF6LmrrC9I5YI3J3bmqk9c0nkXRA8Yl78fVirW_t6x9otOelV25_ULyqctJfWGoNGyzjhfVVvbiiKCQUKVb8YsV8vOGvBe-cEV2xDdqYPwAmRsg'}
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
