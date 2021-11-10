@@ -1,94 +1,4 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateCardsPack {
-  onCreateCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    groupsIds
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateCardsPack {
-  onUpdateCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    groupsIds
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCardsPack {
-  onDeleteCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    groupsIds
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateContactUsModel {
   onCreateContactUsModel {
     id
@@ -188,69 +98,6 @@ subscription OnDeleteGroup {
     updatedAt
   }
 }
-subscription OnCreateNews {
-  onCreateNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateNews {
-  onUpdateNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteNews {
-  onDeleteNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateCouponCodes {
-  onCreateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateCouponCodes {
-  onUpdateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCouponCodes {
-  onDeleteCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id
@@ -289,6 +136,159 @@ subscription OnDeleteSubscriptionPlan {
     numberOfCardPacks
     price
     discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateNews {
+  onCreateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateNews {
+  onUpdateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteNews {
+  onDeleteNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCardsPack {
+  onCreateCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    groupsIds
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCardsPack {
+  onUpdateCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    groupsIds
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCardsPack {
+  onDeleteCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    groupsIds
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateCouponCodes {
+  onCreateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCouponCodes {
+  onUpdateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCouponCodes {
+  onDeleteCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
     createdAt
     updatedAt
   }

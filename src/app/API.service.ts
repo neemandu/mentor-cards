@@ -4,7 +4,6 @@
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
-import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -2780,9 +2779,7 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
@@ -2904,9 +2901,7 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
   }

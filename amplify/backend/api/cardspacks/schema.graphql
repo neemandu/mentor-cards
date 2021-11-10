@@ -58,24 +58,6 @@ input CreateUserInput {
   email: AWSEmail
 }
 
-type CardsPack 
-@model
-@auth(rules: [{ allow: private, operations: [read], provider: userPools }])
-{
-  id: ID! 
-  imgUrl: String! 
-  description: String 
-  tags: [String] 
-  categories: [String] 
-  cards: [String] 
-  cardsPreview: [String] 
-  groupsIds: [String] 
-  guideBook: GuideBook 
-  name: String 
-  freeUntilDate: AWSDateTime
-  about: About
-}
-
 type About{
   text: String
   imgUrl: String
@@ -150,8 +132,7 @@ type MonthlySubscription {
 
 type SubscriptionPlan 
 @model 
-@auth( rules: [ { allow: private, provider: userPools},
-                { allow: public,  operations: [read] }] ){
+@auth( rules: [ { allow: private, provider: userPools}] ){
   id: ID!
   name: String
   description: String
@@ -168,6 +149,24 @@ type News
   id: ID!
   message: String
   order: Int
+}
+
+type CardsPack 
+@model
+@auth(rules: [{ allow: private, operations: [create,read, update, delete], provider: userPools }])
+{
+  id: ID! 
+  imgUrl: String! 
+  description: String 
+  tags: [String] 
+  categories: [String] 
+  cards: [String] 
+  cardsPreview: [String] 
+  groupsIds: [String] 
+  guideBook: GuideBook 
+  name: String 
+  freeUntilDate: AWSDateTime
+  about: About
 }
 
 type CouponCodes

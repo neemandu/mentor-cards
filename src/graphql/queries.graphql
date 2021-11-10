@@ -1,71 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query GetCardsPack($id: ID!) {
-  getCardsPack(id: $id) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
-    cardsPreview
-    groupsIds
-    guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
-        }
-      }
-    }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    createdAt
-    updatedAt
-  }
-}
-query ListCardsPacks(
-  $filter: ModelCardsPackFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      imgUrl
-      description
-      tags
-      categories
-      cards
-      cardsPreview
-      groupsIds
-      guideBook {
-        subjects {
-          subjectName
-          subSubjects {
-            subSubjectName
-            questions
-          }
-        }
-      }
-      name
-      freeUntilDate
-      about {
-        text
-        imgUrl
-        link
-      }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetContactUsModel($id: ID!) {
   getContactUsModel(id: $id) {
     id
@@ -251,6 +184,41 @@ query ListGroups(
     nextToken
   }
 }
+query GetSubscriptionPlan($id: ID!) {
+  getSubscriptionPlan(id: $id) {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
+query ListSubscriptionPlans(
+  $filter: ModelSubscriptionPlanFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetNews($id: ID!) {
   getNews(id: $id) {
     id
@@ -270,6 +238,73 @@ query ListNewss(
       id
       message
       order
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCardsPack($id: ID!) {
+  getCardsPack(id: $id) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards
+    cardsPreview
+    groupsIds
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListCardsPacks(
+  $filter: ModelCardsPackFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards
+      cardsPreview
+      groupsIds
+      guideBook {
+        subjects {
+          subjectName
+          subSubjects {
+            subSubjectName
+            questions
+          }
+        }
+      }
+      name
+      freeUntilDate
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -301,41 +336,6 @@ query ListCouponCodess(
       discount
       trialPeriodInDays
       allowedCardsPacks
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetSubscriptionPlan($id: ID!) {
-  getSubscriptionPlan(id: $id) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-query ListSubscriptionPlans(
-  $filter: ModelSubscriptionPlanFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
       createdAt
       updatedAt
     }
