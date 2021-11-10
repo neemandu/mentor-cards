@@ -52,7 +52,15 @@
               "userPoolId": "authmentorcards56dbf153"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 7,
+                "description": "mentor-cards"
+              }
+            }
+          ]
         }
       }
     }
