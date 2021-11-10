@@ -8,6 +8,17 @@ const awsmobile = {
     "aws_user_pools_id": "eu-west-2_JXCusST7A",
     "aws_user_pools_web_client_id": "3737ho2r7qnr67nnpo8s8pts",
     "oauth": {},
+    "aws_cloud_logic_custom": [
+        {
+            "name": "PayPalSubscriptionsWebHook",
+            "endpoint": "https://xhmys98f7g.execute-api.eu-west-2.amazonaws.com/dev",
+            "region": "eu-west-2"
+        }
+    ],
+    "aws_appsync_graphqlEndpoint": "https://5cmzkp3ucbcgrm7eflb2mg3ram.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "aws_appsync_region": "eu-west-2",
+    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
+    "aws_appsync_apiKey": "da2-2zjhcj5okvethdgdl4svnxmykm",
     "aws_cognito_login_mechanisms": [
         "EMAIL"
     ],
@@ -24,18 +35,7 @@ const awsmobile = {
     },
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
-    ],
-    "aws_cloud_logic_custom": [
-        {
-            "name": "PayPalSubscriptionsWebHook",
-            "endpoint": "https://xhmys98f7g.execute-api.eu-west-2.amazonaws.com/dev",
-            "region": "eu-west-2"
-        }
-    ],
-    "aws_appsync_graphqlEndpoint": "https://5cmzkp3ucbcgrm7eflb2mg3ram.appsync-api.eu-west-2.amazonaws.com/graphql",
-    "aws_appsync_region": "eu-west-2",
-    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_appsync_apiKey": "da2-2zjhcj5okvethdgdl4svnxmykm"
+    ]
 };
 
 
