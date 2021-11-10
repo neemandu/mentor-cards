@@ -2620,7 +2620,9 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
     )) as any;
     return <ListNewssQuery>response.data.listNewss;
   }
@@ -2722,9 +2724,8 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(  { query: statement,
-      variables: gqlAPIServiceArguments,
-      authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS}
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }

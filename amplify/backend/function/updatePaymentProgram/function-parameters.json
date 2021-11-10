@@ -1,24 +1,14 @@
 {
   "permissions": {
-    "auth": {
-      "mentorcards91f3dc29": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ]
-    },
     "storage": {
       "CardsPack:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
+        "read"
       ],
       "User:@model(appsync)": [
         "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ],
       "Group:@model(appsync)": [
         "create",
@@ -27,7 +17,10 @@
         "delete"
       ],
       "SubscriptionPlan:@model(appsync)": [
-        "read"
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },

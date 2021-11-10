@@ -7,7 +7,7 @@
   mat-align-tabs="center" dynamicHeight>
   <mat-tab>
     <ng-template mat-tab-label class="tab-label">
-      התחברות
+      משתמש קיים
     </ng-template>
     <ng-template matTabContent>
       <app-login (loggedIn)="closeDialog()" (toRegister)="selectedTab = 1;" [registeredEmail]="registeredEmail">
@@ -16,7 +16,7 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label class="tab-label">
-      הרשמה
+      משתמש חדש
     </ng-template>
     <ng-template matTabContent>
       <app-register (registeredEmitter)="registered($event)"></app-register>

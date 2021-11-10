@@ -98,6 +98,48 @@ subscription OnDeleteGroup {
     updatedAt
   }
 }
+subscription OnCreateSubscriptionPlan {
+  onCreateSubscriptionPlan {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateSubscriptionPlan {
+  onUpdateSubscriptionPlan {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteSubscriptionPlan {
+  onDeleteSubscriptionPlan {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateNews {
   onCreateNews {
     id
@@ -161,44 +203,92 @@ subscription OnDeleteCouponCodes {
     updatedAt
   }
 }
-subscription OnCreateSubscriptionPlan {
-  onCreateSubscriptionPlan {
+subscription OnCreateCardsPack {
+  onCreateCardsPack {
     id
-    name
+    imgUrl
     description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
+    tags
+    categories
+    cards
+    cardsPreview
+    groupsIds
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateSubscriptionPlan {
-  onUpdateSubscriptionPlan {
+subscription OnUpdateCardsPack {
+  onUpdateCardsPack {
     id
-    name
+    imgUrl
     description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
+    tags
+    categories
+    cards
+    cardsPreview
+    groupsIds
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteSubscriptionPlan {
-  onDeleteSubscriptionPlan {
+subscription OnDeleteCardsPack {
+  onDeleteCardsPack {
     id
-    name
+    imgUrl
     description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
+    tags
+    categories
+    cards
+    cardsPreview
+    groupsIds
+    guideBook {
+      subjects {
+        subjectName
+        subSubjects {
+          subSubjectName
+          questions
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }

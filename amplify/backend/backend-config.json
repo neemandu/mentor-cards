@@ -1,10 +1,29 @@
 {
   "auth": {
-    "mentorcards91f3dc29": {
+    "mentorcards56dbf153": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "customAuth": false
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanisms": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   },
   "api": {
@@ -30,15 +49,15 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authmentorcards91f3dc29"
+              "userPoolId": "authmentorcards56dbf153"
             }
           },
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
-                "apiKeyExpirationDays": 365,
-                "description": "public api"
+                "apiKeyExpirationDays": 7,
+                "description": "mentor-cards"
               }
             }
           ]
@@ -80,27 +99,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
-    },
-    "UpdatePaymentProgram": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "mentorcards91f3dc29",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
         {
           "category": "api",
           "resourceName": "cardspacks",
@@ -237,6 +235,25 @@
       ]
     },
     "GetFreeUntilDate": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "mentorcards91f3dc29CustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "updatePaymentProgram": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",

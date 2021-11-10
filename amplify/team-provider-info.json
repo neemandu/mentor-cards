@@ -88,25 +88,18 @@
       "AmplifyAppId": "d15egmtmsipj3q"
     },
     "categories": {
-      "auth": {
-        "mentorcards91f3dc29": {}
-      },
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-4c575953693850696556-build.zip"
+          "s3Key": "amplify-builds/CreateUser-6e38567741355a797970-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCardsPack-4b6f5a3164445a6d6f59-build.zip"
+          "s3Key": "amplify-builds/AddCardsPack-49496965736e47366d53-build.zip"
         },
         "ChangeCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/ChangeCardsPack-6f4b724371376441596e-build.zip"
-        },
-        "UpdatePaymentProgram": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-506a61796f326d315a4e-build.zip"
         },
         "UpdateGroupUsersList": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -118,27 +111,27 @@
         },
         "JoinExistingGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/JoinExistingGroup-314868412b6c4178686a-build.zip"
+          "s3Key": "amplify-builds/JoinExistingGroup-37537a6253726732474b-build.zip"
         },
         "DeleteGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/DeleteGroup-6a6262324445566d7369-build.zip"
+          "s3Key": "amplify-builds/DeleteGroup-356b7350714b52416163-build.zip"
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-61413452505744366a54-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-3747676c77594f6a2b72-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/getGroup-31682b4f4b61722b6b47-build.zip"
+          "s3Key": "amplify-builds/getGroup-33685a435675526b7944-build.zip"
         },
         "IsInGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/IsInGroup-6b3574564b4a4d645357-build.zip"
+          "s3Key": "amplify-builds/IsInGroup-744b3159532b336b7859-build.zip"
         },
         "PayPalCancelWebhook": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PayPalCancelWebhook-3067477a344232357850-build.zip"
+          "s3Key": "amplify-builds/PayPalCancelWebhook-4a59734b356754416365-build.zip"
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -146,8 +139,22 @@
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-656e4d772f486a4e7031-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-392b706733767266644f-build.zip"
+        },
+        "mentorcards91f3dc29CustomMessage": {
+          "REDIRECTURL": "https://dev.d15egmtmsipj3q.amplifyapp.com/no-program-page/",
+          "EMAILSUBJECT": "Mentor-Cards Verification",
+          "EMAILMESSAGE": "תודה שהצטרפתם! לחצו על הלינק כדי לחזור לאתר. ",
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/mentorcards91f3dc29CustomMessage-332b626944416662796d-build.zip"
+        },
+        "updatePaymentProgram": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/updatePaymentProgram-6c655a4b577063454d2b-build.zip"
         }
+      },
+      "auth": {
+        "mentorcards56dbf153": {}
       }
     }
   }

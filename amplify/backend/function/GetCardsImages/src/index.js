@@ -108,9 +108,14 @@ function isFreeTrialPeriod(firstDate, allPackagesDate) {
     return false;
 }
 
-exports.handler = async (event) => {
+exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
+    console.log('event');
     console.log(event);
+    console.log('context');
+    console.log(context);
+    console.log('callback');
+    console.log(callback);
 
     // user was not identified in cognito
     if(!("identity" in event)){
@@ -126,9 +131,9 @@ exports.handler = async (event) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     }); 
 
-    var username = event.identity.claims['cognito:email'];
+    var username = event.identity.claims['cognito:username'];
     if(!username){
-        username = event.identity.claims['email'];
+        username = event.identity.claims['username'];
     }
 
     var user = await getUser(username);

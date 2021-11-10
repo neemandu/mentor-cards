@@ -117,7 +117,7 @@ exports.handler = async (event) => {
         var params = {
             TableName:table,
             Item:{
-                "id": email,
+                "id": username,
                 "username": username,
                 "email": email,
                 "phone": phone,

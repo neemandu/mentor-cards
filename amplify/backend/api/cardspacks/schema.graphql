@@ -2,12 +2,12 @@ type Mutation {
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
-  updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
   Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
   AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
+  updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
 }
 
 input joinExistingGroupInput {
@@ -58,25 +58,6 @@ input CreateUserInput {
   email: AWSEmail
 }
 
-type CardsPack 
-@model (subscriptions: null)
-@auth(rules: [{ allow: private, operations: [read], provider: userPools },
-              { allow: public }])
-{
-  id: ID! 
-  imgUrl: String! 
-  description: String 
-  tags: [String] 
-  categories: [String] 
-  cards: [String] @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetCardsImages-${env}")
-  cardsPreview: [String] 
-  groupsIds: [String] 
-  guideBook: GuideBook 
-  name: String 
-  freeUntilDate: AWSDateTime @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetFreeUntilDate-${env}")
-  about: About
-}
-
 type About{
   text: String
   imgUrl: String
@@ -108,8 +89,7 @@ type ContactUsModel
 
 type User 
 @model (mutations: null)
-@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update], provider: userPools },
-                { allow: public,  operations: [create] }] ){
+@auth( rules: [ { allow: owner, ownerField: "username", operations: [read, update], provider: userPools }] ){
   id: ID!
   username: ID!
   email: ID!
@@ -153,7 +133,7 @@ type MonthlySubscription {
 type SubscriptionPlan 
 @model 
 @auth( rules: [ { allow: private, provider: userPools},
-                { allow: public,  operations: [read] }] ){
+                { allow: public, operations: [read] }] ){
   id: ID!
   name: String
   description: String
@@ -167,10 +147,29 @@ type SubscriptionPlan
 type News
 @model
 @auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools },
-                { allow: public,  operations: [read] }] ){
+              { allow: public, operations: [read] }] ){
   id: ID!
   message: String
   order: Int
+}
+
+type CardsPack 
+@model
+@auth(rules: [{ allow: private, operations: [create,read, update, delete], provider: userPools },
+              { allow: public, operations: [read] }])
+{
+  id: ID! 
+  imgUrl: String! 
+  description: String 
+  tags: [String] 
+  categories: [String] 
+  cards: [String] @function(name: "GetCardsImages-${env}")
+  cardsPreview: [String] 
+  groupsIds: [String] 
+  guideBook: GuideBook 
+  name: String 
+  freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
+  about: About
 }
 
 type CouponCodes

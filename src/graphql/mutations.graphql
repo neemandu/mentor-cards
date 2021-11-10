@@ -54,9 +54,6 @@ mutation AddCardsPack($input: addCardsPackInput!) {
 mutation ChangeCardsPack($input: changeCardsPackInput!) {
   changeCardsPack(input: $input)
 }
-mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
-  updatePaymentProgram(input: $input)
-}
 mutation UpdateGroupUsersList($input: groupUsersListInput!) {
   updateGroupUsersList(input: $input)
 }
@@ -71,6 +68,9 @@ mutation DeleteGroupById($input: deleteGroupInput!) {
 }
 mutation AddCouponCode($input: couponCodeInput!) {
   AddCouponCode(input: $input)
+}
+mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
+  updatePaymentProgram(input: $input)
 }
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
@@ -276,51 +276,6 @@ mutation DeleteNews(
     updatedAt
   }
 }
-mutation CreateCouponCodes(
-  $input: CreateCouponCodesInput!
-  $condition: ModelCouponCodesConditionInput
-) {
-  createCouponCodes(input: $input, condition: $condition) {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateCouponCodes(
-  $input: UpdateCouponCodesInput!
-  $condition: ModelCouponCodesConditionInput
-) {
-  updateCouponCodes(input: $input, condition: $condition) {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteCouponCodes(
-  $input: DeleteCouponCodesInput!
-  $condition: ModelCouponCodesConditionInput
-) {
-  deleteCouponCodes(input: $input, condition: $condition) {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
 mutation CreateCardsPack(
   $input: CreateCardsPackInput!
   $condition: ModelCardsPackConditionInput
@@ -416,6 +371,51 @@ mutation DeleteCardsPack(
       imgUrl
       link
     }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateCouponCodes(
+  $input: CreateCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  createCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCouponCodes(
+  $input: UpdateCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  updateCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCouponCodes(
+  $input: DeleteCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  deleteCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
     createdAt
     updatedAt
   }

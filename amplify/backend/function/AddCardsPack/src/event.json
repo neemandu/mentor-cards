@@ -1,7 +1,7 @@
 {
   "identity": {
     "claims": {
-      "cognito:username" : "dneeman"
+      "cognito:email" : "dneeman"
     }
   }
 }
