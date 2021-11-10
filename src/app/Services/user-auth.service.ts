@@ -90,6 +90,7 @@ export class UserAuthService {
           return;
         }
         this.userData = new UserData().deseralize(data);
+        localStorage.setItem('signedin', 'true');
         this.overlaySpinnerService.changeOverlaySpinner(false);
         if (this.userData.groupId)
           this.updateGroupData();
@@ -189,6 +190,7 @@ export class UserAuthService {
 
   loggedOut(): void {
     this.userData = undefined;
+    localStorage.removeItem('signedin');
     this.signedOutEmmiter.emit(true);
     // this.router.navigate(['no-program-page']);
   }
