@@ -132,7 +132,8 @@ type MonthlySubscription {
 
 type SubscriptionPlan 
 @model 
-@auth( rules: [ { allow: private, provider: userPools}] ){
+@auth( rules: [ { allow: private, provider: userPools},
+              { allow: public, operations: [read] }]] ){
   id: ID!
   name: String
   description: String
@@ -145,7 +146,8 @@ type SubscriptionPlan
 
 type News
 @model
-@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools }] ){
+@auth( rules: [ { allow: private, operations: [create,read, update, delete], provider: userPools },
+              { allow: public, operations: [read] }]] ){
   id: ID!
   message: String
   order: Int
