@@ -2336,6 +2336,65 @@ export class APIService {
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
+  async ListCardsPacksForPreview(
+    filter?: ModelCardsPackFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCardsPacksQuery> {
+    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
+        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            imgUrl
+            description
+            cards
+            tags
+            categories
+            cardsPreview
+            guideBook {
+              __typename
+              subjects {
+                __typename
+                subjectName
+                subSubjects {
+                  __typename
+                  subSubjectName
+                  questions
+                }
+              }
+            }
+            name
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+    )) as any;
+    return <ListCardsPacksQuery>response.data.listCardsPacks;
+  }
   async ListCardsPacks(
     filter?: ModelCardsPackFilterInput,
     limit?: number,
