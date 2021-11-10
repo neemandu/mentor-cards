@@ -2450,7 +2450,10 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS},
+        {"authorization": localStorage.getItem('CognitoIdentityServiceProvider.egeu500tpklnq8md0rf6mvl19.neemandu@gmail.com.accessToken')}
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
