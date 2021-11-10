@@ -251,41 +251,6 @@ query ListGroups(
     nextToken
   }
 }
-query GetSubscriptionPlan($id: ID!) {
-  getSubscriptionPlan(id: $id) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-query ListSubscriptionPlans(
-  $filter: ModelSubscriptionPlanFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetNews($id: ID!) {
   getNews(id: $id) {
     id
@@ -336,6 +301,41 @@ query ListCouponCodess(
       discount
       trialPeriodInDays
       allowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetSubscriptionPlan($id: ID!) {
+  getSubscriptionPlan(id: $id) {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    price
+    discount
+    createdAt
+    updatedAt
+  }
+}
+query ListSubscriptionPlans(
+  $filter: ModelSubscriptionPlanFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      price
+      discount
       createdAt
       updatedAt
     }

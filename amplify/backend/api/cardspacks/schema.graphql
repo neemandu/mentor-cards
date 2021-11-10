@@ -59,7 +59,7 @@ input CreateUserInput {
 }
 
 type CardsPack 
-@model (subscriptions: null)
+@model
 @auth(rules: [{ allow: private, operations: [read], provider: userPools }])
 {
   id: ID! 
@@ -67,12 +67,12 @@ type CardsPack
   description: String 
   tags: [String] 
   categories: [String] 
-  cards: [String] @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetCardsImages-${env}")
+  cards: [String] 
   cardsPreview: [String] 
   groupsIds: [String] 
   guideBook: GuideBook 
   name: String 
-  freeUntilDate: AWSDateTime @auth(rules: [{ allow: private, operations: [read], provider: userPools }]) @function(name: "GetFreeUntilDate-${env}")
+  freeUntilDate: AWSDateTime
   about: About
 }
 
