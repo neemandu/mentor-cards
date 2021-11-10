@@ -153,19 +153,20 @@ type News
 
 type CardsPack 
 @model
-@auth(rules: [{ allow: private, operations: [create,read, update, delete], provider: userPools }])
+@auth(rules: [{ allow: private, operations: [create,read, update, delete], provider: userPools },
+              { allow: public, operations: [read] }])
 {
   id: ID! 
   imgUrl: String! 
   description: String 
   tags: [String] 
   categories: [String] 
-  cards: [String] 
+  cards: [String] @function(name: "GetCardsImages-${env}")
   cardsPreview: [String] 
   groupsIds: [String] 
   guideBook: GuideBook 
   name: String 
-  freeUntilDate: AWSDateTime
+  freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
   about: About
 }
 

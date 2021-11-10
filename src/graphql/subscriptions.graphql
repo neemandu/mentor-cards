@@ -167,6 +167,42 @@ subscription OnDeleteNews {
     updatedAt
   }
 }
+subscription OnCreateCouponCodes {
+  onCreateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCouponCodes {
+  onUpdateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCouponCodes {
+  onDeleteCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateCardsPack {
   onCreateCardsPack {
     id
@@ -253,42 +289,6 @@ subscription OnDeleteCardsPack {
       imgUrl
       link
     }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateCouponCodes {
-  onCreateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateCouponCodes {
-  onUpdateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCouponCodes {
-  onDeleteCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
     createdAt
     updatedAt
   }
