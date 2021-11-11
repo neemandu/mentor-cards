@@ -32,7 +32,7 @@
   </div>
   <div *ngIf="news?.length > 0" id="actions" class="d-flex flex-column actions-bottom">
     <span id="news-title">חדשות ועדכונים</span>
-    <marquee style="font-size: 1rem;" vspace="1%" direction="up" width="90%" height="50px" scrollamount="1"
+    <marquee style="font-size: 1rem;" vspace="1%" direction="up" width="90%" height="75px" scrollamount="1"
       onmouseover="this.stop();" onmouseout="this.start();">
       <ul>
         <li *ngFor="let new of news">

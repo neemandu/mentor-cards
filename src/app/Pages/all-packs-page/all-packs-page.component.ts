@@ -93,7 +93,7 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   updateUserData(): void {
-    this.userAuthService.updateUserData();
+    this.userAuthService.loggedIn();
   }
 
   /**
