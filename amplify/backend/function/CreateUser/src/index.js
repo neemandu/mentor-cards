@@ -94,12 +94,17 @@ exports.handler = async (event) => {
     var email = event.arguments.input['email'];
     var phone = event.arguments.input['phone'];
 
+    console.log('Adding new user:')
+    console.log(username)
+    console.log(email)
+    console.log(phone)
+
     AWS.config.update({
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
 
-    var user = await getUser(email);
+    var user = await getUser(username);
 
     if(!user){
 
