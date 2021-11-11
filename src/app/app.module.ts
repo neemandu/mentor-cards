@@ -77,7 +77,7 @@ import { NewEditNewsComponent } from './Shared Components/Dialogs/new-edit-news/
 import { EnterCouponCodeDialogComponent } from './Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 import { AboutAuthorComponent } from './Shared Components/pack/about-author/about-author.component';
 import { InformationBarComponent } from './Shared Components/information-bar/information-bar.component';
-import { PwChallangeComponent } from './main-screen/user-related/user-related-dialog/login/pw-challange/pw-challange.component';
+// import { PwChallangeComponent } from './main-screen/user-related/user-related-dialog/login/pw-challange/pw-challange.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +121,7 @@ import { PwChallangeComponent } from './main-screen/user-related/user-related-di
     EnterCouponCodeDialogComponent,
     AboutAuthorComponent,
     InformationBarComponent,
-    PwChallangeComponent,
+    // PwChallangeComponent,
   ],
   imports: [
     BrowserModule,
