@@ -33,12 +33,14 @@ export class LoginComponent implements OnInit {
     username: ['', [Validators.required, Validators.email]],
     confirmationCode: ['', Validators.required],
   });
+  // userData: any;
   newPasswordPhase: boolean = false;
   hidePW: boolean = true;
   showLogin: boolean = true;
   showForgotPw: boolean = false;
   showConfirmUser: boolean = false;
   showLoading: boolean = false;
+  showPwChallange: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
@@ -75,8 +77,15 @@ export class LoginComponent implements OnInit {
       "password": this.loginForm.get("password").value,
     }
     this.amplifyAuthService.logIn(user).then(userData => {
-      this.userAuthService.loggedIn(userData);
-      this.loggedIn.emit();
+      // this.userData = userData;
+      // if (userData.challengeName) {
+      //   if (userData.challengeName === "NEW_PASSWORD_REQUIRED")
+      //     this.showNewPwChallange()
+      // }
+      // else {
+        this.userAuthService.loggedIn(userData);
+        this.loggedIn.emit();
+      // }
     })
       .catch(err => {
         console.log("file: login.component.ts ~ line 84 ~ onLoginSubmit ~ err", err)
@@ -102,6 +111,16 @@ export class LoginComponent implements OnInit {
     this.showLogin = true;
     this.confirmForm.reset();
     this.forgotPasswordForm.reset();
+  }
+
+  /**
+   * After email checked, Initiate password reset phase
+   */
+  newPasswordChallange(): void {
+    this.forgotPasswordForm.controls.username.disable();
+    this.newPasswordPhase = true;
+    this.forgotPasswordForm.controls.confirmationCode.setValidators([Validators.required])
+    this.forgotPasswordForm.controls.newPassword.setValidators([Validators.required, Validators.minLength(8)])
   }
 
   //---FORGOT PASSWORD---//

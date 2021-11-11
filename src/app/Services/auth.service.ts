@@ -67,8 +67,11 @@ export class AuthService {
 
   confirmCode(email: string, confirmCode: string) {
     return Auth.confirmSignUp(email, confirmCode)
-
   }
+
+  // changePassword(userData: any, oldPassword: string, newPassword: string) {
+  //   return Auth.changePassword(userData, oldPassword, newPassword);
+  // }
 
   async signInWithFacebook() {
     const socialResult = await this.socialSignIn(AuthService.FACEBOOK);
