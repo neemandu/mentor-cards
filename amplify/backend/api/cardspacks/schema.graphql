@@ -56,6 +56,7 @@ input GroupUserRoleInput{
 input CreateUserInput {
   username: String
   email: AWSEmail
+  phone: String
 }
 
 type About{

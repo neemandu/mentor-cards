@@ -13,6 +13,7 @@ export interface SubscriptionResponse<T> {
 export type CreateUserInput = {
   username?: string | null;
   email?: string | null;
+  phone?: string | null;
 };
 
 export type User = {
