@@ -88,13 +88,22 @@ export class UserAuthService {
       (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      let snackBarRef = this._snackBar.open('שגיאה בהתחברות, נסו שנית', 'רענן', {
+        duration: 20000,
+        panelClass: ['rtl-snackbar']
+      });
+      snackBarRef.onAction().subscribe(() => {
+        window.location.reload();
+      });
     })
   }
 
   createUser(): void {
     var newUsername: string = this.cognitoUserData.username;
     var newUserEmail: string = this.cognitoUserData.attributes['email'];
-    var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail };
+    var newUserPhone: string = this.cognitoUserData.attributes['phone_number'];
+    var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail, 'phone': newUserPhone };
     this.api.CreateUser(user).then(value => {
       console.log("file: user-auth.service.ts ~ line 71 ~ this.api.CreateUser ~ value", value)
       this.userData = new UserData().deseralize(value);
@@ -107,6 +116,14 @@ export class UserAuthService {
       });
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject", reject)
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      let snackBarRef = this._snackBar.open('שגיאה במימוש משתמש, נסו שנית', 'רענן', {
+        duration: 20000,
+        panelClass: ['rtl-snackbar']
+      });
+      snackBarRef.onAction().subscribe(() => {
+        window.location.reload();
+      });
     });
   }
 
