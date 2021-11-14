@@ -160,7 +160,7 @@ export class LoginComponent implements OnInit {
   forgotPasswordReset(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     var user = this.forgotPasswordForm.get("username").value;
-    var confirmationCode = this.forgotPasswordForm.get("confirmationCode").value.trim;
+    var confirmationCode = this.forgotPasswordForm.get("confirmationCode").value.trim();
     var newPassword = this.forgotPasswordForm.get("newPassword").value;
     this.userAuthService.forgotPasswordReset(user, confirmationCode, newPassword)
       .then(res => {
@@ -251,7 +251,7 @@ export class LoginComponent implements OnInit {
 
   onConfirmSubmit(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    this.amplifyAuthService.confirmCode(this.confirmForm.controls['username'].value, this.confirmForm.controls['confirmationCode'].value.trim)
+    this.amplifyAuthService.confirmCode(this.confirmForm.controls['username'].value, this.confirmForm.controls['confirmationCode'].value.trim())
       .then((data: any) => {
         this.overlaySpinnerService.changeOverlaySpinner(false);
         // console.log(data);
