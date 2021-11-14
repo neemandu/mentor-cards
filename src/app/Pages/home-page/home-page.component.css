@@ -30,7 +30,7 @@ video {
 }
 
 .actions-top {
-  margin-bottom: 1%;
+  margin-bottom: 2%;
   padding: 4%;
 }
 
@@ -110,6 +110,10 @@ app-information-bar {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+marquee li {
+  margin-bottom: 1%;
 }
 
 /* @keyframes shadow {

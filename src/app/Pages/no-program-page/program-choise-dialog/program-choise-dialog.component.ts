@@ -111,7 +111,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
                 duration: 4000,
                 panelClass: ['rtl-snackbar']
               });
-              this.userAuthService.updateUserData();
+              this.userAuthService.loggedIn();
               this.overlaySpinnerService.changeOverlaySpinner(false);
               this.dialogRef.close(this.packSelected);
             }, error => {
