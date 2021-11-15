@@ -58,7 +58,6 @@ input CreateUserInput {
   username: String
   email: AWSEmail
   phone: String
-  test: String
 }
 
 type About{
