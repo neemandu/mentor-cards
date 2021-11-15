@@ -91,7 +91,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-6e38567741355a797970-build.zip"
+          "s3Key": "amplify-builds/CreateUser-66685642706e574b2f4c-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
