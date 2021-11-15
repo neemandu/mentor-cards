@@ -94,10 +94,11 @@ exports.handler = async (event) => {
     var email = event.arguments.input['email'];
     var phone = event.arguments.input['phone'];
 
-    console.log('Adding new user:')
-    console.log(username)
-    console.log(email)
-    console.log(phone)
+    console.log(event);
+    console.log('Adding new user:');
+    console.log(username);
+    console.log(email);
+    console.log(phone);
 
     AWS.config.update({
         region: env.REGION
@@ -145,6 +146,7 @@ exports.handler = async (event) => {
         };
     
         console.log("Adding a new user...");
+        console.log(params);
     
         await docClient.put(params, function(err, data) {
             if (err) {
