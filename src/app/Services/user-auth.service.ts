@@ -103,7 +103,9 @@ export class UserAuthService {
     var newUsername: string = this.cognitoUserData.username;
     var newUserEmail: string = this.cognitoUserData.attributes['email'];
     var newUserPhone: string = this.cognitoUserData.attributes['phone_number'];
-    var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail, 'phone': newUserPhone };
+    var user: CreateUserInput = { 'username': newUsername, 
+                                  'email': newUserEmail, 
+                                  'phone': newUserPhone };
     this.api.CreateUser(user).then(value => {
       console.log("file: user-auth.service.ts ~ line 71 ~ this.api.CreateUser ~ value", value)
       this.userData = new UserData().deseralize(value);
