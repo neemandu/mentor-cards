@@ -78,4 +78,8 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
+
+  signInWithGoogle() {
+    this.amplifyAuthService.signInWithGoogle();
+  }
 }

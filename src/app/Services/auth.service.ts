@@ -55,9 +55,21 @@ export class AuthService {
       .then(() => this.loggedIn = false)
   }
 
-  socialSignIn(provider: CognitoHostedUIIdentityProvider): Promise<ICredentials> {
-    return Auth.federatedSignIn({
+  socialSignIn(provider: CognitoHostedUIIdentityProvider) {
+    Auth.federatedSignIn({
       'provider': provider
+    }).then(cred => {
+      // If success, you will get the AWS credentials
+      console.log('cred');
+      console.log(cred);
+      return Auth.currentAuthenticatedUser();
+    }).then(user => {
+      // If success, the user object you passed in Auth.federatedSignIn
+      console.log('user');
+      console.log(user);
+    }).catch(e => {
+      console.log('e')
+      console.log(e)
     });
   }
 
