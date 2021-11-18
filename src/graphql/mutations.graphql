@@ -290,11 +290,22 @@ mutation CreateCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      guideBook {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -323,11 +334,22 @@ mutation UpdateCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      guideBook {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -356,11 +378,22 @@ mutation DeleteCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      guideBook {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
         }
       }
     }
