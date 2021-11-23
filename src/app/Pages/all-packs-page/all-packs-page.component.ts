@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { APIService } from 'src/app/API.service';
+import { APIService, ListCardsPacksQuery } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
 import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
@@ -47,7 +47,7 @@ export class AllPacksPageComponent implements OnInit {
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites;
       this.filterPacks()
-      this.sortPacks();
+      // this.sortPacks();
     }));
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.getAllPacks();
@@ -61,34 +61,42 @@ export class AllPacksPageComponent implements OnInit {
       this.allPacks = this.cardsService.allPacks.map(pack => pack);
       this.allCategories = this.cardsService.allCategories.map(category => category);
       this.allFavorites = this.cardsService.favorites;
-      this.sortPacks();
+      // this.sortPacks();
     } else {
-      let authStatus = localStorage.getItem('signedin');
-      (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then(packs => {
-        // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
-        this.allPacks = packs.items.map(pack => {
-          pack.categories.forEach(category => {
-            if (!this.allCategories.includes(category))
-              this.allCategories.push(category);
-          });
-          return new PackContent().deseralize(pack)
-        });
-        // console.log("file: all-packs-page.component.ts ~ line 75 ~ packs", packs)
-        this.cardsService.allPacks = this.allPacks.map(pack => pack);
-        this.cardsService.allCategories = this.allCategories.map(category => category);
+      let sub = this.cardsService.allPacksReadyEmmiter.subscribe(() => {
+        sub.unsubscribe();
+        this.allPacks = this.cardsService.allPacks.map(pack => pack);
+        this.allCategories = this.cardsService.allCategories.map(category => category);
         this.allFavorites = this.cardsService.favorites;
-        // console.log("file: all-packs-page.component.ts ~ line 83 ~ this.allPacks", this.allPacks)
-        this.sortPacks();
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-      }, reject => {
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
-          duration: 20000,
-        });
-        snackBarRef.onAction().subscribe(() => {
-          window.location.reload();
-        });
       })
+      this.cardsService.getAllPacks();
+      // let authStatus = localStorage.getItem('signedin');
+      // (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
+      //   // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
+      //   this.cardsService.setAllPacks(packs)
+      //   this.allPacks = packs.items.map(pack => {
+      //     pack.categories.forEach(category => {
+      //       if (!this.allCategories.includes(category))
+      //         this.allCategories.push(category);
+      //     });
+      //     return new PackContent().deseralize(pack)
+      //   });
+      //   // console.log("file: all-packs-page.component.ts ~ line 75 ~ packs", packs)
+      //   this.cardsService.allPacks = this.allPacks.map(pack => pack);
+      //   this.cardsService.allCategories = this.allCategories.map(category => category);
+      //   this.allFavorites = this.cardsService.favorites;
+      //   // console.log("file: all-packs-page.component.ts ~ line 83 ~ this.allPacks", this.allPacks)
+      //   this.sortPacks();
+      //   this.overlaySpinnerService.changeOverlaySpinner(false);
+      // }, reject => {
+      //   this.overlaySpinnerService.changeOverlaySpinner(false);
+      //   let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
+      //     duration: 20000,
+      //   });
+      //   snackBarRef.onAction().subscribe(() => {
+      //     window.location.reload();
+      //   });
+      // })
     }
   }
 
@@ -99,24 +107,24 @@ export class AllPacksPageComponent implements OnInit {
   /**
    * Sort all packs so that favorites are first 
    */
-  sortPacks(): void {
-    this.allPacks?.sort((packA, packB) => {
-      //free packs
-      if (packA.freeUntilDate > new Date())
-        return -1;
-      if (packB.freeUntilDate > new Date())
-        return 1;
-      //favorites
-      if (this.allFavorites.includes(packA.id) && this.allFavorites.includes(packB.id))
-        return 0;
-      if (this.allFavorites.includes(packA.id))
-        return -1;
-      if (this.allFavorites.includes(packB.id))
-        return 1;
-      else
-        return packA.categories[0].localeCompare(packB.categories[0]);
-    })
-  }
+  // sortPacks(): void {
+  //   this.allPacks?.sort((packA, packB) => {
+  //     //free packs
+  //     if (packA.freeUntilDate > new Date())
+  //       return -1;
+  //     if (packB.freeUntilDate > new Date())
+  //       return 1;
+  //     //favorites
+  //     if (this.allFavorites.includes(packA.id) && this.allFavorites.includes(packB.id))
+  //       return 0;
+  //     if (this.allFavorites.includes(packA.id))
+  //       return -1;
+  //     if (this.allFavorites.includes(packB.id))
+  //       return 1;
+  //     else
+  //       return packA.categories[0].localeCompare(packB.categories[0]);
+  //   })
+  // }
 
   /**
    * Return all packs that user ownes
@@ -203,7 +211,7 @@ export class AllPacksPageComponent implements OnInit {
       if (this.selectedFavorites.length != 0) {
         this.favoritesFilter()
       }
-      this.sortPacks();
+      // this.sortPacks();
     }
   }
 

@@ -43,7 +43,8 @@ export class PopoutService {
   openOnce(url, target) {
     // open a blank "target" window
     // or get the reference to the existing "target" window
-    const winRef = window.open('', target, "height=700,width=1000", false);
+    // const winRef = window.open('', target, "height=700,width=1000", false);
+    const winRef = window.open('', target, "height=700,width=1000");
     return winRef;
   }
 

@@ -56,20 +56,21 @@ export class UserAuthService {
    * @param userData - data returned from the BE for the user (tokens etc')
    */
   loggedIn(cognitoUserData: void | CognitoUserInterface): void {
-    console.log("file: user-auth.service.ts ~ line 60 ~ loggedIn ~ cognitoUserData", cognitoUserData)
+    // console.log("file: user-auth.service.ts ~ line 60 ~ loggedIn ~ cognitoUserData", cognitoUserData)
     if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
     this.cognitoUserData = cognitoUserData || this.cognitoUserData;
     this.api.GetUser(this.cognitoUserData.username).then(data => {
-      console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetUser ~ data", data)
+      // console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetUser ~ data", data)
       if (!data) {
         this.createUser();
         // this.overlaySpinnerService.changeOverlaySpinner(false);
         return;
       }
       this.userData = new UserData().deseralize(data);
+      // console.log("file: user-auth.service.ts ~ line 73 ~ this.api.GetUser ~ this.userData", this.userData)
       localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
@@ -84,6 +85,9 @@ export class UserAuthService {
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }
+
+      // this.userData.groupRole = 'SUPER_USER';
+
       this.loggedInEmmiter.emit(this.userData);
       (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
@@ -105,7 +109,7 @@ export class UserAuthService {
     var newUserPhone: string = this.cognitoUserData.attributes['phone_number'];
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail, 'phone': newUserPhone };
     this.api.CreateUser(user).then(value => {
-      console.log("file: user-auth.service.ts ~ line 71 ~ this.api.CreateUser ~ value", value)
+      // console.log("file: user-auth.service.ts ~ line 71 ~ this.api.CreateUser ~ value", value)
       this.userData = new UserData().deseralize(value);
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this.loggedInEmmiter.emit(this.userData);

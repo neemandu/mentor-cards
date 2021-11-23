@@ -24,16 +24,16 @@ export class GuideBookComponent implements OnInit {
 
   ngOnInit(): void {
     // debugger
-    if(this.data.guideBook){
+    if (this.data.guideBook) {
       this.title = "ספר הדרכה"
       this.guideBook = this.data.guideBook;
       this.packName = this.data.packName;
       this.packDesc = this.data.packDesc;
     }
-    else{
+    else {
       this.guideBook = new GuideBook().setDefault();
-      this.title = "ספר הדרכה לדוגמא"
-      this.packName = "ערכה לדוגמא",
+      this.title = "ספר הדרכה לדוגמא";
+      this.packName = "ערכה לדוגמא";
       this.packDesc = "תאור ערכה לדוגמא";
     }
   }

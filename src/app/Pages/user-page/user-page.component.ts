@@ -65,7 +65,7 @@ export class UserPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ביטול תכנית", ["האם לבטל הרשמה לתכנית זו?"], "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("ביטול תכנית נוכחית", ["האם לבטל הרשמה לתכנית זו?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();

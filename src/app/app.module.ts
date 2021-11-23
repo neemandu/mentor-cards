@@ -33,7 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 
 //Components
 import { AppRoutingModule } from './app-routing.module';
@@ -77,6 +77,8 @@ import { NewEditNewsComponent } from './Shared Components/Dialogs/new-edit-news/
 import { EnterCouponCodeDialogComponent } from './Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 import { AboutAuthorComponent } from './Shared Components/pack/about-author/about-author.component';
 import { InformationBarComponent } from './Shared Components/information-bar/information-bar.component';
+import { GuideBookManagementComponent } from './Pages/site-content-management/guide-book-management/guide-book-management.component';
+import { NewsManagementComponent } from './Pages/site-content-management/news-management/news-management.component';
 // import { PwChallangeComponent } from './main-screen/user-related/user-related-dialog/login/pw-challange/pw-challange.component';
 
 @NgModule({
@@ -121,6 +123,8 @@ import { InformationBarComponent } from './Shared Components/information-bar/inf
     EnterCouponCodeDialogComponent,
     AboutAuthorComponent,
     InformationBarComponent,
+    GuideBookManagementComponent,
+    NewsManagementComponent,
     // PwChallangeComponent,
   ],
   imports: [
@@ -155,7 +159,8 @@ import { InformationBarComponent } from './Shared Components/information-bar/inf
     MatTableModule,
     MatSelectModule,
     MatCardModule,
-    DragDropModule
+    DragDropModule,
+    MatExpansionModule
   ],
   providers: [
   ],

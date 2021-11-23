@@ -2,17 +2,17 @@
     <button class="iconButton" mat-icon-button (click)="closeDialog()">
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
-    <span class="title" *ngIf="!data">הוספת חדשות</span>
-    <span class="title" *ngIf="data">עריכת חדשות</span>
+    <span class="title" *ngIf="!data">הוספה</span>
+    <span class="title" *ngIf="data">עריכה</span>
     <span class="title" style="visibility: hidden;"></span>
 </mat-toolbar>
 <div class="line"></div>
 
 <div mat-dialog-content>
-    <form class="d-flex flex-column" [formGroup]="newsForm" style="margin-top: 1rem;">
+    <form class="d-flex flex-column" [formGroup]="form" style="margin-top: 1rem;">
         <mat-form-field>
-            <mat-label>תוכן חדשות</mat-label>
-            <input type="text" matInput formControlName="value" placeholder="תוכן החדשות" cdkFocusInitial>
+            <mat-label>תוכן</mat-label>
+            <input type="text" matInput formControlName="value" placeholder="תוכן" cdkFocusInitial>
             <mat-error *ngIf="formControls.value.hasError('required')">
                 חובה להזין תוכן
             </mat-error>
@@ -22,5 +22,5 @@
 
 <div class="buttons" mat-dialog-actions>
     <button class="action-button" type="button" (click)="saveChanges()"
-        [disabled]="newsForm.invalid || !newsForm.dirty">שמור</button>
+        [disabled]="form.invalid || !form.dirty">שמור</button>
 </div>
