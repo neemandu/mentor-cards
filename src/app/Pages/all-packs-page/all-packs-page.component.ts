@@ -46,7 +46,7 @@ export class AllPacksPageComponent implements OnInit {
     this.loadedPacks = 0;
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites;
-      this.filterPacks()
+      this.filterPacks();
       // this.sortPacks();
     }));
     this.overlaySpinnerService.changeOverlaySpinner(true);
@@ -104,6 +104,13 @@ export class AllPacksPageComponent implements OnInit {
     this.userAuthService.loggedIn();
   }
 
+  allPacksUnderCategory(category: string): PackContent[] {
+    return this.allPacks.filter(pack => pack.categories.includes(category));
+  }
+
+  allFavoritePacks(): PackContent[] {
+    return this.allPacks.filter(pack => this.selectedFavorites.includes(pack.id));
+  }
   /**
    * Sort all packs so that favorites are first 
    */
