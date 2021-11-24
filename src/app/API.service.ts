@@ -3079,18 +3079,6 @@ export class APIService {
             tags
             categories
             cardsPreview
-            guideBook {
-              __typename
-              subjects {
-                __typename
-                subjectName
-                subSubjects {
-                  __typename
-                  subSubjectName
-                  questions
-                }
-              }
-            }
             name
             about {
               __typename
