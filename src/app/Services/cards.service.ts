@@ -120,7 +120,7 @@ export class CardsService {
    */
   setPackAfterChanges(index: number, res: any): void {
     this.allPacks[index] = new PackContent().deseralize(res);
-    this.allPacksReadyEmmiter.emit();
+    // this.allPacksReadyEmmiter.emit();
   }
 
   /**
