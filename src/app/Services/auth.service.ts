@@ -19,6 +19,7 @@ export class AuthService {
   public loggedIn: boolean;
   private _authState: Subject<CognitoUser | any> = new Subject<CognitoUser | any>();
   authState: Observable<CognitoUser | any> = this._authState.asObservable();
+  authResponseUri: string = "https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/"
 
   public static SIGN_IN = 'signIn';
   public static SIGN_OUT = 'signOut';
@@ -32,6 +33,13 @@ export class AuthService {
         this._authState.next(payload.event);
       }
     });
+    // (Auth as any)._handleAuthResponse(this.authResponseUri)
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .err(err => {
+    //     console.log(err)
+    //   })
   }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {

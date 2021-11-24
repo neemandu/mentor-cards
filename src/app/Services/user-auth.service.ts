@@ -38,16 +38,19 @@ export class UserAuthService {
     public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
     this.rememebrMe();
     this.getSubscriptionPlans();
+    window.onstorage = (obj) => {
+      console.log(obj);
+    };
   }
 
   async rememebrMe(): Promise<void> {
     try {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      setTimeout(() => { }, 2000);
+      // this.overlaySpinnerService.changeOverlaySpinner(false);
+      // setTimeout(() => { }, 2000);
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
       this.loggedIn(user)
     } catch (err) {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+      // this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
       console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
     }
