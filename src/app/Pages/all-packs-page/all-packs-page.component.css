@@ -1,5 +1,5 @@
 * {
-  font-family: 'rubik';
+  font-family: 'rubik' !important;
   font-size: inherit;
 }
 
@@ -131,4 +131,14 @@ h1 {
 
 .caterory-title {
   text-align: start;
+  margin-inline-start: 1%;
+  margin-block-end: -5px;
+  font-size: large;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #ffa800;
+}
+
+.all-packs-view__section {
+  margin-bottom: 1%;
 }

@@ -24,7 +24,7 @@ export class AllPacksPageComponent implements OnInit {
 
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
-  allCategoryPacks: CategoryPack[];
+  allCategoryPacks: CategoryPack[] = [];
   // allPacksOwned: PackContent[] = [];
   // allPacksNotOwned: PackContent[] = [];
   allCategories: string[] = [];
@@ -36,6 +36,7 @@ export class AllPacksPageComponent implements OnInit {
   freeTextFilterSelected: string = '';
   selectedCategories: string[] = [];
   selectedFavorites: string[] = [];
+  showBottomArrow: boolean = true;
   // selectedTags: string[] = [];
 
   constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
@@ -58,6 +59,21 @@ export class AllPacksPageComponent implements OnInit {
       // this.filterPacks();
       // this.sortPacks();
     }));
+    document.onscroll = () => {
+      // if (document.documentElement.scrollTop > 100) {
+      //   this.showTopArrow = true;
+      // } else {
+      //   this.showTopArrow = false;
+      // }
+      if (document.documentElement.scrollTop < document.documentElement.offsetHeight) {
+        console.log("show")
+        this.showBottomArrow = true;
+      } else {
+        console.log("no show")
+        this.showBottomArrow = false;
+      }
+    }
+
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.getAllPacks();
   }

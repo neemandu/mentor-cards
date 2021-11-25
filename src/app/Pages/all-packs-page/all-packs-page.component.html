@@ -72,8 +72,8 @@
     </div>
   </div> -->
 
-  <div class="all-packs-view" #new>
-    <div *ngIf="allFavPacks.length != 0">
+  <div id="test" class="all-packs-view" #new>
+    <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
       <h3 class="caterory-title">מועדפים</h3>
       <div class="d-flex flex-row flex-wrap">
         <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo" (loaded)="packLoaded();"
@@ -81,7 +81,7 @@
         </app-pack>
       </div>
     </div>
-    <div *ngFor="let categoryPacks of allCategoryPacks">
+    <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks">
       <h3 class="caterory-title">{{categoryPacks.category}}</h3>
       <div class="d-flex flex-row flex-wrap">
         <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
