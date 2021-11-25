@@ -8,6 +8,11 @@ import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
+interface CategoryPack {
+  category: string,
+  packs: PackContent[]
+}
+
 @Component({
   selector: 'app-all-packs-page',
   templateUrl: './all-packs-page.component.html',
@@ -18,6 +23,8 @@ export class AllPacksPageComponent implements OnInit {
   mobile: boolean;
 
   allPacks: PackContent[] = [];
+  allFavPacks: PackContent[] = [];
+  allCategoryPacks: CategoryPack[];
   // allPacksOwned: PackContent[] = [];
   // allPacksNotOwned: PackContent[] = [];
   allCategories: string[] = [];
@@ -46,7 +53,9 @@ export class AllPacksPageComponent implements OnInit {
     this.loadedPacks = 0;
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites;
-      this.filterPacks()
+      // this.favoritesFilter();
+      this.setAllFavPacksToShow();
+      // this.filterPacks();
       // this.sortPacks();
     }));
     this.overlaySpinnerService.changeOverlaySpinner(true);
@@ -58,16 +67,16 @@ export class AllPacksPageComponent implements OnInit {
    */
   getAllPacks(): void {
     if (this.cardsService.allPacks) {
-      this.allPacks = this.cardsService.allPacks.map(pack => pack);
-      this.allCategories = this.cardsService.allCategories.map(category => category);
-      this.allFavorites = this.cardsService.favorites;
+      this.setAllPacksData();
+      this.setAllCategoryPacksToShow();
+      this.setAllFavPacksToShow();
       // this.sortPacks();
     } else {
       let sub = this.cardsService.allPacksReadyEmmiter.subscribe(() => {
         sub.unsubscribe();
-        this.allPacks = this.cardsService.allPacks.map(pack => pack);
-        this.allCategories = this.cardsService.allCategories.map(category => category);
-        this.allFavorites = this.cardsService.favorites;
+        this.setAllPacksData();
+        this.setAllCategoryPacksToShow();
+        this.setAllFavPacksToShow();
       })
       this.cardsService.getAllPacks();
       // let authStatus = localStorage.getItem('signedin');
@@ -100,9 +109,38 @@ export class AllPacksPageComponent implements OnInit {
     }
   }
 
+  setAllPacksData(): void {
+    this.allPacks = this.cardsService.allPacks.map(pack => pack);
+    this.allCategories = this.cardsService.allCategories.map(category => category);
+    this.allFavorites = this.cardsService.favorites;
+  }
+
+  setAllCategoryPacksToShow(): void {
+    this.allCategoryPacks = this.allCategories.filter(category => {
+      return this.selectedCategories.length != 0 ? this.selectedCategories.includes(category) : true
+    }).map(category => {
+      let packs = this.allPacks.filter(pack => pack.categories.includes(category));
+      if (packs.length != 0)
+        return { category: category, packs: packs }
+    })
+    // console.log(this.allCategoryPacks)
+  }
+
+  setAllFavPacksToShow(): void {
+    this.allFavPacks = this.allPacks.filter(pack => this.allFavorites.includes(pack.id));
+  }
+
   updateUserData(): void {
     this.userAuthService.loggedIn();
   }
+
+  // allPacksUnderCategory(category: string): PackContent[] {
+  //   return this.allPacks.filter(pack => pack.categories.includes(category));
+  // }
+
+  // allFavoritePacks(): PackContent[] {
+  //   return this.allPacks.filter(pack => this.allFavorites.includes(pack.id));
+  // }
 
   /**
    * Sort all packs so that favorites are first 
@@ -129,18 +167,18 @@ export class AllPacksPageComponent implements OnInit {
   /**
    * Return all packs that user ownes
    */
-  allOwnedPacks(): PackContent[] {
-    return this.allPacks ? this.allPacks.filter(pack => pack.cards.length != 0) : [];
-    // return this.allPacks.filter(pack => pack.cards);
-  }
+  // allOwnedPacks(): PackContent[] {
+  //   return this.allPacks ? this.allPacks.filter(pack => pack.cards.length != 0) : [];
+  //   // return this.allPacks.filter(pack => pack.cards);
+  // }
 
   /**
    * Return all packs that user doesn't own
    */
-  allNotOwnedPacks(): PackContent[] {
-    return this.allPacks ? this.allPacks.filter(pack => pack.cards.length == 0) : [];
-    // return this.allPacks.filter(pack => !pack.cards);
-  }
+  // allNotOwnedPacks(): PackContent[] {
+  //   return this.allPacks ? this.allPacks.filter(pack => pack.cards.length == 0) : [];
+  //   // return this.allPacks.filter(pack => !pack.cards);
+  // }
 
   getCategoryColor(category): string {
     return this.cardsService.getCategoryColor(category);
@@ -209,10 +247,12 @@ export class AllPacksPageComponent implements OnInit {
         this.categoryFilter();
       }
       if (this.selectedFavorites.length != 0) {
-        this.favoritesFilter()
+        this.favoritesFilter();
       }
       // this.sortPacks();
     }
+    this.setAllCategoryPacksToShow();
+    this.setAllFavPacksToShow();
   }
 
   freeTextFilter(): void {
@@ -249,9 +289,7 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   favoritesFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackContent) => {
-      return this.selectedFavorites.includes(pack.name);
-    })
+    this.allPacks = this.allPacks.filter((pack: PackContent) => this.selectedFavorites.includes(pack.name))
   }
 
   public navigate(path: string): void {

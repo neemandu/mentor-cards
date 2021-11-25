@@ -111,7 +111,7 @@ mat-form-field {
 }
 
 #choose-program-link:hover {
-  color:#ffa800;
+  color: #ffa800;
 }
 
 h1 {
@@ -119,12 +119,16 @@ h1 {
 }
 
 .category {
-  margin-top: 5%!important;
+  margin-top: 5% !important;
 }
 
 .category-color-dot {
   font-size: 12px;
   font-family: 'Material Icons'
-  /* margin-right: -10px;
+    /* margin-right: -10px;
   margin-bottom: -4px; */
+}
+
+.caterory-title {
+  text-align: start;
 }
