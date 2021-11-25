@@ -3,6 +3,8 @@
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
+import awsconfig from '../aws-exports';
+API.configure(awsconfig)
 import { Observable } from "zen-observable-ts";
 import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
