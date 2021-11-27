@@ -51,6 +51,10 @@ mat-toolbar {
   font-size: x-large;
 }
 
+.note {
+  font-size: medium;
+}
+
 .line {
   background-color: #ffa800;
   width: auto;
