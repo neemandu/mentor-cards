@@ -59,20 +59,15 @@ export class AllPacksPageComponent implements OnInit {
       // this.filterPacks();
       // this.sortPacks();
     }));
-    document.onscroll = () => {
-      // if (document.documentElement.scrollTop > 100) {
-      //   this.showTopArrow = true;
-      // } else {
-      //   this.showTopArrow = false;
-      // }
-      if (document.documentElement.scrollTop < document.documentElement.offsetHeight) {
-        console.log("show")
-        this.showBottomArrow = true;
-      } else {
-        console.log("no show")
-        this.showBottomArrow = false;
-      }
-    }
+    // document.onscroll = () => {
+    //   if (document.documentElement.scrollTop < document.documentElement.offsetHeight) {
+    //     console.log("show")
+    //     this.showBottomArrow = true;
+    //   } else {
+    //     console.log("no show")
+    //     this.showBottomArrow = false;
+    //   }
+    // }
 
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.getAllPacks();
