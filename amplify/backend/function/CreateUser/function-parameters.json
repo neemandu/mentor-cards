@@ -11,5 +11,19 @@
       ]
     }
   },
-  "lambdaLayers": []
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "mentorcardsMailingListService",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "sendinblueApiKey",
+      "environmentVariableName": "SENDINBLUE_API_KEY"
+    }
+  ]
 }

@@ -132,7 +132,8 @@ type SubscriptionPlan
   providerPlanId: String!
   numberOfUsers: Int
   numberOfCardPacks: Int
-  price: Float
+  billingCycleInMonths: Int
+  fullPrice: Float
   discount: Float
 }
 

@@ -72,6 +72,13 @@
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "function",
+          "resourceName": "mentorcardsMailingListService",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
           "category": "api",
           "resourceName": "cardspacks",
           "attributes": [
@@ -266,6 +273,11 @@
           ]
         }
       ]
+    },
+    "mentorcardsMailingListService": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   }
 }
