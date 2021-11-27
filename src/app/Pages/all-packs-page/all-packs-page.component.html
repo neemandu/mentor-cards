@@ -19,7 +19,7 @@
         *ngFor="let category of allCategories|slice:0:categoriesToShow"
         [selected]="selectedCategories.includes(category)" [value]="category">
         <!-- <span> -->
-          {{category}}
+        {{category}}
         <!-- <div class="d-flex justify-content-end align-items-baseline category">
           <mat-icon class="category-color-dot" [style.color]="getCategoryColor(category)">
             circle
@@ -74,7 +74,10 @@
 
   <div id="test" class="all-packs-view" #new>
     <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
-      <h3 class="caterory-title">מועדפים</h3>
+      <div class="d-flex align-items-center justify-content-between">
+        <h3 class="caterory-title">המועדפים שלי</h3>
+        <div class="line"></div>
+      </div>
       <div class="d-flex flex-row flex-wrap">
         <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo" (loaded)="packLoaded();"
           (packChange)="getAllPacks(); updateUserData();">
@@ -82,7 +85,10 @@
       </div>
     </div>
     <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks">
-      <h3 class="caterory-title">{{categoryPacks.category}}</h3>
+      <div class="d-flex align-items-center justify-content-between">
+        <h3 class="caterory-title">{{categoryPacks.category}}</h3>
+        <div class="line"></div>
+      </div>
       <div class="d-flex flex-row flex-wrap">
         <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
           (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">

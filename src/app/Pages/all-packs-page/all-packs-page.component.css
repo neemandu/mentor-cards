@@ -133,10 +133,18 @@ h1 {
   text-align: start;
   margin-inline-start: 1%;
   margin-block-end: -5px;
-  font-size: large;
+  font-size: 1.5EM;
   font-weight: 600;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   color: #ffa800;
+}
+
+.line {
+  background-color: #ffa800;
+  width: 80%;
+  height: 3px;
+  border-radius: 25%;
+  margin-left: 5%;
 }
 
 .all-packs-view__section {
