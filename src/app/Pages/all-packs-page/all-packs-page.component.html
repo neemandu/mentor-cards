@@ -74,7 +74,8 @@
 
   <div id="test" class="all-packs-view" #new>
     <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
-      <div class="d-flex align-items-center justify-content-between">
+      <div class="category-line d-flex align-items-center justify-content-around">
+        <div class="line"></div>
         <h3 class="caterory-title">המועדפים שלי</h3>
         <div class="line"></div>
       </div>
@@ -85,7 +86,8 @@
       </div>
     </div>
     <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks">
-      <div class="d-flex align-items-center justify-content-between">
+      <div class="category-line d-flex align-items-center justify-content-around">
+        <div class="line"></div>
         <h3 class="caterory-title">{{categoryPacks.category}}</h3>
         <div class="line"></div>
       </div>

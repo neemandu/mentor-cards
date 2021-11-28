@@ -28,18 +28,19 @@ export class AuthService {
 
   constructor() {
     Hub.listen('auth', (data) => {
+      console.log("file: auth.service.ts ~ line 32 ~ Hub.listen ~ data", data)
       const { channel, payload } = data;
       if (channel === 'auth') {
         this._authState.next(payload.event);
       }
     });
-    // (Auth as any)._handleAuthResponse(this.authResponseUri)
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    //   .err(err => {
-    //     console.log(err)
-    //   })
+    (Auth as any)._handleAuthResponse(this.authResponseUri)
+      .then(res => {
+        console.log("file: auth.service.ts ~ line 38 ~ constructor ~ res", res)
+      })
+      .err(err => {
+        console.log("file: auth.service.ts ~ line 44 ~ constructor ~ err", err)
+      })
   }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {

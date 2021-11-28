@@ -131,7 +131,7 @@ h1 {
 
 .caterory-title {
   text-align: start;
-  margin-inline-start: 1%;
+  /* margin-inline-start: 1%; */
   margin-block-end: -5px;
   font-size: 1.5EM;
   font-weight: 600;
@@ -141,12 +141,16 @@ h1 {
 
 .line {
   background-color: #ffa800;
-  width: 80%;
-  height: 3px;
-  border-radius: 25%;
-  margin-left: 5%;
+  width: 35%;
+  height: 5px;
+  border-radius: 100%;
+  /* margin-left: 5%; */
 }
 
 .all-packs-view__section {
   margin-bottom: 1%;
+}
+
+.category-line {
+  width: 100%;
 }
