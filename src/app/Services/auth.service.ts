@@ -3,6 +3,7 @@ import Auth, { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Hub, ICredentials } from '@aws-amplify/core';
 import { Subject, Observable } from 'rxjs';
 import { CognitoUser } from 'amazon-cognito-identity-js';
+import { UserAuthService } from './user-auth.service';
 
 export interface NewUser {
   fullName: string
@@ -26,12 +27,20 @@ export class AuthService {
   public static FACEBOOK = CognitoHostedUIIdentityProvider.Facebook;
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
-  constructor() {
-    Hub.listen('auth', (data) => {
-      console.log("file: auth.service.ts ~ line 32 ~ Hub.listen ~ data", data)
-      const { channel, payload } = data;
-      if (channel === 'auth') {
-        this._authState.next(payload.event);
+  constructor(private userAuthService: UserAuthService) {
+    // Hub.listen('auth', (data) => {
+    //   console.log("file: auth.service.ts ~ line 32 ~ Hub.listen ~ data", data)
+    //   const { channel, payload } = data;
+    //   if (channel === 'auth') {
+    //     this._authState.next(payload.event);
+    //   }
+    // });
+    Hub.listen('auth', ({ payload: { event, data, message } }) => {
+      console.log("file: auth.service.ts ~ line 39 ~ Hub.listen ~ event", event)
+      if (event === 'signIn') {
+        this.userAuthService.loggedIn(data);
+      } else {
+        this._authState.next(event);
       }
     });
     // (Auth as any)._handleAuthResponse(this.authResponseUri)
@@ -69,16 +78,13 @@ export class AuthService {
       'provider': provider
     }).then(cred => {
       // If success, you will get the AWS credentials
-      console.log('cred');
-      console.log(cred);
+      console.log("file: auth.service.ts ~ line 78 ~ socialSignIn ~ cred", cred)
       return Auth.currentAuthenticatedUser();
     }).then(user => {
       // If success, the user object you passed in Auth.federatedSignIn
-      console.log('user');
-      console.log(user);
+      console.log("file: auth.service.ts ~ line 82 ~ socialSignIn ~ user", user)
     }).catch(e => {
-      console.log('e')
-      console.log(e)
+      console.log("file: auth.service.ts ~ line 85 ~ socialSignIn ~ e", e)
     });
   }
 
