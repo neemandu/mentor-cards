@@ -18,7 +18,8 @@ mutation CreateUser($input: CreateUserInput!) {
         providerPlanId
         numberOfUsers
         numberOfCardPacks
-        price
+        billingCycleInMonths
+        fullPrice
         discount
         createdAt
         updatedAt
@@ -128,7 +129,8 @@ mutation CreateGroup(
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -154,7 +156,8 @@ mutation UpdateGroup(
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -180,7 +183,8 @@ mutation DeleteGroup(
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -200,7 +204,8 @@ mutation CreateSubscriptionPlan(
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
@@ -217,7 +222,8 @@ mutation UpdateSubscriptionPlan(
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
@@ -234,7 +240,8 @@ mutation DeleteSubscriptionPlan(
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt

@@ -45,7 +45,8 @@ query GetUser($id: ID!) {
         providerPlanId
         numberOfUsers
         numberOfCardPacks
-        price
+        billingCycleInMonths
+        fullPrice
         discount
         createdAt
         updatedAt
@@ -99,7 +100,8 @@ query ListUsers(
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -145,7 +147,8 @@ query GetGroup($id: ID!) {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -173,7 +176,8 @@ query ListGroups(
         providerPlanId
         numberOfUsers
         numberOfCardPacks
-        price
+        billingCycleInMonths
+        fullPrice
         discount
         createdAt
         updatedAt
@@ -223,12 +227,13 @@ query GetSubscriptionPlan($id: ID!) {
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
   }
-}
+} 
 query ListSubscriptionPlans(
   $filter: ModelSubscriptionPlanFilterInput
   $limit: Int
@@ -242,7 +247,8 @@ query ListSubscriptionPlans(
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt

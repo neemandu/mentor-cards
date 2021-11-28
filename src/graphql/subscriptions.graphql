@@ -43,7 +43,8 @@ subscription OnCreateGroup {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -66,7 +67,8 @@ subscription OnUpdateGroup {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -89,7 +91,8 @@ subscription OnDeleteGroup {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -142,7 +145,8 @@ subscription OnCreateSubscriptionPlan {
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
@@ -156,7 +160,8 @@ subscription OnUpdateSubscriptionPlan {
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
@@ -170,7 +175,8 @@ subscription OnDeleteSubscriptionPlan {
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt

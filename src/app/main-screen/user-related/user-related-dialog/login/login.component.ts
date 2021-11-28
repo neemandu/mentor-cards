@@ -11,6 +11,8 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isLoggedIn = false;
+  user: { id: string; username: string; email: string };
 
   @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
   // @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
@@ -46,6 +48,16 @@ export class LoginComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
 
   ngOnInit(): void {
+    this.amplifyAuthService.isLoggedIn$.subscribe(
+      isLoggedIn => {
+        (this.isLoggedIn = isLoggedIn);
+        console.log("log in!!!!!!");
+      }
+    );
+
+    this.amplifyAuthService.auth$.subscribe(({ id, username, email }) => {
+      this.user = { id, username, email };
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

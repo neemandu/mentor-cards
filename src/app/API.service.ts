@@ -58,7 +58,8 @@ export type SubscriptionPlan = {
   providerPlanId?: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt?: string;
   updatedAt?: string;
@@ -233,7 +234,8 @@ export type CreateSubscriptionPlanInput = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
 };
 
@@ -243,7 +245,8 @@ export type ModelSubscriptionPlanConditionInput = {
   providerPlanId?: ModelStringInput | null;
   numberOfUsers?: ModelIntInput | null;
   numberOfCardPacks?: ModelIntInput | null;
-  price?: ModelFloatInput | null;
+  billingCycleInMonths?: ModelFloatInput | null;
+  fullPrice?: ModelFloatInput | null;
   discount?: ModelFloatInput | null;
   and?: Array<ModelSubscriptionPlanConditionInput | null> | null;
   or?: Array<ModelSubscriptionPlanConditionInput | null> | null;
@@ -281,7 +284,8 @@ export type UpdateSubscriptionPlanInput = {
   providerPlanId?: string | null;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
 };
 
@@ -552,7 +556,8 @@ export type ModelSubscriptionPlanFilterInput = {
   providerPlanId?: ModelStringInput | null;
   numberOfUsers?: ModelIntInput | null;
   numberOfCardPacks?: ModelIntInput | null;
-  price?: ModelFloatInput | null;
+  billingCycleInMonths?: ModelFloatInput | null;
+  fullPrice?: ModelFloatInput | null;
   discount?: ModelFloatInput | null;
   and?: Array<ModelSubscriptionPlanFilterInput | null> | null;
   or?: Array<ModelSubscriptionPlanFilterInput | null> | null;
@@ -623,7 +628,8 @@ export type CreateUserMutation = {
       providerPlanId: string;
       numberOfUsers?: number | null;
       numberOfCardPacks?: number | null;
-      price?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
       discount?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -700,7 +706,8 @@ export type CreateGroupMutation = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -725,7 +732,8 @@ export type UpdateGroupMutation = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -750,7 +758,8 @@ export type DeleteGroupMutation = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -767,7 +776,8 @@ export type CreateSubscriptionPlanMutation = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -781,7 +791,8 @@ export type UpdateSubscriptionPlanMutation = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -795,7 +806,8 @@ export type DeleteSubscriptionPlanMutation = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -1056,7 +1068,8 @@ export type GetUserQuery = {
       providerPlanId: string;
       numberOfUsers?: number | null;
       numberOfCardPacks?: number | null;
-      price?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
       discount?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -1110,7 +1123,8 @@ export type ListUsersQuery = {
         providerPlanId: string;
         numberOfUsers?: number | null;
         numberOfCardPacks?: number | null;
-        price?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
         discount?: number | null;
         createdAt: string;
         updatedAt: string;
@@ -1159,7 +1173,8 @@ export type GetGroupQuery = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1186,7 +1201,8 @@ export type ListGroupsQuery = {
       providerPlanId: string;
       numberOfUsers?: number | null;
       numberOfCardPacks?: number | null;
-      price?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
       discount?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -1233,7 +1249,8 @@ export type GetSubscriptionPlanQuery = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -1249,7 +1266,8 @@ export type ListSubscriptionPlansQuery = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1423,7 +1441,8 @@ export type OnCreateGroupSubscription = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1448,7 +1467,8 @@ export type OnUpdateGroupSubscription = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1473,7 +1493,8 @@ export type OnDeleteGroupSubscription = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1526,7 +1547,8 @@ export type OnCreateSubscriptionPlanSubscription = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -1540,7 +1562,8 @@ export type OnUpdateSubscriptionPlanSubscription = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -1554,7 +1577,8 @@ export type OnDeleteSubscriptionPlanSubscription = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -1761,7 +1785,8 @@ export class APIService {
               providerPlanId
               numberOfUsers
               numberOfCardPacks
-              price
+              billingCycleInMonths
+              fullPrice
               discount
               createdAt
               updatedAt
@@ -2001,7 +2026,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -2042,7 +2068,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -2083,7 +2110,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -2116,7 +2144,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -2146,7 +2175,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -2176,7 +2206,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -2625,7 +2656,8 @@ export class APIService {
               providerPlanId
               numberOfUsers
               numberOfCardPacks
-              price
+              billingCycleInMonths
+              fullPrice
               discount
               createdAt
               updatedAt
@@ -2693,7 +2725,8 @@ export class APIService {
                 providerPlanId
                 numberOfUsers
                 numberOfCardPacks
-                price
+                billingCycleInMonths
+                fullPrice
                 discount
                 createdAt
                 updatedAt
@@ -2759,7 +2792,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -2800,7 +2834,8 @@ export class APIService {
               providerPlanId
               numberOfUsers
               numberOfCardPacks
-              price
+              billingCycleInMonths
+              fullPrice
               discount
               createdAt
               updatedAt
@@ -2895,7 +2930,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -2925,7 +2961,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -3256,7 +3293,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -3289,7 +3327,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -3322,7 +3361,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -3407,7 +3447,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -3429,7 +3470,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -3451,7 +3493,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt

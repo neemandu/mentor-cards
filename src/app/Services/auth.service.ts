@@ -1,9 +1,24 @@
 import { Injectable } from '@angular/core';
 import Auth, { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Hub, ICredentials } from '@aws-amplify/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { UserAuthService } from './user-auth.service';
+import { map } from 'rxjs/operators';
+
+const initialAuthState = {
+  isLoggedIn: false,
+  username: null,
+  id: null,
+  email: null
+};
+
+export interface AuthState {
+  isLoggedIn: boolean;
+  username: string | null;
+  id: string | null;
+  email: string | null;
+}
 
 export interface NewUser {
   fullName: string
@@ -18,9 +33,18 @@ export interface NewUser {
 export class AuthService {
 
   public loggedIn: boolean;
-  private _authState: Subject<CognitoUser | any> = new Subject<CognitoUser | any>();
-  authState: Observable<CognitoUser | any> = this._authState.asObservable();
-  authResponseUri: string = "https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/"
+  private readonly _authState = new BehaviorSubject<AuthState>(
+    initialAuthState
+  );
+  /** AuthState as an Observable */
+  readonly auth$ = this._authState.asObservable();
+
+  /** Observe the isLoggedIn slice of the auth state */
+  readonly isLoggedIn$ = this.auth$.pipe(map(state => state.isLoggedIn));  
+
+  //private _authState: Subject<CognitoUser | any> = new Subject<CognitoUser | any>();
+  //authState: Observable<CognitoUser | any> = this._authState.asObservable();
+  //authResponseUri: string = "https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/"
 
   public static SIGN_IN = 'signIn';
   public static SIGN_OUT = 'signOut';
@@ -28,28 +52,35 @@ export class AuthService {
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
   constructor(private userAuthService: UserAuthService) {
-    // Hub.listen('auth', (data) => {
-    //   console.log("file: auth.service.ts ~ line 32 ~ Hub.listen ~ data", data)
-    //   const { channel, payload } = data;
-    //   if (channel === 'auth') {
-    //     this._authState.next(payload.event);
-    //   }
-    // });
+    // Get the user on creation of this service
+    Auth.currentAuthenticatedUser().then(
+      (user: any) => this.setUser(user),
+      _err => this._authState.next(initialAuthState)
+    );
+
+    // Use Hub channel 'auth' to get notified on changes
     Hub.listen('auth', ({ payload: { event, data, message } }) => {
-      console.log("file: auth.service.ts ~ line 39 ~ Hub.listen ~ event", event)
       if (event === 'signIn') {
-        this.userAuthService.loggedIn(data);
+        console.log("logged in!!!!!")
+        // On 'signIn' event, the data is a CognitoUser object
+        this.setUser(data);
       } else {
-        this._authState.next(event);
+        this._authState.next(initialAuthState);
       }
     });
-    // (Auth as any)._handleAuthResponse(this.authResponseUri)
-    //   .then(res => {
-    //     console.log("file: auth.service.ts ~ line 38 ~ constructor ~ res", res)
-    //   })
-    //   .err(err => {
-    //     console.log("file: auth.service.ts ~ line 44 ~ constructor ~ err", err)
-    //   })
+  }
+
+  private setUser(user: any) {
+    if (!user) {
+      return;
+    }
+
+    const {
+      attributes: { sub: id, email },
+      username
+    } = user;
+
+    this._authState.next({ isLoggedIn: true, id, username, email });
   }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {
