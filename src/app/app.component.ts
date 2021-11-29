@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.user = authData as CognitoUserInterface;
         LogRocket.identify(this.user.username);
-        this.userAuthService.loggedIn(this.user);
+        this.userAuthService.loggedIn(this.user.username);
       }
       else if (this.authState === 'signin') {
         this.userAuthService.loggedOut();

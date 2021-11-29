@@ -66,7 +66,7 @@ export class UserAuthService {
       // this.overlaySpinnerService.changeOverlaySpinner(false);
       // setTimeout(() => { }, 2000);
       //const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
-      this.loggedIn(this.user.cognitoUser)
+      this.loggedIn(this.user.username);
     } catch (err) {
       // this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
@@ -78,7 +78,7 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(username): void {
+  loggedIn(username: void | string): void {
     // console.log("file: user-auth.service.ts ~ line 60 ~ loggedIn ~ cognitoUserData", cognitoUserData)
     if (!username) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
