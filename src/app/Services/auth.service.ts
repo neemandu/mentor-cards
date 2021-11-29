@@ -71,17 +71,23 @@ export class AuthService {
   }
 
   private setUser(user: any) {
-    console.log(user);
-    console.log("user");
-    if (!user) {
-      return;
-    }
-
-    var username = user.username;
-    var id = user.attributes.sub;
-    var email = user.attributes.email;
-
-    this._authState.next({ isLoggedIn: true, id, username, email });
+    Auth.currentUserInfo().then(
+      (userAtt: any) => {
+        console.log("user");
+        console.log(user);
+        console.log("userAtt");
+        console.log(userAtt);
+        if (!user || !userAtt) {
+          return;
+        }
+    
+        var username = user.username;
+        var id = userAtt.attributes.sub;
+        var email = userAtt.attributes.email;
+    
+        this._authState.next({ isLoggedIn: true, id, username, email });
+      }
+    )  
   }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {
