@@ -77,10 +77,9 @@ export class AuthService {
       return;
     }
 
-    const {
-      attributes: { sub: id, email },
-      username
-    } = user;
+    var username = user.username;
+    var id = user.attributes.sub;
+    var email = user.attributes.email;
 
     this._authState.next({ isLoggedIn: true, id, username, email });
   }
