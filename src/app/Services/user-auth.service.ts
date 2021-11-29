@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserRelatedDialogComponent } from '../main-screen/user-related/user-related-dialog/user-related-dialog.component';
 import { OverlaySpinnerService } from './overlay-spinner.service';
+import { AuthService } from 'src/app/Services/auth.service';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -26,7 +27,8 @@ export class UserAuthService {
   @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() addCouponCodeToFavs: EventEmitter<string[]> = new EventEmitter<string[]>();
-
+  isLoggedIn = false;
+  user: { id: string; username: string; email: string; cognitoUser: CognitoUserInterface };
   cognitoUserData: CognitoUserInterface;
   subPlans: SubscriptionPlan[];
   userData: UserData;
@@ -35,7 +37,23 @@ export class UserAuthService {
 
   constructor(public _snackBar: MatSnackBar, public router: Router,
     private ngZone: NgZone, private api: APIService, private http: HttpClient,
-    public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
+    public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) {
+
+    this.amplifyAuthService.isLoggedIn$.subscribe(
+      isLoggedIn => {
+        (this.isLoggedIn = isLoggedIn);
+        console.log("all packs log in!!!!!!");
+        console.log("this.isLoggedIn");
+        console.log(this.isLoggedIn);
+      }
+    );
+  
+    this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
+      this.user = { id, username, email, cognitoUser };
+      this.cognitoUserData = cognitoUser;
+    });
+  
+  
     this.rememebrMe();
     this.getSubscriptionPlans();
     window.onstorage = (obj) => {
@@ -47,8 +65,8 @@ export class UserAuthService {
     try {
       // this.overlaySpinnerService.changeOverlaySpinner(false);
       // setTimeout(() => { }, 2000);
-      const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
-      this.loggedIn(user)
+      //const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
+      this.loggedIn(this.user.cognitoUser)
     } catch (err) {
       // this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
@@ -60,14 +78,13 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(cognitoUserData: void | CognitoUserInterface): void {
+  loggedIn(username): void {
     // console.log("file: user-auth.service.ts ~ line 60 ~ loggedIn ~ cognitoUserData", cognitoUserData)
-    if (!cognitoUserData && !this.cognitoUserData) {
+    if (!username) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
-    this.cognitoUserData = cognitoUserData || this.cognitoUserData;
-    this.api.GetUser(this.cognitoUserData.username).then(data => {
+    this.api.GetUser(username).then(data => {
       // console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetUser ~ data", data)
       if (!data) {
         this.createUser();

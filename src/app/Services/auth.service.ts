@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import Auth, { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Hub, ICredentials } from '@aws-amplify/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { UserAuthService } from './user-auth.service';
 import { map } from 'rxjs/operators';
@@ -10,7 +11,8 @@ const initialAuthState = {
   isLoggedIn: false,
   username: null,
   id: null,
-  email: null
+  email: null,
+  cognitoUser: null
 };
 
 export interface AuthState {
@@ -18,6 +20,7 @@ export interface AuthState {
   username: string | null;
   id: string | null;
   email: string | null;
+  cognitoUser: CognitoUserInterface | null;
 }
 
 export interface NewUser {
@@ -73,10 +76,6 @@ export class AuthService {
   private setUser(user: any) {
     Auth.currentUserInfo().then(
       (userAtt: any) => {
-        console.log("user");
-        console.log(user);
-        console.log("userAtt");
-        console.log(userAtt);
         if (!user || !userAtt) {
           return;
         }
@@ -84,8 +83,8 @@ export class AuthService {
         var username = user.username;
         var id = userAtt.attributes.sub;
         var email = userAtt.attributes.email;
-    
-        this._authState.next({ isLoggedIn: true, id, username, email });
+        var cognitoUser = user;
+        this._authState.next({ isLoggedIn: true, id, username, email, cognitoUser });
       }
     )  
   }

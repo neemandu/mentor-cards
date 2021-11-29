@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService, ListCardsPacksQuery } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
-import { AuthService } from 'src/app/Services/auth.service';
 import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -20,8 +19,6 @@ interface CategoryPack {
   styleUrls: ['./all-packs-page.component.css']
 })
 export class AllPacksPageComponent implements OnInit {  
-  isLoggedIn = false;
-  user: { id: string; username: string; email: string };
   Subscription: Subscription = new Subscription();
   mobile: boolean;
 
@@ -43,25 +40,11 @@ export class AllPacksPageComponent implements OnInit {
   // selectedTags: string[] = [];
 
   constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
-    private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone, private amplifyAuthService: AuthService) {
+    private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
   ngOnInit() {
-    this.amplifyAuthService.isLoggedIn$.subscribe(
-      isLoggedIn => {
-        (this.isLoggedIn = isLoggedIn);
-        console.log("all packs log in!!!!!!");
-        console.log("this.isLoggedIn");
-        console.log(this.isLoggedIn);
-      }
-    );
-
-    this.amplifyAuthService.auth$.subscribe(({ id, username, email }) => {
-      this.user = { id, username, email };
-    });
-
-
     this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
       // this.overlaySpinnerService.changeOverlaySpinner(true);
       this.getAllPacks();
