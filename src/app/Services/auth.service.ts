@@ -54,7 +54,7 @@ export class AuthService {
   public static FACEBOOK = CognitoHostedUIIdentityProvider.Facebook;
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
-  constructor(private userAuthService: UserAuthService) {
+  constructor() {
     // Get the user on creation of this service
     Auth.currentAuthenticatedUser().then(
       (user: any) => this.setUser(user),
