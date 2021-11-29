@@ -3,6 +3,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Router } from '@angular/router';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { APIService } from 'src/app/API.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -24,14 +25,27 @@ export class NavComponent implements OnInit {
   ]
 
   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,
-    private api: APIService) {
+    private api: APIService, private amplifyAuthService: AuthService) {
   }
 
   ngOnInit() {
-    this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
+    this.amplifyAuthService.isLoggedIn$.subscribe(
+      isLoggedIn => {
+        (this.loggedIn = isLoggedIn);
+        console.log("nav log in!!!!!!");
+        console.log("this.isLoggedIn");
+        console.log(this.loggedIn);
+      }
+    );
+  
+    this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
+      this.userAttributes = cognitoUser;
+    });
+
+    /*this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
       this.userAttributes = userAttributes;
       this.loggedIn = true;
-    })
+    })*/
     this.userAuthService.signedOutEmmiter.subscribe(() => {
       this.userAttributes = undefined;
       this.loggedIn = false;
