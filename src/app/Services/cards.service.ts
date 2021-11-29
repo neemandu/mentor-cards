@@ -8,12 +8,13 @@ import { UserAuthService } from './user-auth.service';
 import { UserData } from '../Objects/user-related';
 import { APIService, ListCardsPacksQuery } from '../API.service';
 import { OverlaySpinnerService } from './overlay-spinner.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardsService {
-
+  isLoggedIn: boolean = false;
   baseURL = environment.baseurl;
   apiControllerName = 'dev/'
 
@@ -32,13 +33,19 @@ export class CardsService {
 
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService,
-    private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
+    private overlaySpinnerService: OverlaySpinnerService, private api: APIService, private amplifyAuthService: AuthService) {
     this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
       this.allPacks = undefined;
     }))
-    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    this.amplifyAuthService.isLoggedIn$.subscribe(
+      isLoggedIn => {
+        (this.isLoggedIn = isLoggedIn);
+      }
+    );
+    
+    /*this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
       this.allPacks = undefined;
-    }));
+    }));*/
     this.Subscription.add(this.userAuthService.addCouponCodeToFavs.subscribe((ids: string[]) => {
       // console.log("file: cards.service.ts ~ line 39 ~ this.Subscription.add ~ ids", ids)
       this.addFavoritesFromCouponCode(ids);
@@ -89,8 +96,7 @@ export class CardsService {
 
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    let authStatus = localStorage.getItem('signedin');
-    (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
+    (this.isLoggedIn ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
       // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
         pack.categories.forEach(category => {

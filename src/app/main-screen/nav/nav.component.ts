@@ -32,9 +32,6 @@ export class NavComponent implements OnInit {
     this.amplifyAuthService.isLoggedIn$.subscribe(
       isLoggedIn => {
         (this.loggedIn = isLoggedIn);
-        console.log("nav log in!!!!!!");
-        console.log("this.isLoggedIn");
-        console.log(this.loggedIn);
       }
     );
   

@@ -42,9 +42,6 @@ export class UserAuthService {
     this.amplifyAuthService.isLoggedIn$.subscribe(
       isLoggedIn => {
         (this.isLoggedIn = isLoggedIn);
-        console.log("all packs log in!!!!!!");
-        console.log("this.isLoggedIn");
-        console.log(this.isLoggedIn);
       }
     );
   
