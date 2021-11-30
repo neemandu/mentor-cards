@@ -29,20 +29,20 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.amplifyAuthService.isLoggedIn$.subscribe(
-      isLoggedIn => {
-        (this.loggedIn = isLoggedIn);
-      }
-    );
-  
-    this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
-      this.userAttributes = cognitoUser;
-    });
+    // this.amplifyAuthService.isLoggedIn$.subscribe(
+    //   isLoggedIn => {
+    //     (this.loggedIn = isLoggedIn);
+    //   }
+    // );
 
-    /*this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
+    // this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
+    //   this.userAttributes = cognitoUser;
+    // });
+
+    this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
       this.userAttributes = userAttributes;
       this.loggedIn = true;
-    })*/
+    })
     this.userAuthService.signedOutEmmiter.subscribe(() => {
       this.userAttributes = undefined;
       this.loggedIn = false;
@@ -69,7 +69,7 @@ export class NavComponent implements OnInit {
    * @returns a string with all news to save\compare 
    */
   private getNewsList(): string {
-    let res = this.news.map(n => n.message).toString(); 
+    let res = this.news.map(n => n.message).toString();
     return res;
   }
 

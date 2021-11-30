@@ -48,16 +48,16 @@ export class LoginComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
 
   ngOnInit(): void {
-    this.amplifyAuthService.isLoggedIn$.subscribe(
-      isLoggedIn => {
-        (this.isLoggedIn = isLoggedIn);
-        console.log("log in!!!!!!");
-      }
-    );
+    // this.amplifyAuthService.isLoggedIn$.subscribe(
+    //   isLoggedIn => {
+    //     (this.isLoggedIn = isLoggedIn);
+    //     console.log("log in!!!!!!");
+    //   }
+    // );
 
-    this.amplifyAuthService.auth$.subscribe(({ id, username, email }) => {
-      this.user = { id, username, email };
-    });
+    // this.amplifyAuthService.auth$.subscribe(({ id, username, email }) => {
+    //   this.user = { id, username, email };
+    // });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -95,8 +95,8 @@ export class LoginComponent implements OnInit {
       //     this.showNewPwChallange()
       // }
       // else {
-        this.userAuthService.loggedIn(user.username);
-        this.loggedIn.emit();
+      this.userAuthService.loggedIn(user.username);
+      this.loggedIn.emit();
       // }
     })
       .catch(err => {

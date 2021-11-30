@@ -43,7 +43,7 @@ export class AuthService {
   readonly auth$ = this._authState.asObservable();
 
   /** Observe the isLoggedIn slice of the auth state */
-  readonly isLoggedIn$ = this.auth$.pipe(map(state => state.isLoggedIn));  
+  readonly isLoggedIn$ = this.auth$.pipe(map(state => state.isLoggedIn));
 
   //private _authState: Subject<CognitoUser | any> = new Subject<CognitoUser | any>();
   //authState: Observable<CognitoUser | any> = this._authState.asObservable();
@@ -54,7 +54,7 @@ export class AuthService {
   public static FACEBOOK = CognitoHostedUIIdentityProvider.Facebook;
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
-  constructor() {
+  constructor(private userAuthService: UserAuthService) {
     // Get the user on creation of this service
     Auth.currentAuthenticatedUser().then(
       (user: any) => this.setUser(user),
@@ -79,14 +79,15 @@ export class AuthService {
         if (!user || !userAtt) {
           return;
         }
-    
+
         var username = user.username;
         var id = userAtt.attributes.sub;
         var email = userAtt.attributes.email;
         var cognitoUser = user;
         this._authState.next({ isLoggedIn: true, id, username, email, cognitoUser });
+        this.userAuthService.loggedIn(user.username);
       }
-    )  
+    )
   }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {
