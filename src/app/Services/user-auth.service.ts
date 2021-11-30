@@ -64,7 +64,7 @@ export class UserAuthService {
     try {
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
       if (user)
-        this.loggedIn(user.username);
+        this.loggedIn(user);
       else
         throw 'No current user - rememberMe retured VOID';
     } catch (err) {
@@ -77,19 +77,25 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(username: void | string): void {
-    console.log("file: user-auth.service.ts ~ line 81 ~ loggedIn ~ username", username)
-    if (!username) {
+  // loggedIn(username: void | string): void {
+  //   console.log("file: user-auth.service.ts ~ line 81 ~ loggedIn ~ username", username)
+  //   if (!username) {
+  //     this.overlaySpinnerService.changeOverlaySpinner(false);
+  //     return;
+  //   }
+  loggedIn(cognitoUserData: void | CognitoUserInterface): void {
+    if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
-    this.api.GetUser(username).then(data => {
+    this.cognitoUserData = cognitoUserData || this.cognitoUserData;
+    this.api.GetUser(this.cognitoUserData.username).then(data => {
       if (!data) {
         this.createUser();
         return;
       }
       this.userData = new UserData().deseralize(data);
-      LogRocket.identify(username);
+      LogRocket.identify(this.cognitoUserData.username);
       // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {

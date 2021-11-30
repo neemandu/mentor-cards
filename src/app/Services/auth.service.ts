@@ -74,6 +74,7 @@ export class AuthService {
   }
 
   private setUser(user: any) {
+    console.log("file: auth.service.ts ~ line 77 ~ setUser ~ user", user)
     Auth.currentUserInfo().then(
       (userAtt: any) => {
         if (!user || !userAtt) {
@@ -85,7 +86,7 @@ export class AuthService {
         var email = userAtt.attributes.email;
         var cognitoUser = user;
         this._authState.next({ isLoggedIn: true, id, username, email, cognitoUser });
-        this.userAuthService.loggedIn(user.username);
+        this.userAuthService.loggedIn(cognitoUser);
       }
     )
   }
