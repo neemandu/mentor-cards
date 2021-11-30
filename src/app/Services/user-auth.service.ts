@@ -78,6 +78,7 @@ export class UserAuthService {
    * @param userData - data returned from the BE for the user (tokens etc')
    */
   loggedIn(username: void | string): void {
+    console.log("file: user-auth.service.ts ~ line 81 ~ loggedIn ~ username", username)
     if (!username) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
