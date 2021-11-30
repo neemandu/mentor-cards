@@ -62,7 +62,11 @@ export class UserAuthService {
 
   async rememebrMe(): Promise<void> {
     try {
-      this.loggedIn(this.user.username);
+      const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
+      if (user)
+        this.loggedIn(user.username);
+      else
+        throw 'No current user - rememberMe retured VOID';
     } catch (err) {
       localStorage.removeItem('signedin');
       console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
