@@ -73,7 +73,7 @@ export class AuthService {
     });
   }
 
-  private setUser(user: any) {
+  private setUser(user: CognitoUserInterface) {
     console.log("file: auth.service.ts ~ line 77 ~ setUser ~ user", user)
     Auth.currentUserInfo().then(
       (userAtt: any) => {
@@ -86,7 +86,7 @@ export class AuthService {
         var email = userAtt.attributes.email;
         var cognitoUser = user;
         this._authState.next({ isLoggedIn: true, id, username, email, cognitoUser });
-        this.userAuthService.loggedIn(cognitoUser);
+        this.userAuthService.loggedIn(user);
       }
     )
   }
