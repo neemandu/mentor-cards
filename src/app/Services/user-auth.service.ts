@@ -54,7 +54,7 @@ export class UserAuthService {
 
 
     this.rememebrMe();
-    this.getSubscriptionPlans();
+    //this.getSubscriptionPlans();
     window.onstorage = (obj) => {
       console.log(obj);
     };
