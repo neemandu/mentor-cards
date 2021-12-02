@@ -1,87 +1,57 @@
 <title>Mentor-Cards עמוד מחירון תכניות</title>
-<div id="content" class="d-flex flex-column" *ngIf="this.packSelected">
-    <div id="title">
-        בגדול זה פשוט, <br>​
-        ככל שתהיו יותר אנשים <br>​
-        ותעשו שימוש ביותר ערכות בחודש <br>​
-        <b>כך המחיר למשתמש יהיה נמוך יותר...</b><br>​
-        ועכשיו – למחשבון.​
-    </div>
-    <div id="amount-of-users" class="section">
-        <h1>כמה תהיו?</h1>
-        <div class="subtitle">
-            בחלק זה בוחרים את כמות המשתמשים היכולים להשתמש במערכת במקביל בחודש. <br>​
-            כל משתמש יוכל לבחור את ערכות הקלפים שלו. <br>​
-            הוספת המשתמשים למערכת תעשה לאחר ביצוע התשלום ע"י המשלם. <br>​
-            ניתן להכניס אמצעי תשלום יחיד עבור כל המשתמשים.
-        </div>
-        <div id="amount-of-btns">
-            <mat-button-toggle-group [(ngModel)]="numOfUsersSelected" name="amountOfPeople"
-                (change)="changePack();fixParameters();">
-                <mat-button-toggle *ngFor="let userAmount of configAmountsOfUsers" [value]="userAmount"
-                    matTooltip="{{getProgramJsonDescription(userAmount)}}" [matTooltipClass]="{'tooltip-class' : true}">
-                    <p class="button-top-line">
-                        {{getAmountOfUsersDesc(userAmount)}}
-                    </p>
-                    <p class="button-bottom-line" style="font-size: medium;">
-                        {{getDiscountAmount(userAmount)}}
-                    </p>
-                </mat-button-toggle>
-            </mat-button-toggle-group>
-        </div>
-    </div>
-    <div id="amount-of-packs" class="section">
-        <h1>כמה ערכות קלפים בשימוש חודשי?​</h1>
-        <div class="subtitle">
-            בחלק זה בוחרים את כמות ערכות הקלפים בהם תוכלו להשתמש לאחר חודש ההתנסות. <br>​
-            בחירת ערכות הקלפים מתבצעת רק לאחר חודש ההתנסות, <br>​
-            <b>במהלך חודש זה כל ערכות הקלפים באתר פתוחות עבורכם!</b><br><br>​
-            אנחנו כל הזמן מכינים ערכות קלפים חדשות! חבל לנו שתפספסו אותן<br>​
-            ולכן אנו שמחים להעניק לכם בכל חודש את האפשרות להתרענן עם ערכה חדשה במקום אחת הערכות שברשותכם!
-        </div>
-        <div id="amount-of-btns">
-            <mat-button-toggle-group [(ngModel)]="packSelected" name="amountOfPacks" (change)="fixParameters();">
-                <mat-button-toggle #toggle *ngFor="let plan of getPlans()" [value]="plan" class="pack-toggle">
-                    <p class="button-top-line">
-                        {{getNumOfPacksDesc(plan.numberOfCardPacks)}}
-                    </p>
-                    <p id="original_price" *ngIf="plan.discount != 0">
-                        <s>{{plan.price}} ש"ח</s>
-                    </p>
-                    <p id="real_price" class="button-bottom-line">
-                        {{(plan.price - plan.discount).toFixed(2)}} ש"ח
-                    </p>
-                    <p style="font-size: medium;">
-                        לחודש
-                    </p>
-                    <!-- </div> -->
-                </mat-button-toggle>
-            </mat-button-toggle-group>
-        </div>
-    </div>
-    <div id="conclusion" class="section">
-        <h1>נסכם:</h1>
-        <!-- <p>כמות משתמשים: {{numOfUsersSelected}}</p> -->
-        <!-- <p>כמות ערכות בחודש: {{packSelected.numberOfCardPacks == -1 ? 'ללא הגבלה' : packSelected.numberOfCardPacks}}</p> -->
-        <!-- <p *ngIf="packSelected.discount !== 0">מחיר לפני הנחה: {{packSelected.price.toFixed(2)}} ש"ח</p> -->
-        <p class="conclusion-line">מחיר חודשי למשתמש: {{((packSelected.price -
-            packSelected.discount)/numOfUsersSelected).toFixed(2)}} ש"ח</p><br>
-        <p class="conclusion-line">מחיר סופי לחבילה זו: {{(packSelected.price - packSelected.discount).toFixed(2)}} ש"ח
-        </p><br>
-        <!-- <p class="conclusion-line">תאריך חיוב ראשון: {{paymentStartDate | date:'d/M/y'}}</p><br> -->
-        <p id="reminder" style="font-size: medium;font-weight: 600;">בטלו בכל עת.
-        </p>
-    </div>
-    <button *ngIf="purchaseBtnVisible" id="purchase-btn" class="action-button" type="button" (click)="checkFreePeriod()">
-        <!-- (click)="openApprovePurchaseDialog()"> -->
-        להצטרפות לתכנית לחצו כאן
-    </button>
-    <p *ngIf="noChangingProgramThisMonth" id="purchase-btn" style="font-size: medium;font-weight: 600;">הוחלפה
-        חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}
-    <p *ngIf="!userSingedIn" id="purchase-btn" style="font-size: medium;font-weight: 600;">יש להתחבר על מנת להצטרף לתכנית
-    </p>
-    <p *ngIf="userSingedIn && selectedProgramOwned" id="purchase-btn" style="font-size: medium;font-weight: 600;">אתם רשומים לתכנית זו
-    </p>
+<div>
+    <ul>
+        <li>
+            <mat-icon style="color: blue;">done</mat-icon><b> גישה מלאה ללא הגבלה </b> - נהנים מכל ערכות הקלפים באתר
+        </li>
+        <li>
+            <mat-icon style="color: blue;">done</mat-icon><b> ספר הדרכה צמוד לכל ערכת קלפים</b> - עשרות שאלות עוצמתיות והצעות מגוונות לעבודה
+        </li>
+        <li>
+            <mat-icon style="color: blue;">done</mat-icon><b> שימוש בכל היכולות </b> - קלפים גלויים וסמויים, בחירת קלף באופן אקראי, ערבוב, בחירה מרובה לעבודה תהליכית ועוד…
+        </li>
+        <li>
+            <mat-icon style="color: blue;">done</mat-icon><b> תוכן מתחדש ודינמי</b> - ערכות קלפים נוספות וטכניקות עבודה חדשות המתעדכנות באופן שוטף ע"י יוצרי הבית שלנו ויוצרים מבחוץ
+        </li>
+        <li>
+            <mat-icon style="color: blue;">done</mat-icon><b> שירות ותמיכה</b> - יש לכם שאלה? בא לכם להתייעץ? הצוות שלנו זמין לכם גם בווצאפ! 
+        </li>
+    </ul>
+    <mat-card class="inline-block">
+        <mat-card-title>תוכנית חודשית</mat-card-title>
+        <mat-card-content>
+          <p>{{ monthlySubscrition.fullPrice / monthlySubscrition.billingCycleInMonths }} / חודש</p>
+          <p>חיוב חודשי</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button>התחברות</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="inline-block">
+        <mat-card-subtitle><mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon></mat-card-subtitle>
+        <mat-card-title>תוכנית חצי-שנתית</mat-card-title>
+        <mat-card-content>
+          <p>{{ halfYearlySubscrition.fullPrice / halfYearlySubscrition.billingCycleInMonths }} / חודש</p>
+          <p>משלמים מראש {{halfYearlySubscrition.fullPrice}} לחצי שנה וחוסכים 17%</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button>התחברות</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="inline-block">
+        <mat-card-subtitle>הכי משתלמת</mat-card-subtitle>
+        <mat-card-title>תוכנית שנתית</mat-card-title>
+        <mat-card-content>
+          <p>{{ yearlySubscrition.fullPrice / yearlySubscrition.billingCycleInMonths }} / חודש</p>
+          <p>משלמים מראש {{yearlySubscrition.fullPrice}} לשנה וחוסכים 30%</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          <button mat-button>התחברות</button>
+        </mat-card-actions>
+    </mat-card>
 </div>
 
 <app-information-bar></app-information-bar>

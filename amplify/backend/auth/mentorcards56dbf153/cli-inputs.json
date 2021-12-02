@@ -1,14 +1,16 @@
 {
+  "version": "1",
+  "cognitoConfig": {
     "identityPoolName": "mentorcards56dbf153_identitypool_56dbf153",
     "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "mentor56dbf153",
     "userPoolName": "mentorcards56dbf153_userpool_56dbf153",
     "autoVerifiedAttributes": [
-        "email"
+      "email"
     ],
     "mfaConfiguration": "OFF",
     "mfaTypes": [
-        "SMS Text Message"
+      "SMS Text Message"
     ],
     "smsAuthenticationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר מנטור-קארדס",
     "smsVerificationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר מנטור-קארדס",
@@ -18,47 +20,50 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+      "email"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-        "email"
+      "email"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+      "email"
     ],
     "userpoolClientLambdaRole": "mentor56dbf153_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "56dbf153",
-    "resourceName": "mentorcards56dbf153",
     "authSelections": "identityPoolAndUserPool",
-    "authRoleArn": {
-        "Fn::GetAtt": [
-            "AuthRole",
-            "Arn"
-        ]
-    },
-    "unauthRoleArn": {
-        "Fn::GetAtt": [
-            "UnauthRole",
-            "Arn"
-        ]
-    },
-    "useDefault": "defaultSocial",
-    "usernameAttributes": [
-        "email"
-    ],
-    "userPoolGroupList": [],
+    "resourceName": "mentorcards56dbf153",
     "serviceName": "Cognito",
-    "dependsOn": [],
+    "useDefault": "defaultSocial",
+    "sharedId": "56dbf153",
+    "userPoolGroupList": [],
+    "usernameAttributes": [
+      "email"
+    ],
     "hostedUI": true,
     "hostedUIDomainName": "mentor-cards",
-    "authProvidersUserPool": [
-        "Google"
-    ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "authProvidersUserPool": [
+      "Google"
+    ],
     "authProviders": [],
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": false,
+    "useEnabledMfas": false,
+    "dependsOn": [],
     "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\"],\"LogoutURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\"]}"
+  }
 }

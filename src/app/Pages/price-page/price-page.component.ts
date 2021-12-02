@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { APIService } from '../../API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { PurchaseData } from 'src/app/Objects/purchase-data';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
@@ -27,12 +29,17 @@ export class PricePageComponent implements OnInit {
   ownsCurrentPlanLabel: boolean = false;
   userData: UserData;
   Subscription: Subscription = new Subscription();
+  monthlySubscrition: SubscriptionPlan;
+  halfYearlySubscrition: SubscriptionPlan;
+  yearlySubscrition: SubscriptionPlan;
 
-
-  constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
-    this.overlaySpinnerService.changeOverlaySpinner(true);
+  constructor(public _snackBar: MatSnackBar, 
+              private api: APIService,
+              private userAuthService: UserAuthService, 
+              private overlaySpinnerService: OverlaySpinnerService, 
+              public dialog: MatDialog) {
     // debugger
-    this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
+    /*this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
       this.userAuthService.subPlans.forEach(plan => {
         this.configAmountsOfUsers.push(plan.numberOfUsers);
       })
@@ -59,11 +66,14 @@ export class PricePageComponent implements OnInit {
         this.numOfUsersSelected = this.configAmountsOfUsers[1];
         this.overlaySpinnerService.changeOverlaySpinner(false);
       }
-    }
+    }*/
   }
 
   ngOnInit(): void {
-    if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
+    this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.getSubscriptionPlans();
+    this.overlaySpinnerService.changeOverlaySpinner(false);
+   /* if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
       new Date(this.userAuthService.userData?.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData?.numberOfPlansSubstitutions > 1) {
       this.changedPlansThisMonth = true;
     } else {
@@ -73,13 +83,31 @@ export class PricePageComponent implements OnInit {
       this.userData = userData;
       this.overlaySpinnerService.changeOverlaySpinner(false);
     }));
-    this.userData = this.userAuthService.userData;
+    this.userData = this.userAuthService.userData;*/
+  }
+
+  getSubscriptionPlans(): void {
+    this.api.ListSubscriptionPlans().then(value => {
+      var subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan));
+      this.monthlySubscrition = subPlans.find(plan => plan.billingCycleInMonths == 1);
+      this.halfYearlySubscrition = subPlans.find(plan => plan.billingCycleInMonths == 6);
+      this.yearlySubscrition = subPlans.find(plan => plan.billingCycleInMonths == 12);
+    }, reject => {
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
+      let snackBarRef = this._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
+        duration: 20000,
+        panelClass: ['rtl-snackbar']
+      });
+      snackBarRef.onAction().subscribe(() => {
+        window.location.reload();
+      });
+    });
   }
 
   /**
    * Get all plans (amount of packs) to let user choose
    */
-  getPlans(): SubscriptionPlan[] {
+  /*getPlans(): SubscriptionPlan[] {
     return this.userAuthService.subPlans.filter(plan => plan.numberOfUsers == this.numOfUsersSelected).sort((a, b) => {
       if (a.numberOfCardPacks == -1)
         return 1
@@ -88,7 +116,7 @@ export class PricePageComponent implements OnInit {
       else
         return a.numberOfCardPacks - b.numberOfCardPacks
     })
-  }
+  }*/
 
   /**
    * Change pack after changing amount of users
@@ -110,7 +138,7 @@ export class PricePageComponent implements OnInit {
   getProgramJsonDescription(userAmount): string {
     return programData.packDescriptions.find(data => data.amountOfPeople == userAmount).description;
   }
-
+/*
   getNumOfPacksDesc(numberOfCardPacks): string {
     if (numberOfCardPacks == -1)
       return 'כל מה שיש לכם!'
@@ -118,14 +146,14 @@ export class PricePageComponent implements OnInit {
       return numberOfCardPacks + '- בקטנה'
     else if (numberOfCardPacks == 5)
       return numberOfCardPacks + '- מספיק לי'
-  }
+  }*/
   // getNumOfPacksDesc(numberOfCardPacks): string {
   //   if (numberOfCardPacks == -1)
   //     return 'כל הערכות'
   //   else
   //     return numberOfCardPacks + ' ערכות'
   // }
-
+/*
   getAmountOfUsersDesc(userAmount): string {
     if (userAmount == 1)
       return userAmount + '- אני'
@@ -135,7 +163,7 @@ export class PricePageComponent implements OnInit {
       return userAmount + '- כל החבר\'ה'
     else if (userAmount == 50)
       return userAmount + '- כל הארגון'
-  }
+  }*/
 
   // getAmountOfUsersDesc(userAmount): string {
   //   if (userAmount == 1)
