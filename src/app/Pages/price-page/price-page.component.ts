@@ -214,7 +214,7 @@ export class PricePageComponent implements OnInit {
   /**
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
-  checkFreePeriod(): void {
+  checkFreePeriod(months): void {
     if (this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate != null) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -254,5 +254,9 @@ export class PricePageComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
+  }
+
+  signInSignUp(): void {
+    this.userAuthService.showSignInModal();
   }
 }

@@ -25,7 +25,9 @@
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
-          <button mat-button>התחברות</button>
+            <button *ngIf="purchaseBtnVisible" id="purchase-btn" class="action-button" type="button" (click)="checkFreePeriod(1)">
+                קבלו גישה חודשית לכל ערכות הקלפים
+            </button>
         </mat-card-actions>
     </mat-card>
     <mat-card class="inline-block">
@@ -37,7 +39,9 @@
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
-          <button mat-button>התחברות</button>
+            <button *ngIf="purchaseBtnVisible" id="purchase-btn" class="action-button" type="button" (click)="checkFreePeriod(6)">
+                קבלו גישה חצי שנתית לכל ערכות הקלפים
+            </button>
         </mat-card-actions>
     </mat-card>
     <mat-card class="inline-block">
@@ -49,9 +53,18 @@
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>
-          <button mat-button>התחברות</button>
+            <button *ngIf="purchaseBtnVisible" id="purchase-btn" class="action-button" type="button" (click)="checkFreePeriod(12)">
+                קבלו גישה שנתית לכל ערכות הקלפים
+            </button>
         </mat-card-actions>
     </mat-card>
+    <p *ngIf="noChangingProgramThisMonth" id="purchase-btn" style="font-size: medium;font-weight: 600;">הוחלפה
+        חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}
+    <p *ngIf="!userSingedIn" id="purchase-btn" style="font-size: medium;font-weight: 600;">
+    <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)=signInSignUp()>יש להתחבר על מנת להצטרף לתכנית</button>
+    </p>
+    <p *ngIf="userSingedIn && selectedProgramOwned" id="purchase-btn" style="font-size: medium;font-weight: 600;">אתם רשומים לתכנית זו
+    </p>
 </div>
 
 <app-information-bar></app-information-bar>
