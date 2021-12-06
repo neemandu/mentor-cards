@@ -32,6 +32,7 @@ export class PricePageComponent implements OnInit {
   monthlySubscrition: SubscriptionPlan;
   halfYearlySubscrition: SubscriptionPlan;
   yearlySubscrition: SubscriptionPlan;
+  subPlans: SubscriptionPlan[];
 
   constructor(public _snackBar: MatSnackBar, 
               private api: APIService,
@@ -88,10 +89,12 @@ export class PricePageComponent implements OnInit {
 
   getSubscriptionPlans(): void {
     this.api.ListSubscriptionPlans().then(value => {
-      var subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan));
-      this.monthlySubscrition = subPlans.find(plan => plan.billingCycleInMonths == 1);
-      this.halfYearlySubscrition = subPlans.find(plan => plan.billingCycleInMonths == 6);
-      this.yearlySubscrition = subPlans.find(plan => plan.billingCycleInMonths == 12);
+      this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan));
+      this.monthlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
+      console.log("this.monthlySubscrition");
+      console.log(this.monthlySubscrition);
+      this.halfYearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
+      this.yearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
       let snackBarRef = this._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
@@ -214,26 +217,32 @@ export class PricePageComponent implements OnInit {
   /**
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
-  checkFreePeriod(months): void {
-    if (this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate != null) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.maxHeight = '85vh';
-      dialogConfig.maxWidth = '30vw';
-      let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
-      textInModal += this.userAuthService.expDate;
-      dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
-      const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-      var dialogSub = dialogRef.afterClosed().subscribe(res => {
-        dialogSub.unsubscribe();
-        if (res) {
-          this.openApprovePurchaseDialog();
-        }
-      });
+  checkFreePeriod(packId): void {
+    if(!this.userSingedIn){
+      this.signInSignUp();
     }
-    else {
-      this.openApprovePurchaseDialog();
+    else{
+      this.packSelected = this.subPlans.find(pack => pack.id == packId)
+      if (this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate != null) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.maxHeight = '85vh';
+        dialogConfig.maxWidth = '30vw';
+        let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
+        textInModal += this.userAuthService.expDate;
+        dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
+        const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+        var dialogSub = dialogRef.afterClosed().subscribe(res => {
+          dialogSub.unsubscribe();
+          if (res) {
+            this.openApprovePurchaseDialog();
+          }
+        });
+      }
+      else {
+        this.openApprovePurchaseDialog();
+      }
     }
   }
 
@@ -256,7 +265,7 @@ export class PricePageComponent implements OnInit {
     this.Subscription.unsubscribe();
   }
 
-  signInSignUp(): void {
+   signInSignUp(): void {
     this.userAuthService.showSignInModal();
   }
 }
