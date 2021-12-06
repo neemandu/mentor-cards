@@ -139,7 +139,7 @@ exports.handler = async (event, context, callback) => {
     var user = await getUser(username);
     var allPackagesDate = new Date();
     var now = new Date();
-    var trialPeriodInDays = 30;
+    var trialPeriodInDays = 14;
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
