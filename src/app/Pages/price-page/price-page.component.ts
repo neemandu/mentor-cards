@@ -91,11 +91,11 @@ export class PricePageComponent implements OnInit {
   getSubscriptionPlans(): void {
     this.subPlans = this.userAuthService.subPlans;
     this.monthlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
-    console.log("file: price-page.component.ts ~ line 93 ~ getSubscriptionPlans ~ this.monthlySubscrition", this.monthlySubscription)
+    // console.log("file: price-page.component.ts ~ line 93 ~ getSubscriptionPlans ~ this.monthlySubscrition", this.monthlySubscription)
     this.halfYearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
-    console.log("file: price-page.component.ts ~ line 95 ~ getSubscriptionPlans ~ this.halfYearlySubscrition", this.halfYearlySubscription)
+    // console.log("file: price-page.component.ts ~ line 95 ~ getSubscriptionPlans ~ this.halfYearlySubscrition", this.halfYearlySubscription)
     this.yearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
-    console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
+    // console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
   //   this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
@@ -140,23 +140,23 @@ export class PricePageComponent implements OnInit {
   /**
    * Change pack after changing amount of users
    */
-  changePack(): void {
-    this.packSelected = this.userAuthService.subPlans.find(pack =>
-      pack.numberOfUsers === this.numOfUsersSelected && pack.numberOfCardPacks == this.packSelected.numberOfCardPacks
-    )
-  }
+  // changePack(): void {
+  //   this.packSelected = this.userAuthService.subPlans.find(pack =>
+  //     pack.numberOfUsers === this.numOfUsersSelected && pack.numberOfCardPacks == this.packSelected.numberOfCardPacks
+  //   )
+  // }
 
   /**
    * After any change in plan - check if plan chosen is users current plan  
    */
-  fixParameters(): void {
-    !this.changedPlansThisMonth && this.packSelected.numberOfCardPacks === this.userAuthService.userData.subscription?.subscriptionPlan?.numberOfCardPacks &&
-      this.numOfUsersSelected == this.userAuthService.userData.subscription?.subscriptionPlan?.numberOfUsers ? this.ownsCurrentPlanLabel = true : this.ownsCurrentPlanLabel = false;
-  }
+  // fixParameters(): void {
+  //   !this.changedPlansThisMonth && this.packSelected.numberOfCardPacks === this.userAuthService.userData.subscription?.subscriptionPlan?.numberOfCardPacks &&
+  //     this.numOfUsersSelected == this.userAuthService.userData.subscription?.subscriptionPlan?.numberOfUsers ? this.ownsCurrentPlanLabel = true : this.ownsCurrentPlanLabel = false;
+  // }
 
-  getProgramJsonDescription(userAmount): string {
-    return programData.packDescriptions.find(data => data.amountOfPeople == userAmount).description;
-  }
+  // getProgramJsonDescription(userAmount): string {
+  //   return programData.packDescriptions.find(data => data.amountOfPeople == userAmount).description;
+  // }
   /*
     getNumOfPacksDesc(numberOfCardPacks): string {
       if (numberOfCardPacks == -1)
@@ -191,17 +191,17 @@ export class PricePageComponent implements OnInit {
   //     return userAmount + ' משתמשים'
   // }
 
-  getDiscountAmount(userAmount): string {
-    var plan = this.userAuthService.subPlans.find(plan => plan.numberOfUsers == userAmount)
-    if (plan.discount != 0)
-      return Math.floor((plan.discount / plan.fullPrice) * 100) + '% הנחה'
-    else
-      return '- - - -';
-  }
+  // getDiscountAmount(userAmount): string {
+  //   var plan = this.userAuthService.subPlans.find(plan => plan.numberOfUsers == userAmount)
+  //   if (plan.discount != 0)
+  //     return Math.floor((plan.discount / plan.fullPrice) * 100) + '% הנחה'
+  //   else
+  //     return '- - - -';
+  // }
 
-  get programJsonExtra(): string {
-    return programData.packDescriptions.find(data => data.amountOfPeople == this.packSelected.numberOfUsers).extra;
-  }
+  // get programJsonExtra(): string {
+  //   return programData.packDescriptions.find(data => data.amountOfPeople == this.packSelected.numberOfUsers).extra;
+  // }
 
   get paymentStartDate() {
     if (this.userData) {
