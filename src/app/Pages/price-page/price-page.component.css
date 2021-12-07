@@ -143,17 +143,21 @@ li:hover {
 }
 
 mat-card {
-  transition: transform 0.5s ease, margin 0.3s ease;
+  margin: 0 0.5vw;
+  border: 2px var(--main-color) solid;
+  transition: transform 0.5s ease, margin 0.5s ease;
 }
 
 mat-card:hover {
-  transform: scale(1.06);
+  transform: scale(1.1);
   /* z-index: 5; */
-  margin: 0 1.5%;
-  border: 2px var(--main-color) solid;
+  margin: 0 2vw;
+  border-width: 3px;
 }
 
 mat-card-subtitle {
+  /* background-color: #ffaa008e;
+  border-radius: 20px; */
   transition: background-color 0.2s linear, padding 0.2s linear, border-radius 0.1s linear;
 }
 
