@@ -54,7 +54,7 @@ export class UserAuthService {
 
 
     this.rememebrMe();
-    //this.getSubscriptionPlans();
+    this.getSubscriptionPlans();
     window.onstorage = (obj) => {
       console.log(obj);
     };
@@ -202,16 +202,16 @@ export class UserAuthService {
     if (!this.subPlans) {
       this.api.ListSubscriptionPlans().then(value => {
         this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
-        this.subPlans.sort((planA, planB) => {
-          if (planA.numberOfUsers - planB.numberOfUsers > 0)
-            return 1;
-          if (planA.numberOfUsers - planB.numberOfUsers < 0)
-            return -1;
-          if (planA.numberOfCardPacks - planB.numberOfCardPacks > 0)
-            return 1;
-          else
-            return -1;
-        })
+        // this.subPlans.sort((planA, planB) => {
+        //   if (planA.numberOfUsers - planB.numberOfUsers > 0)
+        //     return 1;
+        //   if (planA.numberOfUsers - planB.numberOfUsers < 0)
+        //     return -1;
+        //   if (planA.numberOfCardPacks - planB.numberOfCardPacks > 0)
+        //     return 1;
+        //   else
+        //     return -1;
+        // })
         this.subPlansEmmiter.emit();
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)

@@ -29,83 +29,99 @@ export class PricePageComponent implements OnInit {
   ownsCurrentPlanLabel: boolean = false;
   userData: UserData;
   Subscription: Subscription = new Subscription();
-  monthlySubscrition: SubscriptionPlan;
-  halfYearlySubscrition: SubscriptionPlan;
-  yearlySubscrition: SubscriptionPlan;
-  subPlans: SubscriptionPlan[];
 
-  constructor(public _snackBar: MatSnackBar, 
-              private api: APIService,
-              private userAuthService: UserAuthService, 
-              private overlaySpinnerService: OverlaySpinnerService, 
-              public dialog: MatDialog) {
-    // debugger
-    /*this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
-      this.userAuthService.subPlans.forEach(plan => {
-        this.configAmountsOfUsers.push(plan.numberOfUsers);
-      })
-      this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      if (!this.userAuthService.userData) {
-        this.packSelected = this.userAuthService.subPlans[5];
-        this.numOfUsersSelected = this.configAmountsOfUsers[1];
-      }
-    }));
-    if (this.userAuthService.userData || this.userAuthService.subPlans) {
-      this.userAuthService.subPlans.forEach(plan => {
-        this.configAmountsOfUsers.push(plan.numberOfUsers);
-      })
-      this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
-      if (this.userAuthService.userData && this.userAuthService.userData.status === "PLAN") {//Plan already exists
-        this.packSelected = this.userAuthService.subPlans.find(plan => plan.id === this.userAuthService.userData.subscription.subscriptionPlan.id);
-        this.numOfUsersSelected = this.userAuthService.userData.subscription.subscriptionPlan.numberOfUsers;
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-      }
-      else {//No plan for current user
-        // debugger
-        this.packSelected = this.userAuthService.subPlans[5];
-        this.numOfUsersSelected = this.configAmountsOfUsers[1];
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-      }
-    }*/
+  subPlans: SubscriptionPlan[];
+  monthlySubscription: SubscriptionPlan;
+  halfYearlySubscription: SubscriptionPlan;
+  yearlySubscription: SubscriptionPlan;
+
+  constructor(public _snackBar: MatSnackBar, private api: APIService,
+    private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
+    // this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
+    //   this.userAuthService.subPlans.forEach(plan => {
+    //     this.configAmountsOfUsers.push(plan.numberOfUsers);
+    //   })
+    //   this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
+    //   this.overlaySpinnerService.changeOverlaySpinner(false);
+    //   if (!this.userAuthService.userData) {
+    //     this.packSelected = this.userAuthService.subPlans[5];
+    //     this.numOfUsersSelected = this.configAmountsOfUsers[1];
+    //   }
+    // }));
+    // if (this.userAuthService.userData || this.userAuthService.subPlans) {
+    //   this.userAuthService.subPlans.forEach(plan => {
+    //     this.configAmountsOfUsers.push(plan.numberOfUsers);
+    //   })
+    //   this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
+    //   if (this.userAuthService.userData && this.userAuthService.userData.status === "PLAN") {//Plan already exists
+    //     this.packSelected = this.userAuthService.subPlans.find(plan => plan.id === this.userAuthService.userData.subscription.subscriptionPlan.id);
+    //     this.numOfUsersSelected = this.userAuthService.userData.subscription.subscriptionPlan.numberOfUsers;
+    //     this.overlaySpinnerService.changeOverlaySpinner(false);
+    //   }
+    //   else {//No plan for current user
+    //     // debugger
+    //     this.packSelected = this.userAuthService.subPlans[5];
+    //     this.numOfUsersSelected = this.configAmountsOfUsers[1];
+    //     this.overlaySpinnerService.changeOverlaySpinner(false);
+    //   }
+    // }
   }
 
   ngOnInit(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    this.getSubscriptionPlans();
-    this.overlaySpinnerService.changeOverlaySpinner(false);
-   /* if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
-      new Date(this.userAuthService.userData?.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData?.numberOfPlansSubstitutions > 1) {
-      this.changedPlansThisMonth = true;
-    } else {
-      this.ownsCurrentPlanLabel = false;
-    }
-    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
-      this.userData = userData;
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+    this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
+      this.getSubscriptionPlans();
     }));
-    this.userData = this.userAuthService.userData;*/
+    if (this.userAuthService.subPlans) {
+      this.getSubscriptionPlans();
+    }
+    /* if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
+       new Date(this.userAuthService.userData?.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData?.numberOfPlansSubstitutions > 1) {
+       this.changedPlansThisMonth = true;
+     } else {
+       this.ownsCurrentPlanLabel = false;
+     }
+     this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+       this.userData = userData;
+       this.overlaySpinnerService.changeOverlaySpinner(false);
+     }));
+     this.userData = this.userAuthService.userData;*/
   }
 
   getSubscriptionPlans(): void {
-    this.api.ListSubscriptionPlans().then(value => {
-      this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan));
-      this.monthlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
-      console.log("this.monthlySubscrition");
-      console.log(this.monthlySubscrition);
-      this.halfYearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
-      this.yearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
-    }, reject => {
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
-      let snackBarRef = this._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
-        duration: 20000,
-        panelClass: ['rtl-snackbar']
-      });
-      snackBarRef.onAction().subscribe(() => {
-        window.location.reload();
-      });
-    });
+    this.subPlans = this.userAuthService.subPlans;
+    this.monthlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
+    console.log("file: price-page.component.ts ~ line 93 ~ getSubscriptionPlans ~ this.monthlySubscrition", this.monthlySubscription)
+    this.halfYearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
+    console.log("file: price-page.component.ts ~ line 95 ~ getSubscriptionPlans ~ this.halfYearlySubscrition", this.halfYearlySubscription)
+    this.yearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
+    console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
+    this.overlaySpinnerService.changeOverlaySpinner(false);
   }
+  //   this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
+  //     this.subPlans = this.userAuthService.subPlans;
+  //     this.overlaySpinnerService.changeOverlaySpinner(true);
+  //   }));
+
+  // this.api.ListSubscriptionPlans().then(value => {
+  //   this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan));
+  //   console.log("file: price-page.component.ts ~ line 89 ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
+  //   this.monthlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
+  //   // console.log("this.monthlySubscrition");
+  //   console.log(this.monthlySubscrition);
+  //   this.halfYearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
+  //   this.yearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
+  // }, reject => {
+  //   console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
+  //   let snackBarRef = this._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
+  //     duration: 20000,
+  //     panelClass: ['rtl-snackbar']
+  //   });
+  //   snackBarRef.onAction().subscribe(() => {
+  //     window.location.reload();
+  //   });
+  // });
+  // }
 
   /**
    * Get all plans (amount of packs) to let user choose
@@ -141,32 +157,32 @@ export class PricePageComponent implements OnInit {
   getProgramJsonDescription(userAmount): string {
     return programData.packDescriptions.find(data => data.amountOfPeople == userAmount).description;
   }
-/*
-  getNumOfPacksDesc(numberOfCardPacks): string {
-    if (numberOfCardPacks == -1)
-      return 'כל מה שיש לכם!'
-    else if (numberOfCardPacks == 2)
-      return numberOfCardPacks + '- בקטנה'
-    else if (numberOfCardPacks == 5)
-      return numberOfCardPacks + '- מספיק לי'
-  }*/
+  /*
+    getNumOfPacksDesc(numberOfCardPacks): string {
+      if (numberOfCardPacks == -1)
+        return 'כל מה שיש לכם!'
+      else if (numberOfCardPacks == 2)
+        return numberOfCardPacks + '- בקטנה'
+      else if (numberOfCardPacks == 5)
+        return numberOfCardPacks + '- מספיק לי'
+    }*/
   // getNumOfPacksDesc(numberOfCardPacks): string {
   //   if (numberOfCardPacks == -1)
   //     return 'כל הערכות'
   //   else
   //     return numberOfCardPacks + ' ערכות'
   // }
-/*
-  getAmountOfUsersDesc(userAmount): string {
-    if (userAmount == 1)
-      return userAmount + '- אני'
-    else if (userAmount == 3)
-      return userAmount + '- חברים קרובים'
-    else if (userAmount == 10)
-      return userAmount + '- כל החבר\'ה'
-    else if (userAmount == 50)
-      return userAmount + '- כל הארגון'
-  }*/
+  /*
+    getAmountOfUsersDesc(userAmount): string {
+      if (userAmount == 1)
+        return userAmount + '- אני'
+      else if (userAmount == 3)
+        return userAmount + '- חברים קרובים'
+      else if (userAmount == 10)
+        return userAmount + '- כל החבר\'ה'
+      else if (userAmount == 50)
+        return userAmount + '- כל הארגון'
+    }*/
 
   // getAmountOfUsersDesc(userAmount): string {
   //   if (userAmount == 1)
@@ -218,10 +234,10 @@ export class PricePageComponent implements OnInit {
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
   checkFreePeriod(packId): void {
-    if(!this.userSingedIn){
+    if (!this.userSingedIn) {
       this.signInSignUp();
     }
-    else{
+    else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
       if (this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate != null) {
         const dialogConfig = new MatDialogConfig();
@@ -265,7 +281,7 @@ export class PricePageComponent implements OnInit {
     this.Subscription.unsubscribe();
   }
 
-   signInSignUp(): void {
+  signInSignUp(): void {
     this.userAuthService.showSignInModal();
   }
 }
