@@ -1,6 +1,6 @@
 <div id="content" class="d-flex flex-column align-items-center">
-    <h1>עמוד מחירון תכניות Mentor-Cards</h1>
-    <img style="margin-bottom: 16px; width: 50%;" src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
+    <h1>מצטרפים למנוי ונהנים מעד 30% אחוזי הנחה!</h1>
+    <img style="margin-bottom: 16px; width: 35%;" src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
         alt="responsive">
     <ul>
         <span id="list-header">הצטרפו לתכנית ותקבלו:</span>
@@ -27,34 +27,36 @@
 </div>
 <br />
 <div style="text-align: center;">
-    <div *ngIf="subPlans" class="d-flex justify-content-center program-cards">
+    <div *ngIf="subPlans" class="d-flex justify-content-center align-items-center program-cards">
         <mat-card>
-            <mat-card-subtitle>הכי פשוט</mat-card-subtitle>
+            <mat-card-subtitle>הכי בקטנה</mat-card-subtitle>
             <mat-card-title>תוכנית חודשית</mat-card-title>
             <mat-card-content>
-                <p>{{ monthlySubscription.fullPrice / monthlySubscription.billingCycleInMonths }} ש"ח / חודש</p>
-                <p>חיוב חודשי</p>
+                <p class="price-line">חודש / <span class="price-number">₪{{ monthlySubscription.fullPrice /
+                        monthlySubscription.billingCycleInMonths }}</span></p>
+                <p class="price-line">חיוב חודשי</p>
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button class="action-button purchase-btn" type="button"
+                <button class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(monthlySubscription.id)">
                     קבלו גישה חודשית לכל ערכות הקלפים
                 </button>
             </mat-card-actions>
         </mat-card>
-        <mat-card>
-            <mat-card-subtitle>
+        <mat-card id="popular-mat-card">
+            <mat-card-subtitle id="popular-mat-card-subtitle">
                 <mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon>
             </mat-card-subtitle>
             <mat-card-title>תוכנית חצי-שנתית</mat-card-title>
-            <mat-card-content>
-                <p>{{ halfYearlySubscription.fullPrice / halfYearlySubscription.billingCycleInMonths }} ש"ח / חודש</p>
-                <p>משלמים מראש {{halfYearlySubscription.fullPrice}} ש"ח לחצי שנה וחוסכים 17%</p>
+            <mat-card-content id="popular-mat-card-content">
+                <p class="price-line">חודש / <span class="price-number">₪{{ halfYearlySubscription.fullPrice /
+                        halfYearlySubscription.billingCycleInMonths }}</span></p>
+                <p class="price-line">משלמים מראש {{halfYearlySubscription.fullPrice}} ש"ח לחצי שנה וחוסכים 17%</p>
             </mat-card-content>
             <mat-divider inset></mat-divider>
-            <mat-card-actions>
-                <button class="action-button purchase-btn" type="button"
+            <mat-card-actions id="popular-mat-card-actions">
+                <button class="popular-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(halfYearlySubscription.id)">
                     קבלו גישה חצי שנתית לכל ערכות הקלפים
                 </button>
@@ -64,27 +66,27 @@
             <mat-card-subtitle>הכי משתלמת</mat-card-subtitle>
             <mat-card-title>תוכנית שנתית</mat-card-title>
             <mat-card-content>
-                <p>{{ yearlySubscription.fullPrice / yearlySubscription.billingCycleInMonths }} ש"ח / חודש
-                </p>
-                <p>משלמים מראש {{yearlySubscription.fullPrice}} ש"ח לשנה וחוסכים 30%</p>
+                <p class="price-line">חודש / <span class="price-number">₪{{ yearlySubscription.fullPrice /
+                        yearlySubscription.billingCycleInMonths }}</span></p>
+                <p class="price-line">משלמים מראש {{yearlySubscription.fullPrice}} ש"ח לשנה וחוסכים 30%</p>
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button class="action-button purchase-btn" type="button"
+                <button class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(yearlySubscription.id)">
                     קבלו גישה שנתית לכל ערכות הקלפים
                 </button>
             </mat-card-actions>
         </mat-card>
     </div>
-    <p *ngIf="noChangingProgramThisMonth" style="font-size: medium;font-weight: 600;">הוחלפה
-        חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}</p>
+    <!-- <p *ngIf="noChangingProgramThisMonth" style="font-size: medium;font-weight: 600;">הוחלפה
+        חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}</p> -->
     <!--<p *ngIf="!userSingedIn"  style="font-size: medium;font-weight: 600;">
     <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)=signInSignUp()>יש להתחבר על מנת להצטרף לתכנית</button>
     </p>-->
-    <p *ngIf="userSingedIn && selectedProgramOwned" style="font-size: medium;font-weight: 600;">
+    <!-- <p *ngIf="userSingedIn && selectedProgramOwned" style="font-size: medium;font-weight: 600;">
         אתם רשומים לתכנית זו
-    </p>
+    </p> -->
     <img style="height: 5%; width: 5%; margin-top: 2%;" src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
         alt="Secure Payment">
 </div>

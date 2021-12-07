@@ -10,7 +10,7 @@ import { UserData } from 'src/app/Objects/user-related';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
+// import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
 import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 
@@ -214,21 +214,21 @@ export class PricePageComponent implements OnInit {
     return this.userAuthService.userData;
   }
 
-  get nextPlanChangeDate() {
-    return this.userAuthService.nextPlanChangeDate;
-  }
+  // get nextPlanChangeDate() {
+  //   return this.userAuthService.nextPlanChangeDate;
+  // }
 
-  get purchaseBtnVisible() {
-    return this.userSingedIn && !this.selectedProgramOwned && (this.userAuthService.userData.status !== 'PLAN' || !this.userAuthService.planChangedThisMonth)
-  }
+  // get purchaseBtnVisible() {
+  //   return this.userSingedIn && !this.selectedProgramOwned && (this.userAuthService.userData.status !== 'PLAN' || !this.userAuthService.planChangedThisMonth)
+  // }
 
-  get noChangingProgramThisMonth() {
-    return this.userSingedIn && !this.selectedProgramOwned && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
-  }
+  // get noChangingProgramThisMonth() {
+  //   return this.userSingedIn && !this.selectedProgramOwned && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
+  // }
 
-  get selectedProgramOwned() {
-    return this.userSingedIn && this.packSelected.id == this.userAuthService.userData?.subscription?.subscriptionPlan?.id;
-  }
+  // get selectedProgramOwned() {
+  //   return this.userSingedIn && this.packSelected.id == this.userAuthService.userData?.subscription?.subscriptionPlan?.id;
+  // }
 
   /**
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand

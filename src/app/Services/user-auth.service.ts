@@ -84,6 +84,8 @@ export class UserAuthService {
   //     return;
   //   }
   loggedIn(cognitoUserData: void | CognitoUserInterface): void {
+    if (this.userData)
+      return;
     if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
@@ -112,7 +114,7 @@ export class UserAuthService {
         })
       }
       this.loggedInEmmiter.emit(this.userData);
-      (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+      // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
       this.overlaySpinnerService.changeOverlaySpinner(false);
