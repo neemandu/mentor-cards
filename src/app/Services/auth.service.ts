@@ -56,10 +56,10 @@ export class AuthService {
 
   constructor(private userAuthService: UserAuthService) {
     // Get the user on creation of this service
-    Auth.currentAuthenticatedUser().then(
-      (user: any) => this.setUser(user),
-      _err => this._authState.next(initialAuthState)
-    );
+    // Auth.currentAuthenticatedUser().then(
+    //   (user: any) => this.setUser(user),
+    //   _err => this._authState.next(initialAuthState)
+    // );
 
     // Use Hub channel 'auth' to get notified on changes
     Hub.listen('auth', ({ payload: { event, data, message } }) => {

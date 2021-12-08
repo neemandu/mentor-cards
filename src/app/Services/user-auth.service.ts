@@ -84,8 +84,6 @@ export class UserAuthService {
   //     return;
   //   }
   loggedIn(cognitoUserData: void | CognitoUserInterface): void {
-    if (this.userData)
-      return;
     if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;

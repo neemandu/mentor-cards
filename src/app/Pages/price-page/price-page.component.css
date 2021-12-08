@@ -81,10 +81,10 @@ h1 {
 
 .purchase-btn {
   margin: 1vh;
-  width: 15vw;
-  height: 6vh;
+  width: 90%;
+  min-height: 5vh;
   font-size: large;
-  border-radius: 25px;
+  border-radius: 25px
 }
 
 .popular-purchase-btn {
@@ -170,7 +170,10 @@ li:hover {
 }
 
 .program-cards {
-  height: 25vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 #popular-mat-card {
@@ -221,3 +224,20 @@ mat-card-content {
   padding: 1%;
   border-radius: 20px;
 } */
+
+@media only screen and (max-device-width : 480px) {
+
+  /* Styles */
+  .program-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ul {
+    width: 70%;
+    text-align: right;
+  }
+
+}
