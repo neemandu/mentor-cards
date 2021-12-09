@@ -292,7 +292,8 @@ query GetCardsPack($id: ID!) {
     cardsPreview
     groupsIds
     guideBook {
-      guideBook {
+      name
+      subElements {
         name
         subElements {
           name
@@ -302,9 +303,6 @@ query GetCardsPack($id: ID!) {
               name
               subElements {
                 name
-                subElements {
-                  name
-                }
               }
             }
           }
@@ -338,7 +336,8 @@ query ListCardsPacks(
       cardsPreview
       groupsIds
       guideBook {
-        guideBook {
+        name
+        subElements {
           name
           subElements {
             name

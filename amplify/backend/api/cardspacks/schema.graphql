@@ -72,7 +72,7 @@ type GuideBookElement{
 
 type ContactUsModel 
 @model 
-@auth( rules: [ { allow: private, operations: [read, create], provider: userPools  }] ){
+@auth( rules: [ { allow: public, operations: [read, create] }] ){
   id: ID!
   name: String
   content: String

@@ -297,7 +297,8 @@ mutation CreateCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      guideBook {
+      name
+      subElements {
         name
         subElements {
           name
@@ -307,9 +308,6 @@ mutation CreateCardsPack(
               name
               subElements {
                 name
-                subElements {
-                  name
-                }
               }
             }
           }
@@ -341,7 +339,8 @@ mutation UpdateCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      guideBook {
+      name
+      subElements {
         name
         subElements {
           name
@@ -351,9 +350,6 @@ mutation UpdateCardsPack(
               name
               subElements {
                 name
-                subElements {
-                  name
-                }
               }
             }
           }
@@ -385,7 +381,8 @@ mutation DeleteCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      guideBook {
+      name
+      subElements {
         name
         subElements {
           name
@@ -395,9 +392,6 @@ mutation DeleteCardsPack(
               name
               subElements {
                 name
-                subElements {
-                  name
-                }
               }
             }
           }

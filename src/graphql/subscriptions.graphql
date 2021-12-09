@@ -220,7 +220,8 @@ subscription OnCreateCardsPack {
     cardsPreview
     groupsIds
     guideBook {
-      guideBook {
+      name
+      subElements {
         name
         subElements {
           name
@@ -230,9 +231,6 @@ subscription OnCreateCardsPack {
               name
               subElements {
                 name
-                subElements {
-                  name
-                }
               }
             }
           }
@@ -261,7 +259,8 @@ subscription OnUpdateCardsPack {
     cardsPreview
     groupsIds
     guideBook {
-      guideBook {
+      name
+      subElements {
         name
         subElements {
           name
@@ -271,9 +270,6 @@ subscription OnUpdateCardsPack {
               name
               subElements {
                 name
-                subElements {
-                  name
-                }
               }
             }
           }
@@ -302,7 +298,8 @@ subscription OnDeleteCardsPack {
     cardsPreview
     groupsIds
     guideBook {
-      guideBook {
+      name
+      subElements {
         name
         subElements {
           name
@@ -312,9 +309,6 @@ subscription OnDeleteCardsPack {
               name
               subElements {
                 name
-                subElements {
-                  name
-                }
               }
             }
           }

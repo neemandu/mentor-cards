@@ -335,14 +335,10 @@ export type CreateCardsPackInput = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
+  guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
-};
-
-export type GuideBookInput = {
-  guideBook?: Array<GuideBookElementInput | null> | null;
 };
 
 export type GuideBookElementInput = {
@@ -381,17 +377,12 @@ export type CardsPack = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: GuideBook;
+  guideBook?: Array<GuideBookElementInput | null>;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: About;
   createdAt?: string;
   updatedAt?: string;
-};
-
-export type GuideBook = {
-  __typename: "GuideBook";
-  guideBook?: Array<GuideBookElement | null> | null;
 };
 
 export type GuideBookElement = {
@@ -416,7 +407,7 @@ export type UpdateCardsPackInput = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
+  guideBook?: Array<GuideBookElementInput | null>;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
@@ -850,9 +841,10 @@ export type CreateCardsPackMutation = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    guideBook?: Array<{
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
       __typename: "GuideBookElement";
       name?: string | null;
       subElements?: Array<{
@@ -867,16 +859,12 @@ export type CreateCardsPackMutation = {
             subElements?: Array<{
               __typename: "GuideBookElement";
               name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
             } | null> | null;
           } | null> | null;
         } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -899,9 +887,10 @@ export type UpdateCardsPackMutation = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    guideBook?: Array<{
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
       __typename: "GuideBookElement";
       name?: string | null;
       subElements?: Array<{
@@ -916,16 +905,12 @@ export type UpdateCardsPackMutation = {
             subElements?: Array<{
               __typename: "GuideBookElement";
               name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
             } | null> | null;
           } | null> | null;
         } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -948,9 +933,10 @@ export type DeleteCardsPackMutation = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    guideBook?: Array<{
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
       __typename: "GuideBookElement";
       name?: string | null;
       subElements?: Array<{
@@ -965,16 +951,12 @@ export type DeleteCardsPackMutation = {
             subElements?: Array<{
               __typename: "GuideBookElement";
               name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
             } | null> | null;
           } | null> | null;
         } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -1307,9 +1289,10 @@ export type GetCardsPackQuery = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    guideBook?: Array<{
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
       __typename: "GuideBookElement";
       name?: string | null;
       subElements?: Array<{
@@ -1324,16 +1307,12 @@ export type GetCardsPackQuery = {
             subElements?: Array<{
               __typename: "GuideBookElement";
               name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
             } | null> | null;
           } | null> | null;
         } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -1358,9 +1337,10 @@ export type ListCardsPacksQuery = {
     cards?: Array<string | null> | null;
     cardsPreview?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
-    guideBook?: {
-      __typename: "GuideBook";
-      guideBook?: Array<{
+    guideBook?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
         __typename: "GuideBookElement";
         name?: string | null;
         subElements?: Array<{
@@ -1380,7 +1360,7 @@ export type ListCardsPacksQuery = {
           } | null> | null;
         } | null> | null;
       } | null> | null;
-    } | null;
+    } | null> | null;
     name?: string | null;
     freeUntilDate?: string | null;
     about?: {
@@ -1621,9 +1601,10 @@ export type OnCreateCardsPackSubscription = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    guideBook?: Array<{
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
       __typename: "GuideBookElement";
       name?: string | null;
       subElements?: Array<{
@@ -1638,16 +1619,12 @@ export type OnCreateCardsPackSubscription = {
             subElements?: Array<{
               __typename: "GuideBookElement";
               name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
             } | null> | null;
           } | null> | null;
         } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -1670,9 +1647,10 @@ export type OnUpdateCardsPackSubscription = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    guideBook?: Array<{
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
       __typename: "GuideBookElement";
       name?: string | null;
       subElements?: Array<{
@@ -1687,16 +1665,12 @@ export type OnUpdateCardsPackSubscription = {
             subElements?: Array<{
               __typename: "GuideBookElement";
               name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
             } | null> | null;
           } | null> | null;
         } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -1719,9 +1693,10 @@ export type OnDeleteCardsPackSubscription = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    guideBook?: Array<{
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
       __typename: "GuideBookElement";
       name?: string | null;
       subElements?: Array<{
@@ -1736,16 +1711,12 @@ export type OnDeleteCardsPackSubscription = {
             subElements?: Array<{
               __typename: "GuideBookElement";
               name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
             } | null> | null;
           } | null> | null;
         } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -1949,7 +1920,9 @@ export class APIService {
       gqlAPIServiceArguments.condition = condition;
     }
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
     )) as any;
     return <CreateContactUsModelMutation>response.data.createContactUsModel;
   }
@@ -2316,7 +2289,8 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            guideBook {
+            name
+            subElements {
               __typename
               name
               subElements {
@@ -2331,10 +2305,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }
@@ -2381,7 +2351,8 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            guideBook {
+            name
+            subElements {
               __typename
               name
               subElements {
@@ -2396,10 +2367,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }
@@ -2446,7 +2413,8 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            guideBook {
+            name
+            subElements {
               __typename
               name
               subElements {
@@ -2461,10 +2429,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }
@@ -3056,7 +3020,8 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            guideBook {
+            name
+            subElements {
               __typename
               name
               subElements {
@@ -3071,10 +3036,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }
@@ -3167,8 +3128,9 @@ export class APIService {
             cardsPreview
             groupsIds
             guideBook {
-              __typename
-              guideBook {
+               __typename
+              name
+              subElements {
                 __typename
                 name
                 subElements {
@@ -3180,10 +3142,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }
@@ -3571,7 +3529,8 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            guideBook {
+            name
+            subElements {
               __typename
               name
               subElements {
@@ -3586,10 +3545,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }
@@ -3628,7 +3583,8 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            guideBook {
+            name
+            subElements {
               __typename
               name
               subElements {
@@ -3643,10 +3599,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }
@@ -3685,7 +3637,8 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            guideBook {
+            name
+            subElements {
               __typename
               name
               subElements {
@@ -3700,10 +3653,6 @@ export class APIService {
                     subElements {
                       __typename
                       name
-                      subElements {
-                        __typename
-                        name
-                      }
                     }
                   }
                 }

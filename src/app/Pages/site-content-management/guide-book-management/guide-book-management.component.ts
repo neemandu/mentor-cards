@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { APIService, UpdateCardsPackInput } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
-import { GuideBook, GuideBookElement, PackContent } from 'src/app/Objects/packs';
+import { GuideBookElement, PackContent } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -12,7 +12,7 @@ import { NewEditNewsComponent, newEditObject } from 'src/app/Shared Components/D
 interface GuideBookPack {
   id: string,
   name: string,
-  guideBook: GuideBook
+  guideBook: GuideBookElement[]
 }
 
 @Component({
