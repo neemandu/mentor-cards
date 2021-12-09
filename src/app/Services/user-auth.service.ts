@@ -112,6 +112,7 @@ export class UserAuthService {
         })
       }
       this.loggedInEmmiter.emit(this.userData);
+      (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
@@ -135,7 +136,8 @@ export class UserAuthService {
       this.userData = new UserData().deseralize(value);
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this.loggedInEmmiter.emit(this.userData);
-      (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+      (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
         panelClass: ['rtl-snackbar']
