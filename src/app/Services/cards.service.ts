@@ -8,7 +8,7 @@ import { UserAuthService } from './user-auth.service';
 import { UserData } from '../Objects/user-related';
 import { APIService, ListCardsPacksQuery } from '../API.service';
 import { OverlaySpinnerService } from './overlay-spinner.service';
-import { AuthService } from 'src/app/Services/auth.service';
+// import { AuthService } from 'src/app/Services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,19 +33,21 @@ export class CardsService {
 
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService,
-    private overlaySpinnerService: OverlaySpinnerService, private api: APIService, private amplifyAuthService: AuthService) {
+    private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
     this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
+      this.isLoggedIn = false;
       this.allPacks = undefined;
     }))
-    this.amplifyAuthService.isLoggedIn$.subscribe(
-      isLoggedIn => {
-        (this.isLoggedIn = isLoggedIn);
-      }
-    );
-    
-    /*this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    // this.amplifyAuthService.isLoggedIn$.subscribe(
+    //   isLoggedIn => {
+    //     (this.isLoggedIn = isLoggedIn);
+    //   }
+    // );
+
+    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+      this.isLoggedIn = true;
       this.allPacks = undefined;
-    }));*/
+    }));
     this.Subscription.add(this.userAuthService.addCouponCodeToFavs.subscribe((ids: string[]) => {
       // console.log("file: cards.service.ts ~ line 39 ~ this.Subscription.add ~ ids", ids)
       this.addFavoritesFromCouponCode(ids);

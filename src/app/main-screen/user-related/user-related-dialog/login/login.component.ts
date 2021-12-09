@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
       //     this.showNewPwChallange()
       // }
       // else {
-      this.userAuthService.loggedIn(user.username);
+      this.userAuthService.loggedIn(userData);
       this.loggedIn.emit();
       // }
     })

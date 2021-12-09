@@ -45,7 +45,6 @@ export class GuideBookManagementComponent implements OnInit, OnDestroy {
         id: pack.id,
         guideBook: pack.guideBook
       }));
-      // console.log("file: guide-book-management.component.ts ~ line 26 ~ getAllPacks ~ this.allPacks", this.allPacks)
     } else {
       this.Subscription.add(this.cardsService.allPacksReadyEmmiter.subscribe(() => {
         // sub.unsubscribe();
@@ -54,7 +53,6 @@ export class GuideBookManagementComponent implements OnInit, OnDestroy {
           id: pack.id,
           guideBook: pack.guideBook
         }));
-        // console.log("file: guide-book-management.component.ts ~ line 32 ~ sub ~ this.allPacks", this.allPacks)
       }));
       this.cardsService.getAllPacks();
     }
@@ -71,21 +69,22 @@ export class GuideBookManagementComponent implements OnInit, OnDestroy {
         dialogSub.unsubscribe();
         if (res) {
           this.saveChanges((selectedPack: PackContent) => {
-            this.selectedIndex = this.allPacks.findIndex(pack => pack.name === selectedPack.name);
-            this.selectedPack = JSON.parse(JSON.stringify(selectedPack));
+            this.setNewPack(selectedPack)
             this.changesMade = false;
           });
         } else {
-          this.selectedIndex = this.allPacks.findIndex(pack => pack.name === selectedPack.name);
-          this.selectedPack = JSON.parse(JSON.stringify(selectedPack));
+          this.setNewPack(selectedPack)
           this.changesMade = false;
         }
       });
     } else {
-      this.selectedIndex = this.allPacks.findIndex(pack => pack.name === selectedPack.name);
-      this.selectedPack = JSON.parse(JSON.stringify(selectedPack));
+      this.setNewPack(selectedPack)
     }
-    console.log("file: guide-book-management.component.ts ~ line 61 ~ this.saveChanges ~ this.selectedPack", this.selectedPack)
+  }
+
+  setNewPack(selectedPack: PackContent): void {
+    this.selectedIndex = this.allPacks.findIndex(pack => pack.name === selectedPack.name);
+    this.selectedPack = JSON.parse(JSON.stringify(selectedPack));
   }
 
   removeElement(index: number, listOfEl: GuideBookElement[]): void {

@@ -62,34 +62,34 @@ export class AuthService {
     // );
 
     // Use Hub channel 'auth' to get notified on changes
-    Hub.listen('auth', ({ payload: { event, data, message } }) => {
-      if (event === 'signIn') {
-        console.log("logged in!!!!!")
-        // On 'signIn' event, the data is a CognitoUser object
-        this.setUser(data);
-      } else {
-        this._authState.next(initialAuthState);
-      }
-    });
+    // Hub.listen('auth', ({ payload: { event, data, message } }) => {
+    //   if (event === 'signIn') {
+    //     console.log("logged in!!!!!")
+    //     // On 'signIn' event, the data is a CognitoUser object
+    //     this.setUser(data);
+    //   } else {
+    //     this._authState.next(initialAuthState);
+    //   }
+    // });
   }
 
-  private setUser(user: CognitoUserInterface) {
-    console.log("file: auth.service.ts ~ line 77 ~ setUser ~ user", user)
-    Auth.currentUserInfo().then(
-      (userAtt: any) => {
-        if (!user || !userAtt) {
-          return;
-        }
+  // private setUser(user: CognitoUserInterface) {
+  //   console.log("file: auth.service.ts ~ line 77 ~ setUser ~ user", user)
+  //   Auth.currentUserInfo().then(
+  //     (userAtt: any) => {
+  //       if (!user || !userAtt) {
+  //         return;
+  //       }
 
-        var username = user.username;
-        var id = userAtt.attributes.sub;
-        var email = userAtt.attributes.email;
-        var cognitoUser = user;
-        this._authState.next({ isLoggedIn: true, id, username, email, cognitoUser });
-        this.userAuthService.loggedIn(user);
-      }
-    )
-  }
+  //       var username = user.username;
+  //       var id = userAtt.attributes.sub;
+  //       var email = userAtt.attributes.email;
+  //       var cognitoUser = user;
+  //       this._authState.next({ isLoggedIn: true, id, username, email, cognitoUser });
+  //       this.userAuthService.loggedIn(user);
+  //     }
+  //   )
+  // }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {
     return Auth.signUp({
