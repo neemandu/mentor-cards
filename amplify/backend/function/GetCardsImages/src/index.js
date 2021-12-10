@@ -145,6 +145,11 @@ exports.handler = async (event, context, callback) => {
     console.log('user.firstProgramRegistrationDate');
     console.log(user.firstProgramRegistrationDate); 
 
+    if(user && user.groupRole == "SUPER_USER"){
+        console.log('Super user!');
+        return event.source['cards'];
+    }
+
     if(user &&    // Free Pack!
        'freeUntilDate' in event.source &&
        (new Date(event.source['freeUntilDate'])) > now
