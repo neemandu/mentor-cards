@@ -58,6 +58,30 @@ function monthDiff(d1, d2) {
     return months <= 0 ? 0 : months;
 }
 
+function monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
+
+function getBillingEndDate(user) {
+    console.log('getBillingEndDate');
+    console.log('cancellationDate is: ');
+    console.log(user.cancellationDate);
+    var cycles = user.subscription?.subscriptionPlan?.billingCycleInMonths;
+    var createdAt = new Date(user.subscription.subscriptionPlan.createdAt);
+    var monthsDiff = monthDiff(createdAt, user.cancellationDate);
+    var numOfCycles = (monthsDiff / cycles) + 1;
+    var millisecondsInMonth = 2505600000;
+    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
+    var endDate = new Date(createdAt.getTime() + numberOfMonthsToAdd);
+    console.log('endDate is: ');
+    console.log(endDate);
+    return endDate;
+}
+
 function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
     console.log('getBillingEndDate');
     console.log('cancellationDate is: ');
@@ -207,10 +231,12 @@ exports.handler = async (event, context, callback) => {
         console.log('Package belong to user');
         return event.source['cards'];
     }
+
+
     if(user &&    // canceled subscription but before billing cycle ended
        user.status == "NOPLAN" && 
        user.cancellationDate != null && 
-       now < getBillingEndDate(user.firstProgramRegistrationDate, user.cancellationDate)
+       now < getBillingEndDate(user)
     ){
         console.log('getBillingEndDate');
         return event.source['cards'];

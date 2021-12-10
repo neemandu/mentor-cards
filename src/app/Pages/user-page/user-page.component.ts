@@ -42,7 +42,7 @@ export class UserPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ביטול תכנית נוכחית", ["האם לבטל הרשמה לתכנית זו?"], "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("ביטול החיוב האוטומטי", ["האם לבטל את החיוב האוטומטי לתכנית זו?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
@@ -51,7 +51,7 @@ export class UserPageComponent implements OnInit {
         this.api.Unsubscribe({ 'username': this.userData.username }).then(() => {
           this.overlaySpinnerService.changeOverlaySpinner(false)
           window.location.reload();
-          this.userAuthService._snackBar.open('בוטלה התכנית. עצוב לנו לראות אתכם עוזבים, ואנו מקווים לראותכם שוב בעתיד', '', {
+          this.userAuthService._snackBar.open('החיוב האוטומטי בוטל בהצלחה', '', {
             duration: 10000,
             panelClass: ['rtl-snackbar']
           });
@@ -97,7 +97,7 @@ export class UserPageComponent implements OnInit {
     var monthsDiff = this.monthDiff(createdAt, now);
     var numOfCycles = (monthsDiff / cycles) + 1;
     var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
-    return new Date(this.userData.firstProgramRegistrationDate.getTime() + numberOfMonthsToAdd);
+    return new Date(createdAt.getTime() + numberOfMonthsToAdd);
   }
 
   get trialMonthExpDate() {

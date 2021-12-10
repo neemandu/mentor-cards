@@ -242,7 +242,6 @@ exports.handler = async (event) => {
     await cancelPayPalSubscription(user.subscription.providerTransactionId, access_token);
 
     user.status = "NOPLAN";
-    user.subscription = null;
     user.groupId = null;
     user.groupRole = null;
     user.cancellationDate = new Date().toISOString();

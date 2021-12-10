@@ -13,7 +13,7 @@
         <div class="user-info-section">
             <h1>פרטי חבילה</h1>
             <div class="line"></div>
-            <p>תכנית: {{userData.subscription.description}}</p>
+            <p>תכנית: {{userData.subscription.subscriptionPlan.description}}</p>
             <p>תאריך הרשמה לחבילה הנוכחית: {{userData.subscription.startDate | date:'d/M/y'}}</p>
             <p>תאריך תחילת תשלום: {{paymentStartDate | date:'d/M/y'}}</p>
             <p>תאריך החיוב הבא: {{nextPaymentDate | date:'d/M/y'}}</p>
