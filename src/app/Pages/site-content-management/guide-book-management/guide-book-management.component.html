@@ -29,7 +29,7 @@
         </button>
 
         <mat-accordion *ngIf="selectedPack" class="accordion">
-            <mat-expansion-panel *ngFor="let subject of selectedPack.guideBook.guideBook; let i = index" hideToggle>
+            <mat-expansion-panel *ngFor="let subject of selectedPack.guideBook; let i = index" hideToggle>
                 <mat-expansion-panel-header #panelH1 style="align-items: center;">
                     <mat-panel-title style="align-items: center;">
                         <!-- <input type="text" [(ngModel)]="subject.subjectName"> -->
@@ -38,7 +38,7 @@
                             <mat-icon>delete</mat-icon>
                         </button>
                         <button mat-icon-button color="primary" class="edit-remove-icon"
-                            (click)="editElement(selectedPack.guideBook.guideBook, i)">
+                            (click)="editElement(selectedPack.guideBook, i)">
                             <mat-icon>edit</mat-icon>
                         </button>
                         נושא -
