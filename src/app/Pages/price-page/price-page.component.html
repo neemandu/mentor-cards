@@ -30,7 +30,7 @@
     <div *ngIf="subPlans" class="program-cards d-flex justify-content-center align-items-center">
         <mat-card>
             <mat-card-subtitle>הכי בקטנה</mat-card-subtitle>
-            <mat-card-title>תוכנית חודשית</mat-card-title>
+            <mat-card-title>תכנית חודשית</mat-card-title>
             <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ monthlySubscription.fullPrice /
                         monthlySubscription.billingCycleInMonths }}</span></p>
@@ -38,9 +38,15 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button class="other-purchase-btn purchase-btn" type="button"
+                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths != 1" 
+                    class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(monthlySubscription.id)">
                     קבלו גישה חודשית לכל ערכות הקלפים
+                </button>
+                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1" 
+                    class="other-purchase-btn purchase-btn" type="button"
+                    disabled>
+                    הצטרפת כבר לתכנית זו               
                 </button>
             </mat-card-actions>
         </mat-card>
@@ -48,7 +54,7 @@
             <mat-card-subtitle id="popular-mat-card-subtitle">
                 <mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon>
             </mat-card-subtitle>
-            <mat-card-title>תוכנית חצי-שנתית</mat-card-title>
+            <mat-card-title>תכנית חצי-שנתית</mat-card-title>
             <mat-card-content id="popular-mat-card-content">
                 <p class="price-line">חודש / <span class="price-number">₪{{ halfYearlySubscription.fullPrice /
                         halfYearlySubscription.billingCycleInMonths }}</span></p>
@@ -56,15 +62,21 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions id="popular-mat-card-actions">
-                <button class="popular-purchase-btn purchase-btn" type="button"
+                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths != 6" 
+                    class="popular-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(halfYearlySubscription.id)">
                     קבלו גישה חצי שנתית לכל ערכות הקלפים
+                </button>                
+                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 6" 
+                        class="other-purchase-btn purchase-btn" type="button"
+                        disabled>
+                        הצטרפת כבר לתכנית זו               
                 </button>
             </mat-card-actions>
         </mat-card>
         <mat-card>
             <mat-card-subtitle>הכי משתלמת</mat-card-subtitle>
-            <mat-card-title>תוכנית שנתית</mat-card-title>
+            <mat-card-title>תכנית שנתית</mat-card-title>
             <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ yearlySubscription.fullPrice /
                         yearlySubscription.billingCycleInMonths }}</span></p>
@@ -72,9 +84,15 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button class="other-purchase-btn purchase-btn" type="button"
+                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths != 12" 
+                    class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(yearlySubscription.id)">
                     קבלו גישה שנתית לכל ערכות הקלפים
+                </button>
+                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12" 
+                        class="other-purchase-btn purchase-btn" type="button"
+                        disabled>
+                        הצטרפת כבר לתכנית זו               
                 </button>
             </mat-card-actions>
         </mat-card>
