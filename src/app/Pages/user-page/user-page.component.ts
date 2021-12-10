@@ -93,7 +93,8 @@ export class UserPageComponent implements OnInit {
   get nextPaymentDate() {
     var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
     var now = new Date();
-    var monthsDiff = this.monthDiff(this.userData.subscription.subscriptionPlan.createdAt, now);
+    var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    var monthsDiff = this.monthDiff(createdAt, now);
     var numOfCycles = (monthsDiff / cycles) + 1;
     var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
     return new Date(this.userData.firstProgramRegistrationDate.getTime() + numberOfMonthsToAdd);
