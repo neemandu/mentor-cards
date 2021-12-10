@@ -58,14 +58,6 @@ function monthDiff(d1, d2) {
     return months <= 0 ? 0 : months;
 }
 
-function monthDiff(d1, d2) {
-    var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth();
-    months += d2.getMonth();
-    return months <= 0 ? 0 : months;
-}
-
 function getBillingEndDate(user) {
     console.log('getBillingEndDate');
     console.log('cancellationDate is: ');
@@ -81,19 +73,6 @@ function getBillingEndDate(user) {
     console.log(endDate);
     return endDate;
 }
-
-function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
-    console.log('getBillingEndDate');
-    console.log('cancellationDate is: ');
-    console.log(cancellationDate);
-    var monthsDiff = monthDiff(firstProgramRegistrationDate, cancellationDate) + 1;
-    var endPaymentDate = new Date(firstProgramRegistrationDate);
-    endPaymentDate.setMonth(endPaymentDate.getMonth() + monthsDiff);
-    console.log('End of billing cycle date is: ');
-    console.log(endPaymentDate);
-    return new Date(endPaymentDate);  
-}
-
 
 function isPackageBelongToUser(id, cardsPacksIds, username) {
     console.log('Checking if package belong to user: ' + username );
@@ -136,10 +115,6 @@ exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
     console.log('event');
     console.log(event);
-    console.log('context');
-    console.log(context);
-    console.log('callback');
-    console.log(callback);
 
     // user was not identified in cognito
     if(!("identity" in event)){
