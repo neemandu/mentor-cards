@@ -95,9 +95,10 @@ export class UserAuthService {
         return;
       }
       this.userData = new UserData().deseralize(data);
-      console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
+      this.isLoggedIn = true;
+      // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.cognitoUserData.username);
-      // localStorage.setItem('signedin', 'true');
+      localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
@@ -269,6 +270,7 @@ export class UserAuthService {
     this.userData = undefined;
     this.cognitoUserData = undefined;
     localStorage.removeItem('signedin');
+    this.isLoggedIn = false;
     this.signedOutEmmiter.emit(true);
     // this.router.navigate(['no-program-page']);
   }

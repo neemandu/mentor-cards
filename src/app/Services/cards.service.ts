@@ -53,6 +53,7 @@ export class CardsService {
       this.addFavoritesFromCouponCode(ids);
     }));
     var favs = localStorage.getItem("MentorCardFavorites")
+    this.isLoggedIn = this.userAuthService.isLoggedIn;
     if (favs) {
       this.favorites = favs.split(',');
       this.favoriteChangeEmmiter.emit(this.favorites);
