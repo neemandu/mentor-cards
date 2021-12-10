@@ -1888,7 +1888,7 @@ export class APIService {
     input: updatePaymentProgramInput
   ): Promise<boolean | null> {
     const statement = `mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
-        updatePaymentProgram(input: $input)
+        UpdatePaymentProgram(input: $input)
       }`;
     const gqlAPIServiceArguments: any = {
       input

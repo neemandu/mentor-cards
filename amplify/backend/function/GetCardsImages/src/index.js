@@ -65,7 +65,7 @@ function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
     var monthsDiff = monthDiff(firstProgramRegistrationDate, cancellationDate) + 1;
     var endPaymentDate = new Date(firstProgramRegistrationDate);
     endPaymentDate.setMonth(endPaymentDate.getMonth() + monthsDiff);
-    console.log('End of billing cycle dae is: ');
+    console.log('End of billing cycle date is: ');
     console.log(endPaymentDate);
     return new Date(endPaymentDate);  
 }
@@ -158,16 +158,6 @@ exports.handler = async (event, context, callback) => {
         return event.source['cards'];
     }
 
-    if(user &&    // unlimited subscription
-       user.status == "PLAN" &&
-       user.subscription && 
-       user.subscription.subscriptionPlan && 
-       user.subscription.subscriptionPlan.numberOfCardPacks== -1              
-    ){
-        console.log('Limitless program');
-        return event.source['cards'];
-    }
-    
     var startFreePeriodDate = user.createdAt;
     if(user &&
         user.couponCodes &&

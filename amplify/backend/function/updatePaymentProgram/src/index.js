@@ -1,3 +1,30 @@
+/* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
+	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN
+	API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */
+
+exports.handler = async (event) => {
+    // TODO implement
+    const response = {
+        statusCode: 200,
+    //  Uncomment below to enable CORS requests
+    //  headers: {
+    //      "Access-Control-Allow-Origin": "*",
+    //      "Access-Control-Allow-Headers": "*"
+    //  }, 
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    return response;
+};
   /* Amplify Params - DO NOT EDIT
       API_CARDSPACKS_CARDSPACKTABLE_ARN
       API_CARDSPACKS_CARDSPACKTABLE_NAME

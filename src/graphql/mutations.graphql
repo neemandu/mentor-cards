@@ -71,7 +71,7 @@ mutation AddCouponCode($input: couponCodeInput!) {
   AddCouponCode(input: $input)
 }
 mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
-  updatePaymentProgram(input: $input)
+  UpdatePaymentProgram(input: $input)
 }
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
