@@ -57,7 +57,7 @@ export class AuthGuardNoProgramPageService implements CanActivate {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
       else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        this.ngZone.run(() => this.router.navigate(['home-page']));
         return true;
       }
     })
@@ -77,7 +77,7 @@ export class AuthGuardUserPageService implements CanActivate {
         return true;
       }
       else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        this.ngZone.run(() => this.router.navigate(['home-page']));
       }
     }
     var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
@@ -86,7 +86,7 @@ export class AuthGuardUserPageService implements CanActivate {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
       else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        this.ngZone.run(() => this.router.navigate(['home-page']));
       }
     })
   }

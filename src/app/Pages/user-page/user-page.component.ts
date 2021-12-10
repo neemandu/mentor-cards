@@ -9,8 +9,6 @@ import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-import { PostPurchaseSummeryDialogComponent } from 'src/app/Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
-import { ProgramChoiseDialogComponent } from '../no-program-page/program-choise-dialog/program-choise-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -37,27 +35,6 @@ export class UserPageComponent implements OnInit {
       this.overlaySpinnerService.changeOverlaySpinner(false);
     }));
   }
-
-  /**
-   * When user wants to change his subscription plan (1 per month)
-   */
-  openChooseProgramModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    // dialogConfig.maxHeight = '85vh';
-    // this.videoplayer.nativeElement.pause();
-    const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(res => {
-      // this.videoplayer.nativeElement.play();
-      dialogSub.unsubscribe();
-      if (res) {
-        this.cardsService.allPacks = undefined;
-        // this.router.navigate(['all-packs-page']);
-      }
-    });
-  }
-
   /**
    * When user wants to cancel his subscription (Anytime)
    */
