@@ -44,7 +44,7 @@
                     קבלו גישה חודשית לכל ערכות הקלפים
                 </button>
                 <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1" 
-                    class="disabled-btn" type="button"
+                    class="disabled-btn purchase-btn" type="button"
                     disabled>
                     הצטרפת כבר לתכנית זו               
                 </button>
@@ -68,7 +68,7 @@
                     קבלו גישה חצי שנתית לכל ערכות הקלפים
                 </button>                
                 <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 6" 
-                        class="disabled-btn" type="button"
+                        class="disabled-btn purchase-btn" type="button"
                         disabled>
                         הצטרפת כבר לתכנית זו               
                 </button>
@@ -90,7 +90,7 @@
                     קבלו גישה שנתית לכל ערכות הקלפים
                 </button>
                 <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12" 
-                        class="disabled-btn" type="button"
+                        class="disabled-btn purchase-btn" type="button"
                         disabled>
                         הצטרפת כבר לתכנית זו               
                 </button>
