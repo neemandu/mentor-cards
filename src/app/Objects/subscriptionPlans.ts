@@ -8,6 +8,8 @@ export class SubscriptionPlan {
     billingCycleInMonths: number;
     fullPrice: number;
     providerPlanId: string;
+    createdAt: Date;
+    updatedAt: Date;
 
     constructor() { }
 

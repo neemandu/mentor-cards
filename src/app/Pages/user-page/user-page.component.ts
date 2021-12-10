@@ -82,6 +82,23 @@ export class UserPageComponent implements OnInit {
     return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth);
   }
 
+  monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
+
+  get nextPaymentDate() {
+    var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
+    var now = new Date();
+    var monthsDiff = this.monthDiff(this.userData.subscription.subscriptionPlan.createdAt, now);
+    var numOfCycles = (monthsDiff / cycles) + 1;
+    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
+    return new Date(this.userData.firstProgramRegistrationDate.getTime() + numberOfMonthsToAdd);
+  }
+
   get trialMonthExpDate() {
     // return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
     return this.userAuthService.trialMonthExpDate
