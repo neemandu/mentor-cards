@@ -62,12 +62,14 @@ export class UserAuthService {
 
   async rememebrMe(): Promise<void> {
     try {
+      this.overlaySpinnerService.changeOverlaySpinner(true);
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
       if (user)
         this.loggedIn(user);
       else
         throw 'No current user - rememberMe retured VOID';
     } catch (err) {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
       console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
     }
@@ -98,7 +100,7 @@ export class UserAuthService {
       this.isLoggedIn = true;
       // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.cognitoUserData.username);
-      localStorage.setItem('signedin', 'true');
+      // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
@@ -269,7 +271,7 @@ export class UserAuthService {
   loggedOut(): void {
     this.userData = undefined;
     this.cognitoUserData = undefined;
-    localStorage.removeItem('signedin');
+    // localStorage.removeItem('signedin');
     this.isLoggedIn = false;
     this.signedOutEmmiter.emit(true);
     // this.router.navigate(['no-program-page']);
