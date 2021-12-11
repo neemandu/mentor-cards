@@ -43,7 +43,7 @@
                     (click)="checkFreePeriod(monthlySubscription.id)">
                     קבלו גישה חודשית לכל ערכות הקלפים
                 </button>
-                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1" 
+                <button *ngIf="userDate.status === 'PLAN' && userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1" 
                     class="disabled-btn purchase-btn" type="button"
                     disabled>
                     הצטרפת כבר לתכנית זו               
@@ -67,7 +67,7 @@
                     (click)="checkFreePeriod(halfYearlySubscription.id)">
                     קבלו גישה חצי שנתית לכל ערכות הקלפים
                 </button>                
-                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 6" 
+                <button *ngIf="userDate.status === 'PLAN' && userData.subscription?.subscriptionPlan?.billingCycleInMonths == 6" 
                         class="disabled-btn purchase-btn" type="button"
                         disabled>
                         הצטרפת כבר לתכנית זו               
@@ -89,7 +89,7 @@
                     (click)="checkFreePeriod(yearlySubscription.id)">
                     קבלו גישה שנתית לכל ערכות הקלפים
                 </button>
-                <button *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12" 
+                <button *ngIf="userDate.status === 'PLAN' && userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12" 
                         class="disabled-btn purchase-btn" type="button"
                         disabled>
                         הצטרפת כבר לתכנית זו               

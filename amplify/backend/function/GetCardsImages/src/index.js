@@ -62,7 +62,7 @@ function getBillingEndDate(user) {
     console.log('getBillingEndDate');
     console.log('cancellationDate is: ');
     console.log(user.cancellationDate);
-    var cycles = user.subscription?.subscriptionPlan?.billingCycleInMonths;
+    var cycles = user.subscription.subscriptionPlan.billingCycleInMonths;
     var createdAt = new Date(user.subscription.subscriptionPlan.createdAt);
     var monthsDiff = monthDiff(createdAt, user.cancellationDate);
     var numOfCycles = (monthsDiff / cycles) + 1;
