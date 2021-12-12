@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
@@ -44,8 +45,8 @@ export class LoginComponent implements OnInit {
   showLoading: boolean = false;
   showPwChallange: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
-    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, public router: Router,
+    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService, private ngZone: NgZone) { }
 
   ngOnInit(): void {
     // this.amplifyAuthService.isLoggedIn$.subscribe(
@@ -79,6 +80,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  public navigate(path: string): void {
+    // console.log(path)
+    this.ngZone.run(() => this.router.navigate([path]));
+  }
+
   //---LOGIN---//
 
   onLoginSubmit(): void {
@@ -97,6 +103,7 @@ export class LoginComponent implements OnInit {
       // else {
       this.userAuthService.loggedIn(userData);
       this.loggedIn.emit();
+      this.navigate('/all-packs-page');
       // }
     })
       .catch(err => {
