@@ -68,7 +68,10 @@ app-card {
 
 #actions {
   align-items: center;
-  padding-top: 3%;
+  padding: 3%;
+  margin: 2% 0px 0px 0px;
+  border-radius: 20px;
+  border: var(--amplify-primary-tint) 3px solid;
 }
 
 .iconButton {

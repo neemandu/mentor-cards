@@ -40,8 +40,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.ngZone.run(() => this.router.navigate([path]));
     }
 
-    get trialMonthExpDate() {
-        return this.userAuthService.trialMonthExpDate;
+    get trialPeriodExpDate() {
+        return this.userAuthService.trialPeriodExpDate;
     }
 
     signInSignUp(): void {

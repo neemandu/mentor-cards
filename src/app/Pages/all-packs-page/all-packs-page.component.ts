@@ -203,8 +203,8 @@ export class AllPacksPageComponent implements OnInit {
     return this.userAuthService.userData.subscription;
   }
 
-  get trialMonthExpDate() {
-    return this.userAuthService.trialMonthExpDate;
+  get trialPeriodExpDate() {
+    return this.userAuthService.trialPeriodExpDate;
   }
 
   get codeCouponExpDate() {

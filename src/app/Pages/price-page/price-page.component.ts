@@ -13,6 +13,7 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 // import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
 import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
 const millisecondsInMonth: number = 2505600000;
+const millisecondsInTwoWeeks: number = 1209600000;
 
 
 @Component({
@@ -205,9 +206,9 @@ export class PricePageComponent implements OnInit {
 
   get paymentStartDate() {
     if (this.userData) {
-      return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth);
+      return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInTwoWeeks);
     }
-    return new Date(new Date().getTime() + millisecondsInMonth);
+    return new Date(new Date().getTime() + millisecondsInTwoWeeks);
   }
 
   get userSingedIn() {
@@ -239,7 +240,7 @@ export class PricePageComponent implements OnInit {
     }
     else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
-      if (this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate != null) {
+      if (this.userAuthService.trialPeriodExpDate || this.userAuthService.codeCouponExpDate != null) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;

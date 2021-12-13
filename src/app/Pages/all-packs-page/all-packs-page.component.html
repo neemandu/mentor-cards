@@ -73,6 +73,9 @@
   </div> -->
 
   <div id="test" class="all-packs-view" #new>
+    <h1 *ngIf="trialPeriodExpDate" style="text-align: center; margin-left: 14rem;">
+      כל ערכות הקלפים לרשותכם עד ה- {{trialPeriodExpDate | date:'d/M/yy'}}
+    </h1>
     <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
       <div class="category-line d-flex align-items-center justify-content-around">
         <div class="line"></div>

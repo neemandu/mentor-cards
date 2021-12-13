@@ -22,7 +22,7 @@ export class PackPreviewComponent implements OnInit {
   loadedCards: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
-    private userAuthService: UserAuthService, private api: APIService, private overlaySpinnerService: OverlaySpinnerService, 
+    private userAuthService: UserAuthService, private api: APIService, private overlaySpinnerService: OverlaySpinnerService,
     private cardsService: CardsService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
@@ -79,9 +79,13 @@ export class PackPreviewComponent implements OnInit {
   get signedIn() {
     return this.userAuthService.userData;
   }
-  
+
   get hasProgram() {
     return this.userAuthService.userData.subscription;
+  }
+
+  get trialPeriodExpDate() {
+    return this.userAuthService.trialPeriodExpDate;
   }
 
   openChooseProgramModal(): void {
@@ -101,7 +105,7 @@ export class PackPreviewComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData('החלפת ערכות',[ 'ערכת `' + pack.description + '` תוחלף בערכת `' + this.data.description + '`','שימו לב - ניתן להחליף ערכת קלפים אחת פעם בחודש בהתאם למועד החיוב'], 'אישור', 'ביטול')
+    dialogConfig.data = new DynamicDialogData('החלפת ערכות', ['ערכת `' + pack.description + '` תוחלף בערכת `' + this.data.description + '`', 'שימו לב - ניתן להחליף ערכת קלפים אחת פעם בחודש בהתאם למועד החיוב'], 'אישור', 'ביטול')
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
