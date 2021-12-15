@@ -9,8 +9,6 @@ import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-import { PostPurchaseSummeryDialogComponent } from 'src/app/Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
-import { ProgramChoiseDialogComponent } from '../no-program-page/program-choise-dialog/program-choise-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -37,27 +35,6 @@ export class UserPageComponent implements OnInit {
       this.overlaySpinnerService.changeOverlaySpinner(false);
     }));
   }
-
-  /**
-   * When user wants to change his subscription plan (1 per month)
-   */
-  openChooseProgramModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    // dialogConfig.maxHeight = '85vh';
-    // this.videoplayer.nativeElement.pause();
-    const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(res => {
-      // this.videoplayer.nativeElement.play();
-      dialogSub.unsubscribe();
-      if (res) {
-        this.cardsService.allPacks = undefined;
-        // this.router.navigate(['all-packs-page']);
-      }
-    });
-  }
-
   /**
    * When user wants to cancel his subscription (Anytime)
    */
@@ -65,7 +42,7 @@ export class UserPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ביטול תכנית נוכחית", ["האם לבטל הרשמה לתכנית זו?"], "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("ביטול החיוב האוטומטי", ["האם לבטל את החיוב האוטומטי לתכנית זו?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
@@ -74,7 +51,7 @@ export class UserPageComponent implements OnInit {
         this.api.Unsubscribe({ 'username': this.userData.username }).then(() => {
           this.overlaySpinnerService.changeOverlaySpinner(false)
           window.location.reload();
-          this.userAuthService._snackBar.open('בוטלה התכנית. עצוב לנו לראות אתכם עוזבים, ואנו מקווים לראותכם שוב בעתיד', '', {
+          this.userAuthService._snackBar.open('החיוב האוטומטי בוטל בהצלחה', '', {
             duration: 10000,
             panelClass: ['rtl-snackbar']
           });
@@ -105,7 +82,25 @@ export class UserPageComponent implements OnInit {
     return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth);
   }
 
-  get trialPeriodExpDate() {
+  monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
+
+  get nextPaymentDate() {
+    var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
+    var now = new Date();
+    var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    var monthsDiff = this.monthDiff(createdAt, now);
+    var numOfCycles = (monthsDiff / cycles) + 1;
+    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
+    return new Date(createdAt.getTime() + numberOfMonthsToAdd);
+  }
+
+  get trialMonthExpDate() {
     // return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
     return this.userAuthService.trialPeriodExpDate
   }

@@ -58,18 +58,21 @@ function monthDiff(d1, d2) {
     return months <= 0 ? 0 : months;
 }
 
-function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
+function getBillingEndDate(user) {
     console.log('getBillingEndDate');
     console.log('cancellationDate is: ');
-    console.log(cancellationDate);
-    var monthsDiff = monthDiff(firstProgramRegistrationDate, cancellationDate) + 1;
-    var endPaymentDate = new Date(firstProgramRegistrationDate);
-    endPaymentDate.setMonth(endPaymentDate.getMonth() + monthsDiff);
-    console.log('End of billing cycle dae is: ');
-    console.log(endPaymentDate);
-    return new Date(endPaymentDate);  
+    console.log(user.cancellationDate);
+    var cycles = user.subscription.subscriptionPlan.billingCycleInMonths;
+    var createdAt = new Date(user.subscription.subscriptionPlan.createdAt);
+    var monthsDiff = monthDiff(createdAt, user.cancellationDate);
+    var numOfCycles = (monthsDiff / cycles) + 1;
+    var millisecondsInMonth = 2505600000;
+    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
+    var endDate = new Date(createdAt.getTime() + numberOfMonthsToAdd);
+    console.log('endDate is: ');
+    console.log(endDate);
+    return endDate;
 }
-
 
 function isPackageBelongToUser(id, cardsPacksIds, username) {
     console.log('Checking if package belong to user: ' + username );
@@ -112,10 +115,6 @@ exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
     console.log('event');
     console.log(event);
-    console.log('context');
-    console.log(context);
-    console.log('callback');
-    console.log(callback);
 
     // user was not identified in cognito
     if(!("identity" in event)){
@@ -158,16 +157,6 @@ exports.handler = async (event, context, callback) => {
         return event.source['cards'];
     }
 
-    if(user &&    // unlimited subscription
-       user.status == "PLAN" &&
-       user.subscription && 
-       user.subscription.subscriptionPlan && 
-       user.subscription.subscriptionPlan.numberOfCardPacks== -1              
-    ){
-        console.log('Limitless program');
-        return event.source['cards'];
-    }
-    
     var startFreePeriodDate = user.createdAt;
     if(user &&
         user.couponCodes &&
@@ -217,10 +206,12 @@ exports.handler = async (event, context, callback) => {
         console.log('Package belong to user');
         return event.source['cards'];
     }
+
+
     if(user &&    // canceled subscription but before billing cycle ended
        user.status == "NOPLAN" && 
        user.cancellationDate != null && 
-       now < getBillingEndDate(user.firstProgramRegistrationDate, user.cancellationDate)
+       now < getBillingEndDate(user)
     ){
         console.log('getBillingEndDate');
         return event.source['cards'];

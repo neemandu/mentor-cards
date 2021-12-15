@@ -38,7 +38,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           this.overlaySpinnerService.changeOverlaySpinner(true);
           var ids: updatePaymentProgramInput = { 'paymentProgramId': this.data.packSelected.id, 'providerTransactionId': data.subscriptionID }
           this.api.UpdatePaymentProgram(ids).then(data => {
-            this.userAuthService._snackBar.open('הרשמתך לחבילה בוצעה בהצלחה!', '', {
+            this.userAuthService._snackBar.open('הרשמתך לתכנית בוצעה בהצלחה!', '', {
               duration: 4000,
               panelClass: ['rtl-snackbar']
             });

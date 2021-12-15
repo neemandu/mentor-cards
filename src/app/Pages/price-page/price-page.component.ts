@@ -76,6 +76,7 @@ export class PricePageComponent implements OnInit {
     if (this.userAuthService.subPlans) {
       this.getSubscriptionPlans();
     }
+    this.userData = this.userAuthService.userData;
     /* if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
        new Date(this.userAuthService.userData?.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData?.numberOfPlansSubstitutions > 1) {
        this.changedPlansThisMonth = true;

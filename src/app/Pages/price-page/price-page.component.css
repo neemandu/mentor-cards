@@ -121,6 +121,11 @@ h1 {
   background: #f5f5f5;
 }
 
+.disabled-btn {
+  background: #e5e7e7;
+}
+
+
 /* .action-button {
   height: 2rem;
   border-radius: 5px;

@@ -15,16 +15,15 @@
       לאמן!</span>
     <span id="middle" *ngIf="userData && trialPeriodExpDate">אתם כבר מחוברים ויש לכם חודש מתנה, לכו
       לאמן!</span>
+    <!-- <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">עדין לא נרשמתם לתוכנית?</span> -->
     <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
     <span style="font-size: medium;" id="middle">התחברו ותיהנו מ-14 ימי ניסיון בחינם!</span>
     <div *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">
       <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
-      <br>
-      <span id="bottom">החל מ-19.90 ש"ח לחודש.</span>
     </div>
-    <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialPeriodExpDate)" type="button"
-      (click)="navigate('/all-packs-page')">לכל הערכות</button>
+    <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialMonthExpDate)" type="button"
+      (click)="navigate('/all-packs-page')">לכל ערכות הקלפים</button>
     <br>
     <span id="middle">רוצים לראות איך זה עובד?</span>
     <br>

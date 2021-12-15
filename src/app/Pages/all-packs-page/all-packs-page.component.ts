@@ -1,12 +1,14 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { APIService, ListCardsPacksQuery } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
 import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
+import { EnterCouponCodeDialogComponent } from 'src/app/Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 
 interface CategoryPack {
   category: string,
@@ -19,6 +21,7 @@ interface CategoryPack {
   styleUrls: ['./all-packs-page.component.css']
 })
 export class AllPacksPageComponent implements OnInit {  
+  @ViewChild('videoPlayer') videoplayer: ElementRef;
   Subscription: Subscription = new Subscription();
   mobile: boolean;
 
@@ -40,7 +43,7 @@ export class AllPacksPageComponent implements OnInit {
   // selectedTags: string[] = [];
 
   constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
-    private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) {
+    private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone, public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
@@ -71,6 +74,23 @@ export class AllPacksPageComponent implements OnInit {
 
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.getAllPacks();
+  }
+
+  openEnterCouponCodeModal(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    // dialogConfig.maxHeight = '85vh';
+    this.videoplayer.nativeElement.pause();
+    const dialogRef = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(res => {
+      this.videoplayer.nativeElement.play();
+      dialogSub.unsubscribe();
+      if (res) {
+        this.router.navigate(['all-packs-page']);
+        window.location.reload();
+      }
+    });
   }
 
   /**

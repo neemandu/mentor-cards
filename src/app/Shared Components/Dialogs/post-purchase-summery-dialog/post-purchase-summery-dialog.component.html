@@ -2,7 +2,7 @@
     <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
         <mat-icon style="font-family: 'Material Icons'; font-size: large;">highlight_off</mat-icon>
     </button>
-    <span class="title">ההצטרפות בוצעה בהצלחה!
+    <span class="title">הצטרפותך בוצעה בהצלחה!
         <span>&#127881;</span>
     </span>
     <!-- For symmetry -->
@@ -13,29 +13,18 @@
 </mat-toolbar>
 <div class="line"></div>
 <div id='summery' mat-dialog-content>
-    <p>איזה כיף! אז מה יש לנו:</p>
-    <ul style="padding-right: 1rem;">
-        <li style="font-size: large;">
-            כמות משתמשים: {{data.numberOfUsers}}
-        </li>
-        <li>
-            כמות ערכות בשימוש חודשי: {{data.numberOfCardPacks == -1 ? 'ללא הגבלה' : data.numberOfCardPacks}}
-        </li>
-    </ul>
+    <p>איזה כיף! נרשמת ל:</p>
+    <p *ngIf="data.billingCycleInMonths == 1">תכנית חודשית</p>
+    <p *ngIf="data.billingCycleInMonths == 6">תכנית חצי-שנתית</p>
+    <p *ngIf="data.billingCycleInMonths == 12">תכנית שנתית</p>
     <div class="line"></div>
 </div>
 <div class="actions" mat-dialog-actions>
     <p>מה הלאה?</p>
     <div class="buttons d-flex flex-column">
         <div style="margin-bottom: 1rem;" class="d-flex flex-row align-items-center">
-            <button class="action-button" type="button" (click)="navigate('/all-packs-page')">לחץ כאן למעבר לערכות
+            <button class="action-button" type="button" (click)="navigate('/all-packs-page')">לחצו כאן למעבר לערכות
                 הקלפים</button>
-            <p class="instruction">או דרך כפתור "כל הערכות" בסרגל הכלים העליון</p>
-        </div>
-        <div *ngIf="data.numberOfUsers != 1" class="d-flex flex-row align-items-center">
-            <button class="action-button" type="button" (click)="navigate('/group-management')">לחץ כאן להגדרת חברי
-                הקבוצה</button>
-            <p class="instruction">או דרך סמל המשתמש בצד ימין למעלה</p>
         </div>
     </div>
     <p style="font-size: x-large;">עבודה נעימה!</p>
