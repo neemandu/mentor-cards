@@ -65,13 +65,16 @@ export class GuideBookManagementComponent implements OnInit, OnDestroy {
       dialogConfig.autoFocus = true;
       dialogConfig.data = new DynamicDialogData("שמירה?", ["האם לשמור שינויים לפי מעבר לערכה אחרת?"], "אישור", "ביטול")
       const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-      var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
+      var dialogSub = dialogRef.afterClosed().subscribe(async (res: boolean) => {
         dialogSub.unsubscribe();
         if (res) {
-          this.saveChanges((selectedPack: PackContent) => {
+          try {
+            await this.saveChanges();
             this.setNewPack(selectedPack)
             this.changesMade = false;
-          });
+          } catch (err) {
+            console.log("file: guide-book-management.component.ts ~ line 76 ~ dialogSub ~ err", err)
+          }
         } else {
           this.setNewPack(selectedPack)
           this.changesMade = false;
@@ -137,27 +140,47 @@ export class GuideBookManagementComponent implements OnInit, OnDestroy {
     });
   }
 
-  saveChanges(cb?): void {
-    this.overlaySpinnerService.changeOverlaySpinner(true);
-    let input: UpdateCardsPackInput = {
-      id: this.selectedPack.id,
-      guideBook: this.selectedPack.guideBook
-    }
-    this.api.UpdateCardsPack(input).then(res => {
-      this.cardsService.setPackAfterChanges(this.selectedIndex, res);
-      this.allPacks[this.selectedIndex].guideBook = this.selectedPack.guideBook;
-      if (cb)
-        cb();
-      this.changesMade = false;
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      this.cardsService._snackBar.open('ספר הדרכה נשמר בהצלחה', '', {
-        duration: 3000,
-        panelClass: ['rtl-snackbar']
-      });
-    }).catch(err => {
-      console.log("file: guide-book-management.component.ts ~ line 150 ~ this.api.UpdateCardsPack ~ err", err)
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+  saveChanges(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.overlaySpinnerService.changeOverlaySpinner(true);
+      let input: UpdateCardsPackInput = {
+        id: this.selectedPack.id,
+        guideBook: this.selectedPack.guideBook
+      }
+      this.api.UpdateCardsPack(input).then(res => {
+        this.cardsService.setPackAfterChanges(this.selectedIndex, res);
+        this.allPacks[this.selectedIndex].guideBook = this.selectedPack.guideBook;
+        this.changesMade = false;
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.cardsService._snackBar.open('ספר הדרכה נשמר בהצלחה', '', {
+          duration: 3000,
+          panelClass: ['rtl-snackbar']
+        });
+        resolve(true);
+      }).catch(err => {
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.cardsService._snackBar.open('תקלה בשמירת ספר ההדרכה, נסו שנית', '', {
+          duration: 3000,
+          panelClass: ['rtl-snackbar']
+        });
+        reject(err)
+      })
     })
+    // this.api.UpdateCardsPack(input).then(res => {
+    //   this.cardsService.setPackAfterChanges(this.selectedIndex, res);
+    //   this.allPacks[this.selectedIndex].guideBook = this.selectedPack.guideBook;
+    //   if (cb)
+    //     cb();
+    //   this.changesMade = false;
+    //   this.overlaySpinnerService.changeOverlaySpinner(false);
+    //   this.cardsService._snackBar.open('ספר הדרכה נשמר בהצלחה', '', {
+    //     duration: 3000,
+    //     panelClass: ['rtl-snackbar']
+    //   });
+    // }).catch(err => {
+    //   console.log("file: guide-book-management.component.ts ~ line 150 ~ this.api.UpdateCardsPack ~ err", err)
+    //   this.overlaySpinnerService.changeOverlaySpinner(false);
+    // })
   }
 
   ngOnDestroy(): void {

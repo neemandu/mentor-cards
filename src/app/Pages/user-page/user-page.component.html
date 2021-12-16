@@ -14,14 +14,20 @@
             <h1>פרטי התכנית</h1>
             <div class="line"></div>
             <p>תכנית: {{userData.subscription.subscriptionPlan.description}}</p>
-            <p>תאריך הרשמה לחבילה הנוכחית: {{userData.subscription.startDate | date:'d/M/y'}}</p>
-            <p>תאריך תחילת תשלום: {{paymentStartDate | date:'d/M/y'}}</p>
+            <p>תאריך הרשמה לתכנית הנוכחית: {{userData.subscription.startDate | date:'d/M/y'}}</p>
+            <!-- <p>תאריך תחילת תשלום: {{paymentStartDate | date:'d/M/y'}}</p> -->
             <p>תאריך החיוב הבא: {{nextPaymentDate | date:'d/M/y'}}</p>
-            <p>מחיר עבור החבילה הנוכחית: {{(userData.subscription.subscriptionPlan.fullPrice -
+            <p>מחיר עבור התכנית הנוכחית: {{(userData.subscription.subscriptionPlan.fullPrice -
                 userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
             <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
-            <p *ngIf="!userData.groupRole || userData.groupRole!=='USER'" (click)="openCancelDialogModal()"
-                style="cursor: pointer; text-decoration: underline;">לביטול החיוב האוטומטי</p>
+            <div class="d-flex justify-content-between" style="width: 100%; margin-top: 2rem;">
+                <div class="d-flex flex-column align-items-baseline">
+                    <p (click)="navigate()" style="cursor: pointer; text-decoration: underline; margin-bottom: auto;">החליפו תוכנית</p>
+                    <span style="font-size: small;">*התכנית החדשה תעודכן החל מתאריך {{nextPaymentDate | date:'d/M/y'}}</span>
+                </div>
+                <p *ngIf="!userData.groupRole || userData.groupRole!=='USER'" (click)="openCancelDialogModal()"
+                    style="cursor: pointer; text-decoration: underline;">לביטול החיוב האוטומטי</p>
+            </div>
         </div>
         <!-- <div class="d-flex flex-row"
             *ngIf="userData.groupRole === 'ADMIN' || userData.subscription.subscriptionPlan.numberOfUsers == 1">

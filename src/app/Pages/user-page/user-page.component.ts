@@ -1,11 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
-import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserData } from 'src/app/Objects/user-related';
-import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -23,7 +22,7 @@ export class UserPageComponent implements OnInit {
   userData: UserData;
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog,
-    private cardsService: CardsService, private api: APIService) {
+    private ngZone: NgZone, private api: APIService, public router: Router) {
     this.userData = this.userAuthService.userData;
     // console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
@@ -88,7 +87,7 @@ export class UserPageComponent implements OnInit {
     months -= d1.getMonth();
     months += d2.getMonth();
     return months <= 0 ? 0 : months;
-}
+  }
 
   get nextPaymentDate() {
     var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
@@ -103,6 +102,10 @@ export class UserPageComponent implements OnInit {
   get trialMonthExpDate() {
     // return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
     return this.userAuthService.trialPeriodExpDate
+  }
+
+  public navigate(): void {
+    this.ngZone.run(() => this.router.navigate(['price-page']));
   }
 
   ngOnDestroy(): void {

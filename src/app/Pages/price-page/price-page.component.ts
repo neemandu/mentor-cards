@@ -77,6 +77,7 @@ export class PricePageComponent implements OnInit {
       this.getSubscriptionPlans();
     }
     this.userData = this.userAuthService.userData;
+    console.log("file: price-page.component.ts ~ line 80 ~ ngOnInit ~ this.userData", this.userData)
     /* if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
        new Date(this.userAuthService.userData?.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData?.numberOfPlansSubstitutions > 1) {
        this.changedPlansThisMonth = true;
@@ -258,6 +259,23 @@ export class PricePageComponent implements OnInit {
           }
         });
       }
+      else if (this.userData?.status === 'PLAN') {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.maxHeight = '85vh';
+        dialogConfig.maxWidth = '30vw';
+        const title = "הנכם רשומים לתכנית אחרת"
+        const content = ["שימו לב!", `התכנית החדשה תעודכן החל מהתאריך ${this.nextPaymentDate}`]
+        dialogConfig.data = new DynamicDialogData(title, content, "המשך בכל זאת", "בטל")
+        const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+        var dialogSub = dialogRef.afterClosed().subscribe(res => {
+          dialogSub.unsubscribe();
+          if (res) {
+            this.openApprovePurchaseDialog();
+          }
+        });
+      }
       else {
         this.openApprovePurchaseDialog();
       }
@@ -277,6 +295,25 @@ export class PricePageComponent implements OnInit {
       if (res) {
       }
     });
+  }
+
+  private get nextPaymentDate() {
+    var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
+    var now = new Date();
+    var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    var monthsDiff = this.monthDiff(createdAt, now);
+    var numOfCycles = (monthsDiff / cycles) + 1;
+    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
+    const options = { year: "numeric", month: "numeric", day: "numeric" };
+    return new Date(createdAt.getTime() + numberOfMonthsToAdd).toLocaleDateString('he-IL');
+  }
+
+  private monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
   }
 
   ngOnDestroy(): void {

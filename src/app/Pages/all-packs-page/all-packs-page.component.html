@@ -15,8 +15,7 @@
     <br>
     <h3 id="filter-by-options-title">קטגוריות</h3>
     <mat-selection-list #categories (selectionChange)="categoriesSelectedChange($event); filterPacks()">
-      <mat-list-option disableRipple style="direction: ltr;"
-        *ngFor="let category of allCategories|slice:0:categoriesToShow"
+      <mat-list-option disableRipple style="direction: ltr;" *ngFor="let category of allCategories"
         [selected]="selectedCategories.includes(category)" [value]="category">
         <!-- <span> -->
         {{category}}
@@ -89,7 +88,7 @@
       </div>
     </div>
     <div *ngIf="selectedFavorites.length == 0">
-      <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks">
+      <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks; let i = index;">
         <div class="category-line d-flex align-items-center justify-content-around">
           <div class="line"></div>
           <h3 class="caterory-title">{{categoryPacks.category}}</h3>

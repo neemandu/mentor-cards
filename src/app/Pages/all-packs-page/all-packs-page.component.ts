@@ -20,7 +20,7 @@ interface CategoryPack {
   templateUrl: './all-packs-page.component.html',
   styleUrls: ['./all-packs-page.component.css']
 })
-export class AllPacksPageComponent implements OnInit {  
+export class AllPacksPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   Subscription: Subscription = new Subscription();
   mobile: boolean;
@@ -238,13 +238,13 @@ export class AllPacksPageComponent implements OnInit {
   /**
    * Show more or less categories
    */
-  categoriesToShowChange(): void {
-    if (this.categoriesToShow < this.allCategories.length) {
-      this.categoriesToShow = this.allCategories.length;
-    } else {
-      this.categoriesToShow = 5;
-    }
-  }
+  // categoriesToShowChange(): void {
+  //   if (this.categoriesToShow < this.allCategories.length) {
+  //     this.categoriesToShow = this.allCategories.length;
+  //   } else {
+  //     this.categoriesToShow = 5;
+  //   }
+  // }
 
   packLoaded(): void {
     this.loadedPacks++;

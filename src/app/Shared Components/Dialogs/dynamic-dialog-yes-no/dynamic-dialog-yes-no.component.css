@@ -9,6 +9,7 @@ p {
 }
 
 .buttons {
+  justify-content: space-between;
   margin: 0px;
 }
 
