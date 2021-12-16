@@ -24,7 +24,7 @@
     <div *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">
       <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
     </div>
-    <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialMonthExpDate)"
+    <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialPeriodExpDate)"
       type="button" (click)="navigate('/all-packs-page')">לכל ערכות הקלפים</button>
     <br>
     <span id="middle">רוצים לראות איך זה עובד?</span>
