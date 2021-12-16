@@ -81,7 +81,6 @@ export class AllPacksPageComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
-    this.videoplayer.nativeElement.pause();
     const dialogRef = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       this.videoplayer.nativeElement.play();
