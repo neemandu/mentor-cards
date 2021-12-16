@@ -19,6 +19,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
         public router: Router, private ngZone: NgZone, private api: APIService) {
+    }
+
+    ngOnInit(): void {
         this.overlaySpinnerService.changeOverlaySpinner(true);
         this.api.ListNewss().then(news => {
             this.news = news.items.sort((a, b) => a.order - b.order);
@@ -30,9 +33,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
         this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
             this.userData = undefined;
         }))
-    }
-
-    ngOnInit(): void {
+        this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+            this.userData = userData;
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+        }));
         this.userData = this.userAuthService.userData;
     }
 
