@@ -157,7 +157,8 @@ exports.handler = async (event, context, callback) => {
         return event.source['cards'];
     }
 
-    if(user && // does the package belong to the user?
+    console.log('Checking Unlimited plan');
+    if(user && 
         user.status == "PLAN" &&
         user.subscription &&
         user.subscription.subscriptionPlan &&
