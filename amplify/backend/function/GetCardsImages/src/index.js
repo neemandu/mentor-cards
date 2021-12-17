@@ -144,11 +144,13 @@ exports.handler = async (event, context, callback) => {
     console.log('user.firstProgramRegistrationDate');
     console.log(user.firstProgramRegistrationDate); 
 
+    console.log('Checking if user is SUPER_USER');
     if(user && user.groupRole == "SUPER_USER"){
         console.log('Super user!');
         return event.source['cards'];
     }
 
+    console.log('Checking if pack is free');
     if(user &&    // Free Pack!
        'freeUntilDate' in event.source &&
        (new Date(event.source['freeUntilDate'])) > now
@@ -157,6 +159,7 @@ exports.handler = async (event, context, callback) => {
         return event.source['cards'];
     }
 
+    console.log('Not a free plan');
     console.log('Checking Unlimited plan');
     if(user && 
         user.status == "PLAN" &&
@@ -168,6 +171,7 @@ exports.handler = async (event, context, callback) => {
          return event.source['cards'];
      }
 
+    console.log('Not Unlimited plan');
     var startFreePeriodDate = user.createdAt;
     if(user &&
         user.couponCodes &&
@@ -183,6 +187,8 @@ exports.handler = async (event, context, callback) => {
             }
         }
     allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
+    
+    console.log('Checking if its a free trial period');
     if(user &&    
         isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
      ){
@@ -190,6 +196,8 @@ exports.handler = async (event, context, callback) => {
          return event.source['cards'];
      }
     
+    console.log('Not a free trial period');
+    console.log('Checking if user has a coupon code with this package');
     if(user &&
         user.couponCodes &&
         user.couponCodes.length > 0){
@@ -203,6 +211,8 @@ exports.handler = async (event, context, callback) => {
                 }
             }
         }
+    
+    console.log('User does not have a coupon for this pack');
     /*if(user &&    // first 30 days all packs are available
        user.status == "PLAN" &&
        isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
@@ -210,6 +220,7 @@ exports.handler = async (event, context, callback) => {
         console.log('First Month');
         return event.source['cards'];
     }*/
+    console.log('Check if user own this pack');
     if(user && // does the package belong to the user?
        user.status == "PLAN" &&
        isPackageBelongToUser(event.source['id'], user.cardsPacksIds, username)     
@@ -217,8 +228,9 @@ exports.handler = async (event, context, callback) => {
         console.log('Package belong to user');
         return event.source['cards'];
     }
+    console.log('User does not own this pack');
 
-
+    console.log('Check if user canceled but paid for the rest of the period');
     if(user &&    // canceled subscription but before billing cycle ended
        user.status == "NOPLAN" && 
        user.cancellationDate != null && 
