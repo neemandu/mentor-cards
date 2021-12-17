@@ -157,6 +157,16 @@ exports.handler = async (event, context, callback) => {
         return event.source['cards'];
     }
 
+    if(user && // does the package belong to the user?
+        user.status == "PLAN" &&
+        user.subscription &&
+        user.subscription.subscriptionPlan &&
+        user.subscription.subscriptionPlan.numberOfCardPacks == -1
+     ){
+         console.log('Unlimited plan');
+         return event.source['cards'];
+     }
+
     var startFreePeriodDate = user.createdAt;
     if(user &&
         user.couponCodes &&
