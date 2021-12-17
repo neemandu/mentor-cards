@@ -28,13 +28,12 @@
     <button type="button" class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button>
     <!-- <button type="button" *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
       class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button> -->
-    <button type="button" *ngIf="!loggedIn || !userAttributes?.subscription || userAttributes?.status === 'NOPLAN'"
-      class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
+    <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
       להתנסות</button>
     <!-- <button type="button" class="btn navbar-btn" *ngIf="userAttributes?.status === 'PLAN'" (click)="navigate('/all-packs-page')">כל
       הערכות</button> -->
     <button type="button" class="btn navbar-btn" (click)="navigate('/guide-page')">הדרכות</button>
-    <button type="button" class="btn navbar-btn" (click)="navigate('/price-page')">מחירון תכניות</button>
+    <button type="button" class="btn navbar-btn" (click)="navigate('/price-page')">מחירון</button>
     <button type="button" class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
     <button type="button" class="btn navbar-btn" (click)="navigate('/contact-us')">צור קשר</button>
   </div>

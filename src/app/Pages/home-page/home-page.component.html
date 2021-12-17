@@ -27,9 +27,9 @@
     <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialPeriodExpDate)"
       type="button" (click)="navigate('/all-packs-page')">לכל ערכות הקלפים</button>
     <br>
-    <span id="middle">רוצים לראות איך זה עובד?</span>
+    <span *ngIf="!userData" id="middle">רוצים לראות איך זה עובד?</span>
     <br>
-    <button style="font-size: x-large;" type="button" (click)="navigate('/example-pack')">ערכה לדוגמא</button>
+    <button *ngIf="!userData" style="font-size: x-large;" type="button" (click)="navigate('/example-pack')">ערכה לדוגמא</button>
   </div>
   <div *ngIf="news?.length > 0" id="actions" class="d-flex flex-column actions-bottom">
     <span id="news-title">חדשות ועדכונים</span>
