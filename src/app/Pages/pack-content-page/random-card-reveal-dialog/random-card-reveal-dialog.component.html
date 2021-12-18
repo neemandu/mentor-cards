@@ -8,9 +8,8 @@
       </mat-icon>
     </button>
 
-    <app-card [ngClass]="{'card-pre-reveal': true, 'card-reveal': cardLoaded}" [cardContent]="selectedCard"
-      [flipped]="true" (loaded)="cardLoaded=true">
-    </app-card>
+    <img loading="eager" class="img-view"
+      src={{selectedCard.imgUrl}} data-src={{selectedCard.imgUrl}}>  
 
     <button type="button" class="btn btn-light" [disabled]="index == 0" (click)="prevCard()">
       <mat-icon class="btn-icon">chevron_left</mat-icon>

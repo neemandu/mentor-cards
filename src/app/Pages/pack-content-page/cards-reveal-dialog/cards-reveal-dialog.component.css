@@ -23,9 +23,26 @@ app-card {
   /* visibility: visible; */
   opacity: 1;
 }
+.img-view {
+  height: 40vh;  
+}
+
+.badge-light {
+  font-size: 0.8rem;
+  background-color: #efefef;
+}
 
 ::ng-deep .mat-dialog-container {
   overflow: hidden;
+  padding: 10px;
+}
+
+.index {
+  width: 100%;
+} 
+
+.card-preview{
+  padding: 2px;
 }
 
 .closeModalButton {

@@ -9,7 +9,7 @@
       <!-- Card Front -->
       <div class="flip-box-back">
         <img loading="eager" (load)="imgLoaded()" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}"
-          src={{cardContent.imgUrl}} data-src={{cardContent.imgUrl}} style="height: 40vh;" (contextmenu)="onRightClick();">
+          src={{cardContent.imgUrl}} data-src={{cardContent.imgUrl}} (contextmenu)="onRightClick();">
       </div>
     </div>
   <!-- </div> -->

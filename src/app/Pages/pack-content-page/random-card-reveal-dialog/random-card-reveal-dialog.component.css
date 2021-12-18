@@ -10,6 +10,10 @@ app-card {
   display: flex;
 }
 
+.img-view {
+  height: 40vh;  
+}
+
 .card-pre-reveal {
   margin: 10px 10px;
   max-height: 85vh;
