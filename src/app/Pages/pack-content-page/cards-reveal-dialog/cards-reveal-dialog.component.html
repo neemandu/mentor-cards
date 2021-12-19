@@ -2,7 +2,10 @@
   <button class="closeModalButton" mat-icon-button (click)="closeDialog()">
     <mat-icon>highlight_off</mat-icon>
   </button>
-  <mat-dialog-content class="content">
+  <mat-dialog-content
+  [ngClass]="{'content': true, 'one-card': data.length == 1, 'two-card': data.length == 2,
+  'three-card': data.length == 3, 'four-card': data.length == 4, 'five-card': data.length == 5}"
+  >
     <!-- <div class="content"> -->
       <div class="d-flex flex-column card-preview" *ngFor="let card of data">
         <img loading="eager" class="img-view" src={{card.imgUrl}} data-src={{card.imgUrl}}>
