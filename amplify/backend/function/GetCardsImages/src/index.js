@@ -49,10 +49,12 @@ async function getUser(username){
 
 function monthDiff(d1, d2) {
     var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth();
-    months += d2.getMonth();
-    if(d2.getDate() < d1.getDate()){
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+    months = (date2.getFullYear() - date1.getFullYear()) * 12;
+    months -= date1.getMonth();
+    months += date2.getMonth();
+    if(date2.getDate() < date1.getDate()){
         months--;
     }
     return months <= 0 ? 0 : months;
@@ -63,12 +65,22 @@ function getBillingEndDate(user) {
     console.log('cancellationDate is: ');
     console.log(user.cancellationDate);
     var cycles = user.subscription.subscriptionPlan.billingCycleInMonths;
+    console.log('cycles is: ');
+    console.log(cycles);
     var createdAt = new Date(user.subscription.subscriptionPlan.createdAt);
+    console.log('createdAt is: ');
+    console.log(createdAt);
     var monthsDiff = monthDiff(createdAt, user.cancellationDate);
-    var numOfCycles = (monthsDiff / cycles) + 1;
-    var millisecondsInMonth = 2505600000;
-    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
-    var endDate = new Date(createdAt.getTime() + numberOfMonthsToAdd);
+    console.log('monthsDiff is: ');
+    console.log(monthsDiff);
+    var numOfCycles = Math.ceil(monthsDiff / cycles);
+    console.log('numOfCycles is: ');
+    console.log(numOfCycles);
+    var numberOfMonthsToAdd = numOfCycles * cycles;
+    console.log('numberOfMonthsToAdd is: ');
+    console.log(numberOfMonthsToAdd);
+    var endDate = new Date(createdAt);
+    endDate.setMonth(endDate.getMonth()+numberOfMonthsToAdd);
     console.log('endDate is: ');
     console.log(endDate);
     return endDate;
