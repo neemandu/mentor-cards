@@ -48,9 +48,13 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    //   // this.overlaySpinnerService.changeOverlaySpinner(true);
+    //   this.getAllPacks();
+    // }));
+    this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       // this.overlaySpinnerService.changeOverlaySpinner(true);
-      this.getAllPacks();
+      userData ? this.getAllPacks() : null;
     }));
     window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
     this.mobile = window.screen.width <= 600;

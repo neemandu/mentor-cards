@@ -38,9 +38,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
-    this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
-      this.userData = undefined;
-    }));
+    // this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
+    //   this.userData = undefined;
+    // }));
+    this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+      this.userData = userData;
+    })
     this.userData = this.userAuthService.userData;
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
@@ -122,7 +125,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxHeight = '85vh';
+    dialogConfig.maxHeight = '90vh';
     dialogConfig.data = this.pack.cards;
     this.sleep(800).then(() => {
       const dialogRef = this.dialog.open(RandomCardRevealDialogComponent, dialogConfig);

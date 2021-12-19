@@ -2,11 +2,12 @@
   <button class="closeModalButton" mat-icon-button (click)="closeDialog()">
     <mat-icon>highlight_off</mat-icon>
   </button>
-  <div class="content">
-    <div class="d-flex flex-column card-preview" *ngFor="let card of data">
-      <img loading="eager" class="img-view"
-      src={{card.imgUrl}} data-src={{card.imgUrl}}>  
-      <span class="badge badge-pill badge-light index">{{card.index}}</span> 
-    </div>
-  </div>
+  <mat-dialog-content class="content">
+    <!-- <div class="content"> -->
+      <div class="d-flex flex-column card-preview" *ngFor="let card of data">
+        <img loading="eager" class="img-view" src={{card.imgUrl}} data-src={{card.imgUrl}}>
+        <span class="badge badge-pill badge-light index">{{card.index}}</span>
+      </div>
+    <!-- </div> -->
+  </mat-dialog-content>
 </div>

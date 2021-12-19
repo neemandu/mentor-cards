@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { APIService } from 'src/app/API.service';
 import { AuthService } from 'src/app/Services/auth.service';
+import { UserData } from 'src/app/Objects/user-related';
 
 @Component({
   selector: 'app-nav',
@@ -39,14 +40,18 @@ export class NavComponent implements OnInit {
     //   this.userAttributes = cognitoUser;
     // });
 
-    this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
-      this.userAttributes = userAttributes;
-      this.loggedIn = true;
+    this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+      this.userAttributes = userData;
+      this.loggedIn = userData ? true : false;
     })
-    this.userAuthService.signedOutEmmiter.subscribe(() => {
-      this.userAttributes = undefined;
-      this.loggedIn = false;
-    })
+    // this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
+    //   this.userAttributes = userAttributes;
+    //   this.loggedIn = true;
+    // })
+    // this.userAuthService.signedOutEmmiter.subscribe(() => {
+    //   this.userAttributes = undefined;
+    //   this.loggedIn = false;
+    // })
     this.api.ListNewss().then(news => {
       this.news = news.items.sort((a, b) => a.order - b.order);
       let oldNews = localStorage.getItem("news")

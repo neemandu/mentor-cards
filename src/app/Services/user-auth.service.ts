@@ -23,10 +23,11 @@ const millisecondsInDay: number = 86400000;
 })
 export class UserAuthService {
 
-  @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
+  @Output() userDataEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
+  // @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
+  // @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() groupDataEmmiter: EventEmitter<GroupData> = new EventEmitter<GroupData>();
   // @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() addCouponCodeToFavs: EventEmitter<string[]> = new EventEmitter<string[]>();
   isLoggedIn = false;
@@ -114,7 +115,7 @@ export class UserAuthService {
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }
-      this.loggedInEmmiter.emit(this.userData);
+      this.userDataEmmiter.emit(this.userData);
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
@@ -138,7 +139,7 @@ export class UserAuthService {
     this.api.CreateUser(user).then(value => {
       this.userData = new UserData().deseralize(value);
       this.overlaySpinnerService.changeOverlaySpinner(false);
-      this.loggedInEmmiter.emit(this.userData);
+      this.userDataEmmiter.emit(this.userData);
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
@@ -273,7 +274,7 @@ export class UserAuthService {
     this.cognitoUserData = undefined;
     // localStorage.removeItem('signedin');
     this.isLoggedIn = false;
-    this.signedOutEmmiter.emit(true);
+    this.userDataEmmiter.emit(undefined);
     // this.router.navigate(['no-program-page']);
   }
 

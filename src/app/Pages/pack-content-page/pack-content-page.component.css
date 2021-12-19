@@ -29,7 +29,7 @@ app-card:hover {
 
 .bottom-nav {
   position: fixed;
-  bottom: 20px;
+  bottom: 5px;
   width: 100%;
   margin-top: 15px;
   transform: translateY(0px);

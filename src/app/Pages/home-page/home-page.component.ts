@@ -30,13 +30,17 @@ export class HomePageComponent implements OnInit, OnDestroy {
             this.overlaySpinnerService.changeOverlaySpinner(false);
             console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.ListNewss ~ error", error)
         })
-        this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
-            this.userData = undefined;
-        }))
-        this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+        // this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
+        //     this.userData = undefined;
+        // }))
+        // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+        //     this.userData = userData;
+        //     this.overlaySpinnerService.changeOverlaySpinner(false);
+        // }));
+        this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
             this.userData = userData;
-            this.overlaySpinnerService.changeOverlaySpinner(false);
-        }));
+            userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
+        })
         this.userData = this.userAuthService.userData;
     }
 

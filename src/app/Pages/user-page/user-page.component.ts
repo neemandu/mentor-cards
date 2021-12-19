@@ -29,10 +29,14 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    //   this.userData = userData;
+    //   this.overlaySpinnerService.changeOverlaySpinner(false);
+    // }));
+    this.userAuthService.userDataEmmiter.subscribe(((userData: UserData) => {
       this.userData = userData;
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-    }));
+      userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
+    }))
   }
   /**
    * When user wants to cancel his subscription (Anytime)
