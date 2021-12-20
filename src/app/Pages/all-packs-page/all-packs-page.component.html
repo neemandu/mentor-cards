@@ -77,9 +77,9 @@
     </h1> -->
     <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
       <div class="category-line d-flex align-items-center justify-content-around">
-        <div class="line"></div>
+        <div class="first-line"></div>
         <h3 class="caterory-title">המועדפים שלי</h3>
-        <div class="line"></div>
+        <div class="second-line"></div>
       </div>
       <div class="d-flex flex-row flex-wrap">
         <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo" (loaded)="packLoaded();"
@@ -90,9 +90,9 @@
     <div *ngIf="selectedFavorites.length == 0">
       <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks; let i = index;">
         <div class="category-line d-flex align-items-center justify-content-around">
-          <div class="line"></div>
+          <div class="first-line"></div>
           <h3 class="caterory-title">{{categoryPacks.category}}</h3>
-          <div class="line"></div>
+          <div class="second-line"></div>
         </div>
         <div class="d-flex flex-row flex-wrap">
           <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"

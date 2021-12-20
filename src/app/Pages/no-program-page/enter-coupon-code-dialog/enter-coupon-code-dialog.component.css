@@ -1,74 +1,75 @@
 mat-icon {
-  font-family: 'Material Icons';
-}
-
-* {
-  font-family: 'rubik';
-  direction: rtl;
-}
-
-.buttons {
-  margin: 0px;
-  justify-content: center;
-}
-
-.action-button {
-  font-size: medium;
-  margin-left: 1rem;
-  border-radius: 5px;
-  border: none;
-  font-size: large;
-  background: #ffa800;
-  color: white;
-  height: 2rem;
-  width: 4rem;
-}
-
-.action-button:hover {
-  background: #e69900;
-}
-
-.action-button:active {
-  background: #db9200;
-}
-
-.action-button:focus {
-  outline: none;
-}
-
-.action-button:disabled {
-  background: #cccccc;
-  color: rgb(82, 82, 82);
-  cursor: not-allowed;
-}
-
-mat-toolbar {
-  margin-top: -10px;
-  background-color: transparent;
-}
-
-.title {
-  font-size: large;
-  margin-right: -15px;
-}
-
-.line {
-  background-color: #ffa800;
-  width: auto;
-  height: 3px;
-  margin-top: -15px;
-}
-
-.iconButton {
-  /* margin-top: -15px; */
-  margin-left: -20px;
-}
-
-.mat-form-field {
-  text-align: center;
-  font-size: medium;
-}
-
-mat-option {
-  text-align: initial;
-}
+    font-family: 'Material Icons';
+  }
+  
+  * {
+    font-family: 'rubik';
+    direction: rtl;
+  }
+  
+  .buttons {
+    margin: 0px;
+    justify-content: center;
+  }
+  
+  .action-button {
+    font-size: medium;
+    margin-left: 1rem;
+    border-radius: 5px;
+    border: none;
+    font-size: large;
+    background: #ffa800;
+    color: white;
+    height: 2rem;
+    width: 4rem;
+  }
+  
+  .action-button:hover {
+    background: #e69900;
+  }
+  
+  .action-button:active {
+    background: #db9200;
+  }
+  
+  .action-button:focus {
+    outline: none;
+  }
+  
+  .action-button:disabled {
+    background: #cccccc;
+    color: rgb(82, 82, 82);
+    cursor: not-allowed;
+  }
+  
+  mat-toolbar {
+    margin-top: -10px;
+    background-color: transparent;
+  }
+  
+  .title {
+    font-size: large;
+    margin-right: -15px;
+  }
+  
+  .line {
+    background-color: #ffa800;
+    width: auto;
+    height: 3px;
+    margin-top: -15px;
+  }
+  
+  .iconButton {
+    /* margin-top: -15px; */
+    margin-left: -20px;
+  }
+  
+  .mat-form-field {
+    text-align: center;
+    font-size: medium;
+  }
+  
+  mat-option {
+    text-align: initial;
+  }
+  
