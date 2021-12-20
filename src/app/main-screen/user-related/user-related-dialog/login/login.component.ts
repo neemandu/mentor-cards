@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
@@ -11,6 +12,8 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isLoggedIn = false;
+  user: { id: string; username: string; email: string };
 
   @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
   // @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
@@ -33,17 +36,29 @@ export class LoginComponent implements OnInit {
     username: ['', [Validators.required, Validators.email]],
     confirmationCode: ['', Validators.required],
   });
+  // userData: any;
   newPasswordPhase: boolean = false;
   hidePW: boolean = true;
   showLogin: boolean = true;
   showForgotPw: boolean = false;
   showConfirmUser: boolean = false;
   showLoading: boolean = false;
+  showPwChallange: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
-    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, public router: Router,
+    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService, private ngZone: NgZone) { }
 
   ngOnInit(): void {
+    // this.amplifyAuthService.isLoggedIn$.subscribe(
+    //   isLoggedIn => {
+    //     (this.isLoggedIn = isLoggedIn);
+    //     console.log("log in!!!!!!");
+    //   }
+    // );
+
+    // this.amplifyAuthService.auth$.subscribe(({ id, username, email }) => {
+    //   this.user = { id, username, email };
+    // });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -65,6 +80,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  public navigate(path: string): void {
+    // console.log(path)
+    this.ngZone.run(() => this.router.navigate([path]));
+  }
+
   //---LOGIN---//
 
   onLoginSubmit(): void {
@@ -75,8 +95,16 @@ export class LoginComponent implements OnInit {
       "password": this.loginForm.get("password").value,
     }
     this.amplifyAuthService.logIn(user).then(userData => {
+      // this.userData = userData;
+      // if (userData.challengeName) {
+      //   if (userData.challengeName === "NEW_PASSWORD_REQUIRED")
+      //     this.showNewPwChallange()
+      // }
+      // else {
       this.userAuthService.loggedIn(userData);
       this.loggedIn.emit();
+      this.navigate('/all-packs-page');
+      // }
     })
       .catch(err => {
         console.log("file: login.component.ts ~ line 84 ~ onLoginSubmit ~ err", err)
@@ -102,6 +130,16 @@ export class LoginComponent implements OnInit {
     this.showLogin = true;
     this.confirmForm.reset();
     this.forgotPasswordForm.reset();
+  }
+
+  /**
+   * After email checked, Initiate password reset phase
+   */
+  newPasswordChallange(): void {
+    this.forgotPasswordForm.controls.username.disable();
+    this.newPasswordPhase = true;
+    this.forgotPasswordForm.controls.confirmationCode.setValidators([Validators.required])
+    this.forgotPasswordForm.controls.newPassword.setValidators([Validators.required, Validators.minLength(8)])
   }
 
   //---FORGOT PASSWORD---//

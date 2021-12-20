@@ -14,7 +14,7 @@ export class CardsRevealDialogComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    // console.log("CardsRevealDialogComponent -> constructor -> data", this.data)
+    console.log("CardsRevealDialogComponent -> constructor -> data", this.data)
   }
 
   

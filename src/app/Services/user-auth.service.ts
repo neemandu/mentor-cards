@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserRelatedDialogComponent } from '../main-screen/user-related/user-related-dialog/user-related-dialog.component';
 import { OverlaySpinnerService } from './overlay-spinner.service';
+// import { AuthService } from 'src/app/Services/auth.service';
+import LogRocket from 'logrocket';
+
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -20,13 +23,15 @@ const millisecondsInDay: number = 86400000;
 })
 export class UserAuthService {
 
-  @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
+  @Output() userDataEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
+  // @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
+  // @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() groupDataEmmiter: EventEmitter<GroupData> = new EventEmitter<GroupData>();
-  @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() addCouponCodeToFavs: EventEmitter<string[]> = new EventEmitter<string[]>();
-
+  isLoggedIn = false;
+  user: { id: string; username: string; email: string; cognitoUser: CognitoUserInterface };
   cognitoUserData: CognitoUserInterface;
   subPlans: SubscriptionPlan[];
   userData: UserData;
@@ -36,18 +41,36 @@ export class UserAuthService {
   constructor(public _snackBar: MatSnackBar, public router: Router,
     private ngZone: NgZone, private api: APIService, private http: HttpClient,
     public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
+
+    // this.amplifyAuthService.isLoggedIn$.subscribe(
+    //   isLoggedIn => {
+    //     (this.isLoggedIn = isLoggedIn);
+    //   }
+    // );
+
+    // this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
+    //   this.user = { id, username, email, cognitoUser };
+    //   this.cognitoUserData = cognitoUser;
+    // });
+
+
     this.rememebrMe();
     this.getSubscriptionPlans();
+    window.onstorage = (obj) => {
+      console.log(obj);
+    };
   }
 
   async rememebrMe(): Promise<void> {
     try {
-      // this.overlaySpinnerService.changeOverlaySpinner(false);
-      // setTimeout(() => { }, 2000);
+      this.overlaySpinnerService.changeOverlaySpinner(true);
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
-      this.loggedIn(user)
+      if (user)
+        this.loggedIn(user);
+      else
+        throw 'No current user - rememberMe retured VOID';
     } catch (err) {
-      // this.overlaySpinnerService.changeOverlaySpinner(false);
+      this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
       console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
     }
@@ -57,22 +80,28 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
+  // loggedIn(username: void | string): void {
+  //   console.log("file: user-auth.service.ts ~ line 81 ~ loggedIn ~ username", username)
+  //   if (!username) {
+  //     this.overlaySpinnerService.changeOverlaySpinner(false);
+  //     return;
+  //   }
   loggedIn(cognitoUserData: void | CognitoUserInterface): void {
-    console.log("file: user-auth.service.ts ~ line 60 ~ loggedIn ~ cognitoUserData", cognitoUserData)
     if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
     this.cognitoUserData = cognitoUserData || this.cognitoUserData;
     this.api.GetUser(this.cognitoUserData.username).then(data => {
-      console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetUser ~ data", data)
       if (!data) {
         this.createUser();
-        // this.overlaySpinnerService.changeOverlaySpinner(false);
         return;
       }
       this.userData = new UserData().deseralize(data);
-      localStorage.setItem('signedin', 'true');
+      this.isLoggedIn = true;
+      // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
+      LogRocket.identify(this.cognitoUserData.username);
+      // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
@@ -86,8 +115,9 @@ export class UserAuthService {
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }
-      this.loggedInEmmiter.emit(this.userData);
-      (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+      this.userDataEmmiter.emit(this.userData);
+      (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -105,15 +135,13 @@ export class UserAuthService {
     var newUsername: string = this.cognitoUserData.username;
     var newUserEmail: string = this.cognitoUserData.attributes['email'];
     var newUserPhone: string = this.cognitoUserData.attributes['phone_number'];
-    var user: CreateUserInput = { 'username': newUsername, 
-                                  'email': newUserEmail, 
-                                  'phone': newUserPhone };
+    var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail, 'phone': newUserPhone };
     this.api.CreateUser(user).then(value => {
-      console.log("file: user-auth.service.ts ~ line 71 ~ this.api.CreateUser ~ value", value)
       this.userData = new UserData().deseralize(value);
       this.overlaySpinnerService.changeOverlaySpinner(false);
-      this.loggedInEmmiter.emit(this.userData);
-      (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+      this.userDataEmmiter.emit(this.userData);
+      (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
         panelClass: ['rtl-snackbar']
@@ -180,16 +208,16 @@ export class UserAuthService {
     if (!this.subPlans) {
       this.api.ListSubscriptionPlans().then(value => {
         this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
-        this.subPlans.sort((planA, planB) => {
-          if (planA.numberOfUsers - planB.numberOfUsers > 0)
-            return 1;
-          if (planA.numberOfUsers - planB.numberOfUsers < 0)
-            return -1;
-          if (planA.numberOfCardPacks - planB.numberOfCardPacks > 0)
-            return 1;
-          else
-            return -1;
-        })
+        // this.subPlans.sort((planA, planB) => {
+        //   if (planA.numberOfUsers - planB.numberOfUsers > 0)
+        //     return 1;
+        //   if (planA.numberOfUsers - planB.numberOfUsers < 0)
+        //     return -1;
+        //   if (planA.numberOfCardPacks - planB.numberOfCardPacks > 0)
+        //     return 1;
+        //   else
+        //     return -1;
+        // })
         this.subPlansEmmiter.emit();
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
@@ -244,8 +272,9 @@ export class UserAuthService {
   loggedOut(): void {
     this.userData = undefined;
     this.cognitoUserData = undefined;
-    localStorage.removeItem('signedin');
-    this.signedOutEmmiter.emit(true);
+    // localStorage.removeItem('signedin');
+    this.isLoggedIn = false;
+    this.userDataEmmiter.emit(undefined);
     // this.router.navigate(['no-program-page']);
   }
 
@@ -278,8 +307,10 @@ export class UserAuthService {
   /**
    * return if in trial month (first month after register)
    */
-  get trialMonthExpDate(): Date {
-    return this.userData.createdAt?.getTime() + millisecondsInMonth >= new Date().getTime() ? new Date(this.userData.createdAt?.getTime() + millisecondsInMonth) : null;
+  get trialPeriodExpDate(): Date {
+    return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
+      new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
+      null;
   }
 
   /**
@@ -298,7 +329,7 @@ export class UserAuthService {
    * Returns actual exp date
    */
   get expDate() {
-    let date = (this.codeCouponExpDate ? this.codeCouponExpDate : this.trialMonthExpDate)
+    let date = (this.codeCouponExpDate ? this.codeCouponExpDate : this.trialPeriodExpDate)
     return date ? date.toLocaleDateString('he-IL') : null;
   }
 

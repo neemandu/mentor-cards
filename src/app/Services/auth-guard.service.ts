@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { UserData } from '../Objects/user-related';
 import { UserAuthService } from './user-auth.service';
 
 // @Injectable({
@@ -51,16 +52,26 @@ export class AuthGuardNoProgramPageService implements CanActivate {
     else {
       this.ngZone.run(() => this.router.navigate(['home-page']));
     }
-    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+    var sub = this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       sub.unsubscribe();
-      if (userData.status === "PLAN") {
+      if (userData?.status === "PLAN") {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
       else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        this.ngZone.run(() => this.router.navigate(['home-page']));
         return true;
       }
     })
+    // var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+    //   sub.unsubscribe();
+    //   if (userData.status === "PLAN") {
+    //     this.ngZone.run(() => this.router.navigate(['user-page']));
+    //   }
+    //   else {
+    //     this.ngZone.run(() => this.router.navigate(['home-page']));
+    //     return true;
+    //   }
+    // })
   }
 }
 
@@ -77,16 +88,16 @@ export class AuthGuardUserPageService implements CanActivate {
         return true;
       }
       else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        this.ngZone.run(() => this.router.navigate(['home-page']));
       }
     }
-    var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+    var sub = this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       sub.unsubscribe();
-      if (userData.status === "PLAN") {
+      if (userData?.status === "PLAN") {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
       else {
-        this.ngZone.run(() => this.router.navigate(['no-program-page']));
+        this.ngZone.run(() => this.router.navigate(['home-page']));
       }
     })
   }
@@ -109,9 +120,9 @@ export class AuthGuardGroupManagementService implements CanActivate {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
     }
-    var subUser = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
+    var subUser = this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       subUser.unsubscribe();
-      if (userData.groupId) {
+      if (userData?.groupId) {
         var subGroup = this.userAuthService.groupDataEmmiter.subscribe((groupData) => {
           subGroup.unsubscribe();
           this.ngZone.run(() => this.router.navigate(['group-management']));

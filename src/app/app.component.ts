@@ -56,30 +56,30 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
-    onAuthUIStateChange((authState, authData) => {
-      this.authState = authState;
-      // console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
-      // debugger
-      if (this.authState === 'signedin') {
-        // debugger
-        this.showLogin = false;
-        localStorage.setItem('signedin', 'true');
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        this.user = authData as CognitoUserInterface;
-        LogRocket.identify(this.user.username);
-        this.userAuthService.loggedIn(this.user);
-      }
-      else if (this.authState === 'signin') {
-        this.userAuthService.loggedOut();
-        localStorage.removeItem('signedin');
-      }
-      this.ref.detectChanges();
-    })
-    this.userAuthService.showSignInModalEmitter.subscribe(() => {
-      this.overlaySpinnerService.changeOverlaySpinner(true);
-      this.showLogin = true;
-    })
+    // // localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
+    // onAuthUIStateChange((authState, authData) => {
+    //   this.authState = authState;
+    //   // console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
+    //   // debugger
+    //   if (this.authState === 'signedin') {
+    //     // debugger
+    //     this.showLogin = false;
+    //     localStorage.setItem('signedin', 'true');
+    //     this.overlaySpinnerService.changeOverlaySpinner(false);
+    //     this.user = authData as CognitoUserInterface;
+    //     LogRocket.identify(this.user.username);
+    //     this.userAuthService.loggedIn(this.user.username);
+    //   }
+    //   else if (this.authState === 'signin') {
+    //     this.userAuthService.loggedOut();
+    //     localStorage.removeItem('signedin');
+    //   }
+    //   this.ref.detectChanges();
+    // })
+    // this.userAuthService.showSignInModalEmitter.subscribe(() => {
+    //   this.overlaySpinnerService.changeOverlaySpinner(true);
+    //   this.showLogin = true;
+    // })
     var ua = navigator.userAgent;
     console.log("file: app.component.ts ~ line 84 ~ ngOnInit ~ ua", ua)
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
@@ -96,10 +96,10 @@ export class AppComponent implements OnInit {
     const dialogRef = this.dialog.open(MobileWarningDialogComponent, dialogConfig);
   }
 
-  closeAmplify(): void {
-    this.showLogin = false;
-    this.overlaySpinnerService.changeOverlaySpinner(false);
-  }
+  // closeAmplify(): void {
+  //   this.showLogin = false;
+  //   this.overlaySpinnerService.changeOverlaySpinner(false);
+  // }
 
   ngOnDestroy() {
     return onAuthUIStateChange;

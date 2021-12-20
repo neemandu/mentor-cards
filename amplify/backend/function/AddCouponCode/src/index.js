@@ -130,7 +130,7 @@ exports.handler = async (event) => {
         for(var i = 0 ; i < user.couponCodes.length ; i++){ 
             if(user.couponCodes[i].id == couponCode){
                 console.warn('Coupon code already used - ' + couponCode);
-                throw Error ('קוד ההטבה כבר מומש');
+                throw Error ('Coupon code already in use');
             }
         } 
     }

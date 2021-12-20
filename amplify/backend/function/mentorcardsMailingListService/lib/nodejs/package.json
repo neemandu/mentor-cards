@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "sib-api-v3-sdk": "^8.2.1"
+  },
+  "devDependencies": {}
+}

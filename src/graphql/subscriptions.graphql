@@ -43,7 +43,8 @@ subscription OnCreateGroup {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -66,7 +67,8 @@ subscription OnUpdateGroup {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -89,80 +91,12 @@ subscription OnDeleteGroup {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
     }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateSubscriptionPlan {
-  onCreateSubscriptionPlan {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateSubscriptionPlan {
-  onUpdateSubscriptionPlan {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteSubscriptionPlan {
-  onDeleteSubscriptionPlan {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateNews {
-  onCreateNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateNews {
-  onUpdateNews {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteNews {
-  onDeleteNews {
-    id
-    message
-    order
     createdAt
     updatedAt
   }
@@ -203,6 +137,78 @@ subscription OnDeleteCouponCodes {
     updatedAt
   }
 }
+subscription OnCreateSubscriptionPlan {
+  onCreateSubscriptionPlan {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateSubscriptionPlan {
+  onUpdateSubscriptionPlan {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteSubscriptionPlan {
+  onDeleteSubscriptionPlan {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateNews {
+  onCreateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateNews {
+  onUpdateNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteNews {
+  onDeleteNews {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateCardsPack {
   onCreateCardsPack {
     id
@@ -214,11 +220,20 @@ subscription OnCreateCardsPack {
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+              }
+            }
+          }
         }
       }
     }
@@ -244,11 +259,20 @@ subscription OnUpdateCardsPack {
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+              }
+            }
+          }
         }
       }
     }
@@ -274,11 +298,20 @@ subscription OnDeleteCardsPack {
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+              }
+            }
+          }
         }
       }
     }

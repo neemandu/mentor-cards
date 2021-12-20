@@ -1,7 +1,7 @@
 <title>Mentor-Cards כל ערכות הקלפים</title>
 <div id="content">
   <div *ngIf="!mobile" id="filters" class="float-right d-flex flex-column">
-    <button id="couponCodeBtn" type="button" (click)="navigate('/no-program-page')">יש לך קוד הטבה/קבוצה?</button>
+    <button id="couponCodeBtn" type="button" (click)="openEnterCouponCodeModal()">יש לך קוד הטבה?</button>
     <h3 id="filter-by-options-title">חיפוש</h3>
     <mat-form-field>
       <mat-label>הקלד מילת מפתח, נושא...</mat-label>
@@ -15,16 +15,15 @@
     <br>
     <h3 id="filter-by-options-title">קטגוריות</h3>
     <mat-selection-list #categories (selectionChange)="categoriesSelectedChange($event); filterPacks()">
-      <mat-list-option disableRipple style="direction: ltr;"
-        *ngFor="let category of allCategories|slice:0:categoriesToShow"
+      <mat-list-option disableRipple style="direction: ltr;" *ngFor="let category of allCategories"
         [selected]="selectedCategories.includes(category)" [value]="category">
         <!-- <span> -->
-          <div class="d-flex justify-content-end align-items-baseline category">
-            {{category}}
-            <mat-icon class="category-color-dot" [style.color]="getCategoryColor(category)">
-              circle
-            </mat-icon>
-          </div>
+        {{category}}
+        <!-- <div class="d-flex justify-content-end align-items-baseline category">
+          <mat-icon class="category-color-dot" [style.color]="getCategoryColor(category)">
+            circle
+          </mat-icon>
+        </div> -->
         <!-- </span> -->
       </mat-list-option>
       <!-- <button *ngIf="allCategories.length >= 5" id="more-less-categories-button" (click)="categoriesToShowChange()">
@@ -43,8 +42,7 @@
       </mat-list-option>
     </mat-selection-list>
   </div>
-  <div class="all-packs-view">
-    <!-- Available Packs -->
+  <!-- <div class="all-packs-view" #old>
     <div *ngIf="allOwnedPacks().length != 0">
       <h1 *ngIf="signedIn && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">ערכות הקלפים שלי</h1>
       <h1 *ngIf="signedIn && trialMonthExpDate" style="text-align: center; margin-left: 14rem;">
@@ -55,7 +53,6 @@
         </app-pack>
       </div>
     </div>
-    <!-- Unavailable Packs -->
     <div *ngIf="allNotOwnedPacks().length != 0">
       <h1 style="text-align: center; margin-left: 14rem;">לכל ערכות הקלפים</h1>
       <h1 *ngIf="signedIn && !hasProgram && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">מקווים
@@ -70,6 +67,38 @@
         <app-pack class="pack" *ngFor="let packInfo of allNotOwnedPacks()" [packInfo]="packInfo"
           (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">
         </app-pack>
+      </div>
+    </div>
+  </div> -->
+
+  <div id="test" class="all-packs-view" #new>
+    <!-- <h1 *ngIf="trialPeriodExpDate" style="text-align: center; margin-left: 14rem;">
+      כל ערכות הקלפים לרשותכם עד ה- {{trialPeriodExpDate | date:'d/M/yy'}}
+    </h1> -->
+    <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
+      <div class="category-line d-flex align-items-center justify-content-around">
+        <div class="first-line"></div>
+        <h3 class="caterory-title">המועדפים שלי</h3>
+        <div class="second-line"></div>
+      </div>
+      <div class="d-flex flex-row flex-wrap">
+        <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo" (loaded)="packLoaded();"
+          (packChange)="getAllPacks(); updateUserData();">
+        </app-pack>
+      </div>
+    </div>
+    <div *ngIf="selectedFavorites.length == 0">
+      <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks; let i = index;">
+        <div class="category-line d-flex align-items-center justify-content-around">
+          <div class="first-line"></div>
+          <h3 class="caterory-title">{{categoryPacks.category}}</h3>
+          <div class="second-line"></div>
+        </div>
+        <div class="d-flex flex-row flex-wrap">
+          <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
+            (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">
+          </app-pack>
+        </div>
       </div>
     </div>
   </div>

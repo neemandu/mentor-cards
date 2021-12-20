@@ -8,8 +8,8 @@ body {
 }
 
 :root {
-  --amplify-secondary-tint: #ffa800!important;
-  --amplify-font-family: rubik;
+  --main-color: #ffa800!important;
+  --main-font-family: rubik;
 }
 
 body {

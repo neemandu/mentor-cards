@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { GuideBook } from 'src/app/Objects/packs';
+import { GuideBookElement, PackContent } from 'src/app/Objects/packs';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { PopoutData, POPOUT_MODAL_DATA } from 'src/app/Services/popout.service';
 
@@ -10,7 +10,7 @@ import { PopoutData, POPOUT_MODAL_DATA } from 'src/app/Services/popout.service';
 })
 export class GuideBookComponent implements OnInit {
 
-  guideBook: GuideBook;
+  guideBook: GuideBookElement[];
   packName: string;
   packDesc: string;
   title: string;
@@ -24,16 +24,16 @@ export class GuideBookComponent implements OnInit {
 
   ngOnInit(): void {
     // debugger
-    if(this.data.guideBook){
+    if (this.data.guideBook) {
       this.title = "ספר הדרכה"
       this.guideBook = this.data.guideBook;
       this.packName = this.data.packName;
       this.packDesc = this.data.packDesc;
     }
-    else{
-      this.guideBook = new GuideBook().setDefault();
-      this.title = "ספר הדרכה לדוגמא"
-      this.packName = "ערכה לדוגמא",
+    else {
+      this.guideBook = new Array<GuideBookElement>();
+      this.title = "ספר הדרכה לדוגמא";
+      this.packName = "ערכה לדוגמא";
       this.packDesc = "תאור ערכה לדוגמא";
     }
   }

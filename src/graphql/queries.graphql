@@ -45,7 +45,8 @@ query GetUser($id: ID!) {
         providerPlanId
         numberOfUsers
         numberOfCardPacks
-        price
+        billingCycleInMonths
+        fullPrice
         discount
         createdAt
         updatedAt
@@ -99,7 +100,8 @@ query ListUsers(
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -145,7 +147,8 @@ query GetGroup($id: ID!) {
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -173,71 +176,12 @@ query ListGroups(
         providerPlanId
         numberOfUsers
         numberOfCardPacks
-        price
+        billingCycleInMonths
+        fullPrice
         discount
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetSubscriptionPlan($id: ID!) {
-  getSubscriptionPlan(id: $id) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    price
-    discount
-    createdAt
-    updatedAt
-  }
-}
-query ListSubscriptionPlans(
-  $filter: ModelSubscriptionPlanFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      price
-      discount
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetNews($id: ID!) {
-  getNews(id: $id) {
-    id
-    message
-    order
-    createdAt
-    updatedAt
-  }
-}
-query ListNewss(
-  $filter: ModelNewsFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      message
-      order
       createdAt
       updatedAt
     }
@@ -275,6 +219,68 @@ query ListCouponCodess(
     nextToken
   }
 }
+query GetSubscriptionPlan($id: ID!) {
+  getSubscriptionPlan(id: $id) {
+    id
+    name
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    createdAt
+    updatedAt
+  }
+} 
+query ListSubscriptionPlans(
+  $filter: ModelSubscriptionPlanFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetNews($id: ID!) {
+  getNews(id: $id) {
+    id
+    message
+    order
+    createdAt
+    updatedAt
+  }
+}
+query ListNewss(
+  $filter: ModelNewsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      message
+      order
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetCardsPack($id: ID!) {
   getCardsPack(id: $id) {
     id
@@ -286,11 +292,20 @@ query GetCardsPack($id: ID!) {
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+              }
+            }
+          }
         }
       }
     }
@@ -321,11 +336,20 @@ query ListCardsPacks(
       cardsPreview
       groupsIds
       guideBook {
-        subjects {
-          subjectName
-          subSubjects {
-            subSubjectName
-            questions
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
           }
         }
       }

@@ -176,7 +176,7 @@
   }
   
   async function updateMonthlySubscription(user, paymentProgram, transId){
-      var monthlySub = {
+      var sub = {
           id: 1,
           startDate : new Date().toISOString(),
           paymentProvider : "PayPal",
@@ -198,7 +198,7 @@
               user.cardsPacksIds = [];
           }
       user.status = "PLAN";
-      user.subscription = monthlySub;
+      user.subscription = sub;
       user.lastPlanSubstitutionDate = new Date().toISOString();
       user.updateAt = new Date().toISOString();
       user.numberOfPlansSubstitutions++;
@@ -212,53 +212,6 @@
       await saveUser(user);
   }
   
-  /*
-  async function createIncognitoGroup(username){
-      var name = username + "_Group";
-      var userPoolId = env.AUTH_MENTORCARDS91F3DC29_USERPOOLID;
-      console.log("Trying to create group in cognito: " + name);
-  
-      var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
-      var group;
-      var params = {
-          GroupName: name, 
-          UserPoolId: userPoolId
-        };
-  
-        console.log("Getting group in cognito: " + name);
-        await cognitoidentityserviceprovider.getGroup(params, function(err, data) {
-          if (err) {
-              console.log(err, err.stack);
-          } // an error occurred
-          else{
-              group = data;
-          }            
-        }).promise();
-  
-  
-      if(!group){
-          console.log("Creating group in cognito: " + name);
-  
-          var params = {
-              GroupName: name, 
-              UserPoolId: userPoolId, 
-              Precedence: 1
-            };
-            await cognitoidentityserviceprovider.createGroup(params, function(err, data) {
-              if (err) console.log(err, err.stack); // an error occurred
-              else{    
-                  group = data; 
-                  console.log(data);     
-              }     
-            }).promise();
-            console.log("Creating group in cognito: " + name);
-      }
-      else{
-          console.log("group " + name + " already exists");
-      }
-  
-      return name;
-  }*/
   function makeid(length) {
       var result           = '';
       var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

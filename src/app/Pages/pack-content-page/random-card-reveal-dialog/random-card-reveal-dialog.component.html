@@ -2,19 +2,16 @@
   <button class="closeModalButton" mat-icon-button (click)="closeDialog()">
     <mat-icon>highlight_off</mat-icon>
   </button>
-  <div class="content">
+  <mat-dialog-content class="content">
+    <!-- <div class="content"> -->
     <button type="button" class="btn btn-light" [disabled]="index == data.length-1" (click)="nextCard()">
       <mat-icon class="btn-icon">chevron_right
       </mat-icon>
     </button>
-
-    <app-card [ngClass]="{'card-pre-reveal': true, 'card-reveal': cardLoaded}" [cardContent]="selectedCard"
-      [flipped]="true" (loaded)="cardLoaded=true">
-    </app-card>
-
+    <img loading="eager" src={{selectedCard.imgUrl}} data-src={{selectedCard.imgUrl}}>
     <button type="button" class="btn btn-light" [disabled]="index == 0" (click)="prevCard()">
       <mat-icon class="btn-icon">chevron_left</mat-icon>
     </button>
-
-  </div>
+    <!-- </div> -->
+  </mat-dialog-content>
 </div>

@@ -3,7 +3,9 @@ backend:
   phases:
     build:
       commands:
-        - amplifyPush --simple
+        - '# Execute Amplify CLI with the helper script'
+        - chmod u+x ./myamplifypush.sh
+        - ./myamplifypush.sh
 frontend:
   phases:
     preBuild:

@@ -9,18 +9,17 @@
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu" xPosition="before" dir="rtl">
-        <button mat-menu-item *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
+        <button mat-menu-item *ngIf="loggedIn && userAttributes?.status === 'PLAN'"
           (click)="navigate('/user-page')">פרטי משתמש</button>
-        <button mat-menu-item *ngIf="loggedIn && (!userAttributes?.subscription || userAttributes?.status === 'NOPLAN')"
-          (click)="navigate('/no-program-page')">הרשמה לתוכנית</button>
+        <button mat-menu-item *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'"
+          (click)="navigate('/price-page')">הרשמה לתכנית</button>
         <button mat-menu-item
           *ngIf="loggedIn && (userAttributes?.groupId && (userAttributes?.groupRole === 'ADMIN' || userAttributes?.groupRole === 'SUPER_USER'))"
           (click)="navigate('/group-management')">ניהול
           קבוצה</button>
         <!-- <button mat-menu-item *ngIf="loggedIn && (userAttributes?.groupRole === 'SUPERUSER')" -->
-        <button mat-menu-item
-          *ngIf="loggedIn && (userAttributes?.groupId && userAttributes?.groupRole === 'SUPER_USER')"
-          (click)="navigate('/site-content-management')">ניהול
+        <button mat-menu-item [matMenuTriggerFor]="managementMenu"
+          *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'">ניהול
           תוכן האתר</button>
         <button mat-menu-item *ngIf="loggedIn" (click)=logout()>התנתק</button>
       </mat-menu>
@@ -29,13 +28,12 @@
     <button type="button" class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button>
     <!-- <button type="button" *ngIf="loggedIn && (userAttributes?.subscription || userAttributes?.status === 'PLAN')"
       class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button> -->
-    <button type="button" *ngIf="!loggedIn || !userAttributes?.subscription || userAttributes?.status === 'NOPLAN'"
-      class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
+    <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
       להתנסות</button>
     <!-- <button type="button" class="btn navbar-btn" *ngIf="userAttributes?.status === 'PLAN'" (click)="navigate('/all-packs-page')">כל
       הערכות</button> -->
     <button type="button" class="btn navbar-btn" (click)="navigate('/guide-page')">הדרכות</button>
-    <button type="button" class="btn navbar-btn" (click)="navigate('/price-page')">מחירון תכניות</button>
+    <button type="button" class="btn navbar-btn" (click)="navigate('/price-page')">מחירון</button>
     <button type="button" class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
     <button type="button" class="btn navbar-btn" (click)="navigate('/contact-us')">צור קשר</button>
   </div>
@@ -68,8 +66,19 @@
         {{n.message}}
       </li>
       <li class="news-list-item" *ngIf="news?.length==0">
-         אין חדשות ועדכונים חדשים
+        אין חדשות ועדכונים חדשים
       </li>
     </ul>
   </div>
+</mat-menu>
+
+<mat-menu #managementMenu="matMenu" backdropClass="mat-menu">
+  <button mat-menu-item (click)="navigate('/news-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    <div>ניהול חדשות ועדכונים</div>
+  </button>
+  <button mat-menu-item (click)="navigate('/guide-book-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    <div>ניהול ספרי הדרכה</div>
+  </button>
 </mat-menu>

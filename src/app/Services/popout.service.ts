@@ -1,7 +1,7 @@
 import { ComponentPortal, DomPortalOutlet, PortalInjector } from '@angular/cdk/portal';
 import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Injectable, Injector } from '@angular/core';
 import { InjectionToken } from '@angular/core';
-import { GuideBook } from '../Objects/packs';
+import { GuideBookElement, PackContent } from 'src/app/Objects/packs';
 import { GuideBookComponent } from '../Pages/pack-content-page/guide-book/guide-book.component';
 //chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#ttl=Open%20Angular%20components%20dynamically%20in%20new%20browser%20tab%20without%20bootstrapping%20the%20whole%20app%20again%20%7C%20by%20Saranya%20Thangaraj%20%7C%20Medium&pos=8699.0908203125&uri=https://medium.com/@saranya.thangaraj/open-angular-component-in-a-new-tab-without-bootstrapping-the-whole-app-again-e329af460e92
 @Injectable({
@@ -43,7 +43,8 @@ export class PopoutService {
   openOnce(url, target) {
     // open a blank "target" window
     // or get the reference to the existing "target" window
-    const winRef = window.open('', target, "height=700,width=1000", false);
+    // const winRef = window.open('', target, "height=700,width=1000", false);
+    const winRef = window.open('', target, "height=700,width=1000");
     return winRef;
   }
 
@@ -88,7 +89,7 @@ export class PopoutService {
 
 export interface PopoutData {
   modalName: string;
-  guideBook: GuideBook;
+  guideBook: GuideBookElement[];
   packName: string;
   packDesc: string;
 }

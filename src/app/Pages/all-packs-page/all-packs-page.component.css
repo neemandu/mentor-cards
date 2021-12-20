@@ -1,5 +1,5 @@
 * {
-  font-family: 'rubik';
+  font-family: 'rubik' !important;
   font-size: inherit;
 }
 
@@ -111,7 +111,7 @@ mat-form-field {
 }
 
 #choose-program-link:hover {
-  color:#ffa800;
+  color: #ffa800;
 }
 
 h1 {
@@ -119,12 +119,51 @@ h1 {
 }
 
 .category {
-  margin-top: 5%!important;
+  margin-top: 5% !important;
 }
 
 .category-color-dot {
   font-size: 12px;
   font-family: 'Material Icons'
-  /* margin-right: -10px;
+    /* margin-right: -10px;
   margin-bottom: -4px; */
+}
+
+.caterory-title {
+  text-align: start;
+  margin-block-end: -5px;
+  font-size: 1.5EM;
+  font-weight: 600;
+  color: #ffa800;
+  transition: transform 0.5s;
+}
+
+.first-line,
+.second-line {
+  background-color: #ffa800;
+  width: 35%;
+  height: 5px;
+  border-radius: 100%;
+  transition: transform 0.5s, scale 1s;
+}
+
+.all-packs-view__section {
+  margin-bottom: 1%;
+}
+
+.category-line {
+  width: 100%;
+}
+
+.category-line:hover>.first-line {
+  transform: translateX(-25px) scaleX(1.1);
+}
+
+.category-line:hover>.second-line {
+  transform: translateX(25px) scaleX(1.1);
+}
+
+.category-line:hover>.caterory-title {
+  transform: scale(1.2);
+
 }

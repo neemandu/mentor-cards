@@ -242,7 +242,6 @@ exports.handler = async (event) => {
     await cancelPayPalSubscription(user.subscription.providerTransactionId, access_token);
 
     user.status = "NOPLAN";
-    user.subscription = null;
     user.groupId = null;
     user.groupRole = null;
     user.cancellationDate = new Date().toISOString();
@@ -253,20 +252,15 @@ exports.handler = async (event) => {
     // Removing all group users
     if(user.groupId){
         var group = await getGroup(user.groupId);
-
         for(var i =0 ; group.groupUsers.length; i++){
             email = group.groupUsers[i].email;
             var groupUser = await getUserByEmail(email);
             groupUser.status = "NOPLAN";
-            groupUser.subscription = null;
             groupUser.groupId = null;
             groupUser.groupRole = null;
             groupUser.cancellationDate = new Date().toISOString();
             groupUser.cardsPacksIds = []
             await saveUser(groupUser);
         }
-
     }
-
-    await saveUser(groupUser);
 };

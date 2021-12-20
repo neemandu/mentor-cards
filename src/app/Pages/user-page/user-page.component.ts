@@ -1,16 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
-import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserData } from 'src/app/Objects/user-related';
-import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-import { PostPurchaseSummeryDialogComponent } from 'src/app/Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
-import { ProgramChoiseDialogComponent } from '../no-program-page/program-choise-dialog/program-choise-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -25,39 +22,22 @@ export class UserPageComponent implements OnInit {
   userData: UserData;
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog,
-    private cardsService: CardsService, private api: APIService) {
+    private ngZone: NgZone, private api: APIService, public router: Router) {
     this.userData = this.userAuthService.userData;
     // console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
   }
 
   ngOnInit(): void {
-    this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
+    //   this.userData = userData;
+    //   this.overlaySpinnerService.changeOverlaySpinner(false);
+    // }));
+    this.userAuthService.userDataEmmiter.subscribe(((userData: UserData) => {
       this.userData = userData;
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-    }));
+      userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
+    }))
   }
-
-  /**
-   * When user wants to change his subscription plan (1 per month)
-   */
-  openChooseProgramModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    // dialogConfig.maxHeight = '85vh';
-    // this.videoplayer.nativeElement.pause();
-    const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(res => {
-      // this.videoplayer.nativeElement.play();
-      dialogSub.unsubscribe();
-      if (res) {
-        this.cardsService.allPacks = undefined;
-        // this.router.navigate(['all-packs-page']);
-      }
-    });
-  }
-
   /**
    * When user wants to cancel his subscription (Anytime)
    */
@@ -65,7 +45,7 @@ export class UserPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ביטול תכנית", ["האם לבטל הרשמה לתכנית זו?"], "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("ביטול החיוב האוטומטי", ["האם לבטל את החיוב האוטומטי לתכנית זו?"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
@@ -74,7 +54,7 @@ export class UserPageComponent implements OnInit {
         this.api.Unsubscribe({ 'username': this.userData.username }).then(() => {
           this.overlaySpinnerService.changeOverlaySpinner(false)
           window.location.reload();
-          this.userAuthService._snackBar.open('בוטלה התכנית. עצוב לנו לראות אתכם עוזבים, ואנו מקווים לראותכם שוב בעתיד', '', {
+          this.userAuthService._snackBar.open('החיוב האוטומטי בוטל בהצלחה', '', {
             duration: 10000,
             panelClass: ['rtl-snackbar']
           });
@@ -105,9 +85,31 @@ export class UserPageComponent implements OnInit {
     return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInMonth);
   }
 
+  monthDiff(d1, d2) {
+    var months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth();
+    months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+  }
+
+  get nextPaymentDate() {
+    var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
+    var now = new Date();
+    var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    var monthsDiff = this.monthDiff(createdAt, now);
+    var numOfCycles = (monthsDiff / cycles) + 1;
+    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
+    return new Date(createdAt.getTime() + numberOfMonthsToAdd);
+  }
+
   get trialMonthExpDate() {
     // return new Date() <= new Date(this.userData.firstProgramRegistrationDate);
-    return this.userAuthService.trialMonthExpDate
+    return this.userAuthService.trialPeriodExpDate
+  }
+
+  public navigate(): void {
+    this.ngZone.run(() => this.router.navigate(['price-page']));
   }
 
   ngOnDestroy(): void {

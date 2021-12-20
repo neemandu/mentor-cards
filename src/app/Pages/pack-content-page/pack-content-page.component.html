@@ -46,17 +46,17 @@
       <li><span>באתר קיימות עשרות ערכות קלפים לבחירתכם</span></li>
       <li><span>כל ערכה כוללת מעל ל-40 קלפים</span></li>
       <li><span>כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים</span></li>
-      <li><span>במסגרת 30 ימי הניסיון כל ערכות הקלפים לרשותכם</span></li>
+      <li><span>במסגרת 14 ימי הניסיון כל ערכות הקלפים לרשותכם</span></li>
     </ul>
     <div class="line"></div>
     <div id="actions" class="d-flex flex-column align-items-center">
-      <span id="middle" *ngIf="!userData">הירשמו, בחרו תוכנית והתחילו את תקופת הניסיון</span>
+      <span id="middle" *ngIf="!userData">הירשמו, בחרו תכנית והתחילו את תקופת הניסיון</span>
       <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">עדין לא נרשמתם לתוכנית?</span>
       <span id="middle" *ngIf="userData && userData.status === 'PLAN'">אתם כבר מחוברים, למה אתם מחכים? לעבודה :)</span>
       <br>
       <button class="action-button" *ngIf="!userData" type="button" (click)="signInSignUp()">התחברות/הרשמה</button>
       <button class="action-button" *ngIf="userData && userData.status === 'NOPLAN'" type="button"
-        (click)="navigate('/no-program-page')">להרשמה לתוכנית</button>
+        (click)="navigate('/price-page')">להרשמה לתוכנית</button>
       <button class="action-button" *ngIf="userData && userData.status === 'PLAN'" type="button"
         (click)="navigate('/all-packs-page')">לכל הערכות</button>
     </div>

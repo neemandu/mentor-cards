@@ -7,7 +7,7 @@ type Mutation {
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
   AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
-  updatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
+  UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
 }
 
 input joinExistingGroupInput {
@@ -66,23 +66,14 @@ type About{
   link: String
 }
 
-type GuideBook{
-  subjects: [GuideBookSubject]
-}
-
-type GuideBookSubject{
-  subjectName: String
-  subSubjects: [SubSubject]
-}
-
-type SubSubject{
-  subSubjectName: String
-  questions: [String]
+type GuideBookElement{
+  name: String
+  subElements: [GuideBookElement]
 }
 
 type ContactUsModel 
 @model 
-@auth( rules: [ { allow: private, operations: [read, create], provider: userPools  }] ){
+@auth( rules: [ { allow: public, operations: [read, create] }] ){
   id: ID!
   name: String
   content: String
@@ -142,7 +133,8 @@ type SubscriptionPlan
   providerPlanId: String!
   numberOfUsers: Int
   numberOfCardPacks: Int
-  price: Float
+  billingCycleInMonths: Int
+  fullPrice: Float
   discount: Float
 }
 
@@ -168,7 +160,7 @@ type CardsPack
   cards: [String] @function(name: "GetCardsImages-${env}")
   cardsPreview: [String] 
   groupsIds: [String] 
-  guideBook: GuideBook 
+  guideBook: [GuideBookElement] 
   name: String 
   freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
   about: About

@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.formBuilder.group({
     name: ['', Validators.required],
     // lastName: ['', Validators.required],
+    // phone: ['', [Validators.required, Validators.pattern(/^05\d{1}?\d{7}$/)]],
     phone: ['', [Validators.required, Validators.pattern(/^[+]{0,1}\d{10,15}/)]],
     username: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
@@ -76,10 +77,6 @@ export class RegisterComponent implements OnInit {
         this.registerForm.get('usernameConfirm').setErrors({ 'UsernameExistsException': true });
       }
     })
-  }
-
-  signInWithFacebook() {
-    this.amplifyAuthService.signInWithFacebook();
   }
 
   signInWithGoogle() {

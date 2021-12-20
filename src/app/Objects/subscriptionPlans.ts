@@ -5,8 +5,11 @@ export class SubscriptionPlan {
     name: string;
     numberOfCardPacks: number;
     numberOfUsers: number;
-    price: number;
+    billingCycleInMonths: number;
+    fullPrice: number;
     providerPlanId: string;
+    createdAt: Date;
+    updatedAt: Date;
 
     constructor() { }
 

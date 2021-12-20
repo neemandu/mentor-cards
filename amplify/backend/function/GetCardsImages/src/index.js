@@ -49,27 +49,42 @@ async function getUser(username){
 
 function monthDiff(d1, d2) {
     var months;
-    months = (d2.getFullYear() - d1.getFullYear()) * 12;
-    months -= d1.getMonth();
-    months += d2.getMonth();
-    if(d2.getDate() < d1.getDate()){
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+    months = (date2.getFullYear() - date1.getFullYear()) * 12;
+    months -= date1.getMonth();
+    months += date2.getMonth();
+    if(date2.getDate() < date1.getDate()){
         months--;
     }
     return months <= 0 ? 0 : months;
 }
 
-function getBillingEndDate(firstProgramRegistrationDate, cancellationDate) {
+function getBillingEndDate(user) {
     console.log('getBillingEndDate');
     console.log('cancellationDate is: ');
-    console.log(cancellationDate);
-    var monthsDiff = monthDiff(firstProgramRegistrationDate, cancellationDate) + 1;
-    var endPaymentDate = new Date(firstProgramRegistrationDate);
-    endPaymentDate.setMonth(endPaymentDate.getMonth() + monthsDiff);
-    console.log('End of billing cycle dae is: ');
-    console.log(endPaymentDate);
-    return new Date(endPaymentDate);  
+    console.log(user.cancellationDate);
+    var cycles = user.subscription.subscriptionPlan.billingCycleInMonths;
+    console.log('cycles is: ');
+    console.log(cycles);
+    var createdAt = new Date(user.subscription.subscriptionPlan.createdAt);
+    console.log('createdAt is: ');
+    console.log(createdAt);
+    var monthsDiff = monthDiff(createdAt, user.cancellationDate);
+    console.log('monthsDiff is: ');
+    console.log(monthsDiff);
+    var numOfCycles = Math.ceil(monthsDiff / cycles);
+    console.log('numOfCycles is: ');
+    console.log(numOfCycles);
+    var numberOfMonthsToAdd = numOfCycles * cycles;
+    console.log('numberOfMonthsToAdd is: ');
+    console.log(numberOfMonthsToAdd);
+    var endDate = new Date(createdAt);
+    endDate.setMonth(endDate.getMonth()+numberOfMonthsToAdd);
+    console.log('endDate is: ');
+    console.log(endDate);
+    return endDate;
 }
-
 
 function isPackageBelongToUser(id, cardsPacksIds, username) {
     console.log('Checking if package belong to user: ' + username );
@@ -112,10 +127,6 @@ exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
     console.log('event');
     console.log(event);
-    console.log('context');
-    console.log(context);
-    console.log('callback');
-    console.log(callback);
 
     // user was not identified in cognito
     if(!("identity" in event)){
@@ -139,12 +150,19 @@ exports.handler = async (event, context, callback) => {
     var user = await getUser(username);
     var allPackagesDate = new Date();
     var now = new Date();
-    var trialPeriodInDays = 30;
+    var trialPeriodInDays = 14;
     console.log('allPackagesDate');
     console.log(allPackagesDate);
     console.log('user.firstProgramRegistrationDate');
     console.log(user.firstProgramRegistrationDate); 
 
+    console.log('Checking if user is SUPER_USER');
+    if(user && user.groupRole == "SUPER_USER"){
+        console.log('Super user!');
+        return event.source['cards'];
+    }
+
+    console.log('Checking if pack is free');
     if(user &&    // Free Pack!
        'freeUntilDate' in event.source &&
        (new Date(event.source['freeUntilDate'])) > now
@@ -153,16 +171,19 @@ exports.handler = async (event, context, callback) => {
         return event.source['cards'];
     }
 
-    if(user &&    // unlimited subscription
-       user.status == "PLAN" &&
-       user.subscription && 
-       user.subscription.subscriptionPlan && 
-       user.subscription.subscriptionPlan.numberOfCardPacks== -1              
-    ){
-        console.log('Limitless program');
-        return event.source['cards'];
-    }
-    
+    console.log('Not a free plan');
+    console.log('Checking Unlimited plan');
+    if(user && 
+        user.status == "PLAN" &&
+        user.subscription &&
+        user.subscription.subscriptionPlan &&
+        user.subscription.subscriptionPlan.numberOfCardPacks == -1
+     ){
+         console.log('Unlimited plan');
+         return event.source['cards'];
+     }
+
+    console.log('Not Unlimited plan');
     var startFreePeriodDate = user.createdAt;
     if(user &&
         user.couponCodes &&
@@ -178,6 +199,8 @@ exports.handler = async (event, context, callback) => {
             }
         }
     allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
+    
+    console.log('Checking if its a free trial period');
     if(user &&    
         isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
      ){
@@ -185,6 +208,8 @@ exports.handler = async (event, context, callback) => {
          return event.source['cards'];
      }
     
+    console.log('Not a free trial period');
+    console.log('Checking if user has a coupon code with this package');
     if(user &&
         user.couponCodes &&
         user.couponCodes.length > 0){
@@ -198,6 +223,8 @@ exports.handler = async (event, context, callback) => {
                 }
             }
         }
+    
+    console.log('User does not have a coupon for this pack');
     /*if(user &&    // first 30 days all packs are available
        user.status == "PLAN" &&
        isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
@@ -205,6 +232,7 @@ exports.handler = async (event, context, callback) => {
         console.log('First Month');
         return event.source['cards'];
     }*/
+    console.log('Check if user own this pack');
     if(user && // does the package belong to the user?
        user.status == "PLAN" &&
        isPackageBelongToUser(event.source['id'], user.cardsPacksIds, username)     
@@ -212,10 +240,13 @@ exports.handler = async (event, context, callback) => {
         console.log('Package belong to user');
         return event.source['cards'];
     }
+    console.log('User does not own this pack');
+
+    console.log('Check if user canceled but paid for the rest of the period');
     if(user &&    // canceled subscription but before billing cycle ended
        user.status == "NOPLAN" && 
        user.cancellationDate != null && 
-       now < getBillingEndDate(user.firstProgramRegistrationDate, user.cancellationDate)
+       now < getBillingEndDate(user)
     ){
         console.log('getBillingEndDate');
         return event.source['cards'];

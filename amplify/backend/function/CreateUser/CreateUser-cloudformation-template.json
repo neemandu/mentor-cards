@@ -19,6 +19,13 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "functionmentorcardsMailingListServiceArn": {
+      "Type": "String",
+      "Default": "functionmentorcardsMailingListServiceArn"
+    },
+    "sendinblueApiKey": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -120,6 +127,9 @@
                   }
                 ]
               ]
+            },
+            "SENDINBLUE_API_KEY": {
+              "Ref": "sendinblueApiKey"
             }
           }
         },
@@ -130,7 +140,11 @@
           ]
         },
         "Runtime": "nodejs12.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Ref": "functionmentorcardsMailingListServiceArn"
+          }
+        ],
         "Timeout": "25",
         "Code": {
           "S3Bucket": {

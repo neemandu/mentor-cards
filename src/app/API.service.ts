@@ -3,6 +3,8 @@
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
+import awsconfig from '../aws-exports';
+API.configure(awsconfig)
 import { Observable } from "zen-observable-ts";
 import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
@@ -57,7 +59,8 @@ export type SubscriptionPlan = {
   providerPlanId?: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt?: string;
   updatedAt?: string;
@@ -84,11 +87,6 @@ export type changeCardsPackInput = {
   newCardsPackId?: string | null;
 };
 
-export type updatePaymentProgramInput = {
-  paymentProgramId: string;
-  providerTransactionId?: string | null;
-};
-
 export type groupUsersListInput = {
   usernamesList?: Array<GroupUserRoleInput | null> | null;
 };
@@ -112,6 +110,11 @@ export type deleteGroupInput = {
 
 export type couponCodeInput = {
   couponCode: string;
+};
+
+export type updatePaymentProgramInput = {
+  paymentProgramId: string;
+  providerTransactionId?: string | null;
 };
 
 export type CreateContactUsModelInput = {
@@ -232,7 +235,8 @@ export type CreateSubscriptionPlanInput = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
 };
 
@@ -242,7 +246,8 @@ export type ModelSubscriptionPlanConditionInput = {
   providerPlanId?: ModelStringInput | null;
   numberOfUsers?: ModelIntInput | null;
   numberOfCardPacks?: ModelIntInput | null;
-  price?: ModelFloatInput | null;
+  billingCycleInMonths?: ModelFloatInput | null;
+  fullPrice?: ModelFloatInput | null;
   discount?: ModelFloatInput | null;
   and?: Array<ModelSubscriptionPlanConditionInput | null> | null;
   or?: Array<ModelSubscriptionPlanConditionInput | null> | null;
@@ -280,7 +285,8 @@ export type UpdateSubscriptionPlanInput = {
   providerPlanId?: string | null;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
 };
 
@@ -321,39 +327,6 @@ export type DeleteNewsInput = {
   id: string;
 };
 
-export type CreateCouponCodesInput = {
-  id?: string | null;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  allowedCardsPacks?: Array<string | null> | null;
-};
-
-export type ModelCouponCodesConditionInput = {
-  organization?: ModelStringInput | null;
-  couponCode?: ModelStringInput | null;
-  discount?: ModelFloatInput | null;
-  trialPeriodInDays?: ModelIntInput | null;
-  allowedCardsPacks?: ModelStringInput | null;
-  and?: Array<ModelCouponCodesConditionInput | null> | null;
-  or?: Array<ModelCouponCodesConditionInput | null> | null;
-  not?: ModelCouponCodesConditionInput | null;
-};
-
-export type UpdateCouponCodesInput = {
-  id: string;
-  organization?: string | null;
-  couponCode?: string | null;
-  discount?: number | null;
-  trialPeriodInDays?: number | null;
-  allowedCardsPacks?: Array<string | null> | null;
-};
-
-export type DeleteCouponCodesInput = {
-  id: string;
-};
-
 export type CreateCardsPackInput = {
   id?: string | null;
   imgUrl: string;
@@ -363,24 +336,15 @@ export type CreateCardsPackInput = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
+  guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
 };
 
-export type GuideBookInput = {
-  subjects?: Array<GuideBookSubjectInput | null> | null;
-};
-
-export type GuideBookSubjectInput = {
-  subjectName?: string | null;
-  subSubjects?: Array<SubSubjectInput | null> | null;
-};
-
-export type SubSubjectInput = {
-  subSubjectName?: string | null;
-  questions?: Array<string | null> | null;
+export type GuideBookElementInput = {
+  name?: string | null;
+  subElements?: Array<GuideBookElementInput | null> | null;
 };
 
 export type AboutInput = {
@@ -414,7 +378,7 @@ export type CardsPack = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: GuideBook;
+  guideBook?: Array<GuideBookElementInput | null>;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: About;
@@ -422,21 +386,10 @@ export type CardsPack = {
   updatedAt?: string;
 };
 
-export type GuideBook = {
-  __typename: "GuideBook";
-  subjects?: Array<GuideBookSubject | null> | null;
-};
-
-export type GuideBookSubject = {
-  __typename: "GuideBookSubject";
-  subjectName?: string | null;
-  subSubjects?: Array<SubSubject | null> | null;
-};
-
-export type SubSubject = {
-  __typename: "SubSubject";
-  subSubjectName?: string | null;
-  questions?: Array<string | null> | null;
+export type GuideBookElement = {
+  __typename: "GuideBookElement";
+  name?: string | null;
+  subElements?: Array<GuideBookElement | null> | null;
 };
 
 export type About = {
@@ -455,13 +408,46 @@ export type UpdateCardsPackInput = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: GuideBookInput | null;
+  guideBook?: Array<GuideBookElementInput | null>;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
 };
 
 export type DeleteCardsPackInput = {
+  id: string;
+};
+
+export type CreateCouponCodesInput = {
+  id?: string | null;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
+};
+
+export type ModelCouponCodesConditionInput = {
+  organization?: ModelStringInput | null;
+  couponCode?: ModelStringInput | null;
+  discount?: ModelFloatInput | null;
+  trialPeriodInDays?: ModelIntInput | null;
+  allowedCardsPacks?: ModelStringInput | null;
+  and?: Array<ModelCouponCodesConditionInput | null> | null;
+  or?: Array<ModelCouponCodesConditionInput | null> | null;
+  not?: ModelCouponCodesConditionInput | null;
+};
+
+export type UpdateCouponCodesInput = {
+  id: string;
+  organization?: string | null;
+  couponCode?: string | null;
+  discount?: number | null;
+  trialPeriodInDays?: number | null;
+  allowedCardsPacks?: Array<string | null> | null;
+};
+
+export type DeleteCouponCodesInput = {
   id: string;
 };
 
@@ -537,21 +523,6 @@ export type ModelGroupConnection = {
   nextToken?: string | null;
 };
 
-export type ModelNewsFilterInput = {
-  id?: ModelIDInput | null;
-  message?: ModelStringInput | null;
-  order?: ModelIntInput | null;
-  and?: Array<ModelNewsFilterInput | null> | null;
-  or?: Array<ModelNewsFilterInput | null> | null;
-  not?: ModelNewsFilterInput | null;
-};
-
-export type ModelNewsConnection = {
-  __typename: "ModelNewsConnection";
-  items?: Array<News | null> | null;
-  nextToken?: string | null;
-};
-
 export type ModelCouponCodesFilterInput = {
   id?: ModelIDInput | null;
   organization?: ModelStringInput | null;
@@ -567,6 +538,42 @@ export type ModelCouponCodesFilterInput = {
 export type ModelCouponCodesConnection = {
   __typename: "ModelCouponCodesConnection";
   items?: Array<CouponCodes | null> | null;
+  nextToken?: string | null;
+};
+
+export type ModelSubscriptionPlanFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  providerPlanId?: ModelStringInput | null;
+  numberOfUsers?: ModelIntInput | null;
+  numberOfCardPacks?: ModelIntInput | null;
+  billingCycleInMonths?: ModelFloatInput | null;
+  fullPrice?: ModelFloatInput | null;
+  discount?: ModelFloatInput | null;
+  and?: Array<ModelSubscriptionPlanFilterInput | null> | null;
+  or?: Array<ModelSubscriptionPlanFilterInput | null> | null;
+  not?: ModelSubscriptionPlanFilterInput | null;
+};
+
+export type ModelSubscriptionPlanConnection = {
+  __typename: "ModelSubscriptionPlanConnection";
+  items?: Array<SubscriptionPlan | null> | null;
+  nextToken?: string | null;
+};
+
+export type ModelNewsFilterInput = {
+  id?: ModelIDInput | null;
+  message?: ModelStringInput | null;
+  order?: ModelIntInput | null;
+  and?: Array<ModelNewsFilterInput | null> | null;
+  or?: Array<ModelNewsFilterInput | null> | null;
+  not?: ModelNewsFilterInput | null;
+};
+
+export type ModelNewsConnection = {
+  __typename: "ModelNewsConnection";
+  items?: Array<News | null> | null;
   nextToken?: string | null;
 };
 
@@ -592,26 +599,6 @@ export type ModelCardsPackConnection = {
   nextToken?: string | null;
 };
 
-export type ModelSubscriptionPlanFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  providerPlanId?: ModelStringInput | null;
-  numberOfUsers?: ModelIntInput | null;
-  numberOfCardPacks?: ModelIntInput | null;
-  price?: ModelFloatInput | null;
-  discount?: ModelFloatInput | null;
-  and?: Array<ModelSubscriptionPlanFilterInput | null> | null;
-  or?: Array<ModelSubscriptionPlanFilterInput | null> | null;
-  not?: ModelSubscriptionPlanFilterInput | null;
-};
-
-export type ModelSubscriptionPlanConnection = {
-  __typename: "ModelSubscriptionPlanConnection";
-  items?: Array<SubscriptionPlan | null> | null;
-  nextToken?: string | null;
-};
-
 export type CreateUserMutation = {
   __typename: "User";
   id: string;
@@ -633,7 +620,8 @@ export type CreateUserMutation = {
       providerPlanId: string;
       numberOfUsers?: number | null;
       numberOfCardPacks?: number | null;
-      price?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
       discount?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -710,7 +698,8 @@ export type CreateGroupMutation = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -735,7 +724,8 @@ export type UpdateGroupMutation = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -760,7 +750,8 @@ export type DeleteGroupMutation = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -777,7 +768,8 @@ export type CreateSubscriptionPlanMutation = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -791,7 +783,8 @@ export type UpdateSubscriptionPlanMutation = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -805,7 +798,8 @@ export type DeleteSubscriptionPlanMutation = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -834,6 +828,144 @@ export type DeleteNewsMutation = {
   id: string;
   message?: string | null;
   order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateCardsPackMutation = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCardsPackMutation = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteCardsPackMutation = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -870,108 +1002,6 @@ export type DeleteCouponCodesMutation = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type CreateCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    subjects?: Array<{
-      __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
-        __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name?: string | null;
-  freeUntilDate?: string | null;
-  about?: {
-    __typename: "About";
-    text?: string | null;
-    imgUrl?: string | null;
-    link?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    subjects?: Array<{
-      __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
-        __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name?: string | null;
-  freeUntilDate?: string | null;
-  about?: {
-    __typename: "About";
-    text?: string | null;
-    imgUrl?: string | null;
-    link?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteCardsPackMutation = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    subjects?: Array<{
-      __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
-        __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-  name?: string | null;
-  freeUntilDate?: string | null;
-  about?: {
-    __typename: "About";
-    text?: string | null;
-    imgUrl?: string | null;
-    link?: string | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1021,7 +1051,8 @@ export type GetUserQuery = {
       providerPlanId: string;
       numberOfUsers?: number | null;
       numberOfCardPacks?: number | null;
-      price?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
       discount?: number | null;
       createdAt: string;
       updatedAt: string;
@@ -1075,7 +1106,8 @@ export type ListUsersQuery = {
         providerPlanId: string;
         numberOfUsers?: number | null;
         numberOfCardPacks?: number | null;
-        price?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
         discount?: number | null;
         createdAt: string;
         updatedAt: string;
@@ -1124,7 +1156,8 @@ export type GetGroupQuery = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1151,33 +1184,12 @@ export type ListGroupsQuery = {
       providerPlanId: string;
       numberOfUsers?: number | null;
       numberOfCardPacks?: number | null;
-      price?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
       discount?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken?: string | null;
-};
-
-export type GetNewsQuery = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListNewssQuery = {
-  __typename: "ModelNewsConnection";
-  items?: Array<{
-    __typename: "News";
-    id: string;
-    message?: string | null;
-    order?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1212,6 +1224,62 @@ export type ListCouponCodessQuery = {
   nextToken?: string | null;
 };
 
+export type GetSubscriptionPlanQuery = {
+  __typename: "SubscriptionPlan";
+  id: string;
+  name?: string | null;
+  description?: string | null;
+  providerPlanId: string;
+  numberOfUsers?: number | null;
+  numberOfCardPacks?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
+  discount?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListSubscriptionPlansQuery = {
+  __typename: "ModelSubscriptionPlanConnection";
+  items?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
+export type GetNewsQuery = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListNewssQuery = {
+  __typename: "ModelNewsConnection";
+  items?: Array<{
+    __typename: "News";
+    id: string;
+    message?: string | null;
+    order?: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
 export type GetCardsPackQuery = {
   __typename: "CardsPack";
   id: string;
@@ -1222,18 +1290,30 @@ export type GetCardsPackQuery = {
   cards?: Array<string | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
-  guideBook?: {
-    __typename: "GuideBook";
-    subjects?: Array<{
-      __typename: "GuideBookSubject";
-      subjectName?: string | null;
-      subSubjects?: Array<{
-        __typename: "SubSubject";
-        subSubjectName?: string | null;
-        questions?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
       } | null> | null;
     } | null> | null;
-  } | null;
+  } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: {
@@ -1258,18 +1338,30 @@ export type ListCardsPacksQuery = {
     cards?: Array<string | null> | null;
     cardsPreview?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
-    guideBook?: {
-      __typename: "GuideBook";
-      subjects?: Array<{
-        __typename: "GuideBookSubject";
-        subjectName?: string | null;
-        subSubjects?: Array<{
-          __typename: "SubSubject";
-          subSubjectName?: string | null;
-          questions?: Array<string | null> | null;
+    guideBook?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
         } | null> | null;
       } | null> | null;
-    } | null;
+    } | null> | null;
     name?: string | null;
     freeUntilDate?: string | null;
     about?: {
@@ -1278,38 +1370,6 @@ export type ListCardsPacksQuery = {
       imgUrl?: string | null;
       link?: string | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null> | null;
-  nextToken?: string | null;
-};
-
-export type GetSubscriptionPlanQuery = {
-  __typename: "SubscriptionPlan";
-  id: string;
-  name?: string | null;
-  description?: string | null;
-  providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  price?: number | null;
-  discount?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListSubscriptionPlansQuery = {
-  __typename: "ModelSubscriptionPlanConnection";
-  items?: Array<{
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    price?: number | null;
-    discount?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1362,7 +1422,8 @@ export type OnCreateGroupSubscription = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1387,7 +1448,8 @@ export type OnUpdateGroupSubscription = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
@@ -1412,38 +1474,12 @@ export type OnDeleteGroupSubscription = {
     providerPlanId: string;
     numberOfUsers?: number | null;
     numberOfCardPacks?: number | null;
-    price?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
     discount?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteNewsSubscription = {
-  __typename: "News";
-  id: string;
-  message?: string | null;
-  order?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1492,7 +1528,8 @@ export type OnCreateSubscriptionPlanSubscription = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -1506,7 +1543,8 @@ export type OnUpdateSubscriptionPlanSubscription = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
   createdAt: string;
   updatedAt: string;
@@ -1520,8 +1558,174 @@ export type OnDeleteSubscriptionPlanSubscription = {
   providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
-  price?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
   discount?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteNewsSubscription = {
+  __typename: "News";
+  id: string;
+  message?: string | null;
+  order?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateCardsPackSubscription = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateCardsPackSubscription = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteCardsPackSubscription = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<string | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1553,7 +1757,8 @@ export class APIService {
               providerPlanId
               numberOfUsers
               numberOfCardPacks
-              price
+              billingCycleInMonths
+              fullPrice
               discount
               createdAt
               updatedAt
@@ -1615,20 +1820,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.changeCardsPack;
-  }
-  async UpdatePaymentProgram(
-    input: updatePaymentProgramInput
-  ): Promise<boolean | null> {
-    const statement = `mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
-        updatePaymentProgram(input: $input)
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <boolean | null>response.data.updatePaymentProgram;
   }
   async UpdateGroupUsersList(
     input: groupUsersListInput
@@ -1694,6 +1885,20 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.AddCouponCode;
   }
+  async UpdatePaymentProgram(
+    input: updatePaymentProgramInput
+  ): Promise<boolean | null> {
+    const statement = `mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
+        UpdatePaymentProgram(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.updatePaymentProgram;
+  }
   async CreateContactUsModel(
     input: CreateContactUsModelInput,
     condition?: ModelContactUsModelConditionInput
@@ -1716,7 +1921,9 @@ export class APIService {
       gqlAPIServiceArguments.condition = condition;
     }
     const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
     )) as any;
     return <CreateContactUsModelMutation>response.data.createContactUsModel;
   }
@@ -1793,7 +2000,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -1834,7 +2042,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -1875,7 +2084,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -1908,7 +2118,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -1938,7 +2149,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -1968,7 +2180,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -2060,6 +2273,192 @@ export class APIService {
     )) as any;
     return <DeleteNewsMutation>response.data.deleteNews;
   }
+  async CreateCardsPack(
+    input: CreateCardsPackInput,
+    condition?: ModelCardsPackConditionInput
+  ): Promise<CreateCardsPackMutation> {
+    const statement = `mutation CreateCardsPack($input: CreateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
+        createCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateCardsPackMutation>response.data.createCardsPack;
+  }
+  async UpdateCardsPack(
+    input: UpdateCardsPackInput,
+    condition?: ModelCardsPackConditionInput
+  ): Promise<UpdateCardsPackMutation> {
+    const statement = `mutation UpdateCardsPack($input: UpdateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
+        updateCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCardsPackMutation>response.data.updateCardsPack;
+  }
+  async DeleteCardsPack(
+    input: DeleteCardsPackInput,
+    condition?: ModelCardsPackConditionInput
+  ): Promise<DeleteCardsPackMutation> {
+    const statement = `mutation DeleteCardsPack($input: DeleteCardsPackInput!, $condition: ModelCardsPackConditionInput) {
+        deleteCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteCardsPackMutation>response.data.deleteCardsPack;
+  }
   async CreateCouponCodes(
     input: CreateCouponCodesInput,
     condition?: ModelCouponCodesConditionInput
@@ -2144,156 +2543,6 @@ export class APIService {
     )) as any;
     return <DeleteCouponCodesMutation>response.data.deleteCouponCodes;
   }
-  async CreateCardsPack(
-    input: CreateCardsPackInput,
-    condition?: ModelCardsPackConditionInput
-  ): Promise<CreateCardsPackMutation> {
-    const statement = `mutation CreateCardsPack($input: CreateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
-        createCardsPack(input: $input, condition: $condition) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateCardsPackMutation>response.data.createCardsPack;
-  }
-  async UpdateCardsPack(
-    input: UpdateCardsPackInput,
-    condition?: ModelCardsPackConditionInput
-  ): Promise<UpdateCardsPackMutation> {
-    const statement = `mutation UpdateCardsPack($input: UpdateCardsPackInput!, $condition: ModelCardsPackConditionInput) {
-        updateCardsPack(input: $input, condition: $condition) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateCardsPackMutation>response.data.updateCardsPack;
-  }
-  async DeleteCardsPack(
-    input: DeleteCardsPackInput,
-    condition?: ModelCardsPackConditionInput
-  ): Promise<DeleteCardsPackMutation> {
-    const statement = `mutation DeleteCardsPack($input: DeleteCardsPackInput!, $condition: ModelCardsPackConditionInput) {
-        deleteCardsPack(input: $input, condition: $condition) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            subjects {
-              __typename
-              subjectName
-              subSubjects {
-                __typename
-                subSubjectName
-                questions
-              }
-            }
-          }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteCardsPackMutation>response.data.deleteCardsPack;
-  }
   async GetContactUsModel(id: string): Promise<GetContactUsModelQuery> {
     const statement = `query GetContactUsModel($id: ID!) {
         getContactUsModel(id: $id) {
@@ -2372,7 +2621,8 @@ export class APIService {
               providerPlanId
               numberOfUsers
               numberOfCardPacks
-              price
+              billingCycleInMonths
+              fullPrice
               discount
               createdAt
               updatedAt
@@ -2440,7 +2690,8 @@ export class APIService {
                 providerPlanId
                 numberOfUsers
                 numberOfCardPacks
-                price
+                billingCycleInMonths
+                fullPrice
                 discount
                 createdAt
                 updatedAt
@@ -2506,7 +2757,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -2547,7 +2799,8 @@ export class APIService {
               providerPlanId
               numberOfUsers
               numberOfCardPacks
-              price
+              billingCycleInMonths
+              fullPrice
               discount
               createdAt
               updatedAt
@@ -2572,61 +2825,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListGroupsQuery>response.data.listGroups;
-  }
-  async GetNews(id: string): Promise<GetNewsQuery> {
-    const statement = `query GetNews($id: ID!) {
-        getNews(id: $id) {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetNewsQuery>response.data.getNews;
-  }
-  async ListNewss(
-    filter?: ModelNewsFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListNewssQuery> {
-    const statement = `query ListNewss($filter: ModelNewsFilterInput, $limit: Int, $nextToken: String) {
-        listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            message
-            order
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
-    )) as any;
-    return <ListNewssQuery>response.data.listNewss;
   }
   async GetCouponCodes(id: string): Promise<GetCouponCodesQuery> {
     const statement = `query GetCouponCodes($id: ID!) {
@@ -2687,6 +2885,128 @@ export class APIService {
     )) as any;
     return <ListCouponCodessQuery>response.data.listCouponCodess;
   }
+  async GetSubscriptionPlan(id: string): Promise<GetSubscriptionPlanQuery> {
+    const statement = `query GetSubscriptionPlan($id: ID!) {
+        getSubscriptionPlan(id: $id) {
+          __typename
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetSubscriptionPlanQuery>response.data.getSubscriptionPlan;
+  }
+  async ListSubscriptionPlans(
+    filter?: ModelSubscriptionPlanFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListSubscriptionPlansQuery> {
+    const statement = `query ListSubscriptionPlans($filter: ModelSubscriptionPlanFilterInput, $limit: Int, $nextToken: String) {
+        listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+    )) as any;
+    return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
+  }
+  async GetNews(id: string): Promise<GetNewsQuery> {
+    const statement = `query GetNews($id: ID!) {
+        getNews(id: $id) {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetNewsQuery>response.data.getNews;
+  }
+  async ListNewss(
+    filter?: ModelNewsFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListNewssQuery> {
+    const statement = `query ListNewss($filter: ModelNewsFilterInput, $limit: Int, $nextToken: String) {
+        listNewss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            message
+            order
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+    )) as any;
+    return <ListNewssQuery>response.data.listNewss;
+  }
   async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!) {
         getCardsPack(id: $id) {
@@ -2701,13 +3021,25 @@ export class APIService {
           groupsIds
           guideBook {
             __typename
-            subjects {
+            name
+            subElements {
               __typename
-              subjectName
-              subSubjects {
+              name
+              subElements {
                 __typename
-                subSubjectName
-                questions
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
               }
             }
           }
@@ -2748,18 +3080,6 @@ export class APIService {
             tags
             categories
             cardsPreview
-            guideBook {
-              __typename
-              subjects {
-                __typename
-                subjectName
-                subSubjects {
-                  __typename
-                  subSubjectName
-                  questions
-                }
-              }
-            }
             name
             about {
               __typename
@@ -2809,14 +3129,22 @@ export class APIService {
             cardsPreview
             groupsIds
             guideBook {
-              __typename
-              subjects {
+               __typename
+              name
+              subElements {
                 __typename
-                subjectName
-                subSubjects {
+                name
+                subElements {
                   __typename
-                  subSubjectName
-                  questions
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
                 }
               }
             }
@@ -2848,71 +3176,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
-  }
-  async GetSubscriptionPlan(id: string): Promise<GetSubscriptionPlanQuery> {
-    const statement = `query GetSubscriptionPlan($id: ID!) {
-        getSubscriptionPlan(id: $id) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          price
-          discount
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetSubscriptionPlanQuery>response.data.getSubscriptionPlan;
-  }
-  async ListSubscriptionPlans(
-    filter?: ModelSubscriptionPlanFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListSubscriptionPlansQuery> {
-    const statement = `query ListSubscriptionPlans($filter: ModelSubscriptionPlanFilterInput, $limit: Int, $nextToken: String) {
-        listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            price
-            discount
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
-    )) as any;
-    return <ListSubscriptionPlansQuery>response.data.listSubscriptionPlans;
   }
   OnCreateContactUsModelListener: Observable<
     SubscriptionResponse<OnCreateContactUsModelSubscription>
@@ -2989,7 +3252,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -3022,7 +3286,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -3055,7 +3320,8 @@ export class APIService {
             providerPlanId
             numberOfUsers
             numberOfCardPacks
-            price
+            billingCycleInMonths
+            fullPrice
             discount
             createdAt
             updatedAt
@@ -3066,57 +3332,6 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteGroupSubscription>>;
-
-  OnCreateNewsListener: Observable<
-    SubscriptionResponse<OnCreateNewsSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateNews {
-        onCreateNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnCreateNewsSubscription>>;
-
-  OnUpdateNewsListener: Observable<
-    SubscriptionResponse<OnUpdateNewsSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateNews {
-        onUpdateNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdateNewsSubscription>>;
-
-  OnDeleteNewsListener: Observable<
-    SubscriptionResponse<OnDeleteNewsSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteNews {
-        onDeleteNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnDeleteNewsSubscription>>;
 
   OnCreateCouponCodesListener: Observable<
     SubscriptionResponse<OnCreateCouponCodesSubscription>
@@ -3191,7 +3406,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -3213,7 +3429,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -3235,7 +3452,8 @@ export class APIService {
           providerPlanId
           numberOfUsers
           numberOfCardPacks
-          price
+          billingCycleInMonths
+          fullPrice
           discount
           createdAt
           updatedAt
@@ -3243,4 +3461,217 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteSubscriptionPlanSubscription>>;
+
+  OnCreateNewsListener: Observable<
+    SubscriptionResponse<OnCreateNewsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateNews {
+        onCreateNews {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateNewsSubscription>>;
+
+  OnUpdateNewsListener: Observable<
+    SubscriptionResponse<OnUpdateNewsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateNews {
+        onUpdateNews {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateNewsSubscription>>;
+
+  OnDeleteNewsListener: Observable<
+    SubscriptionResponse<OnDeleteNewsSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteNews {
+        onDeleteNews {
+          __typename
+          id
+          message
+          order
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteNewsSubscription>>;
+
+  OnCreateCardsPackListener: Observable<
+    SubscriptionResponse<OnCreateCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateCardsPack {
+        onCreateCardsPack {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateCardsPackSubscription>>;
+
+  OnUpdateCardsPackListener: Observable<
+    SubscriptionResponse<OnUpdateCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateCardsPack {
+        onUpdateCardsPack {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateCardsPackSubscription>>;
+
+  OnDeleteCardsPackListener: Observable<
+    SubscriptionResponse<OnDeleteCardsPackSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteCardsPack {
+        onDeleteCardsPack {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteCardsPackSubscription>>;
 }

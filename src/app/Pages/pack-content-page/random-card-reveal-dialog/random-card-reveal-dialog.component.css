@@ -8,6 +8,7 @@ app-card {
 
 .content {
   display: flex;
+  height: 60vh;
 }
 
 .card-pre-reveal {

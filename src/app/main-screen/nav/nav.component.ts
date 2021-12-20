@@ -3,6 +3,8 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Router } from '@angular/router';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { APIService } from 'src/app/API.service';
+import { AuthService } from 'src/app/Services/auth.service';
+import { UserData } from 'src/app/Objects/user-related';
 
 @Component({
   selector: 'app-nav',
@@ -24,18 +26,32 @@ export class NavComponent implements OnInit {
   ]
 
   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,
-    private api: APIService) {
+    private api: APIService, private amplifyAuthService: AuthService) {
   }
 
   ngOnInit() {
-    this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
-      this.userAttributes = userAttributes;
-      this.loggedIn = true;
+    // this.amplifyAuthService.isLoggedIn$.subscribe(
+    //   isLoggedIn => {
+    //     (this.loggedIn = isLoggedIn);
+    //   }
+    // );
+
+    // this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
+    //   this.userAttributes = cognitoUser;
+    // });
+
+    this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+      this.userAttributes = userData;
+      this.loggedIn = userData ? true : false;
     })
-    this.userAuthService.signedOutEmmiter.subscribe(() => {
-      this.userAttributes = undefined;
-      this.loggedIn = false;
-    })
+    // this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
+    //   this.userAttributes = userAttributes;
+    //   this.loggedIn = true;
+    // })
+    // this.userAuthService.signedOutEmmiter.subscribe(() => {
+    //   this.userAttributes = undefined;
+    //   this.loggedIn = false;
+    // })
     this.api.ListNewss().then(news => {
       this.news = news.items.sort((a, b) => a.order - b.order);
       let oldNews = localStorage.getItem("news")
@@ -58,7 +74,7 @@ export class NavComponent implements OnInit {
    * @returns a string with all news to save\compare 
    */
   private getNewsList(): string {
-    let res = this.news.map(n => n.message).toString(); 
+    let res = this.news.map(n => n.message).toString();
     return res;
   }
 

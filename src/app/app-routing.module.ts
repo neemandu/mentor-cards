@@ -10,7 +10,9 @@ import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.
 import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
 import { PackContentPageComponent } from './Pages/pack-content-page/pack-content-page.component';
 import { PricePageComponent } from './Pages/price-page/price-page.component';
-import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
+import { GuideBookManagementComponent } from './Pages/site-content-management/guide-book-management/guide-book-management.component';
+import { NewsManagementComponent } from './Pages/site-content-management/news-management/news-management.component';
+// import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
 import { AuthGuardGroupManagementService, AuthGuardNoProgramPageService, AuthGuardSiteContentManagementService, AuthGuardUserPageService } from './Services/auth-guard.service';
 
@@ -21,7 +23,9 @@ const routes: Routes = [
   // { path: 'no-program-page', component: NoProgramPageComponent },
   { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuardUserPageService] },
   { path: 'group-management', component: GroupManagementComponent, canActivate: [AuthGuardGroupManagementService] },
-  { path: 'site-content-management', component: SiteContentManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
+  // { path: 'site-content-management', component: SiteContentManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
+  { path: 'guide-book-management', component: GuideBookManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
+  { path: 'news-management', component: NewsManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
   { path: 'all-packs-page', component: AllPacksPageComponent },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },

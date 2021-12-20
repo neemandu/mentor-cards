@@ -9,6 +9,7 @@ mat-icon {
   
   .buttons {
     margin: 0px;
+    justify-content: center;
   }
   
   .action-button {

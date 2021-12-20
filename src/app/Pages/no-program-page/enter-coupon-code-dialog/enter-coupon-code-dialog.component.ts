@@ -36,9 +36,9 @@ export class EnterCouponCodeDialogComponent implements OnInit {
       }
     }, reject => {
       // console.log("file: enter-group-id-dialog.component.ts ~ line 33 ~ this.api.IsInGroup ~ reject", reject)
-      if (reject.errors[0].message.startsWith("no such coupon"))
+      if ((reject.errors[0].message).toLowerCase().startsWith("no such coupon"))
         this.formControls.couponCode.setErrors({ 'noSuchCoupon': true });
-      else if (reject.errors[0].message.startsWith("user already has a coupon"))
+      else if ((reject.errors[0].message).toLowerCase().startsWith("coupon code already in use"))
         this.formControls.couponCode.setErrors({ 'userHasCoupon': true });
       this.overlaySpinnerService.changeOverlaySpinner(false);
     })

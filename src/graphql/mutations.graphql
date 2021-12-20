@@ -18,7 +18,8 @@ mutation CreateUser($input: CreateUserInput!) {
         providerPlanId
         numberOfUsers
         numberOfCardPacks
-        price
+        billingCycleInMonths
+        fullPrice
         discount
         createdAt
         updatedAt
@@ -70,7 +71,7 @@ mutation AddCouponCode($input: couponCodeInput!) {
   AddCouponCode(input: $input)
 }
 mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
-  updatePaymentProgram(input: $input)
+  UpdatePaymentProgram(input: $input)
 }
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
@@ -128,7 +129,8 @@ mutation CreateGroup(
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -154,7 +156,8 @@ mutation UpdateGroup(
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -180,7 +183,8 @@ mutation DeleteGroup(
       providerPlanId
       numberOfUsers
       numberOfCardPacks
-      price
+      billingCycleInMonths
+      fullPrice
       discount
       createdAt
       updatedAt
@@ -200,7 +204,8 @@ mutation CreateSubscriptionPlan(
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
@@ -217,7 +222,8 @@ mutation UpdateSubscriptionPlan(
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
@@ -234,7 +240,8 @@ mutation DeleteSubscriptionPlan(
     providerPlanId
     numberOfUsers
     numberOfCardPacks
-    price
+    billingCycleInMonths
+    fullPrice
     discount
     createdAt
     updatedAt
@@ -290,11 +297,20 @@ mutation CreateCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+              }
+            }
+          }
         }
       }
     }
@@ -323,11 +339,20 @@ mutation UpdateCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+              }
+            }
+          }
         }
       }
     }
@@ -356,11 +381,20 @@ mutation DeleteCardsPack(
     cardsPreview
     groupsIds
     guideBook {
-      subjects {
-        subjectName
-        subSubjects {
-          subSubjectName
-          questions
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+              }
+            }
+          }
         }
       }
     }
