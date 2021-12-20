@@ -12,10 +12,10 @@
     "mfaTypes": [
       "SMS Text Message"
     ],
-    "smsAuthenticationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר מנטור-קארדס",
-    "smsVerificationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר מנטור-קארדס",
-    "emailVerificationSubject": "קוד אימות מאתר מנטור-קארדס",
-    "emailVerificationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר מנטור-קארדס",
+    "smsAuthenticationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר Mentor-Cards.com",
+    "smsVerificationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר Mentor-Cards.com",
+    "emailVerificationSubject": "קוד אימות מאתר Mentor-Cards",
+    "emailVerificationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר Mentor-Cards.com",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
