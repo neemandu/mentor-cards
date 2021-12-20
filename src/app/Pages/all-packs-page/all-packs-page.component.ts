@@ -9,6 +9,8 @@ import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { EnterCouponCodeDialogComponent } from 'src/app/Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
+import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 
 interface CategoryPack {
   category: string,
@@ -85,13 +87,18 @@ export class AllPacksPageComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
-    const dialogRef = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(res => {
-      this.videoplayer.nativeElement.play();
-      dialogSub.unsubscribe();
+    const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
+    const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
+      dialogSub1.unsubscribe();
       if (res) {
-        this.router.navigate(['all-packs-page']);
-        window.location.reload();
+        // this.videoplayer.nativeElement.play();
+        dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
+        const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+        const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
+          dialogSub2.unsubscribe();
+          this.router.navigate(['all-packs-page']);
+          window.location.reload();
+        })
       }
     });
   }
