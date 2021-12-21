@@ -8,7 +8,7 @@ const awsmobile = {
     "aws_user_pools_id": "eu-west-2_s4Ax8bC3q",
     "aws_user_pools_web_client_id": "43nsctsqn9cjhl819dfbf2m329",
     "oauth": {
-        "domain": "mentor-cards.auth.eu-west-2.amazoncognito.com",
+        "domain": "mentor-cards-prod.auth.eu-west-2.amazoncognito.com",
         "scope": [
             "phone",
             "email",
