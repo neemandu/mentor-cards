@@ -19,7 +19,8 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-68326e76586a4d483266-build.zip"
+          "s3Key": "amplify-builds/CreateUser-48555959363074446758-build.zip",
+          "sendinblueApiKey": "xxx"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -39,7 +40,7 @@
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-6831447476466f4d5848-build.zip"
+          "s3Key": "amplify-builds/UnSubscribe-682f6a6c694478356f70-build.zip"
         },
         "JoinExistingGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -51,7 +52,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-487241444633524d4139-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-6f434472454f53305932-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -67,7 +68,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-73372b38544468387948-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-44345a78542b2f657830-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -79,7 +80,7 @@
         },
         "updatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/updatePaymentProgram-6c655a4b577063454d2b-build.zip"
+          "s3Key": "amplify-builds/updatePaymentProgram-637037316e2f74596c78-build.zip"
         }
       }
     }
@@ -157,10 +158,6 @@
           "EMAILMESSAGE": "תודה שהצטרפתם! לחצו על הלינק כדי לחזור לאתר. ",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/mentorcards91f3dc29CustomMessage-332b626944416662796d-build.zip"
-        },
-        "mentorcardsMailingListService": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/mentorcardsMailingListService-LambdaLayerVersioncb2b11a8-build.zip"
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",

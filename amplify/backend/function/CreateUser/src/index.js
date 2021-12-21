@@ -11,7 +11,6 @@ Amplify Params - DO NOT EDIT */
 
 
 const { env } = require("process");
-const SibApiV3Sdk = require('sib-api-v3-sdk');
 var AWS = require("aws-sdk");
 
 async function getUser(username){
@@ -88,33 +87,6 @@ async function getUserGroup(username){
     await docClient.scan(groupParams, onScan).promise();
 
     return g_group;
-}
-
-function AddUserToMailingList(username, email, phone){
-    let defaultClient = SibApiV3Sdk.ApiClient.instance;
-    
-    let api_key = process.env.SENDINBLUE_API_KEY
-    let apiKey = defaultClient.authentications['api-key'];
-    apiKey.apiKey = api_key;
-    
-    let apiInstance = new SibApiV3Sdk.ContactsApi();
-    
-    let createContact = new SibApiV3Sdk.CreateContact();
-    
-    createContact.email = email;
-    createContact.attributes = {
-        "lastname": username,
-        "sms": phone,
-        "firstname": username
-    }
-    createContact.updateEnabled = true;
-    createContact.listIds = [3]
-    
-    apiInstance.createContact(createContact).then(function(data) {
-      console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-    }, function(error) {
-      console.error(error);
-    });
 }
 
 exports.handler = async (event) => {
