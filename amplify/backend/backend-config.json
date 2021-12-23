@@ -72,13 +72,6 @@
       "service": "Lambda",
       "dependsOn": [
         {
-          "category": "function",
-          "resourceName": "mentorcardsMailingListService",
-          "attributes": [
-            "Arn"
-          ]
-        },
-        {
           "category": "api",
           "resourceName": "cardspacks",
           "attributes": [
@@ -260,11 +253,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "mentorcardsMailingListService": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
-    },
     "UpdatePaymentProgram": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -275,6 +263,21 @@
           "resourceName": "cardspacks",
           "attributes": [
             "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "ContactUsTrigger": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
           ]
         }
       ]

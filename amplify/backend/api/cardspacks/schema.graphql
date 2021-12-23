@@ -14,6 +14,7 @@ input joinExistingGroupInput {
   groupId: String!
 }
 
+
 input couponCodeInput {
   couponCode: String!
 }
