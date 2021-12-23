@@ -109,13 +109,7 @@ export type AmplifyDependentResourcesAttributes = {
             "LambdaExecutionRole": "string",
             "Region": "string"
         },
-        "updatePaymentProgram": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "ContactUsTrigger": {
+        "UpdatePaymentProgram": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

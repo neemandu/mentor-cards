@@ -56,7 +56,8 @@
             {
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
-                "apiKeyExpirationDays": 7,
+                "apiKeyExpirationDays": 365,
+                "apiKeyExpirationDate": "2022-12-23T07:32:53.846Z",
                 "description": "mentor-cards"
               }
             }

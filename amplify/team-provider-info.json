@@ -106,7 +106,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-5268524457396e35752f-build.zip",
+          "s3Key": "amplify-builds/CreateUser-5a5a6c4c693432435933-build.zip",
           "sendinblueApiKey": "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"
         },
         "AddCardsPack": {
@@ -123,7 +123,7 @@
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-786444464a4c704d5935-build.zip"
+          "s3Key": "amplify-builds/UnSubscribe-682f6a6c694478356f70-build.zip"
         },
         "JoinExistingGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -135,7 +135,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-5075385a6277664a5868-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-6f434472454f53305932-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -151,7 +151,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-6254376a6f556a634b6b-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-44345a78542b2f657830-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -166,7 +166,7 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-4e4f6239424245792b4c-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-637037316e2f74596c78-build.zip"
         }
       },
       "auth": {
