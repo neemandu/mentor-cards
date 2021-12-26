@@ -130,12 +130,6 @@ img {
   direction: rtl;
 }
 
-/* ::ng-deep .mat-menu-panel { */
-/* max-width: 35vw !important;
-  min-width: 15vw !important; */
-/* width: min-content;
-} */
-
 ::ng-deep .mat-menu-news {
   width: max-content;
 }
