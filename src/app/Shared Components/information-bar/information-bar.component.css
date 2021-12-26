@@ -20,6 +20,20 @@
   margin-right: 2rem;
 }
 
-#site-rules {
+.site-rules {
   cursor: pointer;
+}
+
+#site-rules-sm {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-text {
+    display: none;
+  }
+
+  #site-rules-sm {
+    display: inherit;
+  }
 }

@@ -25,7 +25,7 @@ interface CategoryPack {
 export class AllPacksPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   Subscription: Subscription = new Subscription();
-  mobile: boolean;
+  // mobile: boolean;
 
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
@@ -58,8 +58,8 @@ export class AllPacksPageComponent implements OnInit {
       // this.overlaySpinnerService.changeOverlaySpinner(true);
       userData ? this.getAllPacks() : null;
     }));
-    window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
-    this.mobile = window.screen.width <= 600;
+    // window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
+    // this.mobile = window.screen.width <= 600;
     this.loadedPacks = 0;
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites;

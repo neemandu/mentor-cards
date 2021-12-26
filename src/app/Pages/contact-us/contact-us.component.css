@@ -88,7 +88,7 @@ mat-toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 4%;
+  margin-top: 3%;
 }
 
 mat-card {
@@ -100,40 +100,25 @@ textarea {
   max-height: 30vh;
 }
 
-@keyframes shadow {
-  0% {
-    box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 12px;
+app-information-bar {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+/* @media screen and (max-width: 1024px) {
+} */
+
+@media screen and (max-width: 768px) {
+  .content {
+    flex-direction: column;
   }
 
-  14% {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  }
-
-  28% {
-    box-shadow: rgba(0, 0, 0, 0.1) -4px 4px 12px;
-  }
-
-  42% {
-    box-shadow: rgba(0, 0, 0, 0.1) -4px 0px 12px;
-  }
-
-  56% {
-    box-shadow: rgba(0, 0, 0, 0.1) -4px -4px 12px;
-  }
-
-  70% {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px -4px 12px;
-  }
-
-  84%{
-    box-shadow: rgba(0, 0, 0, 0.1) 4px -4px 12px;
-  }
-
-  95%{
-    box-shadow: rgba(0, 0, 0, 0.1) 4px 0px 12px;
-  }
-
-  100%{
-    box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 12px;
+  .img {
+    display: none;
   }
 }
+/* 
+@media screen and (max-width: 480px) {
+
+} */

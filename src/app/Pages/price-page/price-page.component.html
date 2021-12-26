@@ -26,7 +26,7 @@
 </div>
 <br />
 <div style="text-align: center;">
-    <div *ngIf="subPlans" class="program-cards d-flex justify-content-center align-items-center">
+    <div *ngIf="subPlans" class="program-cards">
         <mat-card>
             <mat-card-subtitle>הכי בקטנה</mat-card-subtitle>
             <mat-card-title>תכנית חודשית</mat-card-title>
@@ -102,7 +102,7 @@
     <!-- <p *ngIf="userSingedIn && selectedProgramOwned" style="font-size: medium;font-weight: 600;">
         אתם רשומים לתכנית זו
     </p> -->
-    <img style="height: 5%; width: 5%; margin-top: 2%;" src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
+    <img id="payment-img" src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
         alt="Secure Payment">
 </div>
 

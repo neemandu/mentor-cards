@@ -28,11 +28,12 @@
 }
 
 .card-previews {
-  max-width: 40vw;
+  display: flex;
+  max-width: 50vw;
 }
 
 app-card {
-  margin: 0px 10px;
+  margin: 0px 5px;
 }
 
 .action-button {
@@ -87,4 +88,23 @@ mat-icon {
   font-size: 0.8rem;
   direction: rtl;
   text-align: right;
+}
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 768px) {
+  .card-previews {
+    max-width: initial;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card-previews {
+    flex-direction: column;
+    max-height: 65vh;
+  }
+
+  app-card {
+    margin: 5px 0px;
+  }
 }

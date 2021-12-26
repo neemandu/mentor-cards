@@ -99,7 +99,7 @@ export class UserAuthService {
       }
       this.userData = new UserData().deseralize(data);
       this.isLoggedIn = true;
-      // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
+      console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.cognitoUserData.username);
       // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -308,6 +308,15 @@ export class UserAuthService {
    * return if in trial month (first month after register)
    */
   get trialPeriodExpDate(): Date {
+    return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
+      new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
+      null;
+  }
+
+  /**
+   * return if in trial month (first month after register)
+   */
+  getTrialPeriodExpDate(): Date {
     return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
       new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
       null;

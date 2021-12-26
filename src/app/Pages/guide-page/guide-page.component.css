@@ -14,14 +14,23 @@
 
 #buttons {
   margin: 1% 1%;
-  width: 20vw;
+  /* width: 20vw; */
   position: sticky;
   top: 18%;
   height: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 button {
   height: auto;
+  width: fit-content;
+}
+
+#layout {
+  display: flex;
+  flex-direction: row;
 }
 
 #content {
@@ -29,7 +38,7 @@ button {
   text-align: right;
   font-size: larger;
   line-height: 4vh;
-  width: 50vw;
+  max-width: 50%;
 }
 
 .btn {
@@ -44,12 +53,9 @@ button {
   background-color: #e2e6ea;
 }
 
-.btn:focus {
-  box-shadow: 0 0 0 0.2rem #ffcf008c;
-}
-
 .selected-btn {
   font-weight: 600;
+  box-shadow: 0 0 0 0.2rem #ffcf008c;
 }
 
 .flower-img {
@@ -65,3 +71,42 @@ button {
   opacity: 0;
   transition: opacity 2s;
 }
+
+@media screen and (max-width: 1024px) {
+  .flower-img {
+    display: none;
+  }
+
+  #content {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #buttons {
+    position: inherit;
+  }
+
+  #line {
+    width: 80vw;
+    height: 3px;
+    position: inherit;
+    /* top: 16%; */
+  }
+
+  #layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #title {
+    font-size: x-large;
+  }
+
+  #content {
+    max-width: 80%;
+  }
+}
+
+
+@media screen and (max-width: 480px) {}

@@ -3,6 +3,7 @@ p {
   font-size: medium;
   line-height: 1.5rem;
   direction: rtl;
+  margin-left: 10%;
 }
 
 .line {

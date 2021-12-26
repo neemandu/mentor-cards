@@ -1,6 +1,6 @@
-* {
+/* * {
   font-family: 'rubik';
-}
+} */
 
 .nav {
   background-color: #ffffffd4;
@@ -52,6 +52,12 @@ app-card:hover {
   font-weight: 500;
   font-size: large;
   transition: color .15s ease-in-out, background-color .15s ease-in-out;
+}
+
+.option-menu-btn {
+  font-weight: 500;
+  font-size: large;
+  text-align: end;
 }
 
 button:focus {
@@ -110,12 +116,12 @@ p {
   font-size: 1rem;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   p {
     margin: 10px;
     font-size: inherit;
   }
-}
+} */
 
 ul {
   list-style: none;
@@ -123,6 +129,7 @@ ul {
   text-align: right;
   font-size: 1rem;
   padding-right: 0rem;
+  max-width: 90%;
 }
 
 ul li:before {
@@ -141,10 +148,12 @@ li span {
   padding: 2%;
   border-radius: 20px;
   width: fit-content;
+  max-width: 90%;
 }
 
 #middle {
   font-size: x-large;
+  text-align: center;
 }
 
 .action-button {
@@ -185,4 +194,38 @@ li span {
 
 #about-author:hover {
   color: #717171;
+}
+
+#mult-choise-btn {
+  display: flex;
+}
+
+#actions {
+  display: inherit;
+}
+
+#menu-actions {
+  display: none;
+  color: #ffa800;
+  background: white;
+  border-radius: 5px;
+  border: none;
+}
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 768px) {
+  #mult-choise-btn {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #actions {
+    display: none;
+  }
+
+  #menu-actions {
+    display: inherit;
+  }
 }

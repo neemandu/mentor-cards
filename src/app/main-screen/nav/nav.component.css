@@ -20,22 +20,12 @@ button {
   box-shadow: 0 0 0 0.2rem #ffcf008c;
 }
 
-.btn-icon {
-  margin-right: 5px;
-}
-
 #nav-buttons {
   margin: 5px 10px 5px 0px;
 }
 
 button:focus {
   outline: none;
-}
-
-#log-in-buttons {
-  width: 45%;
-  display: flex;
-  justify-content: flex-start;
 }
 
 #account_circle {
@@ -46,14 +36,10 @@ button:focus {
   transform: scale(1.2);
 }
 
-.login-button {
-  margin-right: 5vmin;
-}
-
 .sticky-top {
   z-index: 1000;
-  margin-bottom: 5px;
-  margin-top: -1px;
+  /* margin-bottom: 5px;
+  margin-top: -1px; */
 }
 
 img {
@@ -75,20 +61,6 @@ img {
 
 #logo:active {
   opacity: 0.8;
-}
-
-h1 {
-  letter-spacing: 1px;
-  margin: 10px 15px;
-}
-
-.iconButton {
-  cursor: pointer;
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
 }
 
 #notificationIcon {
@@ -145,6 +117,7 @@ h1 {
   direction: rtl;
   text-align: initial;
   padding-left: 5%;
+  min-width: 10rem;
 }
 
 .news-list-item {
@@ -157,11 +130,34 @@ h1 {
   direction: rtl;
 }
 
-::ng-deep .mat-menu-panel {
-  max-width: 35vw !important;
-  min-width: 15vw !important;
+/* ::ng-deep .mat-menu-panel { */
+/* max-width: 35vw !important;
+  min-width: 15vw !important; */
+/* width: min-content;
+} */
+
+::ng-deep .mat-menu-news {
+  width: max-content;
 }
 
 .tooltip-class {
   font-size: 1rem;
+}
+
+::ng-deep .mat-menu-buttons {
+  width: min-content;
+}
+
+#nav-buttons .menu-btn {
+  display: none;
+}
+
+@media screen and (max-width: 1060px) {
+  #nav-buttons button:not(:first-child) {
+    display: none;
+  }
+
+  #nav-buttons .menu-btn {
+    display: inherit;
+  }
 }
