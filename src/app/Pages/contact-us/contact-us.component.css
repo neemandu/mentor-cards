@@ -100,11 +100,11 @@ textarea {
   max-height: 30vh;
 }
 
-app-information-bar {
+/* app-information-bar {
   position: absolute;
   bottom: 0px;
   width: 100%;
-}
+} */
 
 /* @media screen and (max-width: 1024px) {
 } */

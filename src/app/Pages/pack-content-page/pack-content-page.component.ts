@@ -70,6 +70,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   multipileChanged(): void {
     this.selectedCards = [];
+    // let htmlElement: HTMLHtmlElement = document.getElementsByTagName("html")[0];
+    // htmlElement.style.transform = 'rotate(-90deg);'
   }
 
   cardSelected(card: CardComponent, index: number): void {
