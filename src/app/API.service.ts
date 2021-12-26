@@ -12,6 +12,7 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
+
 export type CreateUserInput = {
   username?: string | null;
   email?: string | null;

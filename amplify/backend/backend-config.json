@@ -56,7 +56,8 @@
             {
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
-                "apiKeyExpirationDays": 7,
+                "apiKeyExpirationDays": 365,
+                "apiKeyExpirationDate": "2022-12-23T07:32:53.846Z",
                 "description": "mentor-cards"
               }
             }
@@ -71,13 +72,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "mentorcardsMailingListService",
-          "attributes": [
-            "Arn"
-          ]
-        },
         {
           "category": "api",
           "resourceName": "cardspacks",
@@ -260,11 +254,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "mentorcardsMailingListService": {
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer",
-      "build": true
-    },
     "UpdatePaymentProgram": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -275,6 +264,21 @@
           "resourceName": "cardspacks",
           "attributes": [
             "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "ContactUsTrigger": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
           ]
         }
       ]

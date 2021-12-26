@@ -11,7 +11,6 @@ Amplify Params - DO NOT EDIT */
 
 
 const { env } = require("process");
-const SibApiV3Sdk = require('sib-api-v3-sdk');
 var AWS = require("aws-sdk");
 
 async function getUser(username){
@@ -90,44 +89,23 @@ async function getUserGroup(username){
     return g_group;
 }
 
-function AddUserToMailingList(username, email, phone){
-    let defaultClient = SibApiV3Sdk.ApiClient.instance;
-    
-    let api_key = process.env.SENDINBLUE_API_KEY
-    let apiKey = defaultClient.authentications['api-key'];
-    apiKey.apiKey = api_key;
-    
-    let apiInstance = new SibApiV3Sdk.ContactsApi();
-    
-    let createContact = new SibApiV3Sdk.CreateContact();
-    
-    createContact.email = email;
-    createContact.attributes = {
-        "lastname": username,
-        "sms": phone,
-        "firstname": username
-    }
-    createContact.updateEnabled = true;
-    createContact.listIds = [3]
-    
-    apiInstance.createContact(createContact).then(function(data) {
-      console.log('API called successfully. Returned data: ' + JSON.stringify(data));
-    }, function(error) {
-      console.error(error);
-    });
-}
-
 exports.handler = async (event) => {
     var username = event.arguments.input['username'];
     var email = event.arguments.input['email'];
     var phone = event.arguments.input['phone'];
 
+    console.log(event);
+    console.log('Adding new user:');
+    console.log(username);
+    console.log(email);
+    console.log(phone);
+
     AWS.config.update({
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     });
-    AddUserToMailingList(username, email, phone);
-    var user = await getUser(email);
+
+    var user = await getUser(username);
 
     if(!user){
 
@@ -168,6 +146,7 @@ exports.handler = async (event) => {
         };
     
         console.log("Adding a new user...");
+        console.log(params);
     
         await docClient.put(params, function(err, data) {
             if (err) {
