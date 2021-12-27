@@ -123,6 +123,10 @@ p {
   }
 } */
 
+::ng-deep .cdk-overlay-pane {
+  max-width: 50vw !important;
+}
+
 ul {
   list-style: none;
   line-height: 2rem;
@@ -215,9 +219,9 @@ li span {
 @media screen and (max-width: 1024px) {}
 
 @media screen and (max-width: 768px) {
-  /* #mult-choise-btn {
-    display: none;
-  } */
+  ::ng-deep .cdk-overlay-pane {
+    max-width: 80vw !important;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -227,5 +231,11 @@ li span {
 
   #menu-actions {
     display: inherit;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  ::ng-deep .cdk-overlay-pane {
+    max-width: 95vw !important;
   }
 }

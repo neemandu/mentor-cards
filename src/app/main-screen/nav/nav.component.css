@@ -47,6 +47,10 @@ img {
   margin: 5px;
 }
 
+#logo-no-name {
+  display: none;
+}
+
 #logo {
   /* margin: 10px 10px; */
   background-color: white;
@@ -154,4 +158,20 @@ img {
   #nav-buttons .menu-btn {
     display: inherit;
   }
+
+}
+
+@media screen and (max-width: 480px) {
+  #logo-name {
+    display: none;
+  }
+
+  #logo-no-name {
+    display: inherit;
+  }
+
+  img {
+    height: 2rem;
+  }
+
 }

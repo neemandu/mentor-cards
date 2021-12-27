@@ -20,7 +20,7 @@ p {
 .flower-img {
   opacity: 0;
   transition: opacity 2s;
-  height: 20rem;
+  height: 30vw;
   margin-top: 1.5rem;
 }
 
@@ -95,6 +95,15 @@ p {
     display: none;
   }
 
+  .flower-img:first-child {
+    display: inherit;
+    position: absolute;
+    opacity: 0.2 !important;
+    top: 10%;
+    z-index: -1;
+    height: 50vh;
+  }
+
   #about-content {
     margin-top: 2rem;
   }
@@ -127,8 +136,25 @@ p {
     max-width: 80vw;
   }
 
+  .flower-img:first-child {
+    display: inherit;
+    position: absolute;
+    opacity: 0.2 !important;
+    top: 15%;
+    z-index: -1;
+    height: 50vh;
+  }
+
 }
 
 
 @media screen and (max-width: 480px) {
+  .flower-img:first-child {
+    display: inherit;
+    position: absolute;
+    opacity: 0.2 !important;
+    top: 25%;
+    z-index: -1;
+    height: 50vh;
+  }
 }

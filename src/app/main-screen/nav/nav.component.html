@@ -41,7 +41,8 @@
           </a>
         </li>
       </ul> -->
-      <img src="/assets/Logo.png">
+      <img id="logo-name" src="/assets/Logo.png">
+      <img id="logo-no-name" src="/assets/Logo-NoName-NoBG.png">
     </div>
   </div>
 </nav>
@@ -61,22 +62,22 @@
 </mat-menu>
 
 <mat-menu class="mat-menu-buttons" #allButtons="matMenu">
-    <button mat-menu-item type="button" *ngIf="!loggedIn" class="btn " (click)="navigate('/home-page')">
+    <button mat-menu-item type="button" *ngIf="!loggedIn" (click)="navigate('/home-page')">
       <mat-icon>home</mat-icon>
     </button>
-    <button mat-menu-item id="user-drop-down" *ngIf="loggedIn" type="button" class="btn "
+    <button mat-menu-item id="user-drop-down" *ngIf="loggedIn" type="button"
       [matMenuTriggerFor]="userMenu">
       <mat-icon id="account_circle">account_circle</mat-icon>
     </button>
-    <button mat-menu-item type="button" *ngIf="!loggedIn" class="btn " (click)=signInSignUp()>התחברות\הרשמה</button>
-    <button mat-menu-item type="button" class="btn " (click)="navigate('/all-packs-page')">כל ערכות
+    <button mat-menu-item type="button" *ngIf="!loggedIn" (click)=signInSignUp()>התחברות\הרשמה</button>
+    <button mat-menu-item type="button" (click)="navigate('/all-packs-page')">כל ערכות
       הקלפים</button>
-    <button mat-menu-item type="button" *ngIf="!loggedIn" class="btn " (click)="navigate('/example-pack')">ערכה
+    <button mat-menu-item type="button" *ngIf="!loggedIn" (click)="navigate('/example-pack')">ערכה
       להתנסות</button>
-    <button mat-menu-item type="button" class="btn" (click)="navigate('/guide-page')">הדרכות</button>
-    <button mat-menu-item type="button" class="btn" (click)="navigate('/price-page')">מחירון</button>
-    <button mat-menu-item type="button" class="btn" (click)="navigate('/about-page')">עלינו</button>
-    <button mat-menu-item type="button" class="btn" (click)="navigate('/contact-us')">צור קשר</button>
+    <button mat-menu-item type="button" (click)="navigate('/guide-page')">הדרכות</button>
+    <button mat-menu-item type="button" (click)="navigate('/price-page')">מחירון</button>
+    <button mat-menu-item type="button" (click)="navigate('/about-page')">עלינו</button>
+    <button mat-menu-item type="button" (click)="navigate('/contact-us')">צור קשר</button>
 </mat-menu>
 
 <mat-menu #userMenu="matMenu">

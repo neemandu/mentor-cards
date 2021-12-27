@@ -13,7 +13,7 @@ app-card {
 
 .one-card,
 .two-card {
-  height: 60vh;
+  height: 50vh;
 }
 
 .three-card,
@@ -68,15 +68,3 @@ app-card {
 .closeModalButton:focus {
   outline: none;
 }
-
-/* @media screen and (max-width: 600px) {
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  app-card {
-    max-width: 100%;
-  }
-} */

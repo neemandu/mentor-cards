@@ -120,4 +120,8 @@ marquee li {
   .actions {
     width: 85%;
   }
+
+  #top {
+    font-size: x-large;
+  }
 }

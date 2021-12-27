@@ -2,30 +2,10 @@
   direction: rtl;
 }
 
-app-card {
-  max-width: 25vw;
-}
-
 .content {
   display: flex;
-  height: 60vh;
-}
-
-.card-pre-reveal {
-  margin: 10px 10px;
-  max-height: 85vh;
-  opacity: 0;
-  transition: opacity 0.3s linear;
-}
-
-.card-reveal {
-  opacity: 1;
-  /* transition: opacity 0.7s linear; */
-}
-
-.closeModalButton {
-  margin-top: 0px;
-  margin-bottom: 1%;
+  justify-content: center;
+  /* height: 60vh; */
 }
 
 .closeModalButton:focus {
@@ -36,14 +16,22 @@ app-card {
   overflow: hidden;
 }
 
-@media screen and (max-width: 600px) {
+img {
+  width: 55%;
+}
+
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 480px) {
   .content {
-    display: flex;
     flex-direction: column-reverse;
-    justify-content: center;
+    max-height: fit-content;
   }
 
-  app-card {
-    max-width: 100%;
+  img {
+    width: unset;
   }
 }

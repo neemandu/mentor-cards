@@ -70,8 +70,17 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   multipileChanged(): void {
     this.selectedCards = [];
-    // let htmlElement: HTMLHtmlElement = document.getElementsByTagName("html")[0];
-    // htmlElement.style.transform = 'rotate(-90deg);'
+    this.rotate();
+  }
+
+  async rotate() {
+    const { type } = screen.orientation;
+    if (type.startsWith("landscape")) return;
+    try {
+      await screen.orientation.lock('landscape');
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   cardSelected(card: CardComponent, index: number): void {
@@ -127,7 +136,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxHeight = '90vh';
+    // dialogConfig.maxHeight = '90vh';
     dialogConfig.data = this.pack.cards;
     this.sleep(800).then(() => {
       const dialogRef = this.dialog.open(RandomCardRevealDialogComponent, dialogConfig);
