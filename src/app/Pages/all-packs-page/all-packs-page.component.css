@@ -165,7 +165,6 @@ h1 {
 
 .category-line:hover>.categrory-title {
   transform: scale(1.2);
-
 }
 
 @media screen and (max-width: 1024px) {}
@@ -183,5 +182,9 @@ h1 {
 @media screen and (max-width: 480px) {
   app-pack {
     margin: 5px 10px;
+  }
+
+  .category-line:hover>.categrory-title {
+    transform: none;
   }
 }

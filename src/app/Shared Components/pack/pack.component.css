@@ -106,6 +106,10 @@ mat-icon {
   font-weight: 600;
   animation: heartbeat 2s infinite;
 }
+/* 
+img {
+  overflow-y: auto;
+} */
 
 @keyframes heartbeat {
 
