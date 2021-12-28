@@ -118,7 +118,11 @@ textarea {
     display: none;
   }
 }
-/* 
-@media screen and (max-width: 480px) {
 
-} */
+@media screen and (max-width: 480px) {
+  app-information-bar {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+  }
+}

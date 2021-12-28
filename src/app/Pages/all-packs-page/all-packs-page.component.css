@@ -38,11 +38,12 @@ app-pack {
 
 #filters {
   position: sticky;
+  top: 10%;
   max-width: 25vw;
   word-break: keep-all;
   margin-left: 10px;
   margin-bottom: 1rem;
-  height: 88vh;
+  /* height: 88vh; */
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -186,5 +187,10 @@ h1 {
 
   .category-line:hover>.categrory-title {
     transform: none;
+  }
+
+  .first-line,
+  .second-line {
+    width: 25%;
   }
 }

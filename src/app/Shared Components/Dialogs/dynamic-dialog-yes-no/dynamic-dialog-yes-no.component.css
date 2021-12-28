@@ -43,3 +43,9 @@ mat-toolbar {
   /* margin-top: -15px; */
   margin-left: -20px;
 }
+
+#title-div {
+  text-align: start;
+  display: flex;
+  justify-content: space-around;
+}

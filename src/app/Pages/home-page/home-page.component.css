@@ -21,14 +21,16 @@ video {
   width: 40%;
 }
 
+.actions-bottom,
 .actions-top {
   margin-bottom: 2%;
   padding: 2%;
 }
 
+/* 
 .actions-bottom {
   padding: 2%;
-}
+} */
 
 #top {
   font-size: xx-large;
@@ -95,7 +97,7 @@ button:focus {
 }
 
 app-information-bar {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0px;
   width: 100%;
 }

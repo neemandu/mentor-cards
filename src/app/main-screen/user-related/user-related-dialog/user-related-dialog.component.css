@@ -36,10 +36,21 @@ mat-tab {
   font-weight: bold;
 }
 
+.tab-label-sub {
+  font-size: 0.8rem;
+}
+
 ::ng-deep .mat-ink-bar {
   background-color: #ffa800 !important;
 }
 
 .iconButton {
   margin: -10px;
+}
+
+@media screen and (max-width: 480px) {
+  mat-tab-group {
+    width: 75vw;
+  }
+
 }

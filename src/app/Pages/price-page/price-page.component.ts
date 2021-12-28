@@ -247,7 +247,7 @@ export class PricePageComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.maxHeight = '85vh';
-        dialogConfig.maxWidth = '30vw';
+        dialogConfig.maxWidth = '85vw';
         let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
         textInModal += this.userAuthService.expDate;
         dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
@@ -264,7 +264,7 @@ export class PricePageComponent implements OnInit {
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.maxHeight = '85vh';
-        dialogConfig.maxWidth = '30vw';
+        dialogConfig.maxWidth = '85vw';
         const title = "הנכם רשומים לתכנית אחרת"
         const content = ["שימו לב!", `התכנית החדשה תעודכן החל מהתאריך ${this.nextPaymentDate}`]
         dialogConfig.data = new DynamicDialogData(title, content, "המשך בכל זאת", "בטל")

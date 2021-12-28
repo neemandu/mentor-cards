@@ -95,4 +95,10 @@ video {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  app-information-bar {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+  }
 }

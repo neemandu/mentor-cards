@@ -7,7 +7,7 @@
 <div class=content>
   <div class="d-flex flex-column actions actions-top">
     <img id="logo" src="/assets/Logo-NoBG.png">
-    <br><br>
+    <br>
     <span id="top">פלטפורמת הקלפים הדיגיטלית הגדולה בישראל</span>
     <br>
     <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">עדין לא נרשמתם
@@ -17,7 +17,6 @@
     <span id="middle" *ngIf="userData && trialPeriodExpDate">אתם כבר מחוברים ויש לכם חודש מתנה, לכו
       לאמן!</span>
     <!-- <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">עדין לא נרשמתם לתוכנית?</span> -->
-    <br>
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
     <span style="font-size: medium;" id="middle" *ngIf="!userData">התחברו ותיהנו מ-14 ימי ניסיון בחינם!</span>
     <div *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">

@@ -287,7 +287,7 @@ export class UserAuthService {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
-    // dialogConfig.maxWidth = '85vw';
+    dialogConfig.maxWidth = '90vw';
     const dialogRef = this.dialog.open(UserRelatedDialogComponent, dialogConfig);
   }
 
