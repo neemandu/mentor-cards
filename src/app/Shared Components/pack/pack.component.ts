@@ -55,6 +55,8 @@ export class PackComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.maxWidth = '85vw';
+    dialogConfig.maxHeight = '90vh';
     dialogConfig.data = this.packInfo;
     const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {

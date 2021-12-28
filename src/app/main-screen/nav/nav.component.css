@@ -36,11 +36,9 @@ button:focus {
   transform: scale(1.2);
 }
 
-/* .sticky-top {
+.sticky-top {
   z-index: 1000;
-  margin-bottom: 5px;
-  margin-top: -1px;
-} */
+}
 
 img {
   height: 3rem;
