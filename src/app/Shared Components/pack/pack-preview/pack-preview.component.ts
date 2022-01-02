@@ -119,7 +119,7 @@ export class PackPreviewComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxWidth = '40vw';
+    // dialogConfig.maxWidth = '40vw';
     dialogConfig.data = this.data;
     this.dialog.open(AboutAuthorComponent, dialogConfig);
   }

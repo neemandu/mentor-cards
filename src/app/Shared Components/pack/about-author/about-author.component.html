@@ -1,9 +1,3 @@
-<!-- <div mat-dialog-title class="d-flex justify-content-between">
-    <button class="iconButton" mat-icon-button [mat-dialog-close] cdkFocusInitial>
-        <mat-icon>highlight_off</mat-icon>
-    </button>
-    <h2>לגבי יוצר הערכה</h2>
-</div> -->
 <mat-toolbar class="d-flex justify-content-between">
     <button class="iconButton" mat-icon-button [mat-dialog-close] cdkFocusInitial>
         <mat-icon>highlight_off</mat-icon>
@@ -11,14 +5,13 @@
     <span class="title">על יוצר הערכה</span>
 </mat-toolbar>
 <div class="line"></div>
-<div mat-dialog-content class="d-flex flex-column">
-    <div class="d-flex justify-content-center align-items-center">
-        <img style="max-height: 30vh; max-width: 20vw;" *ngIf="packInfo.about.imgUrl" src={{packInfo.about.imgUrl}}>
+<div mat-dialog-content>
+    <div id="content">
+        <img *ngIf="packInfo.about.imgUrl" src={{packInfo.about.imgUrl}}>
         <p>{{packInfo.about.text}}</p>
     </div>
 </div>
 <mat-dialog-actions align="center" *ngIf="packInfo.about.link">
-    <a href="{{packInfo.about.link}}" target="_blank" style="text-align: center; font-size: x-large;">למידע נוסף לחצו כאן</a>
+    <a href="{{packInfo.about.link}}" target="_blank" style="text-align: center; font-size: x-large;">למידע נוסף לחצו
+        כאן</a>
 </mat-dialog-actions>
-<!-- <div mat-dialog-actions>
-</div> --> 

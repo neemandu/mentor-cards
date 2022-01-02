@@ -53,3 +53,14 @@ ul {
 #payment-inst-list {
   font-weight: 600;
 }
+
+.mat-dialog-content {
+  max-height: initial;
+  max-width: 35vw;
+}
+
+@media screen and (max-width: 768px) {
+  .mat-dialog-content {
+    max-width: initial;
+  }
+}
