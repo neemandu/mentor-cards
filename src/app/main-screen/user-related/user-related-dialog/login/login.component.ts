@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
     // this.showHideLoading();
     this.overlaySpinnerService.changeOverlaySpinner(true);
     var user = {
-      "username": this.loginForm.get("username").value,
+      "username": this.loginForm.get("username").value.toLowerCase(),
       "password": this.loginForm.get("password").value,
     }
     this.amplifyAuthService.logIn(user).then(userData => {
@@ -158,7 +158,7 @@ export class LoginComponent implements OnInit {
 
   forgotPasswordVarifyEmail(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    var user = this.forgotPasswordForm.get("username").value;
+    var user = this.forgotPasswordForm.get("username").value.toLowerCase();
     this.userAuthService.forgotPasswordVarifyEmail(user)
       .then(res => {
         this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -178,7 +178,7 @@ export class LoginComponent implements OnInit {
 
   forgotPasswordReset(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    var user = this.forgotPasswordForm.get("username").value;
+    var user = this.forgotPasswordForm.get("username").value.toLowerCase();
     var confirmationCode = this.forgotPasswordForm.get("confirmationCode").value.trim();
     var newPassword = this.forgotPasswordForm.get("newPassword").value;
     this.userAuthService.forgotPasswordReset(user, confirmationCode, newPassword)

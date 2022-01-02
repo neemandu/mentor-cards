@@ -287,7 +287,7 @@ export class PricePageComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.maxHeight = '85vh';
-    dialogConfig.maxWidth = '30vw';
+    // dialogConfig.maxWidth = '30vw';
     dialogConfig.data = new PurchaseData(this.paymentStartDate, this.packSelected);
     const dialogRef = this.dialog.open(ApprovePurchaseDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {

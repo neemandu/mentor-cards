@@ -148,6 +148,11 @@ img {
   display: none;
 }
 
+.mat-menu-item {
+  text-align: start;
+  direction: rtl;
+}
+
 @media screen and (max-width: 1060px) {
   #nav-buttons button:not(:first-child) {
     display: none;

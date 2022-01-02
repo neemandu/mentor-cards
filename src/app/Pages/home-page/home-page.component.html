@@ -18,6 +18,7 @@
       לאמן!</span>
     <!-- <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">עדין לא נרשמתם לתוכנית?</span> -->
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
+    <br>
     <span style="font-size: medium;" id="middle" *ngIf="!userData">התחברו ותיהנו מ-14 ימי ניסיון בחינם!</span>
     <div *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">
       <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
@@ -25,9 +26,6 @@
     <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialPeriodExpDate)"
       type="button" (click)="navigate('/all-packs-page')">לכל ערכות הקלפים</button>
     <br>
-    <span *ngIf="!userData" id="middle">רוצים לראות איך זה עובד?</span>
-    <br>
-    <button *ngIf="!userData" style="font-size: x-large;" type="button" (click)="navigate('/example-pack')">ערכה לדוגמא</button>
   </div>
   <div *ngIf="news?.length > 0" class="d-flex flex-column actions actions-bottom">
     <span id="news-title">חדשות ועדכונים</span>

@@ -79,7 +79,7 @@ p {
 }
 
 #top-image {
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
   width: 35%;
   transition: transform 0.5s ease;
 }
@@ -267,6 +267,7 @@ mat-card-content {
 
   #title {
     font-size: 1.5em;
+    max-width: 90%;
   }
 
 }

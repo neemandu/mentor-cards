@@ -16,13 +16,13 @@
     <button type="button" class="option-btn top-option-btn" (click)="openRandomCardsModal()">הצג קלף אקראי</button>
     <!-- <button *ngIf="pack.about" type="button" class="option-btn about-author-option-btn" (click)="openAboutDialog()">על יוצר הערכה</button> -->
   </div>
-  <button type="button" id="menu-actions" class="btn" [matMenuTriggerFor]="actions">
+  <button type="button" id="menu-actions" class="btn option-btn" [matMenuTriggerFor]="actions">
     <mat-icon>style</mat-icon>
-    <span style="font-size: large;">פעולות</span>
+    <span >פעולות</span>
   </button>
   <!-- just for balance -->
   <button type="button" class="option-btn top-option-btn" (click)="openGuideBook()">
-    <mat-icon style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
+    <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
   </button>
   <!-- <div *ngIf="!pack || !pack.guideBook" style="visibility: hidden;" class="d-flex flex-row">
     <div style="font-size: 1rem; margin-left: 5px;">בחירה מרובה </div>

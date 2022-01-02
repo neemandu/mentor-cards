@@ -202,6 +202,8 @@ li span {
 
 #mult-choise-btn {
   display: flex;
+  align-items: center;
+  width: min-content;
 }
 
 #actions {
@@ -237,5 +239,16 @@ li span {
 @media screen and (max-width: 480px) {
   ::ng-deep .cdk-overlay-pane {
     max-width: 95vw !important;
+  }
+
+  .option-btn {
+    font-weight: 800;
+    font-size: medium;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #guide-book-icon {
+    display: none;
   }
 }

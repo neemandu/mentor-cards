@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
   }
 
   checkUsernameConfirm(): void {
-    if (this.registerForm.controls.username.value !== this.registerForm.controls.usernameConfirm.value)
+    if (this.registerForm.controls.username.value.toLowerCase() !== this.registerForm.controls.usernameConfirm.value.toLowerCase())
       this.registerForm.controls.usernameConfirm.setErrors({ 'notSameEmail': true })
   }
 
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
     var user: NewUser = {
       "fullName": this.registerForm.get("name").value,
       "phone": `+972${this.registerForm.get("phone").value}`,
-      "email": this.registerForm.get("username").value,
+      "email": this.registerForm.get("username").value.toLowerCase(),
       "password": this.registerForm.get("password").value,
     }
     this.amplifyAuthService.signUp(user).then(data => {
