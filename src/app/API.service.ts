@@ -38,6 +38,7 @@ export type User = {
   cancellationDate?: string | null;
   couponCodes?: Array<CouponCodes | null> | null;
   cardsPacksIds?: Array<string | null> | null;
+  providerTransactionId?: string | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -499,6 +500,7 @@ export type ModelUserFilterInput = {
   groupRole?: ModelStringInput | null;
   cancellationDate?: ModelStringInput | null;
   cardsPacksIds?: ModelStringInput | null;
+  providerTransactionId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -647,7 +649,8 @@ export type CreateUserMutation = {
     createdAt: string;
     updatedAt: string;
   } | null> | null;
-  cardsPacksIds?: Array<string | null> | null;
+  cardsPacksIds?: Array<string | null> | null; 
+  providerTransactionId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1079,6 +1082,7 @@ export type GetUserQuery = {
     updatedAt: string;
   } | null> | null;
   cardsPacksIds?: Array<string | null> | null;
+  providerTransactionId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1134,6 +1138,7 @@ export type ListUsersQuery = {
       updatedAt: string;
     } | null> | null;
     cardsPacksIds?: Array<string | null> | null;
+    providerTransactionId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1785,6 +1790,7 @@ export class APIService {
             updatedAt
           }
           cardsPacksIds
+          providerTransactionId
           createdAt
           updatedAt
         }
@@ -2649,6 +2655,7 @@ export class APIService {
             updatedAt
           }
           cardsPacksIds
+          providerTransactionId
           createdAt
           updatedAt
         }
@@ -2718,6 +2725,7 @@ export class APIService {
               updatedAt
             }
             cardsPacksIds
+            providerTransactionId
             createdAt
             updatedAt
           }
