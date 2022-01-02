@@ -5,6 +5,8 @@
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
+const { env } = require("process");
+var AWS = require("aws-sdk");
 
 async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -120,7 +122,7 @@ async function cancelUserSubscription(user){
 }
 
 function sendRecipt(){
-    console.log("Should Sned a recipt!! Not yet implemented");
+    console.log("Should Send a recipt!! Not yet implemented");
 }
 
 async function getUserByPayPalTxId(transaction_id){
@@ -162,18 +164,22 @@ async function getUserByPayPalTxId(transaction_id){
 exports.handler = async (event) => {
     console.log('PayPal webhook!');
     console.log('event:');
+    console.log(event);
     var paypal_body = JSON.parse(event.body);
     var event_type = paypal_body.event_type;
-    var transaction_id = paypal_body.resource.id;
-    var user = getUserByPayPalTxId(transaction_id);
+    var transaction_id = paypal_body.resource.billing_agreement_id;
+    console.log('event_type: ' + event_type);
     if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+        var transaction_id = paypal_body.resource.id;
+        console.log('transaction_id: ' + transaction_id);
+        var user = await getUserByPayPalTxId(transaction_id);
         await cancelUserSubscription(user);
     }
-    else if(event_type == "BILLING.SUBSCRIPTION.CREATED" || 
-    event_type == "PAYMENT.SALE.COMPLETED"){
+    else if(event_type == "PAYMENT.SALE.COMPLETED"){
+        var transaction_id = paypal_body.resource.billing_agreement_id;
+        console.log('transaction_id: ' + transaction_id);
         sendRecipt();
     }
-    console.log(event);
     const response = {
         statusCode: 200,
     //  Uncomment below to enable CORS requests
