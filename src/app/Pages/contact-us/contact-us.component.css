@@ -89,6 +89,7 @@ mat-toolbar {
   align-items: center;
   justify-content: center;
   margin-top: 3%;
+  min-height: 82%;
 }
 
 mat-card {

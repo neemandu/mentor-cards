@@ -31,7 +31,7 @@ p {
 #about-text {
   display: flex;
   justify-content: space-between;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 #about-content {
@@ -88,6 +88,10 @@ p {
   font-size: larger;
   color: #ff9a14;
   font-weight: 600;
+}
+
+#introduction-partial {
+  display: none;
 }
 
 @media screen and (max-width: 1024px) {
@@ -156,5 +160,17 @@ p {
     top: 25%;
     z-index: -1;
     height: 50vh;
+  }
+
+  #introduction-full {
+    display: none;
+  }
+
+  #introduction-partial {
+    display: inherit;
+  }
+
+  #introduction {
+    margin-bottom: 1.5rem;
   }
 }

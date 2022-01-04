@@ -68,3 +68,17 @@ app-card {
 .closeModalButton:focus {
   outline: none;
 }
+
+#rotate-screen-instruction {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  font-size: small;
+  justify-content: center;
+}
+
+@media screen and (orientation: portrait) {
+  #rotate-screen-instruction {
+    display: inherit;
+  }
+}

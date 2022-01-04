@@ -2,15 +2,17 @@
   <button class="closeModalButton" mat-icon-button (click)="closeDialog()">
     <mat-icon>highlight_off</mat-icon>
   </button>
-  <mat-dialog-content
-  [ngClass]="{'content': true, 'one-card': data.length == 1, 'two-card': data.length == 2,
-  'three-card': data.length == 3, 'four-card': data.length == 4, 'five-card': data.length == 5}"
-  >
+  <mat-dialog-content [ngClass]="{'content': true, 'one-card': data.length == 1, 'two-card': data.length == 2,
+  'three-card': data.length == 3, 'four-card': data.length == 4, 'five-card': data.length == 5}">
     <!-- <div class="content"> -->
-      <div class="d-flex flex-column card-preview" *ngFor="let card of data">
-        <img loading="eager" class="img-view" src={{card.imgUrl}} data-src={{card.imgUrl}}>
-        <span class="badge badge-pill badge-light index">{{card.index}}</span>
-      </div>
+    <div class="d-flex flex-column card-preview" *ngFor="let card of data">
+      <img loading="eager" class="img-view" src={{card.imgUrl}} data-src={{card.imgUrl}}>
+      <span class="badge badge-pill badge-light index">{{card.index}}</span>
+    </div>
     <!-- </div> -->
   </mat-dialog-content>
+  <div id="rotate-screen-instruction">
+    <mat-icon>screen_rotation</mat-icon>
+    <span>לחווית שימוש מיטבית, כדאי לעבור לתצוגה אופקית.</span>
+  </div>
 </div>

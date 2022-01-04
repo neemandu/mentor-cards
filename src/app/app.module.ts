@@ -35,6 +35,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, MobileWarningDialogComponent } from './app.component';
@@ -161,7 +162,7 @@ import { AuthService } from './Services/auth.service';
     MatSelectModule,
     MatCardModule,
     DragDropModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   providers: [
   ],
