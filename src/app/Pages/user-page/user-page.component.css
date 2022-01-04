@@ -85,6 +85,12 @@ video {
   justify-content: space-between;
 }
 
+app-information-bar {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
 @media screen and (max-width: 1024px) {}
 
 @media screen and (max-width: 768px) {}
@@ -96,9 +102,4 @@ video {
     align-items: flex-start;
   }
 
-  app-information-bar {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-  }
 }
