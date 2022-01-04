@@ -3,6 +3,12 @@ button {
   font-size: 1rem;
 }
 
+.nav {
+  background-color: white;
+  height: var(--top-nav-height)
+
+}
+
 .navbar-btn {
   margin-left: 5px;
 }

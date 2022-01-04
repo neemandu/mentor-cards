@@ -1,7 +1,8 @@
 .footer {
   font-size: larger;
   width: 100%;
-  height: 3rem;
+  height: var(--bottom-nav-height);
+  /* height: 7vh; */
   background-color: rgb(255, 203, 126);
   color: white;
   /* text-align: center; */

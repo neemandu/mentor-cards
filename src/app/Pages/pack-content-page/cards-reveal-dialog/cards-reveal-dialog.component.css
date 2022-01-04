@@ -10,6 +10,7 @@ app-card {
   display: flex;
   flex-direction: row;
   align-self: center;
+  margin-bottom: 1rem;
 }
 
 .one-card,

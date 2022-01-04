@@ -88,8 +88,10 @@ mat-toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 3%;
-  min-height: 82%;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  /* min-height: 82%; */
+  min-height: var(--content-height);
 }
 
 mat-card {

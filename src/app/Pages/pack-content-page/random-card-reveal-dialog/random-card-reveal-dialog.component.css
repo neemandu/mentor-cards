@@ -5,7 +5,7 @@
 .content {
   display: flex;
   justify-content: center;
-  /* height: 60vh; */
+  height: 75vh;
 }
 
 .closeModalButton:focus {
@@ -16,9 +16,9 @@
   overflow: hidden;
 }
 
-img {
+/* img {
   width: 55%;
-}
+} */
 
 @media screen and (max-width: 1024px) {
 }
@@ -29,9 +29,16 @@ img {
   .content {
     flex-direction: column-reverse;
     max-height: fit-content;
+    height: 60vh;
   }
 
-  img {
+  /* img {
     width: unset;
-  }
+  } */
 }
+
+/* @media screen and (max-width: 320px) {
+  .content {
+    height: 55vh;
+  }
+} */
