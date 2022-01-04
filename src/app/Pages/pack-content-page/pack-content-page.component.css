@@ -124,7 +124,7 @@ p {
 } */
 
 ::ng-deep .cdk-overlay-pane {
-  max-width: 50vw !important;
+  max-width: 90vw !important;
 }
 
 ul {
@@ -237,10 +237,6 @@ li span {
 }
 
 @media screen and (max-width: 480px) {
-  ::ng-deep .cdk-overlay-pane {
-    max-width: 95vw !important;
-  }
-
   .option-btn {
     font-weight: 800;
     font-size: medium;

@@ -9,6 +9,7 @@ app-card {
 .content {
   display: flex;
   flex-direction: row;
+  align-self: center;
 }
 
 .one-card,
@@ -39,7 +40,8 @@ app-card {
 }
 
 .img-view {
-  height: 95%;
+  height: 100%;
+  width: 100%;
 }
 
 .badge-light {
@@ -58,6 +60,8 @@ app-card {
 
 .card-preview {
   padding: 0.5em;
+  display: flex;
+  flex-direction: column;
 }
 
 .closeModalButton {
@@ -75,10 +79,32 @@ app-card {
   gap: 5px;
   font-size: small;
   justify-content: center;
+  margin-top: 0.5rem;
 }
 
 @media screen and (orientation: portrait) {
   #rotate-screen-instruction {
     display: inherit;
   }
+
+  .one-card,
+  .two-card,
+  .three-card,
+  .four-card,
+  .five-card {
+    height: 65vh;
+  }
+
+  .content {
+    flex-direction: column;
+    overflow: auto;
+    max-height: 55vh;
+  }
+
 }
+
+/* @media screen and (max-width: 480px) {
+  .content {
+    flex-direction: column;
+  }
+} */
