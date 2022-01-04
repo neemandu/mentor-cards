@@ -11,7 +11,7 @@
     </div>
   </div>
   <!-- </mat-dialog-content> -->
-  <div id="rotate-screen-instruction">
+  <div *ngIf="data.length > 1" id="rotate-screen-instruction">
     <mat-icon>screen_rotation</mat-icon>
     <span style="text-align: center;">לחווית שימוש מיטבית, כדאי לעבור לתצוגה אופקית.</span>
   </div>
