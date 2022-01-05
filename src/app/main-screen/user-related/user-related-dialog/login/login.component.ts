@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   showConfirmUser: boolean = false;
   showLoading: boolean = false;
   showPwChallange: boolean = false;
+  confirmCodeSent: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, public router: Router,
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService, private ngZone: NgZone) { }
@@ -161,6 +162,7 @@ export class LoginComponent implements OnInit {
     var user = this.forgotPasswordForm.get("username").value.toLowerCase();
     this.userAuthService.forgotPasswordVarifyEmail(user)
       .then(res => {
+        this.confirmCodeSent = true;
         this.overlaySpinnerService.changeOverlaySpinner(false);
         // this.forgotPasswordForm.enable();
         this.newPasswordPhaseEnable();
@@ -271,8 +273,8 @@ export class LoginComponent implements OnInit {
   onConfirmSubmit(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.amplifyAuthService.confirmCode(this.confirmForm.controls['username'].value, this.confirmForm.controls['confirmationCode'].value.trim())
-      .then((data: any) => {
-        this.overlaySpinnerService.changeOverlaySpinner(false);
+    .then((data: any) => {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
         // console.log(data);
         if (data === 'SUCCESS') {
           this.userAuthService._snackBar.open(

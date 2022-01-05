@@ -252,6 +252,10 @@ mat-card-content {
     font-size: 1.7em;
   }
 
+  ul {
+    padding-inline-start: 10px;
+  }
+
 }
 
 
@@ -270,4 +274,7 @@ mat-card-content {
     max-width: 90%;
   }
 
+  ul {
+    padding-inline-start: 0px;
+  }
 }
