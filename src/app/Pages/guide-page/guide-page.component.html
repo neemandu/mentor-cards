@@ -2,17 +2,17 @@
 <h1 id="title">{{title}}</h1>
 <div id="layout">
     <div id="buttons" class="d-flex flex-column">
-        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==1}" type="button" (click)="selectedBtn=1"
-            mat-menu-item (click)="title='מהות העבודה עם קלפים​'">
+        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==1}" type="button" (click)="selectedTopicChanged(1, 'מהות העבודה עם קלפים​')"
+            mat-menu-item>
             מהות העבודה עם קלפים​</button>
-        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==2}" type="button" (click)="selectedBtn=2"
-            mat-menu-item (click)="title='המלצות כלליות לעבודה עם קלפים​​'">
+        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==2}" type="button" (click)="selectedTopicChanged(2, 'המלצות כלליות לעבודה עם קלפים​​')"
+            mat-menu-item>
             המלצות כלליות לעבודה עם קלפים​</button>
-        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==3}" type="button" (click)="selectedBtn=3"
-            mat-menu-item (click)="title='ספרי ההדרכה שלנו​​'">
+        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==3}" type="button" (click)="selectedTopicChanged(3, 'ספרי ההדרכה שלנו​​')"
+            mat-menu-item>
             ספרי ההדרכה שלנו​</button>
-        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==4}" type="button" (click)="selectedBtn=4"
-            mat-menu-item (click)="title='הסבר לעבודה עם תוכנות לשיחות וידאו​​'">
+        <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==4}" type="button" (click)="selectedTopicChanged(4, 'הסבר לעבודה עם תוכנות לשיחות וידאו​​')"
+            mat-menu-item>
             הסבר לעבודה עם תוכנות לשיחות וידאו <br> ושיתוף מסך (ZOOM/Skype/Teams)
         </button>
     </div>
@@ -111,7 +111,7 @@
 
 <div id="accordion">
     <mat-accordion>
-        <mat-expansion-panel>
+        <mat-expansion-panel (click)="selectedTopicChanged(1, 'מהות העבודה עם קלפים​')">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     מהות העבודה עם קלפים
@@ -125,7 +125,7 @@
                 ​</p>
         </mat-expansion-panel>
 
-        <mat-expansion-panel>
+        <mat-expansion-panel (click)="selectedTopicChanged(2, 'המלצות כלליות לעבודה עם קלפים​​')">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     המלצות כלליות לעבודה עם קלפים​
@@ -156,7 +156,7 @@
             </ol>
         </mat-expansion-panel>
 
-        <mat-expansion-panel>
+        <mat-expansion-panel (click)="selectedTopicChanged(3, 'ספרי ההדרכה שלנו​​')">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     ספרי ההדרכה שלנו
@@ -183,7 +183,7 @@
             </p>
         </mat-expansion-panel>
 
-        <mat-expansion-panel>
+        <mat-expansion-panel (click)="selectedTopicChanged(4, 'הסבר לעבודה עם תוכנות לשיחות וידאו​​')">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     הסבר לעבודה עם תוכנות לשיחות וידאו <br> ושיתוף מסך (ZOOM/Skype/Teams)

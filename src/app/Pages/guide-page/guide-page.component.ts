@@ -14,4 +14,9 @@ export class GuidePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  selectedTopicChanged(index: number, title: string): void {
+    this.title = title;
+    this.selectedBtn = index;
+  }
+
 }
