@@ -120,7 +120,7 @@ exports.handler = async (event) => {
         if(group){
             subscription = group.subscription
         }*/
-
+        var tid = "Empty_" + username;
         var params = {
             TableName:table,
             Item:{
@@ -143,7 +143,7 @@ exports.handler = async (event) => {
                 "cancellationDate": null,
                 "couponCodes": [],
                 "cardsPacksIds": [],
-                "providerTransactionId": "",
+                "providerTransactionId": tid,
                 "fullName": fullName
             }
         };
