@@ -1,13 +1,6 @@
 
 const aws = require('aws-sdk');
 
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["PayPalAPIKey"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_CARDSPACKTABLE_ARN
 	API_CARDSPACKS_CARDSPACKTABLE_NAME
@@ -219,6 +212,14 @@ async function cancelPayPalSubscription(transactionId, access_token){
 async function getPayPalAccessToken(){
     console.log("getPayPalAccessToken");
     console.log("getting paypal secret");
+    
+    var { Parameters } = await (new aws.SSM())
+    .getParameters({
+    Names: ["PayPalAPIKey"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+    })
+    .promise();
+
     var paypalAPIKey = Parameters[0].Value;
     console.log("getting paypal secret DONE");
     var defaultOptions = {

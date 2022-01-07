@@ -106,7 +106,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-4267457375624e735756-build.zip",
+          "s3Key": "amplify-builds/CreateUser-3752457466454d436b38-build.zip",
           "sendinblueApiKey": "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"
         },
         "AddCardsPack": {
@@ -123,7 +123,7 @@
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-51414b6567693052776a-build.zip",
+          "s3Key": "amplify-builds/UnSubscribe-49515370526a64764875-build.zip",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "JoinExistingGroup": {
@@ -168,6 +168,11 @@
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/PayPalWebhookFunc-59464b716c50554d5446-build.zip"
+        },
+        "AddContactToExternalEmailService": {
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/AddContactToExternalEmailService-6853544e364173515a4e-build.zip"
         }
       },
       "auth": {

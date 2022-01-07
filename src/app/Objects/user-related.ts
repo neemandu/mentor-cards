@@ -18,6 +18,7 @@ export class UserData {
     couponCodes: CouponCode[];
     cardsPacksIds: string[];
     providerTransactionId?: string | null;
+    fullName?: string | null;
 
     deseralize(input: any) {
         Object.assign(this, input);

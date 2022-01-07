@@ -73,6 +73,7 @@ query GetUser($id: ID!) {
     }
     cardsPacksIds
     providerTransactionId
+    fullName
     createdAt
     updatedAt
   }
@@ -129,6 +130,7 @@ query ListUsers(
       }
       cardsPacksIds
       providerTransactionId
+      fullName
       createdAt
       updatedAt
     }

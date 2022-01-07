@@ -93,6 +93,7 @@ exports.handler = async (event) => {
     var username = event.arguments.input['username'];
     var email = event.arguments.input['email'];
     var phone = event.arguments.input['phone'];
+    var fullName = event.arguments.input['fullName'];
 
     console.log(event);
     console.log('Adding new user:');
@@ -142,7 +143,8 @@ exports.handler = async (event) => {
                 "cancellationDate": null,
                 "couponCodes": [],
                 "cardsPacksIds": [],
-                "providerTransactionId": null
+                "providerTransactionId": "",
+                "fullName": fullName
             }
         };
     

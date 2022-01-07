@@ -58,6 +58,7 @@ input CreateUserInput {
   username: String
   email: AWSEmail
   phone: String
+  fullName: String
 }
 
 type About{
@@ -101,6 +102,7 @@ type User
   couponCodes: [CouponCodes]
   cardsPacksIds: [String]
   providerTransactionId: String
+  fullName: String
 }
 
 type Group
