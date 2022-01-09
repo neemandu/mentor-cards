@@ -57,15 +57,15 @@
                 <mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon>
             </mat-card-subtitle>
             <mat-card-title>תכנית חצי-שנתית</mat-card-title>
-            <mat-card-content id="popular-mat-card-content">
+            <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ halfYearlySubscription.fullPrice /
                         halfYearlySubscription.billingCycleInMonths }}</span></p>
                 <p class="price-line">משלמים מראש {{halfYearlySubscription.fullPrice}} ש"ח לחצי שנה וחוסכים 17%</p>
             </mat-card-content>
             <mat-divider inset></mat-divider>
-            <mat-card-actions id="popular-mat-card-actions">
+            <mat-card-actions>
                 <button *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 6"
-                    class="popular-purchase-btn purchase-btn" type="button"
+                    class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(halfYearlySubscription.id)">
                     להצטרפות >>
                 </button>

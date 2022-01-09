@@ -191,7 +191,7 @@ li:hover {
 mat-card {
   /* margin: 0 0.5vw; */
   /* border: 2px var(--main-color) solid; */
-  min-width: 20rem;
+  width: 20rem;
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;
   border-radius: 10px;
@@ -276,5 +276,9 @@ mat-card-content {
 
   ul {
     padding-inline-start: 0px;
+  }
+
+  mat-card {
+    width: 18rem;
   }
 }
