@@ -43,7 +43,7 @@ button:focus {
 }
 
 .sticky-top {
-  z-index: 1000;
+  z-index: 1;
 }
 
 img {

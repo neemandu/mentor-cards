@@ -262,3 +262,111 @@ li span {
     display: none;
   }
 }
+
+/* --------------------------------------------------------------------------------- */
+
+
+/* The Modal (background) */
+.selected-cards-modal {
+  display: block;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0 0 0 / 60%);
+}
+
+/* Modal Content */
+.selected-cards-modal-content {
+  height: 100%;
+  animation: fadeIn 0.4s, slideUp 0.4s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.random-content, .selected-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  height: 90%;
+  align-items: center;
+}
+
+.card-view {
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.one-cards,
+.two-cards {
+  width: calc(100vw /3);
+}
+
+.three-cards {
+  width: calc(100vw /4);
+}
+
+.four-cards {
+  width: calc(100vw /5);
+}
+
+.five-cards {
+  width: calc(100vw /6);
+}
+
+mat-icon {
+  color: var(--main-color);
+}
+
+.mat-icon-close {
+  font-size: xx-large;
+}
+
+.mat-icon-arrow:disabled {
+  color: #747474;
+}
+
+@media screen and (orientation: portrait) {
+
+  .selected-content {
+    flex-direction: column;
+    overflow: auto;
+    justify-content: initial;
+    /* height: 90%; */
+  }
+
+  .random-content {
+    flex-direction: column;
+  }
+
+  .one-cards,
+  .two-cards,
+  .three-cards,
+  .four-cards,
+  .five-cards {
+    width: 65vw;
+  }
+
+}
