@@ -232,6 +232,10 @@ li span {
   border: none;
 }
 
+.reveal-card {
+  animation: fadeIn 0.4s, slideUp 0.6s;
+}
+
 @media screen and (max-width: 1024px) {}
 
 @media screen and (max-width: 768px) {

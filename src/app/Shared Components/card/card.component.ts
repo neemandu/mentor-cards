@@ -21,10 +21,9 @@ export class CardComponent implements OnInit {
     // console.log("CardComponent -> card", this.cardContent)
   }
 
-  imgLoaded(): any {
-    this.loaded.emit();
-  }
-
+  // imgLoaded(): any {
+  //   this.loaded.emit();
+  // }
 
   onRightClick(): boolean {
     return false;

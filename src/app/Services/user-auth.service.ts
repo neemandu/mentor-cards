@@ -100,7 +100,7 @@ export class UserAuthService {
       this.userData = new UserData().deseralize(data);
       this.isLoggedIn = true;
       this.userDataEmmiter.emit(this.userData);
-      console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
+      // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.userData.email);
       // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);

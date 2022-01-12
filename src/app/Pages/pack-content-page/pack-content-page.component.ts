@@ -45,27 +45,20 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
-    // this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
-    //   this.userData = undefined;
-    // }));
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userData = userData;
     })
     this.userData = this.userAuthService.userData;
-    this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
   ngOnInit(): void {
     if (this.id) {//a specific pack
       if (this.cardsService.allPacks) {
         this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
-        // this.shuffle();
-        // console.log("file: pack-content-page.component.ts ~ line 52 ~ ngOnInit ~ this.pack", this.pack)
       }
       else {
         this.api.GetCardsPack(this.id).then(pack => {
           this.pack = new PackContent().deseralize(pack);
-          // this.shuffle();
         }, reject => {
           console.log("file: pack-content-page.component.ts ~ line 86 ~ this.api.GetCardsPack ~ reject", reject)
           this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -228,12 +221,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  cardLoaded(): void {
-    this.loadedCards++;
-    if (this.loadedCards == this.pack.cards.length) {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-    }
-  }
+  // cardLoaded(): void {
+  //   // this.loadedCards++;
+  //   // if (this.loadedCards == this.pack.cards.length) {
+  //   //   this.overlaySpinnerService.changeOverlaySpinner(false);
+  //   // }
+  //   this.overlaySpinnerService.changeOverlaySpinner(false);
+  // }
 
   signInSignUp(): void {
     this.userAuthService.showSignInModal();
