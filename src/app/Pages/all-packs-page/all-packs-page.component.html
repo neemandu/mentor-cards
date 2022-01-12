@@ -10,7 +10,7 @@
         (keyup)="filterPacks()">
       <button mat-button [ngStyle]="{'visibility': filterText.value ? 'visible' : 'hidden'}" matSuffix mat-icon-button
         aria-label="Clear" (click)="freeTextFilterSelected = ''; filterPacks()">
-        <mat-icon style="font-family: 'Material Icons';">close</mat-icon>
+        <mat-icon style="font-family: 'Material Icons' !important;">close</mat-icon>
       </button>
     </mat-form-field>
     <br>
@@ -90,12 +90,12 @@
     </div>
     <div *ngIf="selectedFavorites.length == 0">
       <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks; let i = index;">
-        <div class="category-line d-flex align-items-center justify-content-around">
+        <div *ngIf="categoryPacks" class="category-line d-flex align-items-center justify-content-around">
           <div class="first-line"></div>
           <h3 class="categrory-title">{{categoryPacks.category}}</h3>
           <div class="second-line"></div>
         </div>
-        <div class="d-flex flex-row flex-wrap card-section">
+        <div *ngIf="categoryPacks" class="d-flex flex-row flex-wrap card-section">
           <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
             (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">
           </app-pack>
