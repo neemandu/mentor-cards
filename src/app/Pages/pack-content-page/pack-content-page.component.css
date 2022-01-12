@@ -265,6 +265,29 @@ li span {
 
 /* --------------------------------------------------------------------------------- */
 
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--main-color-light);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color-dark);
+}
+
+
 
 /* The Modal (background) */
 .selected-cards-modal {
@@ -277,6 +300,7 @@ li span {
   height: 100%;
   overflow: auto;
   background-color: rgb(0 0 0 / 60%);
+  backdrop-filter: blur(5px);
 }
 
 /* Modal Content */
@@ -314,6 +338,10 @@ li span {
   align-items: center;
 }
 
+.selected-content-one-card {
+  justify-content: center !important;
+}
+
 .card-view {
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -348,8 +376,13 @@ mat-icon {
   color: #747474;
 }
 
-@media screen and (orientation: portrait) {
+@media (orientation: landscape) {
+  .selected-cards-modal-content {
+    height: 90%;
+  }
+}
 
+@media (orientation: portrait) {
   .selected-content {
     flex-direction: column;
     overflow: auto;
