@@ -26,7 +26,7 @@
 <div style="padding-bottom: 2rem;" class="d-flex flex-column align-items-center">
   <div *ngIf="pack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">
     <app-card
-      [ngClass]="{'clickable': true, 'shuffle-item': true, 'reveal-card': true}"
+      [ngClass]="{'clickable': true, 'shuffle-item': true}"
       *ngFor="let card of pack.cards; let i = index" transition-group-item [cardContent]="card"
       [selected]="selectedCards.includes(card)" [index]="i+1"
       [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)">

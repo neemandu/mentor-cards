@@ -31,17 +31,15 @@ body {
   transition: transform .2s;
 }
 
-.item-hidden {
-  /* visibility: hidden; */
+/* .item-hidden {
   opacity: 0;
   transition: opacity 0.5s linear;
 }
 
 .item-reveal {
-  /* visibility: visible; */
   opacity: 1;
   transition: opacity 0.1s linear;
-}
+} */
 
 .item:hover {
   transform: scale(1.05);
