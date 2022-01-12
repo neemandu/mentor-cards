@@ -1,7 +1,8 @@
 <title>Mentor-Cards כל ערכות הקלפים</title>
 <div id="content">
   <div id="filters" class="float-right">
-    <button id="couponCodeBtn" type="button" (click)="openEnterCouponCodeModal()">יש לך קוד הטבה?</button>
+    <button *ngIf="userData" id="couponCodeBtn" type="button" (click)="openEnterCouponCodeModal()">יש לך קוד
+      הטבה?</button>
     <h3 id="filter-by-options-title">חיפוש</h3>
     <mat-form-field>
       <mat-label>הקלד מילת מפתח, נושא...</mat-label>
@@ -70,7 +71,7 @@
       </div>
     </div>
   </div> -->
-<!--test-->
+  <!--test-->
   <div id="test" class="all-packs-view" #new>
     <!-- <h1 *ngIf="trialPeriodExpDate" style="text-align: center; margin-left: 14rem;">
       כל ערכות הקלפים לרשותכם עד ה- {{trialPeriodExpDate | date:'d/M/yy'}}

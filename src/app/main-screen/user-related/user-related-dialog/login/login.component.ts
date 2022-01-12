@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   user: { id: string; username: string; email: string };
 
-  @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
+  @Output() loggedInCloseDialog: EventEmitter<any> = new EventEmitter<any>();
   // @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
   @Input() registeredEmail: string;
 
@@ -103,8 +103,8 @@ export class LoginComponent implements OnInit {
       // }
       // else {
       this.userAuthService.loggedIn(userData);
-      this.loggedIn.emit();
-      this.navigate('/all-packs-page');
+      this.loggedInCloseDialog.emit();
+      // this.navigate('/all-packs-page');
       // }
     })
       .catch(err => {

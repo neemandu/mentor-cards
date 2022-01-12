@@ -99,8 +99,9 @@ export class UserAuthService {
       }
       this.userData = new UserData().deseralize(data);
       this.isLoggedIn = true;
+      this.userDataEmmiter.emit(this.userData);
       console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
-      LogRocket.identify(this.cognitoUserData.username);
+      LogRocket.identify(this.userData.email);
       // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
@@ -115,7 +116,6 @@ export class UserAuthService {
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }
-      this.userDataEmmiter.emit(this.userData);
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {

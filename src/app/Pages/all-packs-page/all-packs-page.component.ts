@@ -30,6 +30,7 @@ export class AllPacksPageComponent implements OnInit {
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
+  userData: UserData;
   // allPacksOwned: PackContent[] = [];
   // allPacksNotOwned: PackContent[] = [];
   allCategories: string[] = [];
@@ -56,6 +57,7 @@ export class AllPacksPageComponent implements OnInit {
     // }));
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       // this.overlaySpinnerService.changeOverlaySpinner(true);
+      this.userData = userData;
       userData ? this.getAllPacks() : null;
     }));
     // window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
@@ -79,6 +81,7 @@ export class AllPacksPageComponent implements OnInit {
     // }
 
     this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.userData = this.userAuthService.userData;
     this.getAllPacks();
   }
 

@@ -14,7 +14,7 @@
       </div> -->
     </ng-template>
     <ng-template matTabContent>
-      <app-login (loggedIn)="closeDialog()" (toRegister)="selectedTab = 1;" [registeredEmail]="registeredEmail">
+      <app-login (loggedInCloseDialog)="closeDialog()" (toRegister)="selectedTab = 1;" [registeredEmail]="registeredEmail">
       </app-login>
     </ng-template>
   </mat-tab>

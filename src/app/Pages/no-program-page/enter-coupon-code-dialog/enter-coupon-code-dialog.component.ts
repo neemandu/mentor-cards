@@ -27,7 +27,7 @@ export class EnterCouponCodeDialogComponent implements OnInit {
 
   enterGroup(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    this.api.AddCouponCode({ 'couponCode': this.formControls.couponCode.value }).then(res => {
+    this.api.AddCouponCode({ 'couponCode': this.formControls.couponCode.value.toLowerCase() }).then(res => {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       if (res)
         this.dialogRef.close(true);
