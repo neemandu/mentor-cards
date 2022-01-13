@@ -1,0 +1,16 @@
+{
+  "lambdaLayers": [],
+  "secretNames": [
+    "sendinblueAPIKey"
+  ],
+  "permissions": {
+    "storage": {
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}
