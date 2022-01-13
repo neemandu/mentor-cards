@@ -75,19 +75,6 @@ mutation AddCouponCode($input: couponCodeInput!) {
 mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
   UpdatePaymentProgram(input: $input)
 }
-mutation CreateContactUsModel(
-  $input: CreateContactUsModelInput!
-  $condition: ModelContactUsModelConditionInput
-) {
-  createContactUsModel(input: $input, condition: $condition) {
-    id
-    name
-    content
-    email
-    createdAt
-    updatedAt
-  }
-}
 mutation UpdateContactUsModel(
   $input: UpdateContactUsModelInput!
   $condition: ModelContactUsModelConditionInput
@@ -110,6 +97,57 @@ mutation DeleteContactUsModel(
     name
     content
     email
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateMessageQueue(
+  $input: CreateMessageQueueInput!
+  $condition: ModelMessageQueueConditionInput
+) {
+  createMessageQueue(input: $input, condition: $condition) {
+    id
+    email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMessageQueue(
+  $input: UpdateMessageQueueInput!
+  $condition: ModelMessageQueueConditionInput
+) {
+  updateMessageQueue(input: $input, condition: $condition) {
+    id
+    email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMessageQueue(
+  $input: DeleteMessageQueueInput!
+  $condition: ModelMessageQueueConditionInput
+) {
+  deleteMessageQueue(input: $input, condition: $condition) {
+    id
+    email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
@@ -310,6 +348,9 @@ mutation CreateCardsPack(
               name
               subElements {
                 name
+                subElements {
+                  name
+                }
               }
             }
           }
@@ -352,6 +393,9 @@ mutation UpdateCardsPack(
               name
               subElements {
                 name
+                subElements {
+                  name
+                }
               }
             }
           }
@@ -394,6 +438,9 @@ mutation DeleteCardsPack(
               name
               subElements {
                 name
+                subElements {
+                  name
+                }
               }
             }
           }
@@ -452,6 +499,19 @@ mutation DeleteCouponCodes(
     discount
     trialPeriodInDays
     allowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateContactUsModel(
+  $input: CreateContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  createContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
     createdAt
     updatedAt
   }

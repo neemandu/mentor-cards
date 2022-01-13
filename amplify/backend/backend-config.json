@@ -298,7 +298,7 @@
         }
       ]
     },
-    "EmailWelcome": {
+    "EmailGuideIntroduction": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
@@ -307,8 +307,21 @@
           "category": "api",
           "resourceName": "cardspacks",
           "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "MessagingService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
           ]
         }
       ]

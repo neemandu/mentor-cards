@@ -6,6 +6,12 @@
         "read",
         "update"
       ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
       "Group:@model(appsync)": [
         "read"
       ]

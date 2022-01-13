@@ -121,7 +121,14 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "EmailWelcome": {
+        "EmailGuideIntroduction": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string",
+            "CloudWatchEventRule": "string"
+        },
+        "MessagingService": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
