@@ -70,15 +70,6 @@ export class AllPacksPageComponent implements OnInit {
       // this.filterPacks();
       // this.sortPacks();
     }));
-    // document.onscroll = () => {
-    //   if (document.documentElement.scrollTop < document.documentElement.offsetHeight) {
-    //     console.log("show")
-    //     this.showBottomArrow = true;
-    //   } else {
-    //     console.log("no show")
-    //     this.showBottomArrow = false;
-    //   }
-    // }
 
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.userData = this.userAuthService.userData;
@@ -86,24 +77,23 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   openEnterCouponCodeModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    // dialogConfig.maxHeight = '85vh';
-    const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
-    const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
-      dialogSub1.unsubscribe();
-      if (res) {
-        // this.videoplayer.nativeElement.play();
-        dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
-        const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-        const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
-          dialogSub2.unsubscribe();
-          this.router.navigate(['all-packs-page']);
-          window.location.reload();
-        })
-      }
-    });
+    this.userAuthService.openEnterCouponCodeModal();
+    // const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    // dialogConfig.autoFocus = true;
+    // const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
+    // const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
+    //   dialogSub1.unsubscribe();
+    //   if (res) {
+    //     dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
+    //     const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+    //     const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
+    //       dialogSub2.unsubscribe();
+    //       this.router.navigate(['all-packs-page']);
+    //       window.location.reload();
+    //     })
+    //   }
+    // });
   }
 
   /**

@@ -380,7 +380,7 @@ mat-icon {
   color: #747474;
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-height: 480px) {
   .selected-cards-modal-content {
     height: 90%;
   }

@@ -159,6 +159,13 @@ img {
   direction: rtl;
 }
 
+/* #couponCodeBtn {
+  background: #ffa800;
+  color: white;
+  font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+} */
+
 @media screen and (max-width: 1060px) {
   #nav-buttons button:not(:first-child) {
     display: none;

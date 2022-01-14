@@ -30,28 +30,11 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.amplifyAuthService.isLoggedIn$.subscribe(
-    //   isLoggedIn => {
-    //     (this.loggedIn = isLoggedIn);
-    //   }
-    // );
-
-    // this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
-    //   this.userAttributes = cognitoUser;
-    // });
 
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userAttributes = userData;
       this.loggedIn = userData ? true : false;
     })
-    // this.userAuthService.loggedInEmmiter.subscribe((userAttributes) => {
-    //   this.userAttributes = userAttributes;
-    //   this.loggedIn = true;
-    // })
-    // this.userAuthService.signedOutEmmiter.subscribe(() => {
-    //   this.userAttributes = undefined;
-    //   this.loggedIn = false;
-    // })
     this.api.ListNewss().then(news => {
       this.news = news.items.sort((a, b) => a.order - b.order);
       let oldNews = localStorage.getItem("news")
@@ -68,6 +51,10 @@ export class NavComponent implements OnInit {
       localStorage.setItem("news", this.getNewsList());
       this.newsNotification = false;
     }
+  }
+
+  openEnterCouponCodeModal(): void {
+    this.userAuthService.openEnterCouponCodeModal();
   }
 
   /**

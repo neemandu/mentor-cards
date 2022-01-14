@@ -101,110 +101,7 @@ export class PricePageComponent implements OnInit {
     // console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
-  //   this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
-  //     this.subPlans = this.userAuthService.subPlans;
-  //     this.overlaySpinnerService.changeOverlaySpinner(true);
-  //   }));
 
-  // this.api.ListSubscriptionPlans().then(value => {
-  //   this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan));
-  //   console.log("file: price-page.component.ts ~ line 89 ~ this.api.ListSubscriptionPlans ~ this.subPlans", this.subPlans)
-  //   this.monthlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
-  //   // console.log("this.monthlySubscrition");
-  //   console.log(this.monthlySubscrition);
-  //   this.halfYearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
-  //   this.yearlySubscrition = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
-  // }, reject => {
-  //   console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
-  //   let snackBarRef = this._snackBar.open('שגיאה במשיכת חבילות, נסו שנית', 'רענן', {
-  //     duration: 20000,
-  //     panelClass: ['rtl-snackbar']
-  //   });
-  //   snackBarRef.onAction().subscribe(() => {
-  //     window.location.reload();
-  //   });
-  // });
-  // }
-
-  /**
-   * Get all plans (amount of packs) to let user choose
-   */
-  /*getPlans(): SubscriptionPlan[] {
-    return this.userAuthService.subPlans.filter(plan => plan.numberOfUsers == this.numOfUsersSelected).sort((a, b) => {
-      if (a.numberOfCardPacks == -1)
-        return 1
-      else if (b.numberOfCardPacks == -1)
-        return -1
-      else
-        return a.numberOfCardPacks - b.numberOfCardPacks
-    })
-  }*/
-
-  /**
-   * Change pack after changing amount of users
-   */
-  // changePack(): void {
-  //   this.packSelected = this.userAuthService.subPlans.find(pack =>
-  //     pack.numberOfUsers === this.numOfUsersSelected && pack.numberOfCardPacks == this.packSelected.numberOfCardPacks
-  //   )
-  // }
-
-  /**
-   * After any change in plan - check if plan chosen is users current plan  
-   */
-  // fixParameters(): void {
-  //   !this.changedPlansThisMonth && this.packSelected.numberOfCardPacks === this.userAuthService.userData.subscription?.subscriptionPlan?.numberOfCardPacks &&
-  //     this.numOfUsersSelected == this.userAuthService.userData.subscription?.subscriptionPlan?.numberOfUsers ? this.ownsCurrentPlanLabel = true : this.ownsCurrentPlanLabel = false;
-  // }
-
-  // getProgramJsonDescription(userAmount): string {
-  //   return programData.packDescriptions.find(data => data.amountOfPeople == userAmount).description;
-  // }
-  /*
-    getNumOfPacksDesc(numberOfCardPacks): string {
-      if (numberOfCardPacks == -1)
-        return 'כל מה שיש לכם!'
-      else if (numberOfCardPacks == 2)
-        return numberOfCardPacks + '- בקטנה'
-      else if (numberOfCardPacks == 5)
-        return numberOfCardPacks + '- מספיק לי'
-    }*/
-  // getNumOfPacksDesc(numberOfCardPacks): string {
-  //   if (numberOfCardPacks == -1)
-  //     return 'כל הערכות'
-  //   else
-  //     return numberOfCardPacks + ' ערכות'
-  // }
-  /*
-    getAmountOfUsersDesc(userAmount): string {
-      if (userAmount == 1)
-        return userAmount + '- אני'
-      else if (userAmount == 3)
-        return userAmount + '- חברים קרובים'
-      else if (userAmount == 10)
-        return userAmount + '- כל החבר\'ה'
-      else if (userAmount == 50)
-        return userAmount + '- כל הארגון'
-    }*/
-
-  // getAmountOfUsersDesc(userAmount): string {
-  //   if (userAmount == 1)
-  //     return 'משתמש יחיד'
-  //   else
-  //     return userAmount + ' משתמשים'
-  // }
-
-  // getDiscountAmount(userAmount): string {
-  //   var plan = this.userAuthService.subPlans.find(plan => plan.numberOfUsers == userAmount)
-  //   if (plan.discount != 0)
-  //     return Math.floor((plan.discount / plan.fullPrice) * 100) + '% הנחה'
-  //   else
-  //     return '- - - -';
-  // }
-
-  // get programJsonExtra(): string {
-  //   return programData.packDescriptions.find(data => data.amountOfPeople == this.packSelected.numberOfUsers).extra;
-  // }
 
   get paymentStartDate() {
     if (this.userData) {
@@ -217,22 +114,6 @@ export class PricePageComponent implements OnInit {
     return this.userAuthService.userData;
   }
 
-  // get nextPlanChangeDate() {
-  //   return this.userAuthService.nextPlanChangeDate;
-  // }
-
-  // get purchaseBtnVisible() {
-  //   return this.userSingedIn && !this.selectedProgramOwned && (this.userAuthService.userData.status !== 'PLAN' || !this.userAuthService.planChangedThisMonth)
-  // }
-
-  // get noChangingProgramThisMonth() {
-  //   return this.userSingedIn && !this.selectedProgramOwned && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
-  // }
-
-  // get selectedProgramOwned() {
-  //   return this.userSingedIn && this.packSelected.id == this.userAuthService.userData?.subscription?.subscriptionPlan?.id;
-  // }
-
   /**
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
@@ -242,14 +123,15 @@ export class PricePageComponent implements OnInit {
     }
     else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
-      if (this.userAuthService.trialPeriodExpDate || this.userAuthService.codeCouponExpDate != null) {
+      // if (this.userAuthService.trialPeriodExpDate || this.userAuthService.codeCouponExpDate != null) {
+      if (this.userAuthService.trialPeriodExpDate) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
         dialogConfig.maxHeight = '85vh';
         dialogConfig.maxWidth = '85vw';
         let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
-        textInModal += this.userAuthService.expDate;
+        textInModal += this.userAuthService.trialPeriodExpDate.toLocaleDateString('he-IL');
         dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
         const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
         var dialogSub = dialogRef.afterClosed().subscribe(res => {

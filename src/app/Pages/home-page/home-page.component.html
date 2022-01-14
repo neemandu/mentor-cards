@@ -12,14 +12,12 @@
     <br>
     <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">עדין לא נרשמתם
       לתוכנית?</span>
-    <!-- <span id="middle" *ngIf="userData && userData.status === 'PLAN'">אתם כבר מחוברים, למה אתם מחכים? לכו
+    <span id="middle" *ngIf="userData && trialPeriodExpDate">יש ערכות קלפים הזמינות לשימושכם/ן</span>
+    <!-- <span id="middle" *ngIf="userData && trialPeriodExpDate">אתם כבר מחוברים ויש לכם חודש מתנה, לכו
       לאמן!</span> -->
-    <span id="middle" *ngIf="userData && trialPeriodExpDate">אתם כבר מחוברים ויש לכם חודש מתנה, לכו
-      לאמן!</span>
-    <!-- <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialMonthExpDate">עדין לא נרשמתם לתוכנית?</span> -->
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
     <br>
-    <span style="font-size: medium;" id="middle" *ngIf="!userData">התחברו ותיהנו מ-14 ימי ניסיון בחינם!</span>
+    <span style="font-size: medium;" id="middle" *ngIf="!userData">הרשמו ותיהנו מ-14 ימי ניסיון בחינם!</span>
     <div *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">
       <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
     </div>
