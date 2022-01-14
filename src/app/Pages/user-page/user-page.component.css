@@ -50,6 +50,7 @@ video {
   height: 3px;
   margin-top: -15px;
   margin-bottom: 10px;
+  align-self: center;
 }
 
 .changePlanBtn {
@@ -83,6 +84,7 @@ video {
 .actions {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 app-information-bar {
