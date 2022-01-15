@@ -47,32 +47,21 @@ function shouldSentAlert(user){
 
 async function getAllRelevantUsers(){
     var docClient = new AWS.DynamoDB.DocumentClient();
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;   
-    var startDate = new Date();
-    startDate.setDate(startDate.getDate()-7); 
-    startDate.setHours(0, 0, 0, 0);
-    var endDate = new Date();
-    endDate.setDate(endDate.getDate()-6); 
-    endDate.setHours(0, 0, 0, 0);
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;    
     var userParams = {
         TableName: userTable,
         IndexName: "status-createdAt-index",
-        ProjectionExpression:"id, createdAt, email, fullName, phone",
-        KeyConditionExpression: "#status = :status and #createdAt BETWEEN :startDateTime and :endDateTime",
+        ProjectionExpression:"id, subscription, email, fullName, phone, couponCodes",
+        KeyConditionExpression: "#st = :status",
         ExpressionAttributeNames:{
-            "#status": "status",
-            "#createdAt": "createdAt"
+            "#st": "status"
         },
         ExpressionAttributeValues: {
-          ':status': 'NOPLAN',
-          ':startDateTime': startDate.toISOString(),
-          ':endDateTime': endDate.toISOString()
+            ":status": "NOPLAN"
         }
     };
 
-    console.log("searching for users that were created 7 days ago");
-    console.log("start date: " + startDate);
-    console.log("end date: " + endDate);
+    console.log("searching for users with a plan");
     var users = [];
     await docClient.query(userParams, function(err, data) {
         if (err) {
@@ -85,7 +74,7 @@ async function getAllRelevantUsers(){
                 var a = shouldSentAlert(user);
                 if(a){
                     var d = new Date();
-                    var id = user.email + "_GUIDE_AFTER_7_DAYS_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+                    var id = user.email + "_UPCOMING_END_OF_TRIAL_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
                     var item = {
                         PutRequest: {
                             Item: {

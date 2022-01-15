@@ -12,8 +12,5 @@
       ]
     }
   },
-  "lambdaLayers": [],
-  "secretNames": [
-    "sendinblueAPIKey"
-  ]
+  "lambdaLayers": []
 }

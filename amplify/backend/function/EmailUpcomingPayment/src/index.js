@@ -11,33 +11,51 @@ Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
 
-function shouldSentAlert(user){
-    var startFreePeriodDate = user.createdAt;
-    var trialPeriodInDays = 14;
-    if(user &&
-        user.couponCodes &&
-        user.couponCodes.length > 0){
-            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
-                if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
-                    var couponDate = user.couponCodes[i].createdAt;
-                    if(couponDate > startFreePeriodDate){
-                        startFreePeriodDate = couponDate;
-                        trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
-                    }
-                }
-            }
-        }  
-    var endOfTrialDate = startFreePeriodDate;  
-    endOfTrialDate.setDate(endOfTrialDate.getDate()+trialPeriodInDays);
+function monthDiff(d1, d2) {
+    var months;
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+    months = (date2.getFullYear() - date1.getFullYear()) * 12;
+    months -= date1.getMonth();
+    months += date2.getMonth();
+    if(date2.getDate() < date1.getDate()){
+        months--;
+    }
+    return months <= 0 ? 0 : months;
+}
+
+function getBillingEndDate(user) {
+    console.log('getBillingEndDate');
+    var cycles = user.subscription.subscriptionPlan.billingCycleInMonths;
+    console.log('cycles is: ' + cycles);
+    var createdAt = new Date(user.subscription.startDate);
+    console.log('Subscription started at: ');
+    console.log(createdAt);
     var now = new Date();
-    var Difference_In_Time = endOfTrialDate.getTime() - now.getTime();
+    var monthsDiff = monthDiff(createdAt, now);
+    console.log('monthsDiff is: ' + monthsDiff);
+    var numOfCycles = (monthsDiff / cycles) + 1;
+    console.log('numOfCycles is: ' + numOfCycles);
+    var numberOfMonthsToAdd = numOfCycles * cycles;
+    console.log('numberOfMonthsToAdd is: ' + numberOfMonthsToAdd);
+    var endDate = new Date(createdAt);
+    endDate.setMonth(endDate.getMonth()+numberOfMonthsToAdd);
+    console.log('endDate is: ');
+    console.log(endDate);
+    return endDate;
+}
+
+function shouldSentUpcomingBillingAlert(user){
+    var nextBillingCycle = getBillingEndDate(user);
+    var now = new Date();
+    var Difference_In_Time = nextBillingCycle.getTime() - now.getTime();
     var Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
-    console.log('endOfTrialDate date: ');
-    console.log(endOfTrialDate);
+    console.log('Next billing date: ');
+    console.log(nextBillingCycle);
     console.log('Now: ');
     console.log(now);
     console.log('Difference_In_Days: ' + Difference_In_Days);
-    if(Difference_In_Days == 0){
+    if(Difference_In_Days == 7){
         console.log('Should send email to: ' + user.email);
         return true;
     }
@@ -47,32 +65,21 @@ function shouldSentAlert(user){
 
 async function getAllRelevantUsers(){
     var docClient = new AWS.DynamoDB.DocumentClient();
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;   
-    var startDate = new Date();
-    startDate.setDate(startDate.getDate()-7); 
-    startDate.setHours(0, 0, 0, 0);
-    var endDate = new Date();
-    endDate.setDate(endDate.getDate()-6); 
-    endDate.setHours(0, 0, 0, 0);
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;    
     var userParams = {
         TableName: userTable,
         IndexName: "status-createdAt-index",
-        ProjectionExpression:"id, createdAt, email, fullName, phone",
-        KeyConditionExpression: "#status = :status and #createdAt BETWEEN :startDateTime and :endDateTime",
+        ProjectionExpression:"id, subscription, email, fullName, phone",
+        KeyConditionExpression: "#st = :status",
         ExpressionAttributeNames:{
-            "#status": "status",
-            "#createdAt": "createdAt"
+            "#st": "status"
         },
         ExpressionAttributeValues: {
-          ':status': 'NOPLAN',
-          ':startDateTime': startDate.toISOString(),
-          ':endDateTime': endDate.toISOString()
+            ":status": "PLAN"
         }
     };
 
-    console.log("searching for users that were created 7 days ago");
-    console.log("start date: " + startDate);
-    console.log("end date: " + endDate);
+    console.log("searching for users with a plan");
     var users = [];
     await docClient.query(userParams, function(err, data) {
         if (err) {
@@ -82,10 +89,10 @@ async function getAllRelevantUsers(){
             
             console.log(data.Items.length);
             data.Items.forEach(function(user) {
-                var a = shouldSentAlert(user);
+                var a = shouldSentUpcomingBillingAlert(user);
                 if(a){
                     var d = new Date();
-                    var id = user.email + "_GUIDE_AFTER_7_DAYS_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+                    var id = user.email + "_UPCOMING_PAYMENT_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
                     var item = {
                         PutRequest: {
                             Item: {
@@ -94,7 +101,7 @@ async function getAllRelevantUsers(){
                                 "emailDeliveryTime": null,
                                 "phone": user.phone,
                                 "smsDeliveryTime": null,
-                                "emailTemplateId": 3,
+                                "emailTemplateId": 5,
                                 "name": user.fullName,
                                 "params": {
                                     "name": user.fullName

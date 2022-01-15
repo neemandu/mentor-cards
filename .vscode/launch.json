@@ -12,7 +12,9 @@
             "lambda": {
                 "runtime": "nodejs12.x",
                 "payload": {},
-                "environmentVariables": {}
+                "environmentVariables": {
+                    "env": "DEV"
+                }
             }
         }
     ]

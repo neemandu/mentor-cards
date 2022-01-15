@@ -204,7 +204,7 @@ async function updateMonthlySubscription(user, paymentProgram, transId) {
     user.status = "PLAN";
     user.subscription = sub;
     user.lastPlanSubstitutionDate = new Date().toISOString();
-    user.updateAt = new Date().toISOString();
+    user.updatedAt = new Date().toISOString();
     user.numberOfPlansSubstitutions++;
 
     //user.isGroupOwner = paymentProgram.numberOfUsers > 1 ? true : false;

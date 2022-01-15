@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.5.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.8\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -19,9 +19,6 @@
     "apicardspacksGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apicardspacksGraphQLAPIIdOutput"
-    },
-    "secretsPathAmplifyAppId": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -54,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "EmailGuideIntroduction",
+            "EmailUpcomingEndOfTrialNotice",
             {
               "Fn::Join": [
                 "",
                 [
-                  "EmailGuideIntroduction",
+                  "EmailUpcomingEndOfTrialNotice",
                   "-",
                   {
                     "Ref": "env"
@@ -76,57 +73,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "API_CARDSPACKS_USERTABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
-              }
-            },
-            "API_CARDSPACKS_USERTABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
-                    }
-                  }
-                ]
-              ]
-            },
-            "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apicardspacksGraphQLAPIIdOutput"
-            },
-            "sendinblueAPIKey": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "EmailGuideIntroduction"
-                      }
-                    ]
-                  },
-                  "sendinblueAPIKey"
-                ]
-              ]
             },
             "API_CARDSPACKS_MESSAGEQUEUETABLE_NAME": {
               "Fn::ImportValue": {
@@ -153,6 +99,35 @@
                   }
                 ]
               ]
+            },
+            "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apicardspacksGraphQLAPIIdOutput"
+            },
+            "API_CARDSPACKS_USERTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+              }
+            },
+            "API_CARDSPACKS_USERTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                    }
+                  }
+                ]
+              ]
             }
           }
         },
@@ -173,12 +148,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole92da39fb",
+            "mentorcardsLambdaRole54edb016",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole92da39fb",
+                  "mentorcardsLambdaRole54edb016",
                   "-",
                   {
                     "Ref": "env"
@@ -424,63 +399,6 @@
           ]
         }
       }
-    },
-    "AmplifyFunctionSecretsPolicy": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-function-secrets-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "ssm:GetParameter",
-                "ssm:GetParameters"
-              ],
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:ssm:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":parameter",
-                    {
-                      "Fn::Sub": [
-                        "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                        {
-                          "appId": {
-                            "Ref": "secretsPathAmplifyAppId"
-                          },
-                          "env": {
-                            "Ref": "env"
-                          },
-                          "functionName": "EmailGuideIntroduction"
-                        }
-                      ]
-                    },
-                    "*"
-                  ]
-                ]
-              }
-            }
-          ]
-        }
-      },
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ]
     }
   },
   "Outputs": {

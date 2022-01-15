@@ -110,7 +110,7 @@ async function markAsSent(record){
     "smsDeliveryTime": null,
     "emailTemplateId": record.emailTemplateId.N,
     "name": record.name.S,
-    "params": record.params.S
+    "params": record.params.M
   }
 
   var docClient = new AWS.DynamoDB.DocumentClient();
@@ -135,10 +135,12 @@ async function markAsSent(record){
 exports.handler = async (event) => {
   for (const streamedItem of event.Records) {
     if (streamedItem.eventName === 'INSERT') {
+      console.log("streamedItem");
+      console.log(streamedItem);
       //pull off items from stream
       const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.S
       const email = streamedItem.dynamodb.NewImage.email.S
-      const params = streamedItem.dynamodb.NewImage.params.S
+      const params = streamedItem.dynamodb.NewImage.params.M
       const name = streamedItem.dynamodb.NewImage.name.S
 
       await sendWelcomeEmail(
