@@ -253,20 +253,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "UpdatePaymentProgram": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
-    },
     "ContactUsTrigger": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -278,6 +264,20 @@
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
+    },
+    "UpdatePaymentProgram": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
           ]
         }
       ]
