@@ -83,10 +83,6 @@
         "PayPalCancelWebhook": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/PayPalCancelWebhook-3067477a344232357850-build.zip"
-        },
-        "updatePaymentProgram": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/updatePaymentProgram-637037316e2f74596c78-build.zip"
         }
       }
     }
