@@ -59,7 +59,7 @@
 </div>
 
 <nav *ngIf="pack"
-  [ngClass]="{'nav navbar-light d-flex justify-content-between align-items-center bottom-nav': true, 'bottom-nav-hidden':(selectedCards.length == 0 || !multipileChecked)}">
+  [ngClass]="{'nav navbar-light d-flex justify-content-between align-items-center bottom-nav': true, 'bottom-nav-hidden':(!multipileChecked)}">
   <div class="nav-buttons">
     <button type="button" [ngClass]="{'option-btn bottom-option-btn':true}" [disabled]="selectedCards.length == 0"
       (click)="toggleChosenCardsModal()">הצג
