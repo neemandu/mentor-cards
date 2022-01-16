@@ -26,6 +26,10 @@ mat-toolbar {
   max-width: 45vw;
 }
 
+img {
+  max-width: 25vw;
+}
+
 @media screen and (max-width: 1024px) {
   #content {
     max-width: 55vw;
