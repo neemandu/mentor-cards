@@ -1,13 +1,13 @@
 {
   "permissions": {
     "storage": {
-      "User:@model(appsync)": [
+      "MessageQueue:@model(appsync)": [
         "create",
         "read",
         "update",
         "delete"
       ],
-      "MessageQueue:@model(appsync)": [
+      "User:@model(appsync)": [
         "create",
         "read",
         "update",

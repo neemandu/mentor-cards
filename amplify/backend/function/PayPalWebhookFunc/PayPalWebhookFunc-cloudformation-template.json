@@ -271,7 +271,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
                         }
                       }
                     ]
@@ -292,7 +292,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
                         }
                       },
                       "/index/*"
@@ -333,7 +333,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       }
                     ]
@@ -354,7 +354,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       },
                       "/index/*"

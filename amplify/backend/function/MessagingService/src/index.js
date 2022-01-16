@@ -19,7 +19,7 @@ const { Parameters } = await (new aws.SSM())
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
 
-const aws = require('aws-sdk');
+var AWS = require("aws-sdk");
 const { env } = require("process");
 const http = require('https'); // or https 
 
@@ -46,7 +46,7 @@ const post = (defaultOptions, path, payload) => new Promise((resolve, reject) =>
 })
 
 async function getParam(){
-  var { Parameters } = await (new aws.SSM())
+  var { Parameters } = await (new AWS.SSM())
   .getParameters({
     Names: ["sendinblueAPIKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
@@ -62,8 +62,10 @@ async function getParam(){
   return Parameters[0].Value; 
 }
 
-async function sendWelcomeEmail(tempalteId, email, params, name){
-  console.log("sendWelcomeEmail: tempalteId: " + tempalteId + " | email: " + email + " | params: " + params + " | name: " + name);
+async function sendEmail(tempalteId, email, params, name){
+  console.log("sendEmail: tempalteId: " + tempalteId + " | email: " + email + " | name: " + name);
+  console.log("params: ");
+  console.log(params);
 
   var api_key = await getParam();
 
@@ -82,7 +84,7 @@ async function sendWelcomeEmail(tempalteId, email, params, name){
       "email": "office@mentor-cards.com", 
       "name":"Mentor-Cards"
     },
-    "templateId": tempalteId,
+    "templateId": parseInt(tempalteId),
     "params": params,
     "messageVersions":[
       {
@@ -95,10 +97,10 @@ async function sendWelcomeEmail(tempalteId, email, params, name){
       }
     ]
     });
-  console.log("sendWelcomeEmail: sending POST Start");
+  console.log("Send Email: sending POST Start");
 
   await post(defaultOptions, "/v3/smtp/email", body);
-  console.log("sendWelcomeEmail: sending POST End");
+  console.log("Send Email: sending POST End");
 }
 
 async function markAsSent(record){
@@ -138,12 +140,12 @@ exports.handler = async (event) => {
       console.log("streamedItem");
       console.log(streamedItem);
       //pull off items from stream
-      const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.S
-      const email = streamedItem.dynamodb.NewImage.email.S
-      const params = streamedItem.dynamodb.NewImage.params.M
-      const name = streamedItem.dynamodb.NewImage.name.S
+      const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.N;
+      const email = streamedItem.dynamodb.NewImage.email.S;
+      const params = streamedItem.dynamodb.NewImage.params.M;
+      const name = streamedItem.dynamodb.NewImage.name.S;
 
-      await sendWelcomeEmail(
+      await sendEmail(
         templateId, 
         email, 
         params,
