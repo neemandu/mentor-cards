@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   user: { id: string; username: string; email: string };
 
-  @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
+  @Output() loggedInCloseDialog: EventEmitter<any> = new EventEmitter<any>();
   // @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
   @Input() registeredEmail: string;
 
@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   showConfirmUser: boolean = false;
   showLoading: boolean = false;
   showPwChallange: boolean = false;
+  confirmCodeSent: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, public router: Router,
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService, private ngZone: NgZone) { }
@@ -91,7 +92,7 @@ export class LoginComponent implements OnInit {
     // this.showHideLoading();
     this.overlaySpinnerService.changeOverlaySpinner(true);
     var user = {
-      "username": this.loginForm.get("username").value,
+      "username": this.loginForm.get("username").value.toLowerCase(),
       "password": this.loginForm.get("password").value,
     }
     this.amplifyAuthService.logIn(user).then(userData => {
@@ -102,8 +103,8 @@ export class LoginComponent implements OnInit {
       // }
       // else {
       this.userAuthService.loggedIn(userData);
-      this.loggedIn.emit();
-      this.navigate('/all-packs-page');
+      this.loggedInCloseDialog.emit();
+      // this.navigate('/all-packs-page');
       // }
     })
       .catch(err => {
@@ -158,9 +159,10 @@ export class LoginComponent implements OnInit {
 
   forgotPasswordVarifyEmail(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    var user = this.forgotPasswordForm.get("username").value;
+    var user = this.forgotPasswordForm.get("username").value.toLowerCase();
     this.userAuthService.forgotPasswordVarifyEmail(user)
       .then(res => {
+        this.confirmCodeSent = true;
         this.overlaySpinnerService.changeOverlaySpinner(false);
         // this.forgotPasswordForm.enable();
         this.newPasswordPhaseEnable();
@@ -178,7 +180,7 @@ export class LoginComponent implements OnInit {
 
   forgotPasswordReset(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    var user = this.forgotPasswordForm.get("username").value;
+    var user = this.forgotPasswordForm.get("username").value.toLowerCase();
     var confirmationCode = this.forgotPasswordForm.get("confirmationCode").value.trim();
     var newPassword = this.forgotPasswordForm.get("newPassword").value;
     this.userAuthService.forgotPasswordReset(user, confirmationCode, newPassword)
@@ -271,8 +273,8 @@ export class LoginComponent implements OnInit {
   onConfirmSubmit(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.amplifyAuthService.confirmCode(this.confirmForm.controls['username'].value, this.confirmForm.controls['confirmationCode'].value.trim())
-      .then((data: any) => {
-        this.overlaySpinnerService.changeOverlaySpinner(false);
+    .then((data: any) => {
+      this.overlaySpinnerService.changeOverlaySpinner(false);
         // console.log(data);
         if (data === 'SUCCESS') {
           this.userAuthService._snackBar.open(

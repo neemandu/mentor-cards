@@ -20,7 +20,7 @@
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <button type="submit" class="option-btn login-button" [disabled]="!loginForm.valid">התחבר</button>
+        <button type="submit" class="option-btn login-button" [disabled]="!loginForm.valid">כניסה</button>
       </div>
     </form>
 
@@ -62,7 +62,7 @@
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <a class="underlineHover" id="not-receive-code" style="cursor: pointer;"
+        <a *ngIf="confirmCodeSent" class="underlineHover" id="not-receive-code" style="cursor: pointer;"
           (click)="forgotPasswordVarifyEmail()">לא
           קיבלתם קוד? לחצו כאן לקבלת קוד נוסף</a>
         <button *ngIf="!newPasswordPhase" type="submit" class="option-btn login-button"
@@ -91,7 +91,7 @@
             להמתין ולנסות שוב בהמשך
           </mat-error>
         </mat-form-field>
-        <a class="underlineHover" id="not-receive-code" style="cursor: pointer;" (click)="sendConfirmationCode()">לא
+        <a *ngIf="confirmCodeSent" class="underlineHover" id="not-receive-code" style="cursor: pointer;" (click)="sendConfirmationCode()">לא
           קיבלתם קוד? לחצו כאן לקבלת קוד נוסף</a>
         <button type="submit" class="option-btn login-button" [disabled]="!confirmForm.valid">אמת משתמש</button>
       </div>
@@ -103,8 +103,8 @@
   <br>
   <div id="formFooter">
     <a class="underlineHover" style="cursor: pointer;" *ngIf="showLogin"
-      (click)="showForgotPasswordForm(); loginForm.reset()">שכחת
-      סיסמא?</a>
+      (click)="showForgotPasswordForm(); loginForm.reset()">?שכחת
+      סיסמא</a>
     <a class="underlineHover" style="cursor: pointer;" *ngIf="!showLogin"
       (click)="showLoginForm(); forgotPasswordForm.reset(); confirmForm.reset(); hidePW=true;">התחברות</a>
   </div>

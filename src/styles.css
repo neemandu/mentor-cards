@@ -8,8 +8,16 @@ body {
 }
 
 :root {
-  --main-color: #ffa800!important;
+  --main-color: #ffa800 !important;
+  --main-color-light: #ffd37c !important;
+  --main-color-dark: #c28100 !important;
   --main-font-family: rubik;
+  --screen-s: 480px;
+  --screen-m: 768px;
+  --screen-l: 1024px;
+  --bottom-nav-height: 3rem;
+  --top-nav-height: 4rem;
+  --content-height: calc(100vh-3rem-4rem)
 }
 
 body {
@@ -23,17 +31,15 @@ body {
   transition: transform .2s;
 }
 
-.item-hidden {
-  /* visibility: hidden; */
+/* .item-hidden {
   opacity: 0;
   transition: opacity 0.5s linear;
 }
 
 .item-reveal {
-  /* visibility: visible; */
   opacity: 1;
   transition: opacity 0.1s linear;
-}
+} */
 
 .item:hover {
   transform: scale(1.05);
@@ -42,6 +48,7 @@ body {
 
 .mat-icon {
   vertical-align: middle;
+  /* font-family: 'Material Icons'; */
 }
 
 .clickable {

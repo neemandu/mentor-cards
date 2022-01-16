@@ -19,5 +19,8 @@
       ]
     }
   },
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "secretNames": [
+    "PayPalAPIKey"
+  ]
 }

@@ -1,19 +1,20 @@
 import { Component, ComponentFactoryResolver, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { CardComponent } from 'src/app/Shared Components/card/card.component';
-import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-dialog.component';
-import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
+// import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-dialog.component';
+// import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
 import * as exampleCards from '../../../assets/Bundle Configurations/ExmaplePack.json';
 import { PopoutData, PopoutService } from 'src/app/Services/popout.service';
 import { UserData } from 'src/app/Objects/user-related';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Subscription } from 'rxjs';
 import { AboutAuthorComponent } from 'src/app/Shared Components/pack/about-author/about-author.component';
+import { Card } from 'src/app/Objects/card';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -31,6 +32,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   multipileChecked: boolean = false;
   showGuideBook: boolean = false;
   userData: UserData;
+  showSelectedCards: boolean = false;
+  showRandomCards: boolean = false;
+  portraitToLandscapeAlertShown: boolean = false;
+
+  randomSelectedCard: Card;
+  randomCardIndex: number = 0;
 
   constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog,
     private overlaySpinnerService: OverlaySpinnerService, private api: APIService, public popoutService: PopoutService,
@@ -38,21 +45,17 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
-    // this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
-    //   this.userData = undefined;
-    // }));
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userData = userData;
     })
     this.userData = this.userAuthService.userData;
-    this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     if (this.id) {//a specific pack
       if (this.cardsService.allPacks) {
         this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
-        // console.log("file: pack-content-page.component.ts ~ line 52 ~ ngOnInit ~ this.pack", this.pack)
       }
       else {
         this.api.GetCardsPack(this.id).then(pack => {
@@ -91,9 +94,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       }
     }
     else {
-      this.selectedCards.push(card);
+      this.selectedCards = [card];
       card.index = index;
-      this.openChosenCardsModal();
+      this.toggleChosenCardsModal();
     }
   }
 
@@ -102,38 +105,107 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.pack.cards.sort(() => Math.random() - 0.5);
   }
 
-  openChosenCardsModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.maxHeight = '85vh';
-    dialogConfig.minHeight = '40vh';
-    dialogConfig.data = this.selectedCards;
-    const dialogRef = this.dialog.open(CardsRevealDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(() => {
-      dialogSub.unsubscribe();
+  toggleChosenCardsModal(): void {
+    if (!this.showSelectedCards) {
+      if (!this.portraitToLandscapeAlertShown && this.selectedCards.length > 1 && window.matchMedia("(orientation: portrait)").matches) {
+        this.portraitToLandscapeAlertShown = true;
+        this.openPortraitToLandscapeAlert();
+      }
+      this.showSelectedCards = true;
+    }
+    else {
+      this.showSelectedCards = false;
       if (!this.multipileChecked)
         this.selectedCards = [];
-    });
+    }
   }
 
-  openRandomCardsModal(): void {
-    if (this.flipped) {
-      this.flipped = !this.flipped
-    }
-    this.shuffle();
+  openPortraitToLandscapeAlert(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxHeight = '90vh';
-    dialogConfig.data = this.pack.cards;
-    this.sleep(800).then(() => {
-      const dialogRef = this.dialog.open(RandomCardRevealDialogComponent, dialogConfig);
-      var dialogSub = dialogRef.afterClosed().subscribe(() => {
-        dialogSub.unsubscribe();
-      });
-    });
+    this.dialog.open(PortraitWarningDialogComponent, dialogConfig);
   }
+
+  // openChosenCardsModal(): void {
+  //   this.showSelectedCards = true;
+  //   // const dialogConfig = new MatDialogConfig();
+  //   // dialogConfig.disableClose = true;
+  //   // dialogConfig.autoFocus = true;
+  //   // dialogConfig.maxHeight = '85vh';
+  //   // dialogConfig.minHeight = '40vh';
+  //   // dialogConfig.data = this.selectedCards;
+  //   // const dialogRef = this.dialog.open(CardsRevealDialogComponent, dialogConfig);
+  //   // var dialogSub = dialogRef.afterClosed().subscribe(() => {
+  //   //   dialogSub.unsubscribe();
+  //   //   if (!this.multipileChecked)
+  //   //     this.selectedCards = [];
+  //   // });
+  //   // var modal = document.getElementById("myModal");
+  //   // modal.style.display = "block";
+
+  //   // Get the button that opens the modal
+  //   // var btn = document.getElementById("myBtn");
+
+  //   // Get the <span> element that closes the modal
+  //   // var span = document.getElementsByClassName("close")[0];
+
+  //   // When the user clicks the button, open the modal 
+  //   // btn.onclick = function () {
+  //   // }
+
+  //   // When the user clicks on <span> (x), close the modal
+  //   // span.onclick = function () {
+  //   //   modal.style.display = "none";
+  //   // }
+
+  //   // When the user clicks anywhere outside of the modal, close it
+  //   // window.onclick = function (event) {
+  //   //   if (event.target == modal) {
+  //   //     modal.style.display = "none";
+  //   //   }
+  //   // }
+  // }
+
+  // closeChosenCardsModal(): void {
+  //   this.showSelectedCards = false;
+  //   if (!this.multipileChecked)
+  //     this.selectedCards = [];
+  // }
+
+  toggleRandomCardsModal(): void {
+    if (this.showRandomCards) {
+      this.showRandomCards = false;
+    }
+    else {
+      this.shuffle();
+      this.sleep(500).then(() => { this.showRandomCards = true; });
+    }
+  }
+
+  // openRandomCardsModal(): void {
+  //   this.shuffle();
+  //   this.showRandomCards = true;
+  //   // if (this.flipped) {
+  //   //   this.flipped = !this.flipped
+  //   // }
+  //   // this.shuffle();
+  //   // const dialogConfig = new MatDialogConfig();
+  //   // dialogConfig.disableClose = true;
+  //   // dialogConfig.autoFocus = true;
+  //   // // dialogConfig.maxHeight = '90vh';
+  //   // dialogConfig.data = this.pack.cards;
+  //   // this.sleep(800).then(() => {
+  //   //   const dialogRef = this.dialog.open(RandomCardRevealDialogComponent, dialogConfig);
+  //   //   var dialogSub = dialogRef.afterClosed().subscribe(() => {
+  //   //     dialogSub.unsubscribe();
+  //   //   });
+  //   // });
+  // }
+
+  // closeRandomCardsModal(): void {
+  //   this.showRandomCards = false;
+  // }
 
   openGuideBook(): void {
     // debugger
@@ -150,12 +222,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  cardLoaded(): void {
-    this.loadedCards++;
-    if (this.loadedCards == this.pack.cards.length) {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-    }
-  }
+  // cardLoaded(): void {
+  //   // this.loadedCards++;
+  //   // if (this.loadedCards == this.pack.cards.length) {
+  //   //   this.overlaySpinnerService.changeOverlaySpinner(false);
+  //   // }
+  //   this.overlaySpinnerService.changeOverlaySpinner(false);
+  // }
 
   signInSignUp(): void {
     this.userAuthService.showSignInModal();
@@ -179,4 +252,19 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }
+}
+
+@Component({
+  selector: 'portrait-warning-dialog',
+  templateUrl: './portrait-warning-dialog.html',
+})
+export class PortraitWarningDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<PortraitWarningDialogComponent>) { }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
 }

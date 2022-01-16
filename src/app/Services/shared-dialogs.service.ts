@@ -15,7 +15,7 @@ export class SharedDialogsService {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxWidth = '40vw';
+    dialogConfig.maxWidth = '80vw';
     this.dialog.open(SiteRulesDialogComponent, dialogConfig);
   }
 

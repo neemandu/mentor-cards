@@ -1,6 +1,6 @@
-* {
+/* * {
   font-family: 'rubik';
-}
+} */
 
 .nav {
   background-color: #ffffffd4;
@@ -54,13 +54,19 @@ app-card:hover {
   transition: color .15s ease-in-out, background-color .15s ease-in-out;
 }
 
+.option-menu-btn {
+  font-weight: 500;
+  font-size: large;
+  text-align: end;
+}
+
 button:focus {
   outline: none;
 }
 
 .top-option-btn {
   background: white;
-  color: #ffa800;
+  color: var(--main-color);
 }
 
 .top-option-btn:hover {
@@ -86,7 +92,7 @@ button:focus {
 
 .bottom-option-btn {
   opacity: 1;
-  background: #ffa800;
+  background: var(--main-color);
   color: white;
 }
 
@@ -110,11 +116,15 @@ p {
   font-size: 1rem;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   p {
     margin: 10px;
     font-size: inherit;
   }
+} */
+
+::ng-deep .cdk-overlay-pane {
+  max-width: 90vw !important;
 }
 
 ul {
@@ -123,6 +133,7 @@ ul {
   text-align: right;
   font-size: 1rem;
   padding-right: 0rem;
+  max-width: 90%;
 }
 
 ul li:before {
@@ -141,10 +152,12 @@ li span {
   padding: 2%;
   border-radius: 20px;
   width: fit-content;
+  max-width: 90%;
 }
 
 #middle {
   font-size: x-large;
+  text-align: center;
 }
 
 .action-button {
@@ -152,7 +165,7 @@ li span {
   font-size: x-large;
   /* width: 10rem; */
   border-radius: 5px;
-  background: #ffa800;
+  background: var(--main-color);
   color: white;
   border: none;
   font-weight: 500;
@@ -171,7 +184,7 @@ li span {
 }
 
 .line {
-  background-color: #ffa800;
+  background-color: var(--main-color);
   width: auto;
   height: 3px;
   margin-bottom: 1rem;
@@ -185,4 +198,212 @@ li span {
 
 #about-author:hover {
   color: #717171;
+}
+
+#mult-choise-btn {
+  display: flex;
+  align-items: center;
+  width: min-content;
+}
+
+#mult-choise-btn-txt {
+  font-size: 1rem;
+  margin-left: 5px;
+  color: var(--main-color)
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--main-color);
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: var(--main-color-light)
+}
+
+#actions {
+  display: inherit;
+}
+
+#menu-actions {
+  display: none;
+  color: var(--main-color);
+  background: white;
+  border-radius: 5px;
+  border: none;
+}
+
+/* .reveal-card {
+  animation: fadeIn 0.4s, slideUp 0.6s;
+} */
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 768px) {
+  ::ng-deep .cdk-overlay-pane {
+    max-width: 80vw !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #actions {
+    display: none;
+  }
+
+  #menu-actions {
+    display: inherit;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .option-btn {
+    font-weight: 800;
+    font-size: medium;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #guide-book-icon {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------------- */
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--main-color-light);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color-dark);
+}
+
+
+
+/* The Modal (background) */
+.selected-cards-modal {
+  display: block;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0 0 0 / 60%);
+  backdrop-filter: blur(5px);
+}
+
+/* Modal Content */
+.selected-cards-modal-content {
+  height: 100%;
+  animation: fadeIn 0.4s, slideUp 0.4s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.random-content, .selected-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  height: 90%;
+  align-items: center;
+}
+
+.selected-content-one-card {
+  justify-content: center !important;
+}
+
+.card-view {
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.one-cards,
+.two-cards {
+  width: calc(100vw /3);
+}
+
+.three-cards {
+  width: calc(100vw /4);
+}
+
+.four-cards {
+  width: calc(100vw /5);
+}
+
+.five-cards {
+  width: calc(100vw /6);
+}
+
+mat-icon {
+  color: var(--main-color);
+}
+
+.mat-icon-close {
+  font-size: xx-large;
+}
+
+.mat-icon-arrow:disabled {
+  color: #747474;
+}
+
+@media (orientation: landscape) and (max-height: 480px) {
+  .selected-cards-modal-content {
+    height: 90%;
+  }
+}
+
+@media (orientation: portrait) {
+  .selected-content {
+    flex-direction: column;
+    overflow: auto;
+    justify-content: initial;
+    /* height: 90%; */
+  }
+
+  .random-content {
+    flex-direction: column;
+  }
+
+  .one-cards,
+  .two-cards,
+  .three-cards,
+  .four-cards,
+  .five-cards {
+    width: 65vw;
+  }
+
 }

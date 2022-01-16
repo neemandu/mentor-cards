@@ -13,6 +13,9 @@ import { UserRelatedDialogComponent } from '../main-screen/user-related/user-rel
 import { OverlaySpinnerService } from './overlay-spinner.service';
 // import { AuthService } from 'src/app/Services/auth.service';
 import LogRocket from 'logrocket';
+import { EnterCouponCodeDialogComponent } from '../Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
+import { DynamicDialogData } from '../Objects/dynamic-dialog-data';
+import { DynamicDialogYesNoComponent } from '../Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
@@ -41,18 +44,6 @@ export class UserAuthService {
   constructor(public _snackBar: MatSnackBar, public router: Router,
     private ngZone: NgZone, private api: APIService, private http: HttpClient,
     public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
-
-    // this.amplifyAuthService.isLoggedIn$.subscribe(
-    //   isLoggedIn => {
-    //     (this.isLoggedIn = isLoggedIn);
-    //   }
-    // );
-
-    // this.amplifyAuthService.auth$.subscribe(({ id, username, email, cognitoUser }) => {
-    //   this.user = { id, username, email, cognitoUser };
-    //   this.cognitoUserData = cognitoUser;
-    // });
-
 
     this.rememebrMe();
     this.getSubscriptionPlans();
@@ -99,8 +90,9 @@ export class UserAuthService {
       }
       this.userData = new UserData().deseralize(data);
       this.isLoggedIn = true;
+      this.userDataEmmiter.emit(this.userData);
       // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
-      LogRocket.identify(this.cognitoUserData.username);
+      LogRocket.identify(this.userData.email);
       // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
@@ -115,7 +107,6 @@ export class UserAuthService {
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }
-      this.userDataEmmiter.emit(this.userData);
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
@@ -208,16 +199,6 @@ export class UserAuthService {
     if (!this.subPlans) {
       this.api.ListSubscriptionPlans().then(value => {
         this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
-        // this.subPlans.sort((planA, planB) => {
-        //   if (planA.numberOfUsers - planB.numberOfUsers > 0)
-        //     return 1;
-        //   if (planA.numberOfUsers - planB.numberOfUsers < 0)
-        //     return -1;
-        //   if (planA.numberOfCardPacks - planB.numberOfCardPacks > 0)
-        //     return 1;
-        //   else
-        //     return -1;
-        // })
         this.subPlansEmmiter.emit();
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
@@ -232,12 +213,24 @@ export class UserAuthService {
     }
   }
 
-  /**
-   * Return if user is logged in
-   */
-  // isLoggedIn(): boolean {
-  //   return this.userData != undefined;
-  // }
+  openEnterCouponCodeModal(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
+    const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
+      dialogSub1.unsubscribe();
+      if (res) {
+        dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
+        const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+        const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
+          dialogSub2.unsubscribe();
+          this.router.navigate(['all-packs-page']);
+          window.location.reload();
+        })
+      }
+    });
+  }
 
   /**
    * Check username (email) and send varification email with code
@@ -287,7 +280,7 @@ export class UserAuthService {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     // dialogConfig.maxHeight = '85vh';
-    // dialogConfig.maxWidth = '85vw';
+    dialogConfig.maxWidth = '90vw';
     const dialogRef = this.dialog.open(UserRelatedDialogComponent, dialogConfig);
   }
 
@@ -308,6 +301,15 @@ export class UserAuthService {
    * return if in trial month (first month after register)
    */
   get trialPeriodExpDate(): Date {
+    return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
+      new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
+      null;
+  }
+
+  /**
+   * return if in trial month (first month after register)
+   */
+  getTrialPeriodExpDate(): Date {
     return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
       new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
       null;

@@ -2,6 +2,28 @@
   direction: rtl;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--main-color-light);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main-color);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color-dark);
+}
+
 app-card {
   max-width: 25vw;
 }
@@ -9,21 +31,12 @@ app-card {
 .content {
   display: flex;
   flex-direction: row;
+  align-self: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  height: 70vh;
 }
 
-.one-card,
-.two-card {
-  height: 60vh;
-}
-
-.three-card,
-.four-card {
-  height: 45vh;
-}
-
-.five-card {
-  height: 40vh;
-}
 
 .card-pre-reveal {
   margin: 10px 10px;
@@ -39,7 +52,10 @@ app-card {
 }
 
 .img-view {
-  height: 95%;
+  /* width: 100%;
+  height: -webkit-fill-available; */
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
 }
 
 .badge-light {
@@ -47,9 +63,11 @@ app-card {
   background-color: #efefef;
 }
 
-::ng-deep .mat-dialog-container {
+ .mat-dialog-container {
   overflow: hidden;
   padding: 10px;
+  background: none;
+  box-shadow: none;
 }
 
 .index {
@@ -58,6 +76,8 @@ app-card {
 
 .card-preview {
   padding: 0.5em;
+  display: flex;
+  flex-direction: column;
 }
 
 .closeModalButton {
@@ -69,14 +89,73 @@ app-card {
   outline: none;
 }
 
-/* @media screen and (max-width: 600px) {
+/* #rotate-screen-instruction {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  font-size: small;
+  justify-content: center;
+  margin-top: 0.5rem;
+} */
+
+@media screen and (orientation: portrait) {
+  /* #rotate-screen-instruction {
+    display: inherit;
+  } */
+
+  /* .one-card,
+  .two-card,
+  .three-card,
+  .four-card,
+  .five-card {
+    height: 65vh;
+  } */
+
+  /* .img-view {
+    height: initial;
+  } */
+
   .content {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
+    overflow: auto;
   }
 
-  app-card {
-    max-width: 100%;
+}
+
+
+@media screen and (max-width: 1024px) and (orientation: horizontal) {
+
+  .four-card {
+    height: 55vh;
+  }
+  
+  .five-card {
+    height: 44vh;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: horizontal) {
+
+  .four-card {
+    height: 50vh;
+  }
+  
+  .five-card {
+    height: 39vh;
+  }
+}
+
+
+@media screen and (max-width: 480px) and (orientation: horizontal) {
+
+}
+
+@media screen and (max-width: 320px) and (orientation: horizontal) {
+
+}
+
+/* @media screen and (max-width: 480px) {
+  .content {
+    flex-direction: column;
   }
 } */

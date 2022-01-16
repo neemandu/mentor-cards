@@ -35,9 +35,10 @@ import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 
+
 //Components
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, MobileWarningDialogComponent } from './app.component';
+import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -52,7 +53,7 @@ import { AllPacksPageComponent } from './Pages/all-packs-page/all-packs-page.com
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.component';
 import { CardsRevealDialogComponent } from './Pages/pack-content-page/cards-reveal-dialog/cards-reveal-dialog.component';
-import { PackContentPageComponent } from './Pages/pack-content-page/pack-content-page.component';
+import { PackContentPageComponent, PortraitWarningDialogComponent } from './Pages/pack-content-page/pack-content-page.component';
 import { RandomCardRevealDialogComponent } from './Pages/pack-content-page/random-card-reveal-dialog/random-card-reveal-dialog.component';
 import { CardComponent } from './Shared Components/card/card.component';
 import { PackComponent } from './Shared Components/pack/pack.component';
@@ -118,7 +119,7 @@ import { AuthService } from './Services/auth.service';
     PricePageComponent,
     GuidePageComponent,
     ApprovePurchaseDialogComponent,
-    MobileWarningDialogComponent,
+    PortraitWarningDialogComponent,
     SiteContentManagementComponent,
     NewEditNewsComponent,
     EnterCouponCodeDialogComponent,
@@ -161,13 +162,13 @@ import { AuthService } from './Services/auth.service';
     MatSelectModule,
     MatCardModule,
     DragDropModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent,
     PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
-    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, MobileWarningDialogComponent, NewEditNewsComponent]
+    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent, NewEditNewsComponent]
 })
 export class AppModule { }

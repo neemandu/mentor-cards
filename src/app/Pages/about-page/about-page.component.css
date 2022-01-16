@@ -20,7 +20,7 @@ p {
 .flower-img {
   opacity: 0;
   transition: opacity 2s;
-  height: 25rem;
+  height: 30vw;
   margin-top: 1.5rem;
 }
 
@@ -29,16 +29,21 @@ p {
 }
 
 #about-text {
-  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
 }
 
 #about-content {
   margin-top: 5rem;
   padding-bottom: 2rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .person-bio {
-  width: 25%;
+  width: 33%;
   text-align: center;
   transition: transform 1s, line-height 1s
 }
@@ -83,4 +88,89 @@ p {
   font-size: larger;
   color: #ff9a14;
   font-weight: 600;
+}
+
+#introduction-partial {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .flower-img {
+    display: none;
+  }
+
+  .flower-img:first-child {
+    display: inherit;
+    position: absolute;
+    opacity: 0.2 !important;
+    top: 10%;
+    z-index: -1;
+    height: 50vh;
+  }
+
+  #about-content {
+    margin-top: 2rem;
+  }
+
+  #introduction {
+    max-width: 70vw;
+  }
+
+  #about-text {
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .person-bio {
+    width: 450px;
+  }
+
+  .person-bio:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #introduction>p {
+    line-height: 1.5rem;
+    font-size: medium;
+  }
+
+  #introduction {
+    max-width: 80vw;
+  }
+
+  .flower-img:first-child {
+    display: inherit;
+    position: absolute;
+    opacity: 0.2 !important;
+    top: 15%;
+    z-index: -1;
+    height: 50vh;
+  }
+
+}
+
+
+@media screen and (max-width: 480px) {
+  .flower-img:first-child {
+    display: inherit;
+    position: absolute;
+    opacity: 0.2 !important;
+    top: 25%;
+    z-index: -1;
+    height: 50vh;
+  }
+
+  #introduction-full {
+    display: none;
+  }
+
+  #introduction-partial {
+    display: inherit;
+  }
+
+  #introduction {
+    margin-bottom: 1.5rem;
+  }
 }

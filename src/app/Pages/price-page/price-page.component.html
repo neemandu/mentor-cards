@@ -1,6 +1,8 @@
 <div id="content" class="d-flex flex-column align-items-center">
-    <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1>
+    <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
     <img id="top-image" src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png" alt="responsive">
+    <span id="title">מצטרפים לתכנית ונהנים מעד 30% הנחה!</span>
+    <br>
     <ul>
         <span id="list-header">הצטרפו לתכנית ותקבלו:</span>
         <li>
@@ -26,7 +28,7 @@
 </div>
 <br />
 <div style="text-align: center;">
-    <div *ngIf="subPlans" class="program-cards d-flex justify-content-center align-items-center">
+    <div *ngIf="subPlans" class="program-cards">
         <mat-card>
             <mat-card-subtitle>הכי בקטנה</mat-card-subtitle>
             <mat-card-title>תכנית חודשית</mat-card-title>
@@ -49,20 +51,21 @@
                 </button>
             </mat-card-actions>
         </mat-card>
-        <mat-card id="popular-mat-card">
+        <!-- <mat-card id="popular-mat-card"> -->
+        <mat-card>
             <mat-card-subtitle id="popular-mat-card-subtitle">
                 <mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon>
             </mat-card-subtitle>
             <mat-card-title>תכנית חצי-שנתית</mat-card-title>
-            <mat-card-content id="popular-mat-card-content">
+            <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ halfYearlySubscription.fullPrice /
                         halfYearlySubscription.billingCycleInMonths }}</span></p>
                 <p class="price-line">משלמים מראש {{halfYearlySubscription.fullPrice}} ש"ח לחצי שנה וחוסכים 17%</p>
             </mat-card-content>
             <mat-divider inset></mat-divider>
-            <mat-card-actions id="popular-mat-card-actions">
+            <mat-card-actions>
                 <button *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 6"
-                    class="popular-purchase-btn purchase-btn" type="button"
+                    class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(halfYearlySubscription.id)">
                     להצטרפות >>
                 </button>
@@ -102,8 +105,7 @@
     <!-- <p *ngIf="userSingedIn && selectedProgramOwned" style="font-size: medium;font-weight: 600;">
         אתם רשומים לתכנית זו
     </p> -->
-    <img style="height: 5%; width: 5%; margin-top: 2%;" src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
-        alt="Secure Payment">
+    <img id="payment-img" src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png" alt="Secure Payment">
 </div>
 
 <app-information-bar></app-information-bar>

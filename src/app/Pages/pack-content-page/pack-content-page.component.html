@@ -4,37 +4,32 @@
   <h2 *ngIf="pack?.about" id="about-author" class="clickable" (click)="openAboutDialog()">(על יוצר הערכה)</h2>
 </div>
 <div class="d-flex justify-content-between nav-buttons ">
-  <div id="multipileToggle" class="d-flex flex-row">
-    <div style="font-size: 1rem; margin-left: 5px;">בחירה מרובה </div>
+  <div id="mult-choise-btn">
+    <div id="mult-choise-btn-txt">בחירה מרובה </div>
     <mat-slide-toggle (change)="multipileChanged()" [(ngModel)]="multipileChecked">
     </mat-slide-toggle>
   </div>
-  <div>
+  <div id="actions">
     <button type="button" class="option-btn top-option-btn" (click)="shuffle()">ערבב</button>
     <button type="button" class="option-btn top-option-btn" (click)="flipped = !flipped; selectedCards = []">הפוך
       חפיסה</button>
-    <button type="button" class="option-btn top-option-btn" (click)="openRandomCardsModal()">הצג קלף אקראי</button>
-    <!-- <button *ngIf="pack.about" type="button" class="option-btn about-author-option-btn" (click)="openAboutDialog()">על יוצר הערכה</button> -->
+    <button type="button" class="option-btn top-option-btn" (click)="toggleRandomCardsModal()">הצג קלף אקראי</button>
   </div>
-  <!-- just for balance -->
-  <button type="button" class="option-btn top-option-btn" (click)="openGuideBook()">
-    <mat-icon style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
+  <button type="button" id="menu-actions" class="btn option-btn" [matMenuTriggerFor]="actions">
+    <mat-icon>style</mat-icon>
+    <span>פעולות</span>
   </button>
-  <!-- <div *ngIf="!pack || !pack.guideBook" style="visibility: hidden;" class="d-flex flex-row">
-    <div style="font-size: 1rem; margin-left: 5px;">בחירה מרובה </div>
-    <mat-slide-toggle>
-    </mat-slide-toggle>
-  </div> -->
-  <!-- just for balance -->
+  <button type="button" class="option-btn top-option-btn" (click)="openGuideBook()">
+    <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
+  </button>
 </div>
 <div style="padding-bottom: 2rem;" class="d-flex flex-column align-items-center">
   <div *ngIf="pack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">
     <app-card
-      [ngClass]="{'clickable': true, 'shuffle-item': true, 'item-hidden': true, 'item-reveal': loadedCards == pack.cards.length}"
+      [ngClass]="{'clickable': true, 'shuffle-item': true}"
       *ngFor="let card of pack.cards; let i = index" transition-group-item [cardContent]="card"
       [selected]="selectedCards.includes(card)" [index]="i+1"
-      [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)"
-      (loaded)="cardLoaded()">
+      [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)">
     </app-card>
   </div>
   <div id="introduction" *ngIf="!id">
@@ -50,7 +45,7 @@
     </ul>
     <div class="line"></div>
     <div id="actions" class="d-flex flex-column align-items-center">
-      <span id="middle" *ngIf="!userData">הירשמו, בחרו תכנית והתחילו את תקופת הניסיון</span>
+      <span id="middle" *ngIf="!userData">הירשמו, והתחילו את תקופת הניסיון</span>
       <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">עדין לא נרשמתם לתוכנית?</span>
       <span id="middle" *ngIf="userData && userData.status === 'PLAN'">אתם כבר מחוברים, למה אתם מחכים? לעבודה :)</span>
       <br>
@@ -63,18 +58,60 @@
   </div>
 </div>
 
-<nav *ngIf="pack && loadedCards==pack.cards.length"
-  [ngClass]="{'nav navbar-light d-flex justify-content-between align-items-center bottom-nav': true, 'bottom-nav-hidden':(selectedCards.length == 0 || !multipileChecked)}">
+<nav *ngIf="pack"
+  [ngClass]="{'nav navbar-light d-flex justify-content-between align-items-center bottom-nav': true, 'bottom-nav-hidden':(!multipileChecked)}">
   <div class="nav-buttons">
     <button type="button" [ngClass]="{'option-btn bottom-option-btn':true}" [disabled]="selectedCards.length == 0"
-      (click)="openChosenCardsModal()">הצג
+      (click)="toggleChosenCardsModal()">הצג
       קלפים שנבחרו</button>
     <button type="button" [ngClass]="{'option-btn bottom-option-btn':true}" (click)="selectedCards = []"
       [disabled]="selectedCards.length == 0">איפוס
       בחירה</button>
-    <!-- [ngClass]="{'option-btn':true, 'bottom-nav-hidden': selectedCards.length == 0}" -->
   </div>
   <div id="amountChosen">
     <p>{{selectedCards.length}}/5 קלפים נבחרו</p>
   </div>
 </nav>
+
+<mat-menu #actions="matMenu">
+  <button mat-menu-item type="button" class="option-menu-btn top-option-btn" (click)="shuffle()">ערבב</button>
+  <button mat-menu-item type="button" class="option-menu-btn top-option-btn"
+    (click)="flipped = !flipped; selectedCards = []">הפוך
+    חפיסה</button>
+  <button mat-menu-item type="button" class="option-menu-btn top-option-btn" (click)="toggleRandomCardsModal()">הצג קלף
+    אקראי</button>
+</mat-menu>
+
+<div *ngIf="showSelectedCards" class="selected-cards-modal">
+  <div class="selected-cards-modal-content">
+    <button class="iconButton" mat-icon-button (click)="toggleChosenCardsModal()">
+      <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+    </button>
+    <div [ngClass]="{'selected-content':true, 'selected-content-one-card': selectedCards.length == 1}">
+      <img *ngFor="let card of selectedCards"
+        [ngClass]="{'card-view':true, 'one-cards': selectedCards.length == 1, 'two-cards': selectedCards.length == 2,
+      'three-cards': selectedCards.length == 3, 'four-cards': selectedCards.length == 4, 'five-cards': selectedCards.length == 5}" loading="eager"
+        src={{card.imgUrl}} data-src={{card.imgUrl}}>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showRandomCards" class="selected-cards-modal">
+  <div class="selected-cards-modal-content">
+    <button class="iconButton" mat-icon-button (click)="toggleRandomCardsModal()">
+      <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+    </button>
+    <div class="random-content">
+      <button type="button" class="btn btn-light" [disabled]="randomCardIndex == pack.cards.length-1"
+        (click)="randomCardIndex=randomCardIndex+1">
+        <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
+      </button>
+      <img class="card-view one-cards" loading="eager" src={{pack.cards[randomCardIndex].imgUrl}}
+        data-src={{pack.cards[randomCardIndex].imgUrl}}>
+      <button type="button" class="btn btn-light" [disabled]="randomCardIndex == 0"
+        (click)="randomCardIndex=randomCardIndex - 1">
+        <mat-icon class="btn-icon mat-icon-arrow">chevron_left</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

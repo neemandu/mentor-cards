@@ -2,7 +2,7 @@ import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { APIService, ListCardsPacksQuery } from 'src/app/API.service';
+import { APIService } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
 import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
@@ -25,11 +25,12 @@ interface CategoryPack {
 export class AllPacksPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   Subscription: Subscription = new Subscription();
-  mobile: boolean;
+  // mobile: boolean;
 
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
+  userData: UserData;
   // allPacksOwned: PackContent[] = [];
   // allPacksNotOwned: PackContent[] = [];
   allCategories: string[] = [];
@@ -56,10 +57,11 @@ export class AllPacksPageComponent implements OnInit {
     // }));
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       // this.overlaySpinnerService.changeOverlaySpinner(true);
+      this.userData = userData;
       userData ? this.getAllPacks() : null;
     }));
-    window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
-    this.mobile = window.screen.width <= 600;
+    // window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
+    // this.mobile = window.screen.width <= 600;
     this.loadedPacks = 0;
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites;
@@ -68,39 +70,30 @@ export class AllPacksPageComponent implements OnInit {
       // this.filterPacks();
       // this.sortPacks();
     }));
-    // document.onscroll = () => {
-    //   if (document.documentElement.scrollTop < document.documentElement.offsetHeight) {
-    //     console.log("show")
-    //     this.showBottomArrow = true;
-    //   } else {
-    //     console.log("no show")
-    //     this.showBottomArrow = false;
-    //   }
-    // }
 
     this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.userData = this.userAuthService.userData;
     this.getAllPacks();
   }
 
   openEnterCouponCodeModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    // dialogConfig.maxHeight = '85vh';
-    const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
-    const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
-      dialogSub1.unsubscribe();
-      if (res) {
-        // this.videoplayer.nativeElement.play();
-        dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
-        const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-        const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
-          dialogSub2.unsubscribe();
-          this.router.navigate(['all-packs-page']);
-          window.location.reload();
-        })
-      }
-    });
+    this.userAuthService.openEnterCouponCodeModal();
+    // const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    // dialogConfig.autoFocus = true;
+    // const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
+    // const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
+    //   dialogSub1.unsubscribe();
+    //   if (res) {
+    //     dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
+    //     const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+    //     const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
+    //       dialogSub2.unsubscribe();
+    //       this.router.navigate(['all-packs-page']);
+    //       window.location.reload();
+    //     })
+    //   }
+    // });
   }
 
   /**

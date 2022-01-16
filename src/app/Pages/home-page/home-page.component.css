@@ -1,51 +1,40 @@
+/* 480, 768, 1024 */
+
 video {
   position: fixed;
   right: 0;
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
-}
-
-#logo-div {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  text-align: center;
-  background-color: white;
+  z-index: -1;
 }
 
 #logo {
-  width: 23%;
+  width: 100%;
 }
 
-#actions {
+.actions {
   align-items: center;
   background: #fff1d6de;
-  /* background: linear-gradient(-45deg, #fff1d6de, #fff5d6de, #ffe9bed5, #ffe7c7de); */
-  /* background-size: 400% 400%; */
-  /* animation: gradient 15s ease infinite, shadow 5s ease-in-out infinite; */
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  /* box-shadow: 5px 5px; */
+  width: 40%;
 }
 
+.actions-bottom,
 .actions-top {
   margin-bottom: 2%;
-  padding: 4%;
-}
-
-.actions-bottom {
   padding: 2%;
 }
+
+/* 
+.actions-bottom {
+  padding: 2%;
+} */
 
 #top {
   font-size: xx-large;
   line-height: 2rem;
-}
-
-#top-logo {
-  font-size: xxx-large;
-  font-weight: 600;
 }
 
 #middle {
@@ -62,11 +51,13 @@ video {
 }
 
 .content {
-  position: absolute;
-  top: 10%;
-  left: 25vw;
-  width: 50%;
+  /* width: 100%; */
+  /* height: 100%; */
+  display: flex;
   text-align: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3vh;
 }
 
 button {
@@ -105,47 +96,34 @@ button:focus {
   }
 }
 
-app-information-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 marquee li {
   margin-bottom: 1%;
 }
 
-/* @keyframes shadow {
-  0% {
-    box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 12px;
+@media screen and (max-width: 1024px) {
+  .actions {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .actions {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .actions {
+    width: 85%;
   }
 
-  15% {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  #top {
+    font-size: x-large;
   }
 
-  30% {
-    box-shadow: rgba(0, 0, 0, 0.1) -4px 4px 12px;
+  app-information-bar {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
   }
-
-  45% {
-    box-shadow: rgba(0, 0, 0, 0.1) -4px 0px 12px;
-  }
-
-  60% {
-    box-shadow: rgba(0, 0, 0, 0.1) -4px -4px 12px;
-  }
-
-  75% {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px -4px 12px;
-  }
-
-  90%{
-    box-shadow: rgba(0, 0, 0, 0.1) 4px -4px 12px;
-  }
-
-  100%{
-    box-shadow: rgba(0, 0, 0, 0.1) 4px 0px 12px;
-  }
-} */
+}

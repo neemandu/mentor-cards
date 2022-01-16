@@ -141,7 +141,8 @@ exports.handler = async (event) => {
                 "numberOfUsedPacks": 0,
                 "cancellationDate": null,
                 "couponCodes": [],
-                "cardsPacksIds": []
+                "cardsPacksIds": [],
+                "providerTransactionId": null
             }
         };
     

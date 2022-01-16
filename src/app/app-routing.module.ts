@@ -15,6 +15,7 @@ import { NewsManagementComponent } from './Pages/site-content-management/news-ma
 // import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
 import { AuthGuardGroupManagementService, AuthGuardNoProgramPageService, AuthGuardSiteContentManagementService, AuthGuardUserPageService } from './Services/auth-guard.service';
+import { CanDeactivateGuardService } from './Services/can-deactivate-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -24,7 +25,7 @@ const routes: Routes = [
   { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuardUserPageService] },
   { path: 'group-management', component: GroupManagementComponent, canActivate: [AuthGuardGroupManagementService] },
   // { path: 'site-content-management', component: SiteContentManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
-  { path: 'guide-book-management', component: GuideBookManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
+  { path: 'guide-book-management', component: GuideBookManagementComponent, canActivate: [AuthGuardSiteContentManagementService], canDeactivate: [CanDeactivateGuardService] },
   { path: 'news-management', component: NewsManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
   { path: 'all-packs-page', component: AllPacksPageComponent },
   { path: 'about-page', component: AboutPageComponent },

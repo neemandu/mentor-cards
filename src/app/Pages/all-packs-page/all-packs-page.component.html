@@ -1,7 +1,8 @@
 <title>Mentor-Cards כל ערכות הקלפים</title>
 <div id="content">
-  <div *ngIf="!mobile" id="filters" class="float-right d-flex flex-column">
-    <button id="couponCodeBtn" type="button" (click)="openEnterCouponCodeModal()">יש לך קוד הטבה?</button>
+  <div id="filters" class="float-right">
+    <button *ngIf="userData" id="couponCodeBtn" type="button" (click)="openEnterCouponCodeModal()">יש לך קוד
+      הטבה?</button>
     <h3 id="filter-by-options-title">חיפוש</h3>
     <mat-form-field>
       <mat-label>הקלד מילת מפתח, נושא...</mat-label>
@@ -9,7 +10,7 @@
         (keyup)="filterPacks()">
       <button mat-button [ngStyle]="{'visibility': filterText.value ? 'visible' : 'hidden'}" matSuffix mat-icon-button
         aria-label="Clear" (click)="freeTextFilterSelected = ''; filterPacks()">
-        <mat-icon style="font-family: 'Material Icons';">close</mat-icon>
+        <mat-icon style="font-family: 'Material Icons' !important;">close</mat-icon>
       </button>
     </mat-form-field>
     <br>
@@ -70,7 +71,7 @@
       </div>
     </div>
   </div> -->
-
+  <!--test-->
   <div id="test" class="all-packs-view" #new>
     <!-- <h1 *ngIf="trialPeriodExpDate" style="text-align: center; margin-left: 14rem;">
       כל ערכות הקלפים לרשותכם עד ה- {{trialPeriodExpDate | date:'d/M/yy'}}
@@ -78,10 +79,10 @@
     <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
       <div class="category-line d-flex align-items-center justify-content-around">
         <div class="first-line"></div>
-        <h3 class="caterory-title">המועדפים שלי</h3>
+        <h3 class="categrory-title">המועדפים שלי</h3>
         <div class="second-line"></div>
       </div>
-      <div class="d-flex flex-row flex-wrap">
+      <div class="d-flex flex-row flex-wrap card-section">
         <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo" (loaded)="packLoaded();"
           (packChange)="getAllPacks(); updateUserData();">
         </app-pack>
@@ -89,12 +90,12 @@
     </div>
     <div *ngIf="selectedFavorites.length == 0">
       <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks; let i = index;">
-        <div class="category-line d-flex align-items-center justify-content-around">
+        <div *ngIf="categoryPacks" class="category-line d-flex align-items-center justify-content-around">
           <div class="first-line"></div>
-          <h3 class="caterory-title">{{categoryPacks.category}}</h3>
+          <h3 class="categrory-title">{{categoryPacks.category}}</h3>
           <div class="second-line"></div>
         </div>
-        <div class="d-flex flex-row flex-wrap">
+        <div *ngIf="categoryPacks" class="d-flex flex-row flex-wrap card-section">
           <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
             (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">
           </app-pack>

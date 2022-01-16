@@ -50,6 +50,7 @@ video {
   height: 3px;
   margin-top: -15px;
   margin-bottom: 10px;
+  align-self: center;
 }
 
 .changePlanBtn {
@@ -78,4 +79,29 @@ video {
 
 .changePlanBtn:disabled {
   background: #cccccc;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+app-information-bar {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 480px) {
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 }

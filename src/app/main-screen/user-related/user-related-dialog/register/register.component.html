@@ -5,7 +5,7 @@
         <mat-form-field>
           <mat-label>שם מלא</mat-label>
           <input autocomplete="off" formControlName="name" matInput>
-          <mat-hint>עברית\אנגלית</mat-hint>
+          <mat-hint>עברית/אנגלית</mat-hint>
         </mat-form-field>
         <mat-form-field>
           <mat-label>טלפון נייד</mat-label>
@@ -17,8 +17,7 @@
         <mat-form-field>
           <mat-label>אימייל</mat-label>
           <input autocomplete="off" formControlName="username" matInput>
-          <mat-error *ngIf="registerForm.controls.username.errors?.UsernameExistsException">מייל זה קיים במערכת, נא
-            להשתמש באחר
+          <mat-error *ngIf="registerForm.controls.username.errors?.UsernameExistsException">מייל זה קיים במערכת
           </mat-error>
         </mat-form-field>
         <mat-form-field>
@@ -26,9 +25,7 @@
           <input autocomplete="off" formControlName="usernameConfirm" matInput (focusout)="checkUsernameConfirm()">
           <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.notSameEmail">מייל לא תואם
           </mat-error>
-          <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.UsernameExistsException">מייל זה קיים במערכת,
-            נא
-            להשתמש באחר
+          <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.UsernameExistsException">מייל זה קיים במערכת
           </mat-error>
         </mat-form-field>
         <mat-form-field>

@@ -99,3 +99,36 @@ export class GuideBookElement {
         return this;
     }
 }
+
+/*
+interface GuideBookElement {
+    name: string;
+    subElements: GuideBookElement[] | null;
+}
+
+let res: GuideBookElement;
+
+let x: any = {} //old guidebook
+
+res = x.subjects.map((subject: any) => {
+    const obj1: GuideBookElement = {
+        name: subject.subjectName,
+        subElements: subject.subSubjects.map((subSubject: any) => {
+            const obj2: GuideBookElement = {
+                name: subSubject.subSubjectName,
+                subElements: subSubject.questions.map((question: any) => {
+                    const obj3: GuideBookElement = {
+                        name: question,
+                        subElements: null
+                    };
+                    return obj3;
+                })
+            };
+            return obj2;
+        })
+    };
+    return obj1;
+})
+
+console.log(res); //new guidebook
+*/

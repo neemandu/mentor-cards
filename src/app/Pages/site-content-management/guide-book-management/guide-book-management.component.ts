@@ -183,7 +183,20 @@ export class GuideBookManagementComponent implements OnInit, OnDestroy {
     // })
   }
 
+  canDeactivate() {
+    if (this.changesMade) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = new DynamicDialogData('יציאה ללא שמירה', ['לצאת מהעמוד ללא שמירת השינויים?'], 'כן', 'לא')
+      const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+      return dialogRef.afterClosed();
+    }
+    return true;
+  }
+
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
   }
 }
+

@@ -1,12 +1,13 @@
 .footer {
   font-size: larger;
   width: 100%;
-  height: 3rem;
+  height: var(--bottom-nav-height);
+  /* height: 7vh; */
   background-color: rgb(255, 203, 126);
   color: white;
   /* text-align: center; */
   align-items: center;
-  margin-top: 2%;
+  /* margin-top: 2%; */
 }
 
 .icons {
@@ -20,6 +21,20 @@
   margin-right: 2rem;
 }
 
-#site-rules {
+.site-rules {
   cursor: pointer;
+}
+
+#site-rules-sm {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-text {
+    display: none;
+  }
+
+  #site-rules-sm {
+    display: inherit;
+  }
 }

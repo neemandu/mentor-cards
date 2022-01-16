@@ -10,6 +10,7 @@ img {
   height: auto;
   box-shadow: 0.25em 0.25em 0px 0px rgb(255 255 255), 0.25em 0.25em 0px 1px #ddd, 0.5em 0.5em 0px 0px rgb(255 255 255), 0.5em 0.5em 0px 1px #ddd, rgba(0, 0, 0, 0.09) 0px 3px 12px;
   transition: box-shadow 0.2s ease-out;
+  touch-action: pan-y !important;
 }
 
 img:hover {
@@ -106,6 +107,11 @@ mat-icon {
   font-weight: 600;
   animation: heartbeat 2s infinite;
 }
+
+/* 
+img {
+  overflow-y: auto;
+} */
 
 @keyframes heartbeat {
 

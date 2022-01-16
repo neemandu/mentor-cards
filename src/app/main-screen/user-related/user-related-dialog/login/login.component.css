@@ -13,6 +13,7 @@
 .mat-form-field {
   text-align: right;
   margin-bottom: 5px;
+  direction: rtl;
 }
 
 .option-btn {
@@ -62,7 +63,8 @@ mat-progress-bar {
 #login-form {
   /*border-left: #ffa800 2px solid;*/
   padding: 1% 1% 1% 5%;
-  width: 18vw;
+  /* width: 18vw; */
+  width: 100%;
 }
 
 #not-receive-code {

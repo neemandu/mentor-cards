@@ -13,6 +13,7 @@
 .mat-form-field {
   text-align: right;
   margin-bottom: 5px;
+  direction: rtl;
 }
 
 .option-btn {
@@ -63,7 +64,8 @@ mat-progress-bar {
 #register-form {
   /*border-left: #ffa800 2px solid;*/
   padding: 1% 1% 1% 5%;
-  width: 18vw;
+  width: 100%;
+  /* width: 18vw; */
 }
 
 /* add appropriate colors to fb, twitter and google buttons */
