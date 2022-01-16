@@ -100,7 +100,6 @@ type User
   cancellationDate: AWSDateTime
   couponCodes: [CouponCodes]
   cardsPacksIds: [String]
-  providerTransactionId: String
 }
 
 type Group

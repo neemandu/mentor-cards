@@ -187,8 +187,6 @@
       console.log("updating new subscription in DB");
   
       user.cancellationDate = null;
-
-      user.providerTransactionId = transId;
   
       user.firstProgramRegistrationDate = user.firstProgramRegistrationDate ? 
       user.firstProgramRegistrationDate : 

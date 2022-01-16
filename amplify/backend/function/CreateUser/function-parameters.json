@@ -15,9 +15,9 @@
     {
       "type": "ProjectLayer",
       "resourceName": "mentorcardsMailingListService",
+      "env": "dev",
       "version": "Always choose latest version",
-      "isLatestVersionSelected": true,
-      "env": "prod"
+      "isLatestVersionSelected": true
     }
   ],
   "environmentVariableList": [

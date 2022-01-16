@@ -1,13 +1,3 @@
-
-const aws = require('aws-sdk');
-
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["PayPalAPIKey"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_CARDSPACKTABLE_ARN
 	API_CARDSPACKS_CARDSPACKTABLE_NAME
@@ -218,15 +208,13 @@ async function cancelPayPalSubscription(transactionId, access_token){
 
 async function getPayPalAccessToken(){
     console.log("getPayPalAccessToken");
-    console.log("getting paypal secret");
-    var paypalAPIKey = Parameters[0].Value;
-    console.log("getting paypal secret DONE");
+
     var defaultOptions = {
         host: 'api.paypal.com',
         port: 443, 
         headers: {
             'Content-Type': 'text/plain',
-            'Authorization': 'Basic ' + paypalAPIKey
+            'Authorization': 'Basic QVRleGlMUFZFWG9meXF6aXNVOU1UMk54bFV1bTJYdnVwNktad0hVc2tVajk5VDRzblZCLU55M3hkMUw4NTFQTVY0OEJoVUktSkZYbk56a3Q6RUxPd3pkOFZ0M0lCWHVwQzBLMDJhckFhbENpRl95WW9HTWo0cm9CVEV5Sk5vLTZxNXBNdEhOYTNZY3F1Y2hSWWwxZTFoYjRMc1lzSk9HWEI='
         }
     }
 
@@ -235,36 +223,6 @@ async function getPayPalAccessToken(){
     console.log(response);
     console.log(response["access_token"]);
     return response["access_token"];   
-}
-
-async function getGroup(groupId){
-    console.log("getGroup: " + groupId);
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
-    
-    console.log("check against table: " + groupTable);
-    var groupParams = {
-        TableName:groupTable,
-        Key:{
-            "id": groupId
-        }
-    };
-
-    var group;
-    await docClient.get(groupParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
-            group = data["Item"];
-        }
-    }).promise();
-
-    if(!group){
-        throw Error ('no such Group - ' + groupId);
-    }
-
-    return group;
 }
 
 exports.handler = async (event) => {
@@ -281,7 +239,15 @@ exports.handler = async (event) => {
     var user = await getUserByUSerName(username);
 
     var access_token = await getPayPalAccessToken();
-    await cancelPayPalSubscription(user.providerTransactionId, access_token);
+    await cancelPayPalSubscription(user.subscription.providerTransactionId, access_token);
+
+    user.status = "NOPLAN";
+    user.groupId = null;
+    user.groupRole = null;
+    user.cancellationDate = new Date().toISOString();
+    user.cardsPacksIds = []
+
+    await saveUser(user);
 
     // Removing all group users
     if(user.groupId){
@@ -297,12 +263,4 @@ exports.handler = async (event) => {
             await saveUser(groupUser);
         }
     }
-
-    user.status = "NOPLAN";
-    user.groupId = null;
-    user.groupRole = null;
-    user.cancellationDate = new Date().toISOString();
-    user.cardsPacksIds = []
-
-    await saveUser(user);
 };

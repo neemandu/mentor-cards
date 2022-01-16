@@ -27,6 +27,20 @@
     }
   },
   "api": {
+    "PayPalSubscriptionsWebHook": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "PayPalCancelWebhook",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    },
     "cardspacks": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
@@ -42,28 +56,13 @@
             {
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
-                "apiKeyExpirationDays": 365,
-                "apiKeyExpirationDate": "2022-12-23T07:32:53.846Z",
+                "apiKeyExpirationDays": 7,
                 "description": "mentor-cards"
               }
             }
           ]
         }
       }
-    },
-    "PayPalWebhookAPI": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "PayPalWebhookFunc",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
     }
   },
   "function": {
@@ -207,6 +206,20 @@
         }
       ]
     },
+    "PayPalCancelWebhook": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
     "AddCouponCode": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -265,20 +278,6 @@
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
-          ]
-        }
-      ]
-    },
-    "PayPalWebhookFunc": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
           ]
         }
       ]
