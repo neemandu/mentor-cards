@@ -19,7 +19,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-5a5a6c4c693432435933-build.zip",
+          "s3Key": "amplify-builds/CreateUser-4267457375624e735756-build.zip",
           "sendinblueApiKey": "xxx"
         },
         "AddCardsPack": {
@@ -40,7 +40,7 @@
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-682f6a6c694478356f70-build.zip",
+          "s3Key": "amplify-builds/UnSubscribe-766335452f4c6b336672-build.zip",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "JoinExistingGroup": {
@@ -78,11 +78,7 @@
         "ContactUsTrigger": {
           "sesEmail": "support@mentor-cards.com",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/ContactUsTrigger-4d772f5a484143382f6c-build.zip"
-        },
-        "PayPalCancelWebhook": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalCancelWebhook-3067477a344232357850-build.zip"
+          "s3Key": "amplify-builds/ContactUsTrigger-3547774d71377a544371-build.zip"
         }
       }
     }
@@ -161,10 +157,6 @@
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/UpdatePaymentProgram-2b5179654b367a747956-build.zip"
-        },
-        "PayPalWebhookFunc": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-59464b716c50554d5446-build.zip"
         }
       },
       "auth": {
