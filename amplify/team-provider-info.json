@@ -167,7 +167,12 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-59464b716c50554d5446-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-6f6834426d70642f6266-build.zip"
+        },
+        "ContactUsTrigger": {
+          "sesEmail": "support@mentor-cards.com",
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/ContactUsTrigger-4d772f5a484143382f6c-build.zip"
         }
       },
       "auth": {
