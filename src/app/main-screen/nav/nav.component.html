@@ -57,7 +57,7 @@
   <button mat-menu-item id="user-drop-down" *ngIf="loggedIn" [matMenuTriggerFor]="userMenu">
     <mat-icon id="account_circle">account_circle</mat-icon>
   </button>
-  <button mat-menu-item *ngIf="!loggedIn" (click)=signInSignUp()>התחברות\הרשמה</button>
+  <button mat-menu-item *ngIf="!loggedIn" (click)=signInSignUp()>התחברות/הרשמה</button>
   <button mat-menu-item (click)="navigate('/all-packs-page')">כל ערכות
     הקלפים</button>
   <button mat-menu-item *ngIf="!loggedIn" (click)="navigate('/example-pack')">ערכה
