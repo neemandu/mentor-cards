@@ -1,5 +1,7 @@
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
+	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
@@ -121,8 +123,37 @@ async function cancelUserSubscription(user){
     await saveUser(user);
 }
 
-function sendRecipt(){
-    console.log("Should Send a recipt!! Not yet implemented");
+function sendRecipt(email, phone, fullName){
+    console.log("Should Send a recipt!!");
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
+    var d = new Date();
+    var id = email + "_RECIPT_FROM_PAYPAL_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var params = {
+        TableName: table,
+        Item: {
+            "id": id,
+            "email": email,
+            "emailDeliveryTime": null,
+            "phone": phone,
+            "smsDeliveryTime": null,
+            "emailTemplateId": 11,
+            "name": fullName,
+            "params": {
+                "name": fullName
+            }
+        }
+    };
+
+    await docClient.put(params, function (err, data) {
+        if (err) {
+            console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
 }
 
 async function getUserByPayPalTxId(transaction_id){
@@ -161,6 +192,38 @@ async function getUserByPayPalTxId(transaction_id){
 
 }
 
+async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
+    var d = new Date();
+    var id = email + "_UNSUBSCRIBE_FROM_PAYPAL_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var params = {
+        TableName: table,
+        Item: {
+            "id": id,
+            "email": email,
+            "emailDeliveryTime": null,
+            "phone": phone,
+            "smsDeliveryTime": null,
+            "emailTemplateId": 10,
+            "name": fullName,
+            "params": {
+                "name": fullName
+            }
+        }
+    };
+
+    await docClient.put(params, function (err, data) {
+        if (err) {
+            console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
+}
+
 exports.handler = async (event) => {
     console.log('PayPal webhook!');
     console.log('event:');
@@ -174,11 +237,12 @@ exports.handler = async (event) => {
         console.log('transaction_id: ' + transaction_id);
         var user = await getUserByPayPalTxId(transaction_id);
         await cancelUserSubscription(user);
+        await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
     }
     else if(event_type == "PAYMENT.SALE.COMPLETED"){
         var transaction_id = paypal_body.resource.billing_agreement_id;
         console.log('transaction_id: ' + transaction_id);
-        sendRecipt();
+        //sendRecipt();
     }
     const response = {
         statusCode: 200,
