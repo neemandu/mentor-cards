@@ -78,10 +78,6 @@
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/mentorcards91f3dc29CustomMessage-332b626944416662796d-build.zip"
         },
-        "updatePaymentProgram": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/updatePaymentProgram-637037316e2f74596c78-build.zip"
-        },
         "ContactUsTrigger": {
           "sesEmail": "support@mentor-cards.com",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
