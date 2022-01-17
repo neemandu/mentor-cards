@@ -1,12 +1,17 @@
-
+/* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
+	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
+	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */
 const aws = require('aws-sdk');
-
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["PayPalAPIKey"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
 
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_CARDSPACKTABLE_ARN
@@ -219,6 +224,14 @@ async function cancelPayPalSubscription(transactionId, access_token){
 async function getPayPalAccessToken(){
     console.log("getPayPalAccessToken");
     console.log("getting paypal secret");
+    
+    var { Parameters } = await (new aws.SSM())
+    .getParameters({
+    Names: ["PayPalAPIKey"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+    })
+    .promise();
+
     var paypalAPIKey = Parameters[0].Value;
     console.log("getting paypal secret DONE");
     var defaultOptions = {
@@ -267,6 +280,38 @@ async function getGroup(groupId){
     return group;
 }
 
+async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
+    var d = new Date();
+    var id = email + "_UNSUBSCRIBE_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var params = {
+        TableName: table,
+        Item: {
+            "id": id,
+            "email": email,
+            "emailDeliveryTime": null,
+            "phone": phone,
+            "smsDeliveryTime": null,
+            "emailTemplateId": 10,
+            "name": fullName,
+            "params": {
+                "name": fullName
+            }
+        }
+    };
+
+    await docClient.put(params, function (err, data) {
+        if (err) {
+            console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
+}
+
 exports.handler = async (event) => {
     AWS.config.update({
         region: env.REGION
@@ -305,4 +350,6 @@ exports.handler = async (event) => {
     user.cardsPacksIds = []
 
     await saveUser(user);
+
+    await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
 };

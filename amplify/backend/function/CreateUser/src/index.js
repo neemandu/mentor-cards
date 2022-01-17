@@ -2,7 +2,8 @@
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_GROUPTABLE_ARN
 	API_CARDSPACKS_GROUPTABLE_NAME
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
+	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
@@ -89,10 +90,43 @@ async function getUserGroup(username){
     return g_group;
 }
 
+async function addWelcomeEmailToMessageQueue(email, phone, fullName){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
+    var d = new Date();
+    var id = email + "_WELCOME_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var params = {
+        TableName:table,
+        Item:{
+            "id": id,
+            "email": email,
+            "emailDeliveryTime": null,
+            "phone": phone,
+            "smsDeliveryTime": null,
+            "emailTemplateId": 1,
+            "name": fullName,
+            "params": {
+                "name": fullName
+            }
+        }
+    };
+
+    await docClient.put(params, function(err, data) {
+        if (err) {
+            console.error("Unable to add welcome message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
+}
+
 exports.handler = async (event) => {
     var username = event.arguments.input['username'];
     var email = event.arguments.input['email'];
     var phone = event.arguments.input['phone'];
+    var fullName = event.arguments.input['fullName'];
 
     console.log(event);
     console.log('Adding new user:');
@@ -119,7 +153,7 @@ exports.handler = async (event) => {
         if(group){
             subscription = group.subscription
         }*/
-
+        var tid = "Empty_" + username;
         var params = {
             TableName:table,
             Item:{
@@ -142,7 +176,8 @@ exports.handler = async (event) => {
                 "cancellationDate": null,
                 "couponCodes": [],
                 "cardsPacksIds": [],
-                "providerTransactionId": null
+                "providerTransactionId": tid,
+                "fullName": fullName
             }
         };
     
@@ -158,6 +193,8 @@ exports.handler = async (event) => {
                 //callback(null, data);
             }
         }).promise();
+
+        await addWelcomeEmailToMessageQueue(email, phone, fullName);
     
         console.log("Done adding a new user...");
         

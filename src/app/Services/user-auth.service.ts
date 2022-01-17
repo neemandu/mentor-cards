@@ -126,7 +126,8 @@ export class UserAuthService {
     var newUsername: string = this.cognitoUserData.username;
     var newUserEmail: string = this.cognitoUserData.attributes['email'];
     var newUserPhone: string = this.cognitoUserData.attributes['phone_number'];
-    var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail, 'phone': newUserPhone };
+    var newUserFullName: string = this.cognitoUserData.attributes['given_name'];
+    var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail, 'phone': newUserPhone, 'fullName': newUserFullName };
     this.api.CreateUser(user).then(value => {
       this.userData = new UserData().deseralize(value);
       this.overlaySpinnerService.changeOverlaySpinner(false);

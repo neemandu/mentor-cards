@@ -11,6 +11,40 @@ Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
 
+function shouldSentAlert(user){
+    var startFreePeriodDate = user.createdAt;
+    var trialPeriodInDays = 14;
+    if(user &&
+        user.couponCodes &&
+        user.couponCodes.length > 0){
+            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
+                    var couponDate = user.couponCodes[i].createdAt;
+                    if(couponDate > startFreePeriodDate){
+                        startFreePeriodDate = couponDate;
+                        trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
+                    }
+                }
+            }
+        }  
+    var endOfTrialDate = startFreePeriodDate;  
+    endOfTrialDate.setDate(endOfTrialDate.getDate()+trialPeriodInDays);
+    var now = new Date();
+    var Difference_In_Time = endOfTrialDate.getTime() - now.getTime();
+    var Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
+    console.log('endOfTrialDate date: ');
+    console.log(endOfTrialDate);
+    console.log('Now: ');
+    console.log(now);
+    console.log('Difference_In_Days: ' + Difference_In_Days);
+    if(Difference_In_Days == 0){
+        console.log('Should send email to: ' + user.email);
+        return true;
+    }
+    console.log('Should not send email to: ' + user.email);
+    return false;
+}
+
 async function getAllRelevantUsers(){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;   
@@ -47,25 +81,28 @@ async function getAllRelevantUsers(){
             console.log("Query succeeded.");         
             console.log(data.Items.length);
             data.Items.forEach(function(user) {
-                var d = new Date();
-                var id = user.email + "_GUIDE_AFTER_7_DAYS_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-                var item = {
-                    PutRequest: {
-                        Item: {
-                            "id": id,
-                            "email": user.email,
-                            "emailDeliveryTime": null,
-                            "phone": user.phone,
-                            "smsDeliveryTime": null,
-                            "emailTemplateId": 3,
-                            "name": user.fullName,
-                            "params": {
-                                "name": user.fullName
+                var a = shouldSentAlert(user);
+                if(a){
+                    var d = new Date();
+                    var id = user.email + "_GUIDE_AFTER_7_DAYS_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+                    var item = {
+                        PutRequest: {
+                            Item: {
+                                "id": id,
+                                "email": user.email,
+                                "emailDeliveryTime": null,
+                                "phone": user.phone,
+                                "smsDeliveryTime": null,
+                                "emailTemplateId": 3,
+                                "name": user.fullName,
+                                "params": {
+                                    "name": user.fullName
+                                }
                             }
                         }
                     }
+                    users.push(item);
                 }
-                users.push(item);               
             });
         }
     }).promise();

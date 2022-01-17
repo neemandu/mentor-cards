@@ -1,30 +1,42 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateContactUsModel {
-  onCreateContactUsModel {
+subscription OnCreateMessageQueue {
+  onCreateMessageQueue {
     id
-    name
-    content
     email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateContactUsModel {
-  onUpdateContactUsModel {
+subscription OnUpdateMessageQueue {
+  onUpdateMessageQueue {
     id
-    name
-    content
     email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteContactUsModel {
-  onDeleteContactUsModel {
+subscription OnDeleteMessageQueue {
+  onDeleteMessageQueue {
     id
-    name
-    content
     email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
@@ -137,6 +149,36 @@ subscription OnDeleteCouponCodes {
     updatedAt
   }
 }
+subscription OnCreateContactUsModel {
+  onCreateContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateContactUsModel {
+  onUpdateContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteContactUsModel {
+  onDeleteContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id
@@ -231,6 +273,9 @@ subscription OnCreateCardsPack {
               name
               subElements {
                 name
+                subElements {
+                  name
+                }
               }
             }
           }
@@ -270,6 +315,9 @@ subscription OnUpdateCardsPack {
               name
               subElements {
                 name
+                subElements {
+                  name
+                }
               }
             }
           }
@@ -309,6 +357,9 @@ subscription OnDeleteCardsPack {
               name
               subElements {
                 name
+                subElements {
+                  name
+                }
               }
             }
           }
