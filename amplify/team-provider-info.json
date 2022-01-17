@@ -157,7 +157,12 @@
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/UpdatePaymentProgram-2b5179654b367a747956-build.zip"
-        }
+        },
+        "ContactUsTrigger": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/ContactUsTrigger-4d772f5a484143382f6c-build.zip"
+        },
+        "PayPalWebhookFunc": {}
       },
       "auth": {
         "mentorcards56dbf153": {}
