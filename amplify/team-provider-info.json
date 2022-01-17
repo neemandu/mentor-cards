@@ -116,7 +116,7 @@
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-5a5a6478527642583944-build.zip",
+          "s3Key": "amplify-builds/UnSubscribe-663875346b3773326f44-build.zip",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "JoinExistingGroup": {
@@ -156,15 +156,16 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-6d6658432f3938534568-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-426c626d486a6b394a70-build.zip"
         },
         "ContactUsTrigger": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/ContactUsTrigger-4d772f5a484143382f6c-build.zip"
+          "s3Key": "amplify-builds/ContactUsTrigger-4d772f5a484143382f6c-build.zip",
+          "sesEmail": "support@mentor-cards.com"
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-4e3943364b5737413679-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-3654737271637144362f-build.zip"
         },
         "AddContactToExternalEmailService": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
