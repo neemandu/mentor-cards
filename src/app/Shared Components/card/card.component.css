@@ -44,3 +44,25 @@ img {
   /* Safari */
   backface-visibility: hidden;
 }
+
+/* .badge {
+  width: 100%;
+}
+
+.remove-btn {
+  display: none;
+}
+
+.remove-icon {
+  font-size: initial;
+}
+
+.index-remove {
+  display: flex;
+  height: 1rem;
+  align-items: center;
+}
+
+.index-remove:hover>.remove-btn {
+  display: initial;
+} */

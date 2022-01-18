@@ -6,7 +6,6 @@ button {
 .nav {
   background-color: white;
   height: var(--top-nav-height)
-
 }
 
 .navbar-btn {
@@ -126,11 +125,38 @@ img {
   text-align: initial;
   padding-left: 5%;
   min-width: 10rem;
+  line-height: 2rem;
+  list-style: circle;
 }
 
 .news-list-item {
   font-size: 1rem;
+  color: var(--main-color);
 }
+
+li span {
+  color: black;
+}
+
+.line {
+  background-color: #ffa800;
+  height: 5px;
+  width: 80%;
+  border-radius: 100%;
+  margin-bottom: 8px;
+  margin-top: 7px;
+}
+
+.news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* li::marker {
+  color: var(--main-color);
+  content: "►";
+} */
 
 #news-title {
   font-size: large;

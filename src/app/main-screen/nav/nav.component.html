@@ -37,11 +37,12 @@
 </nav>
 
 <mat-menu class="mat-menu-news" #newsMenu="matMenu">
-  <div style="text-align: center;">
+  <div class="news">
     <span id="news-title">חדשות ועדכונים</span>
+    <div class="line"></div>
     <ul id="news-list">
       <li class="news-list-item" *ngFor="let n of news">
-        {{n.message}}
+        <span>{{n.message}}</span>
       </li>
       <li class="news-list-item" *ngIf="news?.length==0">
         אין חדשות ועדכונים חדשים
