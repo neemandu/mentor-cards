@@ -109,6 +109,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
+        "ContactUsTrigger": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
         "PayPalWebhookFunc": {
             "Name": "string",
             "Arn": "string",

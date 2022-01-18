@@ -17,6 +17,7 @@ export type CreateUserInput = {
   username?: string | null;
   email?: string | null;
   phone?: string | null;
+  fullName?: string | null;
 };
 
 export type User = {
@@ -39,6 +40,7 @@ export type User = {
   couponCodes?: Array<CouponCodes | null> | null;
   cardsPacksIds?: Array<string | null> | null;
   providerTransactionId?: string | null;
+  fullName?: string | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -192,6 +194,121 @@ export type UpdateContactUsModelInput = {
 
 export type DeleteContactUsModelInput = {
   id: string;
+};
+
+export type CreateMessageQueueInput = {
+  id?: string | null;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+};
+
+export type ModelMessageQueueConditionInput = {
+  email?: ModelStringInput | null;
+  emailDeliveryTime?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
+  smsDeliveryTime?: ModelStringInput | null;
+  emailTemplateId?: ModelIntInput | null;
+  name?: ModelStringInput | null;
+  params?: ModelStringInput | null;
+  and?: Array<ModelMessageQueueConditionInput | null> | null;
+  or?: Array<ModelMessageQueueConditionInput | null> | null;
+  not?: ModelMessageQueueConditionInput | null;
+};
+
+export type MessageQueue = {
+  __typename: "MessageQueue";
+  id?: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type UpdateMessageQueueInput = {
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+};
+
+export type DeleteMessageQueueInput = {
+  id: string;
+};
+
+export type ModelMessageQueueFilterInput = {
+  id?: ModelIDInput | null;
+  email?: ModelStringInput | null;
+  emailDeliveryTime?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
+  smsDeliveryTime?: ModelStringInput | null;
+  emailTemplateId?: ModelIntInput | null;
+  name?: ModelStringInput | null;
+  params?: ModelStringInput | null;
+  and?: Array<ModelMessageQueueFilterInput | null> | null;
+  or?: Array<ModelMessageQueueFilterInput | null> | null;
+  not?: ModelMessageQueueFilterInput | null;
+};
+
+export type ModelMessageQueueConnection = {
+  __typename: "ModelMessageQueueConnection";
+  items?: Array<MessageQueue>;
+  nextToken?: string | null;
+};
+
+export type CreateMessageQueueMutation = {
+  __typename: "MessageQueue";
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateMessageQueueMutation = {
+  __typename: "MessageQueue";
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteMessageQueueMutation = {
+  __typename: "MessageQueue";
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CreateGroupInput = {
@@ -501,6 +618,7 @@ export type ModelUserFilterInput = {
   cancellationDate?: ModelStringInput | null;
   cardsPacksIds?: ModelStringInput | null;
   providerTransactionId?: ModelStringInput | null;
+  fullName?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -651,6 +769,7 @@ export type CreateUserMutation = {
   } | null> | null;
   cardsPacksIds?: Array<string | null> | null; 
   providerTransactionId?: string | null;
+  fullName?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1083,6 +1202,7 @@ export type GetUserQuery = {
   } | null> | null;
   cardsPacksIds?: Array<string | null> | null;
   providerTransactionId?: string | null;
+  fullName?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1139,9 +1259,42 @@ export type ListUsersQuery = {
     } | null> | null;
     cardsPacksIds?: Array<string | null> | null;
     providerTransactionId?: string | null;
+    fullName?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
+  nextToken?: string | null;
+};
+
+export type GetMessageQueueQuery = {
+  __typename: "MessageQueue";
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListMessageQueuesQuery = {
+  __typename: "ModelMessageQueueConnection";
+  items: Array<{
+    __typename: "MessageQueue";
+    id: string;
+    email?: string | null;
+    emailDeliveryTime?: string | null;
+    phone?: string | null;
+    smsDeliveryTime?: string | null;
+    emailTemplateId?: number | null;
+    name?: string | null;
+    params?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  }>;
   nextToken?: string | null;
 };
 
@@ -1407,6 +1560,48 @@ export type OnDeleteContactUsModelSubscription = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateMessageQueueSubscription = {
+  __typename: "MessageQueue";
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateMessageQueueSubscription = {
+  __typename: "MessageQueue";
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteMessageQueueSubscription = {
+  __typename: "MessageQueue";
+  id: string;
+  email?: string | null;
+  emailDeliveryTime?: string | null;
+  phone?: string | null;
+  smsDeliveryTime?: string | null;
+  emailTemplateId?: number | null;
+  name?: string | null;
+  params?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1791,6 +1986,7 @@ export class APIService {
           }
           cardsPacksIds
           providerTransactionId
+          fullName
           createdAt
           updatedAt
         }
@@ -1984,6 +2180,96 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
+  }
+  async CreateMessageQueue(
+    input: CreateMessageQueueInput,
+    condition?: ModelMessageQueueConditionInput
+  ): Promise<CreateMessageQueueMutation> {
+    const statement = `mutation CreateMessageQueue($input: CreateMessageQueueInput!, $condition: ModelMessageQueueConditionInput) {
+        createMessageQueue(input: $input, condition: $condition) {
+          __typename
+          id
+          email
+          emailDeliveryTime
+          phone
+          smsDeliveryTime
+          emailTemplateId
+          name
+          params
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateMessageQueueMutation>response.data.createMessageQueue;
+  }
+  async UpdateMessageQueue(
+    input: UpdateMessageQueueInput,
+    condition?: ModelMessageQueueConditionInput
+  ): Promise<UpdateMessageQueueMutation> {
+    const statement = `mutation UpdateMessageQueue($input: UpdateMessageQueueInput!, $condition: ModelMessageQueueConditionInput) {
+        updateMessageQueue(input: $input, condition: $condition) {
+          __typename
+          id
+          email
+          emailDeliveryTime
+          phone
+          smsDeliveryTime
+          emailTemplateId
+          name
+          params
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateMessageQueueMutation>response.data.updateMessageQueue;
+  }
+  async DeleteMessageQueue(
+    input: DeleteMessageQueueInput,
+    condition?: ModelMessageQueueConditionInput
+  ): Promise<DeleteMessageQueueMutation> {
+    const statement = `mutation DeleteMessageQueue($input: DeleteMessageQueueInput!, $condition: ModelMessageQueueConditionInput) {
+        deleteMessageQueue(input: $input, condition: $condition) {
+          __typename
+          id
+          email
+          emailDeliveryTime
+          phone
+          smsDeliveryTime
+          emailTemplateId
+          name
+          params
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteMessageQueueMutation>response.data.deleteMessageQueue;
   }
   async CreateGroup(
     input: CreateGroupInput,
@@ -2656,6 +2942,7 @@ export class APIService {
           }
           cardsPacksIds
           providerTransactionId
+          fullName
           createdAt
           updatedAt
         }
@@ -2726,6 +3013,7 @@ export class APIService {
             }
             cardsPacksIds
             providerTransactionId
+            fullName
             createdAt
             updatedAt
           }
@@ -2746,6 +3034,69 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
+  }
+  async GetMessageQueue(id: string): Promise<GetMessageQueueQuery> {
+    const statement = `query GetMessageQueue($id: ID!) {
+        getMessageQueue(id: $id) {
+          __typename
+          id
+          email
+          emailDeliveryTime
+          phone
+          smsDeliveryTime
+          emailTemplateId
+          name
+          params
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetMessageQueueQuery>response.data.getMessageQueue;
+  }
+  async ListMessageQueues(
+    filter?: ModelMessageQueueFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListMessageQueuesQuery> {
+    const statement = `query ListMessageQueues($filter: ModelMessageQueueFilterInput, $limit: Int, $nextToken: String) {
+        listMessageQueues(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            email
+            emailDeliveryTime
+            phone
+            smsDeliveryTime
+            emailTemplateId
+            name
+            params
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListMessageQueuesQuery>response.data.listMessageQueues;
   }
   async GetGroup(id: string): Promise<GetGroupQuery> {
     const statement = `query GetGroup($id: ID!) {
@@ -3238,6 +3589,72 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteContactUsModelSubscription>>;
+
+OnCreateMessageQueueListener: Observable<
+    SubscriptionResponse<OnCreateMessageQueueSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateMessageQueue {
+        onCreateMessageQueue {
+          __typename
+          id
+          email
+          emailDeliveryTime
+          phone
+          smsDeliveryTime
+          emailTemplateId
+          name
+          params
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateMessageQueueSubscription>>;
+
+  OnUpdateMessageQueueListener: Observable<
+    SubscriptionResponse<OnUpdateMessageQueueSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateMessageQueue {
+        onUpdateMessageQueue {
+          __typename
+          id
+          email
+          emailDeliveryTime
+          phone
+          smsDeliveryTime
+          emailTemplateId
+          name
+          params
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateMessageQueueSubscription>>;
+
+  OnDeleteMessageQueueListener: Observable<
+    SubscriptionResponse<OnDeleteMessageQueueSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteMessageQueue {
+        onDeleteMessageQueue {
+          __typename
+          id
+          email
+          emailDeliveryTime
+          phone
+          smsDeliveryTime
+          emailTemplateId
+          name
+          params
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteMessageQueueSubscription>>;
 
   OnCreateGroupListener: Observable<
     SubscriptionResponse<OnCreateGroupSubscription>
