@@ -77,6 +77,11 @@ button:focus {
   background: #ffebc4;
 }
 
+.top-option-btn-disabled {
+  background: #c3c3c3;
+  color: #686868;
+}
+
 .about-author-option-btn {
   background: #ffbe41;
   color: #717171;
@@ -366,6 +371,11 @@ li span {
 
 .five-cards {
   width: calc(100vw /6);
+}
+
+.remove-btn {
+  margin-bottom: -15px;
+  animation: fadeIn 0.4s, slideUp 0.4s;
 }
 
 mat-icon {
