@@ -123,8 +123,38 @@ async function cancelUserSubscription(user){
     await saveUser(user);
 }
 
-function sendRecipt(){
-    console.log("Should Send a recipt!! Not yet implemented");
+async function sendRecipt(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
+    var d = new Date();
+    var id = email + "_RECIPT_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var params = {
+        TableName: table,
+        Item: {
+            "id": id,
+            "email": user.email,
+            "emailDeliveryTime": null,
+            "phone": user.phone,
+            "smsDeliveryTime": null,
+            "emailTemplateId": 11,
+            "name": user.fullName,
+            "params": {
+                "name": user.fullName,
+                "program": user.subscription.subscriptionPlan.description,
+                "amount": user.subscription.subscriptionPlan.fullPrice
+            }
+        }
+    };
+
+    await docClient.put(params, function (err, data) {
+        if (err) {
+            console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+            //callback("Failed");
+        } else {
+            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+            //callback(null, data);
+        }
+    }).promise();
 }
 
 async function getUserByPayPalTxId(transaction_id){
@@ -213,7 +243,8 @@ exports.handler = async (event) => {
     else if(event_type == "PAYMENT.SALE.COMPLETED"){
         var transaction_id = paypal_body.resource.billing_agreement_id;
         console.log('transaction_id: ' + transaction_id);
-        sendRecipt();
+        var user = await getUserByPayPalTxId(transaction_id);
+        await sendRecipt(user);
     }
     const response = {
         statusCode: 200,
