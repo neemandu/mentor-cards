@@ -1,5 +1,15 @@
-import { Component, ComponentFactoryResolver, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import {
+  Component,
+  ComponentFactoryResolver,
+  NgZone,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
@@ -21,14 +31,13 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 @Component({
   selector: 'app-pack-content-page',
   templateUrl: './pack-content-page.component.html',
-  styleUrls: ['./pack-content-page.component.css']
+  styleUrls: ['./pack-content-page.component.css'],
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
-
   Subscription: Subscription = new Subscription();
   id: any;
   pack: PackContent;
-  selectedCards: any[] = []
+  selectedCards: any[] = [];
   loadedCards: number = 0;
   flipped: boolean = false;
   multipileChecked: boolean = false;
@@ -38,40 +47,60 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   showRandomCards: boolean = false;
   portraitToLandscapeAlertShown: boolean = false;
   showEditPack: boolean = false;
+  removedCards: Card[] = [];
+  cards: Card[] = [];
 
   randomSelectedCard: Card;
   randomCardIndex: number = 0;
 
-  constructor(public route: ActivatedRoute, private cardsService: CardsService, public dialog: MatDialog,
-    private overlaySpinnerService: OverlaySpinnerService, private api: APIService, public popoutService: PopoutService,
-    public componentFactoryResolver: ComponentFactoryResolver, private router: Router, private userAuthService: UserAuthService, private ngZone: NgZone) {
-    this.route.params.subscribe(params => {
-      this.id = params['id']
+  constructor(
+    public route: ActivatedRoute,
+    private cardsService: CardsService,
+    public dialog: MatDialog,
+    private overlaySpinnerService: OverlaySpinnerService,
+    private api: APIService,
+    public popoutService: PopoutService,
+    public componentFactoryResolver: ComponentFactoryResolver,
+    private router: Router,
+    private userAuthService: UserAuthService,
+    private ngZone: NgZone
+  ) {
+    this.route.params.subscribe((params) => {
+      this.id = params['id'];
     });
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userData = userData;
-    })
+    });
     this.userData = this.userAuthService.userData;
   }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    if (this.id) {//a specific pack
+    if (this.id) {
+      //a specific pack
       if (this.cardsService.allPacks) {
-        this.pack = this.cardsService.allPacks.find(pack => pack.id === this.id)
+        this.pack = this.cardsService.allPacks.find(
+          (pack) => pack.id === this.id
+        );
+      } else {
+        this.api.GetCardsPack(this.id).then(
+          (pack) => {
+            this.pack = new PackContent().deseralize(pack);
+          },
+          (reject) => {
+            console.log(
+              'file: pack-content-page.component.ts ~ line 86 ~ this.api.GetCardsPack ~ reject',
+              reject
+            );
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+          }
+        );
       }
-      else {
-        this.api.GetCardsPack(this.id).then(pack => {
-          this.pack = new PackContent().deseralize(pack);
-        }, reject => {
-          console.log("file: pack-content-page.component.ts ~ line 86 ~ this.api.GetCardsPack ~ reject", reject)
-          this.overlaySpinnerService.changeOverlaySpinner(false);
-        })
-      }
+    } else {
+      //example pack
+      this.pack = new PackContent().deseralize(exampleCards['default']);
     }
-    else {//example pack
-      this.pack = new PackContent().deseralize(exampleCards['default'])
-    }
+    this.cards = [...this.pack.cards]; //TODO
   }
 
   multipileChanged(): void {
@@ -81,22 +110,22 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   cardSelected(card: CardComponent, index: number): void {
     if (this.multipileChecked) {
       if (this.selectedCards.includes(card)) {
-        this.selectedCards.splice(this.selectedCards.findIndex(existingCard => existingCard == card), 1)
+        this.selectedCards.splice(
+          this.selectedCards.findIndex((existingCard) => existingCard == card),
+          1
+        );
         card.index = undefined;
-      }
-      else {
-        if (this.selectedCards.length < 5)
-          this.selectedCards.push(card)
+      } else {
+        if (this.selectedCards.length < 5) this.selectedCards.push(card);
         else {
           this.cardsService._snackBar.open('ניתן לבחור עד 5 קלפים', '', {
             duration: 3000,
-            panelClass: ['rtl-snackbar']
+            panelClass: ['rtl-snackbar'],
           });
         }
         card.index = index;
       }
-    }
-    else {
+    } else {
       this.selectedCards = [card];
       card.index = index;
       this.toggleChosenCardsModal();
@@ -105,21 +134,23 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   shuffle(): void {
     this.selectedCards = [];
-    this.pack.cards.sort(() => Math.random() - 0.5);
+    this.cards.sort(() => Math.random() - 0.5);
   }
 
   toggleChosenCardsModal(): void {
     if (!this.showSelectedCards) {
-      if (!this.portraitToLandscapeAlertShown && this.selectedCards.length > 1 && window.matchMedia("(orientation: portrait)").matches) {
+      if (
+        !this.portraitToLandscapeAlertShown &&
+        this.selectedCards.length > 1 &&
+        window.matchMedia('(orientation: portrait)').matches
+      ) {
         this.portraitToLandscapeAlertShown = true;
         this.openPortraitToLandscapeAlert();
       }
       this.showSelectedCards = true;
-    }
-    else {
+    } else {
       this.showSelectedCards = false;
-      if (!this.multipileChecked)
-        this.selectedCards = [];
+      if (!this.multipileChecked) this.selectedCards = [];
     }
   }
 
@@ -133,32 +164,59 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   toggleRandomCardsModal(): void {
     if (this.showRandomCards) {
       this.showRandomCards = false;
-    }
-    else {
+    } else {
       this.shuffle();
-      this.sleep(500).then(() => { this.showRandomCards = true; });
+      this.sleep(500).then(() => {
+        this.showRandomCards = true;
+      });
     }
   }
 
+  /**
+   * Toggle edit pack
+   */
   editPack(): void {
     if (!this.showEditPack) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.data = new DynamicDialogData("עריכת ערכה", ["לחיצה על אייקון המחיקה תמחק קלפים עד כניסה הבאה לאתר"], "אישור", "")
+      dialogConfig.data = new DynamicDialogData(
+        'עריכת ערכה',
+        ['לחיצה על אייקון העין תסתיר את הקלף.','לחיצה על איפוס ערכה יחזיר את כל הקלפים שהוסתרו.'],
+        'אישור',
+        ''
+      );
       this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
       this.showEditPack = true;
-      this.flipped = true; 
-      this.selectedCards = []
-    }
-    else {
+      this.flipped = true;
+      this.selectedCards = [];
+      // const list = document.getElementsByClassName('shuffle');
+      // Array.from(list).forEach((item) => {
+      //   item.removeAttribute('transition-group-item');
+      // });
+    } else {
       this.showEditPack = false;
-      this.flipped = false; 
+      this.flipped = false;
+      // const list = document.getElementsByClassName('shuffle');
+      // Array.from(list).forEach((item) => {
+      //   item.setAttribute('transition-group-item', '');
+      // });
     }
   }
 
+  /**
+   * Return all removed cards to the pack
+   */
+  resetEditPack(): void {
+    this.cards = [...this.cards, ...this.removedCards];
+    // this.removedCards.forEach((card) => this.cards.push(card));
+    this.removedCards = [];
+    this.editPack();
+  }
+
   removeCard(index: number): void {
-    this.pack.cards.splice(index, 1);
+    const removed = this.cards.splice(index, 1);
+    this.removedCards = [...this.removedCards, ...removed];
   }
 
   openGuideBook(): void {
@@ -167,13 +225,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       modalName: 'guide-book',
       guideBook: this.pack.guideBook,
       packName: this.pack.name,
-      packDesc: this.pack.description
+      packDesc: this.pack.description,
     };
     this.popoutService.openPopoutModal(modalData);
   }
 
   sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   signInSignUp(): void {
@@ -205,12 +263,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   templateUrl: './portrait-warning-dialog.html',
 })
 export class PortraitWarningDialogComponent {
-
-  constructor(
-    public dialogRef: MatDialogRef<PortraitWarningDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<PortraitWarningDialogComponent>) {}
 
   closeDialog(): void {
     this.dialogRef.close();
   }
-
 }

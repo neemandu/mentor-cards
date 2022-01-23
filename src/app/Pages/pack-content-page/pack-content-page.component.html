@@ -3,6 +3,10 @@
   <h1 style="text-align: center" *ngIf="pack">{{pack.name}}</h1>
   <h2 *ngIf="pack?.about" id="about-author" class="clickable" (click)="openAboutDialog()">(על יוצר הערכה)</h2>
 </div>
+
+<!-- <button type="button" *ngIf="showEditPack" [ngClass]="{'option-btn top-option-btn': true}" (click)="editPack()">ביטול עריכה</button>
+<button type="button" *ngIf="showEditPack" [ngClass]="{'option-btn top-option-btn': true}" (click)="editPack()">סיום עריכה</button> -->
+
 <div class="d-flex justify-content-between nav-buttons ">
   <div id="mult-choise-btn">
     <div id="mult-choise-btn-txt">בחירה מרובה </div>
@@ -20,42 +24,57 @@
     <button type="button" [disabled]="showEditPack"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
       (click)="toggleRandomCardsModal()">הצג קלף אקראי</button>
-    <button type="button" [ngClass]="{'option-btn top-option-btn': true}" (click)="editPack()">עריכת ערכה</button>
+    <button type="button" [ngClass]="{'option-btn top-option-btn': true}" (click)="editPack()">{{!showEditPack ? 'עריכה':'סיום עריכה'}}</button>
   </div>
   <button type="button" id="menu-actions" class="btn option-btn" [matMenuTriggerFor]="actions">
     <mat-icon>style</mat-icon>
     <span>פעולות</span>
   </button>
-  <button type="button" disabled="showEditPack"
+  <button type="button" [disabled]="showEditPack"
     [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
     (click)="openGuideBook()">
     <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
   </button>
 </div>
 <div style="padding-bottom: 2rem;" class="d-flex flex-column align-items-center">
-  <div *ngIf="pack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">
+  <div *ngIf="pack && !showEditPack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">
     <!-- New start -->
-    <div *ngFor="let card of pack.cards; let i = index" class="d-flex flex-column align-items-center shuffle-item"
+    <div *ngFor="let card of cards; let i = index" [ngClass]="{'d-flex flex-column align-items-center shuffle': true, 'shuffle-item': !showEditPack}"
       transition-group-item>
-      <button *ngIf="showEditPack" mat-icon-button class="remove-btn" (click)=removeCard(i)>
-        <mat-icon class="remove-icon">delete</mat-icon>
-      </button>
-      <app-card [ngClass]="{'clickable': true, 'shuffle-item': true}" transition-group-item [cardContent]="card"
+      <!-- <button *ngIf="showEditPack" mat-icon-button class="remove-btn" (click)=removeCard(i)>
+        <mat-icon class="remove-icon">visibility_off</mat-icon>
+      </button> -->
+      <app-card [ngClass]="{'clickable': true}" [cardContent]="card"
         [selected]="selectedCards.includes(card)" [index]="i+1"
         [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)">
       </app-card>
     </div>
+
     <!-- New end -->
     
     <!-- Old  start-->
     <!-- <app-card
       [ngClass]="{'clickable': true, 'shuffle-item': true}"
-      *ngFor="let card of pack.cards; let i = index" transition-group-item [cardContent]="card"
+      *ngFor="let card of cards; let i = index" transition-group-item [cardContent]="card"
       [selected]="selectedCards.includes(card)" [index]="i+1"
       [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)">
     </app-card> -->
     <!-- Old end -->
   </div>
+
+  <div *ngIf="pack && showEditPack" class="d-flex flex-row justify-content-center flex-wrap">
+    <div *ngFor="let card of cards; let i = index" [ngClass]="{'d-flex flex-column align-items-center': true}">
+      <button *ngIf="showEditPack" mat-icon-button class="remove-btn" (click)=removeCard(i)>
+        <mat-icon class="remove-icon">visibility_off</mat-icon>
+      </button>
+      <app-card [ngClass]="{'clickable': true}" [cardContent]="card"
+        [selected]="selectedCards.includes(card)" [index]="i+1"
+        [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))" (click)="cardSelected(card, i+1)">
+      </app-card>
+    </div>
+  </div>
+
+
   <div id="introduction" *ngIf="!id">
     <p style="text-align: center; font-size: 2rem; margin-bottom: 1.5rem; font-weight: 700;">שימו <span
         style="color: coral;">&#10084;</span>
@@ -97,6 +116,17 @@
   </div>
 </nav>
 
+<nav *ngIf="pack"
+  [ngClass]="{'nav navbar-light d-flex justify-content-between align-items-center bottom-nav': true, 'bottom-nav-hidden':(!showEditPack)}">
+  <div class="nav-buttons">
+    <button type="button" [ngClass]="{'option-btn bottom-option-btn': true}" (click)="resetEditPack()">איפוס ערכה</button>
+<button type="button" [ngClass]="{'option-btn bottom-option-btn': true}" (click)="editPack()">סיום עריכה</button>
+  </div>
+  <div id="amountChosen">
+    <p>לחיצה על אייקון העין תסתיר את הקלף מתחתיו</p>
+  </div>
+</nav>
+
 <mat-menu #actions="matMenu">
   <button mat-menu-item type="button" class="option-menu-btn top-option-btn" (click)="shuffle()">ערבב</button>
   <button mat-menu-item type="button" class="option-menu-btn top-option-btn"
@@ -126,12 +156,12 @@
       <mat-icon class="mat-icon-close">highlight_off</mat-icon>
     </button>
     <div class="random-content">
-      <button type="button" class="btn btn-light" [disabled]="randomCardIndex == pack.cards.length-1"
+      <button type="button" class="btn btn-light" [disabled]="randomCardIndex == cards.length-1"
         (click)="randomCardIndex=randomCardIndex+1">
         <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
       </button>
-      <img class="card-view one-cards" loading="eager" src={{pack.cards[randomCardIndex].imgUrl}}
-        data-src={{pack.cards[randomCardIndex].imgUrl}}>
+      <img class="card-view one-cards" loading="eager" src={{cards[randomCardIndex].imgUrl}}
+        data-src={{cards[randomCardIndex].imgUrl}}>
       <button type="button" class="btn btn-light" [disabled]="randomCardIndex == 0"
         (click)="randomCardIndex=randomCardIndex - 1">
         <mat-icon class="btn-icon mat-icon-arrow">chevron_left</mat-icon>

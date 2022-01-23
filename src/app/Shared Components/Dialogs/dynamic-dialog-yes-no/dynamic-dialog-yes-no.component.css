@@ -45,7 +45,7 @@ mat-toolbar {
 }
 
 #title-div {
-  text-align: start;
+  /* text-align: start; */
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
