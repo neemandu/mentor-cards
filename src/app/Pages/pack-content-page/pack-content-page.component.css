@@ -34,6 +34,9 @@ app-card:hover {
   margin-top: 15px;
   transform: translateY(0px);
   transition: transform 0.3s linear, opacity 0.3s linear;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bottom-nav-hidden {
@@ -263,6 +266,11 @@ li span {
   .option-btn {
     font-weight: 800;
     font-size: medium;
+  }
+
+  .bottom-nav-edit {
+    justify-content: center;
+    flex-direction: column-reverse;
   }
 }
 
