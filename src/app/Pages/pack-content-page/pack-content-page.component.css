@@ -27,6 +27,10 @@ app-card:hover {
   align-items: center;
 }
 
+.cards-container {
+  padding-bottom: 3rem;
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 5px;
@@ -271,6 +275,10 @@ li span {
   .bottom-nav-edit {
     justify-content: center;
     flex-direction: column-reverse;
+  }
+
+  .cards-container {
+    padding-bottom: 6rem;
   }
 }
 

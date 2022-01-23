@@ -36,7 +36,7 @@
     <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
   </button>
 </div>
-<div style="padding-bottom: 2rem;" class="d-flex flex-column align-items-center">
+<div class="d-flex flex-column align-items-center cards-container">
   <div *ngIf="pack && !showEditPack" [transition-group]="'flip-list'" class="d-flex flex-row justify-content-center flex-wrap">
     <!-- New start -->
     <div *ngFor="let card of cards; let i = index" [ngClass]="{'d-flex flex-column align-items-center shuffle': true, 'shuffle-item': !showEditPack}"
