@@ -50,6 +50,11 @@ const awsmobile = {
             "name": "PayPalWebhookAPI",
             "endpoint": "https://vgi4o66wki.execute-api.eu-west-2.amazonaws.com/dev",
             "region": "eu-west-2"
+        },
+        {
+            "name": "receiptsAPI",
+            "endpoint": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev",
+            "region": "eu-west-2"
         }
     ],
     "aws_cognito_login_mechanisms": [
