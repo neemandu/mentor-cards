@@ -503,6 +503,39 @@ mutation DeleteCouponCodes(
     updatedAt
   }
 }
+mutation CreateReceiptIds(
+  $input: CreateReceiptIdsInput!
+  $condition: ModelReceiptIdsConditionInput
+) {
+  createReceiptIds(input: $input, condition: $condition) {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateReceiptIds(
+  $input: UpdateReceiptIdsInput!
+  $condition: ModelReceiptIdsConditionInput
+) {
+  updateReceiptIds(input: $input, condition: $condition) {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteReceiptIds(
+  $input: DeleteReceiptIdsInput!
+  $condition: ModelReceiptIdsConditionInput
+) {
+  deleteReceiptIds(input: $input, condition: $condition) {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
   $condition: ModelContactUsModelConditionInput

@@ -258,6 +258,29 @@ query ListContactUsModels(
     nextToken
   }
 }
+query GetReceiptIds($id: ID!) {
+  getReceiptIdsl(id: $id) {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+query ListReceiptIds(
+  $filter: ModelReceiptIdsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listReceiptIds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      counter
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetSubscriptionPlan($id: ID!) {
   getSubscriptionPlan(id: $id) {
     id

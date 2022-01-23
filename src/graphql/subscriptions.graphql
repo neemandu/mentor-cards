@@ -149,6 +149,30 @@ subscription OnDeleteCouponCodes {
     updatedAt
   }
 }
+subscription OnCreateReceiptIds {
+  onCreateReceiptIds {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateReceiptIds {
+  onUpdateReceiptIds {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteReceiptIds {
+  onDeleteReceiptIds {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateContactUsModel {
   onCreateContactUsModel {
     id
