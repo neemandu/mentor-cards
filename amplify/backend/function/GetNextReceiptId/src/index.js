@@ -6,7 +6,7 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-const { env, ppid } = require("process");
+const { env } = require("process");
 var AWS = require("aws-sdk");
 
 async function getNextId(){
@@ -28,7 +28,6 @@ async function getNextId(){
     var documentClient = new AWS.DynamoDB.DocumentClient();
       
     var id = 0;
-    console.log('hi');
     await documentClient.update(params).promise().then(data => {
         id = data.Attributes.counter
     }).catch(e => {
