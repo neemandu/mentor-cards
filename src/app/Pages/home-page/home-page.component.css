@@ -82,6 +82,12 @@ button:focus {
   outline: none;
 }
 
+app-information-bar {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -119,11 +125,5 @@ marquee li {
 
   #top {
     font-size: x-large;
-  }
-
-  app-information-bar {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
   }
 }
