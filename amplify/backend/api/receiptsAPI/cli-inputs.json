@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "paths": {
+    "/counter": {
+      "name": "/counter",
+      "lambdaFunction": "GetNextReceiptId",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "read"
+        ]
+      }
+    }
+  }
+}

@@ -93,7 +93,8 @@
       "UnauthRoleName": "amplify-mentorcards-dev-214725-unauthRole",
       "StackName": "amplify-mentorcards-dev-214725",
       "StackId": "arn:aws:cloudformation:eu-west-2:150827790089:stack/amplify-mentorcards-dev-214725/0e5c2b40-340e-11eb-a7b3-068350039b94",
-      "AmplifyAppId": "d15egmtmsipj3q"
+      "AmplifyAppId": "d15egmtmsipj3q",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-mentorcards-dev-214725-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "function": {
@@ -193,6 +194,10 @@
         "EmailUpcomingEndOfTrialNotice": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/EmailUpcomingEndOfTrialNotice-504e56432f77752b6972-build.zip"
+        },
+        "GetNextReceiptId": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/GetNextReceiptId-685935676f7a43714935-build.zip"
         }
       },
       "auth": {

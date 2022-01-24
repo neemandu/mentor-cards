@@ -128,9 +128,8 @@ type ContactUsModel
   email: String
 }
 
-type ReceiptIds
+type ReceiptsId
   @model
-  @key(fields:["id", "counter"])
   @auth(rules: [{ allow: public, operations: [read, create, update] }]) {
   id: ID! 
   counter: Int!
