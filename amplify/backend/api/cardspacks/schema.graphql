@@ -115,6 +115,7 @@ type User
   cardsPacksIds: [String]
   providerTransactionId: String
   fullName: String
+  orgMembership: OrganizationMembership @connection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -133,6 +134,24 @@ type ReceiptsId
   @auth(rules: [{ allow: public, operations: [read, create, update] }]) {
   id: ID! 
   counter: Int!
+}
+
+type Organizations
+  @model
+  @auth(rules: [{ allow: public, operations: [read, create, update] }]) {
+  id: ID! 
+  name: String!
+  membersEmails: [AWSEmail] 
+  membership: OrganizationMembership @connection 
+}
+
+type OrganizationMembership
+  @model
+  @auth(rules: [{ allow: private, operations: [read, create, update, delete] }]) {
+  id: ID! 
+  name: String
+  trialPeriodInDays: Int
+  numberOfallowedCardsPacks: Int
 }
 
 input joinExistingGroupInput {

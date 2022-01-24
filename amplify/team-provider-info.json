@@ -197,7 +197,7 @@
         },
         "GetNextReceiptId": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetNextReceiptId-685935676f7a43714935-build.zip"
+          "s3Key": "amplify-builds/GetNextReceiptId-4f4c794f4a6d32313431-build.zip"
         }
       },
       "auth": {
