@@ -1,12 +1,11 @@
 {
   "version": 1,
   "paths": {
-    "/api": {
-      "name": "/api",
-      "lambdaFunction": "PayPalWebhookFunc",
+    "/PayPalSubscriptions": {
       "permissions": {
         "setting": "open"
-      }
+      },
+      "lambdaFunction": "PayPalCancelWebhook"
     }
   }
 }

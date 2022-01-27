@@ -17,6 +17,7 @@ export type AmplifyDependentResourcesAttributes = {
         "cardspacks": {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
+<<<<<<< HEAD
         },
         "PayPalWebhookAPI": {
             "RootUrl": "string",
@@ -27,6 +28,8 @@ export type AmplifyDependentResourcesAttributes = {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
+=======
+>>>>>>> main
         }
     },
     "function": {
@@ -90,6 +93,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
+        "PayPalCancelWebhook": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
         "AddCouponCode": {
             "Name": "string",
             "Arn": "string",
@@ -108,19 +117,13 @@ export type AmplifyDependentResourcesAttributes = {
             "LambdaExecutionRole": "string",
             "Region": "string"
         },
-        "UpdatePaymentProgram": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
         "ContactUsTrigger": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "PayPalWebhookFunc": {
+        "UpdatePaymentProgram": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

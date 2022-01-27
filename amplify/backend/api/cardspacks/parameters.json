@@ -2,12 +2,10 @@
   "AppSyncApiName": "cardspacks",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "CreateAPIKey": 1,
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
       "authmentorcards56dbf153",
       "Outputs.UserPoolId"
     ]
-  },
-  "AuthModeLastUpdated": "2021-12-23T06:23:22.789Z"
+  }
 }

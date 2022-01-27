@@ -130,6 +130,8 @@ export class UserAuthService {
     var user: CreateUserInput = { 'username': newUsername, 'email': newUserEmail, 'phone': newUserPhone, 'fullName': newUserFullName };
     this.api.CreateUser(user).then(value => {
       this.userData = new UserData().deseralize(value);
+      this.isLoggedIn = true;
+      LogRocket.identify(this.userData.email);
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this.userDataEmmiter.emit(this.userData);
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;

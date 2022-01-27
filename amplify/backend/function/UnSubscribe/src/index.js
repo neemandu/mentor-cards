@@ -239,7 +239,7 @@ async function getPayPalAccessToken(){
         port: 443, 
         headers: {
             'Content-Type': 'text/plain',
-            'Authorization': 'Basic ' + paypalAPIKey
+            'Authorization': 'Basic QVRleGlMUFZFWG9meXF6aXNVOU1UMk54bFV1bTJYdnVwNktad0hVc2tVajk5VDRzblZCLU55M3hkMUw4NTFQTVY0OEJoVUktSkZYbk56a3Q6RUxPd3pkOFZ0M0lCWHVwQzBLMDJhckFhbENpRl95WW9HTWo0cm9CVEV5Sk5vLTZxNXBNdEhOYTNZY3F1Y2hSWWwxZTFoYjRMc1lzSk9HWEI='
         }
     }
 
@@ -326,7 +326,15 @@ exports.handler = async (event) => {
     var user = await getUserByUSerName(username);
 
     var access_token = await getPayPalAccessToken();
-    await cancelPayPalSubscription(user.providerTransactionId, access_token);
+    await cancelPayPalSubscription(user.subscription.providerTransactionId, access_token);
+
+    user.status = "NOPLAN";
+    user.groupId = null;
+    user.groupRole = null;
+    user.cancellationDate = new Date().toISOString();
+    user.cardsPacksIds = []
+
+    await saveUser(user);
 
     // Removing all group users
     if(user.groupId){
