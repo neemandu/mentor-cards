@@ -6,12 +6,12 @@
       *ngIf="packInfo.about && packInfo.about.length!=0" class="clickable about-icon">info</mat-icon>
   </div> -->
   <!-- Owned - list-->
-  <img *ngIf="packInfo.cards.length != 0" routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()"
+  <img alt="The packs fron card" *ngIf="packInfo.cards.length != 0" routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()"
     src={{packInfo.imgUrl}}
     matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
     matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
   <!-- Not owned -->
-  <img *ngIf="packInfo.cards.length == 0" (click)="openPreviewDialog()" (load)="imgLoaded()" src={{packInfo.imgUrl}}
+  <img alt="The packs fron card" *ngIf="packInfo.cards.length == 0" (click)="openPreviewDialog()" (load)="imgLoaded()" src={{packInfo.imgUrl}}
     matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
     matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
   <label *ngIf="isStillFree" class="free-until-label">ערכה במתנה! עד - {{freeUntilDate}}</label>

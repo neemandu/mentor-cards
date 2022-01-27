@@ -181,7 +181,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.data = new DynamicDialogData(
-        'עריכת ערכה',
+        'עריכת ערכת קלפים',
         ['לחיצה על אייקון העין תסתיר את הקלף.','לחיצה על איפוס ערכה יחזיר את כל הקלפים שהוסתרו.'],
         'אישור',
         ''

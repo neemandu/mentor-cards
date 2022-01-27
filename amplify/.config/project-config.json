@@ -8,9 +8,9 @@
   "javascript": {
     "framework": "angular",
     "config": {
-      "SourceDir": "src",
-      "DistributionDir": "dist/mentor-cards",
-      "BuildCommand": "npm.cmd run-script build",
+      "SourceDir": "C:\\Personal\\Projects\\mentor-cards\\src",
+      "DistributionDir": "C:\\Personal\\Projects\\mentor-cards\\dist",
+      "BuildCommand": "ng b --prod",
       "StartCommand": "ng serve"
     }
   }

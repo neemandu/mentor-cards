@@ -123,7 +123,7 @@
 <button type="button" [ngClass]="{'option-btn bottom-option-btn': true}" (click)="editPack()">סיום עריכה</button>
   </div>
   <div id="amountChosen">
-    <p>לחיצה על אייקון העין תסתיר את הקלף מתחתיו</p>
+    <p style="font-weight: bold;">לחיצה על אייקון העין <mat-icon class="remove-icon">visibility_off</mat-icon> תסתיר את הקלף מתחתיו</p>
   </div>
 </nav>
 
@@ -143,7 +143,7 @@
       <mat-icon class="mat-icon-close">highlight_off</mat-icon>
     </button>
     <div [ngClass]="{'selected-content':true, 'selected-content-one-card': selectedCards.length == 1}">
-      <img *ngFor="let card of selectedCards"
+      <img *ngFor="let card of selectedCards" alt="one of the selected cards shown"
         [ngClass]="{'card-view':true, 'one-cards': selectedCards.length == 1, 'two-cards': selectedCards.length == 2,
       'three-cards': selectedCards.length == 3, 'four-cards': selectedCards.length == 4, 'five-cards': selectedCards.length == 5}" loading="eager"
         src={{card.imgUrl}} data-src={{card.imgUrl}}>
@@ -162,7 +162,7 @@
         <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
       </button>
       <img class="card-view one-cards" loading="eager" src={{cards[randomCardIndex].imgUrl}}
-        data-src={{cards[randomCardIndex].imgUrl}}>
+        data-src={{cards[randomCardIndex].imgUrl}} alt="Random card from the pack">
       <button type="button" class="btn btn-light" [disabled]="randomCardIndex == 0"
         (click)="randomCardIndex=randomCardIndex - 1">
         <mat-icon class="btn-icon mat-icon-arrow">chevron_left</mat-icon>
