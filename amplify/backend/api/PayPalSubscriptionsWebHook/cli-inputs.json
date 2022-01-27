@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "paths": {
+    "/PayPalSubscriptions": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "PayPalCancelWebhook"
+    }
+  }
+}
