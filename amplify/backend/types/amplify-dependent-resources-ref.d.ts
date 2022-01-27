@@ -14,11 +14,6 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "PayPalSubscriptionsWebHook": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
-        },
         "cardspacks": {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"

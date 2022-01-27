@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { UserData } from 'src/app/Objects/user-related';
+import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
@@ -18,7 +19,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     news: any[] = [];
 
     constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
-        public router: Router, private ngZone: NgZone, private api: APIService) {
+        public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService
+        ) {
     }
 
     ngOnInit(): void {
