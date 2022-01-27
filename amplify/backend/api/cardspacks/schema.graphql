@@ -77,6 +77,7 @@ type CouponCodes
   discount: Float
   trialPeriodInDays: Int
   allowedCardsPacks: [String]
+  org: Organizations @connection
 }
 
 
@@ -138,7 +139,7 @@ type ReceiptsId
 
 type Organizations
   @model
-  @auth(rules: [{ allow: public, operations: [read, create, update] }]) {
+  @auth(rules: [{ allow: private, operations: [read, create, update] }]) {
   id: ID! 
   name: String!
   membersEmails: [AWSEmail] 

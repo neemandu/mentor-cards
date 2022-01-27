@@ -244,7 +244,7 @@ exports.handler = async (event) => {
         var transaction_id = paypal_body.resource.billing_agreement_id;
         console.log('transaction_id: ' + transaction_id);
         var user = await getUserByPayPalTxId(transaction_id);
-        await sendRecipt(user);
+        //await sendRecipt(user);
     }
     const response = {
         statusCode: 200,
