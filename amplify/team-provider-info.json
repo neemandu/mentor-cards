@@ -81,7 +81,7 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-4e4f6239424245792b4c-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-5a6446794a36424b624b-build.zip"
         }
       }
     }
