@@ -93,12 +93,14 @@ exports.handler = async (event) => {
     var username = event.arguments.input['username'];
     var email = event.arguments.input['email'];
     var phone = event.arguments.input['phone'];
+    var fullName = event.arguments.input['fullName'];
 
     console.log(event);
     console.log('Adding new user:');
     console.log(username);
     console.log(email);
     console.log(phone);
+    console.log(fullName);
 
     AWS.config.update({
         region: env.REGION
@@ -141,7 +143,9 @@ exports.handler = async (event) => {
                 "numberOfUsedPacks": 0,
                 "cancellationDate": null,
                 "couponCodes": [],
-                "cardsPacksIds": []
+                "cardsPacksIds": [],
+                "providerTransactionId": "n/a",
+                "fullName": fullName
             }
         };
     
