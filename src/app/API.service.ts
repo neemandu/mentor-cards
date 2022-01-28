@@ -17,6 +17,7 @@ export type CreateUserInput = {
   username?: string | null;
   email?: string | null;
   phone?: string | null;
+  fullName?: string | null;
 };
 
 export type User = {
@@ -39,6 +40,7 @@ export type User = {
   couponCodes?: Array<CouponCodes | null> | null;
   cardsPacksIds?: Array<string | null> | null;
   providerTransactionId?: string | null;
+  fullName?: string | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -501,6 +503,7 @@ export type ModelUserFilterInput = {
   cancellationDate?: ModelStringInput | null;
   cardsPacksIds?: ModelStringInput | null;
   providerTransactionId?: ModelStringInput | null;
+  fullName?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -651,6 +654,7 @@ export type CreateUserMutation = {
   } | null> | null;
   cardsPacksIds?: Array<string | null> | null; 
   providerTransactionId?: string | null;
+  fullName?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1083,6 +1087,7 @@ export type GetUserQuery = {
   } | null> | null;
   cardsPacksIds?: Array<string | null> | null;
   providerTransactionId?: string | null;
+  fullName?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1139,6 +1144,7 @@ export type ListUsersQuery = {
     } | null> | null;
     cardsPacksIds?: Array<string | null> | null;
     providerTransactionId?: string | null;
+    fullName?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1791,6 +1797,7 @@ export class APIService {
           }
           cardsPacksIds
           providerTransactionId
+          fullName
           createdAt
           updatedAt
         }
@@ -2656,6 +2663,7 @@ export class APIService {
           }
           cardsPacksIds
           providerTransactionId
+          fullName
           createdAt
           updatedAt
         }
@@ -2726,6 +2734,7 @@ export class APIService {
             }
             cardsPacksIds
             providerTransactionId
+            fullName
             createdAt
             updatedAt
           }

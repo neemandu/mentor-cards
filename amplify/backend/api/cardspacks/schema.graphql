@@ -101,6 +101,7 @@ type User
   couponCodes: [CouponCodes]
   cardsPacksIds: [String]
   providerTransactionId: String
+  fullName: String
 }
 
 type Group
