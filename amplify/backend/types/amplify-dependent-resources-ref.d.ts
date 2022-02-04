@@ -17,7 +17,6 @@ export type AmplifyDependentResourcesAttributes = {
         "cardspacks": {
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
-<<<<<<< HEAD
         },
         "PayPalWebhookAPI": {
             "RootUrl": "string",
@@ -28,8 +27,6 @@ export type AmplifyDependentResourcesAttributes = {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
-=======
->>>>>>> main
         }
     },
     "function": {
@@ -93,12 +90,6 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "PayPalCancelWebhook": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
         "AddCouponCode": {
             "Name": "string",
             "Arn": "string",
@@ -129,47 +120,13 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "AddContactToExternalEmailService": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "EmailGuideIntroduction": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "MessagingService": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "EmailUpcomingPayment": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "EmailUpcomingEndOfTrialNotice": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "EmailEndOfTrialNotice": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
         "GetNextReceiptId": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "PayPalWebhookFunc": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

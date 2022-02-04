@@ -23,7 +23,7 @@
       "resourceName": "mentorcardsMailingListService",
       "version": "Always choose latest version",
       "isLatestVersionSelected": true,
-      "env": "prod"
+      "env": "dev"
     }
   ],
   "environmentVariableList": [

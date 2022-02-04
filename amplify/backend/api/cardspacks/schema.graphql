@@ -1,33 +1,54 @@
 type Mutation {
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
-  addCardsPack(input: addCardsPackInput!): Boolean
-    @function(name: "AddCardsPack-${env}")
-  changeCardsPack(input: changeCardsPackInput!): Boolean
-    @function(name: "ChangeCardsPack-${env}")
-  updateGroupUsersList(input: groupUsersListInput!): Boolean
-    @function(name: "UpdateGroupUsersList-${env}")
-  Unsubscribe(input: unSubscribeInput!): Boolean
-    @function(name: "UnSubscribe-${env}")
-  JoinExistingGroup(input: joinExistingGroupInput!): Boolean
-    @function(name: "JoinExistingGroup-${env}")
-  DeleteGroupById(input: deleteGroupInput!): Boolean
-    @function(name: "DeleteGroup-${env}")
-  AddCouponCode(input: couponCodeInput!): Boolean
-    @function(name: "AddCouponCode-${env}")
-  UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean
-    @function(name: "UpdatePaymentProgram-${env}")
+  addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
+  changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
+  updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
+  Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
+  JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
+  DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
+  AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
+  UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
+  GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}")
+  UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
 }
 
-type Group
+type User
   @model
-  @auth(rules: [{allow: private, operations: [create, read, update], provider: userPools}]) {
+  @auth(rules: [{allow: owner, ownerField: "username", operations: [read, update], provider: userPools}]) {
   id: ID!
-  groupUsers: [GroupUserRole]
-  paymentProgram: SubscriptionPlan
+  username: ID!
+  email: ID!
+  phone: String
+  status: String
+  subscription: MonthlySubscription
+  numberOfPacksSubstitutions: Int
+  lastPackSubstitutionDate: AWSDateTime
+  numberOfPlansSubstitutions: Int
+  lastPlanSubstitutionDate: AWSDateTime
+  firstProgramRegistrationDate: AWSDateTime
+  groupId: String
+  numberOfUsedPacks: Int
+  groupRole: String
+  cancellationDate: AWSDateTime
+  couponCodes: [CouponCodes]
+  cardsPacksIds: [String]
+  providerTransactionId: String
+  fullName: String
+  orgMembership: OrganizationMembership @connection
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type MonthlySubscription {
+  id: ID!
+  startDate: AWSDateTime
+  paymentProvider: String
+  providerTransactionId: String
+  subscriptionPlan: SubscriptionPlan
 }
 
 type SubscriptionPlan
-  @model
+  @model (queries: null)
   @auth(rules: [{ allow: private, provider: userPools }
                 { allow: public, operations: [read] }] ) {
   id: ID!
@@ -39,6 +60,43 @@ type SubscriptionPlan
   billingCycleInMonths: Int
   fullPrice: Float
   discount: Float
+  orgMembership: OrganizationMembership @connection
+}
+
+type CouponCodes
+  @model
+  @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}]) {
+  id: ID!
+  organization: String
+  couponCode: String
+  discount: Float
+  trialPeriodInDays: Int
+  allowedCardsPacks: [String]
+  org: Organizations @connection
+}
+
+type Organizations
+  @model
+  @auth(rules: [{ allow: private, operations: [read, create, update] }]) {
+  id: ID! 
+  name: String!
+  membersEmails: [AWSEmail] 
+  membership: OrganizationMembership @connection 
+}
+
+type ReceiptsId
+  @model
+  @auth(rules: [{ allow: public, operations: [read, create, update] }]) {
+  id: ID! 
+  counter: Int!
+}
+
+type Group
+  @model
+  @auth(rules: [{allow: private, operations: [create, read, update], provider: userPools}]) {
+  id: ID!
+  groupUsers: [GroupUserRole]
+  paymentProgram: SubscriptionPlan
 }
 
 type News
@@ -68,19 +126,6 @@ type CardsPack
   about: About
 }
 
-type CouponCodes
-  @model
-  @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}]) {
-  id: ID!
-  organization: String
-  couponCode: String
-  discount: Float
-  trialPeriodInDays: Int
-  allowedCardsPacks: [String]
-  org: Organizations @connection
-}
-
-
 type MessageQueue
   @model
   @auth( rules: [{allow: private, operations: [create, read, update], provider: userPools}] ) {
@@ -94,33 +139,6 @@ type MessageQueue
   params: AWSJSON
 }
 
-type User
-  @model(mutations: null)
-  @auth(rules: [{allow: owner, ownerField: "username", operations: [read, update], provider: userPools}]) {
-  id: ID!
-  username: ID!
-  email: ID!
-  phone: String
-  status: String
-  subscription: MonthlySubscription
-  numberOfPacksSubstitutions: Int
-  lastPackSubstitutionDate: AWSDateTime
-  numberOfPlansSubstitutions: Int
-  lastPlanSubstitutionDate: AWSDateTime
-  firstProgramRegistrationDate: AWSDateTime
-  groupId: String
-  numberOfUsedPacks: Int
-  groupRole: String
-  cancellationDate: AWSDateTime
-  couponCodes: [CouponCodes]
-  cardsPacksIds: [String]
-  providerTransactionId: String
-  fullName: String
-  orgMembership: OrganizationMembership @connection
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
-}
-
 type ContactUsModel
   @model
   @auth(rules: [{ allow: public, operations: [read, create] }]) {
@@ -130,22 +148,6 @@ type ContactUsModel
   email: String
 }
 
-type ReceiptsId
-  @model
-  @auth(rules: [{ allow: public, operations: [read, create, update] }]) {
-  id: ID! 
-  counter: Int!
-}
-
-type Organizations
-  @model
-  @auth(rules: [{ allow: private, operations: [read, create, update] }]) {
-  id: ID! 
-  name: String!
-  membersEmails: [AWSEmail] 
-  membership: OrganizationMembership @connection 
-}
-
 type OrganizationMembership
   @model
   @auth(rules: [{ allow: private, operations: [read, create, update, delete] }]) {
@@ -153,56 +155,6 @@ type OrganizationMembership
   name: String
   trialPeriodInDays: Int
   numberOfallowedCardsPacks: Int
-}
-
-input joinExistingGroupInput {
-  groupId: String!
-}
-
-input couponCodeInput {
-  couponCode: String!
-}
-
-input GetGroupInput {
-  id: String!
-}
-
-input deleteGroupInput {
-  groupId: String!
-}
-
-input unSubscribeInput {
-  username: String!
-}
-
-input groupUsersListInput {
-  usernamesList: [GroupUserRoleInput]
-}
-
-input updatePaymentProgramInput {
-  paymentProgramId: String!
-  providerTransactionId: String
-}
-
-input addCardsPackInput {
-  cardsPackId: String
-}
-
-input changeCardsPackInput {
-  oldCardsPackId: String
-  newCardsPackId: String
-}
-
-input GroupUserRoleInput {
-  email: String
-  role: String
-}
-
-input CreateUserInput {
-  username: String
-  email: AWSEmail
-  phone: String
-  fullName: String
 }
 
 type About {
@@ -221,10 +173,56 @@ type GroupUserRole {
   role: String
 }
 
-type MonthlySubscription {
-  id: ID!
-  startDate: AWSDateTime
-  paymentProvider: String
+input updatePaymentProgramInput {
+  paymentProgramId: String!
   providerTransactionId: String
-  subscriptionPlan: SubscriptionPlan
+}
+
+input couponCodeInput {
+  couponCode: String!
+}
+
+input deleteGroupInput {
+  groupId: String!
+}
+
+input joinExistingGroupInput {
+  groupId: String!
+}
+
+input CreateUserInput {
+  username: String
+  email: AWSEmail
+  phone: String
+  fullName: String
+}
+
+input addCardsPackInput {
+  cardsPackId: String
+}
+
+input changeCardsPackInput {
+  oldCardsPackId: String
+  newCardsPackId: String
+}
+
+input groupUsersListInput {
+  usernamesList: [GroupUserRoleInput]
+}
+
+input GroupUserRoleInput {
+  email: String
+  role: String
+}
+
+input unSubscribeInput {
+  username: String!
+}
+
+input userInput {
+  username: String!
+}
+
+input selectedCardPacksInput {
+  cardsPacksIds: [String]
 }

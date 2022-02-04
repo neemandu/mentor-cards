@@ -27,20 +27,6 @@
     }
   },
   "api": {
-    "PayPalSubscriptionsWebHook": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "PayPalCancelWebhook",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
-    },
     "cardspacks": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
@@ -234,20 +220,6 @@
         }
       ]
     },
-    "PayPalCancelWebhook": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
-    },
     "AddCouponCode": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -396,6 +368,48 @@
       ]
     },
     "GetNextReceiptId": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "PayPalWebhookFunc": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "GetSubscriptionPlans": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "UpdateSelectedCardPacks": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
