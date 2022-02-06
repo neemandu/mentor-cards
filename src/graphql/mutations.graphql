@@ -47,6 +47,7 @@ mutation CreateUser($input: CreateUserInput!) {
     cardsPacksIds
     providerTransactionId
     fullName
+    orgMembership
     createdAt
     updatedAt
   }

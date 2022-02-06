@@ -19,6 +19,13 @@
     "apicardspacksGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apicardspacksGraphQLAPIIdOutput"
+    },
+    "apicardspacksGraphQLAPIEndpointOutput": {
+      "Type": "String",
+      "Default": "apicardspacksGraphQLAPIEndpointOutput"
+    },
+    "secretsPathAmplifyAppId": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -51,12 +58,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "GetSubscriptionPlans",
+            "MessagingService",
             {
               "Fn::Join": [
                 "",
                 [
-                  "GetSubscriptionPlans",
+                  "MessagingService",
                   "-",
                   {
                     "Ref": "env"
@@ -74,12 +81,34 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_CARDSPACKS_USERTABLE_NAME": {
+            "sendinblueAPIKey": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "MessagingService"
+                      }
+                    ]
+                  },
+                  "sendinblueAPIKey"
+                ]
+              ]
+            },
+            "API_CARDSPACKS_MESSAGEQUEUETABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
               }
             },
-            "API_CARDSPACKS_USERTABLE_ARN": {
+            "API_CARDSPACKS_MESSAGEQUEUETABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -94,7 +123,7 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
                     }
                   }
                 ]
@@ -102,32 +131,6 @@
             },
             "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apicardspacksGraphQLAPIIdOutput"
-            },
-            "API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
-              }
-            },
-            "API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
-                    }
-                  }
-                ]
-              ]
             }
           }
         },
@@ -148,12 +151,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRolee45c0bda",
+            "mentorcardsLambdaRole4005237f",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRolee45c0bda",
+                  "mentorcardsLambdaRole4005237f",
                   "-",
                   {
                     "Ref": "env"
@@ -224,6 +227,119 @@
         }
       }
     },
+    "LambdaTriggerPolicyMessageQueue": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy-MessageQueue",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:ListStreams"
+              ],
+              "Resource": {
+                "Fn::ImportValue": {
+                  "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:StreamArn"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "LambdaEventSourceMappingMessageQueue": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "DependsOn": [
+        "LambdaTriggerPolicyMessageQueue",
+        "LambdaExecutionRole"
+      ],
+      "Properties": {
+        "BatchSize": 100,
+        "Enabled": true,
+        "EventSourceArn": {
+          "Fn::ImportValue": {
+            "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:StreamArn"
+          }
+        },
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "LambdaFunction",
+            "Arn"
+          ]
+        },
+        "StartingPosition": "LATEST"
+      }
+    },
+    "AmplifyFunctionSecretsPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-function-secrets-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "ssm:GetParameter",
+                "ssm:GetParameters"
+              ],
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter",
+                    {
+                      "Fn::Sub": [
+                        "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                        {
+                          "appId": {
+                            "Ref": "secretsPathAmplifyAppId"
+                          },
+                          "env": {
+                            "Ref": "env"
+                          },
+                          "functionName": "MessagingService"
+                        }
+                      ]
+                    },
+                    "*"
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ]
+    },
     "AmplifyResourcesPolicy": {
       "DependsOn": [
         "LambdaExecutionRole"
@@ -242,12 +358,18 @@
             {
               "Effect": "Allow",
               "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
-                "dynamodb:Query"
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {
@@ -265,7 +387,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
                         }
                       }
                     ]
@@ -286,63 +408,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
-                        }
-                      },
-                      "/index/*"
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:dynamodb:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
-                        }
-                      }
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:dynamodb:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
                         }
                       },
                       "/index/*"

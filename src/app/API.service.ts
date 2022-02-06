@@ -41,6 +41,7 @@ export type User = {
   cardsPacksIds?: Array<string | null> | null;
   providerTransactionId?: string | null;
   fullName?: string | null;
+  orgMembership?: string | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -619,6 +620,7 @@ export type ModelUserFilterInput = {
   cardsPacksIds?: ModelStringInput | null;
   providerTransactionId?: ModelStringInput | null;
   fullName?: ModelStringInput | null;
+  orgMembership?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -770,6 +772,7 @@ export type CreateUserMutation = {
   cardsPacksIds?: Array<string | null> | null; 
   providerTransactionId?: string | null;
   fullName?: string | null;
+  orgMembership?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1203,6 +1206,7 @@ export type GetUserQuery = {
   cardsPacksIds?: Array<string | null> | null;
   providerTransactionId?: string | null;
   fullName?: string | null;
+  orgMembership?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1260,6 +1264,7 @@ export type ListUsersQuery = {
     cardsPacksIds?: Array<string | null> | null;
     providerTransactionId?: string | null;
     fullName?: string | null;
+    orgMembership?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
@@ -1987,6 +1992,7 @@ export class APIService {
           cardsPacksIds
           providerTransactionId
           fullName
+          orgMembership
           createdAt
           updatedAt
         }
@@ -2943,6 +2949,7 @@ export class APIService {
           cardsPacksIds
           providerTransactionId
           fullName
+          orgMembership
           createdAt
           updatedAt
         }
@@ -3014,6 +3021,7 @@ export class APIService {
             cardsPacksIds
             providerTransactionId
             fullName
+            orgMembership
             createdAt
             updatedAt
           }

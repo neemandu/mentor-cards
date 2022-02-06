@@ -51,12 +51,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "GetSubscriptionPlans",
+            "EmailEndOfTrialNotice",
             {
               "Fn::Join": [
                 "",
                 [
-                  "GetSubscriptionPlans",
+                  "EmailEndOfTrialNotice",
                   "-",
                   {
                     "Ref": "env"
@@ -73,6 +73,35 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "API_CARDSPACKS_MESSAGEQUEUETABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
+              }
+            },
+            "API_CARDSPACKS_MESSAGEQUEUETABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apicardspacksGraphQLAPIIdOutput"
             },
             "API_CARDSPACKS_USERTABLE_NAME": {
               "Fn::ImportValue": {
@@ -99,35 +128,6 @@
                   }
                 ]
               ]
-            },
-            "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apicardspacksGraphQLAPIIdOutput"
-            },
-            "API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
-              }
-            },
-            "API_CARDSPACKS_SUBSCRIPTIONPLANTABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
-                    }
-                  }
-                ]
-              ]
             }
           }
         },
@@ -148,12 +148,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRolee45c0bda",
+            "mentorcardsLambdaRole00ca3975",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRolee45c0bda",
+                  "mentorcardsLambdaRole00ca3975",
                   "-",
                   {
                     "Ref": "env"
@@ -242,12 +242,18 @@
             {
               "Effect": "Allow",
               "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
-                "dynamodb:Query"
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {
@@ -265,7 +271,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
                         }
                       }
                     ]
@@ -286,7 +292,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
                         }
                       },
                       "/index/*"
@@ -321,7 +327,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       }
                     ]
@@ -342,7 +348,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:SubscriptionPlanTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
                         }
                       },
                       "/index/*"
@@ -351,6 +357,45 @@
                 }
               ]
             }
+          ]
+        }
+      }
+    },
+    "CloudWatchEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Description": "Schedule rule for Lambda",
+        "ScheduleExpression": {
+          "Ref": "CloudWatchRule"
+        },
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "LambdaFunction",
+                "Arn"
+              ]
+            },
+            "Id": {
+              "Ref": "LambdaFunction"
+            }
+          }
+        ]
+      }
+    },
+    "PermissionForEventsToInvokeLambda": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "LambdaFunction"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "CloudWatchEvent",
+            "Arn"
           ]
         }
       }
@@ -378,6 +423,11 @@
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "CloudWatchEventRule": {
+      "Value": {
+        "Ref": "CloudWatchEvent"
       }
     }
   }

@@ -13,7 +13,7 @@ type Mutation {
 }
 
 type User
-  @model
+  @model(mutations:null)
   @auth(rules: [{allow: owner, ownerField: "username", operations: [read, update], provider: userPools}]) {
   id: ID!
   username: ID!
