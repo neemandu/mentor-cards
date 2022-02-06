@@ -1,4 +1,232 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateCouponCodes {
+  onCreateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    org {
+      id
+      name
+      membersEmails
+      membership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCouponCodes {
+  onUpdateCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    org {
+      id
+      name
+      membersEmails
+      membership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCouponCodes {
+  onDeleteCouponCodes {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    org {
+      id
+      name
+      membersEmails
+      membership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateOrganizations {
+  onCreateOrganizations {
+    id
+    name
+    membersEmails
+    membership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateOrganizations {
+  onUpdateOrganizations {
+    id
+    name
+    membersEmails
+    membership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteOrganizations {
+  onDeleteOrganizations {
+    id
+    name
+    membersEmails
+    membership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateGroup {
+  onCreateGroup {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateGroup {
+  onUpdateGroup {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteGroup {
+  onDeleteGroup {
+    id
+    groupUsers {
+      email
+      role
+    }
+    paymentProgram {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateMessageQueue {
   onCreateMessageQueue {
     id
@@ -41,164 +269,32 @@ subscription OnDeleteMessageQueue {
     updatedAt
   }
 }
-subscription OnCreateGroup {
-  onCreateGroup {
-    id
-    groupUsers {
-      email
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateGroup {
-  onUpdateGroup {
-    id
-    groupUsers {
-      email
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteGroup {
-  onDeleteGroup {
-    id
-    groupUsers {
-      email
-      role
-    }
-    paymentProgram {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateCouponCodes {
-  onCreateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateCouponCodes {
-  onUpdateCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCouponCodes {
-  onDeleteCouponCodes {
-    id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateReceiptIds {
-  onCreateReceiptIds {
-    id
-    counter
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateReceiptIds {
-  onUpdateReceiptIds {
-    id
-    counter
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteReceiptIds {
-  onDeleteReceiptIds {
-    id
-    counter
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateContactUsModel {
-  onCreateContactUsModel {
+subscription OnCreateOrganizationMembership {
+  onCreateOrganizationMembership {
     id
     name
-    content
-    email
+    trialPeriodInDays
+    numberOfallowedCardsPacks
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateContactUsModel {
-  onUpdateContactUsModel {
+subscription OnUpdateOrganizationMembership {
+  onUpdateOrganizationMembership {
     id
     name
-    content
-    email
+    trialPeriodInDays
+    numberOfallowedCardsPacks
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteContactUsModel {
-  onDeleteContactUsModel {
+subscription OnDeleteOrganizationMembership {
+  onDeleteOrganizationMembership {
     id
     name
-    content
-    email
+    trialPeriodInDays
+    numberOfallowedCardsPacks
     createdAt
     updatedAt
   }
@@ -214,6 +310,14 @@ subscription OnCreateSubscriptionPlan {
     billingCycleInMonths
     fullPrice
     discount
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -229,6 +333,14 @@ subscription OnUpdateSubscriptionPlan {
     billingCycleInMonths
     fullPrice
     discount
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -244,6 +356,38 @@ subscription OnDeleteSubscriptionPlan {
     billingCycleInMonths
     fullPrice
     discount
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateReceiptsId {
+  onCreateReceiptsId {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateReceiptsId {
+  onUpdateReceiptsId {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteReceiptsId {
+  onDeleteReceiptsId {
+    id
+    counter
     createdAt
     updatedAt
   }
@@ -397,6 +541,36 @@ subscription OnDeleteCardsPack {
       imgUrl
       link
     }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateContactUsModel {
+  onCreateContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateContactUsModel {
+  onUpdateContactUsModel {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteContactUsModel {
+  onDeleteContactUsModel {
+    id
+    name
+    content
+    email
     createdAt
     updatedAt
   }

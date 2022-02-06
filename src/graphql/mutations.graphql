@@ -21,6 +21,14 @@ mutation CreateUser($input: CreateUserInput!) {
         billingCycleInMonths
         fullPrice
         discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -41,13 +49,35 @@ mutation CreateUser($input: CreateUserInput!) {
       discount
       trialPeriodInDays
       allowedCardsPacks
+      org {
+        id
+        name
+        membersEmails
+        membership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
     cardsPacksIds
     providerTransactionId
     fullName
-    orgMembership
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
@@ -76,79 +106,267 @@ mutation AddCouponCode($input: couponCodeInput!) {
 mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
   UpdatePaymentProgram(input: $input)
 }
-mutation UpdateContactUsModel(
-  $input: UpdateContactUsModelInput!
-  $condition: ModelContactUsModelConditionInput
-) {
-  updateContactUsModel(input: $input, condition: $condition) {
+mutation GetSubscriptionPlans($input: userInput!) {
+  GetSubscriptionPlans(input: $input) {
     id
     name
-    content
-    email
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
 }
-mutation DeleteContactUsModel(
-  $input: DeleteContactUsModelInput!
-  $condition: ModelContactUsModelConditionInput
+mutation UpdateSelectedCardPacks($input: selectedCardPacksInput!) {
+  UpdateSelectedCardPacks(input: $input)
+}
+mutation CreateSubscriptionPlan(
+  $input: CreateSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
 ) {
-  deleteContactUsModel(input: $input, condition: $condition) {
+  createSubscriptionPlan(input: $input, condition: $condition) {
     id
     name
-    content
-    email
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
 }
-mutation CreateMessageQueue(
-  $input: CreateMessageQueueInput!
-  $condition: ModelMessageQueueConditionInput
+mutation UpdateSubscriptionPlan(
+  $input: UpdateSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
 ) {
-  createMessageQueue(input: $input, condition: $condition) {
+  updateSubscriptionPlan(input: $input, condition: $condition) {
     id
-    email
-    emailDeliveryTime
-    phone
-    smsDeliveryTime
-    emailTemplateId
     name
-    params
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
 }
-mutation UpdateMessageQueue(
-  $input: UpdateMessageQueueInput!
-  $condition: ModelMessageQueueConditionInput
+mutation DeleteSubscriptionPlan(
+  $input: DeleteSubscriptionPlanInput!
+  $condition: ModelSubscriptionPlanConditionInput
 ) {
-  updateMessageQueue(input: $input, condition: $condition) {
+  deleteSubscriptionPlan(input: $input, condition: $condition) {
     id
-    email
-    emailDeliveryTime
-    phone
-    smsDeliveryTime
-    emailTemplateId
     name
-    params
+    description
+    providerPlanId
+    numberOfUsers
+    numberOfCardPacks
+    billingCycleInMonths
+    fullPrice
+    discount
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
     createdAt
     updatedAt
   }
 }
-mutation DeleteMessageQueue(
-  $input: DeleteMessageQueueInput!
-  $condition: ModelMessageQueueConditionInput
+mutation CreateCouponCodes(
+  $input: CreateCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
 ) {
-  deleteMessageQueue(input: $input, condition: $condition) {
+  createCouponCodes(input: $input, condition: $condition) {
     id
-    email
-    emailDeliveryTime
-    phone
-    smsDeliveryTime
-    emailTemplateId
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    org {
+      id
+      name
+      membersEmails
+      membership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCouponCodes(
+  $input: UpdateCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  updateCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    org {
+      id
+      name
+      membersEmails
+      membership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCouponCodes(
+  $input: DeleteCouponCodesInput!
+  $condition: ModelCouponCodesConditionInput
+) {
+  deleteCouponCodes(input: $input, condition: $condition) {
+    id
+    organization
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    org {
+      id
+      name
+      membersEmails
+      membership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateOrganizations(
+  $input: CreateOrganizationsInput!
+  $condition: ModelOrganizationsConditionInput
+) {
+  createOrganizations(input: $input, condition: $condition) {
+    id
     name
-    params
+    membersEmails
+    membership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateOrganizations(
+  $input: UpdateOrganizationsInput!
+  $condition: ModelOrganizationsConditionInput
+) {
+  updateOrganizations(input: $input, condition: $condition) {
+    id
+    name
+    membersEmails
+    membership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteOrganizations(
+  $input: DeleteOrganizationsInput!
+  $condition: ModelOrganizationsConditionInput
+) {
+  deleteOrganizations(input: $input, condition: $condition) {
+    id
+    name
+    membersEmails
+    membership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteReceiptsId(
+  $input: DeleteReceiptsIdInput!
+  $condition: ModelReceiptsIdConditionInput
+) {
+  deleteReceiptsId(input: $input, condition: $condition) {
+    id
+    counter
     createdAt
     updatedAt
   }
@@ -173,6 +391,14 @@ mutation CreateGroup(
       billingCycleInMonths
       fullPrice
       discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -200,6 +426,14 @@ mutation UpdateGroup(
       billingCycleInMonths
       fullPrice
       discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -227,63 +461,17 @@ mutation DeleteGroup(
       billingCycleInMonths
       fullPrice
       discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateSubscriptionPlan(
-  $input: CreateSubscriptionPlanInput!
-  $condition: ModelSubscriptionPlanConditionInput
-) {
-  createSubscriptionPlan(input: $input, condition: $condition) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    billingCycleInMonths
-    fullPrice
-    discount
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateSubscriptionPlan(
-  $input: UpdateSubscriptionPlanInput!
-  $condition: ModelSubscriptionPlanConditionInput
-) {
-  updateSubscriptionPlan(input: $input, condition: $condition) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    billingCycleInMonths
-    fullPrice
-    discount
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteSubscriptionPlan(
-  $input: DeleteSubscriptionPlanInput!
-  $condition: ModelSubscriptionPlanConditionInput
-) {
-  deleteSubscriptionPlan(input: $input, condition: $condition) {
-    id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    billingCycleInMonths
-    fullPrice
-    discount
     createdAt
     updatedAt
   }
@@ -459,78 +647,138 @@ mutation DeleteCardsPack(
     updatedAt
   }
 }
-mutation CreateCouponCodes(
-  $input: CreateCouponCodesInput!
-  $condition: ModelCouponCodesConditionInput
+mutation CreateMessageQueue(
+  $input: CreateMessageQueueInput!
+  $condition: ModelMessageQueueConditionInput
 ) {
-  createCouponCodes(input: $input, condition: $condition) {
+  createMessageQueue(input: $input, condition: $condition) {
     id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
+    email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
 }
-mutation UpdateCouponCodes(
-  $input: UpdateCouponCodesInput!
-  $condition: ModelCouponCodesConditionInput
+mutation UpdateMessageQueue(
+  $input: UpdateMessageQueueInput!
+  $condition: ModelMessageQueueConditionInput
 ) {
-  updateCouponCodes(input: $input, condition: $condition) {
+  updateMessageQueue(input: $input, condition: $condition) {
     id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
+    email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
 }
-mutation DeleteCouponCodes(
-  $input: DeleteCouponCodesInput!
-  $condition: ModelCouponCodesConditionInput
+mutation DeleteMessageQueue(
+  $input: DeleteMessageQueueInput!
+  $condition: ModelMessageQueueConditionInput
 ) {
-  deleteCouponCodes(input: $input, condition: $condition) {
+  deleteMessageQueue(input: $input, condition: $condition) {
     id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
+    email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
 }
-mutation CreateReceiptIds(
-  $input: CreateReceiptIdsInput!
-  $condition: ModelReceiptIdsConditionInput
+mutation UpdateContactUsModel(
+  $input: UpdateContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
 ) {
-  createReceiptIds(input: $input, condition: $condition) {
+  updateContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteContactUsModel(
+  $input: DeleteContactUsModelInput!
+  $condition: ModelContactUsModelConditionInput
+) {
+  deleteContactUsModel(input: $input, condition: $condition) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateOrganizationMembership(
+  $input: CreateOrganizationMembershipInput!
+  $condition: ModelOrganizationMembershipConditionInput
+) {
+  createOrganizationMembership(input: $input, condition: $condition) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateOrganizationMembership(
+  $input: UpdateOrganizationMembershipInput!
+  $condition: ModelOrganizationMembershipConditionInput
+) {
+  updateOrganizationMembership(input: $input, condition: $condition) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteOrganizationMembership(
+  $input: DeleteOrganizationMembershipInput!
+  $condition: ModelOrganizationMembershipConditionInput
+) {
+  deleteOrganizationMembership(input: $input, condition: $condition) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateReceiptsId(
+  $input: CreateReceiptsIdInput!
+  $condition: ModelReceiptsIdConditionInput
+) {
+  createReceiptsId(input: $input, condition: $condition) {
     id
     counter
     createdAt
     updatedAt
   }
 }
-mutation UpdateReceiptIds(
-  $input: UpdateReceiptIdsInput!
-  $condition: ModelReceiptIdsConditionInput
+mutation UpdateReceiptsId(
+  $input: UpdateReceiptsIdInput!
+  $condition: ModelReceiptsIdConditionInput
 ) {
-  updateReceiptIds(input: $input, condition: $condition) {
-    id
-    counter
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteReceiptIds(
-  $input: DeleteReceiptIdsInput!
-  $condition: ModelReceiptIdsConditionInput
-) {
-  deleteReceiptIds(input: $input, condition: $condition) {
+  updateReceiptsId(input: $input, condition: $condition) {
     id
     counter
     createdAt

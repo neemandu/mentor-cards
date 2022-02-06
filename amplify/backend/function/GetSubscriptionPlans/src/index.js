@@ -52,8 +52,10 @@ async function getPlansByOrgId(orgId){
 
     var subsParams = {
         TableName:subPlansTable,
-        Key:{
-            "id": orgId
+        IndexName: "email-index",
+        KeyConditionExpression: "orgMembership = :orgMembership",
+        ExpressionAttributeValues: {
+            ":orgMembership": orgId
         }
     };
 
