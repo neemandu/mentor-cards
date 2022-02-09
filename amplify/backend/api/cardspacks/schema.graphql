@@ -8,7 +8,7 @@ type Mutation {
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
   AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
   UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
-  GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}")
+  GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}") @aws_cognito_user_pools @aws_api_key
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
 }
 
