@@ -52,7 +52,7 @@ async function getPlansByOrgId(orgId){
 
     var subsParams = {
         TableName:subPlansTable,
-        IndexName: "email-index",
+        IndexName: "orgMembership-index",
         KeyConditionExpression: "orgMembership = :orgMembership",
         ExpressionAttributeValues: {
             ":orgMembership": orgId
@@ -63,7 +63,7 @@ async function getPlansByOrgId(orgId){
 
     var org;
 
-    await docClient.get(subsParams, function(err, data) {
+    await docClient.query(subsParams, function(err, data) {
         if (err) {
             console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
@@ -74,10 +74,10 @@ async function getPlansByOrgId(orgId){
     }).promise();
 
     if(!org){
-        throw Error ('no such org id - ' + orgId);
+        console.error('no such org id - ' + orgId);
     }
 
-    return user;
+    return org;
 
 }
 
@@ -95,7 +95,7 @@ exports.handler = async (event) => {
     }
     var orgId  = "-1";
     if(username != null){
-        user = await getUserByUserName(username);
+        var user = await getUserByUserName(username);
         orgId = user.orgMembership == null ? "-1" : user.orgMembership;
     }   
     var subPlans = await getPlansByOrgId("-1");

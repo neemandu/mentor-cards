@@ -203,7 +203,7 @@
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetSubscriptionPlans-42462f43356e712b6e37-build.zip"
+          "s3Key": "amplify-builds/GetSubscriptionPlans-666c535270716b413972-build.zip"
         }
       },
       "auth": {
