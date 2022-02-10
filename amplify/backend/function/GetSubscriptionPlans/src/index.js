@@ -69,7 +69,7 @@ async function getPlansByOrgId(orgId){
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Get org succeeded:", JSON.stringify(data, null, 2));
-            org = data["Item"];
+            org = data["Items"];
         }
     }).promise();
 

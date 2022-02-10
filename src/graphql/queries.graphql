@@ -78,6 +78,7 @@ query GetUser($id: ID!) {
       createdAt
       updatedAt
     }
+    test
     createdAt
     updatedAt
   }
@@ -166,6 +167,7 @@ query ListUsers(
         createdAt
         updatedAt
       }
+      test
       createdAt
       updatedAt
     }

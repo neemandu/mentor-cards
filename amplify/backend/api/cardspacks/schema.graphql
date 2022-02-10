@@ -35,6 +35,7 @@ type User
   providerTransactionId: String
   fullName: String
   orgMembership: OrganizationMembership @connection
+  test: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
