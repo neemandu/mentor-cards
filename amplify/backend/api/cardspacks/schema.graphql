@@ -35,7 +35,7 @@ type User
   providerTransactionId: String
   fullName: String
   orgMembership: OrganizationMembership @connection
-  test: String
+  endOfTrialDate: AWSDateTime @function(name: "GetEndOfTrialDate-${env}")
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }

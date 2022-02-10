@@ -42,6 +42,7 @@ export type User = {
   providerTransactionId?: string | null;
   fullName?: string | null;
   orgMembership?: OrganizationMembership;
+  endOfTrialDate?: string | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -906,6 +907,7 @@ export type CreateUserMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  endOfTrialDate?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1641,6 +1643,7 @@ export type GetUserQuery = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  endOfTrialDate?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1733,6 +1736,7 @@ export type ListUsersQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    endOfTrialDate?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2850,6 +2854,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3026,6 +3031,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3081,6 +3087,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3121,6 +3128,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3161,6 +3169,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -4253,6 +4262,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -4359,6 +4369,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            endOfTrialDate
             createdAt
             updatedAt
           }

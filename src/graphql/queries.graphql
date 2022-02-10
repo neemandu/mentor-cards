@@ -78,7 +78,7 @@ query GetUser($id: ID!) {
       createdAt
       updatedAt
     }
-    test
+    endOfTrialDate
     createdAt
     updatedAt
   }
@@ -167,7 +167,7 @@ query ListUsers(
         createdAt
         updatedAt
       }
-      test
+      endOfTrialDate
       createdAt
       updatedAt
     }

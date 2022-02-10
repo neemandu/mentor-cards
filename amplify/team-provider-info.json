@@ -204,6 +204,10 @@
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/GetSubscriptionPlans-6a3945442f516e6f4165-build.zip"
+        },
+        "GetEndOfTrialDate": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/GetEndOfTrialDate-7949302b50346b383846-build.zip"
         }
       },
       "auth": {
