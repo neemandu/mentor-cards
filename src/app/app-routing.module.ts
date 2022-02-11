@@ -10,6 +10,7 @@ import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.
 import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
 import { PackContentPageComponent } from './Pages/pack-content-page/pack-content-page.component';
 import { PricePageComponent } from './Pages/price-page/price-page.component';
+import { CompanyPackChoiseComponent } from './Pages/site-content-management/company-pack-choise/company-pack-choise.component';
 import { GuideBookManagementComponent } from './Pages/site-content-management/guide-book-management/guide-book-management.component';
 import { NewsManagementComponent } from './Pages/site-content-management/news-management/news-management.component';
 // import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'guide-book', component: GuideBookComponent },
   { path: 'price-page', component: PricePageComponent },
   { path: 'guide-page', component: GuidePageComponent },
+  { path: 'company-pack-choise', component: CompanyPackChoiseComponent },
   { path: '**', redirectTo: '/all-packs-page' },
 ];
 

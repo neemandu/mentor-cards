@@ -55,7 +55,7 @@
         <mat-form-field *ngIf="newPasswordPhase">
           <mat-label>סיסמא חדשה</mat-label>
           <input autocomplete="off" formControlName="newPassword" matInput [type]="hidePW ? 'password' : 'text'">
-          <mat-hint>8 ספרות לפחות, חייב להכיל ספרה, אות קטנה ואות גדולה (באנגלית)</mat-hint>
+          <mat-hint>8 תווים לפחות, חייב להכיל ספרה, אות קטנה ואות גדולה (באנגלית)</mat-hint>
           <mat-error *ngIf="forgotPasswordForm.controls.newPassword.errors?.badPassword">סיסמא לא חוקית, נסו שנית
           </mat-error>
           <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">

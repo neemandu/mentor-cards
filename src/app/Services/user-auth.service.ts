@@ -46,7 +46,7 @@ export class UserAuthService {
     public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
 
     this.rememebrMe();
-    this.getSubscriptionPlans();
+    // this.getSubscriptionPlans();
     window.onstorage = (obj) => {
       console.log(obj);
     };
@@ -60,10 +60,12 @@ export class UserAuthService {
         this.loggedIn(user);
       else
         throw 'No current user - rememberMe retured VOID';
+      // this.getSubscriptionPlans();
     } catch (err) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
       console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
+      this.getSubscriptionPlans();
     }
   }
 
@@ -90,6 +92,8 @@ export class UserAuthService {
       }
       this.userData = new UserData().deseralize(data);
       this.isLoggedIn = true;
+      this.subPlans = undefined;
+      this.getSubscriptionPlans();
       this.userDataEmmiter.emit(this.userData);
       // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.userData.email);
@@ -200,8 +204,10 @@ export class UserAuthService {
    */
   getSubscriptionPlans(): void {
     if (!this.subPlans) {
-      this.api.ListSubscriptionPlans().then(value => {
-        this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+      (this.isLoggedIn ? this.api.GetSubscriptionPlansForOrgs({ username: this.userData.username }) : this.api.GetSubscriptionPlans({ username: 'Not Logged In' })).then((value: any) => {
+        // this.api.ListSubscriptionPlans().then(value => {
+        // this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+        this.subPlans = value.map(plan => new SubscriptionPlan().deseralize(plan))
         this.subPlansEmmiter.emit();
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
