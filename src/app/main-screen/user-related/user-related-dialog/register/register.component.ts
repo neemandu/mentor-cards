@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     // phone: ['', [Validators.required, Validators.pattern(/^05\d{1}?\d{7}$/)]],
     phone: ['', [Validators.required, Validators.pattern(/^[+]{0,1}\d{10,15}/)]],
     username: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
     usernameConfirm: ['', [Validators.required, Validators.email]],
     passwordConfirm: ['', [Validators.required, Validators.minLength(8)]],
   });

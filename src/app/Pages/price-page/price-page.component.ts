@@ -23,8 +23,8 @@ const millisecondsInTwoWeeks: number = 1209600000;
 })
 export class PricePageComponent implements OnInit {
 
-  configAmountsOfUsers: number[] = [];
-  numOfUsersSelected: number;
+  // configAmountsOfUsers: number[] = [];
+  // numOfUsersSelected: number;
   packSelected: SubscriptionPlan;
   changedPlansThisMonth: boolean = false;
   ownsCurrentPlanLabel: boolean = false;

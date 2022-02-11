@@ -19,6 +19,7 @@ export class UserData {
     cardsPacksIds: string[];
     providerTransactionId?: string | null;
     fullName?: string | null;
+    orgMembership: OrgMembership;
 
     deseralize(input: any) {
         Object.assign(this, input);
@@ -67,4 +68,13 @@ export class CouponCode {
         this.createdAt = new Date(input.createdAt);
         this.updatedAt = new Date(input.updatedAt);
     }
+}
+
+export class OrgMembership {
+    id: string;
+    name: string;
+    trialPeriodInDays: number;
+    numberOfallowedCardsPacks: number;
+    createdAt: string;
+    updatedAt: string;
 }

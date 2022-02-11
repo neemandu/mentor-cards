@@ -65,7 +65,7 @@ export class CardsService {
   }
 
   addFavoritesFromCouponCode(ids: string[]): void {
-    ids.forEach(id => {
+    ids?.forEach(id => {
       if (!this.favorites.includes(id) && !this.couponCodeAddedToFav(id)) {
         this.favorites.push(id);
         this.setCouponCodeAddedToFav(id);
