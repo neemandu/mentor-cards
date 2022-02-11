@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "storage": {
+      "ReceiptsId:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

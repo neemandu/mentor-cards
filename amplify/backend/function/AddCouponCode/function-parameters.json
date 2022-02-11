@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "storage": {
+      "CouponCodes:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "Organizations:@model(appsync)": [
+        "read"
+      ],
+      "OrganizationMembership:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

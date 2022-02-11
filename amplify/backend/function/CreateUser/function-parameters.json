@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "storage": {
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Group:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "mentorcardsMailingListService",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true,
+      "env": "dev"
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "sendinblueApiKey",
+      "environmentVariableName": "SENDINBLUE_API_KEY"
+    }
+  ]
+}

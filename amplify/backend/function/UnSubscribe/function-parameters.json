@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "storage": {
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Group:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "CardsPack:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
