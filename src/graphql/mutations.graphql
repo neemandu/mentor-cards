@@ -78,6 +78,7 @@ mutation CreateUser($input: CreateUserInput!) {
       createdAt
       updatedAt
     }
+    endOfTrialDate
     createdAt
     updatedAt
   }
