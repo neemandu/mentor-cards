@@ -1,5 +1,4 @@
 exports.handler = async (event) => {
-    var allPackagesDate = new Date();
     var trialPeriodInDays = 14;
     console.log('event.source');
     console.log(event.source);
@@ -19,7 +18,9 @@ exports.handler = async (event) => {
                 }
             }
         }
-    
-    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);   
-    return new Date(allPackagesDate);
+    var start = new Date(startFreePeriodDate);
+    console.log('start');
+    console.log(start);
+    start.setDate(start.getDate()+trialPeriodInDays);   
+    return new Date(start);
 };

@@ -44,23 +44,15 @@ query GetUser($id: ID!) {
     cancellationDate
     couponCodes {
       id
-      organization
       couponCode
       discount
       trialPeriodInDays
       allowedCardsPacks
-      org {
+      orgId {
         id
         name
-        membersEmails
-        membership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
+        trialPeriodInDays
+        numberOfallowedCardsPacks
         createdAt
         updatedAt
       }
@@ -133,23 +125,15 @@ query ListUsers(
       cancellationDate
       couponCodes {
         id
-        organization
         couponCode
         discount
         trialPeriodInDays
         allowedCardsPacks
-        org {
+        orgId {
           id
           name
-          membersEmails
-          membership {
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            createdAt
-            updatedAt
-          }
+          trialPeriodInDays
+          numberOfallowedCardsPacks
           createdAt
           updatedAt
         }
@@ -177,23 +161,15 @@ query ListUsers(
 query GetCouponCodes($id: ID!) {
   getCouponCodes(id: $id) {
     id
-    organization
     couponCode
     discount
     trialPeriodInDays
     allowedCardsPacks
-    org {
+    orgId {
       id
       name
-      membersEmails
-      membership {
-        id
-        name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        createdAt
-        updatedAt
-      }
+      trialPeriodInDays
+      numberOfallowedCardsPacks
       createdAt
       updatedAt
     }
@@ -209,23 +185,15 @@ query ListCouponCodess(
   listCouponCodess(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      organization
       couponCode
       discount
       trialPeriodInDays
       allowedCardsPacks
-      org {
+      orgId {
         id
         name
-        membersEmails
-        membership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
+        trialPeriodInDays
+        numberOfallowedCardsPacks
         createdAt
         updatedAt
       }
@@ -238,7 +206,6 @@ query ListCouponCodess(
 query GetOrganizations($id: ID!) {
   getOrganizations(id: $id) {
     id
-    name
     membersEmails
     membership {
       id
@@ -260,7 +227,6 @@ query ListOrganizationss(
   listOrganizationss(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
       membersEmails
       membership {
         id
@@ -270,6 +236,37 @@ query ListOrganizationss(
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetOrganizationMembership($id: ID!) {
+  getOrganizationMembership(id: $id) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+query ListOrganizationMemberships(
+  $filter: ModelOrganizationMembershipFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOrganizationMemberships(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
       createdAt
       updatedAt
     }
@@ -376,37 +373,6 @@ query ListMessageQueues(
       emailTemplateId
       name
       params
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetOrganizationMembership($id: ID!) {
-  getOrganizationMembership(id: $id) {
-    id
-    name
-    trialPeriodInDays
-    numberOfallowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-query ListOrganizationMemberships(
-  $filter: ModelOrganizationMembershipFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listOrganizationMemberships(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      name
-      trialPeriodInDays
-      numberOfallowedCardsPacks
       createdAt
       updatedAt
     }

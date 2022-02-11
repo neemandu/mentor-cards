@@ -207,7 +207,7 @@
         },
         "GetEndOfTrialDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetEndOfTrialDate-7949302b50346b383846-build.zip"
+          "s3Key": "amplify-builds/GetEndOfTrialDate-6632514b73692b515946-build.zip"
         }
       },
       "auth": {

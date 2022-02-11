@@ -68,21 +68,28 @@ type CouponCodes
   @model
   @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}]) {
   id: ID!
-  organization: String
   couponCode: String
   discount: Float
   trialPeriodInDays: Int
   allowedCardsPacks: [String]
-  org: Organizations @connection
+  orgId: OrganizationMembership @connection
 }
 
 type Organizations
   @model
   @auth(rules: [{ allow: private, operations: [read, create, update] }]) {
   id: ID! 
-  name: String!
   membersEmails: [AWSEmail] 
   membership: OrganizationMembership @connection 
+}
+
+type OrganizationMembership
+  @model
+  @auth(rules: [{ allow: private, operations: [read, create, update, delete] }]) {
+  id: ID! 
+  name: String
+  trialPeriodInDays: Int
+  numberOfallowedCardsPacks: Int
 }
 
 type ReceiptsId
@@ -147,15 +154,6 @@ type ContactUsModel
   name: String
   content: String
   email: String
-}
-
-type OrganizationMembership
-  @model
-  @auth(rules: [{ allow: private, operations: [read, create, update, delete] }]) {
-  id: ID! 
-  name: String
-  trialPeriodInDays: Int
-  numberOfallowedCardsPacks: Int
 }
 
 type About {

@@ -44,23 +44,15 @@ mutation CreateUser($input: CreateUserInput!) {
     cancellationDate
     couponCodes {
       id
-      organization
       couponCode
       discount
       trialPeriodInDays
       allowedCardsPacks
-      org {
+      orgId {
         id
         name
-        membersEmails
-        membership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
+        trialPeriodInDays
+        numberOfallowedCardsPacks
         createdAt
         updatedAt
       }
@@ -217,23 +209,15 @@ mutation CreateCouponCodes(
 ) {
   createCouponCodes(input: $input, condition: $condition) {
     id
-    organization
     couponCode
     discount
     trialPeriodInDays
     allowedCardsPacks
-    org {
+    orgId {
       id
       name
-      membersEmails
-      membership {
-        id
-        name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        createdAt
-        updatedAt
-      }
+      trialPeriodInDays
+      numberOfallowedCardsPacks
       createdAt
       updatedAt
     }
@@ -247,23 +231,15 @@ mutation UpdateCouponCodes(
 ) {
   updateCouponCodes(input: $input, condition: $condition) {
     id
-    organization
     couponCode
     discount
     trialPeriodInDays
     allowedCardsPacks
-    org {
+    orgId {
       id
       name
-      membersEmails
-      membership {
-        id
-        name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        createdAt
-        updatedAt
-      }
+      trialPeriodInDays
+      numberOfallowedCardsPacks
       createdAt
       updatedAt
     }
@@ -277,23 +253,15 @@ mutation DeleteCouponCodes(
 ) {
   deleteCouponCodes(input: $input, condition: $condition) {
     id
-    organization
     couponCode
     discount
     trialPeriodInDays
     allowedCardsPacks
-    org {
+    orgId {
       id
       name
-      membersEmails
-      membership {
-        id
-        name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        createdAt
-        updatedAt
-      }
+      trialPeriodInDays
+      numberOfallowedCardsPacks
       createdAt
       updatedAt
     }
@@ -307,7 +275,6 @@ mutation CreateOrganizations(
 ) {
   createOrganizations(input: $input, condition: $condition) {
     id
-    name
     membersEmails
     membership {
       id
@@ -327,7 +294,6 @@ mutation UpdateOrganizations(
 ) {
   updateOrganizations(input: $input, condition: $condition) {
     id
-    name
     membersEmails
     membership {
       id
@@ -347,7 +313,6 @@ mutation DeleteOrganizations(
 ) {
   deleteOrganizations(input: $input, condition: $condition) {
     id
-    name
     membersEmails
     membership {
       id
@@ -357,6 +322,45 @@ mutation DeleteOrganizations(
       createdAt
       updatedAt
     }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateOrganizationMembership(
+  $input: CreateOrganizationMembershipInput!
+  $condition: ModelOrganizationMembershipConditionInput
+) {
+  createOrganizationMembership(input: $input, condition: $condition) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateOrganizationMembership(
+  $input: UpdateOrganizationMembershipInput!
+  $condition: ModelOrganizationMembershipConditionInput
+) {
+  updateOrganizationMembership(input: $input, condition: $condition) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteOrganizationMembership(
+  $input: DeleteOrganizationMembershipInput!
+  $condition: ModelOrganizationMembershipConditionInput
+) {
+  deleteOrganizationMembership(input: $input, condition: $condition) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
     createdAt
     updatedAt
   }
@@ -721,45 +725,6 @@ mutation DeleteContactUsModel(
     name
     content
     email
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateOrganizationMembership(
-  $input: CreateOrganizationMembershipInput!
-  $condition: ModelOrganizationMembershipConditionInput
-) {
-  createOrganizationMembership(input: $input, condition: $condition) {
-    id
-    name
-    trialPeriodInDays
-    numberOfallowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateOrganizationMembership(
-  $input: UpdateOrganizationMembershipInput!
-  $condition: ModelOrganizationMembershipConditionInput
-) {
-  updateOrganizationMembership(input: $input, condition: $condition) {
-    id
-    name
-    trialPeriodInDays
-    numberOfallowedCardsPacks
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteOrganizationMembership(
-  $input: DeleteOrganizationMembershipInput!
-  $condition: ModelOrganizationMembershipConditionInput
-) {
-  deleteOrganizationMembership(input: $input, condition: $condition) {
-    id
-    name
-    trialPeriodInDays
-    numberOfallowedCardsPacks
     createdAt
     updatedAt
   }

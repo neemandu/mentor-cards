@@ -85,22 +85,11 @@ export type OrganizationMembership = {
 export type CouponCodes = {
   __typename: "CouponCodes";
   id?: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: Organizations;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type Organizations = {
-  __typename: "Organizations";
-  id?: string;
-  name?: string;
-  membersEmails?: Array<string | null> | null;
-  membership?: OrganizationMembership;
+  orgId?: OrganizationMembership;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -261,16 +250,14 @@ export type DeleteSubscriptionPlanInput = {
 
 export type CreateCouponCodesInput = {
   id?: string | null;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  couponCodesOrgId?: string | null;
+  couponCodesOrgIdId?: string | null;
 };
 
 export type ModelCouponCodesConditionInput = {
-  organization?: ModelStringInput | null;
   couponCode?: ModelStringInput | null;
   discount?: ModelFloatInput | null;
   trialPeriodInDays?: ModelIntInput | null;
@@ -282,12 +269,11 @@ export type ModelCouponCodesConditionInput = {
 
 export type UpdateCouponCodesInput = {
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  couponCodesOrgId?: string | null;
+  couponCodesOrgIdId?: string | null;
 };
 
 export type DeleteCouponCodesInput = {
@@ -296,27 +282,60 @@ export type DeleteCouponCodesInput = {
 
 export type CreateOrganizationsInput = {
   id?: string | null;
-  name: string;
   membersEmails?: Array<string | null> | null;
   organizationsMembershipId?: string | null;
 };
 
 export type ModelOrganizationsConditionInput = {
-  name?: ModelStringInput | null;
   membersEmails?: ModelStringInput | null;
   and?: Array<ModelOrganizationsConditionInput | null> | null;
   or?: Array<ModelOrganizationsConditionInput | null> | null;
   not?: ModelOrganizationsConditionInput | null;
 };
 
+export type Organizations = {
+  __typename: "Organizations";
+  id?: string;
+  membersEmails?: Array<string | null> | null;
+  membership?: OrganizationMembership;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 export type UpdateOrganizationsInput = {
   id: string;
-  name?: string | null;
   membersEmails?: Array<string | null> | null;
   organizationsMembershipId?: string | null;
 };
 
 export type DeleteOrganizationsInput = {
+  id: string;
+};
+
+export type CreateOrganizationMembershipInput = {
+  id?: string | null;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
+};
+
+export type ModelOrganizationMembershipConditionInput = {
+  name?: ModelStringInput | null;
+  trialPeriodInDays?: ModelIntInput | null;
+  numberOfallowedCardsPacks?: ModelIntInput | null;
+  and?: Array<ModelOrganizationMembershipConditionInput | null> | null;
+  or?: Array<ModelOrganizationMembershipConditionInput | null> | null;
+  not?: ModelOrganizationMembershipConditionInput | null;
+};
+
+export type UpdateOrganizationMembershipInput = {
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
+};
+
+export type DeleteOrganizationMembershipInput = {
   id: string;
 };
 
@@ -581,33 +600,6 @@ export type DeleteContactUsModelInput = {
   id: string;
 };
 
-export type CreateOrganizationMembershipInput = {
-  id?: string | null;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-};
-
-export type ModelOrganizationMembershipConditionInput = {
-  name?: ModelStringInput | null;
-  trialPeriodInDays?: ModelIntInput | null;
-  numberOfallowedCardsPacks?: ModelIntInput | null;
-  and?: Array<ModelOrganizationMembershipConditionInput | null> | null;
-  or?: Array<ModelOrganizationMembershipConditionInput | null> | null;
-  not?: ModelOrganizationMembershipConditionInput | null;
-};
-
-export type UpdateOrganizationMembershipInput = {
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-};
-
-export type DeleteOrganizationMembershipInput = {
-  id: string;
-};
-
 export type CreateReceiptsIdInput = {
   id?: string | null;
   counter: number;
@@ -643,6 +635,7 @@ export type ModelUserFilterInput = {
   cardsPacksIds?: ModelStringInput | null;
   providerTransactionId?: ModelStringInput | null;
   fullName?: ModelStringInput | null;
+  endOfTrialDate?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
@@ -674,7 +667,6 @@ export type ModelUserConnection = {
 
 export type ModelCouponCodesFilterInput = {
   id?: ModelIDInput | null;
-  organization?: ModelStringInput | null;
   couponCode?: ModelStringInput | null;
   discount?: ModelFloatInput | null;
   trialPeriodInDays?: ModelIntInput | null;
@@ -692,7 +684,6 @@ export type ModelCouponCodesConnection = {
 
 export type ModelOrganizationsFilterInput = {
   id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
   membersEmails?: ModelStringInput | null;
   and?: Array<ModelOrganizationsFilterInput | null> | null;
   or?: Array<ModelOrganizationsFilterInput | null> | null;
@@ -702,6 +693,22 @@ export type ModelOrganizationsFilterInput = {
 export type ModelOrganizationsConnection = {
   __typename: "ModelOrganizationsConnection";
   items?: Array<Organizations | null>;
+  nextToken?: string | null;
+};
+
+export type ModelOrganizationMembershipFilterInput = {
+  id?: ModelIDInput | null;
+  name?: ModelStringInput | null;
+  trialPeriodInDays?: ModelIntInput | null;
+  numberOfallowedCardsPacks?: ModelIntInput | null;
+  and?: Array<ModelOrganizationMembershipFilterInput | null> | null;
+  or?: Array<ModelOrganizationMembershipFilterInput | null> | null;
+  not?: ModelOrganizationMembershipFilterInput | null;
+};
+
+export type ModelOrganizationMembershipConnection = {
+  __typename: "ModelOrganizationMembershipConnection";
+  items?: Array<OrganizationMembership | null>;
   nextToken?: string | null;
 };
 
@@ -735,22 +742,6 @@ export type ModelMessageQueueFilterInput = {
 export type ModelMessageQueueConnection = {
   __typename: "ModelMessageQueueConnection";
   items?: Array<MessageQueue | null>;
-  nextToken?: string | null;
-};
-
-export type ModelOrganizationMembershipFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  trialPeriodInDays?: ModelIntInput | null;
-  numberOfallowedCardsPacks?: ModelIntInput | null;
-  and?: Array<ModelOrganizationMembershipFilterInput | null> | null;
-  or?: Array<ModelOrganizationMembershipFilterInput | null> | null;
-  not?: ModelOrganizationMembershipFilterInput | null;
-};
-
-export type ModelOrganizationMembershipConnection = {
-  __typename: "ModelOrganizationMembershipConnection";
-  items?: Array<OrganizationMembership | null>;
   nextToken?: string | null;
 };
 
@@ -870,25 +861,16 @@ export type CreateUserMutation = {
   couponCodes?: Array<{
     __typename: "CouponCodes";
     id: string;
-    organization?: string | null;
     couponCode?: string | null;
     discount?: number | null;
     trialPeriodInDays?: number | null;
     allowedCardsPacks?: Array<string | null> | null;
-    org?: {
-      __typename: "Organizations";
+    orgId?: {
+      __typename: "OrganizationMembership";
       id: string;
-      name: string;
-      membersEmails?: Array<string | null> | null;
-      membership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1011,25 +993,16 @@ export type DeleteSubscriptionPlanMutation = {
 export type CreateCouponCodesMutation = {
   __typename: "CouponCodes";
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: {
-    __typename: "Organizations";
+  orgId?: {
+    __typename: "OrganizationMembership";
     id: string;
-    name: string;
-    membersEmails?: Array<string | null> | null;
-    membership?: {
-      __typename: "OrganizationMembership";
-      id: string;
-      name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1040,25 +1013,16 @@ export type CreateCouponCodesMutation = {
 export type UpdateCouponCodesMutation = {
   __typename: "CouponCodes";
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: {
-    __typename: "Organizations";
+  orgId?: {
+    __typename: "OrganizationMembership";
     id: string;
-    name: string;
-    membersEmails?: Array<string | null> | null;
-    membership?: {
-      __typename: "OrganizationMembership";
-      id: string;
-      name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1069,25 +1033,16 @@ export type UpdateCouponCodesMutation = {
 export type DeleteCouponCodesMutation = {
   __typename: "CouponCodes";
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: {
-    __typename: "Organizations";
+  orgId?: {
+    __typename: "OrganizationMembership";
     id: string;
-    name: string;
-    membersEmails?: Array<string | null> | null;
-    membership?: {
-      __typename: "OrganizationMembership";
-      id: string;
-      name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1098,7 +1053,6 @@ export type DeleteCouponCodesMutation = {
 export type CreateOrganizationsMutation = {
   __typename: "Organizations";
   id: string;
-  name: string;
   membersEmails?: Array<string | null> | null;
   membership?: {
     __typename: "OrganizationMembership";
@@ -1116,7 +1070,6 @@ export type CreateOrganizationsMutation = {
 export type UpdateOrganizationsMutation = {
   __typename: "Organizations";
   id: string;
-  name: string;
   membersEmails?: Array<string | null> | null;
   membership?: {
     __typename: "OrganizationMembership";
@@ -1134,7 +1087,6 @@ export type UpdateOrganizationsMutation = {
 export type DeleteOrganizationsMutation = {
   __typename: "Organizations";
   id: string;
-  name: string;
   membersEmails?: Array<string | null> | null;
   membership?: {
     __typename: "OrganizationMembership";
@@ -1145,6 +1097,36 @@ export type DeleteOrganizationsMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateOrganizationMembershipMutation = {
+  __typename: "OrganizationMembership";
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateOrganizationMembershipMutation = {
+  __typename: "OrganizationMembership";
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteOrganizationMembershipMutation = {
+  __typename: "OrganizationMembership";
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1501,36 +1483,6 @@ export type DeleteContactUsModelMutation = {
   updatedAt: string;
 };
 
-export type CreateOrganizationMembershipMutation = {
-  __typename: "OrganizationMembership";
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type UpdateOrganizationMembershipMutation = {
-  __typename: "OrganizationMembership";
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteOrganizationMembershipMutation = {
-  __typename: "OrganizationMembership";
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type CreateReceiptsIdMutation = {
   __typename: "ReceiptsId";
   id: string;
@@ -1606,25 +1558,16 @@ export type GetUserQuery = {
   couponCodes?: Array<{
     __typename: "CouponCodes";
     id: string;
-    organization?: string | null;
     couponCode?: string | null;
     discount?: number | null;
     trialPeriodInDays?: number | null;
     allowedCardsPacks?: Array<string | null> | null;
-    org?: {
-      __typename: "Organizations";
+    orgId?: {
+      __typename: "OrganizationMembership";
       id: string;
-      name: string;
-      membersEmails?: Array<string | null> | null;
-      membership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1699,25 +1642,16 @@ export type ListUsersQuery = {
     couponCodes?: Array<{
       __typename: "CouponCodes";
       id: string;
-      organization?: string | null;
       couponCode?: string | null;
       discount?: number | null;
       trialPeriodInDays?: number | null;
       allowedCardsPacks?: Array<string | null> | null;
-      org?: {
-        __typename: "Organizations";
+      orgId?: {
+        __typename: "OrganizationMembership";
         id: string;
-        name: string;
-        membersEmails?: Array<string | null> | null;
-        membership?: {
-          __typename: "OrganizationMembership";
-          id: string;
-          name?: string | null;
-          trialPeriodInDays?: number | null;
-          numberOfallowedCardsPacks?: number | null;
-          createdAt: string;
-          updatedAt: string;
-        } | null;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -1746,25 +1680,16 @@ export type ListUsersQuery = {
 export type GetCouponCodesQuery = {
   __typename: "CouponCodes";
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: {
-    __typename: "Organizations";
+  orgId?: {
+    __typename: "OrganizationMembership";
     id: string;
-    name: string;
-    membersEmails?: Array<string | null> | null;
-    membership?: {
-      __typename: "OrganizationMembership";
-      id: string;
-      name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1777,25 +1702,16 @@ export type ListCouponCodessQuery = {
   items: Array<{
     __typename: "CouponCodes";
     id: string;
-    organization?: string | null;
     couponCode?: string | null;
     discount?: number | null;
     trialPeriodInDays?: number | null;
     allowedCardsPacks?: Array<string | null> | null;
-    org?: {
-      __typename: "Organizations";
+    orgId?: {
+      __typename: "OrganizationMembership";
       id: string;
-      name: string;
-      membersEmails?: Array<string | null> | null;
-      membership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1808,7 +1724,6 @@ export type ListCouponCodessQuery = {
 export type GetOrganizationsQuery = {
   __typename: "Organizations";
   id: string;
-  name: string;
   membersEmails?: Array<string | null> | null;
   membership?: {
     __typename: "OrganizationMembership";
@@ -1828,7 +1743,6 @@ export type ListOrganizationssQuery = {
   items: Array<{
     __typename: "Organizations";
     id: string;
-    name: string;
     membersEmails?: Array<string | null> | null;
     membership?: {
       __typename: "OrganizationMembership";
@@ -1839,6 +1753,30 @@ export type ListOrganizationssQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetOrganizationMembershipQuery = {
+  __typename: "OrganizationMembership";
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListOrganizationMembershipsQuery = {
+  __typename: "ModelOrganizationMembershipConnection";
+  items: Array<{
+    __typename: "OrganizationMembership";
+    id: string;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -1945,30 +1883,6 @@ export type ListMessageQueuesQuery = {
     emailTemplateId?: number | null;
     name?: string | null;
     params?: string | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type GetOrganizationMembershipQuery = {
-  __typename: "OrganizationMembership";
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListOrganizationMembershipsQuery = {
-  __typename: "ModelOrganizationMembershipConnection";
-  items: Array<{
-    __typename: "OrganizationMembership";
-    id: string;
-    name?: string | null;
-    trialPeriodInDays?: number | null;
-    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2144,25 +2058,16 @@ export type ListContactUsModelsQuery = {
 export type OnCreateCouponCodesSubscription = {
   __typename: "CouponCodes";
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: {
-    __typename: "Organizations";
+  orgId?: {
+    __typename: "OrganizationMembership";
     id: string;
-    name: string;
-    membersEmails?: Array<string | null> | null;
-    membership?: {
-      __typename: "OrganizationMembership";
-      id: string;
-      name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2173,25 +2078,16 @@ export type OnCreateCouponCodesSubscription = {
 export type OnUpdateCouponCodesSubscription = {
   __typename: "CouponCodes";
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: {
-    __typename: "Organizations";
+  orgId?: {
+    __typename: "OrganizationMembership";
     id: string;
-    name: string;
-    membersEmails?: Array<string | null> | null;
-    membership?: {
-      __typename: "OrganizationMembership";
-      id: string;
-      name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2202,25 +2098,16 @@ export type OnUpdateCouponCodesSubscription = {
 export type OnDeleteCouponCodesSubscription = {
   __typename: "CouponCodes";
   id: string;
-  organization?: string | null;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  org?: {
-    __typename: "Organizations";
+  orgId?: {
+    __typename: "OrganizationMembership";
     id: string;
-    name: string;
-    membersEmails?: Array<string | null> | null;
-    membership?: {
-      __typename: "OrganizationMembership";
-      id: string;
-      name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2231,7 +2118,6 @@ export type OnDeleteCouponCodesSubscription = {
 export type OnCreateOrganizationsSubscription = {
   __typename: "Organizations";
   id: string;
-  name: string;
   membersEmails?: Array<string | null> | null;
   membership?: {
     __typename: "OrganizationMembership";
@@ -2249,7 +2135,6 @@ export type OnCreateOrganizationsSubscription = {
 export type OnUpdateOrganizationsSubscription = {
   __typename: "Organizations";
   id: string;
-  name: string;
   membersEmails?: Array<string | null> | null;
   membership?: {
     __typename: "OrganizationMembership";
@@ -2267,7 +2152,6 @@ export type OnUpdateOrganizationsSubscription = {
 export type OnDeleteOrganizationsSubscription = {
   __typename: "Organizations";
   id: string;
-  name: string;
   membersEmails?: Array<string | null> | null;
   membership?: {
     __typename: "OrganizationMembership";
@@ -2278,6 +2162,36 @@ export type OnDeleteOrganizationsSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateOrganizationMembershipSubscription = {
+  __typename: "OrganizationMembership";
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateOrganizationMembershipSubscription = {
+  __typename: "OrganizationMembership";
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteOrganizationMembershipSubscription = {
+  __typename: "OrganizationMembership";
+  id: string;
+  name?: string | null;
+  trialPeriodInDays?: number | null;
+  numberOfallowedCardsPacks?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2425,36 +2339,6 @@ export type OnDeleteMessageQueueSubscription = {
   emailTemplateId?: number | null;
   name?: string | null;
   params?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateOrganizationMembershipSubscription = {
-  __typename: "OrganizationMembership";
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateOrganizationMembershipSubscription = {
-  __typename: "OrganizationMembership";
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteOrganizationMembershipSubscription = {
-  __typename: "OrganizationMembership";
-  id: string;
-  name?: string | null;
-  trialPeriodInDays?: number | null;
-  numberOfallowedCardsPacks?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2817,25 +2701,16 @@ export class APIService {
           couponCodes {
             __typename
             id
-            organization
             couponCode
             discount
             trialPeriodInDays
             allowedCardsPacks
-            org {
+            orgId {
               __typename
               id
               name
-              membersEmails
-              membership {
-                __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                createdAt
-                updatedAt
-              }
+              trialPeriodInDays
+              numberOfallowedCardsPacks
               createdAt
               updatedAt
             }
@@ -2969,44 +2844,6 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
   }
-  async GetSubscriptionPlansForOrgs(
-    input: userInput
-  ): Promise<Array<GetSubscriptionPlansMutation>> {
-    const statement = `mutation GetSubscriptionPlans($input: userInput!) {
-        GetSubscriptionPlans(input: $input) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <Array<GetSubscriptionPlansMutation>>(
-      response.data.GetSubscriptionPlans
-    );
-  }
   async GetSubscriptionPlans(
     input: userInput
   ): Promise<Array<GetSubscriptionPlansMutation>> {
@@ -3031,7 +2868,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3087,7 +2923,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3128,7 +2963,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3169,7 +3003,6 @@ export class APIService {
             createdAt
             updatedAt
           }
-          endOfTrialDate
           createdAt
           updatedAt
         }
@@ -3193,25 +3026,16 @@ export class APIService {
         createCouponCodes(input: $input, condition: $condition) {
           __typename
           id
-          organization
           couponCode
           discount
           trialPeriodInDays
           allowedCardsPacks
-          org {
+          orgId {
             __typename
             id
             name
-            membersEmails
-            membership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
-            }
+            trialPeriodInDays
+            numberOfallowedCardsPacks
             createdAt
             updatedAt
           }
@@ -3238,25 +3062,16 @@ export class APIService {
         updateCouponCodes(input: $input, condition: $condition) {
           __typename
           id
-          organization
           couponCode
           discount
           trialPeriodInDays
           allowedCardsPacks
-          org {
+          orgId {
             __typename
             id
             name
-            membersEmails
-            membership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
-            }
+            trialPeriodInDays
+            numberOfallowedCardsPacks
             createdAt
             updatedAt
           }
@@ -3283,25 +3098,16 @@ export class APIService {
         deleteCouponCodes(input: $input, condition: $condition) {
           __typename
           id
-          organization
           couponCode
           discount
           trialPeriodInDays
           allowedCardsPacks
-          org {
+          orgId {
             __typename
             id
             name
-            membersEmails
-            membership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
-            }
+            trialPeriodInDays
+            numberOfallowedCardsPacks
             createdAt
             updatedAt
           }
@@ -3328,7 +3134,6 @@ export class APIService {
         createOrganizations(input: $input, condition: $condition) {
           __typename
           id
-          name
           membersEmails
           membership {
             __typename
@@ -3362,7 +3167,6 @@ export class APIService {
         updateOrganizations(input: $input, condition: $condition) {
           __typename
           id
-          name
           membersEmails
           membership {
             __typename
@@ -3396,7 +3200,6 @@ export class APIService {
         deleteOrganizations(input: $input, condition: $condition) {
           __typename
           id
-          name
           membersEmails
           membership {
             __typename
@@ -3421,6 +3224,90 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteOrganizationsMutation>response.data.deleteOrganizations;
+  }
+  async CreateOrganizationMembership(
+    input: CreateOrganizationMembershipInput,
+    condition?: ModelOrganizationMembershipConditionInput
+  ): Promise<CreateOrganizationMembershipMutation> {
+    const statement = `mutation CreateOrganizationMembership($input: CreateOrganizationMembershipInput!, $condition: ModelOrganizationMembershipConditionInput) {
+        createOrganizationMembership(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateOrganizationMembershipMutation>(
+      response.data.createOrganizationMembership
+    );
+  }
+  async UpdateOrganizationMembership(
+    input: UpdateOrganizationMembershipInput,
+    condition?: ModelOrganizationMembershipConditionInput
+  ): Promise<UpdateOrganizationMembershipMutation> {
+    const statement = `mutation UpdateOrganizationMembership($input: UpdateOrganizationMembershipInput!, $condition: ModelOrganizationMembershipConditionInput) {
+        updateOrganizationMembership(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateOrganizationMembershipMutation>(
+      response.data.updateOrganizationMembership
+    );
+  }
+  async DeleteOrganizationMembership(
+    input: DeleteOrganizationMembershipInput,
+    condition?: ModelOrganizationMembershipConditionInput
+  ): Promise<DeleteOrganizationMembershipMutation> {
+    const statement = `mutation DeleteOrganizationMembership($input: DeleteOrganizationMembershipInput!, $condition: ModelOrganizationMembershipConditionInput) {
+        deleteOrganizationMembership(input: $input, condition: $condition) {
+          __typename
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteOrganizationMembershipMutation>(
+      response.data.deleteOrganizationMembership
+    );
   }
   async DeleteReceiptsId(
     input: DeleteReceiptsIdInput,
@@ -4014,90 +3901,6 @@ export class APIService {
     )) as any;
     return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
   }
-  async CreateOrganizationMembership(
-    input: CreateOrganizationMembershipInput,
-    condition?: ModelOrganizationMembershipConditionInput
-  ): Promise<CreateOrganizationMembershipMutation> {
-    const statement = `mutation CreateOrganizationMembership($input: CreateOrganizationMembershipInput!, $condition: ModelOrganizationMembershipConditionInput) {
-        createOrganizationMembership(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateOrganizationMembershipMutation>(
-      response.data.createOrganizationMembership
-    );
-  }
-  async UpdateOrganizationMembership(
-    input: UpdateOrganizationMembershipInput,
-    condition?: ModelOrganizationMembershipConditionInput
-  ): Promise<UpdateOrganizationMembershipMutation> {
-    const statement = `mutation UpdateOrganizationMembership($input: UpdateOrganizationMembershipInput!, $condition: ModelOrganizationMembershipConditionInput) {
-        updateOrganizationMembership(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateOrganizationMembershipMutation>(
-      response.data.updateOrganizationMembership
-    );
-  }
-  async DeleteOrganizationMembership(
-    input: DeleteOrganizationMembershipInput,
-    condition?: ModelOrganizationMembershipConditionInput
-  ): Promise<DeleteOrganizationMembershipMutation> {
-    const statement = `mutation DeleteOrganizationMembership($input: DeleteOrganizationMembershipInput!, $condition: ModelOrganizationMembershipConditionInput) {
-        deleteOrganizationMembership(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteOrganizationMembershipMutation>(
-      response.data.deleteOrganizationMembership
-    );
-  }
   async CreateReceiptsId(
     input: CreateReceiptsIdInput,
     condition?: ModelReceiptsIdConditionInput
@@ -4225,25 +4028,16 @@ export class APIService {
           couponCodes {
             __typename
             id
-            organization
             couponCode
             discount
             trialPeriodInDays
             allowedCardsPacks
-            org {
+            orgId {
               __typename
               id
               name
-              membersEmails
-              membership {
-                __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                createdAt
-                updatedAt
-              }
+              trialPeriodInDays
+              numberOfallowedCardsPacks
               createdAt
               updatedAt
             }
@@ -4332,25 +4126,16 @@ export class APIService {
             couponCodes {
               __typename
               id
-              organization
               couponCode
               discount
               trialPeriodInDays
               allowedCardsPacks
-              org {
+              orgId {
                 __typename
                 id
                 name
-                membersEmails
-                membership {
-                  __typename
-                  id
-                  name
-                  trialPeriodInDays
-                  numberOfallowedCardsPacks
-                  createdAt
-                  updatedAt
-                }
+                trialPeriodInDays
+                numberOfallowedCardsPacks
                 createdAt
                 updatedAt
               }
@@ -4396,25 +4181,16 @@ export class APIService {
         getCouponCodes(id: $id) {
           __typename
           id
-          organization
           couponCode
           discount
           trialPeriodInDays
           allowedCardsPacks
-          org {
+          orgId {
             __typename
             id
             name
-            membersEmails
-            membership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
-            }
+            trialPeriodInDays
+            numberOfallowedCardsPacks
             createdAt
             updatedAt
           }
@@ -4441,25 +4217,16 @@ export class APIService {
           items {
             __typename
             id
-            organization
             couponCode
             discount
             trialPeriodInDays
             allowedCardsPacks
-            org {
+            orgId {
               __typename
               id
               name
-              membersEmails
-              membership {
-                __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                createdAt
-                updatedAt
-              }
+              trialPeriodInDays
+              numberOfallowedCardsPacks
               createdAt
               updatedAt
             }
@@ -4489,7 +4256,6 @@ export class APIService {
         getOrganizations(id: $id) {
           __typename
           id
-          name
           membersEmails
           membership {
             __typename
@@ -4523,7 +4289,6 @@ export class APIService {
           items {
             __typename
             id
-            name
             membersEmails
             membership {
               __typename
@@ -4554,6 +4319,67 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListOrganizationssQuery>response.data.listOrganizationss;
+  }
+  async GetOrganizationMembership(
+    id: string
+  ): Promise<GetOrganizationMembershipQuery> {
+    const statement = `query GetOrganizationMembership($id: ID!) {
+        getOrganizationMembership(id: $id) {
+          __typename
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetOrganizationMembershipQuery>(
+      response.data.getOrganizationMembership
+    );
+  }
+  async ListOrganizationMemberships(
+    filter?: ModelOrganizationMembershipFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListOrganizationMembershipsQuery> {
+    const statement = `query ListOrganizationMemberships($filter: ModelOrganizationMembershipFilterInput, $limit: Int, $nextToken: String) {
+        listOrganizationMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListOrganizationMembershipsQuery>(
+      response.data.listOrganizationMemberships
+    );
   }
   async GetGroup(id: string): Promise<GetGroupQuery> {
     const statement = `query GetGroup($id: ID!) {
@@ -4722,67 +4548,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListMessageQueuesQuery>response.data.listMessageQueues;
-  }
-  async GetOrganizationMembership(
-    id: string
-  ): Promise<GetOrganizationMembershipQuery> {
-    const statement = `query GetOrganizationMembership($id: ID!) {
-        getOrganizationMembership(id: $id) {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetOrganizationMembershipQuery>(
-      response.data.getOrganizationMembership
-    );
-  }
-  async ListOrganizationMemberships(
-    filter?: ModelOrganizationMembershipFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListOrganizationMembershipsQuery> {
-    const statement = `query ListOrganizationMemberships($filter: ModelOrganizationMembershipFilterInput, $limit: Int, $nextToken: String) {
-        listOrganizationMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListOrganizationMembershipsQuery>(
-      response.data.listOrganizationMemberships
-    );
   }
   async GetReceiptsId(id: string): Promise<GetReceiptsIdQuery> {
     const statement = `query GetReceiptsId($id: ID!) {
@@ -5131,25 +4896,16 @@ export class APIService {
         onCreateCouponCodes {
           __typename
           id
-          organization
           couponCode
           discount
           trialPeriodInDays
           allowedCardsPacks
-          org {
+          orgId {
             __typename
             id
             name
-            membersEmails
-            membership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
-            }
+            trialPeriodInDays
+            numberOfallowedCardsPacks
             createdAt
             updatedAt
           }
@@ -5168,25 +4924,16 @@ export class APIService {
         onUpdateCouponCodes {
           __typename
           id
-          organization
           couponCode
           discount
           trialPeriodInDays
           allowedCardsPacks
-          org {
+          orgId {
             __typename
             id
             name
-            membersEmails
-            membership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
-            }
+            trialPeriodInDays
+            numberOfallowedCardsPacks
             createdAt
             updatedAt
           }
@@ -5205,25 +4952,16 @@ export class APIService {
         onDeleteCouponCodes {
           __typename
           id
-          organization
           couponCode
           discount
           trialPeriodInDays
           allowedCardsPacks
-          org {
+          orgId {
             __typename
             id
             name
-            membersEmails
-            membership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
-            }
+            trialPeriodInDays
+            numberOfallowedCardsPacks
             createdAt
             updatedAt
           }
@@ -5242,7 +4980,6 @@ export class APIService {
         onCreateOrganizations {
           __typename
           id
-          name
           membersEmails
           membership {
             __typename
@@ -5268,7 +5005,6 @@ export class APIService {
         onUpdateOrganizations {
           __typename
           id
-          name
           membersEmails
           membership {
             __typename
@@ -5294,7 +5030,6 @@ export class APIService {
         onDeleteOrganizations {
           __typename
           id
-          name
           membersEmails
           membership {
             __typename
@@ -5311,6 +5046,66 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteOrganizationsSubscription>>;
+
+  OnCreateOrganizationMembershipListener: Observable<
+    SubscriptionResponse<OnCreateOrganizationMembershipSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateOrganizationMembership {
+        onCreateOrganizationMembership {
+          __typename
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<OnCreateOrganizationMembershipSubscription>
+  >;
+
+  OnUpdateOrganizationMembershipListener: Observable<
+    SubscriptionResponse<OnUpdateOrganizationMembershipSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateOrganizationMembership {
+        onUpdateOrganizationMembership {
+          __typename
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<OnUpdateOrganizationMembershipSubscription>
+  >;
+
+  OnDeleteOrganizationMembershipListener: Observable<
+    SubscriptionResponse<OnDeleteOrganizationMembershipSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteOrganizationMembership {
+        onDeleteOrganizationMembership {
+          __typename
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<OnDeleteOrganizationMembershipSubscription>
+  >;
 
   OnCreateGroupListener: Observable<
     SubscriptionResponse<OnCreateGroupSubscription>
@@ -5506,66 +5301,6 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteMessageQueueSubscription>>;
-
-  OnCreateOrganizationMembershipListener: Observable<
-    SubscriptionResponse<OnCreateOrganizationMembershipSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateOrganizationMembership {
-        onCreateOrganizationMembership {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<OnCreateOrganizationMembershipSubscription>
-  >;
-
-  OnUpdateOrganizationMembershipListener: Observable<
-    SubscriptionResponse<OnUpdateOrganizationMembershipSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateOrganizationMembership {
-        onUpdateOrganizationMembership {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<OnUpdateOrganizationMembershipSubscription>
-  >;
-
-  OnDeleteOrganizationMembershipListener: Observable<
-    SubscriptionResponse<OnDeleteOrganizationMembershipSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteOrganizationMembership {
-        onDeleteOrganizationMembership {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<OnDeleteOrganizationMembershipSubscription>
-  >;
 
   OnCreateSubscriptionPlanListener: Observable<
     SubscriptionResponse<OnCreateSubscriptionPlanSubscription>
