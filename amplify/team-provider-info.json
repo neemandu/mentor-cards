@@ -1,18 +1,4 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-mentorcards-dev-214725-authRole",
-      "UnauthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-dev-214725-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::150827790089:role/amplify-mentorcards-dev-214725-authRole",
-      "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-      "UnauthRoleName": "amplify-mentorcards-dev-214725-unauthRole",
-      "StackName": "amplify-mentorcards-dev-214725",
-      "StackId": "arn:aws:cloudformation:eu-west-2:150827790089:stack/amplify-mentorcards-dev-214725/0e5c2b40-340e-11eb-a7b3-068350039b94",
-      "AmplifyAppId": "d15egmtmsipj3q",
-      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-mentorcards-dev-214725-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
-    }
-  },
   "prod": {
     "awscloudformation": {
       "AuthRoleName": "amplify-mentorcards-prod-133607-authRole",
@@ -134,7 +120,7 @@
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-4a716253395759355634-build.zip",
+          "s3Key": "amplify-builds/UnSubscribe-3975306f504b69634f59-build.zip",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "JoinExistingGroup": {
@@ -159,7 +145,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-4d4f424437506d787039-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-417678643658742b6e65-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -174,7 +160,7 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-71584a68447241787237-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-326834745561746e5976-build.zip"
         },
         "ContactUsTrigger": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -184,12 +170,12 @@
         "EmailGuideIntroduction": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/EmailGuideIntroduction-644a58615a4144356676-build.zip"
+          "s3Key": "amplify-builds/EmailGuideIntroduction-3376536a704c32704d5a-build.zip"
         },
         "MessagingService": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/MessagingService-6d4e6e75567577317744-build.zip"
+          "s3Key": "amplify-builds/MessagingService-337831593139446f434a-build.zip"
         },
         "EmailUpcomingPayment": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -205,7 +191,7 @@
         },
         "GetNextReceiptId": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetNextReceiptId-323639676f574f773953-build.zip"
+          "s3Key": "amplify-builds/GetNextReceiptId-4f4c794f4a6d32313431-build.zip"
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -221,7 +207,7 @@
         },
         "GetEndOfTrialDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetEndOfTrialDate-6632514b73692b515946-build.zip"
+          "s3Key": "amplify-builds/GetEndOfTrialDate-7949302b50346b383846-build.zip"
         }
       },
       "auth": {
