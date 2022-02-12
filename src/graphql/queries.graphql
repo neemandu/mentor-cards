@@ -48,7 +48,7 @@ query GetUser($id: ID!) {
       discount
       trialPeriodInDays
       allowedCardsPacks
-      orgId {
+      organization {
         id
         name
         trialPeriodInDays
@@ -129,7 +129,7 @@ query ListUsers(
         discount
         trialPeriodInDays
         allowedCardsPacks
-        orgId {
+        organization {
           id
           name
           trialPeriodInDays
@@ -165,7 +165,7 @@ query GetCouponCodes($id: ID!) {
     discount
     trialPeriodInDays
     allowedCardsPacks
-    orgId {
+    organization {
       id
       name
       trialPeriodInDays
@@ -189,7 +189,7 @@ query ListCouponCodess(
       discount
       trialPeriodInDays
       allowedCardsPacks
-      orgId {
+      organization {
         id
         name
         trialPeriodInDays

@@ -89,7 +89,7 @@ export type CouponCodes = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: OrganizationMembership;
+  organization?: OrganizationMembership;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -254,7 +254,7 @@ export type CreateCouponCodesInput = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  couponCodesOrgIdId?: string | null;
+  couponCodesOrganizationId?: string | null;
 };
 
 export type ModelCouponCodesConditionInput = {
@@ -273,7 +273,7 @@ export type UpdateCouponCodesInput = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  couponCodesOrgIdId?: string | null;
+  couponCodesOrganizationId?: string | null;
 };
 
 export type DeleteCouponCodesInput = {
@@ -865,7 +865,7 @@ export type CreateUserMutation = {
     discount?: number | null;
     trialPeriodInDays?: number | null;
     allowedCardsPacks?: Array<string | null> | null;
-    orgId?: {
+    organization?: {
       __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
@@ -997,7 +997,7 @@ export type CreateCouponCodesMutation = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: {
+  organization?: {
     __typename: "OrganizationMembership";
     id: string;
     name?: string | null;
@@ -1017,7 +1017,7 @@ export type UpdateCouponCodesMutation = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: {
+  organization?: {
     __typename: "OrganizationMembership";
     id: string;
     name?: string | null;
@@ -1037,7 +1037,7 @@ export type DeleteCouponCodesMutation = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: {
+  organization?: {
     __typename: "OrganizationMembership";
     id: string;
     name?: string | null;
@@ -1562,7 +1562,7 @@ export type GetUserQuery = {
     discount?: number | null;
     trialPeriodInDays?: number | null;
     allowedCardsPacks?: Array<string | null> | null;
-    orgId?: {
+    organization?: {
       __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
@@ -1646,7 +1646,7 @@ export type ListUsersQuery = {
       discount?: number | null;
       trialPeriodInDays?: number | null;
       allowedCardsPacks?: Array<string | null> | null;
-      orgId?: {
+      organization?: {
         __typename: "OrganizationMembership";
         id: string;
         name?: string | null;
@@ -1684,7 +1684,7 @@ export type GetCouponCodesQuery = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: {
+  organization?: {
     __typename: "OrganizationMembership";
     id: string;
     name?: string | null;
@@ -1706,7 +1706,7 @@ export type ListCouponCodessQuery = {
     discount?: number | null;
     trialPeriodInDays?: number | null;
     allowedCardsPacks?: Array<string | null> | null;
-    orgId?: {
+    organization?: {
       __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
@@ -2062,7 +2062,7 @@ export type OnCreateCouponCodesSubscription = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: {
+  organization?: {
     __typename: "OrganizationMembership";
     id: string;
     name?: string | null;
@@ -2082,7 +2082,7 @@ export type OnUpdateCouponCodesSubscription = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: {
+  organization?: {
     __typename: "OrganizationMembership";
     id: string;
     name?: string | null;
@@ -2102,7 +2102,7 @@ export type OnDeleteCouponCodesSubscription = {
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  orgId?: {
+  organization?: {
     __typename: "OrganizationMembership";
     id: string;
     name?: string | null;
@@ -2705,7 +2705,7 @@ export class APIService {
             discount
             trialPeriodInDays
             allowedCardsPacks
-            orgId {
+            organization {
               __typename
               id
               name
@@ -3030,7 +3030,7 @@ export class APIService {
           discount
           trialPeriodInDays
           allowedCardsPacks
-          orgId {
+          organization {
             __typename
             id
             name
@@ -3066,7 +3066,7 @@ export class APIService {
           discount
           trialPeriodInDays
           allowedCardsPacks
-          orgId {
+          organization {
             __typename
             id
             name
@@ -3102,7 +3102,7 @@ export class APIService {
           discount
           trialPeriodInDays
           allowedCardsPacks
-          orgId {
+          organization {
             __typename
             id
             name
@@ -4032,7 +4032,7 @@ export class APIService {
             discount
             trialPeriodInDays
             allowedCardsPacks
-            orgId {
+            organization {
               __typename
               id
               name
@@ -4130,7 +4130,7 @@ export class APIService {
               discount
               trialPeriodInDays
               allowedCardsPacks
-              orgId {
+              organization {
                 __typename
                 id
                 name
@@ -4185,7 +4185,7 @@ export class APIService {
           discount
           trialPeriodInDays
           allowedCardsPacks
-          orgId {
+          organization {
             __typename
             id
             name
@@ -4221,7 +4221,7 @@ export class APIService {
             discount
             trialPeriodInDays
             allowedCardsPacks
-            orgId {
+            organization {
               __typename
               id
               name
@@ -4900,7 +4900,7 @@ export class APIService {
           discount
           trialPeriodInDays
           allowedCardsPacks
-          orgId {
+          organization {
             __typename
             id
             name
@@ -4928,7 +4928,7 @@ export class APIService {
           discount
           trialPeriodInDays
           allowedCardsPacks
-          orgId {
+          organization {
             __typename
             id
             name
@@ -4956,7 +4956,7 @@ export class APIService {
           discount
           trialPeriodInDays
           allowedCardsPacks
-          orgId {
+          organization {
             __typename
             id
             name

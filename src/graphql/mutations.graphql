@@ -48,7 +48,7 @@ mutation CreateUser($input: CreateUserInput!) {
       discount
       trialPeriodInDays
       allowedCardsPacks
-      orgId {
+      organization {
         id
         name
         trialPeriodInDays
@@ -213,7 +213,7 @@ mutation CreateCouponCodes(
     discount
     trialPeriodInDays
     allowedCardsPacks
-    orgId {
+    organization {
       id
       name
       trialPeriodInDays
@@ -235,7 +235,7 @@ mutation UpdateCouponCodes(
     discount
     trialPeriodInDays
     allowedCardsPacks
-    orgId {
+    organization {
       id
       name
       trialPeriodInDays
@@ -257,7 +257,7 @@ mutation DeleteCouponCodes(
     discount
     trialPeriodInDays
     allowedCardsPacks
-    orgId {
+    organization {
       id
       name
       trialPeriodInDays

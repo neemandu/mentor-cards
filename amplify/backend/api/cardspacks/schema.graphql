@@ -72,7 +72,7 @@ type CouponCodes
   discount: Float
   trialPeriodInDays: Int
   allowedCardsPacks: [String]
-  orgId: OrganizationMembership @connection
+  organization: OrganizationMembership @connection
 }
 
 type Organizations
