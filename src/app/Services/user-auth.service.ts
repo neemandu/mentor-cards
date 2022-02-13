@@ -95,7 +95,7 @@ export class UserAuthService {
       this.subPlans = undefined;
       this.getSubscriptionPlans();
       this.userDataEmmiter.emit(this.userData);
-      // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
+      console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.userData.email);
       // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -112,6 +112,7 @@ export class UserAuthService {
         })
       }
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      this.checkOrgTrial();
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
@@ -219,6 +220,21 @@ export class UserAuthService {
           window.location.reload();
         });
       });
+    }
+  }
+
+  /**
+   * Check if user is in an org, and if trial is done and card packs aren't picked, move them to pack choosing page 
+   */
+  checkOrgTrial(): void {
+    if (this.userData.orgMembership) {
+      if(this.userData.endOfTrialDate >= new Date()) {
+        const id = this.userData.orgMembership.id;
+        const cc = this.userData.couponCodes.find(coupon => coupon.organization.id = id)
+        if (cc.allowedCardsPacks.length == 0){
+          this.ngZone.run(() => this.router.navigate(['/company-pack-choise']))
+        }
+      }
     }
   }
 

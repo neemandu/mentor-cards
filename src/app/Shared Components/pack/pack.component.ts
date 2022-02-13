@@ -16,6 +16,7 @@ export class PackComponent implements OnInit, OnDestroy {
   Subscription: Subscription = new Subscription();
 
   @Input() packInfo: PackInfo;
+  @Input() orgName: string;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   @Output() packChange: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
@@ -27,7 +28,8 @@ export class PackComponent implements OnInit, OnDestroy {
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.fav = favorites.includes(this.packInfo.id)
     }));
-    this.fav = this.cardsService.isFavorite(this.packInfo.id)
+    this.fav = this.cardsService.isFavorite(this.packInfo.id);
+
   }
 
   addRemoveFavorite(): void {

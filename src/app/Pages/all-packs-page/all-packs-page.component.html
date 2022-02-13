@@ -83,7 +83,7 @@
         <div class="second-line"></div>
       </div>
       <div class="d-flex flex-row flex-wrap card-section">
-        <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo" (loaded)="packLoaded();"
+        <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo" [orgName]="userData?.orgMembership?.name" (loaded)="packLoaded();"
           (packChange)="getAllPacks(); updateUserData();">
         </app-pack>
       </div>

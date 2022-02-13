@@ -2844,6 +2844,44 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
   }
+  async GetSubscriptionPlansForOrgs(
+    input: userInput
+  ): Promise<Array<GetSubscriptionPlansMutation>> {
+    const statement = `mutation GetSubscriptionPlans($input: userInput!) {
+        GetSubscriptionPlans(input: $input) {
+          __typename
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            __typename
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<GetSubscriptionPlansMutation>>(
+      response.data.GetSubscriptionPlans
+    );
+  }
   async GetSubscriptionPlans(
     input: userInput
   ): Promise<Array<GetSubscriptionPlansMutation>> {
@@ -4035,11 +4073,6 @@ export class APIService {
             organization {
               __typename
               id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              createdAt
-              updatedAt
             }
             createdAt
             updatedAt
