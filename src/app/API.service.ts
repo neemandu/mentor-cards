@@ -3663,6 +3663,7 @@ export class APIService {
             imgUrl
             link
           }
+          isOwnedByOrg
           createdAt
           updatedAt
         }
@@ -3729,6 +3730,7 @@ export class APIService {
             imgUrl
             link
           }
+          isOwnedByOrg
           createdAt
           updatedAt
         }
@@ -3795,6 +3797,7 @@ export class APIService {
             imgUrl
             link
           }
+          isOwnedByOrg
           createdAt
           updatedAt
         }
@@ -4754,6 +4757,7 @@ export class APIService {
             imgUrl
             link
           }
+          isOwnedByOrg
           createdAt
           updatedAt
         }
@@ -4863,6 +4867,7 @@ export class APIService {
               imgUrl
               link
             }
+            isOwnedByOrg
             createdAt
             updatedAt
           }
@@ -5599,6 +5604,7 @@ export class APIService {
             imgUrl
             link
           }
+          isOwnedByOrg
           createdAt
           updatedAt
         }
@@ -5657,6 +5663,7 @@ export class APIService {
             imgUrl
             link
           }
+          isOwnedByOrg
           createdAt
           updatedAt
         }
@@ -5715,6 +5722,7 @@ export class APIService {
             imgUrl
             link
           }
+          isOwnedByOrg
           createdAt
           updatedAt
         }
