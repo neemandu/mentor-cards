@@ -439,6 +439,7 @@ export type CreateCardsPackInput = {
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
+  isOwnedByOrg?: boolean | false;
 };
 
 export type GuideBookElementInput = {
@@ -462,6 +463,7 @@ export type ModelCardsPackConditionInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
+  isOwnedByOrg?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -481,6 +483,7 @@ export type CardsPack = {
   name?: string | null;
   freeUntilDate?: string | null;
   about?: About;
+  isOwnedByOrg?: boolean | false;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -511,6 +514,7 @@ export type UpdateCardsPackInput = {
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
+  isOwnedByOrg?: boolean | false;
 };
 
 export type DeleteCardsPackInput = {
@@ -785,6 +789,7 @@ export type ModelCardsPackFilterInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
+  isOwnedByOrg?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1317,6 +1322,7 @@ export type CreateCardsPackMutation = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
+  isOwnedByOrg?: boolean | false;
   createdAt: string;
   updatedAt: string;
 };
@@ -1367,6 +1373,7 @@ export type UpdateCardsPackMutation = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
+  isOwnedByOrg?: boolean | false;
   createdAt: string;
   updatedAt: string;
 };
@@ -1417,6 +1424,7 @@ export type DeleteCardsPackMutation = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
+  isOwnedByOrg?: boolean | false;
   createdAt: string;
   updatedAt: string;
 };
@@ -1977,6 +1985,7 @@ export type GetCardsPackQuery = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
+  isOwnedByOrg?: boolean | false;
   createdAt: string;
   updatedAt: string;
 };
@@ -2025,6 +2034,7 @@ export type ListCardsPacksQuery = {
       imgUrl?: string | null;
       link?: string | null;
     } | null;
+    isOwnedByOrg?: boolean | false;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2512,6 +2522,7 @@ export type OnCreateCardsPackSubscription = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
+  isOwnedByOrg?: boolean | false;
   createdAt: string;
   updatedAt: string;
 };
@@ -2562,6 +2573,7 @@ export type OnUpdateCardsPackSubscription = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
+  isOwnedByOrg?: boolean | false;
   createdAt: string;
   updatedAt: string;
 };
@@ -2612,6 +2624,7 @@ export type OnDeleteCardsPackSubscription = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
+  isOwnedByOrg?: boolean | false;
   createdAt: string;
   updatedAt: string;
 };

@@ -132,6 +132,7 @@ type CardsPack
   name: String
   freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
   about: About
+  isOwnedByOrg: Boolean @function(name: "IsCardsPackOwnedByOrgForUser-${env}")
 }
 
 type MessageQueue

@@ -558,6 +558,7 @@ mutation CreateCardsPack(
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }
@@ -603,6 +604,7 @@ mutation UpdateCardsPack(
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }
@@ -648,6 +650,7 @@ mutation DeleteCardsPack(
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }

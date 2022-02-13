@@ -465,6 +465,7 @@ query GetCardsPack($id: ID!) {
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }
@@ -509,6 +510,7 @@ query ListCardsPacks(
         imgUrl
         link
       }
+      isOwnedByOrg
       createdAt
       updatedAt
     }
