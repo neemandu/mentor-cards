@@ -11,6 +11,7 @@ export class PackInfo {
     name: string;
     freeUntilDate: Date;
     about: AboutInput;
+    isOwnedByOrg: boolean;
 
     constructor() { }
 
@@ -32,6 +33,7 @@ export class PackContent {
     name: string;
     freeUntilDate: Date;
     about: AboutInput;
+    isOwnedByOrg: boolean;
 
     constructor() { }
 
