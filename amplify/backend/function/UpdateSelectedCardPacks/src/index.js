@@ -84,7 +84,7 @@ exports.handler = async (event) => {
     }
     console.log('username: ' + username);
     var user = await getUserByUSerName(username);
-    if(!user.orgMembership){
+    if(!user.userOrgMembershipId){
         console.log('user does not belong to any organization');
         throw Error('user does not belong to any organization');
     }
@@ -92,7 +92,7 @@ exports.handler = async (event) => {
         user.couponCodes && 
         user.couponCodes.length > 0){   
         for(var i = 0 ; i < user.couponCodes.length ; i++){ 
-            if(user.couponCodes[i].id == user.orgMembership.id){
+            if(user.couponCodes[i].id == user.userOrgMembershipId.id){
                 if(user.couponCodes[i].allowedCardsPacks.length > 0){
                     console.log('User already submitted card packs');
                     throw Error('User already submitted card packs');

@@ -167,8 +167,8 @@ exports.handler = async (event) => {
 
     var organization = await getOrgByCode(couponCode);
     if(organization){
-        if(user.orgMembership){
-            console.log('User: ' + user.email + " already belong to organization: " + user.orgMembership);
+        if(user.userOrgMembershipId){
+            console.log('User: ' + user.email + " already belong to organization: " + user.userOrgMembershipId);
             throw Error ('User already in organization');
         }
         else{
@@ -178,7 +178,7 @@ exports.handler = async (event) => {
                 throw Error ('Not in organization');
             }
             else{
-                user.orgMembership = organization.membership;
+                user.userOrgMembershipId = organization.membership;
                 await saveUser(user); 
             }
         }

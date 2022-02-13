@@ -430,6 +430,7 @@ subscription OnCreateCardsPack {
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }
@@ -472,6 +473,7 @@ subscription OnUpdateCardsPack {
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }
@@ -514,6 +516,7 @@ subscription OnDeleteCardsPack {
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }
