@@ -77,27 +77,10 @@ export class CompanyPackChoiseComponent implements OnInit {
         this.api.UpdateSelectedCardPacks({ cardsPacksIds: ids })
           .then(res => {
             this.openRedirectDialog();
-            console.log("🚀 ~ file: company-pack-choise.component.ts ~ line 77 ~ dialogSub ~ res", res)
             this.overlaySpinnerService.changeOverlaySpinner(false);
           })
           .catch(error => {
-            if ((error.errors[0].message).toLowerCase().startsWith("user does not belong to any organization")) {
-              this.error = 'אינכם שייכים לאף ארגון'
-              this.saveDisabled = true;
-              this.cardsService._snackBar.open('אינכם שייכים לאף ארגון, אתם מועברים לעמוד כל ערכות הקלפים', '', {
-                duration: 3000,
-              });
-              setTimeout(() => { this.navigate('/all-packs-page') }, 3000);
-            }
-            else if ((error.errors[0].message).toLowerCase().startsWith("user already submitted card packs")) {
-              this.error = 'בחרתם כבר ערכות קלפים בעבר'
-              this.saveDisabled = true;
-              this.cardsService._snackBar.open('בחרתם כבר ערכות קלפים בעבר, אתם מועברים לעמוד כל ערכות הקלפים', '', {
-                duration: 3000,
-              });
-              setTimeout(() => { this.navigate('/all-packs-page') }, 3000);
-            }
-            // console.log("🚀 ~ file: company-pack-choise.component.ts ~ line 84 ~ dialogSub ~ error", error)
+            this.handleErrors(error.errors[0].message);
             this.overlaySpinnerService.changeOverlaySpinner(false);
           })
       }
@@ -109,7 +92,31 @@ export class CompanyPackChoiseComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = new DynamicDialogData("ערכות הקלפים הוזנו בהצלחה", ["אתם מועברים לעמוד כל ערכות הקלפים"], "אישור", "")
-    this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(() => {
+      dialogSub.unsubscribe();
+      this.navigate('/all-packs-page');
+      window.location.reload();
+    });
+  }
+
+  handleErrors(errorMsg: string): void {
+    if (errorMsg.toLowerCase().startsWith("user does not belong to any organization")) {
+      this.error = 'אינכם שייכים לאף ארגון'
+      this.saveDisabled = true;
+      this.cardsService._snackBar.open('אינכם שייכים לאף ארגון, אתם מועברים לעמוד כל ערכות הקלפים', '', {
+        duration: 3000,
+      });
+      setTimeout(() => { this.navigate('/all-packs-page') }, 3000);
+    }
+    else if (errorMsg.toLowerCase().startsWith("user already submitted card packs")) {
+      this.error = 'בחרתם כבר ערכות קלפים בעבר'
+      this.saveDisabled = true;
+      this.cardsService._snackBar.open('בחרתם כבר ערכות קלפים בעבר, אתם מועברים לעמוד כל ערכות הקלפים', '', {
+        duration: 3000,
+      });
+      setTimeout(() => { this.navigate('/all-packs-page') }, 3000);
+    }
   }
 
 }

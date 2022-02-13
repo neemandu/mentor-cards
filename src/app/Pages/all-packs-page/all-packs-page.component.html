@@ -96,7 +96,7 @@
           <div class="second-line"></div>
         </div>
         <div *ngIf="categoryPacks" class="d-flex flex-row flex-wrap card-section">
-          <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
+          <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo" [orgName]="userData?.orgMembership?.name"
             (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">
           </app-pack>
         </div>

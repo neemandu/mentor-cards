@@ -107,7 +107,7 @@ export class UserAuthService {
         this.updateGroupData();
       if (this.userData.couponCodes.length != 0) {
         this.userData.couponCodes.forEach(coupon => {
-          if (coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
+          if (!coupon.trialPeriodInDays || coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }

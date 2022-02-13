@@ -36,8 +36,7 @@ const routes: Routes = [
   { path: 'guide-book', component: GuideBookComponent },
   { path: 'price-page', component: PricePageComponent },
   { path: 'guide-page', component: GuidePageComponent },
-  { path: 'company-pack-choise', component: CompanyPackChoiseComponent },
-  // { path: 'company-pack-choise', component: CompanyPackChoiseComponent, canActivate: [AuthGuardCompanyCardChoiseService]  },
+  { path: 'company-pack-choise', component: CompanyPackChoiseComponent, canActivate: [AuthGuardCompanyCardChoiseService]  },
   { path: '**', redirectTo: '/all-packs-page' },
 ];
 
