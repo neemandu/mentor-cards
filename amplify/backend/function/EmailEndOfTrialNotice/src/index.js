@@ -27,7 +27,7 @@ function shouldSentAlert(user){
                 }
             }
         }  
-    var endOfTrialDate = startFreePeriodDate;  
+    var endOfTrialDate = new Date(startFreePeriodDate);  
     endOfTrialDate.setDate(endOfTrialDate.getDate()+trialPeriodInDays);
     var now = new Date();
     var Difference_In_Time = endOfTrialDate.getTime() - now.getTime();
@@ -51,7 +51,7 @@ async function getAllRelevantUsers(){
     var userParams = {
         TableName: userTable,
         IndexName: "status-createdAt-index",
-        ProjectionExpression:"id, subscription, email, fullName, phone, couponCodes",
+        ProjectionExpression:"id, subscription, email, fullName, phone, couponCodes, createdAt, userOrgMembershipId",
         KeyConditionExpression: "#st = :status",
         ExpressionAttributeNames:{
             "#st": "status"
@@ -60,8 +60,7 @@ async function getAllRelevantUsers(){
             ":status": "NOPLAN"
         }
     };
-
-    console.log("searching for users with a plan");
+    console.log("searching for users with no plan");
     var users = [];
     await docClient.query(userParams, function(err, data) {
         if (err) {
@@ -74,7 +73,11 @@ async function getAllRelevantUsers(){
                 var a = shouldSentAlert(user);
                 if(a){
                     var d = new Date();
-                    var id = user.email + "_UPCOMING_END_OF_TRIAL_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+                    var id = user.email + "_END_OF_TRIAL_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+                    var emailTemplateId = 6;
+                    if(user.userOrgMembershipId){
+                        emailTemplateId = 12;
+                    }
                     var item = {
                         PutRequest: {
                             Item: {
@@ -83,14 +86,14 @@ async function getAllRelevantUsers(){
                                 "emailDeliveryTime": null,
                                 "phone": user.phone,
                                 "smsDeliveryTime": null,
-                                "emailTemplateId": 3,
+                                "emailTemplateId": emailTemplateId,
                                 "name": user.fullName,
                                 "params": {
                                     "name": user.fullName
                                 }
                             }
                         }
-                    }
+                    };
                     users.push(item);
                 }
             });
