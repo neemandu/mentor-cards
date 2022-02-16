@@ -182,7 +182,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       dialogConfig.autoFocus = true;
       dialogConfig.data = new DynamicDialogData(
         'עריכת ערכת קלפים',
-        ['לחיצה על אייקון העין תסתיר את הקלף.','לחיצה על איפוס ערכה יחזיר את כל הקלפים שהוסתרו.'],
+        ['להסתרת קלף, לחצו על אייקון העין מעליו.', 'להצגת הקלפים המוסתרים לחצו על איפוס ערכה בתחתית העמוד.'],
         'אישור',
         ''
       );
@@ -190,17 +190,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.showEditPack = true;
       this.flipped = true;
       this.selectedCards = [];
-      // const list = document.getElementsByClassName('shuffle');
-      // Array.from(list).forEach((item) => {
-      //   item.removeAttribute('transition-group-item');
-      // });
     } else {
       this.showEditPack = false;
-      this.flipped = false;
-      // const list = document.getElementsByClassName('shuffle');
-      // Array.from(list).forEach((item) => {
-      //   item.setAttribute('transition-group-item', '');
-      // });
+      this.flipped = true;
     }
   }
 
@@ -209,7 +201,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
    */
   resetEditPack(): void {
     this.cards = [...this.cards, ...this.removedCards];
-    // this.removedCards.forEach((card) => this.cards.push(card));
     this.removedCards = [];
     this.editPack();
   }
@@ -263,7 +254,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   templateUrl: './portrait-warning-dialog.html',
 })
 export class PortraitWarningDialogComponent {
-  constructor(public dialogRef: MatDialogRef<PortraitWarningDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<PortraitWarningDialogComponent>) { }
 
   closeDialog(): void {
     this.dialogRef.close();

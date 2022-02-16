@@ -13,6 +13,13 @@ video {
   width: 100%;
 }
 
+.line {
+  background-color: #ffa800;
+  width: 80%;
+  height: 3px;
+  /* margin-top: -15px; */
+}
+
 .actions {
   align-items: center;
   background: #fff1d6de;

@@ -29,7 +29,7 @@ export class CardsService {
   allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
-  categoryColor = new Map<string, string>([['קלפי תמונה', '#89f4ff'], ['קלפי תמונה + מילה', '#ff3af0d1'], ['קלפי מילה', '#c789ff'], ['קלפי שאלות', '#ff8989'], ['קלפי מסרים', '#5581ff']]);
+  // categoryColor = new Map<string, string>([['קלפי תמונה', '#89f4ff'], ['קלפי תמונה + מילה', '#ff3af0d1'], ['קלפי מילה', '#c789ff'], ['קלפי שאלות', '#ff8989'], ['קלפי מסרים', '#5581ff']]);
 
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService,
@@ -146,9 +146,9 @@ export class CardsService {
     })
   }
 
-  getCategoryColor(category: string): string {
-    return this.categoryColor.get(category);
-  }
+  // getCategoryColor(category: string): string {
+  //   return this.categoryColor.get(category);
+  // }
 
   public getPackById(id: any): Observable<any> {
     return this.http.get<any>(this.baseURL + this.apiControllerName + 'cards?id=' + id, { headers: this.headerDict });

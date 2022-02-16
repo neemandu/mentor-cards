@@ -167,8 +167,8 @@ export class AuthGuardCompanyCardChoiseService implements CanActivate {
 
   canActivate(): boolean {
     // debugger;
-    if (this.userAuthService.userData.orgMembership) {
-      if (this.userAuthService.userData.endOfTrialDate >= new Date()) {
+    if (this.userAuthService?.userData?.orgMembership) {
+      if (this.userAuthService.userData.endOfTrialDate <= new Date()) {
         return true;
       }
     }
