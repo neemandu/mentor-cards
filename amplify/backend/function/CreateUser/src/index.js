@@ -198,7 +198,7 @@ exports.handler = async (event) => {
     
         console.log("Done adding a new user...");
         
-        //AddUserToMailingList(username, email, phone);
+        AddUserToMailingList(username, email, phone);
 
         return params["Item"];
     }
