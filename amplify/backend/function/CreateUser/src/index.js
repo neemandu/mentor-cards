@@ -197,8 +197,6 @@ exports.handler = async (event) => {
         await addWelcomeEmailToMessageQueue(email, phone, fullName);
     
         console.log("Done adding a new user...");
-        
-        AddUserToMailingList(username, email, phone);
 
         return params["Item"];
     }

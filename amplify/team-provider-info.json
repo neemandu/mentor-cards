@@ -103,7 +103,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-456b62306a702f412f52-build.zip",
+          "s3Key": "amplify-builds/CreateUser-4c694f43374d4d476367-build.zip",
           "sendinblueApiKey": "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"
         },
         "AddCardsPack": {
@@ -212,6 +212,12 @@
         "IsCardsPackOwnedByOrgForUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-5061477046364b4c7266-build.zip"
+        },
+        "AddNewUserToEmailsContactList": {
+          "contactListId": "6",
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-775a776c2b5164663056-build.zip"
         }
       },
       "auth": {
