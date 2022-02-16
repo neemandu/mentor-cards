@@ -178,8 +178,7 @@ exports.handler = async (event) => {
                 throw Error ('Not in organization');
             }
             else{
-                user.userOrgMembershipId = organization.membership;
-                await saveUser(user); 
+                user.userOrgMembershipId = organization.organizationsMembershipId;
             }
         }
     }

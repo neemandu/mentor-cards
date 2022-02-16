@@ -98,6 +98,6 @@ exports.handler = async (event) => {
         var user = await getUserByUserName(username);
         orgId = user.userOrgMembershipId == null ? "-1" : user.userOrgMembershipId;
     }   
-    var subPlans = await getPlansByOrgId("-1");
+    var subPlans = await getPlansByOrgId(orgId);
     return subPlans;
 };

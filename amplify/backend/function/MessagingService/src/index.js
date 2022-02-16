@@ -91,7 +91,7 @@ async function sendEmail(tempalteId, email, params, name){
           'Accept': 'application/json',
           'api-key': api_key
       }
-  }
+  };
 
   var body = JSON.stringify({
     "sender":{ 
@@ -127,7 +127,7 @@ async function markAsSent(record){
     "emailTemplateId": record.emailTemplateId.N,
     "name": record.name.S,
     "params": record.params.M
-  }
+  };
 
   var docClient = new AWS.DynamoDB.DocumentClient();
   var messageTable = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
@@ -168,5 +168,5 @@ exports.handler = async (event) => {
         await markAsSent(streamedItem.dynamodb.NewImage);
     }
   }
-  return { status: 'done' }
+  return { status: 'done' };
 };

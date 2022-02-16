@@ -27,7 +27,7 @@ function shouldSentAlert(user){
                 }
             }
         }  
-    var endOfTrialDate = startFreePeriodDate;  
+    var endOfTrialDate = new Date(startFreePeriodDate); 
     endOfTrialDate.setDate(endOfTrialDate.getDate()+trialPeriodInDays);
     var now = new Date();
     var Difference_In_Time = endOfTrialDate.getTime() - now.getTime();
@@ -51,7 +51,7 @@ async function getAllRelevantUsers(){
     var userParams = {
         TableName: userTable,
         IndexName: "status-createdAt-index",
-        ProjectionExpression:"id, subscription, email, fullName, phone, couponCodes",
+        ProjectionExpression:"id, subscription, email, fullName, phone, couponCodes, createdAt",
         KeyConditionExpression: "#st = :status",
         ExpressionAttributeNames:{
             "#st": "status"
@@ -83,7 +83,7 @@ async function getAllRelevantUsers(){
                                 "emailDeliveryTime": null,
                                 "phone": user.phone,
                                 "smsDeliveryTime": null,
-                                "emailTemplateId": 3,
+                                "emailTemplateId": 4,
                                 "name": user.fullName,
                                 "params": {
                                     "name": user.fullName
@@ -123,11 +123,12 @@ async function insertRecordsToMessagingQueue(users){
 }
 
 exports.handler = async (event) => {
+    /*
     var users = await getAllRelevantUsers();
     if(users.length > 0){
         await insertRecordsToMessagingQueue(users);
     }
     else{
         console.log("No users should be notified");
-    }
+    }*/
 };
