@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { APIService } from '../../API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { PurchaseData } from 'src/app/Objects/purchase-data';
 import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
@@ -36,8 +35,8 @@ export class PricePageComponent implements OnInit {
   halfYearlySubscription: SubscriptionPlan;
   yearlySubscription: SubscriptionPlan;
 
-  constructor(public _snackBar: MatSnackBar, private api: APIService,
-    private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
+  constructor(public _snackBar: MatSnackBar, private userAuthService: UserAuthService, 
+    private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
     // this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
     //   this.userAuthService.subPlans.forEach(plan => {
     //     this.configAmountsOfUsers.push(plan.numberOfUsers);

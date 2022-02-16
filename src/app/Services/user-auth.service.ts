@@ -159,36 +159,6 @@ export class UserAuthService {
   }
 
   /**
-   * Get all data from BE about user
-   */
-  // updateUserData(): void {
-  //   if (this.cognitoUserData != null) {
-  //     this.api.GetUser(this.cognitoUserData.username).then(data => {
-  //       console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetUser ~ data", data)
-  //       if (!data) {
-  //         this.overlaySpinnerService.changeOverlaySpinner(false);
-  //         return;
-  //       }
-  //       this.userData = new UserData().deseralize(data);
-  //       localStorage.setItem('signedin', 'true');
-  //       this.overlaySpinnerService.changeOverlaySpinner(false);
-  //       if (this.userData.groupId)
-  //         this.updateGroupData();
-  //       if (this.userData.couponCodes.length != 0) {
-  //         this.userData.couponCodes.forEach(coupon => {
-  //           if (coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
-  //             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
-  //         })
-  //       }
-  //       this.loggedInEmmiter.emit(this.userData);
-  //       (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
-  //     }, reject => {
-  //       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
-  //     })
-  //   }
-  // }
-
-  /**
    * Get all data about current group
    */
   updateGroupData(): void {
@@ -228,10 +198,10 @@ export class UserAuthService {
    */
   checkOrgTrial(): void {
     if (this.userData.orgMembership) {
-      if(this.userData.endOfTrialDate >= new Date()) {
+      if (this.userData.endOfTrialDate.getTime() <= new Date().getTime()) {
         const id = this.userData.orgMembership.id;
         const cc = this.userData.couponCodes.find(coupon => coupon.organization.id = id)
-        if (cc.allowedCardsPacks.length == 0){
+        if (cc.allowedCardsPacks.length == 0) {
           this.ngZone.run(() => this.router.navigate(['/company-pack-choise']))
         }
       }
@@ -246,7 +216,7 @@ export class UserAuthService {
     const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
       dialogSub1.unsubscribe();
       if (res) {
-        dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
+        dialogConfig.data = new DynamicDialogData("קוד ההטבה הוזן בהצלחה", [], "אישור", "")
         const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
         const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
           dialogSub2.unsubscribe();
@@ -293,6 +263,8 @@ export class UserAuthService {
     // localStorage.removeItem('signedin');
     this.isLoggedIn = false;
     this.userDataEmmiter.emit(undefined);
+    this.subPlans = undefined;
+    this.getSubscriptionPlans();
     // this.router.navigate(['no-program-page']);
   }
 

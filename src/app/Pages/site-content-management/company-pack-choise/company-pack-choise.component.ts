@@ -30,11 +30,26 @@ export class CompanyPackChoiseComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.allPacks = this.cardsService.allPacks.map(pack => pack);
+    this.getAllPacks();
     this.userData = this.userAuthService.userData;
-    !this.userData ? this.navigate('/all-packs-page') : null;
-    // this.choises = new Array(this.userData.orgMembership.numberOfallowedCardsPacks).map(el => 0);
     this.choises = Array.apply(null, Array(this.userData.orgMembership.numberOfallowedCardsPacks)).map(() => { })
+  }
+
+  /**
+   * Retrive all packs
+   */
+  getAllPacks(): void {
+    if (this.cardsService.allPacks) {
+      this.allPacks = this.cardsService.allPacks.map(pack => pack);
+    } else {
+      this.overlaySpinnerService.changeOverlaySpinner(true);
+      let sub = this.cardsService.allPacksReadyEmmiter.subscribe(() => {
+        sub.unsubscribe();
+        this.allPacks = this.cardsService.allPacks.map(pack => pack);
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+      })
+      this.cardsService.getAllPacks();
+    }
   }
 
   navigate(path: string): void {

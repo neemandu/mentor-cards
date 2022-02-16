@@ -41,9 +41,9 @@ export class PackComponent implements OnInit, OnDestroy {
     this.loaded.emit();
   }
 
-  getBorderColor(): string {
-    return this.cardsService.getCategoryColor(this.packInfo.categories[0]);
-  }
+  // getBorderColor(): string {
+  //   return this.cardsService.getCategoryColor(this.packInfo.categories[0]);
+  // }
 
   get isStillFree() {
     return new Date() < new Date(this.packInfo.freeUntilDate);
