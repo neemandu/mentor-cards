@@ -28,21 +28,21 @@
 
   <div class="packChoise" *ngIf="showPackChoise">
     <div class="choise-dd d-flex flex-column justify-content-center">
-      <div *ngFor="let choise of choises; let i = index" class="d-flex">
+      <div *ngFor="let num of amountOfPacksArray; let i = index" class="d-flex">
         <mat-form-field appearance="fill" style="text-align: initial;">
           <mat-label>בחירת ערכה מספר {{i+1}}</mat-label>
-          <mat-select [(value)]="choises[i]" (selectionChange)="selectionChanged($event)">
+          <mat-select [(value)]="choices[i]" (selectionChange)="selectionChanged($event)">
             <mat-option *ngFor="let pack of allPacks" [value]="pack" [disabled]="choiseDisabled(pack)">
               <span>{{pack.name}}</span>
             </mat-option>
           </mat-select>
         </mat-form-field>
         <button [disabled]="!choise" class="iconButton" mat-icon-button style="margin-top: 5%;"
-          (click)="openPreviewDialog(choises[i])">
+          (click)="openPreviewDialog(choices[i])">
           <mat-icon style="font-family: 'Material Icons';">info</mat-icon>
         </button>
       </div>
-      <button [disabled]="saveDisabled" class="action-button" type="button" (click)="saveSelectedChoises()">שמירת
+      <button [disabled]="saveDisabled" class="action-button" type="button" (click)="saveSelectedchoices()">שמירת
         ערכות</button>
       <mat-error *ngIf="error">
         {{error}}
