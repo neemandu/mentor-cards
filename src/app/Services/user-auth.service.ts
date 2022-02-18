@@ -111,7 +111,7 @@ export class UserAuthService {
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }
-      (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      (this.userData.status === 'PLAN' || this.couponCodesCardPacksAllowed()) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
       this.checkOrgTrial();
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
@@ -156,6 +156,29 @@ export class UserAuthService {
         window.location.reload();
       });
     });
+  }
+
+  /**
+   * @returns boolean, if any coupon code is valid and has card packs
+   */
+  private couponCodesCardPacksAllowed() {
+    let allowed = false;
+    this.userData.couponCodes.forEach(coupon => {
+      if (!coupon.trialPeriodInDays || this.checkIfCouponStillValid(coupon.createdAt, coupon.trialPeriodInDays))
+        if (coupon.allowedCardsPacks?.length != 0)
+          allowed = true;
+    })
+    return allowed;
+  }
+
+  /**
+   * 
+   * @param startDate - date of beginning of coupon
+   * @param periodInDays 
+   * @returns boolean, if the coupon is still valid
+   */
+  private checkIfCouponStillValid(startDate: Date | any, periodInDays: number): boolean {
+    return new Date(startDate).getTime() + periodInDays * millisecondsInDay > new Date().getTime();
   }
 
   /**

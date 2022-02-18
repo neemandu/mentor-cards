@@ -17,7 +17,7 @@ video {
   background-color: #ffa800;
   width: 80%;
   height: 3px;
-  /* margin-top: -15px; */
+  border-radius: 100%;
 }
 
 .actions {
@@ -42,6 +42,7 @@ video {
 #top {
   font-size: xx-large;
   line-height: 2rem;
+  font-weight: bold;
 }
 
 #middle {

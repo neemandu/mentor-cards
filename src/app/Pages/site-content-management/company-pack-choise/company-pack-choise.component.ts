@@ -84,7 +84,7 @@ export class CompanyPackChoiseComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("שמירת ערכות", ["לשמור ערכות אלו?", "לאחר שמירה לא ניתן יהיה לשנות בחירה זו"], "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("שמירת ערכות קלפים", ["לשמור ערכות אלו?", "לאחר לחיצה על אישור לא יהיה ניתן לשנות את ערכות הקלפים הנבחרות"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
       dialogSub.unsubscribe();
@@ -108,7 +108,7 @@ export class CompanyPackChoiseComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ערכות הקלפים הוזנו בהצלחה", ["האתר יתרענן ותוכלו להתחיל לעבוד"], "אישור", "")
+    dialogConfig.data = new DynamicDialogData("ערכות הקלפים הנבחרות עודכנו בהצלחה", ["המשך עבודה נעימה!"], "אישור", "")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(() => {
       dialogSub.unsubscribe();
