@@ -732,6 +732,81 @@ mutation DeleteContactUsModel(
     updatedAt
   }
 }
+mutation CreateInvoices(
+  $input: CreateInvoicesInput!
+  $condition: ModelInvoicesConditionInput
+) {
+  createInvoices(input: $input, condition: $condition) {
+    id
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateInvoices(
+  $input: UpdateInvoicesInput!
+  $condition: ModelInvoicesConditionInput
+) {
+  updateInvoices(input: $input, condition: $condition) {
+    id
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteInvoices(
+  $input: DeleteInvoicesInput!
+  $condition: ModelInvoicesConditionInput
+) {
+  deleteInvoices(input: $input, condition: $condition) {
+    id
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
+    createdAt
+    updatedAt
+  }
+}
 mutation CreateReceiptsId(
   $input: CreateReceiptsIdInput!
   $condition: ModelReceiptsIdConditionInput

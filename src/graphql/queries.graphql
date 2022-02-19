@@ -379,6 +379,57 @@ query ListMessageQueues(
     nextToken
   }
 }
+query GetInvoices($id: ID!) {
+  getInvoices(id: $id) {
+    id
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
+    createdAt
+    updatedAt
+  }
+}
+query ListInvoicess(
+  $filter: ModelInvoicesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listInvoicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      email
+      fullName
+      customerAddress
+      date
+      invoiceRunningId
+      items {
+        itemName
+        pricePerItem
+        numberOfItems
+      }
+      businessName
+      businessPhoneNumber
+      businessAddress
+      businessWebsite
+      invoiceType
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetReceiptsId($id: ID!) {
   getReceiptsId(id: $id) {
     id

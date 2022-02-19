@@ -272,6 +272,72 @@ subscription OnDeleteMessageQueue {
     updatedAt
   }
 }
+subscription OnCreateInvoices {
+  onCreateInvoices {
+    id
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateInvoices {
+  onUpdateInvoices {
+    id
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteInvoices {
+  onDeleteInvoices {
+    id
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id
