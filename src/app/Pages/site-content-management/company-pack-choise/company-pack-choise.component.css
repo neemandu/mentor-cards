@@ -18,8 +18,8 @@ video {
   padding: 2%;
   border-radius: 20px;
   width: fit-content;
-  max-width: 40%;
   margin-top: 5%;
+  max-width: 40%;
 }
 
 #title {
@@ -81,6 +81,10 @@ li span {
   font-weight: 500;
 }
 
+.top-button {
+  max-width: 48%;
+}
+
 .action-button:hover {
   background: #e69900;
 }
@@ -107,4 +111,41 @@ li span {
   width: fit-content;
   margin-top: 3vh;
   margin-bottom: 3vh;
+}
+
+@media screen and (max-width: 1024px) {
+  #introduction {
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #introduction {
+    max-width: 65%;
+    padding: 3%;
+  }
+
+  .packChoise {
+    padding: 4%;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  #introduction {
+    max-width: 90%;
+    padding: 4%;
+  }
+
+  /* #title {
+    font-size: 1.5rem;
+  } */
+
+  .action-button {
+    font-size: large;
+  }
+
+  .packChoise {
+    padding: 6%;
+  }
 }

@@ -30,6 +30,7 @@ mat-toolbar {
 .title {
   font-size: larger;
   margin-right: -15px;
+  text-align: center;
 }
 
 .line {

@@ -22,7 +22,8 @@ export class CompanyPackChoiseComponent implements OnInit {
   userData: UserData;
   showPackChoise: boolean = false;
   saveDisabled: boolean = true;
-  choises: PackContent[] = [];
+  choices: PackContent[] = [];
+  amountOfPacksArray: number[] = []; //only for *ngFor
   error: string;
 
   constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
@@ -32,7 +33,8 @@ export class CompanyPackChoiseComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPacks();
     this.userData = this.userAuthService.userData;
-    this.choises = Array.apply(null, Array(this.userData.orgMembership.numberOfallowedCardsPacks)).map(() => { })
+    this.choices = Array.apply(null, Array(this.userData.orgMembership.numberOfallowedCardsPacks)).map(() => undefined);
+    this.amountOfPacksArray = Array(this.userData.orgMembership.numberOfallowedCardsPacks).fill(0);
   }
 
   /**
@@ -57,12 +59,12 @@ export class CompanyPackChoiseComponent implements OnInit {
   }
 
   choiseDisabled(pack: PackContent): boolean {
-    return this.choises.includes(pack);
+    return this.choices.includes(pack);
   }
 
   selectionChanged(): void {
     this.saveDisabled = false;
-    this.choises.forEach(choise => {
+    this.choices.forEach(choise => {
       if (!choise)
         this.saveDisabled = true;
     })
@@ -78,17 +80,17 @@ export class CompanyPackChoiseComponent implements OnInit {
     this.dialog.open(PackPreviewComponent, dialogConfig);
   }
 
-  saveSelectedChoises(): void {
+  saveSelectedchoices(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("שמירת ערכות", ["לשמור ערכות אלו?", "לאחר שמירה לא ניתן יהיה לשנות בחירה זו"], "אישור", "ביטול")
+    dialogConfig.data = new DynamicDialogData("שמירת ערכות קלפים", ["לשמור ערכות אלו?", "לאחר לחיצה על אישור לא יהיה ניתן לשנות את ערכות הקלפים הנבחרות"], "אישור", "ביטול")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
       dialogSub.unsubscribe();
       if (res) {
         this.overlaySpinnerService.changeOverlaySpinner(true);
-        const ids: string[] = this.choises.map(choise => choise.id)
+        const ids: string[] = this.choices.map(choise => choise.id)
         this.api.UpdateSelectedCardPacks({ cardsPacksIds: ids })
           .then(res => {
             this.openRedirectDialog();
@@ -106,7 +108,7 @@ export class CompanyPackChoiseComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = new DynamicDialogData("ערכות הקלפים הוזנו בהצלחה", ["אתם מועברים לעמוד כל ערכות הקלפים"], "אישור", "")
+    dialogConfig.data = new DynamicDialogData("ערכות הקלפים הנבחרות עודכנו בהצלחה", ["המשך עבודה נעימה!"], "אישור", "")
     const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(() => {
       dialogSub.unsubscribe();
