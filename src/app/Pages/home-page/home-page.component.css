@@ -51,7 +51,7 @@ video {
 
 #news-title {
   font-size: x-large;
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 
 #bottom {
@@ -110,8 +110,14 @@ app-information-bar {
   }
 }
 
-marquee li {
-  margin-bottom: 1%;
+li span {
+  color: black;
+}
+
+.news-list-item {
+  font-size: 1rem;
+  color: var(--main-color);
+  line-height: 2rem;
 }
 
 @media screen and (max-width: 1024px) {

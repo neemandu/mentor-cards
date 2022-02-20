@@ -16,7 +16,7 @@
     matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
     matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable'>
   <label *ngIf="isStillFree" class="free-until-label">ערכה במתנה! עד - {{freeUntilDate}}</label>
-  <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label">ערכה לשימושכם במתנה מ{{orgName}}</label>
+  <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label">ערכת הקלפים שנבחרה</label>
   <div id="pack-buttons" class="d-flex justify-content-between">
     <div class="pack-icons">
       <mat-icon class="fav-icon" id="fav-icon" matTooltip="מחיקה מהמועדפים" matTooltipShowDelay="500" *ngIf="this.fav"

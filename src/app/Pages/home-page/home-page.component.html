@@ -28,12 +28,13 @@
     <br>
   </div>
   <div *ngIf="news?.length > 0" class="d-flex flex-column actions actions-bottom">
-    <span id="news-title">חדשות ועדכונים</span>
+    <span id="news-title">חדשות ועדכונים</span><br>
+    <div class="line"></div>
     <marquee style="font-size: 1rem;" vspace="1%" direction="up" width="90%" height="75px" scrollamount="1"
       onmouseover="this.stop();" onmouseout="this.start();">
       <ul>
-        <li *ngFor="let new of news">
-          {{new.message}}
+        <li class="news-list-item" *ngFor="let new of news">
+          <span>{{new.message}}</span>
         </li>
       </ul>
     </marquee>
