@@ -112,25 +112,25 @@ export class PricePageComponent implements OnInit {
     }
     else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
-      // if (this.userAuthService.trialPeriodExpDate || this.userAuthService.codeCouponExpDate != null) {
-      if (this.userAuthService.trialPeriodExpDate) {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.maxHeight = '85vh';
-        dialogConfig.maxWidth = '85vw';
-        let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
-        textInModal += this.userAuthService.trialPeriodExpDate.toLocaleDateString('he-IL');
-        dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
-        const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-        var dialogSub = dialogRef.afterClosed().subscribe(res => {
-          dialogSub.unsubscribe();
-          if (res) {
-            this.openApprovePurchaseDialog();
-          }
-        });
-      }
-      else if (this.userData?.status === 'PLAN') {
+      // if (this.userAuthService.trialPeriodExpDate) {
+      //   const dialogConfig = new MatDialogConfig();
+      //   dialogConfig.disableClose = true;
+      //   dialogConfig.autoFocus = true;
+      //   dialogConfig.maxHeight = '85vh';
+      //   dialogConfig.maxWidth = '85vw';
+      //   let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
+      //   textInModal += this.userAuthService.trialPeriodExpDate.toLocaleDateString('he-IL');
+      //   dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
+      //   const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+      //   var dialogSub = dialogRef.afterClosed().subscribe(res => {
+      //     dialogSub.unsubscribe();
+      //     if (res) {
+      //       this.openApprovePurchaseDialog();
+      //     }
+      //   });
+      // }
+      // else if (this.userData?.status === 'PLAN') {
+      if (this.userData?.status === 'PLAN') {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
