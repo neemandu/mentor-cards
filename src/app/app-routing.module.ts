@@ -15,7 +15,7 @@ import { GuideBookManagementComponent } from './Pages/site-content-management/gu
 import { NewsManagementComponent } from './Pages/site-content-management/news-management/news-management.component';
 // import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
-import { AuthGuardCompanyCardChoiseService, AuthGuardGroupManagementService, AuthGuardNoProgramPageService, AuthGuardSiteContentManagementService, AuthGuardUserPageService } from './Services/auth-guard.service';
+import { AuthGuardCompanyCardChoiseService, AuthGuardGroupManagementService, AuthGuardNoProgramPageService, AuthGuardPricePageService, AuthGuardSiteContentManagementService, AuthGuardUserPageService } from './Services/auth-guard.service';
 import { CanDeactivateGuardService } from './Services/can-deactivate-guard.service';
 
 const routes: Routes = [
@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'pack-view/:id', component: PackContentPageComponent },
   { path: 'example-pack', component: PackContentPageComponent },
   { path: 'guide-book', component: GuideBookComponent },
-  { path: 'price-page', component: PricePageComponent },
+  { path: 'price-page', component: PricePageComponent, canActivate: [AuthGuardPricePageService] },
   { path: 'guide-page', component: GuidePageComponent },
   { path: 'company-pack-choise', component: CompanyPackChoiseComponent, canActivate: [AuthGuardCompanyCardChoiseService]  },
   { path: '**', redirectTo: '/all-packs-page' },

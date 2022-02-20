@@ -46,6 +46,7 @@ export class UserAuthService {
     public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService) {
 
     this.rememebrMe();
+    this.getSubscriptionPlans();
     // this.getSubscriptionPlans();
     window.onstorage = (obj) => {
       console.log(obj);
@@ -330,9 +331,10 @@ export class UserAuthService {
    * return if in trial month (first month after register)
    */
   getTrialPeriodExpDate(): Date {
-    return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
-      new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
-      null;
+    // return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
+    //   new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
+    //   null;
+    return this.userData?.endOfTrialDate ? this.userData.endOfTrialDate : null;
   }
 
   /**

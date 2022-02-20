@@ -176,3 +176,20 @@ export class AuthGuardCompanyCardChoiseService implements CanActivate {
     return false;
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardPricePageService implements CanActivate {
+
+  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+
+  canActivate(): boolean {
+    // debugger;
+    if (this.userAuthService?.subPlans) {
+      return true;
+    }
+    this.ngZone.run(() => this.router.navigate(['home-page']));
+    return false;
+  }
+}

@@ -16,14 +16,28 @@
       </app-card>
     </div>
   </div>
-  <div *ngIf="trialPeriodDate" id="actions" class="d-flex flex-column">
+  <div *ngIf="trialPeriodDate && !userData.orgMembership" id="actions" class="d-flex flex-column">
     <h1 style="text-align: center">
-      תקופת הניסיון שלך הסתיימה.
+      תקופת הניסיון הסתיימה.
     </h1>
     <div class="d-flex d-flex justify-content-around">
-      <button class="action-button" type="button" (click)="navigate('/price-page')">להרשמה לתכנית</button>
+      <button class="action-button" type="button" (click)="navigate('/price-page')">לגישה מלאה לכל ערכות הקלפים</button>
     </div>
   </div>
+  <div *ngIf="trialPeriodDate && userData.orgMembership" id="actions" class="d-flex flex-column">
+    <!-- <h1 style="text-align: center">
+      לגישה מלאה לכל ערכות הקלפים
+    </h1> -->
+    <div class="d-flex d-flex justify-content-around">
+      <button class="action-button" type="button" (click)="navigate('/price-page')">לגישה מלאה לכל ערכות הקלפים</button>
+    </div>
+  </div>
+
+  <!-- <div id="actions" class="d-flex justify-content-center">
+    <button class="action-button" type="button" (click)="navigate('/price-page')">
+      שדרג תוכנית
+    </button>
+  </div> -->
   <!-- <div id="actions" class="d-flex flex-row justify-content-around">
     <div *ngIf="signedIn && hasProgram" class="action-btn-div">
       <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה

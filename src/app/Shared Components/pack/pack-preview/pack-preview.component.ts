@@ -1,6 +1,7 @@
 import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserData } from 'src/app/Objects/user-related';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from '../../Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { AboutAuthorComponent } from '../about-author/about-author.component';
@@ -15,12 +16,14 @@ export class PackPreviewComponent implements OnInit {
 
   loadedCards: number = 0;
   trialPeriodDate: Date | null;
+  userData: UserData;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
+    this.userData = this.userAuthService.userData;
     // console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
   }
 
@@ -111,9 +114,9 @@ export class PackPreviewComponent implements OnInit {
   //   });
   // }
 
-  get trialPeriodExpDate() {
-    return this.userAuthService.trialPeriodExpDate;
-  }
+  // get trialPeriodExpDate() {
+  //   return this.userAuthService.trialPeriodExpDate;
+  // }
 
   openAboutDialog(): void {
     const dialogConfig = new MatDialogConfig();

@@ -78,17 +78,6 @@ export class PricePageComponent implements OnInit {
     }
     this.userData = this.userAuthService.userData;
     console.log("file: price-page.component.ts ~ line 80 ~ ngOnInit ~ this.userData", this.userData)
-    /* if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
-       new Date(this.userAuthService.userData?.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData?.numberOfPlansSubstitutions > 1) {
-       this.changedPlansThisMonth = true;
-     } else {
-       this.ownsCurrentPlanLabel = false;
-     }
-     this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
-       this.userData = userData;
-       this.overlaySpinnerService.changeOverlaySpinner(false);
-     }));
-     this.userData = this.userAuthService.userData;*/
   }
 
   getSubscriptionPlans(): void {
