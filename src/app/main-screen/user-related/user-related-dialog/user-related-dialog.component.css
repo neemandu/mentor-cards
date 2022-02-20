@@ -2,6 +2,11 @@ mat-tab {
   transition: width 2s, height 2s
 }
 
+mat-dialog-content {
+  max-height: 75vh!important;
+}
+
+
 .mat-tab-group {
   /* direction: rtl; */
   transition: width 2s, height 2s
