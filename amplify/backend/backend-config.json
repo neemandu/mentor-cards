@@ -442,16 +442,31 @@
         }
       ]
     },
-    "GenerateInvoices": {
+    "InvoiceHandler": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "api",
+          "resourceName": "receiptsAPI",
+          "attributes": [
+            "ApiName",
+            "ApiId"
+          ]
+        },
+        {
           "category": "storage",
           "resourceName": "Invoices",
           "attributes": [
             "BucketName"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
           ]
         }
       ]

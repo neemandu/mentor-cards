@@ -218,10 +218,6 @@
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4e50564b5731354a3033-build.zip"
-        },
-        "GenerateInvoices": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GenerateInvoices-39374133653050394862-build.zip"
         }
       },
       "auth": {
