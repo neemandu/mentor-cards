@@ -157,6 +157,29 @@ type ContactUsModel
   email: String
 }
 
+type Invoices
+  @model
+  @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}]) {
+  id: ID!
+  email: String
+  fullName: String
+  customerAddress: String
+  date: AWSDateTime
+  invoiceRunningId: Int
+  items: [InvoiceItems]
+  businessName: String
+  businessPhoneNumber: String
+  businessAddress: String
+  businessWebsite: String
+  invoiceType: String
+}
+
+type InvoiceItems{
+  itemName: String
+  pricePerItem: Float
+  numberOfItems: Int
+}
+
 type About {
   text: String
   imgUrl: String

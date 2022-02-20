@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "storage": {
+      "Invoices": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

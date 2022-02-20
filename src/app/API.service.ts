@@ -604,6 +604,87 @@ export type DeleteContactUsModelInput = {
   id: string;
 };
 
+export type CreateInvoicesInput = {
+  id?: string | null;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<InvoiceItemsInput | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+};
+
+export type InvoiceItemsInput = {
+  itemName?: string | null;
+  pricePerItem?: number | null;
+  numberOfItems?: number | null;
+};
+
+export type ModelInvoicesConditionInput = {
+  email?: ModelStringInput | null;
+  fullName?: ModelStringInput | null;
+  customerAddress?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  invoiceRunningId?: ModelIntInput | null;
+  businessName?: ModelStringInput | null;
+  businessPhoneNumber?: ModelStringInput | null;
+  businessAddress?: ModelStringInput | null;
+  businessWebsite?: ModelStringInput | null;
+  invoiceType?: ModelStringInput | null;
+  and?: Array<ModelInvoicesConditionInput | null> | null;
+  or?: Array<ModelInvoicesConditionInput | null> | null;
+  not?: ModelInvoicesConditionInput | null;
+};
+
+export type Invoices = {
+  __typename: "Invoices";
+  id?: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<InvoiceItems | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type InvoiceItems = {
+  __typename: "InvoiceItems";
+  itemName?: string | null;
+  pricePerItem?: number | null;
+  numberOfItems?: number | null;
+};
+
+export type UpdateInvoicesInput = {
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<InvoiceItemsInput | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+};
+
+export type DeleteInvoicesInput = {
+  id: string;
+};
+
 export type CreateReceiptsIdInput = {
   id?: string | null;
   counter: number;
@@ -746,6 +827,29 @@ export type ModelMessageQueueFilterInput = {
 export type ModelMessageQueueConnection = {
   __typename: "ModelMessageQueueConnection";
   items?: Array<MessageQueue | null>;
+  nextToken?: string | null;
+};
+
+export type ModelInvoicesFilterInput = {
+  id?: ModelIDInput | null;
+  email?: ModelStringInput | null;
+  fullName?: ModelStringInput | null;
+  customerAddress?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  invoiceRunningId?: ModelIntInput | null;
+  businessName?: ModelStringInput | null;
+  businessPhoneNumber?: ModelStringInput | null;
+  businessAddress?: ModelStringInput | null;
+  businessWebsite?: ModelStringInput | null;
+  invoiceType?: ModelStringInput | null;
+  and?: Array<ModelInvoicesFilterInput | null> | null;
+  or?: Array<ModelInvoicesFilterInput | null> | null;
+  not?: ModelInvoicesFilterInput | null;
+};
+
+export type ModelInvoicesConnection = {
+  __typename: "ModelInvoicesConnection";
+  items?: Array<Invoices | null>;
   nextToken?: string | null;
 };
 
@@ -1491,6 +1595,75 @@ export type DeleteContactUsModelMutation = {
   updatedAt: string;
 };
 
+export type CreateInvoicesMutation = {
+  __typename: "Invoices";
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<{
+    __typename: "InvoiceItems";
+    itemName?: string | null;
+    pricePerItem?: number | null;
+    numberOfItems?: number | null;
+  } | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateInvoicesMutation = {
+  __typename: "Invoices";
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<{
+    __typename: "InvoiceItems";
+    itemName?: string | null;
+    pricePerItem?: number | null;
+    numberOfItems?: number | null;
+  } | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteInvoicesMutation = {
+  __typename: "Invoices";
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<{
+    __typename: "InvoiceItems";
+    itemName?: string | null;
+    pricePerItem?: number | null;
+    numberOfItems?: number | null;
+  } | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type CreateReceiptsIdMutation = {
   __typename: "ReceiptsId";
   id: string;
@@ -1891,6 +2064,56 @@ export type ListMessageQueuesQuery = {
     emailTemplateId?: number | null;
     name?: string | null;
     params?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetInvoicesQuery = {
+  __typename: "Invoices";
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<{
+    __typename: "InvoiceItems";
+    itemName?: string | null;
+    pricePerItem?: number | null;
+    numberOfItems?: number | null;
+  } | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListInvoicessQuery = {
+  __typename: "ModelInvoicesConnection";
+  items: Array<{
+    __typename: "Invoices";
+    id: string;
+    email?: string | null;
+    fullName?: string | null;
+    customerAddress?: string | null;
+    date?: string | null;
+    invoiceRunningId?: number | null;
+    items?: Array<{
+      __typename: "InvoiceItems";
+      itemName?: string | null;
+      pricePerItem?: number | null;
+      numberOfItems?: number | null;
+    } | null> | null;
+    businessName?: string | null;
+    businessPhoneNumber?: string | null;
+    businessAddress?: string | null;
+    businessWebsite?: string | null;
+    invoiceType?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2349,6 +2572,75 @@ export type OnDeleteMessageQueueSubscription = {
   emailTemplateId?: number | null;
   name?: string | null;
   params?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateInvoicesSubscription = {
+  __typename: "Invoices";
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<{
+    __typename: "InvoiceItems";
+    itemName?: string | null;
+    pricePerItem?: number | null;
+    numberOfItems?: number | null;
+  } | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateInvoicesSubscription = {
+  __typename: "Invoices";
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<{
+    __typename: "InvoiceItems";
+    itemName?: string | null;
+    pricePerItem?: number | null;
+    numberOfItems?: number | null;
+  } | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteInvoicesSubscription = {
+  __typename: "Invoices";
+  id: string;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  items?: Array<{
+    __typename: "InvoiceItems";
+    itemName?: string | null;
+    pricePerItem?: number | null;
+    numberOfItems?: number | null;
+  } | null> | null;
+  businessName?: string | null;
+  businessPhoneNumber?: string | null;
+  businessAddress?: string | null;
+  businessWebsite?: string | null;
+  invoiceType?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3955,6 +4247,123 @@ export class APIService {
     )) as any;
     return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
   }
+    async CreateInvoices(
+    input: CreateInvoicesInput,
+    condition?: ModelInvoicesConditionInput
+  ): Promise<CreateInvoicesMutation> {
+    const statement = `mutation CreateInvoices($input: CreateInvoicesInput!, $condition: ModelInvoicesConditionInput) {
+        createInvoices(input: $input, condition: $condition) {
+          __typename
+          id
+          email
+          fullName
+          customerAddress
+          date
+          invoiceRunningId
+          items {
+            __typename
+            itemName
+            pricePerItem
+            numberOfItems
+          }
+          businessName
+          businessPhoneNumber
+          businessAddress
+          businessWebsite
+          invoiceType
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateInvoicesMutation>response.data.createInvoices;
+  }
+  async UpdateInvoices(
+    input: UpdateInvoicesInput,
+    condition?: ModelInvoicesConditionInput
+  ): Promise<UpdateInvoicesMutation> {
+    const statement = `mutation UpdateInvoices($input: UpdateInvoicesInput!, $condition: ModelInvoicesConditionInput) {
+        updateInvoices(input: $input, condition: $condition) {
+          __typename
+          id
+          email
+          fullName
+          customerAddress
+          date
+          invoiceRunningId
+          items {
+            __typename
+            itemName
+            pricePerItem
+            numberOfItems
+          }
+          businessName
+          businessPhoneNumber
+          businessAddress
+          businessWebsite
+          invoiceType
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateInvoicesMutation>response.data.updateInvoices;
+  }
+  async DeleteInvoices(
+    input: DeleteInvoicesInput,
+    condition?: ModelInvoicesConditionInput
+  ): Promise<DeleteInvoicesMutation> {
+    const statement = `mutation DeleteInvoices($input: DeleteInvoicesInput!, $condition: ModelInvoicesConditionInput) {
+        deleteInvoices(input: $input, condition: $condition) {
+          __typename
+          id
+          email
+          fullName
+          customerAddress
+          date
+          invoiceRunningId
+          items {
+            __typename
+            itemName
+            pricePerItem
+            numberOfItems
+          }
+          businessName
+          businessPhoneNumber
+          businessAddress
+          businessWebsite
+          invoiceType
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteInvoicesMutation>response.data.deleteInvoices;
+  }
   async CreateReceiptsId(
     input: CreateReceiptsIdInput,
     condition?: ModelReceiptsIdConditionInput
@@ -4597,6 +5006,87 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListMessageQueuesQuery>response.data.listMessageQueues;
+  }
+    async GetInvoices(id: string): Promise<GetInvoicesQuery> {
+    const statement = `query GetInvoices($id: ID!) {
+        getInvoices(id: $id) {
+          __typename
+          id
+          email
+          fullName
+          customerAddress
+          date
+          invoiceRunningId
+          items {
+            __typename
+            itemName
+            pricePerItem
+            numberOfItems
+          }
+          businessName
+          businessPhoneNumber
+          businessAddress
+          businessWebsite
+          invoiceType
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetInvoicesQuery>response.data.getInvoices;
+  }
+  async ListInvoicess(
+    filter?: ModelInvoicesFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListInvoicessQuery> {
+    const statement = `query ListInvoicess($filter: ModelInvoicesFilterInput, $limit: Int, $nextToken: String) {
+        listInvoicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            email
+            fullName
+            customerAddress
+            date
+            invoiceRunningId
+            items {
+              __typename
+              itemName
+              pricePerItem
+              numberOfItems
+            }
+            businessName
+            businessPhoneNumber
+            businessAddress
+            businessWebsite
+            invoiceType
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListInvoicessQuery>response.data.listInvoicess;
   }
   async GetReceiptsId(id: string): Promise<GetReceiptsIdQuery> {
     const statement = `query GetReceiptsId($id: ID!) {
@@ -5352,6 +5842,100 @@ export class APIService {
       }`
     )
   ) as Observable<SubscriptionResponse<OnDeleteMessageQueueSubscription>>;
+
+ OnCreateInvoicesListener: Observable<
+    SubscriptionResponse<OnCreateInvoicesSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateInvoices {
+        onCreateInvoices {
+          __typename
+          id
+          email
+          fullName
+          customerAddress
+          date
+          invoiceRunningId
+          items {
+            __typename
+            itemName
+            pricePerItem
+            numberOfItems
+          }
+          businessName
+          businessPhoneNumber
+          businessAddress
+          businessWebsite
+          invoiceType
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnCreateInvoicesSubscription>>;
+
+  OnUpdateInvoicesListener: Observable<
+    SubscriptionResponse<OnUpdateInvoicesSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateInvoices {
+        onUpdateInvoices {
+          __typename
+          id
+          email
+          fullName
+          customerAddress
+          date
+          invoiceRunningId
+          items {
+            __typename
+            itemName
+            pricePerItem
+            numberOfItems
+          }
+          businessName
+          businessPhoneNumber
+          businessAddress
+          businessWebsite
+          invoiceType
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnUpdateInvoicesSubscription>>;
+
+  OnDeleteInvoicesListener: Observable<
+    SubscriptionResponse<OnDeleteInvoicesSubscription>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteInvoices {
+        onDeleteInvoices {
+          __typename
+          id
+          email
+          fullName
+          customerAddress
+          date
+          invoiceRunningId
+          items {
+            __typename
+            itemName
+            pricePerItem
+            numberOfItems
+          }
+          businessName
+          businessPhoneNumber
+          businessAddress
+          businessWebsite
+          invoiceType
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<SubscriptionResponse<OnDeleteInvoicesSubscription>>;
+
 
   OnCreateSubscriptionPlanListener: Observable<
     SubscriptionResponse<OnCreateSubscriptionPlanSubscription>
