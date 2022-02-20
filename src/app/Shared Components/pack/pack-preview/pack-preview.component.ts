@@ -19,13 +19,13 @@ export class PackPreviewComponent implements OnInit {
   trialPeriodDate: Date | null;
   userData: UserData;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: previewData, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
-    // console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
+    console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
   }
 
   // choosePack(): void {

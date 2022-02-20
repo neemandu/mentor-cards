@@ -3,6 +3,7 @@ import { Card } from './card';
 
 export class PackInfo {
     cards: any[];
+    cardsPreview: any[];
     categories: string[];
     description: string;
     id: string;
@@ -24,6 +25,7 @@ export class PackInfo {
 
 export class PackContent {
     cards: Card[];
+    cardsPreview: any[];
     categories: string[];
     description: string;
     id: string;

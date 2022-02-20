@@ -2,17 +2,17 @@
   <mat-icon>highlight_off</mat-icon>
 </button>
 <div class="d-flex flex-column">
-  <p class="main-header">{{data.packname}}</p>
-  <p class="content categories-tags">{{data.packdescription}}</p>
-  <div *ngIf="data.packabout" class="action-btn-div" style="margin-bottom: 1rem;">
+  <p class="main-header">{{data.pack.name}}</p>
+  <p class="content categories-tags">{{data.pack.description}}</p>
+  <div *ngIf="data.pack.about" class="action-btn-div" style="margin-bottom: 1rem;">
     <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה</button>
   </div>
   <div id="example-cards" style="display: contents;">
     <p class="sub-header">קלפים לדוגמא</p>
     <div class="card-previews">
-      <app-card *ngFor="let card of data.packcardsPreview" [cardContent]="{'imgUrl':card}" [flipped]="true"
+      <app-card *ngFor="let card of data.pack.cardsPreview" [cardContent]="{'imgUrl':card}" [flipped]="true"
         (loaded)="loadedCards = loadedCards + 1"
-        [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.packcardsPreview.length}">
+        [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.pack.cardsPreview.length}">
       </app-card>
     </div>
   </div>
