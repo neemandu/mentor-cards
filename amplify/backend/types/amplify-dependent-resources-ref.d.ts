@@ -196,7 +196,7 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "GenerateInvoices": {
+        "InvoiceHandler": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
