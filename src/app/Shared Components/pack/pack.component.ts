@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { AboutAuthorComponent } from './about-author/about-author.component';
-import { PackPreviewComponent } from './pack-preview/pack-preview.component';
+import { PackPreviewComponent, previewData } from './pack-preview/pack-preview.component';
 
 @Component({
   selector: 'app-pack',
@@ -59,7 +59,8 @@ export class PackComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true;
     dialogConfig.maxWidth = '85vw';
     dialogConfig.maxHeight = '90vh';
-    dialogConfig.data = this.packInfo;
+    const data: previewData = { 'pack': this.packInfo, 'showButtons': false };
+    dialogConfig.data = data;
     const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();

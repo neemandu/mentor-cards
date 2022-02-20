@@ -2,17 +2,17 @@
   <mat-icon>highlight_off</mat-icon>
 </button>
 <div class="d-flex flex-column">
-  <p class="main-header">{{data.name}}</p>
-  <p class="content categories-tags">{{data.description}}</p>
-  <div *ngIf="data.about" class="action-btn-div" style="margin-bottom: 1rem;">
+  <p class="main-header">{{data.packname}}</p>
+  <p class="content categories-tags">{{data.packdescription}}</p>
+  <div *ngIf="data.packabout" class="action-btn-div" style="margin-bottom: 1rem;">
     <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה</button>
   </div>
   <div id="example-cards" style="display: contents;">
     <p class="sub-header">קלפים לדוגמא</p>
     <div class="card-previews">
-      <app-card *ngFor="let card of data.cardsPreview" [cardContent]="{'imgUrl':card}" [flipped]="true"
+      <app-card *ngFor="let card of data.packcardsPreview" [cardContent]="{'imgUrl':card}" [flipped]="true"
         (loaded)="loadedCards = loadedCards + 1"
-        [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.cardsPreview.length}">
+        [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.packcardsPreview.length}">
       </app-card>
     </div>
   </div>
@@ -68,7 +68,7 @@
           הוחלפה תכנית החודש
         </span></button>
     </div>
-    <div *ngIf="data.about" class="action-btn-div">
+    <div *ngIf="data.packabout" class="action-btn-div">
       <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה
       </button>
     </div>

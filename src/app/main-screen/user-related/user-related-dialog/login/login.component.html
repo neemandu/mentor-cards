@@ -8,8 +8,8 @@
           <mat-error *ngIf="loginForm.controls.username.errors?.userNotConfirmed">משתמש לא אומת. יש להכנס למייל ולאמת
             משתמש על מנת להתחבר</mat-error>
           <mat-error *ngIf="loginForm.controls.username.errors?.userNotFound">משתמש לא קיים</mat-error>
-          <mat-error *ngIf="loginForm.controls.username.errors?.LimitExceededException">יותר מדי נסיונות איפוס. יש
-            להמתין ולנסות שוב בהמשך
+          <mat-error *ngIf="loginForm.controls.username.errors?.LimitExceededException">יותר מידי ניסיונות התחברות. נא
+            לנסות שוב בעוד 15 דקות.
           </mat-error>
           <mat-error *ngIf="loginForm.controls.username.errors?.email">כתובת האימייל אינה תקינה, אנא נסו שנית.
           </mat-error>

@@ -9,7 +9,7 @@ import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-import { PackPreviewComponent } from 'src/app/Shared Components/pack/pack-preview/pack-preview.component';
+import { PackPreviewComponent, previewData } from 'src/app/Shared Components/pack/pack-preview/pack-preview.component';
 
 @Component({
   selector: 'app-company-pack-choise',
@@ -76,7 +76,8 @@ export class CompanyPackChoiseComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.maxWidth = '85vw';
     dialogConfig.maxHeight = '90vh';
-    dialogConfig.data = pack;
+    const data: previewData = { 'pack': pack, 'showButtons': false };
+    dialogConfig.data = data;
     this.dialog.open(PackPreviewComponent, dialogConfig);
   }
 

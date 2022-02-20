@@ -1,59 +1,63 @@
 <title>Mentor-Cards עמוד צור קשר</title>
 <div class="content">
-    <div class="contact-form">
-        <div style="text-align: center; margin-bottom: 5%;">
-            <span class="title">תרצו לשתף אותנו במשהו?</span>
-            <div class="line"></div>
-        </div>
-        <mat-card>
-            <mat-card-content>
-                <form class="d-flex flex-column" [formGroup]="contactForm">
-                    <mat-form-field>
-                        <mat-label>שם</mat-label>
-                        <input type="text" matInput formControlName="name">
-                        <mat-error *ngIf="formControls.name.hasError('required')">
-                            חובה להזין שם
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>מייל</mat-label>
-                        <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-                        <mat-error
-                            *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                            יש להזין מייל תקין
-                        </mat-error>
-                        <mat-error *ngIf="formControls.email.hasError('required')">
-                            חובה להזין מייל
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>תוכן</mat-label>
-                        <textarea matInput formControlName="content"></textarea>
-                        <mat-error *ngIf="formControls.content.hasError('required')">
-                            חובה להזין תוכן
-                        </mat-error>
-                    </mat-form-field>
-                </form>
-            </mat-card-content>
-            <mat-card-actions>
-                <button class="action-button" type="button" [disabled]="contactForm.invalid || !contactForm.dirty"
-                    (click)="sendContent()">שלח</button>
-            </mat-card-actions>
-        </mat-card>
-        <br /><br />
-        <br /><br />
-        <div style="text-align: center; margin-bottom: 5%;">
-            <span class="title">  אנחנו זמינים גם ב </span>
-            <a class="title" href="https://wa.me/972549139859?text=שלום%20זה%20בנוגע%20לאתר%20Mentor-Cards"
-            target="_blank">WhatsApp
-        </a>
-        <span class="title">! </span><br />
-        <span class="note">(* בין השעות 8:00-17:00 בימים א' – ה' )</span>
-        <div class="line"></div>
-        </div>
+  <div class="contact-form">
+    <div style="text-align: center; margin-bottom: 5%;">
+      <span class="title">תרצו לשתף אותנו במשהו?</span>
+      <div class="line"></div>
     </div>
-    <img class="img" matTooltip="Photo by Nikita Kachanovsky on Unsplash" matTooltipShowDelay="1000"
-        onload="this.style.opacity='0.8'" src="../../../assets/contact-us.jpg" alt="Decorative chair with a 'Think outside the box' glowing sign">
+    <mat-card>
+      <mat-card-content>
+        <form class="d-flex flex-column" [formGroup]="contactForm">
+          <mat-form-field>
+            <mat-label>שם</mat-label>
+            <input type="text" matInput formControlName="name">
+            <mat-error *ngIf="formControls.name.hasError('required')">
+              חובה להזין שם
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>מייל</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
+            <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
+              יש להזין מייל תקין
+            </mat-error>
+            <mat-error *ngIf="formControls.email.hasError('required')">
+              חובה להזין מייל
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>תוכן</mat-label>
+            <textarea matInput formControlName="content"></textarea>
+            <mat-error *ngIf="formControls.content.hasError('required')">
+              חובה להזין תוכן
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="action-button" type="button" [disabled]="contactForm.invalid || !contactForm.dirty"
+          (click)="sendContent()">שלח</button>
+      </mat-card-actions>
+    </mat-card>
+    <br /><br />
+    <br /><br />
+    <div style="text-align: center; margin-bottom: 5%;">
+      <span class="title"> אנחנו זמינים גם ב </span>
+      <a class="title" href="https://wa.me/972549139859?text=שלום%20זה%20בנוגע%20לאתר%20Mentor-Cards"
+        target="_blank">WhatsApp
+      </a>
+      <span class="title">! </span><br />
+      <span class="note">(* בין השעות 8:00-17:00 בימים א' – ה' )</span>
+      <div class="line"></div><br>
+      <!-- <span class="note">Office@mentor-cards.com </span><br>
+      <span class="note">Support@mentor-cards.com</span> -->
+      <a class="note" href="mailto:Office@mentor-cards.com">Office@mentor-cards.com</a><br>
+      <a class="note" href="mailto:Support@mentor-cards.com">Support@mentor-cards.com</a>
+    </div>
+  </div>
+  <img class="img" matTooltip="Photo by Nikita Kachanovsky on Unsplash" matTooltipShowDelay="1000"
+    onload="this.style.opacity='0.8'" src="../../../assets/contact-us.jpg"
+    alt="Decorative chair with a 'Think outside the box' glowing sign">
 </div>
 
 <app-information-bar></app-information-bar>

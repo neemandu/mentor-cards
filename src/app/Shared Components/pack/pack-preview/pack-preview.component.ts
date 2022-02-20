@@ -1,6 +1,7 @@
 import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { PackContent, PackInfo } from 'src/app/Objects/packs';
 import { UserData } from 'src/app/Objects/user-related';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from '../../Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -136,4 +137,9 @@ export class PackPreviewComponent implements OnInit {
     this.dialogRef.close();
   }
 
+}
+
+export interface previewData {
+  pack: PackContent | PackInfo;
+  showButtons: boolean;
 }
