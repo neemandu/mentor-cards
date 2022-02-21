@@ -14,14 +14,19 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "PayPalSubscriptionsWebHook": {
+        "cardspacks": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        },
+        "PayPalWebhookAPI": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
         },
-        "cardspacks": {
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
+        "receiptsAPI": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
         }
     },
     "function": {
@@ -114,6 +119,88 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "EmailGuideIntroduction": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string",
+            "CloudWatchEventRule": "string"
+        },
+        "MessagingService": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "EmailUpcomingPayment": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string",
+            "CloudWatchEventRule": "string"
+        },
+        "EmailUpcomingEndOfTrialNotice": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string",
+            "CloudWatchEventRule": "string"
+        },
+        "EmailEndOfTrialNotice": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string",
+            "CloudWatchEventRule": "string"
+        },
+        "GetNextReceiptId": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "PayPalWebhookFunc": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "GetSubscriptionPlans": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "UpdateSelectedCardPacks": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "GetEndOfTrialDate": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "IsCardsPackOwnedByOrgForUser": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "AddNewUserToEmailsContactList": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
+    "storage": {
+        "Invoices": {
+            "BucketName": "string",
+            "Region": "string"
         }
     }
 }
