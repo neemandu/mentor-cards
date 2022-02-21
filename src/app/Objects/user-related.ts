@@ -19,11 +19,8 @@ export class UserData {
     cardsPacksIds: string[];
     providerTransactionId?: string | null;
     fullName?: string | null;
-<<<<<<< HEAD
-=======
     endOfTrialDate: Date;
     orgMembership: OrgMembership;
->>>>>>> dev
 
     deseralize(input: any) {
         Object.assign(this, input);
