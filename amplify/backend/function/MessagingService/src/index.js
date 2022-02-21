@@ -12,26 +12,6 @@ const { Parameters } = await (new aws.SSM())
 
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
-/* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
-	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//*
-Use the following code to retrieve configured secrets from SSM:
-
-const aws = require('aws-sdk');
-
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["sendinblueAPIKey"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
-Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
-*/
 
 var AWS = require("aws-sdk");
 const { env } = require("process");
