@@ -1,3 +1,17 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["sendinblueAPIKey"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
@@ -44,7 +58,8 @@ async function getAllRelevantUsers(){
         if (err) {
             console.log("Unable to query. Error:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Query succeeded.");         
+            console.log("Query succeeded.");
+            
             console.log(data.Items.length);
             data.Items.forEach(function(user) {
                 var d = new Date();
@@ -65,7 +80,7 @@ async function getAllRelevantUsers(){
                         }
                     }
                 }
-                users.push(item);               
+                users.push(item);
             });
         }
     }).promise();

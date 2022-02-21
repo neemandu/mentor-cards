@@ -47,6 +47,7 @@ export class UserAuthService {
 
     this.rememebrMe();
     this.getSubscriptionPlans();
+    // this.getSubscriptionPlans();
     window.onstorage = (obj) => {
       console.log(obj);
     };
@@ -60,10 +61,12 @@ export class UserAuthService {
         this.loggedIn(user);
       else
         throw 'No current user - rememberMe retured VOID';
+      // this.getSubscriptionPlans();
     } catch (err) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
       console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
+      this.getSubscriptionPlans();
     }
   }
 
@@ -90,8 +93,10 @@ export class UserAuthService {
       }
       this.userData = new UserData().deseralize(data);
       this.isLoggedIn = true;
+      this.subPlans = undefined;
+      this.getSubscriptionPlans();
       this.userDataEmmiter.emit(this.userData);
-      // console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
+      console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.userData.email);
       // localStorage.setItem('signedin', 'true');
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -103,11 +108,12 @@ export class UserAuthService {
         this.updateGroupData();
       if (this.userData.couponCodes.length != 0) {
         this.userData.couponCodes.forEach(coupon => {
-          if (coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
+          if (!coupon.trialPeriodInDays || coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
         })
       }
-      (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      (this.userData.status === 'PLAN' || this.couponCodesCardPacksAllowed()) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      this.checkOrgTrial();
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
@@ -154,34 +160,27 @@ export class UserAuthService {
   }
 
   /**
-   * Get all data from BE about user
+   * @returns boolean, if any coupon code is valid and has card packs
    */
-  // updateUserData(): void {
-  //   if (this.cognitoUserData != null) {
-  //     this.api.GetUser(this.cognitoUserData.username).then(data => {
-  //       console.log("file: user-auth.service.ts ~ line 89 ~ this.api.GetUser ~ data", data)
-  //       if (!data) {
-  //         this.overlaySpinnerService.changeOverlaySpinner(false);
-  //         return;
-  //       }
-  //       this.userData = new UserData().deseralize(data);
-  //       localStorage.setItem('signedin', 'true');
-  //       this.overlaySpinnerService.changeOverlaySpinner(false);
-  //       if (this.userData.groupId)
-  //         this.updateGroupData();
-  //       if (this.userData.couponCodes.length != 0) {
-  //         this.userData.couponCodes.forEach(coupon => {
-  //           if (coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
-  //             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
-  //         })
-  //       }
-  //       this.loggedInEmmiter.emit(this.userData);
-  //       (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
-  //     }, reject => {
-  //       console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
-  //     })
-  //   }
-  // }
+  private couponCodesCardPacksAllowed() {
+    let allowed = false;
+    this.userData.couponCodes.forEach(coupon => {
+      if (!coupon.trialPeriodInDays || this.checkIfCouponStillValid(coupon.createdAt, coupon.trialPeriodInDays))
+        if (coupon.allowedCardsPacks?.length != 0)
+          allowed = true;
+    })
+    return allowed;
+  }
+
+  /**
+   * 
+   * @param startDate - date of beginning of coupon
+   * @param periodInDays 
+   * @returns boolean, if the coupon is still valid
+   */
+  private checkIfCouponStillValid(startDate: Date | any, periodInDays: number): boolean {
+    return new Date(startDate).getTime() + periodInDays * millisecondsInDay > new Date().getTime();
+  }
 
   /**
    * Get all data about current group
@@ -200,8 +199,10 @@ export class UserAuthService {
    */
   getSubscriptionPlans(): void {
     if (!this.subPlans) {
-      this.api.ListSubscriptionPlans().then(value => {
-        this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+      (this.isLoggedIn ? this.api.GetSubscriptionPlansForOrgs({ username: this.userData.username }) : this.api.GetSubscriptionPlans({ username: 'Not Logged In' })).then((value: any) => {
+        // this.api.ListSubscriptionPlans().then(value => {
+        // this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
+        this.subPlans = value.map(plan => new SubscriptionPlan().deseralize(plan))
         this.subPlansEmmiter.emit();
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
@@ -216,6 +217,21 @@ export class UserAuthService {
     }
   }
 
+  /**
+   * Check if user is in an org, and if trial is done and card packs aren't picked, move them to pack choosing page 
+   */
+  checkOrgTrial(): void {
+    if (this.userData.orgMembership) {
+      if (this.userData.endOfTrialDate.getTime() <= new Date().getTime()) {
+        const id = this.userData.orgMembership.id;
+        const cc = this.userData.couponCodes.find(coupon => coupon.organization.id = id)
+        if (cc.allowedCardsPacks.length == 0) {
+          this.ngZone.run(() => this.router.navigate(['/company-pack-choise']))
+        }
+      }
+    }
+  }
+
   openEnterCouponCodeModal(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -224,7 +240,7 @@ export class UserAuthService {
     const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
       dialogSub1.unsubscribe();
       if (res) {
-        dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
+        dialogConfig.data = new DynamicDialogData("קוד ההטבה הוזן בהצלחה", [], "אישור", "")
         const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
         const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
           dialogSub2.unsubscribe();
@@ -271,6 +287,8 @@ export class UserAuthService {
     // localStorage.removeItem('signedin');
     this.isLoggedIn = false;
     this.userDataEmmiter.emit(undefined);
+    this.subPlans = undefined;
+    this.getSubscriptionPlans();
     // this.router.navigate(['no-program-page']);
   }
 
@@ -313,9 +331,10 @@ export class UserAuthService {
    * return if in trial month (first month after register)
    */
   getTrialPeriodExpDate(): Date {
-    return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
-      new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
-      null;
+    // return this.userData?.createdAt?.getTime() + millisecondsInDay * 14 >= new Date().getTime() ?
+    //   new Date(this.userData.createdAt?.getTime() + millisecondsInDay * 14) :
+    //   null;
+    return this.userData?.endOfTrialDate ? this.userData.endOfTrialDate : null;
   }
 
   /**

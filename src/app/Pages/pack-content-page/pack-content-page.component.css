@@ -1,6 +1,6 @@
-/* * {
+h1,h2 {
   font-family: 'rubik';
-} */
+}
 
 .nav {
   background-color: #ffffffd4;
@@ -27,6 +27,10 @@ app-card:hover {
   align-items: center;
 }
 
+.cards-container {
+  padding-bottom: 3rem;
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 5px;
@@ -34,6 +38,9 @@ app-card:hover {
   margin-top: 15px;
   transform: translateY(0px);
   transition: transform 0.3s linear, opacity 0.3s linear;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bottom-nav-hidden {
@@ -75,6 +82,11 @@ button:focus {
 
 .top-option-btn:active {
   background: #ffebc4;
+}
+
+.top-option-btn-disabled {
+  background: #c3c3c3;
+  color: #686868;
 }
 
 .about-author-option-btn {
@@ -259,6 +271,15 @@ li span {
     font-weight: 800;
     font-size: medium;
   }
+
+  .bottom-nav-edit {
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+
+  .cards-container {
+    padding-bottom: 6rem;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -366,6 +387,11 @@ li span {
 
 .five-cards {
   width: calc(100vw /6);
+}
+
+.remove-btn {
+  margin-bottom: -15px;
+  animation: fadeIn 0.4s, slideUp 0.4s;
 }
 
 mat-icon {

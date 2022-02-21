@@ -3,6 +3,7 @@ import { Card } from './card';
 
 export class PackInfo {
     cards: any[];
+    cardsPreview: any[];
     categories: string[];
     description: string;
     id: string;
@@ -11,6 +12,7 @@ export class PackInfo {
     name: string;
     freeUntilDate: Date;
     about: AboutInput;
+    isOwnedByOrg: boolean;
 
     constructor() { }
 
@@ -23,6 +25,7 @@ export class PackInfo {
 
 export class PackContent {
     cards: Card[];
+    cardsPreview: any[];
     categories: string[];
     description: string;
     id: string;
@@ -32,6 +35,7 @@ export class PackContent {
     name: string;
     freeUntilDate: Date;
     about: AboutInput;
+    isOwnedByOrg: boolean;
 
     constructor() { }
 

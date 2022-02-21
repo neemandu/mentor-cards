@@ -13,6 +13,13 @@ video {
   width: 100%;
 }
 
+.line {
+  background-color: #ffa800;
+  width: 80%;
+  height: 3px;
+  border-radius: 100%;
+}
+
 .actions {
   align-items: center;
   background: #fff1d6de;
@@ -35,6 +42,7 @@ video {
 #top {
   font-size: xx-large;
   line-height: 2rem;
+  font-weight: bold;
 }
 
 #middle {
@@ -43,7 +51,7 @@ video {
 
 #news-title {
   font-size: x-large;
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 
 #bottom {
@@ -82,6 +90,12 @@ button:focus {
   outline: none;
 }
 
+app-information-bar {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -96,8 +110,14 @@ button:focus {
   }
 }
 
-marquee li {
-  margin-bottom: 1%;
+li span {
+  color: black;
+}
+
+.news-list-item {
+  font-size: 1rem;
+  color: var(--main-color);
+  line-height: 2rem;
 }
 
 @media screen and (max-width: 1024px) {
@@ -119,11 +139,5 @@ marquee li {
 
   #top {
     font-size: x-large;
-  }
-
-  app-information-bar {
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
   }
 }

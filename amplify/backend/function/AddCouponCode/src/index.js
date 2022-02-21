@@ -2,14 +2,10 @@
 	API_CARDSPACKS_COUPONCODESTABLE_ARN
 	API_CARDSPACKS_COUPONCODESTABLE_NAME
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_COUPONCODESTABLE_ARN
-	API_CARDSPACKS_COUPONCODESTABLE_NAME
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_ORGANIZATIONMEMBERSHIPTABLE_ARN
+	API_CARDSPACKS_ORGANIZATIONMEMBERSHIPTABLE_NAME
+	API_CARDSPACKS_ORGANIZATIONSTABLE_ARN
+	API_CARDSPACKS_ORGANIZATIONSTABLE_NAME
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
@@ -76,6 +72,40 @@ async function saveUser(user){
     }).promise();
 }
 
+async function getOrgByCode(couponCode){
+    console.log("getOrgByCode: " + couponCode);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var orgTable = env.API_CARDSPACKS_ORGANIZATIONSTABLE_NAME;
+    
+    console.log("check against table: " + orgTable);
+    var subParams = {
+        TableName:orgTable,
+        Key:{
+            "id": couponCode
+        }
+    };
+
+    var couponCodeDb;
+    await docClient.get(subParams, function(err, data) {
+        if (err) {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Get getOrgByCode succeeded:", JSON.stringify(data, null, 2));
+            couponCodeDb = data["Item"];
+        }
+    }).promise();
+
+    if(!couponCodeDb){
+        console.log('no such org - ' + couponCode);
+    }
+
+    return couponCodeDb;
+}
+
+function isUserBelongToOrg(org, email){
+    return org.membersEmails.includes(email);
+}
+
 async function getCouponCode(couponCode){
     console.log("getCouponCode: " + couponCode);
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -135,20 +165,34 @@ exports.handler = async (event) => {
         } 
     }
 
-    if(user){
-        var dbCouponCode = await getCouponCode(couponCode);
-        if(!dbCouponCode){
-            console.warn('no such coupon code - ' + couponCode);
-            throw Error ('no such coupon code - ' + couponCode);
+    var organization = await getOrgByCode(couponCode);
+    if(organization){
+        if(user.userOrgMembershipId){
+            console.log('User: ' + user.email + " already belong to organization: " + user.userOrgMembershipId);
+            throw Error ('User already in organization');
         }
-        if(!user.couponCodes){
-            user.couponCodes = [];
+        else{
+            var isUserBelong = isUserBelongToOrg(organization, user.email);
+            if(!isUserBelong){
+                console.log('User: ' + user.email + " does not belong to organization: " + couponCode);
+                throw Error ('Not in organization');
+            }
+            else{
+                user.userOrgMembershipId = organization.organizationsMembershipId;
+            }
         }
-        dbCouponCode.createdAt = new Date().toISOString();
-        dbCouponCode.updatedAt = new Date().toISOString();
-        user.couponCodes.push(dbCouponCode);
-        await saveUser(user); 
     }
-    
+    var dbCouponCode = await getCouponCode(couponCode);
+    if(!dbCouponCode){
+        console.warn('no such coupon code - ' + couponCode);
+        throw Error ('no such coupon code - ' + couponCode);
+    }
+    if(!user.couponCodes){
+        user.couponCodes = [];
+    }
+    dbCouponCode.createdAt = new Date().toISOString();
+    dbCouponCode.updatedAt = new Date().toISOString();
+    user.couponCodes.push(dbCouponCode);
+    await saveUser(user); 
     return true;
 };

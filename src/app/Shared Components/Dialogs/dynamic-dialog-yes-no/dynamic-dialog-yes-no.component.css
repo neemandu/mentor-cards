@@ -30,6 +30,7 @@ mat-toolbar {
 .title {
   font-size: larger;
   margin-right: -15px;
+  text-align: center;
 }
 
 .line {
@@ -45,7 +46,7 @@ mat-toolbar {
 }
 
 #title-div {
-  text-align: start;
+  /* text-align: start; */
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }

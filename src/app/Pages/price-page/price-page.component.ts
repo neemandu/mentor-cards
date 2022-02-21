@@ -23,8 +23,8 @@ const millisecondsInTwoWeeks: number = 1209600000;
 })
 export class PricePageComponent implements OnInit {
 
-  configAmountsOfUsers: number[] = [];
-  numOfUsersSelected: number;
+  // configAmountsOfUsers: number[] = [];
+  // numOfUsersSelected: number;
   packSelected: SubscriptionPlan;
   changedPlansThisMonth: boolean = false;
   ownsCurrentPlanLabel: boolean = false;
@@ -78,17 +78,6 @@ export class PricePageComponent implements OnInit {
     }
     this.userData = this.userAuthService.userData;
     console.log("file: price-page.component.ts ~ line 80 ~ ngOnInit ~ this.userData", this.userData)
-    /* if (this.userAuthService.userData?.lastPlanSubstitutionDate &&
-       new Date(this.userAuthService.userData?.lastPlanSubstitutionDate).getTime() + millisecondsInMonth > new Date().getTime() && this.userAuthService.userData?.numberOfPlansSubstitutions > 1) {
-       this.changedPlansThisMonth = true;
-     } else {
-       this.ownsCurrentPlanLabel = false;
-     }
-     this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
-       this.userData = userData;
-       this.overlaySpinnerService.changeOverlaySpinner(false);
-     }));
-     this.userData = this.userAuthService.userData;*/
   }
 
   getSubscriptionPlans(): void {
@@ -123,25 +112,25 @@ export class PricePageComponent implements OnInit {
     }
     else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
-      // if (this.userAuthService.trialPeriodExpDate || this.userAuthService.codeCouponExpDate != null) {
-      if (this.userAuthService.trialPeriodExpDate) {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.maxHeight = '85vh';
-        dialogConfig.maxWidth = '85vw';
-        let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
-        textInModal += this.userAuthService.trialPeriodExpDate.toLocaleDateString('he-IL');
-        dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
-        const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-        var dialogSub = dialogRef.afterClosed().subscribe(res => {
-          dialogSub.unsubscribe();
-          if (res) {
-            this.openApprovePurchaseDialog();
-          }
-        });
-      }
-      else if (this.userData?.status === 'PLAN') {
+      // if (this.userAuthService.trialPeriodExpDate) {
+      //   const dialogConfig = new MatDialogConfig();
+      //   dialogConfig.disableClose = true;
+      //   dialogConfig.autoFocus = true;
+      //   dialogConfig.maxHeight = '85vh';
+      //   dialogConfig.maxWidth = '85vw';
+      //   let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
+      //   textInModal += this.userAuthService.trialPeriodExpDate.toLocaleDateString('he-IL');
+      //   dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
+      //   const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+      //   var dialogSub = dialogRef.afterClosed().subscribe(res => {
+      //     dialogSub.unsubscribe();
+      //     if (res) {
+      //       this.openApprovePurchaseDialog();
+      //     }
+      //   });
+      // }
+      // else if (this.userData?.status === 'PLAN') {
+      if (this.userData?.status === 'PLAN') {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -184,7 +173,7 @@ export class PricePageComponent implements OnInit {
     var now = new Date();
     var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
     var monthsDiff = this.monthDiff(createdAt, now);
-    var numOfCycles = (monthsDiff / cycles) + 1;
+    var numOfCycles = Math.ceil(monthsDiff / cycles);
     var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(createdAt.getTime() + numberOfMonthsToAdd).toLocaleDateString('he-IL');

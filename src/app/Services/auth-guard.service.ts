@@ -157,3 +157,39 @@ export class AuthGuardSiteContentManagementService implements CanActivate {
     }
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardCompanyCardChoiseService implements CanActivate {
+
+  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+
+  canActivate(): boolean {
+    // debugger;
+    if (this.userAuthService?.userData?.orgMembership) {
+      if (this.userAuthService.userData.endOfTrialDate <= new Date()) {
+        return true;
+      }
+    }
+    this.ngZone.run(() => this.router.navigate(['home-page']));
+    return false;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardPricePageService implements CanActivate {
+
+  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+
+  canActivate(): boolean {
+    // debugger;
+    if (this.userAuthService?.subPlans) {
+      return true;
+    }
+    this.ngZone.run(() => this.router.navigate(['home-page']));
+    return false;
+  }
+}

@@ -6,6 +6,12 @@
         "read",
         "update"
       ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
       "Group:@model(appsync)": [
         "read"
       ]
@@ -17,7 +23,7 @@
       "resourceName": "mentorcardsMailingListService",
       "version": "Always choose latest version",
       "isLatestVersionSelected": true,
-      "env": "prod"
+      "env": "dev"
     }
   ],
   "environmentVariableList": [

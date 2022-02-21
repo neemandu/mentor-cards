@@ -1,21 +1,27 @@
 {
   "permissions": {
     "storage": {
-      "CardsPack:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
       "User:@model(appsync)": [
         "create",
         "read",
         "update"
       ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
       "Group:@model(appsync)": [
         "create",
         "read",
         "update"
+      ],
+      "CardsPack:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },

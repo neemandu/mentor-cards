@@ -2,28 +2,42 @@
   <mat-icon>highlight_off</mat-icon>
 </button>
 <div class="d-flex flex-column">
-  <p class="main-header">{{data.name}}</p>
-  <p class="content categories-tags">{{data.description}}</p>
-  <div *ngIf="data.about" class="action-btn-div" style="margin-bottom: 1rem;">
+  <p class="main-header">{{data.pack.name}}</p>
+  <p class="content categories-tags">{{data.pack.description}}</p>
+  <div *ngIf="data.pack.about" class="action-btn-div" style="margin-bottom: 1rem;">
     <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה</button>
   </div>
   <div id="example-cards" style="display: contents;">
     <p class="sub-header">קלפים לדוגמא</p>
     <div class="card-previews">
-      <app-card *ngFor="let card of data.cardsPreview" [cardContent]="{'imgUrl':card}" [flipped]="true"
+      <app-card *ngFor="let card of data.pack.cardsPreview" [cardContent]="{'imgUrl':card}" [flipped]="true"
         (loaded)="loadedCards = loadedCards + 1"
-        [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.cardsPreview.length}">
+        [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.pack.cardsPreview.length}">
       </app-card>
     </div>
   </div>
-  <div *ngIf="trialPeriodDate" id="actions" class="d-flex flex-column">
+  <div *ngIf="trialPeriodDate && !userData.orgMembership" id="actions" class="d-flex flex-column">
     <h1 style="text-align: center">
-      תקופת הניסיון שלך הסתיימה.
+      תקופת הניסיון הסתיימה.
     </h1>
     <div class="d-flex d-flex justify-content-around">
-      <button class="action-button" type="button" (click)="navigate('/price-page')">להרשמה לתכנית</button>
+      <button class="action-button" type="button" (click)="navigate('/price-page')">לגישה מלאה לכל ערכות הקלפים</button>
     </div>
   </div>
+  <div *ngIf="trialPeriodDate && userData.orgMembership" id="actions" class="d-flex flex-column">
+    <!-- <h1 style="text-align: center">
+      לגישה מלאה לכל ערכות הקלפים
+    </h1> -->
+    <div class="d-flex d-flex justify-content-around">
+      <button class="action-button" type="button" (click)="navigate('/price-page')">לגישה מלאה לכל ערכות הקלפים</button>
+    </div>
+  </div>
+
+  <!-- <div id="actions" class="d-flex justify-content-center">
+    <button class="action-button" type="button" (click)="navigate('/price-page')">
+      שדרג תוכנית
+    </button>
+  </div> -->
   <!-- <div id="actions" class="d-flex flex-row justify-content-around">
     <div *ngIf="signedIn && hasProgram" class="action-btn-div">
       <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
@@ -54,7 +68,7 @@
           הוחלפה תכנית החודש
         </span></button>
     </div>
-    <div *ngIf="data.about" class="action-btn-div">
+    <div *ngIf="data.packabout" class="action-btn-div">
       <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה
       </button>
     </div>

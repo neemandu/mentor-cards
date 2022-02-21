@@ -1,31 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query GetContactUsModel($id: ID!) {
-  getContactUsModel(id: $id) {
-    id
-    name
-    content
-    email
-    createdAt
-    updatedAt
-  }
-}
-query ListContactUsModels(
-  $filter: ModelContactUsModelFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listContactUsModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      content
-      email
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
 query GetUser($id: ID!) {
   getUser(id: $id) {
     id
@@ -48,6 +21,14 @@ query GetUser($id: ID!) {
         billingCycleInMonths
         fullPrice
         discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -63,17 +44,33 @@ query GetUser($id: ID!) {
     cancellationDate
     couponCodes {
       id
-      organization
       couponCode
       discount
       trialPeriodInDays
       allowedCardsPacks
+      organization {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
     cardsPacksIds
     providerTransactionId
     fullName
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    endOfTrialDate
     createdAt
     updatedAt
   }
@@ -105,6 +102,14 @@ query ListUsers(
           billingCycleInMonths
           fullPrice
           discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -120,17 +125,148 @@ query ListUsers(
       cancellationDate
       couponCodes {
         id
-        organization
         couponCode
         discount
         trialPeriodInDays
         allowedCardsPacks
+        organization {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
       cardsPacksIds
       providerTransactionId
       fullName
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      endOfTrialDate
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetCouponCodes($id: ID!) {
+  getCouponCodes(id: $id) {
+    id
+    couponCode
+    discount
+    trialPeriodInDays
+    allowedCardsPacks
+    organization {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListCouponCodess(
+  $filter: ModelCouponCodesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCouponCodess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      couponCode
+      discount
+      trialPeriodInDays
+      allowedCardsPacks
+      organization {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetOrganizations($id: ID!) {
+  getOrganizations(id: $id) {
+    id
+    membersEmails
+    membership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      createdAt
+      updatedAt
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListOrganizationss(
+  $filter: ModelOrganizationsFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOrganizationss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      membersEmails
+      membership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetOrganizationMembership($id: ID!) {
+  getOrganizationMembership(id: $id) {
+    id
+    name
+    trialPeriodInDays
+    numberOfallowedCardsPacks
+    createdAt
+    updatedAt
+  }
+}
+query ListOrganizationMemberships(
+  $filter: ModelOrganizationMembershipFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOrganizationMemberships(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
       createdAt
       updatedAt
     }
@@ -154,6 +290,14 @@ query GetGroup($id: ID!) {
       billingCycleInMonths
       fullPrice
       discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -183,6 +327,14 @@ query ListGroups(
         billingCycleInMonths
         fullPrice
         discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -192,68 +344,109 @@ query ListGroups(
     nextToken
   }
 }
-query GetCouponCodes($id: ID!) {
-  getCouponCodes(id: $id) {
+query GetMessageQueue($id: ID!) {
+  getMessageQueue(id: $id) {
     id
-    organization
-    couponCode
-    discount
-    trialPeriodInDays
-    allowedCardsPacks
+    email
+    emailDeliveryTime
+    phone
+    smsDeliveryTime
+    emailTemplateId
+    name
+    params
     createdAt
     updatedAt
   }
 }
-query ListCouponCodess(
-  $filter: ModelCouponCodesFilterInput
+query ListMessageQueues(
+  $filter: ModelMessageQueueFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listCouponCodess(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listMessageQueues(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      organization
-      couponCode
-      discount
-      trialPeriodInDays
-      allowedCardsPacks
+      email
+      emailDeliveryTime
+      phone
+      smsDeliveryTime
+      emailTemplateId
+      name
+      params
       createdAt
       updatedAt
     }
     nextToken
   }
 }
-query GetSubscriptionPlan($id: ID!) {
-  getSubscriptionPlan(id: $id) {
+query GetInvoices($id: ID!) {
+  getInvoices(id: $id) {
     id
-    name
-    description
-    providerPlanId
-    numberOfUsers
-    numberOfCardPacks
-    billingCycleInMonths
-    fullPrice
-    discount
+    email
+    fullName
+    customerAddress
+    date
+    invoiceRunningId
+    items {
+      itemName
+      pricePerItem
+      numberOfItems
+    }
+    businessName
+    businessPhoneNumber
+    businessAddress
+    businessWebsite
+    invoiceType
     createdAt
     updatedAt
   }
-} 
-query ListSubscriptionPlans(
-  $filter: ModelSubscriptionPlanFilterInput
+}
+query ListInvoicess(
+  $filter: ModelInvoicesFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listSubscriptionPlans(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listInvoicess(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
+      email
+      fullName
+      customerAddress
+      date
+      invoiceRunningId
+      items {
+        itemName
+        pricePerItem
+        numberOfItems
+      }
+      businessName
+      businessPhoneNumber
+      businessAddress
+      businessWebsite
+      invoiceType
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetReceiptsId($id: ID!) {
+  getReceiptsId(id: $id) {
+    id
+    counter
+    createdAt
+    updatedAt
+  }
+}
+query ListReceiptsIds(
+  $filter: ModelReceiptsIdFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listReceiptsIds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      counter
       createdAt
       updatedAt
     }
@@ -307,6 +500,9 @@ query GetCardsPack($id: ID!) {
               name
               subElements {
                 name
+                subElements {
+                  name
+                }
               }
             }
           }
@@ -320,6 +516,7 @@ query GetCardsPack($id: ID!) {
       imgUrl
       link
     }
+    isOwnedByOrg
     createdAt
     updatedAt
   }
@@ -364,6 +561,34 @@ query ListCardsPacks(
         imgUrl
         link
       }
+      isOwnedByOrg
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetContactUsModel($id: ID!) {
+  getContactUsModel(id: $id) {
+    id
+    name
+    content
+    email
+    createdAt
+    updatedAt
+  }
+}
+query ListContactUsModels(
+  $filter: ModelContactUsModelFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listContactUsModels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      content
+      email
       createdAt
       updatedAt
     }

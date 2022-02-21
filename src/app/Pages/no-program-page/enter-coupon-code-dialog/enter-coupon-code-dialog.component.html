@@ -5,7 +5,7 @@
     </button>
 </mat-toolbar>
 <div class="line"></div>
-<div mat-dialog-content>
+<mat-dialog-content>
     <form class="d-flex flex-column" [formGroup]="userForm">
         <mat-form-field>
             <mat-label>קוד הטבה</mat-label>
@@ -16,9 +16,15 @@
             <mat-error *ngIf="formControls.couponCode.hasError('userHasCoupon')">
                 קיים לך כבר קוד הטבה
             </mat-error>
+            <mat-error *ngIf="formControls.couponCode.hasError('userAlreadyInOrganization')">
+                קוד הטבה עבור אירגון זה כבר פעיל
+            </mat-error>
+            <mat-error *ngIf="formControls.couponCode.hasError('notInOrganization')">
+                כתובת המייל שלך אינה נמצאת במאגרי המידע שברשותינו. אנא פנו לאיש הקשר באירגונכם
+            </mat-error>
         </mat-form-field>
     </form>
-</div>
+</mat-dialog-content>
 
 <div class="buttons" mat-dialog-actions>
     <button class="action-button" type="button" (click)="enterGroup()"

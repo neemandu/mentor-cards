@@ -19,12 +19,18 @@ export class UserData {
     cardsPacksIds: string[];
     providerTransactionId?: string | null;
     fullName?: string | null;
+<<<<<<< HEAD
+=======
+    endOfTrialDate: Date;
+    orgMembership: OrgMembership;
+>>>>>>> dev
 
     deseralize(input: any) {
         Object.assign(this, input);
         this.firstProgramRegistrationDate = new Date(input.firstProgramRegistrationDate);
         this.createdAt = input.createdAt ? new Date(input.createdAt) : undefined;
         this.couponCodes = input.couponCodes?.map(couponCode => new CouponCode(couponCode));
+        this.endOfTrialDate = input.endOfTrialDate ? new Date(input.endOfTrialDate) : undefined;
         return this;
     }
 }
@@ -54,7 +60,7 @@ export class GroupUser {
 
 export class CouponCode {
     id: string;
-    organization: string;
+    organization: OrgMembership;
     couponCode: string;
     discount: number;
     trialPeriodInDays: number;
@@ -67,4 +73,13 @@ export class CouponCode {
         this.createdAt = new Date(input.createdAt);
         this.updatedAt = new Date(input.updatedAt);
     }
+}
+
+export class OrgMembership {
+    id: string;
+    name: string;
+    trialPeriodInDays: number;
+    numberOfallowedCardsPacks: number;
+    createdAt: string;
+    updatedAt: string;
 }

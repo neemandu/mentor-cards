@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "storage": {
+      "User:@model(appsync)": [
+        "read"
+      ],
+      "SubscriptionPlan:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

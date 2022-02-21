@@ -78,7 +78,7 @@ mat-toolbar {
 
 .img {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 0.5s;
   max-height: 80vh;
   border-radius: 50px;
   animation: shadow 5s ease-in-out infinite;

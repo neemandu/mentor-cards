@@ -40,6 +40,10 @@ export class EnterCouponCodeDialogComponent implements OnInit {
         this.formControls.couponCode.setErrors({ 'noSuchCoupon': true });
       else if ((reject.errors[0].message).toLowerCase().startsWith("coupon code already in use"))
         this.formControls.couponCode.setErrors({ 'userHasCoupon': true });
+      else if ((reject.errors[0].message).toLowerCase().startsWith("user already in organization"))
+        this.formControls.couponCode.setErrors({ 'userAlreadyInOrganization': true });
+      else if ((reject.errors[0].message).toLowerCase().startsWith("not in organization"))
+        this.formControls.couponCode.setErrors({ 'notInOrganization': true });
       this.overlaySpinnerService.changeOverlaySpinner(false);
     })
   }

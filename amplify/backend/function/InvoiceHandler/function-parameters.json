@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "api": {
+      "receiptsAPI": [
+        "read"
+      ]
+    },
+    "storage": {
+      "Invoices": [
+        "create",
+        "read",
+        "update"
+      ],
+      "User:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

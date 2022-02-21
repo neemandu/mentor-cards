@@ -51,24 +51,15 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
-    //   // this.overlaySpinnerService.changeOverlaySpinner(true);
-    //   this.getAllPacks();
-    // }));
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       // this.overlaySpinnerService.changeOverlaySpinner(true);
       this.userData = userData;
       userData ? this.getAllPacks() : null;
     }));
-    // window.addEventListener('resize', () => { this.mobile = window.screen.width <= 600 });
-    // this.mobile = window.screen.width <= 600;
     this.loadedPacks = 0;
     this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
       this.allFavorites = favorites;
-      // this.favoritesFilter();
       this.setAllFavPacksToShow();
-      // this.filterPacks();
-      // this.sortPacks();
     }));
 
     this.overlaySpinnerService.changeOverlaySpinner(true);
@@ -78,22 +69,6 @@ export class AllPacksPageComponent implements OnInit {
 
   openEnterCouponCodeModal(): void {
     this.userAuthService.openEnterCouponCodeModal();
-    // const dialogConfig = new MatDialogConfig();
-    // dialogConfig.disableClose = true;
-    // dialogConfig.autoFocus = true;
-    // const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
-    // const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
-    //   dialogSub1.unsubscribe();
-    //   if (res) {
-    //     dialogConfig.data = new DynamicDialogData("קוד הטבה הוזן בהצלחה", [], "אישור", "")
-    //     const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-    //     const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
-    //       dialogSub2.unsubscribe();
-    //       this.router.navigate(['all-packs-page']);
-    //       window.location.reload();
-    //     })
-    //   }
-    // });
   }
 
   /**
@@ -113,33 +88,6 @@ export class AllPacksPageComponent implements OnInit {
         this.setAllFavPacksToShow();
       })
       this.cardsService.getAllPacks();
-      // let authStatus = localStorage.getItem('signedin');
-      // (authStatus === 'true' ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
-      //   // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
-      //   this.cardsService.setAllPacks(packs)
-      //   this.allPacks = packs.items.map(pack => {
-      //     pack.categories.forEach(category => {
-      //       if (!this.allCategories.includes(category))
-      //         this.allCategories.push(category);
-      //     });
-      //     return new PackContent().deseralize(pack)
-      //   });
-      //   // console.log("file: all-packs-page.component.ts ~ line 75 ~ packs", packs)
-      //   this.cardsService.allPacks = this.allPacks.map(pack => pack);
-      //   this.cardsService.allCategories = this.allCategories.map(category => category);
-      //   this.allFavorites = this.cardsService.favorites;
-      //   // console.log("file: all-packs-page.component.ts ~ line 83 ~ this.allPacks", this.allPacks)
-      //   this.sortPacks();
-      //   this.overlaySpinnerService.changeOverlaySpinner(false);
-      // }, reject => {
-      //   this.overlaySpinnerService.changeOverlaySpinner(false);
-      //   let snackBarRef = this.cardsService._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
-      //     duration: 20000,
-      //   });
-      //   snackBarRef.onAction().subscribe(() => {
-      //     window.location.reload();
-      //   });
-      // })
     }
   }
 
@@ -168,55 +116,9 @@ export class AllPacksPageComponent implements OnInit {
     this.userAuthService.loggedIn();
   }
 
-  // allPacksUnderCategory(category: string): PackContent[] {
-  //   return this.allPacks.filter(pack => pack.categories.includes(category));
+  // getCategoryColor(category): string {
+  //   return this.cardsService.getCategoryColor(category);
   // }
-
-  // allFavoritePacks(): PackContent[] {
-  //   return this.allPacks.filter(pack => this.allFavorites.includes(pack.id));
-  // }
-
-  /**
-   * Sort all packs so that favorites are first 
-   */
-  // sortPacks(): void {
-  //   this.allPacks?.sort((packA, packB) => {
-  //     //free packs
-  //     if (packA.freeUntilDate > new Date())
-  //       return -1;
-  //     if (packB.freeUntilDate > new Date())
-  //       return 1;
-  //     //favorites
-  //     if (this.allFavorites.includes(packA.id) && this.allFavorites.includes(packB.id))
-  //       return 0;
-  //     if (this.allFavorites.includes(packA.id))
-  //       return -1;
-  //     if (this.allFavorites.includes(packB.id))
-  //       return 1;
-  //     else
-  //       return packA.categories[0].localeCompare(packB.categories[0]);
-  //   })
-  // }
-
-  /**
-   * Return all packs that user ownes
-   */
-  // allOwnedPacks(): PackContent[] {
-  //   return this.allPacks ? this.allPacks.filter(pack => pack.cards.length != 0) : [];
-  //   // return this.allPacks.filter(pack => pack.cards);
-  // }
-
-  /**
-   * Return all packs that user doesn't own
-   */
-  // allNotOwnedPacks(): PackContent[] {
-  //   return this.allPacks ? this.allPacks.filter(pack => pack.cards.length == 0) : [];
-  //   // return this.allPacks.filter(pack => !pack.cards);
-  // }
-
-  getCategoryColor(category): string {
-    return this.cardsService.getCategoryColor(category);
-  }
 
   get signedIn() {
     return this.userAuthService.userData;
@@ -233,21 +135,6 @@ export class AllPacksPageComponent implements OnInit {
   get codeCouponExpDate() {
     return this.userAuthService.codeCouponExpDate;
   }
-
-  // get expDate() {
-  //   return this.userAuthService.expDate;
-  // }
-
-  /**
-   * Show more or less categories
-   */
-  // categoriesToShowChange(): void {
-  //   if (this.categoriesToShow < this.allCategories.length) {
-  //     this.categoriesToShow = this.allCategories.length;
-  //   } else {
-  //     this.categoriesToShow = 5;
-  //   }
-  // }
 
   packLoaded(): void {
     this.loadedPacks++;

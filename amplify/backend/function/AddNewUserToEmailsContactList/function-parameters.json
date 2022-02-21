@@ -1,0 +1,12 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "contactListId",
+      "environmentVariableName": "CONTACT_LIST_ID"
+    }
+  ],
+  "secretNames": [
+    "sendinblueAPIKey"
+  ]
+}

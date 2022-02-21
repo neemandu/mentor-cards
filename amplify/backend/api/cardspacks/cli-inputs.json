@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authmentorcards56dbf153"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 365,
+        "apiKeyExpirationDate": "2022-12-23T07:32:53.846Z",
+        "keyDescription": "mentor-cards"
+      }
+    ],
+    "conflictResolution": {},
+    "apiName": "cardspacks",
+    "gqlSchemaPath": "C:\\Projects\\Mentor-Cards\\mentor-cards\\amplify\\backend\\api\\cardspacks\\schema.graphql"
+  }
+}
