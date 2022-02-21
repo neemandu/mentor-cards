@@ -75,14 +75,23 @@
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/ContactUsTrigger-4d772f5a484143382f6c-build.zip"
         },
-        "PayPalCancelWebhook": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalCancelWebhook-6d4358376c2b3868566f-build.zip"
-        },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/UpdatePaymentProgram-5a5876626d674f2f7948-build.zip"
-        }
+        },
+        "EmailGuideIntroduction": {},
+        "MessagingService": {},
+        "EmailUpcomingPayment": {},
+        "EmailUpcomingEndOfTrialNotice": {},
+        "EmailEndOfTrialNotice": {},
+        "GetNextReceiptId": {},
+        "PayPalWebhookFunc": {},
+        "GetSubscriptionPlans": {},
+        "UpdateSelectedCardPacks": {},
+        "GetEndOfTrialDate": {},
+        "IsCardsPackOwnedByOrgForUser": {},
+        "AddNewUserToEmailsContactList": {},
+        "InvoiceHandler": {}
       }
     }
   },
