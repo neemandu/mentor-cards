@@ -93,7 +93,9 @@ async function sendEmail(tempalteId, email, params, name){
     });
   console.log("Send Email: sending POST Start");
 
-  await post(defaultOptions, "/v3/smtp/email", body);
+  var msg = await post(defaultOptions, "/v3/smtp/email", body);
+  console.log('post msg: ');
+  console.log(msg);
   console.log("Send Email: sending POST End");
 }
 
