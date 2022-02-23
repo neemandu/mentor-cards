@@ -12,26 +12,6 @@ const { Parameters } = await (new aws.SSM())
 
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
-/* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
-	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//*
-Use the following code to retrieve configured secrets from SSM:
-
-const aws = require('aws-sdk');
-
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["sendinblueAPIKey"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
-Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
-*/
 
 var AWS = require("aws-sdk");
 const { env } = require("process");
@@ -50,6 +30,7 @@ const post = (defaultOptions, path, payload) => new Promise((resolve, reject) =>
           var buf = "";
           if(buffer != ""){
               buf = JSON.parse(buffer);
+              console.log(buf);
           }
           resolve(buf);
           })
@@ -113,7 +94,9 @@ async function sendEmail(tempalteId, email, params, name){
     });
   console.log("Send Email: sending POST Start");
 
-  await post(defaultOptions, "/v3/smtp/email", body);
+  var msg = await post(defaultOptions, "/v3/smtp/email", body);
+  console.log('msg');
+  console.log(msg);
   console.log("Send Email: sending POST End");
 }
 
@@ -124,7 +107,7 @@ async function markAsSent(record){
     "emailDeliveryTime": new Date().toISOString(),
     "phone": record.phone.S,
     "smsDeliveryTime": null,
-    "emailTemplateId": record.emailTemplateId.N,
+    "emailTemplateId": record.emailTemplateId.S,
     "name": record.name.S,
     "params": record.params.M
   };
@@ -154,7 +137,7 @@ exports.handler = async (event) => {
       console.log("streamedItem");
       console.log(streamedItem);
       //pull off items from stream
-      const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.N;
+      const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.S;
       const email = streamedItem.dynamodb.NewImage.email.S;
       const params = streamedItem.dynamodb.NewImage.params.M;
       const name = streamedItem.dynamodb.NewImage.name.S;
