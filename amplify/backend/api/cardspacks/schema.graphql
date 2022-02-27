@@ -50,8 +50,9 @@ type MonthlySubscription {
 
 type SubscriptionPlan
   @model (queries: null)
-  @auth(rules: [{ allow: private, provider: userPools }
-                { allow: public, operations: [read] }] ) {
+  @auth(rules: [{ allow: private, provider: userPools, operations: [read] }
+                { allow: public, operations: [read] },
+                { allow: groups, groups: ["Admins"] }] ) {
   id: ID!
   name: String
   description: String
@@ -66,7 +67,8 @@ type SubscriptionPlan
 
 type CouponCodes
   @model
-  @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}]) {
+  @auth(rules: [{ allow: private, operations: [read], provider: userPools},
+                { allow: groups, groups: ["Admins"] }]) {
   id: ID!
   couponCode: String
   discount: Float
@@ -77,7 +79,8 @@ type CouponCodes
 
 type Organizations
   @model
-  @auth(rules: [{ allow: private, operations: [read, create, update] }]) {
+  @auth(rules: [{ allow: private, operations: [read] },
+                { allow: groups, groups: ["Admins"] }]) {
   id: ID! 
   membersEmails: [AWSEmail] 
   membership: OrganizationMembership @connection 
@@ -85,7 +88,8 @@ type Organizations
 
 type OrganizationMembership
   @model
-  @auth(rules: [{ allow: private, operations: [read, create, update, delete] }]) {
+  @auth(rules: [{ allow: private, operations: [read] },
+                { allow: groups, groups: ["Admins"] }]) {
   id: ID! 
   name: String
   trialPeriodInDays: Int
@@ -109,8 +113,9 @@ type Group
 
 type News
   @model
-  @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}
-                {allow: public, operations: [read] }]) {
+  @auth(rules: [{allow: private, operations: [read], provider: userPools}
+                {allow: public, operations: [read] },
+                { allow: groups, groups: ["Admins"] }]) {
   id: ID!
   message: String
   order: Int
@@ -159,7 +164,7 @@ type ContactUsModel
 
 type Invoices
   @model
-  @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}]) {
+  @auth(rules: [{ allow: groups, groups: ["Admins"] }]) {
   id: ID!
   email: String
   fullName: String

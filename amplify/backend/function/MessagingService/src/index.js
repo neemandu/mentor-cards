@@ -107,7 +107,7 @@ async function markAsSent(record){
     "emailDeliveryTime": new Date().toISOString(),
     "phone": record.phone.S,
     "smsDeliveryTime": null,
-    "emailTemplateId": record.emailTemplateId.S,
+    "emailTemplateId": record.emailTemplateId.N,
     "name": record.name.S,
     "params": record.params.M
   };
@@ -134,14 +134,16 @@ async function markAsSent(record){
 exports.handler = async (event) => {
   for (const streamedItem of event.Records) {
     if (streamedItem.eventName === 'INSERT') {
-      console.log("streamedItem");
-      console.log(streamedItem);
       //pull off items from stream
-      const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.S;
+      const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.N;
       const email = streamedItem.dynamodb.NewImage.email.S;
       const params = streamedItem.dynamodb.NewImage.params.M;
       const name = streamedItem.dynamodb.NewImage.name.S;
-
+      
+      console.log("sendEmail: tempalteId: " + templateId + " | email: " + email + " | name: " + name);
+      console.log('params:');
+      console.log(params);
+  
       await sendEmail(
         templateId, 
         email, 
