@@ -73,7 +73,7 @@ function getBillingEndDate(user) {
     var monthsDiff = monthDiff(createdAt, user.cancellationDate);
     console.log('monthsDiff is: ');
     console.log(monthsDiff);
-    var numOfCycles = Math.ceil(monthsDiff / cycles);
+    var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
     console.log('numOfCycles is: ');
     console.log(numOfCycles);
     var numberOfMonthsToAdd = numOfCycles * cycles;

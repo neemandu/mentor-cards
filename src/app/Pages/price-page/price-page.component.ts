@@ -173,7 +173,7 @@ export class PricePageComponent implements OnInit {
     var now = new Date();
     var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
     var monthsDiff = this.monthDiff(createdAt, now);
-    var numOfCycles = Math.ceil(monthsDiff / cycles);
+    var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
     var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(createdAt.getTime() + numberOfMonthsToAdd).toLocaleDateString('he-IL');
