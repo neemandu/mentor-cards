@@ -30,22 +30,18 @@ async function getUser(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
     }
 
     return user;
-
 }
 
 async function updateUserPackSubstitution(user){
@@ -63,15 +59,11 @@ async function updateUserPackSubstitution(user){
 
     console.log("updateUserPackSubstitution...");
     
-        await docClient.put(params, function(err, data) {
-            if (err) {
-                console.error("Unable to updateUserPackSubstitution. Error JSON:", JSON.stringify(err, null, 2));
-                //callback("Failed");
-            } else {
-                console.log("Added item:", JSON.stringify(data, null, 2));
-                //callback(null, data);
-            }
-        }).promise();
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item:", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updateUserPackSubstitution. Error JSON:", JSON.stringify(err, null, 2));
+    });
     
         console.log("Done updateUserPackSubstitution...");
 }

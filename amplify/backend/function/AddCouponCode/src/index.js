@@ -32,15 +32,12 @@ async function getUserByUSerName(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
@@ -51,27 +48,23 @@ async function getUserByUSerName(username){
 }
 
 async function saveUser(user){
-    
-    user.updatedAt = new Date().toISOString();
     var docClient = new AWS.DynamoDB.DocumentClient();
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
-    var params = {
+    user.updatedAt = new Date().toISOString();
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+    var updatedUserParams = {
         TableName: userTable,
         Item: user
     };
 
-    await docClient.put(params, function(err, data) {
-        if (err) {
-            console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-}
+    console.log("updating user " + user.id + " as unsubscribed" );
 
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
+}
 async function getOrgByCode(couponCode){
     console.log("getOrgByCode: " + couponCode);
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -85,21 +78,19 @@ async function getOrgByCode(couponCode){
         }
     };
 
-    var couponCodeDb;
-    await docClient.get(subParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get getOrgByCode succeeded:", JSON.stringify(data, null, 2));
-            couponCodeDb = data["Item"];
-        }
-    }).promise();
+    var org;
+    await docClient.get(subParams).promise().then(data => {
+        console.log("Get getOrgByCode succeeded:", JSON.stringify(data, null, 2));
+        org = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
-    if(!couponCodeDb){
+    if(!org){
         console.log('no such org - ' + couponCode);
     }
 
-    return couponCodeDb;
+    return org;
 }
 
 function isUserBelongToOrg(org, email){
@@ -120,14 +111,12 @@ async function getCouponCode(couponCode){
     };
 
     var couponCodeDb;
-    await docClient.get(subParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get getCouponCode succeeded:", JSON.stringify(data, null, 2));
+    await docClient.get(subParams).promise().then(data => {
+        console.log("Get getCouponCode succeeded:", JSON.stringify(data, null, 2));
             couponCodeDb = data["Item"];
-        }
-    }).promise();
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!couponCodeDb){
         throw Error ('no such Coupon Code - ' + couponCode);

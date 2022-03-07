@@ -55,16 +55,12 @@ async function removeUserFromCardsPack(cardsPack, username){
             Item: cardsPack
         };
     
-    
-        await docClient.put(cardPackParams, function(err, data) {
-            if (err) {
-                console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
-                //callback("Failed");
-            } else {
-                console.log("updated pack with new user:", JSON.stringify(data, null, 2));
-                //callback(null, data);
-            }
-        }).promise();
+        await docClient.put(cardPackParams).promise().then(data => {
+            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+          }).catch(err => {
+            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+          });
+
     }  
 }
 
@@ -78,16 +74,14 @@ async function removeUserFromAllPacks(user){
     };
     console.log("searching for number of used packs for - " + user.username);
     
-    await docClient.scan(params, function(err, data) {
-        if (err) {
-            console.error("Unable to read packs. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get packs succeeded:", JSON.stringify(data, null, 2));
-            data.Items.forEach(async function(item) {
-                await removeUserFromCardsPack(item, user.username);
-            });
-        }
-    }).promise();
+    await docClient.scan(params).promise().then(data => {      
+        console.log("Get packs succeeded:", JSON.stringify(data, null, 2));
+        data.Items.forEach(async function(item) {
+            await removeUserFromCardsPack(item, user.username);
+        });    
+    }).catch(err => {
+        console.error("Unable to read packs. Error JSON:", JSON.stringify(err, null, 2));
+    });
 }
 
 async function getUserByUSerName(username){
@@ -107,15 +101,12 @@ async function getUserByUSerName(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
@@ -142,16 +133,14 @@ async function getUserByEmail(email){
     var user;
     console.log("searching for user - " + email);
 
-    await docClient.query(userParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
-            if(data["Items"] && data["Items"].length > 0){
-                user = data["Items"][0];
-            }
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
         }
-    }).promise();
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such email - ' + email);
@@ -173,15 +162,11 @@ async function saveUser(user){
 
     console.log("updating user " + user.id + " as unsubscribed" );
 
-    await docClient.put(updatedUserParams, function(err, data) {
-        if (err) {
-            console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 const post = (defaultOptions, path, payload) => new Promise((resolve, reject) => {
@@ -264,15 +249,14 @@ async function getGroup(groupId){
     };
 
     var group;
-    await docClient.get(groupParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
-            group = data["Item"];
-        }
-    }).promise();
 
+    await docClient.get(groupParams).promise().then(data => {
+        console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+        group = data["Item"];
+      }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+      });
+      
     if(!group){
         throw Error ('no such Group - ' + groupId);
     }
@@ -300,16 +284,12 @@ async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
             }
         }
     };
-
-    await docClient.put(params, function (err, data) {
-        if (err) {
-            console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+      }).catch(err => {
+        console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+      });
+    
 }
 
 exports.handler = async (event) => {

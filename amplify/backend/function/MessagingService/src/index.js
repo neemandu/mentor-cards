@@ -63,7 +63,7 @@ async function sendEmail(tempalteId, email, params, name){
   console.log(params);
 
   var api_key = await getParam();
-
+  var t_name = name == "" ? "לקוח מנטור-קארדס" : name;
   var defaultOptions = {
       host: 'api.sendinblue.com',
       port: 443, 
@@ -86,7 +86,7 @@ async function sendEmail(tempalteId, email, params, name){
         "to":[
              {
                 "email": email,
-                "name": name
+                "name": t_name
              }
           ]
       }
@@ -107,9 +107,11 @@ async function markAsSent(record){
     "emailDeliveryTime": new Date().toISOString(),
     "phone": record.phone.S,
     "smsDeliveryTime": null,
-    "emailTemplateId": record.emailTemplateId.N,
-    "name": record.name.S,
-    "params": record.params.M
+    "emailTemplateId": record.emailTemplateId?.N ?? record.emailTemplateId?.S,
+    "name": record.name?.S ?? "",
+    "params": record.params?.M ?? "",
+    "createdAt": record.createdAt?.S ?? new Date().toISOString(),
+    "updatedAt": new Date().toISOString()
   };
 
   var docClient = new AWS.DynamoDB.DocumentClient();
@@ -120,37 +122,51 @@ async function markAsSent(record){
       Item: updatedRecord
   };
 
-  await docClient.put(params, function(err, data) {
-      if (err) {
-          console.error("Unable to update message Q. Error JSON:", JSON.stringify(err, null, 2));
-          //callback("Failed");
-      } else {
-          console.log("Added item:", JSON.stringify(data, null, 2));
-          //callback(null, data);
-      }
-  }).promise();
+  await docClient.put(params).promise().then(data => {
+    console.log("Added item:", JSON.stringify(data, null, 2));
+  }).catch(err => {
+    console.error("Unable to update message Q. Error JSON:", JSON.stringify(err, null, 2));
+  });
+
 }
 
 exports.handler = async (event) => {
+  console.log('Message Service STARTS!!!!');
   for (const streamedItem of event.Records) {
     if (streamedItem.eventName === 'INSERT') {
-      //pull off items from stream
-      const templateId = streamedItem.dynamodb.NewImage.emailTemplateId.N;
+      console.log('streamedItem');
+      console.log(streamedItem);
+      var templateId = streamedItem.dynamodb.NewImage.emailTemplateId.N;
+      if(!templateId){
+        templateId = streamedItem.dynamodb.NewImage.emailTemplateId.S;
+      }
       const email = streamedItem.dynamodb.NewImage.email.S;
-      const params = streamedItem.dynamodb.NewImage.params.M;
-      const name = streamedItem.dynamodb.NewImage.name.S;
+      var params = streamedItem.dynamodb.NewImage.params.M;
+      var name = streamedItem.dynamodb.NewImage.name?.S ?? "לקוח/ה יקר/ה";
       
+      if(params && 
+      Object.keys(params).length === 0 && 
+      Object.getPrototypeOf(params) === Object.prototype){
+        params = {
+          "name": name
+        };
+      }
+
       console.log("sendEmail: tempalteId: " + templateId + " | email: " + email + " | name: " + name);
       console.log('params:');
       console.log(params);
   
-      await sendEmail(
-        templateId, 
-        email, 
-        params,
-        name);
-
+      try{
+        await sendEmail(
+          templateId, 
+          email, 
+          params,
+          name);
+      
         await markAsSent(streamedItem.dynamodb.NewImage);
+      }catch(error) {
+        console.error(error);
+      }
     }
   }
   return { status: 'done' };

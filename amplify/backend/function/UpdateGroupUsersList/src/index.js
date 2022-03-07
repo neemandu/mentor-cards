@@ -22,21 +22,20 @@ var AWS = require("aws-sdk");
 async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
+    user.updatedAt = new Date().toISOString();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
     var updatedUserParams = {
         TableName: userTable,
         Item: user
     };
 
-    await docClient.put(updatedUserParams, function(err, data) {
-        if (err) {
-            console.error("Unable to update " + user.id + ". Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated user " + user.id + ".", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    console.log("updating user " + user.id + " as unsubscribed" );
+
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 async function getUserByUSerName(username){
@@ -56,15 +55,12 @@ async function getUserByUSerName(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
@@ -91,16 +87,14 @@ async function getUserByEmail(email){
     var user;
     console.log("searching for user - " + email);
 
-    await docClient.query(userParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
-            if(data["Items"] && data["Items"].length > 0){
-                user = data["Items"][0];
-            }
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
         }
-    }).promise();
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     return user;
 
@@ -120,14 +114,13 @@ async function getGroup(groupId){
     };
 
     var group;
-    await docClient.get(groupParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
-            group = data["Item"];
-        }
-    }).promise();
+
+    await docClient.get(groupParams).promise().then(data => {
+        console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+        group = data["Item"];
+      }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+      });
 
     if(!group){
         throw Error ('no such Group - ' + groupId);
@@ -215,13 +208,11 @@ async function updateGroup(group, userlist){
     };
 
     var group;
-    await docClient.put(groupParams, function(err, data) {
-        if (err) {
-            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Updated Group succeeded:", JSON.stringify(data, null, 2));
-        }
-    }).promise();
+    await docClient.put(groupParams).promise().then(data => {
+        console.log("Updated Group succeeded:", JSON.stringify(data, null, 2));
+      }).catch(err => {
+        console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+      });
 }
 
 exports.handler = async (event) => {

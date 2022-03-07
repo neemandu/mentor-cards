@@ -31,63 +31,18 @@ async function getUser(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such user - ' + username);
+    }
 
     return user;
-
-}
-var g_username;
-var g_group;
-async function onScan(err, data) {
-    if (err) {
-        console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-    } else {
-        // print all the movies
-        console.log("Scan succeeded.");
-        data.Items.forEach(function(group) {
-           if(group.groupUsers){
-               for(var i =0 ; i< group.groupUsers.length; i++){
-                   if(group.groupUsers[i].username == g_username){
-                    g_group = group;
-                    break;
-                   }
-               }
-           }
-        });
-
-        // continue scanning if we have more movies, because
-        // scan can retrieve a maximum of 1MB of data
-        if (typeof data.LastEvaluatedKey != "undefined") {
-            console.log("Scanning for more...");
-            params.ExclusiveStartKey = data.LastEvaluatedKey;
-            await docClient.scan(params, onScan).promise();
-        }
-    }
-}
-
-async function getUserGroup(username){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    g_username = username;
-    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
-
-    
-    var groupParams = {
-        TableName:groupTable
-    };
-
-    console.log("searching for user - " + username);
-
-    await docClient.scan(groupParams, onScan).promise();
-
-    return g_group;
 }
 
 async function addWelcomeEmailToMessageQueue(email, phone, fullName){
@@ -111,15 +66,11 @@ async function addWelcomeEmailToMessageQueue(email, phone, fullName){
         }
     };
 
-    await docClient.put(params, function(err, data) {
-        if (err) {
-            console.error("Unable to add welcome message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to add welcome message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+    });
 }
 
 exports.handler = async (event) => {
@@ -184,15 +135,11 @@ exports.handler = async (event) => {
         console.log("Adding a new user...");
         console.log(params);
     
-        await docClient.put(params, function(err, data) {
-            if (err) {
-                console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
-                //callback("Failed");
-            } else {
-                console.log("Added item:", JSON.stringify(data, null, 2));
-                //callback(null, data);
-            }
-        }).promise();
+        await docClient.put(params).promise().then(data => {
+            console.log("Added item:", JSON.stringify(data, null, 2));
+        }).catch(err => {
+            console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
+        })
 
         await addWelcomeEmailToMessageQueue(email, phone, fullName);
     

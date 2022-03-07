@@ -10,7 +10,7 @@ Amplify Params - DO NOT EDIT */
 const { env, ppid } = require("process");
 var AWS = require("aws-sdk");
 
-async function getUserByUserName(username){
+async function getUserByUSerName(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
@@ -27,15 +27,12 @@ async function getUserByUserName(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
@@ -63,15 +60,12 @@ async function getPlansByOrgId(orgId){
 
     var org;
 
-    await docClient.query(subsParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get org succeeded:", JSON.stringify(data, null, 2));
-            org = data["Items"];
-        }
-    }).promise();
+    await docClient.query(subsParams).promise().then(data => {
+        console.log("Get org succeeded:", JSON.stringify(data, null, 2));
+        org = data["Items"];
+    }).catch(err => {            
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!org){
         console.error('no such org id - ' + orgId);
