@@ -94,7 +94,9 @@ async function getOrgByCode(couponCode){
 }
 
 function isUserBelongToOrg(org, email){
-    return org.membersEmails.includes(email);
+    return org.some(element => {
+        return element.toLowerCase() === email.toLowerCase();
+      });
 }
 
 async function getCouponCode(couponCode){
