@@ -50,22 +50,21 @@ export class LoginComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-    // this.amplifyAuthService.isLoggedIn$.subscribe(
-    //   isLoggedIn => {
-    //     (this.isLoggedIn = isLoggedIn);
-    //     console.log("log in!!!!!!");
-    //   }
-    // );
-
-    // this.amplifyAuthService.auth$.subscribe(({ id, username, email }) => {
-    //   this.user = { id, username, email };
-    // });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.registeredEmail) {
       this.showConfirmUserForm()
     }
+  }
+
+  /**
+   * (yaniv knobel @ intel . com) -> yanivknobel@intel.com
+   * @param form - form to clean username space out of 
+   */
+  trimSpacesEmail(form, field): void {
+    if(form.controls[field].value !== '')
+      form.controls[field].setValue(form.controls[field].value.split(' ').join(''))
   }
 
   /**
@@ -96,16 +95,8 @@ export class LoginComponent implements OnInit {
       "password": this.loginForm.get("password").value,
     }
     this.amplifyAuthService.logIn(user).then(userData => {
-      // this.userData = userData;
-      // if (userData.challengeName) {
-      //   if (userData.challengeName === "NEW_PASSWORD_REQUIRED")
-      //     this.showNewPwChallange()
-      // }
-      // else {
       this.userAuthService.loggedIn(userData);
       this.loggedInCloseDialog.emit();
-      // this.navigate('/all-packs-page');
-      // }
     })
       .catch(err => {
         console.log("file: login.component.ts ~ line 84 ~ onLoginSubmit ~ err", err)
@@ -273,8 +264,8 @@ export class LoginComponent implements OnInit {
   onConfirmSubmit(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.amplifyAuthService.confirmCode(this.confirmForm.controls['username'].value, this.confirmForm.controls['confirmationCode'].value.trim())
-    .then((data: any) => {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+      .then((data: any) => {
+        this.overlaySpinnerService.changeOverlaySpinner(false);
         // console.log(data);
         if (data === 'SUCCESS') {
           this.userAuthService._snackBar.open(
