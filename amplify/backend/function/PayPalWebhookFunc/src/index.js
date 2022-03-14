@@ -22,15 +22,11 @@ async function saveUser(user){
 
     console.log("updating user " + user.id + " as unsubscribed" );
 
-    await docClient.put(updatedUserParams, function(err, data) {
-        if (err) {
-            console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 async function getGroup(groupId){
@@ -47,14 +43,12 @@ async function getGroup(groupId){
     };
 
     var group;
-    await docClient.get(groupParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
-            group = data["Item"];
-        }
-    }).promise();
+    await docClient.get(groupParams).promise().then(data => {
+        console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+        group = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!group){
         throw Error ('no such Group - ' + groupId);
@@ -79,17 +73,16 @@ async function getUserByEmail(email){
     };
     var user;
     console.log("searching for user - " + email);
-
-    await docClient.query(userParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
-            if(data["Items"] && data["Items"].length > 0){
-                user = data["Items"][0];
-            }
+   
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
         }
-    }).promise();
+        
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such email - ' + email);
@@ -123,40 +116,6 @@ async function cancelUserSubscription(user){
     await saveUser(user);
 }
 
-async function sendRecipt(user){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
-    var d = new Date();
-    var id = email + "_RECIPT_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    var params = {
-        TableName: table,
-        Item: {
-            "id": id,
-            "email": user.email,
-            "emailDeliveryTime": null,
-            "phone": user.phone,
-            "smsDeliveryTime": null,
-            "emailTemplateId": 11,
-            "name": user.fullName,
-            "params": {
-                "name": user.fullName,
-                "program": user.subscription.subscriptionPlan.description,
-                "amount": user.subscription.subscriptionPlan.fullPrice
-            }
-        }
-    };
-
-    await docClient.put(params, function (err, data) {
-        if (err) {
-            console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-}
-
 async function getUserByPayPalTxId(transaction_id){
     console.log("searching user by paypal transaction id - " + transaction_id);
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -174,16 +133,14 @@ async function getUserByPayPalTxId(transaction_id){
     };
     var user;
 
-    await docClient.query(userParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user by paypal transaction id succeeded:", JSON.stringify(data, null, 2));
-            if(data["Items"] && data["Items"].length > 0){
-                user = data["Items"][0];
-            }
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
         }
-    }).promise();
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such  paypal transaction id - ' + transaction_id);
@@ -213,16 +170,11 @@ async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
             }
         }
     };
-
-    await docClient.put(params, function (err, data) {
-        if (err) {
-            console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+      }).catch(err => {
+        console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+      });
 }
 
 exports.handler = async (event) => {

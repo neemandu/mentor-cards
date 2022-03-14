@@ -49,7 +49,7 @@ function shouldSentUpcomingBillingAlert(user){
     var nextBillingCycle = getBillingEndDate(user);
     var now = new Date();
     var Difference_In_Time = nextBillingCycle.getTime() - now.getTime();
-    var Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
+    var Difference_In_Days = Math.floor(Difference_In_Time / (1000 * 3600 * 24));
     console.log('Next billing date: ');
     console.log(nextBillingCycle);
     console.log('Now: ');
@@ -81,39 +81,39 @@ async function getAllRelevantUsers(){
 
     console.log("searching for users with a plan");
     var users = [];
-    await docClient.query(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to query. Error:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Query succeeded.");
-            
-            console.log(data.Items.length);
-            data.Items.forEach(function(user) {
-                var a = shouldSentUpcomingBillingAlert(user);
-                if(a){
-                    var d = new Date();
-                    var id = user.email + "_UPCOMING_PAYMENT_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-                    var item = {
-                        PutRequest: {
-                            Item: {
-                                "id": id,
-                                "email": user.email,
-                                "emailDeliveryTime": null,
-                                "phone": user.phone,
-                                "smsDeliveryTime": null,
-                                "emailTemplateId": 5,
-                                "name": user.fullName,
-                                "params": {
-                                    "name": user.fullName
-                                }
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Query succeeded.");    
+        console.log(data.Items.length);
+        data.Items.forEach(function(user) {
+            var a = shouldSentUpcomingBillingAlert(user);
+            if(a){
+                var d = new Date();
+                var id = user.email + "_UPCOMING_PAYMENT_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+                var item = {
+                    PutRequest: {
+                        Item: {
+                            "id": id,
+                            "email": user.email,
+                            "emailDeliveryTime": null,
+                            "phone": user.phone,
+                            "smsDeliveryTime": null,
+                            "emailTemplateId": 5,
+                            "createdAt": new Date().toISOString(),
+                            "updatedAt": new Date().toISOString(),
+                            "name": user.fullName,
+                            "params": {
+                                "name": user.fullName
                             }
                         }
                     }
-                    users.push(item);
                 }
-            });
-        }
-    }).promise();
+                users.push(item);
+            }
+        });
+        
+    }).catch(err => {
+        console.log("Unable to query. Error:", JSON.stringify(err, null, 2));
+    });
     return users;
 }
 
@@ -125,19 +125,17 @@ async function insertRecordsToMessagingQueue(users){
             [table]: users
         }
     };
-    await docClient.batchWrite(params, function(err, data) {
-        if (err) {
-            console.error("Unable to batchWrite. Error JSON:", JSON.stringify(err, null, 2));
-            console.log("params");
-            console.log(params);
-            //callback("Failed");
-        } else {
-            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
-            console.log("params");
-            console.log(params);
-            //callback(null, data);
-        }
-    }).promise();
+    await docClient.batchWrite(params).promise().then(data => {
+        console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+        console.log("params");
+        console.log(params);
+        //callback(null, data);
+    }).catch(err => {
+        console.error("Unable to batchWrite. Error JSON:", JSON.stringify(err, null, 2));
+        console.log("params");
+        console.log(params);
+        //callback("Failed");)
+    });
 }
 
 exports.handler = async (event) => {

@@ -198,15 +198,14 @@ async function getInvoiceRunningId(){
   var additionalParams = {
   };
   var body = {
-      //This is where you define the body of the request
   };
   var id = 0;
   apigClient.invokeApi(pathParams, pathTemplate, method, additionalParams, body)
       .then(function(result){
         console.log(result);
         id = result;
-      }).catch( function(result){
-        console.log(result);
+      }).catch( function(err){
+        console.error(err);
     });
 
   return id;

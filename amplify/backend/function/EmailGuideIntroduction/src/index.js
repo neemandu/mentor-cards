@@ -54,36 +54,36 @@ async function getAllRelevantUsers(){
     console.log("start date: " + startDate);
     console.log("end date: " + endDate);
     var users = [];
-    await docClient.query(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to query. Error:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Query succeeded.");
-            
-            console.log(data.Items.length);
-            data.Items.forEach(function(user) {
-                var d = new Date();
-                var id = user.email + "_GUIDE_AFTER_7_DAYS_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-                var item = {
-                    PutRequest: {
-                        Item: {
-                            "id": id,
-                            "email": user.email,
-                            "emailDeliveryTime": null,
-                            "phone": user.phone,
-                            "smsDeliveryTime": null,
-                            "emailTemplateId": 3,
-                            "name": user.fullName,
-                            "params": {
-                                "name": user.fullName
-                            }
+    await docClient.query(userParams).promise().then(data =>{
+        console.log("Query succeeded.");
+        
+        console.log(data.Items.length);
+        data.Items.forEach(function(user) {
+            var d = new Date();
+            var id = user.email + "_GUIDE_AFTER_7_DAYS_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+            var item = {
+                PutRequest: {
+                    Item: {
+                        "id": id,
+                        "email": user.email,
+                        "emailDeliveryTime": null,
+                        "phone": user.phone,
+                        "smsDeliveryTime": null,
+                        "emailTemplateId": 3,
+                        "createdAt": new Date().toISOString(),
+                        "updatedAt": new Date().toISOString(),
+                        "name": user.fullName,
+                        "params": {
+                            "name": user.fullName
                         }
                     }
                 }
-                users.push(item);
-            });
-        }
-    }).promise();
+            }
+            users.push(item);
+        });
+    }).catch(err => {
+        console.error("Error JSON:", JSON.stringify(err, null, 2));
+    });
     return users;
 }
 
@@ -95,19 +95,14 @@ async function insertRecordsToMessagingQueue(users){
             [table]: users
         }
     };
-    await docClient.batchWrite(params, function(err, data) {
-        if (err) {
-            console.error("Unable to batchWrite. Error JSON:", JSON.stringify(err, null, 2));
-            console.log("params");
-            console.log(params);
-            //callback("Failed");
-        } else {
-            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
-            console.log("params");
-            console.log(params);
-            //callback(null, data);
-        }
-    }).promise();
+
+    await docClient.batchWrite(params).promise().then(data => {
+        console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to batchWrite. Error JSON:", JSON.stringify(err, null, 2));
+        console.log("params");
+        console.log(params);
+    });
 }
 
 exports.handler = async (event) => {

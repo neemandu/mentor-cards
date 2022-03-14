@@ -28,15 +28,12 @@ async function getUserByUSerName(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
@@ -47,25 +44,22 @@ async function getUserByUSerName(username){
 }
 
 async function saveUser(user){
-    
-    user.updatedAt = new Date().toISOString();
     var docClient = new AWS.DynamoDB.DocumentClient();
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
-    var params = {
+    user.updatedAt = new Date().toISOString();
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+    var updatedUserParams = {
         TableName: userTable,
         Item: user
     };
 
-    await docClient.put(params, function(err, data) {
-        if (err) {
-            console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    console.log("updating user " + user.id + " as unsubscribed" );
+
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 exports.handler = async (event) => {

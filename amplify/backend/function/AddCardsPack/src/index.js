@@ -30,104 +30,41 @@ async function getUser(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
     }
 
     return user;
-
 }
 
 function userReachedMaximumPacks(user){
     return user.cardsPacks && user.cardsPacks.length == user.subscription.subscriptionPlan.numberOfCardPacks;
 }
 
-async function getCardsPack(cardsPackId){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-
-    var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
-    var cardsParams = {
-        TableName: cardPackTable,
-        Key:{
-            "id": cardsPackId
-        }
-    };
-
-    console.log("searching for card - " + cardsPackId);
-
-    var cardPack;
-
-    await docClient.get(cardsParams, function(err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get card succeeded:", JSON.stringify(data, null, 2));
-            cardPack = data["Item"];
-        }
-    }).promise();
-
-    if(!cardPack){
-        throw Error ('no such card - ' + cardsPackId);
-    }
-
-    return cardPack;
-}
-
-async function pushUserToCardsPack(cardsPack, username){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-
-    var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
-
-    cardsPack.usersIds.push(username);
-    var cardPackParams = {
-        TableName: cardPackTable,
-        Key:{
-            "id" : cardsPack.id
-        },
-        Item: cardsPack
-    };
-
-    console.log("updating pack with new user : " +username);
-
-    await docClient.put(cardPackParams, function(err, data) {
-        if (err) {
-            console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("updated pack with new user:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
-}
-
 async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
-    var params = {
+    user.updatedAt = new Date().toISOString();
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+    var updatedUserParams = {
         TableName: userTable,
         Item: user
     };
 
-    console.log("saveUser " +user.username);
+    console.log("updating user " + user.id + " as unsubscribed" );
 
-    await docClient.put(params, function(err, data) {
-        if (err) {
-            console.error("Unable to saveUser. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("updated saveUser:", JSON.stringify(data, null, 2));
-        }
-    }).promise();
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 exports.handler = async (event) => {

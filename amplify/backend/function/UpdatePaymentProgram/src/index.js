@@ -18,15 +18,15 @@ Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
 
-async function getUserByUSerName(username) {
+async function getUserByUSerName(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
-
+    
     var userParams = {
-        TableName: userTable,
-        Key: {
+        TableName:userTable,
+        Key:{
             "id": username
         }
     };
@@ -35,18 +35,15 @@ async function getUserByUSerName(username) {
 
     var user;
 
-    await docClient.get(userParams, function (err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
-    if (!user) {
-        throw Error('no such user - ' + username);
+    if(!user){
+        throw Error ('no such user - ' + username);
     }
 
     return user;
@@ -70,16 +67,14 @@ async function getUserByEmail(email) {
     var user;
     console.log("searching for user - " + email);
 
-    await docClient.query(userParams, function (err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
-            if (data["Items"] && data["Items"].length > 0) {
-                user = data["Items"][0];
-            }
-        }
-    }).promise();
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if (data["Items"] && data["Items"].length > 0) {
+            user = data["Items"][0];
+        }    
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if (!user) {
         throw Error('no such email - ' + email);
@@ -103,14 +98,12 @@ async function getPaymentProgram(subId) {
     };
 
     var subscription;
-    await docClient.get(subParams, function (err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get PaymentProgram succeeded:", JSON.stringify(data, null, 2));
-            subscription = data["Item"];
-        }
-    }).promise();
+    await docClient.get(subParams).promise().then(data => {
+        console.log("Get PaymentProgram succeeded:", JSON.stringify(data, null, 2));
+        subscription = data["Item"];      
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if (!subscription) {
         throw Error('no such subscription - ' + subId);
@@ -139,14 +132,12 @@ async function getGroup(groupId) {
     };
 
     var group;
-    await docClient.get(groupParams, function (err, data) {
-        if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
-            group = data["Item"];
-        }
-    }).promise();
+    await docClient.get(groupParams).promise().then(data => {
+        console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+        group = data["Item"];    
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if (!group) {
         throw Error('no such Group - ' + groupId);
@@ -155,26 +146,23 @@ async function getGroup(groupId) {
     return group;
 }
 
-async function saveUser(user) {
+async function saveUser(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
 
     user.updatedAt = new Date().toISOString();
-    var docClient = new AWS.DynamoDB.DocumentClient();
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
-
-    var params = {
+    var updatedUserParams = {
         TableName: userTable,
         Item: user
     };
 
-    await docClient.put(params, function (err, data) {
-        if (err) {
-            console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    console.log("updating user " + user.id + " as unsubscribed" );
+
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 async function updateMonthlySubscription(user, paymentProgram, transId) {
@@ -250,15 +238,11 @@ async function createGroup(email, subscriptionPlan) {
         }
     };
 
-    await docClient.put(params, function (err, data) {
-        if (err) {
-            console.error("Unable to create group. Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added group:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+    await docClient.put(params).promise().then(data => {
+        console.log("Added group:", JSON.stringify(data, null, 2));
+        }).catch(err => {
+            console.error("Unable to updating group. Error JSON:", JSON.stringify(err, null, 2));
+        }); 
 
     return id;
 }
@@ -284,15 +268,11 @@ async function addNewSubscriptionEmailToMessageQueue(templateId, email, phone, f
         }
     };
 
-    await docClient.put(params, function (err, data) {
-        if (err) {
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+        }).catch(err => {
             console.error("Unable to add _NEW_SUBSCRIPTION_PLAN_ message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
-            //callback("Failed");
-        } else {
-            console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
-            //callback(null, data);
-        }
-    }).promise();
+        }); 
 }
 
 exports.handler = async (event) => {
