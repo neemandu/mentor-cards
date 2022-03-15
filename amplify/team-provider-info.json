@@ -112,7 +112,7 @@
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetSubscriptionPlans-555664444e3473616669-build.zip"
+          "s3Key": "amplify-builds/GetSubscriptionPlans-657a494632794a6e7239-build.zip"
         },
         "UpdateSelectedCardPacks": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
