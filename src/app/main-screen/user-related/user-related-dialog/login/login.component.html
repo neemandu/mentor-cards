@@ -4,7 +4,8 @@
       <div class="d-flex flex-column">
         <mat-form-field>
           <mat-label>אימייל</mat-label>
-          <input autocomplete="off" formControlName="username" matInput color="primary" inputmode="email">
+          <input autocomplete="off" formControlName="username" matInput color="primary" inputmode="email"
+            (focusout)="trimSpacesEmail(loginForm, 'username')">
           <mat-error *ngIf="loginForm.controls.username.errors?.userNotConfirmed">משתמש לא אומת. יש להכנס למייל ולאמת
             משתמש על מנת להתחבר</mat-error>
           <mat-error *ngIf="loginForm.controls.username.errors?.userNotFound">משתמש לא קיים</mat-error>
@@ -41,7 +42,8 @@
       <div class="d-flex flex-column">
         <mat-form-field>
           <mat-label>אימייל</mat-label>
-          <input autocomplete="off" formControlName="username" matInput inputmode="email">
+          <input autocomplete="off" formControlName="username" matInput inputmode="email"
+            (focusout)="trimSpacesEmail(forgotPasswordForm, 'username')">
           <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.userNotFound">משתמש לא קיים</mat-error>
           <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.limitExceeded">יותר מדי נסיונות. יש
             להמתין ולנסות שוב בהמשך</mat-error>
@@ -83,11 +85,13 @@
       <div class="d-flex flex-column">
         <mat-form-field>
           <mat-label>אימייל</mat-label>
-          <input autocomplete="off" formControlName="username" matInput color="primary" inputmode="email">
+          <input autocomplete="off" formControlName="username" matInput color="primary" inputmode="email"
+            (focusout)="trimSpacesEmail(confirmForm, 'username')">
         </mat-form-field>
         <mat-form-field>
-          <mat-label>(נשלח לאימייל) קוד אימות</mat-label>
-          <input autocomplete="off" formControlName="confirmationCode" matInput color="primary" inputmode="numeric">
+          <mat-label>קוד אימות (נשלח למייל)</mat-label>
+          <input autocomplete="off" formControlName="confirmationCode" matInput color="primary" inputmode="numeric"
+            (focusout)="trimSpacesEmail(confirmForm, 'confirmationCode')">
           <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.CodeMismatchException">קוד לא תואם לקוד שנשלח,
             נסו שנית</mat-error>
           <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.LimitExceededException">יותר מדי נסיונות. יש

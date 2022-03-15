@@ -38,34 +38,6 @@ export class PricePageComponent implements OnInit {
 
   constructor(public _snackBar: MatSnackBar, private api: APIService,
     private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
-    // this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
-    //   this.userAuthService.subPlans.forEach(plan => {
-    //     this.configAmountsOfUsers.push(plan.numberOfUsers);
-    //   })
-    //   this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
-    //   this.overlaySpinnerService.changeOverlaySpinner(false);
-    //   if (!this.userAuthService.userData) {
-    //     this.packSelected = this.userAuthService.subPlans[5];
-    //     this.numOfUsersSelected = this.configAmountsOfUsers[1];
-    //   }
-    // }));
-    // if (this.userAuthService.userData || this.userAuthService.subPlans) {
-    //   this.userAuthService.subPlans.forEach(plan => {
-    //     this.configAmountsOfUsers.push(plan.numberOfUsers);
-    //   })
-    //   this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
-    //   if (this.userAuthService.userData && this.userAuthService.userData.status === "PLAN") {//Plan already exists
-    //     this.packSelected = this.userAuthService.subPlans.find(plan => plan.id === this.userAuthService.userData.subscription.subscriptionPlan.id);
-    //     this.numOfUsersSelected = this.userAuthService.userData.subscription.subscriptionPlan.numberOfUsers;
-    //     this.overlaySpinnerService.changeOverlaySpinner(false);
-    //   }
-    //   else {//No plan for current user
-    //     // debugger
-    //     this.packSelected = this.userAuthService.subPlans[5];
-    //     this.numOfUsersSelected = this.configAmountsOfUsers[1];
-    //     this.overlaySpinnerService.changeOverlaySpinner(false);
-    //   }
-    // }
   }
 
   ngOnInit(): void {
@@ -112,24 +84,6 @@ export class PricePageComponent implements OnInit {
     }
     else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
-      // if (this.userAuthService.trialPeriodExpDate) {
-      //   const dialogConfig = new MatDialogConfig();
-      //   dialogConfig.disableClose = true;
-      //   dialogConfig.autoFocus = true;
-      //   dialogConfig.maxHeight = '85vh';
-      //   dialogConfig.maxWidth = '85vw';
-      //   let textInModal = "כל ערכות הקלפים פתוחות לשימושכם בחינם עד ל-"
-      //   textInModal += this.userAuthService.trialPeriodExpDate.toLocaleDateString('he-IL');
-      //   dialogConfig.data = new DynamicDialogData("תקופת ניסיון חינמית באתר", ["שימו לב!", textInModal, "תהנו מזה!"], "המשך בכל זאת", "בטל")
-      //   const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-      //   var dialogSub = dialogRef.afterClosed().subscribe(res => {
-      //     dialogSub.unsubscribe();
-      //     if (res) {
-      //       this.openApprovePurchaseDialog();
-      //     }
-      //   });
-      // }
-      // else if (this.userData?.status === 'PLAN') {
       if (this.userData?.status === 'PLAN') {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
@@ -169,18 +123,18 @@ export class PricePageComponent implements OnInit {
   }
 
   private get nextPaymentDate() {
-    var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
-    var now = new Date();
-    var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
-    var monthsDiff = this.monthDiff(createdAt, now);
-    var numOfCycles = Math.ceil(monthsDiff / cycles);
-    var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
+    let cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
+    let now = new Date();
+    let createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    let monthsDiff = this.monthDiff(createdAt, now);
+    let numOfCycles = Math.floor(monthsDiff / cycles) + 1;
+    let numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
     const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(createdAt.getTime() + numberOfMonthsToAdd).toLocaleDateString('he-IL');
   }
 
   private monthDiff(d1, d2) {
-    var months;
+    let months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
     months -= d1.getMonth();
     months += d2.getMonth();

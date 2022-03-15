@@ -34,6 +34,16 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * (yaniv knobel @ intel . com) -> yanivknobel@intel.com
+   * @param form - form to clean username space out of 
+   */
+  trimSpacesEmail(form): void {
+    if (form.controls['username'].value !== '')
+      form.controls['username'].setValue(form.controls['username'].value.split(' ').join(''))
+    console.log(form.controls['username'])
+  }
+
   checkUsernameConfirm(): void {
     if (this.registerForm.controls.username.value.toLowerCase() !== this.registerForm.controls.usernameConfirm.value.toLowerCase())
       this.registerForm.controls.usernameConfirm.setErrors({ 'notSameEmail': true })

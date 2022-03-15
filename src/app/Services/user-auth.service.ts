@@ -27,10 +27,7 @@ const millisecondsInDay: number = 86400000;
 export class UserAuthService {
 
   @Output() userDataEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
-  // @Output() loggedInEmmiter: EventEmitter<UserData> = new EventEmitter<UserData>();
-  // @Output() signedOutEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() groupDataEmmiter: EventEmitter<GroupData> = new EventEmitter<GroupData>();
-  // @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() addCouponCodeToFavs: EventEmitter<string[]> = new EventEmitter<string[]>();
   isLoggedIn = false;
@@ -38,8 +35,8 @@ export class UserAuthService {
   cognitoUserData: CognitoUserInterface;
   subPlans: SubscriptionPlan[];
   userData: UserData;
-  // userData: any;
   groupData: GroupData;
+  rememberMeDone: boolean = false;
 
   constructor(public _snackBar: MatSnackBar, public router: Router,
     private ngZone: NgZone, private api: APIService, private http: HttpClient,
@@ -47,7 +44,6 @@ export class UserAuthService {
 
     this.rememebrMe();
     this.getSubscriptionPlans();
-    // this.getSubscriptionPlans();
     window.onstorage = (obj) => {
       console.log(obj);
     };
@@ -57,15 +53,20 @@ export class UserAuthService {
     try {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
-      if (user)
+      if (user) {
         this.loggedIn(user);
-      else
+        this.rememberMeDone = true;
+      }
+      else {
+        this.rememberMeDone = true;
         throw 'No current user - rememberMe retured VOID';
+      }
       // this.getSubscriptionPlans();
     } catch (err) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');
       console.log("file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err", err)
+      this.rememberMeDone = true;
       this.getSubscriptionPlans();
     }
   }
@@ -74,12 +75,6 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in 
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  // loggedIn(username: void | string): void {
-  //   console.log("file: user-auth.service.ts ~ line 81 ~ loggedIn ~ username", username)
-  //   if (!username) {
-  //     this.overlaySpinnerService.changeOverlaySpinner(false);
-  //     return;
-  //   }
   loggedIn(cognitoUserData: void | CognitoUserInterface): void {
     if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -99,7 +94,7 @@ export class UserAuthService {
       console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.userData.email);
       // localStorage.setItem('signedin', 'true');
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+      // this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
         panelClass: ['rtl-snackbar']
@@ -138,9 +133,9 @@ export class UserAuthService {
       this.userData = new UserData().deseralize(value);
       this.isLoggedIn = true;
       LogRocket.identify(this.userData.email);
-      this.overlaySpinnerService.changeOverlaySpinner(false);
       this.userDataEmmiter.emit(this.userData);
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      this.overlaySpinnerService.changeOverlaySpinner(false);
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
@@ -226,6 +221,7 @@ export class UserAuthService {
         const id = this.userData.orgMembership.id;
         const cc = this.userData.couponCodes.find(coupon => coupon.organization.id = id)
         if (cc.allowedCardsPacks.length == 0) {
+          this.overlaySpinnerService.changeOverlaySpinner(false);
           this.ngZone.run(() => this.router.navigate(['/company-pack-choise']))
         }
       }

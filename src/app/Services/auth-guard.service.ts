@@ -3,34 +3,20 @@ import { CanActivate, Router } from '@angular/router';
 import { UserData } from '../Objects/user-related';
 import { UserAuthService } from './user-auth.service';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthGuardAllPacksPageService implements CanActivate {
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardAllPacksPageService implements CanActivate {
 
-//   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
-//   canActivate(): boolean {
-//     // debugger;
-//     if (this.userAuthService.userData) {
-//       if (this.userAuthService.userData.status === "PLAN" || this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate)
-//         return true;
-//       else {
-//         return false;
-//       }
-//     }
-//     var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
-//       sub.unsubscribe();
-//       if (userData.status === "PLAN" || this.userAuthService.trialMonthExpDate || this.userAuthService.codeCouponExpDate) {
-//         this.ngZone.run(() => this.router.navigate(['all-packs-page']));
-//         return true;
-//       }
-//       else {
-//         this.ngZone.run(() => this.router.navigate(['no-program-page']));
-//       }
-//     })
-//   }
-// }
+  canActivate(): boolean {
+    if (this.userAuthService.rememberMeDone)
+      return true;
+    this.ngZone.run(() => this.router.navigate(['home-page']));
+    return false;
+  }
+}
 
 @Injectable({
   providedIn: 'root'
@@ -62,16 +48,6 @@ export class AuthGuardNoProgramPageService implements CanActivate {
         return true;
       }
     })
-    // var sub = this.userAuthService.loggedInEmmiter.subscribe((userData) => {
-    //   sub.unsubscribe();
-    //   if (userData.status === "PLAN") {
-    //     this.ngZone.run(() => this.router.navigate(['user-page']));
-    //   }
-    //   else {
-    //     this.ngZone.run(() => this.router.navigate(['home-page']));
-    //     return true;
-    //   }
-    // })
   }
 }
 

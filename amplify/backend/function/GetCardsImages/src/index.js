@@ -29,22 +29,18 @@ async function getUser(username){
 
     var user;
 
-    await docClient.get(userParams, function(err, data) {
-        if (err) {
-            console.log("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-            user = data["Item"];
-        }
-    }).promise();
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
 
     if(!user){
         throw Error ('no such user - ' + username);
     }
 
     return user;
-
 }
 
 function monthDiff(d1, d2) {
@@ -73,7 +69,7 @@ function getBillingEndDate(user) {
     var monthsDiff = monthDiff(createdAt, user.cancellationDate);
     console.log('monthsDiff is: ');
     console.log(monthsDiff);
-    var numOfCycles = Math.ceil(monthsDiff / cycles);
+    var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
     console.log('numOfCycles is: ');
     console.log(numOfCycles);
     var numberOfMonthsToAdd = numOfCycles * cycles;
