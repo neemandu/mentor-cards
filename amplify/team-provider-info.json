@@ -20,52 +20,52 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-36396d6e32586d683539-build.zip",
+          "s3Key": "amplify-builds/CreateUser-37553441744e386d2f6c-build.zip",
           "sendinblueApiKey": "xxx"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddCardsPack-55535742474e706c5971-build.zip"
+          "s3Key": "amplify-builds/AddCardsPack-674e5a7430377a6d5841-build.zip"
         },
         "ChangeCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/ChangeCardsPack-684c534751506754766d-build.zip"
+          "s3Key": "amplify-builds/ChangeCardsPack-586651675a4a71715550-build.zip"
         },
         "UpdateGroupUsersList": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdateGroupUsersList-49566a5a68455437634e-build.zip"
+          "s3Key": "amplify-builds/UpdateGroupUsersList-327a44647a34706c4d37-build.zip"
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-4a716253395759355634-build.zip"
+          "s3Key": "amplify-builds/UnSubscribe-59585135563649694a63-build.zip"
         },
         "JoinExistingGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/JoinExistingGroup-314868412b6c4178686a-build.zip"
+          "s3Key": "amplify-builds/JoinExistingGroup-7a4a5a55707546614d39-build.zip"
         },
         "DeleteGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/DeleteGroup-6a6262324445566d7369-build.zip"
+          "s3Key": "amplify-builds/DeleteGroup-4253757771594e615471-build.zip"
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-75596b656b366155486a-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-31782f42676c4c517336-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/getGroup-31682b4f4b61722b6b47-build.zip"
+          "s3Key": "amplify-builds/getGroup-6953333664496979664a-build.zip"
         },
         "IsInGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/IsInGroup-6b3574564b4a4d645357-build.zip"
+          "s3Key": "amplify-builds/IsInGroup-796553554f6e66544a49-build.zip"
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-564d314a756d6c6e6f4d-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-357956466b42372b5263-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-533951334e505a337739-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-515269472f6868764939-build.zip"
         },
         "mentorcards91f3dc29CustomMessage": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -78,29 +78,29 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-5a5876626d674f2f7948-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-74787946635548354a52-build.zip"
         },
         "EmailGuideIntroduction": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/EmailGuideIntroduction-444a732b515933415844-build.zip"
+          "s3Key": "amplify-builds/EmailGuideIntroduction-4d624a3051774c667952-build.zip"
         },
         "MessagingService": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/MessagingService-3675694376324e705479-build.zip"
+          "s3Key": "amplify-builds/MessagingService-713167496a58726e3664-build.zip"
         },
         "EmailUpcomingPayment": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/EmailUpcomingPayment-4447446d4744776d4f73-build.zip"
+          "s3Key": "amplify-builds/EmailUpcomingPayment-38496e66382b4f32656a-build.zip"
         },
         "EmailUpcomingEndOfTrialNotice": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/EmailUpcomingEndOfTrialNotice-4475532f374b36697869-build.zip"
+          "s3Key": "amplify-builds/EmailUpcomingEndOfTrialNotice-79754c377754394f6b6f-build.zip"
         },
         "EmailEndOfTrialNotice": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/EmailEndOfTrialNotice-42636c496f4a6b46444a-build.zip"
+          "s3Key": "amplify-builds/EmailEndOfTrialNotice-374b74737a4a62783231-build.zip"
         },
         "GetNextReceiptId": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -108,33 +108,33 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-4648415a326b63306554-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-614f70354e686c495331-build.zip"
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetSubscriptionPlans-552f6533467a34347a4f-build.zip"
+          "s3Key": "amplify-builds/GetSubscriptionPlans-555664444e3473616669-build.zip"
         },
         "UpdateSelectedCardPacks": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdateSelectedCardPacks-7a62347732382b304d54-build.zip"
+          "s3Key": "amplify-builds/UpdateSelectedCardPacks-746c616c6e6253637350-build.zip"
         },
         "GetEndOfTrialDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetEndOfTrialDate-52766366467a45654e73-build.zip"
+          "s3Key": "amplify-builds/GetEndOfTrialDate-712f507a6b5063547661-build.zip"
         },
         "IsCardsPackOwnedByOrgForUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-6c6b4e6f4b7364577961-build.zip"
+          "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-53616278382f6452316f-build.zip"
         },
         "AddNewUserToEmailsContactList": {
           "contactListId": "2",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-416d73434e6e58414c39-build.zip"
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-614f2f6a51666a645a7a-build.zip"
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-63524b7854776a61634e-build.zip"
+          "s3Key": "amplify-builds/InvoiceHandler-636d5072593242763556-build.zip"
         }
       }
     }
