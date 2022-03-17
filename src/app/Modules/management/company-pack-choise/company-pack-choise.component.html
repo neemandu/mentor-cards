@@ -1,0 +1,52 @@
+<video #videoPlayer width="1920px" height="600px" autoplay loop oncanplay="this.play()"
+  onloadedmetadata="this.muted = true; this.style.opacity='0.5'">
+  <source src="assets\About video.mp4" type="video/mp4">
+  <source src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4" type="video/mp4">
+</video>
+
+<div class="content d-flex flex-column align-items-center">
+  <div id="introduction">
+    <p id="title">תקופת הניסיון שלכם הסתיימה</p>
+    <p id="title">עובדי ועובדות {{this.userData.orgMembership.name}} נהנים
+      מהנחה חסרת תקדים בסך 60% על התוכניות שלנו!
+    </p>
+    <p id="sub-title">מצטרפים לתכנית ומקבלים:</p>
+    <ul>
+      <li><span>גישה מלאה וללא הגבלה לכל ערכות הקלפים באתר.</span></li>
+      <li><span>ספר הדרכה מתעדכן וייעודי לכל ערכת קלפים!</span></li>
+      <li><span>ערכות קלפים מגוונות גם של יוצרים מבחוץ!</span></li>
+      <li><span>מאגר אין סופי של רעיונות להפעלות ליחידים ולקבוצות!</span></li>
+      <li><span>עבודה מכל מקום ומכל סוג מכשיר.</span></li>
+    </ul>
+    <div class="line"></div>
+    <div id="actions">
+      <button class="action-button top-button" type="button" (click)="navigate('/price-page')">לבחירת תכנית בהנחה</button>
+      <button class="action-button top-button" type="button" (click)="showPackChoise = true">לבחירת
+        {{this.userData.orgMembership.numberOfallowedCardsPacks }} ערכות</button>
+    </div>
+  </div>
+
+  <div class="packChoise" *ngIf="showPackChoise">
+    <div class="choise-dd d-flex flex-column justify-content-center">
+      <div *ngFor="let num of amountOfPacksArray; let i = index" class="d-flex">
+        <mat-form-field appearance="fill" style="text-align: initial;">
+          <mat-label>בחירת ערכה מספר {{i+1}}</mat-label>
+          <mat-select [(value)]="choices[i]" (selectionChange)="selectionChanged($event)">
+            <mat-option *ngFor="let pack of allPacks" [value]="pack" [disabled]="choiseDisabled(pack)">
+              <span>{{pack.name}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button [disabled]="!choices[i]" class="iconButton" mat-icon-button style="margin-top: 5%;"
+          (click)="openPreviewDialog(choices[i])">
+          <mat-icon style="font-family: 'Material Icons';">info</mat-icon>
+        </button>
+      </div>
+      <button [disabled]="saveDisabled" class="action-button" type="button" (click)="saveSelectedchoices()">שמירת
+        ערכות</button>
+      <mat-error *ngIf="error">
+        {{error}}
+      </mat-error>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <div id="layout" class="d-flex flex-column">
+    <div id="header" class="d-flex justify-content-between">
+      <span id="title">
+        קודי הטבה
+      </span>
+      <button id="couponCodeBtn" (click)="newEditCoupon()">הוספת קוד הטבה</button>
+    </div>
+    <div id="table" *ngIf="couponData">
+      <mat-form-field appearance="standard">
+        <mat-label>חיפוש...</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="לפי כל ערך" #input>
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- edit Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> עריכה </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="iconButton" mat-icon-button (click)="newEditCoupon(element)">
+              <mat-icon class="matIcon">edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- remove Column -->
+        <ng-container matColumnDef="remove">
+          <th mat-header-cell *matHeaderCellDef> מחיקה </th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+            <button class="iconButton" mat-icon-button (click)="removeCoupon(element, index)">
+              <mat-icon class="matIcon">delete</mat-icon>
+            </button> </td>
+        </ng-container>
+
+        <!-- trialLength Column -->
+        <ng-container matColumnDef="trialLength">
+          <th mat-header-cell *matHeaderCellDef> תקופת ניסיון בימים </th>
+          <td mat-cell *matCellDef="let element"> {{element.trialPeriodInDays}} </td>
+        </ng-container>
+
+        <!-- code Column -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> קוד הטבה </th>
+          <td mat-cell *matCellDef="let element"> {{element.couponCode}} </td>
+        </ng-container>
+
+        <!-- packIds Column -->
+        <ng-container matColumnDef="packIds">
+          <th mat-header-cell *matHeaderCellDef> ערכות קלפים </th>
+          <td mat-cell *matCellDef="let element"> {{element.allowedCardsPacks}} </td>
+        </ng-container>
+
+        <!-- org Column -->
+        <ng-container matColumnDef="org">
+          <th mat-header-cell *matHeaderCellDef> ארגון </th>
+          <td mat-cell *matCellDef="let element"> {{element.organization ? element.organization.name : '---'}} </td>
+        </ng-container>
+
+        <!-- discount Column -->
+        <ng-container matColumnDef="discount">
+          <th mat-header-cell *matHeaderCellDef> הנחה </th>
+          <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
