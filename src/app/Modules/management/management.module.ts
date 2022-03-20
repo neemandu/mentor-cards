@@ -15,6 +15,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -29,12 +33,16 @@ import { MatIconModule } from '@angular/material/icon';
     NewEditNewsComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatToolbarModule
   ],
   entryComponents: [NewEditNewsComponent, NewEditCouponDialogComponent]
 })
