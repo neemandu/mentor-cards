@@ -45,7 +45,7 @@ export class CouponCodesManagementComponent implements OnInit {
     });
   }
 
-  newEditCoupon(oldCoupon?): void {
+  newEditCoupon(oldCoupon?, index?): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -58,7 +58,12 @@ export class CouponCodesManagementComponent implements OnInit {
       (oldCoupon ? this.api.UpdateCouponCodes(newCoupon) : this.api.CreateCouponCodes(newCoupon)).then(res => {
         this.mngService.overlaySpinner(false);
         res['packsNames'] = this.getPackNames(res);
-        this.couponData = [...this.couponData, res];
+        if (oldCoupon) {
+          this.couponData.splice(index, 1, res);
+        }
+        else {
+          this.couponData = [...this.couponData, res];
+        }
         this.dataSource = new MatTableDataSource(this.couponData);
         this.mngService.snackBarPositive("הקופון נשמר בהצלחה");
       }, error => {

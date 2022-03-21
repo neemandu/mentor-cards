@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CreateCouponCodesInput, UpdateCouponCodesInput } from 'src/app/API.service';
 
 @Component({
   selector: 'app-new-edit-coupon-dialog',
@@ -35,12 +36,14 @@ export class NewEditCouponDialogComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.data.coupon)
-    const res = {
-      ...this.data.coupon, allowedCardsPacks: this.selectedPacks.map(pack => pack.id),
-      couponCode: this.couponForm.controls.code.value, discount: this.couponForm.controls.discount.value,
-      trialPeriodInDays: this.couponForm.controls.days.value, organization: this.selectedOrg
+    const res: CreateCouponCodesInput | UpdateCouponCodesInput = {
+      id: this.data.coupon?.id ? this.data.coupon.id : null,
+      couponCode: this.couponForm.controls.code.value,
+      discount: this.couponForm.controls.discount.value,
+      trialPeriodInDays: this.couponForm.controls.days.value,
+      allowedCardsPacks: this.selectedPacks.map(pack => pack.id),
+      couponCodesOrganizationId: this.selectedOrg?.membership.id,
     }
-    res.__typename ? delete res.__typename : null;
     this.dialogRef.close(res);
   }
 
