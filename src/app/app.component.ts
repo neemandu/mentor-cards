@@ -47,8 +47,7 @@ export class AppComponent implements OnInit {
   title = 'amplify-angular-auth';
   showLogin: boolean = false;
 
-  constructor(private ref: ChangeDetectorRef, private userAuthService: UserAuthService,
-    private overlaySpinnerService: OverlaySpinnerService,
+  constructor(private overlaySpinnerService: OverlaySpinnerService,
     public dialog: MatDialog) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
     // I18n.putVocabularies(dict);

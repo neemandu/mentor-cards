@@ -8,9 +8,9 @@ import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
-import { EnterCouponCodeDialogComponent } from 'src/app/Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
-import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
+// import { EnterCouponCodeDialogComponent } from 'src/app/Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
+// import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+// import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 
 interface CategoryPack {
   category: string,
