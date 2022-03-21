@@ -54,7 +54,7 @@
         <!-- packIds Column -->
         <ng-container matColumnDef="packNames">
           <th mat-header-cell *matHeaderCellDef> ערכות קלפים </th>
-          <td mat-cell *matCellDef="let element" style="width: 15vw;"> {{element.packsNames}} </td>
+          <td mat-cell *matCellDef="let element" style="width: 15vw;"> {{element.packsNames ? element.packsNames : '---'}} </td>
         </ng-container>
 
         <!-- org Column -->

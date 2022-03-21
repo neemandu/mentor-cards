@@ -33,7 +33,8 @@ export class CouponCodesManagementComponent implements OnInit {
     this.api.ListCouponCodess().then((res) => {
       this.couponData = [...res.items]
       this.couponData.forEach(coupon => {
-        coupon['packsNames'] = this.getPackNames(coupon);
+        if (coupon.allowedCardsPacks && coupon.allowedCardsPacks.length != 0)
+          coupon['packsNames'] = this.getPackNames(coupon);
       });
       console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 28 ~ this.api.ListCouponCodess ~ this.couponData", this.couponData)
       this.dataSource = new MatTableDataSource(this.couponData);
@@ -47,7 +48,7 @@ export class CouponCodesManagementComponent implements OnInit {
 
   newEditCoupon(oldCoupon?, index?): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = { coupon: oldCoupon, organizations: this.organizations, allPacks: this.mngService.getAllPacks() };
     const dialogRef = this.dialog.open(NewEditCouponDialogComponent, dialogConfig);
@@ -57,7 +58,9 @@ export class CouponCodesManagementComponent implements OnInit {
       this.mngService.overlaySpinner(true);
       (oldCoupon ? this.api.UpdateCouponCodes(newCoupon) : this.api.CreateCouponCodes(newCoupon)).then(res => {
         this.mngService.overlaySpinner(false);
-        res['packsNames'] = this.getPackNames(res);
+        if (res.allowedCardsPacks && res.allowedCardsPacks.length != 0) {
+          res['packsNames'] = this.getPackNames(res);
+        }
         if (oldCoupon) {
           this.couponData.splice(index, 1, res);
         }

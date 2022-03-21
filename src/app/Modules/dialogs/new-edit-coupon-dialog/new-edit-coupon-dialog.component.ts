@@ -11,9 +11,9 @@ import { CreateCouponCodesInput, UpdateCouponCodesInput } from 'src/app/API.serv
 export class NewEditCouponDialogComponent implements OnInit {
 
   couponForm: FormGroup = this.formBuilder.group({
-    days: ['', [Validators.required, Validators.min(0)]],
+    days: [0, [Validators.required, Validators.min(0)]],
     code: ['', [Validators.required]],
-    discount: ['', [Validators.required]],
+    discount: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
   });
 
   selectedPacks: any[];
@@ -41,7 +41,7 @@ export class NewEditCouponDialogComponent implements OnInit {
       couponCode: this.couponForm.controls.code.value,
       discount: this.couponForm.controls.discount.value,
       trialPeriodInDays: this.couponForm.controls.days.value,
-      allowedCardsPacks: this.selectedPacks.map(pack => pack.id),
+      allowedCardsPacks: this.selectedPacks?.map(pack => pack.id),
       couponCodesOrganizationId: this.selectedOrg?.membership.id,
     }
     this.dialogRef.close(res);
