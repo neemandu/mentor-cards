@@ -1,0 +1,18 @@
+<form [formGroup]="orgsForm" class="d-flex flex-column">
+  <mat-form-field>
+    <mat-label>שם הארגון</mat-label>
+    <input autocomplete="off" formControlName="name" matInput type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>תקופת ניסיון בימים</mat-label>
+    <input formControlName="days" matInput color="primary" inputmode="numeric" type="number">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>מספר ערכות קלפים למשתמש</mat-label>
+    <input formControlName="packsAmount" matInput color="primary" inputmode="numeric" type="number">
+  </mat-form-field>
+</form>
+<div class="d-flex justify-content-between">
+  <button (click)="closeDialog()">ביטול</button>
+  <button [disabled]="!orgsForm.valid" (click)="onSubmit()">אישור</button>
+</div>
