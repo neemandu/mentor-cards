@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NewEditOrganizationComponent } from '../dialogs/new-edit-organization/new-edit-organization.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatExpansionModule,
     MatToolbarModule
   ],
-  entryComponents: [NewEditNewsComponent, NewEditCouponDialogComponent]
+  entryComponents: [NewEditNewsComponent, NewEditCouponDialogComponent, NewEditOrganizationComponent]
 })
 export class ManagementModule { }

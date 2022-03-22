@@ -78,6 +78,7 @@ import { AboutAuthorComponent } from './Shared Components/pack/about-author/abou
 import { InformationBarComponent } from './Shared Components/information-bar/information-bar.component';
 import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
 import { ManagementModule } from './Modules/management/management.module';
+import { NewEditOrganizationComponent } from './Modules/dialogs/new-edit-organization/new-edit-organization.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { ManagementModule } from './Modules/management/management.module';
     AboutAuthorComponent,
     InformationBarComponent,
     CompanyPackChoiseComponent,
+    NewEditOrganizationComponent,
   ],
   imports: [
     BrowserModule,

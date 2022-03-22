@@ -6,7 +6,8 @@
   <mat-form-field>
     <mat-label>קוד הטבה</mat-label>
     <input autocomplete="off" formControlName="code" matInput type="text">
-    <mat-error *ngIf="couponForm.controls.code.errors">קוד הטבה לא תקין</mat-error>
+    <!-- <mat-error *ngIf="couponForm.controls.code.errors">קוד הטבה לא תקין</mat-error> -->
+    <mat-error *ngIf="couponForm.controls.code.errors?.DupCouponName">שם קופון כבר קיים</mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill" style="text-align: initial;">
     <mat-label>ערכות קלפים בהטבה</mat-label>
