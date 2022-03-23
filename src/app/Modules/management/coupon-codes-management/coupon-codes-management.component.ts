@@ -3,7 +3,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { APIService, OrganizationMembership } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
-import { CardsService } from 'src/app/Services/cards.service';
 import { ManagementService } from 'src/app/Services/management.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { NewEditCouponDialogComponent } from '../../dialogs/new-edit-coupon-dialog/new-edit-coupon-dialog.component';
@@ -50,7 +49,7 @@ export class CouponCodesManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = { coupon: oldCoupon, organizations: this.organizations, allPacks: this.mngService.getAllPacks() };
+    dialogConfig.data = { coupon: oldCoupon, organizations: this.organizations, allPacks: this.mngService.getAllPacks(), allCoupons: this.couponData };
     const dialogRef = this.dialog.open(NewEditCouponDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(newCoupon => {
       dialogSub.unsubscribe();

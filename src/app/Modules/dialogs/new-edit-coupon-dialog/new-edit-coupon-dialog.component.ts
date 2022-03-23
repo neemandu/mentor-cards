@@ -36,6 +36,10 @@ export class NewEditCouponDialogComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.data.coupon)
+    if (this.dupCouponError()) {
+      this.couponForm.controls.code.setErrors({ 'DupCouponName': true });
+      return;
+    } 
     const res: CreateCouponCodesInput | UpdateCouponCodesInput = {
       id: this.data.coupon?.id ? this.data.coupon.id : null,
       couponCode: this.couponForm.controls.code.value,
@@ -45,6 +49,11 @@ export class NewEditCouponDialogComponent implements OnInit {
       couponCodesOrganizationId: this.selectedOrg?.membership.id,
     }
     this.dialogRef.close(res);
+  }
+
+  dupCouponError(): boolean {
+    const sameNameCoupon = this.data.allCoupons.filter(coupon => coupon.couponCode === this.couponForm.controls.code.value)
+    return sameNameCoupon.length != 0;
   }
 
   closeDialog(): void {
