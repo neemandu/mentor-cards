@@ -10,7 +10,7 @@ Amplify Params - DO NOT EDIT */
 const { env, ppid } = require("process");
 var AWS = require("aws-sdk");
 
-async function getUserByUSerName(username){
+async function getUserByUserName (username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
