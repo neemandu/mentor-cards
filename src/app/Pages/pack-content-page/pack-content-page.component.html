@@ -19,7 +19,9 @@
     </mat-slide-toggle>
   </div> -->
   <div id="actions">
-    <button type="button" [ngClass]="{'option-btn top-option-btn': true}" (click)="multipileChanged()"
+    <button type="button"
+      [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
+      (click)="multipileChanged()"
       [disabled]="showEditPack">{{!multipileChecked ? 'לבחירה מרובה':'לבחירה יחידה'}}</button>
     <button type="button" [disabled]="showEditPack"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
