@@ -14,7 +14,7 @@ import { CompanyPackChoiseComponent } from './Modules/management/company-pack-ch
 import { UserPageComponent } from './Pages/user-page/user-page.component';
 import {
   AuthGuardAllPacksPageService, AuthGuardCompanyCardChoiseService, AuthGuardGroupManagementService,
-  AuthGuardNoProgramPageService, AuthGuardPricePageService, AuthGuardSiteContentManagementService,
+  AuthGuardNoProgramPageService, AuthGuardPackContentService, AuthGuardPricePageService, AuthGuardSiteContentManagementService,
   AuthGuardUserPageService
 } from './Services/auth-guard.service';
 import { CanDeactivateGuardService } from './Services/can-deactivate-guard.service';
@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'all-packs-page', component: AllPacksPageComponent, canActivate: [AuthGuardAllPacksPageService] },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  { path: 'pack-view/:id', component: PackContentPageComponent },
+  { path: 'pack-view/:id', component: PackContentPageComponent, canActivate: [AuthGuardPackContentService] },
   { path: 'example-pack', component: PackContentPageComponent },
   { path: 'guide-book', component: GuideBookComponent },
   { path: 'price-page', component: PricePageComponent, canActivate: [AuthGuardPricePageService] },

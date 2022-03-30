@@ -5,6 +5,7 @@ import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { ManagementService } from 'src/app/Services/management.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { NewEditOrganizationComponent } from '../../dialogs/new-edit-organization/new-edit-organization.component';
 
 @Component({
   selector: 'app-organization-management',
@@ -38,31 +39,22 @@ export class OrganizationManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {};
-    // const dialogRef = this.dialog.open(NewEditCouponDialogComponent, dialogConfig);
-    // var dialogSub = dialogRef.afterClosed().subscribe(newCoupon => {
-    //   dialogSub.unsubscribe();
-    //   if (!newCoupon) return;
-    //   this.mngService.overlaySpinner(true);
-    //   (oldCoupon ? this.api.UpdateCouponCodes(newCoupon) : this.api.CreateCouponCodes(newCoupon)).then(res => {
-    //     this.mngService.overlaySpinner(false);
-    //     if (res.allowedCardsPacks && res.allowedCardsPacks.length != 0) {
-    //       res['packsNames'] = this.getPackNames(res);
-    //     }
-    //     if (oldCoupon) {
-    //       this.couponData.splice(index, 1, res);
-    //     }
-    //     else {
-    //       this.couponData = [...this.couponData, res];
-    //     }
-    //     this.dataSource = new MatTableDataSource(this.couponData);
-    //     this.mngService.snackBarPositive("הקופון נשמר בהצלחה");
-    //   }, error => {
-    //     this.mngService.overlaySpinner(false);
-    //     this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
-    //     console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 54 ~ error", error)
-    //   })
-    // });
+    dialogConfig.data = { org: oldOrg, allOrgs: this.orgsData };
+    const dialogRef = this.dialog.open(NewEditOrganizationComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(newOrg => {
+      dialogSub.unsubscribe();
+      if (!newOrg) return;
+      this.mngService.overlaySpinner(true);
+      (oldOrg ? this.api.UpdateOrganizations(newOrg) : this.api.CreateOrganizations(newOrg)).then(res => {
+
+        this.mngService.snackBarPositive("הארגון נשמר בהצלחה");
+      }, error => {
+        this.mngService.overlaySpinner(false);
+        this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
+        console.log("🚀 ~ file: organization-management.component.ts ~ line 50 ~ error", error)
+      });
+
+    });
   }
 
   remove(org, index): void {

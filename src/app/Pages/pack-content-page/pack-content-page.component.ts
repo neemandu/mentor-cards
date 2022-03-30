@@ -105,6 +105,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   multipileChanged(): void {
     this.selectedCards = [];
+    this.multipileChecked = !this.multipileChecked
   }
 
   cardSelected(card: CardComponent, index: number): void {

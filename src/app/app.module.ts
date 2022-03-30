@@ -79,6 +79,7 @@ import { InformationBarComponent } from './Shared Components/information-bar/inf
 import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
 import { ManagementModule } from './Modules/management/management.module';
 import { NewEditOrganizationComponent } from './Modules/dialogs/new-edit-organization/new-edit-organization.component';
+import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { NewEditOrganizationComponent } from './Modules/dialogs/new-edit-organiz
     InformationBarComponent,
     CompanyPackChoiseComponent,
     NewEditOrganizationComponent,
+    FbChatComponent,
   ],
   imports: [
     BrowserModule,

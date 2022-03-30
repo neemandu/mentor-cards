@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { UserData } from '../Objects/user-related';
+import { CardsService } from './cards.service';
 import { UserAuthService } from './user-auth.service';
 
 @Injectable({
@@ -15,6 +16,29 @@ export class AuthGuardAllPacksPageService implements CanActivate {
       return true;
     this.ngZone.run(() => this.router.navigate(['home-page']));
     return false;
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardPackContentService implements CanActivate {
+
+  constructor(private userAuthService: UserAuthService, private cardsService: CardsService, public router: Router, private ngZone: NgZone) { }
+
+  canActivate(): boolean {
+    // debugger;
+    if (this.userAuthService.userData) {
+      if (this.cardsService.allPacks) {
+        return true;
+      }
+      else {
+        this.ngZone.run(() => this.router.navigate(['home-page']));
+      }
+    }
+    else {
+      this.ngZone.run(() => this.router.navigate(['home-page']));
+    }
   }
 }
 
