@@ -13,7 +13,7 @@
       </ng-template>
       <ng-template matTabContent>
         <app-login (loggedInCloseDialog)="closeDialog()" (toRegister)="selectedTab = 1;"
-          [registeredEmail]="registeredEmail">
+          [registeredEmail]="registeredEmail" [registeredPW]="registeredPW">
         </app-login>
       </ng-template>
     </mat-tab>

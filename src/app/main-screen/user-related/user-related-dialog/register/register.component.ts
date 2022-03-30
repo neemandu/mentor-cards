@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
         duration: 10000,
         panelClass: ['rtl-snackbar']
       });
-      this.registeredEmitter.emit(user.email)
+      this.registeredEmitter.emit({email: user.email, password: user.password})
       // console.log("file: register.component.ts ~ line 67 ~ this.userAuthService.signUp ~ data", data)
     }, error => {
       this.overlaySpinnerService.changeOverlaySpinner(false);

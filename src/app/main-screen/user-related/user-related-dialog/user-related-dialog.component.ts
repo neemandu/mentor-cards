@@ -16,6 +16,7 @@ export class UserRelatedDialogComponent implements OnInit {
 
   selectedTab: number;
   registeredEmail: string;
+  registeredPW: string;
 
   constructor(public dialogRef: MatDialogRef<UserRelatedDialogComponent>,) { }
 
@@ -32,8 +33,9 @@ export class UserRelatedDialogComponent implements OnInit {
     // this.registerChild.resetForms();
   }
 
-  registered(email): void {
+  registered({email,password}): void {
     this.registeredEmail = email;
+    this.registeredPW = password;
     this.selectedTab = 0;
     // this.loginChild.showConfirmUserForm(email)
   }
