@@ -34,6 +34,7 @@ import { MatCardModule } from '@angular/material/card';
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 //Components
@@ -160,6 +161,7 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     MatCardModule,
     DragDropModule,
     MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [
   ],

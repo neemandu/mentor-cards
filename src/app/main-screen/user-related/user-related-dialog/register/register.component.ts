@@ -23,9 +23,11 @@ export class RegisterComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
     usernameConfirm: ['', [Validators.required, Validators.email]],
     passwordConfirm: ['', [Validators.required, Validators.minLength(8)]],
+    allowEmails: [false, [Validators.required]],
   });
   hidePW: boolean = true;
   hidePWConfirm: boolean = true;
+  allowEmails: boolean = false;
   // showLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
