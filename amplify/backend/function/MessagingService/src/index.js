@@ -135,7 +135,7 @@ exports.handler = async (event) => {
   for (const streamedItem of event.Records) {
     if (streamedItem.eventName === 'INSERT') {
       console.log('streamedItem');
-      console.log(streamedItem);
+      console.log(streamedItem.dynamodb.NewImage);
       var templateId = streamedItem.dynamodb.NewImage.emailTemplateId.N;
       if(!templateId){
         templateId = streamedItem.dynamodb.NewImage.emailTemplateId.S;

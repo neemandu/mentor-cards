@@ -39,7 +39,7 @@ async function getUser(username){
     });
 
     if(!user){
-        throw Error ('no such user - ' + username);
+        console.log('no such user - ' + username);
     }
 
     return user;

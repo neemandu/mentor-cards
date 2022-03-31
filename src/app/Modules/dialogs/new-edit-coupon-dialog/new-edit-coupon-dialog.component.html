@@ -1,0 +1,38 @@
+<form [formGroup]="couponForm" class="d-flex flex-column">
+  <mat-form-field>
+    <mat-label>תקופת ניסיון בימים</mat-label>
+    <input formControlName="days" matInput color="primary" inputmode="numeric" type="number">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>קוד הטבה</mat-label>
+    <input autocomplete="off" formControlName="code" matInput type="text">
+    <!-- <mat-error *ngIf="couponForm.controls.code.errors">קוד הטבה לא תקין</mat-error> -->
+    <mat-error *ngIf="couponForm.controls.code.errors?.DupCouponName">שם קופון כבר קיים</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="text-align: initial;">
+    <mat-label>ערכות קלפים בהטבה</mat-label>
+    <mat-select [(value)]="selectedPacks" multiple>
+      <mat-option *ngFor="let pack of data.allPacks" [value]="pack">
+        {{pack.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="text-align: initial;">
+    <mat-label>ארגון</mat-label>
+    <mat-select [(value)]="selectedOrg">
+      <mat-option></mat-option>
+      <mat-option *ngFor="let organization of data.organizations" [value]="organization">
+        {{organization.membership.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>הנחה</mat-label>
+    <input formControlName="discount" matInput color="primary" inputmode="numeric" type="number">
+    <mat-icon matSuffix>%</mat-icon>
+  </mat-form-field>
+</form>
+<div class="d-flex justify-content-between">
+  <button (click)="closeDialog()">ביטול</button>
+  <button [disabled]="!couponForm.valid" (click)="onSubmit()">אישור</button>
+</div>

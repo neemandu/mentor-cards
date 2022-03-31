@@ -68,6 +68,13 @@ mat-progress-bar {
   /* width: 18vw; */
 }
 
+#emails-error {
+  font-size: small;
+  text-align: start;
+  direction: rtl;
+  margin-top: -10px;
+}
+
 /* add appropriate colors to fb, twitter and google buttons */
 .fb {
   background-color: #3B5998;

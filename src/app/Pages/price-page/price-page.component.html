@@ -46,7 +46,7 @@
                     להצטרפות >>
                 </button>
                 <button
-                    *ngIf="userDate?.status === 'PLAN' && userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1"
+                    *ngIf="userData?.status === 'PLAN' && userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1"
                     class="disabled-btn purchase-btn" type="button" disabled>
                     הינך רשום לתכנית זו
                 </button>

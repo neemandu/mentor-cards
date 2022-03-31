@@ -23,9 +23,11 @@ export class RegisterComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
     usernameConfirm: ['', [Validators.required, Validators.email]],
     passwordConfirm: ['', [Validators.required, Validators.minLength(8)]],
+    allowEmails: [false, [Validators.required]],
   });
   hidePW: boolean = true;
   hidePWConfirm: boolean = true;
+  allowEmails: boolean = false;
   // showLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
@@ -77,7 +79,7 @@ export class RegisterComponent implements OnInit {
         duration: 10000,
         panelClass: ['rtl-snackbar']
       });
-      this.registeredEmitter.emit(user.email)
+      this.registeredEmitter.emit({email: user.email, password: user.password})
       // console.log("file: register.component.ts ~ line 67 ~ this.userAuthService.signUp ~ data", data)
     }, error => {
       this.overlaySpinnerService.changeOverlaySpinner(false);

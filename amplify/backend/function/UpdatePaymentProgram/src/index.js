@@ -221,7 +221,7 @@ async function createGroup(email, subscriptionPlan) {
     var user = {
         email: email,
         role: "ADMIN"
-    }
+    };
     var users = [];
     users.push(user);
     var params = {
@@ -342,16 +342,7 @@ exports.handler = async (event) => {
         }
         console.log('Updating program to updated by user: ' + username);
         await updateMonthlySubscription(user, paymentProgram, transId);
-        var templateId;
-        if (subId == "MC1YEAR") {
-            templateId = 9
-        }
-        else if (subId == "MC6MONTHS") {
-            templateId = 8
-        }
-        else if (subId == "MC1MONTH") {
-            templateId = 7
-        }
+        var templateId = 7;
         await addNewSubscriptionEmailToMessageQueue(templateId, user.email, user.phone, user.fullName);
     }
 

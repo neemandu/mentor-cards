@@ -18,12 +18,13 @@ export class LoginComponent implements OnInit {
   @Output() loggedInCloseDialog: EventEmitter<any> = new EventEmitter<any>();
   // @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
   @Input() registeredEmail: string;
+  @Input() registeredPW: string;
 
   // emailRegex = '^[A-Za-z0-9._%+-]+@intel.com$';
   // Login Form
   loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    password: ['', [Validators.required]]
   });
   // Forgot Password Form
   forgotPasswordForm: FormGroup = this.formBuilder.group({
@@ -269,11 +270,13 @@ export class LoginComponent implements OnInit {
         // console.log(data);
         if (data === 'SUCCESS') {
           this.userAuthService._snackBar.open(
-            `משתמש אומת! יש להתחבר על מנת להתחיל לעבוד`, '', {
+            `משתמש אומת! בעוד רגע תוכלו להתחיל לעבוד`, '', {
+            // `משתמש אומת! יש להתחבר על מנת להתחיל לעבוד`, '', {
             duration: 4000,
             panelClass: ['rtl-snackbar']
           });
           this.showLoginForm();
+          this.onLoginSubmit();
         }
       })
       .catch((error: any) => {
@@ -308,6 +311,7 @@ export class LoginComponent implements OnInit {
     if (this.registeredEmail) {
       this.confirmForm.controls['username'].setValue(this.registeredEmail);
       this.loginForm.controls['username'].setValue(this.registeredEmail);
+      this.loginForm.controls['password'].setValue(this.registeredPW);
       // this.confirmForm.controls['username'].disable();
     }
   }

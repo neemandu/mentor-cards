@@ -53,7 +53,14 @@
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <button type="submit" class="option-btn" id="login-button" [disabled]="!registerForm.valid">הרשמה</button>
+        <mat-checkbox style="direction: rtl; text-align: start; margin-top: 5px; margin-right: -8px;"
+          formControlName="allowEmails" [(ngModel)]="allowEmails"><span style="margin-right: 10px;">
+            אני מאשר/ת קבלת דיוורים מ Mentor-Cards
+          </span>
+        </mat-checkbox>
+        <mat-error id="emails-error" *ngIf="!allowEmails">יש לסמן את התיבה על מנת להירשם</mat-error>
+        <button type="submit" class="option-btn" id="login-button"
+          [disabled]="!registerForm.valid || !allowEmails">הרשמה</button>
       </div>
     </form>
 

@@ -7,12 +7,13 @@
   <mat-tab-group mat-stretch-tabs [selectedIndex]="selectedTab" (selectedTabChange)="tabChanged($event)"
     mat-align-tabs="center" dynamicHeight>
     <mat-tab>
-      <ng-template mat-tab-label class="tab-label">
-        התחברות
+      <ng-template mat-tab-label class="tab-label" class="d-flex flex-column">
+        <label>התחברות</label>
+        <!-- <label style="font-size:small">משתמש חדש</label> -->
       </ng-template>
       <ng-template matTabContent>
         <app-login (loggedInCloseDialog)="closeDialog()" (toRegister)="selectedTab = 1;"
-          [registeredEmail]="registeredEmail">
+          [registeredEmail]="registeredEmail" [registeredPW]="registeredPW">
         </app-login>
       </ng-template>
     </mat-tab>

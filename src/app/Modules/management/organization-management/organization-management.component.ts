@@ -1,0 +1,91 @@
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { APIService } from 'src/app/API.service';
+import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
+import { ManagementService } from 'src/app/Services/management.service';
+import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { NewEditOrganizationComponent } from '../../dialogs/new-edit-organization/new-edit-organization.component';
+
+@Component({
+  selector: 'app-organization-management',
+  templateUrl: './organization-management.component.html',
+  styleUrls: ['./organization-management.component.css']
+})
+export class OrganizationManagementComponent implements OnInit {
+
+  dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['edit', 'remove', 'name', 'trialLength', 'amountOfPacks', 'orgUsers'];
+  orgsData: any[];
+
+  constructor(private api: APIService, public dialog: MatDialog, public mngService: ManagementService) { }
+
+  ngOnInit(): void {
+    this.mngService.overlaySpinner(true);
+    this.dataSource = new MatTableDataSource([]);
+    this.getAllData();
+  }
+
+  getAllData(): void {
+    this.api.ListOrganizationss().then((res) => {
+      this.orgsData = [...res.items]
+      this.dataSource = new MatTableDataSource(this.orgsData);
+      console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 38 ~ this.api.ListOrganizationss ~ this.organizations", this.orgsData)
+      this.mngService.overlaySpinner(false);
+    });
+  }
+
+  newEdit(oldOrg?, index?): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = { org: oldOrg, allOrgs: this.orgsData };
+    const dialogRef = this.dialog.open(NewEditOrganizationComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(newOrg => {
+      dialogSub.unsubscribe();
+      if (!newOrg) return;
+      this.mngService.overlaySpinner(true);
+      (oldOrg ? this.api.UpdateOrganizations(newOrg) : this.api.CreateOrganizations(newOrg)).then(res => {
+
+        this.mngService.snackBarPositive("הארגון נשמר בהצלחה");
+      }, error => {
+        this.mngService.overlaySpinner(false);
+        this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
+        console.log("🚀 ~ file: organization-management.component.ts ~ line 50 ~ error", error)
+      });
+
+    });
+  }
+
+  remove(org, index): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = new DynamicDialogData("מחיקת קוד הטבה", [`האם למחוק את ארגון "${org.membership.name}"`], "אישור", "ביטול")
+    const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
+      dialogSub.unsubscribe();
+      if (!res) return;
+      this.mngService.overlaySpinner(true);
+      this.api.DeleteOrganizations({ id: org.id }).then(res => {
+        this.mngService.overlaySpinner(false);
+        this.orgsData.splice(index, 1);
+        this.dataSource = new MatTableDataSource(this.orgsData);
+        this.mngService.snackBarPositive("הארגון נמחק בהצלחה");
+      }, error => {
+        this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
+        console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 49 ~ this.api.DeleteCouponCodes ~ error", error)
+      });
+    });
+  }
+
+  showMembers(org, index): void {
+
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+}

@@ -34,6 +34,7 @@ import { MatCardModule } from '@angular/material/card';
 import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 //Components
@@ -73,16 +74,13 @@ import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules
 import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
 import { ApprovePurchaseDialogComponent } from './Pages/price-page/approve-purchase-dialog/approve-purchase-dialog.component';
-import { SiteContentManagementComponent } from './Pages/site-content-management/site-content-management.component';
-import { NewEditNewsComponent } from './Shared Components/Dialogs/new-edit-news/new-edit-news.component';
 import { EnterCouponCodeDialogComponent } from './Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 import { AboutAuthorComponent } from './Shared Components/pack/about-author/about-author.component';
 import { InformationBarComponent } from './Shared Components/information-bar/information-bar.component';
-import { GuideBookManagementComponent } from './Pages/site-content-management/guide-book-management/guide-book-management.component';
-import { NewsManagementComponent } from './Pages/site-content-management/news-management/news-management.component';
-import { CompanyPackChoiseComponent } from './Pages/site-content-management/company-pack-choise/company-pack-choise.component';
-// import { AuthService } from './Services/auth.service';
-// import { PwChallangeComponent } from './main-screen/user-related/user-related-dialog/login/pw-challange/pw-challange.component';
+import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
+import { ManagementModule } from './Modules/management/management.module';
+import { NewEditOrganizationComponent } from './Modules/dialogs/new-edit-organization/new-edit-organization.component';
+import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
 
 @NgModule({
   declarations: [
@@ -121,15 +119,12 @@ import { CompanyPackChoiseComponent } from './Pages/site-content-management/comp
     GuidePageComponent,
     ApprovePurchaseDialogComponent,
     PortraitWarningDialogComponent,
-    SiteContentManagementComponent,
-    NewEditNewsComponent,
     EnterCouponCodeDialogComponent,
     AboutAuthorComponent,
     InformationBarComponent,
-    GuideBookManagementComponent,
-    NewsManagementComponent,
-    CompanyPackChoiseComponent
-    // PwChallangeComponent,
+    CompanyPackChoiseComponent,
+    NewEditOrganizationComponent,
+    FbChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,6 +136,7 @@ import { CompanyPackChoiseComponent } from './Pages/site-content-management/comp
     ReactiveFormsModule,
     FormsModule,
     PortalModule,
+    ManagementModule,
     //Material
     MatButtonModule,
     MatIconModule,
@@ -165,12 +161,13 @@ import { CompanyPackChoiseComponent } from './Pages/site-content-management/comp
     MatCardModule,
     DragDropModule,
     MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent,
     PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
-    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent, NewEditNewsComponent]
+    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent]
 })
 export class AppModule { }
