@@ -342,16 +342,7 @@ exports.handler = async (event) => {
         }
         console.log('Updating program to updated by user: ' + username);
         await updateMonthlySubscription(user, paymentProgram, transId);
-        var templateId;
-        if (subId.includes("YEAR")) {
-            templateId = 9;
-        }
-        else if (subId.includes("6MONTHS")) {
-            templateId = 8;
-        }
-        else if (subId.includes("1MONTH")) {
-            templateId = 7;
-        }
+        var templateId = 7;
         await addNewSubscriptionEmailToMessageQueue(templateId, user.email, user.phone, user.fullName);
     }
 
