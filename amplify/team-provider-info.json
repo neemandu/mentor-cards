@@ -20,7 +20,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-37553441744e386d2f6c-build.zip",
+          "s3Key": "amplify-builds/CreateUser-6e7458626367557a3543-build.zip",
           "sendinblueApiKey": "xxx"
         },
         "AddCardsPack": {
@@ -78,7 +78,7 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-74787946635548354a52-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-79664f66306a61536a56-build.zip"
         },
         "EmailGuideIntroduction": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
@@ -88,7 +88,7 @@
         "MessagingService": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/MessagingService-713167496a58726e3664-build.zip"
+          "s3Key": "amplify-builds/MessagingService-4b3156574b35444b4e37-build.zip"
         },
         "EmailUpcomingPayment": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -112,7 +112,7 @@
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetSubscriptionPlans-657a494632794a6e7239-build.zip"
+          "s3Key": "amplify-builds/GetSubscriptionPlans-586869746d716d356451-build.zip"
         },
         "UpdateSelectedCardPacks": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -130,7 +130,7 @@
           "contactListId": "2",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-614f2f6a51666a645a7a-build.zip"
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4f6e5963496264373845-build.zip"
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
