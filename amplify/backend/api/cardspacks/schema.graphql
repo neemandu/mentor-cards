@@ -10,6 +10,7 @@ type Mutation {
   UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
   GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}") @aws_cognito_user_pools @aws_api_key
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
+  IncrementCardPackLike(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
 }
 
 type User
@@ -138,6 +139,8 @@ type CardsPack
   freeUntilDate: AWSDateTime @function(name: "GetFreeUntilDate-${env}")
   about: About
   isOwnedByOrg: Boolean @function(name: "IsCardsPackOwnedByOrgForUser-${env}")
+  brief: String
+  likesCounter: Int
 }
 
 type MessageQueue
@@ -253,4 +256,8 @@ input userInput {
 
 input selectedCardPacksInput {
   cardsPacksIds: [String]
+}
+
+input cardPackIdInput {
+  cardsPackId: Int
 }

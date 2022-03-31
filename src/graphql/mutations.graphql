@@ -559,6 +559,8 @@ mutation CreateCardsPack(
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }
@@ -605,6 +607,7 @@ mutation UpdateCardsPack(
       link
     }
     isOwnedByOrg
+    brief
     createdAt
     updatedAt
   }
@@ -651,6 +654,8 @@ mutation DeleteCardsPack(
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }

@@ -517,6 +517,8 @@ query GetCardsPack($id: ID!) {
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }
@@ -562,6 +564,8 @@ query ListCardsPacks(
         link
       }
       isOwnedByOrg
+      brief
+      likesCounter
       createdAt
       updatedAt
     }
