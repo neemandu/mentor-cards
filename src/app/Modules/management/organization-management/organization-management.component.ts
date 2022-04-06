@@ -6,6 +6,7 @@ import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { ManagementService } from 'src/app/Services/management.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { NewEditOrganizationComponent } from '../../dialogs/new-edit-organization/new-edit-organization.component';
+import { OrgMembersDialogComponent } from '../../dialogs/org-members-dialog/org-members-dialog.component';
 
 @Component({
   selector: 'app-organization-management',
@@ -22,7 +23,7 @@ export class OrganizationManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.mngService.overlaySpinner(true);
-    this.dataSource = new MatTableDataSource([]);
+    this.dataSource = new MatTableDataSource(this.orgsData);
     this.getAllData();
   }
 
@@ -30,7 +31,6 @@ export class OrganizationManagementComponent implements OnInit {
     this.api.ListOrganizationss().then((res) => {
       this.orgsData = [...res.items]
       this.dataSource = new MatTableDataSource(this.orgsData);
-      console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 38 ~ this.api.ListOrganizationss ~ this.organizations", this.orgsData)
       this.mngService.overlaySpinner(false);
     });
   }
@@ -45,9 +45,18 @@ export class OrganizationManagementComponent implements OnInit {
       dialogSub.unsubscribe();
       if (!newOrg) return;
       this.mngService.overlaySpinner(true);
-      (oldOrg ? this.api.UpdateOrganizations(newOrg) : this.api.CreateOrganizations(newOrg)).then(res => {
-
-        this.mngService.snackBarPositive("הארגון נשמר בהצלחה");
+      (oldOrg ? this.api.UpdateOrganizationMembership(newOrg) : this.api.CreateOrganizationMembership(newOrg)).then(res => {
+        console.log("🚀 ~ file: organization-management.component.ts ~ line 49 ~ res", res)
+        if (oldOrg) {//update
+          oldOrg.membership = res;
+          this.orgsData.splice(index, 1, oldOrg);
+          this.dataSource = new MatTableDataSource(this.orgsData);
+          this.mngService.overlaySpinner(false);
+          this.mngService.snackBarPositive("הארגון עודכן בהצלחה");
+        }
+        else {//new
+          this.createNewOrg(res.id);
+        }
       }, error => {
         this.mngService.overlaySpinner(false);
         this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
@@ -55,6 +64,19 @@ export class OrganizationManagementComponent implements OnInit {
       });
 
     });
+  }
+
+  createNewOrg(orgId: string): void {
+    this.api.CreateOrganizations({ organizationsMembershipId: orgId }).then(res => {
+      this.orgsData = [...this.orgsData, res];
+      this.dataSource = new MatTableDataSource(this.orgsData);
+      this.mngService.overlaySpinner(false);
+      this.mngService.snackBarPositive("הארגון נשמר בהצלחה");
+    }, error => {
+      console.log("🚀 ~ file: organization-management.component.ts ~ line 64 ~ this.api.CreateOrganizations ~ error", error)
+      this.mngService.overlaySpinner(false);
+      this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
+    })
   }
 
   remove(org, index): void {
@@ -79,8 +101,28 @@ export class OrganizationManagementComponent implements OnInit {
     });
   }
 
-  showMembers(org, index): void {
-
+  editMembers(org, index): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = org;
+    dialogConfig.width = '30vw';
+    const dialogRef = this.dialog.open(OrgMembersDialogComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe((res: string[]) => {
+      dialogSub.unsubscribe();
+      if (!res) return;
+      this.mngService.overlaySpinner(true);
+      this.api.UpdateOrganizations({ id: org.id, membersEmails: res }).then(res => {
+        this.mngService.overlaySpinner(false);
+        this.orgsData.splice(index, 1, res);
+        this.dataSource = new MatTableDataSource(this.orgsData);
+        this.mngService.overlaySpinner(false);
+        this.mngService.snackBarPositive("רשימת המיילים עודכנה בהצלחה");
+      }, error => {
+        this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
+        console.log("🚀 ~ file: organization-management.component.ts ~ line 123 ~ this.api.UpdateOrganizations ~ error", error)
+      });
+    });
   }
 
   applyFilter(event: Event) {
