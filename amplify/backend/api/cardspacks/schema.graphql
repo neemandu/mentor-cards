@@ -10,7 +10,7 @@ type Mutation {
   UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
   GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}") @aws_cognito_user_pools @aws_api_key
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
-  IncrementCardPackLike(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
+  LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
 }
 
 type User
@@ -39,6 +39,7 @@ type User
   endOfTrialDate: AWSDateTime @function(name: "GetEndOfTrialDate-${env}")
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  favouritePacks: [Int]
 }
 
 type MonthlySubscription {

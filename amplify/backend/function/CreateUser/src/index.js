@@ -128,7 +128,8 @@ exports.handler = async (event) => {
                 "couponCodes": [],
                 "cardsPacksIds": [],
                 "providerTransactionId": tid,
-                "fullName": fullName
+                "fullName": fullName,
+                "favouritePacks": []
             }
         };
     

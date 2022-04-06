@@ -71,6 +71,7 @@ query GetUser($id: ID!) {
       updatedAt
     }
     endOfTrialDate
+    favouritePacks
     createdAt
     updatedAt
   }
@@ -152,6 +153,7 @@ query ListUsers(
         updatedAt
       }
       endOfTrialDate
+      favouritePacks
       createdAt
       updatedAt
     }
