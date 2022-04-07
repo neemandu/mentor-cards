@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CreateOrganizationsInput, UpdateOrganizationsInput } from 'src/app/API.service';
+import { CreateOrganizationMembershipInput, UpdateOrganizationMembershipInput } from 'src/app/API.service';
 
 @Component({
   selector: 'app-new-edit-organization',
@@ -15,27 +15,37 @@ export class NewEditOrganizationComponent implements OnInit {
     name: ['', [Validators.required]],
     packsAmount: [0, [Validators.required, Validators.min(0)]],
   });
+  currOrg = undefined;
 
   constructor(public dialogRef: MatDialogRef<NewEditOrganizationComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    const org = this.data.org;
-    if (org) {
-      this.orgsForm.controls.days.setValue(org.membership.trialPeriodInDays);
-      this.orgsForm.controls.name.setValue(org.membership.name);
-      this.orgsForm.controls.packsAmount.setValue(org.membership.numberOfallowedCardsPacks);
+    this.currOrg = this.data.org;
+    if (this.currOrg) {
+      this.orgsForm.controls.days.setValue(this.currOrg.membership.trialPeriodInDays);
+      this.orgsForm.controls.name.setValue(this.currOrg.membership.name);
+      this.orgsForm.controls.packsAmount.setValue(this.currOrg.membership.numberOfallowedCardsPacks);
     }
   }
 
   onSubmit(): void {
-    console.log(this.data.coupon)
-    const res: CreateOrganizationsInput | UpdateOrganizationsInput = {
-      id: this.data.org?.id ? this.data.org.id : null,
-      membersEmails: this.orgsForm.controls.discount.value,
-      organizationsMembershipId: this.orgsForm.controls.days.value,
+    if (this.checkOrgExists()) {
+      this.orgsForm.controls.name.setErrors({ 'orgExists': true });
+      return;
+    }
+    const res: CreateOrganizationMembershipInput | UpdateOrganizationMembershipInput = {
+      id: this.currOrg ? this.currOrg.membership.id : null,
+      name: this.orgsForm.controls.name.value,
+      trialPeriodInDays: this.orgsForm.controls.days.value,
+      numberOfallowedCardsPacks: this.orgsForm.controls.packsAmount.value,
     }
     this.dialogRef.close(res);
+  }
+
+  checkOrgExists(): boolean {
+    const sameNameOrg = this.data.allOrgs.filter(org => org.membership.name === this.orgsForm.controls.name.value && this.data.org.id !== org.id)
+    return sameNameOrg.length != 0;
   }
 
   closeDialog(): void {

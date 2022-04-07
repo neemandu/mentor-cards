@@ -1,9 +1,7 @@
 <div class="container d-flex justify-content-center align-items-center">
   <div id="layout" class="d-flex flex-column">
     <div id="header" class="d-flex justify-content-between">
-      <span id="title">
-        ארגונים
-      </span>
+      <span id="title">ארגונים</span>
       <button id="newBtn" (click)="newEdit()">הוספת ארגון</button>
     </div>
     <div id="table" *ngIf="orgsData">
@@ -54,8 +52,8 @@
         <!-- packIds Column -->
         <ng-container matColumnDef="orgUsers">
           <th mat-header-cell *matHeaderCellDef> רשימת חברים </th>
-          <td mat-cell *matCellDef="let element">
-            <button class="iconButton" mat-icon-button (click)="showMembers(element, j)">
+          <td mat-cell *matCellDef="let element; let k = index;">
+            <button class="iconButton" mat-icon-button (click)="editMembers(element, k)">
               <mat-icon class="matIcon">people</mat-icon>
             </button> </td>
         </ng-container>

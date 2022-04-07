@@ -1,0 +1,12 @@
+<form [formGroup]="orgMembersForm" class="d-flex flex-column">
+  <mat-form-field>
+    <mat-label>משתמשים</mat-label>
+    <textarea matInput formControlName="members" [rows]="textAreaRows" placeholder="רשימה של מיילים מופרדים בENTER"></textarea>
+    <mat-error *ngIf="orgMembersForm.controls.members.errors?.badEmail">המייל {{badAddress}} לא תקין</mat-error>
+  </mat-form-field>
+</form>
+<br>
+<div class="d-flex justify-content-between">
+  <button (click)="closeDialog()">ביטול</button>
+  <button [disabled]="!orgMembersForm.valid || !orgMembersForm.dirty" (click)="onSubmit()">אישור</button>
+</div>
