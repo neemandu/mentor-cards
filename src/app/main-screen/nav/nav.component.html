@@ -69,10 +69,10 @@
     הקלפים</button>
   <button mat-menu-item *ngIf="!loggedIn" (click)="navigate('/example-pack')">ערכה
     להתנסות</button>
-  <button mat-menu-item (click)="navigate('/guide-page')">הדרכות</button>
-  <button mat-menu-item (click)="navigate('/price-page')">מחירון</button>
-  <button mat-menu-item (click)="navigate('/about-page')">עלינו</button>
-  <button mat-menu-item (click)="navigate('/contact-us')">צור קשר</button>
+  <button id="ourGuidesPage" mat-menu-item (click)="navigate('/guide-page')">הדרכות</button>
+  <button id="pricePage" mat-menu-item (click)="navigate('/price-page')">מחירון</button>
+  <button id="aboutUsPage" mat-menu-item (click)="navigate('/about-page')">עלינו</button>
+  <button id="contactUsPage" mat-menu-item (click)="navigate('/contact-us')">צור קשר</button>
   <mat-divider *ngIf="loggedIn"></mat-divider>
   <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">יש לך קוד
     הטבה?</button>

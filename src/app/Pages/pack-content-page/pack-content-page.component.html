@@ -4,7 +4,7 @@
     <h1 style="text-align: center" *ngIf="pack">{{pack.name}}</h1>
     <h2 *ngIf="pack?.about" id="about-author" class="clickable" (click)="openAboutDialog()">(על יוצר הערכה)</h2>
   </div>
-  <button type="button" [disabled]="showEditPack"
+  <button id="guideBook" type="button" [disabled]="showEditPack"
     [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
     (click)="openGuideBook()">
     <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
@@ -19,21 +19,21 @@
     </mat-slide-toggle>
   </div> -->
   <div id="actions">
-    <button type="button"
+    <button id="multipleChoise" type="button"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
       (click)="multipileChanged()"
-      [disabled]="showEditPack">{{!multipileChecked ? 'לבחירה מרובה':'לבחירה יחידה'}}</button>
-    <button type="button" [disabled]="showEditPack"
+      [disabled]="showEditPack">{{!multipileChecked ? 'בחירה מרובה':'בחירה יחידה'}}</button>
+    <button id="mixCards" type="button" [disabled]="showEditPack"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
       (click)="shuffle()">ערבב</button>
-    <button type="button" [disabled]="showEditPack"
+    <button id="flipCards" type="button" [disabled]="showEditPack"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
       (click)="flipped = !flipped; selectedCards = []">הפוך
-      חפיסה</button>
-    <button type="button" [disabled]="showEditPack"
+      את הקלפים</button>
+    <button id="randomCard" type="button" [disabled]="showEditPack"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
       (click)="toggleRandomCardsModal()">הצג קלף אקראי</button>
-    <button type="button" [ngClass]="{'option-btn top-option-btn': true}"
+    <button id="editPack" type="button" [ngClass]="{'option-btn top-option-btn': true}"
       (click)="editPack()">{{!showEditPack ? 'עריכה':'סיום עריכה'}}</button>
   </div>
   <button type="button" id="menu-actions" class="btn option-btn" [matMenuTriggerFor]="actions">
