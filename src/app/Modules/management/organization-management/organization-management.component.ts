@@ -5,7 +5,7 @@ import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { ManagementService } from 'src/app/Services/management.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-import { NewEditOrganizationComponent } from '../../dialogs/new-edit-organization/new-edit-organization.component';
+import { NewEditOrganizationDialogComponent } from '../../dialogs/new-edit-organization/new-edit-organization.component';
 import { OrgMembersDialogComponent } from '../../dialogs/org-members-dialog/org-members-dialog.component';
 
 @Component({
@@ -40,7 +40,7 @@ export class OrganizationManagementComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = { org: oldOrg, allOrgs: this.orgsData };
-    const dialogRef = this.dialog.open(NewEditOrganizationComponent, dialogConfig);
+    const dialogRef = this.dialog.open(NewEditOrganizationDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(newOrg => {
       dialogSub.unsubscribe();
       if (!newOrg) return;

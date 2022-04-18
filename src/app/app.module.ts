@@ -79,8 +79,8 @@ import { AboutAuthorComponent } from './Shared Components/pack/about-author/abou
 import { InformationBarComponent } from './Shared Components/information-bar/information-bar.component';
 import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
 import { ManagementModule } from './Modules/management/management.module';
-import { NewEditOrganizationComponent } from './Modules/dialogs/new-edit-organization/new-edit-organization.component';
 import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
+// import { ReceiptItemsPipe } from './Modules/management/receipts-management/receipt-items.pipe';
 
 @NgModule({
   declarations: [
@@ -94,6 +94,7 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     PackContentPageComponent,
     TooltipListViewPipe,
     AmountOfPacksViewPipe,
+    // ReceiptItemsPipe,
     CardsRevealDialogComponent,
     OverlaySpinnerComponent,
     RandomCardRevealDialogComponent,
@@ -123,7 +124,6 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     AboutAuthorComponent,
     InformationBarComponent,
     CompanyPackChoiseComponent,
-    NewEditOrganizationComponent,
     FbChatComponent,
   ],
   imports: [

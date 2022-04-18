@@ -8,8 +8,10 @@
     mat-align-tabs="center" dynamicHeight>
     <mat-tab>
       <ng-template mat-tab-label class="tab-label">
-        <label>משתמש קיים</label>
-        <!-- <label style="font-size:small">משתמש חדש</label> -->
+        <div class="d-flex flex-column">
+          <label class="loginRegisterLabel">התחברות</label>
+          <label class="subLabel">משתמש קיים</label>
+        </div>
       </ng-template>
       <ng-template matTabContent>
         <app-login (loggedInCloseDialog)="closeDialog()" (toRegister)="selectedTab = 1;"
@@ -19,7 +21,10 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label class="tab-label">
-        <label>משתמש חדש</label>
+        <div class="d-flex flex-column">
+          <label class="loginRegisterLabel">הרשמה</label>
+          <label class="subLabel">משתמש חדש</label>
+        </div>
       </ng-template>
       <ng-template matTabContent>
         <app-register (registeredEmitter)="registered($event)"></app-register>

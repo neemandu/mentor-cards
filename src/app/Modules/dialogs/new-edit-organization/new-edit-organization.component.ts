@@ -8,7 +8,7 @@ import { CreateOrganizationMembershipInput, UpdateOrganizationMembershipInput } 
   templateUrl: './new-edit-organization.component.html',
   styleUrls: ['./new-edit-organization.component.css', '../mng-style.css']
 })
-export class NewEditOrganizationComponent implements OnInit {
+export class NewEditOrganizationDialogComponent implements OnInit {
 
   orgsForm: FormGroup = this.formBuilder.group({
     days: [0, [Validators.required, Validators.min(0)]],
@@ -17,7 +17,7 @@ export class NewEditOrganizationComponent implements OnInit {
   });
   currOrg = undefined;
 
-  constructor(public dialogRef: MatDialogRef<NewEditOrganizationComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+  constructor(public dialogRef: MatDialogRef<NewEditOrganizationDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {

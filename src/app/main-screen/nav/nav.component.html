@@ -73,6 +73,10 @@
   <button mat-menu-item (click)="navigate('/price-page')">מחירון</button>
   <button mat-menu-item (click)="navigate('/about-page')">עלינו</button>
   <button mat-menu-item (click)="navigate('/contact-us')">צור קשר</button>
+  <button mat-menu-item *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
+    [matMenuTriggerFor]="managementMenu">
+    אדמין
+  </button>
   <mat-divider *ngIf="loggedIn"></mat-divider>
   <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">יש לך קוד
     הטבה?</button>
