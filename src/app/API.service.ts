@@ -43,6 +43,7 @@ export type User = {
   fullName?: string | null;
   orgMembership?: OrganizationMembership;
   endOfTrialDate?: string | null;
+  favouritePacks?: Array<number | null> | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -1008,6 +1009,7 @@ export type CreateUserMutation = {
     updatedAt: string;
   } | null;
   endOfTrialDate?: string | null;
+  favouritePacks?: Array<number | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1782,6 +1784,7 @@ export type GetUserQuery = {
     updatedAt: string;
   } | null;
   endOfTrialDate?: string | null;
+  favouritePacks?: Array<number | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1866,6 +1869,7 @@ export type ListUsersQuery = {
       updatedAt: string;
     } | null;
     endOfTrialDate?: string | null;
+    favouritePacks?: Array<number | null> | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -3058,6 +3062,7 @@ export class APIService {
             updatedAt
           }
           endOfTrialDate
+          favouritePacks
           createdAt
           updatedAt
         }
@@ -4543,6 +4548,7 @@ export class APIService {
             updatedAt
           }
           endOfTrialDate
+          favouritePacks
           createdAt
           updatedAt
         }
@@ -4641,6 +4647,7 @@ export class APIService {
               updatedAt
             }
             endOfTrialDate
+            favouritePacks
             createdAt
             updatedAt
           }

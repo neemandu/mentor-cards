@@ -71,6 +71,7 @@ mutation CreateUser($input: CreateUserInput!) {
       updatedAt
     }
     endOfTrialDate
+    favouritePacks
     createdAt
     updatedAt
   }

@@ -35,7 +35,7 @@
         </form>
       </mat-card-content>
       <mat-card-actions>
-        <button class="action-button" type="button" [disabled]="contactForm.invalid || !contactForm.dirty"
+        <button id="contactUsFormSubmission" class="action-button" type="button" [disabled]="contactForm.invalid || !contactForm.dirty"
           (click)="sendContent()">שלח</button>
       </mat-card-actions>
     </mat-card>
@@ -43,7 +43,7 @@
     <br /><br />
     <div style="text-align: center; margin-bottom: 5%;">
       <span class="title"> אנחנו זמינים גם ב </span>
-      <a class="title" href="https://wa.me/972549139859?text=שלום%20זה%20בנוגע%20לאתר%20Mentor-Cards"
+      <a id="whatsupContactUs" class="title" href="https://wa.me/972549139859?text=שלום%20זה%20בנוגע%20לאתר%20Mentor-Cards"
         target="_blank">WhatsApp
       </a>
       <span class="title">! </span><br />
@@ -51,8 +51,8 @@
       <div class="line"></div><br>
       <!-- <span class="note">Office@mentor-cards.com </span><br>
       <span class="note">Support@mentor-cards.com</span> -->
-      <a class="note" href="mailto:Office@mentor-cards.com">Office@mentor-cards.com</a><br>
-      <a class="note" href="mailto:Support@mentor-cards.com">Support@mentor-cards.com</a>
+      <a id="officeEmail" class="note" href="mailto:Office@mentor-cards.com">Office@mentor-cards.com</a><br>
+      <a id="supportEmail" class="note" href="mailto:Support@mentor-cards.com">Support@mentor-cards.com</a>
     </div>
   </div>
   <img class="img" matTooltip="Photo by Nikita Kachanovsky on Unsplash" matTooltipShowDelay="1000"

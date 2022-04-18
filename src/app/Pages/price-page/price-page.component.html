@@ -40,7 +40,7 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1"
+                <button id="monthlySubscription" *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1"
                     class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(monthlySubscription.id)">
                     להצטרפות >>
@@ -65,7 +65,7 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 6"
+                <button id="halfYearlySubscription" *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 6"
                     class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(halfYearlySubscription.id)">
                     להצטרפות >>
@@ -86,7 +86,7 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12"
+                <button id="yearlySubscription" *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12"
                     class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(yearlySubscription.id)">
                     להצטרפות >>
