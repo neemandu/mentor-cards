@@ -42,6 +42,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     NewEditNewsComponent,
     OrgMembersDialogComponent,
     NewEditReceiptDialogComponent,
+    NewEditOrganizationDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
