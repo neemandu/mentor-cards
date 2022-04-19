@@ -80,7 +80,6 @@ import { InformationBarComponent } from './Shared Components/information-bar/inf
 import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
 import { ManagementModule } from './Modules/management/management.module';
 import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
-// import { ReceiptItemsPipe } from './Modules/management/receipts-management/receipt-items.pipe';
 
 @NgModule({
   declarations: [
@@ -94,7 +93,6 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     PackContentPageComponent,
     TooltipListViewPipe,
     AmountOfPacksViewPipe,
-    // ReceiptItemsPipe,
     CardsRevealDialogComponent,
     OverlaySpinnerComponent,
     RandomCardRevealDialogComponent,
@@ -161,7 +159,7 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     MatCardModule,
     DragDropModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [
   ],
