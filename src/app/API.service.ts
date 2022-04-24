@@ -5041,7 +5041,7 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListMessageQueuesQuery>response.data.listMessageQueues;
-  }
+  } 
     async GetInvoices(id: string): Promise<GetInvoicesQuery> {
     const statement = `query GetInvoices($id: ID!) {
         getInvoices(id: $id) {
