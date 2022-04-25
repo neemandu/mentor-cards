@@ -185,15 +185,15 @@ function createHtml(){
   return html;
 }
 
-async function getInvoiceRunningId(){
-  
+function getInvoiceRunningId(){
+  console.log(env.API_RECEIPTSAPI_APINAME);
   var apigClient = apigClientFactory.newClient({
     invokeUrl: env.API_RECEIPTSAPI_APINAME
   });
 
   var pathParams = {};
 // Template syntax follows url-template https://www.npmjs.com/package/url-template
-  var pathTemplate = '/counter'
+  var pathTemplate = '/counter';
   var method = 'GET';
   var additionalParams = {
   };
@@ -209,13 +209,16 @@ async function getInvoiceRunningId(){
     });
 
   return id;
-  }
-
-async function sendInvoiceToEmail(email, fullName, html){
-
 }
 
-exports.handler = event => {
+function sendInvoiceToEmail(email, fullName, html){
+  console.log("sendInvoiceToEmail:");
+  console.log("email: " + email);
+  console.log("fullName: " + fullName);
+  console.log("html: " + html);
+}
+
+exports.handler = async (event) => {
   //eslint-disable-line
   console.log(JSON.stringify(event, null, 2));
   event.Records.forEach(record => {
@@ -226,22 +229,22 @@ exports.handler = event => {
       //pull off items from stream
       var invoice = {
         email: record.dynamodb.NewImage.email.S,
-        fullName: record.dynamodb.NewImage.email.S,
-        customerAddress: record.dynamodb.NewImage.params.M,
-        date: record.dynamodb.NewImage.name.S,
-        businessName: record.dynamodb.NewImage.email.S,
-        businessPhoneNumber: record.dynamodb.NewImage.params.M,
-        businessAddress: record.dynamodb.NewImage.name.S,
-        businessWebsite: record.dynamodb.NewImage.email.S,
-        invoiceType: record.dynamodb.NewImage.params.M
-      }
-      invoice.invoiceRunningId = await getInvoiceRunningId();
-      var items = record.dynamodb.NewImage.membersEmails.L;
+        fullName: record.dynamodb.NewImage.fullName.S,
+        customerAddress: record.dynamodb.NewImage.customerAddress.S,
+        date: record.dynamodb.NewImage.date.S,
+        businessName: 'Mentor-Cards',
+        businessPhoneNumber: '0549139859',
+        businessAddress: 'Maglan 4, Meitar',
+        businessWebsite: '',
+        invoiceType: record.dynamodb.NewImage.invoiceType.S
+      };
+      invoice.invoiceRunningId = getInvoiceRunningId();
+      var items = record.dynamodb.NewImage.items.L;
       invoice.item = items[0].M.itemName.S;
       invoice.item_price = items[0].M.pricePerItem.N;
       invoice.item_quantity = items[0].M.numberOfItems.N;
       invoice.html = createHtml(invoice);
-      await sendInvoiceToEmail(email, fullName, html);
+      sendInvoiceToEmail(invoice.email, invoice.fullName, invoice.html);
   }});
   return Promise.resolve('Successfully processed DynamoDB record');
 };

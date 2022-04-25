@@ -145,7 +145,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-357956466b42372b5263-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-334133626f6672637569-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -221,7 +221,7 @@
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-636d5072593242763556-build.zip"
+          "s3Key": "amplify-builds/InvoiceHandler-41725443596544475849-build.zip"
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
