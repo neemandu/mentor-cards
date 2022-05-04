@@ -9,9 +9,10 @@
 	STORAGE_INVOICES_BUCKETNAME
 Amplify Params - DO NOT EDIT */
 const { env, ppid } = require("process");
-var apigClientFactory = require("aws-api-gateway-client").default;
+const https = require('https');
+var AWS = require("aws-sdk");
 
-function createHtml(){
+function createHtml(invoice){
   const newLocal = `<!DOCTYPE html>
   <html>
     <head>
@@ -186,29 +187,25 @@ function createHtml(){
 }
 
 function getInvoiceRunningId(){
-  console.log(env.API_RECEIPTSAPI_APINAME);
-  var apigClient = apigClientFactory.newClient({
-    invokeUrl: env.API_RECEIPTSAPI_APINAME
-  });
+  return new Promise((resolve, reject) => {
+    https.get(env.RECEIPTS_URL, res => {
+      let rawData = '';
 
-  var pathParams = {};
-// Template syntax follows url-template https://www.npmjs.com/package/url-template
-  var pathTemplate = '/counter';
-  var method = 'GET';
-  var additionalParams = {
-  };
-  var body = {
-  };
-  var id = 0;
-  apigClient.invokeApi(pathParams, pathTemplate, method, additionalParams, body)
-      .then(function(result){
-        console.log(result);
-        id = result;
-      }).catch( function(err){
-        console.error(err);
+      res.on('data', chunk => {
+        rawData += chunk;
+      });
+
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(rawData));
+        } catch (err) {
+          reject(new Error(err));
+        }
+      });
+    }, error => {
+       reject(new Error(error));
     });
-
-  return id;
+  });
 }
 
 function sendInvoiceToEmail(email, fullName, html){
@@ -238,13 +235,41 @@ exports.handler = async (event) => {
         businessWebsite: '',
         invoiceType: record.dynamodb.NewImage.invoiceType.S
       };
-      invoice.invoiceRunningId = getInvoiceRunningId();
-      var items = record.dynamodb.NewImage.items.L;
-      invoice.item = items[0].M.itemName.S;
-      invoice.item_price = items[0].M.pricePerItem.N;
-      invoice.item_quantity = items[0].M.numberOfItems.N;
-      invoice.html = createHtml(invoice);
-      sendInvoiceToEmail(invoice.email, invoice.fullName, invoice.html);
+      const res = https.get(env.RECEIPTS_URL);
+      console.log('res');
+      
+      const response = await new Promise((resolve, reject) => {
+        const req = https.get(env.RECEIPTS_URL, function(res) {
+          res.on('data', chunk => {
+            dataString += chunk;
+          });
+          res.on('end', () => {
+            resolve({
+                statusCode: 200,
+                body: JSON.stringify(JSON.parse(dataString), null, 4)
+            });
+          });
+        });
+        
+        req.on('error', (e) => {
+          reject({
+              statusCode: 500,
+              body: 'Something went wrong!'
+          });
+        });
+    });
+      
+      
+      
+      console.log(response);
+      
+      // invoice.invoiceRunningId = await getInvoiceRunningId();
+      // console.log("invoice.invoiceRunningId: " + invoice.invoiceRunningId);
+      // var items = record.dynamodb.NewImage.items.L;
+      // invoice.item = items[0].M.itemName.S;
+      // invoice.item_price = items[0].M.pricePerItem.N;
+      // invoice.item_quantity = items[0].M.numberOfItems.N;
+      // invoice.html = createHtml(invoice);
+      // sendInvoiceToEmail(invoice.email, invoice.fullName, invoice.html);
   }});
-  return Promise.resolve('Successfully processed DynamoDB record');
 };

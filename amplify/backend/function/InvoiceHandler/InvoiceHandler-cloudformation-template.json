@@ -35,6 +35,9 @@
     "apireceiptsAPIApiId": {
       "Type": "String",
       "Default": "apireceiptsAPIApiId"
+    },
+    "receiptsUrl": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -127,6 +130,9 @@
             },
             "API_RECEIPTSAPI_APIID": {
               "Ref": "apireceiptsAPIApiId"
+            },
+            "RECEIPTS_URL": {
+              "Ref": "receiptsUrl"
             }
           }
         },
