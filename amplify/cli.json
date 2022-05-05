@@ -4,7 +4,8 @@
       "addmissingownerfields": true,
       "validatetypenamereservedwords": true,
       "useexperimentalpipelinedtransformer": false,
-      "showfieldauthnotification": false
+      "showfieldauthnotification": false,
+      "securityEnhancementNotification": false
     },
     "project": {
       "overrides": true

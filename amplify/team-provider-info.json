@@ -127,10 +127,10 @@
           "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-53616278382f6452316f-build.zip"
         },
         "AddNewUserToEmailsContactList": {
-          "contactListId": "2",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4f6e5963496264373845-build.zip"
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4f6e5963496264373845-build.zip",
+          "contactListId": "2"
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
