@@ -1,5 +1,16 @@
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
+	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	API_RECEIPTSAPI_APIID
+	API_RECEIPTSAPI_APINAME
+	ENV
+	REGION
+	STORAGE_INVOICES_BUCKETNAME
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	API_RECEIPTSAPI_APIID
@@ -8,7 +19,7 @@
 	REGION
 	STORAGE_INVOICES_BUCKETNAME
 Amplify Params - DO NOT EDIT */
-const { env, ppid } = require("process");
+const { env } = require("process");
 const https = require('https');
 var AWS = require("aws-sdk");
 
@@ -80,12 +91,14 @@ function createHtml(invoice){
         .invoice-box table tr.item.last td {
           border-bottom: 2px solid #eee;
           text-align: center;
+          direction: rtl;
         }
   
         .invoice-box table tr.total td {
           border-top: none;
           font-weight: bold;
           text-align: center;
+          direction: rtl;
         }
   
         @media only screen and (max-width: 600px) {
@@ -126,7 +139,7 @@ function createHtml(invoice){
               <table>
                 <tr>
                   <td>
-                    {{invoiceRunningId}} :#{{invoiceType}}<br />
+                    {{invoiceRunningId}} מס' {{invoiceType}}<br />
                     {{date}} :תאריך<br />
                   </td>
                   <td class="title">
@@ -166,14 +179,15 @@ function createHtml(invoice){
             <td>פריט</td>
           </tr>
           <tr class="item last">
-            <td>ש"ח {{item_price}}</td>
+            <td>{{item_price}} ש"ח</td>
             <td>{{item_quantity}}</td>
             <td>{{item}}</td>
           </tr>
   
           <tr class="total">
-  
-            <td class="total">ש"ח {{item_price}} :סה"כ</td>
+            <td class="total">{{item_price}}  ש"ח</td>
+            <td class="total"> </td>
+            <td class="total">סה"כ</td>
           </tr>
         </table>
       </div>
@@ -181,31 +195,10 @@ function createHtml(invoice){
   </html>`;
   var html = newLocal;
   for (const [key, value] of Object.entries(invoice)) {
-    html = html.replace(key, value);
+    html = html.replace("{{" + key + "}}", value);
   }
+  html = html.replace("{{item_price}}", invoice['item_price']);
   return html;
-}
-
-function getInvoiceRunningId(){
-  return new Promise((resolve, reject) => {
-    https.get(env.RECEIPTS_URL, res => {
-      let rawData = '';
-
-      res.on('data', chunk => {
-        rawData += chunk;
-      });
-
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(rawData));
-        } catch (err) {
-          reject(new Error(err));
-        }
-      });
-    }, error => {
-       reject(new Error(error));
-    });
-  });
 }
 
 function sendInvoiceToEmail(email, fullName, html){
@@ -215,7 +208,7 @@ function sendInvoiceToEmail(email, fullName, html){
   console.log("html: " + html);
 }
 
-exports.handler = async (event) => {
+exports.handler = (event) => {
   //eslint-disable-line
   console.log(JSON.stringify(event, null, 2));
   event.Records.forEach(record => {
@@ -228,48 +221,37 @@ exports.handler = async (event) => {
         email: record.dynamodb.NewImage.email.S,
         fullName: record.dynamodb.NewImage.fullName.S,
         customerAddress: record.dynamodb.NewImage.customerAddress.S,
-        date: record.dynamodb.NewImage.date.S,
+        date: new Date(record.dynamodb.NewImage.date.S).toLocaleDateString(),
         businessName: 'Mentor-Cards',
         businessPhoneNumber: '0549139859',
         businessAddress: 'Maglan 4, Meitar',
         businessWebsite: '',
         invoiceType: record.dynamodb.NewImage.invoiceType.S
       };
-      const res = https.get(env.RECEIPTS_URL);
+      
       console.log('res');
+      console.log("env.RECEIPTS_URL: " + env.RECEIPTS_URL);
       
-      const response = await new Promise((resolve, reject) => {
-        const req = https.get(env.RECEIPTS_URL, function(res) {
-          res.on('data', chunk => {
-            dataString += chunk;
-          });
-          res.on('end', () => {
-            resolve({
-                statusCode: 200,
-                body: JSON.stringify(JSON.parse(dataString), null, 4)
-            });
-          });
+      let dataString = '';
+      
+      const req = https.get(env.RECEIPTS_URL, function(res) {
+        res.on('data', chunk => {
+          dataString += chunk;
         });
-        
-        req.on('error', (e) => {
-          reject({
-              statusCode: 500,
-              body: 'Something went wrong!'
-          });
+        res.on('end', () => {
+          invoice.invoiceRunningId = dataString;
+          console.log("invoice.invoiceRunningId: " + invoice.invoiceRunningId);
+          var items = record.dynamodb.NewImage.items.L;
+          invoice.item = items[0].M.itemName.S;
+          invoice.item_price = items[0].M.pricePerItem.N;
+          invoice.item_quantity = items[0].M.numberOfItems.N;
+          invoice.html = createHtml(invoice);
+          sendInvoiceToEmail(invoice.email, invoice.fullName, invoice.html);
         });
-    });
+      });
       
-      
-      
-      console.log(response);
-      
-      // invoice.invoiceRunningId = await getInvoiceRunningId();
-      // console.log("invoice.invoiceRunningId: " + invoice.invoiceRunningId);
-      // var items = record.dynamodb.NewImage.items.L;
-      // invoice.item = items[0].M.itemName.S;
-      // invoice.item_price = items[0].M.pricePerItem.N;
-      // invoice.item_quantity = items[0].M.numberOfItems.N;
-      // invoice.html = createHtml(invoice);
-      // sendInvoiceToEmail(invoice.email, invoice.fullName, invoice.html);
+      req.on('error', (e) => {
+        console.error(e);
+      });
   }});
 };

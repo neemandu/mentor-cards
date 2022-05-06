@@ -13,6 +13,11 @@
       ],
       "User:@model(appsync)": [
         "read"
+      ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update"
       ]
     }
   },
