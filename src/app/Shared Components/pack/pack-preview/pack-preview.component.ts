@@ -137,6 +137,11 @@ export class PackPreviewComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  signInSignUp(): void {
+    this.closeDialog();
+    this.userAuthService.showSignInModal();
+  }
+
 }
 
 export interface previewData {
