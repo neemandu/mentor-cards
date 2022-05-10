@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.fbBtnSub = this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        const fbButton = document.getElementById('fb-customer-chat')
+        const fbButton = document.getElementById('fb-root')
         if (val.url.includes('pack-view')) {
           fbButton.style.visibility = 'hidden';
         } else {
