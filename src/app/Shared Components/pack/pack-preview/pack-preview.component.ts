@@ -25,7 +25,7 @@ export class PackPreviewComponent implements OnInit {
   ngOnInit(): void {
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
-    console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
+    // console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
   }
 
   // choosePack(): void {
@@ -72,7 +72,7 @@ export class PackPreviewComponent implements OnInit {
   //   // return this.userAuthService.userData.numberOfUsedPacks;
   // }
 
-  // get signedIn() {
+  // signedIn() {
   //   return this.userAuthService.userData;
   // }
 
