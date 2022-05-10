@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       if (val instanceof NavigationEnd) {
         const fbButton = document.getElementById('fb-root')
         if (val.url.includes('pack-view')) {
-          fbButton.style.visibility = 'none';
+          fbButton.style.visibility = 'hidden';
         } else {
           fbButton.style.visibility = 'unset';
         }
