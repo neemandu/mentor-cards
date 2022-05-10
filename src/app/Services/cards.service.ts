@@ -29,12 +29,11 @@ export class CardsService {
   allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
-  // categoryColor = new Map<string, string>([['קלפי תמונה', '#89f4ff'], ['קלפי תמונה + מילה', '#ff3af0d1'], ['קלפי מילה', '#c789ff'], ['קלפי שאלות', '#ff8989'], ['קלפי מסרים', '#5581ff']]);
-
+  categoriesOrder: string[] = ['קלפי תמונה', 'משתפי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'ערכות במתנה'];
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService,
     private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
-      
+
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.isLoggedIn = userData ? true : false;
       this.allPacks = undefined;
@@ -97,6 +96,9 @@ export class CardsService {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))
             this.allCategories.push(category);
+        });
+        this.allCategories.sort((a, b) => {
+          return this.categoriesOrder.indexOf(a) - this.categoriesOrder.indexOf(b);
         });
         return new PackContent().deseralize(pack)
       });
