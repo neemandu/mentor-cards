@@ -29,12 +29,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.fbBtnSub = this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        console.log(val.url)
         const fbButton = document.getElementById('fb-root')
         if (val.url.includes('pack-view')) {
-          if (window.screen.width <= 480) {
-            fbButton.style.visibility = 'none';
-          }
+          fbButton.style.visibility = 'none';
         } else {
           fbButton.style.visibility = 'unset';
         }
