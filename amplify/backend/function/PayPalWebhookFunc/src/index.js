@@ -1,4 +1,7 @@
 /* Amplify Params - DO NOT EDIT
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
 	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
@@ -196,7 +199,7 @@ exports.handler = async (event) => {
         var transaction_id = paypal_body.resource.billing_agreement_id;
         console.log('transaction_id: ' + transaction_id);
         var user = await getUserByPayPalTxId(transaction_id);
-        //await sendRecipt(user);
+        await createInvoice(user);
     }
     const response = {
         statusCode: 200,
