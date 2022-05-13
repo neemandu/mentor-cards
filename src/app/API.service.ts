@@ -43,6 +43,7 @@ export type User = {
   fullName?: string | null;
   orgMembership?: OrganizationMembership;
   endOfTrialDate?: string | null;
+  favouritePacks?: Array<number | null> | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -439,7 +440,9 @@ export type CreateCardsPackInput = {
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | false;  
+  brief?: string | null;
+  likesCounter?: number | null;
 };
 
 export type GuideBookElementInput = {
@@ -464,6 +467,8 @@ export type ModelCardsPackConditionInput = {
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
   isOwnedByOrg?: ModelStringInput | null;
+  brief?: ModelStringInput | null;
+  likesCounter?: ModelIntInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -483,7 +488,9 @@ export type CardsPack = {
   name?: string | null;
   freeUntilDate?: string | null;
   about?: About;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | false;  
+  brief?: string | null;
+  likesCounter?: number | null;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -513,6 +520,7 @@ export type UpdateCardsPackInput = {
   guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  brief?: string | null;
   about?: AboutInput | null;
   isOwnedByOrg?: boolean | false;
 };
@@ -894,6 +902,8 @@ export type ModelCardsPackFilterInput = {
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
   isOwnedByOrg?: ModelStringInput | null;
+  brief?: ModelStringInput | null;
+  likesCounter?: ModelIntInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -999,6 +1009,7 @@ export type CreateUserMutation = {
     updatedAt: string;
   } | null;
   endOfTrialDate?: string | null;
+  favouritePacks?: Array<number | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1427,6 +1438,8 @@ export type CreateCardsPackMutation = {
     link?: string | null;
   } | null;
   isOwnedByOrg?: boolean | false;
+  brief?: string | null;
+  likesCounter?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1478,6 +1491,7 @@ export type UpdateCardsPackMutation = {
     link?: string | null;
   } | null;
   isOwnedByOrg?: boolean | false;
+  brief?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1529,6 +1543,8 @@ export type DeleteCardsPackMutation = {
     link?: string | null;
   } | null;
   isOwnedByOrg?: boolean | false;
+  brief?: string | null;
+  likesCounter?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1768,6 +1784,7 @@ export type GetUserQuery = {
     updatedAt: string;
   } | null;
   endOfTrialDate?: string | null;
+  favouritePacks?: Array<number | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1852,6 +1869,7 @@ export type ListUsersQuery = {
       updatedAt: string;
     } | null;
     endOfTrialDate?: string | null;
+    favouritePacks?: Array<number | null> | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2209,6 +2227,8 @@ export type GetCardsPackQuery = {
     link?: string | null;
   } | null;
   isOwnedByOrg?: boolean | false;
+  brief?: string | null;
+  likesCounter?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2258,6 +2278,8 @@ export type ListCardsPacksQuery = {
       link?: string | null;
     } | null;
     isOwnedByOrg?: boolean | false;
+    brief?: string | null;
+    likesCounter?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2815,6 +2837,8 @@ export type OnCreateCardsPackSubscription = {
     link?: string | null;
   } | null;
   isOwnedByOrg?: boolean | false;
+  brief?: string | null;
+  likesCounter?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2866,6 +2890,7 @@ export type OnUpdateCardsPackSubscription = {
     link?: string | null;
   } | null;
   isOwnedByOrg?: boolean | false;
+  brief?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2917,6 +2942,8 @@ export type OnDeleteCardsPackSubscription = {
     link?: string | null;
   } | null;
   isOwnedByOrg?: boolean | false;
+  brief?: string | null;
+  likesCounter?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3035,6 +3062,7 @@ export class APIService {
             updatedAt
           }
           endOfTrialDate
+          favouritePacks
           createdAt
           updatedAt
         }
@@ -3956,6 +3984,8 @@ export class APIService {
             link
           }
           isOwnedByOrg
+          brief
+          likesCounter
           createdAt
           updatedAt
         }
@@ -4023,6 +4053,7 @@ export class APIService {
             link
           }
           isOwnedByOrg
+          brief
           createdAt
           updatedAt
         }
@@ -4090,6 +4121,8 @@ export class APIService {
             link
           }
           isOwnedByOrg
+          brief
+          likesCounter
           createdAt
           updatedAt
         }
@@ -4515,6 +4548,7 @@ export class APIService {
             updatedAt
           }
           endOfTrialDate
+          favouritePacks
           createdAt
           updatedAt
         }
@@ -4613,6 +4647,7 @@ export class APIService {
               updatedAt
             }
             endOfTrialDate
+            favouritePacks
             createdAt
             updatedAt
           }
@@ -5006,7 +5041,7 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListMessageQueuesQuery>response.data.listMessageQueues;
-  }
+  } 
     async GetInvoices(id: string): Promise<GetInvoicesQuery> {
     const statement = `query GetInvoices($id: ID!) {
         getInvoices(id: $id) {
@@ -5243,6 +5278,8 @@ export class APIService {
             link
           }
           isOwnedByOrg
+          brief
+          likesCounter
           createdAt
           updatedAt
         }
@@ -5279,6 +5316,8 @@ export class APIService {
               imgUrl
               link
             }
+            brief
+            likesCounter
             createdAt
             updatedAt
           }
@@ -5353,6 +5392,8 @@ export class APIService {
               link
             }
             isOwnedByOrg
+            brief
+            likesCounter
             createdAt
             updatedAt
           }
@@ -6184,6 +6225,8 @@ export class APIService {
             link
           }
           isOwnedByOrg
+          brief
+          likesCounter
           createdAt
           updatedAt
         }
@@ -6243,6 +6286,7 @@ export class APIService {
             link
           }
           isOwnedByOrg
+          brief
           createdAt
           updatedAt
         }
@@ -6302,6 +6346,8 @@ export class APIService {
             link
           }
           isOwnedByOrg
+          brief
+          likesCounter
           createdAt
           updatedAt
         }

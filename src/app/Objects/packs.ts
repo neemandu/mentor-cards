@@ -13,6 +13,8 @@ export class PackInfo {
     freeUntilDate: Date;
     about: AboutInput;
     isOwnedByOrg: boolean;
+    brief: string;
+    likesCounter: number;
 
     constructor() { }
 
@@ -36,6 +38,8 @@ export class PackContent {
     freeUntilDate: Date;
     about: AboutInput;
     isOwnedByOrg: boolean;
+    brief: string;
+    likesCounter: number;
 
     constructor() { }
 

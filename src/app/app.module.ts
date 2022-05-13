@@ -79,7 +79,6 @@ import { AboutAuthorComponent } from './Shared Components/pack/about-author/abou
 import { InformationBarComponent } from './Shared Components/information-bar/information-bar.component';
 import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
 import { ManagementModule } from './Modules/management/management.module';
-import { NewEditOrganizationComponent } from './Modules/dialogs/new-edit-organization/new-edit-organization.component';
 import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
 
 @NgModule({
@@ -123,7 +122,6 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     AboutAuthorComponent,
     InformationBarComponent,
     CompanyPackChoiseComponent,
-    NewEditOrganizationComponent,
     FbChatComponent,
   ],
   imports: [
@@ -161,7 +159,7 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     MatCardModule,
     DragDropModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [
   ],

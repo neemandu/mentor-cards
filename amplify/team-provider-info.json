@@ -156,7 +156,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-41497470335835554334-build.zip",
+          "s3Key": "amplify-builds/CreateUser-567642326d772b565945-build.zip",
           "sendinblueApiKey": "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"
         },
         "AddCardsPack": {
@@ -198,7 +198,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-357956466b42372b5263-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-334133626f6672637569-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -213,7 +213,7 @@
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-74787946635548354a52-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-79664f66306a61536a56-build.zip"
         },
         "ContactUsTrigger": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -228,7 +228,7 @@
         "MessagingService": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/MessagingService-713167496a58726e3664-build.zip"
+          "s3Key": "amplify-builds/MessagingService-4730326a66365933312b-build.zip"
         },
         "EmailUpcomingPayment": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -248,7 +248,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-614f70354e686c495331-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-57694c594832786a6d56-build.zip"
         },
         "UpdateSelectedCardPacks": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -256,7 +256,7 @@
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetSubscriptionPlans-555664444e3473616669-build.zip"
+          "s3Key": "amplify-builds/GetSubscriptionPlans-586869746d716d356451-build.zip"
         },
         "GetEndOfTrialDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -274,7 +274,12 @@
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-636d5072593242763556-build.zip"
+          "s3Key": "amplify-builds/InvoiceHandler-493579577646526f7869-build.zip",
+          "receiptsUrl": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev/counter"
+        },
+        "IncrementCardPackLike": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/IncrementCardPackLike-53652f57422b724e6959-build.zip"
         }
       },
       "auth": {

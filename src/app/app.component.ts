@@ -1,10 +1,8 @@
 import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { UserAuthService } from './Services/user-auth.service';
+import { Component, OnInit } from '@angular/core';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
-import { I18n } from 'aws-amplify';
-import LogRocket from 'logrocket';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,94 +13,34 @@ export class AppComponent implements OnInit {
   //https://docs.amplify.aws/ui/auth/authenticator/q/framework/angular#sign-out
   //https://www.unimedia.tech/2020/12/12/aws-amplify-authentication-with-angular/
   // https://docs.amplify.aws/ui/auth/authenticator/q/framework/angular#hiding-form-fields
-  // signUpFormFields = [
-  //   {
-  //     type: "name",
-  //     label: "שם מלא *",
-  //     placeholder: "שם מלא",
-  //     required: true,
-  //   },
-  //   {
-  //     type: "email",
-  //     label: "Email Address *",
-  //     placeholder: "Email",
-  //     required: true,
-  //   },
-  //   {
-  //     type: "password",
-  //     label: "Password *",
-  //     placeholder: "Password",
-  //     required: true,
-  //   },
-  //   {
-  //     type: "phone_number",
-  //     label: "Phone Number *",
-  //     placeholder: "(555) 555-1212",
-  //     required: true,
-  //   },
-  // ];//TODO
 
   user: CognitoUserInterface | undefined;
   authState: AuthState;
   title = 'amplify-angular-auth';
   showLogin: boolean = false;
+  fbBtnSub: Subscription;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService,
-    public dialog: MatDialog) {
+  constructor(private overlaySpinnerService: OverlaySpinnerService, private router: Router) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
     // I18n.putVocabularies(dict);
     // I18n.setLanguage('he')
   }
 
   ngOnInit() {
-    // // localStorage.getItem('signedin') ? this.showLogin = true : this.showLogin = false;
-    // onAuthUIStateChange((authState, authData) => {
-    //   this.authState = authState;
-    //   // console.log("file: app.component.ts ~ line 30 ~ onAuthUIStateChange ~ authState", authState)
-    //   // debugger
-    //   if (this.authState === 'signedin') {
-    //     // debugger
-    //     this.showLogin = false;
-    //     localStorage.setItem('signedin', 'true');
-    //     this.overlaySpinnerService.changeOverlaySpinner(false);
-    //     this.user = authData as CognitoUserInterface;
-    //     LogRocket.identify(this.user.username);
-    //     this.userAuthService.loggedIn(this.user.username);
-    //   }
-    //   else if (this.authState === 'signin') {
-    //     this.userAuthService.loggedOut();
-    //     localStorage.removeItem('signedin');
-    //   }
-    //   this.ref.detectChanges();
-    // })
-    // this.userAuthService.showSignInModalEmitter.subscribe(() => {
-    //   this.overlaySpinnerService.changeOverlaySpinner(true);
-    //   this.showLogin = true;
-    // })
-
-    //M<obile Warning
-    // var ua = navigator.userAgent;
-    // console.log("file: app.component.ts ~ line 84 ~ ngOnInit ~ ua", ua)
-    // if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
-    //   // if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua))
-    //   this.openMobileErrorModal();
+    this.fbBtnSub = this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        const fbButton = document.getElementById('fb-root')
+        if (val.url.includes('pack-view')) {
+          fbButton.style.visibility = 'hidden';
+        } else {
+          fbButton.style.visibility = 'unset';
+        }
+      }
+    })
   }
 
-  // openMobileErrorModal(): void {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.maxHeight = '85vh';
-  //   dialogConfig.maxWidth = '85vw';
-  //   const dialogRef = this.dialog.open(MobileWarningDialogComponent, dialogConfig);
-  // }
-
-  // closeAmplify(): void {
-  //   this.showLogin = false;
-  //   this.overlaySpinnerService.changeOverlaySpinner(false);
-  // }
-
   ngOnDestroy() {
+    this.fbBtnSub.unsubscribe();
     return onAuthUIStateChange;
   }
 }
@@ -164,19 +102,19 @@ export class AppComponent implements OnInit {
 //   }
 // };
 
-@Component({
-  selector: 'mobile-warning-dialog',
-  templateUrl: './mobile-warning-dialog.html',
-})
-export class MobileWarningDialogComponent {
+// @Component({
+//   selector: 'mobile-warning-dialog',
+//   templateUrl: './mobile-warning-dialog.html',
+// })
+// export class MobileWarningDialogComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<MobileWarningDialogComponent>) { }
+//   constructor(
+//     public dialogRef: MatDialogRef<MobileWarningDialogComponent>) { }
 
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
+//   closeDialog(): void {
+//     this.dialogRef.close();
+//   }
 
-}
+// }
 
 

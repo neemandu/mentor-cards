@@ -497,6 +497,8 @@ subscription OnCreateCardsPack {
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }
@@ -540,6 +542,7 @@ subscription OnUpdateCardsPack {
       link
     }
     isOwnedByOrg
+    brief
     createdAt
     updatedAt
   }
@@ -583,6 +586,8 @@ subscription OnDeleteCardsPack {
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }

@@ -71,6 +71,7 @@ query GetUser($id: ID!) {
       updatedAt
     }
     endOfTrialDate
+    favouritePacks
     createdAt
     updatedAt
   }
@@ -152,6 +153,7 @@ query ListUsers(
         updatedAt
       }
       endOfTrialDate
+      favouritePacks
       createdAt
       updatedAt
     }
@@ -517,6 +519,8 @@ query GetCardsPack($id: ID!) {
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }
@@ -562,6 +566,8 @@ query ListCardsPacks(
         link
       }
       isOwnedByOrg
+      brief
+      likesCounter
       createdAt
       updatedAt
     }

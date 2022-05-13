@@ -2,7 +2,7 @@
     <!-- <span>
       Copyright © 2021 Mentor-Cards. All rights reserved.
     </span> -->
-    <span class="footer-text">
+    <span id="siteRules" class="footer-text">
         זכויות יוצרים © 2021 Mentor-Cards. כל הזכויות שמורות. <span (click)='openSiteRulesModal()'
             class="site-rules">(לתקנון
             האתר)</span>
@@ -11,7 +11,7 @@
             id="site-rules-sm" class="site-rules">(לתקנון
             האתר)</span>
     <div class="d-flex icons">
-        <a class="social-link" href="https://wa.me/972549139859?text=שלום%20זה%20בנוגע%20לאתר%20Mentor-Cards"
+        <a id="whatsupInfoBar" class="social-link" href="https://wa.me/972549139859?text=שלום%20זה%20בנוגע%20לאתר%20Mentor-Cards"
             target="_blank" aria-label="whatsapp">
             <svg id="whatsapp-logo" viewBox="0 0 310 310" preserveAspectRatio="xMinYMid">
                 <path
@@ -20,14 +20,14 @@
                     d="M156.734,0C73.318,0,5.454,67.354,5.454,150.143c0,26.777,7.166,52.988,20.741,75.928L0.212,302.716   c-0.484,1.429-0.124,3.009,0.933,4.085C1.908,307.58,2.943,308,4,308c0.405,0,0.813-0.061,1.211-0.188l79.92-25.396   c21.87,11.685,46.588,17.853,71.604,17.853C240.143,300.27,308,232.923,308,150.143C308,67.354,240.143,0,156.734,0z    M156.734,268.994c-23.539,0-46.338-6.797-65.936-19.657c-0.659-0.433-1.424-0.655-2.194-0.655c-0.407,0-0.815,0.062-1.212,0.188   l-40.035,12.726l12.924-38.129c0.418-1.234,0.209-2.595-0.561-3.647c-14.924-20.392-22.813-44.485-22.813-69.677   c0-65.543,53.754-118.867,119.826-118.867c66.064,0,119.812,53.324,119.812,118.867   C276.546,215.678,222.799,268.994,156.734,268.994z" />
             </svg>
         </a>
-        <a class="social-link" href="https://www.instagram.com/mentor_cards/" target="_blank" aria-label="facebook">
+        <a id="instagram" class="social-link" href="https://www.instagram.com/mentor_cards/" target="_blank" aria-label="facebook">
             <svg id="instagram-logo" viewBox="0 0 612 612" preserveAspectRatio="xMinYMid">
                 <path
                     d="M544,170 C544,179.388 536.389,187 527,187 L442,187 C432.611,187 425,179.388 425,170 L425,85 C425,75.612 432.611,68 442,68 L527,68 C536.389,68 544,75.612 544,85 L544,170 Z M544,527 C544,536.389 536.389,544 527,544 L85,544 C75.612,544 68,536.389 68,527 L68,255 L126.042,255 C121.457,271.211 119,288.32 119,306 C119,409.277 202.723,493 306,493 C409.277,493 493,409.277 493,306 C493,288.32 490.544,271.211 485.958,255 L544,255 L544,527 Z M306,187 C371.722,187 425,240.278 425,306 C425,371.722 371.722,425 306,425 C240.278,425 187,371.722 187,306 C187,240.278 240.278,187 306,187 L306,187 Z M527,0 L85,0 C38.057,0 0,38.057 0,85 L0,527 C0,573.943 38.057,612 85,612 L527,612 C573.943,612 612,573.943 612,527 L612,85 C612,38.057 573.943,0 527,0 L527,0 Z">
                 </path>
             </svg>
         </a>
-        <a class="social-link" href="https://www.facebook.com/groups/mentorcards/" target="_blank"
+        <a id="facebook" class="social-link" href="https://www.facebook.com/groups/mentorcards/" target="_blank"
             aria-label="facebook">
             <svg id="facebook-logo" viewBox="0 0 612 612" preserveAspectRatio="xMinYMid">
                 <path
@@ -35,7 +35,7 @@
                 </path>
             </svg>
         </a>
-        <a class="social-link" href="https://www.youtube.com/channel/UCt3Ol6TXXUOLNiJaQLonDqw/" target="_blank"
+        <a id="youtube" class="social-link" href="https://www.youtube.com/channel/UCt3Ol6TXXUOLNiJaQLonDqw/" target="_blank"
             aria-label="youtube">
             <svg id="youtube-logo" viewBox="0 0 869 611" preserveAspectRatio="xMinYMid">
                 <path

@@ -71,6 +71,7 @@ mutation CreateUser($input: CreateUserInput!) {
       updatedAt
     }
     endOfTrialDate
+    favouritePacks
     createdAt
     updatedAt
   }
@@ -559,6 +560,8 @@ mutation CreateCardsPack(
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }
@@ -605,6 +608,7 @@ mutation UpdateCardsPack(
       link
     }
     isOwnedByOrg
+    brief
     createdAt
     updatedAt
   }
@@ -651,6 +655,8 @@ mutation DeleteCardsPack(
       link
     }
     isOwnedByOrg
+    brief
+    likesCounter
     createdAt
     updatedAt
   }

@@ -30,6 +30,7 @@ export class AllPacksPageComponent implements OnInit {
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
+  categoriesOrder: string[] = ['קלפי תמונה', 'שיתופי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'מתנה'];
   userData: UserData;
   // allPacksOwned: PackContent[] = [];
   // allPacksNotOwned: PackContent[] = [];
@@ -105,7 +106,6 @@ export class AllPacksPageComponent implements OnInit {
       if (packs.length != 0)
         return { category: category, packs: packs }
     })
-    // console.log(this.allCategoryPacks)
   }
 
   setAllFavPacksToShow(): void {

@@ -2,6 +2,7 @@
   <mat-form-field>
     <mat-label>שם הארגון</mat-label>
     <input autocomplete="off" formControlName="name" matInput type="text">
+    <mat-error *ngIf="orgsForm.controls.name.errors?.orgExists">שם ארגון כבר קיים</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>תקופת ניסיון בימים</mat-label>
@@ -14,5 +15,5 @@
 </form>
 <div class="d-flex justify-content-between">
   <button (click)="closeDialog()">ביטול</button>
-  <button [disabled]="!orgsForm.valid" (click)="onSubmit()">אישור</button>
+  <button [disabled]="!orgsForm.valid || !orgsForm.dirty" (click)="onSubmit()">אישור</button>
 </div>

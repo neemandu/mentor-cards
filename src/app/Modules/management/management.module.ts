@@ -9,7 +9,11 @@ import { PaymentProgramsManagementComponent } from './payment-programs-managemen
 import { ReceiptsManagementComponent } from './receipts-management/receipts-management.component';
 import { NewEditCouponDialogComponent } from '../dialogs/new-edit-coupon-dialog/new-edit-coupon-dialog.component';
 import { NewEditNewsComponent } from 'src/app/Shared Components/Dialogs/new-edit-news/new-edit-news.component';
+import { NewEditOrganizationDialogComponent } from '../dialogs/new-edit-organization/new-edit-organization.component';
+import { OrgMembersDialogComponent } from '../dialogs/org-members-dialog/org-members-dialog.component';
+import { NewEditReceiptDialogComponent } from '../dialogs/new-edit-receipt-dialog/new-edit-receipt-dialog.component';
 
+import { ReceiptItemsPipe } from './receipts-management/receipt-items.pipe';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,10 +23,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NewEditOrganizationComponent } from '../dialogs/new-edit-organization/new-edit-organization.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+
+
 
 @NgModule({
   declarations: [
+    ReceiptItemsPipe,
     CouponCodesManagementComponent,
     NewsManagementComponent,
     GuideBookManagementComponent,
@@ -31,7 +39,10 @@ import { NewEditOrganizationComponent } from '../dialogs/new-edit-organization/n
     PaymentProgramsManagementComponent,
     ReceiptsManagementComponent,
     NewEditCouponDialogComponent,
-    NewEditNewsComponent
+    NewEditNewsComponent,
+    OrgMembersDialogComponent,
+    NewEditReceiptDialogComponent,
+    NewEditOrganizationDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -43,8 +54,14 @@ import { NewEditOrganizationComponent } from '../dialogs/new-edit-organization/n
     MatIconModule,
     MatSelectModule,
     MatExpansionModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  entryComponents: [NewEditNewsComponent, NewEditCouponDialogComponent, NewEditOrganizationComponent]
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+  ],
+  entryComponents: [NewEditNewsComponent, NewEditCouponDialogComponent, NewEditOrganizationDialogComponent,
+    OrgMembersDialogComponent, NewEditReceiptDialogComponent]
 })
 export class ManagementModule { }

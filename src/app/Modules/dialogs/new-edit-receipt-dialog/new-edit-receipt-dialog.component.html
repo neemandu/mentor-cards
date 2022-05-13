@@ -1,0 +1,46 @@
+<form [formGroup]="receiptForm" class="d-flex flex-column">
+  <mat-form-field>
+    <mat-label>שם הלקוח</mat-label>
+    <input formControlName="fullName" matInput color="primary" type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>אימייל</mat-label>
+    <input autocomplete="off" formControlName="email" matInput type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>כתובת</mat-label>
+    <input autocomplete="off" formControlName="customerAddress" matInput type="text">
+  </mat-form-field>
+  <!-- <mat-form-field>
+    <mat-label>תאריך תשלום</mat-label>
+    <input autocomplete="off" formControlName="date" matInput type="date">
+  </mat-form-field> -->
+  <mat-form-field>
+    <mat-label>תאריך תשלום</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date">
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="text-align: initial;">
+    <mat-label>פריט</mat-label>
+    <mat-select formControlName="items" multiple>
+      <mat-option *ngFor="let item of allItems" [value]="item">
+        {{item.itemName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="text-align: initial;">
+    <mat-label>סוג מסמך</mat-label>
+    <mat-select formControlName="invoiceType">
+      <mat-option></mat-option>
+      <mat-option *ngFor="let type of allTypes" [value]="type">
+        {{type}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div class="d-flex justify-content-between">
+  <button (click)="closeDialog()">ביטול</button>
+  <button [disabled]="!receiptForm.valid" (click)="onSubmit()">אישור</button>
+</div>

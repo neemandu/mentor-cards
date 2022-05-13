@@ -1,11 +1,6 @@
 img {
-  /* border-style: solid;
-  border-width: 0px 4px 4px 4px;
-  border-radius: 0px 0px 4px 4px; */
   border: 1px solid #ddd;
   border-radius: 4px;
-  /* padding: 5px; */
-  /* width: 10vw; */
   width: 10rem;
   height: auto;
   box-shadow: 0.25em 0.25em 0px 0px rgb(255 255 255), 0.25em 0.25em 0px 1px #ddd, 0.5em 0.5em 0px 0px rgb(255 255 255), 0.5em 0.5em 0px 1px #ddd, rgba(0, 0, 0, 0.09) 0px 3px 12px;
@@ -15,12 +10,10 @@ img {
 
 img:hover {
   box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd, 0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd, rgba(0, 0, 0, 0.09) 0px 3px 12px;
-  /* transform: scale(1.03); */
 }
 
 #pack-buttons {
   margin-top: 5px;
-  /* margin-top: 14.2rem; */
   position: relative;
 }
 
@@ -64,7 +57,6 @@ img:hover {
 }
 
 mat-icon {
-  /* margin: 0px 5px 0px 5px; */
   font-size: 20px;
   cursor: default;
 }
@@ -73,9 +65,7 @@ mat-icon {
   text-align: center;
   margin-bottom: 0px;
   font-family: 'rubik';
-  /* border-style: solid;
-  border-width: 4px 4px 0px 4px;
-  border-radius: 4px 4px 0px 0px; */
+  width: 10rem;
 }
 
 .content {
@@ -107,11 +97,6 @@ mat-icon {
   font-weight: 600;
   animation: heartbeat 2s infinite;
 }
-
-/* 
-img {
-  overflow-y: auto;
-} */
 
 @keyframes heartbeat {
 

@@ -94,9 +94,15 @@ async function getOrgByCode(couponCode){
 }
 
 function isUserBelongToOrg(org, email){
-    return org.some(element => {
-        return element.toLowerCase() === email.toLowerCase();
-      });
+    console.log('x');
+    for(var i = 0 ; i < org.length ; i++){ 
+        var x = org[i];
+        console.log(x);
+        if (x.toLowerCase() === email.toLowerCase()){
+            return true;
+        }
+    }
+    return false;
 }
 
 async function getCouponCode(couponCode){
@@ -163,7 +169,7 @@ exports.handler = async (event) => {
             throw Error ('User already in organization');
         }
         else{
-            var isUserBelong = isUserBelongToOrg(organization, user.email);
+            var isUserBelong = isUserBelongToOrg(organization.membersEmails, user.email);
             if(!isUserBelong){
                 console.log('User: ' + user.email + " does not belong to organization: " + couponCode);
                 throw Error ('Not in organization');

@@ -3,7 +3,7 @@ mat-tab {
 }
 
 mat-dialog-content {
-  max-height: 75vh!important;
+  max-height: 75vh !important;
 }
 
 
@@ -51,6 +51,14 @@ mat-dialog-content {
 
 .iconButton {
   margin: -10px;
+}
+
+.loginRegisterLabel {
+  margin: 0;
+}
+
+.subLabel {
+  font-size: small;
 }
 
 @media screen and (max-width: 480px) {
