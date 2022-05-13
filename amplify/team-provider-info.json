@@ -20,7 +20,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-6e7458626367557a3543-build.zip",
+          "s3Key": "amplify-builds/CreateUser-696e45316e6c6f4d4a56-build.zip",
           "sendinblueApiKey": "xxx"
         },
         "AddCardsPack": {
@@ -61,7 +61,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-357956466b42372b5263-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-334133626f6672637569-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -88,7 +88,7 @@
         "MessagingService": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/MessagingService-4b3156574b35444b4e37-build.zip"
+          "s3Key": "amplify-builds/MessagingService-4730326a66365933312b-build.zip"
         },
         "EmailUpcomingPayment": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -108,7 +108,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-614f70354e686c495331-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-6d54764d41457347516f-build.zip"
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -134,7 +134,8 @@
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-636d5072593242763556-build.zip"
+          "s3Key": "amplify-builds/InvoiceHandler-6e773336796e52795436-build.zip",
+          "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter"
         }
       }
     }
