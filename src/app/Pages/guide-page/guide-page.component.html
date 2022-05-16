@@ -19,10 +19,10 @@
       (click)="selectedTopicChanged(5, 'עקרונות מפתח ודגשים בעבודה עם קלפים גלויים וסמויים​​')" mat-menu-item>
       עקרונות מפתח ודגשים בעבודה עם <br> קלפים גלויים וסמויים
     </button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==6}" type="button"
+    <!-- <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==6}" type="button"
       (click)="selectedTopicChanged(6, 'עבודה נכונה עם ספר ההדרכה שלנו')" mat-menu-item>
       ספרי ההדרכה שלנו
-    </button>
+    </button> -->
     <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==7}" type="button"
       (click)="selectedTopicChanged(7, 'איך מזינים קוד הטבה?')" mat-menu-item>
       איך מזינים קוד הטבה?
@@ -83,6 +83,13 @@
         כמו כן, קיימת חלוקה לשאלות כשהקלפים במצב גלוי או סמוי
         (לכל אחת מהשיטות יתרונותיה הייחודים).
       </p>
+      <span class="video-title">עבודה נכונה עם ספר ההדרכה שלנו:</span>
+      <div class="iframe-container-internal">
+        <iframe class="responsive-iframe" src="https://www.youtube.com/embed/IHo6vK2LBTg" title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
     </div>
     <div id="content4" class="d-flex flex-column" *ngIf="selectedBtn==4">
       <div>
@@ -124,11 +131,11 @@
       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
   </div>
-  <div id="content6" class="iframe-container" *ngIf="selectedBtn==6">
+  <!-- <div id="content6" class="iframe-container" *ngIf="selectedBtn==6">
     <iframe class="responsive-iframe" src="https://www.youtube.com/embed/IHo6vK2LBTg" title="YouTube video player"
       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
-  </div>
+  </div> -->
   <div id="content7" class="iframe-container" *ngIf="selectedBtn==7">
     <iframe class="responsive-iframe" src="https://www.youtube.com/embed/D9_CAABE86Q" title="YouTube video player"
       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -209,6 +216,11 @@
         כמו כן, קיימת חלוקה לשאלות כשהקלפים במצב גלוי או סמוי
         (לכל אחת מהשיטות יתרונותיה הייחודים).
       </p>
+      <h2>עבודה נכונה עם ספר ההדרכה שלנו:</h2>
+      <iframe class="responsive-iframe-panel" src="https://www.youtube.com/embed/IHo6vK2LBTg"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </mat-expansion-panel>
 
     <mat-expansion-panel (click)="selectedTopicChanged(4, 'הסבר לעבודה עם תוכנות לשיחות וידאו​​')">
@@ -257,21 +269,23 @@
           עקרונות מפתח ודגשים בעבודה עם קלפים גלויים וסמויים
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <iframe class="responsive-iframe-panel" src="https://www.youtube.com/embed/vpoUP_cUguM" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      <iframe class="responsive-iframe-panel" src="https://www.youtube.com/embed/vpoUP_cUguM"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(6, 'עבודה נכונה עם ספר ההדרכה שלנו')">
+    <!-- <mat-expansion-panel (click)="selectedTopicChanged(6, 'עבודה נכונה עם ספר ההדרכה שלנו')">
       <mat-expansion-panel-header>
         <mat-panel-title>
           ספרי ההדרכה שלנו
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <iframe class="responsive-iframe-panel" src="https://www.youtube.com/embed/IHo6vK2LBTg" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      <iframe class="responsive-iframe-panel" src="https://www.youtube.com/embed/IHo6vK2LBTg"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
 
     <mat-expansion-panel (click)="selectedTopicChanged(7, 'איך מזינים קוד הטבה?')">
       <mat-expansion-panel-header>
@@ -279,8 +293,9 @@
           איך מזינים קוד הטבה?
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <iframe class="responsive-iframe-panel" src="https://www.youtube.com/embed/D9_CAABE86Q" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      <iframe class="responsive-iframe-panel" src="https://www.youtube.com/embed/D9_CAABE86Q"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </mat-expansion-panel>
   </mat-accordion>
