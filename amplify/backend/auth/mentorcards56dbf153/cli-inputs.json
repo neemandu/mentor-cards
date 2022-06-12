@@ -24,7 +24,7 @@
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientRefreshTokenValidity": "365",
     "userpoolClientWriteAttributes": [
       "email"
     ],
@@ -36,7 +36,7 @@
     "authSelections": "identityPoolAndUserPool",
     "resourceName": "mentorcards56dbf153",
     "serviceName": "Cognito",
-    "useDefault": "defaultSocial",
+    "useDefault": "manual",
     "sharedId": "56dbf153",
     "userPoolGroupList": [],
     "usernameAttributes": [
@@ -63,7 +63,29 @@
     },
     "breakCircularDependency": false,
     "useEnabledMfas": false,
-    "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\"],\"LogoutURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\"]}"
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "PreSignUpCognito",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "thirdPartyAuth": false,
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {
+      "PreSignup": [
+        "custom"
+      ]
+    },
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\"],\"LogoutURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\"]}",
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": []
   }
 }
