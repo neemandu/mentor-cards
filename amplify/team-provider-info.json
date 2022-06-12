@@ -227,6 +227,10 @@
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-3763742f646e70594d78-build.zip"
+        },
+        "PreSignUpCognito": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/PreSignUpCognito-33796779537772396a44-build.zip"
         }
       },
       "auth": {
