@@ -1,8 +1,8 @@
 /* Amplify Params - DO NOT EDIT
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_INVOICESTABLE_ARN
+	API_CARDSPACKS_INVOICESTABLE_NAME
+    API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
 	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
 	API_CARDSPACKS_USERTABLE_ARN
@@ -180,6 +180,43 @@ async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
       });
 }
 
+async function createInvoice(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
+    var d = new Date();
+    var id = user.id + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var subDescription = user.subscription.subscriptionPlan.description + "מנוי ";
+    var params = {
+        TableName: table,
+        Item: {
+            "id": id,
+            "createdAt": new Date().toISOString(), 
+            "businessAddress": "מגלן 4 , כרמית",
+            "businessName": "Mentor-Cards",
+            "businessPhoneNumber": "0549139859",
+            "businessWebsite": "https://www.mentor-cards.com",
+            "customerAddress": "",
+            "date": new Date().toISOString(),
+            "email": user.email,
+            "fullName": user.fullName,
+            "invoiceType": "קבלה",
+            "items": [
+             {
+              "itemName": subDescription,
+              "numberOfItems": 1,
+              "pricePerItem": user.subscription.subscriptionPlan.fullPrice
+             }
+            ],
+            "updatedAt": new Date().toISOString()
+           }
+    };
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item to invoice queue item:", JSON.stringify(data, null, 2));
+      }).catch(err => {
+        console.error("Unable to add invoice message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+      });
+}
+
 exports.handler = async (event) => {
     console.log('PayPal webhook!');
     console.log('event:');
@@ -199,7 +236,7 @@ exports.handler = async (event) => {
         var transaction_id = paypal_body.resource.billing_agreement_id;
         console.log('transaction_id: ' + transaction_id);
         var user = await getUserByPayPalTxId(transaction_id);
-        //await createInvoice(user);
+        await createInvoice(user);
     }
     const response = {
         statusCode: 200,

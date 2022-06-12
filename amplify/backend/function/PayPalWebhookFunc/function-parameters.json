@@ -1,4 +1,13 @@
 {
-  "permissions": {},
+  "permissions": {
+    "storage": {
+      "Invoices:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
   "lambdaLayers": []
 }
