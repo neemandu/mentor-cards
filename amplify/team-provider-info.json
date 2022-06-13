@@ -232,7 +232,10 @@
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/PreSignUpCognito-33796779537772396a44-build.zip"
         },
-        "mentorcards56dbf153PreSignup": {}
+        "mentorcards56dbf153PreSignup": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-75772f475452744f7569-build.zip"
+        }
       },
       "auth": {
         "mentorcards56dbf153": {}

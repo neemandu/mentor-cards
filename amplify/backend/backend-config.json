@@ -6,7 +6,7 @@
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "PreSignUpCognito",
+          "resourceName": "mentorcards56dbf153PreSignup",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
