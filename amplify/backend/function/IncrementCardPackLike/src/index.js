@@ -2,6 +2,8 @@
 	API_CARDSPACKS_CARDSPACKTABLE_ARN
 	API_CARDSPACKS_CARDSPACKTABLE_NAME
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
@@ -91,10 +93,14 @@ async function getPack(id){
 }
 
 
-async function incrementLikes(cardsPack){
+async function incrementLikes(cardsPack, add){
     
     console.log("incrementLikes - pack: " + cardsPack.id);
-    cardsPack.likesCounter++;
+    if(!cardsPack.likesCounter){
+        cardsPack.likesCounter = 0;
+    }
+    cardsPack.likesCounter = cardsPack.likesCounter + add;
+    console.log("pack: " + cardsPack.id + " new # of likes: " + cardsPack.likesCounter);
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
@@ -108,9 +114,9 @@ async function incrementLikes(cardsPack){
     };
 
     await docClient.put(cardPackParams).promise().then(data => {
-        console.log("updated pack with new user:", JSON.stringify(data, null, 2));
+        console.log("updated pack with new number of likes:", JSON.stringify(data, null, 2));
       }).catch(err => {
-        console.error("Unable to update pack with new user. Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to update pack with new number of likes. Error JSON:", JSON.stringify(err, null, 2));
       });
 
       
@@ -133,26 +139,27 @@ exports.handler = async (event) => {
     if(!username){
         username = event.identity.claims['username'];
     }
-    var user = await getUser(username);  
-    var cardsPackId = parseInt(event.arguments.input['cardsPackId']);
-    var action = event.arguments.input['action'];
-    if(action == "add"){
-        if(user.favouritePacks == null){
-            user.favouritePacks = [cardsPackId];
-        }
-        else if(!user.favouritePacks.includes(cardsPackId)){
-            user.favouritePacks.push(cardsPackId);
-        }
+    var user = await getUser(username); 
+    if(!user){
+        return false;
     }
-    else if (action == "remove"){
-        if(user.favouritePacks){
-            user.favouritePacks = arrayRemove(user.favouritePacks, cardsPackId);
+    var add = 1;
+    var cardsPackId = parseInt(event.arguments.input['cardsPackId']);
+    if(user.favouritePacks && 
+        user.favouritePacks.includes(cardsPackId)){
+        user.favouritePacks = arrayRemove(user.favouritePacks, cardsPackId);
+        add = -1;
+    }
+    else{
+        if(user.favouritePacks == null){
+            user.favouritePacks = [];
         }
+        user.favouritePacks.push(cardsPackId);       
     }
     user.updatedAt = new Date().toISOString();
     await saveUser(user);
 
     var pack = await getPack(cardsPackId);
-    await incrementLikes(pack);    
-
+    await incrementLikes(pack, add);    
+    return true;
 };

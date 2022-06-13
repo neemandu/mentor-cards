@@ -25,7 +25,12 @@ mutation CreateUser($input: CreateUserInput!) {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
           createdAt
           updatedAt
         }
@@ -52,7 +57,12 @@ mutation CreateUser($input: CreateUserInput!) {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -66,7 +76,12 @@ mutation CreateUser($input: CreateUserInput!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -115,7 +130,12 @@ mutation GetSubscriptionPlans($input: userInput!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -144,7 +164,12 @@ mutation CreateSubscriptionPlan(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -170,7 +195,12 @@ mutation UpdateSubscriptionPlan(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -196,7 +226,12 @@ mutation DeleteSubscriptionPlan(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -218,7 +253,12 @@ mutation CreateCouponCodes(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -240,7 +280,12 @@ mutation UpdateCouponCodes(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -262,7 +307,12 @@ mutation DeleteCouponCodes(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -281,7 +331,12 @@ mutation CreateOrganizations(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -300,7 +355,12 @@ mutation UpdateOrganizations(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -319,7 +379,12 @@ mutation DeleteOrganizations(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -335,7 +400,12 @@ mutation CreateOrganizationMembership(
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks
+    numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
     createdAt
     updatedAt
   }
@@ -348,7 +418,12 @@ mutation UpdateOrganizationMembership(
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks
+    numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
     createdAt
     updatedAt
   }
@@ -361,7 +436,12 @@ mutation DeleteOrganizationMembership(
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks
+    numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
     createdAt
     updatedAt
   }
@@ -401,7 +481,12 @@ mutation CreateGroup(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -436,7 +521,12 @@ mutation UpdateGroup(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -471,7 +561,12 @@ mutation DeleteGroup(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }

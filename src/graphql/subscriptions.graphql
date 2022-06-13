@@ -10,7 +10,12 @@ subscription OnCreateCouponCodes {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -29,7 +34,12 @@ subscription OnUpdateCouponCodes {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -48,7 +58,12 @@ subscription OnDeleteCouponCodes {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -64,7 +79,12 @@ subscription OnCreateOrganizations {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -80,7 +100,12 @@ subscription OnUpdateOrganizations {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -96,7 +121,12 @@ subscription OnDeleteOrganizations {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -109,7 +139,12 @@ subscription OnCreateOrganizationMembership {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks
+    numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
     createdAt
     updatedAt
   }
@@ -119,7 +154,12 @@ subscription OnUpdateOrganizationMembership {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks
+    numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
     createdAt
     updatedAt
   }
@@ -129,7 +169,12 @@ subscription OnDeleteOrganizationMembership {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks
+    numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
     createdAt
     updatedAt
   }
@@ -155,7 +200,12 @@ subscription OnCreateGroup {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -187,7 +237,12 @@ subscription OnUpdateGroup {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -219,7 +274,12 @@ subscription OnDeleteGroup {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -353,7 +413,12 @@ subscription OnCreateSubscriptionPlan {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -376,7 +441,12 @@ subscription OnUpdateSubscriptionPlan {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -399,7 +469,12 @@ subscription OnDeleteSubscriptionPlan {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks               
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }

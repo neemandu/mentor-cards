@@ -79,6 +79,7 @@ export type OrganizationMembership = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: About | null;  
   createdAt?: string;
   updatedAt?: string;
 };
@@ -318,12 +319,14 @@ export type CreateOrganizationMembershipInput = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: About | null;  
 };
 
 export type ModelOrganizationMembershipConditionInput = {
   name?: ModelStringInput | null;
   trialPeriodInDays?: ModelIntInput | null;
   numberOfallowedCardsPacks?: ModelIntInput | null;
+  about?: AboutInput | null;  
   and?: Array<ModelOrganizationMembershipConditionInput | null> | null;
   or?: Array<ModelOrganizationMembershipConditionInput | null> | null;
   not?: ModelOrganizationMembershipConditionInput | null;
@@ -334,6 +337,7 @@ export type UpdateOrganizationMembershipInput = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: About | null;  
 };
 
 export type DeleteOrganizationMembershipInput = {
@@ -794,6 +798,7 @@ export type ModelOrganizationMembershipFilterInput = {
   name?: ModelStringInput | null;
   trialPeriodInDays?: ModelIntInput | null;
   numberOfallowedCardsPacks?: ModelIntInput | null;
+  about?: AboutInput | null;  
   and?: Array<ModelOrganizationMembershipFilterInput | null> | null;
   or?: Array<ModelOrganizationMembershipFilterInput | null> | null;
   not?: ModelOrganizationMembershipFilterInput | null;
@@ -961,6 +966,12 @@ export type CreateUserMutation = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text: string;
+          imgUrl: string;
+          link: string;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -990,6 +1001,12 @@ export type CreateUserMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1005,6 +1022,12 @@ export type CreateUserMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1031,6 +1054,12 @@ export type GetSubscriptionPlansMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1055,6 +1084,12 @@ export type CreateSubscriptionPlanMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1079,6 +1114,12 @@ export type UpdateSubscriptionPlanMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1103,6 +1144,12 @@ export type DeleteSubscriptionPlanMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1123,6 +1170,12 @@ export type CreateCouponCodesMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1143,6 +1196,12 @@ export type UpdateCouponCodesMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1163,6 +1222,12 @@ export type DeleteCouponCodesMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1180,6 +1245,12 @@ export type CreateOrganizationsMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1197,6 +1268,12 @@ export type UpdateOrganizationsMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1214,6 +1291,12 @@ export type DeleteOrganizationsMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1227,6 +1310,12 @@ export type CreateOrganizationMembershipMutation = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text: string;
+    imgUrl: string;
+    link: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1237,6 +1326,12 @@ export type UpdateOrganizationMembershipMutation = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text: string;
+    imgUrl: string;
+    link: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1247,6 +1342,12 @@ export type DeleteOrganizationMembershipMutation = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text: string;
+    imgUrl: string;
+    link: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1284,6 +1385,12 @@ export type CreateGroupMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1319,6 +1426,12 @@ export type UpdateGroupMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1354,6 +1467,12 @@ export type DeleteGroupMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1736,6 +1855,12 @@ export type GetUserQuery = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text: string;
+          imgUrl: string;
+          link: string;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -1765,6 +1890,12 @@ export type GetUserQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1780,6 +1911,12 @@ export type GetUserQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1821,6 +1958,12 @@ export type ListUsersQuery = {
           name?: string | null;
           trialPeriodInDays?: number | null;
           numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text: string;
+            imgUrl: string;
+            link: string;
+          } | null;
           createdAt: string;
           updatedAt: string;
         } | null;
@@ -1850,6 +1993,12 @@ export type ListUsersQuery = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text: string;
+          imgUrl: string;
+          link: string;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -1865,6 +2014,12 @@ export type ListUsersQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1889,6 +2044,12 @@ export type GetCouponCodesQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1911,6 +2072,12 @@ export type ListCouponCodessQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1930,6 +2097,12 @@ export type GetOrganizationsQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1949,6 +2122,12 @@ export type ListOrganizationssQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1964,6 +2143,12 @@ export type GetOrganizationMembershipQuery = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text: string;
+    imgUrl: string;
+    link: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1976,6 +2161,12 @@ export type ListOrganizationMembershipsQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2007,6 +2198,12 @@ export type GetGroupQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2044,6 +2241,12 @@ export type ListGroupsQuery = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text: string;
+          imgUrl: string;
+          link: string;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -2323,6 +2526,12 @@ export type OnCreateCouponCodesSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2343,6 +2552,12 @@ export type OnUpdateCouponCodesSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2363,6 +2578,12 @@ export type OnDeleteCouponCodesSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2380,6 +2601,12 @@ export type OnCreateOrganizationsSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2397,6 +2624,12 @@ export type OnUpdateOrganizationsSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2414,6 +2647,12 @@ export type OnDeleteOrganizationsSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2427,6 +2666,12 @@ export type OnCreateOrganizationMembershipSubscription = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text: string;
+    imgUrl: string;
+    link: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2437,6 +2682,12 @@ export type OnUpdateOrganizationMembershipSubscription = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text: string;
+    imgUrl: string;
+    link: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2447,6 +2698,12 @@ export type OnDeleteOrganizationMembershipSubscription = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text: string;
+    imgUrl: string;
+    link: string;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2476,6 +2733,12 @@ export type OnCreateGroupSubscription = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2511,6 +2774,12 @@ export type OnUpdateGroupSubscription = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2546,6 +2815,12 @@ export type OnDeleteGroupSubscription = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text: string;
+        imgUrl: string;
+        link: string;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2684,6 +2959,12 @@ export type OnCreateSubscriptionPlanSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2708,6 +2989,12 @@ export type OnUpdateSubscriptionPlanSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2731,7 +3018,13 @@ export type OnDeleteSubscriptionPlanSubscription = {
     id: string;
     name?: string | null;
     trialPeriodInDays?: number | null;
-    numberOfallowedCardsPacks?: number | null;
+    numberOfallowedCardsPacks?: number | null;   
+    about?: {
+      __typename: "About";
+      text: string;
+      imgUrl: string;
+      link: string;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -3013,7 +3306,12 @@ export class APIService {
                 id
                 name
                 trialPeriodInDays
-                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -3042,7 +3340,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks                
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -3057,7 +3361,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3197,7 +3507,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3235,7 +3551,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3290,7 +3612,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3330,7 +3658,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3370,7 +3704,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3406,7 +3746,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3442,7 +3788,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3478,7 +3830,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3511,7 +3869,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3544,7 +3908,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3577,7 +3947,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3606,7 +3982,13 @@ export class APIService {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks               
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -3634,7 +4016,13 @@ export class APIService {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks               
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -3662,7 +4050,13 @@ export class APIService {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks               
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -3733,7 +4127,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -3784,7 +4184,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -3835,7 +4241,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4504,7 +4916,13 @@ export class APIService {
                 id
                 name
                 trialPeriodInDays
-                numberOfallowedCardsPacks
+                numberOfallowedCardsPacks               
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -4543,7 +4961,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -4598,7 +5022,13 @@ export class APIService {
                   id
                   name
                   trialPeriodInDays
-                  numberOfallowedCardsPacks
+                  numberOfallowedCardsPacks               
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
                   createdAt
                   updatedAt
                 }
@@ -4627,7 +5057,13 @@ export class APIService {
                 id
                 name
                 trialPeriodInDays
-                numberOfallowedCardsPacks
+                numberOfallowedCardsPacks               
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -4642,7 +5078,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4683,7 +5125,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -4719,7 +5167,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4755,7 +5209,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -4788,7 +5248,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4822,7 +5288,13 @@ export class APIService {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks               
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -4850,7 +5322,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -4900,7 +5378,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4951,7 +5435,13 @@ export class APIService {
                 id
                 name
                 trialPeriodInDays
-                numberOfallowedCardsPacks
+                numberOfallowedCardsPacks               
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -5487,7 +5977,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5515,7 +6011,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5543,7 +6045,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5568,7 +6076,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5593,7 +6107,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5618,7 +6138,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5639,7 +6165,13 @@ export class APIService {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks               
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -5659,7 +6191,13 @@ export class APIService {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks               
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -5679,7 +6217,13 @@ export class APIService {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks               
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -5718,7 +6262,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -5761,7 +6311,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -5804,7 +6360,13 @@ export class APIService {
               id
               name
               trialPeriodInDays
-              numberOfallowedCardsPacks
+              numberOfallowedCardsPacks               
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -5999,7 +6561,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -6031,7 +6599,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -6063,7 +6637,13 @@ export class APIService {
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks               
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }

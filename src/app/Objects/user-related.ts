@@ -1,3 +1,4 @@
+import { About } from "../API.service";
 import { Subscription } from "./subscriptionPlans";
 
 export class UserData {
@@ -76,7 +77,8 @@ export class OrgMembership {
     id: string;
     name: string;
     trialPeriodInDays: number;
-    numberOfallowedCardsPacks: number;
+    numberOfallowedCardsPacks: number;          
+    about: About;
     createdAt: string;
     updatedAt: string;
 }

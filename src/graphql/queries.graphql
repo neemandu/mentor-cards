@@ -25,7 +25,12 @@ query GetUser($id: ID!) {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks          
+          about {
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -52,7 +57,12 @@ query GetUser($id: ID!) {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -66,7 +76,12 @@ query GetUser($id: ID!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -107,7 +122,12 @@ query ListUsers(
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks
+            numberOfallowedCardsPacks          
+            about {
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -134,7 +154,12 @@ query ListUsers(
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
           createdAt
           updatedAt
         }
@@ -148,7 +173,12 @@ query ListUsers(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -171,7 +201,12 @@ query GetCouponCodes($id: ID!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -195,7 +230,12 @@ query ListCouponCodess(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -213,7 +253,12 @@ query GetOrganizations($id: ID!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -234,7 +279,12 @@ query ListOrganizationss(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -249,7 +299,12 @@ query GetOrganizationMembership($id: ID!) {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks
+    numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
     createdAt
     updatedAt
   }
@@ -268,7 +323,12 @@ query ListOrganizationMemberships(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks
+      numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -296,7 +356,12 @@ query GetGroup($id: ID!) {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks
+        numberOfallowedCardsPacks          
+      about {
+        text
+        imgUrl
+        link
+      }
         createdAt
         updatedAt
       }
@@ -333,7 +398,12 @@ query ListGroups(
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks
+          numberOfallowedCardsPacks          
+          about {
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
