@@ -65,6 +65,35 @@ async function saveUser(user){
         console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
         });        
 }
+
+async function getOrgMembership(id){
+    console.log("getOrgMembership: " + id);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var orgTable = env.API_CARDSPACKS_ORGANIZATIONMEMBERSHIPTABLE_NAME;
+    
+    console.log("check against table: " + orgTable);
+    var subParams = {
+        TableName:orgTable,
+        Key:{
+            "id": id
+        }
+    };
+
+    var org;
+    await docClient.get(subParams).promise().then(data => {
+        console.log("Get getOrgMembership succeeded:", JSON.stringify(data, null, 2));
+        org = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!org){
+        console.log('no such org - ' + id);
+    }
+
+    return org;
+}
+
 async function getOrgByCode(couponCode){
     console.log("getOrgByCode: " + couponCode);
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -191,5 +220,11 @@ exports.handler = async (event) => {
     dbCouponCode.updatedAt = new Date().toISOString();
     user.couponCodes.push(dbCouponCode);
     await saveUser(user); 
-    return true;
+
+    if(organization){
+        var orgMembership = await getOrgMembership(organization.organizationsMembershipId);
+        return orgMembership.about;
+    }
+
+    return null;
 };

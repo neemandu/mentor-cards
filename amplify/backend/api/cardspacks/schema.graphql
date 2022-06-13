@@ -96,6 +96,7 @@ type OrganizationMembership
   name: String
   trialPeriodInDays: Int
   numberOfallowedCardsPacks: Int
+  about: About 
 }
 
 type ReceiptsId
