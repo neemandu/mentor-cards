@@ -16,7 +16,7 @@
     <button class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button>
     <button *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
       להתנסות</button>
-    <button class="btn navbar-btn" (click)="navigate('/guide-page')">הדרכות</button>
+    <button class="btn navbar-btn" (click)="navigate('/guide-page')">שאלות נפוצות</button>
     <button class="btn navbar-btn" (click)="navigate('/price-page')">מחירון</button>
     <button class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
     <button class="btn navbar-btn" (click)="navigate('/contact-us')">צור קשר</button>
@@ -30,7 +30,8 @@
   <div class="d-flex flex-row">
     <button mat-icon-button color="primary" id="notificationIcon" *ngIf="news" [matMenuTriggerFor]="newsMenu"
       (click)="viewNotifications()" matTooltip="חדשות ועדכונים" [matTooltipClass]="{'tooltip-class' : true}">
-      <mat-icon class="shake bell-icon" style="color: #ffcc6c" *ngIf="newsNotification && news?.length!=0">
+      <mat-icon matBadge="!" matBadgeColor="warn" matBadgeOverlap="true" matBadgeSize="small" class="shake bell-icon"
+        style="color: #ffcc6c" *ngIf="newsNotification && news?.length!=0">
         notifications_active</mat-icon>
       <mat-icon class="bell-icon" style="color: rgb(93, 93, 93);" *ngIf="!newsNotification || news?.length==0">
         notifications</mat-icon>
@@ -69,7 +70,7 @@
     הקלפים</button>
   <button mat-menu-item *ngIf="!loggedIn" (click)="navigate('/example-pack')">ערכה
     להתנסות</button>
-  <button mat-menu-item (click)="navigate('/guide-page')">הדרכות</button>
+  <button mat-menu-item (click)="navigate('/guide-page')">שאלות נפוצות</button>
   <button mat-menu-item (click)="navigate('/price-page')">מחירון</button>
   <button mat-menu-item (click)="navigate('/about-page')">עלינו</button>
   <button mat-menu-item (click)="navigate('/contact-us')">צור קשר</button>
