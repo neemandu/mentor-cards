@@ -45,7 +45,7 @@ const awsmobile = {
     "aws_appsync_region": "eu-west-2",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
     "aws_appsync_apiKey": "da2-2zjhcj5okvethdgdl4svnxmykm",
-    "aws_cloud_logic_custom": [
+    "aws_cloud_logic_custom": [ 
         {
             "name": "PayPalWebhookAPI",
             "endpoint": "https://vgi4o66wki.execute-api.eu-west-2.amazonaws.com/dev",
