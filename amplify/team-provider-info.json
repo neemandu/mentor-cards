@@ -145,7 +145,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-334133626f6672637569-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-674c42524c77466a7843-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -226,7 +226,7 @@
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/IncrementCardPackLike-3763742f646e70594d78-build.zip"
+          "s3Key": "amplify-builds/IncrementCardPackLike-4b4161484a5566663452-build.zip"
         },
         "PreSignUpCognito": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -234,7 +234,7 @@
         },
         "mentorcards56dbf153PreSignup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-75772f475452744f7569-build.zip"
+          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-363150625a7a4e7a4943-build.zip"
         }
       },
       "auth": {

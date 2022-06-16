@@ -78,7 +78,7 @@ export class OrgMembership {
     name: string;
     trialPeriodInDays: number;
     numberOfallowedCardsPacks: number;          
-    about: About;
+    about: About; 
     createdAt: string;
     updatedAt: string;
 }
