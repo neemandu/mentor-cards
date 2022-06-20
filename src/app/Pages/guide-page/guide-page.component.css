@@ -51,9 +51,7 @@ li {
   margin: 2% 2%;
   text-align: right;
   font-size: larger;
-  /* line-height: 4vh; */
-  /* max-width: 50%; */
-  width: 50%;
+  width: 48%;
 }
 
 #all-screens-img {
@@ -91,6 +89,7 @@ li {
   opacity: 0;
   transition: opacity 2s;
   width: -webkit-fill-available;
+  margin-bottom: 10px;
 }
 
 button {
