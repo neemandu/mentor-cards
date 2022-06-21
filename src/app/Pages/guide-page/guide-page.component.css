@@ -235,6 +235,10 @@ mat-expansion-panel {
     bottom: 0px;
     width: 100%;
   }
+
+  .responsive-iframe-with-text {
+    height: 50vw;
+  }
 }
 
 
