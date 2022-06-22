@@ -1,14 +1,14 @@
 {
   "cards": [
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_1.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_2.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_3.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_4.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_5.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_6.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_7.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_8.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_9.jpg}",
-    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animal1_10.jpg}"
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_1.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_2.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_3.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_4.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_5.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_6.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_7.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_8.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_9.jpg}",
+    "{imgUrl=https://master-cards.s3.eu-west-2.amazonaws.com/animals//animal1_10.jpg}"
   ]
 }
