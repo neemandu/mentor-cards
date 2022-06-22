@@ -10,7 +10,7 @@ subscription OnCreateCouponCodes {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -34,7 +34,7 @@ subscription OnUpdateCouponCodes {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -58,7 +58,7 @@ subscription OnDeleteCouponCodes {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -79,7 +79,7 @@ subscription OnCreateOrganizations {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -100,7 +100,7 @@ subscription OnUpdateOrganizations {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -121,7 +121,7 @@ subscription OnDeleteOrganizations {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -139,12 +139,12 @@ subscription OnCreateOrganizationMembership {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+    numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -154,12 +154,12 @@ subscription OnUpdateOrganizationMembership {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+    numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -169,12 +169,12 @@ subscription OnDeleteOrganizationMembership {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+    numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -200,12 +200,12 @@ subscription OnCreateGroup {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -237,12 +237,12 @@ subscription OnUpdateGroup {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -274,12 +274,12 @@ subscription OnDeleteGroup {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -413,7 +413,7 @@ subscription OnCreateSubscriptionPlan {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -441,7 +441,7 @@ subscription OnUpdateSubscriptionPlan {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -469,7 +469,7 @@ subscription OnDeleteSubscriptionPlan {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks               
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -540,7 +540,10 @@ subscription OnCreateCardsPack {
     description
     tags
     categories
-    cards
+    cards {
+      backImgUrl
+      frontImgUrl
+    }
     cardsPreview
     groupsIds
     guideBook {
@@ -574,6 +577,8 @@ subscription OnCreateCardsPack {
     isOwnedByOrg
     brief
     likesCounter
+    visitorsCounter
+    backImgUrl
     createdAt
     updatedAt
   }
@@ -585,51 +590,10 @@ subscription OnUpdateCardsPack {
     description
     tags
     categories
-    cards
-    cardsPreview
-    groupsIds
-    guideBook {
-      name
-      subElements {
-        name
-        subElements {
-          name
-          subElements {
-            name
-            subElements {
-              name
-              subElements {
-                name
-                subElements {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
+    cards {
+      backImgUrl
+      frontImgUrl
     }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    isOwnedByOrg
-    brief
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCardsPack {
-  onDeleteCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
     cardsPreview
     groupsIds
     guideBook {
@@ -663,6 +627,58 @@ subscription OnDeleteCardsPack {
     isOwnedByOrg
     brief
     likesCounter
+    visitorsCounter
+    backImgUrl
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCardsPack {
+  onDeleteCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards {
+      backImgUrl
+      frontImgUrl
+    }
+    cardsPreview
+    groupsIds
+    guideBook {
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
+    isOwnedByOrg
+    brief
+    likesCounter
+    visitorsCounter
+    backImgUrl
     createdAt
     updatedAt
   }

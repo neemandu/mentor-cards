@@ -40,6 +40,7 @@ type User
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   favouritePacks: [Int]
+  entries: Int
 }
 
 type MonthlySubscription {
@@ -133,7 +134,7 @@ type CardsPack
   description: String
   tags: [String]
   categories: [String]
-  cards: [String] @function(name: "GetCardsImages-${env}")
+  cards: [Cards] @function(name: "GetCardsImages-${env}")
   cardsPreview: [String]
   groupsIds: [String]
   guideBook: [GuideBookElement]
@@ -143,6 +144,13 @@ type CardsPack
   isOwnedByOrg: Boolean @function(name: "IsCardsPackOwnedByOrgForUser-${env}")
   brief: String
   likesCounter: Int
+  visitorsCounter: Int
+  backImgUrl: String
+}
+
+type Cards{
+  backImgUrl: String
+  frontImgUrl: String
 }
 
 type MessageQueue

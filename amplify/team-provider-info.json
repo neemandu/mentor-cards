@@ -103,7 +103,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-4f59596e49792b587536-build.zip",
+          "s3Key": "amplify-builds/CreateUser-5761554977306b4e7773-build.zip",
           "sendinblueApiKey": "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"
         },
         "AddCardsPack": {
@@ -133,7 +133,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-31782f42676c4c517336-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-58447279395a7530314b-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -230,11 +230,11 @@
         },
         "PreSignUpCognito": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PreSignUpCognito-33796779537772396a44-build.zip"
+          "s3Key": "amplify-builds/PreSignUpCognito-484c743439546b4f3442-build.zip"
         },
         "mentorcards56dbf153PreSignup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-363150625a7a4e7a4943-build.zip"
+          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-32467757673574556e44-build.zip"
         }
       },
       "auth": {

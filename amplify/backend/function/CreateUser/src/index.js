@@ -42,7 +42,7 @@ async function getUser(username){
         console.log('no such user - ' + username);
     }
 
-    return user;
+    return user;         
 }
 
 async function addWelcomeEmailToMessageQueue(email, phone, fullName){
@@ -71,6 +71,25 @@ async function addWelcomeEmailToMessageQueue(email, phone, fullName){
     }).catch(err => {
         console.error("Unable to add welcome message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
     });
+}
+
+async function saveUser(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    user.updatedAt = new Date().toISOString();
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+    var updatedUserParams = {
+        TableName: userTable,
+        Item: user
+    };
+
+    console.log("updating user " + user.id + " as unsubscribed" );
+
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 exports.handler = async (event) => {
@@ -105,42 +124,34 @@ exports.handler = async (event) => {
             subscription = group.subscription
         }*/
         var tid = "Empty_" + username;
-        var params = {
-            TableName:table,
-            Item:{
-                "id": username,
-                "username": username,
-                "email": email,
-                "phone": phone,
-                "status": "NOPLAN",
-                "subscription": null,
-                "numberOfPacksSubstitutions": 0,
-                "lastPackSubstitutionDate": null,
-                "numberOfPlansSubstitutions": 0,
-                "lastPlanSubstitutionDate": null,
-                "groupId": null,
-                "groupRole": null,
-                "firstProgramRegistrationDate": new Date().toISOString(),
-                "createdAt": new Date().toISOString(),
-                "updatedAt": new Date().toISOString(),
-                "numberOfUsedPacks": 0,
-                "cancellationDate": null,
-                "couponCodes": [],
-                "cardsPacksIds": [],
-                "providerTransactionId": tid,
-                "fullName": fullName,
-                "favouritePacks": []
-            }
+        var userToInsert = {
+            "id": username,
+            "username": username,
+            "email": email,
+            "phone": phone,
+            "status": "NOPLAN",
+            "subscription": null,
+            "numberOfPacksSubstitutions": 0,
+            "lastPackSubstitutionDate": null,
+            "numberOfPlansSubstitutions": 0,
+            "lastPlanSubstitutionDate": null,
+            "groupId": null,
+            "groupRole": null,
+            "firstProgramRegistrationDate": new Date().toISOString(),
+            "createdAt": new Date().toISOString(),
+            "updatedAt": new Date().toISOString(),
+            "numberOfUsedPacks": 0,
+            "cancellationDate": null,
+            "couponCodes": [],
+            "cardsPacksIds": [],
+            "providerTransactionId": tid,
+            "fullName": fullName,
+            "favouritePacks": [],
+            "entries": 1
         };
     
         console.log("Adding a new user...");
-        console.log(params);
-    
-        await docClient.put(params).promise().then(data => {
-            console.log("Added item:", JSON.stringify(data, null, 2));
-        }).catch(err => {
-            console.error("Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
-        })
+        await this.saveUser(userToInsert);
 
         await addWelcomeEmailToMessageQueue(email, phone, fullName);
     
@@ -149,7 +160,8 @@ exports.handler = async (event) => {
         return params["Item"];
     }
 
-    
+    user.entries++;
+    await this.saveUser(user);
     console.log('user ' + email + " was found");
     return user;
     
