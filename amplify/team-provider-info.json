@@ -136,7 +136,8 @@
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/InvoiceHandler-6e773336796e52795436-build.zip",
           "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter"
-        }
+        },
+        "IncrementCardPackLike": {}
       }
     }
   },
