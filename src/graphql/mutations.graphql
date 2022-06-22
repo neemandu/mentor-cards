@@ -25,12 +25,12 @@ mutation CreateUser($input: CreateUserInput!) {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -57,12 +57,12 @@ mutation CreateUser($input: CreateUserInput!) {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -76,7 +76,7 @@ mutation CreateUser($input: CreateUserInput!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -86,9 +86,10 @@ mutation CreateUser($input: CreateUserInput!) {
       updatedAt
     }
     endOfTrialDate
-    favouritePacks
     createdAt
     updatedAt
+    favouritePacks
+    entries
   }
 }
 mutation AddCardsPack($input: addCardsPackInput!) {
@@ -130,7 +131,7 @@ mutation GetSubscriptionPlans($input: userInput!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -145,6 +146,9 @@ mutation GetSubscriptionPlans($input: userInput!) {
 }
 mutation UpdateSelectedCardPacks($input: selectedCardPacksInput!) {
   UpdateSelectedCardPacks(input: $input)
+}
+mutation LikeClicked($input: cardPackIdInput!) {
+  LikeClicked(input: $input)
 }
 mutation CreateSubscriptionPlan(
   $input: CreateSubscriptionPlanInput!
@@ -164,7 +168,7 @@ mutation CreateSubscriptionPlan(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -195,7 +199,7 @@ mutation UpdateSubscriptionPlan(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -226,7 +230,7 @@ mutation DeleteSubscriptionPlan(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -253,7 +257,7 @@ mutation CreateCouponCodes(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -280,7 +284,7 @@ mutation UpdateCouponCodes(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -307,7 +311,7 @@ mutation DeleteCouponCodes(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -331,7 +335,7 @@ mutation CreateOrganizations(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -355,7 +359,7 @@ mutation UpdateOrganizations(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -379,7 +383,7 @@ mutation DeleteOrganizations(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -400,12 +404,12 @@ mutation CreateOrganizationMembership(
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+    numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -418,12 +422,12 @@ mutation UpdateOrganizationMembership(
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+    numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -436,12 +440,12 @@ mutation DeleteOrganizationMembership(
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+    numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -481,12 +485,12 @@ mutation CreateGroup(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -521,12 +525,12 @@ mutation UpdateGroup(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -561,7 +565,7 @@ mutation DeleteGroup(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
+        numberOfallowedCardsPacks
         about {
           text
           imgUrl
@@ -623,7 +627,10 @@ mutation CreateCardsPack(
     description
     tags
     categories
-    cards
+    cards {
+      backImgUrl
+      frontImgUrl
+    }
     cardsPreview
     groupsIds
     guideBook {
@@ -657,6 +664,8 @@ mutation CreateCardsPack(
     isOwnedByOrg
     brief
     likesCounter
+    visitorsCounter
+    backImgUrl
     createdAt
     updatedAt
   }
@@ -671,54 +680,10 @@ mutation UpdateCardsPack(
     description
     tags
     categories
-    cards
-    cardsPreview
-    groupsIds
-    guideBook {
-      name
-      subElements {
-        name
-        subElements {
-          name
-          subElements {
-            name
-            subElements {
-              name
-              subElements {
-                name
-                subElements {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
+    cards {
+      backImgUrl
+      frontImgUrl
     }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    isOwnedByOrg
-    brief
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteCardsPack(
-  $input: DeleteCardsPackInput!
-  $condition: ModelCardsPackConditionInput
-) {
-  deleteCardsPack(input: $input, condition: $condition) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
     cardsPreview
     groupsIds
     guideBook {
@@ -752,6 +717,61 @@ mutation DeleteCardsPack(
     isOwnedByOrg
     brief
     likesCounter
+    visitorsCounter
+    backImgUrl
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCardsPack(
+  $input: DeleteCardsPackInput!
+  $condition: ModelCardsPackConditionInput
+) {
+  deleteCardsPack(input: $input, condition: $condition) {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards {
+      backImgUrl
+      frontImgUrl
+    }
+    cardsPreview
+    groupsIds
+    guideBook {
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
+    isOwnedByOrg
+    brief
+    likesCounter
+    visitorsCounter
+    backImgUrl
     createdAt
     updatedAt
   }

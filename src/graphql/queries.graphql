@@ -25,7 +25,7 @@ query GetUser($id: ID!) {
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks          
+          numberOfallowedCardsPacks
           about {
             text
             imgUrl
@@ -57,12 +57,12 @@ query GetUser($id: ID!) {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -76,7 +76,7 @@ query GetUser($id: ID!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -86,9 +86,10 @@ query GetUser($id: ID!) {
       updatedAt
     }
     endOfTrialDate
-    favouritePacks
     createdAt
     updatedAt
+    favouritePacks
+    entries
   }
 }
 query ListUsers(
@@ -122,7 +123,7 @@ query ListUsers(
             id
             name
             trialPeriodInDays
-            numberOfallowedCardsPacks          
+            numberOfallowedCardsPacks
             about {
               text
               imgUrl
@@ -154,12 +155,12 @@ query ListUsers(
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -173,19 +174,20 @@ query ListUsers(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
       endOfTrialDate
-      favouritePacks
       createdAt
       updatedAt
+      favouritePacks
+      entries
     }
     nextToken
   }
@@ -201,7 +203,7 @@ query GetCouponCodes($id: ID!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -230,12 +232,12 @@ query ListCouponCodess(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -253,7 +255,7 @@ query GetOrganizations($id: ID!) {
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -279,12 +281,12 @@ query ListOrganizationss(
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -299,12 +301,12 @@ query GetOrganizationMembership($id: ID!) {
     id
     name
     trialPeriodInDays
-    numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+    numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -323,7 +325,7 @@ query ListOrganizationMemberships(
       id
       name
       trialPeriodInDays
-      numberOfallowedCardsPacks          
+      numberOfallowedCardsPacks
       about {
         text
         imgUrl
@@ -356,12 +358,12 @@ query GetGroup($id: ID!) {
         id
         name
         trialPeriodInDays
-        numberOfallowedCardsPacks          
-      about {
-        text
-        imgUrl
-        link
-      }
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -398,7 +400,7 @@ query ListGroups(
           id
           name
           trialPeriodInDays
-          numberOfallowedCardsPacks          
+          numberOfallowedCardsPacks
           about {
             text
             imgUrl
@@ -557,7 +559,10 @@ query GetCardsPack($id: ID!) {
     description
     tags
     categories
-    cards
+    cards {
+      backImgUrl
+      frontImgUrl
+    }
     cardsPreview
     groupsIds
     guideBook {
@@ -591,6 +596,8 @@ query GetCardsPack($id: ID!) {
     isOwnedByOrg
     brief
     likesCounter
+    visitorsCounter
+    backImgUrl
     createdAt
     updatedAt
   }
@@ -607,7 +614,10 @@ query ListCardsPacks(
       description
       tags
       categories
-      cards
+      cards {
+        backImgUrl
+        frontImgUrl
+      }
       cardsPreview
       groupsIds
       guideBook {
@@ -638,6 +648,8 @@ query ListCardsPacks(
       isOwnedByOrg
       brief
       likesCounter
+      visitorsCounter
+      backImgUrl
       createdAt
       updatedAt
     }
