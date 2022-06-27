@@ -1,5 +1,6 @@
 type Mutation {
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
+<<<<<<< HEAD
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
@@ -11,11 +12,46 @@ type Mutation {
   GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}") @aws_cognito_user_pools @aws_api_key
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
+=======
+  addCardsPack(input: addCardsPackInput!): Boolean
+    @function(name: "AddCardsPack-${env}")
+  changeCardsPack(input: changeCardsPackInput!): Boolean
+    @function(name: "ChangeCardsPack-${env}")
+  updateGroupUsersList(input: groupUsersListInput!): Boolean
+    @function(name: "UpdateGroupUsersList-${env}")
+  Unsubscribe(input: unSubscribeInput!): Boolean
+    @function(name: "UnSubscribe-${env}")
+  JoinExistingGroup(input: joinExistingGroupInput!): Boolean
+    @function(name: "JoinExistingGroup-${env}")
+  DeleteGroupById(input: deleteGroupInput!): Boolean
+    @function(name: "DeleteGroup-${env}")
+  AddCouponCode(input: couponCodeInput!): Boolean
+    @function(name: "AddCouponCode-${env}")
+  UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean
+    @function(name: "UpdatePaymentProgram-${env}")
+  GetSubscriptionPlans(input: userInput!): [SubscriptionPlan]
+    @function(name: "GetSubscriptionPlans-${env}")
+    @aws_cognito_user_pools
+    @aws_api_key
+  UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean
+    @function(name: "UpdateSelectedCardPacks-${env}")
+  LikeClicked(input: cardPackIdInput!): Boolean
+    @function(name: "IncrementCardPackLike-${env}")
+>>>>>>> 2f97a9394db5108155f1f0764031bdaba2243d0d
 }
 
 type User
-  @model(mutations:null)
-  @auth(rules: [{allow: owner, ownerField: "username", operations: [read, update], provider: userPools}]) {
+  @model(mutations: null)
+  @auth(
+    rules: [
+      {
+        allow: owner
+        ownerField: "username"
+        operations: [read, update]
+        provider: userPools
+      }
+    ]
+  ) {
   id: ID!
   username: ID!
   email: ID!
@@ -52,10 +88,14 @@ type MonthlySubscription {
 }
 
 type SubscriptionPlan
-  @model (queries: null)
-  @auth(rules: [{ allow: private, provider: userPools, operations: [read] }
-                { allow: public, operations: [read] },
-                { allow: groups, groups: ["Admins"] }] ) {
+  @model(queries: null)
+  @auth(
+    rules: [
+      { allow: private, provider: userPools, operations: [read] }
+      { allow: public, operations: [read] }
+      { allow: groups, groups: ["Admins"] }
+    ]
+  ) {
   id: ID!
   name: String
   description: String
@@ -70,8 +110,12 @@ type SubscriptionPlan
 
 type CouponCodes
   @model
-  @auth(rules: [{ allow: private, operations: [read], provider: userPools},
-                { allow: groups, groups: ["Admins"] }]) {
+  @auth(
+    rules: [
+      { allow: private, operations: [read], provider: userPools }
+      { allow: groups, groups: ["Admins"] }
+    ]
+  ) {
   id: ID!
   couponCode: String
   discount: Float
@@ -82,34 +126,50 @@ type CouponCodes
 
 type Organizations
   @model
-  @auth(rules: [{ allow: private, operations: [read] },
-                { allow: groups, groups: ["Admins"] }]) {
-  id: ID! 
-  membersEmails: [AWSEmail] 
-  membership: OrganizationMembership @connection 
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Admins"] }
+    ]
+  ) {
+  id: ID!
+  membersEmails: [AWSEmail]
+  membership: OrganizationMembership @connection
 }
 
 type OrganizationMembership
   @model
-  @auth(rules: [{ allow: private, operations: [read] },
-                { allow: groups, groups: ["Admins"] }]) {
-  id: ID! 
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: groups, groups: ["Admins"] }
+    ]
+  ) {
+  id: ID!
   name: String
   trialPeriodInDays: Int
   numberOfallowedCardsPacks: Int
-  about: About 
+  about: About
 }
 
 type ReceiptsId
   @model
   @auth(rules: [{ allow: public, operations: [read, create, update] }]) {
-  id: ID! 
+  id: ID!
   counter: Int!
 }
 
 type Group
   @model
-  @auth(rules: [{allow: private, operations: [create, read, update], provider: userPools}]) {
+  @auth(
+    rules: [
+      {
+        allow: private
+        operations: [create, read, update]
+        provider: userPools
+      }
+    ]
+  ) {
   id: ID!
   groupUsers: [GroupUserRole]
   paymentProgram: SubscriptionPlan
@@ -117,9 +177,13 @@ type Group
 
 type News
   @model
-  @auth(rules: [{allow: private, operations: [read], provider: userPools}
-                {allow: public, operations: [read] },
-                { allow: groups, groups: ["Admins"] }]) {
+  @auth(
+    rules: [
+      { allow: private, operations: [read], provider: userPools }
+      { allow: public, operations: [read] }
+      { allow: groups, groups: ["Admins"] }
+    ]
+  ) {
   id: ID!
   message: String
   order: Int
@@ -127,8 +191,16 @@ type News
 
 type CardsPack
   @model
-  @auth(rules: [{allow: private, operations: [create, read, update, delete], provider: userPools}
-                {allow: public, operations: [read] }]) {
+  @auth(
+    rules: [
+      {
+        allow: private
+        operations: [create, read, update, delete]
+        provider: userPools
+      }
+      { allow: public, operations: [read] }
+    ]
+  ) {
   id: ID!
   imgUrl: String!
   description: String
@@ -146,16 +218,26 @@ type CardsPack
   likesCounter: Int
   visitorsCounter: Int
   backImgUrl: String
+  isExternalPack: Boolean
+  authorizedDomains: [String]
 }
 
-type Cards{
+type Cards {
   backImgUrl: String
   frontImgUrl: String
 }
 
 type MessageQueue
   @model
-  @auth( rules: [{allow: private, operations: [create, read, update], provider: userPools}] ) {
+  @auth(
+    rules: [
+      {
+        allow: private
+        operations: [create, read, update]
+        provider: userPools
+      }
+    ]
+  ) {
   id: ID!
   email: AWSEmail
   emailDeliveryTime: AWSDateTime
@@ -175,9 +257,7 @@ type ContactUsModel
   email: String
 }
 
-type Invoices
-  @model
-  @auth(rules: [{ allow: groups, groups: ["Admins"] }]) {
+type Invoices @model @auth(rules: [{ allow: groups, groups: ["Admins"] }]) {
   id: ID!
   email: String
   fullName: String
@@ -192,7 +272,7 @@ type Invoices
   invoiceType: String
 }
 
-type InvoiceItems{
+type InvoiceItems {
   itemName: String
   pricePerItem: Float
   numberOfItems: Int
