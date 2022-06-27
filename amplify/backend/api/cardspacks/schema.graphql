@@ -6,7 +6,7 @@ type Mutation {
   Unsubscribe(input: unSubscribeInput!): Boolean @function(name: "UnSubscribe-${env}")
   JoinExistingGroup(input: joinExistingGroupInput!): Boolean @function(name: "JoinExistingGroup-${env}")
   DeleteGroupById(input: deleteGroupInput!): Boolean @function(name: "DeleteGroup-${env}")
-  AddCouponCode(input: couponCodeInput!): Boolean @function(name: "AddCouponCode-${env}")
+  AddCouponCode(input: couponCodeInput!): About @function(name: "AddCouponCode-${env}")
   UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean @function(name: "UpdatePaymentProgram-${env}")
   GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}") @aws_cognito_user_pools @aws_api_key
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")

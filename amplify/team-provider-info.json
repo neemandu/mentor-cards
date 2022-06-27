@@ -108,28 +108,28 @@
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddCardsPack-674e5a7430377a6d5841-build.zip"
+          "s3Key": "amplify-builds/AddCardsPack-5a684e434c336b642b62-build.zip"
         },
         "ChangeCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/ChangeCardsPack-586651675a4a71715550-build.zip"
+          "s3Key": "amplify-builds/ChangeCardsPack-7a6751516f647250325a-build.zip"
         },
         "UpdateGroupUsersList": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdateGroupUsersList-327a44647a34706c4d37-build.zip"
+          "s3Key": "amplify-builds/UpdateGroupUsersList-4b542f55464b55684b78-build.zip"
         },
         "UnSubscribe": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UnSubscribe-59585135563649694a63-build.zip",
+          "s3Key": "amplify-builds/UnSubscribe-35586e644a326c38734e-build.zip",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "JoinExistingGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/JoinExistingGroup-7a4a5a55707546614d39-build.zip"
+          "s3Key": "amplify-builds/JoinExistingGroup-4e32576a594b38692f48-build.zip"
         },
         "DeleteGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/DeleteGroup-4253757771594e615471-build.zip"
+          "s3Key": "amplify-builds/DeleteGroup-392f787578395448355a-build.zip"
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -137,11 +137,11 @@
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/getGroup-6953333664496979664a-build.zip"
+          "s3Key": "amplify-builds/getGroup-334d615a346b74746349-build.zip"
         },
         "IsInGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/IsInGroup-796553554f6e66544a49-build.zip"
+          "s3Key": "amplify-builds/IsInGroup-6c6c3137454b37577768-build.zip"
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -149,22 +149,22 @@
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-515269472f6868764939-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-6d7355627a525567766a-build.zip"
         },
         "mentorcards91f3dc29CustomMessage": {
           "REDIRECTURL": "https://dev.d15egmtmsipj3q.amplifyapp.com/no-program-page/",
           "EMAILSUBJECT": "Mentor-Cards Verification",
           "EMAILMESSAGE": "תודה שהצטרפתם! לחצו על הלינק כדי לחזור לאתר. ",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/mentorcards91f3dc29CustomMessage-332b626944416662796d-build.zip"
+          "s3Key": "amplify-builds/mentorcards91f3dc29CustomMessage-3934333767326a553456-build.zip"
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/UpdatePaymentProgram-79664f66306a61536a56-build.zip"
+          "s3Key": "amplify-builds/UpdatePaymentProgram-74664b5357376961502b-build.zip"
         },
         "ContactUsTrigger": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/ContactUsTrigger-4d772f5a484143382f6c-build.zip",
+          "s3Key": "amplify-builds/ContactUsTrigger-6b697643716958324b52-build.zip",
           "sesEmail": "support@mentor-cards.com"
         },
         "EmailGuideIntroduction": {
@@ -207,11 +207,11 @@
         },
         "GetEndOfTrialDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetEndOfTrialDate-712f507a6b5063547661-build.zip"
+          "s3Key": "amplify-builds/GetEndOfTrialDate-34334172466c46335171-build.zip"
         },
         "IsCardsPackOwnedByOrgForUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-53616278382f6452316f-build.zip"
+          "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-5670435941456b573964-build.zip"
         },
         "AddNewUserToEmailsContactList": {
           "contactListId": "6",
@@ -226,7 +226,7 @@
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/IncrementCardPackLike-4b4161484a5566663452-build.zip"
+          "s3Key": "amplify-builds/IncrementCardPackLike-4b61574c794342436738-build.zip"
         },
         "PreSignUpCognito": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",

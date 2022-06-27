@@ -148,7 +148,7 @@ exports.handler = async (event) => {
     if(user.favouritePacks && 
         user.favouritePacks.includes(cardsPackId)){
         user.favouritePacks = arrayRemove(user.favouritePacks, cardsPackId);
-        add = -1;
+        //add = -1;
     }
     else{
         if(user.favouritePacks == null){

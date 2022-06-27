@@ -3584,7 +3584,7 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
   }
-  async AddCouponCode(input: couponCodeInput): Promise<boolean | null> {
+  async AddCouponCode(input: couponCodeInput): Promise<About | null> {
     const statement = `mutation AddCouponCode($input: couponCodeInput!) {
         AddCouponCode(input: $input)
       }`;
@@ -3594,7 +3594,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <boolean | null>response.data.AddCouponCode;
+    return <About | null>response.data.AddCouponCode;
   }
   async UpdatePaymentProgram(
     input: updatePaymentProgramInput
