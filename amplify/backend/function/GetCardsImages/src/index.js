@@ -142,7 +142,7 @@ async function incrementPackEntries(cardsPack){
     var cardPackParams = {
         TableName: cardPackTable,
         Key:{
-            "id" : cardsPack.id
+            "id" : "" + cardsPack.id
         },
         Item: cardsPack
     };

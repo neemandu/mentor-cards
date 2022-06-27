@@ -13,18 +13,6 @@
 Amplify Params - DO NOT EDIT */
 const aws = require('aws-sdk');
 
-/* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_CARDSPACKTABLE_ARN
-	API_CARDSPACKS_CARDSPACKTABLE_NAME
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_GROUPTABLE_ARN
-	API_CARDSPACKS_GROUPTABLE_NAME
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT */
-
 const { env, getgroups } = require("process");
 var AWS = require("aws-sdk");
 const http = require('https'); // or https 
