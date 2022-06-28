@@ -5956,7 +5956,11 @@ export class APIService {
             id
             imgUrl
             description
-            cards
+            cards {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
             tags
             categories
             cardsPreview
