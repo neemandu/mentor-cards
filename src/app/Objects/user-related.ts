@@ -22,6 +22,7 @@ export class UserData {
     fullName?: string | null;
     endOfTrialDate: Date;
     orgMembership: OrgMembership;
+    favouritePacks: number[] | null;
 
     deseralize(input: any) {
         Object.assign(this, input);
@@ -77,8 +78,8 @@ export class OrgMembership {
     id: string;
     name: string;
     trialPeriodInDays: number;
-    numberOfallowedCardsPacks: number;          
-    about: About; 
+    numberOfallowedCardsPacks: number;
+    about: About;
     createdAt: string;
     updatedAt: string;
 }

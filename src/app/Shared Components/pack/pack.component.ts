@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PackInfo } from 'src/app/Objects/packs';
-import { CardsService } from 'src/app/Services/cards.service';
-import { AboutAuthorComponent } from './about-author/about-author.component';
+import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { PackPreviewComponent, previewData } from './pack-preview/pack-preview.component';
 
 @Component({
@@ -17,33 +16,27 @@ export class PackComponent implements OnInit, OnDestroy {
 
   @Input() packInfo: PackInfo;
   @Input() orgName: string;
+  // @Input() fav: boolean = false;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   @Output() packChange: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
 
-  constructor(private cardsService: CardsService, public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private userAuthService: UserAuthService) { }
 
   ngOnInit() {
-    // console.log("packInfo", this.packInfo)
-    this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
-      this.fav = favorites.includes(this.packInfo.id)
+    this.Subscription.add(this.userAuthService.favoritesChangeEmmiter.subscribe((favorites: number[]) => {
+      this.fav = favorites.includes(parseInt(this.packInfo.id))
     }));
-    this.fav = this.cardsService.isFavorite(this.packInfo.id);
-
+    this.fav = this.userAuthService.favorites.includes(parseInt(this.packInfo.id))
   }
 
   addRemoveFavorite(): void {
-    this.fav = this.cardsService.addRemoveFavorite(this.packInfo.id)
-    // this.favoriteChangedEmmiter.emit();
+    this.userAuthService.addRemoveFavorite(this.packInfo.id);
   }
 
   imgLoaded(): any {
     this.loaded.emit();
   }
-
-  // getBorderColor(): string {
-  //   return this.cardsService.getCategoryColor(this.packInfo.categories[0]);
-  // }
 
   get isStillFree() {
     return new Date() < new Date(this.packInfo.freeUntilDate);
@@ -69,15 +62,6 @@ export class PackComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  // openAboutDialog(): void {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.maxWidth = '30vw';
-  //   dialogConfig.data = this.packInfo;
-  //   this.dialog.open(AboutAuthorComponent, dialogConfig);
-  // }
 
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();

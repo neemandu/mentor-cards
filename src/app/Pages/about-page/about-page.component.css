@@ -1,6 +1,6 @@
 * {
   font-family: 'rubik';
-  font-size: 1rem;
+  /* font-size: 1rem; */
   direction: rtl;
 }
 
@@ -15,6 +15,7 @@ h2 {
 
 p {
   margin: 0 0 10px;
+  font-size: 1.1rem;
 }
 
 .flower-img {
@@ -32,6 +33,11 @@ p {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
+}
+
+#about-text p {
+  font-size: 1.1rem;
+  line-height: 20px;
 }
 
 #about-content {
@@ -74,7 +80,7 @@ p {
 }
 
 .bio-content>p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.5rem;
   transition: line-height 0.5s
 }

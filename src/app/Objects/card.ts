@@ -10,8 +10,8 @@ export class Card {
 
     deseralize(input: any) {
         this.imgUrl = input;
-        this.imgUrl = this.imgUrl.replace('{imgUrl=', '')
-        this.imgUrl = this.imgUrl.replace('}', '')
+        // this.imgUrl = this.imgUrl.replace('{imgUrl=', '')
+        // this.imgUrl = this.imgUrl.replace('}', '')
         return this;
     }
 }
