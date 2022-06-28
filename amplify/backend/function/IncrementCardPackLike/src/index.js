@@ -52,12 +52,12 @@ async function saveUser(user){
         Item: user
     };
 
-    console.log("updating user " + user.id + " as unsubscribed" );
+    console.log("updating user " + user.id + "  favorites" );
 
     await docClient.put(updatedUserParams).promise().then(data => {
-        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+        console.log("updated user " + user.id + " favorites", JSON.stringify(data, null, 2));
     }).catch(err => {
-        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to updating user " + user.id + " favorites. Error JSON:", JSON.stringify(err, null, 2));
         });        
 }
 
@@ -70,7 +70,7 @@ async function getPack(id){
     var packParams = {
         TableName: packTable,
         Key:{
-            "id": id
+            "id": "" + id
         }
     };
 
@@ -108,7 +108,7 @@ async function incrementLikes(cardsPack, add){
     var cardPackParams = {
         TableName: cardPackTable,
         Key:{
-            "id" : cardsPack.id
+            "id" : "" + cardsPack.id
         },
         Item: cardsPack
     };

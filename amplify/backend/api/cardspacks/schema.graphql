@@ -1,6 +1,5 @@
 type Mutation {
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
-<<<<<<< HEAD
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
@@ -12,32 +11,6 @@ type Mutation {
   GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}") @aws_cognito_user_pools @aws_api_key
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
-=======
-  addCardsPack(input: addCardsPackInput!): Boolean
-    @function(name: "AddCardsPack-${env}")
-  changeCardsPack(input: changeCardsPackInput!): Boolean
-    @function(name: "ChangeCardsPack-${env}")
-  updateGroupUsersList(input: groupUsersListInput!): Boolean
-    @function(name: "UpdateGroupUsersList-${env}")
-  Unsubscribe(input: unSubscribeInput!): Boolean
-    @function(name: "UnSubscribe-${env}")
-  JoinExistingGroup(input: joinExistingGroupInput!): Boolean
-    @function(name: "JoinExistingGroup-${env}")
-  DeleteGroupById(input: deleteGroupInput!): Boolean
-    @function(name: "DeleteGroup-${env}")
-  AddCouponCode(input: couponCodeInput!): Boolean
-    @function(name: "AddCouponCode-${env}")
-  UpdatePaymentProgram(input: updatePaymentProgramInput!): Boolean
-    @function(name: "UpdatePaymentProgram-${env}")
-  GetSubscriptionPlans(input: userInput!): [SubscriptionPlan]
-    @function(name: "GetSubscriptionPlans-${env}")
-    @aws_cognito_user_pools
-    @aws_api_key
-  UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean
-    @function(name: "UpdateSelectedCardPacks-${env}")
-  LikeClicked(input: cardPackIdInput!): Boolean
-    @function(name: "IncrementCardPackLike-${env}")
->>>>>>> 2f97a9394db5108155f1f0764031bdaba2243d0d
 }
 
 type User
