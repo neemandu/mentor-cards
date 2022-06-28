@@ -20,9 +20,9 @@ export class PackComponent implements OnInit, OnDestroy {
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   @Output() packChange: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
-
+  
   constructor(public dialog: MatDialog, private userAuthService: UserAuthService) { }
-
+  
   ngOnInit() {
     this.Subscription.add(this.userAuthService.favoritesChangeEmmiter.subscribe((favorites: number[]) => {
       this.fav = favorites.includes(parseInt(this.packInfo.id))
@@ -31,6 +31,9 @@ export class PackComponent implements OnInit, OnDestroy {
   }
 
   addRemoveFavorite(): void {
+    if(!this.fav) {
+      this.packInfo.likesCounter += 1;
+    }
     this.userAuthService.addRemoveFavorite(this.packInfo.id);
   }
 
