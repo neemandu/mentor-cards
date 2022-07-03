@@ -10,7 +10,7 @@ export class Card {
     constructor() { }
 
     deseralize(input: any) {
-        this.frontImgUrl = input.backImgUrl;
+        this.frontImgUrl = input.frontImgUrl;
         this.backImgUrl = input.backImgUrl;
         // this.imgUrl = this.imgUrl.replace('{imgUrl=', '')
         // this.imgUrl = this.imgUrl.replace('}', '')
