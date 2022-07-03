@@ -133,6 +133,9 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   getAllFavoritesDesc(): string[] {
+    if(!this.allFavorites){
+      this.allFavorites = [];
+    }
     return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)))).map(pack => pack.name);
     // return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
   }
