@@ -3586,7 +3586,11 @@ export class APIService {
   }
   async AddCouponCode(input: couponCodeInput): Promise<About | null> {
     const statement = `mutation AddCouponCode($input: couponCodeInput!) {
-        AddCouponCode(input: $input)
+        AddCouponCode(input: $input){
+          imgUrl
+          link
+          text
+        }
       }`;
     const gqlAPIServiceArguments: any = {
       input

@@ -111,7 +111,11 @@ mutation DeleteGroupById($input: deleteGroupInput!) {
   DeleteGroupById(input: $input)
 }
 mutation AddCouponCode($input: couponCodeInput!) {
-  AddCouponCode(input: $input)
+  AddCouponCode(input: $input){
+    imgUrl
+    link
+    text
+  }
 }
 mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
   UpdatePaymentProgram(input: $input)
