@@ -9,7 +9,7 @@
     <!-- Card Front -->
     <div class="flip-box-back">
       <img loading="eager" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}"
-        src={{cardContent.imgUrl}} data-src={{cardContent.imgUrl}} (contextmenu)="onRightClick();">
+        src={{cardContent.frontImgUrl}} data-src={{cardContent.frontImgUrl}} (contextmenu)="onRightClick();">
     </div>
   </div>
   <span *ngIf="index" class="badge badge-pill badge-light">{{index}}</span>
