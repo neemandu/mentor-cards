@@ -1,5 +1,6 @@
 export class Card {
-    imgUrl: string;
+    frontImgUrl: string;
+    backImgUrl: string;
     index: number;
 
     // constructor($imgUrl: string) {
@@ -9,7 +10,8 @@ export class Card {
     constructor() { }
 
     deseralize(input: any) {
-        this.imgUrl = input;
+        this.frontImgUrl = input.backImgUrl;
+        this.backImgUrl = input.backImgUrl;
         // this.imgUrl = this.imgUrl.replace('{imgUrl=', '')
         // this.imgUrl = this.imgUrl.replace('}', '')
         return this;
