@@ -154,6 +154,9 @@ mutation UpdateSelectedCardPacks($input: selectedCardPacksInput!) {
 mutation LikeClicked($input: cardPackIdInput!) {
   LikeClicked(input: $input)
 }
+mutation IncrementPackEntries($input: cardPackIdInput!) {
+  IncrementPackEntries(input: $input)
+}
 mutation CreateSubscriptionPlan(
   $input: CreateSubscriptionPlanInput!
   $condition: ModelSubscriptionPlanConditionInput

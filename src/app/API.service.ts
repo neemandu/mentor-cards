@@ -3718,6 +3718,18 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.LikeClicked;
   }
+  async IncrementPackEntries(input: cardPackIdInput): Promise<boolean | null> {
+    const statement = `mutation IncrementPackEntries($input: cardPackIdInput!) {
+      IncrementPackEntries(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.IncrementPackEntries;
+  }
   async CreateSubscriptionPlan(
     input: CreateSubscriptionPlanInput,
     condition?: ModelSubscriptionPlanConditionInput

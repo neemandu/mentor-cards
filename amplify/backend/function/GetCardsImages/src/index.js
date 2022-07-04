@@ -129,39 +129,10 @@ function isFreeTrialPeriod(firstDate, allPackagesDate) {
     return false;
 }
 
-async function incrementPackEntries(cardsPack){
-    
-    console.log("incrementPackEntries - pack: " + cardsPack.id);
-   
-    cardsPack.visitorsCounter++;
-    console.log("pack: " + cardsPack.id + " new # of visitors: " + cardsPack.visitorsCounter);
-    var docClient = new AWS.DynamoDB.DocumentClient();
-
-    var cardPackTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
-
-    var cardPackParams = {
-        TableName: cardPackTable,
-        Key:{
-            "id" : "" + cardsPack.id
-        },
-        Item: cardsPack
-    };
-
-    await docClient.put(cardPackParams).promise().then(data => {
-        console.log("updated pack with new number of visitors:", JSON.stringify(data, null, 2));
-      }).catch(err => {
-        console.error("Unable to update pack with new number of visitors. Error JSON:", JSON.stringify(err, null, 2));
-      });
-
-      
-}
-
 exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
     console.log('event');
     console.log(event);
-    var pack = event.source;
-    await incrementPackEntries(pack);
 
     // user was not identified in cognito
     if(!("identity" in event)){

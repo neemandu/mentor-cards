@@ -11,6 +11,7 @@ type Mutation {
   GetSubscriptionPlans(input: userInput!): [SubscriptionPlan] @function(name: "GetSubscriptionPlans-${env}") @aws_cognito_user_pools @aws_api_key
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
+  IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
 }
 
 type User
