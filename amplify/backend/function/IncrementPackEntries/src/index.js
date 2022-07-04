@@ -5,6 +5,8 @@
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
+const { env, ppid } = require("process");
+var AWS = require("aws-sdk");
 
 async function incrementPackEntries(cardsPack){
     
@@ -72,12 +74,5 @@ exports.handler = async (event) => {
     var cardsPackId = parseInt(event.arguments.input['cardsPackId']);
     var pack = await getPack(cardsPackId);
     await incrementPackEntries(pack);
-    return {
-        statusCode: 200,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "*"
-        }, 
-        body: JSON.stringify('Hello from Lambda!'),
-    };
+    return true;
 };
