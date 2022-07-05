@@ -1,5 +1,18 @@
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_INVOICESTABLE_ARN
+	API_CARDSPACKS_INVOICESTABLE_NAME
+	API_CARDSPACKS_MESSAGEQUEUETABLE_ARN
+	API_CARDSPACKS_MESSAGEQUEUETABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	API_RECEIPTSAPI_APIID
+	API_RECEIPTSAPI_APINAME
+	ENV
+	REGION
+	STORAGE_INVOICES_BUCKETNAME
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_USERTABLE_ARN
 	API_CARDSPACKS_USERTABLE_NAME
 	API_RECEIPTSAPI_APIID
@@ -22,6 +35,7 @@ exports.handler = (event) => {
     if (record.eventName === 'INSERT') {
       //pull off items from stream
       var invoice = {
+        id: record.dynamodb.NewImage.id?.S,
         email: record.dynamodb.NewImage.email?.S,
         fullName: record.dynamodb.NewImage.fullName?.S,
         customerAddress: record.dynamodb.NewImage.customerAddress?.S,
@@ -30,7 +44,9 @@ exports.handler = (event) => {
         businessPhoneNumber: record.dynamodb.NewImage.businessPhoneNumber?.S,
         businessAddress: record.dynamodb.NewImage.businessAddress?.S,
         businessWebsite: record.dynamodb.NewImage.businessWebsite?.S,
-        invoiceType: record.dynamodb.NewImage.invoiceType?.S
+        invoiceType: record.dynamodb.NewImage.invoiceType?.S,
+        createdAt: record.dynamodb.NewImage.createdAt?.S,
+        updatedAt: new Date().toISOString() 
       };
       
       console.log('res');
@@ -46,9 +62,11 @@ exports.handler = (event) => {
           invoice.invoiceRunningId = dataString;
           console.log("invoice.invoiceRunningId: " + invoice.invoiceRunningId);
           var items = record.dynamodb.NewImage.items.L;
-          invoice.item = items[0].M.itemName.S;
-          invoice.item_price = items[0].M.pricePerItem.N;
-          invoice.item_quantity = items[0].M.numberOfItems.N;
+          invoice.items = [{
+            itemName: items[0].M.itemName.S,
+            pricePerItem: items[0].M.pricePerItem.N,
+            numberOfItems: items[0].M.numberOfItems.N,
+          }];
           
           var docClient = new AWS.DynamoDB.DocumentClient();
           var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
@@ -77,24 +95,37 @@ exports.handler = (event) => {
                     "businessWebsite": invoice.businessWebsite,
                     "invoiceType": invoice.invoiceType,       
                     "invoiceRunningId": invoice.invoiceRunningId,
-                    "item": invoice.item,
-                    "item_price": invoice.item_price,
-                    "item_quantity": invoice.item_quantity
+                    "item": invoice.items[0].itemName,
+                    "item_price": invoice.items[0].pricePerItem,
+                    "item_quantity": invoice.items[0].numberOfItems
                   }
               }
           };
-        
+          
           docClient.put(params).promise().then(data => {
               console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
           }).catch(err => {
               console.error("Unable to add invoice message to: " + invoice.email + ". Error JSON:", JSON.stringify(err, null, 2));
           });
-                });
-              });
-              
-              req.on('error', (e) => {
+
+          invoice.date = record.dynamodb.NewImage.date?.S;
+          var table1 = env.API_CARDSPACKS_INVOICESTABLE_NAME;
+          var params1 = {
+              TableName: table1,
+              Item: invoice
+          };
+          docClient.put(params1).promise().then(data => {
+              console.log("updateInvoiceRunningId:", JSON.stringify(data, null, 2));
+            }).catch(err => {
+              console.error("Unable to updateInvoiceRunningId . Error JSON:", JSON.stringify(err, null, 2));
+            });
+
+          
+        });
+      });
+      req.on('error', (e) => {
                 console.error(e);
-              });
-          }});
-          console.log('finish');
+            });
+    }});
+    console.log('finish');
 };
