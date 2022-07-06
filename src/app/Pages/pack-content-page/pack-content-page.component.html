@@ -79,6 +79,7 @@
         style="color: coral;">&#10084;</span>
     </p>
     <ul>
+      <li><span>ערכה זו היא ערכה לדוגמא ולכן כוללת רק 10 קלפים</span></li>
       <li><span>באתר קיימות עשרות ערכות קלפים לבחירתכם</span></li>
       <li><span>כל ערכה כוללת מעל ל-40 קלפים</span></li>
       <li><span>כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים</span></li>
@@ -145,7 +146,7 @@
     <div [ngClass]="{'selected-content':true, 'selected-content-one-card': selectedCards.length == 1}">
       <img *ngFor="let card of selectedCards" alt="one of the selected cards shown"
         [ngClass]="{'card-view':true, 'one-cards': selectedCards.length == 1, 'two-cards': selectedCards.length == 2,
-      'three-cards': selectedCards.length == 3, 'four-cards': selectedCards.length == 4, 'five-cards': selectedCards.length == 5}" loading="eager" src={{card.frontImgUrl}} data-src={{card.imgUrl}}>
+      'three-cards': selectedCards.length == 3, 'four-cards': selectedCards.length == 4, 'five-cards': selectedCards.length == 5}" loading="eager" src={{card.frontImgUrl}} data-src={{card.frontImgUrl}}>
     </div>
   </div>
 </div>

@@ -12,10 +12,10 @@
     "mfaTypes": [
       "SMS Text Message"
     ],
-    "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
-    "emailVerificationMessage": "Your verification code is {####}",
+    "smsAuthenticationMessage": "אנא הזמן את קוד האימות הבא באתר {####}",
+    "smsVerificationMessage": "אנא הזמן את קוד האימות הבא באתר {####}",
+    "emailVerificationSubject": "קוד אימות מ- Mentor-Cards",
+    "emailVerificationMessage": "אנא הזמן את קוד האימות הבא באתר {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],

@@ -29,9 +29,6 @@ export class ReceiptsManagementComponent implements OnInit {
     this.api.ListInvoicess().then((res) => {
       console.log("🚀 ~ file: receipts-management.component.ts ~ line 31 ~ this.api.ListReceiptsIds ~ res", res)
       this.receiptsData = [...res.items]
-      for(var item in this.receiptsData){
-        console.log(item);
-      }
       this.dataSource = new MatTableDataSource(this.receiptsData);
       this.mngService.overlaySpinner(false);
     });
