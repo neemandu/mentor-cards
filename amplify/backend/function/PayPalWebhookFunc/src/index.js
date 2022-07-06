@@ -182,7 +182,7 @@ async function createInvoice(user){
     var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
     var d = new Date();
     var id = user.id + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    var subDescription = user.subscription.subscriptionPlan.description + "מנוי ";
+    var subDescription = user.subscription.subscriptionPlan.description + " מנוי";
     var params = {
         TableName: table,
         Item: {
