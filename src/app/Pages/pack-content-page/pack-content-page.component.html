@@ -22,7 +22,7 @@
     <button id="multipleChoise" type="button"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
       (click)="multipileChanged()"
-      [disabled]="showEditPack">{{!multipileChecked ? 'בחירה מרובה':'בחירה יחידה'}}</button>
+      [disabled]="showEditPack">{{!multipileChecked ? 'הצג מספר קלפים':'הצג קלף יחיד'}}</button>
     <button id="mixCards" type="button" [disabled]="showEditPack"
       [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
       (click)="shuffle()">ערבב</button>
