@@ -34,7 +34,10 @@ export class GuideBookComponent implements OnInit {
       this.guideBook = new Array<GuideBookElement>();
       this.title = "ספר הדרכה לדוגמא";
       this.packName = "ערכה לדוגמא";
-      this.packDesc = "תאור ערכה לדוגמא";
+      this.packDesc = "כל ערכת קלפים באתר מגיעה עם ספר הדרכה ייעודי הכולל עשרות שאלות מנחות וטכניקות עבודה מומלצות. \r\n"+
+                      "המגוון עצום - תמיד יהיה לכם מה לשאול!  \r\n"+
+                      "ספרי ההדרכה שלנו מותאמים לעבודה אחד על אחד, לעבודה ארגונית, ולעבודה קבוצתית. \r\n"+
+                      "הרשמו ותהנו מהשפע! :)";
     }
   }
 
