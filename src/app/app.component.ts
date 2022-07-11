@@ -30,10 +30,12 @@ export class AppComponent implements OnInit {
     this.fbBtnSub = this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         const fbButton = document.getElementById('fb-root')
-        if (val.url.includes('pack-view')) {
+        if (val.url.includes('pack-view') || val.url.includes('price-page')) {
           fbButton.style.visibility = 'hidden';
+          fbButton.style.pointerEvents = 'none'
         } else {
           fbButton.style.visibility = 'unset';
+          fbButton.style.pointerEvents = 'auto'
         }
       }
     })
