@@ -18,12 +18,7 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // console.log("CardComponent -> card", this.cardContent)
   }
-
-  // imgLoaded(): any {
-  //   this.loaded.emit();
-  // }
 
   onRightClick(): boolean {
     return false;

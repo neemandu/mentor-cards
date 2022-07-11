@@ -45,7 +45,7 @@ export class PackContent {
 
     deseralize(input: any) {
         Object.assign(this, input);
-        input.cards ? this.cards = input.cards.map(card => new Card().deseralize(card)) : null;
+        input.cards ? this.cards = input.cards.map(card => new Card().deseralize(card, input.backImgUrl)) : null;
         input.guideBook ? this.guideBook = input.guideBook.map(element => new GuideBookElement().deseralize(element)) : null;
         // input.guideBook ? this.guideBook = input.guideBook.map(element => new GuideBookElement().deseralize(element)) : null;
         input.freeUntilDate ? this.freeUntilDate = new Date(input.freeUntilDate) : null;
