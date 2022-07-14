@@ -224,4 +224,9 @@ p {
   #introduction {
     margin-bottom: 1.5rem;
   }
+
+  .client-logo {
+    height: 150px;
+    padding: 1% 0;
+  }
 }
