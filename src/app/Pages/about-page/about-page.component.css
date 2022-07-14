@@ -55,7 +55,7 @@ p {
 }
 
 .person-bio:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   line-height: 5rem;
 }
 
@@ -120,6 +120,29 @@ p {
 
   border: 5px #ff9a14 solid;
   border-radius: 10px;
+}
+
+::ng-deep .mat-tab-label {
+  height: 5px !important;
+}
+
+.client-logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.client-logo {
+  height: 250px;
+  padding: 1% 0;
+}
+
+/* .mat-tab-group {
+  padding: 0 5%;
+} */
+
+::ng-deep mat-ink-bar {
+  background-color: #ffcb7e !important;
 }
 
 @media screen and (max-width: 1024px) {
