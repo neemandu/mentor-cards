@@ -69,7 +69,7 @@
   <button mat-menu-item *ngIf="!loggedIn" (click)=signInSignUp()>התחברות/הרשמה</button>
   <button mat-menu-item (click)="navigate('/all-packs-page')">כל ערכות
     הקלפים</button>
-  <button class="btn navbar-btn" (click)="navigate('/services')">שירותים</button>
+  <button mat-menu-item (click)="navigate('/services')">שירותים</button>
   <button mat-menu-item *ngIf="!loggedIn" (click)="navigate('/example-pack')">ערכה
     להתנסות</button>
   <button mat-menu-item (click)="navigate('/guide-page')">שאלות נפוצות</button>

@@ -11,7 +11,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 })
 export class ServicesComponent implements OnInit {
   selectedBtn: number = 1;
-  title: string = "מה זה מנטור - קארדס?";
+  title: string = "השירותים שלנו";
   playerWidth: number;
   playerHeight: number;
   contactForm: FormGroup;
