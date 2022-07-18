@@ -11,7 +11,9 @@ var AWS = require("aws-sdk");
 async function incrementPackEntries(cardsPack){
     
     console.log("incrementPackEntries - pack: " + cardsPack.id);
-   
+    if(!cardsPack.visitorsCounter){
+        cardsPack.visitorsCounter = 0;
+    }
     cardsPack.visitorsCounter++;
     console.log("pack: " + cardsPack.id + " new # of visitors: " + cardsPack.visitorsCounter);
     var docClient = new AWS.DynamoDB.DocumentClient();
