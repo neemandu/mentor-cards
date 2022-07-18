@@ -373,6 +373,9 @@ export class UserAuthService {
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 376 ~ this.api.LikeClicked ~ reject", reject)
     })
+    if(!this.favorites){
+      this.favorites = [];
+    }
     if (!this.favorites.includes(parseInt(packId))) {
       this.favorites.push(parseInt(packId))
     }
