@@ -43,8 +43,8 @@ p {
 }
 
 #about-text p {
-  font-size: 1.1rem;
-  line-height: 20px;
+  font-size: 1.5rem;
+  line-height: 30px;
 }
 
 #about-content {
@@ -98,9 +98,10 @@ p {
 }
 
 #last-line {
-  font-size: larger;
   color: #ff9a14;
   font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 30px;
 }
 
 #introduction-partial {
