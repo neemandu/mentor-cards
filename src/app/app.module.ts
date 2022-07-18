@@ -81,6 +81,7 @@ import { CompanyPackChoiseComponent } from './Modules/management/company-pack-ch
 import { ManagementModule } from './Modules/management/management.module';
 import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
 import { WelcomeToNewOrgDialogComponent } from './Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
+import { ServicesComponent } from './Pages/services/services.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { WelcomeToNewOrgDialogComponent } from './Shared Components/Dialogs/welc
     CompanyPackChoiseComponent,
     FbChatComponent,
     WelcomeToNewOrgDialogComponent,
+    ServicesComponent,
   ],
   imports: [
     BrowserModule,

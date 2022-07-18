@@ -25,6 +25,7 @@ import { OrganizationManagementComponent } from './Modules/management/organizati
 import { PacksManagementComponent } from './Modules/management/packs-management/packs-management.component';
 import { PaymentProgramsManagementComponent } from './Modules/management/payment-programs-management/payment-programs-management.component';
 import { ReceiptsManagementComponent } from './Modules/management/receipts-management/receipts-management.component';
+import { ServicesComponent } from './Pages/services/services.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'guide-book', component: GuideBookComponent },
   { path: 'price-page', component: PricePageComponent, canActivate: [AuthGuardPricePageService] },
   { path: 'guide-page', component: GuidePageComponent },
+  { path: 'services', component: ServicesComponent },
   { path: 'company-pack-choise', component: CompanyPackChoiseComponent, canActivate: [AuthGuardCompanyCardChoiseService] },
   { path: 'guide-book-management', component: GuideBookManagementComponent, canActivate: [AuthGuardSiteContentManagementService], canDeactivate: [CanDeactivateGuardService] },
   // Management //

@@ -14,6 +14,7 @@
     </div>
     <button *ngIf="!loggedIn" class="btn navbar-btn" (click)=signInSignUp()>התחברות/הרשמה</button>
     <button class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button>
+    <button class="btn navbar-btn" (click)="navigate('/services')">שירותים</button>
     <button *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
       להתנסות</button>
     <button class="btn navbar-btn" (click)="navigate('/guide-page')">שאלות נפוצות</button>
