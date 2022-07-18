@@ -12,10 +12,10 @@
     "mfaTypes": [
       "SMS Text Message"
     ],
-    "smsAuthenticationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר Mentor-Cards.com",
-    "smsVerificationMessage": "{####} :אנא הזינו את קוד האימות הבא באתר Mentor-Cards.com",
-    "emailVerificationSubject": "קוד אימות מאתר Mentor-Cards",
-    "emailVerificationMessage": "אנא הזינו את קוד האימות הבא באתר Mentor-Cards.com: {####} ",
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
@@ -48,7 +48,6 @@
     "authProvidersUserPool": [
       "Google"
     ],
-    "authProviders": [],
     "authRoleArn": {
       "Fn::GetAtt": [
         "AuthRole",
@@ -64,6 +63,17 @@
     "breakCircularDependency": false,
     "useEnabledMfas": false,
     "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\"],\"LogoutURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\"]}"
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {},
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "authTriggerConnections": [
+      "{\"triggerType\":\"PreSignUp\",\"lambdaFunctionName\":\"mentorcards56dbf153PreSignup\"}"
+    ],
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"https://www.mentor-cards.com/home-page/\"]}",
+    "authProviders": []
   }
 }

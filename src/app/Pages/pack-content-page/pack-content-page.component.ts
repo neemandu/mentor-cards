@@ -77,6 +77,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     window.scrollTo(0, 0);
     if (this.id) {
+      this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(() => {
+      }, reject => {
+        console.log("🚀 ~ file: pack-content-page.component.ts ~ line 82 ~ this.api.IncrementPackEntries ~ reject", reject)
+      });
       //a specific pack
       if (this.cardsService.allPacks) {
         this.pack = this.cardsService.allPacks.find(
@@ -89,7 +93,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
           },
           (reject) => {
             console.log(
-              'file: pack-content-page.component.ts ~ line 86 ~ this.api.GetCardsPack ~ reject',
+              'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
               reject
             );
             this.overlaySpinnerService.changeOverlaySpinner(false);

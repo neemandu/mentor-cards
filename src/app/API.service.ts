@@ -12,6 +12,42 @@ export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
 
+export type __SubscriptionContainer = {
+  onCreateCouponCodes: OnCreateCouponCodesSubscription;
+  onUpdateCouponCodes: OnUpdateCouponCodesSubscription;
+  onDeleteCouponCodes: OnDeleteCouponCodesSubscription;
+  onCreateOrganizations: OnCreateOrganizationsSubscription;
+  onUpdateOrganizations: OnUpdateOrganizationsSubscription;
+  onDeleteOrganizations: OnDeleteOrganizationsSubscription;
+  onCreateOrganizationMembership: OnCreateOrganizationMembershipSubscription;
+  onUpdateOrganizationMembership: OnUpdateOrganizationMembershipSubscription;
+  onDeleteOrganizationMembership: OnDeleteOrganizationMembershipSubscription;
+  onCreateGroup: OnCreateGroupSubscription;
+  onUpdateGroup: OnUpdateGroupSubscription;
+  onDeleteGroup: OnDeleteGroupSubscription;
+  onCreateMessageQueue: OnCreateMessageQueueSubscription;
+  onUpdateMessageQueue: OnUpdateMessageQueueSubscription;
+  onDeleteMessageQueue: OnDeleteMessageQueueSubscription;
+  onCreateInvoices: OnCreateInvoicesSubscription;
+  onUpdateInvoices: OnUpdateInvoicesSubscription;
+  onDeleteInvoices: OnDeleteInvoicesSubscription;
+  onCreateSubscriptionPlan: OnCreateSubscriptionPlanSubscription;
+  onUpdateSubscriptionPlan: OnUpdateSubscriptionPlanSubscription;
+  onDeleteSubscriptionPlan: OnDeleteSubscriptionPlanSubscription;
+  onCreateReceiptsId: OnCreateReceiptsIdSubscription;
+  onUpdateReceiptsId: OnUpdateReceiptsIdSubscription;
+  onDeleteReceiptsId: OnDeleteReceiptsIdSubscription;
+  onCreateNews: OnCreateNewsSubscription;
+  onUpdateNews: OnUpdateNewsSubscription;
+  onDeleteNews: OnDeleteNewsSubscription;
+  onCreateCardsPack: OnCreateCardsPackSubscription;
+  onUpdateCardsPack: OnUpdateCardsPackSubscription;
+  onDeleteCardsPack: OnDeleteCardsPackSubscription;
+  onCreateContactUsModel: OnCreateContactUsModelSubscription;
+  onUpdateContactUsModel: OnUpdateContactUsModelSubscription;
+  onDeleteContactUsModel: OnDeleteContactUsModelSubscription;
+};
+
 export type CreateUserInput = {
   username?: string | null;
   email?: string | null;
@@ -22,12 +58,12 @@ export type CreateUserInput = {
 
 export type User = {
   __typename: "User";
-  id?: string;
-  username?: string;
-  email?: string;
+  id: string;
+  username: string;
+  email: string;
   phone?: string | null;
   status?: string | null;
-  subscription?: MonthlySubscription;
+  subscription?: MonthlySubscription | null;
   numberOfPacksSubstitutions?: number | null;
   lastPackSubstitutionDate?: string | null;
   numberOfPlansSubstitutions?: number | null;
@@ -41,58 +77,67 @@ export type User = {
   cardsPacksIds?: Array<string | null> | null;
   providerTransactionId?: string | null;
   fullName?: string | null;
-  orgMembership?: OrganizationMembership;
+  orgMembership?: OrganizationMembership | null;
   endOfTrialDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
   favouritePacks?: Array<number | null> | null;
-  createdAt?: string;
-  updatedAt?: string;
+  entries?: number | null;
 };
 
 export type MonthlySubscription = {
   __typename: "MonthlySubscription";
-  id?: string;
+  id: string;
   startDate?: string | null;
   paymentProvider?: string | null;
   providerTransactionId?: string | null;
-  subscriptionPlan?: SubscriptionPlan;
+  subscriptionPlan?: SubscriptionPlan | null;
 };
 
 export type SubscriptionPlan = {
   __typename: "SubscriptionPlan";
-  id?: string;
+  id: string;
   name?: string | null;
   description?: string | null;
-  providerPlanId?: string;
+  providerPlanId: string;
   numberOfUsers?: number | null;
   numberOfCardPacks?: number | null;
   billingCycleInMonths?: number | null;
   fullPrice?: number | null;
   discount?: number | null;
-  orgMembership?: OrganizationMembership;
-  createdAt?: string;
-  updatedAt?: string;
+  orgMembership?: OrganizationMembership | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OrganizationMembership = {
   __typename: "OrganizationMembership";
-  id?: string;
+  id: string;
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
-  createdAt?: string;
-  updatedAt?: string;
+  about?: About | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type About = {
+  __typename: "About";
+  text?: string | null;
+  imgUrl?: string | null;
+  link?: string | null;
 };
 
 export type CouponCodes = {
   __typename: "CouponCodes";
-  id?: string;
+  id: string;
   couponCode?: string | null;
   discount?: number | null;
   trialPeriodInDays?: number | null;
   allowedCardsPacks?: Array<string | null> | null;
-  organization?: OrganizationMembership;
-  createdAt?: string;
-  updatedAt?: string;
+  organization?: OrganizationMembership | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type addCardsPackInput = {
@@ -140,6 +185,10 @@ export type userInput = {
 
 export type selectedCardPacksInput = {
   cardsPacksIds?: Array<string | null> | null;
+};
+
+export type cardPackIdInput = {
+  cardsPackId?: number | null;
 };
 
 export type CreateSubscriptionPlanInput = {
@@ -296,11 +345,11 @@ export type ModelOrganizationsConditionInput = {
 
 export type Organizations = {
   __typename: "Organizations";
-  id?: string;
+  id: string;
   membersEmails?: Array<string | null> | null;
-  membership?: OrganizationMembership;
-  createdAt?: string;
-  updatedAt?: string;
+  membership?: OrganizationMembership | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateOrganizationsInput = {
@@ -318,6 +367,13 @@ export type CreateOrganizationMembershipInput = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: AboutInput | null;
+};
+
+export type AboutInput = {
+  text?: string | null;
+  imgUrl?: string | null;
+  link?: string | null;
 };
 
 export type ModelOrganizationMembershipConditionInput = {
@@ -334,6 +390,7 @@ export type UpdateOrganizationMembershipInput = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: AboutInput | null;
 };
 
 export type DeleteOrganizationMembershipInput = {
@@ -353,10 +410,10 @@ export type ModelReceiptsIdConditionInput = {
 
 export type ReceiptsId = {
   __typename: "ReceiptsId";
-  id?: string;
-  counter?: number;
-  createdAt?: string;
-  updatedAt?: string;
+  id: string;
+  counter: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CreateGroupInput = {
@@ -372,11 +429,11 @@ export type ModelGroupConditionInput = {
 
 export type Group = {
   __typename: "Group";
-  id?: string;
+  id: string;
   groupUsers?: Array<GroupUserRole | null> | null;
-  paymentProgram?: SubscriptionPlan;
-  createdAt?: string;
-  updatedAt?: string;
+  paymentProgram?: SubscriptionPlan | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type GroupUserRole = {
@@ -410,11 +467,11 @@ export type ModelNewsConditionInput = {
 
 export type News = {
   __typename: "News";
-  id?: string;
+  id: string;
   message?: string | null;
   order?: number | null;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateNewsInput = {
@@ -433,16 +490,23 @@ export type CreateCardsPackInput = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<CardsInput | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
   about?: AboutInput | null;
-  isOwnedByOrg?: boolean | false;  
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
   likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
+};
+
+export type CardsInput = {
+  backImgUrl?: string | null;
+  frontImgUrl?: string | null;
 };
 
 export type GuideBookElementInput = {
@@ -450,49 +514,59 @@ export type GuideBookElementInput = {
   subElements?: Array<GuideBookElementInput | null> | null;
 };
 
-export type AboutInput = {
-  text?: string | null;
-  imgUrl?: string | null;
-  link?: string | null;
-};
-
 export type ModelCardsPackConditionInput = {
   imgUrl?: ModelStringInput | null;
   description?: ModelStringInput | null;
   tags?: ModelStringInput | null;
   categories?: ModelStringInput | null;
-  cards?: ModelStringInput | null;
   cardsPreview?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
-  isOwnedByOrg?: ModelStringInput | null;
+  isOwnedByOrg?: ModelBooleanInput | null;
   brief?: ModelStringInput | null;
   likesCounter?: ModelIntInput | null;
+  visitorsCounter?: ModelIntInput | null;
+  backImgUrl?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
 export type CardsPack = {
   __typename: "CardsPack";
-  id?: string;
-  imgUrl?: string;
+  id: string;
+  imgUrl: string;
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<Cards | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElement | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  about?: About;
-  isOwnedByOrg?: boolean | false;  
+  about?: About | null;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
   likesCounter?: number | null;
-  createdAt?: string;
-  updatedAt?: string;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Cards = {
+  __typename: "Cards";
+  backImgUrl?: string | null;
+  frontImgUrl?: string | null;
 };
 
 export type GuideBookElement = {
@@ -501,28 +575,24 @@ export type GuideBookElement = {
   subElements?: Array<GuideBookElement | null> | null;
 };
 
-export type About = {
-  __typename: "About";
-  text?: string | null;
-  imgUrl?: string | null;
-  link?: string | null;
-};
-
 export type UpdateCardsPackInput = {
   id: string;
   imgUrl?: string | null;
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<CardsInput | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  brief?: string | null;
   about?: AboutInput | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
+  brief?: string | null;
+  likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -555,7 +625,7 @@ export type ModelMessageQueueConditionInput = {
 
 export type MessageQueue = {
   __typename: "MessageQueue";
-  id?: string;
+  id: string;
   email?: string | null;
   emailDeliveryTime?: string | null;
   phone?: string | null;
@@ -563,8 +633,8 @@ export type MessageQueue = {
   emailTemplateId?: number | null;
   name?: string | null;
   params?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateMessageQueueInput = {
@@ -600,12 +670,12 @@ export type ModelContactUsModelConditionInput = {
 
 export type ContactUsModel = {
   __typename: "ContactUsModel";
-  id?: string;
+  id: string;
   name?: string | null;
   content?: string | null;
   email?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type DeleteContactUsModelInput = {
@@ -651,7 +721,7 @@ export type ModelInvoicesConditionInput = {
 
 export type Invoices = {
   __typename: "Invoices";
-  id?: string;
+  id: string;
   email?: string | null;
   fullName?: string | null;
   customerAddress?: string | null;
@@ -663,8 +733,8 @@ export type Invoices = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type InvoiceItems = {
@@ -731,6 +801,8 @@ export type ModelUserFilterInput = {
   endOfTrialDate?: ModelStringInput | null;
   createdAt?: ModelStringInput | null;
   updatedAt?: ModelStringInput | null;
+  favouritePacks?: ModelIntInput | null;
+  entries?: ModelIntInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -754,7 +826,7 @@ export type ModelIDInput = {
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection";
-  items?: Array<User | null>;
+  items: Array<User | null>;
   nextToken?: string | null;
 };
 
@@ -771,7 +843,7 @@ export type ModelCouponCodesFilterInput = {
 
 export type ModelCouponCodesConnection = {
   __typename: "ModelCouponCodesConnection";
-  items?: Array<CouponCodes | null>;
+  items: Array<CouponCodes | null>;
   nextToken?: string | null;
 };
 
@@ -785,7 +857,7 @@ export type ModelOrganizationsFilterInput = {
 
 export type ModelOrganizationsConnection = {
   __typename: "ModelOrganizationsConnection";
-  items?: Array<Organizations | null>;
+  items: Array<Organizations | null>;
   nextToken?: string | null;
 };
 
@@ -801,7 +873,7 @@ export type ModelOrganizationMembershipFilterInput = {
 
 export type ModelOrganizationMembershipConnection = {
   __typename: "ModelOrganizationMembershipConnection";
-  items?: Array<OrganizationMembership | null>;
+  items: Array<OrganizationMembership | null>;
   nextToken?: string | null;
 };
 
@@ -814,7 +886,7 @@ export type ModelGroupFilterInput = {
 
 export type ModelGroupConnection = {
   __typename: "ModelGroupConnection";
-  items?: Array<Group | null>;
+  items: Array<Group | null>;
   nextToken?: string | null;
 };
 
@@ -834,7 +906,7 @@ export type ModelMessageQueueFilterInput = {
 
 export type ModelMessageQueueConnection = {
   __typename: "ModelMessageQueueConnection";
-  items?: Array<MessageQueue | null>;
+  items: Array<MessageQueue | null>;
   nextToken?: string | null;
 };
 
@@ -857,7 +929,7 @@ export type ModelInvoicesFilterInput = {
 
 export type ModelInvoicesConnection = {
   __typename: "ModelInvoicesConnection";
-  items?: Array<Invoices | null>;
+  items: Array<Invoices | null>;
   nextToken?: string | null;
 };
 
@@ -871,7 +943,7 @@ export type ModelReceiptsIdFilterInput = {
 
 export type ModelReceiptsIdConnection = {
   __typename: "ModelReceiptsIdConnection";
-  items?: Array<ReceiptsId | null>;
+  items: Array<ReceiptsId | null>;
   nextToken?: string | null;
 };
 
@@ -886,7 +958,7 @@ export type ModelNewsFilterInput = {
 
 export type ModelNewsConnection = {
   __typename: "ModelNewsConnection";
-  items?: Array<News | null>;
+  items: Array<News | null>;
   nextToken?: string | null;
 };
 
@@ -896,14 +968,15 @@ export type ModelCardsPackFilterInput = {
   description?: ModelStringInput | null;
   tags?: ModelStringInput | null;
   categories?: ModelStringInput | null;
-  cards?: ModelStringInput | null;
   cardsPreview?: ModelStringInput | null;
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
-  isOwnedByOrg?: ModelStringInput | null;
+  isOwnedByOrg?: ModelBooleanInput | null;
   brief?: ModelStringInput | null;
   likesCounter?: ModelIntInput | null;
+  visitorsCounter?: ModelIntInput | null;
+  backImgUrl?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -911,7 +984,7 @@ export type ModelCardsPackFilterInput = {
 
 export type ModelCardsPackConnection = {
   __typename: "ModelCardsPackConnection";
-  items?: Array<CardsPack | null>;
+  items: Array<CardsPack | null>;
   nextToken?: string | null;
 };
 
@@ -927,7 +1000,7 @@ export type ModelContactUsModelFilterInput = {
 
 export type ModelContactUsModelConnection = {
   __typename: "ModelContactUsModelConnection";
-  items?: Array<ContactUsModel | null>;
+  items: Array<ContactUsModel | null>;
   nextToken?: string | null;
 };
 
@@ -961,6 +1034,12 @@ export type CreateUserMutation = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -990,6 +1069,12 @@ export type CreateUserMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1005,13 +1090,20 @@ export type CreateUserMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
   endOfTrialDate?: string | null;
-  favouritePacks?: Array<number | null> | null;
   createdAt: string;
   updatedAt: string;
+  favouritePacks?: Array<number | null> | null;
+  entries?: number | null;
 };
 
 export type GetSubscriptionPlansMutation = {
@@ -1031,6 +1123,12 @@ export type GetSubscriptionPlansMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1055,6 +1153,12 @@ export type CreateSubscriptionPlanMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1079,6 +1183,12 @@ export type UpdateSubscriptionPlanMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1103,6 +1213,12 @@ export type DeleteSubscriptionPlanMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1123,6 +1239,12 @@ export type CreateCouponCodesMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1143,6 +1265,12 @@ export type UpdateCouponCodesMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1163,6 +1291,12 @@ export type DeleteCouponCodesMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1180,6 +1314,12 @@ export type CreateOrganizationsMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1197,6 +1337,12 @@ export type UpdateOrganizationsMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1214,6 +1360,12 @@ export type DeleteOrganizationsMutation = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1227,6 +1379,12 @@ export type CreateOrganizationMembershipMutation = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1237,6 +1395,12 @@ export type UpdateOrganizationMembershipMutation = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1247,6 +1411,12 @@ export type DeleteOrganizationMembershipMutation = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1284,6 +1454,12 @@ export type CreateGroupMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1319,6 +1495,12 @@ export type UpdateGroupMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1354,6 +1536,12 @@ export type DeleteGroupMutation = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1398,7 +1586,11 @@ export type CreateCardsPackMutation = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<{
@@ -1437,9 +1629,11 @@ export type CreateCardsPackMutation = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
   likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1451,7 +1645,11 @@ export type UpdateCardsPackMutation = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<{
@@ -1490,8 +1688,11 @@ export type UpdateCardsPackMutation = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
+  likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1503,7 +1704,11 @@ export type DeleteCardsPackMutation = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<{
@@ -1542,9 +1747,11 @@ export type DeleteCardsPackMutation = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
   likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1736,6 +1943,12 @@ export type GetUserQuery = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -1765,6 +1978,12 @@ export type GetUserQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1780,13 +1999,20 @@ export type GetUserQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
   endOfTrialDate?: string | null;
-  favouritePacks?: Array<number | null> | null;
   createdAt: string;
   updatedAt: string;
+  favouritePacks?: Array<number | null> | null;
+  entries?: number | null;
 };
 
 export type ListUsersQuery = {
@@ -1821,6 +2047,12 @@ export type ListUsersQuery = {
           name?: string | null;
           trialPeriodInDays?: number | null;
           numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
           createdAt: string;
           updatedAt: string;
         } | null;
@@ -1850,6 +2082,12 @@ export type ListUsersQuery = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -1865,13 +2103,20 @@ export type ListUsersQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
     endOfTrialDate?: string | null;
-    favouritePacks?: Array<number | null> | null;
     createdAt: string;
     updatedAt: string;
+    favouritePacks?: Array<number | null> | null;
+    entries?: number | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -1889,6 +2134,12 @@ export type GetCouponCodesQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1911,6 +2162,12 @@ export type ListCouponCodessQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1930,6 +2187,12 @@ export type GetOrganizationsQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1949,6 +2212,12 @@ export type ListOrganizationssQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1964,6 +2233,12 @@ export type GetOrganizationMembershipQuery = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1976,6 +2251,12 @@ export type ListOrganizationMembershipsQuery = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2007,6 +2288,12 @@ export type GetGroupQuery = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2044,6 +2331,12 @@ export type ListGroupsQuery = {
         name?: string | null;
         trialPeriodInDays?: number | null;
         numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -2187,7 +2480,11 @@ export type GetCardsPackQuery = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<{
@@ -2226,9 +2523,11 @@ export type GetCardsPackQuery = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
   likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2242,7 +2541,11 @@ export type ListCardsPacksQuery = {
     description?: string | null;
     tags?: Array<string | null> | null;
     categories?: Array<string | null> | null;
-    cards?: Array<string | null> | null;
+    cards?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
     cardsPreview?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
     guideBook?: Array<{
@@ -2277,9 +2580,11 @@ export type ListCardsPacksQuery = {
       imgUrl?: string | null;
       link?: string | null;
     } | null;
-    isOwnedByOrg?: boolean | false;
+    isOwnedByOrg?: boolean | null;
     brief?: string | null;
     likesCounter?: number | null;
+    visitorsCounter?: number | null;
+    backImgUrl?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -2323,6 +2628,12 @@ export type OnCreateCouponCodesSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2343,6 +2654,12 @@ export type OnUpdateCouponCodesSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2363,6 +2680,12 @@ export type OnDeleteCouponCodesSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2380,6 +2703,12 @@ export type OnCreateOrganizationsSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2397,6 +2726,12 @@ export type OnUpdateOrganizationsSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2414,6 +2749,12 @@ export type OnDeleteOrganizationsSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2427,6 +2768,12 @@ export type OnCreateOrganizationMembershipSubscription = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2437,6 +2784,12 @@ export type OnUpdateOrganizationMembershipSubscription = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2447,6 +2800,12 @@ export type OnDeleteOrganizationMembershipSubscription = {
   name?: string | null;
   trialPeriodInDays?: number | null;
   numberOfallowedCardsPacks?: number | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2476,6 +2835,12 @@ export type OnCreateGroupSubscription = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2511,6 +2876,12 @@ export type OnUpdateGroupSubscription = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2546,6 +2917,12 @@ export type OnDeleteGroupSubscription = {
       name?: string | null;
       trialPeriodInDays?: number | null;
       numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2684,6 +3061,12 @@ export type OnCreateSubscriptionPlanSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2708,6 +3091,12 @@ export type OnUpdateSubscriptionPlanSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2732,6 +3121,12 @@ export type OnDeleteSubscriptionPlanSubscription = {
     name?: string | null;
     trialPeriodInDays?: number | null;
     numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -2797,7 +3192,11 @@ export type OnCreateCardsPackSubscription = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<{
@@ -2836,9 +3235,11 @@ export type OnCreateCardsPackSubscription = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
   likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2850,7 +3251,11 @@ export type OnUpdateCardsPackSubscription = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<{
@@ -2889,8 +3294,11 @@ export type OnUpdateCardsPackSubscription = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
+  likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2902,7 +3310,11 @@ export type OnDeleteCardsPackSubscription = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<{
@@ -2941,9 +3353,11 @@ export type OnDeleteCardsPackSubscription = {
     imgUrl?: string | null;
     link?: string | null;
   } | null;
-  isOwnedByOrg?: boolean | false;
+  isOwnedByOrg?: boolean | null;
   brief?: string | null;
   likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3014,6 +3428,12 @@ export class APIService {
                 name
                 trialPeriodInDays
                 numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -3043,6 +3463,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -3058,13 +3484,20 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
           endOfTrialDate
-          favouritePacks
           createdAt
           updatedAt
+          favouritePacks
+          entries
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3151,9 +3584,13 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
   }
-  async AddCouponCode(input: couponCodeInput): Promise<boolean | null> {
+  async AddCouponCode(input: couponCodeInput): Promise<About | null> {
     const statement = `mutation AddCouponCode($input: couponCodeInput!) {
-        AddCouponCode(input: $input)
+        AddCouponCode(input: $input){
+          imgUrl
+          link
+          text
+        }
       }`;
     const gqlAPIServiceArguments: any = {
       input
@@ -3161,7 +3598,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <boolean | null>response.data.AddCouponCode;
+    return <About | null>response.data.AddCouponCode;
   }
   async UpdatePaymentProgram(
     input: updatePaymentProgramInput
@@ -3269,6 +3706,30 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.UpdateSelectedCardPacks;
   }
+  async LikeClicked(input: cardPackIdInput): Promise<boolean | null> {
+    const statement = `mutation LikeClicked($input: cardPackIdInput!) {
+        LikeClicked(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.LikeClicked;
+  }
+  async IncrementPackEntries(input: cardPackIdInput): Promise<boolean | null> {
+    const statement = `mutation IncrementPackEntries($input: cardPackIdInput!) {
+      IncrementPackEntries(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.IncrementPackEntries;
+  }
   async CreateSubscriptionPlan(
     input: CreateSubscriptionPlanInput,
     condition?: ModelSubscriptionPlanConditionInput
@@ -3291,6 +3752,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3331,6 +3798,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3371,6 +3844,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3407,6 +3886,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3443,6 +3928,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3479,6 +3970,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3512,6 +4009,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3545,6 +4048,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3578,6 +4087,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3607,6 +4122,12 @@ export class APIService {
           name
           trialPeriodInDays
           numberOfallowedCardsPacks
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -3635,6 +4156,12 @@ export class APIService {
           name
           trialPeriodInDays
           numberOfallowedCardsPacks
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -3663,6 +4190,12 @@ export class APIService {
           name
           trialPeriodInDays
           numberOfallowedCardsPacks
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -3734,6 +4267,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -3785,6 +4324,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -3836,6 +4381,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -3944,7 +4495,11 @@ export class APIService {
           description
           tags
           categories
-          cards
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }
           cardsPreview
           groupsIds
           guideBook {
@@ -3986,6 +4541,8 @@ export class APIService {
           isOwnedByOrg
           brief
           likesCounter
+          visitorsCounter
+          backImgUrl
           createdAt
           updatedAt
         }
@@ -4013,75 +4570,11 @@ export class APIService {
           description
           tags
           categories
-          cards
-          cardsPreview
-          groupsIds
-          guideBook {
+          cards {
             __typename
-            name
-            subElements {
-              __typename
-              name
-              subElements {
-                __typename
-                name
-                subElements {
-                  __typename
-                  name
-                  subElements {
-                    __typename
-                    name
-                    subElements {
-                      __typename
-                      name
-                      subElements {
-                        __typename
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            backImgUrl
+            frontImgUrl
           }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          isOwnedByOrg
-          brief
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateCardsPackMutation>response.data.updateCardsPack;
-  }
-  async DeleteCardsPack(
-    input: DeleteCardsPackInput,
-    condition?: ModelCardsPackConditionInput
-  ): Promise<DeleteCardsPackMutation> {
-    const statement = `mutation DeleteCardsPack($input: DeleteCardsPackInput!, $condition: ModelCardsPackConditionInput) {
-        deleteCardsPack(input: $input, condition: $condition) {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
           cardsPreview
           groupsIds
           guideBook {
@@ -4123,6 +4616,83 @@ export class APIService {
           isOwnedByOrg
           brief
           likesCounter
+          visitorsCounter
+          backImgUrl
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCardsPackMutation>response.data.updateCardsPack;
+  }
+  async DeleteCardsPack(
+    input: DeleteCardsPackInput,
+    condition?: ModelCardsPackConditionInput
+  ): Promise<DeleteCardsPackMutation> {
+    const statement = `mutation DeleteCardsPack($input: DeleteCardsPackInput!, $condition: ModelCardsPackConditionInput) {
+        deleteCardsPack(input: $input, condition: $condition) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          isOwnedByOrg
+          brief
+          likesCounter
+          visitorsCounter
+          backImgUrl
           createdAt
           updatedAt
         }
@@ -4280,7 +4850,7 @@ export class APIService {
     )) as any;
     return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
   }
-    async CreateInvoices(
+  async CreateInvoices(
     input: CreateInvoicesInput,
     condition?: ModelInvoicesConditionInput
   ): Promise<CreateInvoicesMutation> {
@@ -4505,6 +5075,12 @@ export class APIService {
                 name
                 trialPeriodInDays
                 numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -4531,6 +5107,17 @@ export class APIService {
             organization {
               __typename
               id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
@@ -4544,13 +5131,20 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
           endOfTrialDate
-          favouritePacks
           createdAt
           updatedAt
+          favouritePacks
+          entries
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -4599,6 +5193,12 @@ export class APIService {
                   name
                   trialPeriodInDays
                   numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
                   createdAt
                   updatedAt
                 }
@@ -4628,6 +5228,12 @@ export class APIService {
                 name
                 trialPeriodInDays
                 numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -4643,13 +5249,20 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
             endOfTrialDate
-            favouritePacks
             createdAt
             updatedAt
+            favouritePacks
+            entries
           }
           nextToken
         }
@@ -4684,6 +5297,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -4720,6 +5339,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4756,6 +5381,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -4789,6 +5420,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4823,6 +5460,12 @@ export class APIService {
           name
           trialPeriodInDays
           numberOfallowedCardsPacks
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
@@ -4851,6 +5494,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -4901,6 +5550,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -4952,6 +5607,12 @@ export class APIService {
                 name
                 trialPeriodInDays
                 numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
                 createdAt
                 updatedAt
               }
@@ -5041,8 +5702,8 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListMessageQueuesQuery>response.data.listMessageQueues;
-  } 
-    async GetInvoices(id: string): Promise<GetInvoicesQuery> {
+  }
+  async GetInvoices(id: string): Promise<GetInvoicesQuery> {
     const statement = `query GetInvoices($id: ID!) {
         getInvoices(id: $id) {
           __typename
@@ -5238,7 +5899,11 @@ export class APIService {
           description
           tags
           categories
-          cards
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }
           cardsPreview
           groupsIds
           guideBook {
@@ -5280,6 +5945,8 @@ export class APIService {
           isOwnedByOrg
           brief
           likesCounter
+          visitorsCounter
+          backImgUrl
           createdAt
           updatedAt
         }
@@ -5305,7 +5972,11 @@ export class APIService {
             id
             imgUrl
             description
-            cards
+            cards {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
             tags
             categories
             cardsPreview
@@ -5356,7 +6027,11 @@ export class APIService {
             description
             tags
             categories
-            cards
+            cards {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
             cardsPreview
             groupsIds
             guideBook {
@@ -5394,6 +6069,8 @@ export class APIService {
             isOwnedByOrg
             brief
             likesCounter
+            visitorsCounter
+            backImgUrl
             createdAt
             updatedAt
           }
@@ -5471,7 +6148,7 @@ export class APIService {
     return <ListContactUsModelsQuery>response.data.listContactUsModels;
   }
   OnCreateCouponCodesListener: Observable<
-    SubscriptionResponse<OnCreateCouponCodesSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateCouponCodes {
@@ -5488,6 +6165,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5496,10 +6179,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateCouponCodesSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
+  >;
 
   OnUpdateCouponCodesListener: Observable<
-    SubscriptionResponse<OnUpdateCouponCodesSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCouponCodes">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateCouponCodes {
@@ -5516,6 +6201,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5524,10 +6215,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateCouponCodesSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCouponCodes">>
+  >;
 
   OnDeleteCouponCodesListener: Observable<
-    SubscriptionResponse<OnDeleteCouponCodesSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCouponCodes">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteCouponCodes {
@@ -5544,6 +6237,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5552,10 +6251,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteCouponCodesSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCouponCodes">>
+  >;
 
   OnCreateOrganizationsListener: Observable<
-    SubscriptionResponse<OnCreateOrganizationsSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrganizations">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateOrganizations {
@@ -5569,6 +6270,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5577,10 +6284,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateOrganizationsSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrganizations">>
+  >;
 
   OnUpdateOrganizationsListener: Observable<
-    SubscriptionResponse<OnUpdateOrganizationsSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrganizations">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateOrganizations {
@@ -5594,6 +6303,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5602,10 +6317,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateOrganizationsSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrganizations">>
+  >;
 
   OnDeleteOrganizationsListener: Observable<
-    SubscriptionResponse<OnDeleteOrganizationsSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrganizations">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteOrganizations {
@@ -5619,6 +6336,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -5627,10 +6350,14 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteOrganizationsSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrganizations">>
+  >;
 
   OnCreateOrganizationMembershipListener: Observable<
-    SubscriptionResponse<OnCreateOrganizationMembershipSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateOrganizationMembership">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateOrganizationMembership {
@@ -5640,17 +6367,27 @@ export class APIService {
           name
           trialPeriodInDays
           numberOfallowedCardsPacks
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<
-    SubscriptionResponse<OnCreateOrganizationMembershipSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateOrganizationMembership">
+    >
   >;
 
   OnUpdateOrganizationMembershipListener: Observable<
-    SubscriptionResponse<OnUpdateOrganizationMembershipSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateOrganizationMembership">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateOrganizationMembership {
@@ -5660,17 +6397,27 @@ export class APIService {
           name
           trialPeriodInDays
           numberOfallowedCardsPacks
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<
-    SubscriptionResponse<OnUpdateOrganizationMembershipSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateOrganizationMembership">
+    >
   >;
 
   OnDeleteOrganizationMembershipListener: Observable<
-    SubscriptionResponse<OnDeleteOrganizationMembershipSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteOrganizationMembership">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteOrganizationMembership {
@@ -5680,17 +6427,25 @@ export class APIService {
           name
           trialPeriodInDays
           numberOfallowedCardsPacks
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
           createdAt
           updatedAt
         }
       }`
     )
   ) as Observable<
-    SubscriptionResponse<OnDeleteOrganizationMembershipSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteOrganizationMembership">
+    >
   >;
 
   OnCreateGroupListener: Observable<
-    SubscriptionResponse<OnCreateGroupSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateGroup">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateGroup {
@@ -5719,6 +6474,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -5730,10 +6491,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateGroupSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateGroup">>
+  >;
 
   OnUpdateGroupListener: Observable<
-    SubscriptionResponse<OnUpdateGroupSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateGroup">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateGroup {
@@ -5762,6 +6525,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -5773,10 +6542,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateGroupSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateGroup">>
+  >;
 
   OnDeleteGroupListener: Observable<
-    SubscriptionResponse<OnDeleteGroupSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteGroup">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteGroup {
@@ -5805,6 +6576,12 @@ export class APIService {
               name
               trialPeriodInDays
               numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
               createdAt
               updatedAt
             }
@@ -5816,10 +6593,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteGroupSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteGroup">>
+  >;
 
   OnCreateMessageQueueListener: Observable<
-    SubscriptionResponse<OnCreateMessageQueueSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateMessageQueue">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateMessageQueue {
@@ -5838,10 +6617,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateMessageQueueSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateMessageQueue">>
+  >;
 
   OnUpdateMessageQueueListener: Observable<
-    SubscriptionResponse<OnUpdateMessageQueueSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateMessageQueue">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateMessageQueue {
@@ -5860,10 +6641,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateMessageQueueSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateMessageQueue">>
+  >;
 
   OnDeleteMessageQueueListener: Observable<
-    SubscriptionResponse<OnDeleteMessageQueueSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteMessageQueue">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteMessageQueue {
@@ -5882,10 +6665,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteMessageQueueSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteMessageQueue">>
+  >;
 
- OnCreateInvoicesListener: Observable<
-    SubscriptionResponse<OnCreateInvoicesSubscription>
+  OnCreateInvoicesListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateInvoices">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateInvoices {
@@ -5913,10 +6698,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateInvoicesSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateInvoices">>
+  >;
 
   OnUpdateInvoicesListener: Observable<
-    SubscriptionResponse<OnUpdateInvoicesSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateInvoices">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateInvoices {
@@ -5944,10 +6731,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateInvoicesSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateInvoices">>
+  >;
 
   OnDeleteInvoicesListener: Observable<
-    SubscriptionResponse<OnDeleteInvoicesSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteInvoices">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteInvoices {
@@ -5975,11 +6764,14 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteInvoicesSubscription>>;
-
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteInvoices">>
+  >;
 
   OnCreateSubscriptionPlanListener: Observable<
-    SubscriptionResponse<OnCreateSubscriptionPlanSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateSubscriptionPlan">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateSubscriptionPlan {
@@ -6000,6 +6792,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -6008,10 +6806,16 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateSubscriptionPlanSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateSubscriptionPlan">
+    >
+  >;
 
   OnUpdateSubscriptionPlanListener: Observable<
-    SubscriptionResponse<OnUpdateSubscriptionPlanSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateSubscriptionPlan">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateSubscriptionPlan {
@@ -6032,6 +6836,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -6040,10 +6850,16 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateSubscriptionPlanSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateSubscriptionPlan">
+    >
+  >;
 
   OnDeleteSubscriptionPlanListener: Observable<
-    SubscriptionResponse<OnDeleteSubscriptionPlanSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteSubscriptionPlan">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteSubscriptionPlan {
@@ -6064,6 +6880,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -6072,10 +6894,14 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteSubscriptionPlanSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteSubscriptionPlan">
+    >
+  >;
 
   OnCreateReceiptsIdListener: Observable<
-    SubscriptionResponse<OnCreateReceiptsIdSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateReceiptsId">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateReceiptsId {
@@ -6088,10 +6914,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateReceiptsIdSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateReceiptsId">>
+  >;
 
   OnUpdateReceiptsIdListener: Observable<
-    SubscriptionResponse<OnUpdateReceiptsIdSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateReceiptsId">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateReceiptsId {
@@ -6104,10 +6932,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateReceiptsIdSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateReceiptsId">>
+  >;
 
   OnDeleteReceiptsIdListener: Observable<
-    SubscriptionResponse<OnDeleteReceiptsIdSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteReceiptsId">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteReceiptsId {
@@ -6120,10 +6950,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteReceiptsIdSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteReceiptsId">>
+  >;
 
   OnCreateNewsListener: Observable<
-    SubscriptionResponse<OnCreateNewsSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateNews">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateNews {
@@ -6137,10 +6969,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateNewsSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateNews">>
+  >;
 
   OnUpdateNewsListener: Observable<
-    SubscriptionResponse<OnUpdateNewsSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateNews">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateNews {
@@ -6154,10 +6988,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateNewsSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateNews">>
+  >;
 
   OnDeleteNewsListener: Observable<
-    SubscriptionResponse<OnDeleteNewsSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteNews">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteNews {
@@ -6171,10 +7007,12 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteNewsSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteNews">>
+  >;
 
   OnCreateCardsPackListener: Observable<
-    SubscriptionResponse<OnCreateCardsPackSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCardsPack">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateCardsPack {
@@ -6185,7 +7023,11 @@ export class APIService {
           description
           tags
           categories
-          cards
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }
           cardsPreview
           groupsIds
           guideBook {
@@ -6227,15 +7069,19 @@ export class APIService {
           isOwnedByOrg
           brief
           likesCounter
+          visitorsCounter
+          backImgUrl
           createdAt
           updatedAt
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateCardsPackSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCardsPack">>
+  >;
 
   OnUpdateCardsPackListener: Observable<
-    SubscriptionResponse<OnUpdateCardsPackSubscription>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCardsPack">>
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateCardsPack {
@@ -6246,67 +7092,11 @@ export class APIService {
           description
           tags
           categories
-          cards
-          cardsPreview
-          groupsIds
-          guideBook {
+          cards {
             __typename
-            name
-            subElements {
-              __typename
-              name
-              subElements {
-                __typename
-                name
-                subElements {
-                  __typename
-                  name
-                  subElements {
-                    __typename
-                    name
-                    subElements {
-                      __typename
-                      name
-                      subElements {
-                        __typename
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            backImgUrl
+            frontImgUrl
           }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          isOwnedByOrg
-          brief
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdateCardsPackSubscription>>;
-
-  OnDeleteCardsPackListener: Observable<
-    SubscriptionResponse<OnDeleteCardsPackSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteCardsPack {
-        onDeleteCardsPack {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards
           cardsPreview
           groupsIds
           guideBook {
@@ -6348,15 +7138,90 @@ export class APIService {
           isOwnedByOrg
           brief
           likesCounter
+          visitorsCounter
+          backImgUrl
           createdAt
           updatedAt
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteCardsPackSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCardsPack">>
+  >;
+
+  OnDeleteCardsPackListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCardsPack">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteCardsPack {
+        onDeleteCardsPack {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          isOwnedByOrg
+          brief
+          likesCounter
+          visitorsCounter
+          backImgUrl
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCardsPack">>
+  >;
 
   OnCreateContactUsModelListener: Observable<
-    SubscriptionResponse<OnCreateContactUsModelSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateContactUsModel">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnCreateContactUsModel {
@@ -6371,10 +7236,16 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnCreateContactUsModelSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateContactUsModel">
+    >
+  >;
 
   OnUpdateContactUsModelListener: Observable<
-    SubscriptionResponse<OnUpdateContactUsModelSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateContactUsModel">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnUpdateContactUsModel {
@@ -6389,10 +7260,16 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnUpdateContactUsModelSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateContactUsModel">
+    >
+  >;
 
   OnDeleteContactUsModelListener: Observable<
-    SubscriptionResponse<OnDeleteContactUsModelSubscription>
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteContactUsModel">
+    >
   > = API.graphql(
     graphqlOperation(
       `subscription OnDeleteContactUsModel {
@@ -6407,5 +7284,9 @@ export class APIService {
         }
       }`
     )
-  ) as Observable<SubscriptionResponse<OnDeleteContactUsModelSubscription>>;
+  ) as Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteContactUsModel">
+    >
+  >;
 }

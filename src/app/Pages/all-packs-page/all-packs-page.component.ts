@@ -8,9 +8,6 @@ import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
-// import { EnterCouponCodeDialogComponent } from 'src/app/Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
-// import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
-// import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 
 interface CategoryPack {
   category: string,
@@ -32,11 +29,9 @@ export class AllPacksPageComponent implements OnInit {
   allCategoryPacks: CategoryPack[] = [];
   categoriesOrder: string[] = ['קלפי תמונה', 'שיתופי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'מתנה'];
   userData: UserData;
-  // allPacksOwned: PackContent[] = [];
-  // allPacksNotOwned: PackContent[] = [];
   allCategories: string[] = [];
-  allFavorites: string[] = [];
-  loadedPacks: number;
+  allFavorites: number[] = [];
+  loadedPacks: number = 0;
   categoriesToShow: number = 5;
 
   //Filters
@@ -44,7 +39,6 @@ export class AllPacksPageComponent implements OnInit {
   selectedCategories: string[] = [];
   selectedFavorites: string[] = [];
   showBottomArrow: boolean = true;
-  // selectedTags: string[] = [];
 
   constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone, public dialog: MatDialog) {
@@ -53,16 +47,15 @@ export class AllPacksPageComponent implements OnInit {
 
   ngOnInit() {
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-      // this.overlaySpinnerService.changeOverlaySpinner(true);
       this.userData = userData;
+      this.allFavorites = this.userAuthService.favorites;
+      this.setAllFavPacksToShow();
       userData ? this.getAllPacks() : null;
     }));
-    this.loadedPacks = 0;
-    this.Subscription.add(this.cardsService.favoriteChangeEmmiter.subscribe((favorites: string[]) => {
+    this.Subscription.add(this.userAuthService.favoritesChangeEmmiter.subscribe((favorites: number[]) => {
       this.allFavorites = favorites;
       this.setAllFavPacksToShow();
     }));
-
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.userData = this.userAuthService.userData;
     this.getAllPacks();
@@ -95,7 +88,7 @@ export class AllPacksPageComponent implements OnInit {
   setAllPacksData(): void {
     this.allPacks = this.cardsService.allPacks.map(pack => pack);
     this.allCategories = this.cardsService.allCategories.map(category => category);
-    this.allFavorites = this.cardsService.favorites;
+    this.allFavorites = this.userAuthService.favorites;
   }
 
   setAllCategoryPacksToShow(): void {
@@ -109,16 +102,12 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   setAllFavPacksToShow(): void {
-    this.allFavPacks = this.allPacks.filter(pack => this.allFavorites.includes(pack.id));
+    this.allFavPacks = this.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)));
   }
 
   updateUserData(): void {
     this.userAuthService.loggedIn();
   }
-
-  // getCategoryColor(category): string {
-  //   return this.cardsService.getCategoryColor(category);
-  // }
 
   get signedIn() {
     return this.userAuthService.userData;
@@ -144,7 +133,11 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   getAllFavoritesDesc(): string[] {
-    return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
+    if(!this.allFavorites){
+      this.allFavorites = [];
+    }
+    return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)))).map(pack => pack.name);
+    // return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
   }
 
   categoriesSelectedChange(event): void {

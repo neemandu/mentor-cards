@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIService } from 'src/app/API.service';
+import { About, APIService } from 'src/app/API.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 
 @Component({
@@ -27,10 +27,10 @@ export class EnterCouponCodeDialogComponent implements OnInit {
 
   enterGroup(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    this.api.AddCouponCode({ 'couponCode': this.formControls.couponCode.value.toLowerCase() }).then(res => {
+    this.api.AddCouponCode({ 'couponCode': this.formControls.couponCode.value.toLowerCase() }).then((res: About) => {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       if (res)
-        this.dialogRef.close(true);
+        this.dialogRef.close(res);
       else {
         this.formControls.couponCode.setErrors({ 'noSuchCoupon': true });
       }

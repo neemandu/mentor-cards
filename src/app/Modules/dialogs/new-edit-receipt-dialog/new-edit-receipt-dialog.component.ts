@@ -14,6 +14,9 @@ export class NewEditReceiptDialogComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     customerAddress: ['', [Validators.required]],
     date: ['', [Validators.required]],
+    itemName: ['', [Validators.required]],
+    pricePerItem: ['', [Validators.required]],
+    numberOfItems: ['', [Validators.required]],
     items: [[], []],
     invoiceType: ['', [Validators.required]],
   });
@@ -37,7 +40,7 @@ export class NewEditReceiptDialogComponent implements OnInit {
   ]
 
   allTypes: string[] = [
-    "חשבון", "עסקה"
+    "קבלה", "חשבונית", "חשבון עסקה"
   ]
 
   constructor(public dialogRef: MatDialogRef<NewEditReceiptDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
@@ -50,8 +53,9 @@ export class NewEditReceiptDialogComponent implements OnInit {
       this.receiptForm.controls.email.setValue(receipt.email);
       this.receiptForm.controls.customerAddress.setValue(receipt.customerAddress);
       this.receiptForm.controls.date.setValue(new Date(receipt.date));
-      const items = this.allItems.filter(item => item.itemName === receipt.items[0].itemName)
-      this.receiptForm.controls.items.setValue(items);
+      this.receiptForm.controls.itemName.setValue(receipt.itemName);
+      this.receiptForm.controls.pricePerItem.setValue(receipt.pricePerItem);
+      this.receiptForm.controls.numberOfItems.setValue(receipt.numberOfItems);
       this.receiptForm.controls.invoiceType.setValue(receipt.invoiceType);
     }
   }
@@ -64,7 +68,11 @@ export class NewEditReceiptDialogComponent implements OnInit {
       fullName: this.receiptForm.controls.fullName.value,
       customerAddress: this.receiptForm.controls.customerAddress.value,
       date: new Date(this.receiptForm.controls.date.value).toISOString(),
-      items: this.receiptForm.controls.items.value,
+      items: [{
+        itemName: this.receiptForm.controls.itemName.value,
+        pricePerItem: this.receiptForm.controls.pricePerItem.value,
+        numberOfItems: this.receiptForm.controls.numberOfItems.value
+      }],
       invoiceType: this.receiptForm.controls.invoiceType.value,
     }
     this.dialogRef.close(res);

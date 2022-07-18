@@ -1,0 +1,16 @@
+<mat-toolbar class="d-flex justify-content-between">
+  <button class="iconButton" mat-icon-button [mat-dialog-close] cdkFocusInitial>
+    <mat-icon>highlight_off</mat-icon>
+  </button>
+  <span class="title">!ברוכים הבאים</span>
+</mat-toolbar>
+<div class="line"></div>
+<div mat-dialog-content>
+  <div id="content">
+    <img alt="The image represents the organization" *ngIf="about.imgUrl" src={{about.imgUrl}}>
+    <p>{{about.text}}</p>
+  </div>
+</div>
+<mat-dialog-actions align="center">
+  <button id="enterCouponCode" class="action-button" type="button" (click)="closeDialog()">יאללה לעבודה</button>
+</mat-dialog-actions>

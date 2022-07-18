@@ -1,3 +1,4 @@
+import { About } from "../API.service";
 import { Subscription } from "./subscriptionPlans";
 
 export class UserData {
@@ -21,6 +22,7 @@ export class UserData {
     fullName?: string | null;
     endOfTrialDate: Date;
     orgMembership: OrgMembership;
+    favouritePacks: number[] | null;
 
     deseralize(input: any) {
         Object.assign(this, input);
@@ -77,6 +79,7 @@ export class OrgMembership {
     name: string;
     trialPeriodInDays: number;
     numberOfallowedCardsPacks: number;
+    about: About;
     createdAt: string;
     updatedAt: string;
 }

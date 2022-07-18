@@ -2,7 +2,7 @@ import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
-import { APIService, CreateUserInput } from '../API.service';
+import { About, APIService, CreateUserInput } from '../API.service';
 import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
@@ -14,8 +14,7 @@ import { OverlaySpinnerService } from './overlay-spinner.service';
 // import { AuthService } from 'src/app/Services/auth.service';
 import LogRocket from 'logrocket';
 import { EnterCouponCodeDialogComponent } from '../Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
-import { DynamicDialogData } from '../Objects/dynamic-dialog-data';
-import { DynamicDialogYesNoComponent } from '../Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { WelcomeToNewOrgDialogComponent } from '../Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
 
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
@@ -30,6 +29,7 @@ export class UserAuthService {
   @Output() groupDataEmmiter: EventEmitter<GroupData> = new EventEmitter<GroupData>();
   @Output() subPlansEmmiter: EventEmitter<any> = new EventEmitter<any>();
   @Output() addCouponCodeToFavs: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() favoritesChangeEmmiter: EventEmitter<number[]> = new EventEmitter();
   isLoggedIn = false;
   user: { id: string; username: string; email: string; cognitoUser: CognitoUserInterface };
   cognitoUserData: CognitoUserInterface;
@@ -37,6 +37,7 @@ export class UserAuthService {
   userData: UserData;
   groupData: GroupData;
   rememberMeDone: boolean = false;
+  favorites: number[] = [];
 
   constructor(public _snackBar: MatSnackBar, public router: Router,
     private ngZone: NgZone, private api: APIService, private http: HttpClient,
@@ -87,14 +88,13 @@ export class UserAuthService {
         return;
       }
       this.userData = new UserData().deseralize(data);
+      this.favorites = this.userData.favouritePacks;
       this.isLoggedIn = true;
       this.subPlans = undefined;
       this.getSubscriptionPlans();
       this.userDataEmmiter.emit(this.userData);
       console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
       LogRocket.identify(this.userData.email);
-      // localStorage.setItem('signedin', 'true');
-      // this.overlaySpinnerService.changeOverlaySpinner(false);
       this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
         duration: 5000,
         panelClass: ['rtl-snackbar']
@@ -236,13 +236,13 @@ export class UserAuthService {
     const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
       dialogSub1.unsubscribe();
       if (res) {
-        dialogConfig.data = new DynamicDialogData("קוד ההטבה הוזן בהצלחה", [], "אישור", "")
-        const dialogRef2 = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
+        dialogConfig.data = res;
+        const dialogRef2 = this.dialog.open(WelcomeToNewOrgDialogComponent, dialogConfig);
         const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
           dialogSub2.unsubscribe();
           this.router.navigate(['all-packs-page']);
           window.location.reload();
-        })
+        });
       }
     });
   }
@@ -366,6 +366,20 @@ export class UserAuthService {
    */
   get nextPlanChangeDate() {
     return new Date(this.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth;
+  }
+
+  addRemoveFavorite(packId: string) {
+    this.api.LikeClicked({ cardsPackId: parseInt(packId) }).then(() => {
+    }, reject => {
+      console.log("🚀 ~ file: user-auth.service.ts ~ line 376 ~ this.api.LikeClicked ~ reject", reject)
+    })
+    if (!this.favorites.includes(parseInt(packId))) {
+      this.favorites.push(parseInt(packId))
+    }
+    else {
+      this.favorites = this.favorites.filter(el => el != parseInt(packId))
+    }
+    this.favoritesChangeEmmiter.emit(this.favorites);
   }
 
 }

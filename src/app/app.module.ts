@@ -80,6 +80,8 @@ import { InformationBarComponent } from './Shared Components/information-bar/inf
 import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
 import { ManagementModule } from './Modules/management/management.module';
 import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
+import { WelcomeToNewOrgDialogComponent } from './Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
+import { ServicesComponent } from './Pages/services/services.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +125,8 @@ import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
     InformationBarComponent,
     CompanyPackChoiseComponent,
     FbChatComponent,
+    WelcomeToNewOrgDialogComponent,
+    ServicesComponent,
   ],
   imports: [
     BrowserModule,

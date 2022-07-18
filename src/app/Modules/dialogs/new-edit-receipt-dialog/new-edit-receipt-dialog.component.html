@@ -22,13 +22,17 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field appearance="fill" style="text-align: initial;">
+  <mat-form-field>
     <mat-label>פריט</mat-label>
-    <mat-select formControlName="items" multiple>
-      <mat-option *ngFor="let item of allItems" [value]="item">
-        {{item.itemName}}
-      </mat-option>
-    </mat-select>
+    <input autocomplete="off" formControlName="itemName" matInput type="text">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>מחיר לפריט</mat-label>
+    <input autocomplete="off" formControlName="pricePerItem" matInput type="number">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>כמות פריטים</mat-label>
+    <input autocomplete="off" formControlName="numberOfItems" matInput type="number">
   </mat-form-field>
   <mat-form-field appearance="fill" style="text-align: initial;">
     <mat-label>סוג מסמך</mat-label>

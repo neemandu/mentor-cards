@@ -17,7 +17,7 @@
     matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable pack-main-card'>
   <label *ngIf="isStillFree" class="free-until-label">ערכה במתנה! עד - {{freeUntilDate}}</label>
   <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label">ערכת הקלפים שנבחרה</label>
-  <div id="pack-buttons" class="d-flex justify-content-between">
+  <div id="pack-buttons" class="d-flex justify-content-between align-items-baseline">
     <div class="pack-icons">
       <mat-icon class="fav-icon" id="fav-icon" matTooltip="מחיקה מהמועדפים" matTooltipShowDelay="500" *ngIf="this.fav"
         matRipple [matRippleRadius]="10" [matRippleUnbounded]="true" [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'"
@@ -26,8 +26,6 @@
         [matRippleRadius]="10" [matRippleUnbounded]="true" [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'"
         (click)="addRemoveFavorite()" [ngStyle]="{'color': '#a0a0a0'}">favorite_border</mat-icon>
     </div>
-    <!--  <div class="pack-icons">
-      <mat-icon matTooltip="קלפי מסרים" matTooltipShowDelay="500" [ngStyle]="{'color': '#a0a0a0'}">campaign</mat-icon>
-    </div>-->
+    <span class="like-counter">{{packInfo.likesCounter}} <span class="liked-this">אנשים אהבו ערכה זו </span></span>
   </div>
 </div>

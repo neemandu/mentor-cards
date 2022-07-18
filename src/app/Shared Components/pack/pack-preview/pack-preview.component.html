@@ -10,7 +10,7 @@
   <div id="example-cards" style="display: contents;">
     <p class="sub-header">קלפים לדוגמא</p>
     <div class="card-previews">
-      <app-card *ngFor="let card of data.pack.cardsPreview" [cardContent]="{'imgUrl':card}" [flipped]="true"
+      <app-card *ngFor="let card of data.pack.cardsPreview" [cardContent]="{'frontImgUrl':card}" [flipped]="true"
         (loaded)="loadedCards = loadedCards + 1"
         [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.pack.cardsPreview.length}">
       </app-card>

@@ -29,6 +29,27 @@ img:hover {
   cursor: pointer;
 }
 
+.like-counter {
+  display: flex;
+  gap: 5px;
+  transform: translateX(0px);
+  transition: transform 0.2s ease;
+}
+
+.liked-this {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#pack-buttons:hover>.like-counter>.liked-this {
+  opacity: 1;
+}
+
+#pack-buttons:hover>.like-counter {
+  transform: translateX(0px);
+}
+
+
 @keyframes shake-heart {
 
   0% {

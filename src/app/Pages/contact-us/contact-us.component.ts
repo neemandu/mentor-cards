@@ -41,7 +41,7 @@ export class ContactUsComponent implements OnInit {
     this.api.CreateContactUsModel(input).then(res => {
       // console.log("file: contact-us.component.ts ~ line 41 ~ this.api.CreateContactUsModel ~ res", res)
       this.overlaySpinnerService.changeOverlaySpinner(false);
-      this.userAuthService._snackBar.open('תודה על השיתוף!', '', {
+      this.userAuthService._snackBar.open('תודה! נהיה איתך בקשר בזמן הקרוב!', '', {
         duration: 5000,
         panelClass: ['rtl-snackbar']
       });

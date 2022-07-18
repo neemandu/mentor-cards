@@ -11,6 +11,11 @@ subscription OnCreateCouponCodes {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -30,6 +35,11 @@ subscription OnUpdateCouponCodes {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -49,6 +59,11 @@ subscription OnDeleteCouponCodes {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -65,6 +80,11 @@ subscription OnCreateOrganizations {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -81,6 +101,11 @@ subscription OnUpdateOrganizations {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -97,6 +122,11 @@ subscription OnDeleteOrganizations {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -110,6 +140,11 @@ subscription OnCreateOrganizationMembership {
     name
     trialPeriodInDays
     numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -120,6 +155,11 @@ subscription OnUpdateOrganizationMembership {
     name
     trialPeriodInDays
     numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -130,6 +170,11 @@ subscription OnDeleteOrganizationMembership {
     name
     trialPeriodInDays
     numberOfallowedCardsPacks
+    about {
+      text
+      imgUrl
+      link
+    }
     createdAt
     updatedAt
   }
@@ -156,6 +201,11 @@ subscription OnCreateGroup {
         name
         trialPeriodInDays
         numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -188,6 +238,11 @@ subscription OnUpdateGroup {
         name
         trialPeriodInDays
         numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -220,6 +275,11 @@ subscription OnDeleteGroup {
         name
         trialPeriodInDays
         numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
         createdAt
         updatedAt
       }
@@ -354,6 +414,11 @@ subscription OnCreateSubscriptionPlan {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -377,6 +442,11 @@ subscription OnUpdateSubscriptionPlan {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -400,6 +470,11 @@ subscription OnDeleteSubscriptionPlan {
       name
       trialPeriodInDays
       numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
       createdAt
       updatedAt
     }
@@ -465,7 +540,10 @@ subscription OnCreateCardsPack {
     description
     tags
     categories
-    cards
+    cards {
+      backImgUrl
+      frontImgUrl
+    }
     cardsPreview
     groupsIds
     guideBook {
@@ -499,6 +577,8 @@ subscription OnCreateCardsPack {
     isOwnedByOrg
     brief
     likesCounter
+    visitorsCounter
+    backImgUrl
     createdAt
     updatedAt
   }
@@ -510,51 +590,10 @@ subscription OnUpdateCardsPack {
     description
     tags
     categories
-    cards
-    cardsPreview
-    groupsIds
-    guideBook {
-      name
-      subElements {
-        name
-        subElements {
-          name
-          subElements {
-            name
-            subElements {
-              name
-              subElements {
-                name
-                subElements {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
+    cards {
+      backImgUrl
+      frontImgUrl
     }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    isOwnedByOrg
-    brief
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteCardsPack {
-  onDeleteCardsPack {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards
     cardsPreview
     groupsIds
     guideBook {
@@ -588,6 +627,58 @@ subscription OnDeleteCardsPack {
     isOwnedByOrg
     brief
     likesCounter
+    visitorsCounter
+    backImgUrl
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCardsPack {
+  onDeleteCardsPack {
+    id
+    imgUrl
+    description
+    tags
+    categories
+    cards {
+      backImgUrl
+      frontImgUrl
+    }
+    cardsPreview
+    groupsIds
+    guideBook {
+      name
+      subElements {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    name
+    freeUntilDate
+    about {
+      text
+      imgUrl
+      link
+    }
+    isOwnedByOrg
+    brief
+    likesCounter
+    visitorsCounter
+    backImgUrl
     createdAt
     updatedAt
   }

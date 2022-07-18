@@ -6,6 +6,12 @@
       ],
       "Group:@model(appsync)": [
         "read"
+      ],
+      "CardsPack:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },

@@ -5,6 +5,14 @@
   /* direction: rtl!important; */
 }
 
+#content ul {
+  font-size: 1.1rem;
+}
+
+#content ul span {
+  font-size: 1.1rem;
+}
+
 p {
   margin: 0;
 }
@@ -33,6 +41,7 @@ p {
 
 .price-line {
   margin: 0.5em 0px 0.5em 0px;
+  font-size: 1.15rem;
 }
 
 .purchase-btn {
@@ -74,7 +83,7 @@ p {
 }
 
 ul {
-  width: 45%;
+  width: 60%;
   text-align: right;
 }
 
@@ -134,6 +143,7 @@ mat-card {
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;
   border-radius: 10px;
+  font-family: var(--main-font-family);
 }
 
 mat-card:hover {

@@ -15,7 +15,7 @@
       <img *ngFor="let card of data" loading="eager" 
       [ngClass]="{'img-view': true, 'one-card': data.length == 1, 'two-card': data.length == 2,
       'three-card': data.length == 3, 'four-card': data.length == 4, 'five-card': data.length == 5}" 
-      src={{card.imgUrl}} data-src={{card.imgUrl}}>
+      src={{card.frontImgUrl}} data-src={{card.frontImgUrl}}>
       <!-- <span class="badge badge-pill badge-light index">{{card.index}}</span> -->
     <!-- </div> -->
   <!-- </div> -->

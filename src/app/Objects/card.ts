@@ -1,17 +1,16 @@
 export class Card {
-    imgUrl: string;
+    frontImgUrl: string;
+    backImgUrl: string;
     index: number;
-
-    // constructor($imgUrl: string) {
-    // 	this.imgUrl = $imgUrl;
-    // }
 
     constructor() { }
 
-    deseralize(input: any) {
-        this.imgUrl = input;
-        this.imgUrl = this.imgUrl.replace('{imgUrl=', '')
-        this.imgUrl = this.imgUrl.replace('}', '')
+    deseralize(input: any, packBackImgUrl: string) {
+        this.frontImgUrl = input.frontImgUrl;
+        if (input.backImgUrl)
+            this.backImgUrl = input.backImgUrl;
+        else if (packBackImgUrl)
+            this.backImgUrl = packBackImgUrl;
         return this;
     }
 }

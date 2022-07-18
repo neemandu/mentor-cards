@@ -41,15 +41,19 @@ const awsmobile = {
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
     ],
-    "aws_cloud_logic_custom": [
-             {
+    "aws_appsync_graphqlEndpoint": "https://5cmzkp3ucbcgrm7eflb2mg3ram.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "aws_appsync_region": "eu-west-2",
+    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
+    "aws_appsync_apiKey": "da2-2zjhcj5okvethdgdl4svnxmykm",
+    "aws_cloud_logic_custom": [ 
+        {
             "name": "PayPalWebhookAPI",
-            "endpoint": "https://vgi4o66wki.execute-api.eu-west-2.amazonaws.com/dev",
+            "endpoint": "https://jpjzkczmze.execute-api.eu-west-2.amazonaws.com/prod",
             "region": "eu-west-2"
         },
         {
             "name": "receiptsAPI",
-            "endpoint": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev",
+            "endpoint": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod",
             "region": "eu-west-2"
         }
     ],

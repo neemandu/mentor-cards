@@ -1,4 +1,4 @@
-import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
@@ -12,7 +12,9 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit, OnDestroy {
+export class HomePageComponent implements OnInit, OnDestroy, AfterViewInit {
+
+    @ViewChildren('logo') logos: QueryList<ElementRef>
 
     Subscription: Subscription = new Subscription();
     userData: UserData;
@@ -20,7 +22,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
         public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService
-        ) {
+    ) {
     }
 
     ngOnInit(): void {
@@ -44,6 +46,21 @@ export class HomePageComponent implements OnInit, OnDestroy {
             userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
         })
         this.userData = this.userAuthService.userData;
+    }
+
+    ngAfterViewInit(): void {
+        this.animateLogos();
+    }
+
+    async animateLogos() {
+        let logoI = 0;
+        const logosArr = this.logos.toArray()
+        for (logoI; logoI < logosArr.length; logoI++) {
+            logosArr[logoI].nativeElement.style.transform = "scale(1.1)";
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            logosArr[logoI].nativeElement.style.transform = "scale(1)";
+            if (logoI === logosArr.length - 1) logoI = -1;
+        }
     }
 
     navigate(path: string): void {

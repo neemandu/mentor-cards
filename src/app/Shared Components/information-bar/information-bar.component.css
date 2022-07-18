@@ -2,14 +2,9 @@
   font-size: larger;
   width: 100%;
   height: var(--bottom-nav-height);
-  /* height: 7vh; */
   background-color: rgb(255, 203, 126);
   color: white;
-  /* text-align: center; */
   align-items: center;
-  /* margin-top: 2%; */
-  /* position: absolute;
-  bottom: 0px; */
 }
 
 .icons {
