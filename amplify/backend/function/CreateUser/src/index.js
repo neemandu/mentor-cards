@@ -115,15 +115,7 @@ exports.handler = async (event) => {
     if(!user){
 
         console.log('user ' + email + " was NOT found");
-        var docClient = new AWS.DynamoDB.DocumentClient();
-
-        var table = env.API_CARDSPACKS_USERTABLE_NAME;
         
-       /* var group = await getUserGroup(username);
-        var subscription;
-        if(group){
-            subscription = group.subscription
-        }*/
         var tid = "Empty_" + username;
         var userToInsert = {
             "id": username,
