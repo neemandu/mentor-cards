@@ -161,6 +161,10 @@ exports.handler = async (event) => {
         return params["Item"];
     }
 
+    if(!user.entries){
+        user.entries = 0;
+    }
+
     user.entries++;
     await this.saveUser(user);
     console.log('user ' + email + " was found");
