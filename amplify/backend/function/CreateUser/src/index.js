@@ -152,7 +152,7 @@ exports.handler = async (event) => {
         };
     
         console.log("Adding a new user...");
-        await this.saveUser(userToInsert);
+        await saveUser(userToInsert);
 
         await addWelcomeEmailToMessageQueue(email, phone, fullName);
     
@@ -166,7 +166,7 @@ exports.handler = async (event) => {
     }
 
     user.entries++;
-    await this.saveUser(user);
+    await saveUser(user);
     console.log('user ' + email + " was found");
     return user;
     
