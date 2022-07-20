@@ -12,10 +12,10 @@
     "mfaTypes": [
       "SMS Text Message"
     ],
-    "smsAuthenticationMessage": "יש להזין את קוד האימות הבא במקום המיועד לכך באתר {####}",
-    "smsVerificationMessage": "יש להזין את קוד האימות הבא במקום המיועד לכך באתר {####}",
-    "emailVerificationSubject": "קוד אימות מ- Mentor-Cards",
-    "emailVerificationMessage": "יש להזין את קוד האימות הבא במקום המיועד לכך באתר {####}",
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
@@ -62,24 +62,10 @@
     },
     "breakCircularDependency": false,
     "useEnabledMfas": false,
-    "dependsOn": [
-      {
-        "category": "function",
-        "resourceName": "mentorcards56dbf153PreSignup",
-        "triggerProvider": "Cognito",
-        "attributes": [
-          "Arn",
-          "Name"
-        ]
-      }
-    ],
+    "dependsOn": [],
     "userPoolGroups": false,
     "adminQueries": false,
-    "triggers": {
-      "PreSignup": [
-        "custom"
-      ]
-    },
+    "triggers": {},
     "parentStack": {
       "Ref": "AWS::StackId"
     },
@@ -87,7 +73,7 @@
     "authTriggerConnections": [
       "{\"triggerType\":\"PreSignUp\",\"lambdaFunctionName\":\"mentorcards56dbf153PreSignup\"}"
     ],
-    "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"implicit\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\"],\"LogoutURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"https://www.mentor-cards.com/home-page/\"]}",
+    "authProviders": []
   }
 }

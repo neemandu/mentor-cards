@@ -271,6 +271,7 @@ type GroupUserRole {
 input updatePaymentProgramInput {
   paymentProgramId: String!
   providerTransactionId: String
+  fullName: String
 }
 
 input couponCodeInput {

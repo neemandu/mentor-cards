@@ -103,6 +103,7 @@ exports.handler = async (event) => {
     console.log(username);
     console.log(email);
     console.log(phone);
+    console.log(fullName);
 
     AWS.config.update({
         region: env.REGION
@@ -114,15 +115,7 @@ exports.handler = async (event) => {
     if(!user){
 
         console.log('user ' + email + " was NOT found");
-        var docClient = new AWS.DynamoDB.DocumentClient();
-
-        var table = env.API_CARDSPACKS_USERTABLE_NAME;
         
-       /* var group = await getUserGroup(username);
-        var subscription;
-        if(group){
-            subscription = group.subscription
-        }*/
         var tid = "Empty_" + username;
         var userToInsert = {
             "id": username,
@@ -151,7 +144,7 @@ exports.handler = async (event) => {
         };
     
         console.log("Adding a new user...");
-        await this.saveUser(userToInsert);
+        await saveUser(userToInsert);
 
         await addWelcomeEmailToMessageQueue(email, phone, fullName);
     
@@ -160,8 +153,12 @@ exports.handler = async (event) => {
         return params["Item"];
     }
 
+    if(!user.entries){
+        user.entries = 0;
+    }
+
     user.entries++;
-    await this.saveUser(user);
+    await saveUser(user);
     console.log('user ' + email + " was found");
     return user;
     

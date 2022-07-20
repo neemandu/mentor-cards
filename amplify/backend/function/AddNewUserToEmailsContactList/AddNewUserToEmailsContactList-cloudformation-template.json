@@ -16,9 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "contactListId": {
-      "Type": "String"
-    },
     "apicardspacksGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apicardspacksGraphQLAPIIdOutput"
@@ -28,6 +25,9 @@
       "Default": "apicardspacksGraphQLAPIEndpointOutput"
     },
     "secretsPathAmplifyAppId": {
+      "Type": "String"
+    },
+    "contactListId": {
       "Type": "String"
     }
   },
@@ -84,9 +84,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "CONTACT_LIST_ID": {
-              "Ref": "contactListId"
-            },
             "sendinblueAPIKey": {
               "Fn::Join": [
                 "",
@@ -108,6 +105,9 @@
                   "sendinblueAPIKey"
                 ]
               ]
+            },
+            "CONTACT_LIST_ID": {
+              "Ref": "contactListId"
             }
           }
         },
