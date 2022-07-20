@@ -82,45 +82,46 @@ export class UserAuthService {
       return;
     }
     this.cognitoUserData = cognitoUserData || this.cognitoUserData;
-    this.api.GetUser(this.cognitoUserData.username).then(data => {
-      if (!data) {
-        this.createUser();
-        return;
-      }
-      this.userData = new UserData().deseralize(data);
-      this.favorites = this.userData.favouritePacks;
-      this.isLoggedIn = true;
-      this.subPlans = undefined;
-      this.getSubscriptionPlans();
-      this.userDataEmmiter.emit(this.userData);
-      console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
-      LogRocket.identify(this.userData.email);
-      this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
-        duration: 5000,
-        panelClass: ['rtl-snackbar']
-      });
-      if (this.userData.groupId)
-        this.updateGroupData();
-      if (this.userData.couponCodes.length != 0) {
-        this.userData.couponCodes.forEach(coupon => {
-          if (!coupon.trialPeriodInDays || coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
-            this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
-        })
-      }
-      (this.userData.status === 'PLAN' || this.couponCodesCardPacksAllowed()) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
-      this.checkOrgTrial();
-      // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
-    }, reject => {
-      console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      let snackBarRef = this._snackBar.open('שגיאה בהתחברות, נסו שנית', 'רענן', {
-        duration: 20000,
-        panelClass: ['rtl-snackbar']
-      });
-      snackBarRef.onAction().subscribe(() => {
-        window.location.reload();
-      });
-    })
+    this.createUser();
+    // this.api.GetUser(this.cognitoUserData.username).then(data => {
+    //   if (!data) {
+    //     this.createUser();
+    //     return;
+    //   }
+    //   this.userData = new UserData().deseralize(data);
+    //   this.favorites = this.userData.favouritePacks;
+    //   this.isLoggedIn = true;
+    //   this.subPlans = undefined;
+    //   this.getSubscriptionPlans();
+    //   this.userDataEmmiter.emit(this.userData);
+    //   console.log("file: user-auth.service.ts ~ line 98 ~ this.api.GetUser ~ this.userData", this.userData)
+    //   LogRocket.identify(this.userData.email);
+    //   this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
+    //     duration: 5000,
+    //     panelClass: ['rtl-snackbar']
+    //   });
+    //   if (this.userData.groupId)
+    //     this.updateGroupData();
+    //   if (this.userData.couponCodes.length != 0) {
+    //     this.userData.couponCodes.forEach(coupon => {
+    //       if (!coupon.trialPeriodInDays || coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
+    //         this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
+    //     })
+    //   }
+    //   (this.userData.status === 'PLAN' || this.couponCodesCardPacksAllowed()) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+    //   this.checkOrgTrial();
+    //   // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+    // }, reject => {
+    //   console.log("🚀 ~ file: user-auth.service.ts ~ line 86 ~ UserAuthService ~ this.api.GetUser ~ reject", reject)
+    //   this.overlaySpinnerService.changeOverlaySpinner(false);
+    //   let snackBarRef = this._snackBar.open('שגיאה בהתחברות, נסו שנית', 'רענן', {
+    //     duration: 20000,
+    //     panelClass: ['rtl-snackbar']
+    //   });
+    //   snackBarRef.onAction().subscribe(() => {
+    //     window.location.reload();
+    //   });
+    // })
   }
 
   createUser(): void {
@@ -132,8 +133,21 @@ export class UserAuthService {
     this.api.CreateUser(user).then(value => {
       this.userData = new UserData().deseralize(value);
       this.isLoggedIn = true;
-      LogRocket.identify(this.userData.email);
+      this.favorites = this.userData.favouritePacks;
+      this.subPlans = undefined;
+      this.getSubscriptionPlans();
       this.userDataEmmiter.emit(this.userData);
+      LogRocket.identify(this.userData.email);
+      if (this.userData.groupId)
+        this.updateGroupData();
+      if (this.userData.couponCodes.length != 0) {
+        this.userData.couponCodes.forEach(coupon => {
+          if (!coupon.trialPeriodInDays || coupon.createdAt?.getTime() + (coupon.trialPeriodInDays * millisecondsInDay) > new Date().getTime())
+            this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks)
+        })
+      }
+      (this.userData.status === 'PLAN' || this.couponCodesCardPacksAllowed()) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
+      this.checkOrgTrial();
       (this.userData.status === 'PLAN') ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : null;
       this.overlaySpinnerService.changeOverlaySpinner(false);
       // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
