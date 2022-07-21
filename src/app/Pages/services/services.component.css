@@ -298,6 +298,13 @@ button {
   display: none;
 }
 
+.line {
+  background-color: #ffa800;
+  width: 80%;
+  height: 3px;
+  border-radius: 100% 0 0 100%
+}
+
 mat-expansion-panel {
   text-align: start;
 }
