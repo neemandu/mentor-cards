@@ -104,8 +104,8 @@ app-information-bar {
   background: #fff1d6de;
   border-radius: 20px;
   box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
-  width: 50%;
-  padding: 1%;
+  width: 40%;
+  padding: 2%;
   margin-bottom: 1%;
 }
 
@@ -120,6 +120,7 @@ app-information-bar {
 .client-logo {
   height: 80px;
   transition: transform 0.8s;
+  margin: 1%;
 }
 
 .client-logo:hover {
@@ -151,19 +152,19 @@ li span {
 }
 
 @media screen and (max-width: 1024px) {
-  .actions {
+  .actions, .clients-container {
     width: 60%;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .actions {
+  .actions, .clients-container {
     width: 70%;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .actions {
+  .actions, .clients-container {
     width: 85%;
   }
 
