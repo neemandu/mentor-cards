@@ -488,16 +488,6 @@
         }
       ]
     },
-    "PreSignUpCognito": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "mentorcards56dbf153PreSignup": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "IncrementPackEntries": {
       "build": true,
       "providerPlugin": "awscloudformation",
