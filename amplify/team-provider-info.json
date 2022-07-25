@@ -20,7 +20,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-777247664f794f6e362f-build.zip",
+          "s3Key": "amplify-builds/CreateUser-5763316d685635575a4a-build.zip",
           "sendinblueApiKey": "xxx"
         },
         "AddCardsPack": {
@@ -108,7 +108,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-383044443061676d4470-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-6937486e69693652626a-build.zip"
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
