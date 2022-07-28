@@ -134,24 +134,16 @@
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-66765831567458336f6d-build.zip",
+          "s3Key": "amplify-builds/InvoiceHandler-4e54336f5837664c4365-build.zip",
           "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter"
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-736a65445a766932474b-build.zip"
         },
-        "PreSignUpCognito": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PreSignUpCognito-484c743439546b4f3442-build.zip"
-        },
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/IncrementPackEntries-484d636238686b326765-build.zip"
-        },
-        "mentorcards56dbf153PreSignup": {
-          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-32467757673574556e44-build.zip"
         }
       }
     }
