@@ -46,7 +46,8 @@ exports.handler = (event) => {
         businessWebsite: record.dynamodb.NewImage.businessWebsite?.S,
         invoiceType: record.dynamodb.NewImage.invoiceType?.S,
         createdAt: record.dynamodb.NewImage.createdAt?.S,
-        updatedAt: new Date().toISOString() 
+        updatedAt: new Date().toISOString(),
+        sequenceNumber: record.dynamodb.SequenceNumber.S,
       };
       
       console.log('res');
@@ -72,7 +73,8 @@ exports.handler = (event) => {
           var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
           var d = new Date();
           var month = d.getMonth() + 1;
-          var id = invoice.email + "_INVOICE_" + d.getFullYear() + "_" + month + "_" + d.getDate();
+          var id = invoice.email + "_INVOICE_" + invoice.sequenceNumber + "_" + d.getFullYear() + "_" + month + "_" + d.getDate();
+          var final_price = parseInt(invoice.items[0].pricePerItem) * parseInt(invoice.items[0].numberOfItems);
           var params = {
               TableName:table,
               Item:{
@@ -83,7 +85,8 @@ exports.handler = (event) => {
                   "smsDeliveryTime": null,
                   "emailTemplateId": 11,
                   "name": invoice.fullName,
-                  "createdAt": invoice.fullName,
+                  "createdAt": new Date().toISOString(),
+                  "updatedAt": new Date().toISOString(),
                   "params": {
                     "email": invoice.email,
                     "fullName": invoice.fullName,
@@ -97,7 +100,8 @@ exports.handler = (event) => {
                     "invoiceRunningId": invoice.invoiceRunningId,
                     "item": invoice.items[0].itemName,
                     "item_price": invoice.items[0].pricePerItem,
-                    "item_quantity": invoice.items[0].numberOfItems
+                    "item_quantity": invoice.items[0].numberOfItems,
+                    "final_price": final_price
                   }
               }
           };
