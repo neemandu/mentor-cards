@@ -74,6 +74,9 @@ async function getAllRelevantUsers(){
                 if(user.userOrgMembershipId){
                     emailTemplateId = 12;
                 }
+                if(!user.fullName){
+                    user.fullName = "";
+                }
                 var item = {
                     PutRequest: {
                         Item: {

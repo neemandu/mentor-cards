@@ -61,6 +61,9 @@ async function getAllRelevantUsers(){
         data.Items.forEach(function(user) {
             var d = new Date();
             var id = user.email + "_GUIDE_AFTER_7_DAYS_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+            if(!user.fullName){
+                user.fullName = "";
+            }
             var item = {
                 PutRequest: {
                     Item: {
