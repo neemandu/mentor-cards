@@ -29,11 +29,7 @@ export class EnterCouponCodeDialogComponent implements OnInit {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.api.AddCouponCode({ 'couponCode': this.formControls.couponCode.value.toLowerCase() }).then((res: About) => {
       this.overlaySpinnerService.changeOverlaySpinner(false);
-      if (res)
-        this.dialogRef.close(res);
-      else {
-        this.formControls.couponCode.setErrors({ 'noSuchCoupon': true });
-      }
+      this.dialogRef.close(res);
     }, reject => {
       // console.log("file: enter-group-id-dialog.component.ts ~ line 33 ~ this.api.IsInGroup ~ reject", reject)
       if ((reject.errors[0].message).toLowerCase().startsWith("no such coupon"))
