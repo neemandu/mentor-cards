@@ -249,7 +249,15 @@ export class UserAuthService {
     const dialogRef1 = this.dialog.open(EnterCouponCodeDialogComponent, dialogConfig);
     const dialogSub1 = dialogRef1.afterClosed().subscribe(res => {
       dialogSub1.unsubscribe();
-      if (res) {
+      if (res === 'done') {
+        this._snackBar.open('קוד ההטבה הוזן בהצלחה!', '', {
+          duration: 1000,
+          panelClass: ['rtl-snackbar']
+        });
+        this.router.navigate(['all-packs-page']);
+        setTimeout(() => { window.location.reload(); }, 1000);
+      }
+      else if (res) {
         dialogConfig.data = res;
         const dialogRef2 = this.dialog.open(WelcomeToNewOrgDialogComponent, dialogConfig);
         const dialogSub2 = dialogRef2.afterClosed().subscribe(res => {
@@ -387,7 +395,7 @@ export class UserAuthService {
     }, reject => {
       console.log("🚀 ~ file: user-auth.service.ts ~ line 376 ~ this.api.LikeClicked ~ reject", reject)
     })
-    if(!this.favorites){
+    if (!this.favorites) {
       this.favorites = [];
     }
     if (!this.favorites.includes(parseInt(packId))) {

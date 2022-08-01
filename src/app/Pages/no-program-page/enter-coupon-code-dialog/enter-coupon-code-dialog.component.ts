@@ -32,7 +32,7 @@ export class EnterCouponCodeDialogComponent implements OnInit {
       if (res)
         this.dialogRef.close(res);
       else {
-        this.formControls.couponCode.setErrors({ 'noSuchCoupon': true });
+        this.dialogRef.close('done');
       }
     }, reject => {
       // console.log("file: enter-group-id-dialog.component.ts ~ line 33 ~ this.api.IsInGroup ~ reject", reject)
