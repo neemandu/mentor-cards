@@ -72,6 +72,9 @@ async function getAllRelevantUsers(){
             if(a){
                 var d = new Date();
                 var id = user.email + "_UPCOMING_END_OF_TRIAL_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+                if(!user.fullName){
+                    user.fullName = "";
+                }
                 var item = {
                     PutRequest: {
                         Item: {
