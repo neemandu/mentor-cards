@@ -35,6 +35,8 @@ export class PricePageComponent implements OnInit {
   monthlySubscription: SubscriptionPlan;
   halfYearlySubscription: SubscriptionPlan;
   yearlySubscription: SubscriptionPlan;
+  halfYearlySubscriptionPercentage: number;
+  yearlySubscriptionPercentage: number;
 
   constructor(public _snackBar: MatSnackBar, private api: APIService,
     private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
@@ -60,7 +62,12 @@ export class PricePageComponent implements OnInit {
     // console.log("file: price-page.component.ts ~ line 95 ~ getSubscriptionPlans ~ this.halfYearlySubscrition", this.halfYearlySubscription)
     this.yearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
     // console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
+    
+    this.halfYearlySubscriptionPercentage = Math.round(100-((this.halfYearlySubscription.fullPrice * 100)/(this.monthlySubscription.fullPrice * this.halfYearlySubscription.billingCycleInMonths)));
+    this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription.fullPrice * 100)/(this.monthlySubscription.fullPrice * this.yearlySubscription.billingCycleInMonths)));
+
     this.overlaySpinnerService.changeOverlaySpinner(false);
+
   }
 
 
