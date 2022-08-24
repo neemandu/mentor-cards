@@ -93,5 +93,8 @@ exports.handler = async (event) => {
         orgId = user.userOrgMembershipId == null ? "-1" : user.userOrgMembershipId;
     }   
     var subPlans = await getPlansByOrgId(orgId);
+    if(!subPlans){
+        subPlans = await getPlansByOrgId("-1");
+    }
     return subPlans;
 };
