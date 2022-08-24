@@ -150,7 +150,7 @@ exports.handler = async (event) => {
     
         console.log("Done adding a new user...");
 
-        return params["Item"];
+        return userToInsert;
     }
 
     if(!user.entries){
