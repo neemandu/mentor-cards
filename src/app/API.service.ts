@@ -3,10 +3,11 @@
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
+import { Observable } from "zen-observable-ts";
 import awsconfig from '../aws-exports';
 API.configure(awsconfig)
-import { Observable } from "zen-observable-ts";
 import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
+
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -83,6 +84,7 @@ export type User = {
   updatedAt: string;
   favouritePacks?: Array<number | null> | null;
   entries?: number | null;
+  externalPacksSubscriptions?: Array<MonthlySubscription | null> | null;
 };
 
 export type MonthlySubscription = {
@@ -92,6 +94,7 @@ export type MonthlySubscription = {
   paymentProvider?: string | null;
   providerTransactionId?: string | null;
   subscriptionPlan?: SubscriptionPlan | null;
+  includedCardPacksIds?: Array<CardsPack | null> | null;
 };
 
 export type SubscriptionPlan = {
@@ -128,6 +131,44 @@ export type About = {
   link?: string | null;
 };
 
+export type CardsPack = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<Cards | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<GuideBookElement | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: About | null;
+  isOwnedByOrg?: boolean | null;
+  brief?: string | null;
+  likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
+  subscriptionPlan?: SubscriptionPlan | null;
+};
+
+export type Cards = {
+  __typename: "Cards";
+  backImgUrl?: string | null;
+  frontImgUrl?: string | null;
+};
+
+export type GuideBookElement = {
+  __typename: "GuideBookElement";
+  name?: string | null;
+  subElements?: Array<GuideBookElement | null> | null;
+};
+
 export type CouponCodes = {
   __typename: "CouponCodes";
   id: string;
@@ -160,6 +201,7 @@ export type GroupUserRoleInput = {
 
 export type unSubscribeInput = {
   username: string;
+  providerTransactionId?: string | null;
 };
 
 export type joinExistingGroupInput = {
@@ -177,6 +219,7 @@ export type couponCodeInput = {
 export type updatePaymentProgramInput = {
   paymentProgramId: string;
   providerTransactionId?: string | null;
+  fullName?: string | null;
 };
 
 export type userInput = {
@@ -502,6 +545,9 @@ export type CreateCardsPackInput = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
+  cardsPackSubscriptionPlanId?: string | null;
 };
 
 export type CardsInput = {
@@ -528,6 +574,8 @@ export type ModelCardsPackConditionInput = {
   likesCounter?: ModelIntInput | null;
   visitorsCounter?: ModelIntInput | null;
   backImgUrl?: ModelStringInput | null;
+  isExternalPack?: ModelBooleanInput | null;
+  authorizedDomains?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -538,41 +586,6 @@ export type ModelBooleanInput = {
   eq?: boolean | null;
   attributeExists?: boolean | null;
   attributeType?: ModelAttributeTypes | null;
-};
-
-export type CardsPack = {
-  __typename: "CardsPack";
-  id: string;
-  imgUrl: string;
-  description?: string | null;
-  tags?: Array<string | null> | null;
-  categories?: Array<string | null> | null;
-  cards?: Array<Cards | null> | null;
-  cardsPreview?: Array<string | null> | null;
-  groupsIds?: Array<string | null> | null;
-  guideBook?: Array<GuideBookElement | null> | null;
-  name?: string | null;
-  freeUntilDate?: string | null;
-  about?: About | null;
-  isOwnedByOrg?: boolean | null;
-  brief?: string | null;
-  likesCounter?: number | null;
-  visitorsCounter?: number | null;
-  backImgUrl?: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type Cards = {
-  __typename: "Cards";
-  backImgUrl?: string | null;
-  frontImgUrl?: string | null;
-};
-
-export type GuideBookElement = {
-  __typename: "GuideBookElement";
-  name?: string | null;
-  subElements?: Array<GuideBookElement | null> | null;
 };
 
 export type UpdateCardsPackInput = {
@@ -593,6 +606,9 @@ export type UpdateCardsPackInput = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
+  cardsPackSubscriptionPlanId?: string | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -977,6 +993,8 @@ export type ModelCardsPackFilterInput = {
   likesCounter?: ModelIntInput | null;
   visitorsCounter?: ModelIntInput | null;
   backImgUrl?: ModelStringInput | null;
+  isExternalPack?: ModelBooleanInput | null;
+  authorizedDomains?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1046,6 +1064,87 @@ export type CreateUserMutation = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    includedCardPacksIds?: Array<{
+      __typename: "CardsPack";
+      id: string;
+      imgUrl: string;
+      description?: string | null;
+      tags?: Array<string | null> | null;
+      categories?: Array<string | null> | null;
+      cards?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
+      cardsPreview?: Array<string | null> | null;
+      groupsIds?: Array<string | null> | null;
+      guideBook?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+      name?: string | null;
+      freeUntilDate?: string | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      isOwnedByOrg?: boolean | null;
+      brief?: string | null;
+      likesCounter?: number | null;
+      visitorsCounter?: number | null;
+      backImgUrl?: string | null;
+      isExternalPack?: boolean | null;
+      authorizedDomains?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
+      subscriptionPlan?: {
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+    } | null> | null;
   } | null;
   numberOfPacksSubstitutions?: number | null;
   lastPackSubstitutionDate?: string | null;
@@ -1104,6 +1203,130 @@ export type CreateUserMutation = {
   updatedAt: string;
   favouritePacks?: Array<number | null> | null;
   entries?: number | null;
+  externalPacksSubscriptions?: Array<{
+    __typename: "MonthlySubscription";
+    id: string;
+    startDate?: string | null;
+    paymentProvider?: string | null;
+    providerTransactionId?: string | null;
+    subscriptionPlan?: {
+      __typename: "SubscriptionPlan";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    includedCardPacksIds?: Array<{
+      __typename: "CardsPack";
+      id: string;
+      imgUrl: string;
+      description?: string | null;
+      tags?: Array<string | null> | null;
+      categories?: Array<string | null> | null;
+      cards?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
+      cardsPreview?: Array<string | null> | null;
+      groupsIds?: Array<string | null> | null;
+      guideBook?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+      name?: string | null;
+      freeUntilDate?: string | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      isOwnedByOrg?: boolean | null;
+      brief?: string | null;
+      likesCounter?: number | null;
+      visitorsCounter?: number | null;
+      backImgUrl?: string | null;
+      isExternalPack?: boolean | null;
+      authorizedDomains?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
+      subscriptionPlan?: {
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+    } | null> | null;
+  } | null> | null;
+};
+
+export type AddCouponCodeMutation = {
+  __typename: "About";
+  text?: string | null;
+  imgUrl?: string | null;
+  link?: string | null;
 };
 
 export type GetSubscriptionPlansMutation = {
@@ -1634,8 +1857,39 @@ export type CreateCardsPackMutation = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
+  subscriptionPlan?: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type UpdateCardsPackMutation = {
@@ -1693,8 +1947,39 @@ export type UpdateCardsPackMutation = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
+  subscriptionPlan?: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type DeleteCardsPackMutation = {
@@ -1752,8 +2037,39 @@ export type DeleteCardsPackMutation = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
+  subscriptionPlan?: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type CreateMessageQueueMutation = {
@@ -1955,6 +2271,87 @@ export type GetUserQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    includedCardPacksIds?: Array<{
+      __typename: "CardsPack";
+      id: string;
+      imgUrl: string;
+      description?: string | null;
+      tags?: Array<string | null> | null;
+      categories?: Array<string | null> | null;
+      cards?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
+      cardsPreview?: Array<string | null> | null;
+      groupsIds?: Array<string | null> | null;
+      guideBook?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+      name?: string | null;
+      freeUntilDate?: string | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      isOwnedByOrg?: boolean | null;
+      brief?: string | null;
+      likesCounter?: number | null;
+      visitorsCounter?: number | null;
+      backImgUrl?: string | null;
+      isExternalPack?: boolean | null;
+      authorizedDomains?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
+      subscriptionPlan?: {
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+    } | null> | null;
   } | null;
   numberOfPacksSubstitutions?: number | null;
   lastPackSubstitutionDate?: string | null;
@@ -2013,6 +2410,123 @@ export type GetUserQuery = {
   updatedAt: string;
   favouritePacks?: Array<number | null> | null;
   entries?: number | null;
+  externalPacksSubscriptions?: Array<{
+    __typename: "MonthlySubscription";
+    id: string;
+    startDate?: string | null;
+    paymentProvider?: string | null;
+    providerTransactionId?: string | null;
+    subscriptionPlan?: {
+      __typename: "SubscriptionPlan";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    includedCardPacksIds?: Array<{
+      __typename: "CardsPack";
+      id: string;
+      imgUrl: string;
+      description?: string | null;
+      tags?: Array<string | null> | null;
+      categories?: Array<string | null> | null;
+      cards?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
+      cardsPreview?: Array<string | null> | null;
+      groupsIds?: Array<string | null> | null;
+      guideBook?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+      name?: string | null;
+      freeUntilDate?: string | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      isOwnedByOrg?: boolean | null;
+      brief?: string | null;
+      likesCounter?: number | null;
+      visitorsCounter?: number | null;
+      backImgUrl?: string | null;
+      isExternalPack?: boolean | null;
+      authorizedDomains?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
+      subscriptionPlan?: {
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+    } | null> | null;
+  } | null> | null;
 };
 
 export type ListUsersQuery = {
@@ -2059,6 +2573,83 @@ export type ListUsersQuery = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      includedCardPacksIds?: Array<{
+        __typename: "CardsPack";
+        id: string;
+        imgUrl: string;
+        description?: string | null;
+        tags?: Array<string | null> | null;
+        categories?: Array<string | null> | null;
+        cards?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
+        cardsPreview?: Array<string | null> | null;
+        groupsIds?: Array<string | null> | null;
+        guideBook?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+        name?: string | null;
+        freeUntilDate?: string | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        isOwnedByOrg?: boolean | null;
+        brief?: string | null;
+        likesCounter?: number | null;
+        visitorsCounter?: number | null;
+        backImgUrl?: string | null;
+        isExternalPack?: boolean | null;
+        authorizedDomains?: Array<string | null> | null;
+        createdAt: string;
+        updatedAt: string;
+        subscriptionPlan?: {
+          __typename: "SubscriptionPlan";
+          id: string;
+          name?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
+            id: string;
+            name?: string | null;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+      } | null> | null;
     } | null;
     numberOfPacksSubstitutions?: number | null;
     lastPackSubstitutionDate?: string | null;
@@ -2117,6 +2708,119 @@ export type ListUsersQuery = {
     updatedAt: string;
     favouritePacks?: Array<number | null> | null;
     entries?: number | null;
+    externalPacksSubscriptions?: Array<{
+      __typename: "MonthlySubscription";
+      id: string;
+      startDate?: string | null;
+      paymentProvider?: string | null;
+      providerTransactionId?: string | null;
+      subscriptionPlan?: {
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      includedCardPacksIds?: Array<{
+        __typename: "CardsPack";
+        id: string;
+        imgUrl: string;
+        description?: string | null;
+        tags?: Array<string | null> | null;
+        categories?: Array<string | null> | null;
+        cards?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
+        cardsPreview?: Array<string | null> | null;
+        groupsIds?: Array<string | null> | null;
+        guideBook?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+        name?: string | null;
+        freeUntilDate?: string | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        isOwnedByOrg?: boolean | null;
+        brief?: string | null;
+        likesCounter?: number | null;
+        visitorsCounter?: number | null;
+        backImgUrl?: string | null;
+        isExternalPack?: boolean | null;
+        authorizedDomains?: Array<string | null> | null;
+        createdAt: string;
+        updatedAt: string;
+        subscriptionPlan?: {
+          __typename: "SubscriptionPlan";
+          id: string;
+          name?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
+            id: string;
+            name?: string | null;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+      } | null> | null;
+    } | null> | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -2528,8 +3232,39 @@ export type GetCardsPackQuery = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
+  subscriptionPlan?: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type ListCardsPacksQuery = {
@@ -2585,8 +3320,39 @@ export type ListCardsPacksQuery = {
     likesCounter?: number | null;
     visitorsCounter?: number | null;
     backImgUrl?: string | null;
+    isExternalPack?: boolean | null;
+    authorizedDomains?: Array<string | null> | null;
     createdAt: string;
     updatedAt: string;
+    subscriptionPlan?: {
+      __typename: "SubscriptionPlan";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -3240,8 +4006,39 @@ export type OnCreateCardsPackSubscription = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
+  subscriptionPlan?: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type OnUpdateCardsPackSubscription = {
@@ -3299,8 +4096,39 @@ export type OnUpdateCardsPackSubscription = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
+  subscriptionPlan?: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type OnDeleteCardsPackSubscription = {
@@ -3358,8 +4186,39 @@ export type OnDeleteCardsPackSubscription = {
   likesCounter?: number | null;
   visitorsCounter?: number | null;
   backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
+  subscriptionPlan?: {
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type OnCreateContactUsModelSubscription = {
@@ -3440,6 +4299,87 @@ export class APIService {
               createdAt
               updatedAt
             }
+            includedCardPacksIds {
+              __typename
+              id
+              imgUrl
+              description
+              tags
+              categories
+              cards {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
+              cardsPreview
+              groupsIds
+              guideBook {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              name
+              freeUntilDate
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              isOwnedByOrg
+              brief
+              likesCounter
+              visitorsCounter
+              backImgUrl
+              isExternalPack
+              authorizedDomains
+              createdAt
+              updatedAt
+              subscriptionPlan {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
+            }
           }
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
@@ -3498,6 +4438,123 @@ export class APIService {
           updatedAt
           favouritePacks
           entries
+          externalPacksSubscriptions {
+            __typename
+            id
+            startDate
+            paymentProvider
+            providerTransactionId
+            subscriptionPlan {
+              __typename
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
+                __typename
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
+              }
+              createdAt
+              updatedAt
+            }
+            includedCardPacksIds {
+              __typename
+              id
+              imgUrl
+              description
+              tags
+              categories
+              cards {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
+              cardsPreview
+              groupsIds
+              guideBook {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              name
+              freeUntilDate
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              isOwnedByOrg
+              brief
+              likesCounter
+              visitorsCounter
+              backImgUrl
+              isExternalPack
+              authorizedDomains
+              createdAt
+              updatedAt
+              subscriptionPlan {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
+            }
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3584,12 +4641,13 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
   }
-  async AddCouponCode(input: couponCodeInput): Promise<About | null> {
+  async AddCouponCode(input: couponCodeInput): Promise<AddCouponCodeMutation> {
     const statement = `mutation AddCouponCode($input: couponCodeInput!) {
-        AddCouponCode(input: $input){
+        AddCouponCode(input: $input) {
+          __typename
+          text
           imgUrl
           link
-          text
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -3598,7 +4656,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <About | null>response.data.AddCouponCode;
+    return <AddCouponCodeMutation>response.data.AddCouponCode;
   }
   async UpdatePaymentProgram(
     input: updatePaymentProgramInput
@@ -3635,6 +4693,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3673,6 +4737,12 @@ export class APIService {
             name
             trialPeriodInDays
             numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
             createdAt
             updatedAt
           }
@@ -3720,7 +4790,7 @@ export class APIService {
   }
   async IncrementPackEntries(input: cardPackIdInput): Promise<boolean | null> {
     const statement = `mutation IncrementPackEntries($input: cardPackIdInput!) {
-      IncrementPackEntries(input: $input)
+        IncrementPackEntries(input: $input)
       }`;
     const gqlAPIServiceArguments: any = {
       input
@@ -4543,8 +5613,39 @@ export class APIService {
           likesCounter
           visitorsCounter
           backImgUrl
+          isExternalPack
+          authorizedDomains
           createdAt
           updatedAt
+          subscriptionPlan {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -4618,8 +5719,39 @@ export class APIService {
           likesCounter
           visitorsCounter
           backImgUrl
+          isExternalPack
+          authorizedDomains
           createdAt
           updatedAt
+          subscriptionPlan {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -4693,8 +5825,39 @@ export class APIService {
           likesCounter
           visitorsCounter
           backImgUrl
+          isExternalPack
+          authorizedDomains
           createdAt
           updatedAt
+          subscriptionPlan {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -5087,6 +6250,87 @@ export class APIService {
               createdAt
               updatedAt
             }
+            includedCardPacksIds {
+              __typename
+              id
+              imgUrl
+              description
+              tags
+              categories
+              cards {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
+              cardsPreview
+              groupsIds
+              guideBook {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              name
+              freeUntilDate
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              isOwnedByOrg
+              brief
+              likesCounter
+              visitorsCounter
+              backImgUrl
+              isExternalPack
+              authorizedDomains
+              createdAt
+              updatedAt
+              subscriptionPlan {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
+            }
           }
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
@@ -5145,6 +6389,123 @@ export class APIService {
           updatedAt
           favouritePacks
           entries
+          externalPacksSubscriptions {
+            __typename
+            id
+            startDate
+            paymentProvider
+            providerTransactionId
+            subscriptionPlan {
+              __typename
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
+                __typename
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
+              }
+              createdAt
+              updatedAt
+            }
+            includedCardPacksIds {
+              __typename
+              id
+              imgUrl
+              description
+              tags
+              categories
+              cards {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
+              cardsPreview
+              groupsIds
+              guideBook {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              name
+              freeUntilDate
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              isOwnedByOrg
+              brief
+              likesCounter
+              visitorsCounter
+              backImgUrl
+              isExternalPack
+              authorizedDomains
+              createdAt
+              updatedAt
+              subscriptionPlan {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
+            }
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -5205,6 +6566,83 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              includedCardPacksIds {
+                __typename
+                id
+                imgUrl
+                description
+                tags
+                categories
+                cards {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
+                cardsPreview
+                groupsIds
+                guideBook {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+                name
+                freeUntilDate
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                isOwnedByOrg
+                brief
+                likesCounter
+                visitorsCounter
+                backImgUrl
+                isExternalPack
+                authorizedDomains
+                createdAt
+                updatedAt
+                subscriptionPlan {
+                  __typename
+                  id
+                  name
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
+                    __typename
+                    id
+                    name
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
+                      __typename
+                      text
+                      imgUrl
+                      link
+                    }
+                    createdAt
+                    updatedAt
+                  }
+                  createdAt
+                  updatedAt
+                }
+              }
             }
             numberOfPacksSubstitutions
             lastPackSubstitutionDate
@@ -5263,6 +6701,119 @@ export class APIService {
             updatedAt
             favouritePacks
             entries
+            externalPacksSubscriptions {
+              __typename
+              id
+              startDate
+              paymentProvider
+              providerTransactionId
+              subscriptionPlan {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
+              includedCardPacksIds {
+                __typename
+                id
+                imgUrl
+                description
+                tags
+                categories
+                cards {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
+                cardsPreview
+                groupsIds
+                guideBook {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+                name
+                freeUntilDate
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                isOwnedByOrg
+                brief
+                likesCounter
+                visitorsCounter
+                backImgUrl
+                isExternalPack
+                authorizedDomains
+                createdAt
+                updatedAt
+                subscriptionPlan {
+                  __typename
+                  id
+                  name
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
+                    __typename
+                    id
+                    name
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
+                      __typename
+                      text
+                      imgUrl
+                      link
+                    }
+                    createdAt
+                    updatedAt
+                  }
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
           }
           nextToken
         }
@@ -5947,8 +7498,39 @@ export class APIService {
           likesCounter
           visitorsCounter
           backImgUrl
+          isExternalPack
+          authorizedDomains
           createdAt
           updatedAt
+          subscriptionPlan {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -6071,8 +7653,39 @@ export class APIService {
             likesCounter
             visitorsCounter
             backImgUrl
+            isExternalPack
+            authorizedDomains
             createdAt
             updatedAt
+            subscriptionPlan {
+              __typename
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
+                __typename
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
+              }
+              createdAt
+              updatedAt
+            }
           }
           nextToken
         }
@@ -7071,8 +8684,39 @@ export class APIService {
           likesCounter
           visitorsCounter
           backImgUrl
+          isExternalPack
+          authorizedDomains
           createdAt
           updatedAt
+          subscriptionPlan {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`
     )
@@ -7140,8 +8784,39 @@ export class APIService {
           likesCounter
           visitorsCounter
           backImgUrl
+          isExternalPack
+          authorizedDomains
           createdAt
           updatedAt
+          subscriptionPlan {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`
     )
@@ -7209,8 +8884,39 @@ export class APIService {
           likesCounter
           visitorsCounter
           backImgUrl
+          isExternalPack
+          authorizedDomains
           createdAt
           updatedAt
+          subscriptionPlan {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`
     )

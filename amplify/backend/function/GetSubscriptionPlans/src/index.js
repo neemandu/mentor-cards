@@ -93,7 +93,7 @@ exports.handler = async (event) => {
         orgId = user.userOrgMembershipId == null ? "-1" : user.userOrgMembershipId;
     }   
     var subPlans = await getPlansByOrgId(orgId);
-    if(!subPlans){
+    if(!subPlans || subPlans.length == 0){
         subPlans = await getPlansByOrgId("-1");
     }
     return subPlans;

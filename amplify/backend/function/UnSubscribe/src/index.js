@@ -290,17 +290,26 @@ exports.handler = async (event) => {
     if(!username){
         username = event.identity.claims['username'];
     }
+    
+    var providerTransactionId = event.arguments.input['providerTransactionId'];
 
     var user = await getUserByUSerName(username);
 
     var access_token = await getPayPalAccessToken();
-    await cancelPayPalSubscription(user.subscription.providerTransactionId, access_token);
-
-    user.status = "NOPLAN";
-    user.groupId = null;
-    user.groupRole = null;
-    user.cancellationDate = new Date().toISOString();
-    user.cardsPacksIds = []
+    await cancelPayPalSubscription(providerTransactionId, access_token);
+    var t_id = user.subscription?.providerTransactionId ?? "-1";
+    if(providerTransactionId == t_id){
+        user.status = "NOPLAN";
+        user.groupId = null;
+        user.groupRole = null;
+        user.cancellationDate = new Date().toISOString();
+        user.cardsPacksIds = []
+    }
+    else{
+        user.externalPacksSubscriptions = user.externalPacksSubscriptions.filter(function( obj ) {
+            return obj.providerTransactionId != transaction_id;
+        });
+    }
 
     await saveUser(user);
 

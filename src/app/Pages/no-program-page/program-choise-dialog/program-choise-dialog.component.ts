@@ -96,11 +96,23 @@ export class ProgramChoiseDialogComponent implements OnInit {
             // debugger
             if (this.userAuthService.userData.status === "NOPLAN")
               return actions.subscription.create({
-                'plan_id': this.packSelected.providerPlanId
+                'plan_id': this.packSelected.providerPlanId,
+                'subscriber': {
+                  'name': {
+                    'given_name': this.userAuthService.userData.fullName
+                  },
+                  'email_address': this.userAuthService.userData.email
+                }
               });
             else if (this.userAuthService.userData.status === "PLAN")
               return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
-                'plan_id': this.packSelected.providerPlanId
+                'plan_id': this.packSelected.providerPlanId,
+                'subscriber': {
+                  'name': {
+                    'given_name': this.userAuthService.userData.fullName
+                  },
+                  'email_address': this.userAuthService.userData.email
+                }
               });
           },
           onApprove: async (data, actions) => {

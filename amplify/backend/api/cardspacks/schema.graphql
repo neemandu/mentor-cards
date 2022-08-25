@@ -51,6 +51,7 @@ type User
   updatedAt: AWSDateTime!
   favouritePacks: [Int]
   entries: Int
+  externalPacksSubscriptions: [MonthlySubscription] 
 }
 
 type MonthlySubscription {
@@ -59,6 +60,7 @@ type MonthlySubscription {
   paymentProvider: String
   providerTransactionId: String
   subscriptionPlan: SubscriptionPlan
+  includedCardPacksIds: [CardsPack] 
 }
 
 type SubscriptionPlan
@@ -194,6 +196,7 @@ type CardsPack
   backImgUrl: String
   isExternalPack: Boolean
   authorizedDomains: [String]
+  subscriptionPlan: SubscriptionPlan @connection
 }
 
 type Cards {
@@ -313,6 +316,7 @@ input GroupUserRoleInput {
 
 input unSubscribeInput {
   username: String!
+  providerTransactionId: String
 }
 
 input userInput {

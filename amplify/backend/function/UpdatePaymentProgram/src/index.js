@@ -171,7 +171,8 @@ async function updateMonthlySubscription(user, paymentProgram, transId) {
         startDate: new Date().toISOString(),
         paymentProvider: "PayPal",
         providerTransactionId: transId,
-        subscriptionPlan: paymentProgram
+        subscriptionPlan: paymentProgram,
+        includedCardPacksIds: []
     };
 
     console.log("updating new subscription in DB");

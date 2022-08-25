@@ -579,8 +579,36 @@ subscription OnCreateCardsPack {
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
     createdAt
     updatedAt
+    subscriptionPlan {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
   }
 }
 subscription OnUpdateCardsPack {
@@ -629,8 +657,36 @@ subscription OnUpdateCardsPack {
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
     createdAt
     updatedAt
+    subscriptionPlan {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
   }
 }
 subscription OnDeleteCardsPack {
@@ -679,8 +735,36 @@ subscription OnDeleteCardsPack {
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
     createdAt
     updatedAt
+    subscriptionPlan {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
   }
 }
 subscription OnCreateContactUsModel {

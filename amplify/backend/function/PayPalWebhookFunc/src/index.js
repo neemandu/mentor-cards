@@ -100,7 +100,7 @@ async function getUserByEmail(email){
 
 }
 
-async function cancelUserSubscription(user){
+async function cancelUserSubscription(user, transaction_id){
     console.log("Canceling user subscription!");
     if(user.groupId){
         var group = await getGroup(user.groupId);
@@ -115,12 +115,18 @@ async function cancelUserSubscription(user){
             await saveUser(groupUser);
         }
     }
-
-    user.status = "NOPLAN";
-    user.groupId = null;
-    user.groupRole = null;
-    user.cancellationDate = new Date().toISOString();
-    user.cardsPacksIds = []
+    if(user.providerTransactionId == transaction_id){
+        user.status = "NOPLAN";
+        user.groupId = null;
+        user.groupRole = null;
+        user.cancellationDate = new Date().toISOString();
+        user.cardsPacksIds = []
+    }
+    else if(user.providerTransactionId != transaction_id){
+        user.externalPacksSubscriptions = user.externalPacksSubscriptions.filter(function( obj ) {
+            return obj.providerTransactionId != transaction_id;
+        });
+    }
     await saveUser(user);
 }
 
@@ -222,6 +228,38 @@ async function createInvoice(user){
       });
 }
 
+async function getUserByUserName(username){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "id": username
+        }
+    };
+
+    console.log("searching for user - " + username);
+
+    var user;
+
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such user - ' + username);
+    }
+
+    return user;
+
+}
+
 exports.handler = async (event) => {
     console.log('PayPal webhook!');
     console.log('event:');
@@ -230,17 +268,22 @@ exports.handler = async (event) => {
     var event_type = paypal_body.event_type;
     var transaction_id = paypal_body.resource.billing_agreement_id;
     console.log('event_type: ' + event_type);
+    var transaction_id = paypal_body.resource.id;
+    var email_address = paypal_body.resource.subscriber?.email_address ?? "";
+    console.log('transaction_id: ' + transaction_id);
+    console.log('email_address: ' + email_address);
+    var user;
+    if(email_address != ""){
+        user = await getUserByUserName(email_address);
+    }
+    else{
+        user = await getUserByPayPalTxId(transaction_id);
+    }
     if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
-        var transaction_id = paypal_body.resource.id;
-        console.log('transaction_id: ' + transaction_id);
-        var user = await getUserByPayPalTxId(transaction_id);
-        await cancelUserSubscription(user);
+        await cancelUserSubscription(user, transaction_id);
         await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
     }
     else if(event_type == "PAYMENT.SALE.COMPLETED"){
-        var transaction_id = paypal_body.resource.billing_agreement_id;
-        console.log('transaction_id: ' + transaction_id);
-        var user = await getUserByPayPalTxId(transaction_id);
         await createInvoice(user);
     }
     const response = {
