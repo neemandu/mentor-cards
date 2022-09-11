@@ -195,7 +195,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-4d364c4454366b496c46-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-7973364731534d4a4632-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -296,7 +296,7 @@
         },
         "AddSingleItemSubscription": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddSingleItemSubscription-46726145774241634135-build.zip"
+          "s3Key": "amplify-builds/AddSingleItemSubscription-6f7642377263437a684a-build.zip"
         }
       },
       "auth": {

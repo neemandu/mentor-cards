@@ -157,7 +157,11 @@ exports.handler = async (event, context, callback) => {
 
     var isExternalPack = event.source['isExternalPack']
     if(isExternalPack){
-        for(var i = 0 ; i < user.externalPacksSubscriptions.length ; i++){ 
+        var length = 0;
+        if(user.externalPacksSubscriptions){
+            length = user.externalPacksSubscriptions.length;
+        }
+        for(var i = 0 ; i < length ; i++){ 
             var packs = user.externalPacksSubscriptions[i];
             for(var j = 0 ; j < packs.includedCardPacksIds.length ; j++){ 
                 var pack = packs.includedCardPacksIds[j];
