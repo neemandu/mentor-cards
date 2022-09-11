@@ -8,7 +8,7 @@
   }
   
   #layout {
-    width: 80%;
+    width: 80vw;
   }
   
   #header #title {
@@ -20,6 +20,10 @@
   table {
     width: 100%;
     text-align: center;
+
+    max-height: 75vh;
+    overflow: auto;
+    padding: 1%;
   }
   
   th.mat-header-cell {

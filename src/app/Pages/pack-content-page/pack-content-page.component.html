@@ -2,6 +2,7 @@
 <div class="d-flex align-items-center flex-column">
   <div class="title d-flex justify-content-center align-items-baseline">
     <h1 style="text-align: center" *ngIf="pack">{{pack.name}}</h1>
+    <h1 style="text-align: center" *ngIf="!id">החיות שבתוכנו</h1>
     <h2 *ngIf="pack?.about" id="about-author" class="clickable" (click)="openAboutDialog()">(על יוצר הערכה)</h2>
   </div>
   <button id="guideBook" type="button" [disabled]="showEditPack"
@@ -79,7 +80,6 @@
         style="color: coral;">&#10084;</span>
     </p>
     <ul>
-      <li><span>ערכה זו היא ערכה לדוגמא ולכן כוללת רק 10 קלפים</span></li>
       <li><span>באתר קיימות עשרות ערכות קלפים לבחירתכם</span></li>
       <li><span>כל ערכה כוללת מעל ל-40 קלפים</span></li>
       <li><span>כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים</span></li>

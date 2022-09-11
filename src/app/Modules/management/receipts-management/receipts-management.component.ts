@@ -29,7 +29,7 @@ export class ReceiptsManagementComponent implements OnInit {
     this.api.ListInvoicess().then((res) => {
       console.log("🚀 ~ file: receipts-management.component.ts ~ line 31 ~ this.api.ListReceiptsIds ~ res", res)
       this.receiptsData = [...res.items]
-      this.dataSource = new MatTableDataSource(this.receiptsData);
+      this.dataSource = new MatTableDataSource(this.receiptsData.sort((a, b) => b.invoiceRunningId - a.invoiceRunningId));
       this.mngService.overlaySpinner(false);
     });
   }
