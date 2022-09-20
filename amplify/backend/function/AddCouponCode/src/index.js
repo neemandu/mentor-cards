@@ -192,21 +192,13 @@ exports.handler = async (event) => {
     }
 
     var organization = await getOrgByCode(couponCode);
-    if(organization){
-        if(user.userOrgMembershipId){
-            console.log('User: ' + user.email + " already belong to organization: " + user.userOrgMembershipId);
-            throw Error ('User already in organization');
-        }
-        else{
-            var isUserBelong = isUserBelongToOrg(organization.membersEmails, user.email);
-            if(!isUserBelong){
-                console.log('User: ' + user.email + " does not belong to organization: " + couponCode);
-                throw Error ('Not in organization');
-            }
-            else{
-                user.userOrgMembershipId = organization.organizationsMembershipId;
-            }
-        }
+    var isUserBelong = isUserBelongToOrg(organization.membersEmails, user.email);
+    if(!isUserBelong){
+        console.log('User: ' + user.email + " does not belong to organization: " + couponCode);
+        throw Error ('Not in organization');
+    }
+    else{
+        user.userOrgMembershipId = organization.organizationsMembershipId;
     }
     var dbCouponCode = await getCouponCode(couponCode);
     if(!dbCouponCode){
