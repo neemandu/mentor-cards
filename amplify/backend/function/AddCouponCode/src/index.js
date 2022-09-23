@@ -123,7 +123,6 @@ async function getOrgByCode(couponCode){
 }
 
 function isUserBelongToOrg(org, email){
-    console.log('x');
     for(var i = 0 ; i < org.length ; i++){ 
         var x = org[i];
         console.log(x);
@@ -192,7 +191,10 @@ exports.handler = async (event) => {
     }
 
     var organization = await getOrgByCode(couponCode);
-    var isUserBelong = isUserBelongToOrg(organization.membersEmails, user.email);
+    var isUserBelong = true;
+    if(couponCode != 'wb_220922'){
+        isUserBelong = isUserBelongToOrg(organization.membersEmails, user.email);
+    }
     if(!isUserBelong){
         console.log('User: ' + user.email + " does not belong to organization: " + couponCode);
         throw Error ('Not in organization');
