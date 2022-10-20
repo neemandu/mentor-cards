@@ -3,11 +3,10 @@
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
-import { Observable } from "zen-observable-ts";
 import awsconfig from '../aws-exports';
 API.configure(awsconfig)
+import { Observable } from "zen-observable-ts";
 import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
-
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -152,6 +151,8 @@ export type CardsPack = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: Prices | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: SubscriptionPlan | null;
@@ -167,6 +168,16 @@ export type GuideBookElement = {
   __typename: "GuideBookElement";
   name?: string | null;
   subElements?: Array<GuideBookElement | null> | null;
+};
+
+export type Prices = {
+  __typename: "Prices";
+  fullYearlyPrice?: number | null;
+  fullMonthlyPrice?: number | null;
+  fullYearlyDiscountPercentage?: number | null;
+  membersSpecialYearlyPrice?: number | null;
+  membersSpecialMonthlyPrice?: number | null;
+  membersYealyDiscountPercentage?: number | null;
 };
 
 export type CouponCodes = {
@@ -547,6 +558,8 @@ export type CreateCardsPackInput = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: PricesInput | null;
   cardsPackSubscriptionPlanId?: string | null;
 };
 
@@ -558,6 +571,15 @@ export type CardsInput = {
 export type GuideBookElementInput = {
   name?: string | null;
   subElements?: Array<GuideBookElementInput | null> | null;
+};
+
+export type PricesInput = {
+  fullYearlyPrice?: number | null;
+  fullMonthlyPrice?: number | null;
+  fullYearlyDiscountPercentage?: number | null;
+  membersSpecialYearlyPrice?: number | null;
+  membersSpecialMonthlyPrice?: number | null;
+  membersYealyDiscountPercentage?: number | null;
 };
 
 export type ModelCardsPackConditionInput = {
@@ -576,6 +598,7 @@ export type ModelCardsPackConditionInput = {
   backImgUrl?: ModelStringInput | null;
   isExternalPack?: ModelBooleanInput | null;
   authorizedDomains?: ModelStringInput | null;
+  topQuestions?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -608,6 +631,8 @@ export type UpdateCardsPackInput = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: PricesInput | null;
   cardsPackSubscriptionPlanId?: string | null;
 };
 
@@ -995,6 +1020,7 @@ export type ModelCardsPackFilterInput = {
   backImgUrl?: ModelStringInput | null;
   isExternalPack?: ModelBooleanInput | null;
   authorizedDomains?: ModelStringInput | null;
+  topQuestions?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1113,6 +1139,16 @@ export type CreateUserMutation = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
+      topQuestions?: Array<string | null> | null;
+      prices?: {
+        __typename: "Prices";
+        fullYearlyPrice?: number | null;
+        fullMonthlyPrice?: number | null;
+        fullYearlyDiscountPercentage?: number | null;
+        membersSpecialYearlyPrice?: number | null;
+        membersSpecialMonthlyPrice?: number | null;
+        membersYealyDiscountPercentage?: number | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
       subscriptionPlan?: {
@@ -1287,6 +1323,16 @@ export type CreateUserMutation = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
+      topQuestions?: Array<string | null> | null;
+      prices?: {
+        __typename: "Prices";
+        fullYearlyPrice?: number | null;
+        fullMonthlyPrice?: number | null;
+        fullYearlyDiscountPercentage?: number | null;
+        membersSpecialYearlyPrice?: number | null;
+        membersSpecialMonthlyPrice?: number | null;
+        membersYealyDiscountPercentage?: number | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
       subscriptionPlan?: {
@@ -1859,6 +1905,16 @@ export type CreateCardsPackMutation = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: {
+    __typename: "Prices";
+    fullYearlyPrice?: number | null;
+    fullMonthlyPrice?: number | null;
+    fullYearlyDiscountPercentage?: number | null;
+    membersSpecialYearlyPrice?: number | null;
+    membersSpecialMonthlyPrice?: number | null;
+    membersYealyDiscountPercentage?: number | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: {
@@ -1949,6 +2005,16 @@ export type UpdateCardsPackMutation = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: {
+    __typename: "Prices";
+    fullYearlyPrice?: number | null;
+    fullMonthlyPrice?: number | null;
+    fullYearlyDiscountPercentage?: number | null;
+    membersSpecialYearlyPrice?: number | null;
+    membersSpecialMonthlyPrice?: number | null;
+    membersYealyDiscountPercentage?: number | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: {
@@ -2039,6 +2105,16 @@ export type DeleteCardsPackMutation = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: {
+    __typename: "Prices";
+    fullYearlyPrice?: number | null;
+    fullMonthlyPrice?: number | null;
+    fullYearlyDiscountPercentage?: number | null;
+    membersSpecialYearlyPrice?: number | null;
+    membersSpecialMonthlyPrice?: number | null;
+    membersYealyDiscountPercentage?: number | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: {
@@ -2320,6 +2396,16 @@ export type GetUserQuery = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
+      topQuestions?: Array<string | null> | null;
+      prices?: {
+        __typename: "Prices";
+        fullYearlyPrice?: number | null;
+        fullMonthlyPrice?: number | null;
+        fullYearlyDiscountPercentage?: number | null;
+        membersSpecialYearlyPrice?: number | null;
+        membersSpecialMonthlyPrice?: number | null;
+        membersYealyDiscountPercentage?: number | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
       subscriptionPlan?: {
@@ -2494,6 +2580,16 @@ export type GetUserQuery = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
+      topQuestions?: Array<string | null> | null;
+      prices?: {
+        __typename: "Prices";
+        fullYearlyPrice?: number | null;
+        fullMonthlyPrice?: number | null;
+        fullYearlyDiscountPercentage?: number | null;
+        membersSpecialYearlyPrice?: number | null;
+        membersSpecialMonthlyPrice?: number | null;
+        membersYealyDiscountPercentage?: number | null;
+      } | null;
       createdAt: string;
       updatedAt: string;
       subscriptionPlan?: {
@@ -2618,6 +2714,16 @@ export type ListUsersQuery = {
         backImgUrl?: string | null;
         isExternalPack?: boolean | null;
         authorizedDomains?: Array<string | null> | null;
+        topQuestions?: Array<string | null> | null;
+        prices?: {
+          __typename: "Prices";
+          fullYearlyPrice?: number | null;
+          fullMonthlyPrice?: number | null;
+          fullYearlyDiscountPercentage?: number | null;
+          membersSpecialYearlyPrice?: number | null;
+          membersSpecialMonthlyPrice?: number | null;
+          membersYealyDiscountPercentage?: number | null;
+        } | null;
         createdAt: string;
         updatedAt: string;
         subscriptionPlan?: {
@@ -2788,6 +2894,16 @@ export type ListUsersQuery = {
         backImgUrl?: string | null;
         isExternalPack?: boolean | null;
         authorizedDomains?: Array<string | null> | null;
+        topQuestions?: Array<string | null> | null;
+        prices?: {
+          __typename: "Prices";
+          fullYearlyPrice?: number | null;
+          fullMonthlyPrice?: number | null;
+          fullYearlyDiscountPercentage?: number | null;
+          membersSpecialYearlyPrice?: number | null;
+          membersSpecialMonthlyPrice?: number | null;
+          membersYealyDiscountPercentage?: number | null;
+        } | null;
         createdAt: string;
         updatedAt: string;
         subscriptionPlan?: {
@@ -3234,6 +3350,16 @@ export type GetCardsPackQuery = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: {
+    __typename: "Prices";
+    fullYearlyPrice?: number | null;
+    fullMonthlyPrice?: number | null;
+    fullYearlyDiscountPercentage?: number | null;
+    membersSpecialYearlyPrice?: number | null;
+    membersSpecialMonthlyPrice?: number | null;
+    membersYealyDiscountPercentage?: number | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: {
@@ -3322,6 +3448,16 @@ export type ListCardsPacksQuery = {
     backImgUrl?: string | null;
     isExternalPack?: boolean | null;
     authorizedDomains?: Array<string | null> | null;
+    topQuestions?: Array<string | null> | null;
+    prices?: {
+      __typename: "Prices";
+      fullYearlyPrice?: number | null;
+      fullMonthlyPrice?: number | null;
+      fullYearlyDiscountPercentage?: number | null;
+      membersSpecialYearlyPrice?: number | null;
+      membersSpecialMonthlyPrice?: number | null;
+      membersYealyDiscountPercentage?: number | null;
+    } | null;
     createdAt: string;
     updatedAt: string;
     subscriptionPlan?: {
@@ -4008,6 +4144,16 @@ export type OnCreateCardsPackSubscription = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: {
+    __typename: "Prices";
+    fullYearlyPrice?: number | null;
+    fullMonthlyPrice?: number | null;
+    fullYearlyDiscountPercentage?: number | null;
+    membersSpecialYearlyPrice?: number | null;
+    membersSpecialMonthlyPrice?: number | null;
+    membersYealyDiscountPercentage?: number | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: {
@@ -4098,6 +4244,16 @@ export type OnUpdateCardsPackSubscription = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: {
+    __typename: "Prices";
+    fullYearlyPrice?: number | null;
+    fullMonthlyPrice?: number | null;
+    fullYearlyDiscountPercentage?: number | null;
+    membersSpecialYearlyPrice?: number | null;
+    membersSpecialMonthlyPrice?: number | null;
+    membersYealyDiscountPercentage?: number | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: {
@@ -4188,6 +4344,16 @@ export type OnDeleteCardsPackSubscription = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  topQuestions?: Array<string | null> | null;
+  prices?: {
+    __typename: "Prices";
+    fullYearlyPrice?: number | null;
+    fullMonthlyPrice?: number | null;
+    fullYearlyDiscountPercentage?: number | null;
+    membersSpecialYearlyPrice?: number | null;
+    membersSpecialMonthlyPrice?: number | null;
+    membersYealyDiscountPercentage?: number | null;
+  } | null;
   createdAt: string;
   updatedAt: string;
   subscriptionPlan?: {
@@ -4348,6 +4514,16 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
+              topQuestions
+              prices {
+                __typename
+                fullYearlyPrice
+                fullMonthlyPrice
+                fullYearlyDiscountPercentage
+                membersSpecialYearlyPrice
+                membersSpecialMonthlyPrice
+                membersYealyDiscountPercentage
+              }
               createdAt
               updatedAt
               subscriptionPlan {
@@ -4522,6 +4698,16 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
+              topQuestions
+              prices {
+                __typename
+                fullYearlyPrice
+                fullMonthlyPrice
+                fullYearlyDiscountPercentage
+                membersSpecialYearlyPrice
+                membersSpecialMonthlyPrice
+                membersYealyDiscountPercentage
+              }
               createdAt
               updatedAt
               subscriptionPlan {
@@ -4671,50 +4857,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
-  }
-  async GetSubscriptionPlansForOrgs(
-    input: userInput
-  ): Promise<Array<GetSubscriptionPlansMutation>> {
-    const statement = `mutation GetSubscriptionPlans($input: userInput!) {
-        GetSubscriptionPlans(input: $input) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <Array<GetSubscriptionPlansMutation>>(
-      response.data.GetSubscriptionPlans
-    );
   }
   async GetSubscriptionPlans(
     input: userInput
@@ -5615,6 +5757,16 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            __typename
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -5721,6 +5873,16 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            __typename
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -5827,6 +5989,16 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            __typename
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -6299,6 +6471,16 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
+              topQuestions
+              prices {
+                __typename
+                fullYearlyPrice
+                fullMonthlyPrice
+                fullYearlyDiscountPercentage
+                membersSpecialYearlyPrice
+                membersSpecialMonthlyPrice
+                membersYealyDiscountPercentage
+              }
               createdAt
               updatedAt
               subscriptionPlan {
@@ -6473,6 +6655,16 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
+              topQuestions
+              prices {
+                __typename
+                fullYearlyPrice
+                fullMonthlyPrice
+                fullYearlyDiscountPercentage
+                membersSpecialYearlyPrice
+                membersSpecialMonthlyPrice
+                membersYealyDiscountPercentage
+              }
               createdAt
               updatedAt
               subscriptionPlan {
@@ -6611,6 +6803,16 @@ export class APIService {
                 backImgUrl
                 isExternalPack
                 authorizedDomains
+                topQuestions
+                prices {
+                  __typename
+                  fullYearlyPrice
+                  fullMonthlyPrice
+                  fullYearlyDiscountPercentage
+                  membersSpecialYearlyPrice
+                  membersSpecialMonthlyPrice
+                  membersYealyDiscountPercentage
+                }
                 createdAt
                 updatedAt
                 subscriptionPlan {
@@ -6781,6 +6983,16 @@ export class APIService {
                 backImgUrl
                 isExternalPack
                 authorizedDomains
+                topQuestions
+                prices {
+                  __typename
+                  fullYearlyPrice
+                  fullMonthlyPrice
+                  fullYearlyDiscountPercentage
+                  membersSpecialYearlyPrice
+                  membersSpecialMonthlyPrice
+                  membersYealyDiscountPercentage
+                }
                 createdAt
                 updatedAt
                 subscriptionPlan {
@@ -7500,6 +7712,16 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            __typename
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -7655,6 +7877,16 @@ export class APIService {
             backImgUrl
             isExternalPack
             authorizedDomains
+            topQuestions
+            prices {
+              __typename
+              fullYearlyPrice
+              fullMonthlyPrice
+              fullYearlyDiscountPercentage
+              membersSpecialYearlyPrice
+              membersSpecialMonthlyPrice
+              membersYealyDiscountPercentage
+            }
             createdAt
             updatedAt
             subscriptionPlan {
@@ -8686,6 +8918,16 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            __typename
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -8786,6 +9028,16 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            __typename
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -8886,6 +9138,16 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            __typename
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {

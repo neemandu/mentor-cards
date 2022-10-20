@@ -78,6 +78,15 @@ query GetUser($id: ID!) {
         backImgUrl
         isExternalPack
         authorizedDomains
+        topQuestions
+        prices {
+          fullYearlyPrice
+          fullMonthlyPrice
+          fullYearlyDiscountPercentage
+          membersSpecialYearlyPrice
+          membersSpecialMonthlyPrice
+          membersYealyDiscountPercentage
+        }
         createdAt
         updatedAt
         subscriptionPlan {
@@ -232,6 +241,15 @@ query GetUser($id: ID!) {
         backImgUrl
         isExternalPack
         authorizedDomains
+        topQuestions
+        prices {
+          fullYearlyPrice
+          fullMonthlyPrice
+          fullYearlyDiscountPercentage
+          membersSpecialYearlyPrice
+          membersSpecialMonthlyPrice
+          membersYealyDiscountPercentage
+        }
         createdAt
         updatedAt
         subscriptionPlan {
@@ -345,6 +363,15 @@ query ListUsers(
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -496,6 +523,15 @@ query ListUsers(
           backImgUrl
           isExternalPack
           authorizedDomains
+          topQuestions
+          prices {
+            fullYearlyPrice
+            fullMonthlyPrice
+            fullYearlyDiscountPercentage
+            membersSpecialYearlyPrice
+            membersSpecialMonthlyPrice
+            membersYealyDiscountPercentage
+          }
           createdAt
           updatedAt
           subscriptionPlan {
@@ -938,6 +974,15 @@ query GetCardsPack($id: ID!) {
     backImgUrl
     isExternalPack
     authorizedDomains
+    topQuestions
+    prices {
+      fullYearlyPrice
+      fullMonthlyPrice
+      fullYearlyDiscountPercentage
+      membersSpecialYearlyPrice
+      membersSpecialMonthlyPrice
+      membersYealyDiscountPercentage
+    }
     createdAt
     updatedAt
     subscriptionPlan {
@@ -1018,6 +1063,15 @@ query ListCardsPacks(
       backImgUrl
       isExternalPack
       authorizedDomains
+      topQuestions
+      prices {
+        fullYearlyPrice
+        fullMonthlyPrice
+        fullYearlyDiscountPercentage
+        membersSpecialYearlyPrice
+        membersSpecialMonthlyPrice
+        membersYealyDiscountPercentage
+      }
       createdAt
       updatedAt
       subscriptionPlan {

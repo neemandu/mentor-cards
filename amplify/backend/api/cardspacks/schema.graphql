@@ -197,6 +197,17 @@ type CardsPack
   isExternalPack: Boolean
   authorizedDomains: [String]
   subscriptionPlan: SubscriptionPlan @connection
+  topQuestions: [String]
+  prices: Prices
+}
+
+type Prices {
+  fullYearlyPrice: Float
+  fullMonthlyPrice: Float
+  fullYearlyDiscountPercentage: Float
+  membersSpecialYearlyPrice: Float
+  membersSpecialMonthlyPrice: Float
+  membersYealyDiscountPercentage: Float
 }
 
 type Cards {

@@ -581,6 +581,15 @@ subscription OnCreateCardsPack {
     backImgUrl
     isExternalPack
     authorizedDomains
+    topQuestions
+    prices {
+      fullYearlyPrice
+      fullMonthlyPrice
+      fullYearlyDiscountPercentage
+      membersSpecialYearlyPrice
+      membersSpecialMonthlyPrice
+      membersYealyDiscountPercentage
+    }
     createdAt
     updatedAt
     subscriptionPlan {
@@ -659,6 +668,15 @@ subscription OnUpdateCardsPack {
     backImgUrl
     isExternalPack
     authorizedDomains
+    topQuestions
+    prices {
+      fullYearlyPrice
+      fullMonthlyPrice
+      fullYearlyDiscountPercentage
+      membersSpecialYearlyPrice
+      membersSpecialMonthlyPrice
+      membersYealyDiscountPercentage
+    }
     createdAt
     updatedAt
     subscriptionPlan {
@@ -737,6 +755,15 @@ subscription OnDeleteCardsPack {
     backImgUrl
     isExternalPack
     authorizedDomains
+    topQuestions
+    prices {
+      fullYearlyPrice
+      fullMonthlyPrice
+      fullYearlyDiscountPercentage
+      membersSpecialYearlyPrice
+      membersSpecialMonthlyPrice
+      membersYealyDiscountPercentage
+    }
     createdAt
     updatedAt
     subscriptionPlan {

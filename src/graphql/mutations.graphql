@@ -78,6 +78,15 @@ mutation CreateUser($input: CreateUserInput!) {
         backImgUrl
         isExternalPack
         authorizedDomains
+        topQuestions
+        prices {
+          fullYearlyPrice
+          fullMonthlyPrice
+          fullYearlyDiscountPercentage
+          membersSpecialYearlyPrice
+          membersSpecialMonthlyPrice
+          membersYealyDiscountPercentage
+        }
         createdAt
         updatedAt
         subscriptionPlan {
@@ -232,6 +241,15 @@ mutation CreateUser($input: CreateUserInput!) {
         backImgUrl
         isExternalPack
         authorizedDomains
+        topQuestions
+        prices {
+          fullYearlyPrice
+          fullMonthlyPrice
+          fullYearlyDiscountPercentage
+          membersSpecialYearlyPrice
+          membersSpecialMonthlyPrice
+          membersYealyDiscountPercentage
+        }
         createdAt
         updatedAt
         subscriptionPlan {
@@ -847,6 +865,15 @@ mutation CreateCardsPack(
     backImgUrl
     isExternalPack
     authorizedDomains
+    topQuestions
+    prices {
+      fullYearlyPrice
+      fullMonthlyPrice
+      fullYearlyDiscountPercentage
+      membersSpecialYearlyPrice
+      membersSpecialMonthlyPrice
+      membersYealyDiscountPercentage
+    }
     createdAt
     updatedAt
     subscriptionPlan {
@@ -928,6 +955,15 @@ mutation UpdateCardsPack(
     backImgUrl
     isExternalPack
     authorizedDomains
+    topQuestions
+    prices {
+      fullYearlyPrice
+      fullMonthlyPrice
+      fullYearlyDiscountPercentage
+      membersSpecialYearlyPrice
+      membersSpecialMonthlyPrice
+      membersYealyDiscountPercentage
+    }
     createdAt
     updatedAt
     subscriptionPlan {
@@ -1009,6 +1045,15 @@ mutation DeleteCardsPack(
     backImgUrl
     isExternalPack
     authorizedDomains
+    topQuestions
+    prices {
+      fullYearlyPrice
+      fullMonthlyPrice
+      fullYearlyDiscountPercentage
+      membersSpecialYearlyPrice
+      membersSpecialMonthlyPrice
+      membersYealyDiscountPercentage
+    }
     createdAt
     updatedAt
     subscriptionPlan {
