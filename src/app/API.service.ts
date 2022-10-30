@@ -4488,7 +4488,7 @@ export class APIService {
             __typename
             id
             couponCode
-            discount
+            discount 
             trialPeriodInDays
             allowedCardsPacks
             organization {
