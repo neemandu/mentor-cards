@@ -79,43 +79,39 @@ query GetUser($id: ID!) {
         isExternalPack
         authorizedDomains
         topQuestions
-        prices {
-          fullYearlyPrice
-          fullMonthlyPrice
-          fullYearlyDiscountPercentage
-          membersSpecialYearlyPrice
-          membersSpecialMonthlyPrice
-          membersYealyDiscountPercentage
-        }
         createdAt
         updatedAt
-        subscriptionPlan {
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
+        subscriptionPlans {
+          items {
             id
             name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              text
-              imgUrl
-              link
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
           }
-          createdAt
-          updatedAt
+          nextToken
         }
       }
+      cancellationDate
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
@@ -242,43 +238,39 @@ query GetUser($id: ID!) {
         isExternalPack
         authorizedDomains
         topQuestions
-        prices {
-          fullYearlyPrice
-          fullMonthlyPrice
-          fullYearlyDiscountPercentage
-          membersSpecialYearlyPrice
-          membersSpecialMonthlyPrice
-          membersYealyDiscountPercentage
-        }
         createdAt
         updatedAt
-        subscriptionPlan {
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
+        subscriptionPlans {
+          items {
             id
             name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              text
-              imgUrl
-              link
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
           }
-          createdAt
-          updatedAt
+          nextToken
         }
       }
+      cancellationDate
     }
   }
 }
@@ -364,43 +356,39 @@ query ListUsers(
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+          subscriptionPlans {
+            items {
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                text
-                imgUrl
-                link
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
+        cancellationDate
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
@@ -524,43 +512,39 @@ query ListUsers(
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+          subscriptionPlans {
+            items {
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                text
-                imgUrl
-                link
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
+        cancellationDate
       }
     }
     nextToken
@@ -975,41 +959,36 @@ query GetCardsPack($id: ID!) {
     isExternalPack
     authorizedDomains
     topQuestions
-    prices {
-      fullYearlyPrice
-      fullMonthlyPrice
-      fullYearlyDiscountPercentage
-      membersSpecialYearlyPrice
-      membersSpecialMonthlyPrice
-      membersYealyDiscountPercentage
-    }
     createdAt
     updatedAt
-    subscriptionPlan {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      orgMembership {
+    subscriptionPlans {
+      items {
         id
         name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        about {
-          text
-          imgUrl
-          link
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
     }
   }
 }
@@ -1064,41 +1043,36 @@ query ListCardsPacks(
       isExternalPack
       authorizedDomains
       topQuestions
-      prices {
-        fullYearlyPrice
-        fullMonthlyPrice
-        fullYearlyDiscountPercentage
-        membersSpecialYearlyPrice
-        membersSpecialMonthlyPrice
-        membersYealyDiscountPercentage
-      }
       createdAt
       updatedAt
-      subscriptionPlan {
-        id
-        name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
+      subscriptionPlans {
+        items {
           id
           name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
     nextToken

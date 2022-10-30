@@ -94,6 +94,7 @@ export type MonthlySubscription = {
   providerTransactionId?: string | null;
   subscriptionPlan?: SubscriptionPlan | null;
   includedCardPacksIds?: Array<CardsPack | null> | null;
+  cancellationDate?: string | null;
 };
 
 export type SubscriptionPlan = {
@@ -152,10 +153,9 @@ export type CardsPack = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: Prices | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: SubscriptionPlan | null;
+  subscriptionPlans?: ModelSubscriptionPlanConnection | null;
 };
 
 export type Cards = {
@@ -170,14 +170,10 @@ export type GuideBookElement = {
   subElements?: Array<GuideBookElement | null> | null;
 };
 
-export type Prices = {
-  __typename: "Prices";
-  fullYearlyPrice?: number | null;
-  fullMonthlyPrice?: number | null;
-  fullYearlyDiscountPercentage?: number | null;
-  membersSpecialYearlyPrice?: number | null;
-  membersSpecialMonthlyPrice?: number | null;
-  membersYealyDiscountPercentage?: number | null;
+export type ModelSubscriptionPlanConnection = {
+  __typename: "ModelSubscriptionPlanConnection";
+  items: Array<SubscriptionPlan | null>;
+  nextToken?: string | null;
 };
 
 export type CouponCodes = {
@@ -228,6 +224,7 @@ export type couponCodeInput = {
 };
 
 export type updatePaymentProgramInput = {
+  packId?: number | null;
   paymentProgramId: string;
   providerTransactionId?: string | null;
   fullName?: string | null;
@@ -256,6 +253,7 @@ export type CreateSubscriptionPlanInput = {
   fullPrice?: number | null;
   discount?: number | null;
   subscriptionPlanOrgMembershipId?: string | null;
+  cardsPackSubscriptionPlansId?: string | null;
 };
 
 export type ModelSubscriptionPlanConditionInput = {
@@ -346,6 +344,7 @@ export type UpdateSubscriptionPlanInput = {
   fullPrice?: number | null;
   discount?: number | null;
   subscriptionPlanOrgMembershipId?: string | null;
+  cardsPackSubscriptionPlansId?: string | null;
 };
 
 export type DeleteSubscriptionPlanInput = {
@@ -559,8 +558,6 @@ export type CreateCardsPackInput = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: PricesInput | null;
-  cardsPackSubscriptionPlanId?: string | null;
 };
 
 export type CardsInput = {
@@ -571,15 +568,6 @@ export type CardsInput = {
 export type GuideBookElementInput = {
   name?: string | null;
   subElements?: Array<GuideBookElementInput | null> | null;
-};
-
-export type PricesInput = {
-  fullYearlyPrice?: number | null;
-  fullMonthlyPrice?: number | null;
-  fullYearlyDiscountPercentage?: number | null;
-  membersSpecialYearlyPrice?: number | null;
-  membersSpecialMonthlyPrice?: number | null;
-  membersYealyDiscountPercentage?: number | null;
 };
 
 export type ModelCardsPackConditionInput = {
@@ -632,8 +620,6 @@ export type UpdateCardsPackInput = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: PricesInput | null;
-  cardsPackSubscriptionPlanId?: string | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -1140,47 +1126,43 @@ export type CreateUserMutation = {
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
       topQuestions?: Array<string | null> | null;
-      prices?: {
-        __typename: "Prices";
-        fullYearlyPrice?: number | null;
-        fullMonthlyPrice?: number | null;
-        fullYearlyDiscountPercentage?: number | null;
-        membersSpecialYearlyPrice?: number | null;
-        membersSpecialMonthlyPrice?: number | null;
-        membersYealyDiscountPercentage?: number | null;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      subscriptionPlan?: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name?: string | null;
-        description?: string | null;
-        providerPlanId: string;
-        numberOfUsers?: number | null;
-        numberOfCardPacks?: number | null;
-        billingCycleInMonths?: number | null;
-        fullPrice?: number | null;
-        discount?: number | null;
-        orgMembership?: {
-          __typename: "OrganizationMembership";
+      subscriptionPlans?: {
+        __typename: "ModelSubscriptionPlanConnection";
+        items: Array<{
+          __typename: "SubscriptionPlan";
           id: string;
           name?: string | null;
-          trialPeriodInDays?: number | null;
-          numberOfallowedCardsPacks?: number | null;
-          about?: {
-            __typename: "About";
-            text?: string | null;
-            imgUrl?: string | null;
-            link?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
+            id: string;
+            name?: string | null;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
       } | null;
     } | null> | null;
+    cancellationDate?: string | null;
   } | null;
   numberOfPacksSubstitutions?: number | null;
   lastPackSubstitutionDate?: string | null;
@@ -1324,47 +1306,43 @@ export type CreateUserMutation = {
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
       topQuestions?: Array<string | null> | null;
-      prices?: {
-        __typename: "Prices";
-        fullYearlyPrice?: number | null;
-        fullMonthlyPrice?: number | null;
-        fullYearlyDiscountPercentage?: number | null;
-        membersSpecialYearlyPrice?: number | null;
-        membersSpecialMonthlyPrice?: number | null;
-        membersYealyDiscountPercentage?: number | null;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      subscriptionPlan?: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name?: string | null;
-        description?: string | null;
-        providerPlanId: string;
-        numberOfUsers?: number | null;
-        numberOfCardPacks?: number | null;
-        billingCycleInMonths?: number | null;
-        fullPrice?: number | null;
-        discount?: number | null;
-        orgMembership?: {
-          __typename: "OrganizationMembership";
+      subscriptionPlans?: {
+        __typename: "ModelSubscriptionPlanConnection";
+        items: Array<{
+          __typename: "SubscriptionPlan";
           id: string;
           name?: string | null;
-          trialPeriodInDays?: number | null;
-          numberOfallowedCardsPacks?: number | null;
-          about?: {
-            __typename: "About";
-            text?: string | null;
-            imgUrl?: string | null;
-            link?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
+            id: string;
+            name?: string | null;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
       } | null;
     } | null> | null;
+    cancellationDate?: string | null;
   } | null> | null;
 };
 
@@ -1906,45 +1884,40 @@ export type CreateCardsPackMutation = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: {
-    __typename: "Prices";
-    fullYearlyPrice?: number | null;
-    fullMonthlyPrice?: number | null;
-    fullYearlyDiscountPercentage?: number | null;
-    membersSpecialYearlyPrice?: number | null;
-    membersSpecialMonthlyPrice?: number | null;
-    membersYealyDiscountPercentage?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    billingCycleInMonths?: number | null;
-    fullPrice?: number | null;
-    discount?: number | null;
-    orgMembership?: {
-      __typename: "OrganizationMembership";
+  subscriptionPlans?: {
+    __typename: "ModelSubscriptionPlanConnection";
+    items: Array<{
+      __typename: "SubscriptionPlan";
       id: string;
       name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      about?: {
-        __typename: "About";
-        text?: string | null;
-        imgUrl?: string | null;
-        link?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -2006,45 +1979,40 @@ export type UpdateCardsPackMutation = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: {
-    __typename: "Prices";
-    fullYearlyPrice?: number | null;
-    fullMonthlyPrice?: number | null;
-    fullYearlyDiscountPercentage?: number | null;
-    membersSpecialYearlyPrice?: number | null;
-    membersSpecialMonthlyPrice?: number | null;
-    membersYealyDiscountPercentage?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    billingCycleInMonths?: number | null;
-    fullPrice?: number | null;
-    discount?: number | null;
-    orgMembership?: {
-      __typename: "OrganizationMembership";
+  subscriptionPlans?: {
+    __typename: "ModelSubscriptionPlanConnection";
+    items: Array<{
+      __typename: "SubscriptionPlan";
       id: string;
       name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      about?: {
-        __typename: "About";
-        text?: string | null;
-        imgUrl?: string | null;
-        link?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -2106,45 +2074,40 @@ export type DeleteCardsPackMutation = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: {
-    __typename: "Prices";
-    fullYearlyPrice?: number | null;
-    fullMonthlyPrice?: number | null;
-    fullYearlyDiscountPercentage?: number | null;
-    membersSpecialYearlyPrice?: number | null;
-    membersSpecialMonthlyPrice?: number | null;
-    membersYealyDiscountPercentage?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    billingCycleInMonths?: number | null;
-    fullPrice?: number | null;
-    discount?: number | null;
-    orgMembership?: {
-      __typename: "OrganizationMembership";
+  subscriptionPlans?: {
+    __typename: "ModelSubscriptionPlanConnection";
+    items: Array<{
+      __typename: "SubscriptionPlan";
       id: string;
       name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      about?: {
-        __typename: "About";
-        text?: string | null;
-        imgUrl?: string | null;
-        link?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -2397,47 +2360,43 @@ export type GetUserQuery = {
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
       topQuestions?: Array<string | null> | null;
-      prices?: {
-        __typename: "Prices";
-        fullYearlyPrice?: number | null;
-        fullMonthlyPrice?: number | null;
-        fullYearlyDiscountPercentage?: number | null;
-        membersSpecialYearlyPrice?: number | null;
-        membersSpecialMonthlyPrice?: number | null;
-        membersYealyDiscountPercentage?: number | null;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      subscriptionPlan?: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name?: string | null;
-        description?: string | null;
-        providerPlanId: string;
-        numberOfUsers?: number | null;
-        numberOfCardPacks?: number | null;
-        billingCycleInMonths?: number | null;
-        fullPrice?: number | null;
-        discount?: number | null;
-        orgMembership?: {
-          __typename: "OrganizationMembership";
+      subscriptionPlans?: {
+        __typename: "ModelSubscriptionPlanConnection";
+        items: Array<{
+          __typename: "SubscriptionPlan";
           id: string;
           name?: string | null;
-          trialPeriodInDays?: number | null;
-          numberOfallowedCardsPacks?: number | null;
-          about?: {
-            __typename: "About";
-            text?: string | null;
-            imgUrl?: string | null;
-            link?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
+            id: string;
+            name?: string | null;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
       } | null;
     } | null> | null;
+    cancellationDate?: string | null;
   } | null;
   numberOfPacksSubstitutions?: number | null;
   lastPackSubstitutionDate?: string | null;
@@ -2581,47 +2540,43 @@ export type GetUserQuery = {
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
       topQuestions?: Array<string | null> | null;
-      prices?: {
-        __typename: "Prices";
-        fullYearlyPrice?: number | null;
-        fullMonthlyPrice?: number | null;
-        fullYearlyDiscountPercentage?: number | null;
-        membersSpecialYearlyPrice?: number | null;
-        membersSpecialMonthlyPrice?: number | null;
-        membersYealyDiscountPercentage?: number | null;
-      } | null;
       createdAt: string;
       updatedAt: string;
-      subscriptionPlan?: {
-        __typename: "SubscriptionPlan";
-        id: string;
-        name?: string | null;
-        description?: string | null;
-        providerPlanId: string;
-        numberOfUsers?: number | null;
-        numberOfCardPacks?: number | null;
-        billingCycleInMonths?: number | null;
-        fullPrice?: number | null;
-        discount?: number | null;
-        orgMembership?: {
-          __typename: "OrganizationMembership";
+      subscriptionPlans?: {
+        __typename: "ModelSubscriptionPlanConnection";
+        items: Array<{
+          __typename: "SubscriptionPlan";
           id: string;
           name?: string | null;
-          trialPeriodInDays?: number | null;
-          numberOfallowedCardsPacks?: number | null;
-          about?: {
-            __typename: "About";
-            text?: string | null;
-            imgUrl?: string | null;
-            link?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
+            id: string;
+            name?: string | null;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
+            } | null;
+            createdAt: string;
+            updatedAt: string;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
       } | null;
     } | null> | null;
+    cancellationDate?: string | null;
   } | null> | null;
 };
 
@@ -2715,47 +2670,43 @@ export type ListUsersQuery = {
         isExternalPack?: boolean | null;
         authorizedDomains?: Array<string | null> | null;
         topQuestions?: Array<string | null> | null;
-        prices?: {
-          __typename: "Prices";
-          fullYearlyPrice?: number | null;
-          fullMonthlyPrice?: number | null;
-          fullYearlyDiscountPercentage?: number | null;
-          membersSpecialYearlyPrice?: number | null;
-          membersSpecialMonthlyPrice?: number | null;
-          membersYealyDiscountPercentage?: number | null;
-        } | null;
         createdAt: string;
         updatedAt: string;
-        subscriptionPlan?: {
-          __typename: "SubscriptionPlan";
-          id: string;
-          name?: string | null;
-          description?: string | null;
-          providerPlanId: string;
-          numberOfUsers?: number | null;
-          numberOfCardPacks?: number | null;
-          billingCycleInMonths?: number | null;
-          fullPrice?: number | null;
-          discount?: number | null;
-          orgMembership?: {
-            __typename: "OrganizationMembership";
+        subscriptionPlans?: {
+          __typename: "ModelSubscriptionPlanConnection";
+          items: Array<{
+            __typename: "SubscriptionPlan";
             id: string;
             name?: string | null;
-            trialPeriodInDays?: number | null;
-            numberOfallowedCardsPacks?: number | null;
-            about?: {
-              __typename: "About";
-              text?: string | null;
-              imgUrl?: string | null;
-              link?: string | null;
+            description?: string | null;
+            providerPlanId: string;
+            numberOfUsers?: number | null;
+            numberOfCardPacks?: number | null;
+            billingCycleInMonths?: number | null;
+            fullPrice?: number | null;
+            discount?: number | null;
+            orgMembership?: {
+              __typename: "OrganizationMembership";
+              id: string;
+              name?: string | null;
+              trialPeriodInDays?: number | null;
+              numberOfallowedCardsPacks?: number | null;
+              about?: {
+                __typename: "About";
+                text?: string | null;
+                imgUrl?: string | null;
+                link?: string | null;
+              } | null;
+              createdAt: string;
+              updatedAt: string;
             } | null;
             createdAt: string;
             updatedAt: string;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
         } | null;
       } | null> | null;
+      cancellationDate?: string | null;
     } | null;
     numberOfPacksSubstitutions?: number | null;
     lastPackSubstitutionDate?: string | null;
@@ -2895,47 +2846,43 @@ export type ListUsersQuery = {
         isExternalPack?: boolean | null;
         authorizedDomains?: Array<string | null> | null;
         topQuestions?: Array<string | null> | null;
-        prices?: {
-          __typename: "Prices";
-          fullYearlyPrice?: number | null;
-          fullMonthlyPrice?: number | null;
-          fullYearlyDiscountPercentage?: number | null;
-          membersSpecialYearlyPrice?: number | null;
-          membersSpecialMonthlyPrice?: number | null;
-          membersYealyDiscountPercentage?: number | null;
-        } | null;
         createdAt: string;
         updatedAt: string;
-        subscriptionPlan?: {
-          __typename: "SubscriptionPlan";
-          id: string;
-          name?: string | null;
-          description?: string | null;
-          providerPlanId: string;
-          numberOfUsers?: number | null;
-          numberOfCardPacks?: number | null;
-          billingCycleInMonths?: number | null;
-          fullPrice?: number | null;
-          discount?: number | null;
-          orgMembership?: {
-            __typename: "OrganizationMembership";
+        subscriptionPlans?: {
+          __typename: "ModelSubscriptionPlanConnection";
+          items: Array<{
+            __typename: "SubscriptionPlan";
             id: string;
             name?: string | null;
-            trialPeriodInDays?: number | null;
-            numberOfallowedCardsPacks?: number | null;
-            about?: {
-              __typename: "About";
-              text?: string | null;
-              imgUrl?: string | null;
-              link?: string | null;
+            description?: string | null;
+            providerPlanId: string;
+            numberOfUsers?: number | null;
+            numberOfCardPacks?: number | null;
+            billingCycleInMonths?: number | null;
+            fullPrice?: number | null;
+            discount?: number | null;
+            orgMembership?: {
+              __typename: "OrganizationMembership";
+              id: string;
+              name?: string | null;
+              trialPeriodInDays?: number | null;
+              numberOfallowedCardsPacks?: number | null;
+              about?: {
+                __typename: "About";
+                text?: string | null;
+                imgUrl?: string | null;
+                link?: string | null;
+              } | null;
+              createdAt: string;
+              updatedAt: string;
             } | null;
             createdAt: string;
             updatedAt: string;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
+          } | null>;
+          nextToken?: string | null;
         } | null;
       } | null> | null;
+      cancellationDate?: string | null;
     } | null> | null;
   } | null>;
   nextToken?: string | null;
@@ -3351,45 +3298,40 @@ export type GetCardsPackQuery = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: {
-    __typename: "Prices";
-    fullYearlyPrice?: number | null;
-    fullMonthlyPrice?: number | null;
-    fullYearlyDiscountPercentage?: number | null;
-    membersSpecialYearlyPrice?: number | null;
-    membersSpecialMonthlyPrice?: number | null;
-    membersYealyDiscountPercentage?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    billingCycleInMonths?: number | null;
-    fullPrice?: number | null;
-    discount?: number | null;
-    orgMembership?: {
-      __typename: "OrganizationMembership";
+  subscriptionPlans?: {
+    __typename: "ModelSubscriptionPlanConnection";
+    items: Array<{
+      __typename: "SubscriptionPlan";
       id: string;
       name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      about?: {
-        __typename: "About";
-        text?: string | null;
-        imgUrl?: string | null;
-        link?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -3449,45 +3391,40 @@ export type ListCardsPacksQuery = {
     isExternalPack?: boolean | null;
     authorizedDomains?: Array<string | null> | null;
     topQuestions?: Array<string | null> | null;
-    prices?: {
-      __typename: "Prices";
-      fullYearlyPrice?: number | null;
-      fullMonthlyPrice?: number | null;
-      fullYearlyDiscountPercentage?: number | null;
-      membersSpecialYearlyPrice?: number | null;
-      membersSpecialMonthlyPrice?: number | null;
-      membersYealyDiscountPercentage?: number | null;
-    } | null;
     createdAt: string;
     updatedAt: string;
-    subscriptionPlan?: {
-      __typename: "SubscriptionPlan";
-      id: string;
-      name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
+    subscriptionPlans?: {
+      __typename: "ModelSubscriptionPlanConnection";
+      items: Array<{
+        __typename: "SubscriptionPlan";
         id: string;
         name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
         } | null;
         createdAt: string;
         updatedAt: string;
-      } | null;
-      createdAt: string;
-      updatedAt: string;
+      } | null>;
+      nextToken?: string | null;
     } | null;
   } | null>;
   nextToken?: string | null;
@@ -4145,45 +4082,40 @@ export type OnCreateCardsPackSubscription = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: {
-    __typename: "Prices";
-    fullYearlyPrice?: number | null;
-    fullMonthlyPrice?: number | null;
-    fullYearlyDiscountPercentage?: number | null;
-    membersSpecialYearlyPrice?: number | null;
-    membersSpecialMonthlyPrice?: number | null;
-    membersYealyDiscountPercentage?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    billingCycleInMonths?: number | null;
-    fullPrice?: number | null;
-    discount?: number | null;
-    orgMembership?: {
-      __typename: "OrganizationMembership";
+  subscriptionPlans?: {
+    __typename: "ModelSubscriptionPlanConnection";
+    items: Array<{
+      __typename: "SubscriptionPlan";
       id: string;
       name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      about?: {
-        __typename: "About";
-        text?: string | null;
-        imgUrl?: string | null;
-        link?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -4245,45 +4177,40 @@ export type OnUpdateCardsPackSubscription = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: {
-    __typename: "Prices";
-    fullYearlyPrice?: number | null;
-    fullMonthlyPrice?: number | null;
-    fullYearlyDiscountPercentage?: number | null;
-    membersSpecialYearlyPrice?: number | null;
-    membersSpecialMonthlyPrice?: number | null;
-    membersYealyDiscountPercentage?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    billingCycleInMonths?: number | null;
-    fullPrice?: number | null;
-    discount?: number | null;
-    orgMembership?: {
-      __typename: "OrganizationMembership";
+  subscriptionPlans?: {
+    __typename: "ModelSubscriptionPlanConnection";
+    items: Array<{
+      __typename: "SubscriptionPlan";
       id: string;
       name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      about?: {
-        __typename: "About";
-        text?: string | null;
-        imgUrl?: string | null;
-        link?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -4345,45 +4272,40 @@ export type OnDeleteCardsPackSubscription = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
-  prices?: {
-    __typename: "Prices";
-    fullYearlyPrice?: number | null;
-    fullMonthlyPrice?: number | null;
-    fullYearlyDiscountPercentage?: number | null;
-    membersSpecialYearlyPrice?: number | null;
-    membersSpecialMonthlyPrice?: number | null;
-    membersYealyDiscountPercentage?: number | null;
-  } | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlan?: {
-    __typename: "SubscriptionPlan";
-    id: string;
-    name?: string | null;
-    description?: string | null;
-    providerPlanId: string;
-    numberOfUsers?: number | null;
-    numberOfCardPacks?: number | null;
-    billingCycleInMonths?: number | null;
-    fullPrice?: number | null;
-    discount?: number | null;
-    orgMembership?: {
-      __typename: "OrganizationMembership";
+  subscriptionPlans?: {
+    __typename: "ModelSubscriptionPlanConnection";
+    items: Array<{
+      __typename: "SubscriptionPlan";
       id: string;
       name?: string | null;
-      trialPeriodInDays?: number | null;
-      numberOfallowedCardsPacks?: number | null;
-      about?: {
-        __typename: "About";
-        text?: string | null;
-        imgUrl?: string | null;
-        link?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    } | null>;
+    nextToken?: string | null;
   } | null;
 };
 
@@ -4515,47 +4437,43 @@ export class APIService {
               isExternalPack
               authorizedDomains
               topQuestions
-              prices {
-                __typename
-                fullYearlyPrice
-                fullMonthlyPrice
-                fullYearlyDiscountPercentage
-                membersSpecialYearlyPrice
-                membersSpecialMonthlyPrice
-                membersYealyDiscountPercentage
-              }
               createdAt
               updatedAt
-              subscriptionPlan {
+              subscriptionPlans {
                 __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                billingCycleInMonths
-                fullPrice
-                discount
-                orgMembership {
+                items {
                   __typename
                   id
                   name
-                  trialPeriodInDays
-                  numberOfallowedCardsPacks
-                  about {
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
                     __typename
-                    text
-                    imgUrl
-                    link
+                    id
+                    name
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
+                      __typename
+                      text
+                      imgUrl
+                      link
+                    }
+                    createdAt
+                    updatedAt
                   }
                   createdAt
                   updatedAt
                 }
-                createdAt
-                updatedAt
+                nextToken
               }
             }
+            cancellationDate
           }
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
@@ -4699,47 +4617,43 @@ export class APIService {
               isExternalPack
               authorizedDomains
               topQuestions
-              prices {
-                __typename
-                fullYearlyPrice
-                fullMonthlyPrice
-                fullYearlyDiscountPercentage
-                membersSpecialYearlyPrice
-                membersSpecialMonthlyPrice
-                membersYealyDiscountPercentage
-              }
               createdAt
               updatedAt
-              subscriptionPlan {
+              subscriptionPlans {
                 __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                billingCycleInMonths
-                fullPrice
-                discount
-                orgMembership {
+                items {
                   __typename
                   id
                   name
-                  trialPeriodInDays
-                  numberOfallowedCardsPacks
-                  about {
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
                     __typename
-                    text
-                    imgUrl
-                    link
+                    id
+                    name
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
+                      __typename
+                      text
+                      imgUrl
+                      link
+                    }
+                    createdAt
+                    updatedAt
                   }
                   createdAt
                   updatedAt
                 }
-                createdAt
-                updatedAt
+                nextToken
               }
             }
+            cancellationDate
           }
         }
       }`;
@@ -5796,45 +5710,40 @@ export class APIService {
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            __typename
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
+          subscriptionPlans {
             __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            items {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
       }`;
@@ -5912,45 +5821,40 @@ export class APIService {
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            __typename
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
+          subscriptionPlans {
             __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            items {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
       }`;
@@ -6028,45 +5932,40 @@ export class APIService {
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            __typename
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
+          subscriptionPlans {
             __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            items {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
       }`;
@@ -6510,47 +6409,43 @@ export class APIService {
               isExternalPack
               authorizedDomains
               topQuestions
-              prices {
-                __typename
-                fullYearlyPrice
-                fullMonthlyPrice
-                fullYearlyDiscountPercentage
-                membersSpecialYearlyPrice
-                membersSpecialMonthlyPrice
-                membersYealyDiscountPercentage
-              }
               createdAt
               updatedAt
-              subscriptionPlan {
+              subscriptionPlans {
                 __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                billingCycleInMonths
-                fullPrice
-                discount
-                orgMembership {
+                items {
                   __typename
                   id
                   name
-                  trialPeriodInDays
-                  numberOfallowedCardsPacks
-                  about {
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
                     __typename
-                    text
-                    imgUrl
-                    link
+                    id
+                    name
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
+                      __typename
+                      text
+                      imgUrl
+                      link
+                    }
+                    createdAt
+                    updatedAt
                   }
                   createdAt
                   updatedAt
                 }
-                createdAt
-                updatedAt
+                nextToken
               }
             }
+            cancellationDate
           }
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
@@ -6694,47 +6589,43 @@ export class APIService {
               isExternalPack
               authorizedDomains
               topQuestions
-              prices {
-                __typename
-                fullYearlyPrice
-                fullMonthlyPrice
-                fullYearlyDiscountPercentage
-                membersSpecialYearlyPrice
-                membersSpecialMonthlyPrice
-                membersYealyDiscountPercentage
-              }
               createdAt
               updatedAt
-              subscriptionPlan {
+              subscriptionPlans {
                 __typename
-                id
-                name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                billingCycleInMonths
-                fullPrice
-                discount
-                orgMembership {
+                items {
                   __typename
                   id
                   name
-                  trialPeriodInDays
-                  numberOfallowedCardsPacks
-                  about {
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
                     __typename
-                    text
-                    imgUrl
-                    link
+                    id
+                    name
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
+                      __typename
+                      text
+                      imgUrl
+                      link
+                    }
+                    createdAt
+                    updatedAt
                   }
                   createdAt
                   updatedAt
                 }
-                createdAt
-                updatedAt
+                nextToken
               }
             }
+            cancellationDate
           }
         }
       }`;
@@ -6842,47 +6733,43 @@ export class APIService {
                 isExternalPack
                 authorizedDomains
                 topQuestions
-                prices {
-                  __typename
-                  fullYearlyPrice
-                  fullMonthlyPrice
-                  fullYearlyDiscountPercentage
-                  membersSpecialYearlyPrice
-                  membersSpecialMonthlyPrice
-                  membersYealyDiscountPercentage
-                }
                 createdAt
                 updatedAt
-                subscriptionPlan {
+                subscriptionPlans {
                   __typename
-                  id
-                  name
-                  description
-                  providerPlanId
-                  numberOfUsers
-                  numberOfCardPacks
-                  billingCycleInMonths
-                  fullPrice
-                  discount
-                  orgMembership {
+                  items {
                     __typename
                     id
                     name
-                    trialPeriodInDays
-                    numberOfallowedCardsPacks
-                    about {
+                    description
+                    providerPlanId
+                    numberOfUsers
+                    numberOfCardPacks
+                    billingCycleInMonths
+                    fullPrice
+                    discount
+                    orgMembership {
                       __typename
-                      text
-                      imgUrl
-                      link
+                      id
+                      name
+                      trialPeriodInDays
+                      numberOfallowedCardsPacks
+                      about {
+                        __typename
+                        text
+                        imgUrl
+                        link
+                      }
+                      createdAt
+                      updatedAt
                     }
                     createdAt
                     updatedAt
                   }
-                  createdAt
-                  updatedAt
+                  nextToken
                 }
               }
+              cancellationDate
             }
             numberOfPacksSubstitutions
             lastPackSubstitutionDate
@@ -7022,47 +6909,43 @@ export class APIService {
                 isExternalPack
                 authorizedDomains
                 topQuestions
-                prices {
-                  __typename
-                  fullYearlyPrice
-                  fullMonthlyPrice
-                  fullYearlyDiscountPercentage
-                  membersSpecialYearlyPrice
-                  membersSpecialMonthlyPrice
-                  membersYealyDiscountPercentage
-                }
                 createdAt
                 updatedAt
-                subscriptionPlan {
+                subscriptionPlans {
                   __typename
-                  id
-                  name
-                  description
-                  providerPlanId
-                  numberOfUsers
-                  numberOfCardPacks
-                  billingCycleInMonths
-                  fullPrice
-                  discount
-                  orgMembership {
+                  items {
                     __typename
                     id
                     name
-                    trialPeriodInDays
-                    numberOfallowedCardsPacks
-                    about {
+                    description
+                    providerPlanId
+                    numberOfUsers
+                    numberOfCardPacks
+                    billingCycleInMonths
+                    fullPrice
+                    discount
+                    orgMembership {
                       __typename
-                      text
-                      imgUrl
-                      link
+                      id
+                      name
+                      trialPeriodInDays
+                      numberOfallowedCardsPacks
+                      about {
+                        __typename
+                        text
+                        imgUrl
+                        link
+                      }
+                      createdAt
+                      updatedAt
                     }
                     createdAt
                     updatedAt
                   }
-                  createdAt
-                  updatedAt
+                  nextToken
                 }
               }
+              cancellationDate
             }
           }
           nextToken
@@ -7751,45 +7634,40 @@ export class APIService {
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            __typename
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
+          subscriptionPlans {
             __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            items {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
       }`;
@@ -7833,6 +7711,39 @@ export class APIService {
             likesCounter
             isExternalPack
             visitorsCounter
+            subscriptionPlans {
+              __typename
+              items {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                createdAt
+                updatedAt
+              }
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -7918,45 +7829,40 @@ export class APIService {
             isExternalPack
             authorizedDomains
             topQuestions
-            prices {
-              __typename
-              fullYearlyPrice
-              fullMonthlyPrice
-              fullYearlyDiscountPercentage
-              membersSpecialYearlyPrice
-              membersSpecialMonthlyPrice
-              membersYealyDiscountPercentage
-            }
             createdAt
             updatedAt
-            subscriptionPlan {
+            subscriptionPlans {
               __typename
-              id
-              name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              items {
                 __typename
                 id
                 name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
                   __typename
-                  text
-                  imgUrl
-                  link
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
                 }
                 createdAt
                 updatedAt
               }
-              createdAt
-              updatedAt
+              nextToken
             }
           }
           nextToken
@@ -8959,45 +8865,40 @@ export class APIService {
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            __typename
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
+          subscriptionPlans {
             __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            items {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
       }`
@@ -9069,45 +8970,40 @@ export class APIService {
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            __typename
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
+          subscriptionPlans {
             __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            items {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
       }`
@@ -9179,45 +9075,40 @@ export class APIService {
           isExternalPack
           authorizedDomains
           topQuestions
-          prices {
-            __typename
-            fullYearlyPrice
-            fullMonthlyPrice
-            fullYearlyDiscountPercentage
-            membersSpecialYearlyPrice
-            membersSpecialMonthlyPrice
-            membersYealyDiscountPercentage
-          }
           createdAt
           updatedAt
-          subscriptionPlan {
+          subscriptionPlans {
             __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            items {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
               createdAt
               updatedAt
             }
-            createdAt
-            updatedAt
+            nextToken
           }
         }
       }`

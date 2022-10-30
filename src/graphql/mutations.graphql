@@ -79,43 +79,39 @@ mutation CreateUser($input: CreateUserInput!) {
         isExternalPack
         authorizedDomains
         topQuestions
-        prices {
-          fullYearlyPrice
-          fullMonthlyPrice
-          fullYearlyDiscountPercentage
-          membersSpecialYearlyPrice
-          membersSpecialMonthlyPrice
-          membersYealyDiscountPercentage
-        }
         createdAt
         updatedAt
-        subscriptionPlan {
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
+        subscriptionPlans {
+          items {
             id
             name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              text
-              imgUrl
-              link
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
           }
-          createdAt
-          updatedAt
+          nextToken
         }
       }
+      cancellationDate
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
@@ -242,43 +238,39 @@ mutation CreateUser($input: CreateUserInput!) {
         isExternalPack
         authorizedDomains
         topQuestions
-        prices {
-          fullYearlyPrice
-          fullMonthlyPrice
-          fullYearlyDiscountPercentage
-          membersSpecialYearlyPrice
-          membersSpecialMonthlyPrice
-          membersYealyDiscountPercentage
-        }
         createdAt
         updatedAt
-        subscriptionPlan {
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
+        subscriptionPlans {
+          items {
             id
             name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              text
-              imgUrl
-              link
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
           }
-          createdAt
-          updatedAt
+          nextToken
         }
       }
+      cancellationDate
     }
   }
 }
@@ -866,41 +858,36 @@ mutation CreateCardsPack(
     isExternalPack
     authorizedDomains
     topQuestions
-    prices {
-      fullYearlyPrice
-      fullMonthlyPrice
-      fullYearlyDiscountPercentage
-      membersSpecialYearlyPrice
-      membersSpecialMonthlyPrice
-      membersYealyDiscountPercentage
-    }
     createdAt
     updatedAt
-    subscriptionPlan {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      orgMembership {
+    subscriptionPlans {
+      items {
         id
         name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        about {
-          text
-          imgUrl
-          link
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
     }
   }
 }
@@ -956,41 +943,36 @@ mutation UpdateCardsPack(
     isExternalPack
     authorizedDomains
     topQuestions
-    prices {
-      fullYearlyPrice
-      fullMonthlyPrice
-      fullYearlyDiscountPercentage
-      membersSpecialYearlyPrice
-      membersSpecialMonthlyPrice
-      membersYealyDiscountPercentage
-    }
     createdAt
     updatedAt
-    subscriptionPlan {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      orgMembership {
+    subscriptionPlans {
+      items {
         id
         name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        about {
-          text
-          imgUrl
-          link
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
     }
   }
 }
@@ -1046,41 +1028,36 @@ mutation DeleteCardsPack(
     isExternalPack
     authorizedDomains
     topQuestions
-    prices {
-      fullYearlyPrice
-      fullMonthlyPrice
-      fullYearlyDiscountPercentage
-      membersSpecialYearlyPrice
-      membersSpecialMonthlyPrice
-      membersYealyDiscountPercentage
-    }
     createdAt
     updatedAt
-    subscriptionPlan {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      orgMembership {
+    subscriptionPlans {
+      items {
         id
         name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        about {
-          text
-          imgUrl
-          link
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
+      nextToken
     }
   }
 }
