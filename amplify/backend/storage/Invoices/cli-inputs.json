@@ -1,0 +1,13 @@
+{
+  "resourceName": "Invoices",
+  "policyUUID": "2c070e9c",
+  "bucketName": "invoices",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "api": {
+      "receiptsAPI": [
+        "read"
+      ]
+    },
+    "storage": {
+      "Invoices": [
+        "create",
+        "read",
+        "update"
+      ],
+      "User:@model(appsync)": [
+        "read"
+      ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "Invoices:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "receiptsUrl",
+      "environmentVariableName": "RECEIPTS_URL"
+    }
+  ]
+}

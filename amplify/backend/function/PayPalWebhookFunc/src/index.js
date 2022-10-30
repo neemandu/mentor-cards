@@ -1,0 +1,299 @@
+/* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_INVOICESTABLE_ARN
+	API_CARDSPACKS_INVOICESTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_INVOICESTABLE_ARN
+	API_CARDSPACKS_INVOICESTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */
+const { env } = require("process");
+var AWS = require("aws-sdk");
+
+async function saveUser(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    user.updatedAt = new Date().toISOString();
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+    var updatedUserParams = {
+        TableName: userTable,
+        Item: user
+    };
+
+    console.log("updating user " + user.id + " as unsubscribed" );
+
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
+}
+
+async function getGroup(groupId){
+    console.log("getGroup: " + groupId);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
+    
+    console.log("check against table: " + groupTable);
+    var groupParams = {
+        TableName:groupTable,
+        Key:{
+            "id": groupId
+        }
+    };
+
+    var group;
+    await docClient.get(groupParams).promise().then(data => {
+        console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+        group = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!group){
+        throw Error ('no such Group - ' + groupId);
+    }
+
+    return group;
+}
+
+async function getUserByEmail(email){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        IndexName: "email-index",
+        KeyConditionExpression: "email = :email",
+        ExpressionAttributeValues: {
+            ":email": email
+        }
+    };
+    var user;
+    console.log("searching for user - " + email);
+   
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
+        }
+        
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such email - ' + email);
+    }
+
+    return user;
+
+}
+
+async function cancelUserSubscription(user, transaction_id){
+    console.log("Canceling user subscription!");
+    if(user.groupId){
+        var group = await getGroup(user.groupId);
+        for(var i =0 ; group.groupUsers.length; i++){
+            email = group.groupUsers[i].email;
+            var groupUser = await getUserByEmail(email);
+            groupUser.status = "NOPLAN";
+            groupUser.groupId = null;
+            groupUser.groupRole = null;
+            groupUser.cancellationDate = new Date().toISOString();
+            groupUser.cardsPacksIds = []
+            await saveUser(groupUser);
+        }
+    }
+    if(user.providerTransactionId == transaction_id){
+        user.status = "NOPLAN";
+        user.groupId = null;
+        user.groupRole = null;
+        user.cancellationDate = new Date().toISOString();
+        user.cardsPacksIds = []
+    }
+    else if(user.providerTransactionId != transaction_id){
+        user.externalPacksSubscriptions = user.externalPacksSubscriptions.filter(function( obj ) {
+            return obj.providerTransactionId != transaction_id;
+        });
+    }
+    await saveUser(user);
+}
+
+async function getUserByPayPalTxId(transaction_id){
+    console.log("searching user by paypal transaction id - " + transaction_id);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        IndexName: "providerTransactionId-index",
+        KeyConditionExpression: "providerTransactionId = :providerTransactionId",
+        ExpressionAttributeValues: {
+            ":providerTransactionId": transaction_id
+        }
+    };
+    var user;
+
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
+        }
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such  paypal transaction id - ' + transaction_id);
+    }
+
+    return user;
+
+}
+
+async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
+    var d = new Date();
+    var id = email + "_UNSUBSCRIBE_FROM_PAYPAL_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var params = {
+        TableName: table,
+        Item: {
+            "id": id,
+            "email": email,
+            "emailDeliveryTime": null,
+            "phone": phone,
+            "smsDeliveryTime": null,
+            "emailTemplateId": 10,
+            "name": fullName,
+            "params": {
+                "name": fullName
+            }
+        }
+    };
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item to message queue item:", JSON.stringify(data, null, 2));
+      }).catch(err => {
+        console.error("Unable to add Unsubscribe message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+      });
+}
+
+async function createInvoice(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
+    var d = new Date();
+    var id = user.id + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+    var subDescription = user.subscription.subscriptionPlan.description + " מנוי";
+    var params = {
+        TableName: table,
+        Item: {
+            "id": id,
+            "createdAt": new Date().toISOString(), 
+            "businessAddress": "מגלן 4 , כרמית",
+            "businessName": "Mentor-Cards",
+            "businessPhoneNumber": "0549139859",
+            "businessWebsite": "https://www.mentor-cards.com",
+            "customerAddress": "",
+            "date": new Date().toISOString(),
+            "email": user.email,
+            "fullName": user.fullName,
+            "invoiceType": "קבלה",
+            "items": [
+             {
+              "itemName": subDescription,
+              "numberOfItems": 1,
+              "pricePerItem": user.subscription.subscriptionPlan.fullPrice
+             }
+            ],
+            "updatedAt": new Date().toISOString()
+           }
+    };
+    await docClient.put(params).promise().then(data => {
+        console.log("Added item to invoice queue item:", JSON.stringify(data, null, 2));
+      }).catch(err => {
+        console.error("Unable to add invoice message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
+      });
+}
+
+async function getUserByUserName(username){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "id": username
+        }
+    };
+
+    console.log("searching for user - " + username);
+
+    var user;
+
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such user - ' + username);
+    }
+
+    return user;
+
+}
+
+exports.handler = async (event) => {
+    console.log('PayPal webhook!');
+    console.log('event:');
+    console.log(event);
+    var paypal_body = JSON.parse(event.body);
+    var event_type = paypal_body.event_type;
+    var transaction_id = paypal_body.resource.billing_agreement_id;
+    console.log('event_type: ' + event_type);
+    var transaction_id = paypal_body.resource.id;
+    var email_address = paypal_body.resource.subscriber?.email_address ?? "";
+    console.log('transaction_id: ' + transaction_id);
+    console.log('email_address: ' + email_address);
+    var user;
+    if(email_address != ""){
+        user = await getUserByUserName(email_address);
+    }
+    else{
+        user = await getUserByPayPalTxId(transaction_id);
+    }
+    if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+        await cancelUserSubscription(user, transaction_id);
+        await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
+    }
+    else if(event_type == "PAYMENT.SALE.COMPLETED"){
+        await createInvoice(user);
+    }
+    const response = {
+        statusCode: 200,
+    //  Uncomment below to enable CORS requests
+    //  headers: {
+    //      "Access-Control-Allow-Origin": "*",
+    //      "Access-Control-Allow-Headers": "*"
+    //  }, 
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    return response;
+};

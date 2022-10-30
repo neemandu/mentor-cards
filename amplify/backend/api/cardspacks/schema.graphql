@@ -61,6 +61,7 @@ type MonthlySubscription {
   providerTransactionId: String
   subscriptionPlan: SubscriptionPlan
   includedCardPacksIds: [CardsPack] 
+  cancellationDate: AWSDateTime
 }
 
 type SubscriptionPlan
@@ -196,18 +197,8 @@ type CardsPack
   backImgUrl: String
   isExternalPack: Boolean
   authorizedDomains: [String]
-  subscriptionPlan: SubscriptionPlan @connection
+  subscriptionPlans: [SubscriptionPlan] @connection
   topQuestions: [String]
-  prices: Prices
-}
-
-type Prices {
-  fullYearlyPrice: Float
-  fullMonthlyPrice: Float
-  fullYearlyDiscountPercentage: Float
-  membersSpecialYearlyPrice: Float
-  membersSpecialMonthlyPrice: Float
-  membersYealyDiscountPercentage: Float
 }
 
 type Cards {
@@ -283,6 +274,7 @@ type GroupUserRole {
 }
 
 input updatePaymentProgramInput {
+  packId: Int
   paymentProgramId: String!
   providerTransactionId: String
   fullName: String
