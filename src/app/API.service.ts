@@ -4441,36 +4441,32 @@ export class APIService {
               updatedAt
               subscriptionPlans {
                 __typename
-                items {
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
                   __typename
                   id
                   name
-                  description
-                  providerPlanId
-                  numberOfUsers
-                  numberOfCardPacks
-                  billingCycleInMonths
-                  fullPrice
-                  discount
-                  orgMembership {
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
                     __typename
-                    id
-                    name
-                    trialPeriodInDays
-                    numberOfallowedCardsPacks
-                    about {
-                      __typename
-                      text
-                      imgUrl
-                      link
-                    }
-                    createdAt
-                    updatedAt
+                    text
+                    imgUrl
+                    link
                   }
                   createdAt
                   updatedAt
                 }
-                nextToken
+                createdAt
+                updatedAt
               }
             }
             cancellationDate
@@ -4621,36 +4617,32 @@ export class APIService {
               updatedAt
               subscriptionPlans {
                 __typename
-                items {
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
                   __typename
                   id
                   name
-                  description
-                  providerPlanId
-                  numberOfUsers
-                  numberOfCardPacks
-                  billingCycleInMonths
-                  fullPrice
-                  discount
-                  orgMembership {
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
                     __typename
-                    id
-                    name
-                    trialPeriodInDays
-                    numberOfallowedCardsPacks
-                    about {
-                      __typename
-                      text
-                      imgUrl
-                      link
-                    }
-                    createdAt
-                    updatedAt
+                    text
+                    imgUrl
+                    link
                   }
                   createdAt
                   updatedAt
                 }
-                nextToken
+                createdAt
+                updatedAt
               }
             }
             cancellationDate
@@ -5714,36 +5706,32 @@ export class APIService {
           updatedAt
           subscriptionPlans {
             __typename
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
         }
       }`;
@@ -5825,36 +5813,32 @@ export class APIService {
           updatedAt
           subscriptionPlans {
             __typename
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
         }
       }`;
@@ -5936,36 +5920,32 @@ export class APIService {
           updatedAt
           subscriptionPlans {
             __typename
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
         }
       }`;
@@ -6413,36 +6393,32 @@ export class APIService {
               updatedAt
               subscriptionPlans {
                 __typename
-                items {
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
                   __typename
                   id
                   name
-                  description
-                  providerPlanId
-                  numberOfUsers
-                  numberOfCardPacks
-                  billingCycleInMonths
-                  fullPrice
-                  discount
-                  orgMembership {
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
                     __typename
-                    id
-                    name
-                    trialPeriodInDays
-                    numberOfallowedCardsPacks
-                    about {
-                      __typename
-                      text
-                      imgUrl
-                      link
-                    }
-                    createdAt
-                    updatedAt
+                    text
+                    imgUrl
+                    link
                   }
                   createdAt
                   updatedAt
                 }
-                nextToken
+                createdAt
+                updatedAt
               }
             }
             cancellationDate
@@ -6593,36 +6569,32 @@ export class APIService {
               updatedAt
               subscriptionPlans {
                 __typename
-                items {
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
                   __typename
                   id
                   name
-                  description
-                  providerPlanId
-                  numberOfUsers
-                  numberOfCardPacks
-                  billingCycleInMonths
-                  fullPrice
-                  discount
-                  orgMembership {
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
                     __typename
-                    id
-                    name
-                    trialPeriodInDays
-                    numberOfallowedCardsPacks
-                    about {
-                      __typename
-                      text
-                      imgUrl
-                      link
-                    }
-                    createdAt
-                    updatedAt
+                    text
+                    imgUrl
+                    link
                   }
                   createdAt
                   updatedAt
                 }
-                nextToken
+                createdAt
+                updatedAt
               }
             }
             cancellationDate
@@ -6737,36 +6709,32 @@ export class APIService {
                 updatedAt
                 subscriptionPlans {
                   __typename
-                  items {
+                  id
+                  name
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
                     __typename
                     id
                     name
-                    description
-                    providerPlanId
-                    numberOfUsers
-                    numberOfCardPacks
-                    billingCycleInMonths
-                    fullPrice
-                    discount
-                    orgMembership {
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
                       __typename
-                      id
-                      name
-                      trialPeriodInDays
-                      numberOfallowedCardsPacks
-                      about {
-                        __typename
-                        text
-                        imgUrl
-                        link
-                      }
-                      createdAt
-                      updatedAt
+                      text
+                      imgUrl
+                      link
                     }
                     createdAt
                     updatedAt
                   }
-                  nextToken
+                  createdAt
+                  updatedAt
                 }
               }
               cancellationDate
@@ -6913,36 +6881,32 @@ export class APIService {
                 updatedAt
                 subscriptionPlans {
                   __typename
-                  items {
+                  id
+                  name
+                  description
+                  providerPlanId
+                  numberOfUsers
+                  numberOfCardPacks
+                  billingCycleInMonths
+                  fullPrice
+                  discount
+                  orgMembership {
                     __typename
                     id
                     name
-                    description
-                    providerPlanId
-                    numberOfUsers
-                    numberOfCardPacks
-                    billingCycleInMonths
-                    fullPrice
-                    discount
-                    orgMembership {
+                    trialPeriodInDays
+                    numberOfallowedCardsPacks
+                    about {
                       __typename
-                      id
-                      name
-                      trialPeriodInDays
-                      numberOfallowedCardsPacks
-                      about {
-                        __typename
-                        text
-                        imgUrl
-                        link
-                      }
-                      createdAt
-                      updatedAt
+                      text
+                      imgUrl
+                      link
                     }
                     createdAt
                     updatedAt
                   }
-                  nextToken
+                  createdAt
+                  updatedAt
                 }
               }
               cancellationDate
@@ -7638,36 +7602,32 @@ export class APIService {
           updatedAt
           subscriptionPlans {
             __typename
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
         }
       }`;
@@ -7713,36 +7673,32 @@ export class APIService {
             visitorsCounter
             subscriptionPlans {
               __typename
-              items {
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
                 id
                 name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                billingCycleInMonths
-                fullPrice
-                discount
-                orgMembership {
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
                   __typename
-                  id
-                  name
-                  trialPeriodInDays
-                  numberOfallowedCardsPacks
-                  about {
-                    __typename
-                    text
-                    imgUrl
-                    link
-                  }
-                  createdAt
-                  updatedAt
+                  text
+                  imgUrl
+                  link
                 }
                 createdAt
                 updatedAt
               }
-              nextToken
+              createdAt
+              updatedAt
             }
             createdAt
             updatedAt
@@ -7833,36 +7789,32 @@ export class APIService {
             updatedAt
             subscriptionPlans {
               __typename
-              items {
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
                 id
                 name
-                description
-                providerPlanId
-                numberOfUsers
-                numberOfCardPacks
-                billingCycleInMonths
-                fullPrice
-                discount
-                orgMembership {
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
                   __typename
-                  id
-                  name
-                  trialPeriodInDays
-                  numberOfallowedCardsPacks
-                  about {
-                    __typename
-                    text
-                    imgUrl
-                    link
-                  }
-                  createdAt
-                  updatedAt
+                  text
+                  imgUrl
+                  link
                 }
                 createdAt
                 updatedAt
               }
-              nextToken
+              createdAt
+              updatedAt
             }
           }
           nextToken
@@ -8869,36 +8821,32 @@ export class APIService {
           updatedAt
           subscriptionPlans {
             __typename
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
         }
       }`
@@ -8974,36 +8922,32 @@ export class APIService {
           updatedAt
           subscriptionPlans {
             __typename
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
         }
       }`
@@ -9079,36 +9023,32 @@ export class APIService {
           updatedAt
           subscriptionPlans {
             __typename
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
         }
       }`

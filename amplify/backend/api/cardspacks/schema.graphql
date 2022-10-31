@@ -197,7 +197,7 @@ type CardsPack
   backImgUrl: String
   isExternalPack: Boolean
   authorizedDomains: [String]
-  subscriptionPlans: [SubscriptionPlan] @connection
+  subscriptionPlans: [SubscriptionPlan] 
   topQuestions: [String]
 }
 
