@@ -288,7 +288,7 @@ async function getCardsPack(packId) {
     var packsParams = {
         TableName: packsTable,
         Key: {
-            "id": packId
+            "id": "" + packId
         }
     };
 
@@ -301,7 +301,7 @@ async function getCardsPack(packId) {
     });
 
     if (!pack) {
-        throw Error('no such pack - ' + subId);
+        throw Error('no such pack - ' + packId);
     }
 
     return pack;
@@ -324,7 +324,7 @@ async function updateSingleSubscription(user, pack, transId) {
 	if(!user.externalPacksSubscriptions){
 		user.externalPacksSubscriptions = [];
 	}
-	user.externalPacksSubscriptions.append(sub);
+	user.externalPacksSubscriptions.push(sub);
     await saveUser(user);
 }
 
