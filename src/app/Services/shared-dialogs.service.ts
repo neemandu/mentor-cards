@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { SubscriptionPlan } from '../Objects/subscriptionPlans';
+import { SubscriptionPlan } from '../API.service';
+// import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { PostPurchaseSummeryDialogComponent } from '../Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 import { SiteRulesDialogComponent } from '../Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
 

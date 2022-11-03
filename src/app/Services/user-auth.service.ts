@@ -2,8 +2,8 @@ import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Auth } from 'aws-amplify';
-import { About, APIService, CreateUserInput } from '../API.service';
-import { SubscriptionPlan } from '../Objects/subscriptionPlans';
+import { About, APIService, CreateUserInput, SubscriptionPlan } from '../API.service';
+// import { SubscriptionPlan } from '../Objects/subscriptionPlans';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
@@ -211,7 +211,8 @@ export class UserAuthService {
       (this.isLoggedIn ? this.api.GetSubscriptionPlansForOrgs({ username: this.userData.username }) : this.api.GetSubscriptionPlans({ username: 'Not Logged In' })).then((value: any) => {
         // this.api.ListSubscriptionPlans().then(value => {
         // this.subPlans = value.items.map(plan => new SubscriptionPlan().deseralize(plan))
-        this.subPlans = value.map(plan => new SubscriptionPlan().deseralize(plan))
+        // this.subPlans = value.map(plan => new SubscriptionPlan().deseralize(plan))
+        this.subPlans = value;
         this.subPlansEmmiter.emit();
       }, reject => {
         console.log("🚀 ~ file: user-auth.service.ts ~ line 79 ~ UserAuthService ~ this.api.ListSubscriptionPlans ~ reject", reject)
