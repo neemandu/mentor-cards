@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIService, updatePaymentProgramInput } from 'src/app/API.service';
-import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
+import { APIService, SubscriptionPlan, updatePaymentProgramInput } from 'src/app/API.service';
+// import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import * as programData from '../../../../assets/Bundle Configurations/BundleConfigs.json';
