@@ -152,10 +152,10 @@ export type CardsPack = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
+  subscriptionPlans?: Array<SubscriptionPlan | null> | null;
   topQuestions?: Array<string | null> | null;
   createdAt: string;
   updatedAt: string;
-  subscriptionPlans?: ModelSubscriptionPlanConnection | null;
 };
 
 export type Cards = {
@@ -168,12 +168,6 @@ export type GuideBookElement = {
   __typename: "GuideBookElement";
   name?: string | null;
   subElements?: Array<GuideBookElement | null> | null;
-};
-
-export type ModelSubscriptionPlanConnection = {
-  __typename: "ModelSubscriptionPlanConnection";
-  items: Array<SubscriptionPlan | null>;
-  nextToken?: string | null;
 };
 
 export type CouponCodes = {
@@ -253,7 +247,6 @@ export type CreateSubscriptionPlanInput = {
   fullPrice?: number | null;
   discount?: number | null;
   subscriptionPlanOrgMembershipId?: string | null;
-  cardsPackSubscriptionPlansId?: string | null;
 };
 
 export type ModelSubscriptionPlanConditionInput = {
@@ -344,7 +337,6 @@ export type UpdateSubscriptionPlanInput = {
   fullPrice?: number | null;
   discount?: number | null;
   subscriptionPlanOrgMembershipId?: string | null;
-  cardsPackSubscriptionPlansId?: string | null;
 };
 
 export type DeleteSubscriptionPlanInput = {
@@ -1125,42 +1117,38 @@ export type CreateUserMutation = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
-      topQuestions?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      subscriptionPlans?: {
-        __typename: "ModelSubscriptionPlanConnection";
-        items: Array<{
-          __typename: "SubscriptionPlan";
+      subscriptionPlans?: Array<{
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
           id: string;
           name?: string | null;
-          description?: string | null;
-          providerPlanId: string;
-          numberOfUsers?: number | null;
-          numberOfCardPacks?: number | null;
-          billingCycleInMonths?: number | null;
-          fullPrice?: number | null;
-          discount?: number | null;
-          orgMembership?: {
-            __typename: "OrganizationMembership";
-            id: string;
-            name?: string | null;
-            trialPeriodInDays?: number | null;
-            numberOfallowedCardsPacks?: number | null;
-            about?: {
-              __typename: "About";
-              text?: string | null;
-              imgUrl?: string | null;
-              link?: string | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null> | null;
+      topQuestions?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
   } | null;
@@ -1305,42 +1293,38 @@ export type CreateUserMutation = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
-      topQuestions?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      subscriptionPlans?: {
-        __typename: "ModelSubscriptionPlanConnection";
-        items: Array<{
-          __typename: "SubscriptionPlan";
+      subscriptionPlans?: Array<{
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
           id: string;
           name?: string | null;
-          description?: string | null;
-          providerPlanId: string;
-          numberOfUsers?: number | null;
-          numberOfCardPacks?: number | null;
-          billingCycleInMonths?: number | null;
-          fullPrice?: number | null;
-          discount?: number | null;
-          orgMembership?: {
-            __typename: "OrganizationMembership";
-            id: string;
-            name?: string | null;
-            trialPeriodInDays?: number | null;
-            numberOfallowedCardsPacks?: number | null;
-            about?: {
-              __typename: "About";
-              text?: string | null;
-              imgUrl?: string | null;
-              link?: string | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null> | null;
+      topQuestions?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
   } | null> | null;
@@ -1883,42 +1867,38 @@ export type CreateCardsPackMutation = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
-  topQuestions?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  subscriptionPlans?: {
-    __typename: "ModelSubscriptionPlanConnection";
-    items: Array<{
-      __typename: "SubscriptionPlan";
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateCardsPackMutation = {
@@ -1978,42 +1958,38 @@ export type UpdateCardsPackMutation = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
-  topQuestions?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  subscriptionPlans?: {
-    __typename: "ModelSubscriptionPlanConnection";
-    items: Array<{
-      __typename: "SubscriptionPlan";
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type DeleteCardsPackMutation = {
@@ -2073,42 +2049,38 @@ export type DeleteCardsPackMutation = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
-  topQuestions?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  subscriptionPlans?: {
-    __typename: "ModelSubscriptionPlanConnection";
-    items: Array<{
-      __typename: "SubscriptionPlan";
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CreateMessageQueueMutation = {
@@ -2359,42 +2331,38 @@ export type GetUserQuery = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
-      topQuestions?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      subscriptionPlans?: {
-        __typename: "ModelSubscriptionPlanConnection";
-        items: Array<{
-          __typename: "SubscriptionPlan";
+      subscriptionPlans?: Array<{
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
           id: string;
           name?: string | null;
-          description?: string | null;
-          providerPlanId: string;
-          numberOfUsers?: number | null;
-          numberOfCardPacks?: number | null;
-          billingCycleInMonths?: number | null;
-          fullPrice?: number | null;
-          discount?: number | null;
-          orgMembership?: {
-            __typename: "OrganizationMembership";
-            id: string;
-            name?: string | null;
-            trialPeriodInDays?: number | null;
-            numberOfallowedCardsPacks?: number | null;
-            about?: {
-              __typename: "About";
-              text?: string | null;
-              imgUrl?: string | null;
-              link?: string | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null> | null;
+      topQuestions?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
   } | null;
@@ -2539,42 +2507,38 @@ export type GetUserQuery = {
       backImgUrl?: string | null;
       isExternalPack?: boolean | null;
       authorizedDomains?: Array<string | null> | null;
-      topQuestions?: Array<string | null> | null;
-      createdAt: string;
-      updatedAt: string;
-      subscriptionPlans?: {
-        __typename: "ModelSubscriptionPlanConnection";
-        items: Array<{
-          __typename: "SubscriptionPlan";
+      subscriptionPlans?: Array<{
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
           id: string;
           name?: string | null;
-          description?: string | null;
-          providerPlanId: string;
-          numberOfUsers?: number | null;
-          numberOfCardPacks?: number | null;
-          billingCycleInMonths?: number | null;
-          fullPrice?: number | null;
-          discount?: number | null;
-          orgMembership?: {
-            __typename: "OrganizationMembership";
-            id: string;
-            name?: string | null;
-            trialPeriodInDays?: number | null;
-            numberOfallowedCardsPacks?: number | null;
-            about?: {
-              __typename: "About";
-              text?: string | null;
-              imgUrl?: string | null;
-              link?: string | null;
-            } | null;
-            createdAt: string;
-            updatedAt: string;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
           } | null;
           createdAt: string;
           updatedAt: string;
-        } | null>;
-        nextToken?: string | null;
-      } | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null> | null;
+      topQuestions?: Array<string | null> | null;
+      createdAt: string;
+      updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
   } | null> | null;
@@ -2669,42 +2633,38 @@ export type ListUsersQuery = {
         backImgUrl?: string | null;
         isExternalPack?: boolean | null;
         authorizedDomains?: Array<string | null> | null;
-        topQuestions?: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-        subscriptionPlans?: {
-          __typename: "ModelSubscriptionPlanConnection";
-          items: Array<{
-            __typename: "SubscriptionPlan";
+        subscriptionPlans?: Array<{
+          __typename: "SubscriptionPlan";
+          id: string;
+          name?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
             id: string;
             name?: string | null;
-            description?: string | null;
-            providerPlanId: string;
-            numberOfUsers?: number | null;
-            numberOfCardPacks?: number | null;
-            billingCycleInMonths?: number | null;
-            fullPrice?: number | null;
-            discount?: number | null;
-            orgMembership?: {
-              __typename: "OrganizationMembership";
-              id: string;
-              name?: string | null;
-              trialPeriodInDays?: number | null;
-              numberOfallowedCardsPacks?: number | null;
-              about?: {
-                __typename: "About";
-                text?: string | null;
-                imgUrl?: string | null;
-                link?: string | null;
-              } | null;
-              createdAt: string;
-              updatedAt: string;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-          } | null>;
-          nextToken?: string | null;
-        } | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null> | null;
+        topQuestions?: Array<string | null> | null;
+        createdAt: string;
+        updatedAt: string;
       } | null> | null;
       cancellationDate?: string | null;
     } | null;
@@ -2845,42 +2805,38 @@ export type ListUsersQuery = {
         backImgUrl?: string | null;
         isExternalPack?: boolean | null;
         authorizedDomains?: Array<string | null> | null;
-        topQuestions?: Array<string | null> | null;
-        createdAt: string;
-        updatedAt: string;
-        subscriptionPlans?: {
-          __typename: "ModelSubscriptionPlanConnection";
-          items: Array<{
-            __typename: "SubscriptionPlan";
+        subscriptionPlans?: Array<{
+          __typename: "SubscriptionPlan";
+          id: string;
+          name?: string | null;
+          description?: string | null;
+          providerPlanId: string;
+          numberOfUsers?: number | null;
+          numberOfCardPacks?: number | null;
+          billingCycleInMonths?: number | null;
+          fullPrice?: number | null;
+          discount?: number | null;
+          orgMembership?: {
+            __typename: "OrganizationMembership";
             id: string;
             name?: string | null;
-            description?: string | null;
-            providerPlanId: string;
-            numberOfUsers?: number | null;
-            numberOfCardPacks?: number | null;
-            billingCycleInMonths?: number | null;
-            fullPrice?: number | null;
-            discount?: number | null;
-            orgMembership?: {
-              __typename: "OrganizationMembership";
-              id: string;
-              name?: string | null;
-              trialPeriodInDays?: number | null;
-              numberOfallowedCardsPacks?: number | null;
-              about?: {
-                __typename: "About";
-                text?: string | null;
-                imgUrl?: string | null;
-                link?: string | null;
-              } | null;
-              createdAt: string;
-              updatedAt: string;
+            trialPeriodInDays?: number | null;
+            numberOfallowedCardsPacks?: number | null;
+            about?: {
+              __typename: "About";
+              text?: string | null;
+              imgUrl?: string | null;
+              link?: string | null;
             } | null;
             createdAt: string;
             updatedAt: string;
-          } | null>;
-          nextToken?: string | null;
-        } | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null> | null;
+        topQuestions?: Array<string | null> | null;
+        createdAt: string;
+        updatedAt: string;
       } | null> | null;
       cancellationDate?: string | null;
     } | null> | null;
@@ -3297,42 +3253,38 @@ export type GetCardsPackQuery = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
-  topQuestions?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  subscriptionPlans?: {
-    __typename: "ModelSubscriptionPlanConnection";
-    items: Array<{
-      __typename: "SubscriptionPlan";
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ListCardsPacksQuery = {
@@ -3390,42 +3342,38 @@ export type ListCardsPacksQuery = {
     backImgUrl?: string | null;
     isExternalPack?: boolean | null;
     authorizedDomains?: Array<string | null> | null;
-    topQuestions?: Array<string | null> | null;
-    createdAt: string;
-    updatedAt: string;
-    subscriptionPlans?: {
-      __typename: "ModelSubscriptionPlanConnection";
-      items: Array<{
-        __typename: "SubscriptionPlan";
+    subscriptionPlans?: Array<{
+      __typename: "SubscriptionPlan";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
         id: string;
         name?: string | null;
-        description?: string | null;
-        providerPlanId: string;
-        numberOfUsers?: number | null;
-        numberOfCardPacks?: number | null;
-        billingCycleInMonths?: number | null;
-        fullPrice?: number | null;
-        discount?: number | null;
-        orgMembership?: {
-          __typename: "OrganizationMembership";
-          id: string;
-          name?: string | null;
-          trialPeriodInDays?: number | null;
-          numberOfallowedCardsPacks?: number | null;
-          about?: {
-            __typename: "About";
-            text?: string | null;
-            imgUrl?: string | null;
-            link?: string | null;
-          } | null;
-          createdAt: string;
-          updatedAt: string;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
         } | null;
         createdAt: string;
         updatedAt: string;
-      } | null>;
-      nextToken?: string | null;
-    } | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null> | null;
+    topQuestions?: Array<string | null> | null;
+    createdAt: string;
+    updatedAt: string;
   } | null>;
   nextToken?: string | null;
 };
@@ -4081,42 +4029,38 @@ export type OnCreateCardsPackSubscription = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
-  topQuestions?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  subscriptionPlans?: {
-    __typename: "ModelSubscriptionPlanConnection";
-    items: Array<{
-      __typename: "SubscriptionPlan";
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnUpdateCardsPackSubscription = {
@@ -4176,42 +4120,38 @@ export type OnUpdateCardsPackSubscription = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
-  topQuestions?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  subscriptionPlans?: {
-    __typename: "ModelSubscriptionPlanConnection";
-    items: Array<{
-      __typename: "SubscriptionPlan";
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnDeleteCardsPackSubscription = {
@@ -4271,42 +4211,38 @@ export type OnDeleteCardsPackSubscription = {
   backImgUrl?: string | null;
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
-  topQuestions?: Array<string | null> | null;
-  createdAt: string;
-  updatedAt: string;
-  subscriptionPlans?: {
-    __typename: "ModelSubscriptionPlanConnection";
-    items: Array<{
-      __typename: "SubscriptionPlan";
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
       id: string;
       name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
       } | null;
       createdAt: string;
       updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnCreateContactUsModelSubscription = {
@@ -4436,9 +4372,6 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
-              topQuestions
-              createdAt
-              updatedAt
               subscriptionPlans {
                 __typename
                 id
@@ -4468,6 +4401,9 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              topQuestions
+              createdAt
+              updatedAt
             }
             cancellationDate
           }
@@ -4484,7 +4420,7 @@ export class APIService {
             __typename
             id
             couponCode
-            discount 
+            discount
             trialPeriodInDays
             allowedCardsPacks
             organization {
@@ -4612,9 +4548,6 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
-              topQuestions
-              createdAt
-              updatedAt
               subscriptionPlans {
                 __typename
                 id
@@ -4644,6 +4577,9 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              topQuestions
+              createdAt
+              updatedAt
             }
             cancellationDate
           }
@@ -5701,9 +5637,6 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
             __typename
             id
@@ -5733,6 +5666,9 @@ export class APIService {
             createdAt
             updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -5808,9 +5744,6 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
             __typename
             id
@@ -5840,6 +5773,9 @@ export class APIService {
             createdAt
             updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -5915,9 +5851,6 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
             __typename
             id
@@ -5947,6 +5880,9 @@ export class APIService {
             createdAt
             updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -6388,9 +6324,6 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
-              topQuestions
-              createdAt
-              updatedAt
               subscriptionPlans {
                 __typename
                 id
@@ -6420,6 +6353,9 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              topQuestions
+              createdAt
+              updatedAt
             }
             cancellationDate
           }
@@ -6564,9 +6500,6 @@ export class APIService {
               backImgUrl
               isExternalPack
               authorizedDomains
-              topQuestions
-              createdAt
-              updatedAt
               subscriptionPlans {
                 __typename
                 id
@@ -6596,6 +6529,9 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              topQuestions
+              createdAt
+              updatedAt
             }
             cancellationDate
           }
@@ -6704,9 +6640,6 @@ export class APIService {
                 backImgUrl
                 isExternalPack
                 authorizedDomains
-                topQuestions
-                createdAt
-                updatedAt
                 subscriptionPlans {
                   __typename
                   id
@@ -6736,6 +6669,9 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                topQuestions
+                createdAt
+                updatedAt
               }
               cancellationDate
             }
@@ -6876,9 +6812,6 @@ export class APIService {
                 backImgUrl
                 isExternalPack
                 authorizedDomains
-                topQuestions
-                createdAt
-                updatedAt
                 subscriptionPlans {
                   __typename
                   id
@@ -6908,6 +6841,9 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                topQuestions
+                createdAt
+                updatedAt
               }
               cancellationDate
             }
@@ -7597,9 +7533,6 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
             __typename
             id
@@ -7629,6 +7562,9 @@ export class APIService {
             createdAt
             updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -7784,9 +7720,6 @@ export class APIService {
             backImgUrl
             isExternalPack
             authorizedDomains
-            topQuestions
-            createdAt
-            updatedAt
             subscriptionPlans {
               __typename
               id
@@ -7816,6 +7749,9 @@ export class APIService {
               createdAt
               updatedAt
             }
+            topQuestions
+            createdAt
+            updatedAt
           }
           nextToken
         }
@@ -8816,9 +8752,6 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
             __typename
             id
@@ -8848,6 +8781,9 @@ export class APIService {
             createdAt
             updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
       }`
     )
@@ -8917,9 +8853,6 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
             __typename
             id
@@ -8949,6 +8882,9 @@ export class APIService {
             createdAt
             updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
       }`
     )
@@ -9018,9 +8954,6 @@ export class APIService {
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
             __typename
             id
@@ -9050,6 +8983,9 @@ export class APIService {
             createdAt
             updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
       }`
     )
