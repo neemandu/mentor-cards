@@ -78,38 +78,35 @@ query GetUser($id: ID!) {
         backImgUrl
         isExternalPack
         authorizedDomains
-        topQuestions
-        createdAt
-        updatedAt
         subscriptionPlans {
-          items {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
             id
             name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
             }
             createdAt
             updatedAt
           }
-          nextToken
+          createdAt
+          updatedAt
         }
+        topQuestions
+        createdAt
+        updatedAt
       }
       cancellationDate
     }
@@ -237,38 +234,35 @@ query GetUser($id: ID!) {
         backImgUrl
         isExternalPack
         authorizedDomains
-        topQuestions
-        createdAt
-        updatedAt
         subscriptionPlans {
-          items {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
             id
             name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
             }
             createdAt
             updatedAt
           }
-          nextToken
+          createdAt
+          updatedAt
         }
+        topQuestions
+        createdAt
+        updatedAt
       }
       cancellationDate
     }
@@ -355,38 +349,35 @@ query ListUsers(
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
         cancellationDate
       }
@@ -511,38 +502,35 @@ query ListUsers(
           backImgUrl
           isExternalPack
           authorizedDomains
-          topQuestions
-          createdAt
-          updatedAt
           subscriptionPlans {
-            items {
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
             }
-            nextToken
+            createdAt
+            updatedAt
           }
+          topQuestions
+          createdAt
+          updatedAt
         }
         cancellationDate
       }
@@ -958,38 +946,35 @@ query GetCardsPack($id: ID!) {
     backImgUrl
     isExternalPack
     authorizedDomains
-    topQuestions
-    createdAt
-    updatedAt
     subscriptionPlans {
-      items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
         id
         name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
         }
         createdAt
         updatedAt
       }
-      nextToken
+      createdAt
+      updatedAt
     }
+    topQuestions
+    createdAt
+    updatedAt
   }
 }
 query ListCardsPacks(
@@ -1042,38 +1027,35 @@ query ListCardsPacks(
       backImgUrl
       isExternalPack
       authorizedDomains
-      topQuestions
-      createdAt
-      updatedAt
       subscriptionPlans {
-        items {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
           id
           name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
           }
           createdAt
           updatedAt
         }
-        nextToken
+        createdAt
+        updatedAt
       }
+      topQuestions
+      createdAt
+      updatedAt
     }
     nextToken
   }

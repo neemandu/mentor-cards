@@ -581,38 +581,35 @@ subscription OnCreateCardsPack {
     backImgUrl
     isExternalPack
     authorizedDomains
-    topQuestions
-    createdAt
-    updatedAt
     subscriptionPlans {
-      items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
         id
         name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
         }
         createdAt
         updatedAt
       }
-      nextToken
+      createdAt
+      updatedAt
     }
+    topQuestions
+    createdAt
+    updatedAt
   }
 }
 subscription OnUpdateCardsPack {
@@ -663,38 +660,35 @@ subscription OnUpdateCardsPack {
     backImgUrl
     isExternalPack
     authorizedDomains
-    topQuestions
-    createdAt
-    updatedAt
     subscriptionPlans {
-      items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
         id
         name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
         }
         createdAt
         updatedAt
       }
-      nextToken
+      createdAt
+      updatedAt
     }
+    topQuestions
+    createdAt
+    updatedAt
   }
 }
 subscription OnDeleteCardsPack {
@@ -745,38 +739,35 @@ subscription OnDeleteCardsPack {
     backImgUrl
     isExternalPack
     authorizedDomains
-    topQuestions
-    createdAt
-    updatedAt
     subscriptionPlans {
-      items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
         id
         name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
         }
         createdAt
         updatedAt
       }
-      nextToken
+      createdAt
+      updatedAt
     }
+    topQuestions
+    createdAt
+    updatedAt
   }
 }
 subscription OnCreateContactUsModel {

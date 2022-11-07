@@ -78,38 +78,35 @@ mutation CreateUser($input: CreateUserInput!) {
         backImgUrl
         isExternalPack
         authorizedDomains
-        topQuestions
-        createdAt
-        updatedAt
         subscriptionPlans {
-          items {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
             id
             name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
             }
             createdAt
             updatedAt
           }
-          nextToken
+          createdAt
+          updatedAt
         }
+        topQuestions
+        createdAt
+        updatedAt
       }
       cancellationDate
     }
@@ -237,38 +234,35 @@ mutation CreateUser($input: CreateUserInput!) {
         backImgUrl
         isExternalPack
         authorizedDomains
-        topQuestions
-        createdAt
-        updatedAt
         subscriptionPlans {
-          items {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
             id
             name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
             }
             createdAt
             updatedAt
           }
-          nextToken
+          createdAt
+          updatedAt
         }
+        topQuestions
+        createdAt
+        updatedAt
       }
       cancellationDate
     }
@@ -857,38 +851,35 @@ mutation CreateCardsPack(
     backImgUrl
     isExternalPack
     authorizedDomains
-    topQuestions
-    createdAt
-    updatedAt
     subscriptionPlans {
-      items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
         id
         name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
         }
         createdAt
         updatedAt
       }
-      nextToken
+      createdAt
+      updatedAt
     }
+    topQuestions
+    createdAt
+    updatedAt
   }
 }
 mutation UpdateCardsPack(
@@ -942,38 +933,35 @@ mutation UpdateCardsPack(
     backImgUrl
     isExternalPack
     authorizedDomains
-    topQuestions
-    createdAt
-    updatedAt
     subscriptionPlans {
-      items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
         id
         name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
         }
         createdAt
         updatedAt
       }
-      nextToken
+      createdAt
+      updatedAt
     }
+    topQuestions
+    createdAt
+    updatedAt
   }
 }
 mutation DeleteCardsPack(
@@ -1027,38 +1015,35 @@ mutation DeleteCardsPack(
     backImgUrl
     isExternalPack
     authorizedDomains
-    topQuestions
-    createdAt
-    updatedAt
     subscriptionPlans {
-      items {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
         id
         name
-        description
-        providerPlanId
-        numberOfUsers
-        numberOfCardPacks
-        billingCycleInMonths
-        fullPrice
-        discount
-        orgMembership {
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
         }
         createdAt
         updatedAt
       }
-      nextToken
+      createdAt
+      updatedAt
     }
+    topQuestions
+    createdAt
+    updatedAt
   }
 }
 mutation CreateMessageQueue(
