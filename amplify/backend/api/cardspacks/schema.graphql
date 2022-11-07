@@ -60,7 +60,7 @@ type MonthlySubscription {
   paymentProvider: String
   providerTransactionId: String
   subscriptionPlan: SubscriptionPlan
-  includedCardPacksIds: [CardsPack] @connection
+  includedCardPacksIds: [CardsPack] 
   cancellationDate: AWSDateTime
 }
 
