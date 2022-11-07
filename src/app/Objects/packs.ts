@@ -1,5 +1,6 @@
 import { AboutInput } from '../API.service';
 import { Card } from './card';
+import { SubscriptionPlan } from 'src/app/API.service';
 
 export class PackInfo {
     cards: any[];
@@ -15,6 +16,9 @@ export class PackInfo {
     isOwnedByOrg: boolean;
     brief: string;
     likesCounter: number;
+    isExternalPack: boolean;
+    subscriptionPlans: SubscriptionPlan[];
+    topQuestions: string[];
 
     constructor() { }
 
@@ -40,6 +44,8 @@ export class PackContent {
     isOwnedByOrg: boolean;
     brief: string;
     likesCounter: number;
+    topQuestions: string[];
+    subscriptionPlans: SubscriptionPlan[];
 
     constructor() { }
 
@@ -52,44 +58,6 @@ export class PackContent {
         return this;
     }
 }
-
-// export class GuideBookSubject {
-//     // subjectName: string;
-//     value: string;
-//     subSubjects: GuideBookSubSubject[];
-
-//     // setDefault(subjectName: string) {
-//     //     this.value = subjectName;
-//     //     this.subSubjects = [new SubSubject().setDefault("תת נושא ראשון"), new SubSubject().setDefault("תת נושא שני"), new SubSubject().setDefault("תת נושא שלישי")]
-//     //     return this;
-//     // }
-
-//     deseralize(input: any) {
-//         // Object.assign(this, input);
-//         this.value = input.subjectName
-//         this.subSubjects = input.subSubjects.map(subSubject => new GuideBookSubSubject().deseralize(subSubject))
-//         return this;
-//     }
-// }
-
-// export class GuideBookSubSubject {
-//     // subSubjectName: string;
-//     value: string;
-//     questions: string[];
-
-//     // setDefault(subjectName: string) {
-//     //     this.value = subjectName;
-//     //     this.questions = ["שאלה מכווינה ראשונה", "שאלה מכווינה שנייה", "שאלה מכווינה שלישית"];
-//     //     return this;
-//     // }
-
-//     deseralize(input: any) {
-//         // Object.assign(this, input);
-//         this.value = input.subSubjectName;
-//         this.questions = input.questions;
-//         return this;
-//     }
-// }
 
 export class GuideBookElement {
     name: string;
@@ -107,36 +75,3 @@ export class GuideBookElement {
         return this;
     }
 }
-
-/*
-interface GuideBookElement {
-    name: string;
-    subElements: GuideBookElement[] | null;
-}
-
-let res: GuideBookElement;
-
-let x: any = {} //old guidebook
-
-res = x.subjects.map((subject: any) => {
-    const obj1: GuideBookElement = {
-        name: subject.subjectName,
-        subElements: subject.subSubjects.map((subSubject: any) => {
-            const obj2: GuideBookElement = {
-                name: subSubject.subSubjectName,
-                subElements: subSubject.questions.map((question: any) => {
-                    const obj3: GuideBookElement = {
-                        name: question,
-                        subElements: null
-                    };
-                    return obj3;
-                })
-            };
-            return obj2;
-        })
-    };
-    return obj1;
-})
-
-console.log(res); //new guidebook
-*/

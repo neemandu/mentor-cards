@@ -21,22 +21,23 @@ export class ApprovePurchaseDialogComponent implements OnInit {
     private api: APIService) { }
 
   ngOnInit(): void {
+    console.log(this.data)
     paypal
       .Buttons({
         createSubscription: (data, actions) => {//lastPlanSubstitutionDate - once in last 30 days
           // debugger
-          if (this.userAuthService.userData.status === "NOPLAN")
+          if (this.userAuthService.userData.status === "NOPLAN" || this.data.packId)
             return actions.subscription.create({
-              'plan_id': this.data.packSelected.providerPlanId
+              'plan_id': this.data.subscriptionPlanSelected.providerPlanId
             });
           else if (this.userAuthService.userData.status === "PLAN")
             return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
-              'plan_id': this.data.packSelected.providerPlanId
+              'plan_id': this.data.subscriptionPlanSelected.providerPlanId
             });
         },
         onApprove: async (data, actions) => {
           this.overlaySpinnerService.changeOverlaySpinner(true);
-          var ids: updatePaymentProgramInput = { 'paymentProgramId': this.data.packSelected.id, 'providerTransactionId': data.subscriptionID }
+          var ids: updatePaymentProgramInput = { 'paymentProgramId': this.data.subscriptionPlanSelected.id, 'providerTransactionId': data.subscriptionID, 'packId': this.data.packId ? this.data.packId : -1 }
           this.api.UpdatePaymentProgram(ids).then(data => {
             this.userAuthService._snackBar.open('הרשמתך לתכנית בוצעה בהצלחה!', '', {
               duration: 4000,
@@ -44,8 +45,8 @@ export class ApprovePurchaseDialogComponent implements OnInit {
             });
             this.userAuthService.loggedIn();
             this.overlaySpinnerService.changeOverlaySpinner(false);
-            this.dialogRef.close();
-            this.sharedDialogsService.openPostPurchaseSummeryDialog(this.data.packSelected);
+            this.dialogRef.close(true);
+            this.sharedDialogsService.openPostPurchaseSummeryDialog(this.data.subscriptionPlanSelected);
           }, error => {
             this.overlaySpinnerService.changeOverlaySpinner(false);
             console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 71 ~ ProgramChoiseDialogComponent ~ this.api.UpdatePaymentProgram ~ error", error)

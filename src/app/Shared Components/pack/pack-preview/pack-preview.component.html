@@ -2,94 +2,101 @@
   <mat-icon>highlight_off</mat-icon>
 </button>
 <div class="d-flex flex-column">
-  <p class="main-header">{{data.pack.name}}</p>
-  <p class="content categories-tags">{{data.pack.description}}</p>
-  <div *ngIf="data.pack.about" class="action-btn-div" style="margin-bottom: 1rem;">
-    <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה</button>
-  </div>
-  <div id="example-cards" style="display: contents;">
-    <p class="sub-header">קלפים לדוגמא</p>
-    <div class="card-previews">
-      <app-card *ngFor="let card of data.pack.cardsPreview" [cardContent]="{'frontImgUrl':card}" [flipped]="true"
-        (loaded)="loadedCards = loadedCards + 1"
-        [ngClass]="{'item-hidden': true, 'item-reveal': loadedCards == data.pack.cardsPreview.length}">
-      </app-card>
+  <div class="top-part">
+    <div class="card-preview">
+      <img class="card-preview-img" style="width: 100%;" src={{data.pack.imgUrl}} alt="Pack cover photo">
+    </div>
+    <div class="top-part-text">
+      <p class="main-header">{{data.pack.name}}</p>
+      <p class="content categories-tags">{{data.pack.description}}</p>
+      <div *ngIf="data.pack.topQuestions && data.pack.topQuestions.length !== 0" class="selected-questions">
+        <p class="selected-quetions-title">שאלות נבחרות מספר ההדרכה</p>
+        <ul class="selected-quetions-list">
+          <li *ngFor="let question of data.pack.topQuestions">{{question}}</li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div *ngIf="trialPeriodDate && !userData.orgMembership" id="actions" class="d-flex flex-column">
-    <h1 style="text-align: center">
-      תקופת הניסיון הסתיימה
-    </h1>
-    <div class="d-flex d-flex justify-content-around">
-      <button class="action-button" type="button" (click)="navigate('/price-page')">לגישה מלאה לכל ערכות הקלפים</button>
+  <div class="line"></div>
+  <div *ngIf="data.pack.about" class="about-author">
+    <div class="about-author-text categories-tags">
+      <p class="main-header">על היוצר</p>
+      <p class="content">{{data.pack.about.text}}</p>
+      <a href={{data.pack.about.link}} target="_blank">למידע נוסף</a>
+    </div>
+    <div class="about-author-image-container">
+      <img class="about-author-image" src={{data.pack.about.imgUrl}} alt="Author Image">
     </div>
   </div>
-  <div *ngIf="trialPeriodDate && userData.orgMembership" id="actions" class="d-flex flex-column">
-    <!-- <h1 style="text-align: center">
-      לגישה מלאה לכל ערכות הקלפים
-    </h1> -->
-    <div class="d-flex d-flex justify-content-around">
-      <button class="action-button" type="button" (click)="navigate('/price-page')">לגישה מלאה לכל ערכות הקלפים</button>
-    </div>
-  </div>
-
-  <div *ngIf="!userData" id="actions" class="d-flex justify-content-center">
-    <button class="action-button" type="button" (click)="navigate('/example-pack')">
-      ערכה להתנסות
-    </button>
+  <div *ngIf="data.pack.about" class="line"></div>
+  <!-- Action buttons -->
+  <div id="not-logged-in" *ngIf="!userData" class="actions">
     <button class="action-button" type="button" (click)="signInSignUp()">
       התחברות/הרשמה
     </button>
   </div>
 
-  <!-- <div id="actions" class="d-flex justify-content-center">
-    <button class="action-button" type="button" (click)="navigate('/price-page')">
-      שדרג תוכנית
-    </button>
-  </div> -->
-  <!-- <div id="actions" class="d-flex flex-row justify-content-around">
-    <div *ngIf="signedIn && hasProgram" class="action-btn-div">
-      <button class="action-button" type="button" (click)="choosePack()" [disabled]="!choosePackButtonVisible">בחר ערכה
-        זו
-        <span style="font-size: small;" *ngIf="!choosePackButtonVisible"><br>
-          נוצלו כל החבילות
-        </span></button>
-    </div>
-    <div *ngIf="signedIn && hasProgram" class="action-btn-div"
-      matTooltip="תאריך הבא להחלפת ערכה: {{nextPackSubstitutionDate | date:'d/M/y'}}" matTooltipShowDelay="500"
-      [matTooltipClass]="{'tooltip-class' : true}">
-      <button class="action-button" type="button" [matMenuTriggerFor]="exchangeMenu"
-        [disabled]="!exchangePackButtonVisible || exchangePackButtonVisibleNothingToChange">החלף ערכה בזו
-        <span style="font-size: small;" *ngIf="!exchangePackButtonVisible"><br>
-          הוחלפה ערכה החודש
-        </span>
-        <span style="font-size: small;"
-          *ngIf="exchangePackButtonVisible && exchangePackButtonVisibleNothingToChange"><br>
-          אין ערכות ברשותך
-        </span>
+  <div id="logged-in" *ngIf="userData">
+    <div id="pack-owned" *ngIf="data.pack.cards && data.pack.cards.length !== 0" class="actions">
+      <button class="action-button" type="button" (click)="navigateToPackView()">
+        כניסה לערכה
       </button>
     </div>
-    <div *ngIf="signedIn && hasProgram" class="action-btn-div">
-      <button class="action-button" type="button" (click)="navigate('/price-page')"
-        [disabled]="!upgradePackButtonVisible">שדרג
-        תוכנית
-        <span style="font-size: small;" *ngIf="!upgradePackButtonVisible"><br>
-          הוחלפה תכנית החודש
-        </span></button>
-    </div>
-    <div *ngIf="data.packabout" class="action-btn-div">
-      <button class="action-button" type="button" (click)="openAboutDialog()">על יוצר הערכה
-      </button>
-    </div>
-  </div> -->
-</div>
 
-<!-- <mat-menu #exchangeMenu="matMenu" xPosition="before" dir="rtl">
-  <button mat-menu-item *ngFor="let pack of currentPacksOwned" style="height: 100%;"
-    matTooltip="קטגוריות: {{pack.categories | tooltipListView}} | תגיות: {{pack.tags | tooltipListView}}"
-    matTooltipShowDelay="1000" [matTooltipClass]="{'tooltip-class' : true}"
-    (click)="openExchangePackApprovalModal(pack)">
-    <img src={{pack.imgUrl}} style="height: 4rem; margin: 5px 0px 5px 5px;">
-    {{pack.description}}
-  </button>
-</mat-menu> -->
+    <div id="logged-in-has-no-program" *ngIf="(!data.pack.cards || data.pack.cards.length === 0) && !data.pack.isExternalPack" class="actions">
+      <button class="action-button" type="button" (click)="navigate('/price-page')">
+        להצטרפות לMentor-Cards לחצו כאן
+      </button>
+    </div>
+
+    <div id="logged-in-has-program-external-pack-not-owned"
+      *ngIf="userData.status === 'PLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack" class="actions case-3">
+      <div class="d-flex flex-column">
+        <div class="d-flex monthly-yearly-toggle">
+          <span style="cursor: pointer;" (click)="monthlyYearlyChanged()">חיוב שנתי</span>
+          <mat-slide-toggle (change)="monthlyYearlyChanged()" [checked]="isYearly">חיוב חודשי</mat-slide-toggle>
+        </div>
+        <span class="discount-line"
+          [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{yearlyPlan.discount}}%
+          הנחה</span>
+      </div>
+      <span class="original-price-line">עלות רגילה: <span class="original-price">
+          {{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}}
+          ש"ח / {{!isYearly ? 'חודש': 'שנה'}}</span></span>
+      <span class="discount-price">עלות למנויים:
+        {{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}}
+        ש"ח / {{!isYearly ? 'חודש': 'שנה'}}</span>
+      <button class="action-button" type="button" (click)="openApprovePurchaseDialog()">
+        לחצו לרכישה
+      </button>
+    </div>
+
+    <div id="logged-in-has-no-program-pack-not-owned"
+      *ngIf="userData.status === 'NOPLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack" class="case-4">
+      <div class="top-part">
+        <span>
+          הצטרפו למנוי שנתי באתר Mentor-Cards וקבלו את ערכה זו רק ב19.90 ש"ח לחודש, בנוסף לכל ערכות הבית שלנו.
+        </span>
+        <button class="action-button" type="button" (click)="navigate('/price-page')">
+          לחצו כאן כדי לראות על מה מדובר
+        </button>
+      </div>
+      <span class="or">או</span>
+      <div class="bottom-part">
+        <div class="d-flex flex-column">
+          <div class="d-flex monthly-yearly-toggle">
+            <span style="cursor: pointer;" (click)="monthlyYearlyChanged()">חיוב שנתי</span>
+            <mat-slide-toggle (change)="monthlyYearlyChanged()" [checked]="isYearly">חיוב חודשי</mat-slide-toggle>
+          </div>
+          <span class="discount-line"
+            [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{discount}}%
+            הנחה</span>
+        </div>
+        <button class="action-button" type="button" (click)="openApprovePurchaseDialog()">
+          לחץ כאן כדי לקנות ב{{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}} ש"ח /
+          {{!isYearly ? 'חודש': 'שנה'}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
