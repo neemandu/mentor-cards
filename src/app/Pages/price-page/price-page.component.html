@@ -34,7 +34,7 @@
     <div *ngIf="subPlans" class="program-cards">
         <mat-card>
             <mat-card-subtitle>הכי בקטנה</mat-card-subtitle>
-            <mat-card-title>תכנית חודשית</mat-card-title>
+            <mat-card-title>תכנית חודשית <s>(במקום 69 ש"ח)</s></mat-card-title>
             <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ monthlySubscription.fullPrice /
                         monthlySubscription.billingCycleInMonths }}</span></p>
@@ -55,7 +55,7 @@
             </mat-card-actions>
         </mat-card>
         <!-- <mat-card id="popular-mat-card"> -->
-        <mat-card>
+         <!--<mat-card>
             <mat-card-subtitle id="popular-mat-card-subtitle">
                 <mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon>
             </mat-card-subtitle>
@@ -77,10 +77,10 @@
                     הינך רשום לתכנית זו
                 </button>
             </mat-card-actions>
-        </mat-card>
+        </mat-card>-->
         <mat-card>
             <mat-card-subtitle>הכי משתלמת</mat-card-subtitle>
-            <mat-card-title>תכנית שנתית</mat-card-title>
+            <mat-card-title>תכנית שנתית <s>(במקום 684 ש"ח)</s></mat-card-title>
             <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ yearlySubscription.fullPrice /
                         yearlySubscription.billingCycleInMonths }}</span></p>
