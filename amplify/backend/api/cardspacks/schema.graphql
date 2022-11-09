@@ -112,6 +112,7 @@ type Organizations
   id: ID!
   membersEmails: [AWSEmail]
   membership: OrganizationMembership @connection
+  verifyPersonByEmail: Boolean
 }
 
 type OrganizationMembership

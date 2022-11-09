@@ -191,16 +191,18 @@ exports.handler = async (event) => {
     }
 
     var organization = await getOrgByCode(couponCode);
-    var isUserBelong = true;
-    if(couponCode != 'wb_220922'){
-        isUserBelong = isUserBelongToOrg(organization.membersEmails, user.email);
-    }
-    if(!isUserBelong){
-        console.log('User: ' + user.email + " does not belong to organization: " + couponCode);
-        throw Error ('Not in organization');
-    }
-    else{
-        user.userOrgMembershipId = organization.organizationsMembershipId;
+    if(organization){
+        var isUserBelong = true;
+        if(organization.verifyPersonByEmail){
+            isUserBelong = isUserBelongToOrg(organization.membersEmails, user.email);
+        }
+        if(!isUserBelong){
+            console.log('User: ' + user.email + " does not belong to organization: " + couponCode);
+            throw Error ('Not in organization');
+        }
+        else{
+            user.userOrgMembershipId = organization.organizationsMembershipId;
+        }
     }
     var dbCouponCode = await getCouponCode(couponCode);
     if(!dbCouponCode){

@@ -610,6 +610,7 @@ query GetOrganizations($id: ID!) {
       createdAt
       updatedAt
     }
+    verifyPersonByEmail
     createdAt
     updatedAt
   }
@@ -636,6 +637,7 @@ query ListOrganizationss(
         createdAt
         updatedAt
       }
+      verifyPersonByEmail
       createdAt
       updatedAt
     }

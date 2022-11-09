@@ -3,10 +3,7 @@
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
-import awsconfig from '../aws-exports';
-API.configure(awsconfig)
 import { Observable } from "zen-observable-ts";
-import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -378,14 +375,23 @@ export type DeleteCouponCodesInput = {
 export type CreateOrganizationsInput = {
   id?: string | null;
   membersEmails?: Array<string | null> | null;
+  verifyPersonByEmail?: boolean | null;
   organizationsMembershipId?: string | null;
 };
 
 export type ModelOrganizationsConditionInput = {
   membersEmails?: ModelStringInput | null;
+  verifyPersonByEmail?: ModelBooleanInput | null;
   and?: Array<ModelOrganizationsConditionInput | null> | null;
   or?: Array<ModelOrganizationsConditionInput | null> | null;
   not?: ModelOrganizationsConditionInput | null;
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
 };
 
 export type Organizations = {
@@ -393,6 +399,7 @@ export type Organizations = {
   id: string;
   membersEmails?: Array<string | null> | null;
   membership?: OrganizationMembership | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -400,6 +407,7 @@ export type Organizations = {
 export type UpdateOrganizationsInput = {
   id: string;
   membersEmails?: Array<string | null> | null;
+  verifyPersonByEmail?: boolean | null;
   organizationsMembershipId?: string | null;
 };
 
@@ -582,13 +590,6 @@ export type ModelCardsPackConditionInput = {
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
 };
 
 export type UpdateCardsPackInput = {
@@ -869,6 +870,7 @@ export type ModelCouponCodesConnection = {
 export type ModelOrganizationsFilterInput = {
   id?: ModelIDInput | null;
   membersEmails?: ModelStringInput | null;
+  verifyPersonByEmail?: ModelBooleanInput | null;
   and?: Array<ModelOrganizationsFilterInput | null> | null;
   or?: Array<ModelOrganizationsFilterInput | null> | null;
   not?: ModelOrganizationsFilterInput | null;
@@ -1554,6 +1556,7 @@ export type CreateOrganizationsMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1577,6 +1580,7 @@ export type UpdateOrganizationsMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1600,6 +1604,7 @@ export type DeleteOrganizationsMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2919,6 +2924,7 @@ export type GetOrganizationsQuery = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2944,6 +2950,7 @@ export type ListOrganizationssQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    verifyPersonByEmail?: boolean | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -3499,6 +3506,7 @@ export type OnCreateOrganizationsSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3522,6 +3530,7 @@ export type OnUpdateOrganizationsSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3545,6 +3554,7 @@ export type OnDeleteOrganizationsSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4700,44 +4710,6 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
   }
-  async GetSubscriptionPlansForOrgs(
-    input: userInput
-  ): Promise<Array<GetSubscriptionPlansMutation>> {
-    const statement = `mutation GetSubscriptionPlans($input: userInput!) {
-        GetSubscriptionPlans(input: $input) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <Array<GetSubscriptionPlansMutation>>(
-      response.data.GetSubscriptionPlans
-    );
-  }
   async GetSubscriptionPlans(
     input: userInput
   ): Promise<Array<GetSubscriptionPlansMutation>> {
@@ -4776,9 +4748,7 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <Array<GetSubscriptionPlansMutation>>(
       response.data.GetSubscriptionPlans
@@ -5110,6 +5080,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -5149,6 +5120,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -5188,6 +5160,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -6225,9 +6198,7 @@ export class APIService {
       gqlAPIServiceArguments.condition = condition;
     }
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateContactUsModelMutation>response.data.createContactUsModel;
   }
@@ -6974,6 +6945,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -7013,6 +6985,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            verifyPersonByEmail
             createdAt
             updatedAt
           }
@@ -7468,9 +7441,7 @@ export class APIService {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListNewssQuery>response.data.listNewss;
   }
@@ -7574,90 +7545,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
-  }
-  async ListCardsPacksForPreview(
-    filter?: ModelCardsPackFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCardsPacksQuery> {
-    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            imgUrl
-            description
-            cards {
-              __typename
-              backImgUrl
-              frontImgUrl
-            }
-            tags
-            categories
-            cardsPreview
-            name
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            brief
-            likesCounter
-            isExternalPack
-            visitorsCounter
-            subscriptionPlans {
-              __typename
-              id
-              name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
-                __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
-              }
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
-    )) as any;
-    return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async ListCardsPacks(
     filter?: ModelCardsPackFilterInput,
@@ -7958,6 +7845,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -7991,6 +7879,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -8024,6 +7913,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
