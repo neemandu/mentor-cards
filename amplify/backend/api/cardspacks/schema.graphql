@@ -62,6 +62,7 @@ type MonthlySubscription {
   subscriptionPlan: SubscriptionPlan
   includedCardPacksIds: [CardsPack] 
   cancellationDate: AWSDateTime
+  nextBillingDate: AWSDateTime @function(name: "GetNextBillingDate-${env}")
 }
 
 type SubscriptionPlan

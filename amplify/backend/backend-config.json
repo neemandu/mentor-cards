@@ -3,5 +3,12 @@
     "Invoices": {
       "dependsOn": []
     }
+  },
+  "function": {
+    "GetNextBillingDate": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
   }
 }

@@ -92,6 +92,32 @@ function getBillingEndDate(user) {
     return endDate;
 }
 
+function getBillingEndDateByUser(startDate, subscriptionPlan, cancellationDate) {
+    console.log('getBillingEndDate');
+    console.log('cancellationDate is: ');
+    console.log(cancellationDate);
+    var cycles = subscriptionPlan.billingCycleInMonths;
+    console.log('cycles is: ');
+    console.log(cycles);
+    var createdAt = new Date(startDate);
+    console.log('createdAt is: ');
+    console.log(createdAt);
+    var monthsDiff = monthDiff(createdAt, cancellationDate);
+    console.log('monthsDiff is: ');
+    console.log(monthsDiff);
+    var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
+    console.log('numOfCycles is: ');
+    console.log(numOfCycles);
+    var numberOfMonthsToAdd = numOfCycles * cycles;
+    console.log('numberOfMonthsToAdd is: ');
+    console.log(numberOfMonthsToAdd);
+    var endDate = new Date(createdAt);
+    endDate.setMonth(endDate.getMonth()+numberOfMonthsToAdd);
+    console.log('endDate is: ');
+    console.log(endDate);
+    return endDate;
+}
+
 function isPackageBelongToUser(id, cardsPacksIds, username) {
     console.log('Checking if package belong to user: ' + username );
     console.log('id: ' + id);
@@ -166,6 +192,17 @@ exports.handler = async (event, context, callback) => {
             for(var j = 0 ; j < packs.includedCardPacksIds.length ; j++){ 
                 var pack = packs.includedCardPacksIds[j];
                 if(pack.id == event.source['id']){
+                    var startDate = packs.startDate;
+                    var subscriptionPlan = packs.subscriptionPlan;
+                    console.log('Check if user canceled but paid for the rest of the period');
+                    if(pack.cancellationDate != null && 
+                        now < getBillingEndDateByUser(startDate, subscriptionPlan, pack.cancellationDate)
+                    ){
+                        console.log('getBillingEndDate');
+                        return event.source['cards'];
+                    }
+
+                
                     return event.source['cards'];
                 }
             }
