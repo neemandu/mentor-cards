@@ -293,6 +293,10 @@
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementPackEntries-484d636238686b326765-build.zip"
+        },
+        "GetNextBillingDate": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/GetNextBillingDate-6e6c6d385a42446e586d-build.zip"
         }
       },
       "auth": {

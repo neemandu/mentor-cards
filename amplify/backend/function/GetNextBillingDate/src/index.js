@@ -2,7 +2,7 @@
 function getBillingEndDate(startDate, subscriptionPlan) {
     console.log('getBillingEndDate');
     var cycles = subscriptionPlan.billingCycleInMonths;
-    console.log('cycles is: ' + cycles);
+    console.log('cycles isx: ' + cycles);
     var createdAt = new Date(startDate);
     console.log('Subscription started at: ');
     console.log(createdAt);
