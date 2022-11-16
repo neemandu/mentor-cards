@@ -20,24 +20,38 @@ export class UserPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   Subscription: Subscription = new Subscription();
   userData: UserData;
+  tableData: PlanTableObj[] = [];
+
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog,
     private ngZone: NgZone, private api: APIService, public router: Router) {
     this.userData = this.userAuthService.userData;
-    // console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
+    this.userData.externalPacksSubscriptions.forEach(element => {
+      const chargeSpan = element.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
+      const tmp: PlanTableObj = {
+        'startDate': new Date(element.startDate),
+        'cancellationDate': element.cancellationDate ? new Date(element.cancellationDate) : null,
+        'nextChargeDate': element.nextBillingDate ? new Date(element.nextBillingDate) : null,
+        'providerTransactionId': element.providerTransactionId,
+        'planName': element.includedCardPacksIds[0].name,
+        'yearlyMonthly': chargeSpan,
+        'price': element.subscriptionPlan.fullPrice
+      }
+      this.tableData.push(tmp)
+    });
+    // this.userData.externalPacksSubscriptions.forEach(element => {
+
+    // });
   }
 
   ngOnInit(): void {
-    // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
-    //   this.userData = userData;
-    //   this.overlaySpinnerService.changeOverlaySpinner(false);
-    // }));
     this.userAuthService.userDataEmmiter.subscribe(((userData: UserData) => {
       this.userData = userData;
       userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
     }))
   }
+
   /**
    * When user wants to cancel his subscription (Anytime)
    */
@@ -115,4 +129,18 @@ export class UserPageComponent implements OnInit {
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
   }
+}
+
+export type PlanTableObj = {
+  startDate: Date;
+  cancellationDate: Date;
+  nextChargeDate: Date;
+  providerTransactionId: string;
+  planName: string;
+  yearlyMonthly: YearlyMonthly;
+  price: number;
+}
+
+export enum YearlyMonthly {
+  MONTHLY, YEARLY
 }

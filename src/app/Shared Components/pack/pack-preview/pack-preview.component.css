@@ -21,7 +21,7 @@
 
 .categories-tags {
   max-width: 35vw;
-  padding: 0px 5%;
+  /* padding: 0px 5%; */
 }
 
 .content {
@@ -34,7 +34,7 @@ a {
 
 .card-preview {
   max-width: 8vw;
-  margin-left: 5%;
+  /* margin-left: 5%; */
 }
 
 .about-author-image-container {
@@ -104,12 +104,14 @@ a {
   text-decoration: underline;
   text-decoration-color: #ffa800;
   line-height: 1rem;
-  padding-right: 4%;
+  /* padding-right: 4%; */
 }
 
 .selected-quetions-list {
   font-size: medium;
   text-align: start;
+  padding-inline-start: 18px;
+  list-style-image: url(/assets/tick_small.png)
 }
 
 .case-3, .case-4 {
@@ -194,9 +196,9 @@ mat-icon {
 .about-author-text {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+  text-align: start;
+  align-items: start;
+  padding: 0px 4%;
 }
 
 .about-author-text {

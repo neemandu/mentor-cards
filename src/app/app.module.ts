@@ -82,6 +82,8 @@ import { ManagementModule } from './Modules/management/management.module';
 import { FbChatComponent } from './Shared Components/fb-chat/fb-chat.component';
 import { WelcomeToNewOrgDialogComponent } from './Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
 import { ServicesComponent } from './Pages/services/services.component';
+import { PlanTableComponent } from './Pages/user-page/plan-table/plan-table.component';
+import { CardsCarouselComponent } from './Shared Components/pack/pack-preview/cards-carousel/cards-carousel.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +129,8 @@ import { ServicesComponent } from './Pages/services/services.component';
     FbChatComponent,
     WelcomeToNewOrgDialogComponent,
     ServicesComponent,
+    PlanTableComponent,
+    CardsCarouselComponent,
   ],
   imports: [
     BrowserModule,

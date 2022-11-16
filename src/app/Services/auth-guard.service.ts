@@ -84,22 +84,19 @@ export class AuthGuardUserPageService implements CanActivate {
 
   canActivate(): boolean {
     if (this.userAuthService.userData) {
-      if (this.userAuthService.userData.status === "PLAN") {
-        return true;
-      }
-      else {
-        this.ngZone.run(() => this.router.navigate(['home-page']));
-      }
+      return true;
     }
-    var sub = this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-      sub.unsubscribe();
-      if (userData?.status === "PLAN") {
-        this.ngZone.run(() => this.router.navigate(['user-page']));
-      }
-      else {
-        this.ngZone.run(() => this.router.navigate(['home-page']));
-      }
-    })
+    this.ngZone.run(() => this.router.navigate(['home-page']));
+    return false;
+    // var sub = this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+    //   sub.unsubscribe();
+    //   if (this.userAuthService.userData) {
+    //     this.ngZone.run(() => this.router.navigate(['user-page']));
+    //   }
+    //   else {
+    //     this.ngZone.run(() => this.router.navigate(['home-page']));
+    //   }
+    // })
   }
 }
 

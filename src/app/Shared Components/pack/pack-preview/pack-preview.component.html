@@ -3,9 +3,6 @@
 </button>
 <div class="d-flex flex-column">
   <div class="top-part">
-    <div class="card-preview">
-      <img class="card-preview-img" style="width: 100%;" src={{data.pack.imgUrl}} alt="Pack cover photo">
-    </div>
     <div class="top-part-text">
       <p class="main-header">{{data.pack.name}}</p>
       <p class="content categories-tags">{{data.pack.description}}</p>
@@ -16,19 +13,12 @@
         </ul>
       </div>
     </div>
+    <!-- <div class="card-preview">
+      <img class="card-preview-img" style="width: 100%;" src={{data.pack.imgUrl}} alt="Pack cover photo">
+    </div> -->
+    <app-cards-carousel class="card-preview" [cards]="data.pack.cardsPreview"></app-cards-carousel>
   </div>
   <div class="line"></div>
-  <div *ngIf="data.pack.about" class="about-author">
-    <div class="about-author-text categories-tags">
-      <p class="main-header">על היוצר</p>
-      <p class="content">{{data.pack.about.text}}</p>
-      <a href={{data.pack.about.link}} target="_blank">למידע נוסף</a>
-    </div>
-    <div class="about-author-image-container">
-      <img class="about-author-image" src={{data.pack.about.imgUrl}} alt="Author Image">
-    </div>
-  </div>
-  <div *ngIf="data.pack.about" class="line"></div>
   <!-- Action buttons -->
   <div id="not-logged-in" *ngIf="!userData" class="actions">
     <button class="action-button" type="button" (click)="signInSignUp()">
@@ -43,21 +33,22 @@
       </button>
     </div>
 
-    <div id="logged-in-has-no-program" *ngIf="(!data.pack.cards || data.pack.cards.length === 0) && !data.pack.isExternalPack" class="actions">
+    <div id="logged-in-has-no-program"
+      *ngIf="(!data.pack.cards || data.pack.cards.length === 0) && !data.pack.isExternalPack" class="actions">
       <button class="action-button" type="button" (click)="navigate('/price-page')">
         להצטרפות לMentor-Cards לחצו כאן
       </button>
     </div>
 
     <div id="logged-in-has-program-external-pack-not-owned"
-      *ngIf="userData.status === 'PLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack" class="actions case-3">
+      *ngIf="userData.status === 'PLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
+      class="actions case-3">
       <div class="d-flex flex-column">
         <div class="d-flex monthly-yearly-toggle">
           <span style="cursor: pointer;" (click)="monthlyYearlyChanged()">חיוב שנתי</span>
           <mat-slide-toggle (change)="monthlyYearlyChanged()" [checked]="isYearly">חיוב חודשי</mat-slide-toggle>
         </div>
-        <span class="discount-line"
-          [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{yearlyPlan.discount}}%
+        <span class="discount-line" [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{yearlyPlan.discount}}%
           הנחה</span>
       </div>
       <span class="original-price-line">עלות רגילה: <span class="original-price">
@@ -72,7 +63,8 @@
     </div>
 
     <div id="logged-in-has-no-program-pack-not-owned"
-      *ngIf="userData.status === 'NOPLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack" class="case-4">
+      *ngIf="userData.status === 'NOPLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
+      class="case-4">
       <div class="top-part">
         <span>
           הצטרפו למנוי שנתי באתר Mentor-Cards וקבלו את ערכה זו רק ב19.90 ש"ח לחודש, בנוסף לכל ערכות הבית שלנו.
@@ -88,14 +80,27 @@
             <span style="cursor: pointer;" (click)="monthlyYearlyChanged()">חיוב שנתי</span>
             <mat-slide-toggle (change)="monthlyYearlyChanged()" [checked]="isYearly">חיוב חודשי</mat-slide-toggle>
           </div>
-          <span class="discount-line"
-            [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{discount}}%
+          <span class="discount-line" [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{discount}}%
             הנחה</span>
         </div>
         <button class="action-button" type="button" (click)="openApprovePurchaseDialog()">
           לחץ כאן כדי לקנות ב{{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}} ש"ח /
           {{!isYearly ? 'חודש': 'שנה'}}
         </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="data.pack.about">
+    <div class="line"></div>
+    <div class="about-author">
+      <div class="about-author-text categories-tags">
+        <p class="main-header">על היוצר</p>
+        <p class="content">{{data.pack.about.text}}</p>
+        <a href={{data.pack.about.link}} target="_blank">למעבר לאתר הבית של היוצר</a>
+      </div>
+      <div class="about-author-image-container">
+        <img class="about-author-image" src={{data.pack.about.imgUrl}} alt="Author Image">
       </div>
     </div>
   </div>

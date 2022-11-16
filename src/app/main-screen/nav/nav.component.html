@@ -86,7 +86,7 @@
 </mat-menu>
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item *ngIf="loggedIn && userAttributes?.status === 'PLAN'" (click)="navigate('/user-page')">פרטי
+  <button mat-menu-item *ngIf="loggedIn" (click)="navigate('/user-page')">פרטי
     משתמש</button>
   <button mat-menu-item *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'" (click)="navigate('/price-page')">הרשמה
     לתכנית</button>

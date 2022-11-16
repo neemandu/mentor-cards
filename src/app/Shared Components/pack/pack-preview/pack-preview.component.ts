@@ -29,6 +29,7 @@ export class PackPreviewComponent implements OnInit {
     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
+    console.log(this.data.pack)
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
     if (this.data.pack.subscriptionPlans) {
