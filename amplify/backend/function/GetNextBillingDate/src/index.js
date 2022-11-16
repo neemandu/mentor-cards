@@ -1,5 +1,5 @@
 
-function getBillingEndDate(startDate, subscriptionPlan) {
+function getBillingEndDateByUser(startDate, subscriptionPlan) {
     console.log('getBillingEndDate');
     var cycles = subscriptionPlan.billingCycleInMonths;
     console.log('cycles isx: ' + cycles);
@@ -18,6 +18,19 @@ function getBillingEndDate(startDate, subscriptionPlan) {
     console.log('endDate is: ');
     console.log(endDate);
     return endDate;
+}
+
+function monthDiff(d1, d2) {
+    var months;
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+    months = (date2.getFullYear() - date1.getFullYear()) * 12;
+    months -= date1.getMonth();
+    months += date2.getMonth();
+    if(date2.getDate() < date1.getDate()){
+        months--;
+    }
+    return months <= 0 ? 0 : months;
 }
 
 /**

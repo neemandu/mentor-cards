@@ -4467,6 +4467,7 @@ export class APIService {
           externalPacksSubscriptions {
             __typename
             id
+            nextBillingDate
             startDate
             paymentProvider
             providerTransactionId

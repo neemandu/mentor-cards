@@ -27,7 +27,7 @@ async function removeUserFromCardsPack(cardsPack, username){
 
     var isChanged = false;
     for (var i = 0; i < cardsPack.usersIds.length; i++) {
-        if(cardsPack.usersIds == username){
+        if(cardsPack.usersIds[i] == username){
             cardsPack.usersIds.splice(i, 1);
             isChanged = true;
             break;
@@ -195,16 +195,6 @@ async function cancelPayPalSubscription(transactionId, access_token){
 async function getPayPalAccessToken(){
     console.log("getPayPalAccessToken");
     console.log("getting paypal secret");
-    
-    var { Parameters } = await (new aws.SSM())
-    .getParameters({
-    Names: ["PayPalAPIKey"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-    })
-    .promise();
-
-    var paypalAPIKey = Parameters[0].Value;
-    console.log("getting paypal secret DONE");
     var defaultOptions = {
         host: 'api.paypal.com',
         port: 443, 
@@ -279,6 +269,8 @@ async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
 }
 
 exports.handler = async (event) => {
+  
+    console.log('handler:');
     AWS.config.update({
         region: env.REGION
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
@@ -288,24 +280,37 @@ exports.handler = async (event) => {
     if(!username){
         username = event.identity.claims['username'];
     }
-    
-    var providerTransactionId = event.arguments.input['providerTransactionId'];
 
+    var providerTransactionId = event.arguments.input['providerTransactionId'];
+    console.log('providerTransactionId:');
+    console.log(providerTransactionId);
+
+    console.log('getUserByUSerName:');
     var user = await getUserByUSerName(username);
 
+    console.log('getPayPalAccessToken:');
     var access_token = await getPayPalAccessToken();
+          
     await cancelPayPalSubscription(providerTransactionId, access_token);
-    var t_id = user.subscription?.providerTransactionId ?? "-1";
+    var t_id = '-1';
+    if(user.subscription){
+        t_id = user.subscription.providerTransactionId
+    }
+     
     if(providerTransactionId == t_id){
+        
+        console.log('site subscription:');
         user.status = "NOPLAN";
         user.groupId = null;
         user.groupRole = null;
         user.cancellationDate = new Date().toISOString();
-        user.cardsPacksIds = []
+        user.cardsPacksIds = [];
     }
     else{
+       
+    console.log('externalPacksSubscriptions:');
         for(var i = 0; i < user.externalPacksSubscriptions.length; i++){
-            if(user.externalPacksSubscriptions[i].providerTransactionId == t_id){
+            if(user.externalPacksSubscriptions[i].providerTransactionId == providerTransactionId){
                 user.externalPacksSubscriptions[i].cancellationDate = new Date().toISOString();
             }
         }
