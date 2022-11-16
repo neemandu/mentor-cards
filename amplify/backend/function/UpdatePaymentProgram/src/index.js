@@ -307,13 +307,22 @@ async function getCardsPack(packId) {
     return pack;
 }
 
-async function updateSingleSubscription(user, pack, transId) {
+async function updateSingleSubscription(user, pack, transId, subId) {
+    var subscriptionPlan;
+    for(var i =0 ; i< pack.subscriptionPlans.length; i++){
+        if(pack.subscriptionPlans[i].id == subId){
+            subscriptionPlan = pack.subscriptionPlans[i];
+            if(user.status == "PLAN"){
+                subscriptionPlan.fullPrice = subscriptionPlan.fullPrice * ((100 - subscriptionPlan.discount)/100);
+            }
+        }
+    }
     var sub = {
         id: 1,
         startDate: new Date().toISOString(),
         paymentProvider: "PayPal",
         providerTransactionId: transId,
-        subscriptionPlan: pack.subscriptionPlan,
+        subscriptionPlan: subscriptionPlan,
 		cancellationDate: null,
         includedCardPacksIds: [pack]
     };
@@ -400,7 +409,7 @@ exports.handler = async (event) => {
         }
         else{
             var pack = await getCardsPack(packId);
-            await updateSingleSubscription(user, pack, transId);
+            await updateSingleSubscription(user, pack, transId, subId);
         }
     }
 };
