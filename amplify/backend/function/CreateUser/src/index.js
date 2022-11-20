@@ -42,23 +42,6 @@ async function getUser(username){
         console.log('no such user - ' + username);
     }
 
-    for(var i = 0; i < user.externalPacksSubscriptions.length; i++){
-        var endDate;
-        if(user.externalPacksSubscriptions[i].cancellationDate != null){
-            console.log("canceled endDate");
-            endDate = getBillingEndDateWithCancellation(user.externalPacksSubscriptions[i].startDate,
-                user.externalPacksSubscriptions[i].subscriptionPlan,
-                user.externalPacksSubscriptions[i].cancellationDate);
-            }
-        else{
-            console.log("Not canceled endDate");
-            endDate = getBillingEndDateByUser(user.externalPacksSubscriptions[i].startDate,
-                user.externalPacksSubscriptions[i].subscriptionPlan);
-        }
-        console.log(endDate);
-        user.externalPacksSubscriptions[i].nextBillingDate = endDate;
-    }
-
     return user;         
 }
 
@@ -94,32 +77,6 @@ function monthDiff(d1, d2) {
         months--;
     }
     return months <= 0 ? 0 : months;
-}
-
-function getBillingEndDateWithCancellation(startDate, subscriptionPlan, cancellationDate) {
-    console.log('getBillingEndDate');
-    console.log('cancellationDate is: ');
-    console.log(cancellationDate);
-    var cycles = subscriptionPlan.billingCycleInMonths;
-    console.log('cycles is: ');
-    console.log(cycles);
-    var createdAt = new Date(startDate);
-    console.log('createdAt is: ');
-    console.log(createdAt);
-    var monthsDiff = monthDiff(createdAt, cancellationDate);
-    console.log('monthsDiff is: ');
-    console.log(monthsDiff);
-    var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
-    console.log('numOfCycles is: ');
-    console.log(numOfCycles);
-    var numberOfMonthsToAdd = numOfCycles * cycles;
-    console.log('numberOfMonthsToAdd is: ');
-    console.log(numberOfMonthsToAdd);
-    var endDate = new Date(createdAt);
-    endDate.setMonth(endDate.getMonth()+numberOfMonthsToAdd);
-    console.log('endDate is: ');
-    console.log(endDate);
-    return endDate;
 }
 
 async function addWelcomeEmailToMessageQueue(email, phone, fullName){
@@ -217,7 +174,8 @@ exports.handler = async (event) => {
             "providerTransactionId": tid,
             "fullName": fullName,
             "favouritePacks": [],
-            "entries": 1
+            "entries": 1,
+            "externalPacksSubscriptions":[]
         };
     
         console.log("Adding a new user...");
@@ -228,6 +186,17 @@ exports.handler = async (event) => {
         console.log("Done adding a new user...");
 
         return userToInsert;
+    }
+    
+    for(var i = 0; i < user.externalPacksSubscriptions.length; i++){
+        var endDate = null;
+        if(user.externalPacksSubscriptions[i].cancellationDate == null){
+            console.log("Not canceled endDate");
+            endDate = getBillingEndDateByUser(user.externalPacksSubscriptions[i].startDate,
+                user.externalPacksSubscriptions[i].subscriptionPlan);
+        }
+        console.log(endDate);
+        user.externalPacksSubscriptions[i].nextBillingDate = endDate;
     }
 
     if(!user.entries){

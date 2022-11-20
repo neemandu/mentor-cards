@@ -14,7 +14,6 @@
     <br>
     <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">עדין לא נרשמתם
       לתוכנית?</span>
-    <span id="middle" *ngIf="userData && trialPeriodExpDate">יש ערכות קלפים הזמינות לשימושכם/ן</span>
     <!-- <span id="middle" *ngIf="userData && trialPeriodExpDate">אתם כבר מחוברים ויש לכם חודש מתנה, לכו
       לאמן!</span> -->
     <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
