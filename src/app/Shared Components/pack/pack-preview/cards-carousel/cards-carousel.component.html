@@ -1,0 +1,8 @@
+<div class="cards-carousel">
+  <img *ngFor="let card of cards; let i = index" [attr.id]="'img_' + i" class="card" src={{card}} alt="Preview photo">
+</div>
+<div class="dots">
+    <a [ngClass]="{'curr-dot': currId === 0}" (click)="scrollTo($event, 0)"></a>
+    <a [ngClass]="{'curr-dot': currId === 1}" (click)="scrollTo($event, 1)"></a>
+    <a [ngClass]="{'curr-dot': currId === 2}" (click)="scrollTo($event, 2)"></a>
+</div>
