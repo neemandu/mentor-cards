@@ -181,7 +181,10 @@ exports.handler = async (event, context, callback) => {
 
     var user = await getUser(username);
 
-    var isExternalPack = event.source['isExternalPack']
+    var isExternalPack = event.source['isExternalPack'];
+    console.log('External Pack: ' + isExternalPack);
+    console.log('Pack Id: ' + event.source['id']);
+    var now = new Date();
     if(isExternalPack){
         var length = 0;
         if(user.externalPacksSubscriptions){
@@ -189,21 +192,29 @@ exports.handler = async (event, context, callback) => {
         }
         for(var i = 0 ; i < length ; i++){ 
             var packs = user.externalPacksSubscriptions[i];
+            console.log('External Pack');
             for(var j = 0 ; j < packs.includedCardPacksIds.length ; j++){ 
                 var pack = packs.includedCardPacksIds[j];
                 if(pack.id == event.source['id']){
+                    console.log('Found the Pack!');
+                    console.log('pack.id: ' + pack.id);
+                    console.log('pack.cancellationDate: ' + pack.cancellationDate);
                     var startDate = packs.startDate;
                     var subscriptionPlan = packs.subscriptionPlan;
                     console.log('Check if user canceled but paid for the rest of the period');
-                    if(pack.cancellationDate != null && 
-                        now < getBillingEndDateByUser(startDate, subscriptionPlan, pack.cancellationDate)
-                    ){
-                        console.log('getBillingEndDate');
+                    if(packs.cancellationDate != null){
+                        var endDate = getBillingEndDateByUser(startDate, subscriptionPlan, packs.cancellationDate);
+                        if(now < endDate){
+                            console.log('now < endDate');
+                            return event.source['cards'];
+                        }
+                        else{
+                            console.log('now > endDate');
+                        }
+                    }
+                    else{
                         return event.source['cards'];
                     }
-
-                
-                    return event.source['cards'];
                 }
             }
         }
@@ -211,7 +222,6 @@ exports.handler = async (event, context, callback) => {
 
     if(!isExternalPack){
         var allPackagesDate = new Date();
-        var now = new Date();
         var trialPeriodInDays = 14;
         console.log('allPackagesDate');
         console.log(allPackagesDate);
