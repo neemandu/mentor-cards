@@ -42,6 +42,6 @@ exports.handler = async (event) => {
     console.log(event);
     var startDate = event.source['startDate'];
     var subscriptionPlan = event.source['subscriptionPlan'];
-    var date = getBillingEndDate(startDate, subscriptionPlan);
+    var date = getBillingEndDateByUser(startDate, subscriptionPlan);
     return date;
 };

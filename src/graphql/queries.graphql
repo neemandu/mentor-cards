@@ -109,6 +109,7 @@ query GetUser($id: ID!) {
         updatedAt
       }
       cancellationDate
+      nextBillingDate
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
@@ -265,6 +266,7 @@ query GetUser($id: ID!) {
         updatedAt
       }
       cancellationDate
+      nextBillingDate
     }
   }
 }
@@ -380,6 +382,7 @@ query ListUsers(
           updatedAt
         }
         cancellationDate
+        nextBillingDate
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
@@ -533,6 +536,7 @@ query ListUsers(
           updatedAt
         }
         cancellationDate
+        nextBillingDate
       }
     }
     nextToken

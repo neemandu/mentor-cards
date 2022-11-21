@@ -296,7 +296,7 @@
         },
         "GetNextBillingDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetNextBillingDate-6c4b6a574a4f5a47654b-build.zip"
+          "s3Key": "amplify-builds/GetNextBillingDate-69513178742b6330577a-build.zip"
         }
       },
       "auth": {
