@@ -198,6 +198,13 @@ exports.handler = async (event) => {
         console.log(endDate);
         user.externalPacksSubscriptions[i].nextBillingDate = endDate;
     }
+    var subEndDate = null;
+    if(user.subscription
+        && !user.subscription.cancellationDate){
+            subEndDate = getBillingEndDateByUser(user.subscription.startDate,
+                user.subscription.subscriptionPlan);
+        }
+    user.subscription.nextBillingDate = subEndDate;
 
     if(!user.entries){
         user.entries = 0;
