@@ -304,6 +304,7 @@ exports.handler = async (event) => {
         user.groupId = null;
         user.groupRole = null;
         user.cancellationDate = new Date().toISOString();
+        user.subscription.cancellationDate = new Date().toISOString();
         user.cardsPacksIds = [];
     }
     else{
