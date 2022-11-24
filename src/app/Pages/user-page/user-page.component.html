@@ -10,41 +10,7 @@
     <div class="user-info-section">
       <h1>תכניות</h1>
       <div class="line"></div>
-        <app-plan-table [tableData]="tableData"></app-plan-table>
-        <!-- <p>תכנית: {{userData.subscription.subscriptionPlan.description}}</p>
-        <p>תאריך הרשמה לתכנית הנוכחית: {{userData.subscription.startDate | date:'d/M/y'}}</p>
-        <p>תאריך החיוב הבא: {{nextPaymentDate | date:'d/M/y'}}</p>
-        <p>מחיר עבור התכנית הנוכחית: {{(userData.subscription.subscriptionPlan.fullPrice -
-                userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
-        <div class="actions" style="width: 100%; margin-top: 2rem;">
-          <div class="d-flex flex-column align-items-baseline">
-            <p (click)="navigate()" style="cursor: pointer; text-decoration: underline; margin-bottom: auto;">
-              החליפו תוכנית</p>
-            <span style="font-size: small;">*התכנית החדשה תעודכן החל מתאריך {{nextPaymentDate |
-                        date:'d/M/y'}}</span>
-          </div>
-          <p *ngIf="!userData.groupRole || userData.groupRole!=='USER'" (click)="openCancelDialogModal()"
-            id="cancelSubscription" style="cursor: pointer; text-decoration: underline;">לביטול החיוב האוטומטי</p>
-        </div>
-        <div class="line"></div>
-      </div>
-      <div *ngIf="userData.externalPacksSubscriptions.length !== 0" class="user-info-section">
-        <p>ערכה: {{userData.externalPacksSubscriptions.subscriptionPlan.description}}</p>
-        <p>תאריך הרשמה לתכנית הנוכחית: {{userData.subscription.startDate | date:'d/M/y'}}</p>
-        <p>תאריך החיוב הבא: {{nextPaymentDate | date:'d/M/y'}}</p>
-        <p>מחיר עבור התכנית הנוכחית: {{(userData.subscription.subscriptionPlan.fullPrice -
-                userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
-        <div class="actions" style="width: 100%; margin-top: 2rem;">
-          <div class="d-flex flex-column align-items-baseline">
-            <p (click)="navigate()" style="cursor: pointer; text-decoration: underline; margin-bottom: auto;">
-              החליפו תוכנית</p>
-            <span style="font-size: small;">*התכנית החדשה תעודכן החל מתאריך {{nextPaymentDate |
-                        date:'d/M/y'}}</span>
-          </div>
-          <p *ngIf="!userData.groupRole || userData.groupRole!=='USER'" (click)="openCancelDialogModal()"
-            id="cancelSubscription" style="cursor: pointer; text-decoration: underline;">לביטול החיוב האוטומטי</p>
-        </div>
-      </div> -->
+        <app-plan-table [tableData]="tableData" [userData]="userData"></app-plan-table>
     </div>
   </div>
 </div>

@@ -1,7 +1,11 @@
 <button class="iconButton" mat-icon-button (click)="closeDialog()">
   <mat-icon>highlight_off</mat-icon>
 </button>
-<div class="d-flex flex-column">
+<div class="d-flex flex-column align-items-center">
+  <div class="title-container" *ngIf="data.pack.isExternalPack">
+    <p class="title">ערכת VIP</p>
+    <p class="subtitle">*ערכת קלפים זו היא ערכת קלפי VIP ואינה כלולה בחבילת ערכות קלפי הבית</p>
+  </div>
   <div class="top-part">
     <div class="top-part-text">
       <p class="main-header">{{data.pack.name}}</p>
@@ -17,8 +21,8 @@
       <img class="card-preview-img" style="width: 100%;" src={{data.pack.imgUrl}} alt="Pack cover photo">
     </div> -->
     <app-cards-carousel class="card-preview" [cards]="data.pack.cardsPreview"></app-cards-carousel>
+    <div class="line"></div>
   </div>
-  <div class="line"></div>
   <!-- Action buttons -->
   <div id="not-logged-in" *ngIf="!userData" class="actions">
     <button class="action-button" type="button" (click)="signInSignUp()">
@@ -48,14 +52,14 @@
           <span style="cursor: pointer;" (click)="monthlyYearlyChanged()">חיוב שנתי</span>
           <mat-slide-toggle (change)="monthlyYearlyChanged()" [checked]="isYearly">חיוב חודשי</mat-slide-toggle>
         </div>
-        <span class="discount-line" [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{yearlyPlan.discount}}%
+        <span class="discount-line" [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{ discount }}%
           הנחה</span>
       </div>
       <span class="original-price-line">עלות רגילה: <span class="original-price">
           {{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}}
           ש"ח / {{!isYearly ? 'חודש': 'שנה'}}</span></span>
       <span class="discount-price">עלות למנויים:
-        {{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}}
+        {{!isYearly ? monthlyPlan.priceForMentorCardsMembers : yearlyPlan.priceForMentorCardsMembers}}
         ש"ח / {{!isYearly ? 'חודש': 'שנה'}}</span>
       <button class="action-button" type="button" (click)="openApprovePurchaseDialog()">
         לחצו לרכישה
@@ -67,7 +71,7 @@
       class="case-4">
       <div class="top-part">
         <span>
-          הצטרפו למנוי שנתי באתר Mentor-Cards וקבלו את ערכה זו רק ב19.90 ש"ח לחודש, בנוסף לכל ערכות הבית שלנו.
+          הצטרפו למנוי שנתי באתר Mentor-Cards וקבלו את ערכה זו רק ב9.90 ש"ח לחודש, בנוסף לכל ערכות הבית שלנו.
         </span>
         <button class="action-button" type="button" (click)="navigate('/price-page')">
           לחצו כאן כדי לראות על מה מדובר
@@ -84,8 +88,8 @@
             הנחה</span>
         </div>
         <button class="action-button" type="button" (click)="openApprovePurchaseDialog()">
-          לחץ כאן כדי לקנות ב{{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}} ש"ח /
-          {{!isYearly ? 'חודש': 'שנה'}}
+          לרכישת ערכה זו ב{{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}} ש"ח /
+          {{!isYearly ? 'חודש': 'שנה'}} לחצו כאן
         </button>
       </div>
     </div>
@@ -104,4 +108,9 @@
       </div>
     </div>
   </div>
+  <mat-checkbox class="doNotShowCheckbox" *ngIf="data.pack.cards && data.pack.cards.length !== 0"
+    [(ngModel)]="neverShowAgain"><span style="margin-right: 10px;">
+      אל תציג שוב
+    </span>
+  </mat-checkbox>
 </div>

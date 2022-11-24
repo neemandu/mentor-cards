@@ -27,6 +27,20 @@ export class UserPageComponent implements OnInit {
     private ngZone: NgZone, private api: APIService, public router: Router) {
     this.userData = this.userAuthService.userData;
     this.overlaySpinnerService.changeOverlaySpinner(false)
+    if (this.userData.subscription) {
+      const chargeSpan = this.userData.subscription.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
+      const tmp: PlanTableObj = {
+        'startDate': new Date(this.userData.subscription.subscriptionPlan.createdAt),
+        'cancellationDate': this.userData.subscription.cancellationDate ? new Date(this.userData.subscription.cancellationDate) : null,
+        'nextChargeDate': null,
+        'providerTransactionId': this.userData.subscription.providerTransactionId,
+        'planName': `ערכות הבית - ${this.userData.subscription.subscriptionPlan.description}`,
+        'yearlyMonthly': chargeSpan,
+        'price': this.userData.subscription.subscriptionPlan.fullPrice,
+        'homePlan' : true
+      }
+      this.tableData.push(tmp)
+    }
     this.userData.externalPacksSubscriptions.forEach(element => {
       const chargeSpan = element.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
       const tmp: PlanTableObj = {
@@ -36,13 +50,11 @@ export class UserPageComponent implements OnInit {
         'providerTransactionId': element.providerTransactionId,
         'planName': element.includedCardPacksIds[0].name,
         'yearlyMonthly': chargeSpan,
-        'price': element.subscriptionPlan.fullPrice
+        'price': element.subscriptionPlan.fullPrice,
+        'homePlan' : false
       }
       this.tableData.push(tmp)
     });
-    // this.userData.externalPacksSubscriptions.forEach(element => {
-
-    // });
   }
 
   ngOnInit(): void {
@@ -139,6 +151,7 @@ export type PlanTableObj = {
   planName: string;
   yearlyMonthly: YearlyMonthly;
   price: number;
+  homePlan: boolean;
 }
 
 export enum YearlyMonthly {

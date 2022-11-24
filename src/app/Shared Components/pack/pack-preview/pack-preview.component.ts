@@ -24,17 +24,24 @@ export class PackPreviewComponent implements OnInit {
   yearlyPlan: SubscriptionPlan;
   monthlyPlan: SubscriptionPlan;
   discount: number;
+  neverShowAgain: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: previewData, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-    console.log(this.data.pack)
+    const ls = localStorage.getItem("packsToOpenAutomatically");
+    const packsToOpenAutomatically = ls ? ls.split(',') : [];
+    if (packsToOpenAutomatically.includes(this.data.pack.id) && this.data.pack.cards.length !== 0)
+      this.navigateToPackView(true)
+
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
     if (this.data.pack.subscriptionPlans) {
       this.yearlyPlan = this.data.pack.subscriptionPlans.find(el => el.billingCycleInMonths === 12)
+      this.yearlyPlan['priceForMentorCardsMembers'] = Math.round(this.yearlyPlan.fullPrice*(1-(this.yearlyPlan.discount/100))*10) / 10
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(el => el.billingCycleInMonths === 1)
+      this.monthlyPlan['priceForMentorCardsMembers'] = Math.round(this.monthlyPlan.fullPrice*(1-(this.monthlyPlan.discount/100))*10) / 10
       this.discount = Math.round((1 - (this.yearlyPlan.fullPrice / (this.monthlyPlan.fullPrice * 12))) * 100)
     }
   }
@@ -48,7 +55,12 @@ export class PackPreviewComponent implements OnInit {
     this.dialog.open(AboutAuthorComponent, dialogConfig);
   }
 
-  navigateToPackView(): void {
+  navigateToPackView(exists): void {
+    if (!exists && this.neverShowAgain) {
+      const ls = localStorage.getItem("packsToOpenAutomatically");
+      const packsToOpenAutomatically = ls ? ls.split(',') : [];
+      localStorage.setItem("packsToOpenAutomatically", [...packsToOpenAutomatically, this.data.pack.id].toString());
+    }
     this.navigate(`/pack-view/${this.data.pack.id}`)
   }
 

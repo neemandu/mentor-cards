@@ -1,17 +1,14 @@
 <div class="d-flex flex-column content">
   <div class="d-flex justify-content-center align-items-center">
     <h3 class="pack-desc">{{packInfo.name}}</h3>
-    <mat-icon class="external-icon" matTooltip="ערכה של יוצר חוץ" matTooltipShowDelay="500"
-    *ngIf="this.packInfo.isExternalPack">public</mat-icon>
+    <!-- <mat-icon class="external-icon" matTooltip="ערכה של יוצר חוץ" matTooltipShowDelay="500"
+    *ngIf="this.packInfo.isExternalPack">public</mat-icon> -->
+    <img class="external-icon" src="/assets/crown.png" alt="VIP pack crown icon"
+    matTooltip="ערכה של יוצר חוץ" matTooltipShowDelay="500"
+    *ngIf="this.packInfo.isExternalPack">
   </div>
   <mat-icon class="lock-icon" matTooltip="ערכה נעולה" matTooltipShowDelay="500"
   *ngIf="!packInfo.cards">lock</mat-icon>
-  <!-- Owned - list-->
-  <!-- <img [id]="packInfo.id" alt="The packs front card" *ngIf="packInfo.cards?.length != 0"
-    routerLink="/pack-view/{{packInfo.id}}" (load)="imgLoaded()" src={{packInfo.imgUrl}}
-    matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
-    matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable pack-main-card'> -->
-  <!-- Not owned -->
   <img alt="The packs front card" (click)="openPreviewDialog()" (load)="imgLoaded()"
     src={{packInfo.imgUrl}}
     matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"

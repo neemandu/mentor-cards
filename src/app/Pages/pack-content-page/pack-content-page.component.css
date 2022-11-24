@@ -43,6 +43,10 @@ app-card:hover {
   align-items: center;
 }
 
+.close-cards-view {
+  left: 48%
+}
+
 .bottom-nav-hidden {
   transform: translateY(3rem);
   opacity: 0;
@@ -429,7 +433,7 @@ mat-icon {
   .three-cards,
   .four-cards,
   .five-cards {
-    width: 65vw;
+    width: 55vw;
   }
 
 }

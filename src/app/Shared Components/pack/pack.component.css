@@ -1,4 +1,4 @@
-img {
+.pack-main-card {
   border: 1px solid #ddd;
   border-radius: 4px;
   width: 10rem;
@@ -8,7 +8,7 @@ img {
   touch-action: pan-y !important;
 }
 
-img:hover {
+.pack-main-card:hover {
   box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd, 0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd, rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
 
@@ -154,6 +154,5 @@ mat-icon {
 }
 
 .external-icon {
-  color: #ffa800;
-  scale: 1.2;
+  scale: 0.8;
 }
