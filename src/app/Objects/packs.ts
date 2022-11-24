@@ -46,6 +46,7 @@ export class PackContent {
     likesCounter: number;
     topQuestions: string[];
     subscriptionPlans: SubscriptionPlan[];
+    isExternalPack: boolean;
 
     constructor() { }
 
