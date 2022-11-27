@@ -88,12 +88,14 @@ export class PlanTableComponent implements OnInit {
   
   openApproveExternalPlanPurchaseDialog(element): void {
     console.log(this.userData.externalPacksSubscriptions)
-    const plan = this.userData.externalPacksSubscriptions.find(el => el.providerTransactionId === element.providerTransactionId).subscriptionPlan;
+    const x = this.userData.externalPacksSubscriptions.find(el => el.providerTransactionId === element.providerTransactionId)
+    const packId = x.includedCardPacksIds[0].id;
+    const plan = x.subscriptionPlan;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.maxHeight = '85vh';
-    dialogConfig.data = new PurchaseData(new Date(), plan, +this.userData.externalPacksSubscriptions[0].includedCardPacksIds[0].id);
+    dialogConfig.data = new PurchaseData(new Date(), plan, +packId);
     const dialogRef = this.dialog.open(ApprovePurchaseDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
