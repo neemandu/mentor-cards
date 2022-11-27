@@ -77,13 +77,14 @@ type SubscriptionPlan
   id: ID!
   name: String
   description: String
-  providerPlanId: String!
+  providerPlanId: String! 
   numberOfUsers: Int
   numberOfCardPacks: Int
   billingCycleInMonths: Int
   fullPrice: Float
   discount: Float
   orgMembership: OrganizationMembership @connection
+  subscriptionProviderPlanId: String 
 }
 
 type CouponCodes
@@ -199,7 +200,7 @@ type CardsPack
   backImgUrl: String
   isExternalPack: Boolean
   authorizedDomains: [String]
-  subscriptionPlans: [SubscriptionPlan] 
+  subscriptionPlans: [SubscriptionPlan] @function(name: "GetProviderPlanId-${env}") 
   topQuestions: [String]
 }
 

@@ -308,8 +308,7 @@ exports.handler = async (event) => {
         user.cardsPacksIds = [];
     }
     else{
-       
-    console.log('externalPacksSubscriptions:');
+        console.log('externalPacksSubscriptions:');
         for(var i = 0; i < user.externalPacksSubscriptions.length; i++){
             if(user.externalPacksSubscriptions[i].providerTransactionId == providerTransactionId){
                 user.externalPacksSubscriptions[i].cancellationDate = new Date().toISOString();

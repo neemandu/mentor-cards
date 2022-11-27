@@ -294,7 +294,7 @@ async function getCardsPack(packId) {
 
     var pack;
     await docClient.get(packsParams).promise().then(data => {
-        console.log("Get PaymentProgram succeeded:", JSON.stringify(data, null, 2));
+        console.log("Get pack succeeded:", JSON.stringify(data, null, 2));
         pack = data["Item"];      
     }).catch(err => {
         console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
@@ -317,7 +317,7 @@ async function updateSingleSubscription(user, pack, transId, subId) {
             }
         }
     }
-    var sub = {
+    var newSub = {
         id: 1,
         startDate: new Date().toISOString(),
         paymentProvider: "PayPal",
@@ -333,7 +333,22 @@ async function updateSingleSubscription(user, pack, transId, subId) {
 	if(!user.externalPacksSubscriptions){
 		user.externalPacksSubscriptions = [];
 	}
-	user.externalPacksSubscriptions.push(sub);
+    var index = -1;
+    for (var i = 0; i < user.externalPacksSubscriptions.length; i++){
+        var sub = user.externalPacksSubscriptions[i];
+        for(var j = 0; j < sub.includedCardPacksIds.length; j++){
+            var packId = sub.includedCardPacksIds[j];
+            if(packId.id == pack.id){
+                index = i;
+            }
+        }
+    }
+    if(index > -1){
+        user.externalPacksSubscriptions[index] = newSub;
+    }
+    else{
+        user.externalPacksSubscriptions.push(newSub);
+    }
     await saveUser(user);
 }
 

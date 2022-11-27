@@ -203,8 +203,8 @@ exports.handler = async (event) => {
         && !user.subscription.cancellationDate){
             subEndDate = getBillingEndDateByUser(user.subscription.startDate,
                 user.subscription.subscriptionPlan);
+            user.subscription.nextBillingDate = subEndDate;
         }
-    user.subscription.nextBillingDate = subEndDate;
 
     if(!user.entries){
         user.entries = 0;
