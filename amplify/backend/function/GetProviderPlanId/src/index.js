@@ -4,7 +4,11 @@
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
 	REGION
-Amplify Params - DO NOT EDIT */async function getUser(username){
+Amplify Params - DO NOT EDIT */
+const { env } = require("process");
+var AWS = require("aws-sdk");
+
+async function getUser(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
@@ -61,6 +65,9 @@ exports.handler = async (event) => {
     console.log('event');
     console.log(event);
     var plans = event.source['subscriptionPlans'];
+    if(typeof plans === 'undefined'){
+        return [];
+    }
     // user was not identified in cognito
     if((!("identity" in event)) || (event.identity == null)){
         return noPlan(plans);

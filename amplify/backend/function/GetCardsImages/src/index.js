@@ -198,11 +198,11 @@ exports.handler = async (event, context, callback) => {
                 if(pack.id == event.source['id']){
                     console.log('Found the Pack!');
                     console.log('pack.id: ' + pack.id);
-                    console.log('pack.cancellationDate: ' + pack.cancellationDate);
+                    console.log('packs.cancellationDate: ' + packs.cancellationDate);
                     var startDate = packs.startDate;
                     var subscriptionPlan = packs.subscriptionPlan;
                     console.log('Check if user canceled but paid for the rest of the period');
-                    if(packs.cancellationDate != null){
+                    if(packs.cancellationDate){
                         var endDate = getBillingEndDateByUser(startDate, subscriptionPlan, packs.cancellationDate);
                         if(now < endDate){
                             console.log('now < endDate');

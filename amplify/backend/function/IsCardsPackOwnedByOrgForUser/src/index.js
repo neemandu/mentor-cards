@@ -63,6 +63,7 @@ exports.handler = async (event) => {
         user.couponCodes.length > 0){
             for(var i = 0 ; i < user.couponCodes.length ; i++){ 
                 if(user.userOrgMembershipId == user.couponCodes[i].couponCodesOrganizationId &&
+                     user.couponCodes[i].allowedCardsPacks && 
                      user.couponCodes[i].allowedCardsPacks.includes(id)){
                     console.log('User has a coupon code with his org');
                     return true;
