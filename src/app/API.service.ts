@@ -4291,6 +4291,7 @@ export class APIService {
           subscription {
             __typename
             id
+            nextBillingDate
             startDate
             paymentProvider
             providerTransactionId
