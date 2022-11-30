@@ -30,6 +30,10 @@ export class PackPreviewComponent implements OnInit {
     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
+    let sub = this.userAuthService.userDataEmmiter.subscribe(() => {
+      sub.unsubscribe();
+      this.closeDialog();
+    });
     const ls = localStorage.getItem("packsToOpenAutomatically");
     const packsToOpenAutomatically = ls ? ls.split(',') : [];
     if (packsToOpenAutomatically.includes(this.data.pack.id) && this.data.pack.cards.length !== 0)
