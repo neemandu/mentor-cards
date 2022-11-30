@@ -132,7 +132,7 @@ export class PricePageComponent implements OnInit {
   private get nextPaymentDate() {
     let cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
     let now = new Date();
-    let createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    let createdAt = new Date(this.userData.subscription.startDate);
     let monthsDiff = this.monthDiff(createdAt, now);
     let numOfCycles = Math.floor(monthsDiff / cycles) + 1;
     let numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
