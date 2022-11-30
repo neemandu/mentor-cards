@@ -89,13 +89,16 @@ exports.handler = async (event) => {
 
     var user = await getUser(username);
     if(!user){
+        console.log('no user - noPlan');
         return noPlan(plans);
     }
     else{
         if(user.status == 'PLAN'){
+            console.log('user has a plan');
             return plan(plans);
         }
         else{
+            console.log('user does not have a plan');
             return noPlan(plans);
         }
     }
