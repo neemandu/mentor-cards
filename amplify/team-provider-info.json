@@ -165,7 +165,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-434559374551486b6b34-build.zip",
+          "s3Key": "amplify-builds/CreateUser-442f744d3068624c532b-build.zip",
           "sendinblueApiKey": "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"
         },
         "AddCardsPack": {
@@ -195,7 +195,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-5971367a644e43564a48-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-463353386a357274704a-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -273,7 +273,7 @@
         },
         "IsCardsPackOwnedByOrgForUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-5670435941456b573964-build.zip"
+          "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-477a7a5361714e486d4b-build.zip"
         },
         "AddNewUserToEmailsContactList": {
           "contactListId": "6",
@@ -300,7 +300,7 @@
         },
         "GetProviderPlanId": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetProviderPlanId-75684350724853322b52-build.zip"
+          "s3Key": "amplify-builds/GetProviderPlanId-466d686e726559662b50-build.zip"
         }
       },
       "auth": {
