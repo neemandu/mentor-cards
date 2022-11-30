@@ -378,7 +378,7 @@ li span {
 
 .one-cards,
 .two-cards {
-  width: calc(100vw /3);
+  width: calc(100vw /3.2);
 }
 
 .three-cards {

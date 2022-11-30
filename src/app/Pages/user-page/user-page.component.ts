@@ -32,7 +32,7 @@ export class UserPageComponent implements OnInit {
       const tmp: PlanTableObj = {
         'startDate': new Date(this.userData.subscription.subscriptionPlan.createdAt),
         'cancellationDate': this.userData.subscription.cancellationDate ? new Date(this.userData.subscription.cancellationDate) : null,
-        'nextChargeDate': null,
+        'nextBillingDate': new Date(this.userData.subscription.nextBillingDate),
         'providerTransactionId': this.userData.subscription.providerTransactionId,
         'planName': `ערכות הבית - ${this.userData.subscription.subscriptionPlan.description}`,
         'yearlyMonthly': chargeSpan,
@@ -46,7 +46,7 @@ export class UserPageComponent implements OnInit {
       const tmp: PlanTableObj = {
         'startDate': new Date(element.startDate),
         'cancellationDate': element.cancellationDate ? new Date(element.cancellationDate) : null,
-        'nextChargeDate': element.nextBillingDate ? new Date(element.nextBillingDate) : null,
+        'nextBillingDate': element.nextBillingDate ? new Date(element.nextBillingDate) : null,
         'providerTransactionId': element.providerTransactionId,
         'planName': element.includedCardPacksIds[0].name,
         'yearlyMonthly': chargeSpan,
@@ -146,7 +146,7 @@ export class UserPageComponent implements OnInit {
 export type PlanTableObj = {
   startDate: Date;
   cancellationDate: Date;
-  nextChargeDate: Date;
+  nextBillingDate: Date;
   providerTransactionId: string;
   planName: string;
   yearlyMonthly: YearlyMonthly;

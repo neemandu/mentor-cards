@@ -9,7 +9,7 @@
   <!-- startDate Column -->
   <ng-container matColumnDef="startDate">
     <th mat-header-cell *matHeaderCellDef> תאריך התחלה </th>
-    <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'd/M/yy'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'dd/MM/yyyy'}} </td>
   </ng-container>
 
   <!-- updateDate Column -->
@@ -17,21 +17,21 @@
     <th mat-header-cell *matHeaderCellDef> תאריך עדכון </th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="element.cancellationDate">
-        {{element.cancellationDate | date: 'd/M/yy'}}
+        {{element.cancellationDate | date: 'dd/MM/yyyy'}}
       </div>
       <div *ngIf="!element.cancellationDate">
       </div>
     </td>
   </ng-container>
 
-  <!-- nextChargeDate Column -->
-  <ng-container matColumnDef="nextChargeDate">
+  <!-- nextBillingDate Column -->
+  <ng-container matColumnDef="nextBillingDate">
     <th mat-header-cell *matHeaderCellDef> תאריך תשלום הבא </th>
     <td mat-cell *matCellDef="let element">
-      <div *ngIf="element.nextChargeDate">
-        {{element.nextChargeDate | date: 'd/M/yy'}}
+      <div *ngIf="element.nextBillingDate">
+        {{element.nextBillingDate | date: 'dd/MM/yyyy'}}
       </div>
-      <div *ngIf="!element.nextChargeDate">
+      <div *ngIf="!element.nextBillingDate">
       </div>
     </td>
   </ng-container>

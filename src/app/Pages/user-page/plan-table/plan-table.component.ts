@@ -18,7 +18,7 @@ import { PlanTableObj } from '../user-page.component';
 })
 export class PlanTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['planName', 'price', 'startDate', 'nextChargeDate', 'yearlyMonthly', 'updateDate', 'cancel'];
+  displayedColumns: string[] = ['planName', 'price', 'startDate', 'nextBillingDate', 'yearlyMonthly', 'updateDate', 'cancel'];
   @Input() tableData: PlanTableObj[];
   @Input() userData: UserData;
   dataSource: MatTableDataSource<PlanTableObj>
