@@ -30,7 +30,7 @@ export class UserPageComponent implements OnInit {
     if (this.userData.subscription) {
       const chargeSpan = this.userData.subscription.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
       const tmp: PlanTableObj = {
-        'startDate': new Date(this.userData.subscription.subscriptionPlan.createdAt),
+        'startDate': new Date(this.userData.subscription.startDate),
         'cancellationDate': this.userData.subscription.cancellationDate ? new Date(this.userData.subscription.cancellationDate) : null,
         'nextBillingDate': new Date(this.userData.subscription.nextBillingDate),
         'providerTransactionId': this.userData.subscription.providerTransactionId,

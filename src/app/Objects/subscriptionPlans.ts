@@ -28,6 +28,7 @@ export class Subscription {
     subscriptionPlan: SubscriptionPlan;
     cancellationDate: string;
     nextBillingDate: string;
+    startDate: string;
 
     constructor() { }
 
