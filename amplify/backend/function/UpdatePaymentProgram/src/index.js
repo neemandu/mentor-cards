@@ -113,9 +113,12 @@ async function getPaymentProgram(subId) {
 }
 
 function userReachedMaximumProgramsSwitch(user) {
+    return false;
+    /*
     var date = new Date();
     date.setDate(date.getDate() - 30);
     return user.lastPlanSubstitutionDate > date;
+    */
 }
 
 async function getGroup(groupId) {
@@ -171,7 +174,8 @@ async function updateMonthlySubscription(user, paymentProgram, transId) {
         startDate: new Date().toISOString(),
         paymentProvider: "PayPal",
         providerTransactionId: transId,
-        subscriptionPlan: paymentProgram
+        subscriptionPlan: paymentProgram,
+        includedCardPacksIds: []
     };
 
     console.log("updating new subscription in DB");
@@ -275,6 +279,79 @@ async function addNewSubscriptionEmailToMessageQueue(templateId, email, phone, f
         }); 
 }
 
+async function getCardsPack(packId) {
+    console.log("getCardsPack: " + packId);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var packsTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
+
+    console.log("check against table: " + packsTable);
+    var packsParams = {
+        TableName: packsTable,
+        Key: {
+            "id": "" + packId
+        }
+    };
+
+    var pack;
+    await docClient.get(packsParams).promise().then(data => {
+        console.log("Get pack succeeded:", JSON.stringify(data, null, 2));
+        pack = data["Item"];      
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if (!pack) {
+        throw Error('no such pack - ' + packId);
+    }
+
+    return pack;
+}
+
+async function updateSingleSubscription(user, pack, transId, subId) {
+    var subscriptionPlan;
+    for(var i =0 ; i< pack.subscriptionPlans.length; i++){
+        if(pack.subscriptionPlans[i].id == subId){
+            subscriptionPlan = pack.subscriptionPlans[i];
+            if(user.status == "PLAN"){
+                subscriptionPlan.fullPrice = subscriptionPlan.fullPrice * ((100 - subscriptionPlan.discount)/100);
+            }
+        }
+    }
+    var newSub = {
+        id: 1,
+        startDate: new Date().toISOString(),
+        paymentProvider: "PayPal",
+        providerTransactionId: transId,
+        subscriptionPlan: subscriptionPlan,
+		cancellationDate: null,
+        includedCardPacksIds: [pack]
+    };
+
+    console.log("updating new subscription in DB");
+    user.updatedAt = new Date().toISOString();
+    console.log("Adding a new external subscription plan to user: " + user.id + "... pack id: " + pack.id);
+	if(!user.externalPacksSubscriptions){
+		user.externalPacksSubscriptions = [];
+	}
+    var index = -1;
+    for (var i = 0; i < user.externalPacksSubscriptions.length; i++){
+        var sub = user.externalPacksSubscriptions[i];
+        for(var j = 0; j < sub.includedCardPacksIds.length; j++){
+            var packId = sub.includedCardPacksIds[j];
+            if(packId.id == pack.id){
+                index = i;
+            }
+        }
+    }
+    if(index > -1){
+        user.externalPacksSubscriptions[index] = newSub;
+    }
+    else{
+        user.externalPacksSubscriptions.push(newSub);
+    }
+    await saveUser(user);
+}
+
 exports.handler = async (event) => {
     AWS.config.update({
         region: env.REGION
@@ -314,36 +391,40 @@ exports.handler = async (event) => {
         }
 
         var subId = args['paymentProgramId'];
-        var paymentProgram = await getPaymentProgram(subId);
-
+        var packId = args['packId'];
         var transId = args['providerTransactionId'];
-
-        // Update all users in the group with the same program
-        if (user.groupId) {
-            var group = await getGroup(user.groupId);
-            for (var i = 0; i < group.groupUsers.length; i++) {
-                var curremail = group.groupUsers[i].email;
-                var currUser = await getUserByEmail(curremail);
-                console.log('checking if user from group is not the updated by user');
-                console.log('updated user: ' + currUser.username);
-                console.log('currnt user: ' + username);
-                if (currUser.username != username) {
-                    console.log('Updating program to user user: ' + currUser.username);
-                    await updateMonthlySubscription(currUser, paymentProgram, transId);
+        if(packId == -1){
+            var paymentProgram = await getPaymentProgram(subId);
+            // Update all users in the group with the same program
+            if (user.groupId) {
+                var group = await getGroup(user.groupId);
+                for (var i = 0; i < group.groupUsers.length; i++) {
+                    var curremail = group.groupUsers[i].email;
+                    var currUser = await getUserByEmail(curremail);
+                    console.log('checking if user from group is not the updated by user');
+                    console.log('updated user: ' + currUser.username);
+                    console.log('currnt user: ' + username);
+                    if (currUser.username != username) {
+                        console.log('Updating program to user user: ' + currUser.username);
+                        await updateMonthlySubscription(currUser, paymentProgram, transId);
+                    }
                 }
             }
-        }
-        else { // No group yet
-            if (paymentProgram.numberOfUsers > 1) {
-                var groupId = await createGroup(user.email, paymentProgram);
-                user.groupId = groupId;
-                user.groupRole = "ADMIN";
+            else { // No group yet
+                if (paymentProgram.numberOfUsers > 1) {
+                    var groupId = await createGroup(user.email, paymentProgram);
+                    user.groupId = groupId;
+                    user.groupRole = "ADMIN";
+                }
             }
+            console.log('Updating program to updated by user: ' + username);
+            await updateMonthlySubscription(user, paymentProgram, transId);
+            var templateId = 7;
+            await addNewSubscriptionEmailToMessageQueue(templateId, user.email, user.phone, user.fullName);
         }
-        console.log('Updating program to updated by user: ' + username);
-        await updateMonthlySubscription(user, paymentProgram, transId);
-        var templateId = 7;
-        await addNewSubscriptionEmailToMessageQueue(templateId, user.email, user.phone, user.fullName);
+        else{
+            var pack = await getCardsPack(packId);
+            await updateSingleSubscription(user, pack, transId, subId);
+        }
     }
-
 };

@@ -16,7 +16,6 @@ export class PackComponent implements OnInit, OnDestroy {
 
   @Input() packInfo: PackInfo;
   @Input() orgName: string;
-  // @Input() fav: boolean = false;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   @Output() packChange: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
@@ -54,7 +53,7 @@ export class PackComponent implements OnInit, OnDestroy {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.maxWidth = '85vw';
-    dialogConfig.maxHeight = '90vh';
+    dialogConfig.maxHeight = '95vh';
     const data: previewData = { 'pack': this.packInfo, 'showButtons': false };
     dialogConfig.data = data;
     const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);

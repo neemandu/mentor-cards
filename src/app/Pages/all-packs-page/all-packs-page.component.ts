@@ -47,10 +47,10 @@ export class AllPacksPageComponent implements OnInit {
 
   ngOnInit() {
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+      userData ? this.getAllPacks() : null;
       this.userData = userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
-      userData ? this.getAllPacks() : null;
     }));
     this.Subscription.add(this.userAuthService.favoritesChangeEmmiter.subscribe((favorites: number[]) => {
       this.allFavorites = favorites;

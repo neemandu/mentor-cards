@@ -37,6 +37,79 @@ mutation CreateUser($input: CreateUserInput!) {
         createdAt
         updatedAt
       }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          backImgUrl
+          frontImgUrl
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
@@ -90,6 +163,111 @@ mutation CreateUser($input: CreateUserInput!) {
     updatedAt
     favouritePacks
     entries
+    externalPacksSubscriptions {
+      id
+      startDate
+      paymentProvider
+      providerTransactionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          backImgUrl
+          frontImgUrl
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
+    }
   }
 }
 mutation AddCardsPack($input: addCardsPackInput!) {
@@ -111,10 +289,10 @@ mutation DeleteGroupById($input: deleteGroupInput!) {
   DeleteGroupById(input: $input)
 }
 mutation AddCouponCode($input: couponCodeInput!) {
-  AddCouponCode(input: $input){
+  AddCouponCode(input: $input) {
+    text
     imgUrl
     link
-    text
   }
 }
 mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
@@ -351,6 +529,7 @@ mutation CreateOrganizations(
       createdAt
       updatedAt
     }
+    verifyPersonByEmail
     createdAt
     updatedAt
   }
@@ -375,6 +554,7 @@ mutation UpdateOrganizations(
       createdAt
       updatedAt
     }
+    verifyPersonByEmail
     createdAt
     updatedAt
   }
@@ -399,6 +579,7 @@ mutation DeleteOrganizations(
       createdAt
       updatedAt
     }
+    verifyPersonByEmail
     createdAt
     updatedAt
   }
@@ -673,6 +854,35 @@ mutation CreateCardsPack(
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
+    subscriptionPlans {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    topQuestions
     createdAt
     updatedAt
   }
@@ -726,6 +936,35 @@ mutation UpdateCardsPack(
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
+    subscriptionPlans {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    topQuestions
     createdAt
     updatedAt
   }
@@ -779,6 +1018,35 @@ mutation DeleteCardsPack(
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
+    subscriptionPlans {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    topQuestions
     createdAt
     updatedAt
   }

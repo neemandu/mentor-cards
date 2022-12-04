@@ -1,0 +1,51 @@
+.cards-carousel {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.cards-carousel>img {
+  border-radius: 10px;
+  background: #ffa800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 2px;
+  transition: width 0.5s, padding 0.5s, scaleX 0.5s;
+}
+
+.active {
+  width: 100%;
+}
+
+.inactive {
+  padding: 0px !important;
+  width: 0px;
+}
+
+.cards-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+a {
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #ffa800;
+}
+
+a:active {
+  background-color: #dd9300;
+}
+
+.curr-dot {
+  background-color: #ffa800;
+}

@@ -155,6 +155,10 @@ mat-card:hover {
 
 mat-card-content {
   margin-top: 1em;
+  min-height: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #payment-img {

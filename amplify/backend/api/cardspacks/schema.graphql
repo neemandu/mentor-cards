@@ -51,6 +51,7 @@ type User
   updatedAt: AWSDateTime!
   favouritePacks: [Int]
   entries: Int
+  externalPacksSubscriptions: [MonthlySubscription] 
 }
 
 type MonthlySubscription {
@@ -59,6 +60,9 @@ type MonthlySubscription {
   paymentProvider: String
   providerTransactionId: String
   subscriptionPlan: SubscriptionPlan
+  includedCardPacksIds: [CardsPack] 
+  cancellationDate: AWSDateTime
+  nextBillingDate: AWSDateTime 
 }
 
 type SubscriptionPlan
@@ -73,13 +77,14 @@ type SubscriptionPlan
   id: ID!
   name: String
   description: String
-  providerPlanId: String!
+  providerPlanId: String! 
   numberOfUsers: Int
   numberOfCardPacks: Int
   billingCycleInMonths: Int
   fullPrice: Float
   discount: Float
   orgMembership: OrganizationMembership @connection
+  subscriptionProviderPlanId: String 
 }
 
 type CouponCodes
@@ -109,6 +114,7 @@ type Organizations
   id: ID!
   membersEmails: [AWSEmail]
   membership: OrganizationMembership @connection
+  verifyPersonByEmail: Boolean
 }
 
 type OrganizationMembership
@@ -194,6 +200,8 @@ type CardsPack
   backImgUrl: String
   isExternalPack: Boolean
   authorizedDomains: [String]
+  subscriptionPlans: [SubscriptionPlan] @function(name: "GetProviderPlanId-${env}") 
+  topQuestions: [String]
 }
 
 type Cards {
@@ -269,6 +277,7 @@ type GroupUserRole {
 }
 
 input updatePaymentProgramInput {
+  packId: Int
   paymentProgramId: String!
   providerTransactionId: String
   fullName: String
@@ -313,6 +322,7 @@ input GroupUserRoleInput {
 
 input unSubscribeInput {
   username: String!
+  providerTransactionId: String
 }
 
 input userInput {

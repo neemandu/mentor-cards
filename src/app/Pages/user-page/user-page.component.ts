@@ -20,24 +20,50 @@ export class UserPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   Subscription: Subscription = new Subscription();
   userData: UserData;
+  tableData: PlanTableObj[] = [];
+
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog,
     private ngZone: NgZone, private api: APIService, public router: Router) {
     this.userData = this.userAuthService.userData;
-    // console.log("file: user-page.component.ts ~ line 26 ~ constructor ~ this.userData", this.userData)
     this.overlaySpinnerService.changeOverlaySpinner(false)
+    if (this.userData.subscription) {
+      const chargeSpan = this.userData.subscription.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
+      const tmp: PlanTableObj = {
+        'startDate': new Date(this.userData.subscription.startDate),
+        'cancellationDate': this.userData.subscription.cancellationDate ? new Date(this.userData.subscription.cancellationDate) : null,
+        'nextBillingDate': this.userData.subscription.nextBillingDate ? new Date(this.userData.subscription.nextBillingDate) : null,
+        'providerTransactionId': this.userData.subscription.providerTransactionId,
+        'planName': `ערכות הבית - ${this.userData.subscription.subscriptionPlan.description}`,
+        'yearlyMonthly': chargeSpan,
+        'price': this.userData.subscription.subscriptionPlan.fullPrice,
+        'homePlan' : true
+      }
+      this.tableData.push(tmp)
+    }
+    this.userData.externalPacksSubscriptions.forEach(element => {
+      const chargeSpan = element.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
+      const tmp: PlanTableObj = {
+        'startDate': new Date(element.startDate),
+        'cancellationDate': element.cancellationDate ? new Date(element.cancellationDate) : null,
+        'nextBillingDate': element.nextBillingDate ? new Date(element.nextBillingDate) : null,
+        'providerTransactionId': element.providerTransactionId,
+        'planName': element.includedCardPacksIds[0].name,
+        'yearlyMonthly': chargeSpan,
+        'price': element.subscriptionPlan.fullPrice,
+        'homePlan' : false
+      }
+      this.tableData.push(tmp)
+    });
   }
 
   ngOnInit(): void {
-    // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
-    //   this.userData = userData;
-    //   this.overlaySpinnerService.changeOverlaySpinner(false);
-    // }));
     this.userAuthService.userDataEmmiter.subscribe(((userData: UserData) => {
       this.userData = userData;
       userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
     }))
   }
+
   /**
    * When user wants to cancel his subscription (Anytime)
    */
@@ -96,7 +122,7 @@ export class UserPageComponent implements OnInit {
   get nextPaymentDate() {
     var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
     var now = new Date();
-    var createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    var createdAt = new Date(this.userData.subscription.startDate);
     var monthsDiff = this.monthDiff(createdAt, now);
     var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
     var numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;
@@ -115,4 +141,19 @@ export class UserPageComponent implements OnInit {
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
   }
+}
+
+export type PlanTableObj = {
+  startDate: Date;
+  cancellationDate: Date;
+  nextBillingDate: Date;
+  providerTransactionId: string;
+  planName: string;
+  yearlyMonthly: YearlyMonthly;
+  price: number;
+  homePlan: boolean;
+}
+
+export enum YearlyMonthly {
+  MONTHLY, YEARLY
 }

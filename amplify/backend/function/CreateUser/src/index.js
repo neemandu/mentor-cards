@@ -45,6 +45,40 @@ async function getUser(username){
     return user;         
 }
 
+function getBillingEndDateByUser(startDate, subscriptionPlan) {
+    console.log('getBillingEndDate');
+    var cycles = subscriptionPlan.billingCycleInMonths;
+    console.log('cycles isx: ' + cycles);
+    var createdAt = new Date(startDate);
+    console.log('Subscription started at: ');
+    console.log(createdAt);
+    var now = new Date();
+    var monthsDiff = monthDiff(createdAt, now);
+    console.log('monthsDiff is: ' + monthsDiff);
+    var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
+    console.log('numOfCycles is: ' + numOfCycles);
+    var numberOfMonthsToAdd = numOfCycles * cycles;
+    console.log('numberOfMonthsToAdd is: ' + numberOfMonthsToAdd);
+    var endDate = new Date(createdAt);
+    endDate.setMonth(endDate.getMonth()+numberOfMonthsToAdd);
+    console.log('endDate is: ');
+    console.log(endDate);
+    return endDate;
+}
+
+function monthDiff(d1, d2) {
+    var months;
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+    months = (date2.getFullYear() - date1.getFullYear()) * 12;
+    months -= date1.getMonth();
+    months += date2.getMonth();
+    if(date2.getDate() < date1.getDate()){
+        months--;
+    }
+    return months <= 0 ? 0 : months;
+}
+
 async function addWelcomeEmailToMessageQueue(email, phone, fullName){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
@@ -83,12 +117,12 @@ async function saveUser(user){
         Item: user
     };
 
-    console.log("updating user " + user.id + " as unsubscribed" );
+    console.log("updating user " + user.id );
 
     await docClient.put(updatedUserParams).promise().then(data => {
-        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+        console.log("updated user " + user.id, JSON.stringify(data, null, 2));
     }).catch(err => {
-        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to updating user " + user.id + " . Error JSON:", JSON.stringify(err, null, 2));
         });        
 }
 
@@ -140,7 +174,8 @@ exports.handler = async (event) => {
             "providerTransactionId": tid,
             "fullName": fullName,
             "favouritePacks": [],
-            "entries": 1
+            "entries": 1,
+            "externalPacksSubscriptions":[]
         };
     
         console.log("Adding a new user...");
@@ -152,7 +187,30 @@ exports.handler = async (event) => {
 
         return userToInsert;
     }
-
+    
+    for(var i = 0; i < user.externalPacksSubscriptions.length; i++){
+        var endDate = null;
+        if(user.externalPacksSubscriptions[i].cancellationDate == null){
+            console.log("Not canceled endDate");
+            endDate = getBillingEndDateByUser(user.externalPacksSubscriptions[i].startDate,
+                user.externalPacksSubscriptions[i].subscriptionPlan);
+        }
+        console.log(endDate);
+        user.externalPacksSubscriptions[i].nextBillingDate = endDate;
+    }
+    var subEndDate = null;
+    if(user.subscription){
+        if(!user.subscription.cancellationDate){
+            console.log('sub is canceled');
+            subEndDate = getBillingEndDateByUser(user.subscription.startDate,
+                user.subscription.subscriptionPlan);
+            user.subscription.nextBillingDate = subEndDate;
+        }
+        else{
+            console.log('sub is not canceled');
+            user.subscription.nextBillingDate = null;
+        }
+    }
     if(!user.entries){
         user.entries = 0;
     }
@@ -160,6 +218,7 @@ exports.handler = async (event) => {
     user.entries++;
     await saveUser(user);
     console.log('user ' + email + " was found");
+    console.log(user);
     return user;
     
 };

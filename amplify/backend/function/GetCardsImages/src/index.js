@@ -92,6 +92,32 @@ function getBillingEndDate(user) {
     return endDate;
 }
 
+function getBillingEndDateByUser(startDate, subscriptionPlan, cancellationDate) {
+    console.log('getBillingEndDate');
+    console.log('cancellationDate is: ');
+    console.log(cancellationDate);
+    var cycles = subscriptionPlan.billingCycleInMonths;
+    console.log('cycles is: ');
+    console.log(cycles);
+    var createdAt = new Date(startDate);
+    console.log('createdAt is: ');
+    console.log(createdAt);
+    var monthsDiff = monthDiff(createdAt, cancellationDate);
+    console.log('monthsDiff is: ');
+    console.log(monthsDiff);
+    var numOfCycles = Math.floor(monthsDiff / cycles) + 1;
+    console.log('numOfCycles is: ');
+    console.log(numOfCycles);
+    var numberOfMonthsToAdd = numOfCycles * cycles;
+    console.log('numberOfMonthsToAdd is: ');
+    console.log(numberOfMonthsToAdd);
+    var endDate = new Date(createdAt);
+    endDate.setMonth(endDate.getMonth()+numberOfMonthsToAdd);
+    console.log('endDate is: ');
+    console.log(endDate);
+    return endDate;
+}
+
 function isPackageBelongToUser(id, cardsPacksIds, username) {
     console.log('Checking if package belong to user: ' + username );
     console.log('id: ' + id);
@@ -154,110 +180,150 @@ exports.handler = async (event, context, callback) => {
     }
 
     var user = await getUser(username);
-    var allPackagesDate = new Date();
+
+    var isExternalPack = event.source['isExternalPack'];
+    console.log('External Pack: ' + isExternalPack);
+    console.log('Pack Id: ' + event.source['id']);
     var now = new Date();
-    var trialPeriodInDays = 14;
-    console.log('allPackagesDate');
-    console.log(allPackagesDate);
-    console.log('user.firstProgramRegistrationDate');
-    console.log(user.firstProgramRegistrationDate); 
-
-    console.log('Checking if user is SUPER_USER');
-    if(user && user.groupRole == "SUPER_USER"){
-        console.log('Super user!');
-        return event.source['cards'];
-    }
-
-    console.log('Checking if pack is free');
-    if(user &&    // Free Pack!
-       'freeUntilDate' in event.source &&
-       (new Date(event.source['freeUntilDate'])) > now
-    ){
-        console.log('Free Pack!');
-        return event.source['cards'];
-    }
-
-    console.log('Not a free plan');
-    console.log('Checking Unlimited plan');
-    if(user && 
-        user.status == "PLAN" &&
-        user.subscription &&
-        user.subscription.subscriptionPlan &&
-        user.subscription.subscriptionPlan.numberOfCardPacks == -1
-     ){
-         console.log('Unlimited plan');
-         return event.source['cards'];
-     }
-
-    console.log('Not Unlimited plan');
-    var startFreePeriodDate = user.createdAt;
-    if(user &&
-        user.couponCodes &&
-        user.couponCodes.length > 0){
-            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
-                if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
-                    var couponDate = user.couponCodes[i].createdAt;
-                    if(couponDate > startFreePeriodDate){
-                        startFreePeriodDate = couponDate;
-                        trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
+    if(isExternalPack){
+        var length = 0;
+        if(user.externalPacksSubscriptions){
+            length = user.externalPacksSubscriptions.length;
+        }
+        for(var i = 0 ; i < length ; i++){ 
+            var packs = user.externalPacksSubscriptions[i];
+            console.log('External Pack');
+            for(var j = 0 ; j < packs.includedCardPacksIds.length ; j++){ 
+                var pack = packs.includedCardPacksIds[j];
+                if(pack.id == event.source['id']){
+                    console.log('Found the Pack!');
+                    console.log('pack.id: ' + pack.id);
+                    console.log('packs.cancellationDate: ' + packs.cancellationDate);
+                    var startDate = packs.startDate;
+                    var subscriptionPlan = packs.subscriptionPlan;
+                    console.log('Check if user canceled but paid for the rest of the period');
+                    if(packs.cancellationDate){
+                        var endDate = getBillingEndDateByUser(startDate, subscriptionPlan, packs.cancellationDate);
+                        if(now < endDate){
+                            console.log('now < endDate');
+                            return event.source['cards'];
+                        }
+                        else{
+                            console.log('now > endDate');
+                        }
+                    }
+                    else{
+                        return event.source['cards'];
                     }
                 }
             }
         }
-    allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
+    }
+
+    if(!isExternalPack){
+        var allPackagesDate = new Date();
+        var trialPeriodInDays = 14;
+        console.log('allPackagesDate');
+        console.log(allPackagesDate);
+        console.log('user.firstProgramRegistrationDate');
+        console.log(user.firstProgramRegistrationDate); 
     
-    console.log('Checking if its a free trial period');
-    if(user &&    
-        isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
-     ){
-         console.log('free trial period');
-         return event.source['cards'];
-     }
-    
-    console.log('Not a free trial period');
-    console.log('Checking if user has a coupon code with this package');
-    if(user &&
-        user.couponCodes &&
-        user.couponCodes.length > 0){
-            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
-                if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
-                    console.log('User has a coupon code with this package');
-                    var date = new Date();
-                    date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
-                    event.source['freeUntilDate'] = date;
-                    return event.source['cards'];
-                }
-            }
+        console.log('Checking if user is SUPER_USER');
+        if(user && user.groupRole == "SUPER_USER"){
+            console.log('Super user!');
+            return event.source['cards'];
         }
     
-    console.log('User does not have a coupon for this pack');
-    /*if(user &&    // first 30 days all packs are available
-       user.status == "PLAN" &&
-       isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
-    ){
-        console.log('First Month');
-        return event.source['cards'];
-    }*/
-    console.log('Check if user own this pack');
-    if(user && // does the package belong to the user?
-       user.status == "PLAN" &&
-       isPackageBelongToUser(event.source['id'], user.cardsPacksIds, username)     
-    ){
-        console.log('Package belong to user');
-        return event.source['cards'];
-    }
-    console.log('User does not own this pack');
-
-    console.log('Check if user canceled but paid for the rest of the period');
-    if(user &&    // canceled subscription but before billing cycle ended
-       user.status == "NOPLAN" && 
-       user.cancellationDate != null && 
-       now < getBillingEndDate(user)
-    ){
-        console.log('getBillingEndDate');
-        return event.source['cards'];
-    }
-    console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
-    return [];
+        console.log('Checking if pack is free');
+        if(user &&    // Free Pack!
+           'freeUntilDate' in event.source &&
+           (new Date(event.source['freeUntilDate'])) > now
+        ){
+            console.log('Free Pack!');
+            return event.source['cards'];
+        }
     
+        console.log('Not a free plan');
+        console.log('Checking Unlimited plan');
+        if(user && 
+            user.status == "PLAN" &&
+            user.subscription &&
+            user.subscription.subscriptionPlan &&
+            user.subscription.subscriptionPlan.numberOfCardPacks == -1
+         ){
+             console.log('Unlimited plan');
+             return event.source['cards'];
+         }
+    
+        console.log('Not Unlimited plan');
+        var startFreePeriodDate = user.createdAt;
+        if(user &&
+            user.couponCodes &&
+            user.couponCodes.length > 0){
+                for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                    if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
+                        var couponDate = user.couponCodes[i].createdAt;
+                        if(couponDate > startFreePeriodDate){
+                            startFreePeriodDate = couponDate;
+                            trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
+                        }
+                    }
+                }
+            }
+        allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
+        
+        console.log('Checking if its a free trial period');
+        if(user &&    
+            isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
+         ){
+             console.log('free trial period');
+             return event.source['cards'];
+         }
+        
+        console.log('Not a free trial period');
+        console.log('Checking if user has a coupon code with this package');
+        if(user &&
+            user.couponCodes &&
+            user.couponCodes.length > 0){
+                for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                    if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
+                        console.log('User has a coupon code with this package');
+                        var date = new Date();
+                        date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
+                        event.source['freeUntilDate'] = date;
+                        return event.source['cards'];
+                    }
+                }
+            }
+        
+        console.log('User does not have a coupon for this pack');
+        /*if(user &&    // first 30 days all packs are available
+           user.status == "PLAN" &&
+           isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)
+        ){
+            console.log('First Month');
+            return event.source['cards'];
+        }*/
+        console.log('Check if user own this pack');
+        if(user && // does the package belong to the user?
+           user.status == "PLAN" &&
+           isPackageBelongToUser(event.source['id'], user.cardsPacksIds, username)     
+        ){
+            console.log('Package belong to user');
+            return event.source['cards'];
+        }
+        console.log('User does not own this pack');
+    
+        console.log('Check if user canceled but paid for the rest of the period');
+        if(user &&    // canceled subscription but before billing cycle ended
+           user.status == "NOPLAN" && 
+           user.cancellationDate != null && 
+           now < getBillingEndDate(user)
+        ){
+            console.log('getBillingEndDate');
+            return event.source['cards'];
+        }
+        console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
+        return [];
+    }    
 };

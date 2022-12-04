@@ -1,0 +1,12 @@
+table {
+  width: 50vw;
+  text-align: center;
+}
+
+tr.mat-header-row, tr.mat-row {
+    border-bottom: 2px solid orange;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}

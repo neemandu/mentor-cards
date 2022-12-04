@@ -23,6 +23,7 @@ export class UserData {
     endOfTrialDate: Date;
     orgMembership: OrgMembership;
     favouritePacks: number[] | null;
+    externalPacksSubscriptions: any[];
 
     deseralize(input: any) {
         Object.assign(this, input);

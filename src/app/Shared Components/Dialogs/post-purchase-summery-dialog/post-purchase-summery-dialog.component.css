@@ -58,6 +58,7 @@ mat-toolbar {
 }
 
 .title {
+  margin-right: 10px;
   font-size: x-large;
 }
 

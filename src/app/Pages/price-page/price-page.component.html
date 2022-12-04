@@ -9,7 +9,7 @@
     <ul>
         <span id="list-header">הצטרפו לתכנית ותקבלו:</span>
         <li>
-            <mat-icon style="color: blue;">done</mat-icon><b> גישה מלאה ללא הגבלה </b> - נהנים מכל ערכות הקלפים באתר.
+            <mat-icon style="color: blue;">done</mat-icon><b> גישה מלאה לכל ערכות הבית </b> - נהנים מכל ערכות הביתה הקיימות והעתידות להיות באתר.
         </li>
         <li>
             <mat-icon style="color: blue;">done</mat-icon><b> ספר הדרכה צמוד לכל ערכת קלפים</b> - עשרות שאלות
@@ -27,14 +27,19 @@
             <mat-icon style="color: blue;">done</mat-icon><b> שירות ותמיכה</b> - יש לכם שאלה? בא לכם להתייעץ? הצוות
             שלנו זמין לכם גם בווצאפ!
         </li>
+        <li>
+            <mat-icon style="color: blue;">done</mat-icon><b> מחיר מיוחר לערכות של יוצרי חוץ</b> - כל ערכת חוץ ב-19.90 ש"ח בלבד לממנויי Mentor-Cards
+            שלנו זמין לכם גם בווצאפ!
+            <div style="font-size: 12px; margin-top: -10px;">* ערכות הבית הן ערכות קלפים הנוצרו ע"י צוות Mentor-Cards, בעוד שערכות חוץ הן ערכות שנוצרו ע"י יוצרים חיצוניים ולא ע"י צוות Mentor-Cards</div>
+        </li>
     </ul>
 </div>
 <br />
 <div style="text-align: center;">
     <div *ngIf="subPlans" class="program-cards">
         <mat-card>
-            <mat-card-subtitle>הכי בקטנה</mat-card-subtitle>
-            <mat-card-title>תכנית חודשית <s>(במקום 69 ש"ח)</s></mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+            <mat-card-title>תכנית חודשית</mat-card-title>
             <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ monthlySubscription.fullPrice /
                         monthlySubscription.billingCycleInMonths }}</span></p>
@@ -42,7 +47,7 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button id="monthlySubscription" *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1"
+                <button id="monthlySubscription" *ngIf="userData?.status === 'NOPLAN' || userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1"
                     class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(monthlySubscription.id)">
                     להצטרפות >>
@@ -55,7 +60,7 @@
             </mat-card-actions>
         </mat-card>
         <!-- <mat-card id="popular-mat-card"> -->
-         <!--<mat-card>
+        <mat-card>
             <mat-card-subtitle id="popular-mat-card-subtitle">
                 <mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon>
             </mat-card-subtitle>
@@ -77,10 +82,10 @@
                     הינך רשום לתכנית זו
                 </button>
             </mat-card-actions>
-        </mat-card>-->
+        </mat-card>
         <mat-card>
             <mat-card-subtitle>הכי משתלמת</mat-card-subtitle>
-            <mat-card-title>תכנית שנתית <s>(במקום 684 ש"ח)</s></mat-card-title>
+            <mat-card-title>תכנית שנתית</mat-card-title>
             <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ yearlySubscription.fullPrice /
                         yearlySubscription.billingCycleInMonths }}</span></p>
@@ -88,12 +93,12 @@
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>
-                <button id="yearlySubscription" *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12"
+                <button id="yearlySubscription" *ngIf="userData?.status === 'NOPLAN' || userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12"
                     class="other-purchase-btn purchase-btn" type="button"
                     (click)="checkFreePeriod(yearlySubscription.id)">
                     להצטרפות >>
                 </button>
-                <button *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12"
+                <button *ngIf="userData?.status === 'PLAN' && userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12"
                     class="disabled-btn purchase-btn" type="button" disabled>
                     הינך רשום לתכנית זו
                 </button>

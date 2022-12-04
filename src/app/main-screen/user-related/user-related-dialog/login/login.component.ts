@@ -158,7 +158,7 @@ export class LoginComponent implements OnInit {
         this.overlaySpinnerService.changeOverlaySpinner(false);
         // this.forgotPasswordForm.enable();
         this.newPasswordPhaseEnable();
-        this.userAuthService._snackBar.open('נשלח קוד אימות למייל', '', {
+        this.userAuthService._snackBar.open('נשלח קוד אימות בהודעה לנייד', '', {
           duration: 5000,
           panelClass: ['rtl-snackbar']
         });
@@ -251,7 +251,7 @@ export class LoginComponent implements OnInit {
         this.confirmForm.controls['username'].setValue(this.loginForm.controls['username'].value);
         this.showConfirmUserForm();
         // this.confirmForm.controls['username'].disable();
-        this.userAuthService._snackBar.open(`נשלח קוד אימות למייל ${this.loginForm.controls['username'].value}, יש להזין ולאמת את המשתמש`, '', {
+        this.userAuthService._snackBar.open(`נשלח קוד אימות בהודעה לנייד ${this.loginForm.controls['username'].value}, יש להזין ולאמת את המשתמש`, '', {
           duration: 4000,
           panelClass: ['rtl-snackbar']
         });

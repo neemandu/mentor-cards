@@ -88,6 +88,7 @@ subscription OnCreateOrganizations {
       createdAt
       updatedAt
     }
+    verifyPersonByEmail
     createdAt
     updatedAt
   }
@@ -109,6 +110,7 @@ subscription OnUpdateOrganizations {
       createdAt
       updatedAt
     }
+    verifyPersonByEmail
     createdAt
     updatedAt
   }
@@ -130,6 +132,7 @@ subscription OnDeleteOrganizations {
       createdAt
       updatedAt
     }
+    verifyPersonByEmail
     createdAt
     updatedAt
   }
@@ -579,6 +582,35 @@ subscription OnCreateCardsPack {
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
+    subscriptionPlans {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    topQuestions
     createdAt
     updatedAt
   }
@@ -629,6 +661,35 @@ subscription OnUpdateCardsPack {
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
+    subscriptionPlans {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    topQuestions
     createdAt
     updatedAt
   }
@@ -679,6 +740,35 @@ subscription OnDeleteCardsPack {
     likesCounter
     visitorsCounter
     backImgUrl
+    isExternalPack
+    authorizedDomains
+    subscriptionPlans {
+      id
+      name
+      description
+      providerPlanId
+      numberOfUsers
+      numberOfCardPacks
+      billingCycleInMonths
+      fullPrice
+      discount
+      orgMembership {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    topQuestions
     createdAt
     updatedAt
   }

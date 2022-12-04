@@ -1,37 +1,18 @@
 <div class="content">
-    <!-- <video #videoPlayer width="1920px" height="600px" autoplay loop oncanplay="this.play()"
-        onloadedmetadata="this.muted = true; this.style.opacity='1'">
-        <source src="assets\About video.mp4" type="video/mp4">
-        <source src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4" type="video/mp4">
-        </video> -->
-    <div class="content user-info" *ngIf="userData !== undefined">
-        <div class="user-info-section">
-            <h1>פרטי משתמש</h1>
-            <div class="line"></div>
-            <p>מייל: {{userData.email}}</p>
-        </div>
-        <div class="user-info-section">
-            <h1>פרטי התכנית</h1>
-            <div class="line"></div>
-            <p>תכנית: {{userData.subscription.subscriptionPlan.description}}</p>
-            <p>תאריך הרשמה לתכנית הנוכחית: {{userData.subscription.startDate | date:'d/M/y'}}</p>
-            <!-- <p>תאריך תחילת תשלום: {{paymentStartDate | date:'d/M/y'}}</p> -->
-            <p>תאריך החיוב הבא: {{nextPaymentDate | date:'d/M/y'}}</p>
-            <p>מחיר עבור התכנית הנוכחית: {{(userData.subscription.subscriptionPlan.fullPrice -
-                userData.subscription.subscriptionPlan.discount).toFixed(2)}}₪</p>
-            <!-- <p>חבילות נותרות להחלפה החודש: {{amountOfPlansToChangeThisMonth}}</p> -->
-            <div class="actions" style="width: 100%; margin-top: 2rem;">
-                <div class="d-flex flex-column align-items-baseline">
-                    <p (click)="navigate()" style="cursor: pointer; text-decoration: underline; margin-bottom: auto;">
-                        החליפו תוכנית</p>
-                    <span style="font-size: small;">*התכנית החדשה תעודכן החל מתאריך {{nextPaymentDate |
-                        date:'d/M/y'}}</span>
-                </div>
-                <p *ngIf="!userData.groupRole || userData.groupRole!=='USER'" (click)="openCancelDialogModal()"
-                   id="cancelSubscription" style="cursor: pointer; text-decoration: underline;">לביטול החיוב האוטומטי</p>
-            </div>
-        </div>
+  <div class="content user-info" *ngIf="userData !== undefined">
+    <div class="user-info-section">
+      <h1>פרטי משתמש</h1>
+      <div class="line"></div>
+      <p>שם: {{userData.fullName}}</p>
+      <p>מייל: {{userData.email}}</p>
+      <p>תאריך הרשמה לאתר: {{userData.createdAt | date: 'd/M/yy'}}</p>
     </div>
+    <div class="user-info-section">
+      <h1>תכניות</h1>
+      <div class="line"></div>
+        <app-plan-table [tableData]="tableData" [userData]="userData"></app-plan-table>
+    </div>
+  </div>
 </div>
 
 <app-information-bar></app-information-bar>

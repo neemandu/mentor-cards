@@ -1,10 +1,12 @@
 import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SubscriptionPlan } from 'src/app/API.service';
 import { PackContent, PackInfo } from 'src/app/Objects/packs';
+import { PurchaseData } from 'src/app/Objects/purchase-data';
 import { UserData } from 'src/app/Objects/user-related';
+import { ApprovePurchaseDialogComponent } from 'src/app/Pages/price-page/approve-purchase-dialog/approve-purchase-dialog.component';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
-import { DynamicDialogYesNoComponent } from '../../Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { AboutAuthorComponent } from '../about-author/about-author.component';
 const millisecondsInMonth: number = 2505600000;
 
@@ -18,106 +20,35 @@ export class PackPreviewComponent implements OnInit {
   loadedCards: number = 0;
   trialPeriodDate: Date | null;
   userData: UserData;
+  isYearly: boolean = false;
+  yearlyPlan: SubscriptionPlan;
+  monthlyPlan: SubscriptionPlan;
+  discount: number;
+  neverShowAgain: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: previewData, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
     private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void {
+    let sub = this.userAuthService.userDataEmmiter.subscribe(() => {
+      sub.unsubscribe();
+      this.closeDialog();
+    });
+    const ls = localStorage.getItem("packsToOpenAutomatically");
+    const packsToOpenAutomatically = ls ? ls.split(',') : [];
+    if (packsToOpenAutomatically.includes(this.data.pack.id) && this.data.pack.cards.length !== 0)
+      this.navigateToPackView(true)
+
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
-    // console.log("🚀 ~ file: pack-preview.component.ts ~ line 21 ~ PackPreviewComponent ~ data", this.data)
+    if (this.data.pack.subscriptionPlans) {
+      this.yearlyPlan = this.data.pack.subscriptionPlans.find(el => el.billingCycleInMonths === 12)
+      this.yearlyPlan['priceForMentorCardsMembers'] = Math.round(this.yearlyPlan.fullPrice*(1-(this.yearlyPlan.discount/100))*10) / 10
+      this.monthlyPlan = this.data.pack.subscriptionPlans.find(el => el.billingCycleInMonths === 1)
+      this.monthlyPlan['priceForMentorCardsMembers'] = Math.round(this.monthlyPlan.fullPrice*(1-(this.monthlyPlan.discount/100))*10) / 10
+      this.discount = Math.round((1 - (this.yearlyPlan.fullPrice / (this.monthlyPlan.fullPrice * 12))) * 100)
+    }
   }
-
-  // choosePack(): void {
-  //   this.overlaySpinnerService.changeOverlaySpinner(true);
-  //   this.api.AddCardsPack({ "cardsPackId": this.data.id }).then(value => {
-  //     this.dialogRef.close(value);
-  //     // console.log("🚀 ~ file: cards.service.ts ~ line 60 ~ CardsService ~ returnthis.api.AddCardsPack ~ value", value)
-  //   }, reject => {
-  //     this.overlaySpinnerService.changeOverlaySpinner(false);
-  //     console.log("🚀 ~ file: cards.service.ts ~ line 63 ~ CardsService ~ returnthis.api.AddCardsPack ~ reject", reject)
-  //   })
-  // }
-
-  // get choosePackButtonVisible() {
-  //   return this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks == -1 ||
-  //     this.userAuthService.userData.numberOfUsedPacks < this.userAuthService.userData.subscription.subscriptionPlan.numberOfCardPacks;
-  // }
-
-  // get exchangePackButtonVisible() {
-  //   return (!this.userAuthService.userData.lastPackSubstitutionDate ||
-  //     new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime())
-  // }
-
-  // get nextPackSubstitutionDate() {
-  //   return new Date(new Date(this.userAuthService.userData.lastPackSubstitutionDate).getTime() + millisecondsInMonth);
-  // }
-
-  // get exchangePackButtonVisibleNothingToChange() {
-  //   return this.userAuthService.userData.numberOfUsedPacks == 0;
-  // }
-
-  // get noChangingProgramThisMonth() {
-  //   return this.userAuthService.userData && this.userAuthService.userData.status === 'PLAN' && this.userAuthService.planChangedThisMonth;
-  // }
-
-  // get upgradePackButtonVisible() {
-  //   return !this.userAuthService.userData.lastPlanSubstitutionDate ||
-  //     new Date(this.userAuthService.userData.lastPlanSubstitutionDate).getTime() + millisecondsInMonth <= new Date().getTime() ||
-  //     this.userAuthService.userData.numberOfPlansSubstitutions == 1
-  // }
-
-  // get currentPacksOwned() {
-  //   return this.cardsService.allPacks.filter(pack => pack.cards.length !== 0);
-  //   // return this.userAuthService.userData.numberOfUsedPacks;
-  // }
-
-  // signedIn() {
-  //   return this.userAuthService.userData;
-  // }
-
-  // get hasProgram() {
-  //   return this.userAuthService.userData.subscription;
-  // }
-
-
-  // openChooseProgramModal(): void {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
-  //   var dialogSub = dialogRef.afterClosed().subscribe(res => {
-  //     dialogSub.unsubscribe();
-  //     if (res) {
-  //       this.dialogRef.close(true);
-  //     }
-  //   });
-  // }
-
-  // openExchangePackApprovalModal(pack): void {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.data = new DynamicDialogData('החלפת ערכות', ['ערכת `' + pack.description + '` תוחלף בערכת `' + this.data.description + '`', 'שימו לב - ניתן להחליף ערכת קלפים אחת פעם בחודש בהתאם למועד החיוב'], 'אישור', 'ביטול')
-  //   const dialogRef = this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
-  //   var dialogSub = dialogRef.afterClosed().subscribe(res => {
-  //     dialogSub.unsubscribe();
-  //     if (res) {
-  //       this.overlaySpinnerService.changeOverlaySpinner(true);
-  //       var packChange: changeCardsPackInput = { "oldCardsPackId": pack.id, "newCardsPackId": this.data.id };
-  //       this.api.ChangeCardsPack(packChange).then(value => {
-  //         this.dialogRef.close(true);
-  //       }, reject => {
-  //         this.overlaySpinnerService.changeOverlaySpinner(false);
-  //         console.log("🚀 ~ file: pack-preview.component.ts ~ line 95 ~ PackPreviewComponent ~ this.api.ChangeCardsPack ~ reject", reject)
-  //       })
-  //     }
-  //   });
-  // }
-
-  // get trialPeriodExpDate() {
-  //   return this.userAuthService.trialPeriodExpDate;
-  // }
 
   openAboutDialog(): void {
     const dialogConfig = new MatDialogConfig();
@@ -126,6 +57,15 @@ export class PackPreviewComponent implements OnInit {
     // dialogConfig.maxWidth = '40vw';
     dialogConfig.data = this.data;
     this.dialog.open(AboutAuthorComponent, dialogConfig);
+  }
+
+  navigateToPackView(exists): void {
+    if (!exists && this.neverShowAgain) {
+      const ls = localStorage.getItem("packsToOpenAutomatically");
+      const packsToOpenAutomatically = ls ? ls.split(',') : [];
+      localStorage.setItem("packsToOpenAutomatically", [...packsToOpenAutomatically, this.data.pack.id].toString());
+    }
+    this.navigate(`/pack-view/${this.data.pack.id}`)
   }
 
   navigate(path: string): void {
@@ -140,6 +80,25 @@ export class PackPreviewComponent implements OnInit {
   signInSignUp(): void {
     this.closeDialog();
     this.userAuthService.showSignInModal();
+  }
+
+  monthlyYearlyChanged(): void {
+    this.isYearly = !this.isYearly;
+  }
+
+  openApprovePurchaseDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxHeight = '85vh';
+    dialogConfig.data = new PurchaseData(new Date(), this.isYearly ? this.yearlyPlan : this.monthlyPlan, +this.data.pack.id);
+    const dialogRef = this.dialog.open(ApprovePurchaseDialogComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(res => {
+      dialogSub.unsubscribe();
+      if (res) {
+        this.dialogRef.close();
+      }
+    });
   }
 
 }

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { APIService } from '../../API.service';
+import { APIService, SubscriptionPlan } from '../../API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { PurchaseData } from 'src/app/Objects/purchase-data';
-import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
+// import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { UserData } from 'src/app/Objects/user-related';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
@@ -132,7 +132,7 @@ export class PricePageComponent implements OnInit {
   private get nextPaymentDate() {
     let cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
     let now = new Date();
-    let createdAt = new Date(this.userData.subscription.subscriptionPlan.createdAt);
+    let createdAt = new Date(this.userData.subscription.startDate);
     let monthsDiff = this.monthDiff(createdAt, now);
     let numOfCycles = Math.floor(monthsDiff / cycles) + 1;
     let numberOfMonthsToAdd = numOfCycles * cycles * millisecondsInMonth;

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { APIService, updatePaymentProgramInput } from 'src/app/API.service';
-import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
+import { APIService, SubscriptionPlan, updatePaymentProgramInput } from 'src/app/API.service';
+// import { SubscriptionPlan } from 'src/app/Objects/subscriptionPlans';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import * as programData from '../../../../assets/Bundle Configurations/BundleConfigs.json';
@@ -96,11 +96,23 @@ export class ProgramChoiseDialogComponent implements OnInit {
             // debugger
             if (this.userAuthService.userData.status === "NOPLAN")
               return actions.subscription.create({
-                'plan_id': this.packSelected.providerPlanId
+                'plan_id': this.packSelected.providerPlanId,
+                'subscriber': {
+                  'name': {
+                    'given_name': this.userAuthService.userData.fullName
+                  },
+                  'email_address': this.userAuthService.userData.email
+                }
               });
             else if (this.userAuthService.userData.status === "PLAN")
               return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
-                'plan_id': this.packSelected.providerPlanId
+                'plan_id': this.packSelected.providerPlanId,
+                'subscriber': {
+                  'name': {
+                    'given_name': this.userAuthService.userData.fullName
+                  },
+                  'email_address': this.userAuthService.userData.email
+                }
               });
           },
           onApprove: async (data, actions) => {
