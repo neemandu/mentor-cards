@@ -1,10 +1,8 @@
 <div id="content" class="d-flex flex-column align-items-center">
     <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
-    <img id="top-image" src="https://master-cards.s3.eu-west-2.amazonaws.com/November+SALE!!!.png" alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities">
-    <!-- <span id="title" *ngIf="!userData?.orgMembership">מצטרפים לתכנית ונהנים מעד 30% הנחה!</span>
-    <span id="title" *ngIf="userData?.orgMembership">שלום ל {{this.userData.orgMembership.name}}!</span>-->
-    <span id="title">חגיגת מבצעי נובמבר - עד 50% הנחה על כל התוכניות שלנו!</span>
-
+    <img id="top-image" src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png" alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities">
+    <span id="title" *ngIf="!userData?.orgMembership">מצטרפים לתכנית ונהנים מעד 30% הנחה!</span>
+    <span id="title" *ngIf="userData?.orgMembership">שלום ל {{this.userData.orgMembership.name}}!</span>
     <br>
     <ul>
         <span id="list-header">הצטרפו לתכנית ותקבלו:</span>
@@ -59,32 +57,8 @@
                 </button>
             </mat-card-actions>
         </mat-card>
-        <!-- <mat-card id="popular-mat-card"> -->
         <mat-card>
-            <mat-card-subtitle id="popular-mat-card-subtitle">
-                <mat-icon>star</mat-icon>הכי פופולרית<mat-icon>star</mat-icon>
-            </mat-card-subtitle>
-            <mat-card-title>תכנית חצי-שנתית</mat-card-title>
-            <mat-card-content>
-                <p class="price-line">חודש / <span class="price-number">₪{{ halfYearlySubscription.fullPrice /
-                        halfYearlySubscription.billingCycleInMonths }}</span></p>
-                <p class="price-line">משלמים מראש {{halfYearlySubscription.fullPrice}} ש"ח לחצי שנה וחוסכים {{halfYearlySubscriptionPercentage}}%</p>
-            </mat-card-content>
-            <mat-divider inset></mat-divider>
-            <mat-card-actions>
-                <button id="halfYearlySubscription" *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 6"
-                    class="other-purchase-btn purchase-btn" type="button"
-                    (click)="checkFreePeriod(halfYearlySubscription.id)">
-                    להצטרפות >>
-                </button>
-                <button *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 6"
-                    class="disabled-btn purchase-btn" type="button" disabled>
-                    הינך רשום לתכנית זו
-                </button>
-            </mat-card-actions>
-        </mat-card>
-        <mat-card>
-            <mat-card-subtitle>הכי משתלמת</mat-card-subtitle>
+            <mat-card-subtitle></mat-card-subtitle>
             <mat-card-title>תכנית שנתית</mat-card-title>
             <mat-card-content>
                 <p class="price-line">חודש / <span class="price-number">₪{{ yearlySubscription.fullPrice /
