@@ -20,7 +20,7 @@
       "function": {
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-442f744d3068624c532b-build.zip",
+          "s3Key": "amplify-builds/CreateUser-324a61515937376d4774-build.zip",
           "sendinblueApiKey": "xxx"
         },
         "AddCardsPack": {
@@ -144,6 +144,14 @@
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/IncrementPackEntries-484d636238686b326765-build.zip"
+        },
+        "GetProviderPlanId": {
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/GetProviderPlanId-4d4d526b4f6c734a5376-build.zip"
+        },
+        "GetNextBillingDate": {
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/GetNextBillingDate-69513178742b6330577a-build.zip"
         }
       }
     }
