@@ -187,16 +187,17 @@ exports.handler = async (event) => {
 
         return userToInsert;
     }
-    
-    for(var i = 0; i < user.externalPacksSubscriptions.length; i++){
-        var endDate = null;
-        if(user.externalPacksSubscriptions[i].cancellationDate == null){
-            console.log("Not canceled endDate");
-            endDate = getBillingEndDateByUser(user.externalPacksSubscriptions[i].startDate,
-                user.externalPacksSubscriptions[i].subscriptionPlan);
+    if(user.externalPacksSubscriptions){
+        for(var i = 0; i < user.externalPacksSubscriptions.length; i++){
+            var endDate = null;
+            if(user.externalPacksSubscriptions[i].cancellationDate == null){
+                console.log("Not canceled endDate");
+                endDate = getBillingEndDateByUser(user.externalPacksSubscriptions[i].startDate,
+                    user.externalPacksSubscriptions[i].subscriptionPlan);
+            }
+            console.log(endDate);
+            user.externalPacksSubscriptions[i].nextBillingDate = endDate;
         }
-        console.log(endDate);
-        user.externalPacksSubscriptions[i].nextBillingDate = endDate;
     }
     var subEndDate = null;
     if(user.subscription){
