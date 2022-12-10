@@ -1,8 +1,30 @@
 export type AmplifyDependentResourcesAttributes = {
-    "storage": {
-        "Invoices": {
-            "BucketName": "string",
-            "Region": "string"
+    "auth": {
+        "mentorcards56dbf153": {
+            "HostedUIDomain": "string",
+            "OAuthMetadata": "string",
+            "UserPoolId": "string",
+            "UserPoolArn": "string",
+            "UserPoolName": "string",
+            "AppClientIDWeb": "string",
+            "AppClientID": "string",
+            "CreatedSNSRole": "string"
+        }
+    },
+    "api": {
+        "cardspacks": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        },
+        "PayPalWebhookAPI": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
+        },
+        "receiptsAPI": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
         }
     },
     "function": {
@@ -195,6 +217,18 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "GetProviderPlanId": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
+    "storage": {
+        "Invoices": {
+            "BucketName": "string",
+            "Region": "string"
         }
     }
 }

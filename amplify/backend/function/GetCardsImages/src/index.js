@@ -239,8 +239,23 @@ exports.handler = async (event, context, callback) => {
         console.log('allPackagesDate');
         console.log(allPackagesDate);
         console.log('user.firstProgramRegistrationDate');
-        console.log(user.firstProgramRegistrationDate);  
-        console.log('Checking if pack is free');   
+        console.log(user.firstProgramRegistrationDate); 
+    
+        console.log('Checking if user is SUPER_USER');
+        if(user && user.groupRole == "SUPER_USER"){
+            console.log('Super user!');
+            return event.source['cards'];
+        }
+    
+        console.log('Checking if pack is free');
+        if(user &&    // Free Pack!
+           'freeUntilDate' in event.source &&
+           (new Date(event.source['freeUntilDate'])) > now
+        ){
+            console.log('Free Pack!');
+            return event.source['cards'];
+        }
+    
         console.log('Not a free plan');
         console.log('Checking Unlimited plan');
         if(user && 
