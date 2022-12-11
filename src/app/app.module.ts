@@ -9,6 +9,12 @@ Amplify.configure(awsconfig);
 import LogRocket from 'logrocket';
 LogRocket.init('cyu6kh/mentor-cards');
 
+import {
+  SocialAuthServiceConfig,
+  SocialAuthService,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
+
 //Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -170,6 +176,19 @@ import { CardsCarouselComponent } from './Shared Components/pack/pack-preview/ca
     MatCheckboxModule,
   ],
   providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('190819062590-9t1orgtvli8t5k0orkv885gg7h9hpjlp.apps.googleusercontent.com') // your client id
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
+    SocialAuthService
   ],
   bootstrap: [AppComponent],
   entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent,

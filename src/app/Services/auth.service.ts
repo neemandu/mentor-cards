@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import Auth, { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
-import { Hub, ICredentials } from '@aws-amplify/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { CognitoHostedUIIdentityProvider, Auth } from '@aws-amplify/auth';
+// import { BehaviorSubject } from 'rxjs';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { CognitoUser } from 'amazon-cognito-identity-js';
-import { UserAuthService } from './user-auth.service';
-import { map } from 'rxjs/operators';
+// import { UserAuthService } from './user-auth.service';
+// import { map } from 'rxjs/operators';
 
-const initialAuthState = {
-  isLoggedIn: false,
-  username: null,
-  id: null,
-  email: null,
-  cognitoUser: null
-};
+import {
+  SocialAuthService,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
+
+// const initialAuthState = {
+//   isLoggedIn: false,
+//   username: null,
+//   id: null,
+//   email: null,
+//   cognitoUser: null
+// };
 
 export interface AuthState {
   isLoggedIn: boolean;
@@ -36,14 +40,14 @@ export interface NewUser {
 export class AuthService {
 
   public loggedIn: boolean;
-  private readonly _authState = new BehaviorSubject<AuthState>(
-    initialAuthState
-  );
+  // private readonly _authState = new BehaviorSubject<AuthState>(
+  //   initialAuthState
+  // );
   /** AuthState as an Observable */
-  readonly auth$ = this._authState.asObservable();
+  // readonly auth$ = this._authState.asObservable();
 
   /** Observe the isLoggedIn slice of the auth state */
-  readonly isLoggedIn$ = this.auth$.pipe(map(state => state.isLoggedIn));
+  // readonly isLoggedIn$ = this.auth$.pipe(map(state => state.isLoggedIn));
 
   //private _authState: Subject<CognitoUser | any> = new Subject<CognitoUser | any>();
   //authState: Observable<CognitoUser | any> = this._authState.asObservable();
@@ -54,42 +58,14 @@ export class AuthService {
   public static FACEBOOK = CognitoHostedUIIdentityProvider.Facebook;
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
-  constructor(private userAuthService: UserAuthService) {
-    // Get the user on creation of this service
-    // Auth.currentAuthenticatedUser().then(
-    //   (user: any) => this.setUser(user),
-    //   _err => this._authState.next(initialAuthState)
-    // );
-
-    // Use Hub channel 'auth' to get notified on changes
-    // Hub.listen('auth', ({ payload: { event, data, message } }) => {
-    //   if (event === 'signIn') {
-    //     console.log("logged in!!!!!")
-    //     // On 'signIn' event, the data is a CognitoUser object
-    //     this.setUser(data);
-    //   } else {
-    //     this._authState.next(initialAuthState);
-    //   }
-    // });
+  constructor(private socialAuthService: SocialAuthService) {
   }
-
-  // private setUser(user: CognitoUserInterface) {
-  //   console.log("file: auth.service.ts ~ line 77 ~ setUser ~ user", user)
-  //   Auth.currentUserInfo().then(
-  //     (userAtt: any) => {
-  //       if (!user || !userAtt) {
-  //         return;
-  //       }
-
-  //       var username = user.username;
-  //       var id = userAtt.attributes.sub;
-  //       var email = userAtt.attributes.email;
-  //       var cognitoUser = user;
-  //       this._authState.next({ isLoggedIn: true, id, username, email, cognitoUser });
-  //       this.userAuthService.loggedIn(user);
-  //     }
-  //   )
-  // }
+  
+  ngOnInit() {
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log(user);
+    });
+  }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {
     return Auth.signUp({
@@ -139,14 +115,16 @@ export class AuthService {
   //   return Auth.changePassword(userData, oldPassword, newPassword);
   // }
 
-  async signInWithFacebook() {
-    const socialResult = await this.socialSignIn(AuthService.FACEBOOK);
-    console.log('fb Result:', socialResult);
-  }
+  // async signInWithFacebook() {
+  //   const socialResult = await this.socialSignIn(AuthService.FACEBOOK);
+  //   console.log('fb Result:', socialResult);
+  // }
 
-  async signInWithGoogle() {
-    const socialResult = await this.socialSignIn(AuthService.GOOGLE);
-    console.log('google Result:', socialResult);
+  signInWithGoogle() {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    // Auth.federatedSignIn({'provider': AuthService.GOOGLE})
+    // const socialResult = await this.socialSignIn(AuthService.GOOGLE);
+    // console.log('google Result:', socialResult);
   }
 
 }

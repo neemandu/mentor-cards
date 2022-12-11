@@ -1,5 +1,10 @@
 * {
   font-family: 'rubik';
+
+  --white: #fff;
+  --google-blue: hwb(217 26% 4%);
+  --google-blue-hover: hwb(217 26% 10%);
+  --button-active-blue: #1669f2;
 }
 
 #title {
@@ -17,7 +22,7 @@
 }
 
 .option-btn {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   height: 39px;
   border-radius: 5px;
   border: none;
@@ -62,7 +67,7 @@ mat-progress-bar {
 
 #login-form {
   /*border-left: #ffa800 2px solid;*/
-  padding: 1% 1% 1% 5%;
+  /* padding: 1% 1% 1% 5%; */
   /* width: 18vw; */
   width: 100%;
 }
@@ -89,7 +94,70 @@ mat-progress-bar {
 }
 
 #social-media-login {
-  margin-right: 5%;
-  width: 18vw;
+  direction: rtl;
+}
+
+.first-line,
+.second-line {
+  background-color: #ffa800;
+  width: 35%;
+  height: 3px;
+  border-radius: 100%;
+  /* transition: transform 0.5s, scale 1s; */
+}
+
+#seperator {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+
+.google-btn {
+  height: 42px;
+  background-color: var(--google-blue);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.google-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: var(--white);
+  left: 0;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  transition: width 1s ease-in-out;
+}
+
+/* .google-icon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 11px;
+  width: 18px;
+  height: 18px;
+  left: 0;
+} */
+
+.btn-text {
+  float: right;
+  margin: 11px 11px 0 0;
+  color: var(--white);
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  font-family: "Roboto";
+}
+
+.google-btn:hover {
+  background-color: var(--google-blue-hover);
+}
+
+.google-icon-wrapper:hover {
+  width: 99%;
 }
