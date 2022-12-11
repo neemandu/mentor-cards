@@ -181,6 +181,19 @@ exports.handler = async (event, context, callback) => {
 
     var user = await getUser(username);
 
+    console.log('Checking if user is SUPER_USER');
+    if(user && user.groupRole == "SUPER_USER"){
+        console.log('Super user!');
+        return event.source['cards'];
+    }
+
+    if(user && 'freeUntilDate' in event.source &&
+    ((new Date(event.source['freeUntilDate'])) > now)){
+        console.log('Free Pack!');
+        return event.source['cards'];
+    }
+
+
     var isExternalPack = event.source['isExternalPack'];
     console.log('External Pack: ' + isExternalPack);
     console.log('Pack Id: ' + event.source['id']);
