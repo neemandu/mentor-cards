@@ -35,10 +35,8 @@ const [
   productionRedirectSignOut,
 ] = awsConfig.oauth.redirectSignOut.split(",");
 
-const domain = isProd ? "mentor-cards-prod.auth.eu-west-2.amazoncognito.com" : "mentor-cards-dev.auth.eu-west-2.amazoncognito.com"
-
 const oauth = {
-  "domain": domain,
+  "domain": isProd ? "mentor-cards-prod.auth.eu-west-2.amazoncognito.com" : "mentor-cards-dev.auth.eu-west-2.amazoncognito.com",
   "scope": [
       "phone",
       "email",
