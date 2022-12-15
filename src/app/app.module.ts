@@ -42,13 +42,6 @@ const [
        
 const oauth = {
   "domain": isProd ? "mentor-cards-prod.auth.eu-west-2.amazoncognito.com" : "mentor-cards-dev.auth.eu-west-2.amazoncognito.com",
-  "scope": [
-      "phone",
-      "email",
-      "openid",
-      "profile",
-      "aws.cognito.signin.user.admin"
-  ],
   "redirectSignIn": isLocalhost ? localRedirectSignIn : (isDev ? devRedirectSignIn : productionRedirectSignIn),
   "redirectSignOut": isLocalhost ? localRedirectSignOut : (isDev ? devRedirectSignOut : productionRedirectSignOut),
   "responseType": "code"
