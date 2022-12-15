@@ -3,21 +3,11 @@ import { CognitoHostedUIIdentityProvider, Auth } from '@aws-amplify/auth';
 // import { BehaviorSubject } from 'rxjs';
 import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { CognitoUser } from 'amazon-cognito-identity-js';
-// import { UserAuthService } from './user-auth.service';
-// import { map } from 'rxjs/operators';
 
 import {
   SocialAuthService,
   GoogleLoginProvider,
 } from 'angularx-social-login';
-
-// const initialAuthState = {
-//   isLoggedIn: false,
-//   username: null,
-//   id: null,
-//   email: null,
-//   cognitoUser: null
-// };
 
 export interface AuthState {
   isLoggedIn: boolean;
@@ -40,31 +30,18 @@ export interface NewUser {
 export class AuthService {
 
   public loggedIn: boolean;
-  // private readonly _authState = new BehaviorSubject<AuthState>(
-  //   initialAuthState
-  // );
-  /** AuthState as an Observable */
-  // readonly auth$ = this._authState.asObservable();
-
-  /** Observe the isLoggedIn slice of the auth state */
-  // readonly isLoggedIn$ = this.auth$.pipe(map(state => state.isLoggedIn));
-
-  //private _authState: Subject<CognitoUser | any> = new Subject<CognitoUser | any>();
-  //authState: Observable<CognitoUser | any> = this._authState.asObservable();
-  //authResponseUri: string = "https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/"
-
   public static SIGN_IN = 'signIn';
   public static SIGN_OUT = 'signOut';
   public static FACEBOOK = CognitoHostedUIIdentityProvider.Facebook;
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
   constructor(private socialAuthService: SocialAuthService) {
-  }
-  
-  ngOnInit() {
     this.socialAuthService.authState.subscribe((user) => {
       console.log(user);
     });
+  }
+
+  ngOnInit() {
   }
 
   signUp(user: NewUser): Promise<CognitoUser | any> {
@@ -88,6 +65,14 @@ export class AuthService {
       .then(() => this.loggedIn = false)
   }
 
+  sendConfirmationCode(email: string) {
+    return Auth.resendSignUp(email)
+  }
+
+  confirmCode(email: string, confirmCode: string) {
+    return Auth.confirmSignUp(email, confirmCode)
+  }
+
   socialSignIn(provider: CognitoHostedUIIdentityProvider) {
     Auth.federatedSignIn({
       'provider': provider
@@ -103,14 +88,6 @@ export class AuthService {
     });
   }
 
-  sendConfirmationCode(email: string) {
-    return Auth.resendSignUp(email)
-  }
-
-  confirmCode(email: string, confirmCode: string) {
-    return Auth.confirmSignUp(email, confirmCode)
-  }
-
   // changePassword(userData: any, oldPassword: string, newPassword: string) {
   //   return Auth.changePassword(userData, oldPassword, newPassword);
   // }
@@ -121,10 +98,11 @@ export class AuthService {
   // }
 
   signInWithGoogle() {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
     // Auth.federatedSignIn({'provider': AuthService.GOOGLE})
     // const socialResult = await this.socialSignIn(AuthService.GOOGLE);
     // console.log('google Result:', socialResult);
+    this.socialSignIn(CognitoHostedUIIdentityProvider.Google)
   }
 
 }

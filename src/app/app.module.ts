@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
-import Amplify from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 import awsConfig from '../aws-exports';
 
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === "[::1]" ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  // [::1] is the IPv6 localhost address.
+  window.location.hostname === "[::1]" ||
+  // 127.0.0.1/8 is considered localhost for IPv4.
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  )
 );
 
 const isDev = Boolean(
@@ -36,7 +36,7 @@ const updatedAwsConfig = {
   ...awsConfig,
   oauth: {
     ...awsConfig.oauth,
-    redirectSignIn: isLocalhost ? localRedirectSignIn : (isDev ? devRedirectSignIn : productionRedirectSignIn ),
+    redirectSignIn: isLocalhost ? localRedirectSignIn : (isDev ? devRedirectSignIn : productionRedirectSignIn),
     redirectSignOut: isLocalhost ? localRedirectSignOut : (isDev ? devRedirectSignOut : productionRedirectSignOut),
   }
 }
@@ -126,6 +126,7 @@ import { WelcomeToNewOrgDialogComponent } from './Shared Components/Dialogs/welc
 import { ServicesComponent } from './Pages/services/services.component';
 import { PlanTableComponent } from './Pages/user-page/plan-table/plan-table.component';
 import { CardsCarouselComponent } from './Shared Components/pack/pack-preview/cards-carousel/cards-carousel.component';
+import { AuthService } from './Services/auth.service';
 
 @NgModule({
   declarations: [
@@ -211,7 +212,7 @@ import { CardsCarouselComponent } from './Shared Components/pack/pack-preview/ca
     MatExpansionModule,
     MatCheckboxModule,
   ],
-  providers: [
+  providers: [AuthService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -222,6 +223,9 @@ import { CardsCarouselComponent } from './Shared Components/pack/pack-preview/ca
             provider: new GoogleLoginProvider('190819062590-9t1orgtvli8t5k0orkv885gg7h9hpjlp.apps.googleusercontent.com') // your client id
           },
         ],
+        onError: (err) => {
+          console.error(err);
+        }
       } as SocialAuthServiceConfig,
     },
     SocialAuthService
