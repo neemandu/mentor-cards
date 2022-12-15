@@ -11,8 +11,8 @@
       "SMS Text Message"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
-    "smsVerificationMessage": "Mentor-Cards - Your verification code is - {####}",
-    "emailVerificationSubject": "Mentor-Cards Verification Code",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
@@ -22,7 +22,7 @@
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": "365",
+    "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
       "name",
       "phone_number",
@@ -40,18 +40,13 @@
     "authSelections": "userPoolOnly",
     "resourceName": "mentorcards56dbf153",
     "serviceName": "Cognito",
-    "useDefault": "manual",
+    "useDefault": "defaultSocial",
     "sharedId": "56dbf153",
     "userPoolGroupList": [],
     "usernameAttributes": [
       "email"
     ],
     "hostedUI": true,
-    "hostedUIDomainName": "mentor-cards",
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "authProvidersUserPool": [
-      "Google"
-    ],
     "authRoleArn": {
       "Fn::GetAtt": [
         "AuthRole",
@@ -77,6 +72,11 @@
     "authTriggerConnections": [
       "{\"triggerType\":\"PreSignUp\",\"lambdaFunctionName\":\"mentorcards56dbf153PreSignup\"}"
     ],
+    "hostedUIDomainName": "mentor-cards",
+    "authProvidersUserPool": [
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
     "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/all-packs-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\",\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"http://localhost:4200/home-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\",\"https://www.mentor-cards.com/home-page/\"]}",
     "authProviders": []
   }
