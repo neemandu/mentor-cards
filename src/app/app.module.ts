@@ -22,19 +22,24 @@ const isDev = Boolean(
 const isProd = Boolean(
     window.location.hostname === "mentor-cards.com");
 
+    
+const redirectSignIn = "http://localhost:4200/all-packs-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/,https://www.mentor-cards.com/all-packs-page/";
+const redirectSignOut = "http://localhost:4200/home-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/,https://www.mentor-cards.com/home-page/";
+ 
+
 // Assuming you have two redirect URIs, and the first is for localhost and second is for production
 const [
   localRedirectSignIn,
   devRedirectSignIn,
   productionRedirectSignIn,
-] = awsConfig.oauth.redirectSignIn.split(",");
+] = redirectSignIn.split(",");
 
 const [
   localRedirectSignOut,
   devRedirectSignOut,
   productionRedirectSignOut,
-] = awsConfig.oauth.redirectSignOut.split(",");
-
+] = redirectSignOut.split(",");
+       
 const oauth = {
   "domain": isProd ? "mentor-cards-prod.auth.eu-west-2.amazoncognito.com" : "mentor-cards-dev.auth.eu-west-2.amazoncognito.com",
   "scope": [
