@@ -19,6 +19,9 @@ const isLocalhost = Boolean(
 const isDev = Boolean(
   window.location.hostname === "dev.d15egmtmsipj3q.amplifyapp.com");
 
+const isProd = Boolean(
+    window.location.hostname === "mentor-cards.com");
+
 // Assuming you have two redirect URIs, and the first is for localhost and second is for production
 const [
   localRedirectSignIn,
@@ -32,13 +35,25 @@ const [
   productionRedirectSignOut,
 ] = awsConfig.oauth.redirectSignOut.split(",");
 
+const domain = isProd ? "mentor-cards-prod.auth.eu-west-2.amazoncognito.com" : "mentor-cards-dev.auth.eu-west-2.amazoncognito.com"
+
+const oauth = {
+  "domain": domain,
+  "scope": [
+      "phone",
+      "email",
+      "openid",
+      "profile",
+      "aws.cognito.signin.user.admin"
+  ],
+  "redirectSignIn": isLocalhost ? localRedirectSignIn : (isDev ? devRedirectSignIn : productionRedirectSignIn),
+  "redirectSignOut": isLocalhost ? localRedirectSignOut : (isDev ? devRedirectSignOut : productionRedirectSignOut),
+  "responseType": "code"
+};
+
 const updatedAwsConfig = {
   ...awsConfig,
-  oauth: {
-    ...awsConfig.oauth,
-    redirectSignIn: isLocalhost ? localRedirectSignIn : (isDev ? devRedirectSignIn : productionRedirectSignIn),
-    redirectSignOut: isLocalhost ? localRedirectSignOut : (isDev ? devRedirectSignOut : productionRedirectSignOut),
-  }
+  oauth: oauth
 }
 
 Amplify.configure(updatedAwsConfig);
