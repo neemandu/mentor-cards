@@ -16,8 +16,8 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "\"http://localhost:4200/all-packs-page/\", \"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\", \"https://www.mentor-cards.com/all-packs-page/\"",
-        "redirectSignOut": "\"http://localhost:4200/home-page/\", \"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\", \"https://www.mentor-cards.com/home-page/\"",
+        "redirectSignIn": "http://localhost:4200/all-packs-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/,https://www.mentor-cards.com/all-packs-page/",
+        "redirectSignOut": "http://localhost:4200/home-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/,https://www.mentor-cards.com/home-page/",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",
