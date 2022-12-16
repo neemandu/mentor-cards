@@ -23,11 +23,26 @@
           ]
         }
       ]
+    },
+    "mentorcards56dbf153PreSignup": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "auth": {
     "mentorcards56dbf153": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards56dbf153PreSignup",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
       "frontendAuthConfig": {
         "socialProviders": [
           "GOOGLE"

@@ -298,7 +298,8 @@
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementPackEntries-484d636238686b326765-build.zip"
         },
-        "AddSingleItemSubscription": {}
+        "AddSingleItemSubscription": {},
+        "mentorcards56dbf153PreSignup": {}
       },
       "auth": {
         "mentorcards56dbf153": {}
