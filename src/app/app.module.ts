@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import Auth from '@aws-amplify/auth';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
@@ -53,6 +54,8 @@ const updatedAwsConfig = {
 }
 
 Amplify.configure(updatedAwsConfig);
+//Auth.configure(updatedAwsConfig)
+
 import LogRocket from 'logrocket';
 LogRocket.init('cyu6kh/mentor-cards');
 

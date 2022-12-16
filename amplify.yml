@@ -13,7 +13,7 @@ frontend:
         - npm ci
     build:
       commands:
-        - npm run build
+        - npm run build:ci
   artifacts:
     baseDirectory: dist/mentor-cards
     files:
