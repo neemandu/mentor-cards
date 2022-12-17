@@ -26,14 +26,16 @@
     "userpoolClientWriteAttributes": [
       "name",
       "phone_number",
-      "email"
+      "email",
+      "given_name"
     ],
     "userpoolClientReadAttributes": [
       "email",
       "name",
       "phone_number",
       "email_verified",
-      "phone_number_verified"
+      "phone_number_verified",
+      "given_name"
     ],
     "userpoolClientLambdaRole": "mentor56dbf153_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,

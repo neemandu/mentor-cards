@@ -301,7 +301,7 @@
         "AddSingleItemSubscription": {},
         "mentorcards56dbf153PreSignup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-73474133385176373937-build.zip"
+          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-4a626130485053766772-build.zip"
         }
       },
       "auth": {
