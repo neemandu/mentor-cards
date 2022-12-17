@@ -70,5 +70,5 @@ async function tryMergeUserAccounts (event) {
 exports.handler = async (event, _, callback) => {
   // continue the flow only if did not link providers
   const wereUsersMerged = await tryMergeUserAccounts(event);
-  return wereUsersMerged ? event : callback(null, event);
+  return event;
 };
