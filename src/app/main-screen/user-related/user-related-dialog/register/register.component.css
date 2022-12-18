@@ -163,3 +163,7 @@ mat-progress-bar {
 .google-icon-wrapper:hover {
   width: 99%;
 }
+
+#formFooter {
+  direction: rtl;
+}
