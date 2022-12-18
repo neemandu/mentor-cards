@@ -1,5 +1,5 @@
 <div id="content">
-  <div class="d-flex" id="register-div">
+  <div class="d-flex flex-column" id="register-div">
     <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSignupSubmit()">
       <div class="d-flex flex-column">
         <mat-form-field>
@@ -64,13 +64,26 @@
       </div>
     </form>
 
-    <!-- <div id="social-media-login" class="d-flex flex-column">
-     <a href="#" class="fb btn">
-        <i class="fa fa-facebook fa-fw"></i> הרשמה עם Facebook
-      </a>
-      <a (click)="signInWithGoogle()" class="google btn">
-        <i class="fa fa-google fa-fw"></i> כניסה עם Google
-      </a>
-    </div>   -->
+    <div id="social-login">
+      <div id="seperator">
+        <div class="first-line"></div>
+        <span class="categrory-title">או</span>
+        <div class="second-line"></div>
+      </div>
+      <div id="social-media-login" class="d-flex flex-column">
+        <!-- <a (click)="signInWithFacebook()" class="fb btn">
+          <i class="fa fa-facebook fa-fw"></i> כניסה עם Facebook
+        </a> -->
+        <!-- <a (click)="signInWithGoogle()" class="google btn">
+          <i class="fa fa-google fa-fw"></i> כניסה עם Google
+        </a> -->
+        <div class="google-btn" (click)="signInWithGoogle()">
+          <div class="google-icon-wrapper">
+            <img class="google-icon" src="../../../../../assets/icons/Google_G_Logo.svg"/>
+          </div>
+          <p class="btn-text"><b>הרשמה עם Google</b></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
