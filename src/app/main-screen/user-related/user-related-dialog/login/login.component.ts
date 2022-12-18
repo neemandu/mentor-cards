@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   user: { id: string; username: string; email: string };
 
   @Output() loggedInCloseDialog: EventEmitter<any> = new EventEmitter<any>();
-  // @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
+  @Output() toRegister: EventEmitter<any> = new EventEmitter<any>();
   @Input() registeredEmail: string;
   @Input() registeredPW: string;
 
@@ -133,6 +133,10 @@ export class LoginComponent implements OnInit {
     this.newPasswordPhase = true;
     this.forgotPasswordForm.controls.confirmationCode.setValidators([Validators.required])
     this.forgotPasswordForm.controls.newPassword.setValidators([Validators.required, Validators.minLength(8)])
+  }
+
+  moveToRegisterForm(): void {
+    this.toRegister.emit();
   }
 
   //---FORGOT PASSWORD---//

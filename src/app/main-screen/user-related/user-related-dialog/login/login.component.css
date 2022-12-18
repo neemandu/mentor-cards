@@ -119,6 +119,8 @@ mat-progress-bar {
   background-color: var(--google-blue);
   border-radius: 2px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .google-icon-wrapper {
@@ -136,15 +138,6 @@ mat-progress-bar {
   transition: width 1s ease-in-out;
 }
 
-/* .google-icon {
-  position: absolute;
-  margin-top: 11px;
-  margin-left: 11px;
-  width: 18px;
-  height: 18px;
-  left: 0;
-} */
-
 .btn-text {
   float: right;
   margin: 11px 11px 0 0;
@@ -160,4 +153,19 @@ mat-progress-bar {
 
 .google-icon-wrapper:hover {
   width: 99%;
+}
+
+#formFooter {
+  direction: rtl;
+}
+
+.footerLogin {
+  display: flex;
+  justify-content: space-between;
+}
+
+#confirmation-code-info {
+  direction: rtl;
+  font-size: 12px;
+  margin-top: 10px;
 }
