@@ -27,7 +27,7 @@
         </div>
       </ng-template>
       <ng-template matTabContent>
-        <app-register (registeredEmitter)="registered($event)"></app-register>
+        <app-register (registeredEmitter)="registered($event)" (toLogin)="selectedTab = 0;"></app-register>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

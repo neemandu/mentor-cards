@@ -1,0 +1,10 @@
+[
+  {
+    "Action": [
+      "cognito-idp:ListUsers",
+      "cognito-idp:ListIdentityProviders",
+      "cognito-idp:AdminLinkProviderForUser"
+    ],
+    "Resource": ["*"]
+   }
+]

@@ -1,5 +1,5 @@
 <div id="content">
-  <div class="d-flex" id="login-div" [hidden]="!showLogin">
+  <div class="d-flex flex-column" id="login-div" [hidden]="!showLogin">
     <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" *ngIf="showLogin">
       <div class="d-flex flex-column">
         <mat-form-field>
@@ -17,7 +17,8 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>סיסמא</mat-label>
-          <input autocomplete="current-password" formControlName="password" matInput [type]="hidePW ? 'password' : 'text'">
+          <input autocomplete="current-password" formControlName="password" matInput
+            [type]="hidePW ? 'password' : 'text'">
           <mat-error *ngIf="loginForm.controls.password.errors?.usernamePwWrong">שם משתמש או סיסמא לא נכונים</mat-error>
           <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -26,15 +27,27 @@
         <button type="submit" class="option-btn login-button" [disabled]="!loginForm.valid">כניסה</button>
       </div>
     </form>
-
-    <!-- <div id="social-media-login" class="d-flex flex-column" *ngIf="showLogin">
-      <a (click)="signInWithFacebook()" class="fb btn">
-        <i class="fa fa-facebook fa-fw"></i> כניסה עם Facebook
-      </a>
-      <a (click)="signInWithGoogle()" class="google btn">
-        <i class="fa fa-google fa-fw"></i> כניסה עם Google
-      </a>
-    </div> -->
+    <div id="social-login" *ngIf="showLogin">
+      <div id="seperator">
+        <div class="first-line"></div>
+        <span class="categrory-title">או</span>
+        <div class="second-line"></div>
+      </div>
+      <div id="social-media-login" class="d-flex flex-column">
+        <!-- <a (click)="signInWithFacebook()" class="fb btn">
+          <i class="fa fa-facebook fa-fw"></i> כניסה עם Facebook
+        </a> -->
+        <!-- <a (click)="signInWithGoogle()" class="google btn">
+          <i class="fa fa-google fa-fw"></i> כניסה עם Google
+        </a> -->
+        <div class="google-btn" (click)="signInWithGoogle()">
+          <div class="google-icon-wrapper">
+            <img class="google-icon" src="../../../../../assets/icons/Google_G_Logo.svg"/>
+          </div>
+          <p class="btn-text"><b>כניסה עם Google</b></p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="forgotPasswordForm" [hidden]="!showForgotPw">
@@ -51,15 +64,15 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="newPasswordPhase">
-          <mat-label>(נשלח בהודעה לנייד) קוד אימות</mat-label>
+          <mat-label>הזינו את קוד האימות שקיבלתם</mat-label>
           <input autocomplete="one-time-code" formControlName="confirmationCode" matInput>
-          <mat-hint>נשלח קוד אימות בהודעה לנייד</mat-hint>
           <mat-error *ngIf="forgotPasswordForm.controls.confirmationCode.errors?.codeMismatch">קוד אימות שגוי
           </mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="newPasswordPhase">
           <mat-label>סיסמא חדשה</mat-label>
-          <input autocomplete="new-password" formControlName="newPassword" matInput [type]="hidePW ? 'password' : 'text'">
+          <input autocomplete="new-password" formControlName="newPassword" matInput
+            [type]="hidePW ? 'password' : 'text'">
           <mat-hint>8 תווים לפחות, חייב להכיל ספרה, אות קטנה ואות גדולה (באנגלית)</mat-hint>
           <mat-error *ngIf="forgotPasswordForm.controls.newPassword.errors?.badPassword">סיסמא לא חוקית, נסו שנית
           </mat-error>
@@ -71,7 +84,8 @@
           (click)="forgotPasswordVarifyEmail()">לא
           קיבלתם קוד? לחצו כאן לקבלת קוד נוסף</a>
         <button *ngIf="!newPasswordPhase" type="submit" class="option-btn login-button"
-          [disabled]="!forgotPasswordForm.valid">קבל קוד אימות בהודעה לנייד</button>
+          [disabled]="!forgotPasswordForm.valid">שילחו לי קוד אימות</button>
+        <span id="confirmation-code-info" *ngIf="!newPasswordPhase">*קוד האימות ישלח למס' הטלפון איתו נרשמת. במידה ונרשמת ללא נייד - קוד האימות ישלח למייל.</span>
         <button *ngIf="newPasswordPhase" type="submit" class="option-btn login-button"
           [disabled]="!forgotPasswordForm.valid">שמור סיסמא חדשה</button>
       </div>
@@ -90,8 +104,8 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>קוד אימות (נשלח בהודעה לנייד)</mat-label>
-          <input autocomplete="one-time-code" formControlName="confirmationCode" matInput color="primary" inputmode="numeric"
-            (focusout)="trimSpacesEmail(confirmForm, 'confirmationCode')">
+          <input autocomplete="one-time-code" formControlName="confirmationCode" matInput color="primary"
+            inputmode="numeric" (focusout)="trimSpacesEmail(confirmForm, 'confirmationCode')">
           <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.CodeMismatchException">קוד לא תואם לקוד שנשלח,
             נסו שנית</mat-error>
           <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.LimitExceededException">יותר מדי נסיונות. יש
@@ -110,10 +124,13 @@
   <mat-divider></mat-divider>
   <br>
   <div id="formFooter">
-    <a class="underlineHover" style="cursor: pointer;" *ngIf="showLogin"
-      (click)="showForgotPasswordForm(); loginForm.reset()">?שכחת
-      סיסמא</a>
+    <div class="footerLogin" *ngIf="showLogin">
+      <a class="underlineHover" style="cursor: pointer;" *ngIf="showLogin"
+        (click)="moveToRegisterForm(); loginForm.reset()">פעם ראשונה אצלנו?</a>
+      <a class="underlineHover" style="cursor: pointer;" *ngIf="showLogin"
+        (click)="showForgotPasswordForm(); loginForm.reset()">שכחת סיסמא?</a>
+    </div>
     <a class="underlineHover" style="cursor: pointer;" *ngIf="!showLogin"
-      (click)="showLoginForm(); forgotPasswordForm.reset(); confirmForm.reset(); hidePW=true;">התחברות</a>
+      (click)="showLoginForm(); forgotPasswordForm.reset(); confirmForm.reset(); hidePW=true;">חזור</a>
   </div>
 </div>

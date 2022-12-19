@@ -3,23 +3,16 @@
 
 const awsmobile = {
     "aws_project_region": "eu-west-2",
-    "aws_cognito_identity_pool_id": "eu-west-2:6a98f73f-f0e0-40ea-914c-5b0c4927667c",
+    "aws_cognito_identity_pool_id": "eu-west-2:6a98f73f-f0e0-40ea-914c-5b0c4927667c" ,
     "aws_cognito_region": "eu-west-2",
     "aws_user_pools_id": "eu-west-2_s4Ax8bC3q",
     "aws_user_pools_web_client_id": "43nsctsqn9cjhl819dfbf2m329",
     "oauth": {
         "domain": "mentor-cards-prod.auth.eu-west-2.amazoncognito.com",
-        "scope": [
-            "phone",
-            "email",
-            "openid",
-            "profile",
-            "aws.cognito.signin.user.admin"
-        ],
-        "redirectSignIn": "https://www.mentor-cards.com/all-packs-page/",
-        "redirectSignOut": "https://www.mentor-cards.com/home-page/",
+        "redirectSignIn": "http://localhost:4200/all-packs-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/,https://www.mentor-cards.com/all-packs-page/",
+        "redirectSignOut": "http://localhost:4200/home-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/,https://www.mentor-cards.com/home-page/",
         "responseType": "code"
-    },
+      },
     "federationTarget": "COGNITO_USER_POOLS",
     "aws_cognito_username_attributes": [
         "EMAIL"

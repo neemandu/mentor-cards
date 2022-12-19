@@ -14,7 +14,7 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
+    "emailVerificationSubject": "Mentor-Cards - Verification Code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
@@ -26,13 +26,21 @@
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": "365",
     "userpoolClientWriteAttributes": [
+      "given_name",
+      "name",
+      "phone_number",
       "email"
     ],
     "userpoolClientReadAttributes": [
-      "email"
+      "email",
+      "given_name",
+      "name",
+      "phone_number",
+      "email_verified",
+      "phone_number_verified"
     ],
     "userpoolClientLambdaRole": "mentor56dbf153_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "authSelections": "identityPoolAndUserPool",
     "resourceName": "mentorcards56dbf153",
     "serviceName": "Cognito",
@@ -43,11 +51,6 @@
       "email"
     ],
     "hostedUI": true,
-    "hostedUIDomainName": "mentor-cards",
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "authProvidersUserPool": [
-      "Google"
-    ],
     "authRoleArn": {
       "Fn::GetAtt": [
         "AuthRole",
@@ -62,10 +65,24 @@
     },
     "breakCircularDependency": false,
     "useEnabledMfas": false,
-    "dependsOn": [],
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "mentorcards56dbf153PreSignup",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
     "userPoolGroups": false,
     "adminQueries": false,
-    "triggers": {},
+    "triggers": {
+      "PreSignup": [
+        "custom"
+      ]
+    },
     "parentStack": {
       "Ref": "AWS::StackId"
     },
@@ -73,8 +90,15 @@
     "authTriggerConnections": [
       "{\"triggerType\":\"PreSignUp\",\"lambdaFunctionName\":\"mentorcards56dbf153PreSignup\"}"
     ],
-    "authProviders": [],
+    "hostedUIDomainName": "mentor-cards",
+    "authProvidersUserPool": [
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "authProviders": [
+      "accounts.google.com"
+    ],
     "thirdPartyAuth": true,
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com//all-packs/page/\"],\"LogoutURLs\":[\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/all-packs-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\",\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"http://localhost:4200/home-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\",\"https://www.mentor-cards.com/home-page/\"]}"
   }
 }

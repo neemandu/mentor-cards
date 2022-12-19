@@ -12,6 +12,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 export class RegisterComponent implements OnInit {
 
   @Output() registeredEmitter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() toLogin: EventEmitter<any> = new EventEmitter<any>();
 
   // pwRegex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/"
   registerForm: FormGroup = this.formBuilder.group({
@@ -34,6 +35,10 @@ export class RegisterComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  moveToLoginForm(): void {
+    this.toLogin.emit();
   }
 
   /**
@@ -79,7 +84,7 @@ export class RegisterComponent implements OnInit {
         duration: 10000,
         panelClass: ['rtl-snackbar']
       });
-      this.registeredEmitter.emit({email: user.email, password: user.password})
+      this.registeredEmitter.emit({ email: user.email, password: user.password })
       // console.log("file: register.component.ts ~ line 67 ~ this.userAuthService.signUp ~ data", data)
     }, error => {
       this.overlaySpinnerService.changeOverlaySpinner(false);

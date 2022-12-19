@@ -168,6 +168,10 @@ h1 {
   transform: scale(1.2);
 }
 
+::ng-deep .mat-list-text {
+  direction: rtl;
+}
+
 @media screen and (max-width: 1024px) {}
 
 @media screen and (max-width: 768px) {

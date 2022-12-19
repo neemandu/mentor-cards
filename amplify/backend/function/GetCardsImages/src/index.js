@@ -174,6 +174,7 @@ exports.handler = async (event, context, callback) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     }); 
 
+    console.log('Pack Id: ' + event.source['id']);
     var username = event.identity.claims['cognito:username'];
     if(!username){
         username = event.identity.claims['username'];
@@ -187,17 +188,55 @@ exports.handler = async (event, context, callback) => {
         return event.source['cards'];
     }
 
-    if(user && 'freeUntilDate' in event.source &&
-    ((new Date(event.source['freeUntilDate'])) > now)){
-        console.log('Free Pack!');
-        return event.source['cards'];
+    var now = new Date();
+    console.log('Checking freeUntilDate');
+    if(user && 'freeUntilDate' in event.source){
+        console.log(event.source['freeUntilDate']);
+        if((new Date(event.source['freeUntilDate'])) > now){
+            console.log('Free Pack!');
+            return event.source['cards'];
+        }
     }
+    else{
+        console.log('dont have freeUntilDate');
+    }
+ 
+    if(user){
+        console.log('Checking if its a free trial period');
+        var allPackagesDate = new Date();
+        var trialPeriodInDays = 14;
+        var startFreePeriodDate = user.createdAt;
+        console.log('allPackagesDate');
+        console.log(allPackagesDate);
+        console.log('startFreePeriodDate');
+        console.log(startFreePeriodDate); 
+        // check trialPeriodInDays coupon code
+        if(user &&
+            user.couponCodes &&
+            user.couponCodes.length > 0){
+                for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                    if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
+                        var couponDate = user.couponCodes[i].createdAt;
+                        if(couponDate > startFreePeriodDate){
+                            startFreePeriodDate = couponDate;
+                            trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
+                        }
+                    }
+                }
+            }
 
+        allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);      
+        if(user &&    
+            isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
+         ){
+             console.log('free trial period');
+             return event.source['cards'];
+         }
+         console.log('Not a free trial period');
+    }
 
     var isExternalPack = event.source['isExternalPack'];
     console.log('External Pack: ' + isExternalPack);
-    console.log('Pack Id: ' + event.source['id']);
-    var now = new Date();
     if(isExternalPack){
         var length = 0;
         if(user.externalPacksSubscriptions){
@@ -234,14 +273,7 @@ exports.handler = async (event, context, callback) => {
     }
 
     if(!isExternalPack){
-        var allPackagesDate = new Date();
-        var trialPeriodInDays = 14;
-        console.log('allPackagesDate');
-        console.log(allPackagesDate);
-        console.log('user.firstProgramRegistrationDate');
-        console.log(user.firstProgramRegistrationDate);  
-        console.log('Checking if pack is free');   
-        console.log('Not a free plan');
+        /* */
         console.log('Checking Unlimited plan');
         if(user && 
             user.status == "PLAN" &&
@@ -252,33 +284,9 @@ exports.handler = async (event, context, callback) => {
              console.log('Unlimited plan');
              return event.source['cards'];
          }
-    
         console.log('Not Unlimited plan');
-        var startFreePeriodDate = user.createdAt;
-        if(user &&
-            user.couponCodes &&
-            user.couponCodes.length > 0){
-                for(var i = 0 ; i < user.couponCodes.length ; i++){ 
-                    if((!user.couponCodes[i].allowedCardsPacks) || (user.couponCodes[i].allowedCardsPacks.length == 0)){
-                        var couponDate = user.couponCodes[i].createdAt;
-                        if(couponDate > startFreePeriodDate){
-                            startFreePeriodDate = couponDate;
-                            trialPeriodInDays = user.couponCodes[i].trialPeriodInDays;
-                        }
-                    }
-                }
-            }
-        allPackagesDate.setDate(allPackagesDate.getDate()-trialPeriodInDays);
+        /* */
         
-        console.log('Checking if its a free trial period');
-        if(user &&    
-            isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
-         ){
-             console.log('free trial period');
-             return event.source['cards'];
-         }
-        
-        console.log('Not a free trial period');
         console.log('Checking if user has a coupon code with this package');
         if(user &&
             user.couponCodes &&
