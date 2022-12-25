@@ -89,7 +89,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
     if (!this.changedPlansThisMonth && !this.ownsCurrentPlanLabel && $event.selectedIndex == 2 && !this.rendered) {
       this.rendered = true;
       let plan_id = this.packSelected.providerPlanId;
-      this.render_id = '#paypal-button-container-' + plan_id;
+      this.render_id = 'paypal-button-container-' + plan_id;
       paypal
         .Buttons({
           // onInit: (data, actions) => {
@@ -148,7 +148,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
             label: 'pay',
           }
         })
-        .render(this.render_id);
+        .render('#'+this.render_id);
     }
   }
 

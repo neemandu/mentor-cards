@@ -24,7 +24,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     let plan_id = this.data.subscriptionPlanSelected.providerPlanId;
-    this.render_id = '#paypal-button-container-' + plan_id;
+    this.render_id = 'paypal-button-container-' + plan_id;
     paypal
       .Buttons({
         createSubscription: (data, actions) => {//lastPlanSubstitutionDate - once in last 30 days
@@ -65,7 +65,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           label: 'pay',
         }
       })
-      .render(this.render_id);
+      .render('#'+this.render_id);
   }
 
   openSiteRulesModal(): void {
