@@ -26,6 +26,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
   rendered: boolean = false;
   changedPlansThisMonth: boolean = false;
   ownsCurrentPlanLabel: boolean = false;
+  render_id: String = "";
 
   constructor(private userAuthService: UserAuthService, public dialogRef: MatDialogRef<ProgramChoiseDialogComponent>, private api: APIService,
     private overlaySpinnerService: OverlaySpinnerService) {
@@ -88,7 +89,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
     if (!this.changedPlansThisMonth && !this.ownsCurrentPlanLabel && $event.selectedIndex == 2 && !this.rendered) {
       this.rendered = true;
       let plan_id = this.packSelected.providerPlanId;
-      let render_id = '#paypal-button-container-' + plan_id;
+      this.render_id = '#paypal-button-container-' + plan_id;
       paypal
         .Buttons({
           // onInit: (data, actions) => {
@@ -147,7 +148,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
             label: 'pay',
           }
         })
-        .render(render_id);
+        .render(this.render_id);
     }
   }
 
