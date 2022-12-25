@@ -63,7 +63,7 @@
       <p id="real_price">מחיר סופי לחבילה זו: {{(packSelected.fullPrice - packSelected.discount).toFixed(2)}} ש"ח</p>
       <p id="reminder" style="margin-top: 1rem;font-size: revert;">14 ימי ניסיון חינם. בטלו בכל עת.</p>
       <p style="font-size: 1rem;">למעבר לתשלום באמצעות PayPal או אשראי לחצו על הכפתור</p>
-      <div [attr.id]="render_id" [hidden]="changedPlansThisMonth || ownsCurrentPlanLabel" style="width: 70%;" #paypal
+      <div id="paypal1" [hidden]="changedPlansThisMonth || ownsCurrentPlanLabel" style="width: 70%;" #paypal1
         [matTooltipClass]="{'tooltip-class' : true}" [matTooltipPosition]="'left'"
         matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
       <p id="cantChangePlanLabel" *ngIf="changedPlansThisMonth">

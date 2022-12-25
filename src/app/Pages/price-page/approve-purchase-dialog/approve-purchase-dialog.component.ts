@@ -14,7 +14,7 @@ declare var paypal;
 })
 export class ApprovePurchaseDialogComponent implements OnInit {
 
-  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
+  @ViewChild('paypal1', { static: true }) paypalElement: ElementRef;
   render_id: String = "";
 
   constructor(public dialogRef: MatDialogRef<ApprovePurchaseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PurchaseData,
@@ -59,13 +59,13 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 77 ~ ProgramChoiseDialogComponent ~ stepChanged ~ err", err)
         },
         style: {
-          layout: 'horizontal',
+          layout: 'vertical',
           color: 'gold',
-          shape: 'pill',
+          shape: 'rect',
           label: 'pay',
         }
       })
-      .render('#'+this.render_id);
+      .render('#paypal1');
   }
 
   openSiteRulesModal(): void {

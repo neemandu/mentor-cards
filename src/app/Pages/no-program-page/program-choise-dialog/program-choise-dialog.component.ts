@@ -16,7 +16,7 @@ const millisecondsInMonth: number = 2505600000;
 })
 export class ProgramChoiseDialogComponent implements OnInit {
 
-  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
+  @ViewChild('paypal1', { static: true }) paypalElement: ElementRef;
 
   isLinear = false;
   isEditable = false;
@@ -142,13 +142,13 @@ export class ProgramChoiseDialogComponent implements OnInit {
             // });
           },
           style: {
-            layout: 'horizontal',
+            layout: 'vertical',
             color: 'gold',
-            shape: 'pill',
+            shape: 'rect',
             label: 'pay',
           }
         })
-        .render('#'+this.render_id);
+        .render('#paypal1');
     }
   }
 
