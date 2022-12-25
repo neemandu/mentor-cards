@@ -21,7 +21,7 @@ const isDev = Boolean(
   window.location.hostname === "dev.d15egmtmsipj3q.amplifyapp.com");
 
 const isProd = Boolean(
-    window.location.hostname === "mentor-cards.com");
+    window.location.hostname === "www.mentor-cards.com");
 
     
 const redirectSignIn = "http://localhost:4200/all-packs-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/,https://www.mentor-cards.com/all-packs-page/";

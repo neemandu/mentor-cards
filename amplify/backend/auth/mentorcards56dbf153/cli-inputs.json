@@ -1,6 +1,8 @@
 {
   "version": "1",
   "cognitoConfig": {
+    "identityPoolName": "mentorcards56dbf153_identitypool_56dbf153",
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "mentor56dbf153",
     "userPoolName": "mentorcards56dbf153_userpool_56dbf153",
     "autoVerifiedAttributes": [
@@ -24,22 +26,22 @@
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": "365",
     "userpoolClientWriteAttributes": [
+      "given_name",
       "name",
       "phone_number",
-      "email",
-      "given_name"
+      "email"
     ],
     "userpoolClientReadAttributes": [
       "email",
+      "given_name",
       "name",
       "phone_number",
       "email_verified",
-      "phone_number_verified",
-      "given_name"
+      "phone_number_verified"
     ],
     "userpoolClientLambdaRole": "mentor56dbf153_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,
-    "authSelections": "userPoolOnly",
+    "authSelections": "identityPoolAndUserPool",
     "resourceName": "mentorcards56dbf153",
     "serviceName": "Cognito",
     "useDefault": "manual",
@@ -93,7 +95,10 @@
       "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/all-packs-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\",\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"http://localhost:4200/home-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\",\"https://www.mentor-cards.com/home-page/\"]}",
-    "authProviders": []
+    "authProviders": [
+      "accounts.google.com"
+    ],
+    "thirdPartyAuth": true,
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/all-packs-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\",\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"http://localhost:4200/home-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\",\"https://www.mentor-cards.com/home-page/\"]}"
   }
 }
