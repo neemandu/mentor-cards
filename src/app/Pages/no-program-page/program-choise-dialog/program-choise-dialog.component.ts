@@ -87,6 +87,8 @@ export class ProgramChoiseDialogComponent implements OnInit {
   stepChanged($event: any): void {
     if (!this.changedPlansThisMonth && !this.ownsCurrentPlanLabel && $event.selectedIndex == 2 && !this.rendered) {
       this.rendered = true;
+      let plan_id = this.packSelected.providerPlanId;
+      let render_id = '#paypal-button-container-' + plan_id;
       paypal
         .Buttons({
           // onInit: (data, actions) => {
@@ -96,7 +98,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
             // debugger
             if (this.userAuthService.userData.status === "NOPLAN")
               return actions.subscription.create({
-                'plan_id': this.packSelected.providerPlanId,
+                'plan_id': plan_id,
                 'subscriber': {
                   'name': {
                     'given_name': this.userAuthService.userData.fullName
@@ -106,7 +108,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
               });
             else if (this.userAuthService.userData.status === "PLAN")
               return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
-                'plan_id': this.packSelected.providerPlanId,
+                'plan_id': plan_id,
                 'subscriber': {
                   'name': {
                     'given_name': this.userAuthService.userData.fullName
@@ -145,7 +147,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
             label: 'pay',
           }
         })
-        .render(this.paypalElement.nativeElement);
+        .render(render_id);
     }
   }
 
