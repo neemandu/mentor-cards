@@ -56,9 +56,9 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           console.log("🚀 ~ file: program-choise-dialog.component.ts ~ line 77 ~ ProgramChoiseDialogComponent ~ stepChanged ~ err", err)
         },
         style: {
-          layout: 'horizontal',
+          layout: 'vertical',
           color: 'gold',
-          shape: 'pill',
+          shape: 'rect',
           label: 'pay',
         }
       })

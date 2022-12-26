@@ -139,9 +139,9 @@ export class ProgramChoiseDialogComponent implements OnInit {
             // });
           },
           style: {
-            layout: 'horizontal',
+            layout: 'vertical',
             color: 'gold',
-            shape: 'pill',
+            shape: 'rect',
             label: 'pay',
           }
         })
