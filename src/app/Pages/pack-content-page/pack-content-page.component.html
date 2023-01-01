@@ -128,6 +128,10 @@
 </nav>
 
 <mat-menu #actions="matMenu">
+  <button mat-menu-item type="button"
+      [ngClass]="{'option-btn': true, 'option-menu-btn top-option-btn': !showEditPack, 'option-menu-btn top-option-btn-disabled': showEditPack}"
+      (click)="multipileChanged()"
+      [disabled]="showEditPack">{{!multipileChecked ? 'הצג מספר קלפים':'הצג קלף יחיד'}}</button>
   <button mat-menu-item type="button" class="option-menu-btn top-option-btn" (click)="shuffle()">ערבב</button>
   <button mat-menu-item type="button" class="option-menu-btn top-option-btn"
     (click)="flipped = !flipped; selectedCards = []">הפוך
