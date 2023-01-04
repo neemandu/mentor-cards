@@ -242,10 +242,22 @@ exports.handler = async (event, context, callback) => {
             for(var i = 0 ; i < user.couponCodes.length ; i++){ 
                 if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
                     console.log('User has a coupon code with this package');
-                    var date = new Date();
-                    date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
-                    event.source['freeUntilDate'] = date;
-                    return event.source['cards'];
+                    if(user.couponCodes[i].trialPeriodInDays > -1){
+                        var date = new Date();
+                        date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
+                        if(date > now){
+                            console.log('User has a coupon code with this package with trialPeriodInDays');
+                            event.source['freeUntilDate'] = date;
+                            return event.source['cards'];
+                        }
+                        else{
+                            console.log('Coupon code expired');
+                        }
+                    }
+                    else{
+                        console.log('User has a coupon code with this package WITHOUT trialPeriodInDays limitation');
+                        return event.source['cards'];
+                    }
                 }
             }
         }
