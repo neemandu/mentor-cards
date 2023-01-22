@@ -49,7 +49,6 @@ export class UserAuthService {
 
   async rememebrMe(): Promise<void> {
     try {
-      this.overlaySpinnerService.changeOverlaySpinner(true);
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({ bypassCache: true })
       if (user) {
         this.loggedIn(user);
@@ -59,7 +58,6 @@ export class UserAuthService {
         this.rememberMeDone = true;
         throw 'No current user - rememberMe retured VOID';
       }
-      // this.getSubscriptionPlans();
     } catch (err) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       localStorage.removeItem('signedin');

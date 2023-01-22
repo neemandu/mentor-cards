@@ -26,7 +26,6 @@ export class HomePageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.overlaySpinnerService.changeOverlaySpinner(true);
         this.api.ListNewss().then(news => {
             this.news = news.items.sort((a, b) => a.order - b.order);
         }, error => {
