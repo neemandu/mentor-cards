@@ -67,7 +67,6 @@ export class PricePageComponent implements OnInit {
     this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription.fullPrice * 100)/(this.monthlySubscription.fullPrice * this.yearlySubscription.billingCycleInMonths)));
 
     this.overlaySpinnerService.changeOverlaySpinner(false);
-
   }
 
 

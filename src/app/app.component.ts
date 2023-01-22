@@ -20,10 +20,7 @@ export class AppComponent implements OnInit {
   showLogin: boolean = false;
   fbBtnSub: Subscription;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, private router: Router) {
-    this.overlaySpinnerService.changeOverlaySpinner(false);
-    // I18n.putVocabularies(dict);
-    // I18n.setLanguage('he')
+  constructor(private router: Router) {
   }
 
   ngOnInit() {

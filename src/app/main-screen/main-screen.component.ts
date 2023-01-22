@@ -12,7 +12,7 @@ import { SharedDialogsService } from '../Services/shared-dialogs.service';
 export class MainScreenComponent implements OnInit, OnDestroy {
 
   subs: Subscription = new Subscription();
-  showSpinner: boolean = false;
+  showSpinner: boolean = true;
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog, private sharedDialogsService: SharedDialogsService) { }
 
@@ -21,10 +21,6 @@ export class MainScreenComponent implements OnInit, OnDestroy {
       this.showSpinner = show
     }));
   }
-
-  // openSiteRulesModal(): void {
-  //   this.sharedDialogsService.openSiteRulesDialog();
-  // }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();

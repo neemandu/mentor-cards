@@ -29,18 +29,9 @@ export class HomePageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.overlaySpinnerService.changeOverlaySpinner(true);
         this.api.ListNewss().then(news => {
             this.news = news.items.sort((a, b) => a.order - b.order);
-            this.overlaySpinnerService.changeOverlaySpinner(false);
         }, error => {
-            this.overlaySpinnerService.changeOverlaySpinner(false);
             console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.ListNewss ~ error", error)
         })
-        // this.Subscription.add(this.userAuthService.signedOutEmmiter.subscribe(() => {
-        //     this.userData = undefined;
-        // }))
-        // this.Subscription.add(this.userAuthService.loggedInEmmiter.subscribe((userData: UserData) => {
-        //     this.userData = userData;
-        //     this.overlaySpinnerService.changeOverlaySpinner(false);
-        // }));
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
             this.userData = userData;
             userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
