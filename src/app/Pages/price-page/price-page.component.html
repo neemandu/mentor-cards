@@ -1,90 +1,157 @@
 <div id="content" class="d-flex flex-column align-items-center">
-    <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
-    <img id="top-image" src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png" alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities">
-    <span id="title" *ngIf="!userData?.orgMembership">מצטרפים לתוכנית ומקבלים:</span>
-    <br>
-    <ul>
-        <li>
-            <mat-icon style="color: blue;">done</mat-icon><b> גישה מלאה לכל ערכות הבית </b> - נהנים ממגוון של עשרות ערכות קלפים מקטגוריות שונות.
-        </li>
-        <li>
-            <mat-icon style="color: blue;">done</mat-icon><b> ספר הדרכה צמוד לכל ערכת קלפים</b> - מאות שאלות
-            עוצמתיות והצעות מגוונות לעבודה.
-        </li>
-        <li>
-            <mat-icon style="color: blue;">done</mat-icon><b> שימוש בכל היכולות </b> - קלפים גלויים וסמויים, בחירת
-            קלף באופן אקראי, ערבוב, בחירה מרובה לעבודה תהליכית ועוד…
-        </li>
-        <li>
-            <mat-icon style="color: blue;">done</mat-icon><b> תוכן מתחדש ודינמי</b> - ערכות קלפים נוספות וטכניקות
-            עבודה חדשות המתעדכנות באופן שוטף ע"י יוצרי הבית שלנו ויוצרים מבחוץ.
-        </li>
-        <li>
-            <mat-icon style="color: blue;">done</mat-icon><b> שירות ותמיכה</b> - יש לכם שאלה? בא לכם להתייעץ? הצוות
-            שלנו זמין לכם גם בווצאפ!
-        </li>
-        <li>
-            <mat-icon style="color: blue;">done</mat-icon><b> מחיר מיוחד לערכות VIP</b> - כל ערכת חוץ ב-9.90 ש"ח בלבד למנויי Mentor-Cards
-            <div style="font-size: 12px; margin-top: -10px;">* ערכות הבית הן ערכות קלפים הנוצרו ע"י צוות Mentor-Cards, בעוד שערכות VIP הן ערכות שנוצרו ע"י יוצרים חיצוניים ולא ע"י צוות Mentor-Cards</div>
-        </li>
-    </ul>
+  <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
+  <img
+    id="top-image"
+    src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
+    alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
+  />
+  <span id="title" *ngIf="!userData?.orgMembership"
+    >מצטרפים לתוכנית ומקבלים:</span
+  >
+  <br />
+  <ul>
+    <li>
+      <mat-icon style="color: blue">done</mat-icon
+      ><b> גישה מלאה לכל ערכות הבית </b> - נהנים ממגוון של עשרות ערכות קלפים
+      מקטגוריות שונות.
+    </li>
+    <li>
+      <mat-icon style="color: blue">done</mat-icon
+      ><b> ספר הדרכה צמוד לכל ערכת קלפים</b> - מאות שאלות עוצמתיות והצעות
+      מגוונות לעבודה.
+    </li>
+    <li>
+      <mat-icon style="color: blue">done</mat-icon><b> שימוש בכל היכולות </b> -
+      קלפים גלויים וסמויים, בחירת קלף באופן אקראי, ערבוב, בחירה מרובה לעבודה
+      תהליכית ועוד…
+    </li>
+    <li>
+      <mat-icon style="color: blue">done</mat-icon><b> תוכן מתחדש ודינמי</b> -
+      ערכות קלפים נוספות וטכניקות עבודה חדשות המתעדכנות באופן שוטף ע"י יוצרי
+      הבית שלנו ויוצרים מבחוץ.
+    </li>
+    <li>
+      <mat-icon style="color: blue">done</mat-icon><b> שירות ותמיכה</b> - יש לכם
+      שאלה? בא לכם להתייעץ? הצוות שלנו זמין לכם גם בווצאפ!
+    </li>
+    <li>
+      <mat-icon style="color: blue">done</mat-icon
+      ><b> מחיר מיוחד לערכות VIP</b> - כל ערכת חוץ ב-9.90 ש"ח בלבד למנויי
+      Mentor-Cards
+      <div style="font-size: 12px; margin-top: -10px">
+        * ערכות הבית הן ערכות קלפים הנוצרו ע"י צוות Mentor-Cards, בעוד שערכות
+        VIP הן ערכות שנוצרו ע"י יוצרים חיצוניים ולא ע"י צוות Mentor-Cards
+      </div>
+    </li>
+  </ul>
 </div>
 <br />
-<div style="text-align: center;">
-    <div *ngIf="subPlans" class="program-cards">
-        <mat-card>
-            <mat-card-subtitle></mat-card-subtitle>
-            <mat-card-title>תכנית חודשית</mat-card-title>
-            <mat-card-content>
-                <p class="price-line">חודש / <span class="price-number">₪{{ monthlySubscription.fullPrice /
-                        monthlySubscription.billingCycleInMonths }}</span></p>
-                <p class="price-line">חיוב חודשי</p>
-            </mat-card-content>
-            <mat-divider inset></mat-divider>
-            <mat-card-actions>
-                <button id="monthlySubscription" *ngIf="userData?.status === 'NOPLAN' || userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1"
-                    class="other-purchase-btn purchase-btn" type="button"
-                    (click)="checkFreePeriod(monthlySubscription.id)">
-                    להצטרפות >>
-                </button>
-                <button
-                    *ngIf="userData?.status === 'PLAN' && userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1"
-                    class="disabled-btn purchase-btn" type="button" disabled>
-                    הינך רשום לתכנית זו
-                </button>
-            </mat-card-actions>
-        </mat-card>
-        <mat-card>
-            <mat-card-subtitle></mat-card-subtitle>
-            <mat-card-title>תכנית שנתית</mat-card-title>
-            <mat-card-content>
-                <p class="price-line">חודש / <span class="price-number">₪{{ yearlySubscription.fullPrice /
-                        yearlySubscription.billingCycleInMonths }}</span></p>
-                <p class="price-line">משלמים מראש {{yearlySubscription.fullPrice}} ש"ח לשנה וחוסכים {{yearlySubscriptionPercentage}}%</p>
-            </mat-card-content>
-            <mat-divider inset></mat-divider>
-            <mat-card-actions>
-                <button id="yearlySubscription" *ngIf="userData?.status === 'NOPLAN' || userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12"
-                    class="other-purchase-btn purchase-btn" type="button"
-                    (click)="checkFreePeriod(yearlySubscription.id)">
-                    להצטרפות >>
-                </button>
-                <button *ngIf="userData?.status === 'PLAN' && userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12"
-                    class="disabled-btn purchase-btn" type="button" disabled>
-                    הינך רשום לתכנית זו
-                </button>
-            </mat-card-actions>
-        </mat-card>
-    </div>
-    <!-- <p *ngIf="noChangingProgramThisMonth" style="font-size: medium;font-weight: 600;">הוחלפה
+<div style="text-align: center">
+  <div *ngIf="subPlans" class="program-cards">
+    <mat-card>
+      <mat-card-subtitle></mat-card-subtitle>
+      <mat-card-title>תכנית חודשית</mat-card-title>
+      <mat-card-content>
+        <p class="price-line">
+          חודש /
+          <span class="price-number"
+            >₪{{
+              monthlySubscription.fullPrice /
+                monthlySubscription.billingCycleInMonths
+            }}</span
+          >
+        </p>
+        <p class="price-line">חיוב חודשי</p>
+      </mat-card-content>
+      <mat-divider inset></mat-divider>
+      <mat-card-actions>
+        <button
+          id="monthlySubscription"
+          *ngIf="
+            userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1
+          "
+          class="other-purchase-btn purchase-btn"
+          type="button"
+          (click)="checkFreePeriod(monthlySubscription.id)"
+        >
+          להצטרפות >>
+        </button>
+        <button
+          *ngIf="
+            userData?.status === 'PLAN' &&
+            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
+          "
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+          הינך רשום לתכנית זו
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
+      <!-- <span id="best-pack">הכי משתלמת</span> -->
+      <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />
+      <mat-card-subtitle></mat-card-subtitle>
+      <mat-card-title>תכנית שנתית</mat-card-title>
+      <mat-card-content>
+        <p class="price-line">
+          חודש /
+          <span class="price-number"
+            >₪{{
+              yearlySubscription.fullPrice /
+                yearlySubscription.billingCycleInMonths
+            }}</span
+          >
+        </p>
+        <p class="price-line">
+          משלמים מראש {{ yearlySubscription.fullPrice }} ש"ח לשנה וחוסכים
+          {{ yearlySubscriptionPercentage }}%
+        </p>
+      </mat-card-content>
+      <mat-divider inset></mat-divider>
+      <mat-card-actions>
+        <button
+          id="yearlySubscription"
+          *ngIf="
+            userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12
+          "
+          class="other-purchase-btn purchase-btn"
+          type="button"
+          (click)="checkFreePeriod(yearlySubscription.id)"
+        >
+          להצטרפות >>
+        </button>
+        <button
+          *ngIf="
+            userData?.status === 'PLAN' &&
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
+          "
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+          הינך רשום לתכנית זו
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <!-- <p *ngIf="noChangingProgramThisMonth" style="font-size: medium;font-weight: 600;">הוחלפה
         חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}</p> -->
-    <!--<p *ngIf="!userSingedIn"  style="font-size: medium;font-weight: 600;">
+  <!--<p *ngIf="!userSingedIn"  style="font-size: medium;font-weight: 600;">
     <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)=signInSignUp()>יש להתחבר על מנת להצטרף לתכנית</button>
     </p>-->
-    <!-- <p *ngIf="userSingedIn && selectedProgramOwned" style="font-size: medium;font-weight: 600;">
+  <!-- <p *ngIf="userSingedIn && selectedProgramOwned" style="font-size: medium;font-weight: 600;">
         אתם רשומים לתכנית זו
     </p> -->
-    <img id="payment-img" alt="Logos of how to pay" src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png" alt="Secure Payment">
+  <img
+    id="payment-img"
+    alt="Logos of how to pay"
+    src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
+    alt="Secure Payment"
+  />
 </div>
 
 <app-information-bar></app-information-bar>

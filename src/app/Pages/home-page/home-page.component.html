@@ -1,56 +1,144 @@
-<video #videoPlayer width="1920px" height="600px" autoplay loop oncanplay="this.play()"
-  onloadedmetadata="this.muted = true; this.style.opacity='0.5'">
-  <source src="assets\About video.mp4" type="video/mp4">
-  <source src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4" type="video/mp4">
+<video
+  #videoPlayer
+  width="1920px"
+  height="600px"
+  autoplay
+  loop
+  oncanplay="this.play()"
+  onloadedmetadata="this.muted = true; this.style.opacity='0.5'"
+>
+  <source src="assets\About video.mp4" type="video/mp4" />
+  <source
+    src="https://master-cards.s3.eu-west-2.amazonaws.com/About+video.mp4"
+    type="video/mp4"
+  />
 </video>
 
-<div class=content>
+<div class="content">
   <div class="d-flex flex-column actions actions-top">
-    <img id="logo" src="/assets/Logo-NoBG.png" alt="Mentor-Cards full logo">
-    <br>
+    <img id="logo" src="/assets/Logo-NoBG.png" alt="Mentor-Cards full logo" />
+    <br />
     <span id="top">בית לערכות קלפים דיגיטליות</span>
-    <br>
+    <br />
     <div class="line"></div>
-    <br>
-    <span id="middle" *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">עדין לא נרשמתם
-      לתוכנית?</span>
+    <br />
+    <span
+      id="middle"
+      *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate"
+      >עדין לא נרשמתם לתוכנית?</span
+    >
     <!-- <span id="middle" *ngIf="userData && trialPeriodExpDate">אתם כבר מחוברים ויש לכם חודש מתנה, לכו
       לאמן!</span> -->
-    <button style="font-size: x-large;" *ngIf="!userData" type="button" (click)="signInSignUp()">בואו נתחיל >>></button>
-    <br>
-    <span style="font-size: medium;" id="middle" *ngIf="!userData">הרשמו ותיהנו מ-14 ימי ניסיון בחינם!</span>
-    <div *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate">
-      <button style="font-size: x-large;" type="button" (click)="navigate('/price-page')">להרשמה לתוכנית</button>
+    <button
+      style="font-size: x-large"
+      *ngIf="!userData"
+      type="button"
+      (click)="signInSignUp()"
+    >
+      בואו נתחיל >>>
+    </button>
+    <br />
+    <span style="font-size: medium" id="middle" *ngIf="!userData"
+      >הרשמו ותיהנו מ-14 ימי ניסיון בחינם!</span
+    >
+    <div
+      *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate"
+    >
+      <button
+        style="font-size: x-large"
+        type="button"
+        (click)="navigate('/price-page')"
+      >
+        להרשמה לתוכנית
+      </button>
     </div>
-    <button style="font-size: x-large;" *ngIf="userData && (userData.status === 'PLAN' || trialPeriodExpDate)"
-      type="button" (click)="navigate('/all-packs-page')">לכל ערכות הקלפים</button>
-    <br>
+    <button
+      style="font-size: x-large"
+      *ngIf="userData && (userData.status === 'PLAN' || trialPeriodExpDate)"
+      type="button"
+      (click)="navigate('/all-packs-page')"
+    >
+      לכל ערכות הקלפים
+    </button>
+    <br />
   </div>
-  <div *ngIf="news?.length > 0" class="d-flex flex-column actions actions-bottom">
-    <span id="news-title">חדשות ועדכונים</span><br>
+  <div
+    *ngIf="news?.length > 0"
+    class="d-flex flex-column actions actions-bottom"
+  >
+    <span id="news-title">חדשות ועדכונים</span><br />
     <div class="line"></div>
-    <marquee style="font-size: 1rem;" vspace="1%" direction="up" width="90%" height="75px" scrollamount="1"
-      onmouseover="this.stop();" onmouseout="this.start();">
+    <marquee
+      style="font-size: 1rem"
+      vspace="1%"
+      direction="up"
+      width="90%"
+      height="75px"
+      scrollamount="1"
+      onmouseover="this.stop();"
+      onmouseout="this.start();"
+    >
       <ul>
-        <li class="news-list-item" *ngFor="let new of news">
-          <span>{{new.message}}</span>
+        <li class="news-list-item" *ngFor="let n of news">
+          <span class="news-list-data"
+            >{{ n.message }}
+            <span class="news-list-date"
+              >({{ n.createdAt | date : "dd.MM.yyyy" }})</span
+            ></span
+          >
+          <!-- <span class="news-list-date">({{ n.createdAt | date : "dd.MM.yyyy" }})</span> -->
         </li>
       </ul>
     </marquee>
   </div>
   <div class="d-flex flex-column align-items-center clients-container">
     <span class="clients-title">לקוחות ושיתופי פעולה</span>
-    <br>
+    <br />
     <div class="line"></div>
-    <br>
+    <br />
     <div class="clients-logo-container">
-      <img #logo class="client-logo" src="../../../assets/About images/Clients/maccabi.png" alt="Client logo PNG">
-      <img #logo class="client-logo" src="../../../assets/About images/Clients/lishka.png" alt="Client logo PNG">
-      <img #logo class="client-logo" src="../../../assets/About images/Clients/logos.png" alt="Client logo PNG">
-      <img #logo class="client-logo" src="../../../assets/About images/Clients/merchaz.png" alt="Client logo PNG">
-      <img #logo class="client-logo" src="../../../assets/About images/Clients/tnoofa.png" alt="Client logo PNG">
-      <img #logo class="client-logo" src="../../../assets/About images/Clients/yozmot.png" alt="Client logo PNG">
-      <img #logo class="client-logo" src="../../../assets/About images/Clients/standard_logo_transparent.png" alt="Client logo PNG">
+      <img
+        #logo
+        class="client-logo"
+        src="../../../assets/About images/Clients/maccabi.png"
+        alt="Client logo PNG"
+      />
+      <img
+        #logo
+        class="client-logo"
+        src="../../../assets/About images/Clients/lishka.png"
+        alt="Client logo PNG"
+      />
+      <img
+        #logo
+        class="client-logo"
+        src="../../../assets/About images/Clients/logos.png"
+        alt="Client logo PNG"
+      />
+      <img
+        #logo
+        class="client-logo"
+        src="../../../assets/About images/Clients/merchaz.png"
+        alt="Client logo PNG"
+      />
+      <img
+        #logo
+        class="client-logo"
+        src="../../../assets/About images/Clients/tnoofa.png"
+        alt="Client logo PNG"
+      />
+      <img
+        #logo
+        class="client-logo"
+        src="../../../assets/About images/Clients/yozmot.png"
+        alt="Client logo PNG"
+      />
+      <img
+        #logo
+        class="client-logo"
+        src="../../../assets/About images/Clients/standard_logo_transparent.png"
+        alt="Client logo PNG"
+      />
     </div>
   </div>
 </div>

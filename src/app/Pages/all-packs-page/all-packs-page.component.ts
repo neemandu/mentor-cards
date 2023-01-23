@@ -1,4 +1,10 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -10,14 +16,14 @@ import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service'
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
 interface CategoryPack {
-  category: string,
-  packs: PackContent[]
+  category: string;
+  packs: PackContent[];
 }
 
 @Component({
   selector: 'app-all-packs-page',
   templateUrl: './all-packs-page.component.html',
-  styleUrls: ['./all-packs-page.component.css']
+  styleUrls: ['./all-packs-page.component.css'],
 })
 export class AllPacksPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
@@ -27,7 +33,17 @@ export class AllPacksPageComponent implements OnInit {
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
-  categoriesOrder: string[] = ['קלפי תמונה', 'שיתופי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'מתנה'];
+  categoriesOrder: string[] = [
+    'קלפי תמונה',
+    'שיתופי פעולה',
+    'קלפי שאלות',
+    'קלפי חגים',
+    'קלפי מילה',
+    'קלפי תמונה + מילה',
+    'קלפי מסרים',
+    'קלפי ערכים',
+    'מתנה',
+  ];
   userData: UserData;
   allCategories: string[] = [];
   allFavorites: number[] = [];
@@ -40,29 +56,46 @@ export class AllPacksPageComponent implements OnInit {
   selectedFavorites: string[] = [];
   showBottomArrow: boolean = true;
 
-  constructor(private cardsService: CardsService, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
-    private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone, public dialog: MatDialog) {
+  constructor(
+    private cardsService: CardsService,
+    private overlaySpinnerService: OverlaySpinnerService,
+    private api: APIService,
+    private userAuthService: UserAuthService,
+    public router: Router,
+    private ngZone: NgZone,
+    public dialog: MatDialog
+  ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
   ngOnInit() {
-    this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-      userData ? this.getAllPacks() : null;
-      this.userData = userData;
-      this.allFavorites = this.userAuthService.favorites;
-      this.setAllFavPacksToShow();
-    }));
-    this.Subscription.add(this.userAuthService.favoritesChangeEmmiter.subscribe((favorites: number[]) => {
-      this.allFavorites = favorites;
-      this.setAllFavPacksToShow();
-    }));
+    this.Subscription.add(
+      this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+        userData ? this.getAllPacks() : null;
+        this.userData = userData;
+        this.allFavorites = this.userAuthService.favorites;
+        this.setAllFavPacksToShow();
+      })
+    );
+    this.Subscription.add(
+      this.userAuthService.favoritesChangeEmmiter.subscribe(
+        (favorites: number[]) => {
+          this.allFavorites = favorites;
+          this.setAllFavPacksToShow();
+        }
+      )
+    );
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.userData = this.userAuthService.userData;
     this.getAllPacks();
   }
 
   openEnterCouponCodeModal(): void {
-    this.userAuthService.openEnterCouponCodeModal();
+    if (this.userData) {
+      this.userAuthService.openEnterCouponCodeModal();
+    } else {
+      this.userAuthService.showSignInModal();
+    }
   }
 
   /**
@@ -80,29 +113,38 @@ export class AllPacksPageComponent implements OnInit {
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
-      })
+      });
       this.cardsService.getAllPacks();
     }
   }
 
   setAllPacksData(): void {
-    this.allPacks = this.cardsService.allPacks.map(pack => pack);
-    this.allCategories = this.cardsService.allCategories.map(category => category);
+    this.allPacks = this.cardsService.allPacks.map((pack) => pack);
+    this.allCategories = this.cardsService.allCategories.map(
+      (category) => category
+    );
     this.allFavorites = this.userAuthService.favorites;
   }
 
   setAllCategoryPacksToShow(): void {
-    this.allCategoryPacks = this.allCategories.filter(category => {
-      return this.selectedCategories.length != 0 ? this.selectedCategories.includes(category) : true
-    }).map(category => {
-      let packs = this.allPacks.filter(pack => pack.categories.includes(category));
-      if (packs.length != 0)
-        return { category: category, packs: packs }
-    })
+    this.allCategoryPacks = this.allCategories
+      .filter((category) => {
+        return this.selectedCategories.length != 0
+          ? this.selectedCategories.includes(category)
+          : true;
+      })
+      .map((category) => {
+        let packs = this.allPacks.filter((pack) =>
+          pack.categories.includes(category)
+        );
+        if (packs.length != 0) return { category: category, packs: packs };
+      });
   }
 
   setAllFavPacksToShow(): void {
-    this.allFavPacks = this.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)));
+    this.allFavPacks = this.allPacks.filter((pack) =>
+      this.allFavorites.includes(parseInt(pack.id))
+    );
   }
 
   updateUserData(): void {
@@ -133,26 +175,40 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   getAllFavoritesDesc(): string[] {
-    if(!this.allFavorites){
+    if (!this.allFavorites) {
       this.allFavorites = [];
     }
-    return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(parseInt(pack.id)))).map(pack => pack.name);
+    return this.cardsService.allPacks
+      ? this.cardsService.allPacks
+          .filter((pack) => this.allFavorites.includes(parseInt(pack.id)))
+          .map((pack) => pack.name)
+      : this.allPacks
+          .filter((pack) => this.allFavorites.includes(parseInt(pack.id)))
+          .map((pack) => pack.name);
     // return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
   }
 
   categoriesSelectedChange(event): void {
-    var index = this.selectedCategories.findIndex(el => el === event.option._value)
-    index == -1 ? this.selectedCategories.push(event.option._value) : this.selectedCategories.splice(index, 1);
+    var index = this.selectedCategories.findIndex(
+      (el) => el === event.option._value
+    );
+    index == -1
+      ? this.selectedCategories.push(event.option._value)
+      : this.selectedCategories.splice(index, 1);
   }
 
   favoritesSelectedChange(event): void {
-    var index = this.selectedFavorites.findIndex(el => el === event.option._value)
-    index == -1 ? this.selectedFavorites.push(event.option._value) : this.selectedFavorites.splice(index, 1);
+    var index = this.selectedFavorites.findIndex(
+      (el) => el === event.option._value
+    );
+    index == -1
+      ? this.selectedFavorites.push(event.option._value)
+      : this.selectedFavorites.splice(index, 1);
   }
 
   filterPacks(): void {
     this.loadedPacks = 0;
-    this.allPacks = this.cardsService.allPacks?.map(pack => pack);
+    this.allPacks = this.cardsService.allPacks?.map((pack) => pack);
     if (this.allPacks) {
       if (this.freeTextFilterSelected !== '') {
         this.freeTextFilter();
@@ -172,38 +228,37 @@ export class AllPacksPageComponent implements OnInit {
   freeTextFilter(): void {
     this.allPacks = this.allPacks.filter((pack: PackContent) => {
       // let contains: boolean = false;
-      if (pack.description.includes(this.freeTextFilterSelected))
-        return true;
-      pack.categories.forEach(category => {
-        if (category.includes(this.freeTextFilterSelected))
-          return true;
-      })
-      pack.tags.forEach(tag => {
-        if (tag.includes(this.freeTextFilterSelected))
-          return true;
-      })
+      if (pack.description.includes(this.freeTextFilterSelected)) return true;
+      pack.categories.forEach((category) => {
+        if (category.includes(this.freeTextFilterSelected)) return true;
+      });
+      pack.tags.forEach((tag) => {
+        if (tag.includes(this.freeTextFilterSelected)) return true;
+      });
       if (pack.name.includes(this.freeTextFilterSelected)) {
         return true;
       }
       // return contains;
       return false;
-    })
+    });
   }
 
   categoryFilter(): void {
     this.allPacks = this.allPacks.filter((pack: PackContent) => {
       let res = false;
-      pack.categories.forEach(category => {
+      pack.categories.forEach((category) => {
         if (this.selectedCategories.includes(category)) {
           res = true;
         }
-      })
+      });
       return res;
-    })
+    });
   }
 
   favoritesFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackContent) => this.selectedFavorites.includes(pack.name))
+    this.allPacks = this.allPacks.filter((pack: PackContent) =>
+      this.selectedFavorites.includes(pack.name)
+    );
   }
 
   public navigate(path: string): void {

@@ -1,45 +1,110 @@
-<nav class="nav navbar-light align-items-center justify-content-between sticky-top">
+<nav
+  class="nav navbar-light align-items-center justify-content-between sticky-top"
+>
   <div id="nav-buttons" class="d-flex flex-row">
     <div dir="rtl">
       <button class="btn navbar-btn menu-btn" [matMenuTriggerFor]="allButtons">
         <mat-icon>menu</mat-icon>
       </button>
-      <button *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/home-page')">
+      <button
+        *ngIf="!loggedIn"
+        class="btn navbar-btn"
+        (click)="navigate('/home-page')"
+      >
         <mat-icon>home</mat-icon>
       </button>
-      <button id="user-drop-down" *ngIf="loggedIn" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">
+      <button
+        id="user-drop-down"
+        *ngIf="loggedIn"
+        class="btn navbar-btn"
+        [matMenuTriggerFor]="userMenu"
+      >
         <mat-icon id="account_circle">account_circle</mat-icon>
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
     </div>
-    <button *ngIf="!loggedIn" class="btn navbar-btn" (click)=signInSignUp()>התחברות/הרשמה</button>
-    <button class="btn navbar-btn" (click)="navigate('/all-packs-page')">כל ערכות הקלפים</button>
-    <button *ngIf="!loggedIn" class="btn navbar-btn" (click)="navigate('/example-pack')">ערכה
-      להתנסות</button>
-      <button class="btn navbar-btn" (click)="navigate('/price-page')">מחירון</button>
-    <button class="btn navbar-btn" (click)="navigate('/guide-page')">שאלות נפוצות</button>
-    <button class="btn navbar-btn" (click)="navigate('/services')">שירותים נוספים</button>
-    <button class="btn navbar-btn" (click)="navigate('/about-page')">עלינו</button>
-    <button class="btn navbar-btn" (click)="navigate('/contact-us')">צור קשר</button>
-    <button class="btn navbar-btn" id="admin-drop-down" *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
-      [matMenuTriggerFor]="managementMenu">
+    <button *ngIf="!loggedIn" class="btn navbar-btn" (click)="signInSignUp()">
+      התחברות/הרשמה
+    </button>
+    <button class="btn navbar-btn" (click)="navigate('/all-packs-page')">
+      כל ערכות הקלפים
+    </button>
+    <button
+      *ngIf="!loggedIn"
+      class="btn navbar-btn"
+      (click)="navigate('/example-pack')"
+    >
+      ערכה להתנסות
+    </button>
+    <button class="btn navbar-btn" (click)="navigate('/price-page')">
+      מחירון
+    </button>
+    <button class="btn navbar-btn" (click)="navigate('/guide-page')">
+      שאלות נפוצות
+    </button>
+    <button class="btn navbar-btn" (click)="navigate('/services')">
+      שירותים נוספים
+    </button>
+    <button class="btn navbar-btn" (click)="navigate('/about-page')">
+      עלינו
+    </button>
+    <button class="btn navbar-btn" (click)="navigate('/contact-us')">
+      צור קשר
+    </button>
+    <button
+      class="btn navbar-btn"
+      id="admin-drop-down"
+      *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
+      [matMenuTriggerFor]="managementMenu"
+    >
       אדמין
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <!-- <button class="btn navbar-btn" (click)="navigate('/company-pack-choise')">בחירת ערכות</button> -->
   </div>
   <div class="d-flex flex-row">
-    <button mat-icon-button color="primary" id="notificationIcon" *ngIf="news" [matMenuTriggerFor]="newsMenu"
-      (click)="viewNotifications()" matTooltip="חדשות ועדכונים" [matTooltipClass]="{'tooltip-class' : true}">
-      <mat-icon matBadge="!" matBadgeColor="warn" matBadgeOverlap="true" matBadgeSize="small" class="shake bell-icon"
-        style="color: #ffcc6c" *ngIf="newsNotification && news?.length!=0">
-        notifications_active</mat-icon>
-      <mat-icon class="bell-icon" style="color: rgb(93, 93, 93);" *ngIf="!newsNotification || news?.length==0">
-        notifications</mat-icon>
+    <button
+      mat-icon-button
+      color="primary"
+      id="notificationIcon"
+      *ngIf="news"
+      [matMenuTriggerFor]="newsMenu"
+      (click)="viewNotifications()"
+      matTooltip="חדשות ועדכונים"
+      [matTooltipClass]="{ 'tooltip-class': true }"
+    >
+      <mat-icon
+        matBadge="!"
+        matBadgeColor="warn"
+        matBadgeOverlap="true"
+        matBadgeSize="small"
+        class="shake bell-icon"
+        style="color: #ffcc6c"
+        *ngIf="newsNotification && news?.length != 0"
+      >
+        notifications_active</mat-icon
+      >
+      <mat-icon
+        class="bell-icon"
+        style="color: rgb(93, 93, 93)"
+        *ngIf="!newsNotification || news?.length == 0"
+      >
+        notifications</mat-icon
+      >
     </button>
-    <div id="logo" matRipple [matRippleCentered]="true" [matRippleRadius]="30" (click)="navigate('/home-page')">
-      <img id="logo-name" src="/assets/Logo.png" alt="Mentor-Cards full logo">
-      <img id="logo-no-name" src="/assets/Logo-NoName-NoBG.png" alt="Mentor-Cards miniature logo">
+    <div
+      id="logo"
+      matRipple
+      [matRippleCentered]="true"
+      [matRippleRadius]="30"
+      (click)="navigate('/home-page')"
+    >
+      <img id="logo-name" src="/assets/Logo.png" alt="Mentor-Cards full logo" />
+      <img
+        id="logo-no-name"
+        src="/assets/Logo-NoName-NoBG.png"
+        alt="Mentor-Cards miniature logo"
+      />
     </div>
   </div>
 </nav>
@@ -50,9 +115,14 @@
     <div class="line"></div>
     <ul id="news-list">
       <li class="news-list-item" *ngFor="let n of news">
-        <span>{{n.message}}</span>
+        <span class="news-list-data"
+          >{{ n.message }}
+          <span class="news-list-date"
+            >({{ n.createdAt | date : "dd.MM.yyyy" }})</span
+          >
+        </span>
       </li>
-      <li class="news-list-item" *ngIf="news?.length==0">
+      <li class="news-list-item" *ngIf="news?.length == 0">
         אין חדשות ועדכונים חדשים
       </li>
     </ul>
@@ -63,65 +133,119 @@
   <button mat-menu-item *ngIf="!loggedIn" (click)="navigate('/home-page')">
     <mat-icon>home</mat-icon>
   </button>
-  <button mat-menu-item id="user-drop-down" *ngIf="loggedIn" [matMenuTriggerFor]="userMenu">
+  <button
+    mat-menu-item
+    id="user-drop-down"
+    *ngIf="loggedIn"
+    [matMenuTriggerFor]="userMenu"
+  >
     <mat-icon id="account_circle">account_circle</mat-icon>
   </button>
-  <button mat-menu-item *ngIf="!loggedIn" (click)=signInSignUp()>התחברות/הרשמה</button>
-  <button mat-menu-item (click)="navigate('/all-packs-page')">כל ערכות
-    הקלפים</button>
-  <button mat-menu-item *ngIf="!loggedIn" (click)="navigate('/example-pack')">ערכה
-    להתנסות</button>
-    <button mat-menu-item (click)="navigate('/price-page')">מחירון</button>
+  <button mat-menu-item *ngIf="!loggedIn" (click)="signInSignUp()">
+    התחברות/הרשמה
+  </button>
+  <button mat-menu-item (click)="navigate('/all-packs-page')">
+    כל ערכות הקלפים
+  </button>
+  <button mat-menu-item *ngIf="!loggedIn" (click)="navigate('/example-pack')">
+    ערכה להתנסות
+  </button>
+  <button mat-menu-item (click)="navigate('/price-page')">מחירון</button>
   <button mat-menu-item (click)="navigate('/guide-page')">שאלות נפוצות</button>
   <button mat-menu-item (click)="navigate('/services')">שירותים נוספים</button>
   <button mat-menu-item (click)="navigate('/about-page')">עלינו</button>
   <button mat-menu-item (click)="navigate('/contact-us')">צור קשר</button>
-  <button mat-menu-item *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
-    [matMenuTriggerFor]="managementMenu">
+  <button
+    mat-menu-item
+    *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
+    [matMenuTriggerFor]="managementMenu"
+  >
     אדמין
   </button>
   <mat-divider *ngIf="loggedIn"></mat-divider>
-  <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">יש לך קוד
-    הטבה?</button>
+  <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">
+    יש לך קוד הטבה?
+  </button>
 </mat-menu>
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item *ngIf="loggedIn" (click)="navigate('/user-page')">פרטי
-    משתמש</button>
-  <button mat-menu-item *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'" (click)="navigate('/price-page')">הרשמה
-    לתכנית</button>
-  <button mat-menu-item type="button"
-    *ngIf="loggedIn && (userAttributes?.groupId && (userAttributes?.groupRole === 'ADMIN' || userAttributes?.groupRole === 'SUPER_USER'))"
-    (click)="navigate('/group-management')">ניהול
-    קבוצה</button>
+  <button mat-menu-item *ngIf="loggedIn" (click)="navigate('/user-page')">
+    פרטי משתמש
+  </button>
+  <button
+    mat-menu-item
+    *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'"
+    (click)="navigate('/price-page')"
+  >
+    הרשמה לתכנית
+  </button>
+  <button
+    mat-menu-item
+    type="button"
+    *ngIf="
+      loggedIn &&
+      userAttributes?.groupId &&
+        (userAttributes?.groupRole === 'ADMIN' ||
+          userAttributes?.groupRole === 'SUPER_USER')
+    "
+    (click)="navigate('/group-management')"
+  >
+    ניהול קבוצה
+  </button>
   <!-- <button mat-menu-item [matMenuTriggerFor]="managementMenu"
     *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'">
     <span>ניהול תוכן האתר</span></button> -->
-  <button mat-menu-item *ngIf="loggedIn" (click)=logout()>התנתק</button>
+  <button mat-menu-item *ngIf="loggedIn" (click)="logout()">התנתק</button>
 </mat-menu>
 
 <mat-menu #managementMenu="matMenu" backdropClass="mat-menu">
-  <button mat-menu-item (click)="navigate('/news-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+  <button
+    mat-menu-item
+    (click)="navigate('/news-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
     <div>חדשות ועדכונים</div>
   </button>
-  <button mat-menu-item (click)="navigate('/guide-book-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+  <button
+    mat-menu-item
+    (click)="navigate('/guide-book-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
     <div>ספרי הדרכה</div>
   </button>
-  <button mat-menu-item (click)="navigate('/coupon-codes-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+  <button
+    mat-menu-item
+    (click)="navigate('/coupon-codes-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
     <div>קודי הטבה</div>
   </button>
-  <button mat-menu-item (click)="navigate('/orgs-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+  <button
+    mat-menu-item
+    (click)="navigate('/orgs-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
     <div>ארגונים</div>
   </button>
-  <button mat-menu-item (click)="navigate('/packs-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+  <button
+    mat-menu-item
+    (click)="navigate('/packs-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
     <div>ערכות קלפים</div>
   </button>
-  <button mat-menu-item (click)="navigate('/payment-programs-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+  <button
+    mat-menu-item
+    (click)="navigate('/payment-programs-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
     <div>חבילות תשלום</div>
   </button>
-  <button mat-menu-item (click)="navigate('/receipts-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+  <button
+    mat-menu-item
+    (click)="navigate('/receipts-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
     <div>קבלות ותשלומים</div>
   </button>
 </mat-menu>

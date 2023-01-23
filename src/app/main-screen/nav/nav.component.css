@@ -130,9 +130,14 @@ img {
   list-style: disc;
 }
 
-.news-list-item {
+.news-list-item .news-list-data {
   font-size: 1rem;
-  color: var(--main-color);
+}
+
+.news-list-item .news-list-date {
+  font-size: 0.8rem;
+  color: rgb(168, 168, 168);
+  margin-right: 5px;
 }
 
 li span {
@@ -166,7 +171,7 @@ li span {
 }
 
 ::ng-deep .mat-menu-news {
-  width: max-content;
+  width: max-content!important;
 }
 
 .tooltip-class {

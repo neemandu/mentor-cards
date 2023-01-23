@@ -146,9 +146,18 @@ li span {
 }
 
 .news-list-item {
-  font-size: 1rem;
   color: var(--main-color);
   line-height: 2rem;
+}
+
+.news-list-item .news-list-data {
+  font-size: 1rem;
+}
+
+.news-list-item .news-list-date {
+  font-size: 0.8rem;
+  color: rgb(168, 168, 168);
+  margin-right: 5px;
 }
 
 @media screen and (max-width: 1024px) {
