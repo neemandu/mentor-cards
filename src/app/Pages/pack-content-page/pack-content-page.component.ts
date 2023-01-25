@@ -16,8 +16,6 @@ import { PackContent } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { CardComponent } from 'src/app/Shared Components/card/card.component';
-// import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-dialog.component';
-// import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
 import * as exampleCards from '../../../assets/Bundle Configurations/ExmaplePack.json';
 import { PopoutData, PopoutService } from 'src/app/Services/popout.service';
 import { UserData } from 'src/app/Objects/user-related';
@@ -109,6 +107,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.pack = new PackContent().deseralize(exampleCards['default']);
     }
     this.cards = [...this.pack.cards];
+    setTimeout(() => {
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    }, 300);
   }
 
   multipileChanged(): void {
