@@ -1,25 +1,52 @@
 <title>Mentor-Cards כל ערכות הקלפים</title>
 <div id="content">
   <div id="filters" class="float-right">
-    <button *ngIf="userData" id="couponCodeBtn" type="button" (click)="openEnterCouponCodeModal()">יש לך קוד
-      הטבה?</button>
+    <button
+      id="couponCodeBtn"
+      type="button"
+      (click)="openEnterCouponCodeModal()"
+    >
+      יש לך קוד הטבה?
+    </button>
     <h3 id="filter-by-options-title">חיפוש</h3>
     <mat-form-field>
       <mat-label>הקלד מילת מפתח, נושא...</mat-label>
-      <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
-        (keyup)="filterPacks()">
-      <button mat-button [ngStyle]="{'visibility': filterText.value ? 'visible' : 'hidden'}" matSuffix mat-icon-button
-        aria-label="Clear" (click)="freeTextFilterSelected = ''; filterPacks()">
-        <mat-icon style="font-family: 'Material Icons' !important;">close</mat-icon>
+      <input
+        #filterText
+        matInput
+        type="text"
+        autocomplete="off"
+        [(ngModel)]="freeTextFilterSelected"
+        (keyup)="filterPacks()"
+      />
+      <button
+        mat-button
+        [ngStyle]="{ visibility: filterText.value ? 'visible' : 'hidden' }"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="freeTextFilterSelected = ''; filterPacks()"
+      >
+        <mat-icon style="font-family: 'Material Icons' !important"
+          >close</mat-icon
+        >
       </button>
     </mat-form-field>
-    <br>
+    <br />
     <h3 id="filter-by-options-title">קטגוריות</h3>
-    <mat-selection-list #categories (selectionChange)="categoriesSelectedChange($event); filterPacks()">
-      <mat-list-option disableRipple style="direction: ltr;" *ngFor="let category of allCategories"
-        [selected]="selectedCategories.includes(category)" [value]="category">
+    <mat-selection-list
+      #categories
+      (selectionChange)="categoriesSelectedChange($event); filterPacks()"
+    >
+      <mat-list-option
+        disableRipple
+        style="direction: ltr"
+        *ngFor="let category of allCategories"
+        [selected]="selectedCategories.includes(category)"
+        [value]="category"
+      >
         <!-- <span> -->
-        {{category}}
+        {{ category }}
         <!-- <div class="d-flex justify-content-end align-items-baseline category">
           <mat-icon class="category-color-dot" [style.color]="getCategoryColor(category)">
             circle
@@ -34,12 +61,20 @@
         </mat-icon>
       </button> -->
     </mat-selection-list>
-    <br>
+    <br />
     <h3 id="filter-by-options-title">המועדפים שלי</h3>
-    <mat-selection-list #favorites (selectionChange)="favoritesSelectedChange($event); filterPacks()">
-      <mat-list-option disableRipple style="direction: ltr;" *ngFor="let fav of getAllFavoritesDesc()"
-        [selected]="selectedFavorites.includes(fav)" [value]="fav">
-        <span style="direction: rtl;">{{fav}}</span>
+    <mat-selection-list
+      #favorites
+      (selectionChange)="favoritesSelectedChange($event); filterPacks()"
+    >
+      <mat-list-option
+        disableRipple
+        style="direction: ltr"
+        *ngFor="let fav of getAllFavoritesDesc()"
+        [selected]="selectedFavorites.includes(fav)"
+        [value]="fav"
+      >
+        <span style="direction: rtl">{{ fav }}</span>
       </mat-list-option>
     </mat-selection-list>
   </div>
@@ -77,29 +112,48 @@
       כל ערכות הקלפים לרשותכם עד ה- {{trialPeriodExpDate | date:'d/M/yy'}}
     </h1> -->
     <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
-      <div class="category-line d-flex align-items-center justify-content-around">
+      <div
+        class="category-line d-flex align-items-center justify-content-around"
+      >
         <div class="first-line"></div>
         <h3 class="categrory-title">המועדפים שלי</h3>
         <div class="second-line"></div>
       </div>
       <div class="d-flex flex-row flex-wrap card-section">
-        <app-pack class="pack" *ngFor="let packInfo of allFavPacks" [packInfo]="packInfo"
-          [orgName]="userData?.orgMembership?.name" (loaded)="packLoaded();"
-          (packChange)="getAllPacks(); updateUserData();">
+        <app-pack
+          class="pack"
+          *ngFor="let packInfo of allFavPacks"
+          [packInfo]="packInfo"
+          [orgName]="userData?.orgMembership?.name"
+          (loaded)="packLoaded()"
+        >
         </app-pack>
       </div>
     </div>
     <div *ngIf="selectedFavorites.length == 0">
-      <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks; let i = index;">
-        <div *ngIf="categoryPacks" class="category-line d-flex align-items-center justify-content-around">
+      <div
+        class="all-packs-view__section"
+        *ngFor="let categoryPacks of allCategoryPacks; let i = index"
+      >
+        <div
+          *ngIf="categoryPacks"
+          class="category-line d-flex align-items-center justify-content-around"
+        >
           <div class="first-line"></div>
-          <h3 class="categrory-title">{{categoryPacks.category}}</h3>
+          <h3 class="categrory-title">{{ categoryPacks.category }}</h3>
           <div class="second-line"></div>
         </div>
-        <div *ngIf="categoryPacks" class="d-flex flex-row flex-wrap card-section">
-          <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
+        <div
+          *ngIf="categoryPacks"
+          class="d-flex flex-row flex-wrap card-section"
+        >
+          <app-pack
+            class="pack"
+            *ngFor="let packInfo of categoryPacks.packs"
+            [packInfo]="packInfo"
             [orgName]="userData?.orgMembership?.name"
-            (loaded)="packLoaded();" (packChange)="getAllPacks(); updateUserData();">
+            (loaded)="packLoaded()"
+          >
           </app-pack>
         </div>
       </div>

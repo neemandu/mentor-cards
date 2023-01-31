@@ -13,9 +13,14 @@ import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { CompanyPackChoiseComponent } from './Modules/management/company-pack-choise/company-pack-choise.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
 import {
-  AuthGuardAllPacksPageService, AuthGuardCompanyCardChoiseService, AuthGuardGroupManagementService,
-  AuthGuardNoProgramPageService, AuthGuardPackContentService, AuthGuardPricePageService, AuthGuardSiteContentManagementService,
-  AuthGuardUserPageService
+  AuthGuardAllPacksPageService,
+  AuthGuardCompanyCardChoiseService,
+  AuthGuardGroupManagementService,
+  AuthGuardNoProgramPageService,
+  AuthGuardPackContentService,
+  AuthGuardPricePageService,
+  AuthGuardSiteContentManagementService,
+  AuthGuardUserPageService,
 } from './Services/auth-guard.service';
 import { CanDeactivateGuardService } from './Services/can-deactivate-guard.service';
 import { GuideBookManagementComponent } from './Modules/management/guide-book-management/guide-book-management.component';
@@ -30,33 +35,92 @@ import { ServicesComponent } from './Pages/services/services.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
   { path: 'home-page', component: HomePageComponent },
-  { path: 'no-program-page', component: NoProgramPageComponent, canActivate: [AuthGuardNoProgramPageService] },
-  { path: 'user-page', component: UserPageComponent, canActivate: [AuthGuardUserPageService] },
-  { path: 'group-management', component: GroupManagementComponent, canActivate: [AuthGuardGroupManagementService] },
-  { path: 'all-packs-page', component: AllPacksPageComponent, canActivate: [AuthGuardAllPacksPageService] },
+  {
+    path: 'no-program-page',
+    component: NoProgramPageComponent,
+    canActivate: [AuthGuardNoProgramPageService],
+  },
+  {
+    path: 'user-page',
+    component: UserPageComponent,
+    canActivate: [AuthGuardUserPageService],
+  },
+  {
+    path: 'group-management',
+    component: GroupManagementComponent,
+    canActivate: [AuthGuardGroupManagementService],
+  },
+  {
+    path: 'all-packs-page',
+    component: AllPacksPageComponent,
+    canActivate: [AuthGuardAllPacksPageService],
+  },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  { path: 'pack-view/:id', component: PackContentPageComponent, canActivate: [AuthGuardPackContentService] },
+  {
+    path: 'pack-view/:id',
+    component: PackContentPageComponent,
+    canActivate: [AuthGuardPackContentService],
+  },
   { path: 'example-pack', component: PackContentPageComponent },
   { path: 'guide-book', component: GuideBookComponent },
-  { path: 'price-page', component: PricePageComponent, canActivate: [AuthGuardPricePageService] },
+  {
+    path: 'price-page',
+    component: PricePageComponent,
+    canActivate: [AuthGuardPricePageService],
+  },
   { path: 'guide-page', component: GuidePageComponent },
   { path: 'services', component: ServicesComponent },
-  { path: 'company-pack-choise', component: CompanyPackChoiseComponent, canActivate: [AuthGuardCompanyCardChoiseService] },
-  { path: 'guide-book-management', component: GuideBookManagementComponent, canActivate: [AuthGuardSiteContentManagementService], canDeactivate: [CanDeactivateGuardService] },
+  {
+    path: 'company-pack-choise',
+    component: CompanyPackChoiseComponent,
+    canActivate: [AuthGuardCompanyCardChoiseService],
+  },
+  {
+    path: 'guide-book-management',
+    component: GuideBookManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+    canDeactivate: [CanDeactivateGuardService],
+  },
   // Management //
-  { path: 'news-management', component: NewsManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
-  { path: 'coupon-codes-management', component: CouponCodesManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
-  { path: 'orgs-management', component: OrganizationManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
-  { path: 'packs-management', component: PacksManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
-  { path: 'payment-programs-management', component: PaymentProgramsManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
-  { path: 'receipts-management', component: ReceiptsManagementComponent, canActivate: [AuthGuardSiteContentManagementService] },
+  {
+    path: 'news-management',
+    component: NewsManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+  {
+    path: 'coupon-codes-management',
+    component: CouponCodesManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+  {
+    path: 'orgs-management',
+    component: OrganizationManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+  {
+    path: 'packs-management',
+    component: PacksManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+  {
+    path: 'payment-programs-management',
+    component: PaymentProgramsManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+  {
+    path: 'receipts-management',
+    component: ReceiptsManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
 
   { path: '**', redirectTo: '/all-packs-page' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

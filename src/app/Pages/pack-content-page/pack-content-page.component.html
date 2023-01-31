@@ -1,43 +1,103 @@
 <title>Mentor-Cards תוכן ערכת הקלפים</title>
 <div class="d-flex align-items-center flex-column">
   <div class="title d-flex justify-content-center align-items-baseline">
-    <h1 style="text-align: center" *ngIf="pack">{{pack.name}}</h1>
+    <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
     <h1 style="text-align: center" *ngIf="!id">החיות שבתוכנו</h1>
-    <h2 *ngIf="pack?.about" id="about-author" class="clickable" (click)="openAboutDialog()">(על יוצר הערכה)</h2>
+    <h2
+      *ngIf="pack?.about"
+      id="about-author"
+      class="clickable"
+      (click)="openAboutDialog()"
+    >
+      (על יוצר הערכה)
+    </h2>
   </div>
-  <button id="guideBook" type="button" [disabled]="showEditPack"
-    [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
-    (click)="openGuideBook()">
-    <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
+  <button
+    id="guideBook"
+    type="button"
+    [disabled]="showEditPack"
+    [ngClass]="{
+      'option-btn': true,
+      'top-option-btn': !showEditPack,
+      'top-option-btn-disabled': showEditPack
+    }"
+    (click)="openGuideBook()"
+  >
+    <mat-icon id="guide-book-icon" style="font-family: 'Material Icons'"
+      >local_library</mat-icon
+    >ספר הדרכה
   </button>
 </div>
 
-<div class="d-flex justify-content-center nav-buttons ">
-  <!-- <div id="mult-choise-btn">
-    <div id="mult-choise-btn-txt">בחירה מרובה </div>
-    <mat-slide-toggle id="multipl-choice" [disabled]="showEditPack" (change)="multipileChanged()"
-      [(ngModel)]="multipileChecked">
-    </mat-slide-toggle>
-  </div> -->
+<div class="d-flex justify-content-center nav-buttons">
   <div id="actions">
-    <button id="multipleChoise" type="button"
-      [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
+    <button
+      id="multipleChoise"
+      type="button"
+      [ngClass]="{
+        'option-btn': true,
+        'top-option-btn': !showEditPack,
+        'top-option-btn-disabled': showEditPack
+      }"
       (click)="multipileChanged()"
-      [disabled]="showEditPack">{{!multipileChecked ? 'הצג מספר קלפים':'הצג קלף יחיד'}}</button>
-    <button id="mixCards" type="button" [disabled]="showEditPack"
-      [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
-      (click)="shuffle()">ערבב</button>
-    <button id="flipCards" type="button" [disabled]="showEditPack"
-      [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
-      (click)="flipped = !flipped; selectedCards = []">הפוך
-      את הקלפים</button>
-    <button id="randomCard" type="button" [disabled]="showEditPack"
-      [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
-      (click)="toggleRandomCardsModal()">הצג קלף אקראי</button>
-    <button id="editPack" type="button" [ngClass]="{'option-btn top-option-btn': true}"
-      (click)="editPack()">{{!showEditPack ? 'עריכה':'סיום עריכה'}}</button>
+      [disabled]="showEditPack"
+    >
+      {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
+    </button>
+    <button
+      id="mixCards"
+      type="button"
+      [disabled]="showEditPack"
+      [ngClass]="{
+        'option-btn': true,
+        'top-option-btn': !showEditPack,
+        'top-option-btn-disabled': showEditPack
+      }"
+      (click)="shuffle()"
+    >
+      ערבב
+    </button>
+    <button
+      id="flipCards"
+      type="button"
+      [disabled]="showEditPack"
+      [ngClass]="{
+        'option-btn': true,
+        'top-option-btn': !showEditPack,
+        'top-option-btn-disabled': showEditPack
+      }"
+      (click)="flipped = !flipped; selectedCards = []"
+    >
+      הפוך את הקלפים
+    </button>
+    <button
+      id="randomCard"
+      type="button"
+      [disabled]="showEditPack"
+      [ngClass]="{
+        'option-btn': true,
+        'top-option-btn': !showEditPack,
+        'top-option-btn-disabled': showEditPack
+      }"
+      (click)="toggleRandomCardsModal()"
+    >
+      הצג קלף אקראי
+    </button>
+    <button
+      id="editPack"
+      type="button"
+      [ngClass]="{ 'option-btn top-option-btn': true }"
+      (click)="editPack()"
+    >
+      {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
+    </button>
   </div>
-  <button type="button" id="menu-actions" class="btn option-btn" [matMenuTriggerFor]="actions">
+  <button
+    type="button"
+    id="menu-actions"
+    class="btn option-btn"
+    [matMenuTriggerFor]="actions"
+  >
     <mat-icon>style</mat-icon>
     <span>פעולות</span>
   </button>
@@ -48,127 +108,296 @@
   </button> -->
 </div>
 <div class="d-flex flex-column align-items-center cards-container">
-  <div *ngIf="pack && !showEditPack" [transition-group]="'flip-list'"
-    class="d-flex flex-row justify-content-center flex-wrap">
+  <div
+    *ngIf="pack && !showEditPack"
+    [transition-group]="'flip-list'"
+    class="d-flex flex-row justify-content-center flex-wrap"
+  >
     <!-- New start -->
-    <div *ngFor="let card of cards; let i = index"
-      [ngClass]="{'d-flex flex-column align-items-center shuffle': true, 'shuffle-item': !showEditPack}"
-      transition-group-item>
-      <app-card [ngClass]="{'clickable': true}" [cardContent]="card" [selected]="selectedCards.includes(card)"
-        [index]="i+1" [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))"
-        (click)="cardSelected(card, i+1)">
+    <div
+      *ngFor="let card of cards; let i = index"
+      [ngClass]="{
+        'd-flex flex-column align-items-center shuffle': true,
+        'shuffle-item': !showEditPack
+      }"
+      transition-group-item
+    >
+      <app-card
+        [ngClass]="{ clickable: true }"
+        [cardContent]="card"
+        [selected]="selectedCards.includes(card)"
+        [index]="i + 1"
+        [flipped]="
+          flipped || (!multipileChecked && selectedCards.includes(card))
+        "
+        (click)="cardSelected(card, i + 1)"
+      >
       </app-card>
     </div>
     <!-- New end -->
   </div>
 
-  <div *ngIf="pack && showEditPack" class="d-flex flex-row justify-content-center flex-wrap">
-    <div *ngFor="let card of cards; let i = index" [ngClass]="{'d-flex flex-column align-items-center': true}">
-      <button *ngIf="showEditPack" mat-icon-button class="remove-btn" (click)=removeCard(i)>
+  <div
+    *ngIf="pack && showEditPack"
+    class="d-flex flex-row justify-content-center flex-wrap"
+  >
+    <div
+      *ngFor="let card of cards; let i = index"
+      [ngClass]="{ 'd-flex flex-column align-items-center': true }"
+    >
+      <button
+        *ngIf="showEditPack"
+        mat-icon-button
+        class="remove-btn"
+        (click)="removeCard(i)"
+      >
         <mat-icon class="remove-icon">visibility_off</mat-icon>
       </button>
-      <app-card [ngClass]="{'clickable': true}" [cardContent]="card" [selected]="selectedCards.includes(card)"
-        [index]="i+1" [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))"
-        (click)="cardSelected(card, i+1)">
+      <app-card
+        [ngClass]="{ clickable: true }"
+        [cardContent]="card"
+        [selected]="selectedCards.includes(card)"
+        [index]="i + 1"
+        [flipped]="
+          flipped || (!multipileChecked && selectedCards.includes(card))
+        "
+        (click)="cardSelected(card, i + 1)"
+      >
       </app-card>
     </div>
   </div>
 
-
   <div id="introduction" *ngIf="!id">
-    <p style="text-align: center; font-size: 2rem; margin-bottom: 1.5rem; font-weight: 700;">שימו <span
-        style="color: coral;">&#10084;</span>
+    <p
+      style="
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+      "
+    >
+      שימו <span style="color: coral">&#10084;</span>
     </p>
     <ul>
       <li><span>באתר קיימות עשרות ערכות קלפים לבחירתכם</span></li>
       <li><span>כל ערכה כוללת מעל ל-40 קלפים</span></li>
-      <li><span>כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים</span></li>
+      <li>
+        <span
+          >כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים</span
+        >
+      </li>
       <li><span>במסגרת 14 ימי הניסיון כל ערכות הקלפים לרשותכם</span></li>
     </ul>
     <div class="line"></div>
     <div id="actions" class="d-flex flex-column align-items-center">
-      <span id="middle" *ngIf="!userData">הירשמו, והתחילו את תקופת הניסיון</span>
-      <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">עדין לא נרשמתם לתוכנית?</span>
-      <span id="middle" *ngIf="userData && userData.status === 'PLAN'">אתם כבר מחוברים, למה אתם מחכים? לעבודה :)</span>
-      <br>
-      <button class="action-button" *ngIf="!userData" type="button" (click)="signInSignUp()">התחברות/הרשמה</button>
-      <button class="action-button" *ngIf="userData && userData.status === 'NOPLAN'" type="button"
-        (click)="navigate('/price-page')">להרשמה לתוכנית</button>
-      <button class="action-button" *ngIf="userData && userData.status === 'PLAN'" type="button"
-        (click)="navigate('/all-packs-page')">לכל הערכות</button>
+      <span id="middle" *ngIf="!userData"
+        >הירשמו, והתחילו את תקופת הניסיון</span
+      >
+      <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'"
+        >עדין לא נרשמתם לתוכנית?</span
+      >
+      <span id="middle" *ngIf="userData && userData.status === 'PLAN'"
+        >אתם כבר מחוברים, למה אתם מחכים? לעבודה :)</span
+      >
+      <br />
+      <button
+        class="action-button"
+        *ngIf="!userData"
+        type="button"
+        (click)="signInSignUp()"
+      >
+        התחברות/הרשמה
+      </button>
+      <button
+        class="action-button"
+        *ngIf="userData && userData.status === 'NOPLAN'"
+        type="button"
+        (click)="navigate('/price-page')"
+      >
+        להרשמה לתוכנית
+      </button>
+      <button
+        class="action-button"
+        *ngIf="userData && userData.status === 'PLAN'"
+        type="button"
+        (click)="navigate('/all-packs-page')"
+      >
+        לכל הערכות
+      </button>
     </div>
   </div>
 </div>
 
-<nav *ngIf="pack" [ngClass]="{'nav navbar-light bottom-nav': true, 'bottom-nav-hidden':(!multipileChecked)}">
+<nav
+  *ngIf="pack && multipileChecked"
+  [ngClass]="{
+    'nav navbar-light bottom-nav': true,
+    'bottom-nav-hidden': !multipileChecked
+  }"
+>
   <div class="nav-buttons">
-    <button type="button" [ngClass]="{'option-btn bottom-option-btn':true}" [disabled]="selectedCards.length == 0"
-      (click)="toggleChosenCardsModal()">הצג
-      קלפים שנבחרו</button>
-    <button type="button" [ngClass]="{'option-btn bottom-option-btn':true}" (click)="selectedCards = []"
-      [disabled]="selectedCards.length == 0">איפוס
-      בחירה</button>
+    <button
+      type="button"
+      [ngClass]="{ 'option-btn bottom-option-btn': true }"
+      [disabled]="selectedCards.length == 0"
+      (click)="toggleChosenCardsModal()"
+    >
+      הצג קלפים שנבחרו
+    </button>
+    <button
+      type="button"
+      [ngClass]="{ 'option-btn bottom-option-btn': true }"
+      (click)="selectedCards = []"
+      [disabled]="selectedCards.length == 0"
+    >
+      איפוס בחירה
+    </button>
   </div>
   <div id="amountChosen">
-    <p>{{selectedCards.length}}/5 קלפים נבחרו</p>
+    <p>{{ selectedCards.length }}/5 קלפים נבחרו</p>
   </div>
 </nav>
 
-<nav *ngIf="pack"
-  [ngClass]="{'nav navbar-light bottom-nav bottom-nav-edit': true, 'bottom-nav-hidden':(!showEditPack)}">
+<nav
+  *ngIf="pack && showEditPack"
+  [ngClass]="{
+    'nav navbar-light bottom-nav bottom-nav-edit': true,
+    'bottom-nav-hidden': !showEditPack
+  }"
+>
   <div class="nav-buttons">
-    <button type="button" [ngClass]="{'option-btn bottom-option-btn': true}" (click)="resetEditPack()">איפוס
-      ערכה</button>
-    <button type="button" [ngClass]="{'option-btn bottom-option-btn': true}" (click)="editPack()">סיום עריכה</button>
+    <button
+      type="button"
+      [ngClass]="{ 'option-btn bottom-option-btn': true }"
+      (click)="resetEditPack()"
+    >
+      איפוס ערכה
+    </button>
+    <button
+      type="button"
+      [ngClass]="{ 'option-btn bottom-option-btn': true }"
+      (click)="editPack()"
+    >
+      סיום עריכה
+    </button>
   </div>
   <div id="amountChosen">
-    <p style="font-weight: bold;">לחיצה על אייקון העין <mat-icon class="remove-icon">visibility_off</mat-icon> תסתיר את
-      הקלף מתחתיו</p>
+    <p style="font-weight: bold">
+      לחיצה על אייקון העין
+      <mat-icon class="remove-icon">visibility_off</mat-icon> תסתיר את הקלף
+      מתחתיו
+    </p>
   </div>
 </nav>
 
 <mat-menu #actions="matMenu">
-  <button mat-menu-item type="button"
-      [ngClass]="{'option-btn': true, 'option-menu-btn top-option-btn': !showEditPack, 'option-menu-btn top-option-btn-disabled': showEditPack}"
-      (click)="multipileChanged()"
-      [disabled]="showEditPack">{{!multipileChecked ? 'הצג מספר קלפים':'הצג קלף יחיד'}}</button>
-  <button mat-menu-item type="button" class="option-menu-btn top-option-btn" (click)="shuffle()">ערבב</button>
-  <button mat-menu-item type="button" class="option-menu-btn top-option-btn"
-    (click)="flipped = !flipped; selectedCards = []">הפוך
-    חפיסה</button>
-  <button mat-menu-item type="button" class="option-menu-btn top-option-btn" (click)="toggleRandomCardsModal()">הצג קלף
-    אקראי</button>
-  <button mat-menu-item type="button" class="option-menu-btn top-option-btn"
-    (click)="editPack()">{{!showEditPack ? 'עריכה':'סיום עריכה'}}</button>
+  <button
+    mat-menu-item
+    type="button"
+    class="option-menu-btn top-option-btn"
+    (click)="shuffle()"
+  >
+    ערבב
+  </button>
+  <button
+    mat-menu-item
+    type="button"
+    class="option-menu-btn top-option-btn"
+    (click)="multipileChanged()"
+  >
+    {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
+  </button>
+  <button
+    mat-menu-item
+    type="button"
+    class="option-menu-btn top-option-btn"
+    (click)="flipped = !flipped; selectedCards = []"
+  >
+    הפוך חפיסה
+  </button>
+  <button
+    mat-menu-item
+    type="button"
+    class="option-menu-btn top-option-btn"
+    (click)="toggleRandomCardsModal()"
+  >
+    הצג קלף אקראי
+  </button>
+  <button
+    mat-menu-item
+    type="button"
+    class="option-menu-btn top-option-btn"
+    (click)="editPack()"
+  >
+    {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
+  </button>
 </mat-menu>
 
 <div *ngIf="showSelectedCards" class="selected-cards-modal">
   <div class="selected-cards-modal-content">
-    <button class="iconButton close-cards-view" mat-icon-button (click)="toggleChosenCardsModal()">
+    <button
+      class="iconButton close-cards-view"
+      mat-icon-button
+      (click)="toggleChosenCardsModal()"
+    >
       <mat-icon class="mat-icon-close">highlight_off</mat-icon>
     </button>
-    <div [ngClass]="{'selected-content':true, 'selected-content-one-card': selectedCards.length == 1}">
-      <img *ngFor="let card of selectedCards" alt="one of the selected cards shown"
-        [ngClass]="{'card-view':true, 'one-cards': selectedCards.length == 1, 'two-cards': selectedCards.length == 2,
-      'three-cards': selectedCards.length == 3, 'four-cards': selectedCards.length == 4, 'five-cards': selectedCards.length == 5}" loading="eager" src={{card.frontImgUrl}} data-src={{card.frontImgUrl}}>
+    <div
+      [ngClass]="{
+        'selected-content': true,
+        'selected-content-one-card': selectedCards.length == 1
+      }"
+    >
+      <img
+        *ngFor="let card of selectedCards"
+        alt="one of the selected cards shown"
+        [ngClass]="{
+          'card-view': true,
+          'one-cards': selectedCards.length == 1,
+          'two-cards': selectedCards.length == 2,
+          'three-cards': selectedCards.length == 3,
+          'four-cards': selectedCards.length == 4,
+          'five-cards': selectedCards.length == 5
+        }"
+        loading="eager"
+        src="{{ card.frontImgUrl }}"
+        data-src="{{ card.frontImgUrl }}"
+      />
     </div>
   </div>
 </div>
 
 <div *ngIf="showRandomCards" class="selected-cards-modal">
   <div class="selected-cards-modal-content">
-    <button class="iconButton close-cards-view" mat-icon-button (click)="toggleRandomCardsModal()">
+    <button
+      class="iconButton close-cards-view"
+      mat-icon-button
+      (click)="toggleRandomCardsModal()"
+    >
       <mat-icon class="mat-icon-close">highlight_off</mat-icon>
     </button>
     <div class="random-content">
-      <button type="button" class="btn btn-light" [disabled]="randomCardIndex == cards.length-1"
-        (click)="randomCardIndex=randomCardIndex+1">
+      <button
+        type="button"
+        class="btn btn-light"
+        [disabled]="randomCardIndex == cards.length - 1"
+        (click)="randomCardIndex = randomCardIndex + 1"
+      >
         <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
       </button>
-      <img class="card-view one-cards" loading="eager" src={{cards[randomCardIndex].frontImgUrl}}
-        data-src={{cards[randomCardIndex].frontImgUrl}} alt="Random card from the pack">
-      <button type="button" class="btn btn-light" [disabled]="randomCardIndex == 0"
-        (click)="randomCardIndex=randomCardIndex - 1">
+      <img
+        class="card-view one-cards"
+        loading="eager"
+        src="{{ cards[randomCardIndex].frontImgUrl }}"
+        data-src="{{ cards[randomCardIndex].frontImgUrl }}"
+        alt="Random card from the pack"
+      />
+      <button
+        type="button"
+        class="btn btn-light"
+        [disabled]="randomCardIndex == 0"
+        (click)="randomCardIndex = randomCardIndex - 1"
+      >
         <mat-icon class="btn-icon mat-icon-arrow">chevron_left</mat-icon>
       </button>
     </div>

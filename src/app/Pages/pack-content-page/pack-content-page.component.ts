@@ -10,14 +10,12 @@ import {
   MatDialogConfig,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';
 import { PackContent } from 'src/app/Objects/packs';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { CardComponent } from 'src/app/Shared Components/card/card.component';
-// import { CardsRevealDialogComponent } from './cards-reveal-dialog/cards-reveal-dialog.component';
-// import { RandomCardRevealDialogComponent } from './random-card-reveal-dialog/random-card-reveal-dialog.component';
 import * as exampleCards from '../../../assets/Bundle Configurations/ExmaplePack.json';
 import { PopoutData, PopoutService } from 'src/app/Services/popout.service';
 import { UserData } from 'src/app/Objects/user-related';
@@ -75,12 +73,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
     if (this.id) {
-      this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(() => {
-      }, reject => {
-        console.log("🚀 ~ file: pack-content-page.component.ts ~ line 82 ~ this.api.IncrementPackEntries ~ reject", reject)
-      });
+      this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
+        () => {},
+        (reject) => {
+          console.log(
+            '🚀 ~ file: pack-content-page.component.ts ~ line 82 ~ this.api.IncrementPackEntries ~ reject',
+            reject
+          );
+        }
+      );
       //a specific pack
       if (this.cardsService.allPacks) {
         this.pack = this.cardsService.allPacks.find(
@@ -104,12 +106,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       //example pack
       this.pack = new PackContent().deseralize(exampleCards['default']);
     }
-    this.cards = [...this.pack.cards]; //TODO
+    this.cards = [...this.pack.cards];
+    setTimeout(() => {
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    }, 300);
   }
 
   multipileChanged(): void {
     this.selectedCards = [];
-    this.multipileChecked = !this.multipileChecked
+    this.multipileChecked = !this.multipileChecked;
   }
 
   cardSelected(card: CardComponent, index: number): void {
@@ -187,7 +192,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       dialogConfig.autoFocus = true;
       dialogConfig.data = new DynamicDialogData(
         'עריכת ערכת קלפים',
-        ['להסתרת קלף, לחצו על אייקון העין מעליו.', 'להצגת הקלפים המוסתרים לחצו על איפוס ערכה בתחתית העמוד.'],
+        [
+          'להסתרת קלף, לחצו על אייקון העין מעליו.',
+          'להצגת הקלפים המוסתרים לחצו על איפוס ערכה בתחתית העמוד.',
+        ],
         'אישור',
         ''
       );
@@ -259,7 +267,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   templateUrl: './portrait-warning-dialog.html',
 })
 export class PortraitWarningDialogComponent {
-  constructor(public dialogRef: MatDialogRef<PortraitWarningDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<PortraitWarningDialogComponent>) {}
 
   closeDialog(): void {
     this.dialogRef.close();

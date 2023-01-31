@@ -1,5 +1,10 @@
 import { Component, Inject, NgZone, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SubscriptionPlan } from 'src/app/API.service';
 import { PackContent, PackInfo } from 'src/app/Objects/packs';
@@ -13,10 +18,9 @@ const millisecondsInMonth: number = 2505600000;
 @Component({
   selector: 'app-pack-preview',
   templateUrl: './pack-preview.component.html',
-  styleUrls: ['./pack-preview.component.css']
+  styleUrls: ['./pack-preview.component.css'],
 })
 export class PackPreviewComponent implements OnInit {
-
   loadedCards: number = 0;
   trialPeriodDate: Date | null;
   userData: UserData;
@@ -26,27 +30,51 @@ export class PackPreviewComponent implements OnInit {
   discount: number;
   neverShowAgain: boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: previewData, public dialogRef: MatDialogRef<PackPreviewComponent>, public dialog: MatDialog,
-    private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: previewData,
+    public dialogRef: MatDialogRef<PackPreviewComponent>,
+    public dialog: MatDialog,
+    private userAuthService: UserAuthService,
+    public router: Router,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {
     let sub = this.userAuthService.userDataEmmiter.subscribe(() => {
       sub.unsubscribe();
       this.closeDialog();
     });
-    const ls = localStorage.getItem("packsToOpenAutomatically");
+    const ls = localStorage.getItem('packsToOpenAutomatically');
     const packsToOpenAutomatically = ls ? ls.split(',') : [];
-    if (packsToOpenAutomatically.includes(this.data.pack.id) && this.data.pack.cards.length !== 0)
-      this.navigateToPackView(true)
+    if (
+      packsToOpenAutomatically.includes(this.data.pack.id) &&
+      this.data.pack.cards.length !== 0
+    )
+      this.navigateToPackView(true);
 
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
     if (this.data.pack.subscriptionPlans) {
-      this.yearlyPlan = this.data.pack.subscriptionPlans.find(el => el.billingCycleInMonths === 12)
-      this.yearlyPlan['priceForMentorCardsMembers'] = Math.round(this.yearlyPlan.fullPrice*(1-(this.yearlyPlan.discount/100))*10) / 10
-      this.monthlyPlan = this.data.pack.subscriptionPlans.find(el => el.billingCycleInMonths === 1)
-      this.monthlyPlan['priceForMentorCardsMembers'] = Math.round(this.monthlyPlan.fullPrice*(1-(this.monthlyPlan.discount/100))*10) / 10
-      this.discount = Math.round((1 - (this.yearlyPlan.fullPrice / (this.monthlyPlan.fullPrice * 12))) * 100)
+      this.yearlyPlan = this.data.pack.subscriptionPlans.find(
+        (el) => el.billingCycleInMonths === 12
+      );
+      this.yearlyPlan['priceForMentorCardsMembers'] =
+        Math.round(
+          this.yearlyPlan.fullPrice * (1 - this.yearlyPlan.discount / 100) * 10
+        ) / 10;
+      this.monthlyPlan = this.data.pack.subscriptionPlans.find(
+        (el) => el.billingCycleInMonths === 1
+      );
+      this.monthlyPlan['priceForMentorCardsMembers'] =
+        Math.round(
+          this.monthlyPlan.fullPrice *
+            (1 - this.monthlyPlan.discount / 100) *
+            10
+        ) / 10;
+      this.discount = Math.round(
+        (1 - this.yearlyPlan.fullPrice / (this.monthlyPlan.fullPrice * 12)) *
+          100
+      );
     }
   }
 
@@ -61,16 +89,19 @@ export class PackPreviewComponent implements OnInit {
 
   navigateToPackView(exists): void {
     if (!exists && this.neverShowAgain) {
-      const ls = localStorage.getItem("packsToOpenAutomatically");
+      const ls = localStorage.getItem('packsToOpenAutomatically');
       const packsToOpenAutomatically = ls ? ls.split(',') : [];
-      localStorage.setItem("packsToOpenAutomatically", [...packsToOpenAutomatically, this.data.pack.id].toString());
+      localStorage.setItem(
+        'packsToOpenAutomatically',
+        [...packsToOpenAutomatically, this.data.pack.id].toString()
+      );
     }
-    this.navigate(`/pack-view/${this.data.pack.id}`)
+    this.navigate(`/pack-view/${this.data.pack.id}`);
   }
 
   navigate(path: string): void {
-    this.ngZone.run(() => this.router.navigate([path]));
     this.closeDialog();
+    this.ngZone.run(() => this.router.navigate([path]));
   }
 
   closeDialog(): void {
@@ -91,16 +122,22 @@ export class PackPreviewComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.maxHeight = '85vh';
-    dialogConfig.data = new PurchaseData(new Date(), this.isYearly ? this.yearlyPlan : this.monthlyPlan, +this.data.pack.id);
-    const dialogRef = this.dialog.open(ApprovePurchaseDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe(res => {
+    dialogConfig.data = new PurchaseData(
+      new Date(),
+      this.isYearly ? this.yearlyPlan : this.monthlyPlan,
+      +this.data.pack.id
+    );
+    const dialogRef = this.dialog.open(
+      ApprovePurchaseDialogComponent,
+      dialogConfig
+    );
+    var dialogSub = dialogRef.afterClosed().subscribe((res) => {
       dialogSub.unsubscribe();
       if (res) {
         this.dialogRef.close();
       }
     });
   }
-
 }
 
 export interface previewData {

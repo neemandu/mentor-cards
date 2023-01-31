@@ -36,9 +36,9 @@ export class AuthService {
   public static GOOGLE = CognitoHostedUIIdentityProvider.Google;
 
   constructor(private socialAuthService: SocialAuthService) {
-    this.socialAuthService.authState.subscribe((user) => {
-      console.log(user);
-    });
+    // this.socialAuthService.authState.subscribe((user) => {
+    //   console.log(user);
+    // });
   }
 
   ngOnInit() {

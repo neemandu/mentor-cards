@@ -13,15 +13,6 @@ p {
   margin: 0px;
 }
 
-button {
-  font-size: medium;
-  margin-left: 1rem;
-}
-
-button:hover {
-  background-color: #ffe2a7;
-}
-
 mat-toolbar {
   margin-top: -10px;
   background-color: transparent;
@@ -49,4 +40,20 @@ mat-toolbar {
   /* text-align: start; */
   display: flex;
   justify-content: center;
+}
+
+button {
+  font-size: medium;
+  margin-left: 1rem;
+  opacity: 1;
+  background: var(--main-color);
+  color: white;
+}
+
+button:hover {
+  background: #e69900;
+}
+
+button:active {
+  background: #db9200;
 }

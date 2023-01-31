@@ -1,4 +1,8 @@
-import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
+import {
+  onAuthUIStateChange,
+  CognitoUserInterface,
+  AuthState,
+} from '@aws-amplify/ui-components';
 import { Component, OnInit } from '@angular/core';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { NavigationEnd, Router } from '@angular/router';
@@ -7,7 +11,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   //https://docs.amplify.aws/ui/auth/authenticator/q/framework/angular#sign-out
@@ -18,31 +22,30 @@ export class AppComponent implements OnInit {
   authState: AuthState;
   title = 'amplify-angular-auth';
   showLogin: boolean = false;
-  fbBtnSub: Subscription;
+  chatBtnSub: Subscription;
+  chatButton: any;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, private router: Router) {
-    this.overlaySpinnerService.changeOverlaySpinner(false);
-    // I18n.putVocabularies(dict);
-    // I18n.setLanguage('he')
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.fbBtnSub = this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        const fbButton = document.getElementById('fb-root')
+    this.chatBtnSub = this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd && this.chatButton) {
         if (val.url.includes('pack-view') || val.url.includes('price-page')) {
-          fbButton.style.visibility = 'hidden';
-          fbButton.style.pointerEvents = 'none'
+          this.chatButton.style.display = 'none';
+          this.chatButton.style.pointerEvents = 'none';
         } else {
-          fbButton.style.visibility = 'unset';
-          fbButton.style.pointerEvents = 'auto'
+          this.chatButton.style.display = 'block';
+          this.chatButton.style.pointerEvents = 'auto';
         }
       }
-    })
+    });
+    setTimeout(() => {
+      this.chatButton = document.getElementById('tidio-chat');
+    }, 1500);
   }
 
   ngOnDestroy() {
-    this.fbBtnSub.unsubscribe();
+    this.chatBtnSub.unsubscribe();
     return onAuthUIStateChange;
   }
 }
@@ -118,5 +121,3 @@ export class AppComponent implements OnInit {
 //   }
 
 // }
-
-

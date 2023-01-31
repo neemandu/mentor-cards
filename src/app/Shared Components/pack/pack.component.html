@@ -1,29 +1,80 @@
 <div class="d-flex flex-column content">
-  <div class="d-flex justify-content-center align-items-center">
-    <h3 class="pack-desc">{{packInfo.name}}</h3>
-    <!-- <mat-icon class="external-icon" matTooltip="ערכה של יוצר חוץ" matTooltipShowDelay="500"
-    *ngIf="this.packInfo.isExternalPack">public</mat-icon> -->
-    <img class="external-icon" src="/assets/crown.png" alt="VIP pack crown icon"
-    matTooltip="ערכה של יוצר חוץ" matTooltipShowDelay="500"
-    *ngIf="this.packInfo.isExternalPack">
+  <div
+    class="pack-title d-flex justify-content-center align-items-center"
+    [matTooltipClass]="{ 'tooltip-class': true }"
+    matTooltip="{{ packInfo.name }}"
+  >
+    <h3 class="pack-desc">{{ packInfo.name }}</h3>
+    <img
+      class="external-icon"
+      src="/assets/crown.png"
+      alt="VIP pack crown icon"
+      matTooltip="ערכה של יוצר חוץ"
+      matTooltipShowDelay="500"
+      *ngIf="this.packInfo.isExternalPack"
+    />
   </div>
-  <mat-icon class="lock-icon" matTooltip="ערכה נעולה" matTooltipShowDelay="500"
-  *ngIf="!packInfo.cards">lock</mat-icon>
-  <img alt="The packs front card" (click)="openPreviewDialog()" (load)="imgLoaded()"
-    src={{packInfo.imgUrl}}
-    matTooltip="קטגוריות: {{packInfo.categories | tooltipListView}} | תגיות: {{packInfo.tags | tooltipListView}}"
-    matTooltipShowDelay="500" [matTooltipClass]="{'tooltip-class' : true}" class='clickable pack-main-card'>
-  <label *ngIf="isStillFree" class="free-until-label">ערכה במתנה! עד - {{freeUntilDate}}</label>
-  <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label">ערכת הקלפים שנבחרה</label>
-  <div id="pack-buttons" class="d-flex justify-content-between align-items-baseline">
+  <mat-icon
+    class="lock-icon"
+    matTooltip="ערכה נעולה"
+    matTooltipShowDelay="500"
+    *ngIf="!packInfo.cards"
+    >lock</mat-icon
+  >
+  <img
+    alt="The packs front card"
+    (click)="openPreviewDialog()"
+    (load)="imgLoaded()"
+    src="{{ packInfo.imgUrl }}"
+    matTooltip="קטגוריות: {{
+      packInfo.categories | tooltipListView
+    }} | תגיות: {{ packInfo.tags | tooltipListView }}"
+    matTooltipShowDelay="500"
+    [matTooltipClass]="{ 'tooltip-class': true }"
+    class="clickable pack-main-card"
+  />
+  <label *ngIf="isStillFree" class="free-until-label"
+    >ערכה במתנה! עד - {{ freeUntilDate }}</label
+  >
+  <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label"
+    >ערכת הקלפים שנבחרה</label
+  >
+  <div
+    id="pack-buttons"
+    class="d-flex justify-content-between align-items-baseline"
+  >
     <div class="pack-icons">
-      <mat-icon class="fav-icon" id="fav-icon" matTooltip="מחיקה מהמועדפים" matTooltipShowDelay="500" *ngIf="this.fav"
-        matRipple [matRippleRadius]="10" [matRippleUnbounded]="true" [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'"
-        (click)="addRemoveFavorite()" [ngStyle]="{'color': '#ff5454'}">favorite</mat-icon>
-      <mat-icon class="fav-icon" matTooltip="הוספה למועדפים" matTooltipShowDelay="500" *ngIf="!this.fav" matRipple
-        [matRippleRadius]="10" [matRippleUnbounded]="true" [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'"
-        (click)="addRemoveFavorite()" [ngStyle]="{'color': '#a0a0a0'}">favorite_border</mat-icon>
+      <mat-icon
+        class="fav-icon"
+        id="fav-icon"
+        matTooltip="מחיקה מהמועדפים"
+        matTooltipShowDelay="500"
+        *ngIf="this.fav"
+        matRipple
+        [matRippleRadius]="10"
+        [matRippleUnbounded]="true"
+        [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'"
+        (click)="addRemoveFavorite()"
+        [ngStyle]="{ color: '#ff5454' }"
+        >favorite</mat-icon
+      >
+      <mat-icon
+        class="fav-icon"
+        matTooltip="הוספה למועדפים"
+        matTooltipShowDelay="500"
+        *ngIf="!this.fav"
+        matRipple
+        [matRippleRadius]="10"
+        [matRippleUnbounded]="true"
+        [matRippleColor]="fav ? '#b3b3b357' : '#ff757569'"
+        (click)="addRemoveFavorite()"
+        [ngStyle]="{ color: '#a0a0a0' }"
+        >favorite_border</mat-icon
+      >
     </div>
-    <span class="like-counter">{{packInfo.likesCounter}} <span class="liked-this">אנשים אהבו ערכה זו </span></span>
+    <span class="like-counter"
+      >{{ packInfo.likesCounter }}
+      <span class="liked-this">אנשים אהבו ערכה זו </span></span
+    >
   </div>
 </div>

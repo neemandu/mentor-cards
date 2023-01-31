@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import Auth from '@aws-amplify/auth';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';

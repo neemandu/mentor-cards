@@ -3,13 +3,17 @@
   border-radius: 4px;
   width: 10rem;
   height: auto;
-  box-shadow: 0.25em 0.25em 0px 0px rgb(255 255 255), 0.25em 0.25em 0px 1px #ddd, 0.5em 0.5em 0px 0px rgb(255 255 255), 0.5em 0.5em 0px 1px #ddd, rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  box-shadow: 0.25em 0.25em 0px 0px rgb(255 255 255), 0.25em 0.25em 0px 1px #ddd,
+    0.5em 0.5em 0px 0px rgb(255 255 255), 0.5em 0.5em 0px 1px #ddd,
+    rgba(0, 0, 0, 0.09) 0px 3px 12px;
   transition: box-shadow 0.2s ease-out;
   touch-action: pan-y !important;
 }
 
 .pack-main-card:hover {
-  box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd, 0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd, rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  box-shadow: 0.4em 0.4em 0px 0px rgb(255 255 255), 0.4em 0.4em 0px 1px #ddd,
+    0.8em 0.8em 0px 0px rgb(255 255 255), 0.8em 0.8em 0px 1px #ddd,
+    rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
 
 #pack-buttons {
@@ -22,7 +26,7 @@
 }
 
 #fav-icon {
-  animation: shake-heart 1s cubic-bezier(.36, .07, .19, .97) both;
+  animation: shake-heart 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 .fav-icon {
@@ -41,17 +45,15 @@
   transition: opacity 0.3s ease;
 }
 
-#pack-buttons:hover>.like-counter>.liked-this {
+#pack-buttons:hover > .like-counter > .liked-this {
   opacity: 1;
 }
 
-#pack-buttons:hover>.like-counter {
+#pack-buttons:hover > .like-counter {
   transform: translateX(0px);
 }
 
-
 @keyframes shake-heart {
-
   0% {
     transform: rotate(0deg);
   }
@@ -85,8 +87,10 @@ mat-icon {
 .pack-desc {
   text-align: center;
   margin-bottom: 0px;
-  font-family: 'rubik';
-  /* width: 10rem; */
+  font-family: "rubik";
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .content {
@@ -120,10 +124,9 @@ mat-icon {
 }
 
 @keyframes heartbeat {
-
   25%,
   75% {
-    transform: scale(.95);
+    transform: scale(0.95);
   }
 
   0%,
@@ -155,4 +158,8 @@ mat-icon {
 
 .external-icon {
   scale: 0.8;
+}
+
+.pack-title {
+  max-width: 10rem;
 }
