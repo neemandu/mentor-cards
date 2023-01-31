@@ -235,33 +235,6 @@ exports.handler = async (event, context, callback) => {
          console.log('Not a free trial period');
     }
 
-    console.log('Checking if user has a coupon code with this package');
-    if(user &&
-        user.couponCodes &&
-        user.couponCodes.length > 0){
-            for(var i = 0 ; i < user.couponCodes.length ; i++){ 
-                if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
-                    console.log('User has a coupon code with this package');
-                    if(user.couponCodes[i].trialPeriodInDays > -1){
-                        var date = new Date();
-                        date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
-                        if(date > now){
-                            console.log('User has a coupon code with this package with trialPeriodInDays');
-                            event.source['freeUntilDate'] = date;
-                            return event.source['cards'];
-                        }
-                        else{
-                            console.log('Coupon code expired');
-                        }
-                    }
-                    else{
-                        console.log('User has a coupon code with this package WITHOUT trialPeriodInDays limitation');
-                        return event.source['cards'];
-                    }
-                }
-            }
-        }
-
     var isExternalPack = event.source['isExternalPack'];
     console.log('External Pack: ' + isExternalPack);
     if(isExternalPack){
@@ -313,6 +286,21 @@ exports.handler = async (event, context, callback) => {
          }
         console.log('Not Unlimited plan');
         /* */
+        
+        console.log('Checking if user has a coupon code with this package');
+        if(user &&
+            user.couponCodes &&
+            user.couponCodes.length > 0){
+                for(var i = 0 ; i < user.couponCodes.length ; i++){ 
+                    if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
+                        console.log('User has a coupon code with this package');
+                        var date = new Date();
+                        date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
+                        event.source['freeUntilDate'] = date;
+                        return event.source['cards'];
+                    }
+                }
+            }
         
         console.log('User does not have a coupon for this pack');
         /*if(user &&    // first 30 days all packs are available
