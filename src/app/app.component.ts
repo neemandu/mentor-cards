@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.chatBtnSub = this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd && this.chatButton) {
-        if (val.url.includes('pack-view') || val.url.includes('price-page')) {
+        if (val.url.includes('pack-view')) {
           this.chatButton.style.display = 'none';
           this.chatButton.style.pointerEvents = 'none';
         } else {
