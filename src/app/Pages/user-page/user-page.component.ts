@@ -41,20 +41,22 @@ export class UserPageComponent implements OnInit {
       }
       this.tableData.push(tmp)
     }
-    this.userData.externalPacksSubscriptions.forEach(element => {
-      const chargeSpan = element.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
-      const tmp: PlanTableObj = {
-        'startDate': new Date(element.startDate),
-        'cancellationDate': element.cancellationDate ? new Date(element.cancellationDate) : null,
-        'nextBillingDate': element.nextBillingDate ? new Date(element.nextBillingDate) : null,
-        'providerTransactionId': element.providerTransactionId,
-        'planName': element.includedCardPacksIds[0].name,
-        'yearlyMonthly': chargeSpan,
-        'price': element.subscriptionPlan.fullPrice,
-        'homePlan' : false
-      }
-      this.tableData.push(tmp)
-    });
+    if(this.userData.externalPacksSubscriptions){
+      this.userData.externalPacksSubscriptions.forEach(element => {
+        const chargeSpan = element.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
+        const tmp: PlanTableObj = {
+          'startDate': new Date(element.startDate),
+          'cancellationDate': element.cancellationDate ? new Date(element.cancellationDate) : null,
+          'nextBillingDate': element.nextBillingDate ? new Date(element.nextBillingDate) : null,
+          'providerTransactionId': element.providerTransactionId,
+          'planName': element.includedCardPacksIds[0].name,
+          'yearlyMonthly': chargeSpan,
+          'price': element.subscriptionPlan.fullPrice,
+          'homePlan' : false
+        }
+        this.tableData.push(tmp)
+      });
+    }
   }
 
   ngOnInit(): void {
