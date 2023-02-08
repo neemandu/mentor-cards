@@ -47,7 +47,7 @@ exports.handler = (event) => {
         invoiceType: record.dynamodb.NewImage.invoiceType?.S,
         createdAt: record.dynamodb.NewImage.createdAt?.S,
         updatedAt: new Date().toISOString(),
-        sequenceNumber: record.dynamodb.SequenceNumber,
+        sequenceNumber: record.dynamodb.SequenceNumber.S,
       };
       
       console.log('res');
