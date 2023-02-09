@@ -68,6 +68,9 @@ async function tryMergeUserAccounts (event) {
 }
 
 exports.handler = async (event, _, callback) => {
+  if (event.request.userAttributes.hasOwnProperty("phone_number")) {
+    event.response.autoVerifyPhone = true;
+  }
   // continue the flow only if did not link providers
   const wereUsersMerged = await tryMergeUserAccounts(event);
   return event;
