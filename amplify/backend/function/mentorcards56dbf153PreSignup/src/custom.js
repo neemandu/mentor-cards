@@ -68,6 +68,8 @@ async function tryMergeUserAccounts (event) {
 }
 
 exports.handler = async (event, _, callback) => {
+  // Confirm the user
+  event.response.autoConfirmUser = true;
   if (event.request.userAttributes.hasOwnProperty("phone_number")) {
     event.response.autoVerifyPhone = true;
   }
