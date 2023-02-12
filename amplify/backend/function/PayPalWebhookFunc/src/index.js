@@ -183,11 +183,8 @@ exports.handler = async (event) => {
         var paypal_body = JSON.parse(event.body);
         var event_type = paypal_body.event_type;
         var transaction_id = paypal_body.resource.billing_agreement_id;
-        var amount = paypal_body.resource.amount.total;
         console.log('event_type: ' + event_type);
-        var email_address = paypal_body.resource.subscriber?.email_address ?? "";
         console.log('transaction_id: ' + transaction_id);
-        console.log('email_address: ' + email_address);
         var user;
         user = await getUserByPayPalTxId(transaction_id);
         if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
@@ -195,6 +192,7 @@ exports.handler = async (event) => {
             await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
         }
         else if(event_type == "PAYMENT.SALE.COMPLETED"){
+            var amount = paypal_body.resource.amount.total;
             await createInvoice(user, amount, transaction_id);
         }
         const response = {
@@ -208,12 +206,13 @@ exports.handler = async (event) => {
         };
         return response;
     } catch(ex){
+        console.error(ex);
         await ses
         .sendEmail({
           Destination: {
             ToAddresses: ["neemandu@gmail.com"],
           },
-          Source: process.env.SES_EMAIL,
+          Source: "support@mentor-cards.com",
           Message: {
             Subject: { Data: 'Mentor-Cards: ERROR' },
             Body: {
