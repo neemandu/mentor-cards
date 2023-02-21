@@ -2,7 +2,10 @@
   "permissions": {
     "storage": {
       "User:@model(appsync)": [
-        "read"
+        "create",
+        "read",
+        "update",
+        "delete"
       ],
       "Group:@model(appsync)": [
         "read"

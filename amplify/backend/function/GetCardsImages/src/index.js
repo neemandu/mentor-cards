@@ -9,6 +9,16 @@
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_GROUPTABLE_ARN
 	API_CARDSPACKS_GROUPTABLE_NAME
@@ -51,6 +61,45 @@ async function getUser(username){
     }
 
     return user;
+}
+
+async function saveUserGet(email, pack){
+    if(!pack.usersUsage){
+        pack.usersUsage = [];
+    }
+    var foundUser = false;
+    for(var i = 0; i< pack["usersUsage"].length; i++){
+        var packUser = pack["usersUsage"][i];
+        if(email == packUser.user.email){
+            foundUser = true;
+            packUser.entries++;
+        }
+        break;
+    }
+    if(!foundUser){
+        var newUser = {
+            user: email,
+            entries: 1
+        }
+        pack["usersUsage"].push(newUser);
+    }
+    
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    pack.updatedAt = new Date().toISOString();
+    var packTable = env.API_CARDSPACKS_CARDSPACKTABLE_NAME;
+    var updatedUserParams = {
+        TableName: packTable,
+        Item: pack
+    };
+
+    console.log("updating pack with new user " + user.email );
+
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updating pack with new user " + user.email, JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating pack with new user " + user.email + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });  
 }
 
 function monthDiff(d1, d2) {
@@ -183,17 +232,28 @@ exports.handler = async (event, context, callback) => {
     var user = await getUser(username);
 
     console.log('Checking if user is SUPER_USER');
-    if(user && user.groupRole == "SUPER_USER"){
+    if(user && 
+        (user.groupRole == "SUPER_USER" || 
+        user.groupRole == "VIP_USER")){
         console.log('Super user!');
         return event.source['cards'];
     }
+
+    if(user && 
+        "isFree" in event.source &&
+        event.source['isFree']){
+            console.log('Free Pack!');
+            await saveUserGet(user.email, event.source);
+            return event.source['cards'];
+        }
 
     var now = new Date();
     console.log('Checking freeUntilDate');
     if(user && 'freeUntilDate' in event.source){
         console.log(event.source['freeUntilDate']);
         if((new Date(event.source['freeUntilDate'])) > now){
-            console.log('Free Pack!');
+            console.log('Free Pack for limited time!');
+            await saveUserGet(user.email, event.source);
             return event.source['cards'];
         }
     }
@@ -230,6 +290,7 @@ exports.handler = async (event, context, callback) => {
             isFreeTrialPeriod(startFreePeriodDate, allPackagesDate)
          ){
              console.log('free trial period');
+             await saveUserGet(user.email, event.source);
              return event.source['cards'];
          }
          console.log('Not a free trial period');
@@ -248,6 +309,7 @@ exports.handler = async (event, context, callback) => {
                         if(date > now){
                             console.log('User has a coupon code with this package with trialPeriodInDays');
                             event.source['freeUntilDate'] = date;
+                            await saveUserGet(user.email, event.source);
                             return event.source['cards'];
                         }
                         else{
@@ -256,6 +318,7 @@ exports.handler = async (event, context, callback) => {
                     }
                     else{
                         console.log('User has a coupon code with this package WITHOUT trialPeriodInDays limitation');
+                        await saveUserGet(user.email, event.source);
                         return event.source['cards'];
                     }
                 }
@@ -285,6 +348,7 @@ exports.handler = async (event, context, callback) => {
                         var endDate = getBillingEndDateByUser(startDate, subscriptionPlan, packs.cancellationDate);
                         if(now < endDate){
                             console.log('now < endDate');
+                            await saveUserGet(user.email, event.source);
                             return event.source['cards'];
                         }
                         else{
@@ -292,6 +356,7 @@ exports.handler = async (event, context, callback) => {
                         }
                     }
                     else{
+                        await saveUserGet(user.email, event.source);
                         return event.source['cards'];
                     }
                 }
@@ -309,6 +374,7 @@ exports.handler = async (event, context, callback) => {
             user.subscription.subscriptionPlan.numberOfCardPacks == -1
          ){
              console.log('Unlimited plan');
+             await saveUserGet(user.email, event.source);
              return event.source['cards'];
          }
         console.log('Not Unlimited plan');
@@ -328,6 +394,7 @@ exports.handler = async (event, context, callback) => {
            isPackageBelongToUser(event.source['id'], user.cardsPacksIds, username)     
         ){
             console.log('Package belong to user');
+            await saveUserGet(user.email, event.source);
             return event.source['cards'];
         }
         console.log('User does not own this pack');
@@ -339,6 +406,7 @@ exports.handler = async (event, context, callback) => {
            now < getBillingEndDate(user)
         ){
             console.log('getBillingEndDate');
+            await saveUserGet(user.email, event.source);
             return event.source['cards'];
         }
         console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);

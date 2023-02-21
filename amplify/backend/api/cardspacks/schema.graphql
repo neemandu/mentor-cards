@@ -52,6 +52,7 @@ type User
   favouritePacks: [Int]
   entries: Int
   externalPacksSubscriptions: [MonthlySubscription] 
+  entryDates: [AWSDateTime]
 }
 
 type MonthlySubscription {
@@ -202,6 +203,13 @@ type CardsPack
   authorizedDomains: [String]
   subscriptionPlans: [SubscriptionPlan] @function(name: "GetProviderPlanId-${env}") 
   topQuestions: [String]
+  usersUsage: [UserUsage]
+  isFree: Boolean
+}
+
+type UserUsage {
+  user: String
+  entries: Int
 }
 
 type Cards {

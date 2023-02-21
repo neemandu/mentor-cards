@@ -39,6 +39,17 @@
           ]
         }
       ]
+    },
+    "GetCardsImages": {
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
     }
   },
   "auth": {

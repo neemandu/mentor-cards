@@ -212,6 +212,7 @@ subscription OnCreateGroup {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -249,6 +250,7 @@ subscription OnUpdateGroup {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -286,6 +288,7 @@ subscription OnDeleteGroup {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -425,6 +428,7 @@ subscription OnCreateSubscriptionPlan {
       createdAt
       updatedAt
     }
+    subscriptionProviderPlanId
     createdAt
     updatedAt
   }
@@ -453,6 +457,7 @@ subscription OnUpdateSubscriptionPlan {
       createdAt
       updatedAt
     }
+    subscriptionProviderPlanId
     createdAt
     updatedAt
   }
@@ -481,6 +486,7 @@ subscription OnDeleteSubscriptionPlan {
       createdAt
       updatedAt
     }
+    subscriptionProviderPlanId
     createdAt
     updatedAt
   }
@@ -607,6 +613,7 @@ subscription OnCreateCardsPack {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -686,6 +693,7 @@ subscription OnUpdateCardsPack {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -765,6 +773,7 @@ subscription OnDeleteCardsPack {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }

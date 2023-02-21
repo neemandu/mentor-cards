@@ -34,6 +34,7 @@ query GetUser($id: ID!) {
           createdAt
           updatedAt
         }
+        subscriptionProviderPlanId
         createdAt
         updatedAt
       }
@@ -101,6 +102,7 @@ query GetUser($id: ID!) {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -191,6 +193,7 @@ query GetUser($id: ID!) {
           createdAt
           updatedAt
         }
+        subscriptionProviderPlanId
         createdAt
         updatedAt
       }
@@ -258,6 +261,7 @@ query GetUser($id: ID!) {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -310,6 +314,7 @@ query ListUsers(
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -374,6 +379,7 @@ query ListUsers(
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -464,6 +470,7 @@ query ListUsers(
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -528,6 +535,7 @@ query ListUsers(
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -719,6 +727,7 @@ query GetGroup($id: ID!) {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -761,6 +770,7 @@ query ListGroups(
           createdAt
           updatedAt
         }
+        subscriptionProviderPlanId
         createdAt
         updatedAt
       }
@@ -975,6 +985,7 @@ query GetCardsPack($id: ID!) {
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -1056,6 +1067,7 @@ query ListCardsPacks(
           createdAt
           updatedAt
         }
+        subscriptionProviderPlanId
         createdAt
         updatedAt
       }
