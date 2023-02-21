@@ -17,7 +17,6 @@ Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
-const ses = new AWS.SES();
 
 async function saveUser(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -38,72 +37,131 @@ async function saveUser(user){
         });        
 }
 
+async function getGroup(groupId){
+    console.log("getGroup: " + groupId);
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    var groupTable = env.API_CARDSPACKS_GROUPTABLE_NAME;
+    
+    console.log("check against table: " + groupTable);
+    var groupParams = {
+        TableName:groupTable,
+        Key:{
+            "id": groupId
+        }
+    };
+
+    var group;
+    await docClient.get(groupParams).promise().then(data => {
+        console.log("Get Group succeeded:", JSON.stringify(data, null, 2));
+        group = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!group){
+        throw Error ('no such Group - ' + groupId);
+    }
+
+    return group;
+}
+
+async function getUserByEmail(email){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        IndexName: "email-index",
+        KeyConditionExpression: "email = :email",
+        ExpressionAttributeValues: {
+            ":email": email
+        }
+    };
+    var user;
+    console.log("searching for user - " + email);
+   
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
+        }
+        
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such email - ' + email);
+    }
+
+    return user;
+
+}
+
 async function cancelUserSubscription(user, transaction_id){
     console.log("Canceling user subscription!");
-
+    if(user.groupId){
+        var group = await getGroup(user.groupId);
+        for(var i =0 ; group.groupUsers.length; i++){
+            email = group.groupUsers[i].email;
+            var groupUser = await getUserByEmail(email);
+            groupUser.status = "NOPLAN";
+            groupUser.groupId = null;
+            groupUser.groupRole = null;
+            groupUser.cancellationDate = new Date().toISOString();
+            groupUser.cardsPacksIds = []
+            await saveUser(groupUser);
+        }
+    }
     if(user.providerTransactionId == transaction_id){
         user.status = "NOPLAN";
         user.groupId = null;
         user.groupRole = null;
         user.cancellationDate = new Date().toISOString();
         user.cardsPacksIds = []
-       }
+    }
     else if(user.providerTransactionId != transaction_id){
-        if(user.externalPacksSubscriptions){
-            var expSubs = [];
-            for(var i= 0; i< user.externalPacksSubscriptions.length; i++){}
-            user.externalPacksSubscriptions = user.externalPacksSubscriptions.filter(function( obj ) {
-                return obj.providerTransactionId != transaction_id;
-            });
-        }
-
+        user.externalPacksSubscriptions = user.externalPacksSubscriptions.filter(function( obj ) {
+            return obj.providerTransactionId != transaction_id;
+        });
     }
     await saveUser(user);
 }
 
-function getSubByTxID(user, transaction_id){
-    var subscription;
-    if(user.providerTransactionId == transaction_id){
-        subscription = user.subscription;
-    }
-    else if(user.providerTransactionId != transaction_id){
-        if(user.externalPacksSubscriptions){
-            for(var i= 0; i< user.externalPacksSubscriptions.length; i++){
-                if(user.externalPacksSubscriptions[i].providerTransactionId == transaction_id){
-                    subscription = user.externalPacksSubscriptions[i];
-                    break;
-                }
-            }
-        }
-    }
-    return subscription;
-}
-
 async function getUserByPayPalTxId(transaction_id){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
-    var params = {
-        TableName : userTable
-    };
     console.log("searching user by paypal transaction id - " + transaction_id);
-    var currUser;
-    await docClient.scan(params).promise().then(data => {      
-        console.log("Get users succeeded:", JSON.stringify(data, null, 2));
-        
-        data.Items.forEach(function(user) {
-            var subscription = getSubByTxID(user, transaction_id);
-            if(subscription){
-                currUser = user;
-                return;
-            }
-        });    
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        IndexName: "providerTransactionId-index",
+        KeyConditionExpression: "providerTransactionId = :providerTransactionId",
+        ExpressionAttributeValues: {
+            ":providerTransactionId": transaction_id
+        }
+    };
+    var user;
+
+    await docClient.query(userParams).promise().then(data => {
+        console.log("Get user by email succeeded:", JSON.stringify(data, null, 2));
+        if(data["Items"] && data["Items"].length > 0){
+            user = data["Items"][0];
+        }
     }).catch(err => {
-        console.error("Unable to read users. Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
     });
-    if(!currUser){
-        throw Error ('no such user with paypal transaction - ' + transaction_id);
+
+    if(!user){
+        throw Error ('no such  paypal transaction id - ' + transaction_id);
     }
-    return currUser;
+
+    return user;
+
 }
 
 async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
@@ -133,17 +191,12 @@ async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
       });
 }
 
-async function createInvoice(user, amount, transaction_id){
+async function createInvoice(user){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
     var d = new Date();
     var id = user.id + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    var subscription = getSubByTxID(user, transaction_id);
-    var extraDesc = " לערכות הבית ";
-    if(subscription?.includedCardPacksIds?.length){
-        extraDesc = subscription.includedCardPacksIds[0].name + " לערכת ";
-    }
-    var subDescription = extraDesc + subscription.subscriptionPlan.description + " מנוי";
+    var subDescription = user.subscription.subscriptionPlan.description + " מנוי";
     var params = {
         TableName: table,
         Item: {
@@ -162,7 +215,7 @@ async function createInvoice(user, amount, transaction_id){
              {
               "itemName": subDescription,
               "numberOfItems": 1,
-              "pricePerItem": amount
+              "pricePerItem": user.subscription.subscriptionPlan.fullPrice
              }
             ],
             "updatedAt": new Date().toISOString()
@@ -171,55 +224,76 @@ async function createInvoice(user, amount, transaction_id){
     await docClient.put(params).promise().then(data => {
         console.log("Added item to invoice queue item:", JSON.stringify(data, null, 2));
       }).catch(err => {
-        console.error("Unable to add invoice message to: " + user.email + ". Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to add invoice message to: " + email + ". Error JSON:", JSON.stringify(err, null, 2));
       });
 }
 
-exports.handler = async (event) => {
-    try{
-        console.log('PayPal webhook!');
-        console.log('event:');
-        console.log(event);
-        var paypal_body = JSON.parse(event.body);
-        var event_type = paypal_body.event_type;
-        var transaction_id = paypal_body.resource.billing_agreement_id;
-        console.log('event_type: ' + event_type);
-        console.log('transaction_id: ' + transaction_id);
-        var user;
-        user = await getUserByPayPalTxId(transaction_id);
-        if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
-            await cancelUserSubscription(user, transaction_id);
-            await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
+async function getUserByUserName(username){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "id": username
         }
-        else if(event_type == "PAYMENT.SALE.COMPLETED"){
-            var amount = paypal_body.resource.amount.total;
-            await createInvoice(user, amount, transaction_id);
-        }
-        const response = {
-            statusCode: 200,
-        //  Uncomment below to enable CORS requests
-        //  headers: {
-        //      "Access-Control-Allow-Origin": "*",
-        //      "Access-Control-Allow-Headers": "*"
-        //  }, 
-            body: JSON.stringify('Hello from Lambda!'),
-        };
-        return response;
-    } catch(ex){
-        console.error(ex);
-        await ses
-        .sendEmail({
-          Destination: {
-            ToAddresses: ["neemandu@gmail.com"],
-          },
-          Source: "support@mentor-cards.com",
-          Message: {
-            Subject: { Data: 'Mentor-Cards: ERROR' },
-            Body: {
-              Text: { Data: `error: ${ex}` },
-            },
-          },
-        })
-        .promise();
+    };
+
+    console.log("searching for user - " + username);
+
+    var user;
+
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such user - ' + username);
     }
+
+    return user;
+
+}
+
+exports.handler = async (event) => {
+    console.log('PayPal webhook!');
+    console.log('event:');
+    console.log(event);
+    var paypal_body = JSON.parse(event.body);
+    var event_type = paypal_body.event_type;
+    var transaction_id = paypal_body.resource.billing_agreement_id;
+    console.log('event_type: ' + event_type);
+    var transaction_id = paypal_body.resource.id;
+    var email_address = paypal_body.resource.subscriber?.email_address ?? "";
+    console.log('transaction_id: ' + transaction_id);
+    console.log('email_address: ' + email_address);
+    var user;
+    if(email_address != ""){
+        user = await getUserByUserName(email_address);
+    }
+    else{
+        user = await getUserByPayPalTxId(transaction_id);
+    }
+    if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+        await cancelUserSubscription(user, transaction_id);
+        await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
+    }
+    else if(event_type == "PAYMENT.SALE.COMPLETED"){
+        await createInvoice(user);
+    }
+    const response = {
+        statusCode: 200,
+    //  Uncomment below to enable CORS requests
+    //  headers: {
+    //      "Access-Control-Allow-Origin": "*",
+    //      "Access-Control-Allow-Headers": "*"
+    //  }, 
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    return response;
 };

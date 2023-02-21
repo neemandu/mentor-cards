@@ -219,13 +219,6 @@
                   }
                 ]
               }
-            },
-            {
-              "Action": [
-                "ses:SendEmail"
-              ],
-              "Effect": "Allow",
-              "Resource": "arn:aws:ses:${region}:${account}:identity/support@mentor-cards.com"
             }
           ]
         }

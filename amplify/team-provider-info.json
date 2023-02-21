@@ -187,7 +187,7 @@
         },
         "GetProviderPlanId": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetProviderPlanId-5a337143345675503478-build.zip"
+          "s3Key": "amplify-builds/GetProviderPlanId-715948706d415878304a-build.zip"
         },
         "CreateUser": {
           "sendinblueApiKey": "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",
@@ -220,7 +220,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-53646e6b704233466977-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-48624a4b424b39776d63-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -279,7 +279,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-6a456337527970666579-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-4d5549515a5974534e6a-build.zip"
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -319,7 +319,7 @@
         "AddSingleItemSubscription": {},
         "mentorcards56dbf153PreSignup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-7131393248517374326e-build.zip"
+          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-454f67582b6354792b6f-build.zip"
         }
       },
       "auth": {
