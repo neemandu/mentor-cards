@@ -93,12 +93,12 @@ async function saveUserGet(email, pack){
         Item: pack
     };
 
-    console.log("updating pack with new user " + user.email );
+    console.log("updating pack with new user " + email );
 
     await docClient.put(updatedUserParams).promise().then(data => {
-        console.log("updating pack with new user " + user.email, JSON.stringify(data, null, 2));
+        console.log("updating pack with new user " + email, JSON.stringify(data, null, 2));
     }).catch(err => {
-        console.error("Unable to updating pack with new user " + user.email + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to updating pack with new user " + email + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
         });  
 }
 

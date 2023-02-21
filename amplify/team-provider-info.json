@@ -220,7 +220,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-2f517a32536651784363-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-504e3479304e61715247-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
