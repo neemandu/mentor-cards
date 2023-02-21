@@ -2,6 +2,14 @@
 	API_CARDSPACKS_CARDSPACKTABLE_ARN
 	API_CARDSPACKS_CARDSPACKTABLE_NAME
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
@@ -46,7 +54,7 @@ function pushUserUsage(email, pack){
     var foundUser = false;
     for(var i = 0; i< pack["usersUsage"].length; i++){
         var packUser = pack["usersUsage"][i];
-        if(email == packUser.user.email){
+        if(email == packUser.user){
             foundUser = true;
             packUser.entries++;
         }
@@ -133,7 +141,7 @@ exports.handler = async (event) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     }); 
 
-    console.log('Pack Id: ' + event.source['id']);
+    console.log('Pack Id: ' + event.arguments.input['cardsPackId']);
     var username = event.identity.claims['cognito:username'];
     if(!username){
         username = event.identity.claims['username'];
