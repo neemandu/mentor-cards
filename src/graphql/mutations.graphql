@@ -34,6 +34,7 @@ mutation CreateUser($input: CreateUserInput!) {
           createdAt
           updatedAt
         }
+        subscriptionProviderPlanId
         createdAt
         updatedAt
       }
@@ -101,6 +102,7 @@ mutation CreateUser($input: CreateUserInput!) {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -191,6 +193,7 @@ mutation CreateUser($input: CreateUserInput!) {
           createdAt
           updatedAt
         }
+        subscriptionProviderPlanId
         createdAt
         updatedAt
       }
@@ -258,6 +261,7 @@ mutation CreateUser($input: CreateUserInput!) {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -322,6 +326,7 @@ mutation GetSubscriptionPlans($input: userInput!) {
       createdAt
       updatedAt
     }
+    subscriptionProviderPlanId
     createdAt
     updatedAt
   }
@@ -362,6 +367,7 @@ mutation CreateSubscriptionPlan(
       createdAt
       updatedAt
     }
+    subscriptionProviderPlanId
     createdAt
     updatedAt
   }
@@ -393,6 +399,7 @@ mutation UpdateSubscriptionPlan(
       createdAt
       updatedAt
     }
+    subscriptionProviderPlanId
     createdAt
     updatedAt
   }
@@ -424,6 +431,7 @@ mutation DeleteSubscriptionPlan(
       createdAt
       updatedAt
     }
+    subscriptionProviderPlanId
     createdAt
     updatedAt
   }
@@ -682,6 +690,7 @@ mutation CreateGroup(
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -722,6 +731,7 @@ mutation UpdateGroup(
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -762,6 +772,7 @@ mutation DeleteGroup(
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -879,6 +890,7 @@ mutation CreateCardsPack(
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -961,6 +973,7 @@ mutation UpdateCardsPack(
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }
@@ -1043,6 +1056,7 @@ mutation DeleteCardsPack(
         createdAt
         updatedAt
       }
+      subscriptionProviderPlanId
       createdAt
       updatedAt
     }

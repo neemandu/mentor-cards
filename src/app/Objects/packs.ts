@@ -12,6 +12,7 @@ export class PackInfo {
     tags: string[];
     name: string;
     freeUntilDate: Date;
+    isFree: boolean;
     about: AboutInput;
     isOwnedByOrg: boolean;
     brief: string;
@@ -40,6 +41,7 @@ export class PackContent {
     guideBook: GuideBookElement[];
     name: string;
     freeUntilDate: Date;
+    isFree: boolean;
     about: AboutInput;
     isOwnedByOrg: boolean;
     brief: string;

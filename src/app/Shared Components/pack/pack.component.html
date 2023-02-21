@@ -36,6 +36,10 @@
   <label *ngIf="isStillFree" class="free-until-label"
     >ערכה במתנה! עד - {{ freeUntilDate }}</label
   >
+  <label *ngIf="packInfo.isFree" class="free-label"
+  (click)="openPreviewDialog()"
+    >פתוח עבורך!</label
+  >
   <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label"
     >ערכת הקלפים שנבחרה</label
   >

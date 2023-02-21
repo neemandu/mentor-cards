@@ -144,6 +144,7 @@ export type CardsPack = {
   guideBook?: Array<GuideBookElement | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: About | null;
   isOwnedByOrg?: boolean | null;
   brief?: string | null;
@@ -541,6 +542,7 @@ export type CreateCardsPackInput = {
   guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: AboutInput | null;
   isOwnedByOrg?: boolean | null;
   brief?: string | null;
@@ -571,6 +573,7 @@ export type ModelCardsPackConditionInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
+  isFree?: boolean | null;
   isOwnedByOrg?: ModelBooleanInput | null;
   brief?: ModelStringInput | null;
   likesCounter?: ModelIntInput | null;
@@ -603,6 +606,7 @@ export type UpdateCardsPackInput = {
   guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: AboutInput | null;
   isOwnedByOrg?: boolean | null;
   brief?: string | null;
@@ -991,6 +995,7 @@ export type ModelCardsPackFilterInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
+  isFree?: boolean | null;
   isOwnedByOrg?: ModelBooleanInput | null;
   brief?: ModelStringInput | null;
   likesCounter?: ModelIntInput | null;
@@ -1104,6 +1109,7 @@ export type CreateUserMutation = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
+      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -1280,6 +1286,7 @@ export type CreateUserMutation = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
+      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -1854,6 +1861,7 @@ export type CreateCardsPackMutation = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -1945,6 +1953,7 @@ export type UpdateCardsPackMutation = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -2036,6 +2045,7 @@ export type DeleteCardsPackMutation = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -2318,6 +2328,7 @@ export type GetUserQuery = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
+      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -2494,6 +2505,7 @@ export type GetUserQuery = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
+      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -2620,6 +2632,7 @@ export type ListUsersQuery = {
         } | null> | null;
         name?: string | null;
         freeUntilDate?: string | null;
+        isFree?: boolean | null;
         about?: {
           __typename: "About";
           text?: string | null;
@@ -2792,6 +2805,7 @@ export type ListUsersQuery = {
         } | null> | null;
         name?: string | null;
         freeUntilDate?: string | null;
+        isFree?: boolean | null;
         about?: {
           __typename: "About";
           text?: string | null;
@@ -3240,6 +3254,7 @@ export type GetCardsPackQuery = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -3329,6 +3344,7 @@ export type ListCardsPacksQuery = {
     } | null> | null;
     name?: string | null;
     freeUntilDate?: string | null;
+    isFree?: boolean | null;
     about?: {
       __typename: "About";
       text?: string | null;
@@ -4016,6 +4032,7 @@ export type OnCreateCardsPackSubscription = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -4107,6 +4124,7 @@ export type OnUpdateCardsPackSubscription = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -4198,6 +4216,7 @@ export type OnDeleteCardsPackSubscription = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
+  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -4360,6 +4379,7 @@ export class APIService {
               }
               name
               freeUntilDate
+              isFree
               about {
                 __typename
                 text
@@ -4537,6 +4557,7 @@ export class APIService {
               }
               name
               freeUntilDate
+              isFree
               about {
                 __typename
                 text
@@ -5626,6 +5647,7 @@ export class APIService {
           }
           name
           freeUntilDate
+          isFree
           about {
             __typename
             text
@@ -5733,6 +5755,7 @@ export class APIService {
           }
           name
           freeUntilDate
+          isFree
           about {
             __typename
             text
@@ -5840,6 +5863,7 @@ export class APIService {
           }
           name
           freeUntilDate
+          isFree
           about {
             __typename
             text
@@ -6313,6 +6337,7 @@ export class APIService {
               }
               name
               freeUntilDate
+              isFree
               about {
                 __typename
                 text
@@ -6489,6 +6514,7 @@ export class APIService {
               }
               name
               freeUntilDate
+              isFree
               about {
                 __typename
                 text
@@ -6629,6 +6655,7 @@ export class APIService {
                 }
                 name
                 freeUntilDate
+                isFree
                 about {
                   __typename
                   text
@@ -6801,6 +6828,7 @@ export class APIService {
                 }
                 name
                 freeUntilDate
+                isFree
                 about {
                   __typename
                   text
@@ -7522,6 +7550,7 @@ export class APIService {
           }
           name
           freeUntilDate
+          isFree
           about {
             __typename
             text
@@ -7709,6 +7738,7 @@ export class APIService {
             }
             name
             freeUntilDate
+            isFree
             about {
               __typename
               text
@@ -8741,6 +8771,7 @@ export class APIService {
           }
           name
           freeUntilDate
+          isFree
           about {
             __typename
             text
@@ -8842,6 +8873,7 @@ export class APIService {
           }
           name
           freeUntilDate
+          isFree
           about {
             __typename
             text
@@ -8943,6 +8975,7 @@ export class APIService {
           }
           name
           freeUntilDate
+          isFree
           about {
             __typename
             text

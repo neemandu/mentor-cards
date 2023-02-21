@@ -175,7 +175,8 @@ exports.handler = async (event) => {
             "fullName": fullName,
             "favouritePacks": [],
             "entries": 1,
-            "externalPacksSubscriptions":[]
+            "externalPacksSubscriptions":[],
+            "entryDates":[new Date().toISOString()]
         };
     
         console.log("Adding a new user...");
@@ -215,8 +216,12 @@ exports.handler = async (event) => {
     if(!user.entries){
         user.entries = 0;
     }
+    if(!user.entries){
+        user.entryDates = [];
+    }
 
     user.entries++;
+    user.entryDates.push(new Date().toISOString());
     await saveUser(user);
     console.log('user ' + email + " was found");
     console.log(user);

@@ -9,6 +9,16 @@
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_GROUPTABLE_ARN
 	API_CARDSPACKS_GROUPTABLE_NAME
@@ -183,17 +193,26 @@ exports.handler = async (event, context, callback) => {
     var user = await getUser(username);
 
     console.log('Checking if user is SUPER_USER');
-    if(user && user.groupRole == "SUPER_USER"){
+    if(user && 
+        (user.groupRole == "SUPER_USER" || 
+        user.groupRole == "VIP_USER")){
         console.log('Super user!');
         return event.source['cards'];
     }
+
+    if(user && 
+        "isFree" in event.source &&
+        event.source['isFree']){
+            console.log('Free Pack!');
+            return event.source['cards'];
+        }
 
     var now = new Date();
     console.log('Checking freeUntilDate');
     if(user && 'freeUntilDate' in event.source){
         console.log(event.source['freeUntilDate']);
         if((new Date(event.source['freeUntilDate'])) > now){
-            console.log('Free Pack!');
+            console.log('Free Pack for limited time!');
             return event.source['cards'];
         }
     }
