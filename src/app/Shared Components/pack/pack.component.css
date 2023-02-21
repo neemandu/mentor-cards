@@ -109,13 +109,13 @@ mat-icon {
 
 .free-label {
   position: relative;
-  padding: 2%;
+  padding: 20%;
   right: 15px;
   margin-left: -20px;
   margin-top: -140px;
   width: 80%;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #ffa800;
   color: white;
   border: none;
@@ -130,13 +130,13 @@ mat-icon {
 
 .free-until-label {
   position: relative;
-  padding: 20%;
+  padding: 2%;
   right: 15px;
   margin-left: -20px;
   margin-top: -55px;
   width: 80%;
   text-align: center;
-  border-radius: 7px;
+  border-radius: 10px;
   background: #ffa800;
   color: white;
   border: none;
