@@ -93,7 +93,7 @@
       "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/all-packs-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\",\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"http://localhost:4200/home-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\",\"https://www.mentor-cards.com/home-page/\"]}",
-    "authProviders": []
+    "authProviders": [],
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/all-packs-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/\",\"https://www.mentor-cards.com/all-packs-page/\"],\"LogoutURLs\":[\"http://localhost:4200/home-page/\",\"https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/\",\"https://www.mentor-cards.com/home-page/\"]}"
   }
 }

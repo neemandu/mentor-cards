@@ -73,8 +73,8 @@ exports.handler = (event) => {
           var table = env.API_CARDSPACKS_MESSAGEQUEUETABLE_NAME;
           var d = new Date();
           var month = d.getMonth() + 1;
-          var id = invoice.email + "_INVOICE_" + invoice.sequenceNumber + "_" + d.getFullYear() + "_" + month + "_" + d.getDate();
-          var final_price = parseInt(invoice.items[0].pricePerItem) * parseInt(invoice.items[0].numberOfItems);
+          var id = invoice.email + "_INVOICE_" + invoice.invoiceRunningId + "_" + d.getFullYear() + "_" + month + "_" + d.getDate();
+          var final_price = parseFloat(invoice.items[0].pricePerItem) * parseInt(invoice.items[0].numberOfItems);
           var params = {
               TableName:table,
               Item:{
