@@ -109,7 +109,7 @@ mat-icon {
 
 .free-label {
   position: relative;
-  padding: 20%;
+  padding: 15%;
   right: 15px;
   margin-left: -20px;
   margin-top: -140px;
@@ -126,6 +126,7 @@ mat-icon {
   border-color: white;
   opacity: 0.9;
   rotate: 15deg;
+  font-size: large;
 }
 
 .free-until-label {
