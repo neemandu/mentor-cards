@@ -22,7 +22,7 @@
       "function": {
         "GetProviderPlanId": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetProviderPlanId-5a337143345675503478-build.zip"
+          "s3Key": "amplify-builds/GetProviderPlanId-43702f5a434c71546745-build.zip"
         },
         "GetNextBillingDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -30,11 +30,11 @@
         },
         "mentorcards56dbf153PreSignup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-457562637170504c4c6f-build.zip"
+          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-37396146366c4e364a36-build.zip"
         },
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-324a61515937376d4774-build.zip"
+          "s3Key": "amplify-builds/CreateUser-433161534e51714f6e58-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -62,7 +62,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-48624a4b424b39776d63-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-68382b6f63792b594f6f-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -86,7 +86,7 @@
         },
         "ContactUsTrigger": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/ContactUsTrigger-4d66655a683867355870-build.zip"
+          "s3Key": "amplify-builds/ContactUsTrigger-6f6839513530684f5536-build.zip"
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -120,7 +120,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-4d5549515a5974534e6a-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-6c6963656d57386a685a-build.zip"
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -140,12 +140,14 @@
         },
         "AddNewUserToEmailsContactList": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-45747053616970474a41-build.zip",
-          "secretsPathAmplifyAppId": "d15egmtmsipj3q"
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-45585754762f39554f44-build.zip",
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
+          "contactListId": "2"
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-4e54336f5837664c4365-build.zip"
+          "s3Key": "amplify-builds/InvoiceHandler-2f766c58374c58354741-build.zip",
+          "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter"
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -153,7 +155,7 @@
         },
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/IncrementPackEntries-484d636238686b326765-build.zip"
+          "s3Key": "amplify-builds/IncrementPackEntries-51684464676d2b566741-build.zip"
         }
       },
       "api": {
@@ -304,7 +306,7 @@
           "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "InvoiceHandler": {
-          "receiptsUrl": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev/counter",
+          "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/dev/counter",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/InvoiceHandler-6c6c7171497669464c45-build.zip"
         },

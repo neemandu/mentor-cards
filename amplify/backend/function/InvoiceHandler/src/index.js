@@ -55,7 +55,7 @@ exports.handler = (event) => {
       
       let dataString = '';
       
-      const req = https.get(env.RECEIPTS_URL, function(res) {
+      const req = https.get(env.receiptsUrl, function(res) {
         res.on('data', chunk => {
           dataString += chunk;
         });

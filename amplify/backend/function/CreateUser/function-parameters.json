@@ -31,5 +31,6 @@
       "cloudFormationParameterName": "sendinblueApiKey",
       "environmentVariableName": "SENDINBLUE_API_KEY"
     }
-  ]
+  ],
+  "secretNames": []
 }

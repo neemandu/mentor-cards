@@ -183,7 +183,7 @@
                 ]
               ]
             },
-            "RECEIPTS_URL": {
+            "receiptsUrl": {
               "Ref": "receiptsUrl"
             }
           }
