@@ -216,7 +216,7 @@ exports.handler = async (event) => {
     if(!user.entries){
         user.entries = 0;
     }
-    if(!user.entries){
+    if(!user.entryDates){
         user.entryDates = [];
     }
 

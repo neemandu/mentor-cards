@@ -38,9 +38,6 @@
       בואו נתחיל >>>
     </button>
     <br />
-    <span style="font-size: medium" id="middle" *ngIf="!userData"
-      >הרשמו ותיהנו מ-14 ימי ניסיון בחינם!</span
-    >
     <div
       *ngIf="userData && userData.status === 'NOPLAN' && !trialPeriodExpDate"
     >
@@ -54,7 +51,7 @@
     </div>
     <button
       style="font-size: x-large"
-      *ngIf="userData && (userData.status === 'PLAN' || trialPeriodExpDate)"
+      *ngIf="userData && (userData.status === 'PLAN')"
       type="button"
       (click)="navigate('/all-packs-page')"
     >
