@@ -207,6 +207,7 @@ exports.handler = async (event, context, callback) => {
             return event.source['cards'];
         }
 
+    var isExternalPack = event.source['isExternalPack'];
     var now = new Date();
     console.log('Checking freeUntilDate');
     if(user && 'freeUntilDate' in event.source){
@@ -220,7 +221,7 @@ exports.handler = async (event, context, callback) => {
         console.log('dont have freeUntilDate');
     }
  
-    if(user){
+    if(!isExternalPack && user){
         console.log('Checking if its a free trial period');
         var allPackagesDate = new Date();
         var trialPeriodInDays = 14;
@@ -272,7 +273,6 @@ exports.handler = async (event, context, callback) => {
     
     console.log('User does not have a coupon for this pack');
 
-    var isExternalPack = event.source['isExternalPack'];
     console.log('External Pack: ' + isExternalPack);
     if(isExternalPack){
         var length = 0;
