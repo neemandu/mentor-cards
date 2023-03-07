@@ -192,9 +192,8 @@
           "s3Key": "amplify-builds/GetProviderPlanId-715948706d415878304a-build.zip"
         },
         "CreateUser": {
-          "sendinblueApiKey": "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",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-433161534e51714f6e58-build.zip"
+          "s3Key": "amplify-builds/CreateUser-32514672613671397879-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -222,7 +221,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-6e4f65496a6d44624d43-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-717742335241372b5a39-build.zip"
         },
         "getGroup": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -245,9 +244,8 @@
           "s3Key": "amplify-builds/mentorcards91f3dc29CustomMessage-7072635a567a4d6d796d-build.zip"
         },
         "ContactUsTrigger": {
-          "sesEmail": "support@mentor-cards.com",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/ContactUsTrigger-4d66655a683867355870-build.zip"
+          "s3Key": "amplify-builds/ContactUsTrigger-6f6839513530684f5536-build.zip"
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -308,7 +306,7 @@
         "InvoiceHandler": {
           "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/dev/counter",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-6c6c7171497669464c45-build.zip"
+          "s3Key": "amplify-builds/InvoiceHandler-2f766c58374c58354741-build.zip"
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
