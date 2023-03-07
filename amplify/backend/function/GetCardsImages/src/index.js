@@ -207,6 +207,7 @@ exports.handler = async (event, context, callback) => {
             return event.source['cards'];
         }
 
+    var isExternalPack = event.source['isExternalPack'];
     var now = new Date();
     console.log('Checking freeUntilDate');
     if(user && 'freeUntilDate' in event.source){
@@ -220,7 +221,7 @@ exports.handler = async (event, context, callback) => {
         console.log('dont have freeUntilDate');
     }
  
-    if(user){
+    if(!isExternalPack && user){
         console.log('Checking if its a free trial period');
         var allPackagesDate = new Date();
         var trialPeriodInDays = 14;
@@ -254,6 +255,7 @@ exports.handler = async (event, context, callback) => {
          console.log('Not a free trial period');
     }
 
+            
     console.log('Checking if user has a coupon code with this package');
     if(user &&
         user.couponCodes &&
@@ -261,27 +263,16 @@ exports.handler = async (event, context, callback) => {
             for(var i = 0 ; i < user.couponCodes.length ; i++){ 
                 if(isPackageBelongToUser(event.source['id'], user.couponCodes[i].allowedCardsPacks, username)){
                     console.log('User has a coupon code with this package');
-                    if(user.couponCodes[i].trialPeriodInDays > -1){
-                        var date = new Date();
-                        date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
-                        if(date > now){
-                            console.log('User has a coupon code with this package with trialPeriodInDays');
-                            event.source['freeUntilDate'] = date;
-                            return event.source['cards'];
-                        }
-                        else{
-                            console.log('Coupon code expired');
-                        }
-                    }
-                    else{
-                        console.log('User has a coupon code with this package WITHOUT trialPeriodInDays limitation');
-                        return event.source['cards'];
-                    }
+                    var date = new Date();
+                    date.setDate(user.couponCodes[i].createdAt+user.couponCodes[i].trialPeriodInDays);
+                    event.source['freeUntilDate'] = date;
+                    return event.source['cards'];
                 }
             }
         }
+    
+    console.log('User does not have a coupon for this pack');
 
-    var isExternalPack = event.source['isExternalPack'];
     console.log('External Pack: ' + isExternalPack);
     if(isExternalPack){
         var length = 0;
@@ -332,8 +323,6 @@ exports.handler = async (event, context, callback) => {
          }
         console.log('Not Unlimited plan');
         /* */
-        
-        console.log('User does not have a coupon for this pack');
         /*if(user &&    // first 30 days all packs are available
            user.status == "PLAN" &&
            isFirstMonth(user.firstProgramRegistrationDate, allPackagesDate)

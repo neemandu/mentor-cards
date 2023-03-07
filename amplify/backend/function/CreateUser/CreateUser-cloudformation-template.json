@@ -19,9 +19,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "sendinblueApiKey": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -149,9 +146,6 @@
                   }
                 ]
               ]
-            },
-            "SENDINBLUE_API_KEY": {
-              "Ref": "sendinblueApiKey"
             }
           }
         },

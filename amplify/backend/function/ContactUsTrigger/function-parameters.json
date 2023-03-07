@@ -5,5 +5,6 @@
       "cloudFormationParameterName": "sesEmail",
       "environmentVariableName": "SES_EMAIL"
     }
-  ]
+  ],
+  "secretNames": []
 }

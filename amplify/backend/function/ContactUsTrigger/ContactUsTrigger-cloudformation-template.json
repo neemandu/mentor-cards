@@ -23,9 +23,6 @@
     "apicardspacksGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apicardspacksGraphQLAPIEndpointOutput"
-    },
-    "sesEmail": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -80,9 +77,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "SES_EMAIL": {
-              "Ref": "sesEmail"
             }
           }
         },

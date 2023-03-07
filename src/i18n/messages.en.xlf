@@ -12,7 +12,6 @@
         <note priority="1" from="description">all packs page title</note>
       </trans-unit>
       <trans-unit id="9122236c42f944ce74fa8a4db045bb84f9da9590" datatype="html">
-        <source>כל הערכות לרשותכם ב-14 ימים הראשונים</source>
         <source>All packs are available during the first month</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/Pages/all-packs-page/all-packs-page.component.html</context>
