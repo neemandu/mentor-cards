@@ -25,6 +25,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 
@@ -42,7 +44,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     NewEditNewsComponent,
     OrgMembersDialogComponent,
     NewEditReceiptDialogComponent,
-    NewEditOrganizationDialogComponent
+    NewEditOrganizationDialogComponent,
+    DashboardComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -56,7 +59,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     MatExpansionModule,
     MatToolbarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgApexchartsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },

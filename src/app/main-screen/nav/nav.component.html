@@ -201,6 +201,13 @@
 <mat-menu #managementMenu="matMenu" backdropClass="mat-menu">
   <button
     mat-menu-item
+    (click)="navigate('/dashboard')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
+    <div>דשבורד</div>
+  </button>
+  <button
+    mat-menu-item
     (click)="navigate('/news-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >

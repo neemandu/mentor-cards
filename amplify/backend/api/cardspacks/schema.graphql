@@ -23,7 +23,8 @@ type User
         ownerField: "username"
         operations: [read, update]
         provider: userPools
-      }
+      },
+      { allow: groups, groups: ["Admins"] }
     ]
   ) {
   id: ID!
