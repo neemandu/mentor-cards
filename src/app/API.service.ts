@@ -3316,6 +3316,11 @@ export type ListCardsPacksQuery = {
       backImgUrl?: string | null;
       frontImgUrl?: string | null;
     } | null> | null;
+    usersUsage?: Array<{
+      __typename: "Cards";
+      user?: string | null;
+      entries?: number | null;
+    } | null> | null;
     cardsPreview?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
     guideBook?: Array<{
@@ -7709,6 +7714,11 @@ export class APIService {
               __typename
               backImgUrl
               frontImgUrl
+            }            
+            usersUsage {
+              __typename
+              user
+              entries
             }
             cardsPreview
             groupsIds

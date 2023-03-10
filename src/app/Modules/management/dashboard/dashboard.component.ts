@@ -26,9 +26,12 @@ export class DashboardComponent implements OnInit {
   @ViewChild("chart", { static: false }) chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['fullName', 'email', 'phone', 'entries'];
   topUsers: any[];
+  allUsers: any[];
   users: any[];
   cards: any[];
+  subs: number;
   constructor(private api: APIService, public mngService: ManagementService) { }
 
   ngOnInit(): void {
@@ -37,7 +40,7 @@ export class DashboardComponent implements OnInit {
     this.chartOptions = {
       series: [],
       chart: {
-        width: 380,
+        width: 480,
         type: "pie"
       },
       labels: [],
@@ -66,12 +69,14 @@ export class DashboardComponent implements OnInit {
       for(var i =0 ; i< this.cards.length; i++){
         var length = 0;
         if(this.cards[i].usersUsage){
-          length = this.cards[i].usersUsage.length;
+          const unique = [...new Set(this.cards[i].usersUsage.map((item) => item.user))];
+          length = unique.length;
         }
         series.push(length);
         labels.push(this.cards[i].name);
       }
       this.chartOptions.series = series;
+      labels.sort
       this.chartOptions.labels = labels;
       console.log(this.chartOptions.series);
       console.log(this.chartOptions.labels);
@@ -80,9 +85,15 @@ export class DashboardComponent implements OnInit {
     });
     this.api.ListUsers().then((res) => {
       this.users = [...res.items];
-      this.topUsers = this.users.sort((a, b) => (a.entries > b.entries) ? 1 : -1).slice(0, 20);
-      this.dataSource = new MatTableDataSource(this.users.sort((a, b) => a.entries - b.entries).slice(0, 20));
-      console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 38 ~ this.api.ListUsers ~ this.users", this.users);
+      this.topUsers = this.users.sort((a, b) => b.entries - a.entries);
+      this.dataSource = new MatTableDataSource(this.users.sort((a, b) => b.entries - a.entries));
+      this.subs = this.users.filter(arr => {
+        if(arr.status == "PLAN"){
+          return true;
+        }
+        return false;
+      }).length;
+      console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 38 ~ this.api.topUsers ~ this.topUsers", this.topUsers);
     });
   }
 

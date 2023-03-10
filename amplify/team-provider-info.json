@@ -30,7 +30,7 @@
         },
         "mentorcards56dbf153PreSignup": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-37396146366c4e364a36-build.zip"
+          "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-69664e7731634b48526f-build.zip"
         },
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -140,7 +140,7 @@
         },
         "AddNewUserToEmailsContactList": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-45585754762f39554f44-build.zip",
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-45747053616970474a41-build.zip",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "contactListId": "2"
         },
