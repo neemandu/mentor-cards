@@ -20,6 +20,7 @@ import { OverlaySpinnerService } from './overlay-spinner.service';
 import LogRocket from 'logrocket';
 import { EnterCouponCodeDialogComponent } from '../Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 import { WelcomeToNewOrgDialogComponent } from '../Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
+import { MixpanelService } from './mixpanel.service';
 
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
@@ -58,7 +59,8 @@ export class UserAuthService {
     private api: APIService,
     private http: HttpClient,
     public dialog: MatDialog,
-    private overlaySpinnerService: OverlaySpinnerService
+    private overlaySpinnerService: OverlaySpinnerService,
+    private mixpanelService: MixpanelService
   ) {
     this.rememebrMe();
     this.getSubscriptionPlans();
@@ -98,6 +100,7 @@ export class UserAuthService {
       return;
     }
     this.cognitoUserData = cognitoUserData || this.cognitoUserData;
+    this.mixpanelService.identify(this.cognitoUserData.attributes['email']);
     this.createUser();
   }
 
@@ -120,7 +123,11 @@ export class UserAuthService {
         this.subPlans = undefined;
         this.getSubscriptionPlans();
         this.userDataEmmiter.emit(this.userData);
+
+        // tracking tools
         LogRocket.identify(this.userData.email);
+        this.mixpanelService.setPeopleProperties(this.userData);
+
         if (this.userData.groupId) this.updateGroupData();
         if (this.userData.couponCodes.length != 0) {
           this.userData.couponCodes.forEach((coupon) => {
