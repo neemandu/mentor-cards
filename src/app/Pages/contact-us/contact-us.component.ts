@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { APIService, CreateContactUsModelInput } from 'src/app/API.service';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
@@ -13,11 +14,18 @@ export class ContactUsComponent implements OnInit {
 
   contactForm: FormGroup;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, private formBuilder: FormBuilder, private api: APIService, private userAuthService: UserAuthService) {
+  constructor(private overlaySpinnerService: OverlaySpinnerService, 
+    private formBuilder: FormBuilder, 
+    private api: APIService, 
+    private userAuthService: UserAuthService,
+    private mixpanelService: MixpanelService) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    // track events
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'contact-us' });
+
     this.contactForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

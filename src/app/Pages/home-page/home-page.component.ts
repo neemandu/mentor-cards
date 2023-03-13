@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
@@ -21,11 +22,15 @@ export class HomePageComponent implements OnInit, OnDestroy, AfterViewInit {
     news: any[] = [];
 
     constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
-        public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService
+        public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService,
+        private mixpanelService: MixpanelService
     ) {
     }
 
     ngOnInit(): void {
+        
+        // track events
+        this.mixpanelService.track("PageViewed", { 'Page Title': 'home-page' });
         this.api.ListNewss().then(news => {
             this.news = news.items.sort((a, b) => a.order - b.order);
         }, error => {

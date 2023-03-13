@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 
 @Component({
   selector: 'app-guide-page',
@@ -11,9 +12,13 @@ export class GuidePageComponent implements OnInit {
   playerWidth: number;
   playerHeight: number;
 
-  constructor() { }
+  constructor(
+    private mixpanelService: MixpanelService) { }
 
   ngOnInit(): void {
+    
+    // track events
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'guide-page' });
     this.playerWidth = window.innerWidth;
     this.playerHeight = this.playerWidth / 1.78
   }

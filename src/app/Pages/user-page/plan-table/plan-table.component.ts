@@ -5,6 +5,7 @@ import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { PurchaseData } from 'src/app/Objects/purchase-data';
 import { UserData } from 'src/app/Objects/user-related';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -24,7 +25,8 @@ export class PlanTableComponent implements OnInit {
   dataSource: MatTableDataSource<PlanTableObj>
 
   constructor(public dialog: MatDialog, private overlaySpinnerService: OverlaySpinnerService, private api: APIService,
-    private userAuthService: UserAuthService) { }
+    private userAuthService: UserAuthService,
+    private mixpanel: MixpanelService) { }
 
   ngOnInit(): void {
   }
@@ -43,6 +45,12 @@ export class PlanTableComponent implements OnInit {
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
       if (res) {
+        this.mixpanel.track("CancelSubscription", {
+          "providerTransactionId": element.providerTransactionId,
+          "Plan name": element.planName,
+          "Plan price": element.price,
+          "Plane cycle": element.yearlyMonthly
+        })
         this.overlaySpinnerService.changeOverlaySpinner(true)
         this.api.Unsubscribe({ 'username': this.userAuthService.userData.username, 'providerTransactionId': element.providerTransactionId }).then((res2) => {
           this.userAuthService._snackBar.open('החיוב האוטומטי בוטל בהצלחה', '', {

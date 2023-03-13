@@ -14,6 +14,7 @@ import { UserData } from 'src/app/Objects/user-related';
 import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
+import { MixpanelService, EventTypes } from 'src/app/Services/mixpanel.service';
 
 interface CategoryPack {
   category: string;
@@ -64,12 +65,17 @@ export class AllPacksPageComponent implements OnInit {
     private userAuthService: UserAuthService,
     public router: Router,
     private ngZone: NgZone,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private mixpanelService: MixpanelService
+
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
   ngOnInit() {
+    // track events
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'all-packs-page' });
+
     this.Subscription.add(
       this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
         userData ? this.getAllPacks() : null;
@@ -92,6 +98,8 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   openEnterCouponCodeModal(): void {
+    
+    this.mixpanelService.track("ButtonClicked", { "Name": "Enter Coupon code"});
     if (this.userData) {
       this.userAuthService.openEnterCouponCodeModal();
     } else {

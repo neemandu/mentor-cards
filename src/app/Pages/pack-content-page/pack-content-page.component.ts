@@ -25,6 +25,7 @@ import { AboutAuthorComponent } from 'src/app/Shared Components/pack/about-autho
 import { Card } from 'src/app/Objects/card';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -61,7 +62,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     public componentFactoryResolver: ComponentFactoryResolver,
     private router: Router,
     private userAuthService: UserAuthService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private mixpanelService: MixpanelService
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -73,6 +75,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // track events
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id });
     if (this.id) {
       this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
         () => {},
@@ -115,6 +119,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   multipileChanged(): void {
     this.selectedCards = [];
     this.multipileChecked = !this.multipileChecked;
+    if(this.multipileChecked){
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show multiple cards", 'Pack id': this.id });
+    }
+    else{
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show one card", 'Pack id': this.id });
+    }
   }
 
   cardSelected(card: CardComponent, index: number): void {
@@ -143,8 +153,19 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   shuffle(): void {
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Shuffle", 'Pack id': this.id });
     this.selectedCards = [];
     this.cards.sort(() => Math.random() - 0.5);
+  }
+
+  flip(): void{
+    this.flipped = !this.flipped; this.selectedCards = [];
+    if(this.flipped){
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Back", 'Pack id': this.id });
+    }
+    else{
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Front", 'Pack id': this.id });
+    }
   }
 
   toggleChosenCardsModal(): void {
@@ -172,6 +193,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   toggleRandomCardsModal(): void {
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show random card", 'Pack id': this.id });
     if (this.showRandomCards) {
       this.showRandomCards = false;
     } else {
@@ -186,6 +208,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
    * Toggle edit pack
    */
   editPack(): void {
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Edit pack", 'Pack id': this.id });
     if (!this.showEditPack) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -224,6 +247,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   openGuideBook(): void {
+    this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id });
     // debugger
     const modalData: PopoutData = {
       modalName: 'guide-book',
@@ -243,6 +267,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   openAboutDialog(): void {
+    
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show creator info", 'Pack id': this.id });
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
