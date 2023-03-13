@@ -75,8 +75,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // track events
-    this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack.name });
     if (this.id) {
       this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
         () => {},
@@ -110,6 +108,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       //example pack
       this.pack = new PackContent().deseralize(exampleCards['default']);
     }
+    // track events
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack.name });
     this.cards = [...this.pack.cards];
     setTimeout(() => {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
