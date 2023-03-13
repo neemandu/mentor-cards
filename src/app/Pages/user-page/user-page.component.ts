@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { UserData } from 'src/app/Objects/user-related';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -24,7 +25,8 @@ export class UserPageComponent implements OnInit {
 
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, private userAuthService: UserAuthService, public dialog: MatDialog,
-    private ngZone: NgZone, private api: APIService, public router: Router) {
+    private ngZone: NgZone, private api: APIService, public router: Router,
+    private mixpanelService: MixpanelService) {
     this.userData = this.userAuthService.userData;
     this.overlaySpinnerService.changeOverlaySpinner(false)
     if (this.userData.subscription) {
@@ -60,6 +62,9 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    // track events
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'user-page' });
     this.userAuthService.userDataEmmiter.subscribe(((userData: UserData) => {
       this.userData = userData;
       userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;

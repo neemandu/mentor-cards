@@ -11,6 +11,7 @@ import { PackContent, PackInfo } from 'src/app/Objects/packs';
 import { PurchaseData } from 'src/app/Objects/purchase-data';
 import { UserData } from 'src/app/Objects/user-related';
 import { ApprovePurchaseDialogComponent } from 'src/app/Pages/price-page/approve-purchase-dialog/approve-purchase-dialog.component';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { AboutAuthorComponent } from '../about-author/about-author.component';
 const millisecondsInMonth: number = 2505600000;
@@ -36,7 +37,8 @@ export class PackPreviewComponent implements OnInit {
     public dialog: MatDialog,
     private userAuthService: UserAuthService,
     public router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private mixpanel: MixpanelService
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +78,14 @@ export class PackPreviewComponent implements OnInit {
           100
       );
     }
+  }
+
+  redirect(): void {
+    this.mixpanel.track("RedirectToExternalCreator", 
+    {"Pack ID": this.data.pack.id, 
+    "Pack name" : this.data.pack.name,
+    "Link" : this.data.pack.about.link});
+    window.open(this.data.pack.about.link, '_blank');
   }
 
   openAboutDialog(): void {

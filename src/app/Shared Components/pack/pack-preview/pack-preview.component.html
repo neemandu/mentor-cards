@@ -101,7 +101,7 @@
       <div class="about-author-text categories-tags">
         <p class="main-header">על היוצר</p>
         <p class="content">{{data.pack.about.text}}</p>
-        <a href={{data.pack.about.link}} target="_blank">למעבר לאתר הבית של היוצר</a>
+        <button (click)="redirect()">למעבר לאתר הבית של היוצר</button>
       </div>
       <div class="about-author-image-container">
         <img class="about-author-image" src={{data.pack.about.imgUrl}} alt="Author Image">

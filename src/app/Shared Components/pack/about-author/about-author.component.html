@@ -12,6 +12,8 @@
     </div>
 </div>
 <mat-dialog-actions align="center" *ngIf="packInfo.about.link">
-    <a href="{{packInfo.about.link}}" [id]="packInfo.about.link" target="_blank" style="text-align: center; font-size: x-large;">למידע נוסף לחצו
-        כאן</a>
+    <button 
+    (click)="redirect()"
+    [id]="packInfo.about.link" style="text-align: center; font-size: x-large;">למידע נוסף לחצו
+        כאן</button>
 </mat-dialog-actions>

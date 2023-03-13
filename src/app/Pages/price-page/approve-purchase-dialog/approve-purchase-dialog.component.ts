@@ -2,6 +2,7 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { APIService, updatePaymentProgramInput } from 'src/app/API.service';
 import { PurchaseData } from 'src/app/Objects/purchase-data';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { SharedDialogsService } from 'src/app/Services/shared-dialogs.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
@@ -19,7 +20,8 @@ export class ApprovePurchaseDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ApprovePurchaseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PurchaseData,
     private userAuthService: UserAuthService, private sharedDialogsService: SharedDialogsService, private overlaySpinnerService: OverlaySpinnerService,
-    private api: APIService) { }
+    private api: APIService,
+    private mixpanel: MixpanelService) { }
 
   ngOnInit(): void {
     console.log(this.data);
@@ -39,6 +41,15 @@ export class ApprovePurchaseDialogComponent implements OnInit {
             });
         },
         onApprove: async (data, actions) => {
+          this.mixpanel.track("PlanPurchase", {"Provider": "PayPal", 
+          "Plan ID": plan_id, 
+          "Transaction ID": data.subscriptionID,
+          "Subscription Plan": this.data.subscriptionPlanSelected, 
+          "Subscription name": this.data.subscriptionPlanSelected.name,
+          "Billing cycle": this.data.subscriptionPlanSelected.billingCycleInMonths,
+          "Full price": this.data.subscriptionPlanSelected.fullPrice,
+          "Pack ID": this.data.packId});
+          
           this.overlaySpinnerService.changeOverlaySpinner(true);
           var ids: updatePaymentProgramInput = { 'paymentProgramId': this.data.subscriptionPlanSelected.id, 'providerTransactionId': data.subscriptionID, 'packId': this.data.packId ? this.data.packId : -1 }
           this.api.UpdatePaymentProgram(ids).then(data => {

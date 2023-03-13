@@ -98,6 +98,8 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   openEnterCouponCodeModal(): void {
+    
+    this.mixpanelService.track("ButtonClicked", { "Name": "Enter Coupon code"});
     if (this.userData) {
       this.userAuthService.openEnterCouponCodeModal();
     } else {

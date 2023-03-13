@@ -12,6 +12,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 // import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
 import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInTwoWeeks: number = 1209600000;
 
@@ -39,10 +40,13 @@ export class PricePageComponent implements OnInit {
   yearlySubscriptionPercentage: number;
 
   constructor(public _snackBar: MatSnackBar, private api: APIService,
-    private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog) {
+    private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog,
+    private mixpanelService: MixpanelService) {
   }
 
   ngOnInit(): void {
+    // track events
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'price-page' });
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
       this.getSubscriptionPlans();

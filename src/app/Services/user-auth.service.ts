@@ -101,6 +101,7 @@ export class UserAuthService {
     }
     this.cognitoUserData = cognitoUserData || this.cognitoUserData;
     this.mixpanelService.identify(this.cognitoUserData.attributes['email']);
+    this.mixpanelService.track("UserLoggedIn");
     this.createUser();
   }
 
