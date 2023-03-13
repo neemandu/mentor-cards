@@ -76,7 +76,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // track events
-    this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id });
+    this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack.name });
     if (this.id) {
       this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
         () => {},
@@ -120,10 +120,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.selectedCards = [];
     this.multipileChecked = !this.multipileChecked;
     if(this.multipileChecked){
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show multiple cards", 'Pack id': this.id });
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show multiple cards", 'Pack id': this.id, 'Pack name': this.pack.name });
     }
     else{
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show one card", 'Pack id': this.id });
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show one card", 'Pack id': this.id, 'Pack name': this.pack.name });
     }
   }
 
@@ -153,7 +153,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   shuffle(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Shuffle", 'Pack id': this.id });
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Shuffle", 'Pack id': this.id, 'Pack name': this.pack.name });
     this.selectedCards = [];
     this.cards.sort(() => Math.random() - 0.5);
   }
@@ -161,10 +161,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   flip(): void{
     this.flipped = !this.flipped; this.selectedCards = [];
     if(this.flipped){
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Back", 'Pack id': this.id });
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Back", 'Pack id': this.id, 'Pack name': this.pack.name });
     }
     else{
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Front", 'Pack id': this.id });
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Front", 'Pack id': this.id, 'Pack name': this.pack.name });
     }
   }
 
@@ -193,7 +193,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   toggleRandomCardsModal(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show random card", 'Pack id': this.id });
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show random card", 'Pack id': this.id, 'Pack name': this.pack.name });
     if (this.showRandomCards) {
       this.showRandomCards = false;
     } else {
@@ -208,7 +208,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
    * Toggle edit pack
    */
   editPack(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Edit pack", 'Pack id': this.id });
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Edit pack", 'Pack id': this.id, 'Pack name': this.pack.name });
     if (!this.showEditPack) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -247,7 +247,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   openGuideBook(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id });
+    this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id, 'Pack name': this.pack.name });
     // debugger
     const modalData: PopoutData = {
       modalName: 'guide-book',
@@ -268,7 +268,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   openAboutDialog(): void {
     
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show creator info", 'Pack id': this.id });
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show creator info", 'Pack id': this.id, 'Pack name': this.pack.name });
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
