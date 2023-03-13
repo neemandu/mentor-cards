@@ -12,6 +12,7 @@ export class EventTypes {
   static readonly CouponCode = "Coupon code";
   static readonly RedirectToExternalCreator = "Redirect to external creator";
   static readonly CancelSubscription = "Cancel Subscription";
+  static readonly SignUp = "Sign Up";
 }
 
 @Injectable({

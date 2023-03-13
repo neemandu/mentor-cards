@@ -22,6 +22,7 @@ import { EnterCouponCodeDialogComponent } from '../Pages/no-program-page/enter-c
 import { WelcomeToNewOrgDialogComponent } from '../Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
 import { MixpanelService } from './mixpanel.service';
 
+
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInDay: number = 86400000;
 
@@ -128,6 +129,18 @@ export class UserAuthService {
         // tracking tools
         LogRocket.identify(this.userData.email);
         this.mixpanelService.setPeopleProperties(this.userData);
+
+        const currentTime = new Date();
+        // Create a new Date object for 5 minutes ago
+        const fiveMinutesAgo = new Date(currentTime.getTime() - (5 * 60 * 1000));
+        if (this.userData.createdAt >= fiveMinutesAgo && this.userData.createdAt <= currentTime) {
+          this.mixpanelService.track("SignUp");
+          console.log("The date is within the last 5 minutes.");
+        } else {
+          this.mixpanelService.track("UserLoggedIn");
+          console.log("The date is not within the last 5 minutes.");
+        }
+
 
         if (this.userData.groupId) this.updateGroupData();
         if (this.userData.couponCodes.length != 0) {

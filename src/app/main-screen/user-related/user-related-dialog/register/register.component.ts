@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService, NewUser } from 'src/app/Services/auth.service';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
@@ -32,7 +33,8 @@ export class RegisterComponent implements OnInit {
   // showLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
-    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService) { }
+    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService,
+    private mixpanel: MixpanelService) { }
 
   ngOnInit(): void {
   }
@@ -78,6 +80,9 @@ export class RegisterComponent implements OnInit {
       "password": this.registerForm.get("password").value,
     }
     this.amplifyAuthService.signUp(user).then(data => {
+      this.mixpanel.track("SignUp", {"Full name": user.fullName,
+                                    "Phone": user.phone,
+                                    "Email": user.email});
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this.userAuthService._snackBar.open(
         `הרשמה מוצלחת!`, '', {
