@@ -40,6 +40,8 @@ export class MixpanelService {
   }
 
   setPeopleProperties(properties: any): void {
+    properties["$name"] = properties["fullName"];
+    properties["$email"] = properties["email"];
     mixpanel.people.set(properties);
   }
 }
