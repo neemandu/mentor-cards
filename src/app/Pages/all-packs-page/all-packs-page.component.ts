@@ -152,7 +152,7 @@ export class AllPacksPageComponent implements OnInit {
 
   setAllFavPacksToShow(): void {
     this.allFavPacks = this.allPacks.filter((pack) =>
-      this.allFavorites.includes(parseInt(pack.id))
+      this.allFavorites?.includes(parseInt(pack.id))
     );
   }
 
@@ -189,10 +189,10 @@ export class AllPacksPageComponent implements OnInit {
     }
     return this.cardsService.allPacks
       ? this.cardsService.allPacks
-          .filter((pack) => this.allFavorites.includes(parseInt(pack.id)))
+          .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
           .map((pack) => pack.name)
       : this.allPacks
-          .filter((pack) => this.allFavorites.includes(parseInt(pack.id)))
+          .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
           .map((pack) => pack.name);
     // return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
   }
