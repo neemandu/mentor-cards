@@ -28,6 +28,7 @@ export class PackComponent implements OnInit, OnDestroy {
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   // @Output() packChange: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;
+  isSubscriber: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -45,6 +46,7 @@ export class PackComponent implements OnInit, OnDestroy {
     this.fav = this.userAuthService.favorites.includes(
       parseInt(this.packInfo.id)
     );
+    this.isSubscriber = this.userAuthService.userData.status === 'PLAN';
   }
 
   addRemoveFavorite(): void {
