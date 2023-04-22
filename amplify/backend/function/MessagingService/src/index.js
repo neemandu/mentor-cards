@@ -105,7 +105,7 @@ async function markAsSent(record){
     "id": record.id.S,
     "email": record.email.S,
     "emailDeliveryTime": new Date().toISOString(),
-    "phone": record.phone.S,
+    "phone": record.phone?.S,
     "smsDeliveryTime": null,
     "emailTemplateId": record.emailTemplateId?.N ?? record.emailTemplateId?.S,
     "name": record.name?.S ?? "",

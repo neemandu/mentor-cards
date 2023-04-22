@@ -52,7 +52,7 @@ export class AuthGuardNoProgramPageService implements CanActivate {
   canActivate(): boolean {
     // debugger;
     if (this.userAuthService.userData) {
-      if (this.userAuthService.userData.status === "PLAN") {
+      if (this.userAuthService.userData?.status === "PLAN") {
         this.ngZone.run(() => this.router.navigate(['user-page']));
       }
       else {

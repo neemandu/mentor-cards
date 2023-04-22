@@ -31,11 +31,11 @@ export class ApprovePurchaseDialogComponent implements OnInit {
       .Buttons({
         createSubscription: (data, actions) => {//lastPlanSubstitutionDate - once in last 30 days
           // debugger
-          if (this.userAuthService.userData.status === "NOPLAN" || this.data.packId)
+          if (this.userAuthService.userData?.status === "NOPLAN" || this.data.packId)
             return actions.subscription.create({
               'plan_id': plan_id
             });
-          else if (this.userAuthService.userData.status === "PLAN")
+          else if (this.userAuthService.userData?.status === "PLAN")
             return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
               'plan_id': plan_id
             });

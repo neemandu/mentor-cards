@@ -22,6 +22,9 @@ export class ManagementService {
   }
 
   getAllPacks(): PackContent[] {
+    if(!this.cardService.allPacks){
+      this.cardService.getAllPacks();
+    }
     return this.cardService.allPacks;
   }
 

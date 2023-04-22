@@ -38,8 +38,7 @@ const routes: Routes = [
   { path: 'home-page', component: HomePageComponent },
   {
     path: 'no-program-page',
-    component: NoProgramPageComponent,
-    canActivate: [AuthGuardNoProgramPageService],
+    component: NoProgramPageComponent
   },
   {
     path: 'user-page',
@@ -51,11 +50,7 @@ const routes: Routes = [
     component: GroupManagementComponent,
     canActivate: [AuthGuardGroupManagementService],
   },
-  {
-    path: 'all-packs-page',
-    component: AllPacksPageComponent,
-    canActivate: [AuthGuardAllPacksPageService],
-  },
+  { path: 'all-packs-page', component: AllPacksPageComponent },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },
   {
@@ -67,8 +62,7 @@ const routes: Routes = [
   { path: 'guide-book', component: GuideBookComponent },
   {
     path: 'price-page',
-    component: PricePageComponent,
-    canActivate: [AuthGuardPricePageService],
+    component: PricePageComponent
   },
   { path: 'guide-page', component: GuidePageComponent },
   { path: 'services', component: ServicesComponent },

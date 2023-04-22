@@ -35,7 +35,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
       this.configAmountsOfUsers.push(plan.numberOfUsers);
     })
     this.configAmountsOfUsers = Array.from(new Set(this.configAmountsOfUsers)).sort((a, b) => a - b)//remove duplicates
-    if (this.userAuthService.userData.status === "PLAN") {//Plan already exists
+    if (this.userAuthService.userData?.status === "PLAN") {//Plan already exists
       this.packSelected = this.userAuthService.subPlans.find(plan => plan.id === this.userAuthService.userData.subscription.subscriptionPlan.id);
       this.numOfUsersSelected = this.userAuthService.userData.subscription.subscriptionPlan.numberOfUsers;
     }
@@ -97,7 +97,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
           // },
           createSubscription: (data, actions) => {//lastPlanSubstitutionDate - once in last 30 days
             // debugger
-            if (this.userAuthService.userData.status === "NOPLAN")
+            if (this.userAuthService.userData?.status === "NOPLAN")
               return actions.subscription.create({
                 'plan_id': plan_id,
                 'subscriber': {
@@ -107,7 +107,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
                   'email_address': this.userAuthService.userData.email
                 }
               });
-            else if (this.userAuthService.userData.status === "PLAN")
+            else if (this.userAuthService.userData?.status === "PLAN")
               return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
                 'plan_id': plan_id,
                 'subscriber': {

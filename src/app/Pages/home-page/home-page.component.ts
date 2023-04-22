@@ -39,6 +39,7 @@ export class HomePageComponent implements OnInit, OnDestroy, AfterViewInit {
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
             this.userData = userData;
             userData ? this.overlaySpinnerService.changeOverlaySpinner(false) : null;
+            this.ngZone.run(() => this.router.navigate(['all-packs-page']));
         })
         this.userData = this.userAuthService.userData;
     }
