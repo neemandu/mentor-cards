@@ -186,7 +186,7 @@ h1 {
 
 @media screen and (max-width: 480px) {
   app-pack {
-    margin: 5px 8px;
+    margin: 5px 6px;
   }
 
   .category-line:hover>.categrory-title {
