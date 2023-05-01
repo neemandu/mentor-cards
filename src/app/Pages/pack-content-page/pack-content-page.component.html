@@ -333,22 +333,15 @@
   </button>
 </mat-menu>
 
-<div *ngIf="showSelectedCards" class="selected-cards-modal">
+<div *ngIf="showSelectedCards" class="selected-cards-modal" (click)="toggleChosenCardsModal()">
   <div class="selected-cards-modal-content">
-    <button
-      class="iconButton close-cards-view"
-      mat-icon-button
-      (click)="toggleChosenCardsModal()"
-    >
-      <mat-icon class="mat-icon-close">highlight_off</mat-icon>
-    </button>
-    <div
+    <div style="height: 100%"
       [ngClass]="{
         'selected-content': true,
         'selected-content-one-card': selectedCards.length == 1
       }"
     >
-      <img
+      <img (click)="imgClick($event)"
         *ngFor="let card of selectedCards"
         alt="one of the selected cards shown"
         [ngClass]="{

@@ -185,6 +185,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  imgClick(event): void {
+    event.stopPropagation();
+  }
+
   openPortraitToLandscapeAlert(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
