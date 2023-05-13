@@ -21,6 +21,7 @@ import LogRocket from 'logrocket';
 import { EnterCouponCodeDialogComponent } from '../Pages/no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 import { WelcomeToNewOrgDialogComponent } from '../Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
 import { MixpanelService } from './mixpanel.service';
+import { PendoService } from './pendo.service';
 
 
 const millisecondsInMonth: number = 2505600000;
@@ -61,7 +62,8 @@ export class UserAuthService {
     private http: HttpClient,
     public dialog: MatDialog,
     private overlaySpinnerService: OverlaySpinnerService,
-    private mixpanelService: MixpanelService
+    private mixpanelService: MixpanelService,
+    private pendoService: PendoService
   ) {
     this.rememebrMe();
     this.getSubscriptionPlans();
@@ -129,6 +131,10 @@ export class UserAuthService {
         // tracking tools
         LogRocket.identify(this.userData.email);
         this.mixpanelService.setPeopleProperties(this.userData);
+
+        
+        // Pendo
+        this.pendoService.initialize('edb9b73d-f27c-43b4-75d5-e42ec45cb29d', this.userData);
 
         const currentTime = new Date();
         // Create a new Date object for 5 minutes ago
