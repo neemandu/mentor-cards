@@ -134,7 +134,7 @@ export class UserAuthService {
 
         
         // Pendo
-        this.pendoService.initialize('edb9b73d-f27c-43b4-75d5-e42ec45cb29d', this.userData);
+        this.pendoService.initialize(this.userData);
 
         const currentTime = new Date();
         // Create a new Date object for 5 minutes ago

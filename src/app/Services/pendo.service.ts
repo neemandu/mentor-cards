@@ -5,10 +5,7 @@ declare var pendo: any;
   providedIn: 'root'
 })
 export class PendoService {
-  initialize(apiKey: string, userData?: any) {
-    (window as any).pendo_options = {
-      apiKey: apiKey
-    };
+  initialize(userData?: any) {
     if (userData) {
       pendo.initialize({
         visitor: {
@@ -23,10 +20,6 @@ export class PendoService {
             creationDate: userData.createdAt
         }
       });
-      (window as any).pendo_options.visitor = userData;
     }
-    const script = document.createElement('script');
-    script.src = `https://cdn.pendo.io/agent/static/${apiKey}/pendo.js`;
-    document.head.appendChild(script);
   }
 }
