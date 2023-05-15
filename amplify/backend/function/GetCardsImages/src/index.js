@@ -169,6 +169,14 @@ exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
     console.log('event');
     console.log(event);
+    
+    console.log('Check if pack is free - id: ' + event.source['id']);
+    if("isFree" in event.source &&
+        event.source['isFree']){
+            console.log('Free Pack!');
+            return event.source['cards'];
+        }
+    console.log('Not a free pack - id: ' + event.source['id']);
 
     // user was not identified in cognito
     if(!("identity" in event)){
@@ -199,13 +207,6 @@ exports.handler = async (event, context, callback) => {
         console.log('Super user!');
         return event.source['cards'];
     }
-
-    if(user && 
-        "isFree" in event.source &&
-        event.source['isFree']){
-            console.log('Free Pack!');
-            return event.source['cards'];
-        }
 
     var isExternalPack = event.source['isExternalPack'];
     var now = new Date();

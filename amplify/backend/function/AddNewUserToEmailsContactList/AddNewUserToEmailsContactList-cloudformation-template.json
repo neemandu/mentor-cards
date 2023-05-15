@@ -108,9 +108,6 @@
             },
             "CONTACT_LIST_ID": {
               "Ref": "contactListId"
-            },
-            "contactListId": {
-              "Ref": "contactListId"
             }
           }
         },

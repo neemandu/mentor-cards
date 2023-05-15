@@ -7633,6 +7633,7 @@ export class APIService {
             categories
             cardsPreview
             name
+            isFree
             about {
               __typename
               text

@@ -34,8 +34,8 @@ import { DashboardComponent } from './Modules/management/dashboard/dashboard.com
 import { ServicesComponent } from './Pages/services/services.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home-page', pathMatch: 'full' },
-  { path: 'home-page', component: HomePageComponent },
+  { path: '', redirectTo: '/all-packs-page', pathMatch: 'full' },
+  { path: 'home-page', redirectTo: '/all-packs-page', pathMatch: 'full' },
   {
     path: 'no-program-page',
     component: NoProgramPageComponent

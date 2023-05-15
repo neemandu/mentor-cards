@@ -90,7 +90,7 @@ export class CardsService {
 
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    (this.isLoggedIn ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
+    this.api.ListCardsPacks().then((packs: ListCardsPacksQuery) => {
       // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
         pack.categories.forEach(category => {
