@@ -7617,58 +7617,89 @@ export class APIService {
     nextToken?: string
   ): Promise<ListCardsPacksQuery> {
     const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+        __typename
+        items {
           __typename
-          items {
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }            
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          isFree
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          isOwnedByOrg
+          brief
+          likesCounter
+          visitorsCounter
+          backImgUrl
+          isExternalPack
+          authorizedDomains
+          subscriptionPlans {
             __typename
             id
-            imgUrl
-            description
-            cards {
-              __typename
-              backImgUrl
-              frontImgUrl
-            }
-            tags
-            categories
-            cardsPreview
             name
-            isFree
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            brief
-            likesCounter
-            isExternalPack
-            visitorsCounter
-            subscriptionPlans {
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
               __typename
               id
               name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
                 __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
+                text
+                imgUrl
+                link
               }
               createdAt
               updatedAt
@@ -7676,9 +7707,13 @@ export class APIService {
             createdAt
             updatedAt
           }
-          nextToken
+          topQuestions
+          createdAt
+          updatedAt
         }
-      }`;
+        nextToken
+      }
+    }`;
     const gqlAPIServiceArguments: any = {};
     if (filter) {
       gqlAPIServiceArguments.filter = filter;

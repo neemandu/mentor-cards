@@ -24,13 +24,13 @@
     <div class="line"></div>
   </div>
   <!-- Action buttons -->
-  <div id="not-logged-in" *ngIf="!userData" class="actions">
+  <div id="not-logged-in" *ngIf="!userData && !data.pack.isFree" class="actions">
     <button class="action-button" type="button" (click)="signInSignUp()">
       התחברות/הרשמה
     </button>
   </div>
 
-  <div id="logged-in" *ngIf="userData">
+  <div id="logged-in" *ngIf="userData || data.pack.isFree">
     <div id="pack-owned" *ngIf="data.pack.cards && data.pack.cards.length !== 0" class="actions">
       <button class="action-button" type="button" (click)="navigateToPackView()">
         כניסה לערכה
@@ -45,7 +45,7 @@
     </div>
 
     <div id="logged-in-has-program-external-pack-not-owned"
-      *ngIf="userData.status === 'PLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
+      *ngIf="userData && userData.status === 'PLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
       class="actions case-3">
       <div class="d-flex flex-column">
         <div class="d-flex monthly-yearly-toggle">
@@ -67,7 +67,7 @@
     </div>
 
     <div id="logged-in-has-no-program-pack-not-owned"
-      *ngIf="userData.status === 'NOPLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
+      *ngIf="userData && userData.status === 'NOPLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
       class="case-4">
       <div class="top-part">
         <span>

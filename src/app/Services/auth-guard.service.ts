@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { UserData } from '../Objects/user-related';
 import { CardsService } from './cards.service';
 import { UserAuthService } from './user-auth.service';
@@ -24,10 +24,17 @@ export class AuthGuardAllPacksPageService implements CanActivate {
 })
 export class AuthGuardPackContentService implements CanActivate {
 
-  constructor(private userAuthService: UserAuthService, private cardsService: CardsService, public router: Router, private ngZone: NgZone) { }
+  constructor(private userAuthService: UserAuthService, 
+    private cardsService: CardsService, 
+    public router: Router, 
+    private ngZone: NgZone) { }
 
-  canActivate(): boolean {
+  canActivate(route: ActivatedRouteSnapshot): boolean {
     // debugger;
+    var pack = this.cardsService.allPacks.filter(pack => pack.id == route.params.id)[0]; 
+    if(pack.isFree){
+      return true;
+    }
     if (this.userAuthService.userData) {
       if (this.cardsService.allPacks) {
         return true;

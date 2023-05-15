@@ -90,7 +90,7 @@ export class CardsService {
 
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    this.api.ListCardsPacks().then((packs: ListCardsPacksQuery) => {
+    (this.isLoggedIn ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
       // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
         pack.categories.forEach(category => {
@@ -106,6 +106,8 @@ export class CardsService {
       this.allPacksReadyEmmiter.emit();
       this.overlaySpinnerService.changeOverlaySpinner(false);
     }, reject => {
+      console.log('reject'); 
+      console.log(reject);
       this.overlaySpinnerService.changeOverlaySpinner(false);
       let snackBarRef = this._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
         duration: 20000,
