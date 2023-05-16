@@ -44,6 +44,10 @@ p {
   font-size: 1.15rem;
 }
 
+.plan-item {
+  font-size: 1.1rem;
+}
+
 .purchase-btn {
   margin: 1vh;
   width: 90%;
@@ -83,7 +87,6 @@ p {
 }
 
 ul {
-  width: 60%;
   text-align: right;
 }
 
@@ -92,15 +95,16 @@ ul {
 }
 
 li {
-  list-style-type: '';
+  font-size: 1.1rem;
+  padding-bottom: 10px;
+  list-style-type: ' ✔ ';
   text-align: right;
-  padding: 0% 3%;
-  line-height: 2.3;
   transition: transform 0.2s linear;
+  position: relative;
 }
 
-li:hover {
-  transform: scale(1.02);
+ul li::before {
+  color: blue
 }
 
 #list-header {
@@ -117,7 +121,7 @@ li:hover {
 }
 
 #popular-mat-card {
-  height: 270px;
+  height: 430px;
   /* border: 2px var(--main-color) solid; */
 }
 
@@ -126,7 +130,11 @@ li:hover {
 }
 
 #popular-mat-card-actions {
-  margin-top: 10px;
+  margin-top: auto;
+}
+
+mat-card-actions {
+  margin-top: auto;
 }
 
 #popular-mat-card-subtitle {
@@ -136,14 +144,19 @@ li:hover {
   color: white;
 }
 
+
 mat-card {
   /* margin: 0 0.5vw; */
   /* border: 2px var(--main-color) solid; */
-  width: 20rem;
+  width: 25rem;
+  height: 430px;
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;
   border-radius: 10px;
   font-family: var(--main-font-family);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 mat-card:hover {
@@ -187,19 +200,12 @@ mat-card:hover > #best-deal {
     width: 45%;
   }
 
-  ul {
-    width: 70%
-  }
-
   #payment-img {
     width: 8%;
   }
 }
 
 @media screen and (max-width: 768px) {
-  ul {
-    width: 90%
-  }
 
   .program-cards {
     flex-direction: column;
@@ -221,9 +227,6 @@ mat-card:hover > #best-deal {
     font-size: 1.7em;
   }
 
-  ul {
-    padding-inline-start: 10px;
-  }
 
 }
 
@@ -241,10 +244,6 @@ mat-card:hover > #best-deal {
   #title {
     font-size: 1.5em;
     max-width: 90%;
-  }
-
-  ul {
-    padding-inline-start: 0px;
   }
 
   mat-card {

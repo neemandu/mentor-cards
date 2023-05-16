@@ -6,48 +6,64 @@
     alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
   />
   <span id="title" *ngIf="!userData?.orgMembership"
-    >מצטרפים לתוכנית ומקבלים:</span
+    >התוכניות שלנו</span
   >
   <br />
-  <ul>
-    <li>
-      <mat-icon style="color: blue">done</mat-icon
-      ><b> גישה מלאה לכל ערכות הבית </b> - נהנים ממגוון של עשרות ערכות קלפים
-      מקטגוריות שונות.
-    </li>
-    <li>
-      <mat-icon style="color: blue">done</mat-icon
-      ><b> ספר הדרכה צמוד לכל ערכת קלפים</b> - מאות שאלות עוצמתיות והצעות
-      מגוונות לעבודה.
-    </li>
-    <li>
-      <mat-icon style="color: blue">done</mat-icon><b> שימוש בכל היכולות </b> -
-      קלפים גלויים וסמויים, בחירת קלף באופן אקראי, ערבוב, בחירה מרובה לעבודה
-      תהליכית ועוד…
-    </li>
-    <li>
-      <mat-icon style="color: blue">done</mat-icon><b> תוכן מתחדש ודינמי</b> -
-      ערכות קלפים נוספות וטכניקות עבודה חדשות המתעדכנות באופן שוטף ע"י יוצרי
-      הבית שלנו ויוצרים מבחוץ.
-    </li>
-    <li>
-      <mat-icon style="color: blue">done</mat-icon><b> שירות ותמיכה</b> - יש לכם
-      שאלה? בא לכם להתייעץ? הצוות שלנו זמין לכם גם בווצאפ!
-    </li>
-    <li>
-      <mat-icon style="color: blue">done</mat-icon
-      ><b> מחיר מיוחד לערכות VIP</b> לקוחות מנטור-קארדס נהנים ממחיר אחיד לכל ערכות VIP באתר החל מ 9.90 ש"ח לחודש
-      <div style="font-size: 12px; margin-top: -10px">
-        * ערכות הבית הן ערכות קלפים הנוצרו ע"י צוות Mentor-cards וערכות Vip הן ערכות קלפים הנוצרו ע"י יוצרים חיצוניים.
-      </div>
-    </li>
-  </ul>
 </div>
 <br />
 <div style="text-align: center">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
-      <mat-card-subtitle></mat-card-subtitle>
+      <mat-card-title>תכנית חינמית</mat-card-title>
+      <mat-card-content>
+        <p class="price-line">
+          חודש /
+          <span class="price-number"
+            >₪0</span
+          >
+        </p>
+        <br />
+        <ul>
+          <li>
+          גישה ל-5 ערכות החמישייה הפותחת
+          </li>
+          <li>
+          הצטרפות לקהילה שלנו בפייסבוק
+          </li><li>
+          הצטרפות לקבוצת הווטסאפ שלנו
+          </li>
+          <li>
+          הדרכות שבועיות במייל          </li>
+          <li>
+          השתתפות בלייבים שלנו
+          </li>
+          <li>
+          גישה לפרסום מאמרים באתר שלנו
+          </li>
+      </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          id="freeSubscription"
+          *ngIf="!userData || userData?.status === 'NOPLAN'"
+          class="other-purchase-btn purchase-btn"
+          type="button"
+          (click)="signInSignUp()"
+        >
+          להצטרפות >>
+        </button>
+        <button
+          *ngIf="userData &&
+            userData.status === 'NOPLAN'"
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+          הינך רשום לתכנית זו
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
       <mat-card-title>תכנית חודשית</mat-card-title>
       <mat-card-content>
         <p class="price-line">
@@ -59,9 +75,18 @@
             }}</span
           >
         </p>
-        <p class="price-line">חיוב חודשי</p>
+        <br />
+        <ul>
+          <li>
+          כל מה שבתוכנית החינמית
+          </li>
+          <li>
+            גישה לכל ערכות הבית - ערכות שפותחו ע"י צוות מנטור-קארדס
+          </li>
+          <li>
+גישה לכל הערכות של האומנים האורחים שלנו    </li>
+        </ul>
       </mat-card-content>
-      <mat-divider inset></mat-divider>
       <mat-card-actions>
         <button
           id="monthlySubscription"
@@ -91,7 +116,6 @@
     <mat-card>
       <!-- <span id="best-pack">הכי משתלמת</span> -->
       <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />
-      <mat-card-subtitle></mat-card-subtitle>
       <mat-card-title>תכנית שנתית</mat-card-title>
       <mat-card-content>
         <p class="price-line">
@@ -107,8 +131,16 @@
           משלמים מראש {{ yearlySubscription.fullPrice }} ש"ח לשנה וחוסכים
           {{ yearlySubscriptionPercentage }}%
         </p>
+        <br />
+        <ul>
+          <li>            
+          כל מה שבתוכנית החודשית
+          </li>
+          <li>          
+            שיחה אישית עם צוות מנטור-קארדס להכוונה ויעוץ
+          </li>
+        </ul>
       </mat-card-content>
-      <mat-divider inset></mat-divider>
       <mat-card-actions>
         <button
           id="yearlySubscription"

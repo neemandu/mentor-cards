@@ -56,7 +56,7 @@
     <!-- <button class="btn navbar-btn" (click)="navigate('/company-pack-choise')">בחירת ערכות</button> -->
   </div>
   <div class="d-flex flex-row">
-    <button class="btn navbar-btn">
+    <button *ngIf="showTour" class="btn navbar-btn">
       התחל סיור באתר
     </button>
     <button
@@ -143,7 +143,7 @@
   <button mat-menu-item (click)="navigate('/all-packs-page')">
     כל ערכות הקלפים
   </button>
-  <button mat-menu-item (click)="navigate('/price-page')">מחירון</button>
+  <button mat-menu-item (click)="navigate('/price-page')">התוכניות שלנו</button>
   <button mat-menu-item (click)="navigate('/guide-page')">שאלות נפוצות</button>
   <button mat-menu-item (click)="navigate('/services')">שירותים נוספים</button>
   <button mat-menu-item (click)="navigate('/about-page')">עלינו</button>

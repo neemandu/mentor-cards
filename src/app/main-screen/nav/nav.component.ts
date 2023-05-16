@@ -1,4 +1,4 @@
-import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, NgZone, OnInit, Output, HostListener } from '@angular/core';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Router } from '@angular/router';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -15,6 +15,11 @@ export class NavComponent implements OnInit {
 
   @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any) {
+    this.showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
+  }
   userAttributes: any;
   loggedIn: boolean = false;
   news: any[];
