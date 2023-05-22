@@ -99,6 +99,7 @@ export class PackPreviewComponent implements OnInit {
 
   navigateToPackView(exists): void {
     console.log('exists');
+    console.log(exists);
     if (!exists && this.neverShowAgain) {
       const ls = localStorage.getItem('packsToOpenAutomatically');
       const packsToOpenAutomatically = ls ? ls.split(',') : [];

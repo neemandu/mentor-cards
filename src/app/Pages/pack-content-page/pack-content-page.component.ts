@@ -75,7 +75,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.id) {
+    if (this.id && this.userData) {
       this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
         () => {},
         (reject) => {

@@ -36,6 +36,7 @@ export class CardsService {
 
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.isLoggedIn = userData ? true : false;
+      console.log('clear packs');
       this.allPacks = undefined;
     }));
 
