@@ -45,7 +45,7 @@
       <mat-card-actions>
         <button
           id="freeSubscription"
-          *ngIf="!userData || userData?.status === 'NOPLAN'"
+          *ngIf="!userData"
           class="other-purchase-btn purchase-btn"
           type="button"
           (click)="signInSignUp()"
