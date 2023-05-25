@@ -38,7 +38,7 @@ export class UserPageComponent implements OnInit {
         'providerTransactionId': this.userData.subscription.providerTransactionId,
         'planName': `ערכות הבית - ${this.userData.subscription.subscriptionPlan.description}`,
         'yearlyMonthly': chargeSpan,
-        'price': this.userData.subscription.subscriptionPlan.fullPrice,
+        'price': this.userData.subscription.subscriptionPlan?.fullPrice,
         'homePlan' : true
       }
       this.tableData.push(tmp)
@@ -53,7 +53,7 @@ export class UserPageComponent implements OnInit {
           'providerTransactionId': element.providerTransactionId,
           'planName': element.includedCardPacksIds[0].name,
           'yearlyMonthly': chargeSpan,
-          'price': element.subscriptionPlan.fullPrice,
+          'price': element.subscriptionPlan?.fullPrice,
           'homePlan' : false
         }
         this.tableData.push(tmp)

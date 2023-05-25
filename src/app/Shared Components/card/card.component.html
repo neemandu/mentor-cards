@@ -3,11 +3,11 @@
   <div [ngClass]="{'flip-box-inner': true, 'flip': flipped}">
     <!-- Card Back -->
     <div class="flip-box-front">
-      <img *ngIf="!cardContent.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
+      <img *ngIf="!cardContent?.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
         src="/assets/Mentor Cards Back.png" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}"
         (contextmenu)="onRightClick();">
-      <img *ngIf="cardContent.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
-        src="{{cardContent.backImgUrl}}" data-src={{cardContent.backImgUrl}}
+      <img *ngIf="cardContent?.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
+        src="{{cardContent?.backImgUrl}}" data-src={{cardContent?.backImgUrl}}
         [ngClass]="{'img-unselected': !selected, 'img-selected': selected}" (contextmenu)="onRightClick();">
     </div>
     <!-- Card Front -->

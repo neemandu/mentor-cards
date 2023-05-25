@@ -62,19 +62,19 @@ export class PackPreviewComponent implements OnInit {
       );
       this.yearlyPlan['priceForMentorCardsMembers'] =
         Math.round(
-          this.yearlyPlan.fullPrice * (1 - this.yearlyPlan.discount / 100) * 10
+          this.yearlyPlan?.fullPrice * (1 - this.yearlyPlan?.discount / 100) * 10
         ) / 10;
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el.billingCycleInMonths === 1
       );
       this.monthlyPlan['priceForMentorCardsMembers'] =
         Math.round(
-          this.monthlyPlan.fullPrice *
-            (1 - this.monthlyPlan.discount / 100) *
+          this.monthlyPlan?.fullPrice *
+            (1 - this.monthlyPlan?.discount / 100) *
             10
         ) / 10;
       this.discount = Math.round(
-        (1 - this.yearlyPlan.fullPrice / (this.monthlyPlan.fullPrice * 12)) *
+        (1 - this.yearlyPlan?.fullPrice / (this.monthlyPlan?.fullPrice * 12)) *
           100
       );
     }
@@ -109,6 +109,7 @@ export class PackPreviewComponent implements OnInit {
       );
     }
     console.log('navigate');
+    console.log(this.data.pack.id);
     this.navigate(`/pack-view/${this.data.pack.id}`);
   }
 

@@ -75,38 +75,33 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.id && this.userData) {
-      this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
-        () => {},
-        (reject) => {
-          console.log(
-            '🚀 ~ file: pack-content-page.component.ts ~ line 82 ~ this.api.IncrementPackEntries ~ reject',
-            reject
-          );
-        }
-      );
-      //a specific pack
-      if (this.cardsService.allPacks) {
-        this.pack = this.cardsService.allPacks.find(
-          (pack) => pack.id === this.id
-        );
-      } else {
-        this.api.GetCardsPack(this.id).then(
-          (pack) => {
-            this.pack = new PackContent().deseralize(pack);
-          },
-          (reject) => {
-            console.log(
-              'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
-              reject
-            );
-            this.overlaySpinnerService.changeOverlaySpinner(false);
-          }
+    this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
+      () => {},
+      (reject) => {
+        console.log(
+          '🚀 ~ file: pack-content-page.component.ts ~ line 82 ~ this.api.IncrementPackEntries ~ reject',
+          reject
         );
       }
+    );
+    //a specific pack
+    if (this.cardsService.allPacks) {
+      this.pack = this.cardsService.allPacks.find(
+        (pack) => pack.id === this.id
+      );
     } else {
-      //example pack
-      this.pack = new PackContent().deseralize(exampleCards['default']);
+      this.api.GetCardsPack(this.id).then(
+        (pack) => {
+          this.pack = new PackContent().deseralize(pack);
+        },
+        (reject) => {
+          console.log(
+            'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
+            reject
+          );
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+        }
+      );
     }
     // track events
     this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack.name });

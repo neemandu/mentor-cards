@@ -47,7 +47,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           "Subscription Plan": this.data.subscriptionPlanSelected, 
           "Subscription name": this.data.subscriptionPlanSelected.name,
           "Billing cycle": this.data.subscriptionPlanSelected.billingCycleInMonths,
-          "Full price": this.data.subscriptionPlanSelected.fullPrice,
+          "Full price": this.data.subscriptionPlanSelected?.fullPrice,
           "Pack ID": this.data.packId});
           
           this.overlaySpinnerService.changeOverlaySpinner(true);
