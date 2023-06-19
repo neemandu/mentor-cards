@@ -121,7 +121,7 @@ ul li::before {
 }
 
 #popular-mat-card {
-  height: 470px;
+  height: 500px;
   /* border: 2px var(--main-color) solid; */
 }
 
@@ -149,7 +149,7 @@ mat-card {
   /* margin: 0 0.5vw; */
   /* border: 2px var(--main-color) solid; */
   width: 25rem;
-  height: 470px;
+  height: 500px;
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;
   border-radius: 10px;
