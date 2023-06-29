@@ -248,5 +248,6 @@ mat-card:hover > #best-deal {
 
   mat-card {
     width: 18rem;
+    height: 650px;
   }
 }
