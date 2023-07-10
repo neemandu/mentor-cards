@@ -227,6 +227,16 @@ exports.handler = async (event, context, callback) => {
     else{
         console.log('dont have freeUntilDate');
     }
+
+    if(user && 
+        user.status == "PLAN" &&
+        user.subscription &&
+        user.subscription.subscriptionPlan &&
+        user.subscription.subscriptionPlan.billingCycleInMonths == 12
+     ){
+         console.log('Yearly plan! they deserve all packs');
+         return event.source['cards'];
+     }
  
     if(!isExternalPack && user){
         console.log('Checking if its a free trial period');
