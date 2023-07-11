@@ -42,7 +42,7 @@
         },
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/IncrementPackEntries-51684464676d2b566741-build.zip"
+          "s3Key": "amplify-builds/IncrementPackEntries-63594c33477442525351-build.zip"
         },
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
