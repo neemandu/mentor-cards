@@ -29,7 +29,7 @@ export class CardsService {
   allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
-  categoriesOrder: string[] = ['החמישייה הפותחת', 'ערכות חדשות', 'VIP ערכות', 'ערכות VIP', 'קלפי תמונה', 'הייטק', 'שיתופי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'ערכות במתנה', 'קלפי NLP', 'NLP קלפי'];
+  categoriesOrder: string[] = ['החמישייה הפותחת', 'ערכות חדשות', 'VIP ערכות', 'ערכות VIP', 'נעים להכיר', 'קלפי תמונה', 'הייטק', 'שיתופי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'ערכות במתנה', 'קלפי NLP', 'NLP קלפי'];
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService,
     private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
