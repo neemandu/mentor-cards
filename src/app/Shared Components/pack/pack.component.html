@@ -5,14 +5,6 @@
     matTooltip="{{ packInfo.name }}"
   >
     <h3 class="pack-desc">{{ packInfo.name }}</h3>
-    <img
-      class="external-icon"
-      src="/assets/crown.png"
-      alt="VIP pack crown icon"
-      matTooltip="ערכה של יוצר חוץ"
-      matTooltipShowDelay="500"
-      *ngIf="this.packInfo.isExternalPack"
-    />
   </div>
   <mat-icon
     class="lock-icon"
