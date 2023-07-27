@@ -73,7 +73,16 @@ export class PricePageComponent implements OnInit {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
-
+  openEnterCouponCodeModal(): void {
+    
+    this.mixpanelService.track("ButtonClicked", { "Name": "Enter Coupon code"});
+    if (this.userData) {
+      this.userAuthService.openEnterCouponCodeModal();
+    } else {
+      this.userAuthService.showSignInModal();
+    }
+  }
+  
   get paymentStartDate() {
     if (this.userData) {
       return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInTwoWeeks);
