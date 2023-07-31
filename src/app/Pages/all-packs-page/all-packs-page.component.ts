@@ -35,7 +35,7 @@ export class AllPacksPageComponent implements OnInit {
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
   categoriesOrder: string[] = [
-    'החמישייה הפותחת',
+    'השלישייה הפותחת',
     'קלפי תמונה',
     'שיתופי פעולה',
     'קלפי שאלות',
