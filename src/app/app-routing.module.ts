@@ -59,8 +59,8 @@ const routes: Routes = [
   { path: 'detail/:slug', component: BlogDetailComponent },
   {
     path: 'pack-view/:id',
-    component: PackContentPageComponent,
-    canActivate: [AuthGuardPackContentService],
+    component: PackContentPageComponent//,
+    //canActivate: [AuthGuardPackContentService],
   },
   { path: 'example-pack', component: PackContentPageComponent },
   { path: 'guide-book', component: GuideBookComponent },
