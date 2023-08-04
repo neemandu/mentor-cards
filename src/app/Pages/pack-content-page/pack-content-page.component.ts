@@ -90,6 +90,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.pack = this.cardsService.allPacks.find(
         (pack) => pack.id === this.id
       );
+      this.cards = [...this.pack.cards];
+      this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
     } else {
       this.api.GetCardsPack(this.id).then(
         (pack) => {
@@ -97,6 +99,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
           if(this.pack.cards.length == 0){
             this.unauthorized = true;
           }
+          this.cards = [...this.pack.cards];
+          this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
         },
         (reject) => {
           console.log(
@@ -108,8 +112,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       );
     }
     // track events
-    this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
-    this.cards = [...this.pack.cards];
     setTimeout(() => {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }, 300);
