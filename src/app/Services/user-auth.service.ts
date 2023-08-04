@@ -71,9 +71,11 @@ export class UserAuthService {
 
   async rememebrMe(): Promise<void> {
     try {
+      console.log("rememebrMe");
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({
         bypassCache: true,
       });
+      console.log("rememebrMe done");
       if (user) {
         this.loggedIn(user);
         this.rememberMeDone = true;
