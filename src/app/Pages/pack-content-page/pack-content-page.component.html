@@ -29,7 +29,11 @@
   </button>
 </div>
 
-<div class="d-flex justify-content-center nav-buttons">
+<div *ngIf="unauthorized">
+  אין לך מספיק הרשאות כדי לצפות בערכה זו
+</div>
+
+<div *ngIf="!unauthorized" class="d-flex justify-content-center nav-buttons">
   <div id="actions">
     <button
       id="multipleChoise"

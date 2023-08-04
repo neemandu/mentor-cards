@@ -48,6 +48,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   showEditPack: boolean = false;
   removedCards: Card[] = [];
   cards: Card[] = [];
+  unauthorized: boolean = false;
 
   randomSelectedCard: Card;
   randomCardIndex: number = 0;
@@ -93,6 +94,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.api.GetCardsPack(this.id).then(
         (pack) => {
           this.pack = new PackContent().deseralize(pack);
+          if(this.pack.cards.length == 0){
+            this.unauthorized = true;
+          }
         },
         (reject) => {
           console.log(
