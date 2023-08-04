@@ -119,10 +119,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.selectedCards = [];
     this.multipileChecked = !this.multipileChecked;
     if(this.multipileChecked){
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show multiple cards", 'Pack id': this.id, 'Pack name': this.pack.name });
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show multiple cards", 'Pack id': this.id, 'Pack name': this.pack?.name });
     }
     else{
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show one card", 'Pack id': this.id, 'Pack name': this.pack.name });
+      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show one card", 'Pack id': this.id, 'Pack name': this.pack?.name });
     }
   }
 
