@@ -4,7 +4,7 @@
     <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
     <h1 style="text-align: center" *ngIf="!id">החיות שבתוכנו</h1>
     <h2
-      *ngIf="pack?.about"
+      *ngIf="pack?.about && !unauthorized"
       id="about-author"
       class="clickable"
       (click)="openAboutDialog()"
@@ -12,7 +12,7 @@
       (על יוצר הערכה)
     </h2>
   </div>
-  <button
+  <button *ngIf="!unauthorized"
     id="guideBook"
     type="button"
     [disabled]="showEditPack"
@@ -28,7 +28,8 @@
     >ספר הדרכה
   </button>
 </div>
-
+<br />
+<br />
 <div *ngIf="unauthorized" class="d-flex justify-content-center">
   אין לך מספיק הרשאות כדי לצפות בערכה זו
 </div>
