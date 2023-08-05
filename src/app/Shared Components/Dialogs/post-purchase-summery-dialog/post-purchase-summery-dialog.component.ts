@@ -15,7 +15,6 @@ export class PostPurchaseSummeryDialogComponent implements OnInit {
   public router: Router, private ngZone: NgZone, private userAuthService: UserAuthService) { }
 
   ngOnInit(): void {
-  // console.log("file: post-purchase-summery-dialog.component.ts ~ line 15 ~ data", this.data)
   }
 
   public navigate(path: string): void {

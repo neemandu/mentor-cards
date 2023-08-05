@@ -95,7 +95,6 @@ export class PlanTableComponent implements OnInit {
   }
   
   openApproveExternalPlanPurchaseDialog(element): void {
-    console.log(this.userData.externalPacksSubscriptions)
     const x = this.userData.externalPacksSubscriptions.find(el => el.providerTransactionId === element.providerTransactionId)
     const packId = x.includedCardPacksIds[0].id;
     const plan = x.subscriptionPlan;

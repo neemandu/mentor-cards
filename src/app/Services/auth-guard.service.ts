@@ -30,8 +30,6 @@ export class AuthGuardPackContentService implements CanActivate {
     private ngZone: NgZone) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    console.log('pack id: ' + route.params.id);
-    // debugger;
     var pack = this.cardsService.allPacks?.filter(pack => pack.id == route.params.id)[0]; 
     if(pack.isFree){
       return true;

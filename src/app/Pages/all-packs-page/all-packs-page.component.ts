@@ -271,7 +271,6 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   public navigate(path: string): void {
-    // console.log(path)
     this.ngZone.run(() => this.router.navigate([path]));
   }
 

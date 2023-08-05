@@ -26,7 +26,6 @@ export class PwChallangeComponent implements OnInit {
     private amplifyAuthService: AuthService) { }
 
   ngOnInit(): void {
-    console.log(this.userData)
     this.newPwForm.controls.userName.setValue(this.userData.challengeParam.userAttributes.email)
   }
 

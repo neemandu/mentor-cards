@@ -71,11 +71,9 @@ export class UserAuthService {
 
   async rememebrMe(): Promise<void> {
     try {
-      console.log("rememebrMe");
       const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({
         bypassCache: true,
       });
-      console.log("rememebrMe done");
       if (user) {
         this.loggedIn(user);
         this.rememberMeDone = true;
@@ -143,10 +141,8 @@ export class UserAuthService {
         const fiveMinutesAgo = new Date(currentTime.getTime() - (5 * 60 * 1000));
         if (this.userData.createdAt >= fiveMinutesAgo && this.userData.createdAt <= currentTime) {
           this.mixpanelService.track("SignUp");
-          console.log("The date is within the last 5 minutes.");
         } else {
           this.mixpanelService.track("UserLoggedIn");
-          console.log("The date is not within the last 5 minutes.");
         }
 
 

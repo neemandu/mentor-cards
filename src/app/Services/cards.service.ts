@@ -36,12 +36,10 @@ export class CardsService {
 
     this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.isLoggedIn = userData ? true : false;
-      console.log('clear packs');
       this.allPacks = undefined;
     }));
 
     this.Subscription.add(this.userAuthService.addCouponCodeToFavs.subscribe((ids: string[]) => {
-      // console.log("file: cards.service.ts ~ line 39 ~ this.Subscription.add ~ ids", ids)
       this.addFavoritesFromCouponCode(ids);
     }));
     var favs = localStorage.getItem("MentorCardFavorites")
@@ -92,7 +90,6 @@ export class CardsService {
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     (this.isLoggedIn ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
-      // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))

@@ -98,8 +98,6 @@ export class PackPreviewComponent implements OnInit {
   }
 
   navigateToPackView(exists): void {
-    console.log('exists');
-    console.log(exists);
     if (!exists && this.neverShowAgain) {
       const ls = localStorage.getItem('packsToOpenAutomatically');
       const packsToOpenAutomatically = ls ? ls.split(',') : [];
@@ -108,14 +106,10 @@ export class PackPreviewComponent implements OnInit {
         [...packsToOpenAutomatically, this.data.pack.id].toString()
       );
     }
-    console.log('navigate');
-    console.log(this.data.pack.id);
     this.navigate(`/pack-view/${this.data.pack.id}`);
   }
 
   navigate(path: string): void {
-    console.log('path');
-    console.log(path);
     this.closeDialog();
     this.ngZone.run(() => this.router.navigate([path]));
   }
