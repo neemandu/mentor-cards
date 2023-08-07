@@ -346,7 +346,26 @@
         'selected-content-one-card': selectedCards.length == 1
       }"
     >
+    <div *ngIf="flipped">
       <img (click)="imgClick($event)"
+        *ngFor="let card of selectedCards"
+        alt="one of the selected cards shown"
+        [ngClass]="{
+          'card-view': true,
+          'one-cards': selectedCards.length == 1,
+          'two-cards': selectedCards.length == 2,
+          'three-cards': selectedCards.length == 3,
+          'four-cards': selectedCards.length == 4,
+          'five-cards': selectedCards.length == 5
+        }"
+        loading="eager"
+        src="{{ card.backImgUrl }}"
+        data-src="{{ card.backImgUrl }}"
+      />
+    </div>
+      <div *ngIf="!flipped">
+      <img (click)="imgClick($event)"
+        
         *ngFor="let card of selectedCards"
         alt="one of the selected cards shown"
         [ngClass]="{
@@ -361,6 +380,7 @@
         src="{{ card.frontImgUrl }}"
         data-src="{{ card.frontImgUrl }}"
       />
+    </div>
     </div>
   </div>
 </div>
