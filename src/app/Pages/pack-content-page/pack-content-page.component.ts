@@ -49,6 +49,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   removedCards: Card[] = [];
   cards: Card[] = [];
   unauthorized: boolean = false;
+  isDoubleSided: boolean = false;
 
   randomSelectedCard: Card;
   randomCardIndex: number = 0;
@@ -94,11 +95,21 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         (pack) => pack.id === this.id
       );
       this.cards = [...this.pack.cards];
+      if(!this.pack.cards[0].backImgUrl){
+        this.isDoubleSided = false;
+      }
+      else if(this.pack.cards[0].backImgUrl == this.pack.cards[1].backImgUrl){
+        this.isDoubleSided = false;
+      }
+      else{
+        this.isDoubleSided = true;
+      }
       this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
     } else {
       this.api.GetCardsPack(this.id).then(
         (pack) => {
           this.pack = new PackContent().deseralize(pack);
+          this.isDoubleSided = pack.cards[0].backImgUrl ? false : true;
           if(this.pack.cards.length == 0){
             this.unauthorized = true;
           }
