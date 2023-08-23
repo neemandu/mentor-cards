@@ -29,6 +29,9 @@
     <button class="btn navbar-btn" (click)="navigate('/all-packs-page')">
       כל ערכות הקלפים
     </button>
+    <button class="btn navbar-btn" (click)="openNewTab()">
+      קורסים דיגיטליים
+    </button>
     <button class="btn navbar-btn" (click)="navigate('/price-page')">
       התוכניות שלנו
     </button>
@@ -152,6 +155,7 @@
   <button mat-menu-item (click)="navigate('/all-packs-page')">
     כל ערכות הקלפים
   </button>
+  <button mat-menu-item (click)="openNewTab()">קורסים דיגיטליים</button>
   <button mat-menu-item (click)="navigate('/price-page')">התוכניות שלנו</button>
   <button mat-menu-item (click)="navigate('/guide-page')">שאלות נפוצות</button>
   <button mat-menu-item (click)="navigate('/services')">שירותים נוספים</button>

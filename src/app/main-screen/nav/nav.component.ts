@@ -70,6 +70,11 @@ export class NavComponent implements OnInit {
     return res;
   }
 
+  openNewTab(): void {
+    const url = 'https://school.mentor-cards.com/bundles'; 
+    window.open(url, '_blank');
+  }
+
   public navigate(path: string): void {
     // console.log(path)
     this.ngZone.run(() => this.router.navigate([path]));
