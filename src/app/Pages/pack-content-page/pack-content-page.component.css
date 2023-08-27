@@ -289,6 +289,7 @@ li span {
 @media screen and (max-width: 320px) {
   #guide-book-icon {
     display: none;
+    color: var(--main-color);
   }
 }
 
@@ -374,6 +375,7 @@ li span {
 .card-view {
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 10px;
 }
 
 .one-cards,

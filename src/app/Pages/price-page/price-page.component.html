@@ -23,117 +23,6 @@ type="button"
 <div style="text-align: center">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
-      <mat-card-title>תכנית חינמית</mat-card-title>
-      <mat-card-content>
-        <p class="price-line">
-          חודש /
-          <span class="price-number"
-            >₪0</span
-          >
-        </p>
-        <br />
-        <ul>
-          <li>
-          גישה ל-3 ערכות השלישייה הפותחת
-          </li>
-          <li>
-          הצטרפות לקהילה שלנו בפייסבוק
-          </li><li>
-          הצטרפות לקבוצת הווטסאפ שלנו
-          </li>
-          <li>
-          הדרכות שבועיות במייל          </li>
-          <li>
-          השתתפות בלייבים שלנו
-          </li>
-          <li>
-          גישה לפרסום מאמרים באתר שלנו
-          </li>
-      </ul>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          id="freeSubscription"
-          *ngIf="!userData"
-          class="other-purchase-btn purchase-btn"
-          type="button"
-          (click)="signInSignUp()"
-        >
-          להצטרפות >>
-        </button>
-        <button
-          *ngIf="userData &&
-            userData.status === 'NOPLAN'"
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-          הינך רשום לתכנית זו
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
-      <mat-card-title>תכנית חודשית</mat-card-title>
-      <mat-card-content>
-        <p class="price-line">
-          חודש /
-          <span class="price-number"
-            >₪{{
-              monthlySubscription.fullPrice /
-                monthlySubscription.billingCycleInMonths
-            }}</span
-          >
-        </p>
-        <br />
-        <ul>
-          <li>
-            גישה ל-3 ערכות השלישייה הפותחת
-            </li>
-            <li>
-            הצטרפות לקהילה שלנו בפייסבוק
-            </li><li>
-            הצטרפות לקבוצת הווטסאפ שלנו
-            </li>
-            <li>
-            הדרכות שבועיות במייל          </li>
-            <li>
-            השתתפות בלייבים שלנו
-            </li>
-            <li>
-            גישה לפרסום מאמרים באתר שלנו
-            </li>
-          <li>
-            גישה לכל ערכות הבית - ערכות שפותחו ע"י צוות מנטור-קארדס
-          </li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          id="monthlySubscription"
-          *ngIf="
-            userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1
-          "
-          class="other-purchase-btn purchase-btn"
-          type="button"
-          (click)="checkFreePeriod(monthlySubscription.id)"
-        >
-          להצטרפות >>
-        </button>
-        <button
-          *ngIf="
-            userData?.status === 'PLAN' &&
-            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
-          "
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-          הינך רשום לתכנית זו
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
       <!-- <span id="best-pack">הכי משתלמת</span> -->
       <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />
       <mat-card-title>תכנית שנתית</mat-card-title>
@@ -194,6 +83,119 @@ type="button"
             userData?.status === 'PLAN' &&
             userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
           "
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+          הינך רשום לתכנית זו
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>תכנית חודשית</mat-card-title>
+      <mat-card-content>
+        <p class="price-line">
+          חודש /
+          <span class="price-number"
+            >₪{{
+              monthlySubscription.fullPrice /
+                monthlySubscription.billingCycleInMonths
+            }}</span
+          >
+        </p>
+        <br />
+        <ul>
+          <li>
+            גישה ל-3 ערכות השלישייה הפותחת
+            </li>
+            <li>
+            הצטרפות לקהילה שלנו בפייסבוק
+            </li><li>
+            הצטרפות לקבוצת הווטסאפ שלנו
+            </li>
+            <li>
+            הדרכות שבועיות במייל          </li>
+            <li>
+            השתתפות בלייבים שלנו
+            </li>
+            <li>
+            גישה לפרסום מאמרים באתר שלנו
+            </li>
+          <li>
+            גישה לכל ערכות הבית - ערכות שפותחו ע"י צוות מנטור-קארדס
+          </li>
+          <li>
+            גישה לכל ערכות ה-VIP שלנו    </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          id="monthlySubscription"
+          *ngIf="
+            userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1
+          "
+          class="other-purchase-btn purchase-btn"
+          type="button"
+          (click)="checkFreePeriod(monthlySubscription.id)"
+        >
+          להצטרפות >>
+        </button>
+        <button
+          *ngIf="
+            userData?.status === 'PLAN' &&
+            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
+          "
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+          הינך רשום לתכנית זו
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>תכנית חינמית</mat-card-title>
+      <mat-card-content>
+        <p class="price-line">
+          חודש /
+          <span class="price-number"
+            >₪0</span
+          >
+        </p>
+        <br />
+        <ul>
+          <li>
+          גישה ל-3 ערכות השלישייה הפותחת
+          </li>
+          <li>
+          הצטרפות לקהילה שלנו בפייסבוק
+          </li><li>
+          הצטרפות לקבוצת הווטסאפ שלנו
+          </li>
+          <li>
+          הדרכות שבועיות במייל          </li>
+          <li>
+          השתתפות בלייבים שלנו
+          </li>
+          <li>
+          גישה לפרסום מאמרים באתר שלנו
+          </li>
+      </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          id="freeSubscription"
+          *ngIf="!userData"
+          class="other-purchase-btn purchase-btn"
+          type="button"
+          (click)="signInSignUp()"
+        >
+          להצטרפות >>
+        </button>
+        <button
+          *ngIf="userData &&
+            userData.status === 'NOPLAN'"
           class="disabled-btn purchase-btn"
           type="button"
           disabled

@@ -231,10 +231,9 @@ exports.handler = async (event, context, callback) => {
     if(user && 
         user.status == "PLAN" &&
         user.subscription &&
-        user.subscription.subscriptionPlan &&
-        user.subscription.subscriptionPlan.billingCycleInMonths == 12
+        user.subscription.subscriptionPlan
      ){
-         console.log('Yearly plan! they deserve all packs');
+         console.log('plan! they deserve all packs');
          return event.source['cards'];
      }
  

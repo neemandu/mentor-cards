@@ -44,34 +44,12 @@
       </button>
     </div>
 
-    <div id="logged-in-has-program-external-pack-not-owned"
-      *ngIf="userData && userData.status === 'PLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
-      class="actions case-3">
-      <div class="d-flex flex-column">
-        <div class="d-flex monthly-yearly-toggle">
-          <span style="cursor: pointer;" (click)="monthlyYearlyChanged()">חיוב שנתי</span>
-          <mat-slide-toggle (change)="monthlyYearlyChanged()" [checked]="isYearly">חיוב חודשי</mat-slide-toggle>
-        </div>
-        <span class="discount-line" [ngStyle]="{'visibility': isYearly ? 'visible' : 'hidden'}">{{ discount }}%
-          הנחה</span>
-      </div>
-      <span class="original-price-line">עלות רגילה: <span class="original-price">
-          {{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}}
-          ש"ח / {{!isYearly ? 'חודש': 'שנה'}}</span></span>
-      <span class="discount-price">עלות למנויים:
-        {{!isYearly ? monthlyPlan.priceForMentorCardsMembers : yearlyPlan.priceForMentorCardsMembers}}
-        ש"ח / {{!isYearly ? 'חודש': 'שנה'}}</span>
-      <button class="action-button" type="button" (click)="openApprovePurchaseDialog()">
-        לחצו לרכישה
-      </button>
-    </div>
-
     <div id="logged-in-has-no-program-pack-not-owned"
       *ngIf="userData && userData.status === 'NOPLAN' && (!data.pack.cards || data.pack.cards.length === 0) && data.pack.isExternalPack"
       class="case-4">
       <div class="top-part">
         <span>
-          הצטרפו למנוי שנתי באתר Mentor-Cards וקבלו את ערכה זו רק ב9.90 ש"ח לחודש, בנוסף לכל ערכות הבית שלנו.
+           * הצטרפו למנוי באתר Mentor-Cards וקבלו ערכה זו ללא עלות נוספת, בנוסף לכל ערכות הבית שלנו.
         </span>
         <button class="action-button" type="button" (click)="navigate('/price-page')">
           לתוכניות שלנו 
