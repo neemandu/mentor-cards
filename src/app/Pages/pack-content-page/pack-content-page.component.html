@@ -33,7 +33,7 @@
   אין לך מספיק הרשאות כדי לצפות בערכה זו
 </div>
 
-<div *ngIf="!unauthorized" class="d-flex justify-content-center nav-buttons">
+<div *ngIf="!unauthorized" class="d-flex justify-content-center">
   <div id="actions">
     <button
       id="multipleChoise"
@@ -46,10 +46,6 @@
       (click)="multipileChanged()"
       [disabled]="showEditPack"
     >
-    <mat-icon *ngIf="multipileChecked" id="guide-book-icon" style="font-family: 'Material Icons'"
-  >photo_icon</mat-icon>
-  <mat-icon *ngIf="!multipileChecked" id="guide-book-icon" style="font-family: 'Material Icons'"
-  >burst_mode_icon</mat-icon>
       {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
     </button>
     <button
@@ -62,8 +58,7 @@
         'top-option-btn-disabled': showEditPack
       }"
       (click)="shuffle()"
-    ><mat-icon id="guide-book-icon" style="font-family: 'Material Icons'"
-    >style_icon</mat-icon>
+    >
       ערבב
     </button>
     <button
@@ -76,8 +71,7 @@
         'top-option-btn-disabled': showEditPack
       }"
       (click)="flip()"
-    ><mat-icon id="guide-book-icon" style="font-family: 'Material Icons'"
-    >flip_camera_android_icon</mat-icon>
+    >
       הפוך את הקלפים
     </button>
     <button
@@ -90,8 +84,7 @@
         'top-option-btn-disabled': showEditPack
       }"
       (click)="toggleRandomCardsModal()"
-    ><mat-icon id="guide-book-icon" style="font-family: 'Material Icons'"
-    >shuffle_icon</mat-icon>
+    >
       הצג קלף אקראי
     </button>
     <button
@@ -100,8 +93,6 @@
       [ngClass]="{ 'option-btn top-option-btn': true }"
       (click)="editPack()"
     >
-    <mat-icon id="guide-book-icon" style="font-family: 'Material Icons'"
-    >edit_icon</mat-icon>
       {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
     </button>
   </div>
@@ -305,7 +296,18 @@
 </nav>
 
 <mat-menu #actions="matMenu">
-  
+  <button
+  mat-menu-item
+  type="button"
+  class="option-menu-btn top-option-btn"
+  (click)="multipileChanged()"
+>
+  {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
+  <mat-icon *ngIf="multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+>photo_icon</mat-icon>
+<mat-icon *ngIf="!multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+>burst_mode_icon</mat-icon>
+</button>
   <button
     mat-menu-item
     type="button"
@@ -317,18 +319,7 @@
     <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
   >style_icon</mat-icon>
   </button>
-  <button
-    mat-menu-item
-    type="button"
-    class="option-menu-btn top-option-btn"
-    (click)="multipileChanged()"
-  >
-    {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
-    <mat-icon *ngIf="multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
-  >photo_icon</mat-icon>
-  <mat-icon *ngIf="!multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
-  >burst_mode_icon</mat-icon>
-  </button>
+
   <button
     mat-menu-item
     type="button"
