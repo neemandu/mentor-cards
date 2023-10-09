@@ -28,10 +28,17 @@
   <label *ngIf="isStillFree" class="free-until-label"
     >ערכה במתנה! עד - {{ freeUntilDate }}</label
   >
-  <label *ngIf="packInfo.isFree && !isSubscriber" class="free-label"
+
+  <!-- open for all 2023 war -->
+  <label class="free-label"
   (click)="openPreviewDialog()" 
     >פתוח עבורך!</label
   >
+
+  <!--<label *ngIf="packInfo.isFree && !isSubscriber" class="free-label"
+  (click)="openPreviewDialog()" 
+    >פתוח עבורך!</label
+  >-->
   <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label"
     >ערכת הקלפים שנבחרה</label
   >
