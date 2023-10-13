@@ -1,5 +1,22 @@
 <title>Mentor-Cards כל ערכות הקלפים</title>
 <div id="content">
+  <!-- Overlay -->
+<div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000;">
+
+  <!-- Popup -->
+  <div style="position: relative; width: 300px; max-width: 80%; margin: 10% auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); direction: rtl; text-align: right;">
+      
+      <!-- Close Button -->
+      <button onclick="document.getElementById('popupOverlay').style.display='none';" style="position: absolute; left: 10px; top: 10px; background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+      
+      <!-- Message -->
+      <p>מנטורים יקרים,</p>
+      <p>כל ערכות הקלפים באתר פתוחות לשימושכם.</p>
+      <p>בתקווה לימים שקטים ובטוחים.</p>
+      <p>צוות מנטור - קארדס</p>
+  </div>
+</div>
+
   <div id="filters" class="float-right">
     <button
       id="couponCodeBtn"
@@ -78,6 +95,7 @@
       </mat-list-option>
     </mat-selection-list>
   </div>
+  
   <!-- <div class="all-packs-view" #old>
     <div *ngIf="allOwnedPacks().length != 0">
       <h1 *ngIf="signedIn && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">ערכות הקלפים שלי</h1>
