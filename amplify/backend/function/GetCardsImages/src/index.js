@@ -180,16 +180,10 @@ exports.handler = async (event, context, callback) => {
 
     // user was not identified in cognito
     if(!("identity" in event)){
-        console.log('no user');
         return [];
     }
 
     if(event.identity == null){
-        console.log('no user');
-        return [];
-    }
-    if(!("claims" in event.identity)){
-        console.log('no user');
         return [];
     }
 

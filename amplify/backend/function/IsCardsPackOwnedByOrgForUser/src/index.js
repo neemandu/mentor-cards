@@ -46,10 +46,7 @@ exports.handler = async (event) => {
     console.log(event);
     if(event.identity == null){
         return false;
-    }  
-    if(!("claims" in event.identity)){
-        return false;
-    } 
+    }
     var username = event.identity.claims['cognito:username'];
     if(!username){
         username = event.identity.claims['username'];

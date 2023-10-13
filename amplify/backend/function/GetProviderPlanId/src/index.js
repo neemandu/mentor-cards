@@ -73,8 +73,8 @@ exports.handler = async (event) => {
         return noPlan(plans);
     }
 
-    if(!("claims" in event.identity)){
-        return noPlan(plans);
+    if(event.identity == null){
+        return [];
     }
 
     AWS.config.update({

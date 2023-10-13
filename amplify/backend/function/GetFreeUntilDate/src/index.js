@@ -64,17 +64,6 @@ exports.handler = async (event) => {
         //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
     }); 
     console.log(event);
-    if(event.identity == null){
-        console.log('no user');
-        return null;
-    }
-    if(!("claims" in event.identity)){
-        console.log('no user');
-        if('freeUntilDate' in event.source){
-            return event.source['freeUntilDate'];
-        }
-        return null;
-    }
     var username = event.identity.claims['cognito:username'];
     if(!username){
         username = event.identity.claims['username'];
