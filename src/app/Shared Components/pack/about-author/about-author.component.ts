@@ -22,10 +22,10 @@ export class AboutAuthorComponent implements OnInit {
 
   redirect(): void {
     this.mixpanel.track("RedirectToExternalCreator", 
-    {"Pack ID": this.packInfo.id, 
-    "Pack name" : this.packInfo.name,
-    "Link" : this.packInfo.about.link});
-    window.open(this.packInfo.about.link, '_blank');
+    {"Pack ID": this.packInfo?.id, 
+    "Pack name" : this.packInfo?.name,
+    "Link" : this.packInfo?.about.link});
+    window.open(this.packInfo?.about.link, '_blank');
   }
 
 }

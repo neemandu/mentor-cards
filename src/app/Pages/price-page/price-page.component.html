@@ -9,52 +9,80 @@
     >התוכניות שלנו</span
   >
   <br />
+  <button class="d-flex flex-column align-items-center"
+id="couponCodeBtn"
+type="button"
+(click)="openEnterCouponCodeModal()"
+>
+להזנת קוד הטבה לחצו כאן
+</button>
 </div>
+
+<br />
 <br />
 <div style="text-align: center">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
-      <mat-card-title>תכנית חינמית</mat-card-title>
+      <!-- <span id="best-pack">הכי משתלמת</span> -->
+      <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />
+      <mat-card-title>תכנית שנתית</mat-card-title>
       <mat-card-content>
         <p class="price-line">
           חודש /
           <span class="price-number"
-            >₪0</span
+            >₪{{
+              yearlySubscription.fullPrice /
+                yearlySubscription.billingCycleInMonths
+            }}</span
           >
+        </p>
+        <p class="price-line">
+          משלמים מראש {{ yearlySubscription.fullPrice }} ש"ח לשנה וחוסכים
+          {{ yearlySubscriptionPercentage }}%
         </p>
         <br />
         <ul>
           <li>
-          גישה ל-5 ערכות החמישייה הפותחת
+            גישה ל-3 ערכות השלישייה הפותחת
+            </li>
+            <li>
+            הצטרפות לקהילה שלנו בפייסבוק
+            </li><li>
+            הצטרפות לקבוצת הווטסאפ שלנו
+            </li>
+            <li>
+            הדרכות שבועיות במייל          </li>
+            <li>
+            השתתפות בלייבים שלנו
+            </li>
+            <li>
+            גישה לפרסום מאמרים באתר שלנו
+            </li>
+          <li>
+            גישה לכל ערכות הבית - ערכות שפותחו ע"י צוות מנטור-קארדס
           </li>
           <li>
-          הצטרפות לקהילה שלנו בפייסבוק
-          </li><li>
-          הצטרפות לקבוצת הווטסאפ שלנו
-          </li>
-          <li>
-          הדרכות שבועיות במייל          </li>
-          <li>
-          השתתפות בלייבים שלנו
-          </li>
-          <li>
-          גישה לפרסום מאמרים באתר שלנו
-          </li>
-      </ul>
+גישה לכל ערכות ה-VIP שלנו    </li>
+        </ul>
       </mat-card-content>
       <mat-card-actions>
         <button
-          id="freeSubscription"
-          *ngIf="!userData || userData?.status === 'NOPLAN'"
+          id="yearlySubscription"
+          *ngIf="
+            userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12
+          "
           class="other-purchase-btn purchase-btn"
           type="button"
-          (click)="signInSignUp()"
+          (click)="checkFreePeriod(yearlySubscription.id)"
         >
           להצטרפות >>
         </button>
         <button
-          *ngIf="userData &&
-            userData.status === 'NOPLAN'"
+          *ngIf="
+            userData?.status === 'PLAN' &&
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
+          "
           class="disabled-btn purchase-btn"
           type="button"
           disabled
@@ -78,13 +106,26 @@
         <br />
         <ul>
           <li>
-          כל מה שבתוכנית החינמית
-          </li>
+            גישה ל-3 ערכות השלישייה הפותחת
+            </li>
+            <li>
+            הצטרפות לקהילה שלנו בפייסבוק
+            </li><li>
+            הצטרפות לקבוצת הווטסאפ שלנו
+            </li>
+            <li>
+            הדרכות שבועיות במייל          </li>
+            <li>
+            השתתפות בלייבים שלנו
+            </li>
+            <li>
+            גישה לפרסום מאמרים באתר שלנו
+            </li>
           <li>
             גישה לכל ערכות הבית - ערכות שפותחו ע"י צוות מנטור-קארדס
           </li>
           <li>
-גישה לכל הערכות של האומנים האורחים שלנו    </li>
+            גישה לכל ערכות ה-VIP שלנו    </li>
         </ul>
       </mat-card-content>
       <mat-card-actions>
@@ -114,51 +155,47 @@
       </mat-card-actions>
     </mat-card>
     <mat-card>
-      <!-- <span id="best-pack">הכי משתלמת</span> -->
-      <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />
-      <mat-card-title>תכנית שנתית</mat-card-title>
+      <mat-card-title>תכנית חינמית</mat-card-title>
       <mat-card-content>
         <p class="price-line">
           חודש /
           <span class="price-number"
-            >₪{{
-              yearlySubscription.fullPrice /
-                yearlySubscription.billingCycleInMonths
-            }}</span
+            >₪0</span
           >
-        </p>
-        <p class="price-line">
-          משלמים מראש {{ yearlySubscription.fullPrice }} ש"ח לשנה וחוסכים
-          {{ yearlySubscriptionPercentage }}%
         </p>
         <br />
         <ul>
-          <li>            
-          כל מה שבתוכנית החודשית
+          <li>
+          גישה ל-3 ערכות השלישייה הפותחת
           </li>
-          <li>          
-            שיחה אישית עם צוות מנטור-קארדס להכוונה ויעוץ
+          <li>
+          הצטרפות לקהילה שלנו בפייסבוק
+          </li><li>
+          הצטרפות לקבוצת הווטסאפ שלנו
           </li>
-        </ul>
+          <li>
+          הדרכות שבועיות במייל          </li>
+          <li>
+          השתתפות בלייבים שלנו
+          </li>
+          <li>
+          גישה לפרסום מאמרים באתר שלנו
+          </li>
+      </ul>
       </mat-card-content>
       <mat-card-actions>
         <button
-          id="yearlySubscription"
-          *ngIf="
-            userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12
-          "
+          id="freeSubscription"
+          *ngIf="!userData"
           class="other-purchase-btn purchase-btn"
           type="button"
-          (click)="checkFreePeriod(yearlySubscription.id)"
+          (click)="signInSignUp()"
         >
           להצטרפות >>
         </button>
         <button
-          *ngIf="
-            userData?.status === 'PLAN' &&
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
-          "
+          *ngIf="userData &&
+            userData.status === 'NOPLAN'"
           class="disabled-btn purchase-btn"
           type="button"
           disabled

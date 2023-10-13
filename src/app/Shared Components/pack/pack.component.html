@@ -5,20 +5,12 @@
     matTooltip="{{ packInfo.name }}"
   >
     <h3 class="pack-desc">{{ packInfo.name }}</h3>
-    <img
-      class="external-icon"
-      src="/assets/crown.png"
-      alt="VIP pack crown icon"
-      matTooltip="ערכה של יוצר חוץ"
-      matTooltipShowDelay="500"
-      *ngIf="this.packInfo.isExternalPack"
-    />
   </div>
   <mat-icon
     class="lock-icon"
     matTooltip="ערכה נעולה"
     matTooltipShowDelay="500"
-    *ngIf="!packInfo.cards"
+    *ngIf="!packInfo.cards || packInfo.cards.length == 0"
     >lock</mat-icon
   >
   <img
@@ -36,10 +28,17 @@
   <label *ngIf="isStillFree" class="free-until-label"
     >ערכה במתנה! עד - {{ freeUntilDate }}</label
   >
-  <label *ngIf="packInfo.isFree && !isSubscriber" class="free-label"
+
+  <!-- open for all 2023 war -->
+  <label class="free-label"
   (click)="openPreviewDialog()" 
     >פתוח עבורך!</label
   >
+
+  <!--<label *ngIf="packInfo.isFree && !isSubscriber" class="free-label"
+  (click)="openPreviewDialog()" 
+    >פתוח עבורך!</label
+  >-->
   <label *ngIf="packInfo.isOwnedByOrg" class="free-until-label"
     >ערכת הקלפים שנבחרה</label
   >

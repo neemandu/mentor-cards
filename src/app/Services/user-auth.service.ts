@@ -141,10 +141,8 @@ export class UserAuthService {
         const fiveMinutesAgo = new Date(currentTime.getTime() - (5 * 60 * 1000));
         if (this.userData.createdAt >= fiveMinutesAgo && this.userData.createdAt <= currentTime) {
           this.mixpanelService.track("SignUp");
-          console.log("The date is within the last 5 minutes.");
         } else {
           this.mixpanelService.track("UserLoggedIn");
-          console.log("The date is not within the last 5 minutes.");
         }
 
 
@@ -293,7 +291,7 @@ export class UserAuthService {
         const cc = this.userData.couponCodes.find(
           (coupon) => (coupon.organization.id = id)
         );
-        if (cc.allowedCardsPacks.length == 0) {
+        if (cc.allowedCardsPacks?.length == 0) {
           this.overlaySpinnerService.changeOverlaySpinner(false);
           this.ngZone.run(() => this.router.navigate(['/company-pack-choise']));
         }

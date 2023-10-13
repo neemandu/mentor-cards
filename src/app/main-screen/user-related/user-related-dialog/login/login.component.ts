@@ -271,7 +271,6 @@ export class LoginComponent implements OnInit {
     this.amplifyAuthService.confirmCode(this.confirmForm.controls['username'].value, this.confirmForm.controls['confirmationCode'].value.trim())
       .then((data: any) => {
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        // console.log(data);
         if (data === 'SUCCESS') {
           this.userAuthService._snackBar.open(
             `משתמש אומת! בעוד רגע תוכלו להתחיל לעבוד`, '', {

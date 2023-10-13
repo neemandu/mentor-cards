@@ -62,19 +62,19 @@ export class PackPreviewComponent implements OnInit {
       );
       this.yearlyPlan['priceForMentorCardsMembers'] =
         Math.round(
-          this.yearlyPlan.fullPrice * (1 - this.yearlyPlan.discount / 100) * 10
+          this.yearlyPlan?.fullPrice * (1 - this.yearlyPlan?.discount / 100) * 10
         ) / 10;
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el.billingCycleInMonths === 1
       );
       this.monthlyPlan['priceForMentorCardsMembers'] =
         Math.round(
-          this.monthlyPlan.fullPrice *
-            (1 - this.monthlyPlan.discount / 100) *
+          this.monthlyPlan?.fullPrice *
+            (1 - this.monthlyPlan?.discount / 100) *
             10
         ) / 10;
       this.discount = Math.round(
-        (1 - this.yearlyPlan.fullPrice / (this.monthlyPlan.fullPrice * 12)) *
+        (1 - this.yearlyPlan?.fullPrice / (this.monthlyPlan?.fullPrice * 12)) *
           100
       );
     }
@@ -83,8 +83,8 @@ export class PackPreviewComponent implements OnInit {
   redirect(): void {
     this.mixpanel.track("RedirectToExternalCreator", 
     {"Pack ID": this.data.pack.id, 
-    "Pack name" : this.data.pack.name,
-    "Link" : this.data.pack.about.link});
+    "Pack name" : this.data.pack?.name,
+    "Link" : this.data.pack?.about.link});
     window.open(this.data.pack.about.link, '_blank');
   }
 
@@ -98,7 +98,6 @@ export class PackPreviewComponent implements OnInit {
   }
 
   navigateToPackView(exists): void {
-    console.log('exists');
     if (!exists && this.neverShowAgain) {
       const ls = localStorage.getItem('packsToOpenAutomatically');
       const packsToOpenAutomatically = ls ? ls.split(',') : [];
@@ -107,13 +106,10 @@ export class PackPreviewComponent implements OnInit {
         [...packsToOpenAutomatically, this.data.pack.id].toString()
       );
     }
-    console.log('navigate');
     this.navigate(`/pack-view/${this.data.pack.id}`);
   }
 
   navigate(path: string): void {
-    console.log('path');
-    console.log(path);
     this.closeDialog();
     this.ngZone.run(() => this.router.navigate([path]));
   }

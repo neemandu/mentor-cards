@@ -28,7 +28,6 @@ export class UserRelatedDialogComponent implements OnInit {
       this.registeredEmail = undefined;
     this.selectedTab = event.index;
     // this.selectedTab = event.index;
-    // console.log("tabChanged -> this.selectedTab", this.selectedTab)
     // this.loginChild.resetForms();
     // this.registerChild.resetForms();
   }

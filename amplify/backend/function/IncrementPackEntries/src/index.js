@@ -53,10 +53,9 @@ function pushUserUsage(email, pack){
     }
     var foundUser = false;
     for(var i = 0; i< pack["usersUsage"].length; i++){
-        var packUser = pack["usersUsage"][i];
-        if(email == packUser.user){
+        if(email == pack["usersUsage"][i].user){
             foundUser = true;
-            packUser.entries++;
+            pack["usersUsage"][i].entries++;
         }
         break;
     }

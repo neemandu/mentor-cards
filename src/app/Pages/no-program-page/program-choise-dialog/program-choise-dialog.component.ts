@@ -173,7 +173,7 @@ export class ProgramChoiseDialogComponent implements OnInit {
   getDiscountAmount(userAmount): string {
     var plan = this.userAuthService.subPlans.find(plan => plan.numberOfUsers == userAmount)
     if(plan.discount != 0)
-      return Math.floor((plan.discount/plan.fullPrice) * 100) + '% הנחה'
+      return Math.floor((plan.discount/plan?.fullPrice) * 100) + '% הנחה'
     else 
       return '- - - -';
   }

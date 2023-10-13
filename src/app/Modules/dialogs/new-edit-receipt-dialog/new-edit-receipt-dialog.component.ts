@@ -61,7 +61,6 @@ export class NewEditReceiptDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.data.coupon)
     const res: CreateInvoicesInput | UpdateInvoicesInput = {
       id: this.data.receipt?.id ? this.data.receipt.id : null,
       email: this.receiptForm.controls.email.value,

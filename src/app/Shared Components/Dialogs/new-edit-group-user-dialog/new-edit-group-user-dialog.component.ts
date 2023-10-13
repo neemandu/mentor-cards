@@ -36,7 +36,6 @@ export class NewEditGroupUserDialogComponent implements OnInit {
     var dialogSub = dialogRef.afterClosed().subscribe((res: boolean) => {
       dialogSub.unsubscribe();
       if (res) {
-        // console.log("file: new-edit-group-user-dialog.component.ts ~ line 40 ~ dialogSub ~ res", res)
         this.data = new GroupUser();
         this.data.email = this.formControls.email.value;
         this.data.role = this.formControls.role.value;

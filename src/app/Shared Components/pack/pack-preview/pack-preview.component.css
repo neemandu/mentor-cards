@@ -56,7 +56,7 @@ a {
 }
 
 .about-author-image {
-  padding-top: 50%;
+  padding-top: 20%;
   width: 100%;
   transition: scale 0.2s ease-out;
 }

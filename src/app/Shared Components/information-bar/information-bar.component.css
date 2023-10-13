@@ -5,6 +5,9 @@
   background-color: rgb(255, 203, 126);
   color: white;
   align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
 }
 
 .icons {

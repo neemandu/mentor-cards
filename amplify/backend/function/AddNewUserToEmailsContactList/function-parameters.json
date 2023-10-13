@@ -12,6 +12,10 @@
     {
       "cloudFormationParameterName": "contactListId",
       "environmentVariableName": "CONTACT_LIST_ID"
+    },
+    {
+      "cloudFormationParameterName": "contactListId",
+      "environmentVariableName": "contactListId"
     }
   ],
   "secretNames": [

@@ -27,6 +27,7 @@
     "angularx-social-login": "^3.5.7",
     "apexcharts": "^3.37.1",
     "aws-amplify": "^3.3.14",
+    "buttercms": "^1.2.12",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
     "isomorphic-fetch": "^2.2.1",

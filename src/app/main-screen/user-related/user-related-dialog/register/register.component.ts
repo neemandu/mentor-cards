@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
   trimSpacesEmail(form): void {
     if (form.controls['username'].value !== '')
       form.controls['username'].setValue(form.controls['username'].value.split(' ').join(''))
-    console.log(form.controls['username'])
   }
 
   checkUsernameConfirm(): void {

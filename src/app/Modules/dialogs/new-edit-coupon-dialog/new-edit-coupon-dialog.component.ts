@@ -35,7 +35,6 @@ export class NewEditCouponDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.data.coupon)
     if (this.dupCouponError()) {
       this.couponForm.controls.code.setErrors({ 'DupCouponName': true });
       return;

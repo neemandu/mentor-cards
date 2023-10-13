@@ -32,6 +32,8 @@ import { PaymentProgramsManagementComponent } from './Modules/management/payment
 import { ReceiptsManagementComponent } from './Modules/management/receipts-management/receipts-management.component';
 import { DashboardComponent } from './Modules/management/dashboard/dashboard.component';
 import { ServicesComponent } from './Pages/services/services.component';
+import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
+import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/all-packs-page', pathMatch: 'full' },
@@ -53,10 +55,12 @@ const routes: Routes = [
   { path: 'all-packs-page', component: AllPacksPageComponent },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  { path: 'all-blogs', component: AllBlogsComponent },
+  { path: 'detail/:slug', component: BlogDetailComponent },
   {
     path: 'pack-view/:id',
-    component: PackContentPageComponent,
-    canActivate: [AuthGuardPackContentService],
+    component: PackContentPageComponent//,
+    //canActivate: [AuthGuardPackContentService],
   },
   { path: 'example-pack', component: PackContentPageComponent },
   { path: 'guide-book', component: GuideBookComponent },
