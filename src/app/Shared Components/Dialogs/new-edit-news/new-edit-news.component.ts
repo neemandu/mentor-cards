@@ -16,7 +16,6 @@ export class NewEditNewsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: newEditObject, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    // console.log(this.data)
     this.form = this.formBuilder.group({
       value: [this.data ?
         this.data.value[this.data.valueFieldName] : '', [Validators.required]],

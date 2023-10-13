@@ -1,0 +1,67 @@
+<title>מאמרים</title>
+<h1 id="title">{{title}}</h1>
+<h1 id="subTitle" *ngIf="!isSubjectPicked">כאן תמצאו מגוון של....</h1>
+<div class="wrapper cardList" *ngIf="!isSubjectPicked">
+    <div (click)="handleCardClick(category)"
+        *ngFor="let category of categories">
+        <mat-card class="example-card">
+            <mat-card-title>{{category.name}}</mat-card-title>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        </mat-card>
+    </div>
+</div>
+
+<div id="layout" *ngIf="isSubjectPicked">
+  <div id="buttons" class="d-flex flex-column">
+    <div *ngFor="let category of categories">
+        <button  [ngClass]="{'btn': true, 'selected-btn': selectedBtn==category.index}" type="button"
+                (click)="selectedTopicChanged(category.index, category.name)" 
+                mat-menu-item>{{category.name}}
+        </button>
+    </div>
+    </div>
+  <div id="line"></div>
+  <div id="content">
+    <div class="wrapper cardList">
+        <app-blog-card
+        *ngFor="let blogPost of filteredBlogs"
+        [slug]="blogPost.slug" 
+        [date]="blogPost.created"
+        [summary]="blogPost.summary"
+        [title]="blogPost.title"
+        [image]="blogPost.featured_image"
+        [authorImage]="blogPost.author.profile_image"
+        [authorName]="blogPost.author.first_name + blogPost.author.last_name"
+        >
+        </app-blog-card>
+    </div>
+  </div>
+</div>
+
+<div id="accordion" *ngIf="isSubjectPicked">
+  <mat-accordion>
+    <div *ngFor="let category of categories">
+    <mat-expansion-panel (click)="selectedTopicChanged(category.index, categopry.name)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{category.name}}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="wrapper cardList">
+        <app-blog-card
+        *ngFor="let blogPost of filteredBlogs"
+        [slug]="blogPost.slug" 
+        [date]="blogPost.created"
+        [summary]="blogPost.summary"
+        [title]="blogPost.title"
+        [image]="blogPost.featured_image"
+        [authorImage]="blogPost.author.profile_image"
+        [authorName]="blogPost.author.first_name + blogPost.author.last_name"
+        >
+        </app-blog-card>
+    </div>
+    </mat-expansion-panel>
+    </div>  
+  </mat-accordion>
+</div>
+
+<app-information-bar></app-information-bar>

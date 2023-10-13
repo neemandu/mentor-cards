@@ -29,6 +29,9 @@
     <button class="btn navbar-btn" (click)="navigate('/all-packs-page')">
       כל ערכות הקלפים
     </button>
+    <button class="btn navbar-btn" (click)="openNewTab()">
+      קורסים דיגיטליים
+    </button>
     <button class="btn navbar-btn" (click)="navigate('/price-page')">
       התוכניות שלנו
     </button>
@@ -41,6 +44,9 @@
     <button class="btn navbar-btn" (click)="navigate('/about-page')">
       עלינו
     </button>
+    <!--<button class="btn navbar-btn" (click)="navigate('/all-blogs')">
+      מרכז למידה
+    </button>-->
     <button class="btn navbar-btn" (click)="navigate('/contact-us')">
       צור קשר
     </button>
@@ -56,12 +62,14 @@
     <!-- <button class="btn navbar-btn" (click)="navigate('/company-pack-choise')">בחירת ערכות</button> -->
   </div>
   <div class="d-flex flex-row">
+    <button *ngIf="!showTour">
+      <div>סיור באתר</div>
+    </button>
     <button *ngIf="showTour" class="btn navbar-btn"
     id="tour-drop-down"
     [matMenuTriggerFor]="tourMenu"
     >
-      סיורים באתר
-      <mat-icon>arrow_drop_down</mat-icon>
+סרטוני הדרכה      <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <button
       mat-icon-button
@@ -147,9 +155,11 @@
   <button mat-menu-item (click)="navigate('/all-packs-page')">
     כל ערכות הקלפים
   </button>
+  <button mat-menu-item (click)="openNewTab()">קורסים דיגיטליים</button>
   <button mat-menu-item (click)="navigate('/price-page')">התוכניות שלנו</button>
   <button mat-menu-item (click)="navigate('/guide-page')">שאלות נפוצות</button>
   <button mat-menu-item (click)="navigate('/services')">שירותים נוספים</button>
+  <!--<button mat-menu-item (click)="navigate('/all-blogs')">מרכז למידה</button>-->
   <button mat-menu-item (click)="navigate('/about-page')">עלינו</button>
   <button mat-menu-item (click)="navigate('/contact-us')">צור קשר</button>
   <button

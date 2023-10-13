@@ -67,13 +67,22 @@ export class PricePageComponent implements OnInit {
     this.yearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
     // console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
     
-    this.halfYearlySubscriptionPercentage = Math.round(100-((this.halfYearlySubscription.fullPrice * 100)/(this.monthlySubscription.fullPrice * this.halfYearlySubscription.billingCycleInMonths)));
-    this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription.fullPrice * 100)/(this.monthlySubscription.fullPrice * this.yearlySubscription.billingCycleInMonths)));
+    this.halfYearlySubscriptionPercentage = Math.round(100-((this.halfYearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.halfYearlySubscription.billingCycleInMonths)));
+    this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.yearlySubscription.billingCycleInMonths)));
 
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
-
+  openEnterCouponCodeModal(): void {
+    
+    this.mixpanelService.track("ButtonClicked", { "Name": "Enter Coupon code"});
+    if (this.userData) {
+      this.userAuthService.openEnterCouponCodeModal();
+    } else {
+      this.userAuthService.showSignInModal();
+    }
+  }
+  
   get paymentStartDate() {
     if (this.userData) {
       return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInTwoWeeks);

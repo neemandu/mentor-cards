@@ -4,7 +4,7 @@
     <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
     <h1 style="text-align: center" *ngIf="!id">החיות שבתוכנו</h1>
     <h2
-      *ngIf="pack?.about"
+      *ngIf="pack?.about && !unauthorized"
       id="about-author"
       class="clickable"
       (click)="openAboutDialog()"
@@ -12,7 +12,7 @@
       (על יוצר הערכה)
     </h2>
   </div>
-  <button
+  <button *ngIf="!unauthorized"
     id="guideBook"
     type="button"
     [disabled]="showEditPack"
@@ -24,12 +24,16 @@
     (click)="openGuideBook()"
   >
     <mat-icon id="guide-book-icon" style="font-family: 'Material Icons'"
-      >local_library</mat-icon
-    >ספר הדרכה
+      >local_library</mat-icon>ספר הדרכה
   </button>
 </div>
+<br />
+<br />
+<div *ngIf="unauthorized" class="d-flex justify-content-center">
+  אין לך מספיק הרשאות כדי לצפות בערכה זו
+</div>
 
-<div class="d-flex justify-content-center nav-buttons">
+<div *ngIf="!unauthorized" class="d-flex justify-content-center">
   <div id="actions">
     <button
       id="multipleChoise"
@@ -98,7 +102,7 @@
     class="btn option-btn"
     [matMenuTriggerFor]="actions"
   >
-    <mat-icon>style</mat-icon>
+    <mat-icon>list</mat-icon>
     <span>פעולות</span>
   </button>
   <!-- <button type="button" [disabled]="showEditPack"
@@ -107,6 +111,7 @@
     <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
   </button> -->
 </div>
+
 <div class="d-flex flex-column align-items-center cards-container">
   <div
     *ngIf="pack && !showEditPack"
@@ -292,21 +297,29 @@
 
 <mat-menu #actions="matMenu">
   <button
+  mat-menu-item
+  type="button"
+  class="option-menu-btn top-option-btn"
+  (click)="multipileChanged()"
+>
+  {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
+  <mat-icon *ngIf="multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+>photo_icon</mat-icon>
+<mat-icon *ngIf="!multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+>burst_mode_icon</mat-icon>
+</button>
+  <button
     mat-menu-item
     type="button"
     class="option-menu-btn top-option-btn"
     (click)="shuffle()"
   >
+
     ערבב
+    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+  >style_icon</mat-icon>
   </button>
-  <button
-    mat-menu-item
-    type="button"
-    class="option-menu-btn top-option-btn"
-    (click)="multipileChanged()"
-  >
-    {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
-  </button>
+
   <button
     mat-menu-item
     type="button"
@@ -314,6 +327,8 @@
     (click)="flipped = !flipped; selectedCards = []"
   >
     הפוך חפיסה
+    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+    >flip_camera_android_icon</mat-icon>
   </button>
   <button
     mat-menu-item
@@ -322,6 +337,8 @@
     (click)="toggleRandomCardsModal()"
   >
     הצג קלף אקראי
+    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+    >shuffle_icon</mat-icon>
   </button>
   <button
     mat-menu-item
@@ -330,9 +347,10 @@
     (click)="editPack()"
   >
     {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
+    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+      >edit_icon</mat-icon>
   </button>
 </mat-menu>
-
 <div *ngIf="showSelectedCards" class="selected-cards-modal" (click)="toggleChosenCardsModal()">
   <div class="selected-cards-modal-content">
     <div style="height: 100%"
@@ -341,6 +359,7 @@
         'selected-content-one-card': selectedCards.length == 1
       }"
     >
+    <div *ngIf="isDoubleSided && flipped">
       <img (click)="imgClick($event)"
         *ngFor="let card of selectedCards"
         alt="one of the selected cards shown"
@@ -356,6 +375,42 @@
         src="{{ card.frontImgUrl }}"
         data-src="{{ card.frontImgUrl }}"
       />
+    </div>
+    <div *ngIf="isDoubleSided && !flipped">
+      <img (click)="imgClick($event)"
+        *ngFor="let card of selectedCards"
+        alt="one of the selected cards shown"
+        [ngClass]="{
+          'card-view': true,
+          'one-cards': selectedCards.length == 1,
+          'two-cards': selectedCards.length == 2,
+          'three-cards': selectedCards.length == 3,
+          'four-cards': selectedCards.length == 4,
+          'five-cards': selectedCards.length == 5
+        }"
+        loading="eager"
+        src="{{ card.backImgUrl }}"
+        data-src="{{ card.backImgUrl }}"
+      />
+    </div>
+    <div *ngIf="!isDoubleSided">
+      <img (click)="imgClick($event)"
+        
+        *ngFor="let card of selectedCards"
+        alt="one of the selected cards shown"
+        [ngClass]="{
+          'card-view': true,
+          'one-cards': selectedCards.length == 1,
+          'two-cards': selectedCards.length == 2,
+          'three-cards': selectedCards.length == 3,
+          'four-cards': selectedCards.length == 4,
+          'five-cards': selectedCards.length == 5
+        }"
+        loading="eager"
+        src="{{ card.frontImgUrl }}"
+        data-src="{{ card.frontImgUrl }}"
+      />
+    </div>
     </div>
   </div>
 </div>

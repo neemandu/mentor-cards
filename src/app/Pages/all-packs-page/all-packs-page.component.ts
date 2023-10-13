@@ -35,7 +35,7 @@ export class AllPacksPageComponent implements OnInit {
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
   categoriesOrder: string[] = [
-    'החמישייה הפותחת',
+    'השלישייה הפותחת',
     'קלפי תמונה',
     'שיתופי פעולה',
     'קלפי שאלות',
@@ -271,7 +271,6 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   public navigate(path: string): void {
-    // console.log(path)
     this.ngZone.run(() => this.router.navigate([path]));
   }
 

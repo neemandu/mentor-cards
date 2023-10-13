@@ -5,6 +5,22 @@
   /* direction: rtl!important; */
 }
 
+
+#couponCodeBtn {  
+  text-align: center;
+  align-items: center;
+  font-family: var(--main-font-family);
+  align-self: center;
+  min-height: 2rem;
+  font-size: larger;
+  border-radius: 5px;
+  background: #ffa800;
+  color: white;
+  border: none;
+  font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
 #content ul {
   font-size: 1.1rem;
 }
@@ -121,7 +137,7 @@ ul li::before {
 }
 
 #popular-mat-card {
-  height: 430px;
+  height: 540px;
   /* border: 2px var(--main-color) solid; */
 }
 
@@ -149,7 +165,7 @@ mat-card {
   /* margin: 0 0.5vw; */
   /* border: 2px var(--main-color) solid; */
   width: 25rem;
-  height: 430px;
+  height: 540px;
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;
   border-radius: 10px;
@@ -248,5 +264,6 @@ mat-card:hover > #best-deal {
 
   mat-card {
     width: 18rem;
+    height: 650px;
   }
 }

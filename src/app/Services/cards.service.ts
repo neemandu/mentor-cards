@@ -29,7 +29,7 @@ export class CardsService {
   allPacks: PackContent[];
   allCategories: string[] = [];
   favorites: any[] = [];
-  categoriesOrder: string[] = ['החמישייה הפותחת', 'VIP ערכות', 'ערכות VIP', 'קלפי תמונה', 'שיתופי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'ערכות במתנה', 'קלפי NLP', 'NLP קלפי'];
+  categoriesOrder: string[] = ['השלישייה הפותחת', 'ערכות חדשות', 'VIP ערכות', 'ערכות VIP', 'נעים להכיר', 'קלפי תמונה', 'הייטק', 'שיתופי פעולה', 'קלפי שאלות', 'קלפי חגים', 'קלפי מילה', 'קלפי תמונה + מילה', 'קלפי מסרים', 'קלפי ערכים', 'ערכות במתנה', 'קלפי NLP', 'NLP קלפי'];
 
   constructor(private http: HttpClient, public _snackBar: MatSnackBar, private userAuthService: UserAuthService,
     private overlaySpinnerService: OverlaySpinnerService, private api: APIService) {
@@ -40,7 +40,6 @@ export class CardsService {
     }));
 
     this.Subscription.add(this.userAuthService.addCouponCodeToFavs.subscribe((ids: string[]) => {
-      // console.log("file: cards.service.ts ~ line 39 ~ this.Subscription.add ~ ids", ids)
       this.addFavoritesFromCouponCode(ids);
     }));
     var favs = localStorage.getItem("MentorCardFavorites")
@@ -91,7 +90,6 @@ export class CardsService {
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     (this.isLoggedIn ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
-      // console.log("file: all-packs-page.component.ts ~ line 68 ~ packs", packs)
       this.allPacks = packs.items.map(pack => {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))

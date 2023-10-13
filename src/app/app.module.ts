@@ -140,6 +140,9 @@ import { ServicesComponent } from './Pages/services/services.component';
 import { PlanTableComponent } from './Pages/user-page/plan-table/plan-table.component';
 import { CardsCarouselComponent } from './Shared Components/pack/pack-preview/cards-carousel/cards-carousel.component';
 import { AuthService } from './Services/auth.service';
+import { BlogCardComponent } from './Shared Components/blog-card/blog-card.component';
+import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
+import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 
 @NgModule({
   declarations: [
@@ -187,6 +190,9 @@ import { AuthService } from './Services/auth.service';
     ServicesComponent,
     PlanTableComponent,
     CardsCarouselComponent,
+    BlogCardComponent,
+    BlogDetailComponent,
+    AllBlogsComponent,
   ],
   imports: [
     BrowserModule,
