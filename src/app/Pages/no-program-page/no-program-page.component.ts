@@ -7,7 +7,6 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { PostPurchaseSummeryDialogComponent } from 'src/app/Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
 import { EnterCouponCodeDialogComponent } from './enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 import { EnterGroupIdDialogComponent } from './enter-group-id-dialog/enter-group-id-dialog.component';
-import { ProgramChoiseDialogComponent } from './program-choise-dialog/program-choise-dialog.component';
 
 @Component({
   selector: 'app-no-program-page',
@@ -24,22 +23,6 @@ export class NoProgramPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  openChooseProgramModal(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    // dialogConfig.maxHeight = '85vh';
-    this.videoplayer.nativeElement.pause();
-    const dialogRef = this.dialog.open(ProgramChoiseDialogComponent, dialogConfig);
-    var dialogSub = dialogRef.afterClosed().subscribe((res: SubscriptionPlan) => {
-      this.videoplayer.nativeElement.play();
-      dialogSub.unsubscribe();
-      if (res) {
-        this.openPostPurchaseSummeryModal(res);
-      }
-    });
   }
 
   openPostPurchaseSummeryModal(packSelected: SubscriptionPlan): void {

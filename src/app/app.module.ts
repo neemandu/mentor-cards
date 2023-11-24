@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import { AmplifyAuthenticatorModule  } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
 import awsConfig from '../aws-exports';
 
@@ -62,7 +62,7 @@ import {
   SocialAuthServiceConfig,
   SocialAuthService,
   GoogleLoginProvider,
-} from 'angularx-social-login';
+} from '@abacritt/angularx-social-login';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -115,7 +115,6 @@ import { CardComponent } from './Shared Components/card/card.component';
 import { PackComponent } from './Shared Components/pack/pack.component';
 import { AmountOfPacksViewPipe, TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
 import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
-import { ProgramChoiseDialogComponent } from './Pages/no-program-page/program-choise-dialog/program-choise-dialog.component';
 import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 import { DynamicDialogYesNoComponent } from './Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
@@ -166,7 +165,6 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
     UserRelatedDialogComponent,
     AllPacksPageComponent,
     NoProgramPageComponent,
-    ProgramChoiseDialogComponent,
     PackPreviewComponent,
     DynamicDialogYesNoComponent,
     UserPageComponent,
@@ -198,7 +196,7 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    AmplifyUIAngularModule,
+    AmplifyAuthenticatorModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -249,9 +247,6 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
     },
     SocialAuthService
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent, ProgramChoiseDialogComponent,
-    PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
-    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,10 @@
 <!--    <app-lang-navigator></app-lang-navigator> -->
 
 <button *ngIf="showLogin"
-  [ngClass]="{'closeLoginButton': true, 'sign-in': authState==='signin','sign-up': authState==='signup', 'forgot-password': authState==='forgotpassword'}"
+  [ngClass]="{'closeLoginButton': true, 'sign-in': 
+  authenticator.route==='signIn',
+  'sign-up': authenticator.route==='signUp', 
+  'forgot-password': authenticator.route==='forgotPassword'}"
   mat-icon-button (click)="closeAmplify()">
   <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
 </button>
