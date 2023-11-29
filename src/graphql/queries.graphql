@@ -107,6 +107,11 @@ query GetUser($id: ID!) {
           updatedAt
         }
         topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
         createdAt
         updatedAt
       }
@@ -266,12 +271,18 @@ query GetUser($id: ID!) {
           updatedAt
         }
         topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
         createdAt
         updatedAt
       }
       cancellationDate
       nextBillingDate
     }
+    entryDates
   }
 }
 query ListUsers(
@@ -384,6 +395,11 @@ query ListUsers(
             updatedAt
           }
           topQuestions
+          usersUsage {
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
@@ -540,12 +556,18 @@ query ListUsers(
             updatedAt
           }
           topQuestions
+          usersUsage {
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
         cancellationDate
         nextBillingDate
       }
+      entryDates
     }
     nextToken
   }
@@ -990,6 +1012,11 @@ query GetCardsPack($id: ID!) {
       updatedAt
     }
     topQuestions
+    usersUsage {
+      user
+      entries
+    }
+    isFree
     createdAt
     updatedAt
   }
@@ -1072,6 +1099,11 @@ query ListCardsPacks(
         updatedAt
       }
       topQuestions
+      usersUsage {
+        user
+        entries
+      }
+      isFree
       createdAt
       updatedAt
     }

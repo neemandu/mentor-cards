@@ -107,6 +107,11 @@ mutation CreateUser($input: CreateUserInput!) {
           updatedAt
         }
         topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
         createdAt
         updatedAt
       }
@@ -266,12 +271,18 @@ mutation CreateUser($input: CreateUserInput!) {
           updatedAt
         }
         topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
         createdAt
         updatedAt
       }
       cancellationDate
       nextBillingDate
     }
+    entryDates
   }
 }
 mutation AddCardsPack($input: addCardsPackInput!) {
@@ -895,6 +906,11 @@ mutation CreateCardsPack(
       updatedAt
     }
     topQuestions
+    usersUsage {
+      user
+      entries
+    }
+    isFree
     createdAt
     updatedAt
   }
@@ -978,6 +994,11 @@ mutation UpdateCardsPack(
       updatedAt
     }
     topQuestions
+    usersUsage {
+      user
+      entries
+    }
+    isFree
     createdAt
     updatedAt
   }
@@ -1061,6 +1082,11 @@ mutation DeleteCardsPack(
       updatedAt
     }
     topQuestions
+    usersUsage {
+      user
+      entries
+    }
+    isFree
     createdAt
     updatedAt
   }

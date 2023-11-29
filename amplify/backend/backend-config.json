@@ -1,10 +1,53 @@
 {
-  "storage": {
-    "Invoices": {
-      "dependsOn": []
+  "auth": {
+    "mentorcards56dbf153": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "mentorcards56dbf153PreSignup",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   },
   "function": {
+    "GetCardsImages": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ]
+    },
     "GetNextBillingDate": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -12,15 +55,37 @@
     },
     "GetProviderPlanId": {
       "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "cardspacks",
           "attributes": [
             "GraphQLAPIIdOutput"
-          ]
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "IncrementPackEntries": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ]
+    },
+    "PayPalWebhookFunc": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
         }
       ]
     },
@@ -28,76 +93,605 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "PayPalWebhookFunc": {
-      "dependsOn": [
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
+      "usedBy": [
         {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
+          "category": "function",
+          "resourceName": "AddCardsPack"
         }
       ]
     },
-    "GetCardsImages": {
-      "dependsOn": [
+    "AMPLIFY_function_AddCardsPack_s3Key": {
+      "usedBy": [
         {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
+          "category": "function",
+          "resourceName": "AddCardsPack"
         }
       ]
     },
-    "IncrementPackEntries": {
-      "dependsOn": [
+    "AMPLIFY_function_AddCouponCode_deploymentBucketName": {
+      "usedBy": [
         {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
+          "category": "function",
+          "resourceName": "AddCouponCode"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddCouponCode_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddCouponCode"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddNewUserToEmailsContactList_contactListId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddNewUserToEmailsContactList"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddNewUserToEmailsContactList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddNewUserToEmailsContactList"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddNewUserToEmailsContactList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddNewUserToEmailsContactList"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddNewUserToEmailsContactList_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddNewUserToEmailsContactList"
+        }
+      ]
+    },
+    "AMPLIFY_function_ChangeCardsPack_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ChangeCardsPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_ChangeCardsPack_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ChangeCardsPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_ContactUsTrigger_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ContactUsTrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_ContactUsTrigger_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ContactUsTrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateShareLink_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateShareLink"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateShareLink_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateShareLink"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateShareLink_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateShareLink"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_DeleteGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "DeleteGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_DeleteGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "DeleteGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailEndOfTrialNotice_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailEndOfTrialNotice"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailEndOfTrialNotice_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailEndOfTrialNotice"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailGuideIntroduction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailGuideIntroduction"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailGuideIntroduction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailGuideIntroduction"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailGuideIntroduction_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailGuideIntroduction"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailUpcomingEndOfTrialNotice_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailUpcomingEndOfTrialNotice"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailUpcomingEndOfTrialNotice_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailUpcomingEndOfTrialNotice"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailUpcomingPayment_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailUpcomingPayment"
+        }
+      ]
+    },
+    "AMPLIFY_function_EmailUpcomingPayment_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "EmailUpcomingPayment"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetCardsImages_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetCardsImages"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetCardsImages_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetCardsImages"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetEndOfTrialDate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetEndOfTrialDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetEndOfTrialDate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetEndOfTrialDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetFreeUntilDate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetFreeUntilDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetFreeUntilDate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetFreeUntilDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextBillingDate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextBillingDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextBillingDate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextBillingDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextReceiptId_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextReceiptId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextReceiptId_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextReceiptId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetProviderPlanId_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetProviderPlanId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetProviderPlanId_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetProviderPlanId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetSubscriptionPlans_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetSubscriptionPlans"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetSubscriptionPlans_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetSubscriptionPlans"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementCardPackLike_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementCardPackLike"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementCardPackLike_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementCardPackLike"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementPackEntries_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementPackEntries"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementPackEntries_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementPackEntries"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvoiceHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvoiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvoiceHandler_receiptsUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvoiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvoiceHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvoiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsCardsPackOwnedByOrgForUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsCardsPackOwnedByOrgForUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsCardsPackOwnedByOrgForUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsCardsPackOwnedByOrgForUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsInGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsInGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsInGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsInGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_JoinExistingGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "JoinExistingGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_JoinExistingGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "JoinExistingGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_MessagingService_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MessagingService"
+        }
+      ]
+    },
+    "AMPLIFY_function_MessagingService_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MessagingService"
+        }
+      ]
+    },
+    "AMPLIFY_function_MessagingService_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MessagingService"
+        }
+      ]
+    },
+    "AMPLIFY_function_PayPalWebhookFunc_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_UnSubscribe_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UnSubscribe"
+        }
+      ]
+    },
+    "AMPLIFY_function_UnSubscribe_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UnSubscribe"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateGroupUsersList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateGroupUsersList"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateGroupUsersList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateGroupUsersList"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdatePaymentProgram_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdatePaymentProgram"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdatePaymentProgram_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdatePaymentProgram"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateSelectedCardPacks_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateSelectedCardPacks"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateSelectedCardPacks_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateSelectedCardPacks"
+        }
+      ]
+    },
+    "AMPLIFY_function_getGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_getGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards56dbf153PreSignup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards56dbf153PreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards56dbf153PreSignup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards56dbf153PreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards91f3dc29CustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards91f3dc29CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards91f3dc29CustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards91f3dc29CustomMessage"
         }
       ]
     }
   },
-  "auth": {
-    "mentorcards56dbf153": {
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "mentorcards56dbf153PreSignup",
-          "triggerProvider": "Cognito",
-          "attributes": [
-            "Arn",
-            "Name"
-          ]
-        }
-      ],
-      "frontendAuthConfig": {
-        "socialProviders": [
-          "GOOGLE"
-        ],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      }
+  "storage": {
+    "Invoices": {
+      "dependsOn": []
     }
   }
 }

@@ -618,6 +618,11 @@ subscription OnCreateCardsPack {
       updatedAt
     }
     topQuestions
+    usersUsage {
+      user
+      entries
+    }
+    isFree
     createdAt
     updatedAt
   }
@@ -698,6 +703,11 @@ subscription OnUpdateCardsPack {
       updatedAt
     }
     topQuestions
+    usersUsage {
+      user
+      entries
+    }
+    isFree
     createdAt
     updatedAt
   }
@@ -778,6 +788,11 @@ subscription OnDeleteCardsPack {
       updatedAt
     }
     topQuestions
+    usersUsage {
+      user
+      entries
+    }
+    isFree
     createdAt
     updatedAt
   }

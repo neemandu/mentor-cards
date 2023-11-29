@@ -30,18 +30,6 @@
   "environmentVariableList": [
     {
       "cloudFormationParameterName": "receiptsUrl",
-      "environmentVariableName": "RECEIPTS_URL"
-    },
-    {
-      "cloudFormationParameterName": "receiptsUrl",
-      "environmentVariableName": "RECEIPTS_URL"
-    },
-    {
-      "cloudFormationParameterName": "receiptsUrl",
-      "environmentVariableName": "receiptsUrl"
-    },
-    {
-      "cloudFormationParameterName": "receiptsUrl",
       "environmentVariableName": "receiptsUrl"
     },
     {

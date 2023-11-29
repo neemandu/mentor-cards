@@ -84,6 +84,7 @@ export type User = {
   favouritePacks?: Array<number | null> | null;
   entries?: number | null;
   externalPacksSubscriptions?: Array<MonthlySubscription | null> | null;
+  entryDates?: Array<string | null> | null;
 };
 
 export type MonthlySubscription = {
@@ -95,6 +96,7 @@ export type MonthlySubscription = {
   subscriptionPlan?: SubscriptionPlan | null;
   includedCardPacksIds?: Array<CardsPack | null> | null;
   cancellationDate?: string | null;
+  nextBillingDate?: string | null;
 };
 
 export type SubscriptionPlan = {
@@ -109,6 +111,7 @@ export type SubscriptionPlan = {
   fullPrice?: number | null;
   discount?: number | null;
   orgMembership?: OrganizationMembership | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -144,7 +147,6 @@ export type CardsPack = {
   guideBook?: Array<GuideBookElement | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: About | null;
   isOwnedByOrg?: boolean | null;
   brief?: string | null;
@@ -155,6 +157,8 @@ export type CardsPack = {
   authorizedDomains?: Array<string | null> | null;
   subscriptionPlans?: Array<SubscriptionPlan | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<UserUsage | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -169,6 +173,12 @@ export type GuideBookElement = {
   __typename: "GuideBookElement";
   name?: string | null;
   subElements?: Array<GuideBookElement | null> | null;
+};
+
+export type UserUsage = {
+  __typename: "UserUsage";
+  user?: string | null;
+  entries?: number | null;
 };
 
 export type CouponCodes = {
@@ -247,6 +257,7 @@ export type CreateSubscriptionPlanInput = {
   billingCycleInMonths?: number | null;
   fullPrice?: number | null;
   discount?: number | null;
+  subscriptionProviderPlanId?: string | null;
   subscriptionPlanOrgMembershipId?: string | null;
 };
 
@@ -259,6 +270,7 @@ export type ModelSubscriptionPlanConditionInput = {
   billingCycleInMonths?: ModelIntInput | null;
   fullPrice?: ModelFloatInput | null;
   discount?: ModelFloatInput | null;
+  subscriptionProviderPlanId?: ModelStringInput | null;
   and?: Array<ModelSubscriptionPlanConditionInput | null> | null;
   or?: Array<ModelSubscriptionPlanConditionInput | null> | null;
   not?: ModelSubscriptionPlanConditionInput | null;
@@ -337,6 +349,7 @@ export type UpdateSubscriptionPlanInput = {
   billingCycleInMonths?: number | null;
   fullPrice?: number | null;
   discount?: number | null;
+  subscriptionProviderPlanId?: string | null;
   subscriptionPlanOrgMembershipId?: string | null;
 };
 
@@ -379,14 +392,23 @@ export type DeleteCouponCodesInput = {
 export type CreateOrganizationsInput = {
   id?: string | null;
   membersEmails?: Array<string | null> | null;
+  verifyPersonByEmail?: boolean | null;
   organizationsMembershipId?: string | null;
 };
 
 export type ModelOrganizationsConditionInput = {
   membersEmails?: ModelStringInput | null;
+  verifyPersonByEmail?: ModelBooleanInput | null;
   and?: Array<ModelOrganizationsConditionInput | null> | null;
   or?: Array<ModelOrganizationsConditionInput | null> | null;
   not?: ModelOrganizationsConditionInput | null;
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
 };
 
 export type Organizations = {
@@ -394,6 +416,7 @@ export type Organizations = {
   id: string;
   membersEmails?: Array<string | null> | null;
   membership?: OrganizationMembership | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -401,6 +424,7 @@ export type Organizations = {
 export type UpdateOrganizationsInput = {
   id: string;
   membersEmails?: Array<string | null> | null;
+  verifyPersonByEmail?: boolean | null;
   organizationsMembershipId?: string | null;
 };
 
@@ -542,7 +566,6 @@ export type CreateCardsPackInput = {
   guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: AboutInput | null;
   isOwnedByOrg?: boolean | null;
   brief?: string | null;
@@ -552,6 +575,8 @@ export type CreateCardsPackInput = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<UserUsageInput | null> | null;
+  isFree?: boolean | null;
 };
 
 export type CardsInput = {
@@ -564,6 +589,11 @@ export type GuideBookElementInput = {
   subElements?: Array<GuideBookElementInput | null> | null;
 };
 
+export type UserUsageInput = {
+  user?: string | null;
+  entries?: number | null;
+};
+
 export type ModelCardsPackConditionInput = {
   imgUrl?: ModelStringInput | null;
   description?: ModelStringInput | null;
@@ -573,7 +603,6 @@ export type ModelCardsPackConditionInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
-  isFree?: boolean | null;
   isOwnedByOrg?: ModelBooleanInput | null;
   brief?: ModelStringInput | null;
   likesCounter?: ModelIntInput | null;
@@ -582,16 +611,10 @@ export type ModelCardsPackConditionInput = {
   isExternalPack?: ModelBooleanInput | null;
   authorizedDomains?: ModelStringInput | null;
   topQuestions?: ModelStringInput | null;
+  isFree?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null;
-  eq?: boolean | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
 };
 
 export type UpdateCardsPackInput = {
@@ -606,7 +629,6 @@ export type UpdateCardsPackInput = {
   guideBook?: Array<GuideBookElementInput | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: AboutInput | null;
   isOwnedByOrg?: boolean | null;
   brief?: string | null;
@@ -616,6 +638,8 @@ export type UpdateCardsPackInput = {
   isExternalPack?: boolean | null;
   authorizedDomains?: Array<string | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<UserUsageInput | null> | null;
+  isFree?: boolean | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -826,6 +850,7 @@ export type ModelUserFilterInput = {
   updatedAt?: ModelStringInput | null;
   favouritePacks?: ModelIntInput | null;
   entries?: ModelIntInput | null;
+  entryDates?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -873,6 +898,7 @@ export type ModelCouponCodesConnection = {
 export type ModelOrganizationsFilterInput = {
   id?: ModelIDInput | null;
   membersEmails?: ModelStringInput | null;
+  verifyPersonByEmail?: ModelBooleanInput | null;
   and?: Array<ModelOrganizationsFilterInput | null> | null;
   or?: Array<ModelOrganizationsFilterInput | null> | null;
   not?: ModelOrganizationsFilterInput | null;
@@ -995,7 +1021,6 @@ export type ModelCardsPackFilterInput = {
   groupsIds?: ModelStringInput | null;
   name?: ModelStringInput | null;
   freeUntilDate?: ModelStringInput | null;
-  isFree?: boolean | null;
   isOwnedByOrg?: ModelBooleanInput | null;
   brief?: ModelStringInput | null;
   likesCounter?: ModelIntInput | null;
@@ -1004,6 +1029,7 @@ export type ModelCardsPackFilterInput = {
   isExternalPack?: ModelBooleanInput | null;
   authorizedDomains?: ModelStringInput | null;
   topQuestions?: ModelStringInput | null;
+  isFree?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1070,6 +1096,7 @@ export type CreateUserMutation = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      subscriptionProviderPlanId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1109,7 +1136,6 @@ export type CreateUserMutation = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
-      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -1149,14 +1175,22 @@ export type CreateUserMutation = {
           createdAt: string;
           updatedAt: string;
         } | null;
+        subscriptionProviderPlanId?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
       topQuestions?: Array<string | null> | null;
+      usersUsage?: Array<{
+        __typename: "UserUsage";
+        user?: string | null;
+        entries?: number | null;
+      } | null> | null;
+      isFree?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
+    nextBillingDate?: string | null;
   } | null;
   numberOfPacksSubstitutions?: number | null;
   lastPackSubstitutionDate?: string | null;
@@ -1247,6 +1281,7 @@ export type CreateUserMutation = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      subscriptionProviderPlanId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -1286,7 +1321,6 @@ export type CreateUserMutation = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
-      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -1326,15 +1360,24 @@ export type CreateUserMutation = {
           createdAt: string;
           updatedAt: string;
         } | null;
+        subscriptionProviderPlanId?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
       topQuestions?: Array<string | null> | null;
+      usersUsage?: Array<{
+        __typename: "UserUsage";
+        user?: string | null;
+        entries?: number | null;
+      } | null> | null;
+      isFree?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
+    nextBillingDate?: string | null;
   } | null> | null;
+  entryDates?: Array<string | null> | null;
 };
 
 export type AddCouponCodeMutation = {
@@ -1370,6 +1413,7 @@ export type GetSubscriptionPlansMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1400,6 +1444,7 @@ export type CreateSubscriptionPlanMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1430,6 +1475,7 @@ export type UpdateSubscriptionPlanMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1460,6 +1506,7 @@ export type DeleteSubscriptionPlanMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1561,6 +1608,7 @@ export type CreateOrganizationsMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1584,6 +1632,7 @@ export type UpdateOrganizationsMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1607,6 +1656,7 @@ export type DeleteOrganizationsMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1701,6 +1751,7 @@ export type CreateGroupMutation = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1742,6 +1793,7 @@ export type UpdateGroupMutation = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1783,6 +1835,7 @@ export type DeleteGroupMutation = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -1861,7 +1914,6 @@ export type CreateCardsPackMutation = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -1901,10 +1953,17 @@ export type CreateCardsPackMutation = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1953,7 +2012,6 @@ export type UpdateCardsPackMutation = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -1993,10 +2051,17 @@ export type UpdateCardsPackMutation = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2045,7 +2110,6 @@ export type DeleteCardsPackMutation = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -2085,10 +2149,17 @@ export type DeleteCardsPackMutation = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2289,6 +2360,7 @@ export type GetUserQuery = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      subscriptionProviderPlanId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2328,7 +2400,6 @@ export type GetUserQuery = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
-      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -2368,14 +2439,22 @@ export type GetUserQuery = {
           createdAt: string;
           updatedAt: string;
         } | null;
+        subscriptionProviderPlanId?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
       topQuestions?: Array<string | null> | null;
+      usersUsage?: Array<{
+        __typename: "UserUsage";
+        user?: string | null;
+        entries?: number | null;
+      } | null> | null;
+      isFree?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
+    nextBillingDate?: string | null;
   } | null;
   numberOfPacksSubstitutions?: number | null;
   lastPackSubstitutionDate?: string | null;
@@ -2466,6 +2545,7 @@ export type GetUserQuery = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      subscriptionProviderPlanId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -2505,7 +2585,6 @@ export type GetUserQuery = {
       } | null> | null;
       name?: string | null;
       freeUntilDate?: string | null;
-      isFree?: boolean | null;
       about?: {
         __typename: "About";
         text?: string | null;
@@ -2545,15 +2624,24 @@ export type GetUserQuery = {
           createdAt: string;
           updatedAt: string;
         } | null;
+        subscriptionProviderPlanId?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
       topQuestions?: Array<string | null> | null;
+      usersUsage?: Array<{
+        __typename: "UserUsage";
+        user?: string | null;
+        entries?: number | null;
+      } | null> | null;
+      isFree?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     cancellationDate?: string | null;
+    nextBillingDate?: string | null;
   } | null> | null;
+  entryDates?: Array<string | null> | null;
 };
 
 export type ListUsersQuery = {
@@ -2597,6 +2685,7 @@ export type ListUsersQuery = {
           createdAt: string;
           updatedAt: string;
         } | null;
+        subscriptionProviderPlanId?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -2632,7 +2721,6 @@ export type ListUsersQuery = {
         } | null> | null;
         name?: string | null;
         freeUntilDate?: string | null;
-        isFree?: boolean | null;
         about?: {
           __typename: "About";
           text?: string | null;
@@ -2672,14 +2760,22 @@ export type ListUsersQuery = {
             createdAt: string;
             updatedAt: string;
           } | null;
+          subscriptionProviderPlanId?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null> | null;
         topQuestions?: Array<string | null> | null;
+        usersUsage?: Array<{
+          __typename: "UserUsage";
+          user?: string | null;
+          entries?: number | null;
+        } | null> | null;
+        isFree?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
       cancellationDate?: string | null;
+      nextBillingDate?: string | null;
     } | null;
     numberOfPacksSubstitutions?: number | null;
     lastPackSubstitutionDate?: string | null;
@@ -2770,6 +2866,7 @@ export type ListUsersQuery = {
           createdAt: string;
           updatedAt: string;
         } | null;
+        subscriptionProviderPlanId?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null;
@@ -2805,7 +2902,6 @@ export type ListUsersQuery = {
         } | null> | null;
         name?: string | null;
         freeUntilDate?: string | null;
-        isFree?: boolean | null;
         about?: {
           __typename: "About";
           text?: string | null;
@@ -2845,15 +2941,24 @@ export type ListUsersQuery = {
             createdAt: string;
             updatedAt: string;
           } | null;
+          subscriptionProviderPlanId?: string | null;
           createdAt: string;
           updatedAt: string;
         } | null> | null;
         topQuestions?: Array<string | null> | null;
+        usersUsage?: Array<{
+          __typename: "UserUsage";
+          user?: string | null;
+          entries?: number | null;
+        } | null> | null;
+        isFree?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
       cancellationDate?: string | null;
+      nextBillingDate?: string | null;
     } | null> | null;
+    entryDates?: Array<string | null> | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -2933,6 +3038,7 @@ export type GetOrganizationsQuery = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2958,6 +3064,7 @@ export type ListOrganizationssQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    verifyPersonByEmail?: boolean | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -3034,6 +3141,7 @@ export type GetGroupQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -3077,6 +3185,7 @@ export type ListGroupsQuery = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      subscriptionProviderPlanId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -3254,7 +3363,6 @@ export type GetCardsPackQuery = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -3294,10 +3402,17 @@ export type GetCardsPackQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3315,11 +3430,6 @@ export type ListCardsPacksQuery = {
       __typename: "Cards";
       backImgUrl?: string | null;
       frontImgUrl?: string | null;
-    } | null> | null;
-    usersUsage?: Array<{
-      __typename: "Cards";
-      user?: string | null;
-      entries?: number | null;
     } | null> | null;
     cardsPreview?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
@@ -3349,7 +3459,6 @@ export type ListCardsPacksQuery = {
     } | null> | null;
     name?: string | null;
     freeUntilDate?: string | null;
-    isFree?: boolean | null;
     about?: {
       __typename: "About";
       text?: string | null;
@@ -3389,10 +3498,17 @@ export type ListCardsPacksQuery = {
         createdAt: string;
         updatedAt: string;
       } | null;
+      subscriptionProviderPlanId?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
     topQuestions?: Array<string | null> | null;
+    usersUsage?: Array<{
+      __typename: "UserUsage";
+      user?: string | null;
+      entries?: number | null;
+    } | null> | null;
+    isFree?: boolean | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -3520,6 +3636,7 @@ export type OnCreateOrganizationsSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3543,6 +3660,7 @@ export type OnUpdateOrganizationsSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3566,6 +3684,7 @@ export type OnDeleteOrganizationsSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  verifyPersonByEmail?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3652,6 +3771,7 @@ export type OnCreateGroupSubscription = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -3693,6 +3813,7 @@ export type OnUpdateGroupSubscription = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -3734,6 +3855,7 @@ export type OnDeleteGroupSubscription = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -3878,6 +4000,7 @@ export type OnCreateSubscriptionPlanSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3908,6 +4031,7 @@ export type OnUpdateSubscriptionPlanSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3938,6 +4062,7 @@ export type OnDeleteSubscriptionPlanSubscription = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  subscriptionProviderPlanId?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4037,7 +4162,6 @@ export type OnCreateCardsPackSubscription = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -4077,10 +4201,17 @@ export type OnCreateCardsPackSubscription = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4129,7 +4260,6 @@ export type OnUpdateCardsPackSubscription = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -4169,10 +4299,17 @@ export type OnUpdateCardsPackSubscription = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4221,7 +4358,6 @@ export type OnDeleteCardsPackSubscription = {
   } | null> | null;
   name?: string | null;
   freeUntilDate?: string | null;
-  isFree?: boolean | null;
   about?: {
     __typename: "About";
     text?: string | null;
@@ -4261,10 +4397,17 @@ export type OnDeleteCardsPackSubscription = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    subscriptionProviderPlanId?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null> | null;
   topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4315,7 +4458,6 @@ export class APIService {
           subscription {
             __typename
             id
-            nextBillingDate
             startDate
             paymentProvider
             providerTransactionId
@@ -4345,6 +4487,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              subscriptionProviderPlanId
               createdAt
               updatedAt
             }
@@ -4384,7 +4527,6 @@ export class APIService {
               }
               name
               freeUntilDate
-              isFree
               about {
                 __typename
                 text
@@ -4424,14 +4566,22 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                subscriptionProviderPlanId
                 createdAt
                 updatedAt
               }
               topQuestions
+              usersUsage {
+                __typename
+                user
+                entries
+              }
+              isFree
               createdAt
               updatedAt
             }
             cancellationDate
+            nextBillingDate
           }
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
@@ -4493,7 +4643,6 @@ export class APIService {
           externalPacksSubscriptions {
             __typename
             id
-            nextBillingDate
             startDate
             paymentProvider
             providerTransactionId
@@ -4523,6 +4672,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              subscriptionProviderPlanId
               createdAt
               updatedAt
             }
@@ -4562,7 +4712,6 @@ export class APIService {
               }
               name
               freeUntilDate
-              isFree
               about {
                 __typename
                 text
@@ -4602,15 +4751,24 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                subscriptionProviderPlanId
                 createdAt
                 updatedAt
               }
               topQuestions
+              usersUsage {
+                __typename
+                user
+                entries
+              }
+              isFree
               createdAt
               updatedAt
             }
             cancellationDate
+            nextBillingDate
           }
+          entryDates
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -4728,44 +4886,6 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
   }
-  async GetSubscriptionPlansForOrgs(
-    input: userInput
-  ): Promise<Array<GetSubscriptionPlansMutation>> {
-    const statement = `mutation GetSubscriptionPlans($input: userInput!) {
-        GetSubscriptionPlans(input: $input) {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <Array<GetSubscriptionPlansMutation>>(
-      response.data.GetSubscriptionPlans
-    );
-  }
   async GetSubscriptionPlans(
     input: userInput
   ): Promise<Array<GetSubscriptionPlansMutation>> {
@@ -4796,6 +4916,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -4881,6 +5002,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -4927,6 +5049,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -4973,6 +5096,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -5138,6 +5262,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -5177,6 +5302,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -5216,6 +5342,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -5396,6 +5523,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -5453,6 +5581,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -5510,6 +5639,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -5652,7 +5782,6 @@ export class APIService {
           }
           name
           freeUntilDate
-          isFree
           about {
             __typename
             text
@@ -5692,10 +5821,17 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
           topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
@@ -5760,7 +5896,6 @@ export class APIService {
           }
           name
           freeUntilDate
-          isFree
           about {
             __typename
             text
@@ -5800,10 +5935,17 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
           topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
@@ -5868,7 +6010,6 @@ export class APIService {
           }
           name
           freeUntilDate
-          isFree
           about {
             __typename
             text
@@ -5908,10 +6049,17 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
           topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
@@ -6303,6 +6451,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              subscriptionProviderPlanId
               createdAt
               updatedAt
             }
@@ -6342,7 +6491,6 @@ export class APIService {
               }
               name
               freeUntilDate
-              isFree
               about {
                 __typename
                 text
@@ -6382,14 +6530,22 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                subscriptionProviderPlanId
                 createdAt
                 updatedAt
               }
               topQuestions
+              usersUsage {
+                __typename
+                user
+                entries
+              }
+              isFree
               createdAt
               updatedAt
             }
             cancellationDate
+            nextBillingDate
           }
           numberOfPacksSubstitutions
           lastPackSubstitutionDate
@@ -6480,6 +6636,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              subscriptionProviderPlanId
               createdAt
               updatedAt
             }
@@ -6519,7 +6676,6 @@ export class APIService {
               }
               name
               freeUntilDate
-              isFree
               about {
                 __typename
                 text
@@ -6559,15 +6715,24 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                subscriptionProviderPlanId
                 createdAt
                 updatedAt
               }
               topQuestions
+              usersUsage {
+                __typename
+                user
+                entries
+              }
+              isFree
               createdAt
               updatedAt
             }
             cancellationDate
+            nextBillingDate
           }
+          entryDates
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -6625,6 +6790,7 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                subscriptionProviderPlanId
                 createdAt
                 updatedAt
               }
@@ -6660,7 +6826,6 @@ export class APIService {
                 }
                 name
                 freeUntilDate
-                isFree
                 about {
                   __typename
                   text
@@ -6700,14 +6865,22 @@ export class APIService {
                     createdAt
                     updatedAt
                   }
+                  subscriptionProviderPlanId
                   createdAt
                   updatedAt
                 }
                 topQuestions
+                usersUsage {
+                  __typename
+                  user
+                  entries
+                }
+                isFree
                 createdAt
                 updatedAt
               }
               cancellationDate
+              nextBillingDate
             }
             numberOfPacksSubstitutions
             lastPackSubstitutionDate
@@ -6798,6 +6971,7 @@ export class APIService {
                   createdAt
                   updatedAt
                 }
+                subscriptionProviderPlanId
                 createdAt
                 updatedAt
               }
@@ -6833,7 +7007,6 @@ export class APIService {
                 }
                 name
                 freeUntilDate
-                isFree
                 about {
                   __typename
                   text
@@ -6873,15 +7046,24 @@ export class APIService {
                     createdAt
                     updatedAt
                   }
+                  subscriptionProviderPlanId
                   createdAt
                   updatedAt
                 }
                 topQuestions
+                usersUsage {
+                  __typename
+                  user
+                  entries
+                }
+                isFree
                 createdAt
                 updatedAt
               }
               cancellationDate
+              nextBillingDate
             }
+            entryDates
           }
           nextToken
         }
@@ -7009,6 +7191,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -7048,6 +7231,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            verifyPersonByEmail
             createdAt
             updatedAt
           }
@@ -7178,6 +7362,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -7235,6 +7420,7 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              subscriptionProviderPlanId
               createdAt
               updatedAt
             }
@@ -7555,7 +7741,6 @@ export class APIService {
           }
           name
           freeUntilDate
-          isFree
           about {
             __typename
             text
@@ -7595,10 +7780,17 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
           topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
@@ -7752,11 +7944,6 @@ export class APIService {
               __typename
               backImgUrl
               frontImgUrl
-            }            
-            usersUsage {
-              __typename
-              user
-              entries
             }
             cardsPreview
             groupsIds
@@ -7786,7 +7973,6 @@ export class APIService {
             }
             name
             freeUntilDate
-            isFree
             about {
               __typename
               text
@@ -7826,10 +8012,17 @@ export class APIService {
                 createdAt
                 updatedAt
               }
+              subscriptionProviderPlanId
               createdAt
               updatedAt
             }
             topQuestions
+            usersUsage {
+              __typename
+              user
+              entries
+            }
+            isFree
             createdAt
             updatedAt
           }
@@ -8038,6 +8231,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -8071,6 +8265,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -8104,6 +8299,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          verifyPersonByEmail
           createdAt
           updatedAt
         }
@@ -8242,6 +8438,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -8293,6 +8490,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -8344,6 +8542,7 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
@@ -8560,6 +8759,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -8604,6 +8804,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -8648,6 +8849,7 @@ export class APIService {
             createdAt
             updatedAt
           }
+          subscriptionProviderPlanId
           createdAt
           updatedAt
         }
@@ -8819,7 +9021,6 @@ export class APIService {
           }
           name
           freeUntilDate
-          isFree
           about {
             __typename
             text
@@ -8859,10 +9060,17 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
           topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
@@ -8921,7 +9129,6 @@ export class APIService {
           }
           name
           freeUntilDate
-          isFree
           about {
             __typename
             text
@@ -8961,10 +9168,17 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
           topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }
@@ -9023,7 +9237,6 @@ export class APIService {
           }
           name
           freeUntilDate
-          isFree
           about {
             __typename
             text
@@ -9063,10 +9276,17 @@ export class APIService {
               createdAt
               updatedAt
             }
+            subscriptionProviderPlanId
             createdAt
             updatedAt
           }
           topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
           createdAt
           updatedAt
         }

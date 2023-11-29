@@ -193,7 +193,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-63396b4573754a45372b-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-5663624835796f772f73-build.zip"
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -201,7 +201,7 @@
         },
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/IncrementPackEntries-51684464676d2b566741-build.zip"
+          "s3Key": "amplify-builds/IncrementPackEntries-63594c33477442525351-build.zip"
         },
         "AddSingleItemSubscription": {},
         "mentorcards56dbf153PreSignup": {
@@ -308,17 +308,20 @@
         },
         "AddNewUserToEmailsContactList": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-45747053616970474a41-build.zip",
-          "secretsPathAmplifyAppId": "d15egmtmsipj3q"
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4f6e5963496264373845-build.zip",
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
+          "contactListId": "1"
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-2f766c58374c58354741-build.zip"
+          "s3Key": "amplify-builds/InvoiceHandler-514464584f542f503864-build.zip",
+          "receiptsUrl": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev"
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-736a65445a766932474b-build.zip"
-        }
+        },
+        "CreateShareLink": {}
       },
       "auth": {
         "mentorcards56dbf153": {}

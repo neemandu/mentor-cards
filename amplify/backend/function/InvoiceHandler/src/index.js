@@ -48,10 +48,7 @@ exports.handler = (event) => {
         createdAt: record.dynamodb.NewImage.createdAt?.S,
         updatedAt: new Date().toISOString(),
         sequenceNumber: record.dynamodb.SequenceNumber.S,
-      };
-      
-      console.log('res');
-      console.log("env.RECEIPTS_URL: " + env.RECEIPTS_URL);
+      };    
       
       let dataString = '';
       

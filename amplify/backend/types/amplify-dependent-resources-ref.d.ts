@@ -8,8 +8,7 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string",
-            "CreatedSNSRole": "string",
-            "GoogleWebClient": "string"
+            "CreatedSNSRole": "string"
         }
     },
     "api": {
@@ -213,23 +212,26 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "GetProviderPlanId": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
         "GetNextBillingDate": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
-            "LambdaExecutionRole": "string"
+            "LambdaExecutionRole": "string",
+            "LambdaExecutionRoleArn": "string"
+        },
+        "GetProviderPlanId": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string",
+            "LambdaExecutionRoleArn": "string"
         },
         "mentorcards56dbf153PreSignup": {
             "Name": "string",
             "Arn": "string",
             "LambdaExecutionRole": "string",
-            "Region": "string"
+            "Region": "string",
+            "LambdaExecutionRoleArn": "string"
         }
     },
     "storage": {
