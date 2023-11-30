@@ -6,7 +6,7 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
 import {
   SocialAuthService,
   GoogleLoginProvider,
-} from '@abacritt/angularx-social-login';
+} from 'angularx-social-login';
 
 export interface AuthState {
   isLoggedIn: boolean;

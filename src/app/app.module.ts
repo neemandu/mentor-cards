@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { AmplifyAuthenticatorModule  } from '@aws-amplify/ui-angular';
+import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
 import awsConfig from '../aws-exports';
 
@@ -62,7 +62,7 @@ import {
   SocialAuthServiceConfig,
   SocialAuthService,
   GoogleLoginProvider,
-} from '@abacritt/angularx-social-login';
+} from 'angularx-social-login';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
@@ -196,7 +196,7 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-    AmplifyAuthenticatorModule,
+    AmplifyUIAngularModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -247,6 +247,9 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
     },
     SocialAuthService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent,
+    PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
+    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent]
 })
 export class AppModule { }
