@@ -25,20 +25,11 @@ type="button"
     <mat-card>
       <!-- <span id="best-pack">הכי משתלמת</span> -->
       <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />
-      <mat-card-title>תכנית שנתית</mat-card-title>
+      <mat-card-title>תכנית Life-Time!</mat-card-title>
       <mat-card-content>
         <p class="price-line">
-          חודש /
-          <span class="price-number"
-            >₪{{
-              yearlySubscription.fullPrice /
-                yearlySubscription.billingCycleInMonths
-            }}</span
-          >
-        </p>
-        <p class="price-line">
-          משלמים מראש {{ yearlySubscription.fullPrice }} ש"ח לשנה וחוסכים
-          {{ yearlySubscriptionPercentage }}%
+          תשלום חד פעמי בסך
+          {{ lifeTimeSubscription.fullPrice }}
         </p>
         <br />
         <ul>
@@ -67,21 +58,21 @@ type="button"
       </mat-card-content>
       <mat-card-actions>
         <button
-          id="yearlySubscription"
+          id="lifetimeSubscription"
           *ngIf="
             userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200
           "
           class="other-purchase-btn purchase-btn"
           type="button"
-          (click)="checkFreePeriod(yearlySubscription.id)"
+          (click)="checkFreePeriod(lifetimeSubscription.id)"
         >
           להצטרפות >>
         </button>
         <button
           *ngIf="
             userData?.status === 'PLAN' &&
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
           "
           class="disabled-btn purchase-btn"
           type="button"

@@ -31,8 +31,8 @@
   </div>
 
   <!-- open for all 2023 war -->
-  <!--<div id="logged-in" *ngIf="userData || data.pack.isFree">-->
-  <div id="logged-in" *ngIf="userData">  
+  <div id="logged-in" *ngIf="userData || data.pack.isFree">
+  <!--<div id="logged-in" *ngIf="userData">  -->
     <div id="pack-owned" *ngIf="data.pack.cards && data.pack.cards.length !== 0" class="actions">
       <button class="action-button" type="button" (click)="navigateToPackView()">
         כניסה לערכה

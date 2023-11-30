@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { CognitoHostedUIIdentityProvider, Auth } from '@aws-amplify/auth';
 // import { BehaviorSubject } from 'rxjs';
-import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
 import {
   SocialAuthService,
   GoogleLoginProvider,
-} from 'angularx-social-login';
+} from '@abacritt/angularx-social-login';
 
 export interface AuthState {
   isLoggedIn: boolean;
   username: string | null;
   id: string | null;
   email: string | null;
-  cognitoUser: CognitoUserInterface | null;
+  cognitoUser: CognitoUser | null;
 }
 
 export interface NewUser {

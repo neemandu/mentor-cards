@@ -64,8 +64,6 @@ import { NgApexchartsModule } from "ng-apexcharts";
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
-  ],
-  entryComponents: [NewEditNewsComponent, NewEditCouponDialogComponent, NewEditOrganizationDialogComponent,
-    OrgMembersDialogComponent, NewEditReceiptDialogComponent]
+  ]
 })
 export class ManagementModule { }

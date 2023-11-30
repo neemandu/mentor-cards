@@ -9,7 +9,6 @@ import {
   SubscriptionPlan,
 } from '../API.service';
 // import { SubscriptionPlan } from '../Objects/subscriptionPlans';
-import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { GroupData, UserData } from '../Objects/user-related';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -22,6 +21,7 @@ import { EnterCouponCodeDialogComponent } from '../Pages/no-program-page/enter-c
 import { WelcomeToNewOrgDialogComponent } from '../Shared Components/Dialogs/welcome-to-new-org-dialog/welcome-to-new-org-dialog.component';
 import { MixpanelService } from './mixpanel.service';
 import { PendoService } from './pendo.service';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
 
 const millisecondsInMonth: number = 2505600000;
@@ -45,9 +45,9 @@ export class UserAuthService {
     id: string;
     username: string;
     email: string;
-    cognitoUser: CognitoUserInterface;
+    cognitoUser: CognitoUser;
   };
-  cognitoUserData: CognitoUserInterface;
+  cognitoUserData: CognitoUser;
   subPlans: SubscriptionPlan[];
   userData: UserData;
   groupData: GroupData;
@@ -71,7 +71,7 @@ export class UserAuthService {
 
   async rememebrMe(): Promise<void> {
     try {
-      const user: void | CognitoUserInterface = await Auth.currentUserPoolUser({
+      const user: void | CognitoUser = await Auth.currentUserPoolUser({
         bypassCache: true,
       });
       if (user) {
@@ -97,22 +97,22 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(cognitoUserData: void | CognitoUserInterface): void {
+  loggedIn(cognitoUserData: void | CognitoUser): void {
     if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
     this.cognitoUserData = cognitoUserData || this.cognitoUserData;
-    this.mixpanelService.identify(this.cognitoUserData.attributes['email']);
+    this.mixpanelService.identify(this.cognitoUserData['email']);
     this.mixpanelService.track("UserLoggedIn");
     this.createUser();
   }
 
   createUser(): void {
-    var newUsername: string = this.cognitoUserData.username;
-    var newUserEmail: string = this.cognitoUserData.attributes['email'];
-    var newUserPhone: string = this.cognitoUserData.attributes['phone_number'];
-    var newUserFullName: string = this.cognitoUserData.attributes['given_name'];
+    var newUsername: string = this.cognitoUserData["username"];
+    var newUserEmail: string = this.cognitoUserData['email'];
+    var newUserPhone: string = this.cognitoUserData['phone_number'];
+    var newUserFullName: string = this.cognitoUserData['given_name'];
     var user: CreateUserInput = {
       username: newUsername,
       email: newUserEmail,

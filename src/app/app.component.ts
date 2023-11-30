@@ -1,12 +1,9 @@
-import {
-  onAuthUIStateChange,
-  CognitoUserInterface,
-  AuthState,
-} from '@aws-amplify/ui-components';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { Component, OnInit } from '@angular/core';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +15,14 @@ export class AppComponent implements OnInit {
   //https://www.unimedia.tech/2020/12/12/aws-amplify-authentication-with-angular/
   // https://docs.amplify.aws/ui/auth/authenticator/q/framework/angular#hiding-form-fields
 
-  user: CognitoUserInterface | undefined;
-  authState: AuthState;
+  user: CognitoUser | undefined;
   title = 'amplify-angular-auth';
   showLogin: boolean = false;
   chatBtnSub: Subscription;
   chatButton: any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    public authenticator: AuthenticatorService) {}
 
   ngOnInit() {
     this.chatBtnSub = this.router.events.subscribe((val) => {
@@ -46,7 +43,6 @@ export class AppComponent implements OnInit {
 
   ngOnDestroy() {
     this.chatBtnSub.unsubscribe();
-    return onAuthUIStateChange;
   }
 }
 
