@@ -1,9 +1,12 @@
 import {
   Component,
   ElementRef,
+  HostListener,
   NgZone,
   OnInit,
   ViewChild,
+  ViewChildren,
+  QueryList,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,6 +18,8 @@ import { CardsService } from 'src/app/Services/cards.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { MixpanelService, EventTypes } from 'src/app/Services/mixpanel.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOption } from '@angular/material/core';
 
 interface CategoryPack {
   category: string;
@@ -28,7 +33,12 @@ interface CategoryPack {
 })
 export class AllPacksPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
+  @ViewChild('filterText') filterTextInput: ElementRef;  
+  @ViewChildren('autocompleteOptions') autocompleteOptions: QueryList<MatOption>;
+
   Subscription: Subscription = new Subscription();
+  filteredOptions = [];
+  allOptions = []; 
   // mobile: boolean;
 
   allPacks: PackContent[] = [];
@@ -57,6 +67,7 @@ export class AllPacksPageComponent implements OnInit {
   selectedCategories: string[] = [];
   selectedFavorites: string[] = [];
   showBottomArrow: boolean = true;
+  currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
 
   constructor(
     private cardsService: CardsService,
@@ -71,6 +82,53 @@ export class AllPacksPageComponent implements OnInit {
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
+
+  initializeFilteredOptions() {
+    // Extract names
+    const allTags = this.allPacks.reduce((acc, pack) => {
+      return acc.concat(pack.tags);
+    }, []);
+
+    // Remove duplicates
+    this.allOptions = Array.from(new Set(allTags));
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    if (this.filteredOptions.length === 0) {
+      return; // No options to navigate
+    }
+    if(event.key === 'Escape'){
+      this.clickOutside(event);
+    }
+    else if(event.key === 'Enter'){
+      const option = this.filteredOptions[this.currentFocusIndex];
+      this.selectOption(option);
+    } else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.changeFocus(1); // Move focus down
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.changeFocus(-1); // Move focus up
+    }
+  }
+  
+
+  changeFocus(direction: number) {
+    this.currentFocusIndex += direction;
+    // Loop back to the start or end if necessary
+    if (this.currentFocusIndex >= this.filteredOptions.length) {
+      this.currentFocusIndex = 0;
+    } else if (this.currentFocusIndex < 0) {
+      this.currentFocusIndex = this.filteredOptions.length - 1;
+    }
+  
+    const optionsArray = this.autocompleteOptions.toArray();
+    const optionToFocus = optionsArray[this.currentFocusIndex];
+    if (optionToFocus) {
+      optionToFocus.focus();
+    }
+  }
+  
 
   ngOnInit() {
     // track events
@@ -97,6 +155,13 @@ export class AllPacksPageComponent implements OnInit {
     this.getAllPacks();
   }
 
+  filterOptions() {
+    const filterValue = this.freeTextFilterSelected.toLowerCase();
+
+    this.filteredOptions = this.allOptions.filter(tag =>
+      tag.toLowerCase().includes(filterValue));
+  }
+
   openEnterCouponCodeModal(): void {
     
     this.mixpanelService.track("ButtonClicked", { "Name": "Enter Coupon code"});
@@ -115,6 +180,7 @@ export class AllPacksPageComponent implements OnInit {
       this.setAllPacksData();
       this.setAllCategoryPacksToShow();
       this.setAllFavPacksToShow();
+      this.initializeFilteredOptions();
       // this.sortPacks();
     } else {
       let sub = this.cardsService.allPacksReadyEmmiter.subscribe(() => {
@@ -122,6 +188,7 @@ export class AllPacksPageComponent implements OnInit {
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
+        this.initializeFilteredOptions();
       });
       this.cardsService.getAllPacks();
     }
@@ -148,6 +215,15 @@ export class AllPacksPageComponent implements OnInit {
         );
         if (packs.length != 0) return { category: category, packs: packs };
       });
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    const clickedInsideAutocomplete = this.filterTextInput.nativeElement.contains(event.target);
+    if (!clickedInsideAutocomplete) {
+      this.filteredOptions = [];
+      this.currentFocusIndex = -1;
+    }
   }
 
   setAllFavPacksToShow(): void {
@@ -235,21 +311,16 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   freeTextFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackContent) => {
-      // let contains: boolean = false;
-      if (pack.description.includes(this.freeTextFilterSelected)) return true;
-      pack.categories.forEach((category) => {
-        if (category.includes(this.freeTextFilterSelected)) return true;
-      });
-      pack.tags.forEach((tag) => {
-        if (tag.includes(this.freeTextFilterSelected)) return true;
-      });
-      if (pack.name.includes(this.freeTextFilterSelected)) {
-        return true;
-      }
-      // return contains;
-      return false;
-    });
+    const filterValue = this.freeTextFilterSelected.toLowerCase();
+    this.allPacks = this.allPacks.filter(packContent =>
+      packContent.tags.some(tag => tag.toLowerCase() === filterValue)
+    );
+  }
+
+  selectOption(option: string) {
+    this.freeTextFilterSelected = option;
+    this.filteredOptions = [];
+    this.filterPacks();
   }
 
   categoryFilter(): void {

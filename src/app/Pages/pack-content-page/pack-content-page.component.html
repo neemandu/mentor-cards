@@ -352,7 +352,14 @@
   </button>
 </mat-menu>
 <div *ngIf="showSelectedCards" class="selected-cards-modal" (click)="toggleChosenCardsModal()">
-  <div class="selected-cards-modal-content">
+  <div class="selected-cards-modal-content">    
+    <button
+      class="iconButton close-cards-view"
+      mat-icon-button
+      (click)="toggleChosenCardsModal()"
+    >
+      <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+    </button>
     <div style="height: 100%"
       [ngClass]="{
         'selected-content': true,
@@ -415,7 +422,7 @@
   </div>
 </div>
 
-<div *ngIf="showRandomCards" class="selected-cards-modal">
+<div *ngIf="showRandomCards" class="selected-cards-modal" (click)="toggleRandomCardsModal()">
   <div class="selected-cards-modal-content">
     <button
       class="iconButton close-cards-view"
