@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { APIService, SubscriptionPlan } from '../../API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
@@ -40,7 +41,7 @@ export class PricePageComponent implements OnInit {
   halfYearlySubscriptionPercentage: number;
   yearlySubscriptionPercentage: number;
 
-  constructor(public _snackBar: MatSnackBar, private api: APIService,
+  constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService,private ngZone: NgZone,
     private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog,
     private mixpanelService: MixpanelService) {
   }
@@ -61,6 +62,7 @@ export class PricePageComponent implements OnInit {
 
   getSubscriptionPlans(): void {
     this.subPlans = this.userAuthService.subPlans;
+
     this.monthlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
     // console.log("file: price-page.component.ts ~ line 93 ~ getSubscriptionPlans ~ this.monthlySubscrition", this.monthlySubscription)
     this.halfYearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
@@ -71,6 +73,9 @@ export class PricePageComponent implements OnInit {
 
     this.halfYearlySubscriptionPercentage = Math.round(100-((this.halfYearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.halfYearlySubscription.billingCycleInMonths)));
     this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.yearlySubscription.billingCycleInMonths)));
+
+console.log(this.lifeTimeSubscription);
+
 
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
@@ -84,7 +89,10 @@ export class PricePageComponent implements OnInit {
       this.userAuthService.showSignInModal();
     }
   }
-  
+  public navigate(path: string): void {
+    // console.log(path)
+    this.ngZone.run(() => this.router.navigate([path]));
+  }
   get paymentStartDate() {
     if (this.userData) {
       return new Date(this.userData.firstProgramRegistrationDate.getTime() + millisecondsInTwoWeeks);
@@ -100,6 +108,7 @@ export class PricePageComponent implements OnInit {
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
   checkFreePeriod(packId): void {
+    console.log(packId);
     if (!this.userSingedIn) {
       this.signInSignUp();
     }
@@ -129,6 +138,7 @@ export class PricePageComponent implements OnInit {
   }
 
   openApprovePurchaseDialog(): void {
+    console.log('openApprovePurchaseDialog');
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

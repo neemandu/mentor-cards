@@ -3,6 +3,24 @@ button {
   font-size: 1rem;
 }
 
+.banner {
+  background-color: #7617d4;
+  color: #ffffff;              
+  text-align: center;        
+  font-size: large;
+  padding: 10px;
+}
+
+.banner a {
+  text-decoration: underline; 
+  color: #ffffff;        
+}
+
+.banner a:hover {
+  text-decoration: underline; 
+  color: #9f9a9a; 
+}
+
 .nav {
   background-color: white;
   height: var(--top-nav-height)
@@ -43,7 +61,7 @@ button:focus {
 }
 
 .sticky-top {
-  z-index: 1;
+  z-index: 5;
 }
 
 img {

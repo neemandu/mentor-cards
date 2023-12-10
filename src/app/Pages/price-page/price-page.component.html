@@ -23,54 +23,64 @@ type="button"
 <div style="text-align: center">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
+      <mat-card-title>ארגונים</mat-card-title>
+      <mat-card-content class="orgs">
+        <br>
+        רוצים לתת לכלל העובדים בארגונכם <br>
+        גישה לערכות הקלפים שלנו?<br>
+        דברו איתנו ונתאים לכם את <br>
+        התוכנית המשתלמת ביותר!
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          class="popular-purchase-btn purchase-btn"
+          type="button"
+          (click)="navigate('/contact-us')"
+        >
+          דברו איתנו!
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
       <!-- <span id="best-pack">הכי משתלמת</span> -->
-      <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />
+      <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
       <mat-card-title>תכנית Life-Time!</mat-card-title>
       <mat-card-content>
         <p class="price-line">
-          תשלום חד פעמי בסך
-          {{ lifeTimeSubscription.fullPrice }}
+          תשלום <u>חד פעמי</u> בסך
+          <span class="price-number"
+            >₪{{
+             lifeTimeSubscription.fullPrice
+            }}!
+          </span>
         </p>
-        <br />
+        <br />     
         <ul>
           <li>
-            גישה ל-3 ערכות השלישייה הפותחת
-            </li>
+            גישה לכל ערכות הקלפים באתר          
+          </li>
             <li>
-            הצטרפות לקהילה שלנו בפייסבוק
-            </li><li>
-            הצטרפות לקבוצת הווטסאפ שלנו
-            </li>
-            <li>
-            הדרכות שבועיות במייל          </li>
-            <li>
-            השתתפות בלייבים שלנו
+            הדרכות שבועיות במייל 
             </li>
             <li>
             גישה לפרסום מאמרים באתר שלנו
             </li>
-          <li>
-            גישה לכל ערכות הבית - ערכות שפותחו ע"י צוות מנטור-קארדס
-          </li>
-          <li>
-גישה לכל ערכות ה-VIP שלנו    </li>
-        </ul>
-      </mat-card-content>
+        </ul></mat-card-content>
       <mat-card-actions>
         <button
           id="lifetimeSubscription"
-          *ngIf="
-            userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200
+          *ngIf="loggedin &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200)
           "
-          class="other-purchase-btn purchase-btn"
+          class="popular-purchase-btn purchase-btn"
           type="button"
-          (click)="checkFreePeriod(lifetimeSubscription.id)"
+          (click)="checkFreePeriod(lifeTimeSubscription.id)"
         >
           להצטרפות >>
         </button>
         <button
-          *ngIf="
+          *ngIf="loggedin &&
             userData?.status === 'PLAN' &&
             userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
           "
@@ -79,6 +89,13 @@ type="button"
           disabled
         >
           הינך רשום לתכנית זו
+        </button>
+        <button
+        *ngIf="!loggedIn"
+        class="popular-purchase-btn purchase-btn"
+        type="button"
+        click="signInSignUp()">
+          להצטרפות >>
         </button>
       </mat-card-actions>
     </mat-card>
@@ -97,43 +114,31 @@ type="button"
         <br />
         <ul>
           <li>
-            גישה ל-3 ערכות השלישייה הפותחת
-            </li>
+            גישה לכל ערכות הקלפים באתר          
+          </li>
             <li>
-            הצטרפות לקהילה שלנו בפייסבוק
-            </li><li>
-            הצטרפות לקבוצת הווטסאפ שלנו
-            </li>
-            <li>
-            הדרכות שבועיות במייל          </li>
-            <li>
-            השתתפות בלייבים שלנו
+            הדרכות שבועיות במייל 
             </li>
             <li>
             גישה לפרסום מאמרים באתר שלנו
             </li>
-          <li>
-            גישה לכל ערכות הבית - ערכות שפותחו ע"י צוות מנטור-קארדס
-          </li>
-          <li>
-            גישה לכל ערכות ה-VIP שלנו    </li>
         </ul>
       </mat-card-content>
       <mat-card-actions>
         <button
           id="monthlySubscription"
-          *ngIf="
-            userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1
+          *ngIf="loggedin &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
           "
-          class="other-purchase-btn purchase-btn"
+          class="popular-purchase-btn purchase-btn"
           type="button"
           (click)="checkFreePeriod(monthlySubscription.id)"
         >
           להצטרפות >>
         </button>
         <button
-          *ngIf="
+          *ngIf="loggedin &&
             userData?.status === 'PLAN' &&
             userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
           "
@@ -143,58 +148,16 @@ type="button"
         >
           הינך רשום לתכנית זו
         </button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
-      <mat-card-title>תכנית חינמית</mat-card-title>
-      <mat-card-content>
-        <p class="price-line">
-          חודש /
-          <span class="price-number"
-            >₪0</span
-          >
-        </p>
-        <br />
-        <ul>
-          <li>
-          גישה ל-3 ערכות השלישייה הפותחת
-          </li>
-          <li>
-          הצטרפות לקהילה שלנו בפייסבוק
-          </li><li>
-          הצטרפות לקבוצת הווטסאפ שלנו
-          </li>
-          <li>
-          הדרכות שבועיות במייל          </li>
-          <li>
-          השתתפות בלייבים שלנו
-          </li>
-          <li>
-          גישה לפרסום מאמרים באתר שלנו
-          </li>
-      </ul>
-      </mat-card-content>
-      <mat-card-actions>
         <button
-          id="freeSubscription"
-          *ngIf="!userData"
-          class="other-purchase-btn purchase-btn"
-          type="button"
-          (click)="signInSignUp()"
-        >
+        *ngIf="!loggedIn"
+        class="popular-purchase-btn purchase-btn"
+        type="button"
+        click="signInSignUp()">
           להצטרפות >>
         </button>
-        <button
-          *ngIf="userData &&
-            userData.status === 'NOPLAN'"
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-          הינך רשום לתכנית זו
-        </button>
       </mat-card-actions>
     </mat-card>
+    
   </div>
   <!-- <p *ngIf="noChangingProgramThisMonth" style="font-size: medium;font-weight: 600;">הוחלפה
         חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}</p> -->

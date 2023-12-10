@@ -21,9 +21,9 @@
     <button
       id="couponCodeBtn"
       type="button"
-      (click)="navigate('/price-page')"
+      (click)="openNewTab()"
     >
-    לקבלת גישה ללא הגבלה לכל ערכות הקלפים לחצו כאן    </button>
+    צפו בקורסים הדיגיטלים שלנו >>>   </button>
     <h3 id="filter-by-options-title">קטגוריות</h3>
     <mat-selection-list
       #categories
@@ -124,7 +124,17 @@
       </mat-form-field>
     </div>
     <br /><br /><br />
-    <div class="all-packs-view__section" *ngIf="allFavPacks.length != 0">
+    <div class="d-flex flex-row flex-wrap card-section" *ngIf="filterText.value">
+      <app-pack
+      class="pack"
+      *ngFor="let packInfo of allPacks"
+      [packInfo]="packInfo"
+      [orgName]="userData?.orgMembership?.name"
+      (loaded)="packLoaded()"
+    >
+    </app-pack>
+    </div>
+    <div class="all-packs-view__section" *ngIf="!filterText.value && allFavPacks.length != 0">
       <div
         class="category-line d-flex align-items-center justify-content-around"
       >
@@ -143,7 +153,7 @@
         </app-pack>
       </div>
     </div>
-    <div *ngIf="selectedFavorites.length == 0">
+    <div *ngIf="!filterText.value && selectedFavorites.length == 0">
       <div
         class="all-packs-view__section"
         *ngFor="let categoryPacks of allCategoryPacks; let i = index"

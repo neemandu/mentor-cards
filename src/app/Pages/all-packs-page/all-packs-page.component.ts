@@ -83,6 +83,11 @@ export class AllPacksPageComponent implements OnInit {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
+  openNewTab(): void {
+    const url = 'https://school.mentor-cards.com/bundles'; 
+    window.open(url, '_blank');
+  }
+
   initializeFilteredOptions() {
     // Extract names
     const allTags = this.allPacks.reduce((acc, pack) => {
@@ -158,8 +163,13 @@ export class AllPacksPageComponent implements OnInit {
   filterOptions() {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
 
-    this.filteredOptions = this.allOptions.filter(tag =>
-      tag.toLowerCase().includes(filterValue));
+    if(filterValue){
+      this.filteredOptions = this.allOptions.filter(tag =>
+        tag.toLowerCase().includes(filterValue));
+    }
+    else{
+      this.getAllPacks();
+    }
   }
 
   openEnterCouponCodeModal(): void {

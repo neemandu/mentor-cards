@@ -1,117 +1,116 @@
 <title>Mentor-Cards תוכן ערכת הקלפים</title>
-<div class="d-flex align-items-center flex-column">
-  <div class="title d-flex justify-content-center align-items-baseline">
-    <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
-    <h1 style="text-align: center" *ngIf="!id">החיות שבתוכנו</h1>
-    <h2
-      *ngIf="pack?.about && !unauthorized"
-      id="about-author"
-      class="clickable"
-      (click)="openAboutDialog()"
-    >
-      (על יוצר הערכה)
-    </h2>
-  </div>
-  <button *ngIf="!unauthorized"
-    id="guideBook"
-    type="button"
-    [disabled]="showEditPack"
-    [ngClass]="{
-      'option-btn': true,
-      'top-option-btn': !showEditPack,
-      'top-option-btn-disabled': showEditPack
-    }"
-    (click)="openGuideBook()"
-  >
-    <mat-icon id="guide-book-icon" style="font-family: 'Material Icons'"
-      >local_library</mat-icon>ספר הדרכה
-  </button>
-</div>
-<br />
-<br />
-<div *ngIf="unauthorized" class="d-flex justify-content-center">
-  אין לך מספיק הרשאות כדי לצפות בערכה זו
-</div>
 
-<div *ngIf="!unauthorized" class="d-flex justify-content-center">
-  <div id="actions">
-    <button
-      id="multipleChoise"
-      type="button"
-      [ngClass]="{
-        'option-btn': true,
-        'top-option-btn': !showEditPack,
-        'top-option-btn-disabled': showEditPack
-      }"
-      (click)="multipileChanged()"
-      [disabled]="showEditPack"
-    >
-      {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
-    </button>
-    <button
-      id="mixCards"
+  <div class="d-flex align-items-center flex-column">
+    <div class="title d-flex justify-content-center align-items-baseline">
+      <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
+      <h1 style="text-align: center" *ngIf="!id">החיות שבתוכנו</h1>
+      <h2
+        *ngIf="pack?.about && !unauthorized"
+        id="about-author"
+        class="clickable"
+        (click)="openAboutDialog()"
+      >
+        (על יוצר הערכה)
+      </h2>
+    </div>
+    <button *ngIf="!unauthorized"
+      id="guideBook"
       type="button"
       [disabled]="showEditPack"
       [ngClass]="{
-        'option-btn': true,
+        'guide-btn': true,
         'top-option-btn': !showEditPack,
         'top-option-btn-disabled': showEditPack
       }"
-      (click)="shuffle()"
+      (click)="openGuideBook()"
     >
-      ערבב
-    </button>
-    <button
-      id="flipCards"
-      type="button"
-      [disabled]="showEditPack"
-      [ngClass]="{
-        'option-btn': true,
-        'top-option-btn': !showEditPack,
-        'top-option-btn-disabled': showEditPack
-      }"
-      (click)="flip()"
-    >
-      הפוך את הקלפים
-    </button>
-    <button
-      id="randomCard"
-      type="button"
-      [disabled]="showEditPack"
-      [ngClass]="{
-        'option-btn': true,
-        'top-option-btn': !showEditPack,
-        'top-option-btn-disabled': showEditPack
-      }"
-      (click)="toggleRandomCardsModal()"
-    >
-      הצג קלף אקראי
-    </button>
-    <button
-      id="editPack"
-      type="button"
-      [ngClass]="{ 'option-btn top-option-btn': true }"
-      (click)="editPack()"
-    >
-      {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
+      <mat-icon id="guide-book-icon" class="guide-icon" style="font-family: 'Material Icons'"
+        >local_library</mat-icon>ספר הדרכה
     </button>
   </div>
-  <button
-    type="button"
-    id="menu-actions"
-    class="btn option-btn"
-    [matMenuTriggerFor]="actions"
-  >
-    <mat-icon>list</mat-icon>
-    <span>פעולות</span>
-  </button>
-  <!-- <button type="button" [disabled]="showEditPack"
-    [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
-    (click)="openGuideBook()">
-    <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
-  </button> -->
-</div>
+  <br />
+    <div *ngIf="unauthorized" class="d-flex justify-content-center">
+      אין לך מספיק הרשאות כדי לצפות בערכה זו
+    </div>
 
+    <div *ngIf="!unauthorized" class="sticky-top d-flex justify-content-center">
+      <div id="actions">
+        <button
+          id="multipleChoise"
+          type="button"
+          [ngClass]="{
+            'option-btn': true,
+            'top-option-btn': !showEditPack,
+            'top-option-btn-disabled': showEditPack
+          }"
+          (click)="multipileChanged()"
+          [disabled]="showEditPack"
+        >
+          {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
+        </button>
+        <button
+          id="mixCards"
+          type="button"
+          [disabled]="showEditPack"
+          [ngClass]="{
+            'option-btn': true,
+            'top-option-btn': !showEditPack,
+            'top-option-btn-disabled': showEditPack
+          }"
+          (click)="shuffle()"
+        >
+          ערבב
+        </button>
+        <button
+          id="flipCards"
+          type="button"
+          [disabled]="showEditPack"
+          [ngClass]="{
+            'option-btn': true,
+            'top-option-btn': !showEditPack,
+            'top-option-btn-disabled': showEditPack
+          }"
+          (click)="flip()"
+        >
+          הפוך את הקלפים
+        </button>
+        <button
+          id="randomCard"
+          type="button"
+          [disabled]="showEditPack"
+          [ngClass]="{
+            'option-btn': true,
+            'top-option-btn': !showEditPack,
+            'top-option-btn-disabled': showEditPack
+          }"
+          (click)="toggleRandomCardsModal()"
+        >
+          הצג קלף אקראי
+        </button>
+        <button
+          id="editPack"
+          type="button"
+          [ngClass]="{ 'option-btn top-option-btn': true }"
+          (click)="editPack()"
+        >
+          {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
+        </button>
+      </div>
+      <button
+        type="button"
+        id="menu-actions"
+        class="btn option-btn"
+        [matMenuTriggerFor]="actions"
+      >
+        <mat-icon>list</mat-icon>
+        <span>פעולות</span>
+      </button>
+      <!-- <button type="button" [disabled]="showEditPack"
+        [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
+        (click)="openGuideBook()">
+        <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
+      </button> -->
+    </div>
 <div class="d-flex flex-column align-items-center cards-container">
   <div
     *ngIf="pack && !showEditPack"
@@ -351,6 +350,8 @@
       >edit_icon</mat-icon>
   </button>
 </mat-menu>
+
+
 <div *ngIf="showSelectedCards" class="selected-cards-modal" (click)="toggleChosenCardsModal()">
   <div class="selected-cards-modal-content">    
     <button

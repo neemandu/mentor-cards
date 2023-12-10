@@ -1,3 +1,8 @@
+<div *ngIf="loggedIn && userAttributes?.subscription?.subscriptionPlan?.id !== 'MCLIFETIME'" class="banner">
+  <p>
+    <a href="/price-page">שדרגו עכשיו</a> לתוכנית Life-Time ותהנו מגישה מלאה לכל הערכות באתר!
+  </p>
+</div>
 <nav
   class="nav navbar-light align-items-center justify-content-between sticky-top"
 >
