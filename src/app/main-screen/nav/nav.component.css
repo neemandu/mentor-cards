@@ -8,7 +8,22 @@ button {
   color: #ffffff;              
   text-align: center;        
   font-size: large;
-  padding: 10px;
+  padding: 10px;  
+  display: flex;
+  justify-content: center; 
+  position: relative;
+}
+
+.close-icon {
+  cursor: pointer;
+  position: absolute;
+  left: 10px; 
+  top: 50%; 
+  transform: translateY(-50%);
+}
+
+.banner p{
+  margin-top: 10px;
 }
 
 .banner a {
@@ -238,6 +253,11 @@ li span {
 
   img {
     height: 2rem;
+  }
+
+  .banner p{
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
 }

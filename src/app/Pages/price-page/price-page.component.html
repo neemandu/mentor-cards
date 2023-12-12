@@ -23,83 +23,6 @@ type="button"
 <div style="text-align: center">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
-      <mat-card-title>ארגונים</mat-card-title>
-      <mat-card-content class="orgs">
-        <br>
-        רוצים לתת לכלל העובדים בארגונכם <br>
-        גישה לערכות הקלפים שלנו?<br>
-        דברו איתנו ונתאים לכם את <br>
-        התוכנית המשתלמת ביותר!
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="navigate('/contact-us')"
-        >
-          דברו איתנו!
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
-      <!-- <span id="best-pack">הכי משתלמת</span> -->
-      <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
-      <mat-card-title>תכנית Life-Time!</mat-card-title>
-      <mat-card-content>
-        <p class="price-line">
-          תשלום <u>חד פעמי</u> בסך
-          <span class="price-number"
-            >₪{{
-             lifeTimeSubscription.fullPrice
-            }}!
-          </span>
-        </p>
-        <br />     
-        <ul>
-          <li>
-            גישה לכל ערכות הקלפים באתר          
-          </li>
-            <li>
-            הדרכות שבועיות במייל 
-            </li>
-            <li>
-            גישה לפרסום מאמרים באתר שלנו
-            </li>
-        </ul></mat-card-content>
-      <mat-card-actions>
-        <button
-          id="lifetimeSubscription"
-          *ngIf="loggedin &&
-            (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200)
-          "
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="checkFreePeriod(lifeTimeSubscription.id)"
-        >
-          להצטרפות >>
-        </button>
-        <button
-          *ngIf="loggedin &&
-            userData?.status === 'PLAN' &&
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
-          "
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-          הינך רשום לתכנית זו
-        </button>
-        <button
-        *ngIf="!loggedIn"
-        class="popular-purchase-btn purchase-btn"
-        type="button"
-        click="signInSignUp()">
-          להצטרפות >>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card>
       <mat-card-title>תכנית חודשית</mat-card-title>
       <mat-card-content>
         <p class="price-line">
@@ -127,7 +50,7 @@ type="button"
       <mat-card-actions>
         <button
           id="monthlySubscription"
-          *ngIf="loggedin &&
+          *ngIf="loggedIn &&
             (userData?.status === 'NOPLAN' ||
             userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
           "
@@ -138,7 +61,7 @@ type="button"
           להצטרפות >>
         </button>
         <button
-          *ngIf="loggedin &&
+          *ngIf="loggedIn &&
             userData?.status === 'PLAN' &&
             userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
           "
@@ -157,7 +80,78 @@ type="button"
         </button>
       </mat-card-actions>
     </mat-card>
-    
+    <mat-card id="popular-mat-card">
+      <!-- <span id="best-pack">הכי משתלמת</span> -->
+      <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
+      <mat-card-title>תכנית Life-Time!</mat-card-title>
+      <mat-card-content>
+        <p class="price-line">
+          תשלום <b><u>חד פעמי</u></b> בסך
+          <span class="price-number"
+            >₪{{
+             lifeTimeSubscription.fullPrice
+            }}!
+          </span>
+        </p>
+        <br />     
+        <ul>
+          <li>
+            גישה לכל ערכות הקלפים באתר          
+          </li>
+            <li>
+            הדרכות שבועיות במייל 
+            </li>
+            <li>
+            גישה לפרסום מאמרים באתר שלנו
+            </li>
+        </ul></mat-card-content>
+      <mat-card-actions>
+        <button
+          *ngIf="loggedIn &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200)
+          "
+          class="popular-purchase-btn purchase-btn"
+          (click)="checkFreePeriod(lifeTimeSubscription.id)"
+        >
+          להצטרפות >>
+        </button>
+        <button
+          *ngIf="loggedIn &&
+            userData?.status === 'PLAN' &&
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
+          "
+          class="disabled-btn purchase-btn"
+          disabled
+        >
+          הינך רשום לתכנית זו
+        </button>
+        <button
+        *ngIf="!loggedIn"
+        class="popular-purchase-btn purchase-btn"
+        click="signInSignUp()">
+          להצטרפות >>
+        </button>
+      </mat-card-actions>
+    </mat-card>  
+    <mat-card>
+      <mat-card-title>ארגונים</mat-card-title>
+      <mat-card-content class="orgs">
+        רוצים לתת לכלל העובדים בארגונכם <br>
+        גישה לערכות הקלפים שלנו?<br>
+        דברו איתנו ונתאים לכם את <br>
+        התוכנית המשתלמת ביותר!
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          class="popular-purchase-btn purchase-btn"
+          type="button"
+          (click)="navigate('/contact-us')"
+        >
+          דברו איתנו!
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <!-- <p *ngIf="noChangingProgramThisMonth" style="font-size: medium;font-weight: 600;">הוחלפה
         חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}</p> -->

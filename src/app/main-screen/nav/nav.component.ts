@@ -20,10 +20,12 @@ export class NavComponent implements OnInit {
   onWindowResize(event: any) {
     this.showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
   }
+  
   userAttributes: any;
   loggedIn: boolean = false;
   news: any[];
   newsNotification: boolean = false;
+  showBanner: boolean = true;
 
   localesList = [
     { code: 'en', label: 'English' },
@@ -39,6 +41,8 @@ export class NavComponent implements OnInit {
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userAttributes = userData;
       this.loggedIn = userData ? true : false;
+      this.showBanner = this.loggedIn && this.userAttributes?.subscription?.subscriptionPlan?.id !== 'MCLIFETIME';
+
     })
     this.api.ListNewss().then(news => {
       this.news = news.items.sort((a, b) => a.order - b.order);

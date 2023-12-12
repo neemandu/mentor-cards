@@ -32,6 +32,7 @@ export class PricePageComponent implements OnInit {
   ownsCurrentPlanLabel: boolean = false;
   userData: UserData;
   Subscription: Subscription = new Subscription();
+  loggedIn: boolean = false;
 
   subPlans: SubscriptionPlan[];
   monthlySubscription: SubscriptionPlan;
@@ -57,6 +58,7 @@ export class PricePageComponent implements OnInit {
       this.getSubscriptionPlans();
     }
     this.userData = this.userAuthService.userData;
+    this.loggedIn = this.userData ? true : false;
     console.log("file: price-page.component.ts ~ line 80 ~ ngOnInit ~ this.userData", this.userData)
   }
 
@@ -108,7 +110,7 @@ console.log(this.lifeTimeSubscription);
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
   checkFreePeriod(packId): void {
-    console.log(packId);
+    console.log('checkFreePeriod');
     if (!this.userSingedIn) {
       this.signInSignUp();
     }
@@ -177,6 +179,7 @@ console.log(this.lifeTimeSubscription);
   }
 
   signInSignUp(): void {
+    console.log('signInSignUp');
     this.userAuthService.showSignInModal();
   }
 }

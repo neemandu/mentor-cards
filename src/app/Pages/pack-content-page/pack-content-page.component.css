@@ -438,7 +438,8 @@ mat-icon {
 }
 
 .mat-icon-close {
-  font-size: xx-large;
+  font-size: 50px;
+  margin-top: 30px;
 }
 
 .mat-icon-arrow:disabled {
@@ -449,6 +450,8 @@ mat-icon {
   .selected-cards-modal-content {
     height: 90%;
   }
+
+  
 }
 
 @media (orientation: portrait) {
@@ -469,6 +472,11 @@ mat-icon {
   .four-cards,
   .five-cards {
     width: 85vw;
+  }
+
+  .mat-icon-close {
+    margin-top: 50px;
+    margin-right: 30px;
   }
 
 }
