@@ -430,11 +430,10 @@
       mat-icon-button
       (click)="toggleRandomCardsModal()"
     >
-      <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+      <mat-icon class="mat-icon-close-random">highlight_off</mat-icon>
     </button>
     <div class="random-content">
       <button
-        type="button"
         class="btn btn-light"
         [disabled]="randomCardIndex == cards.length - 1"
         (click)="randomCardIndex = randomCardIndex + 1"
@@ -449,7 +448,6 @@
         alt="Random card from the pack"
       />
       <button
-        type="button"
         class="btn btn-light"
         [disabled]="randomCardIndex == 0"
         (click)="randomCardIndex = randomCardIndex - 1"
