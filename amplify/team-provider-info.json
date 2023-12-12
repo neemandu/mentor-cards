@@ -193,7 +193,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-5663624835796f772f73-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-436850676e6e58324f75-build.zip"
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",

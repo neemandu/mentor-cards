@@ -24,14 +24,14 @@
     <div class="line"></div>
   </div>
   <!-- Action buttons -->
-  <div id="not-logged-in" *ngIf="!userData && !data.pack.isFree" class="actions">
+  <div id="not-logged-in" *ngIf="!userData" class="actions">
     <button class="action-button" type="button" (click)="signInSignUp()">
       התחברות/הרשמה
     </button>
   </div>
 
   <!-- open for all 2023 war -->
-  <div id="logged-in" *ngIf="userData || data.pack.isFree">
+  <div id="logged-in" *ngIf="userData">
   <!--<div id="logged-in" *ngIf="userData">  -->
     <div id="pack-owned" *ngIf="data.pack.cards && data.pack.cards.length !== 0" class="actions">
       <button class="action-button" type="button" (click)="navigateToPackView()">
