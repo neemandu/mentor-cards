@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild,
   ViewChildren,
+  AfterViewInit,
   QueryList,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -61,12 +62,15 @@ export class AllPacksPageComponent implements OnInit {
   allFavorites: number[] = [];
   loadedPacks: number = 0;
   categoriesToShow: number = 5;
+  isPageLoaded: boolean = false;
 
   //Filters
+  showCategoryLine: boolean = true;
   freeTextFilterSelected: string = '';
   selectedCategories: string[] = [];
   selectedFavorites: string[] = [];
   showBottomArrow: boolean = true;
+  stopGenerateOptions: boolean = true;
   currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
 
   constructor(
@@ -99,14 +103,18 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    if (this.filteredOptions.length === 0) {
-      return; // No options to navigate
+    this.stopGenerateOptions = false;
+    if(this.freeTextFilterSelected === ''){
+      this.showCategoryLine = true;      
     }
     if(event.key === 'Escape'){
       this.clickOutside(event);
     }
     else if(event.key === 'Enter'){
-      const option = this.filteredOptions[this.currentFocusIndex];
+      let option = this.filteredOptions[this.currentFocusIndex];
+      if(!option){
+        option = this.freeTextFilterSelected;
+      }
       this.selectOption(option);
     } else if (event.key === 'ArrowDown') {
       event.preventDefault();
@@ -210,6 +218,8 @@ export class AllPacksPageComponent implements OnInit {
       (category) => category
     );
     this.allFavorites = this.userAuthService.favorites;
+    
+    this.isPageLoaded = true;
   }
 
   setAllCategoryPacksToShow(): void {
@@ -328,7 +338,10 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   selectOption(option: string) {
+    this.currentFocusIndex = -1;
+    this.showCategoryLine = false;
     this.freeTextFilterSelected = option;
+    this.stopGenerateOptions = true;
     this.filteredOptions = [];
     this.filterPacks();
   }

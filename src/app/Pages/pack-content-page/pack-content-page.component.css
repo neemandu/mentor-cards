@@ -324,18 +324,20 @@ li span {
 }
 
 .guide-btn {
-  font-size: large;
+  margin-left: 10px;
+  height: 39px;
   border-radius: 5px;
-  text-align: center;
-  align-items: center;
-  font-family: var(--main-font-family);
-  align-self: center;
-  font-size: x-large;
-  background: #ffa800;
+  /* background: white; */
+  border: solid 1px white;
+  /* color: #ffa800; */
+  background: var(--main-color);
   color: white;
-  border: none;
+  border-color: white;
   font-weight: 500;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  
+  font-family: var(--main-font-family);
+  font-size: large;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;   
 }
 
 .guide-btn:hover {
@@ -392,7 +394,7 @@ li span {
   flex-direction: row;
   justify-content: center;
   gap: 1rem;
-  height: 90%;
+  height: 80%;
   align-items: center;
 }
 
@@ -438,7 +440,12 @@ mat-icon {
 }
 
 .mat-icon-close {
-  font-size: 50px;
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+.mat-icon-close-random {
+  font-size: 40px;
   margin-top: 30px;
 }
 
@@ -463,9 +470,6 @@ mat-icon {
     /* height: 90%; */
   }
 
-  .random-content {
-    flex-direction: column;
-  }
 
   .one-cards,
   .two-cards,

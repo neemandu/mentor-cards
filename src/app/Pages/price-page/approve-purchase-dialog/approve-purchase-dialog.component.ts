@@ -24,7 +24,6 @@ export class ApprovePurchaseDialogComponent implements OnInit {
     private mixpanel: MixpanelService) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     let plan_id = this.data.subscriptionPlanSelected.providerPlanId;
     this.render_id = 'paypal-button-container-' + plan_id;
     paypal

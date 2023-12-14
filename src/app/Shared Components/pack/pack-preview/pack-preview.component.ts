@@ -60,19 +60,24 @@ export class PackPreviewComponent implements OnInit {
       this.yearlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el.billingCycleInMonths === 12
       );
-      this.yearlyPlan['priceForMentorCardsMembers'] =
+      if(this.yearlyPlan){
+        this.yearlyPlan['priceForMentorCardsMembers'] =
         Math.round(
           this.yearlyPlan?.fullPrice * (1 - this.yearlyPlan?.discount / 100) * 10
         ) / 10;
+      }
+
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el.billingCycleInMonths === 1
       );
+      if(this.monthlyPlan){
       this.monthlyPlan['priceForMentorCardsMembers'] =
         Math.round(
           this.monthlyPlan?.fullPrice *
             (1 - this.monthlyPlan?.discount / 100) *
             10
         ) / 10;
+      }
       this.discount = Math.round(
         (1 - this.yearlyPlan?.fullPrice / (this.monthlyPlan?.fullPrice * 12)) *
           100

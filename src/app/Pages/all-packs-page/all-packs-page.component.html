@@ -1,21 +1,5 @@
 <title>Mentor-Cards כל ערכות הקלפים</title>
 <div id="content">
-  <!-- Overlay -->
-<div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000;">
-
-  <!-- Popup -->
-  <div style="position: relative; width: 300px; max-width: 80%; margin: 10% auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); direction: rtl; text-align: right;">
-      
-      <!-- Close Button -->
-      <button onclick="document.getElementById('popupOverlay').style.display='none';" style="position: absolute; left: 10px; top: 10px; background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
-      
-      <!-- Message -->
-      <p>מנטורים יקרים,</p>
-      <p>כל ערכות הקלפים באתר פתוחות לשימושכם.</p>
-      <p>בתקווה לימים שקטים ובטוחים.</p>
-      <p>צוות מנטור - קארדס</p>
-  </div>
-</div>
 
   <div id="filters" class="float-right">
     <button
@@ -23,7 +7,7 @@
       type="button"
       (click)="openNewTab()"
     >
-    צפו בקורסים הדיגיטלים שלנו >>>   </button>
+    צפו בקורסים<br> הדיגיטלים שלנו >>>   </button>
     <h3 id="filter-by-options-title">קטגוריות</h3>
     <mat-selection-list
       #categories
@@ -103,7 +87,7 @@
      <h1 class="header">"כשנגמרות המילים, נכנסים הקלפים"</h1>
     <br /> 
     <div class="searchbar">
-      <p style="text-align: center; font-size: X-large;padding-top: 1rem; max-width: 90%;">מצאו את ערכת הקלפים המתאימה לכם</p>
+      <p style="text-align: center; font-size: X-large;padding-top: 1rem; max-width: 90%;margin-bottom: -0.1rem;">מצאו את ערכת הקלפים המתאימה לכם</p>
       <mat-form-field class="search">
         <mat-label> חפשו לפי נושא המפגש, יוצר הערכה, מטרת הפעילות ועוד...</mat-label>
         <input
@@ -115,7 +99,7 @@
           (keyup)="filterOptions()"
           (keydown)="handleKeyDown($event)"
         />
-        <div *ngIf="filteredOptions.length > 0" class="autocomplete-options" id="autocomplete-options">
+        <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options" id="autocomplete-options">
           <mat-option *ngFor="let option of filteredOptions; let i = index"
           (keydown)="handleKeyDown($event)" #autocompleteOptions (click)="selectOption(option)">
             {{ option }}
@@ -124,7 +108,7 @@
       </mat-form-field>
     </div>
     <br /><br /><br />
-    <div class="d-flex flex-row flex-wrap card-section" *ngIf="filterText.value">
+    <div class="d-flex flex-row flex-wrap card-section" *ngIf="!showCategoryLine">
       <app-pack
       class="pack"
       *ngFor="let packInfo of allPacks"
@@ -134,7 +118,8 @@
     >
     </app-pack>
     </div>
-    <div class="all-packs-view__section" *ngIf="!filterText.value && allFavPacks.length != 0">
+    <p style="font-size: x-large;" *ngIf="allPacks.length == 0 && isPageLoaded">מצטערים אך לא מצאנו משהו שעונה על החיפוש שלך...</p>
+    <div class="all-packs-view__section" *ngIf="showCategoryLine && allFavPacks.length != 0">
       <div
         class="category-line d-flex align-items-center justify-content-around"
       >
@@ -153,7 +138,7 @@
         </app-pack>
       </div>
     </div>
-    <div *ngIf="!filterText.value && selectedFavorites.length == 0">
+    <div *ngIf="showCategoryLine && selectedFavorites.length == 0">
       <div
         class="all-packs-view__section"
         *ngFor="let categoryPacks of allCategoryPacks; let i = index"

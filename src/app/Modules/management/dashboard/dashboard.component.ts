@@ -78,8 +78,6 @@ export class DashboardComponent implements OnInit {
       this.chartOptions.series = series;
       labels.sort
       this.chartOptions.labels = labels;
-      console.log(this.chartOptions.series);
-      console.log(this.chartOptions.labels);
       console.log("🚀 ~ file: coupon-codes-management.component.ts ~ line 28 ~ this.api.ListCardsPacks ~ this.cards", this.cards);
       this.mngService.overlaySpinner(false);
     });

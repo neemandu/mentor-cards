@@ -131,6 +131,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }, 300);
   }
 
+  changeRandomCard(b){
+    this.randomCardIndex = this.randomCardIndex + b;
+  }
   multipileChanged(): void {
     this.selectedCards = [];
     this.multipileChecked = !this.multipileChecked;

@@ -10,7 +10,7 @@
 }
 
 .float-right{
-  width: 10%;
+  width: 15%;
 }
 
 .searchbar{
@@ -117,7 +117,7 @@ app-pack {
 #filters {
   position: sticky;
   top: 10%;
-  max-width: 25vw;
+  max-width: 30vw;
   word-break: keep-all;
   margin-left: 10px;
   margin-bottom: 1rem;
@@ -278,8 +278,10 @@ h1 {
 
   .searchbar{
     background-color: white;
+    border-color: #D39539;
     border-radius: 20px;
-    border: none;
+    border-width: 1px;
+    border-style: solid;
     align-self: center;
     width: 90%;  
     display: flex;

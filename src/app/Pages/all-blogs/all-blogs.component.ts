@@ -44,7 +44,6 @@ export class AllBlogsComponent implements OnInit {
   }
 
   handleCardClick(category): void {
-    console.log('Card clicked!');
     this.isSubjectPicked = true;
     this.selectedTopicChanged(category.index, category.name);
   }

@@ -25,7 +25,7 @@
       (click)="openGuideBook()"
     >
       <mat-icon id="guide-book-icon" class="guide-icon" style="font-family: 'Material Icons'"
-        >local_library</mat-icon>ספר הדרכה
+        >local_library</mat-icon>ספר הדרכה 
     </button>
   </div>
   <br />
@@ -423,7 +423,7 @@
   </div>
 </div>
 
-<div *ngIf="showRandomCards" class="selected-cards-modal" (click)="toggleRandomCardsModal()">
+<div *ngIf="showRandomCards" class="selected-cards-modal">
   <div class="selected-cards-modal-content">
     <button
       class="iconButton close-cards-view"
@@ -432,11 +432,11 @@
     >
       <mat-icon class="mat-icon-close-random">highlight_off</mat-icon>
     </button>
-    <div class="random-content">
+    <div class="random-content" style="height: 100%">
       <button
         class="btn btn-light"
         [disabled]="randomCardIndex == cards.length - 1"
-        (click)="randomCardIndex = randomCardIndex + 1"
+        (click)="changeRandomCard(1)"
       >
         <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
       </button>
@@ -450,7 +450,7 @@
       <button
         class="btn btn-light"
         [disabled]="randomCardIndex == 0"
-        (click)="randomCardIndex = randomCardIndex - 1"
+        (click)="changeRandomCard(-1)"
       >
         <mat-icon class="btn-icon mat-icon-arrow">chevron_left</mat-icon>
       </button>

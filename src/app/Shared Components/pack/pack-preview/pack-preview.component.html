@@ -42,8 +42,7 @@
     <div id="logged-in-has-no-program"
       *ngIf="(!data.pack.cards || data.pack.cards.length === 0) && !data.pack.isExternalPack" class="actions">
       <button class="action-button" type="button" (click)="navigate('/price-page')">
-        להצטרפות לMentor-Cards לחצו כאן
-      </button>
+פתחו לי גישה לערכה >>>      </button>
     </div>
 
     <div id="logged-in-has-no-program-pack-not-owned"
@@ -68,7 +67,7 @@
             הנחה</span>
         </div>
         <button class="action-button" type="button" (click)="openApprovePurchaseDialog()">
-          לרכישת ערכה זו ב{{!isYearly ? monthlyPlan.fullPrice : yearlyPlan.fullPrice}} ש"ח /
+          לרכישת ערכה זו ב{{!isYearly ? monthlyPlan?.fullPrice : yearlyPlan?.fullPrice}} ש"ח /
           {{!isYearly ? 'חודש': 'שנה'}} לחצו כאן
         </button>
       </div>

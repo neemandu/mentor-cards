@@ -75,7 +75,7 @@ type="button"
         *ngIf="!loggedIn"
         class="popular-purchase-btn purchase-btn"
         type="button"
-        click="signInSignUp()">
+        (click)="signInSignUp()">
           להצטרפות >>
         </button>
       </mat-card-actions>
@@ -129,7 +129,7 @@ type="button"
         <button
         *ngIf="!loggedIn"
         class="popular-purchase-btn purchase-btn"
-        click="signInSignUp()">
+        (click)="signInSignUp()">
           להצטרפות >>
         </button>
       </mat-card-actions>

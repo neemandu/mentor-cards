@@ -51,14 +51,18 @@ export class PricePageComponent implements OnInit {
     // track events
     this.mixpanelService.track("PageViewed", { 'Page Title': 'price-page' });
     this.overlaySpinnerService.changeOverlaySpinner(true);
+
+    this.Subscription.add(this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+      this.loggedIn = userData ? true : false;
+      this.userData = userData;
+    }));
+
     this.Subscription.add(this.userAuthService.subPlansEmmiter.subscribe(() => {
       this.getSubscriptionPlans();
     }));
     if (this.userAuthService.subPlans) {
       this.getSubscriptionPlans();
     }
-    this.userData = this.userAuthService.userData;
-    this.loggedIn = this.userData ? true : false;
     console.log("file: price-page.component.ts ~ line 80 ~ ngOnInit ~ this.userData", this.userData)
   }
 
@@ -75,10 +79,6 @@ export class PricePageComponent implements OnInit {
 
     this.halfYearlySubscriptionPercentage = Math.round(100-((this.halfYearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.halfYearlySubscription.billingCycleInMonths)));
     this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.yearlySubscription.billingCycleInMonths)));
-
-console.log(this.lifeTimeSubscription);
-
-
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
@@ -110,7 +110,6 @@ console.log(this.lifeTimeSubscription);
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
   checkFreePeriod(packId): void {
-    console.log('checkFreePeriod');
     if (!this.userSingedIn) {
       this.signInSignUp();
     }
@@ -140,7 +139,6 @@ console.log(this.lifeTimeSubscription);
   }
 
   openApprovePurchaseDialog(): void {
-    console.log('openApprovePurchaseDialog');
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -179,7 +177,6 @@ console.log(this.lifeTimeSubscription);
   }
 
   signInSignUp(): void {
-    console.log('signInSignUp');
     this.userAuthService.showSignInModal();
   }
 }
