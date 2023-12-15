@@ -97,12 +97,6 @@ mat-progress-bar {
 }
 
 #social-media-login {
-  margin-right: 5%;
-  width: 18vw;
-  justify-content: center;
-}
-
-#social-media-login {
   direction: rtl;
 }
 

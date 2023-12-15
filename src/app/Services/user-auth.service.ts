@@ -97,12 +97,18 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(cognitoUserData: void | CognitoUser): void {
+  loggedIn(cognitoUserData?: any): void {
     if (!cognitoUserData && !this.cognitoUserData) {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
-    this.cognitoUserData = cognitoUserData || this.cognitoUserData;
+    if(cognitoUserData){
+      this.cognitoUserData = cognitoUserData;
+      this.cognitoUserData["username"] = cognitoUserData.attributes["sub"];
+      this.cognitoUserData["email"] = cognitoUserData.attributes["email"];
+      this.cognitoUserData["phone_number"] = cognitoUserData.attributes["phone_number"];
+      this.cognitoUserData["given_name"] = cognitoUserData.attributes["given_name"];
+    }
     this.mixpanelService.identify(this.cognitoUserData['email']);
     this.mixpanelService.track("UserLoggedIn");
     this.createUser();

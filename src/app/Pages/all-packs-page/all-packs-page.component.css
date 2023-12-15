@@ -208,6 +208,10 @@ h1 {
   margin-bottom: -4px; */
 }
 
+.tooltip-class {
+  font-size: 1rem;
+}
+
 .categrory-title {
   text-align: center;
   margin-block-end: -5px;
@@ -267,6 +271,9 @@ h1 {
     margin: 5px 6px;
   }
 
+  .header{
+    font-size: large;
+  }
   .category-line:hover>.categrory-title {
     transform: none;
   }

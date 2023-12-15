@@ -148,7 +148,11 @@
           class="category-line d-flex align-items-center justify-content-around"
         >
           <div class="first-line"></div>
-          <h3 class="categrory-title">{{ categoryPacks.category }}</h3>
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות להתנסות חופשית'"     
+          matTooltip="בכל חודש, צוות מנטור-קארדס, יחליף את ערכות הקלפים להתנסות על מנת לחשוף את המשתמשים שלנו לערכות השונות באתרנו."
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category !== 'ערכות להתנסות חופשית'"     
+          >{{ categoryPacks.category }}</h3>
           <div class="second-line"></div>
         </div>
         <div
