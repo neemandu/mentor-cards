@@ -34,7 +34,7 @@
           <mat-label>סיסמא</mat-label>
           <input autocomplete="new-password" formControlName="password" matInput [type]="hidePW ? 'password' : 'text'"
             onkeypress="() => {return (event.charCode >= 33 && event.charCode <= 126)}">
-          <mat-error *ngIf="registerForm.controls.password.errors">סיסמא לא חוקית, נסו שנית</mat-error>
+          <mat-error *ngIf="registerForm.controls.password.errors">סיסמא לא חוקית, נסו שנית. יש להכיל ספרה, אות קטנה ואות גדולה (אנגלית בלבד)</mat-error>
           <mat-hint>8 תווים לפחות, יש להכיל ספרה, אות קטנה וגדולה (באנגלית)</mat-hint>
           <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
