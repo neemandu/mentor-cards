@@ -9,17 +9,7 @@
     >התוכניות שלנו</span
   >
   <br />
-  <button class="d-flex flex-column align-items-center"
-id="couponCodeBtn"
-type="button"
-(click)="openEnterCouponCodeModal()"
->
-להזנת קוד הטבה לחצו כאן
-</button>
 </div>
-
-<br />
-<br />
 <div style="text-align: center">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
@@ -37,14 +27,11 @@ type="button"
         <br />
         <ul>
           <li>
-            גישה לכל ערכות הקלפים באתר          
-          </li>
+            גישה מלאה לעשרות ערכות קלפים          </li>
             <li>
-            הדרכות שבועיות במייל 
-            </li>
+              מגוון עצום של ספרי הדרכה, רעיונות להפעלה, ושאלות מנחות            </li>
             <li>
-            גישה לפרסום מאמרים באתר שלנו
-            </li>
+              אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...            </li>
         </ul>
       </mat-card-content>
       <mat-card-actions>
@@ -85,6 +72,7 @@ type="button"
       <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
       <mat-card-title>תכנית Life-Time!</mat-card-title>
       <mat-card-content>
+        <br>
         <p class="price-line">
           תשלום <b><u>חד פעמי</u></b> בסך
           <span class="price-number"
@@ -96,13 +84,13 @@ type="button"
         <br />     
         <ul>
           <li>
-            גישה לכל ערכות הקלפים באתר          
-          </li>
+            גישה מלאה לעשרות ערכות קלפים - לכל החיים!          </li>
             <li>
-            הדרכות שבועיות במייל 
-            </li>
+              גישה לכל ערכות הקלפים שיעלו לאתר בעתיד!             </li>
             <li>
-            גישה לפרסום מאמרים באתר שלנו
+              מגוון עצום של ספרי הדרכה, רעיונות להפעלה, ושאלות מנחות            </li>
+            <li>
+              אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...
             </li>
         </ul></mat-card-content>
       <mat-card-actions>
@@ -135,12 +123,8 @@ type="button"
       </mat-card-actions>
     </mat-card>  
     <mat-card>
-      <mat-card-title>ארגונים</mat-card-title>
-      <mat-card-content class="orgs">
-        רוצים לתת לכלל העובדים בארגונכם <br>
-        גישה לערכות הקלפים שלנו?<br>
-        דברו איתנו ונתאים לכם את <br>
-        התוכנית המשתלמת ביותר!
+      <mat-card-title>מוסדות וארגונים</mat-card-title>
+      <mat-card-content class="orgs">זה הזמן לאפשר לקלפים להכנס לסביבה הארגונית שלכם וליצור שיח מקרב, מקדם ומפתח. שדרגו יחד איתנו את ארגז הכלים הארגוני שלכם. דברו איתנו ונתאים לכם את התכנית המשתלמת ביותר. 
       </mat-card-content>
       <mat-card-actions>
         <button
@@ -152,15 +136,18 @@ type="button"
         </button>
       </mat-card-actions>
     </mat-card>
-  </div>
-  <!-- <p *ngIf="noChangingProgramThisMonth" style="font-size: medium;font-weight: 600;">הוחלפה
-        חבילה החודש. ניתן יהיה להחליף תכנית בתאריך {{nextPlanChangeDate | date:'d/M/y' }}</p> -->
-  <!--<p *ngIf="!userSingedIn"  style="font-size: medium;font-weight: 600;">
-    <button type="button" *ngIf="!loggedIn" class="btn navbar-btn" (click)=signInSignUp()>יש להתחבר על מנת להצטרף לתכנית</button>
-    </p>-->
-  <!-- <p *ngIf="userSingedIn && selectedProgramOwned" style="font-size: medium;font-weight: 600;">
-        אתם רשומים לתכנית זו
-    </p> -->
+  </div>      
+  <br><br>
+<button style="left: 50%;
+transform: translateX(-50%);
+position: absolute; 
+"
+id="couponCodeBtn"
+type="button"
+(click)="openEnterCouponCodeModal()"
+>
+להזנת קוד הטבה לחצו כאן
+</button><br>
   <img
     id="payment-img"
     alt="Logos of how to pay"
