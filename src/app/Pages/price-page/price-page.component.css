@@ -302,6 +302,11 @@ mat-card:hover > #best-deal {
 
   mat-card {
     width: 18rem;
-    height: 320px;
+    height: 360px;
   }
+
+  #popular-mat-card {
+    height: 420px;
+  }
+
 }
