@@ -18,11 +18,6 @@
     (click)="openPreviewDialog()"
     (load)="imgLoaded()"
     src="{{ packInfo.imgUrl }}"
-    matTooltip="קטגוריות: {{
-      packInfo.categories | tooltipListView
-    }} | תגיות: {{ packInfo.tags | tooltipListView }}"
-    matTooltipShowDelay="500"
-    [matTooltipClass]="{ 'tooltip-class': true }"
     class="clickable pack-main-card"
   />
   <label *ngIf="isStillFree" class="free-until-label"
