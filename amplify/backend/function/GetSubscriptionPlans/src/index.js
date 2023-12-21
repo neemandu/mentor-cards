@@ -96,5 +96,10 @@ exports.handler = async (event) => {
     if(!subPlans || subPlans.length == 0){
         subPlans = await getPlansByOrgId("-1");
     }
-    return subPlans;
+    // Get lifetime plan
+    var lifeTimePlan = await getPlansByOrgId("-2");
+    
+    let combinedArray = subPlans.concat(lifeTimePlan);
+
+    return combinedArray;
 };

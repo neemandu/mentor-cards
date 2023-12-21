@@ -60,7 +60,7 @@
           הינך רשום לתכנית זו
         </button>
         <button
-        *ngIf="!loggedIn"
+        *ngIf="!loggedIn || userData == null"
         class="popular-purchase-btn purchase-btn"
         type="button"
         (click)="signInSignUp()">
@@ -116,7 +116,7 @@
           הינך רשום לתכנית זו
         </button>
         <button
-        *ngIf="!loggedIn"
+        *ngIf="!loggedIn || userData == null"
         class="popular-purchase-btn purchase-btn"
         (click)="signInSignUp()">
           להצטרפות >>
