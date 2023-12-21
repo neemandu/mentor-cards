@@ -79,9 +79,7 @@ async function getUserByPayPalTxId(transaction_id){
     };
     console.log("searching user by paypal transaction id - " + transaction_id);
     var currUser;
-    await docClient.scan(params).promise().then(data => {      
-        console.log("Get users succeeded:", JSON.stringify(data, null, 2));
-        
+    await docClient.scan(params).promise().then(data => {             
         data.Items.forEach(function(user) {
             var subscription = getSubByTxID(user, transaction_id);
             if(subscription){
@@ -174,7 +172,13 @@ exports.handler = async (event) => {
         console.log(event);
         var paypal_body = JSON.parse(event.body);
         var event_type = paypal_body.event_type;
-        var transaction_id = paypal_body.resource.billing_agreement_id;
+        var transaction_id = "";
+        if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+            transaction_id = paypal_body.resource.id;
+        }
+        if(event_type == "PAYMENT.SALE.COMPLETED"){
+            transaction_id = paypal_body.resource.billing_agreement_id;
+        }
         console.log('event_type: ' + event_type);
         console.log('transaction_id: ' + transaction_id);
         var user;
