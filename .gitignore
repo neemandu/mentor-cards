@@ -191,3 +191,4 @@ amplifytools.xcconfig
 **.sample
 #amplify-do-not-edit-end
 .angular/cache/
+text.txt

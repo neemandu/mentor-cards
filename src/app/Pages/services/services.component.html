@@ -13,6 +13,8 @@
       "מקצה לקצה"</button>
     <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==4}" type="button"
       (click)="selectedTopicChanged(4, 'הדרכות וסדנאות')" mat-menu-item>הדרכות וסדנאות</button>
+    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==5}" type="button"
+      (click)="selectedTopicChanged(5, 'סופרוויזן - הדרכת מאמנים')" mat-menu-item>סופרוויזן - הדרכת מאמנים</button>
   </div>
   <div id="line"></div>
   <div id="content">
@@ -315,6 +317,115 @@
         </mat-card-actions>
       </mat-card><br>
       <img src="../../../assets/class.png" class="class-img" alt="Class image">
+    </div>
+    <div id="content5" *ngIf="selectedBtn===5">
+      <h2><b><u>מהו סופרוויזן?
+      </u></b></h2>
+      <p>אם הגעתם לכאן, סימן שבחרתם להיות מנטורים. אתם מלווים אנשים במסע ההתפתחות שלהם. ויש לכם גם חיים אישיים - עולם שלם משלכם, מערכות יחסים, שינויים, חלומות.&nbsp;</p><p>ואולי יש לכם גם התלבטויות או חששות בנוגע ללקוח מסוים, ברמה המקצועית.&nbsp;</p><p>ויכול להיות שבא לכם להתקדם ברמה השיווקית, כדי לייצר יותר חשיפה, ואתם מתלבטים - מה המסר שלכם לעולם?&nbsp; </p><p><strong>סופרוויז'ן הוא תהליך מרתק המשלב 3 עולמות - אימון, ייעוץ והדרכה.</strong>&nbsp;&nbsp;</p>
+      <h2><b>על הסופרוויז'רית</b>
+      
+        </h2>
+        <img src="../../../assets/About images/yarden-sqr.jpg" class="class-img" alt="Class image">
+      <p>היי, שמי ירדן סטמפו ואני מלווה מאמנים להתפחות אישית ומקצועית. </p>
+      <p>11 שנות ניסיון בנו אצלי מומחיות בעולם האימון -       </p>
+      <ul>
+        <li>
+          לימוד קורסים והכשרות מקצועיות למאמנים.
+        </li>
+        <li>
+          אלפי שעות ניסיון אימוני. 
+        </li>
+        <li>
+          מורה לאימון אישי קוגניטיבי.
+        </li>
+        <li>
+          מלמדת כלים מתקדמים להתפתחות אישית ומקצועית מעולמות הנפש הגוף והרוח. 
+        </li>
+      </ul>
+      <p>באפשרותכם לבחור את מה שמתאים לכם מבין 3 תכניות ליווי. מהן התכניות?</p>
+      <br>
+      <div class="line"></div>
+      <br>
+      <!-- -->
+    <p><span style="text-decoration:underline;"><strong>תכנית לבניית תהליך אימון ייחודי מנצח</strong></span></p>
+    <p><span style="text-decoration:underline;">ממודל אימון כללי &gt;&gt;&gt; למודל אימון אישי</span></p>
+    <p>סיוע באינטגרציית הידע שרכשתם ובניית מודל אימוני אישי וייחודי.&nbsp;</p><p><strong>תיאור התכנית:</strong> 
+      בסיום קורס הכשרת מאמנים יוצאים מהמכללה עם מודל אימוני בסיסי לאמן איתו.המודל שקיבלתם, מותאם ללווי תהליכי שינוי 
+      <span style="text-decoration:underline;">באופן כללי </span>אך אינו מותאם ברמת הכלים וברמת התהליך 
+      <span style="text-decoration:underline;">לקהל היעד שלכם.</span></p><p><strong>מטרת התכנית:&nbsp;
+
+      </strong></p><p>נאתר ונדייק את המיומנויות והכלים הרלוונטיים לאימון ונבנה מודל אימוני מחודש - 
+        <strong>שהוא אתם.</strong>&nbsp;&nbsp;</p><p>נבין ונדייק, שלב אחר שלב, איזה כלים אימוניים כדאי להשתמש בהם בכל מפגש אימון,
+           ואיזה משימות כדאי לתת למתאמן שיקדמו את התהליך האישי שלו?</p>
+           <p>נבצע התאמה מדויקת של מודל האימון שלכם לקהל היעד שלכם ולא פחות חשוב מכך, לארגז הכלים והייחודיות שלכם.&nbsp;
+
+           </p><p><strong>עם מה יוצאים?&nbsp;</strong></p><p>עם המוצר הכי חשוב שלכם מוכן, מאורגן, ומותאם לקהל היעד.&nbsp;</p>
+           <p><strong>עלויות ומסביב:&nbsp;</strong></p><p>מספר פגישות: 5 פגישות אישיות.</p>
+           <p>עלות כוללת: 1650 ש"ח + מע"מ.</p><p>האם נדרש לאמן במקביל לזמן קיום המפגשים: לא.</p>
+           <p>מיקום: און ליין / פרונטלי ברמת גן.&nbsp;&nbsp;</p>
+           <br><br>
+           <p><span style="text-decoration:underline;"><strong>תכנית ליווי מאמן אל מול מתאמן&nbsp;</strong></span></p>
+           <p><span style="text-decoration:underline;">תמיכה מקצועית, מקיפה, ואישית למאמן המוביל תהליכי אימון.</span></p>
+           <p>קרה לכם ששאלתם את עצמכם:&nbsp; האם אני מוביל את התהליך בכיוון הנכון?</p>
+           <p>לאן לכוון את הפגישה? על מה לשים את הפוקוס? האם המטרה שהגדרנו היא הנכונה?&nbsp;</p>
+           <p><strong>מטרת התכנית</strong>:&nbsp;</p>
+           <p>בפגישות נתבונן על סיפור חייו של המתאמן ועל מטרת האימון.נגלה יחד את המוטיבים המרכזיים, 
+            את בעיית הלב ואת הפער בין המצב המצוי למצב הרצוי שיוצר תסכול בחייו של המתאמן. נבין - על מה <strong>באמת </strong>
+            המתאמן הגיע להתאמן ונתאים את מתווה אימון בהתאם לצורך שלו.&nbsp;</p><p><strong>עם מה יוצאים?</strong></p>
+            <p>אתם לא לבד.</p><p>מקבלים הדרכה מקיפה וליווי בניהול תהליך אימון אל מול לקוח,
+               למידה של טכניקות עבודה אימוניות נוספות, הקנייה וחיזוק הביטחון כמאמן.&nbsp;</p>
+               <p><strong>מבנה התכנית:&nbsp;</strong></p>
+               <p>כל 2 פגישות שלכם עם המתאמן, אנחנו מקיימים פגישה. התהליך מלווה בהגשת 3 דוחות.&nbsp;</p>
+               <p>אתם נהנים מזמינות טלפונית / וואצאפ (בשעות קבועות) - שיחות הכנה למפגשי אימון, 
+                התייעצויות "קטנות" ודיוקים תוך כדי תהליך האימון.&nbsp;</p><p><strong>עלויות ומסביב:</strong></p>
+                <p>מספר פגישות: 6 פגישות אישיות.&nbsp;</p><p>עלות כוללת: 1950 ש"ח + מע"מ.&nbsp;</p>
+                <p>האם נדרש לאמן במקביל לזמן קיום המפגשים: כן.&nbsp;</p><p>מיקום: און ליין / פרונטלי ברמת גן.&nbsp;&nbsp;</p>
+                <br><br>
+                <p><span style="text-decoration:underline;"><strong>תכנית פרימיום VIP-&nbsp;</strong></span></p><p>חבילה משולבת - ליווי מלא ל 3 חודשים!&nbsp;</p><p>בואו נלביש בגדי עבודה לחלום וניקח יחד את קריירת האימון שלכם למעלה!&nbsp;</p><p>תכנית ליווי אישי ל 3 חודשים שבהם תקבלו שירות VIP לכל מה שמאמן צריך:</p><ul><li>התאמה ושדרוג מודל האימון שקיבלתם במכללה לנישה האימונית שבחרתם להתמקד בה.&nbsp;</li><li>הדרכה מקיפה וליווי בניהול תהליך אימון אל מול לקוח, למידה של טכניקות עבודה אימוניות נוספות, הקנייה וחיזוק הביטחון כמאמן.&nbsp;</li>
+            <li>זמינות טלפונית (בשעות קבועות)
+               - שיחות הכנה למפגשי אימון, התייעצויות "קטנות" ודיוקים תוך כדי העבודה אל מול המתאמנים.&nbsp;</li>
+               <li>במהלך הפגישות תעברו תהליך אישי בהתקרבות אל עצמכם ממקום אימוני ומעצים.&nbsp;</li>
+              </ul><p>מספר פגישות: 12 פגישות אישיות</p><p>עלות כוללת: 3750 ש"ח + מע"מ&nbsp;</p>
+              <p>האם נדרש לאמן במקביל לזמן קיום המפגשים: כן.&nbsp;</p><p>מיקום: און ליין / פרונטלי ברמת גן.&nbsp;&nbsp;</p>  
+
+
+
+<!---->
+      <br><br>
+      <mat-card>
+        <mat-card-content>
+          <form class="d-flex flex-column" [formGroup]="contactForm">
+            <mat-form-field>
+              <mat-label>שם</mat-label>
+              <input type="text" matInput formControlName="name">
+              <mat-error *ngIf="formControls.name.hasError('required')">
+                חובה להזין שם
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>מייל</mat-label>
+              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
+              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
+                יש להזין מייל תקין
+              </mat-error>
+              <mat-error *ngIf="formControls.email.hasError('required')">
+                חובה להזין מייל
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>תוכן</mat-label>
+              <textarea matInput formControlName="content"></textarea>
+              <mat-error *ngIf="formControls.content.hasError('required')">
+                חובה להזין תוכן
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button id="contactUsFormSubmission" class="action-button" type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+        </mat-card-actions>
+      </mat-card><br>
     </div>
   </div>
   <img onload="this.style.opacity='1'" src="../../../assets/flowers.png" class="flower-img" alt="Decorative flowers">
@@ -639,6 +750,120 @@
         </mat-card-actions>
       </mat-card>
     </mat-expansion-panel>
+
+    <mat-expansion-panel (click)="selectedTopicChanged(5, 'סופרוויזן - הדרכת מאמנים')">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          סופרוויזן - הדרכת מאמנים        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <h2><b><u>מהו סופרוויזן?
+      </u></b></h2><p>אם הגעתם לכאן, סימן שבחרתם להיות מנטורים. אתם מלווים אנשים במסע ההתפתחות שלהם. ויש לכם גם חיים אישיים - עולם שלם משלכם, מערכות יחסים, שינויים, חלומות.&nbsp;</p><p>ואולי יש לכם גם התלבטויות או חששות בנוגע ללקוח מסוים, ברמה המקצועית.&nbsp;</p><p>ויכול להיות שבא לכם להתקדם ברמה השיווקית, כדי לייצר יותר חשיפה, ואתם מתלבטים - מה המסר שלכם לעולם?&nbsp; </p><p><strong>סופרוויז'ן הוא תהליך מרתק המשלב 3 עולמות - אימון, ייעוץ והדרכה.</strong>&nbsp;&nbsp;</p>
+      <h2><b>על הסופרוויז'רית</b>
+      </h2>
+        <img src="../../../assets/About images/yarden-sqr.jpg" class="class-img" alt="Yarden Stemp">
+      <p>היי, שמי ירדן סטמפו ואני מלווה מאמנים להתפחות אישית ומקצועית. </p>
+      <p>11 שנות ניסיון בנו אצלי מומחיות בעולם האימון -       </p>
+      <ul>
+        <li>
+          לימוד קורסים והכשרות מקצועיות למאמנים.
+        </li>
+        <li>
+          אלפי שעות ניסיון אימוני. 
+        </li>
+        <li>
+          מורה לאימון אישי קוגניטיבי.
+        </li>
+        <li>
+          מלמדת כלים מתקדמים להתפתחות אישית ומקצועית מעולמות הנפש הגוף והרוח. 
+        </li>
+      </ul>
+      <p>באפשרותכם לבחור את מה שמתאים לכם מבין 3 תכניות ליווי. מהן התכניות?</p>
+      <br>
+      <div class="line"></div>
+      <br>
+      <!-- -->
+    <p><span style="text-decoration:underline;"><strong>תכנית לבניית תהליך אימון ייחודי מנצח</strong></span></p>
+    <p><span style="text-decoration:underline;">ממודל אימון כללי &gt;&gt;&gt; למודל אימון אישי</span></p>
+    <p>סיוע באינטגרציית הידע שרכשתם ובניית מודל אימוני אישי וייחודי.&nbsp;</p><p><strong>תיאור התכנית:</strong> 
+      בסיום קורס הכשרת מאמנים יוצאים מהמכללה עם מודל אימוני בסיסי לאמן איתו.המודל שקיבלתם, מותאם ללווי תהליכי שינוי 
+      <span style="text-decoration:underline;">באופן כללי </span>אך אינו מותאם ברמת הכלים וברמת התהליך 
+      <span style="text-decoration:underline;">לקהל היעד שלכם.</span></p><p><strong>מטרת התכנית:&nbsp;
+
+      </strong></p><p>נאתר ונדייק את המיומנויות והכלים הרלוונטיים לאימון ונבנה מודל אימוני מחודש - 
+        <strong>שהוא אתם.</strong>&nbsp;&nbsp;</p><p>נבין ונדייק, שלב אחר שלב, איזה כלים אימוניים כדאי להשתמש בהם בכל מפגש אימון,
+           ואיזה משימות כדאי לתת למתאמן שיקדמו את התהליך האישי שלו?</p>
+           <p>נבצע התאמה מדויקת של מודל האימון שלכם לקהל היעד שלכם ולא פחות חשוב מכך, לארגז הכלים והייחודיות שלכם.&nbsp;
+
+           </p><p><strong>עם מה יוצאים?&nbsp;</strong></p><p>עם המוצר הכי חשוב שלכם מוכן, מאורגן, ומותאם לקהל היעד.&nbsp;</p>
+           <p><strong>עלויות ומסביב:&nbsp;</strong></p><p>מספר פגישות: 5 פגישות אישיות.</p>
+           <p>עלות כוללת: 1650 ש"ח + מע"מ.</p><p>האם נדרש לאמן במקביל לזמן קיום המפגשים: לא.</p>
+           <p>מיקום: און ליין / פרונטלי ברמת גן.&nbsp;&nbsp;</p>
+           <br><br>
+           <p><span style="text-decoration:underline;"><strong>תכנית ליווי מאמן אל מול מתאמן&nbsp;</strong></span></p>
+           <p><span style="text-decoration:underline;">תמיכה מקצועית, מקיפה, ואישית למאמן המוביל תהליכי אימון.</span></p>
+           <p>קרה לכם ששאלתם את עצמכם:&nbsp; האם אני מוביל את התהליך בכיוון הנכון?</p>
+           <p>לאן לכוון את הפגישה? על מה לשים את הפוקוס? האם המטרה שהגדרנו היא הנכונה?&nbsp;</p>
+           <p><strong>מטרת התכנית</strong>:&nbsp;</p>
+           <p>בפגישות נתבונן על סיפור חייו של המתאמן ועל מטרת האימון.נגלה יחד את המוטיבים המרכזיים, 
+            את בעיית הלב ואת הפער בין המצב המצוי למצב הרצוי שיוצר תסכול בחייו של המתאמן. נבין - על מה <strong>באמת </strong>
+            המתאמן הגיע להתאמן ונתאים את מתווה אימון בהתאם לצורך שלו.&nbsp;</p><p><strong>עם מה יוצאים?</strong></p>
+            <p>אתם לא לבד.</p><p>מקבלים הדרכה מקיפה וליווי בניהול תהליך אימון אל מול לקוח,
+               למידה של טכניקות עבודה אימוניות נוספות, הקנייה וחיזוק הביטחון כמאמן.&nbsp;</p>
+               <p><strong>מבנה התכנית:&nbsp;</strong></p>
+               <p>כל 2 פגישות שלכם עם המתאמן, אנחנו מקיימים פגישה. התהליך מלווה בהגשת 3 דוחות.&nbsp;</p>
+               <p>אתם נהנים מזמינות טלפונית / וואצאפ (בשעות קבועות) - שיחות הכנה למפגשי אימון, 
+                התייעצויות "קטנות" ודיוקים תוך כדי תהליך האימון.&nbsp;</p><p><strong>עלויות ומסביב:</strong></p>
+                <p>מספר פגישות: 6 פגישות אישיות.&nbsp;</p><p>עלות כוללת: 1950 ש"ח + מע"מ.&nbsp;</p>
+                <p>האם נדרש לאמן במקביל לזמן קיום המפגשים: כן.&nbsp;</p><p>מיקום: און ליין / פרונטלי ברמת גן.&nbsp;&nbsp;</p>
+                <br><br>
+                <p><span style="text-decoration:underline;"><strong>תכנית פרימיום VIP-&nbsp;</strong></span></p><p>חבילה משולבת - ליווי מלא ל 3 חודשים!&nbsp;</p><p>בואו נלביש בגדי עבודה לחלום וניקח יחד את קריירת האימון שלכם למעלה!&nbsp;</p><p>תכנית ליווי אישי ל 3 חודשים שבהם תקבלו שירות VIP לכל מה שמאמן צריך:</p><ul><li>התאמה ושדרוג מודל האימון שקיבלתם במכללה לנישה האימונית שבחרתם להתמקד בה.&nbsp;</li><li>הדרכה מקיפה וליווי בניהול תהליך אימון אל מול לקוח, למידה של טכניקות עבודה אימוניות נוספות, הקנייה וחיזוק הביטחון כמאמן.&nbsp;</li>
+            <li>זמינות טלפונית (בשעות קבועות)
+               - שיחות הכנה למפגשי אימון, התייעצויות "קטנות" ודיוקים תוך כדי העבודה אל מול המתאמנים.&nbsp;</li>
+               <li>במהלך הפגישות תעברו תהליך אישי בהתקרבות אל עצמכם ממקום אימוני ומעצים.&nbsp;</li>
+              </ul><p>מספר פגישות: 12 פגישות אישיות</p><p>עלות כוללת: 3750 ש"ח + מע"מ&nbsp;</p>
+              <p>האם נדרש לאמן במקביל לזמן קיום המפגשים: כן.&nbsp;</p><p>מיקום: און ליין / פרונטלי ברמת גן.&nbsp;&nbsp;</p>  
+
+
+
+      <br><br>
+      <mat-card>
+        <mat-card-content>
+          <form class="d-flex flex-column" [formGroup]="contactForm">
+            <mat-form-field>
+              <mat-label>שם</mat-label>
+              <input type="text" matInput formControlName="name">
+              <mat-error *ngIf="formControls.name.hasError('required')">
+                חובה להזין שם
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>מייל</mat-label>
+              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
+              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
+                יש להזין מייל תקין
+              </mat-error>
+              <mat-error *ngIf="formControls.email.hasError('required')">
+                חובה להזין מייל
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>תוכן</mat-label>
+              <textarea matInput formControlName="content"></textarea>
+              <mat-error *ngIf="formControls.content.hasError('required')">
+                חובה להזין תוכן
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button id="contactUsFormSubmission" class="action-button" type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+        </mat-card-actions>
+      </mat-card>
+      <br><br>
+    </mat-expansion-panel>
+
+
   </mat-accordion>
 </div>
 
