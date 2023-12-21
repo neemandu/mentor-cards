@@ -34,7 +34,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-436850676e6e58324f75-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-53387561587359355933-build.zip"
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -86,7 +86,7 @@
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-43316d536e39634f4f50-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-555a2f4b795265644151-build.zip"
         },
         "mentorcards91f3dc29CustomMessage": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
