@@ -17,6 +17,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
 
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   render_id: String = "";
+  isPaypalEnabled = false;
 
   constructor(public dialogRef: MatDialogRef<ApprovePurchaseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PurchaseData,
     private userAuthService: UserAuthService, private sharedDialogsService: SharedDialogsService, private overlaySpinnerService: OverlaySpinnerService,
@@ -24,6 +25,25 @@ export class ApprovePurchaseDialogComponent implements OnInit {
     private mixpanel: MixpanelService) { }
 
   ngOnInit(): void {
+    
+  }
+
+  handleCheckboxChange() {
+    if (this.isPaypalEnabled && this.render_id === '') {
+      this.renderPayPalButtons();
+    }  else {
+      this.hidePayPalButtons();
+    }
+  }
+
+  hidePayPalButtons() {
+    this.render_id = '';
+    const paypalEl = this.paypalElement.nativeElement;
+    paypalEl.innerHTML = ''; 
+  }
+
+  renderPayPalButtons() {
+    // Logic to render PayPal buttons
     let plan_id = this.data.subscriptionPlanSelected.providerPlanId;
     this.render_id = 'paypal-button-container-' + plan_id;
     paypal
@@ -75,8 +95,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           label: 'pay',
         }
       })
-      .render('#paypal');
-  }
+      .render('#paypal');  }
 
   openSiteRulesModal(): void {
     this.sharedDialogsService.openSiteRulesDialog();

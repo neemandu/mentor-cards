@@ -32,20 +32,27 @@
             הבנק עשוי לגבות עמלת דמי העברה או עמלת המרה.
         </li>
         <li>
-            ​הבחירה להמשיך מבטאת את אישורך לכך שגילך מעל 18 שנים ואת הסכמתך ל<a (click)="openSiteRulesModal();">תנאים
-                האלה.</a>
-        </li>
-        <li>
             בתוכנית Life-Time, הגישה לערכות הקלפים באתר תהיה פתוחה כל עוד האתר עובד ונגיש לציבור.
         </li>
         <!-- <li>
             לסיום הרכישה באמצעות <b>PayPal או ע"י כרטיס אשראי</b> לחץ על כפתור ה PayPal.
         </li> -->
     </ul>
-    <p id="payment-title">
-אנא בחרו אמצעי תשלום:    </p>
+    <mat-checkbox [(ngModel)]="isPaypalEnabled" 
+              [ngClass]="{'red-text': !isPaypalEnabled, 'li': isPaypalEnabled}"
+              (change)="handleCheckboxChange()">
+        אנא אשרו כי קראתם את <a (click)="openSiteRulesModal();">תנאי האתר.</a>
+    </mat-checkbox>
+
+    <div *ngIf="isPaypalEnabled" id="payment-title">
+        אנא בחרו אמצעי תשלום:   
+        <div mat-dialog-actions>
+            <div id="paypal" style="width: 100%;" #paypal [matTooltipClass]="{'tooltip-class' : true}"
+                [matTooltipPosition]="'left'" matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
+        </div> 
+    </div>
 </div>
 <div mat-dialog-actions>
     <div id="paypal" style="width: 100%;" #paypal [matTooltipClass]="{'tooltip-class' : true}"
         [matTooltipPosition]="'left'" matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
-</div>
+</div> 
