@@ -73,4 +73,9 @@ ul {
   .mat-dialog-content {
     max-width: initial;
   }
+
+  .scrollable-content {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto; /* This will add a scrollbar if the content overflows */
+  }
 }

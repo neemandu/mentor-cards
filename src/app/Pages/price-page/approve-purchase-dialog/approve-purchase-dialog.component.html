@@ -1,12 +1,5 @@
-<!-- <mat-toolbar class="d-flex justify-content-between">
-    <button class="iconButton" mat-icon-button (click)="closeDialog()">
-        <mat-icon>highlight_off</mat-icon>
-    </button>
-    <span id="title">תשלום באמצעות PayPal או כרטיס אשראי</span>
-    <button style="opacity: 0;" class="iconButton" mat-icon-button>
-        <mat-icon>highlight_off</mat-icon>
-    </button>
-</mat-toolbar> -->
+
+<div class="dialog-content-wrapper" style="max-height: 500px; overflow-y: auto;overflow-x: hidden;">
 <div mat-dialog-title style="text-align: center;">
     <button class="iconButton" mat-icon-button (click)="closeDialog()">
         <mat-icon>highlight_off</mat-icon>
@@ -16,9 +9,6 @@
 <div class="line"></div>
 <div id='summery' mat-dialog-content>
     <ul>
-        <!-- <li>
-            החיוב יתחיל ב-{{data.paymentStartDate | date:'d/M/y'}}, בסוף תקופת הניסיון בחינם, ויתחדש אוטומטית מדי חודש.
-        </li> -->
         <li>
             במידה ובחרת בתוכנית עם תשלום חוזר (חודשית/שנתית/וכו) ולא בתוכנית Life-Time, בתשלום חד פעמי, בסוף תקופת התכנית חשבונך יחויב באופן אוטומטי לתקופה נוספת, אנחנו נזכיר לך במייל 7 ימים לפני ביצוע החיוב
             מחדש.
@@ -38,9 +28,6 @@
         <li>
             בתוכנית Life-Time, הגישה לערכות הקלפים באתר תהיה פתוחה כל עוד האתר עובד ונגיש לציבור.
         </li>
-        <!-- <li>
-            לסיום הרכישה באמצעות <b>PayPal או ע"י כרטיס אשראי</b> לחץ על כפתור ה PayPal.
-        </li> -->
     </ul>
     <p id="payment-title">
 אנא בחרו אמצעי תשלום:    </p>
@@ -48,4 +35,5 @@
 <div mat-dialog-actions>
     <div id="paypal" style="width: 100%;" #paypal [matTooltipClass]="{'tooltip-class' : true}"
         [matTooltipPosition]="'left'" matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
+</div>
 </div>
