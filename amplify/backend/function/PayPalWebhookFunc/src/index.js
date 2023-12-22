@@ -173,8 +173,14 @@ exports.handler = async (event) => {
         var paypal_body = JSON.parse(event.body);
         var event_type = paypal_body.event_type;
         var transaction_id = "";
+        var shouldProcess = true;
         if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
             transaction_id = paypal_body.resource.id;
+
+            // Liftetime plan - we should not cancel for our customers.
+            if(paypal_body.resource.plan_id == 'P-38W13427H3924681HMVGLNDA'){
+                shouldProcess = false;
+            }
         }
         if(event_type == "PAYMENT.SALE.COMPLETED"){
             transaction_id = paypal_body.resource.billing_agreement_id;
@@ -182,14 +188,16 @@ exports.handler = async (event) => {
         console.log('event_type: ' + event_type);
         console.log('transaction_id: ' + transaction_id);
         var user;
-        user = await getUserByPayPalTxId(transaction_id);
-        if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
-            await cancelUserSubscription(user, transaction_id);
-            await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
-        }
-        else if(event_type == "PAYMENT.SALE.COMPLETED"){
-            var amount = paypal_body.resource.amount.total;
-            await createInvoice(user, amount, transaction_id);
+        if(shouldProcess){
+            user = await getUserByPayPalTxId(transaction_id);
+            if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+                await cancelUserSubscription(user, transaction_id);
+                await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
+            }
+            else if(event_type == "PAYMENT.SALE.COMPLETED"){
+                var amount = paypal_body.resource.amount.total;
+                await createInvoice(user, amount, transaction_id);
+            }
         }
         const response = {
             statusCode: 200,
