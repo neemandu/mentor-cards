@@ -25,7 +25,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
     private mixpanel: MixpanelService) { }
 
   ngOnInit(): void {
-    
+    this.renderPayPalButtons();
   }
 
   handleCheckboxChange() {
