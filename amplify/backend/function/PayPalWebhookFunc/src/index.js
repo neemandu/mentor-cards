@@ -189,12 +189,13 @@ exports.handler = async (event) => {
         console.log('transaction_id: ' + transaction_id);
         var user;
         if(shouldProcess){
-            user = await getUserByPayPalTxId(transaction_id);
             if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+                user = await getUserByPayPalTxId(transaction_id);
                 await cancelUserSubscription(user, transaction_id);
                 await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
             }
             else if(event_type == "PAYMENT.SALE.COMPLETED"){
+                user = await getUserByPayPalTxId(transaction_id);
                 var amount = paypal_body.resource.amount.total;
                 await createInvoice(user, amount, transaction_id);
             }
