@@ -102,8 +102,10 @@ export class PricePageComponent implements OnInit {
     return new Date(new Date().getTime() + millisecondsInTwoWeeks);
   }
 
-  get userSingedIn() {
-    return this.userAuthService.userData;
+  get userSingedIn() {   
+    this.userData = this.userAuthService.userData;   
+    this.loggedIn = this.userData ? true : false;
+    return this.userData;
   }
 
   /**
