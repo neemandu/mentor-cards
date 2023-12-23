@@ -102,8 +102,8 @@ export class PricePageComponent implements OnInit {
     return new Date(new Date().getTime() + millisecondsInTwoWeeks);
   }
 
-  get userSingedIn() {   
-    this.userData = this.userAuthService.userData;   
+  get userSingedIn() {
+    this.userData = this.userAuthService.userData;
     this.loggedIn = this.userData ? true : false;
     return this.userData;
   }
@@ -112,14 +112,11 @@ export class PricePageComponent implements OnInit {
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
   checkFreePeriod(packId): void {
-    if (!this.userSingedIn && !this.loggedIn && !this.userData) {
+    if (!this.userSingedIn) {
       this.signInSignUp();
     }
     else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
-      this.mixpanelService.track("PlanPurchaseClick", { "Name": this.packSelected.name,
-        "ID": this.packSelected.id,
-        "Price": this.packSelected.fullPrice});
       if (this.userData?.status === 'PLAN') {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;

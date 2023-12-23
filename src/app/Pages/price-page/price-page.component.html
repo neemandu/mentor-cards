@@ -38,7 +38,10 @@
       <mat-card-actions>
         <button
           id="monthlySubscription"
-          *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1"
+          *ngIf="userSingedIn &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
+          "
           class="popular-purchase-btn purchase-btn"
           type="button"
           (click)="checkFreePeriod(monthlySubscription.id)"
@@ -46,16 +49,28 @@
           להצטרפות >>
         </button>
         <button
-          *ngIf="userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1"
+          *ngIf="userSingedIn &&
+            userData?.status === 'PLAN' &&
+            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
+          "
           class="disabled-btn purchase-btn"
           type="button"
           disabled
         >
           הינך רשום לתכנית זו
         </button>
+        <button
+        *ngIf="!userSingedIn"
+        class="popular-purchase-btn purchase-btn"
+        type="button"
+        (click)="signInSignUp()">
+          להצטרפות >>
+        </button>
       </mat-card-actions>
     </mat-card>
     <mat-card id="popular-mat-card">
+      <!-- <span id="best-pack">הכי משתלמת</span> -->
+      <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
       <mat-card-title>תכנית Life-Time!</mat-card-title>
       <mat-card-content>
         <br>
@@ -81,18 +96,30 @@
         </ul></mat-card-content>
       <mat-card-actions>
         <button
-          *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200"
+          *ngIf="userSingedIn &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200)
+          "
           class="popular-purchase-btn purchase-btn"
           (click)="checkFreePeriod(lifeTimeSubscription.id)"
         >
           להצטרפות >>
         </button>
         <button
-          *ngIf="userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200"
+          *ngIf="userSingedIn &&
+            userData?.status === 'PLAN' &&
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
+          "
           class="disabled-btn purchase-btn"
           disabled
         >
           הינך רשום לתכנית זו
+        </button>
+        <button
+        *ngIf="!userSingedIn"
+        class="popular-purchase-btn purchase-btn"
+        (click)="signInSignUp()">
+          להצטרפות >>
         </button>
       </mat-card-actions>
     </mat-card>  
