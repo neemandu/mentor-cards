@@ -110,7 +110,7 @@ export class PricePageComponent implements OnInit {
    * Before prompting the purchase dialog, check if user has free period\code coupon on hand
    */
   checkFreePeriod(packId): void {
-    if (!this.userSingedIn) {
+    if (!this.userSingedIn && !this.loggedIn && !this.userData) {
       this.signInSignUp();
     }
     else {
