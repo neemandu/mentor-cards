@@ -115,6 +115,9 @@ export class PricePageComponent implements OnInit {
     }
     else {
       this.packSelected = this.subPlans.find(pack => pack.id == packId)
+      this.mixpanelService.track("PlanPurchaseClick", { "Name": this.packSelected.name,
+        "ID": this.packSelected.id,
+        "Price": this.packSelected.fullPrice});
       if (this.userData?.status === 'PLAN') {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
