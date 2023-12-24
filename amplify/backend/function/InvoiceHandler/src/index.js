@@ -60,9 +60,17 @@ exports.handler = (event) => {
           invoice.invoiceRunningId = dataString;
           console.log("invoice.invoiceRunningId: " + invoice.invoiceRunningId);
           var items = record.dynamodb.NewImage.items.L;
+          let price = 0;
+          if('S' in items[0].M.pricePerItem){
+            price = float(items[0].M.pricePerItem['S'])
+          }
+          else if('N' in items[0].M.pricePerItem){
+            price = float(items[0].M.pricePerItem['N'])
+          }
+
           invoice.items = [{
             itemName: items[0].M.itemName.S,
-            pricePerItem: items[0].M.pricePerItem.N,
+            pricePerItem: price,
             numberOfItems: items[0].M.numberOfItems.N,
           }];
           
