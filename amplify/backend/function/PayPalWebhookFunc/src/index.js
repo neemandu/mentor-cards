@@ -216,7 +216,7 @@ exports.handler = async (event) => {
         }
         if(event_type == "PAYMENT.SALE.COMPLETED"){
             transaction_id = paypal_body.resource.billing_agreement_id;
-            user_id_mydb = paypal_body.resource.custom_id;
+            user_id_mydb = paypal_body.resource.custom;
         }
         console.log('event_type: ' + event_type);
         console.log('transaction_id: ' + transaction_id);
