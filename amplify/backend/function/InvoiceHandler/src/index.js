@@ -62,16 +62,24 @@ exports.handler = (event) => {
           var items = record.dynamodb.NewImage.items.L;
           let price = 0;
           if('S' in items[0].M.pricePerItem){
-            price = float(items[0].M.pricePerItem['S'])
+            price = parseFloat(items[0].M.pricePerItem['S'])
           }
           else if('N' in items[0].M.pricePerItem){
-            price = float(items[0].M.pricePerItem['N'])
+            price = items[0].M.pricePerItem['N']
+          }
+
+          let numberOfItems = 1;
+          if('S' in items[0].M.numberOfItems){
+            numberOfItems = parseInt(items[0].M.numberOfItems['S'])
+          }
+          else if('N' in items[0].M.numberOfItems){
+            numberOfItems = items[0].M.numberOfItems['N']
           }
 
           invoice.items = [{
             itemName: items[0].M.itemName.S,
             pricePerItem: price,
-            numberOfItems: items[0].M.numberOfItems.N,
+            numberOfItems: numberOfItems,
           }];
           
           var docClient = new AWS.DynamoDB.DocumentClient();

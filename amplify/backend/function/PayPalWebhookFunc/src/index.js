@@ -21,12 +21,12 @@ async function saveUser(user){
         Item: user
     };
 
-    console.log("updating user " + user.id + " as unsubscribed" );
+    console.log("updating user " + user.id );
 
     await docClient.put(updatedUserParams).promise().then(data => {
-        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+        console.log("updated user " + user.id, JSON.stringify(data, null, 2));
     }).catch(err => {
-        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to updating user " + user.id + ". Error JSON:", JSON.stringify(err, null, 2));
         });        
 }
 
@@ -69,6 +69,37 @@ function getSubByTxID(user, transaction_id){
         }
     }
     return subscription;
+}
+
+async function getUser(id){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "id": id
+        }
+    };
+
+    console.log("searching for user - " + id);
+
+    var user;
+
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!user){
+        throw Error ('no such user - ' + id);
+    }
+
+    return user;
 }
 
 async function getUserByPayPalTxId(transaction_id){
@@ -173,6 +204,7 @@ exports.handler = async (event) => {
         var paypal_body = JSON.parse(event.body);
         var event_type = paypal_body.event_type;
         var transaction_id = "";
+        var user_id_mydb = "";
         var shouldProcess = true;
         if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
             transaction_id = paypal_body.resource.id;
@@ -184,18 +216,27 @@ exports.handler = async (event) => {
         }
         if(event_type == "PAYMENT.SALE.COMPLETED"){
             transaction_id = paypal_body.resource.billing_agreement_id;
+            user_id_mydb = paypal_body.resource.custom_id;
         }
         console.log('event_type: ' + event_type);
         console.log('transaction_id: ' + transaction_id);
-        var user;
+        console.log('user_id_mydb: ' + user_id_mydb);
+
+
         if(shouldProcess){
-            if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+            var user;
+            if(user_id_mydb && user_id_mydb !== ""){
+                user = await getUser(user_id_mydb);
+            }
+            else{
                 user = await getUserByPayPalTxId(transaction_id);
+            }
+
+            if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
                 await cancelUserSubscription(user, transaction_id);
                 await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
             }
             else if(event_type == "PAYMENT.SALE.COMPLETED"){
-                user = await getUserByPayPalTxId(transaction_id);
                 var amount = paypal_body.resource.amount.total;
                 await createInvoice(user, amount, transaction_id);
             }

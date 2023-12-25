@@ -1,0 +1,148 @@
+mat-icon {
+    font-family: 'Material Icons';
+  }
+  
+  * {
+    font-family: 'rubik';
+    direction: rtl;
+    text-align: right;
+  }
+  
+  mat-toolbar {
+    margin-top: -10px;
+    background-color: transparent;
+  }
+  
+  .warning-text {
+    color: red;
+    margin-bottom: 10px; /* Adjust spacing as needed */
+  }
+  
+  .red-text {
+    color: red;
+    font-size: medium;
+  }
+  
+  a {
+    color: #007bff !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+  }
+  
+  .line {
+    background-color: #ffa800;
+    width: auto;
+    height: 3px;
+    margin-bottom: 1rem;
+  }
+  
+  li {
+    font-size: medium;
+  }
+  
+  #title {
+    font-size: large;
+  }
+  
+  ul {
+    line-height: 1.5rem;
+    padding-right: 1rem;
+  }
+  
+  ::ng-deep .tooltip-class {
+    font-size: 0.8rem;
+    direction: rtl !important;
+    text-align: right;
+  }
+  
+  #payment-title {
+    font-size: medium;
+    text-decoration: underline;
+  }
+  
+  #payment-inst-list {
+    font-weight: 600;
+  }
+  
+  .mat-dialog-content {
+    font-size: medium;
+    max-height: initial;
+    max-width: 35vw;
+  }
+
+
+  .checkbox {
+    display: inline-block; /* Allows the label to be sized according to its content */
+    max-width: 100%; /* Ensures the label does not exceed the width of its container */
+    word-wrap: break-word; /* Breaks long words to prevent overflow */
+    overflow-wrap: break-word; /* Ensures overflow text wraps into the next line */
+    border-color: red;
+    white-space: pre-wrap;
+  }
+
+  .label-disabled {
+    pointer-events: none; /* Disables all pointer events on the label */
+    opacity: 0.6; /* Optional: reduces the opacity to visually indicate disabled state */
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+  }
+  
+  .continue {
+    margin-left: 10px;
+    height: 39px;
+    border-radius: 5px;
+    /* background: white; */
+    border: solid 1px white;
+    /* color: #ffa800; */
+    background: var(--main-color);
+    color: white;
+    border-color: white;
+    font-weight: 500;
+    font-family: var(--main-font-family);
+    font-size: large;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, opacity .15s ease-in-out;
+  }
+
+#summery {
+  display: flex;
+  align-items: flex-start; /* Aligns the checkbox to the top of the label */
+}
+
+#summery input[type="checkbox"] {
+  margin-top: 4px; /* Adjust this value as needed for finer alignment */
+  margin-left: 8px; /* Space between the checkbox and the label */
+}
+
+#summery label {
+  font-size: medium;
+}
+
+  
+
+  .continue:disabled {
+    background: #ccc; /* Example: a gray background for disabled state */
+    color: #666; /* Example: a darker text color for disabled state */
+    cursor: not-allowed; /* Shows a 'not allowed' cursor on hover */
+    box-shadow: none; /* Optionally remove box shadow in disabled state */
+    border: solid 1px #ccc; /* Example: change border color for disabled state */
+  }
+
+  @media screen and (max-width: 768px) {
+    .mat-dialog-content {
+      max-width: initial;
+    }
+  
+    .scrollable-content {
+      max-height: 400px; /* Adjust the height as needed */
+      overflow-y: auto; /* This will add a scrollbar if the content overflows */
+    }
+  }
+  

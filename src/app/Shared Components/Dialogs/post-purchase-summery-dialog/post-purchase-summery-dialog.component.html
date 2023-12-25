@@ -17,15 +17,10 @@
     <p *ngIf="data.billingCycleInMonths == 1">תכנית חודשית</p>
     <p *ngIf="data.billingCycleInMonths == 6">תכנית חצי-שנתית</p>
     <p *ngIf="data.billingCycleInMonths == 12">תכנית שנתית</p>
+    <p *ngIf="data.billingCycleInMonths == 1200">תכנית LifeTime</p>
 </div>
 <div class="line"></div>
 <div class="actions" mat-dialog-actions>
-    <p _ngcontent-emn-c272="">מה הלאה?</p>
-    <p>אנחנו נזכיר לך 7 ימים לפני מועד החיוב הבא.</p>
-    <button class="action-button" type="button" (click)="closeDialog()">אישור</button>
-    <!-- <div class="buttons d-flex flex-column">
-        <div style="margin-bottom: 1rem;" class="d-flex flex-row align-items-center">
-        </div>
-    </div> -->
-    <p style="font-size: x-large;">עבודה נעימה!</p>
+    <p>המשך עבודה נעימה</p>
+    <button class="action-button" type="button" (click)="navigate('/all-packs-page')">אישור</button>
 </div>

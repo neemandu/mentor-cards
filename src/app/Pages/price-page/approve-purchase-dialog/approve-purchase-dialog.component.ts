@@ -52,11 +52,13 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           // debugger
           if (this.userAuthService.userData?.status === "NOPLAN" || this.data.packId)
             return actions.subscription.create({
-              'plan_id': plan_id
+              'plan_id': plan_id,
+              'custom_id': this.userAuthService.userData?.id
             });
           else if (this.userAuthService.userData?.status === "PLAN")
             return actions.subscription.revise(this.userAuthService.userData.subscription.providerTransactionId, {
-              'plan_id': plan_id
+              'plan_id': plan_id,
+              'custom_id': this.userAuthService.userData?.id
             });
         },
         onApprove: async (data, actions) => {
@@ -67,7 +69,9 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           "Subscription name": this.data.subscriptionPlanSelected.name,
           "Billing cycle": this.data.subscriptionPlanSelected.billingCycleInMonths,
           "Full price": this.data.subscriptionPlanSelected?.fullPrice,
-          "Pack ID": this.data.packId});
+          "Pack ID": this.data.packId,
+          'User Id': this.userAuthService.userData?.id,
+          'User Email': this.userAuthService.userData?.email});
           
           this.overlaySpinnerService.changeOverlaySpinner(true);
           var ids: updatePaymentProgramInput = { 'paymentProgramId': this.data.subscriptionPlanSelected.id, 'providerTransactionId': data.subscriptionID, 'packId': this.data.packId ? this.data.packId : -1 }

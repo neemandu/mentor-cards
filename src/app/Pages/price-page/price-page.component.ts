@@ -14,6 +14,7 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 // import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
 import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
+import { ReadTermsDialogComponent } from './read-terms-dialog/read-terms-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInTwoWeeks: number = 1209600000;
 
@@ -130,12 +131,12 @@ export class PricePageComponent implements OnInit {
         var dialogSub = dialogRef.afterClosed().subscribe(res => {
           dialogSub.unsubscribe();
           if (res) {
-            this.openApprovePurchaseDialog();
+            this.openReadTermsDialog();
           }
         });
       }
       else {
-        this.openApprovePurchaseDialog();
+        this.openReadTermsDialog();
       }
     }
   }
@@ -148,6 +149,21 @@ export class PricePageComponent implements OnInit {
     // dialogConfig.maxWidth = '30vw';
     dialogConfig.data = new PurchaseData(this.paymentStartDate, this.packSelected);
     const dialogRef = this.dialog.open(ApprovePurchaseDialogComponent, dialogConfig);
+    var dialogSub = dialogRef.afterClosed().subscribe(res => {
+      dialogSub.unsubscribe();
+      if (res) {
+      }
+    });
+  }
+
+  openReadTermsDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxHeight = '85vh';
+    // dialogConfig.maxWidth = '30vw';
+    dialogConfig.data = new PurchaseData(this.paymentStartDate, this.packSelected);
+    const dialogRef = this.dialog.open(ReadTermsDialogComponent, dialogConfig);
     var dialogSub = dialogRef.afterClosed().subscribe(res => {
       dialogSub.unsubscribe();
       if (res) {
