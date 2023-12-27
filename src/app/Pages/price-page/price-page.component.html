@@ -38,7 +38,7 @@
       <mat-card-actions>
         <button
           id="monthlySubscription"
-          *ngIf="loggedIn &&
+          *ngIf="userSingedIn &&
             (userData?.status === 'NOPLAN' ||
             userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
           "
@@ -49,7 +49,7 @@
           להצטרפות >>
         </button>
         <button
-          *ngIf="loggedIn &&
+          *ngIf="userSingedIn &&
             userData?.status === 'PLAN' &&
             userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
           "
@@ -60,7 +60,7 @@
           הינך רשום לתכנית זו
         </button>
         <button
-        *ngIf="!loggedIn"
+        *ngIf="!userSingedIn"
         class="popular-purchase-btn purchase-btn"
         type="button"
         (click)="signInSignUp()">
@@ -96,7 +96,7 @@
         </ul></mat-card-content>
       <mat-card-actions>
         <button
-          *ngIf="loggedIn &&
+          *ngIf="userSingedIn &&
             (userData?.status === 'NOPLAN' ||
             userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200)
           "
@@ -106,7 +106,7 @@
           להצטרפות >>
         </button>
         <button
-          *ngIf="loggedIn &&
+          *ngIf="userSingedIn &&
             userData?.status === 'PLAN' &&
             userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
           "
@@ -116,7 +116,7 @@
           הינך רשום לתכנית זו
         </button>
         <button
-        *ngIf="!loggedIn"
+        *ngIf="!userSingedIn"
         class="popular-purchase-btn purchase-btn"
         (click)="signInSignUp()">
           להצטרפות >>

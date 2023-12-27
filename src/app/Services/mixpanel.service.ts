@@ -7,6 +7,7 @@ export class EventTypes {
   static readonly FormSubmitted = "Form Submitted";
   static readonly PageViewed = "Page Viewed";
   static readonly PlanPurchase = "Plan Purchase";
+  static readonly PlanPurchaseClick = "Plan Purchase Click";
   static readonly ActionButtonClicked = "Action Button Clicked";
   static readonly UserLoggedIn = "User Logged In";
   static readonly CouponCode = "Coupon code";

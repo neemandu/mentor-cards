@@ -142,6 +142,7 @@ import { AuthService } from './Services/auth.service';
 import { BlogCardComponent } from './Shared Components/blog-card/blog-card.component';
 import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
+import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/read-terms-dialog.component';
 
 @NgModule({
   declarations: [
@@ -191,6 +192,7 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
     BlogCardComponent,
     BlogDetailComponent,
     AllBlogsComponent,
+    ReadTermsDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -159,10 +159,10 @@ async function saveUser(user){
         Item: user
     };
 
-    console.log("updating user " + user.id + " as unsubscribed" );
+    console.log("updating user " + user.id + " as subscribed" );
 
     await docClient.put(updatedUserParams).promise().then(data => {
-        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+        console.log("updated user " + user.id + " as subscribed", JSON.stringify(data, null, 2));
     }).catch(err => {
         console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
         });        

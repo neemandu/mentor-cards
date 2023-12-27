@@ -164,13 +164,9 @@ export class UserAuthService {
               this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks);
           });
         }
-        this.userData.status === 'PLAN' || this.couponCodesCardPacksAllowed()
-          ? this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
-          : null;
+
         this.checkOrgTrial();
-        this.userData.status === 'PLAN'
-          ? this.ngZone.run(() => this.router.navigate(['/all-packs-page']))
-          : null;
+
         this.overlaySpinnerService.changeOverlaySpinner(false);
         // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
         this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
