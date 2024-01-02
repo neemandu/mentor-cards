@@ -9,7 +9,7 @@ import {
   AfterViewInit,
   QueryList,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { APIService } from 'src/app/API.service';
@@ -78,7 +78,8 @@ export class AllPacksPageComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService,
     private api: APIService,
     private userAuthService: UserAuthService,
-    public router: Router,
+    public router: ActivatedRoute,
+    public routNavigate: Router,
     private ngZone: NgZone,
     public dialog: MatDialog,
     private mixpanelService: MixpanelService
@@ -144,6 +145,14 @@ export class AllPacksPageComponent implements OnInit {
   
 
   ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      const refId = params['ref'];
+      if (refId) {
+        localStorage.setItem('refId', refId);
+        console.log('refId ID stored:', refId);
+      }
+    });
+
     // track events
     this.mixpanelService.track("PageViewed", { 'Page Title': 'all-packs-page' });
 
@@ -365,7 +374,7 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   public navigate(path: string): void {
-    this.ngZone.run(() => this.router.navigate([path]));
+    this.ngZone.run(() => this.routNavigate.navigate([path]));
   }
 
   ngOnDestroy(): void {

@@ -54,6 +54,32 @@ type User
   entries: Int
   externalPacksSubscriptions: [MonthlySubscription] 
   entryDates: [AWSDateTime]
+  refId: String
+  myAffiliate: Affiliate @connection
+}
+
+type Affiliate
+  @model
+  @auth(
+    rules: [
+      {
+        allow: owner
+        ownerField: "contactEmail"
+        operations: [read, update]
+        provider: userPools
+      },
+      { allow: groups, groups: ["Admins"] }
+    ]
+  ) {
+    affiliateID: ID!
+    name: String
+    contactEmail: AWSEmail
+    phoneNumber: String
+    websiteURL: String
+    paymentDetails: String
+    commissionPercentage: Float
+    dateJoined: AWSDateTime
+    status: String 
 }
 
 type MonthlySubscription {
@@ -309,6 +335,7 @@ input CreateUserInput {
   email: AWSEmail
   phone: String
   fullName: String
+  affiliateId: String
 }
 
 input addCardsPackInput {

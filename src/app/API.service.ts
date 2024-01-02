@@ -54,6 +54,7 @@ export type CreateUserInput = {
   phone?: string | null;
   fullName?: string | null;
   userOrgMembershipId?: string | null;
+  refId?: string | null;
 };
 
 export type User = {
