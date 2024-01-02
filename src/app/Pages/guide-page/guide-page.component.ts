@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
+import { SharedDialogsService } from 'src/app/Services/shared-dialogs.service';
 
 @Component({
   selector: 'app-guide-page',
@@ -13,7 +14,7 @@ export class GuidePageComponent implements OnInit {
   playerHeight: number;
 
   constructor(
-    private mixpanelService: MixpanelService) { }
+    private mixpanelService: MixpanelService, private sharedDialogsService: SharedDialogsService) { }
 
   ngOnInit(): void {
     
@@ -21,6 +22,10 @@ export class GuidePageComponent implements OnInit {
     this.mixpanelService.track("PageViewed", { 'Page Title': 'guide-page' });
     this.playerWidth = window.innerWidth;
     this.playerHeight = this.playerWidth / 1.78
+  }
+
+  openSiteRulesModal(): void {
+    this.sharedDialogsService.openSiteRulesDialog();
   }
 
   selectedTopicChanged(index: number, title: string): void {

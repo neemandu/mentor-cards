@@ -148,11 +148,55 @@
           class="category-line d-flex align-items-center justify-content-around"
         >
           <div class="first-line"></div>
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות להתנסות חופשית'"     
-          matTooltip="בכל חודש, צוות מנטור-קארדס, יחליף את ערכות הקלפים להתנסות על מנת לחשוף את המשתמשים שלנו לערכות השונות באתרנו."
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות להתנסות חופשית' && userData?.status === 'NOPLAN'"     
+          matTooltip="ערכות שנבחרו על ידי הצוות שלנו והגישה אליהן חופשית. ערכות אלו מתחלפות בכל תחילת חודש. "
           [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category !== 'ערכות להתנסות חופשית'"     
-          >{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות להתנסות חופשית' && userData?.status === 'PLAN'"     
+          matTooltip="ערכות שנבחרו על ידי הצוות שלנו. ערכות אלו מתחלפות בכל תחילת חודש."
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות VIP'"     
+          matTooltip="ערכות של יוצרים ואמנים מהעולם"
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'נעים להכיר'"     
+          matTooltip="ערכות קלפי שאלות המתאימות לפעילויות היכרות שונות"
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי תמונה'"     
+          matTooltip="בכל ערכה עשרות קלפי תמונות שונות, 
+          תחת נושא אחד ספציפי."
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי שאלות'"     
+          matTooltip="בכל ערכה עשרות קלפי שאלות שונות, 
+          מפתחות ומעצימות."
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי חגים'"     
+          matTooltip="ערכות קלפים המשלבות מוטיבים מחגי ישראל."
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי מילה'"     
+          matTooltip="ערכות קלפים עם מילים בלבד, תחת נושא אחד ספציפי."
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי מסרים'"     
+          matTooltip="ערכות קלפים עם משפטי השראה והעצמה. "
+          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+
+          
+          <h3 class="categrory-title"  *ngIf="categoryPacks.category !== 'קלפי מסרים' 
+          && categoryPacks.category !== 'קלפי מילה'
+          && categoryPacks.category !== 'קלפי חגים'
+          && categoryPacks.category !== 'ערכות להתנסות חופשית'
+          && categoryPacks.category !== 'ערכות VIP'
+          && categoryPacks.category !== 'נעים להכיר'
+          && categoryPacks.category !== 'קלפי תמונה'
+          && categoryPacks.category !== 'קלפי שאלות'">
+            {{ categoryPacks.category }}</h3>
+
           <div class="second-line"></div>
         </div>
         <div
