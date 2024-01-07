@@ -67,7 +67,7 @@ export class ApprovePurchaseDialogComponent implements OnInit {
           "Transaction ID": data.subscriptionID,
           "Subscription Plan": this.data.subscriptionPlanSelected, 
           "Subscription name": this.data.subscriptionPlanSelected.name,
-          "Billing cycle": this.data.subscriptionPlanSelected.billingCycleInMonths,
+          "Billing cycle": this.data.subscriptionPlanSelected?.billingCycleInMonths,
           "Full price": this.data.subscriptionPlanSelected?.fullPrice,
           "Pack ID": this.data.packId,
           'User Id': this.userAuthService.userData?.id,

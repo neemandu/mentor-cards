@@ -70,16 +70,16 @@ export class PricePageComponent implements OnInit {
   getSubscriptionPlans(): void {
     this.subPlans = this.userAuthService.subPlans;
 
-    this.monthlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 1);
+    this.monthlySubscription = this.subPlans.find(plan => plan?.billingCycleInMonths == 1);
     // console.log("file: price-page.component.ts ~ line 93 ~ getSubscriptionPlans ~ this.monthlySubscrition", this.monthlySubscription)
-    this.halfYearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 6);
+    this.halfYearlySubscription = this.subPlans.find(plan => plan?.billingCycleInMonths == 6);
     // console.log("file: price-page.component.ts ~ line 95 ~ getSubscriptionPlans ~ this.halfYearlySubscrition", this.halfYearlySubscription)
-    this.yearlySubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 12);
+    this.yearlySubscription = this.subPlans.find(plan => plan?.billingCycleInMonths == 12);
     // console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
-    this.lifeTimeSubscription = this.subPlans.find(plan => plan.billingCycleInMonths == 1200);
+    this.lifeTimeSubscription = this.subPlans.find(plan => plan?.billingCycleInMonths == 1200);
 
-    this.halfYearlySubscriptionPercentage = Math.round(100-((this.halfYearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.halfYearlySubscription.billingCycleInMonths)));
-    this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.yearlySubscription.billingCycleInMonths)));
+    this.halfYearlySubscriptionPercentage = Math.round(100-((this.halfYearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.halfYearlySubscription?.billingCycleInMonths)));
+    this.yearlySubscriptionPercentage = Math.round(100-((this.yearlySubscription?.fullPrice * 100)/(this.monthlySubscription?.fullPrice * this.yearlySubscription?.billingCycleInMonths)));
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
@@ -172,7 +172,7 @@ export class PricePageComponent implements OnInit {
   }
 
   private get nextPaymentDate() {
-    let cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
+    let cycles = this.userData.subscription.subscriptionPlan?.billingCycleInMonths;
     let now = new Date();
     let createdAt = new Date(this.userData.subscription.startDate);
     let monthsDiff = this.monthDiff(createdAt, now);

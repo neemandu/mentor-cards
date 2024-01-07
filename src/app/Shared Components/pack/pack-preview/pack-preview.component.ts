@@ -58,7 +58,7 @@ export class PackPreviewComponent implements OnInit {
     this.userData = this.userAuthService.userData;
     if (this.data.pack.subscriptionPlans) {
       this.yearlyPlan = this.data.pack.subscriptionPlans.find(
-        (el) => el.billingCycleInMonths === 12
+        (el) => el?.billingCycleInMonths === 12
       );
       if(this.yearlyPlan){
         this.yearlyPlan['priceForMentorCardsMembers'] =
@@ -68,7 +68,7 @@ export class PackPreviewComponent implements OnInit {
       }
 
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(
-        (el) => el.billingCycleInMonths === 1
+        (el) => el?.billingCycleInMonths === 1
       );
       if(this.monthlyPlan){
       this.monthlyPlan['priceForMentorCardsMembers'] =
