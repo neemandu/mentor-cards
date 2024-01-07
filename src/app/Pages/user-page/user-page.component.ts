@@ -30,7 +30,7 @@ export class UserPageComponent implements OnInit {
     this.userData = this.userAuthService.userData;
     this.overlaySpinnerService.changeOverlaySpinner(false)
     if (this.userData.subscription) {
-      const chargeSpan = this.userData.subscription.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
+      const chargeSpan = this.userData.subscription.subscriptionPlan?.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
       const tmp: PlanTableObj = {
         'startDate': new Date(this.userData.subscription.startDate),
         'cancellationDate': this.userData.subscription.cancellationDate ? new Date(this.userData.subscription.cancellationDate) : null,
@@ -45,7 +45,7 @@ export class UserPageComponent implements OnInit {
     }
     if(this.userData.externalPacksSubscriptions){
       this.userData.externalPacksSubscriptions.forEach(element => {
-        const chargeSpan = element.subscriptionPlan.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
+        const chargeSpan = element.subscriptionPlan?.billingCycleInMonths === 1 ? YearlyMonthly.MONTHLY : YearlyMonthly.YEARLY
         const tmp: PlanTableObj = {
           'startDate': new Date(element.startDate),
           'cancellationDate': element.cancellationDate ? new Date(element.cancellationDate) : null,
@@ -127,7 +127,7 @@ export class UserPageComponent implements OnInit {
   }
 
   get nextPaymentDate() {
-    var cycles = this.userData.subscription.subscriptionPlan.billingCycleInMonths;
+    var cycles = this.userData.subscription.subscriptionPlan?.billingCycleInMonths;
     var now = new Date();
     var createdAt = new Date(this.userData.subscription.startDate);
     var monthsDiff = this.monthDiff(createdAt, now);

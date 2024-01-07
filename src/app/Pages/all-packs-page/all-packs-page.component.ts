@@ -55,6 +55,7 @@ export class AllPacksPageComponent implements OnInit {
     'קלפי תמונה + מילה',
     'קלפי מסרים',
     'קלפי ערכים',
+    'הייטק',
     'מתנה',
   ];
   userData: UserData;
