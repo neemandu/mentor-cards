@@ -1,13 +1,4 @@
 {
-  "permissions": {
-    "storage": {
-      "User:@model(appsync)": [
-        "read"
-      ],
-      "Affiliate:@model(appsync)": [
-        "read"
-      ]
-    }
-  },
+  "permissions": {},
   "lambdaLayers": []
 }

@@ -1,138 +1,59 @@
-/* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_AFFILIATETABLE_ARN
-	API_CARDSPACKS_AFFILIATETABLE_NAME
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT */
+const AWS = require('aws-sdk');
+AWS.config.update({ region: 'us-east-1' }); // Update this to your AWS region
+const docClient = new AWS.DynamoDB.DocumentClient();
 
-const { env, ppid } = require("process");
-var AWS = require("aws-sdk");
-
-async function getUser(username){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;    
-    var userParams = {
-        TableName: userTable,
-        IndexName: "status-createdAt-index",
-        ProjectionExpression:"id, subscription, email, fullName, phone, couponCodes, createdAt",
-        KeyConditionExpression: "Status = :statusVal and refId = :refId",
-        ExpressionAttributeValues: {
-            ":statusVal": "PLAN",
-            ":refId": refId
-        }
-    };
-
-    console.log("searching for users with a plan");
-    var users = [];
-    await docClient.query(userParams).promise()
-
-
-
-    
-    var userParams = {
-        TableName:userTable,
-        Key:{
-            "id": username
-        }
-    };
-
-    console.log("searching for user - " + username);
-
-    var user;
-
-    await docClient.get(userParams).promise().then(data => {
-        console.log("Get user succeeded:", JSON.stringify(data, null, 2));
-        user = data["Item"];
-    }).catch(err => {
-        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
-    });
-
-    if(!user){
-        console.log('no such user - ' + username);
-    }
-
-    return user;         
-}
-
-async function getAffiliateUsers(refId){
-    var docClient = new AWS.DynamoDB.DocumentClient();
-
-    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
-
-    
-    var userParams = {
-        TableName:userTable,
-        Key:{
-            "refId": refId
-        }
-    };
-
-    console.log("searching for users with refId - " + refId);
-
-    var users;
-
-    await docClient.get(userParams).promise().then(data => {
-        console.log("Get users with refId succeeded:", JSON.stringify(data, null, 2));
-        users = data["Items"];
-    }).catch(err => {
-        console.error("Unable to read items for refId. Error JSON:", JSON.stringify(err, null, 2));
-    });
-
-    if(!user){
-        console.log('no users found for refId - ' + refId);
-    }
-
-    return user;   
-}
-
-function aggregateUsers(users){
-    const aggregation = {};
-
-    users.forEach(item => {
-        const date = new Date(item.firstProgramRegistrationDate);
-        const year = date.getFullYear();
-        const month = date.toLocaleString('default', { month: 'long' });
-
-        if (!aggregation[year]) {
-            aggregation[year] = {};
-        }
-        if (!aggregation[year][month]) {
-            aggregation[year][month] = 0;
-        }
-        aggregation[year][month]++;
-    });
-
-    return aggregation;
-}
-
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
 exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-    // Extract username from event identity claims
-    var username = event.identity.claims['cognito:username'];
-    if(!username){
-        username = event.identity.claims['username'];
+    if (!event || !event.identity || !event.identity.claims) {
+        return { error: "Event or identity claims are not provided" };
     }
 
-    var user = await getUser(username);
-
-    var refId = user?.myAffiliate?.affiliateID;
-
-    let aggregation = {};
-    if(refId){
-        var allAffiliateUsers = await getAffiliateUsers(refId);
-
-        // Aggregate users by year and month whose refId matches user's refId
-        aggregation = aggregateUsers(allAffiliateUsers);
+    const username = event.identity.claims['username'];
+    if (!username) {
+        return { error: "Username not found in identity claims" };
     }
-    return {
-        statusCode: 200,
-        body: JSON.stringify(aggregation),
-    };
+
+    try {
+        const queryParams = {
+            TableName: 'YourUserTableName', // Replace with your DynamoDB table name
+            IndexName: 'YourRefIdAndStatusIndex', // Replace with your GSI name
+            KeyConditionExpression: 'refId = :refId and status = :status',
+            ExpressionAttributeValues: {
+                ':refId': username,
+                ':status': 'PLAN'
+            }
+        };
+
+        const queryResult = await docClient.query(queryParams).promise();
+        const users = queryResult.Items;
+
+        let aggregateData = {};
+
+        users.forEach(user => {
+            if (user.subscription && user.firstProgramRegistrationDate) {
+                const date = new Date(user.firstProgramRegistrationDate);
+                const yearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+
+                const key = `${user.subscription.id}_${yearMonth}`;
+                aggregateData[key] = aggregateData[key] || { count: 0, totalPrice: 0 };
+
+                aggregateData[key].count++;
+                aggregateData[key].totalPrice += (user.subscription.subscriptionPlan?.fullPrice || 0);
+            }
+        });
+
+        let responseData = Object.keys(aggregateData).map(key => {
+            const [subscriptionId, yearMonth] = key.split('_');
+            return {
+                subscriptionId,
+                yearMonth,
+                count: aggregateData[key].count,
+                totalPrice: aggregateData[key].totalPrice
+            };
+        });
+
+        return { data: responseData };
+    } catch (error) {
+        console.error("Error processing request:", error);
+        return { error: "Error processing request: " + error.message };
+    }
 };
