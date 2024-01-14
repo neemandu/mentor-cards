@@ -24,6 +24,8 @@
     "@angular/router": "~10.2.0",
     "@aws-amplify/cli": "^10.5.1",
     "@aws-amplify/ui-angular": "^0.4.17",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^3.0.1",
     "angularx-social-login": "^3.5.7",
     "apexcharts": "^3.37.1",
     "aws-amplify": "^3.3.14",

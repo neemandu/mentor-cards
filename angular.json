@@ -9,11 +9,11 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
-      "i18n": { 
-        "sourceLocale": "he", 
-        "locales": { 
-          "en": "src/i18n/messages.en.xlf" 
-        } 
+      "i18n": {
+        "sourceLocale": "he",
+        "locales": {
+          "en": "src/i18n/messages.en.xlf"
+        }
       },
       "architect": {
         "build": {
@@ -36,17 +36,23 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"]
+            "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js"
+            ]
           },
           "configurations": {
-            "en": { 
-              "localize": ["en"] 
+            "en": {
+              "localize": [
+                "en"
+              ]
             },
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -55,7 +61,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
+              "budgets": [
+                {
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
@@ -78,8 +85,8 @@
             "production": {
               "browserTarget": "mentor-cards:build:production"
             },
-            "en": { 
-              "browserTarget": "mentor-cards:build:en" 
+            "en": {
+              "browserTarget": "mentor-cards:build:en"
             }
           }
         },
@@ -104,7 +111,9 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"]
+            "scripts": [
+              "node_modules/apexcharts/dist/apexcharts.min.js"
+            ]
           }
         },
         "lint": {
@@ -135,5 +144,8 @@
       }
     }
   },
-  "defaultProject": "mentor-cards"
+  "defaultProject": "mentor-cards",
+  "cli": {
+    "analytics": false
+  }
 }
