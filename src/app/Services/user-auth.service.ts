@@ -106,7 +106,7 @@ export class UserAuthService {
     console.log(cognitoUserData);
     if(cognitoUserData){
       this.cognitoUserData = cognitoUserData;
-      this.cognitoUserData["username"] = cognitoUserData.attributes["sub"];
+      this.cognitoUserData["username"] = cognitoUserData["userDataKey"]?.split('.')[2] ??  cognitoUserData.attributes["sub"];
       this.cognitoUserData["email"] = cognitoUserData.attributes["email"];
       this.cognitoUserData["phone_number"] = cognitoUserData.attributes["phone_number"];
       this.cognitoUserData["given_name"] = cognitoUserData.attributes["given_name"];
