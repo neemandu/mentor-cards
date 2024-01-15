@@ -115,7 +115,7 @@ export class UserAuthService {
   }
 
   createUser(): void {
-    var newUsername: string = this.cognitoUserData["username"];
+    var newUsername: string = this.cognitoUserData["sub"];
     var newUserEmail: string = this.cognitoUserData['email'];
     var newUserPhone: string = this.cognitoUserData['phone_number'];
     var newUserFullName: string = this.cognitoUserData['given_name'];
