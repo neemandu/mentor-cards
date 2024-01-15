@@ -1,4 +1,81 @@
 {
-    "compA": "Component A works",
-    "compB": "Component B works"
+  "pages": {
+    "all-packs-page": {
+      "title": "Mentor-Cards כל ערכות הקלפים",
+      "coupon-code-btn-1": "View courses",
+      "coupon-code-btn-2": "<<<Our Digits",
+      "mat-section-title": "Categories",
+      "categories": {
+        "ערכות להתנסות חופשית": "FREE TRIAL KITS",
+        "ערכות חדשות": "New Kits",
+        "ערכות VIP": "VIP Kits",
+        "נעים להכיר": "Nice to Meet",
+        "קלפי תמונה": "Picture Cards",
+        "הייטק": "Hi-Tech",
+        "קלפי שאלות": "Question Cards",
+        "קלפי חגים": "Holiday Cards",
+        "קלפי מילה": "Word Cards",
+        "קלפי תמונה + מילה": "Picture + Word Cards",
+        "קלפי מסרים": "Message Cards",
+        "קלפי ערכים": "Value Cards"
+      },
+      "my-favorites": "My Favorites",
+      "header": "",
+      "sub-header": "When words run out, the cards come in",
+      "sub-header-2": "Find the card set that suits you",
+      "search-placeholder":"Search by meeting topic, creator of the kit, purpose of the activity and more..."
+    
+    },
+    "about-us": {
+      "title": "Mentor-Cards About Us Page",
+      "introduction-full": {
+        "line1": "We at Mentor-Cards believe that the processes of introspection, growth, and development should take place in the best possible way",
+        "line2": "with minimal dependence on the environment and changing reality.",
+        "line3": "2020 will be remembered as a year that changed world orders in so many ways.",
+        "line4": "We experienced what it is to turn inward, and we acted as we knew in the unknown conditions that were created in our environment.",
+        "line5": "We trained ourselves for the new world. We continued to train and treat, and this time in front of the screens.",
+        "line6": "From this place, at this time, and with the joint thinking of senior coaches in the country and card experts - we established Mentor-Cards.",
+        "line7": "Mentor-Cards is a friendly platform for working with cards in digital and frontal meetings",
+        "line8": "with an emphasis on the best user experience.",
+        "line9": "Cards are among the most powerful tools in the worlds of coaching and therapy.",
+        "line10": "Cards shuffle, bypass the subconscious, open and develop.",
+        "line11": "Cards help us as professional process leaders to sharpen and specify the most suitable way for our client.",
+        "line12": "The world is changing and developing and we have chosen to grow with it.",
+        "line13": "We are glad that you chose to grow with us."
+      },
+      "introduction-partial": {
+        "line1": "Mentor-Cards is a friendly platform for working with cards in digital and frontal meetings",
+        "line2": "with an emphasis on the best user experience.",
+        "line3": "Cards are among the most powerful tools in the worlds of coaching and therapy.",
+        "line4": "Cards shuffle, bypass the subconscious, open and develop.",
+        "line5": "Cards help us as professional process leaders to sharpen and specify the most suitable way for our client.",
+        "line6": "The world is changing and developing and we have chosen to grow with it.",
+        "line7": "We are glad that you chose to grow with us."
+      },
+      "last-line": "Mentor-Cards Team",
+      "bio-content-1": {
+        "line1": "Dudi Neman",
+        "line2": "Co-founder and Technical Development Manager",
+        "line3": "35 years old from Meitar",
+        "line4": "Software Engineer M.Sc and EMBA in Business Administration.",
+        "line5": "Family man, entrepreneur, optimist, and high-performance coach."
+      },
+      "bio-content-2": {
+        "line1": "Yarden Stampu",
+        "line2": "Co-founder and Professional Content Manager",
+        "line3": "35 years old from Ramat Gan",
+        "line4": "Coach and developer of people and organizations.",
+        "line5": "MBA in Business Administration, group facilitator, and supervisor for coaches.",
+        "line6": "Versatile, brave, loyal to the good, breathes deeply."
+      },
+      "bio-content-3": {
+        "line1": "Yaniv Kanobel",
+        "line2": "Developer and Designer",
+        "line3": "29 years old from Be'er Sheva",
+        "line4": "Software and Information Systems Engineer B.Sc",
+        "line5": "Cooking enthusiast, photography, technology, and nature lover"
+      }
+    }
   }
+  
+}

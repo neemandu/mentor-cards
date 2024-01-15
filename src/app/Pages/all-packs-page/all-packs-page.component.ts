@@ -217,6 +217,7 @@ export class AllPacksPageComponent implements OnInit {
     this.allCategories = this.cardsService.allCategories.map(
       (category) => category
     );
+    console.log(this.allCategories);
     this.allFavorites = this.userAuthService.favorites;
     
     this.isPageLoaded = true;
