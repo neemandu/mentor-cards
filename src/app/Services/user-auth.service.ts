@@ -102,6 +102,8 @@ export class UserAuthService {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
+    console.log('cognitoUserData');
+    console.log(cognitoUserData);
     if(cognitoUserData){
       this.cognitoUserData = cognitoUserData;
       this.cognitoUserData["username"] = cognitoUserData.attributes["sub"];
@@ -115,7 +117,7 @@ export class UserAuthService {
   }
 
   createUser(): void {
-    var newUsername: string = this.cognitoUserData["sub"];
+    var newUsername: string = this.cognitoUserData["username"];
     var newUserEmail: string = this.cognitoUserData['email'];
     var newUserPhone: string = this.cognitoUserData['phone_number'];
     var newUserFullName: string = this.cognitoUserData['given_name'];
