@@ -1,9 +1,11 @@
 <div *ngIf="showBanner" class="banner">
   <span class="close-icon" (click)="showBanner = false">X</span>
   <p>
-    <a href="/price-page">שדרגו עכשיו</a> לתוכנית Life-Time ותהנו מגישה מלאה לכל הערכות באתר!
+    &nbsp;<a href="/price-page">שדרגו עכשיו</a> לתוכנית Life-Time ותהנו מגישה מלאה לכל הערכות באתר! &nbsp;
   </p>
+  <p> זמן לסוף המבצע: {{ countdown }}</p>
 </div>
+
 <nav
   class="nav navbar-light align-items-center justify-content-between sticky-top"
 >

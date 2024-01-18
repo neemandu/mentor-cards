@@ -10,6 +10,7 @@ button {
   font-size: large;
   padding: 10px;  
   display: flex;
+  flex-direction: column;
   justify-content: center; 
   position: relative;
 }
