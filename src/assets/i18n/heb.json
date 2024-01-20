@@ -75,6 +75,46 @@
         "line4": "מהנדס מערכות תוכנה ומידע B.Sc",
         "line5": "חובב בישול, צילום, טכנולוגיה וטבע"
       }
+    },
+    "nav": {
+      "banner": {
+        "upgrade-now": "שדרגו עכשיו",
+        "full-access": "תהנו מגישה מלאה לכל הערכות באתר!"
+      },
+      "navbar": {
+        "signin-signup": "התחברות/הרשמה",
+        "all-card-packs": "כל ערכות הקלפים",
+        "digital-courses": "קורסים דיגיטליים",
+        "our-plans": "התוכניות שלנו",
+        "faq": "שאלות נפוצות",
+        "additional-services": "שירותים נוספים",
+        "about-us": "עלינו",
+        "contact-us": "צור קשר",
+        "admin": "אדמין",
+        "coupon-codes": "  יש לך קוד הטבה?"
+      },
+      "news-updates": "חדשות ועדכונים",
+      "no-news-updates": "  אין חדשות ועדכונים חדשים",
+      "user-menu": {
+        "user-details": "פרטי משתמש",
+        "register-plan": "הרשמה לתכנית",
+        "group-management": "ניהול קבוצה",
+        "logout": "התנתק"
+      },
+      "tour-menu": {
+        "tour-main-page": "סיור בדף הראשי",
+        "how-to-work-with-cards": "איך עובדים עם הקלפים?"
+      },
+      "management-menu": {
+        "dashboard": "דשבורד",
+        "news-management": "חדשות ועדכונים",
+        "guidebook-management": "ספרי הדרכה",
+        "coupon-codes-management": "קודי הטבה",
+        "orgs-management": "ארגונים",
+        "packs-management": "ערכות קלפים",
+        "payment-programs-management": "חבילות תשלום",
+        "receipts-management": "קבלות ותשלומים"
+      }
     }
   }
 }

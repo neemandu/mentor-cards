@@ -1,7 +1,8 @@
 <div *ngIf="showBanner" class="banner">
   <span class="close-icon" (click)="showBanner = false">X</span>
   <p>
-    <a href="/price-page">שדרגו עכשיו</a> לתוכנית Life-Time ותהנו מגישה מלאה לכל הערכות באתר!
+    <a href="/price-page">{{ "pages.nav.banner.upgrade-now" | translate }}</a>
+    {{ "pages.nav.banner.full-access" | translate }}
   </p>
 </div>
 <nav
@@ -30,31 +31,31 @@
       </button>
     </div>
     <button *ngIf="!loggedIn" class="btn navbar-btn" (click)="signInSignUp()">
-      התחברות/הרשמה
+      {{ "pages.nav.navbar.signin-signup" | translate }}
     </button>
     <button class="btn navbar-btn" (click)="navigate('/all-packs-page')">
-      כל ערכות הקלפים
+      {{ "pages.nav.navbar.all-card-packs" | translate }}
     </button>
     <button class="btn navbar-btn" (click)="openNewTab()">
-      קורסים דיגיטליים
+      {{ "pages.nav.navbar.digital-courses" | translate }}
     </button>
     <button class="btn navbar-btn" (click)="navigate('/price-page')">
-      התוכניות שלנו
+      {{ "pages.nav.navbar.our-plans" | translate }}
     </button>
     <button class="btn navbar-btn" (click)="navigate('/guide-page')">
-      שאלות נפוצות
+      {{ "pages.nav.navbar.faq" | translate }}
     </button>
     <button class="btn navbar-btn" (click)="navigate('/services')">
-      שירותים נוספים
+      {{ "pages.nav.navbar.additional-services" | translate }}
     </button>
     <button class="btn navbar-btn" (click)="navigate('/about-page')">
-      עלינו
+      {{ "pages.nav.navbar.about-us" | translate }}
     </button>
     <!--<button class="btn navbar-btn" (click)="navigate('/all-blogs')">
       מרכז למידה
     </button>-->
     <button class="btn navbar-btn" (click)="navigate('/contact-us')">
-      צור קשר
+      {{ "pages.nav.navbar.contact-us" | translate }}
     </button>
     <app-select-language></app-select-language>
 
@@ -64,7 +65,7 @@
       *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
       [matMenuTriggerFor]="managementMenu"
     >
-      אדמין
+    {{ "pages.nav.navbar.admin" | translate }}
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <!-- <button class="btn navbar-btn" (click)="navigate('/company-pack-choise')">בחירת ערכות</button> -->
@@ -77,7 +78,7 @@
       *ngIf="news"
       [matMenuTriggerFor]="newsMenu"
       (click)="viewNotifications()"
-      matTooltip="חדשות ועדכונים"
+      matTooltip="{{ 'pages.nav.news-updates' | translate }}"
       [matTooltipClass]="{ 'tooltip-class': true }"
     >
       <mat-icon
@@ -118,7 +119,7 @@
 
 <mat-menu class="mat-menu-news" #newsMenu="matMenu">
   <div class="news">
-    <span id="news-title">חדשות ועדכונים</span>
+    <span id="news-title">{{ "pages.nav.news-updates" | translate }}</span>
     <div class="line"></div>
     <ul id="news-list">
       <li class="news-list-item" *ngFor="let n of news">
@@ -130,7 +131,7 @@
         </span>
       </li>
       <li class="news-list-item" *ngIf="news?.length == 0">
-        אין חדשות ועדכונים חדשים
+        {{ "pages.nav.no-news-updates" | translate }}
       </li>
     </ul>
   </div>
@@ -149,41 +150,47 @@
     <mat-icon id="account_circle">account_circle</mat-icon>
   </button>
   <button mat-menu-item *ngIf="!loggedIn" (click)="signInSignUp()">
-    התחברות/הרשמה
+    {{ "pages.nav.navbar.signin-signup" | translate }}
   </button>
   <button mat-menu-item (click)="navigate('/all-packs-page')">
-    כל ערכות הקלפים
+    {{ "pages.nav.navbar.all-card-packs" | translate }}
   </button>
-  <button mat-menu-item (click)="openNewTab()">קורסים דיגיטליים</button>
-  <button mat-menu-item (click)="navigate('/price-page')">התוכניות שלנו</button>
-  <button mat-menu-item (click)="navigate('/guide-page')">שאלות נפוצות</button>
-  <button mat-menu-item (click)="navigate('/services')">שירותים נוספים</button>
+  <button mat-menu-item (click)="openNewTab()">
+    {{ "pages.nav.navbar.digital-courses" | translate }}
+  </button>
+  <button mat-menu-item (click)="navigate('/price-page')">
+    {{ "pages.nav.navbar.our-plans" | translate }}
+  </button>
+  <button mat-menu-item (click)="navigate('/guide-page')">
+    {{ "pages.nav.navbar.faq" | translate }}
+  </button>
+  <button mat-menu-item (click)="navigate('/services')">  {{ "pages.nav.navbar.additional-services" | translate }}</button>
   <!--<button mat-menu-item (click)="navigate('/all-blogs')">מרכז למידה</button>-->
-  <button mat-menu-item (click)="navigate('/about-page')">עלינו</button>
-  <button mat-menu-item (click)="navigate('/contact-us')">צור קשר</button>
+  <button mat-menu-item (click)="navigate('/about-page')">  {{ "pages.nav.navbar.about-us" | translate }}</button>
+  <button mat-menu-item (click)="navigate('/contact-us')">{{ "pages.nav.navbar.contact-us" | translate }}</button>
   <button
     mat-menu-item
     *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
     [matMenuTriggerFor]="managementMenu"
   >
-    אדמין
+  {{ "pages.nav.navbar.admin" | translate }}
   </button>
   <mat-divider *ngIf="loggedIn"></mat-divider>
   <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">
-    יש לך קוד הטבה?
+    {{ "pages.nav.navbar.coupon-codes" | translate }}
   </button>
 </mat-menu>
 
 <mat-menu #userMenu="matMenu">
   <button mat-menu-item *ngIf="loggedIn" (click)="navigate('/user-page')">
-    פרטי משתמש
+    {{ "pages.nav.user-menu.user-details" | translate }}
   </button>
   <button
     mat-menu-item
     *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'"
     (click)="navigate('/price-page')"
   >
-    הרשמה לתכנית
+  {{ "pages.nav.user-menu.register-plan" | translate }}
   </button>
   <button
     mat-menu-item
@@ -191,33 +198,25 @@
     *ngIf="
       loggedIn &&
       userAttributes?.groupId &&
-        (userAttributes?.groupRole === 'ADMIN' ||
-          userAttributes?.groupRole === 'SUPER_USER')
+      (userAttributes?.groupRole === 'ADMIN' ||
+        userAttributes?.groupRole === 'SUPER_USER')
     "
     (click)="navigate('/group-management')"
   >
-    ניהול קבוצה
+  {{ "pages.nav.user-menu.group-management" | translate }}
   </button>
   <!-- <button mat-menu-item [matMenuTriggerFor]="managementMenu"
     *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'">
     <span>ניהול תוכן האתר</span></button> -->
-  <button mat-menu-item *ngIf="loggedIn" (click)="logout()">התנתק</button>
+  <button mat-menu-item *ngIf="loggedIn" (click)="logout()"> {{ "pages.nav.user-menu.logout" | translate }}</button>
 </mat-menu>
 
 <mat-menu #tourMenu="matMenu" backdropClass="mat-menu">
-  <button
-    mat-menu-item
-    (click)="navigate('/all-packs-page')"
-    *ngIf="showTour"
-  >
-    <div>סיור בדף הראשי</div>
+  <button mat-menu-item (click)="navigate('/all-packs-page')" *ngIf="showTour">
+    <div> {{ "pages.nav.tour-menu.tour-main-page" | translate }}</div>
   </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/pack-view/50')"
-    *ngIf="showTour"
-  >
-    <div>איך עובדים עם הקלפים?</div>
+  <button mat-menu-item (click)="navigate('/pack-view/50')" *ngIf="showTour">
+    <div>{{ "pages.nav.tour-menu.how-to-work-with-cards" | translate }}</div>
   </button>
 </mat-menu>
 
@@ -227,55 +226,55 @@
     (click)="navigate('/dashboard')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>דשבורד</div>
+    <div>{{ "pages.nav.management-menu.dashboard" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/news-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>חדשות ועדכונים</div>
+    <div> {{ "pages.nav.news-updates" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/guide-book-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>ספרי הדרכה</div>
+    <div>{{ "pages.nav.management-menu.guidebook-management" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/coupon-codes-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>קודי הטבה</div>
+    <div>{{ "pages.nav.management-menu.coupon-codes-management" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/orgs-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>ארגונים</div>
+    <div>{{ "pages.nav.management-menu.orgs-management" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/packs-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>ערכות קלפים</div>
+    <div>{{ "pages.nav.management-menu.packs-management" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/payment-programs-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>חבילות תשלום</div>
+    <div>{{ "pages.nav.management-menu.payment-programs-management" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/receipts-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>קבלות ותשלומים</div>
+    <div>{{ "pages.nav.management-menu.receipts-management" | translate }}</div>
   </button>
 </mat-menu>

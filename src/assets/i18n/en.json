@@ -75,6 +75,47 @@
         "line4": "Software and Information Systems Engineer B.Sc",
         "line5": "Cooking enthusiast, photography, technology, and nature lover"
       }
+    },
+    "nav": {
+      "banner": {
+        "upgrade-now": "Upgrade Now",
+        "full-access": "Enjoy full access to all card packs on the site!"
+      },
+      "navbar": {
+        "home": "Home",
+        "signin-signup": "Sign In/Sign Up",
+        "all-card-packs": "All Card Packs",
+        "digital-courses": "Digital Courses",
+        "our-plans": "Our Plans",
+        "faq": "FAQ",
+        "additional-services": "Additional Services",
+        "about-us": "About Us",
+        "contact-us": "Contact Us",
+        "admin": "Admin",
+        "coupon-codes": "Do you have a discount code?"
+      },
+      "news-updates": "News and Updates",
+      "no-news-updates": "There are no news and new updates",
+      "user-menu": {
+        "user-details": "User Details",
+        "register-plan": "Register for a Plan",
+        "group-management": "Group Management",
+        "logout": "Logout"
+      },
+      "tourMenu": {
+        "tourMainPage": "Tour of the main page",
+        "howToWorkWithCards": "How to work with the cards?"
+      },
+      "management-menu": {
+        "dashboard": "Dashboard",
+        "news-management": "News Management",
+        "guidebook-management": "Guidebook Management",
+        "coupon-codes-management": "Coupon Codes Management",
+        "orgs-management": "Organizations Management",
+        "packs-management": "Card Packs Management",
+        "payment-programs-management": "Payment Programs Management",
+        "receipts-management": "Receipts and Payments Management"
+      }
     }
   }
   
