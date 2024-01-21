@@ -12,7 +12,7 @@
           <mat-error *ngIf="loginForm.controls.username.errors?.email"> {{'pages.login.login-div.login-form.username.errors.email' | translate}}   </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ 'pages.login.login-div.password.label' | translate }}</mat-label>
+          <mat-label>{{ 'pages.login.login-div.login-form.password.label' | translate }}</mat-label>
           <input autocomplete="current-password" formControlName="password" matInput
             [type]="hidePW ? 'password' : 'text'">
           <mat-error *ngIf="loginForm.controls.password.errors?.usernamePwWrong">{{ 'pages.login.login-div.password.errors.usernamePwWrong' | translate }}</mat-error>

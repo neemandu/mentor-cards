@@ -7,45 +7,47 @@
         <mat-icon>highlight_off</mat-icon>
     </button>
 </mat-toolbar> -->
-<div mat-dialog-title style="text-align: center;">
-    <button class="iconButton" mat-icon-button (click)="closeDialog()">
-        <mat-icon>highlight_off</mat-icon>
-    </button>
-    <span id="title">תשלום באמצעות PayPal או כרטיס אשראי</span>
+<div mat-dialog-title style="text-align: center">
+  <button class="iconButton" mat-icon-button (click)="closeDialog()">
+    <mat-icon>highlight_off</mat-icon>
+  </button>
+  <span id="title">{{ "pages.approvePurchaseDialog.title" | translate }} </span>
 </div>
 <div class="line"></div>
-<div id='summery' mat-dialog-content>
-    <ul>
-        <!-- <li>
+<div id="summery" mat-dialog-content>
+  <ul>
+    <!-- <li>
             החיוב יתחיל ב-{{data.paymentStartDate | date:'d/M/y'}}, בסוף תקופת הניסיון בחינם, ויתחדש אוטומטית מדי חודש.
         </li> -->
-        <li>
-            במידה ובחרת בתוכנית עם תשלום חוזר (חודשית/שנתית/וכו) ולא בתוכנית Life-Time, בתשלום חד פעמי, בסוף תקופת התכנית חשבונך יחויב באופן אוטומטי לתקופה נוספת, אנחנו נזכיר לך במייל 7 ימים לפני ביצוע החיוב
-            מחדש.
-        </li>
-        <li>
-            ניתן לבטל את החיוב האוטומטי בכל עת דרך אזור "פרטי המשתמש" באתר ולחיצה על "ביטול החיוב האוטומטי".
-        </li>
-        <li>
-            לא יינתנו החזרים כספיים על תשלומים בגין תקופות חיוב חלקיות באתר.
-        <li>
-            הבנק עשוי לגבות עמלת דמי העברה או עמלת המרה.
-        </li>
-        <li>
-            ​הבחירה להמשיך מבטאת את אישורך לכך שגילך מעל 18 שנים ואת הסכמתך ל<a (click)="openSiteRulesModal();">תנאים
-                האלה.</a>
-        </li>
-        <li>
-            בתוכנית Life-Time, הגישה לערכות הקלפים באתר תהיה פתוחה כל עוד האתר עובד ונגיש לציבור.
-        </li>
-        <!-- <li>
+    <li>
+      {{ "pages.approvePurchaseDialog.summery.recurringPayment" | translate }}
+    </li>
+    <li> {{ "pages.approvePurchaseDialog.summery.cancelAutoCharge" | translate }}
+    </li>
+    <li> {{ "pages.approvePurchaseDialog.summery.noRefunds" | translate }}</li>
+
+    <li>{{ "pages.approvePurchaseDialog.summery.bankCharges" | translate }}</li>
+    <li>
+      ​{{ "pages.approvePurchaseDialog.summery.ageConfirmation" | translate }}<a
+        (click)="openSiteRulesModal()"
+        > ​{{ "pages.approvePurchaseDialog.summery.termsAgreement" | translate }}</a
+      >
+    </li>
+    <li>{{ "pages.approvePurchaseDialog.summery.lifeTimePlan" | translate }}
+    </li>
+    <!-- <li>
             לסיום הרכישה באמצעות <b>PayPal או ע"י כרטיס אשראי</b> לחץ על כפתור ה PayPal.
         </li> -->
-    </ul>
-    <p id="payment-title">
-אנא בחרו אמצעי תשלום:    </p>
+  </ul>
+  <p id="payment-title">{{ "pages.approvePurchaseDialog.paymentTitle" | translate }}</p>
 </div>
 <div mat-dialog-actions>
-    <div id="paypal" style="width: 100%;" #paypal [matTooltipClass]="{'tooltip-class' : true}"
-        [matTooltipPosition]="'left'" matTooltip="אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"></div>
+  <div
+    id="paypal"
+    style="width: 100%"
+    #paypal
+    [matTooltipClass]="{ 'tooltip-class': true }"
+    [matTooltipPosition]="'left'"
+    matTooltip="{{ 'pages.approvePurchaseDialog.paypalTooltip' | translate }}"
+  ></div>
 </div>

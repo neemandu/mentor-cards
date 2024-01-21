@@ -291,6 +291,70 @@
       "edit-icon-description": "edit",
       "delete-icon-description": "delete",
       "add-new-user-button": "הוספת משתמש"
+    },
+    "plan-table": {
+      "plan-column-title": "תכנית",
+      "start-date-column-title": "תאריך התחלה",
+      "update-date-column-title": "תאריך עדכון",
+      "next-billing-date-column-title": "תאריך תשלום הבא",
+      "billing-cycle-column-title": "מחזור חיוב",
+      "price-column-title": "מחיר",
+      "actions-column-title": "פעולות",
+      "price-column-description": " ש\"ח",
+      "cancel-automatic-billing": "לביטול החיוב האוטומטי",
+      "renew-vip-plan": "לחידוש תוכנית ערכת VIP",
+      "renew-home-plan": "לחידוש תכנית הבית"
+    },
+    "user-page": {
+      "user-details-title": "פרטי משתמש",
+      "name-label": "שם",
+      "email-label": "מייל",
+      "registration-date-label": "תאריך הרשמה לאתר",
+      "plans-title": "תכניות"
+    },
+    "price-page": {
+      "our-plans-title": "התוכניות שלנו",
+      "monthly-plan-title": "תכנית חודשית",
+      "month-label": "חודש",
+      "full-access-instruction": "גישה מלאה לעשרות ערכות קלפים",
+      "variety-of-guides-instruction": "מגוון עצום של ספרי הדרכה, רעיונות להפעלה, ושאלות מנחות",
+      "connect-from-anywhere-instruction": "אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...",
+      "join-button-text": "להצטרפות >>",
+      "already-registered-button-text": "הינך רשום לתכנית זו",
+      "popularMatCard": {
+        "title": "תכנית Life-Time!",
+        "payment": "תשלום",
+        "onceBold": "חד פעמי",
+        "inTotal": "בסך",
+        "benefits": {
+          "fullAccess": "גישה מלאה לעשרות ערכות קלפים - לכל החיים!",
+          "futureAccess": "גישה לכל ערכות הקלפים שיעלו לאתר בעתיד!",
+          "variety": "מגוון עצום של ספרי הדרכה, רעיונות להפעלה ושאלות מנחות",
+          "connectAnywhere": "אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד..."
+        },
+        "joinBtn": "להצטרפות >>",
+        "registeredBtn": "הינך רשום לתכנית זו"
+      },
+      "orgsMatCard": {
+        "title": "מוסדות וארגונים",
+        "content": "זה הזמן לאפשר לקלפים להכנס לסביבה הארגונית שלכם וליצור שיח מקרב, מקדם ומפתח. שדרגו יחד איתנו את ארגז הכלים הארגוני שלכם. דברו איתנו ונתאים לכם את התכנית המשתלמת ביותר.",
+        "contactBtn": "דברו איתנו!"
+      },
+      "couponBtn": "להזנת קוד הטבה לחצו כאן"
+    },
+    "approvePurchaseDialog": {
+      "title": "תשלום באמצעות PayPal או כרטיס אשראי",
+      "summery": {
+        "recurringPayment": "במידה ובחרת בתוכנית עם תשלום חוזר (חודשית/שנתית/וכו) ולא בתוכנית Life-Time, בתשלום חד פעמי, בסוף תקופת התכנית חשבונך יחויב באופן אוטומטי לתקופה נוספת, אנחנו נזכיר לך במייל 7 ימים לפני ביצוע החיוב מחדש.",
+        "cancelAutoCharge": "ניתן לבטל את החיוב האוטומטי בכל עת דרך אזור \"פרטי המשתמש\" באתר ולחיצה על \"ביטול החיוב האוטומטי\".",
+        "noRefunds": "לא יינתנו החזרים כספיים על תשלומים בגין תקופות חיוב חלקיות באתר.",
+        "bankCharges": "הבנק עשוי לגבות עמלת דמי העברה או עמלת המרה.",
+        "ageConfirmation": "הבחירה להמשיך מבטאת את אישורך לכך שגילך מעל 18 שנים",
+        "termsAgreement": "ואת הסכמתך לתנאים האלה.",
+        "lifeTimePlan": "בתוכנית Life-Time, הגישה לערכות הקלפים באתר תהיה פתוחה כל עוד האתר עובד ונגיש לציבור."
+      },
+      "paymentTitle": "אנא בחרו אמצעי תשלום:",
+      "paypalTooltip": "אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"
     }
   }
 }

@@ -291,6 +291,70 @@
       "edit-icon-description": "edit",
       "delete-icon-description": "delete",
       "add-new-user-button": "Add User"
+    },
+    "plan-table": {
+      "plan-column-title": "Plan",
+      "start-date-column-title": "Start Date",
+      "update-date-column-title": "Update Date",
+      "next-billing-date-column-title": "Next Billing Date",
+      "billing-cycle-column-title": "Billing Cycle",
+      "price-column-title": "Price",
+      "price-column-description": "New Shekel",
+      "actions-column-title": "Actions",
+      "cancel-automatic-billing": "Cancel Automatic Billing",
+      "renew-vip-plan": "Renew VIP Plan",
+      "renew-home-plan": "Renew Home Plan"
+    },
+    "user-page": {
+      "user-details-title": "User Details",
+      "name-label": "Name",
+      "email-label": "Email",
+      "registration-date-label": "Registration Date",
+      "plans-title": "Plans"
+    },
+    "price-page": {
+      "our-plans-title": "Our Plans",
+      "monthly-plan-title": "Monthly Plan",
+      "month-label": "Month",
+      "full-access-instruction": "Full access to dozens of card sets",
+      "variety-of-guides-instruction": "A huge variety of guidebooks, activity ideas, and guiding questions",
+      "connect-from-anywhere-instruction": "Can connect from anywhere in the world and any device - computer, mobile phone, tablet, projector, and more...",
+      "join-button-text": "Join >>",
+      "already-registered-button-text": "You are registered for this plan",
+      "popularMatCard": {
+        "title": "Life-Time Plan!",
+        "payment": "payment of",
+        "onceBold": "One-time",
+        "inTotal": "in total",
+        "benefits": {
+          "fullAccess": "Full access to dozens of card sets - for life!",
+          "futureAccess": "Access to all card sets that will be uploaded to the site in the future!",
+          "variety": "A huge variety of instruction books, activity ideas, and guiding questions",
+          "connectAnywhere": "Can connect from anywhere in the world and from any device - computer, mobile phone, tablet, projector, and more..."
+        },
+        "joinBtn": "Join >>",
+        "registeredBtn": "You are registered for this plan"
+      },
+      "orgsMatCard": {
+        "title": "Institutions and Organizations",
+        "content": "Now is the time to allow cards to enter your organizational environment and create a conversation that brings closer, promotes, and develops. Upgrade your organizational toolbox together with us. Talk to us and we will tailor the most cost-effective plan for you.",
+        "contactBtn": "Talk to us!"
+      },
+      "couponBtn": "To enter a benefit code click here"
+    },
+    "approvePurchaseDialog": {
+      "title": "Payment via PayPal or Credit Card",
+      "summery": {
+        "recurringPayment": "If you chose a plan with recurring payment (monthly/yearly/etc.) and not the Life-Time plan with a one-time payment, at the end of the plan period your account will be automatically charged for another period, we will remind you by email 7 days before the charge is made again.",
+        "cancelAutoCharge": "You can cancel the automatic charge at any time through the \"User Details\" area on the site and clicking on \"Cancel Automatic Charge\".",
+        "noRefunds": "No refunds will be given for payments for partial billing periods on the site.",
+        "bankCharges": "The bank may charge a transfer fee or conversion fee.",
+        "ageConfirmation": "Choosing to continue confirms that you are over 18 years old",
+        "termsAgreement": "and you agree to these terms.",
+        "lifeTimePlan": "In the Life-Time plan, access to the card sets on the site will be open as long as the site is operational and accessible to the public."
+      },
+      "paymentTitle": "Please choose a payment method:",
+      "paypalTooltip": "If there is an ad blocker in the browser, you need to disable it in order to make a payment"
     }
   }
 }
