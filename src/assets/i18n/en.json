@@ -23,8 +23,7 @@
       "header": "",
       "sub-header": "When words run out, the cards come in",
       "sub-header-2": "Find the card set that suits you",
-      "search-placeholder":"Search by meeting topic, creator of the kit, purpose of the activity and more..."
-    
+      "search-placeholder": "Search by meeting topic, creator of the kit, purpose of the activity and more..."
     },
     "about-us": {
       "title": "Mentor-Cards About Us Page",
@@ -173,7 +172,7 @@
           },
           "not-receive-code": "Didn't receive a code? Click here to get another code",
           "submit-button": {
-            "send-verification-code": "Send me a verification code",
+            "submit-button": "Send me a verification code",
             "save-new-password": "Save new password"
           },
           "confirmation-code-info": "*The verification code will be sent to the phone number with which you registered. If you registered without a mobile phone - the verification code will be sent to the email."
@@ -202,7 +201,54 @@
         },
         "back": "Back"
       }
+    },
+    "register": {
+      "form": {
+        "name-label": "Full Name",
+        "name-hint": "Hebrew/English",
+        "phone-label": "Mobile Phone",
+        "phone-hint": "For example: 0501234567",
+        "phone-error": "Please enter numbers only",
+        "email-label": "Email",
+        "email-error-exists": "This email already exists in the system",
+        "email-confirm-label": "Confirm Email",
+        "email-confirm-error-notsame": "Email does not match",
+        "email-confirm-error-exists": "This email already exists in the system",
+        "password-label": "Password",
+        "password-error": "Invalid password, please try again. Must contain a digit, a lowercase and an uppercase letter (English only)",
+        "password-hint": "At least 8 characters, must contain a digit, a lowercase and an uppercase letter (in English)",
+        "password-confirm-label": "Confirm Password",
+        "password-confirm-error-notsame": "Password does not match",
+        "password-confirm-hint": "At least 8 characters, must contain a digit, a lowercase and an uppercase letter (in English)",
+        "allow-emails": "I agree to receive newsletters from Mentor-Cards",
+        "allow-emails-error": "You must check the box in order to register",
+        "submit-button": "Register"
+      },
+      "social-login": {
+        "seperator": "or",
+        "social-media-login": {
+          "google-btn": "Sign up with Google"
+        },
+        "formFooter": {
+          "existing-customer": "Existing customer?"
+        }
+      }
+    },
+    "user-related": {
+      "close-button": "highlight_off",
+      "tab-group": {
+        "login-tab": {
+          "label": "Login",
+          "sub-label": "Existing User"
+        },
+        "register-tab": {
+          "label": "Register",
+          "sub-label": "New User"
+        }
+      }
+    },
+    "main-screen":{
+      "title":"Mentor-Cards, the largest virtual card platform in Israel - Home page"
     }
   }
-  
 }

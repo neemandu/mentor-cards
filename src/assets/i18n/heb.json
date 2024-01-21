@@ -201,6 +201,54 @@
         },
         "back": "חזור"
       }
+    },
+    "register": {
+      "form": {
+        "name-label": "שם מלא",
+        "name-hint": "עברית/אנגלית",
+        "phone-label": "טלפון נייד",
+        "phone-hint": "לדוגמא: 0501234567",
+        "phone-error": "נא להזין מספרים בלבד",
+        "email-label": "אימייל",
+        "email-error-exists": "מייל זה קיים במערכת",
+        "email-confirm-label": "אימות אימייל",
+        "email-confirm-error-notsame": "מייל לא תואם",
+        "email-confirm-error-exists": "מייל זה קיים במערכת",
+        "password-label": "סיסמא",
+        "password-error": "סיסמא לא חוקית, נסו שנית. יש להכיל ספרה, אות קטנה ואות גדולה (אנגלית בלבד)",
+        "password-hint": "8 תווים לפחות, יש להכיל ספרה, אות קטנה וגדולה (באנגלית)",
+        "password-confirm-label": "אימות סיסמא",
+        "password-confirm-error-notsame": "סיסמא לא תואמת",
+        "password-confirm-hint": "8 תווים לפחות, יש להכיל ספרה, אות קטנה וגדולה (באנגלית)",
+        "allow-emails": "אני מאשר/ת קבלת דיוורים מ Mentor-Cards",
+        "allow-emails-error": "יש לסמן את התיבה על מנת להירשם",
+        "submit-button": "הרשמה"
+      },
+      "social-login": {
+        "seperator": "או",
+        "social-media-login": {
+          "google-btn": "הרשמה עם Google"
+        },
+        "formFooter": {
+          "existing-customer": "לקוח קיים?"
+        }
+      }
+    },
+    "user-related": {
+      "close-button": "highlight_off",
+      "tab-group": {
+        "login-tab": {
+          "label": "התחברות",
+          "sub-label": "משתמש קיים"
+        },
+        "register-tab": {
+          "label": "הרשמה",
+          "sub-label": "משתמש חדש"
+        }
+      }
+    },
+    "main-screen":{
+      "title":"Mentor-Cards, פלטפורמת הקלפים הווירטואליים הגדולה בישראל- עמוד הבית"
     }
   }
 }

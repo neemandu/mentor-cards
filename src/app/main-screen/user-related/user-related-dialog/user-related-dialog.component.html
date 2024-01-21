@@ -1,6 +1,6 @@
 <div>
   <button class="iconButton" mat-icon-button (click)="closeDialog()" cdkFocusInitial>
-    <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+    <mat-icon style="font-family: 'Material Icons';">{{ 'pages.user-related.close-button' | translate }}</mat-icon>
   </button>
 </div>
 <mat-dialog-content>
@@ -9,8 +9,8 @@
     <mat-tab>
       <ng-template mat-tab-label class="tab-label">
         <div class="d-flex flex-column">
-          <label class="loginRegisterLabel">התחברות</label>
-          <label class="subLabel">משתמש קיים</label>
+          <label class="loginRegisterLabel">{{ 'pages.user-related.tab-group.login-tab.label' | translate }}</label>
+          <label class="subLabel"> {{ 'pages.user-related.tab-group.login-tab.sub-label' | translate }}</label>
         </div>
       </ng-template>
       <ng-template matTabContent>
@@ -22,8 +22,8 @@
     <mat-tab>
       <ng-template mat-tab-label class="tab-label">
         <div class="d-flex flex-column">
-          <label class="loginRegisterLabel">הרשמה</label>
-          <label class="subLabel">משתמש חדש</label>
+          <label class="loginRegisterLabel">{{ 'pages.user-related.tab-group.register-tab.label' | translate }}</label>
+          <label class="subLabel">  {{ 'pages.user-related.tab-group.register-tab.sub-label' | translate }}</label>
         </div>
       </ng-template>
       <ng-template matTabContent>
