@@ -115,6 +115,92 @@
         "payment-programs-management": "חבילות תשלום",
         "receipts-management": "קבלות ותשלומים"
       }
+    },
+    "login": {
+      "login-div": {
+        "login-form": {
+          "username": {
+            "label": "אימייל",
+            "errors": {
+              "userNotConfirmed": "משתמש לא אומת. יש להכנס למייל ולאמת משתמש על מנת להתחבר",
+              "userNotFound": "משתמש לא קיים",
+              "LimitExceededException": "יותר מידי ניסיונות התחברות. נא לנסות שוב בעוד 15 דקות.",
+              "email": "כתובת האימייל אינה תקינה, אנא נסו שנית."
+            }
+          },
+          "password": {
+            "label": "סיסמא",
+            "errors": {
+              "usernamePwWrong": "שם משתמש או סיסמא לא נכונים"
+            },
+            "visibility": {
+              "hide": "visibility_off",
+              "show": "visibility"
+            }
+          },
+          "login-button": "כניסה"
+        },
+        "social-login": {
+          "seperator": "או",
+          "social-media-login": {
+            "google-btn": "כניסה עם Google"
+          }
+        }
+      },
+      "forgotPasswordForm": {
+        "form": {
+          "username": {
+            "label": "אימייל",
+            "errors": {
+              "userNotFound": "משתמש לא קיים",
+              "limitExceeded": "יותר מדי נסיונות. יש להמתין ולנסות שוב בהמשך",
+              "email": "כתובת האימייל אינה תקינה, אנא נסו שנית."
+            }
+          },
+          "confirmationCode": {
+            "label": "הזינו את קוד האימות שקיבלתם",
+            "errors": {
+              "codeMismatch": "קוד אימות שגוי"
+            }
+          },
+          "newPassword": {
+            "label": "סיסמא חדשה",
+            "hint": "8 תווים לפחות, חייב להכיל ספרה, אות קטנה ואות גדולה (באנגלית)",
+            "errors": {
+              "badPassword": "סיסמא לא חוקית, נסו שנית"
+            }
+          },
+          "not-receive-code": "לא קיבלתם קוד? לחצו כאן לקבלת קוד נוסף",
+          "submit-button": {
+            "submit-button": "שילחו לי קוד אימות",
+            "save-new-password": "שמור סיסמא חדשה"
+          },
+          "confirmation-code-info": "*קוד האימות ישלח למס' הטלפון איתו נרשמת. במידה ונרשמת ללא נייד - קוד האימות ישלח למייל."
+        }
+      },
+      "confirmForm": {
+        "form": {
+          "username": {
+            "label": "אימייל"
+          },
+          "confirmationCode": {
+            "label": "קוד אימות (נשלח בהודעה לנייד)",
+            "errors": {
+              "CodeMismatchException": "קוד לא תואם לקוד שנשלח, נסו שנית",
+              "LimitExceededException": "יותר מדי נסיונות. יש להמתין ולנסות שוב בהמשך"
+            }
+          },
+          "not-receive-code": "לא קיבלתם קוד? לחצו כאן לקבלת קוד נוסף",
+          "submit-button": "אמת משתמש"
+        }
+      },
+      "formFooter": {
+        "footerLogin": {
+          "firstTime": "פעם ראשונה אצלנו?",
+          "forgotPassword": "שכחת סיסמא?"
+        },
+        "back": "חזור"
+      }
     }
   }
 }

@@ -116,6 +116,92 @@
         "payment-programs-management": "Payment Programs Management",
         "receipts-management": "Receipts and Payments Management"
       }
+    },
+    "login": {
+      "login-div": {
+        "login-form": {
+          "username": {
+            "label": "Email",
+            "errors": {
+              "userNotConfirmed": "User not confirmed. Please check your email to confirm your account in order to log in.",
+              "userNotFound": "User not found",
+              "LimitExceededException": "Too many login attempts. Please try again in 15 minutes.",
+              "email": "The email address is not valid, please try again."
+            }
+          },
+          "password": {
+            "label": "Password",
+            "errors": {
+              "usernamePwWrong": "Username or password is incorrect"
+            },
+            "visibility": {
+              "hide": "visibility_off",
+              "show": "visibility"
+            }
+          },
+          "login-button": "Login"
+        },
+        "social-login": {
+          "seperator": "or",
+          "social-media-login": {
+            "google-btn": "Login with Google"
+          }
+        }
+      },
+      "forgotPasswordForm": {
+        "form": {
+          "username": {
+            "label": "Email",
+            "errors": {
+              "userNotFound": "User not found",
+              "limitExceeded": "Too many attempts. Please wait and try again later",
+              "email": "The email address is not valid, please try again."
+            }
+          },
+          "confirmationCode": {
+            "label": "Enter the verification code you received",
+            "errors": {
+              "codeMismatch": "Verification code is incorrect"
+            }
+          },
+          "newPassword": {
+            "label": "New Password",
+            "hint": "At least 8 characters, must contain a digit, a lowercase and an uppercase letter (in English)",
+            "errors": {
+              "badPassword": "Invalid password, please try again"
+            }
+          },
+          "not-receive-code": "Didn't receive a code? Click here to get another code",
+          "submit-button": {
+            "send-verification-code": "Send me a verification code",
+            "save-new-password": "Save new password"
+          },
+          "confirmation-code-info": "*The verification code will be sent to the phone number with which you registered. If you registered without a mobile phone - the verification code will be sent to the email."
+        }
+      },
+      "confirmForm": {
+        "form": {
+          "username": {
+            "label": "Email"
+          },
+          "confirmationCode": {
+            "label": "Verification Code (sent via mobile message)",
+            "errors": {
+              "CodeMismatchException": "Code does not match the sent code, please try again",
+              "LimitExceededException": "Too many attempts. Please wait and try again later"
+            }
+          },
+          "not-receive-code": "Didn't receive a code? Click here to get another code",
+          "submit-button": "Confirm User"
+        }
+      },
+      "formFooter": {
+        "footerLogin": {
+          "firstTime": "First time with us?",
+          "forgotPassword": "Forgot password?"
+        },
+        "back": "Back"
+      }
     }
   }
   

@@ -3,34 +3,30 @@
     <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" *ngIf="showLogin">
       <div class="d-flex flex-column">
         <mat-form-field>
-          <mat-label>אימייל</mat-label>
+          <mat-label>{{ 'pages.login.login-div.login-form.username.label' | translate }}</mat-label>
           <input autocomplete="email" formControlName="username" matInput color="primary" inputmode="email"
             (focusout)="trimSpacesEmail(loginForm, 'username')">
-          <mat-error *ngIf="loginForm.controls.username.errors?.userNotConfirmed">משתמש לא אומת. יש להכנס למייל ולאמת
-            משתמש על מנת להתחבר</mat-error>
-          <mat-error *ngIf="loginForm.controls.username.errors?.userNotFound">משתמש לא קיים</mat-error>
-          <mat-error *ngIf="loginForm.controls.username.errors?.LimitExceededException">יותר מידי ניסיונות התחברות. נא
-            לנסות שוב בעוד 15 דקות.
-          </mat-error>
-          <mat-error *ngIf="loginForm.controls.username.errors?.email">כתובת האימייל אינה תקינה, אנא נסו שנית.
-          </mat-error>
+          <mat-error *ngIf="loginForm.controls.username.errors?.userNotConfirmed">{{ 'pages.login.login-div.login-form.username.errors.userNotConfirmed' | translate }}</mat-error>
+          <mat-error *ngIf="loginForm.controls.username.errors?.userNotFound">{{ 'pages.login.login-div.login-form.username.errors.userNotConfirmed' | translate }}</mat-error>
+          <mat-error *ngIf="loginForm.controls.username.errors?.LimitExceededException">{{ 'pages.login.login-div.login-form.username.errors.LimitExceededException' | translate }}</mat-error>
+          <mat-error *ngIf="loginForm.controls.username.errors?.email"> {{'pages.login.login-div.login-form.username.errors.email' | translate}}   </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>סיסמא</mat-label>
+          <mat-label>{{ 'pages.login.login-div.password.label' | translate }}</mat-label>
           <input autocomplete="current-password" formControlName="password" matInput
             [type]="hidePW ? 'password' : 'text'">
-          <mat-error *ngIf="loginForm.controls.password.errors?.usernamePwWrong">שם משתמש או סיסמא לא נכונים</mat-error>
+          <mat-error *ngIf="loginForm.controls.password.errors?.usernamePwWrong">{{ 'pages.login.login-div.password.errors.usernamePwWrong' | translate }}</mat-error>
           <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <button type="submit" class="option-btn login-button" [disabled]="!loginForm.valid">כניסה</button>
+        <button type="submit" class="option-btn login-button" [disabled]="!loginForm.valid">{{ 'pages.login.login-div.login-form.login-button' | translate }}</button>
       </div>
     </form>
     <div id="social-login" *ngIf="showLogin">
       <div id="seperator">
         <div class="first-line"></div>
-        <span class="categrory-title">או</span>
+        <span class="categrory-title">{{ 'pages.login.login-div.social-login.seperator' | translate }}</span>
         <div class="second-line"></div>
       </div>
       <div id="social-media-login" class="d-flex flex-column">
@@ -44,7 +40,7 @@
           <div class="google-icon-wrapper">
             <img class="google-icon" src="../../../../../assets/icons/Google_G_Logo.svg"/>
           </div>
-          <p class="btn-text"><b>כניסה עם Google</b></p>
+          <p class="btn-text"><b>{{ 'pages.login.login-div.social-login.social-media-login.google-btn' | translate }}</b></p>
         </div>
       </div>
     </div>
@@ -54,40 +50,36 @@
     <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPasswordSubmit()">
       <div class="d-flex flex-column">
         <mat-form-field>
-          <mat-label>אימייל</mat-label>
+          <mat-label>{{ 'pages.login.forgotPasswordForm.form.username.label' | translate }}</mat-label>
           <input autocomplete="email" formControlName="username" matInput inputmode="email"
             (focusout)="trimSpacesEmail(forgotPasswordForm, 'username')">
-          <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.userNotFound">משתמש לא קיים</mat-error>
-          <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.limitExceeded">יותר מדי נסיונות. יש
-            להמתין ולנסות שוב בהמשך</mat-error>
-          <mat-error *ngIf="loginForm.controls.username.errors?.email">כתובת האימייל אינה תקינה, אנא נסו שנית.
-          </mat-error>
+          <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.userNotFound">{{ 'pages.login.forgotPasswordForm.form.username.errors.userNotFound' | translate }}</mat-error>
+          <mat-error *ngIf="forgotPasswordForm.controls.username.errors?.limitExceeded">{{ 'pages.login.forgotPasswordForm.form.username.errors.LimitExceededException' | translate }}</mat-error>
+          <mat-error *ngIf="loginForm.controls.username.errors?.email">{{ 'pages.login.forgotPasswordForm.form.username.errors.email' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="newPasswordPhase">
-          <mat-label>הזינו את קוד האימות שקיבלתם</mat-label>
+          <mat-label>{{ 'pages.login.forgotPasswordForm.form.confirmationCode.label' | translate }}</mat-label>
           <input autocomplete="one-time-code" formControlName="confirmationCode" matInput>
-          <mat-error *ngIf="forgotPasswordForm.controls.confirmationCode.errors?.codeMismatch">קוד אימות שגוי
+          <mat-error *ngIf="forgotPasswordForm.controls.confirmationCode.errors?.codeMismatch"> {{ 'pages.login.forgotPasswordForm.form.confirmationCode.errors.codeMismatch' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="newPasswordPhase">
-          <mat-label>סיסמא חדשה</mat-label>
+          <mat-label>{{ 'pages.login.forgotPasswordForm.form.newPassword.label' | translate }}</mat-label>
           <input autocomplete="new-password" formControlName="newPassword" matInput
             [type]="hidePW ? 'password' : 'text'">
-          <mat-hint>8 תווים לפחות, חייב להכיל ספרה, אות קטנה ואות גדולה (באנגלית)</mat-hint>
-          <mat-error *ngIf="forgotPasswordForm.controls.newPassword.errors?.badPassword">סיסמא לא חוקית, נסו שנית
-          </mat-error>
+          <mat-hint>{{ 'pages.login.forgotPasswordForm.form.newPassword.hint' | translate }}</mat-hint>
+          <mat-error *ngIf="forgotPasswordForm.controls.newPassword.errors?.badPassword">{{ 'pages.login.forgotPasswordForm.form.newPassword.errors.badPassword' | translate }}</mat-error>
           <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
         <a *ngIf="confirmCodeSent" class="underlineHover" id="not-receive-code" style="cursor: pointer;"
-          (click)="forgotPasswordVarifyEmail()">לא
-          קיבלתם קוד? לחצו כאן לקבלת קוד נוסף</a>
+          (click)="forgotPasswordVarifyEmail()">{{ 'pages.login.forgotPasswordForm.form.not-receive-code' | translate }}</a>
         <button *ngIf="!newPasswordPhase" type="submit" class="option-btn login-button"
-          [disabled]="!forgotPasswordForm.valid">שילחו לי קוד אימות</button>
-        <span id="confirmation-code-info" *ngIf="!newPasswordPhase">*קוד האימות ישלח למס' הטלפון איתו נרשמת. במידה ונרשמת ללא נייד - קוד האימות ישלח למייל.</span>
+          [disabled]="!forgotPasswordForm.valid">{{ 'pages.login.forgotPasswordForm.form.submit-button.submit-button' | translate }}</button>
+        <span id="confirmation-code-info" *ngIf="!newPasswordPhase">{{ 'pages.login.forgotPasswordForm.form.confirmation-code-info' | translate }}</span>
         <button *ngIf="newPasswordPhase" type="submit" class="option-btn login-button"
-          [disabled]="!forgotPasswordForm.valid">שמור סיסמא חדשה</button>
+          [disabled]="!forgotPasswordForm.valid">{{ 'pages.login.forgotPasswordForm.form.submit-button.save-new-password' | translate }}</button>
       </div>
     </form>
   </div>
@@ -98,24 +90,20 @@
     <form [formGroup]="confirmForm" (ngSubmit)="onConfirmSubmit()">
       <div class="d-flex flex-column">
         <mat-form-field>
-          <mat-label>אימייל</mat-label>
+          <mat-label>{{ 'pages.login.confirmForm.form.username.label' | translate }}</mat-label>
           <input autocomplete="email" formControlName="username" matInput color="primary" inputmode="email"
             (focusout)="trimSpacesEmail(confirmForm, 'username')">
         </mat-form-field>
         <mat-form-field>
-          <mat-label>קוד אימות (נשלח בהודעה לנייד)</mat-label>
+          <mat-label>{{ 'pages.login.confirmForm.form.confirmationCode.label' | translate }}</mat-label>
           <input autocomplete="one-time-code" formControlName="confirmationCode" matInput color="primary"
             inputmode="numeric" (focusout)="trimSpacesEmail(confirmForm, 'confirmationCode')">
-          <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.CodeMismatchException">קוד לא תואם לקוד שנשלח,
-            נסו שנית</mat-error>
-          <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.LimitExceededException">יותר מדי נסיונות. יש
-            להמתין ולנסות שוב בהמשך
-          </mat-error>
+          <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.CodeMismatchException">{{ 'pages.login.confirmForm.form.confirmationCode.errors.CodeMismatchException' | translate }}</mat-error>
+          <mat-error *ngIf="confirmForm.controls.confirmationCode.errors?.LimitExceededException">{{ 'pages.login.confirmForm.form.confirmationCode.errors.LimitExceededException' | translate }}</mat-error>
         </mat-form-field>
         <a *ngIf="confirmCodeSent" class="underlineHover" id="not-receive-code" style="cursor: pointer;"
-          (click)="sendConfirmationCode()">לא
-          קיבלתם קוד? לחצו כאן לקבלת קוד נוסף</a>
-        <button type="submit" class="option-btn login-button" [disabled]="!confirmForm.valid">אמת משתמש</button>
+          (click)="sendConfirmationCode()"> {{ 'pages.login.confirmForm.form.not-receive-code' | translate }}  </a>
+        <button type="submit" class="option-btn login-button" [disabled]="!confirmForm.valid">{{ 'pages.login.confirmForm.form.submit-button' | translate }} </button>
       </div>
     </form>
   </div>
@@ -126,11 +114,11 @@
   <div id="formFooter">
     <div class="footerLogin" *ngIf="showLogin">
       <a class="underlineHover" style="cursor: pointer;" *ngIf="showLogin"
-        (click)="moveToRegisterForm(); loginForm.reset()">פעם ראשונה אצלנו?</a>
+        (click)="moveToRegisterForm(); loginForm.reset()">{{ 'pages.login.formFooter.footerLogin.firstTime' | translate }}</a>
       <a class="underlineHover" style="cursor: pointer;" *ngIf="showLogin"
-        (click)="showForgotPasswordForm(); loginForm.reset()">שכחת סיסמא?</a>
+        (click)="showForgotPasswordForm(); loginForm.reset()">{{ 'pages.login.formFooter.footerLogin.forgotPassword' | translate }}</a>
     </div>
     <a class="underlineHover" style="cursor: pointer;" *ngIf="!showLogin"
-      (click)="showLoginForm(); forgotPasswordForm.reset(); confirmForm.reset(); hidePW=true;">חזור</a>
+      (click)="showLoginForm(); forgotPasswordForm.reset(); confirmForm.reset(); hidePW=true;">{{ 'pages.login.formFooter.back' | translate }}</a>
   </div>
 </div>
