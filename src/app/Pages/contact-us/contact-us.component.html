@@ -1,48 +1,49 @@
-<title>Mentor-Cards עמוד צור קשר</title>
+<title>{{ 'pages.contact-us.title' | translate }}</title>
 <div class="content">
   <div class="contact-form">
     <div style="text-align: center; margin-bottom: 5%;">
-      <span class="title">צרו קשר ונשמח לעמוד לשירותכם</span>
+      <span class="title">{{ 'pages.contact-us.contact-form.title' | translate }}</span>
       <div class="line"></div>
     </div>
     <mat-card>
       <mat-card-content>
         <form class="d-flex flex-column" [formGroup]="contactForm">
           <mat-form-field>
-            <mat-label>שם</mat-label>
+            <mat-label>{{ 'pages.contact-us.contact-form.form.name-label' | translate }}</mat-label>
             <input type="text" matInput formControlName="name">
             <mat-error *ngIf="formControls.name.hasError('required')">
-              חובה להזין שם
+              {{ 'pages.contact-us.contact-form.form.name-error-required' | translate }}
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>מייל</mat-label>
-            <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
+            <mat-label>  {{ 'pages.contact-us.contact-form.form.email-label' | translate }}</mat-label>
+            <input type="email" matInput formControlName="email" placeholder=" {{ 'pages.contact-us.contact-form.form.email-placeholder' | translate }}">
             <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-              יש להזין מייל תקין
+              {{ 'pages.contact-us.contact-form.form.email-error-valid' | translate }}
             </mat-error>
             <mat-error *ngIf="formControls.email.hasError('required')">
-              חובה להזין מייל
+              {{ 'pages.contact-us.contact-form.form.email-error-required' | translate }}
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <mat-label>תוכן</mat-label>
+            <mat-label>  {{ 'pages.contact-us.contact-form.form.content-label' | translate }}
+            </mat-label>
             <textarea matInput formControlName="content"></textarea>
             <mat-error *ngIf="formControls.content.hasError('required')">
-              חובה להזין תוכן
+              {{ 'pages.contact-us.contact-form.form.content-error-required' | translate }}  
             </mat-error>
           </mat-form-field>
         </form>
       </mat-card-content>
       <mat-card-actions>
         <button id="contactUsFormSubmission" class="action-button" type="button" [disabled]="contactForm.invalid || !contactForm.dirty"
-          (click)="sendContent()">שלח</button>
+          (click)="sendContent()"> {{ 'pages.contact-us.contact-form.form.submit-button' | translate }}</button>
       </mat-card-actions>
     </mat-card>
     <br /><br />
     <br /><br />
     <div style="text-align: center; margin-bottom: 5%;">
-      <span class="title">המיילים שלנו:</span><br />
+      <span class="title"> {{ 'pages.contact-us.contact-form.emails.title' | translate }}</span><br />
       <div class="line"></div><br>
       <!-- <span class="note">Office@mentor-cards.com </span><br>
       <span class="note">Support@mentor-cards.com</span> -->

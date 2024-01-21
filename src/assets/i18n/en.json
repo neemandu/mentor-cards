@@ -247,8 +247,50 @@
         }
       }
     },
-    "main-screen":{
-      "title":"Mentor-Cards, the largest virtual card platform in Israel - Home page"
+    "main-screen": {
+      "title": "Mentor-Cards, the largest virtual card platform in Israel - Home page"
+    },
+    "contact-us": {
+      "title": "Mentor-Cards Contact Us Page",
+      "contact-form": {
+        "title": "Contact us and we'll be happy to assist you",
+        "form": {
+          "name-label": "Name",
+          "name-error-required": "Name is required",
+          "email-label": "Email",
+          "email-placeholder": "For example, name@example.com",
+          "email-error-valid": "Please enter a valid email",
+          "email-error-required": "Email is required",
+          "content-label": "Content",
+          "content-error-required": "Content is required",
+          "submit-button": "Submit"
+        },
+        "emails": {
+          "title": "Our emails"
+        }
+      }
+    },
+    "group-management": {
+      "group-details-title": "Group Details",
+      "group-management-instructions-title": "Instructions for Group Management",
+      "add-new-user-instruction": "To add a new user to the group, click on 'Add User'",
+      "user-role-description": "'User'- Has access to card sets",
+      "admin-role-description": "'Admin'- Has access to card sets and has permissions to edit group users",
+      "no-admin-limit-instruction": "There is no limit to the number of admins in a group",
+      "edit-existing-user-instruction": "You can click on the pencil button in the table to edit an existing user",
+      "delete-existing-user-instruction": "You can click on the trash button to delete an existing user from the group",
+      "change-confirmation-instruction": "Any change will ask for confirmation and at the end it will be saved in the system",
+      "new-user-instructions-title": "Instructions for Adding New Users",
+      "new-user-registration-instruction": "Ask the new users to enter the site and register using the email address that was entered for them on this page",
+      "group-code-instruction": "On the main page of the site, ask the users to click on the button \"Are you part of a group?\" and enter the group code",
+      "start-using-cards-instruction": "The new users can start using the cards!",
+      "email-column-title": "Email",
+      "role-column-title": "Role",
+      "edit-column-title": "Edit",
+      "delete-column-title": "Delete",
+      "edit-icon-description": "edit",
+      "delete-icon-description": "delete",
+      "add-new-user-button": "Add User"
     }
   }
 }

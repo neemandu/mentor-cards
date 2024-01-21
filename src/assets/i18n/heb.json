@@ -247,8 +247,50 @@
         }
       }
     },
-    "main-screen":{
-      "title":"Mentor-Cards, פלטפורמת הקלפים הווירטואליים הגדולה בישראל- עמוד הבית"
+    "main-screen": {
+      "title": "Mentor-Cards, פלטפורמת הקלפים הווירטואליים הגדולה בישראל- עמוד הבית"
+    },
+    "contact-us": {
+      "title": "Mentor-Cards עמוד צור קשר",
+      "contact-form": {
+        "title": "צרו קשר ונשמח לעמוד לשירותכם",
+        "form": {
+          "name-label": "שם",
+          "name-error-required": "חובה להזין שם",
+          "email-label": "מייל",
+          "email-placeholder": "לדוגמא name@example.com",
+          "email-error-valid": "יש להזין מייל תקין",
+          "email-error-required": "חובה להזין מייל",
+          "content-label": "תוכן",
+          "content-error-required": "חובה להזין תוכן",
+          "submit-button": "שלח"
+        },
+        "emails": {
+          "title": "המיילים שלנו"
+        }
+      }
+    },
+    "group-management": {
+      "group-details-title": "פרטי קבוצה",
+      "group-management-instructions-title": "הוראות לניהול הקבוצה",
+      "add-new-user-instruction": "להוספת משתמש חדש לקבוצה לחצו על 'הוספת משתמש'",
+      "user-role-description": "'משתמש'- בעל גישה לערכות הקלפים",
+      "admin-role-description": "'מנהל'- בעל גישה לערכות הקלפים ובעל הרשאות לעריכה של משתמשי הקבוצה",
+      "no-admin-limit-instruction": "אין הגבלה לכמות המנהלים בקבוצה",
+      "edit-existing-user-instruction": "ניתן ללחוץ על כפתור העיפרון בטבלה על מנת לערוך משתמש קיים",
+      "delete-existing-user-instruction": "ניתן ללחוץ על כפתור הפח על מנת למחוק משתמש קיים מהקבוצה",
+      "change-confirmation-instruction": "כל שינוי יבקש אימות ובסופו תתבצע שמירה במערכת",
+      "new-user-instructions-title": "הוראות לצירוף משתמשים חדשים",
+      "new-user-registration-instruction": "בקש מהמשתמשים החדשים להיכנס לאתר ולהירשם באמצעות כתובת המייל שהוזנה עבורם בדף זה",
+      "group-code-instruction": "בעמוד הראשי באתר בקש מהמשתמשים ללחוץ על כפתור \"אתם חלק מקבוצה?\" ולהזין את קוד הקבוצה",
+      "start-using-cards-instruction": "המשתמשים החדשים יכולים להתחיל להשתמש בקלפים!",
+      "email-column-title": "אימייל",
+      "role-column-title": "תפקיד",
+      "edit-column-title": "עריכה",
+      "delete-column-title": "מחיקה",
+      "edit-icon-description": "edit",
+      "delete-icon-description": "delete",
+      "add-new-user-button": "הוספת משתמש"
     }
   }
 }
