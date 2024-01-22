@@ -355,6 +355,63 @@
       },
       "paymentTitle": "Please choose a payment method:",
       "paypalTooltip": "If there is an ad blocker in the browser, you need to disable it in order to make a payment"
+    },
+    "portraitWarningDialog": {
+      "content": {
+        "icon": "screen_rotation",
+        "message": "For the best user experience, it's recommended to switch to landscape view"
+      },
+      "actions": {
+        "buttonText": "Understood"
+      }
+    },
+    "packContent": {
+      "title": "Mentor-Cards Pack Content",
+      "packName": "{{ pack.name }}",
+      "defaultName": "The Animals Within Us",
+      "aboutAuthor": "(About the Pack Creator)",
+      "guideBook": "Guide Book",
+      "unauthorized": "You do not have sufficient permissions to view this pack",
+      "actions": {
+        "multipleChoice": {
+          "showMultiple": "Show multiple cards",
+          "showSingle": "Show single card"
+        },
+        "mixCards": "Shuffle",
+        "flipCards": "Flip the cards",
+        "randomCard": "Show random card",
+        "editPack": {
+          "edit": "Edit",
+          "endEdit": "End editing"
+        },
+        "menuActions": "Actions",
+        "introduction": {
+          "attention": "Attention",
+          "list": {
+            "dozensOfPacks": "The site has dozens of card packs to choose from",
+            "over40Cards": "Each pack includes over 40 cards",
+            "guideBook": "All packs come with a guide book that includes guiding questions for using the cards",
+            "trialPeriod": "During the 14-day trial period, all card packs are at your disposal"
+          },
+          "actions": {
+            "register": "Register and start your trial period",
+            "notRegistered": "Haven't you registered for a plan yet?",
+            "alreadyRegistered": "You are already connected, what are you waiting for? Get to work :)",
+            "loginRegisterBtn": "Login/Register",
+            "registerPlanBtn": "Register for a plan",
+            "allPacksBtn": "To all packs"
+          }
+        }
+      }, "nav": {
+        "showChosenCards": "Show chosen cards",
+        "resetChoice": "Reset choice",
+        "cardsChosen": "cards chosen",
+        "resetPack": "Reset pack",
+        "endEditing": "End editing",
+        "hideCardBeforeIcon":"Clicking on the eye icon",
+        "hideCardAfterIcon":"will hide the card underneath"
+      }
     }
-  }
+  },
+  "components": {}
 }

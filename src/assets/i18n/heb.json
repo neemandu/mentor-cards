@@ -355,6 +355,77 @@
       },
       "paymentTitle": "אנא בחרו אמצעי תשלום:",
       "paypalTooltip": "אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"
+    },
+    "portraitWarningDialog": {
+      "content": {
+        "icon": "screen_rotation",
+        "message": "לחווית שימוש מיטבית, כדאי לעבור לתצוגה אופקית"
+      },
+      "actions": {
+        "buttonText": "הבנתי"
+      }
+    },
+    "packContent": {
+      "title": "Mentor-Cards תוכן ערכת הקלפים",
+      "packName": "{{ pack.name }}",
+      "defaultName": "החיות שבתוכנו",
+      "aboutAuthor": "(על יוצר הערכה)",
+      "guideBook": "ספר הדרכה",
+      "unauthorized": "אין לך מספיק הרשאות כדי לצפות בערכה זו",
+      "actions": {
+        "multipleChoice": {
+          "showMultiple": "הצג מספר קלפים",
+          "showSingle": "הצג קלף יחיד"
+        },
+        "mixCards": "ערבב",
+        "flipCards": "הפוך את הקלפים",
+        "randomCard": "הצג קלף אקראי",
+        "editPack": {
+          "edit": "עריכה",
+          "endEdit": "סיום עריכה"
+        },
+        "menuActions": "פעולות",
+        "introduction": {
+          "attention": "שימו",
+          "list": {
+            "dozensOfPacks": "באתר קיימות עשרות ערכות קלפים לבחירתכם",
+            "over40Cards": "כל ערכה כוללת מעל ל-40 קלפים",
+            "guideBook": "כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים",
+            "trialPeriod": "במסגרת 14 ימי הניסיון כל ערכות הקלפים לרשותכם"
+          },
+          "actions": {
+            "register": "הירשמו, והתחילו את תקופת הניסיון",
+            "notRegistered": "עדין לא נרשמתם לתוכנית?",
+            "alreadyRegistered": "אתם כבר מחוברים, למה אתם מחכים? לעבודה :)",
+            "loginRegisterBtn": "התחברות/הרשמה",
+            "registerPlanBtn": "להרשמה לתוכנית",
+            "allPacksBtn": "לכל הערכות"
+          }
+        }
+      },
+      "nav": {
+        "showChosenCards": "הצג קלפים שנבחרו",
+        "resetChoice": "איפוס בחירה",
+        "cardsChosen": "קלפים נבחרו",
+        "resetPack": "איפוס ערכה",
+        "endEditing": "סיום עריכה",
+        "hideCardBeforeIcon": "לחיצה על אייקון העין",
+        "hideCardAfterIcon": "תסתיר את הקלף מתחתיו"
+      },
+      "matMenu": {
+        "toggleCardDisplayModeButton": {
+          "true": "הצג מספר קלפים",
+          "false": "הצג קלף יחיד"
+        },
+        "shuffleCardsButton": "ערבב",
+        "flipDeckButton": "הפוך חפיסה",
+        "showRandomCardButton": "הצג קלף אקראי",
+        "editPackButton": {
+          "true": "עריכה",
+          "false": "סיום עריכה"
+        }
+      }
     }
-  }
+  },
+  "components": {}
 }
