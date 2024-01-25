@@ -211,7 +211,7 @@
         "CreateShareLink": {},
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateUser-577a5a4d6d3832427674-build.zip"
+          "s3Key": "amplify-builds/CreateUser-424868454f7758572b33-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",

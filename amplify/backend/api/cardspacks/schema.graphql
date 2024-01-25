@@ -72,7 +72,7 @@ type Affiliate
     ]
   ) {
     affiliateID: ID!
-    name: String
+    affiliateUrl: String
     contactEmail: AWSEmail
     phoneNumber: String
     websiteURL: String
@@ -80,6 +80,17 @@ type Affiliate
     commissionPercentage: Float
     dateJoined: AWSDateTime
     status: String 
+    balance: Float
+    withdraws: [Withdraw]
+}
+
+type Withdraw{
+  id: ID!
+  date: AWSDateTime
+  amount: Float
+  currency: String
+  paymentWay: String
+  transactionId: String
 }
 
 type MonthlySubscription {
