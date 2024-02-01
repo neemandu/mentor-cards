@@ -71,44 +71,41 @@
     <mat-card id="popular-mat-card">
       <!-- <span id="best-pack">הכי משתלמת</span> -->
       <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
-      <mat-card-title>תכנית Life-Time!</mat-card-title>
+      <mat-card-title>תכנית שנתית</mat-card-title>
       <mat-card-content>
-        <br>
         <p class="price-line">
-          תשלום <b><u>חד פעמי</u></b> בסך
+          תשלום בסך
           <span class="price-number"
             >₪{{
-             lifeTimeSubscription.fullPrice
-            }}!
+             yearlySubscription.fullPrice
+            }}
           </span>
         </p>
         <br />     
         <ul>
+          <li>חודשיים מתנה!</li>
           <li>
-            גישה מלאה לעשרות ערכות קלפים - לכל החיים!          </li>
+            גישה מלאה לעשרות ערכות קלפים          </li>
             <li>
-              גישה לכל ערכות הקלפים שיעלו לאתר בעתיד!             </li>
+              מגוון עצום של ספרי הדרכה, רעיונות להפעלה, ושאלות מנחות            </li>
             <li>
-              מגוון עצום של ספרי הדרכה, רעיונות להפעלה ושאלות מנחות            </li>
-            <li>
-              אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...
-            </li>
+              אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...            </li>
         </ul></mat-card-content>
       <mat-card-actions>
         <button
           *ngIf="userSingedIn &&
             (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200)
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
           "
           class="popular-purchase-btn purchase-btn"
-          (click)="checkFreePeriod(lifeTimeSubscription.id)"
+          (click)="checkFreePeriod(yearlySubscription.id)"
         >
           להצטרפות >>
         </button>
         <button
           *ngIf="userSingedIn &&
             userData?.status === 'PLAN' &&
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
           "
           class="disabled-btn purchase-btn"
           disabled
