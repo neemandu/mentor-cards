@@ -5,7 +5,6 @@
 
     <!-- <p>{{'compA.compA1' | translate}}</p> -->
 <app-select-language></app-select-language>
-    
     <button
       id="couponCodeBtn"
       type="button"
@@ -20,8 +19,7 @@
 
       <mat-list-option
         disableRipple
-        style="direction: ltr"
-
+        [dir]="langDirectionService.currentLangDirection"
         *ngFor="let category of allCategories"
         [selected]="selectedCategories.includes(category)"
         [value]="category"
@@ -50,7 +48,7 @@
     >
       <mat-list-option
         disableRipple
-        style="direction: ltr"
+        [dir]="langDirectionService.currentLangDirection"
         *ngFor="let fav of getAllFavoritesDesc()"
         [selected]="selectedFavorites.includes(fav)"
         [value]="fav"

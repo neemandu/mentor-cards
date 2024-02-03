@@ -402,14 +402,374 @@
             "allPacksBtn": "To all packs"
           }
         }
-      }, "nav": {
+      },
+      "nav": {
         "showChosenCards": "Show chosen cards",
         "resetChoice": "Reset choice",
         "cardsChosen": "cards chosen",
         "resetPack": "Reset pack",
         "endEditing": "End editing",
-        "hideCardBeforeIcon":"Clicking on the eye icon",
-        "hideCardAfterIcon":"will hide the card underneath"
+        "hideCardBeforeIcon": "Clicking on the eye icon",
+        "hideCardAfterIcon": "will hide the card underneath"
+      }
+    },
+    "guide-page": {
+      "title": "Mentor-Cards Guide on Website Usage",
+      "layout": {
+        "buttons": {
+          "what-is-mentor-cards": "What is Mentor-Cards?",
+          "how-to-connect": "How to connect to the site?",
+          "how-to-enter-coupon-code": "How to enter a coupon code?",
+          "our-guide-books": "Our guide books",
+          "our-card-sets": "Our card sets",
+          "plans-prices-cancellations": "Plans, prices, and cancellations",
+          "key-principles-in-working-with-cards": "Key principles in working with cards",
+          "how-to-work-with-digital-card-set": "How to work with a digital card set?"
+        }
+      },
+      "content": {
+        "content1": {
+          "paragraph1": "Mentor-Cards is an innovative digital platform that allows coaches, mentors, and therapists from various fields to work with reflective cards online!",
+          "paragraph2": "Mentor-Cards has a huge variety of card sets, so you can match the card set to your client.",
+          "paragraph3": "You can connect to Mentor-Cards via computer, mobile phone, and tablet!"
+        },
+        "content4": {
+          "p1": "Each card set on the site comes with a unique guidebook for it.",
+          "p2": "To use the guidebook, select a card set and click on the \"Guidebook\" button located in the center of the page.",
+          "p3.1": "Guidebooks contain dozens of questions and ideas for various activities using the selected card set -",
+          "p3.2": "divided into the following topics:",
+          "li1": "Suggestions for one-on-one work",
+          "li2": "Suggestions for working with more than one card - process work",
+          "li3": "Suggestions for group work",
+          "li4": "Suggestions for working with word cards (in word card sets)",
+          "p4": "Also, there is a division for questions when the cards are revealed or hidden (each of the methods has its unique advantages).",
+          "h1": "How to use the guidebook during a meeting?",
+          "p5.1": "The guidebook interface is intelligently designed to allow only you to view the questions and ideas in a separate work window so that the participant .",
+          "p5.2": "Will only view the card set and not the book itself  p6 This allows you, the facilitators, to work comfortably with the guidebook during the meeting and write notes in the book itself during the meeting.",
+          "p7": "There is no need to memorize or remember the questions, everything appears in front of your eyes all the time!",
+          "pBold": "Instructions for using the ZOOM software (there are similar options in other video software such as: Skype, Teams and more):",
+          "ol1": "On the \"All Card Sets\" page, choose the card set you want to use.",
+          "ol2": "Click on the \"Guidebook\" button located on the upper left side of this page.",
+          "ol3": "In the ZOOM software, click on the - “SHARE” button located in the center of the ZOOM application and in its lower part.",
+          "ol4": "You should choose to share the screen for your browser where the card set is displayed. Note that the default option is to display the entire screen and we do not want that, but only your browser."
+        },
+        "content5": {
+          "p1": {
+            "b": "The card sets on the site are divided into different categories -",
+            "text1": "Picture cards, word cards, picture+word cards, question cards, message cards, and more.",
+            "br": "You can mark the desired category and display only the cards from that category on the 'All Card Sets' page."
+          },
+          "p2": {
+            "b": "The card sets on the site are constantly updated -",
+            "text": "We add new cards to existing sets and create additional collaborations with external creators to maintain a refreshing and dynamic experience for our customers."
+          },
+          "p3": {
+            "b1": "You can mark with - ",
+            "b2": "- the card sets you prefer",
+            "text": "and thus create a unique category of favorite card sets for you, which will be saved on the 'All Card Sets' page and displayed at the top of the page as long as you choose. Have you exhausted a particular card set? Remove the heart mark and choose a new favorite card set!"
+          },
+          "p4": {
+            "b": "The VIP category",
+            "text": "contains the card sets we chose for you from external creators - we also offer a digital solution for card set creators from the country and the world and choose for our customers the best sets!"
+          },
+          "p5": {
+            "b": "'Free Trial Sets' category -",
+            "text": "free and free access to selected card sets from various categories"
+          },
+          "p6": {
+            "b": "The 'Question Cards' category",
+            "text": "contains various card sets where you will find coaching questions, advancing, purposeful and empowering every process and every meeting."
+          },
+          "p7": {
+            "b": "The 'Picture Cards' category",
+            "text": "is built on the projection mechanism that allows the participant a large response space and the ability to express his inner world with various images and metaphors."
+          },
+          "p8": {
+            "b": "The 'Message Cards' category",
+            "text": "helps to start or end any meeting with a powerful message, for a correct process of drawing conclusions and significant insights."
+          },
+          "p9": {
+            "b": "The 'Holiday Cards' category",
+            "text": "was created because the wisdom of Kabbalah teaches us that every holiday is a gate in the dimension of time, which opens at a certain time of the year and influences us. The holidays are a great opportunity to integrate work with cards!"
+          }
+        },
+        "content6": {
+          "span1": "Join one of our programs and receive -",
+          "ul": {
+            "li1": {
+              "b": "A guidebook attached to each card set -",
+              "text": "Dozens of powerful questions and various suggestions for work."
+            },
+            "li2": {
+              "b": "Use all the capabilities -",
+              "text": "Open and hidden cards, random card selection, shuffling, multiple selection for procedural work, and more…"
+            },
+            "li3": {
+              "b": "Renewing and dynamic content -",
+              "text": "Additional card sets and new work techniques that are constantly updated by our in-house creators and external creators."
+            }
+          },
+          "span2": "We offer our customers 3 programs -",
+          "ol": {
+            "li1": {
+              "b": "Free program -",
+              "text": "Join our mentor community and enjoy free access to selected card sets."
+            },
+            "li2": {
+              "b": "Monthly program -",
+              "text": "Mainly recommended for use in point events, conferences, short workshops, one-time events, etc."
+            },
+            "li3": {
+              "b": "Annual program -",
+              "text": "The program is recommended for people who know and love to incorporate cards as part of their toolbox. Pay in advance for 12 months and enjoy a 30% discount! The payment is made once and all the site services are open for you for the next year."
+            }
+          },
+          "span3": "Cancellations",
+          "p1": "All site users enjoy free access at no cost to the card sets in the 'Free Trial Sets' category.",
+          "p2": "At the end of the program period, the program is automatically renewed for another period, we send an email 7 days before recharging.",
+          "p3": "You can cancel the automatic charge at any time through the \"User Details\" area on the site and click on \"Cancel Automatic Charge\".",
+          "p4": "No cash refunds will be given for partial billing periods on the site."
+        },
+        "content7": {
+          "p1": "The first step in introspection begins with a pause.",
+          "p2": "The pause allows us to ask ourselves questions, and to check whether we are in the right direction for us.",
+          "p3": "From introspection, conclusions can be drawn and a forward action plan can be built.",
+          "p4": "\"Cards Unfold\" - bypasses of consciousness, help us reach deeper layers within us.",
+          "p5": "Cards expand our point of view beyond our familiar comfort zone and offer us a variety of opportunities and new ways of thinking.",
+          "span": "Key principles in working with cards",
+          "ol1": {
+            "b": "Before each card draw, it is recommended to ask a question.",
+            "text1": "After drawing the card, allow time for the chooser to introspect the card and let the asked question resonate.",
+            "text2": "Do not rush to ask another question."
+          },
+          "ol2": {
+            "b": "The truth is in the eyes of the card chooser and therefore all answers are correct.",
+            "text1": "There is no good or bad outcome.",
+            "text2": "The way the card chooser relates to his cards, expresses his personal perception and beliefs.",
+            "text3": "It is right to allow full legitimacy to the choice and personal interpretation in order to create a safe space."
+          },
+          "ol3": {
+            "b": "The guidebook offered for each card set is only a recommendation,",
+            "text1": "It is not mandatory and we even encourage you, to write your own questions and ideas and therefore we have created a dedicated place in the guidebook where you can type things before the start of the meeting and even during it."
+          },
+          "ol4": {
+            "b": "At any given moment, a card can be added or replaced.",
+            "text1": "Before doing so, it is recommended to ask the card chooser - what in this card creates resistance in you?",
+            "text2": "What is the reason you did not connect to the card? There are no good or bad cards."
+          },
+          "ol5": {
+            "b": "The choice of cards is correct for the present time and describes the interpretation, feelings, existence, and spirit of the card chooser at this moment.",
+            "text": "At a different time or situation, a different reaction may arise."
+          }
+        },
+        "content8": {
+          "p1": "The moment you choose a card set to work with, you have 5 buttons at the top of the screen:",
+          "button": "Button -",
+          "p2_b": "\"Flip the cards\"",
+          "p2_text": "- By clicking on the button, you can choose which side of the cards will be visible.",
+          "p3_b": "\"Show number of cards\"",
+          "p3_text": "- By clicking on the button, you can mark up to 5 cards and display them in an enlarged form on the screen.",
+          "p4_b": "\"Shuffle\"",
+          "p4_text": "- Like in the \"real world\", clicking on the shuffle button changes the order of the cards.",
+          "p5_b": "\"Show random card\"",
+          "p5_text": "- By clicking on the button, a random card will be selected from the card set and displayed in an enlarged form on the screen.",
+          "p6_b": "\"Edit\"",
+          "p6_text": "- Allows hiding of specific cards. By clicking on the button, you can hide cards that you are not interested in working with at the current time. Once you exit the card system or refresh the page, all the cards you chose to hide will reappear.",
+          "p7_b": "\"Instruction book\"",
+          "p7_text": "- Opens in a separate screen. Contains a description of the specific card set, questions and ideas for one-on-one work, procedural work, and group work divided into visible or hidden cards."
+        },
+        "all-screens-img": "Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
+      },
+      "accordion": {
+        "mat-accordion": {
+          "mat-button":{
+            "btn1":"What is Mentor - Cards?",
+            "btn2":"How do you connect to the site?",
+            "btn3":"How to enter a benefit code?",
+            "btn4":"Our guide books",
+            "btn5":"Our card sets",
+            "btn6":"Plans, prices and cancellations",
+            "btn7":"Key principles in working with cards",
+            "btn8":"How to work with a digital card set"
+          },
+          "mat-expansion-panel1": {
+            "mat-panel-title": "What is Mentor - Cards?",
+            "p1": "Mentor Cards is an innovative digital platform that allows mentors, coaches, and therapists from various fields to work with projective cards online!",
+            "p2": "Mentor Cards has a huge variety of card sets, so you can tailor the card set to your client.",
+            "p3": "You can also find on the site card sets that we have created, as well as card sets of quality creators from outside."
+          },
+          "mat-expansion-panel2": {
+            "mat-panel-title": "How to connect to the site?",
+            "text": "On the upper right side - click on the \"Login/Register\" button. A window will open in the center of the screen with 2 options: register a new user or login an existing user. Choose to register a new user and fill in the details or choose a simple and quick login via Google."
+          },
+          "mat-expansion-panel3": {
+            "mat-panel-title": "How to enter a benefit code?",
+            "text": "In order to enter a benefit code, you need to login / register to the site. On the \"All Card Sets\" page, on the upper right side, there is a prominent orange button that says \"Do you have a benefit code?\". Clicking on the button opens a small window where you enter the benefit code you received. Click on \"OK\" and that's it, you got the benefit!"
+          },
+          "mat-expansion-panel4": {
+            "mat-panel-title": "Our guidebooks",
+            "p1_1": "Each card set on the site comes with a unique guidebook for it.",
+            "p1_2": "To use the guidebook, choose a card set and click on the \"Guidebook\" button located in the center of the page.",
+            "p1_3": "The guidebooks contain dozens of questions and ideas for various activities using the selected card set -",
+            "p1_4": "divided into the following topics:",
+            "ul": {
+              "li1": "Suggestions for one-on-one work",
+              "li2": "Suggestions for working with more than one card - procedural work",
+              "li3": "Suggestions for group work",
+              "li4": "Suggestions for working with word cards (in word card sets)"
+            },
+            "p2_1": "Also, there is a division for questions when the cards are visible or hidden (each of the methods has its unique advantages).",
+            "h1": "How to use the guidebook during a meeting?",
+            "p3_1": "The guidebook interface is smartly built to allow only you to view the questions and ideas in a separate work window so that the participant",
+            "p3_2": "will see only the card set and not the book itself.",
+            "p3_3": "This allows you, the guides, comfortable work in front of the guidebook during the meeting and writing notes in the book itself while the meeting.",
+            "p3_4": "There is no need to memorize or remember the questions, everything appears in front of your eyes all the time!",
+            "p_bold": "Instructions for using ZOOM software (there are similar options in other video software such as: Skype, Teams, etc.):",
+            "ol": {
+              "li1": "On the \"All Card Sets\" page, choose the card set you want to use.",
+              "li2": "Click on the \"Guidebook\" button located on the upper left side of this page.",
+              "li3": "In the ZOOM software, click on the - “SHARE” button located in the center of the ZOOM application and in its lower part.",
+              "li4": "You should choose to share the screen for your browser in which the card set is displayed. Note that the default option is to display the entire screen and we do not want that, just your browser."
+            }
+          },
+          "mat-expansion-panel5": {
+            "mat-panel-title": "Our card sets",
+            "p1_1_b": "The card sets on the site are divided into different categories -",
+            "p1_1": "Picture cards, word cards, picture+word cards, question cards, message cards, and more.",
+            "p1_2": "You can mark the desired category and display only the cards from that category on the 'All Card Sets' page.",
+            "p2_1_b": "The card sets on the site are constantly updated -",
+            "p2_1": "We add new cards to existing sets and create additional collaborations with external creators to maintain a refreshing and dynamic experience for our customer base.",
+            "p3_1_b": "You can mark with -",
+            "p3": "You can mark your favorite card sets, thus creating a unique category of favorite card sets for you, which will be saved on the \"All Card Sets\" page and displayed at the top of the page as long as you choose. Have you exhausted a certain card set? Remove the heart mark and choose a new favorite card set!",
+            "p4_1_b": "VIP category contains the card sets we chose for you from external creators -",
+            "p4_1": "We offer a digital solution also for card set creators from the country and the world and choose for our customers the best sets! Use of the card sets in this category for an additional fee.",
+            "p5_1_b": "'Sets for free trial' category -",
+            "p5_1": "Free and free access to selected card sets from various categories",
+            "p6_1_b": "Question card category",
+            "p6_1": "Contains various card sets where you will find coaching questions, promoting, targeting and empowering every process and every meeting.",
+            "p7_1_b": "Picture card category",
+            "p7_1": "Built on the projection mechanism that allows the participant a large response space and the ability to express his inner world with various images and metaphors.",
+            "p8_1_b": "Message card category",
+            "p8_1": "Helps to start or end any meeting with a powerful message, for the right process of drawing conclusions and significant insights.",
+            "p9_1_b": "Holiday card category",
+            "p9_1": "Was created because Kabbalah teaches us that every holiday is a gate in the dimension of time, which opens at a certain time of the year and influences us. The holidays are a great opportunity to work with cards!",
+            "p10_1": "VIP category contains the card sets we chose for you from external creators - we offer a digital solution also for card set creators from the country and the world and choose for our customers the best sets! Use of the card sets in this category for an additional fee."
+          },
+          "mat_expansion_panel6": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "Plans, Prices and Cancellations"
+            },
+            "join_our_plans": "Join one of our plans and get -",
+            "full_access": {
+              "bold": "Full unlimited access -",
+              "normal": "Enjoy all the card sets on the site."
+            },
+            "guide_book": {
+              "bold": "A guide book attached to each card set -",
+              "normal": "Dozens of powerful questions and diverse suggestions for work."
+            },
+            "all_capabilities": {
+              "bold": "Use all capabilities -",
+              "normal": "Open and hidden cards, random card selection, shuffling, multiple selection for process work and more..."
+            },
+            "dynamic_content": {
+              "bold": "Renewing and dynamic content -",
+              "normal": "Additional card sets and new work techniques that are updated regularly by our home creators and external creators."
+            },
+            "we_offer": "We offer our customers 3 plans -",
+            "free_plan": {
+              "bold": "Free plan -",
+              "normal": "Grants use of sets under 'Free Trial Sets'."
+            },
+            "monthly_plan": {
+              "bold": "Monthly plan -",
+              "normal": "Grants use of home card sets for a month."
+            },
+            "annual_plan": {
+              "bold": "Annual plan -",
+              "normal": "Pay in advance for 12 months and enjoy a discount on the price! Pay in advance."
+            },
+            "vip_plan": {
+              "bold": "VIP sets -",
+              "normal": "Quality card sets from external creators. Each card set can be purchased in a monthly or annual plan according to the price set by the card set creator. Mentor-Cards customers enjoy a fixed and special price starting from - 9.9 NIS per month."
+            },
+            "cancellations": "Cancellations",
+            "cancellation_policy": {
+              "part1": "All site users enjoy a trial period before choosing the plan.",
+              "part2": "At the end of the plan period, the plan is automatically renewed for another period, we send an email 7 days before performing the charge again.",
+              "part3": "You can cancel the automatic charge at any time through the \"User Details\" area on the site and clicking on \"Cancel Automatic Charge\".",
+              "part4": "No cash refunds will be given for payments for partial billing periods on the site."
+            }
+          },
+          "mat_expansion_panel7": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "Key Principles in Working with Cards"
+            },
+            "first_step": {
+              "part1": "The first step in introspection begins with a pause.",
+              "part2": "The pause allows us to ask ourselves questions, and to check whether we are in the right direction for us.",
+              "part3": "From introspection, it will be possible to draw conclusions and build a plan of action forward.",
+              "part4": "\"Cards reveal\" - bypassing consciousness, help us reach deeper layers within us.",
+              "part5": "Cards expand our point of view beyond the comfort zone we are familiar with and offer us a variety of opportunities and new ways of thinking."
+            },
+            "key_principles": "Key Principles in Working with Cards",
+            "principle1": {
+              "part1": "Before each card draw, it is recommended to ask a question.",
+              "part2": "After drawing the card, allow time for the chooser to introspect the card and for the question asked to resonate.",
+              "part3": "Do not rush to ask another question."
+            },
+            "principle2": {
+              "part1": "The truth is in the eyes of the card chooser and therefore all the answers are correct.",
+              "part2": "There is no good or bad outcome.",
+              "part3": "The way the card chooser relates to his cards, expresses his personal perception and beliefs.",
+              "part4": "It is right to allow full legitimacy for choice and personal interpretation in order to create a safe space."
+            },
+            "principle3": {
+              "part1": "The guidebook offered for each card set is only a recommendation,",
+              "part2": "It is not mandatory and we even encourage you, to write your own questions and ideas and therefore we have created a dedicated place in the guidebook where you can type things before the meeting starts and even during it."
+            },
+            "principle4": {
+              "part1": "At any given moment it is possible to add or replace a card.",
+              "part2": "Before doing so, it is recommended to ask the card chooser - what in this card creates resistance in you?",
+              "part3": "What is the reason you did not connect to the card? There are no good or bad cards."
+            },
+            "principle5": {
+              "part1": "The choice of cards is correct for the present time and describes the interpretation, feelings, existence, and spirit of the card chooser at this moment.",
+              "part2": "At a different time or situation, a different reaction may arise."
+            }
+          },
+          "mat_expansion_panel8": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "How to Work with a Digital Card Set?"
+            },
+            "button": "Button -",
+            "first_step": "Once you have chosen a card set to work with, you have 5 buttons at the top of the screen:",
+            "flip_cards_button": {
+              "bold": "\"Flip the Cards\" -",
+              "normal": "By clicking on the button, you can choose which side of the cards will be visible."
+            },
+            "display_number_cards_button": {
+              "bold": "\"Display Number of Cards\" -",
+              "normal": "By clicking on the button, you can mark up to 5 cards and display them in an enlarged form on the screen."
+            },
+            "shuffle_button": {
+              "bold": "\"Shuffle\" -",
+              "normal": "Like in the \"real world\", clicking on the shuffle button changes the order of the cards."
+            },
+            "display_random_card_button": {
+              "bold": "\"Display a Random Card\" -",
+              "normal": "By clicking on the button, a random card will be selected from the card set and displayed in an enlarged form on the screen."
+            },
+            "edit_button": {
+              "bold": "\"Edit\" -",
+              "normal": "Allows hiding of specific cards. By clicking on the button, you can hide cards that you do not want to work with at the current time. Once you exit the card set or refresh the page, all the cards you chose to hide will reappear."
+            },
+            "guidebook_button": {
+              "bold": "\"Guidebook\" -",
+              "normal": "Opens in a separate screen. Contains a description of the specific card set, questions and ideas for one-on-one work, process work and group work divided into visible or hidden cards."
+            }
+          }
+        }
       }
     }
   },

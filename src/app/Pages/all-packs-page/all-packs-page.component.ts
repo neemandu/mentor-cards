@@ -21,6 +21,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { MixpanelService, EventTypes } from 'src/app/Services/mixpanel.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOption } from '@angular/material/core';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 
 interface CategoryPack {
   category: string;
@@ -81,7 +82,8 @@ export class AllPacksPageComponent implements OnInit {
     public router: Router,
     private ngZone: NgZone,
     public dialog: MatDialog,
-    private mixpanelService: MixpanelService
+    private mixpanelService: MixpanelService,
+    public langDirectionService: LangDirectionService
 
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);

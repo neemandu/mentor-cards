@@ -1,467 +1,771 @@
-<title>Mentor-Cards עמוד הדרכה על שימוש באתר</title>
-<h1 id="title">{{title}}</h1>
+<title>{{ "pages.guide-page.title" | translate }}</title>
+<h1 id="title">{{ title }}</h1>
 <div id="layout">
   <div id="buttons" class="d-flex flex-column">
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==1}" type="button"
-      (click)="selectedTopicChanged(1, 'מה זה מנטור - קארדס?')" mat-menu-item>מה זה מנטור - קארדס? </button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==2}" type="button"
-      (click)="selectedTopicChanged(2, 'איך מתחברים לאתר?')" mat-menu-item>איך מתחברים לאתר?</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==3}" type="button"
-      (click)="selectedTopicChanged(3, 'איך מזינים קוד הטבה?')" mat-menu-item>איך מזינים קוד הטבה?</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==4}" type="button"
-      (click)="selectedTopicChanged(4, 'ספרי ההדרכה שלנו')" mat-menu-item>ספרי ההדרכה שלנו</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==5}" type="button"
-      (click)="selectedTopicChanged(5, 'ערכות הקלפים שלנו')" mat-menu-item>ערכות הקלפים שלנו</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==6}" type="button"
-      (click)="selectedTopicChanged(6, 'תכניות, מחירים וביטולים')" mat-menu-item>תכניות, מחירים וביטולים</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==7}" type="button"
-      (click)="selectedTopicChanged(7, 'עקרונות מפתח בעבודה עם קלפים')" mat-menu-item>עקרונות מפתח בעבודה עם
-      קלפים</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==8}" type="button"
-      (click)="selectedTopicChanged(8, 'איך עובדים עם ערכת קלפים דיגיטלית?')" mat-menu-item>איך עובדים עם ערכת קלפים דיגיטלית?</button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 1 }"
+      type="button"
+      (click)="selectedTopicChanged(1, 'מה זה מנטור - קארדס?')"
+      mat-menu-item
+    >
+      {{ "pages.guide-page.layout.buttons.what-is-mentor-cards" | translate }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 2 }"
+      type="button"
+      (click)="selectedTopicChanged(2, 'איך מתחברים לאתר?')"
+      mat-menu-item
+    >
+      {{ "pages.guide-page.layout.buttons.how-to-connect" | translate }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 3 }"
+      type="button"
+      (click)="selectedTopicChanged(3, 'איך מזינים קוד הטבה?')"
+      mat-menu-item
+    >
+      {{
+        "pages.guide-page.layout.buttons.how-to-enter-coupon-code" | translate
+      }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 4 }"
+      type="button"
+      (click)="selectedTopicChanged(4, 'ספרי ההדרכה שלנו')"
+      mat-menu-item
+    >
+      {{ "pages.guide-page.layout.buttons.our-guide-books" | translate }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 5 }"
+      type="button"
+      (click)="selectedTopicChanged(5, 'ערכות הקלפים שלנו')"
+      mat-menu-item
+    >
+      {{ "pages.guide-page.layout.buttons.our-card-sets" | translate }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 6 }"
+      type="button"
+      (click)="selectedTopicChanged(6, 'תכניות, מחירים וביטולים')"
+      mat-menu-item
+    >
+      {{
+        "pages.guide-page.layout.buttons.plans-prices-cancellations" | translate
+      }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 7 }"
+      type="button"
+      (click)="selectedTopicChanged(7, 'עקרונות מפתח בעבודה עם קלפים')"
+      mat-menu-item
+    >
+      {{
+        "pages.guide-page.layout.buttons.key-principles-in-working-with-cards"
+          | translate
+      }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 8 }"
+      type="button"
+      (click)="selectedTopicChanged(8, 'איך עובדים עם ערכת קלפים דיגיטלית?')"
+      mat-menu-item
+    >
+      {{
+        "pages.guide-page.layout.buttons.how-to-work-with-digital-card-set"
+          | translate
+      }}
+    </button>
   </div>
   <div id="line"></div>
   <div id="content">
-    <div id="content1" *ngIf="selectedBtn===1">
+    <div id="content1" *ngIf="selectedBtn === 1">
       <p>
-        מנטור קארדס היא פלטפורמה דיגיטלית חדשנית המאפשרת למנחים, מאמנים ואנשי טיפול ממגוון תחומים עבודה עם קלפים
-        השלכתיים
-        און ליין!<br>
-        במנטור קארדס יש מגוון עצום של ערכות קלפים, כך שניתן להתאים את ערכת הקלפים ללקוח שלכם.
-        <br><br>
-        ניתן להתחבר למנטור קארדס דרך מחשב, טלפון נייד וטאבלט!
+        {{ "pages.guide-page.content.content1.paragraph1" | translate }}<br />
+        {{ "pages.guide-page.content.content1.paragraph2" | translate }}
+        <br /><br />
+        {{ "pages.guide-page.content.content1.paragraph3" | translate }}
       </p>
-      <img id="all-screens-img" src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
-        alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities">
+      <img
+        id="all-screens-img"
+        src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
+        alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
+      />
     </div>
-    <div id="content4" *ngIf="selectedBtn===4">
+    <div id="content4" *ngIf="selectedBtn === 4">
       <p>
-        כל ערכת קלפים באתר מגיעה עם ספר הדרכה ייחודי עבורה.<br>
-        לשימוש בספר ההדרכה יש לבחור ערכת קלפים וללחוץ על כפתור "ספר ההדרכה" הנמצא במרכז העמוד.<br>
-        ספרי ההדרכה מכילים עשרות שאלות ורעיונות להפעלות שונות לשימוש בערכת הקלפים הנבחרת - <br>בחלוקה לנושאים הבאים:
+        {{ "pages.guide-page.content.content4.p1" | translate }}<br />
+        {{ "pages.guide-page.content.content4.p2" | translate }}<br />
+        {{ "pages.guide-page.content.content4.p3.1" | translate }} <br />
+        {{ "pages.guide-page.content.content4.p3.2" | translate }}
       </p>
       <ul>
-        <li>הצעות לעבודה אחד על אחד
-        </li>
-        <li>הצעות לעבודה עם יותר מקלף אחד - עבודה תהליכית
-        </li>
-        <li>הצעות לעבודה בקבוצות
-        </li>
-        <li>הצעות לעבודה עם קלפי מילה (בערכות קלפי מילה)
-        </li>
+        <li>{{ "pages.guide-page.content.content4.li1" | translate }}</li>
+        <li>{{ "pages.guide-page.content.content4.li2" | translate }}</li>
+        <li>{{ "pages.guide-page.content.content4.li3" | translate }}</li>
+        <li>{{ "pages.guide-page.content.content4.li4" | translate }}</li>
       </ul>
       <p>
-        כמו כן, קיימת חלוקה לשאלות כשהקלפים במצב גלוי או סמוי
-        (לכל אחת מהשיטות יתרונותיה הייחודים).
+        {{ "pages.guide-page.content.content4.p4" | translate }}
       </p>
-      <h1>איך משתמשים בספר ההדרכה בזמן מפגש?</h1>
-      <p>ממשק ספר ההדרכה בנוי בצורה חכמה המאפשרת רק לכם לצפות בשאלות וברעיונות בחלון עבודה נפרד כך שהמשתתף<br> יצפה
-        בערכת
-        הקלפים בלבד ולא בספר עצמו.<br>
-        הדבר מאפשר לכם, המנחים, עבודה נוחה מול ספר ההדרכה בזמן המפגש וכתיבת הערות בספר עצמו תוך כדי המפגש.<br>
-        אין צורך
-        לשנן או לזכור את השאלות, הכל מופיע לכם מול העיניים כל הזמן!
+      <h1>{{ "pages.guide-page.content.content4.h1" | translate }}</h1>
+      <p>
+        {{ "pages.guide-page.content.content4.p5.1" | translate }}<br />{{
+          "pages.guide-page.content.content4.p5.2" | translate
+        }}<br />
+        {{ "pages.guide-page.content.content4.p6" | translate }}<br />
+        {{ "pages.guide-page.content.content4.p7" | translate }}!
       </p>
-      <p style="font-weight: bold;"> ​​ הוראות לשימוש בתוכנת ZOOM
-        (יש אפשרויות דומות בתוכנות וידאו אחרות כמו: Skype, Teams ועוד):</p>
+      <p style="font-weight: bold">
+        {{ "pages.guide-page.content.content4.pBold" | translate }}
+      </p>
       <ol>
+        <li>{{ "pages.guide-page.content.content4.ol1" | translate }}</li>
         <li>
-          בעמוד "כל ערכות הקלפים", בחרו את ערכת הקלפים בה תרצו להשתמש.
+          {{ "pages.guide-page.content.content4.ol2" | translate }}
         </li>
         <li>
-          לחצו על כפתור "ספר הדרכה" אשר נמצא בצידו השמאלי העליון של דף זה.
+          {{ "pages.guide-page.content.content4.ol3" | translate }}
         </li>
         <li>
-          בתוכנת הZOOM ללחוץ על כפתור ה - “SHARE” אשר נמצא במרכז אפליקציית הZOOM ובחלקה התחתון.
-        </li>
-        <li>
-          יש לבחור בשיתוף מסך עבור הדפדפן שלכם בו מוצגת ערכת הקלפים. שימו לב כי אפשרות ברירת המחדל היא
-          להציג
-          את כל המסך ואיננו רוצים זאת, אלא רק את הדפדפן שלכם.
+          {{ "pages.guide-page.content.content4.ol4" | translate }}
         </li>
       </ol>
-      <img onload="this.style.opacity='1'" src="../../../assets/Share Mentor Cards.png" class="screen-share-img"
-        alt="Screen shot, explaining how to share the site properly and use the guide book at the same time">
-      <iframe class="responsive-iframe-with-text" src="https://www.youtube.com/embed/mcRuLFQv-qE"
-        title="YouTube video player" frameborder="0"
+      <img
+        onload="this.style.opacity='1'"
+        src="../../../assets/Share Mentor Cards.png"
+        class="screen-share-img"
+        alt="Screen shot, explaining how to share the site properly and use the guide book at the same time"
+      />
+      <iframe
+        class="responsive-iframe-with-text"
+        src="https://www.youtube.com/embed/mcRuLFQv-qE"
+        title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        allowfullscreen
+      ></iframe>
     </div>
-    <div id="content5" *ngIf="selectedBtn===5">
-      <p><b>ערכות הקלפים באתר מחולקות לקטגוריות שונות -</b>
-        קלפי תמונה, קלפי מילה, קלפי תמונה+מילה, קלפי שאלות, קלפי מסרים ועוד.<br>
-        ניתן לסמן את הקטגוריה הרצויה ולהציג רק את הקלפים מאותה הקטגוריה בעמוד כל ערכות הקלפים.
+    <div id="content5" *ngIf="selectedBtn === 5">
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p1.b" | translate }}</b>
+        {{ "pages.guide-page.content.content5.p1.text1" | translate }}<br />
+        {{ "pages.guide-page.content.content5.p1.br" | translate }}
       </p>
-      <p><b>ערכות הקלפים באתר מתעדכנות כל הזמן -</b> אנחנו מוסיפים קלפים חדשים לערכות קיימות ויוצרים שיתופי פעולה נוספים
-        עם
-        יוצרים חיצוניים כדי לשמור על חוויה מתחדשת ודינאמית לקהל לקוחותינו.
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p2.b" | translate }}</b>
+        {{ "pages.guide-page.content.content5.p2.text" | translate }}
       </p>
-      <p><b>ניתן לסמן ב - <mat-icon>favorite_border</mat-icon> - את ערכות הקלפים המועדפות עליכם</b> ובכך ליצור קטגוריית ערכות
-        קלפים מועדפות ייחודית לכם,
-        אשר תשמר
-        בעמוד "כל ערכות הקלפים" ותוצג בראש העמוד כל עוד תבחרו בכך. מיציתם ערכת קלפים מסוימת? הסירו את סימון הלב ובחרו
-        ערכת קלפים מועדפת חדשה!
+      <p>
+        <b
+          >{{ "pages.guide-page.content.content5.p3.b1" | translate }}
+          <mat-icon>favorite_border</mat-icon
+          >{{ "pages.guide-page.content.content5.p3.b2" | translate }}
+        </b>
+        {{ "pages.guide-page.content.content5.p3.text" | translate }}
       </p>
-      <p><b>קטגוריית VIP</b> מכילה את ערכות הקלפים שבחרנו עבורכם של יוצרים מבחוץ - אנחנו מציעים פתרון דיגיטלי
-        גם ליוצרי
-        ערכות קלפים מהארץ ומהעולם ובוחרים עבור הלקוחות שלנו את הערכות הטובות ביותר!
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p4.b" | translate }} </b>
+        {{ "pages.guide-page.content.content5.p4.text" | translate }}
       </p>
-      <p><b>קטגוריית 'ערכות להתנסות חופשית' -</b> גישה חופשית וחינמית לערכות קלפים נבחרות מקטגוריות שונות
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p5.b" | translate }}</b
+        >{{ "pages.guide-page.content.content5.p5.text" | translate }}
       </p>
-      <p><b>קטגוריית קלפי שאלות</b> מכילה ערכות קלפים שונות בהן תמצאו שאלות אימוניות, מקדמות, מטרתיות ומעצימות כל תהליך
-        וכל
-        מפגש.
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p6.b" | translate }}</b
+        >{{ "pages.guide-page.content.content5.p6.text" | translate }}
       </p>
-      <p><b>קטגוריית קלפי תמונה</b> בנויה על מנגנון ההשלכה אשר מאפשר למשתתף מרחב תגובה גדול ויכולת להביע את עולמו הפנימי
-        בעזרת
-        דימויים ומטאפורות שונות.
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p7.b" | translate }}</b
+        >{{ "pages.guide-page.content.content5.p7.text" | translate }}
       </p>
-      <p><b>קטגוריית קלפי מסרים</b> עוזרת להתחיל או לסיים כל מפגש עם מסר עוצמתי, לתהליך נכון של הסקת מסקנות ותובנות
-        משמעותיות.
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p8.b" | translate }}</b
+        >{{ "pages.guide-page.content.content5.p8.text" | translate }}
       </p>
-      <p><b>קטגוריית קלפי חגים</b> נוצרה מכיוון שחכמת הקבלה מלמדת אותנו שכל חג הוא שער במימד הזמן, שנפתח בתקופה מסוימת
-        בשנה
-        ומשפיע עלינו. החגים הם הזדמנות נהדרת לשלב עבודה עם קלפים!
+      <p>
+        <b> {{ "pages.guide-page.content.content5.p9.b" | translate }}</b
+        >{{ "pages.guide-page.content.content5.p9.text" | translate }}
       </p>
     </div>
-    <div id="content6" *ngIf="selectedBtn===6">
-      <span><u>מצטרפים לאחת התכניות שלנו ומקבלים -</u></span>
+    <div id="content6" *ngIf="selectedBtn === 6">
+      <span
+        ><u>{{
+          "pages.guide-page.content.content6.span1" | translate
+        }}</u></span
+      >
       <ul>
-        <li><b>ספר הדרכה צמוד לכל ערכת קלפים -</b> עשרות שאלות עוצמתיות והצעות מגוונות לעבודה.
+        <li>
+          <b>{{ "pages.guide-page.content.content6.ul.li1.b" | translate }}</b
+          >{{ "pages.guide-page.content.content6.ul.li1.text" | translate }}
         </li>
-        <li><b>שימוש בכל היכולות -</b> קלפים גלויים וסמויים, בחירת קלף באופן אקראי, ערבוב, בחירה מרובה לעבודה תהליכית
-          ועוד…
+        <li>
+          <b>{{ "pages.guide-page.content.content6.ul.li2.b" | translate }}</b
+          >{{ "pages.guide-page.content.content6.ul.li2.text" | translate }}
         </li>
-        <li><b>תוכן מתחדש ודינמי -</b> ערכות קלפים נוספות וטכניקות עבודה חדשות המתעדכנות באופן שוטף ע"י יוצרי הבית שלנו
-          ויוצרים מבחוץ.
+        <li>
+          <b>{{ "pages.guide-page.content.content6.ul.li3.b" | translate }}</b
+          >{{ "pages.guide-page.content.content6.ul.li3.text" | translate }}
         </li>
       </ul>
-      <span><u>אנחנו מציעים ללקוחותינו 3 תכניות -</u></span>
+      <span
+        ><u>{{
+          "pages.guide-page.content.content6.span2" | translate
+        }}</u></span
+      >
       <ol>
-        <li><b>תוכנית חינמית -</b> מצטרפים לקהילת המנטורים שלנו ונהנים מגישה חופשית לערכות קלפים נבחרות.
+        <li>
+          <b>{{ "pages.guide-page.content.content6.ol.li1.b" | translate }}</b
+          >{{ "pages.guide-page.content.content6.ol.li1.text" | translate }}
         </li>
-        <li><b>תוכנית חודשית -</b> מומלצת בעיקר לשימוש באירועים נקודתיים, כנסים, סדנאות קצרות, אירועים חד פעמים וכו'.
+        <li>
+          <b>{{ "pages.guide-page.content.content6.ol.li2.b" | translate }}</b
+          >{{ "pages.guide-page.content.content6.ol.li2.text" | translate }}
         </li>
-        <li><b>תכנית שנתית -</b> התכנית מומלצת לאנשים שמכירים ואוהבים לשלב קלפים כחלק מהארגז הכלים שלהם.<br> משלמים מראש
-          ל 12
-          חודשים ונהנים מ 30% הנחה!
-          התשלום מתבצע באופן חד פעמי וכל שירותי האתר פתוחים עבוריכם לשנה קדימה.
+        <li>
+          <b>{{ "pages.guide-page.content.content6.ol.li3.b" | translate }}</b
+          >{{ "pages.guide-page.content.content6.ol.li3.text" | translate }}
         </li>
       </ol>
-      <span><u>ביטולים</u></span>
-      <p>כל משתמשי האתר נהנים מגישה חופשית ללא עלות לערכות הקלפים בקטגורייה 'ערכות להתנסות חופשית', "<br>
-        בסוף תקופת התכנית, התכנית מתחדשת באופן אוטומטי לתקופה נוספת, אנחנו שולחים מייל 7 ימים לפני ביצוע החיוב מחדש.<br>
-        ניתן לבטל את החיוב האוטומטי בכל עת דרך אזור "פרטי המשתמש" באתר ולחיצה על "ביטול החיוב האוטומטי".<br>
-        לא יינתנו החזרים כספיים על תשלומים בגין תקופות חיוב חלקיות באתר.
+      <span
+        ><u>{{
+          "pages.guide-page.content.content6.span3" | translate
+        }}</u></span
+      >
+      <p>
+        {{ "pages.guide-page.content.content6.p1" | translate }}<br />
+        {{ "pages.guide-page.content.content6.p2" | translate }}<br />
+        {{ "pages.guide-page.content.content6.p3" | translate }}<br />
+        {{ "pages.guide-page.content.content6.p4" | translate }}
       </p>
     </div>
-    <div id="content7" *ngIf="selectedBtn===7">
-      <p>הצעד הראשון בהתבוננות מתחיל בעצירה.<br>
-        העצירה מאפשרת לנו לשאול את עצמנו שאלות, ולבדוק האם אנחנו בכיוון הנכון לנו.<br>
-        מתוך התבוננות תתאפשר הסקת מסקנות ובניית תוכנית פעולה קדימה.<br>
-        "קלפים מקלפים" - עוקפי מודע, עוזרים לנו להגיע לרבדים עמוקים יותר בתוכנו.<br>
-        קלפים מרחיבים את נקודת מבטנו מעבר לאזור הנוחות המוכר לנו ומציעים לנו שלל של הזדמנויות ודרכי חשיבה חדשות. ​
+    <div id="content7" *ngIf="selectedBtn === 7">
+      <p>
+        {{ "pages.guide-page.content.content7.p1" | translate }}<br />
+        {{ "pages.guide-page.content.content7.p2" | translate }}<br />
+        {{ "pages.guide-page.content.content7.p3" | translate }}<br />
+        {{ "pages.guide-page.content.content7.p4" | translate }}<br />
+        {{ "pages.guide-page.content.content7.p5" | translate }}​
       </p>
-      <span><u>עקרונות מפתח בעבודה עם קלפים</u></span>
+      <span
+        ><u>
+          {{ "pages.guide-page.content.content7.span" | translate }}​</u
+        ></span
+      >
       <ol>
-        <li>לפני כל שליפת קלף מומלץ לשאול שאלה.<br> לאחר שליפת הקלף יש לאפשר זמן לבוחר להתבוננות בקלף ולשאלה שנשאלה
-          להדהד.<br>
-          לא למהר לשאול שאלה נוספת. ​
+        <li>
+          {{ "pages.guide-page.content.content7.ol1.b" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol1.text1" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol1.text2" | translate }}​ ​
         </li>
-        <li>האמת היא בעיני בוחר הקלף ולכן כל התשובות נכונות.<br> אין תוצאה טובה או לא טובה.<br> האופן שבו בוחר הקלף
-          מתייחס
-          לקלפיו, מבטא את תפיסתו ואמונותיו האישיות.<br> נכון לאפשר לגיטימציה מלאה לבחירה ולפרשנות אישית על מנת ליצור
-          מרחב
-          בטוח.
+        <li>
+          {{ "pages.guide-page.content.content7.ol2.b" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol2.text1" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol2.text2" | translate }}​ ​<br />
+          {{ "pages.guide-page.content.content7.ol2.text3" | translate }}​
         </li>
-        <li>ספר ההדרכה המוצע לכל ערכת קלפים הוא בגדר המלצה בלבד,<br> אינו מחייב ואנו אף מעודדים אתכם, לכתוב שאלות
-          ורעיונות
-          משלכם ולכן יצרנו לכך מקום ייעודי בספר ההדרכה שבו תוכלו להקליד את הדברים טרם תחילת הפגישה ואף במהלכה. ​
+        <li>
+          {{ "pages.guide-page.content.content7.ol3.b" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol3.text1" | translate }}​ ​
         </li>
-        <li>בכל רגע נתון אפשר להוסיף או להחליף קלף.<br> לפני שמבצעים זאת מומלץ לשאול את בוחר הקלף - מה בקלף הזה יוצר בך
-          את
-          ההתנגדות?<br> מה הסיבה שלא התחברת לקלף? אין קלפים טובים או רעים. ​
+        <li>
+          {{ "pages.guide-page.content.content7.ol4.b" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol4.text1" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol4.text2" | translate }}​ ​
         </li>
-        <li>בחירת הקלפים נכונה לזמן הווה ומתארת את הפרשנות, הרגשות, ההוויה והלך הרוח של בוחר הקלף ברגע זה.<br> בזמן או
-          במצב
-          אחר, יכולה לעלות תגובה שונה.</li>
+        <li>
+          {{ "pages.guide-page.content.content7.ol7.b" | translate }}​<br />
+          {{ "pages.guide-page.content.content7.ol7.text1" | translate }}​ ​
+        </li>
       </ol>
-      <iframe class="responsive-iframe-with-text" src="https://www.youtube.com/embed/vpoUP_cUguM"
-        title="YouTube video player" frameborder="0"
+      <iframe
+        class="responsive-iframe-with-text"
+        src="https://www.youtube.com/embed/vpoUP_cUguM"
+        title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        allowfullscreen
+      ></iframe>
     </div>
-    <div id="content2" class="iframe-container" *ngIf="selectedBtn===2">
-      <iframe class="responsive-iframe" src="https://www.youtube.com/embed/tPQeujPLl-s" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+    <div id="content2" class="iframe-container" *ngIf="selectedBtn === 2">
+      <iframe
+        class="responsive-iframe"
+        src="https://www.youtube.com/embed/tPQeujPLl-s"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
-    <div id="content3" class="iframe-container" *ngIf="selectedBtn===3">
-      <iframe class="responsive-iframe" src="https://www.youtube.com/embed/D9_CAABE86Q" title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+    <div id="content3" class="iframe-container" *ngIf="selectedBtn === 3">
+      <iframe
+        class="responsive-iframe"
+        src="https://www.youtube.com/embed/D9_CAABE86Q"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
-    <div id="content8" class="iframe-container" *ngIf="selectedBtn===8">
-      
-      <p>ברגע שבחרתם ערכת קלפים לעבודה עומדים לרשותכם בחלק העליון של המסך 5 כפתורים:</p>
-      <p>  כפתור - <b>"הפוך את הקלפים" </b>- בלחיצה על הכפתור תוכלו לבחור איזה צד של הקלפים יהיה גלוי. </p>     
-      <p>  כפתור - <b> "הצג מספר קלפים"</b> - בלחיצה על הכפתור תוכלו לסמן עד 5 קלפים ולהציגם בצורה מוגדלת על המסך. </p>     
-      <p>  כפתור - <b>"ערבוב" </b>- כמו ב "עולם האמיתי", לחיצה על כפתור ערבוב משנה את סדר הקלפים. </p>
-      <p>  כפתור - <b> "הצג קלף אקראי" </b>- בלחיצה על הכפתור יבחר קלף אקראי מתוך ערכת הקלפים ויוצג בצורה מוגדלת על המסך. </p>
-      <p>  כפתור - <b> "עריכה"</b> - מאפשר הסתרה של קלפים ספציפיים. בלחיצה על הכפתור תוכלו להסתיר קלפים שאינכם מעוניינים לעבוד איתם בנקודת זמן הנוכחית. ברגע שתצאו מערכת הקלפים או תרעננו את העמוד כל הקלפים שבחרתם להסתיר יופיעו מחדש. </p>
-      <p>  כפתור - <b> "ספר ההדרכה"</b> - יפתח במסך נפרד. מכיל את תיאור ערכת הקלפים הספציפית, שאלות ורעיונות לעבודה אחד על אחד, לעבודה תהליכית ועבודה קבוצתית בחלוקה לקלפים גלויים או סמויים. </p>
-   
+    <div id="content8" class="iframe-container" *ngIf="selectedBtn === 8">
+      <p>
+        {{ "pages.guide-page.content.content8.p1" | translate }}
+      </p>
+      <p>
+        {{ "pages.guide-page.content.content8.button" | translate }}
+        <b> {{ "pages.guide-page.content.content8.p2_b" | translate }} </b>
+        {{ "pages.guide-page.content.content8.p2_text" | translate }}
+      </p>
+      <p>
+        {{ "pages.guide-page.content.content8.button" | translate }}
+        <b> {{ "pages.guide-page.content.content8.p3_b" | translate }} </b>
+        {{ "pages.guide-page.content.content8.p3_text" | translate }}
+      </p>
+      <p>
+        {{ "pages.guide-page.content.content8.button" | translate }}
+        <b> {{ "pages.guide-page.content.content8.p4_b" | translate }} </b>
+        {{ "pages.guide-page.content.content8.p4_text" | translate }}
+      </p>
+      <p>
+        {{ "pages.guide-page.content.content8.button" | translate }}
+        <b> {{ "pages.guide-page.content.content8.p5_b" | translate }} </b>
+        {{ "pages.guide-page.content.content8.p5_text" | translate }}
+      </p>
+      <p>
+        {{ "pages.guide-page.content.content8.button" | translate }}
+        <b> {{ "pages.guide-page.content.content8.p6_b" | translate }} </b>
+        {{ "pages.guide-page.content.content8.p6_text" | translate }}
+      </p>
+      <p>
+        {{ "pages.guide-page.content.content8.button" | translate }}
+        <b> {{ "pages.guide-page.content.content8.p7_b" | translate }} </b>
+        {{ "pages.guide-page.content.content8.p7_text" | translate }}
+      </p>
     </div>
   </div>
-  <img onload="this.style.opacity='1'" src="../../../assets/flowers.png" class="flower-img" alt="Decorative flowers">
+  <img
+    onload="this.style.opacity='1'"
+    src="../../../assets/flowers.png"
+    class="flower-img"
+    alt="Decorative flowers"
+  />
 </div>
 
 <div id="accordion">
   <mat-accordion>
-    <mat-expansion-panel (click)="selectedTopicChanged(1, 'מה זה מנטור - קארדס?')">
+    <mat-expansion-panel (click)="selectedTopicChanged(1, '?')">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          מה זה מנטור - קארדס? </mat-panel-title>
+        <mat-panel-title>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel1.mat-panel-title"
+            | translate
+        }}</mat-panel-title>
       </mat-expansion-panel-header>
       <p>
-        מנטור קארדס היא פלטפורמה דיגיטלית חדשנית המאפשרת למנחים, מאמנים ואנשי טיפול ממגוון תחומים, עבודה עם קלפים
-        השלכתיים
-        און ליין!<br>
-        במנטור קארדס יש מגוון עצום של ערכות קלפים, כך שניתן להתאים את ערכת הקלפים ללקוח שלכם.        <br><br>
-        תוכלו למצוא באתר גם ערכות קלפים שאנחנו יצרנו, וגם ערכות קלפים של יוצרים איכותיים מבחוץ.
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel1.p1"
+            | translate
+        }}<br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel1.p2"
+            | translate
+        }}<br /><br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel1.p3"
+            | translate
+        }}
       </p>
-      <img id="all-screens-img" src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
-        alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities">
+      <img
+        id="all-screens-img"
+        src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
+        alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
+      />
     </mat-expansion-panel>
 
     <mat-expansion-panel (click)="selectedTopicChanged(2, 'איך מתחברים לאתר?')">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          איך מתחברים לאתר? </mat-panel-title>
+        <mat-panel-title>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel2.mat-panel-title"
+            | translate
+        }}</mat-panel-title>
       </mat-expansion-panel-header>
-      <p>מצד ימין למעלה -  לחצ/י על כפתור "התחברות/הרשמה". 
-        יפתח חלון במרכז המסך ובו 2 אפשרויות: 
-        הרשמה משתמש חדש  
-        או 
-        התחברות משתמש קיים. 
-        בחר/י בהרשמה משתמש חדש ומלא/י את הפרטים או בחר בהתחברות פשוטה ומהירה  דרך גוגל. </p>
-      <iframe class="responsive-iframe-panel-mobile" src="https://www.youtube.com/embed/tPQeujPLl-s"
-        title="YouTube video player" frameborder="0"
+      <p>
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel2.text"
+            | translate
+        }}
+      </p>
+      <iframe
+        class="responsive-iframe-panel-mobile"
+        src="https://www.youtube.com/embed/tPQeujPLl-s"
+        title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        allowfullscreen
+      ></iframe>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(3, 'איך מזינים קוד הטבה?')">
+    <mat-expansion-panel
+      (click)="selectedTopicChanged(3, 'איך מזינים קוד הטבה?')"
+    >
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          איך מזינים קוד הטבה?
-        </mat-panel-title>
+        <mat-panel-title>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel3.mat-panel-title"
+            | translate
+        }}</mat-panel-title>
       </mat-expansion-panel-header>
-      <p>על מנת להזין קוד הטבה, יש לבצע התחברות / הרשמה לאתר. 
-        בעמוד "כל ערכות הקלפים" מצד ימין למעלה יש כפתור בולט בצבע כתום שכתוב עליו 
-        "יש לך קוד הטבה?". 
-        לחיצה על הכפתור פותחת חלון קטן בו מזינים את קוד ההטבה שקיבלת.
-         לחיצה על "אישור" וזהו, קיבלת את ההטבה! </p>
-      <iframe class="responsive-iframe-panel-mobile" src="https://www.youtube.com/embed/D9_CAABE86Q"
-        title="YouTube video player" frameborder="0"
+      <p>
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel3.text"
+            | translate
+        }}
+      </p>
+      <iframe
+        class="responsive-iframe-panel-mobile"
+        src="https://www.youtube.com/embed/D9_CAABE86Q"
+        title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        allowfullscreen
+      ></iframe>
     </mat-expansion-panel>
 
     <mat-expansion-panel (click)="selectedTopicChanged(4, 'ספרי ההדרכה שלנו')">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          ספרי ההדרכה שלנו
-        </mat-panel-title>
+        <mat-panel-title>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.mat-panel-title"
+            | translate
+        }}</mat-panel-title>
       </mat-expansion-panel-header>
       <p>
-        כל ערכת קלפים באתר מגיעה עם ספר הדרכה ייחודי עבורה.<br>
-        לשימוש בספר ההדרכה יש לבחור ערכת קלפים וללחוץ על כפתור "ספר ההדרכה" הנמצא במרכז העמוד.<br>
-        ספרי ההדרכה מכילים עשרות שאלות ורעיונות להפעלות שונות לשימוש בערכת הקלפים הנבחרת - <br>בחלוקה לנושאים הבאים:
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p1_1"
+            | translate
+        }}<br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p1_2"
+            | translate
+        }}<br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p1_3"
+            | translate
+        }}
+        <br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p1_4"
+            | translate
+        }}
       </p>
       <ul>
-        <li>הצעות לעבודה אחד על אחד
+        <li>
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ul.li1"
+              | translate
+          }}
         </li>
-        <li>הצעות לעבודה עם יותר מקלף אחד - עבודה תהליכית
+        <li>
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ul.li2"
+              | translate
+          }}
         </li>
-        <li>הצעות לעבודה בקבוצות
+        <li>
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ul.li3"
+              | translate
+          }}
         </li>
-        <li>הצעות לעבודה עם קלפי מילה (בערכות קלפי מילה)
+        <li>
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ul.li4"
+              | translate
+          }}
         </li>
       </ul>
       <p>
-        כמו כן, קיימת חלוקה לשאלות כשהקלפים במצב גלוי או סמוי
-        (לכל אחת מהשיטות יתרונותיה הייחודים).
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p2_1"
+            | translate
+        }}
       </p>
-      <h1>איך משתמשים בספר ההדרכה בזמן מפגש?</h1>
-      <p>ממשק ספר ההדרכה בנוי בצורה חכמה המאפשרת רק לכם לצפות בשאלות וברעיונות בחלון עבודה נפרד כך שהמשתתף<br> יצפה
-        בערכת
-        הקלפים בלבד ולא בספר עצמו.<br>
-        הדבר מאפשר לכם, המנחים, עבודה נוחה מול ספר ההדרכה בזמן המפגש וכתיבת הערות בספר עצמו תוך כדי המפגש.<br>
-        אין צורך
-        לשנן או לזכור את השאלות, הכל מופיע לכם מול העיניים כל הזמן!
+      <h1>
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.h1"
+            | translate
+        }}
+      </h1>
+      <p>
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p3_1"
+            | translate
+        }}<br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p3_2"
+            | translate
+        }}<br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p3_3"
+            | translate
+        }}<br />
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p3_4"
+            | translate
+        }}
       </p>
-      <p style="font-weight: bold;"> ​​ הוראות לשימוש בתוכנת ZOOM
-        (יש אפשרויות דומות בתוכנות וידאו אחרות כמו: Skype, Teams ועוד):</p>
+      <p style="font-weight: bold">
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.p_bold"
+            | translate
+        }}
+      </p>
       <ol>
         <li>
-          בעמוד "כל ערכות הקלפים", בחרו את ערכת הקלפים בה תרצו להשתמש.
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ol.li1"
+              | translate
+          }}
         </li>
         <li>
-          לחצו על כפתור "ספר הדרכה" אשר נמצא בצידו השמאלי העליון של דף זה.
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ol.li2"
+              | translate
+          }}
         </li>
         <li>
-          בתוכנת הZOOM ללחוץ על כפתור ה - “SHARE” אשר נמצא במרכז אפליקציית הZOOM ובחלקה התחתון.
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ol.li3"
+              | translate
+          }}
         </li>
         <li>
-          יש לבחור בשיתוף מסך עבור הדפדפן שלכם בו מוצגת ערכת הקלפים. שימו לב כי אפשרות ברירת המחדל היא
-          להציג
-          את כל המסך ואיננו רוצים זאת, אלא רק את הדפדפן שלכם.
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.ol.li4"
+              | translate
+          }}
         </li>
       </ol>
-      <img onload="this.style.opacity='1'" src="../../../assets/Share Mentor Cards.png" class="screen-share-img"
-        alt="Screen shot, explaining how to share the site properly and use the guide book at the same time">
-      <iframe class="responsive-iframe-with-text" src="https://www.youtube.com/embed/mcRuLFQv-qE"
-        title="YouTube video player" frameborder="0"
+      <img
+        onload="this.style.opacity='1'"
+        src="../../../assets/Share Mentor Cards.png"
+        class="screen-share-img"
+        alt="Screen shot, explaining how to share the site properly and use the guide book at the same time"
+      />
+      <iframe
+        class="responsive-iframe-with-text"
+        src="https://www.youtube.com/embed/mcRuLFQv-qE"
+        title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+        allowfullscreen
+      ></iframe>
     </mat-expansion-panel>
 
     <mat-expansion-panel (click)="selectedTopicChanged(5, 'ערכות הקלפים שלנו')">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          ערכות הקלפים שלנו </mat-panel-title>
+        <mat-panel-title>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.mat-panel-title"
+            | translate
+        }}</mat-panel-title>
       </mat-expansion-panel-header>
-      <p><b>ערכות הקלפים באתר מחולקות לקטגוריות שונות -</b>
-        קלפי תמונה, קלפי מילה, קלפי תמונה+מילה, קלפי שאלות, קלפי מסרים ועוד.<br>
-        ניתן לסמן את הקטגוריה הרצויה ולהציג רק את הקלפים מאותה הקטגוריה בעמוד כל ערכות הקלפים.
+      <p>
+        <b>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p1_1_b"
+            | translate
+        }}</b>
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p1_1"
+            | translate
+        }}<br />{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p1_2"
+            | translate
+        }}
       </p>
-      <p><b>ערכות הקלפים באתר מתעדכנות כל הזמן -</b> אנחנו מוסיפים קלפים חדשים לערכות קיימות ויוצרים שיתופי פעולה נוספים
-        עם
-        יוצרים חיצוניים כדי לשמור על חוויה מתחדשת ודינאמית לקהל לקוחותינו.
+      <p>
+        <b>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p2_1_b"
+            | translate
+        }}</b>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p2_1"
+            | translate
+        }}
       </p>
-      <p><b>ניתן לסמן ב - <mat-icon>favorite_border</mat-icon> -</b> את ערכות הקלפים המועדפות עליכם ובכך ליצור קטגוריית ערכות
-        קלפים מועדפות ייחודית לכם, אשר תשמר
-        בעמוד "כל ערכות הקלפים" ותוצג בראש העמוד כל עוד תבחרו בכך. מיציתם ערכת קלפים מסוימת? הסירו את סימון הלב ובחרו
-        ערכת קלפים מועדפת חדשה!
+      <p>
+        <b>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p3_1_b"
+            | translate
+        }}<mat-icon>favorite_border</mat-icon> -</b> {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p3"
+            | translate
+        }}
       </p>
-      <p><b>קטגוריית VIP מכילה את ערכות הקלפים שבחרנו עבורכם של יוצרים מבחוץ -</b> אנחנו מציעים פתרון דיגיטלי גם
-        ליוצרי
-        ערכות קלפים מהארץ ומהעולם ובוחרים עבור הלקוחות שלנו את הערכות הטובות ביותר!
+      <p>
+        <b>{{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p4_1_b"
+            | translate
+        }}
+          </b>
+          {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p4_1"
+              | translate
+          }} </p>
+      <p>
+        <b> {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p5_1_b"
+            | translate
+        }}</b>  {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p5_1"
+            | translate
+        }} </p>
+        <p>
+          <b> {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p6_1_b"
+              | translate
+          }}</b>  {{
+            "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p6_1"
+              | translate
+          }} </p>
+          <p>
+            <b> {{
+              "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p7_1_b"
+                | translate
+            }}</b>  {{
+              "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p7_1"
+                | translate
+            }} </p>
+            <p>
+              <b> {{
+                "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p8_1_b"
+                  | translate
+              }}</b>  {{
+                "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p8_1"
+                  | translate
+              }} </p>
+              <p>
+                <b> {{
+                  "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p9_1_b"
+                    | translate
+                }}</b>  {{
+                  "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p9_1"
+                    | translate
+                }} </p>
+      <p>
+        {{
+          "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.p10_1"
+            | translate
+        }}
       </p>
-      <p><b>קטגוריית 'ערכות להתנסות חופשית' -</b> גישה חופשית וחינמית לערכות קלפים נבחרות מקטגוריות שונות
-      </p>
-      <p><b>קטגוריית קלפי שאלות</b> מכילה ערכות קלפים שונות בהן תמצאו שאלות אימוניות, מקדמות, מטרתיות ומעצימות כל תהליך
-        וכל
-        מפגש.
-      </p>
-      <p><b>קטגוריית קלפי תמונה</b> בנויה על מנגנון ההשלכה אשר מאפשר למשתתף מרחב תגובה גדול ויכולת להביע את עולמו הפנימי
-        בעזרת
-        דימויים ומטאפורות שונות.
-      </p>
-      <p><b>קטגוריית קלפי מסרים</b> עוזרת להתחיל או לסיים כל מפגש עם מסר עוצמתי, לתהליך נכון של הסקת מסקנות ותובנות
-        משמעותיות.
-      </p>
-      <p><b>קטגוריית קלפי חגים</b> נוצרה מכיוון שחכמת הקבלה מלמדת אותנו שכל חג הוא שער במימד הזמן, שנפתח בתקופה מסוימת
-        בשנה
-        ומשפיע עלינו. החגים הם הזדמנות נהדרת לשלב עבודה עם קלפים!
-      </p>
-      <p>קטגוריית VIP מכילה את ערכות הקלפים שבחרנו עבורכם של יוצרים מבחוץ - אנחנו מציעים פתרון דיגיטלי גם ליוצרי ערכות קלפים מהארץ ומהעולם ובוחרים עבור הלקוחות שלנו את הערכות הטובות ביותר! 
-        שימוש בערכות הקלפים בקטגוריה זו בתשלום נוסף.</p>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(6, 'תכניות, מחירים וביטולים')">
+    <mat-expansion-panel
+      (click)="selectedTopicChanged(6, 'תכניות, מחירים וביטולים')"
+    >
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          תכניות, מחירים וביטולים </mat-panel-title>
+        <mat-panel-title>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.mat_expansion_panel_header.mat_panel_title"| translate }} </mat-panel-title>
       </mat-expansion-panel-header>
-      <span><u>מצטרפים לאחת התכניות שלנו ומקבלים -</u></span>
+      <span><u>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.join_our_plans"| translate }} </u></span>
       <ul>
-        <li><b>גישה מלאה ללא הגבלה -</b> נהנים מכל ערכות הקלפים באתר.</li>
-        <li><b>ספר הדרכה צמוד לכל ערכת קלפים -</b> עשרות שאלות עוצמתיות והצעות מגוונות לעבודה.
-        </li>
-        <li><b>שימוש בכל היכולות -</b> קלפים גלויים וסמויים, בחירת קלף באופן אקראי, ערבוב, בחירה מרובה לעבודה תהליכית
-          ועוד…
-        </li>
-        <li><b>תוכן מתחדש ודינמי -</b> ערכות קלפים נוספות וטכניקות עבודה חדשות המתעדכנות באופן שוטף ע"י יוצרי הבית שלנו
-          ויוצרים מבחוץ.
-        </li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.full_access.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.full_access.normal"| translate }} </li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.guide_book.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.guide_book.normal"| translate }} </li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.all_capabilities.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.all_capabilities.normal"| translate }} </li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.dynamic_content.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.dynamic_content.normal"| translate }} </li>
       </ul>
-      <span><u>אנחנו מציעים ללקוחותינו 3 תכניות -</u></span>
-      <ol><li><b>תוכנית חינמית -</b> מקנה שימוש בערכות תחת 'ערכות להתנסות חופשית'. 
-      </li>
-        <li><b>תוכנית חודשית -</b> מקנה שימוש בערכות קלפי הבית למשך חודש ימים. 
-        </li>
-        <li><b>תכנית שנתית -</b>
-          משלמים מראש ל 12 חודשים ונהנים מהנחה במחיר! משלמים מראש. 
-        </li>
-        <li><b>ערכות VIP -</b>
-          ערכות קלפים איכותיות של יוצרים מבחוץ. כל ערכת קלפים ניתנת לרכישה בתכנית חודשית או שנתית בהתאם למחיר הנקבע ע"י יוצר ערכת הקלפים. 
-לקוחות Mentor-Cards נהנים ממחיר קבוע ומיוחד החל מ - 9.9 ש"ח לחודש.  
-        </li>
-      </ol>
-      <span><u>ביטולים</u></span>
-      <p>כל משתמשי האתר נהנים מתקופת ניסיון טרם בחירת התכנית.<br>
-        בסוף תקופת התכנית, התכנית מתחדשת באופן אוטומטי לתקופה נוספת, אנחנו שולחים מייל 7 ימים לפני ביצוע החיוב מחדש.<br>
-        ניתן לבטל את החיוב האוטומטי בכל עת דרך אזור "פרטי המשתמש" באתר ולחיצה על "ביטול החיוב האוטומטי".<br>
-        לא יינתנו החזרים כספיים על תשלומים בגין תקופות חיוב חלקיות באתר.
-      </p>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel (click)="selectedTopicChanged(7, 'עקרונות מפתח בעבודה עם קלפים')">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          עקרונות מפתח בעבודה עם קלפים </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p>הצעד הראשון בהתבוננות מתחיל בעצירה.<br>
-        העצירה מאפשרת לנו לשאול את עצמנו שאלות, ולבדוק האם אנחנו בכיוון הנכון לנו.<br>
-        מתוך התבוננות תתאפשר הסקת מסקנות ובניית תוכנית פעולה קדימה.<br>
-        "קלפים מקלפים" - עוקפי מודע, עוזרים לנו להגיע לרבדים עמוקים יותר בתוכנו.<br>
-        קלפים מרחיבים את נקודת מבטנו מעבר לאזור הנוחות המוכר לנו ומציעים לנו שלל של הזדמנויות ודרכי חשיבה חדשות. ​
-      </p>
-      <span><u>עקרונות מפתח בעבודה עם קלפים</u></span>
+      <span><u>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.we_offer"| translate }}</u></span>
       <ol>
-        <li>לפני כל שליפת קלף מומלץ לשאול שאלה.<br> לאחר שליפת הקלף יש לאפשר זמן לבוחר להתבוננות בקלף ולשאלה שנשאלה
-          להדהד.<br>
-          לא למהר לשאול שאלה נוספת. ​
-        </li>
-        <li>האמת היא בעיני בוחר הקלף ולכן כל התשובות נכונות.<br> אין תוצאה טובה או לא טובה.<br> האופן שבו בוחר הקלף
-          מתייחס
-          לקלפיו, מבטא את תפיסתו ואמונותיו האישיות.<br> נכון לאפשר לגיטימציה מלאה לבחירה ולפרשנות אישית על מנת ליצור
-          מרחב
-          בטוח.
-        </li>
-        <li>ספר ההדרכה המוצע לכל ערכת קלפים הוא בגדר המלצה בלבד,<br> אינו מחייב ואנו אף מעודדים אתכם, לכתוב שאלות
-          ורעיונות
-          משלכם ולכן יצרנו לכך מקום ייעודי בספר ההדרכה שבו תוכלו להקליד את הדברים טרם תחילת הפגישה ואף במהלכה. ​
-        </li>
-        <li>בכל רגע נתון אפשר להוסיף או להחליף קלף.<br> לפני שמבצעים זאת מומלץ לשאול את בוחר הקלף - מה בקלף הזה יוצר בך
-          את
-          ההתנגדות?<br> מה הסיבה שלא התחברת לקלף? אין קלפים טובים או רעים. ​
-        </li>
-        <li>בחירת הקלפים נכונה לזמן הווה ומתארת את הפרשנות, הרגשות, ההוויה והלך הרוח של בוחר הקלף ברגע זה.<br> בזמן או
-          במצב
-          אחר, יכולה לעלות תגובה שונה.</li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.free_plan.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.free_plan.normal"| translate }} </li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.monthly_plan.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.monthly_plan.normal"| translate }} </li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.annual_plan.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.annual_plan.normal"| translate }} </li>
+        <li><b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.vip_plan.bold"| translate }} </b>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.vip_plan.normal"| translate }} </li>
       </ol>
-      <iframe style="margin-bottom: 5%;" class="responsive-iframe-panel-mobile"
-        src="https://www.youtube.com/embed/vpoUP_cUguM" title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+      <span><u>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.cancellations"| translate }}</u></span>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.cancellation_policy.part1"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.cancellation_policy.part2"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.cancellation_policy.part3"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.cancellation_policy.part4"| translate }}
+      </p>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(8, 'איך עובדים עם ערכת קלפים דיגיטלית?')">
+    <mat-expansion-panel
+      (click)="selectedTopicChanged(7, 'עקרונות מפתח בעבודה עם קלפים')"
+    >
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          איך עובדים עם ערכת קלפים דיגיטלית? </mat-panel-title>
+        <mat-panel-title>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.mat_expansion_panel_header.mat_panel_title"| translate }}</mat-panel-title>
       </mat-expansion-panel-header>
-      <p>ברגע שבחרתם ערכת קלפים לעבודה עומדים לרשותכם בחלק העליון של המסך 5 כפתורים:</p>
-      <p>  כפתור - <b>"הפוך את הקלפים" </b>- בלחיצה על הכפתור תוכלו לבחור איזה צד של הקלפים יהיה גלוי. </p>     
-      <p>  כפתור - <b> "הצג מספר קלפים"</b> - בלחיצה על הכפתור תוכלו לסמן עד 5 קלפים ולהציגם בצורה מוגדלת על המסך. </p>     
-      <p>  כפתור - <b>"ערבוב" </b>- כמו ב "עולם האמיתי", לחיצה על כפתור ערבוב משנה את סדר הקלפים. </p>
-      <p>  כפתור - <b> "הצג קלף אקראי" </b>- בלחיצה על הכפתור יבחר קלף אקראי מתוך ערכת הקלפים ויוצג בצורה מוגדלת על המסך. </p>
-      <p>  כפתור - <b> "עריכה"</b> - מאפשר הסתרה של קלפים ספציפיים. בלחיצה על הכפתור תוכלו להסתיר קלפים שאינכם מעוניינים לעבוד איתם בנקודת זמן הנוכחית. ברגע שתצאו מערכת הקלפים או תרעננו את העמוד כל הקלפים שבחרתם להסתיר יופיעו מחדש. </p>
-      <p>  כפתור - <b> "ספר ההדרכה"</b> - יפתח במסך נפרד. מכיל את תיאור ערכת הקלפים הספציפית, שאלות ורעיונות לעבודה אחד על אחד, לעבודה תהליכית ועבודה קבוצתית בחלוקה לקלפים גלויים או סמויים. </p>
-   </mat-expansion-panel>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.first_step.part1"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.first_step.part2"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.first_step.part3"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.first_step.part4"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.first_step.part5"| translate }}​
+      </p>
+      <span><u>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.key_principles"| translate }}</u></span>
+      <ol>
+        <li>
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle1.part1"| translate }}<br />
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle1.part2"| translate }}<br />
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle1.part3"| translate }}​​
+        </li>
+        <li>
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle2.part1"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle2.part2"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle2.part3"| translate }}<br />
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle2.part4"| translate }}​
+        </li>
+        <li>
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle3.part1"| translate }}<br />
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle3.part2"| translate }}​​​
+        </li>
+        <li>
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle4.part1"| translate }}<br />
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle4.part2"| translate }}<br />
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle4.part3"| translate }}​​
+      ​
+        </li>
+        <li>
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle5.part1"| translate }}<br />
+          {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.principle5.part2"| translate }}​​​
+    
+        </li>
+      </ol>
+      <iframe
+        style="margin-bottom: 5%"
+        class="responsive-iframe-panel-mobile"
+        src="https://www.youtube.com/embed/vpoUP_cUguM"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      (click)="selectedTopicChanged(8, 'איך עובדים עם ערכת קלפים דיגיטלית?')"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.mat_expansion_panel_header.mat_panel_title"| translate }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>
+       {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.first_step"| translate }}
+      </p>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.button"| translate }} <b>"   {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.flip_cards_button.bold"| translate }}   "   </b>  {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.flip_cards_button.normal"| translate }}  
+      </p>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.button"| translate }} <b>"   {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.display_number_cards_button.bold"| translate }}   "   </b>  {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.display_number_cards_button.normal"| translate }}  
+      </p>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.button"| translate }} <b>"   {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.shuffle_button.bold"| translate }}   "   </b>  {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.shuffle_button.normal"| translate }}  
+      </p>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.button"| translate }} <b>"   {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.display_random_card_button.bold"| translate }}   "   </b>  {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.display_random_card_button.normal"| translate }}  
+      </p>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.button"| translate }} <b>"   {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.edit_button.bold"| translate }}   "   </b>  {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.edit_button.normal"| translate }}  
+      </p>
+      <p>
+        {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.button"| translate }} <b>"   {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.guidebook_button.bold"| translate }}   "   </b>  {{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.guidebook_button.normal"| translate }}  
+      </p>
+    </mat-expansion-panel>
   </mat-accordion>
 </div>
 
