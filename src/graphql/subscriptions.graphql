@@ -1,4 +1,79 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateAffiliate($contactEmail: String) {
+  onCreateAffiliate(contactEmail: $contactEmail) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateAffiliate($contactEmail: String) {
+  onUpdateAffiliate(contactEmail: $contactEmail) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteAffiliate($contactEmail: String) {
+  onDeleteAffiliate(contactEmail: $contactEmail) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateCouponCodes {
   onCreateCouponCodes {
     id

@@ -13,6 +13,9 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
+  onCreateAffiliate: OnCreateAffiliateSubscription;
+  onUpdateAffiliate: OnUpdateAffiliateSubscription;
+  onDeleteAffiliate: OnDeleteAffiliateSubscription;
   onCreateCouponCodes: OnCreateCouponCodesSubscription;
   onUpdateCouponCodes: OnUpdateCouponCodesSubscription;
   onDeleteCouponCodes: OnDeleteCouponCodesSubscription;
@@ -53,8 +56,9 @@ export type CreateUserInput = {
   email?: string | null;
   phone?: string | null;
   fullName?: string | null;
+  affiliateId?: string | null;
   userOrgMembershipId?: string | null;
-  refId?: string | null;
+  userMyAffiliateId?: string | null;
 };
 
 export type User = {
@@ -86,6 +90,8 @@ export type User = {
   entries?: number | null;
   externalPacksSubscriptions?: Array<MonthlySubscription | null> | null;
   entryDates?: Array<string | null> | null;
+  refId?: string | null;
+  myAffiliate?: Affiliate | null;
 };
 
 export type MonthlySubscription = {
@@ -194,6 +200,34 @@ export type CouponCodes = {
   updatedAt: string;
 };
 
+export type Affiliate = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<Withdraw | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Withdraw = {
+  __typename: "Withdraw";
+  id: string;
+  date?: string | null;
+  amount?: number | null;
+  currency?: string | null;
+  paymentWay?: string | null;
+  transactionId?: string | null;
+};
+
 export type addCardsPackInput = {
   cardsPackId?: string | null;
 };
@@ -248,36 +282,46 @@ export type cardPackIdInput = {
   cardsPackId?: number | null;
 };
 
-export type CreateSubscriptionPlanInput = {
+export type CreateAffiliateInput = {
   id?: string | null;
-  name?: string | null;
-  description?: string | null;
-  providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  billingCycleInMonths?: number | null;
-  fullPrice?: number | null;
-  discount?: number | null;
-  subscriptionProviderPlanId?: string | null;
-  subscriptionPlanOrgMembershipId?: string | null;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<WithdrawInput | null> | null;
 };
 
-export type ModelSubscriptionPlanConditionInput = {
-  name?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  providerPlanId?: ModelStringInput | null;
-  numberOfUsers?: ModelIntInput | null;
-  numberOfCardPacks?: ModelIntInput | null;
-  billingCycleInMonths?: ModelIntInput | null;
-  fullPrice?: ModelFloatInput | null;
-  discount?: ModelFloatInput | null;
-  subscriptionProviderPlanId?: ModelStringInput | null;
-  and?: Array<ModelSubscriptionPlanConditionInput | null> | null;
-  or?: Array<ModelSubscriptionPlanConditionInput | null> | null;
-  not?: ModelSubscriptionPlanConditionInput | null;
+export type WithdrawInput = {
+  id: string;
+  date?: string | null;
+  amount?: number | null;
+  currency?: string | null;
+  paymentWay?: string | null;
+  transactionId?: string | null;
 };
 
-export type ModelStringInput = {
+export type ModelAffiliateConditionInput = {
+  affiliateID?: ModelIDInput | null;
+  affiliateUrl?: ModelStringInput | null;
+  phoneNumber?: ModelStringInput | null;
+  websiteURL?: ModelStringInput | null;
+  paymentDetails?: ModelStringInput | null;
+  commissionPercentage?: ModelFloatInput | null;
+  dateJoined?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  balance?: ModelFloatInput | null;
+  and?: Array<ModelAffiliateConditionInput | null> | null;
+  or?: Array<ModelAffiliateConditionInput | null> | null;
+  not?: ModelAffiliateConditionInput | null;
+};
+
+export type ModelIDInput = {
   ne?: string | null;
   eq?: string | null;
   le?: string | null;
@@ -316,7 +360,23 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type ModelIntInput = {
+export type ModelStringInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export type ModelFloatInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -328,7 +388,55 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
-export type ModelFloatInput = {
+export type UpdateAffiliateInput = {
+  id: string;
+  affiliateID?: string | null;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<WithdrawInput | null> | null;
+};
+
+export type DeleteAffiliateInput = {
+  id: string;
+};
+
+export type CreateSubscriptionPlanInput = {
+  id?: string | null;
+  name?: string | null;
+  description?: string | null;
+  providerPlanId: string;
+  numberOfUsers?: number | null;
+  numberOfCardPacks?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
+  discount?: number | null;
+  subscriptionProviderPlanId?: string | null;
+  subscriptionPlanOrgMembershipId?: string | null;
+};
+
+export type ModelSubscriptionPlanConditionInput = {
+  name?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  providerPlanId?: ModelStringInput | null;
+  numberOfUsers?: ModelIntInput | null;
+  numberOfCardPacks?: ModelIntInput | null;
+  billingCycleInMonths?: ModelIntInput | null;
+  fullPrice?: ModelFloatInput | null;
+  discount?: ModelFloatInput | null;
+  subscriptionProviderPlanId?: ModelStringInput | null;
+  and?: Array<ModelSubscriptionPlanConditionInput | null> | null;
+  or?: Array<ModelSubscriptionPlanConditionInput | null> | null;
+  not?: ModelSubscriptionPlanConditionInput | null;
+};
+
+export type ModelIntInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -852,30 +960,37 @@ export type ModelUserFilterInput = {
   favouritePacks?: ModelIntInput | null;
   entries?: ModelIntInput | null;
   entryDates?: ModelStringInput | null;
+  refId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
 };
 
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
 export type ModelUserConnection = {
   __typename: "ModelUserConnection";
   items: Array<User | null>;
+  nextToken?: string | null;
+};
+
+export type ModelAffiliateFilterInput = {
+  affiliateID?: ModelIDInput | null;
+  affiliateUrl?: ModelStringInput | null;
+  contactEmail?: ModelStringInput | null;
+  phoneNumber?: ModelStringInput | null;
+  websiteURL?: ModelStringInput | null;
+  paymentDetails?: ModelStringInput | null;
+  commissionPercentage?: ModelFloatInput | null;
+  dateJoined?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  balance?: ModelFloatInput | null;
+  and?: Array<ModelAffiliateFilterInput | null> | null;
+  or?: Array<ModelAffiliateFilterInput | null> | null;
+  not?: ModelAffiliateFilterInput | null;
+};
+
+export type ModelAffiliateConnection = {
+  __typename: "ModelAffiliateConnection";
+  items: Array<Affiliate | null>;
   nextToken?: string | null;
 };
 
@@ -1379,6 +1494,32 @@ export type CreateUserMutation = {
     nextBillingDate?: string | null;
   } | null> | null;
   entryDates?: Array<string | null> | null;
+  refId?: string | null;
+  myAffiliate?: {
+    __typename: "Affiliate";
+    id: string;
+    affiliateID: string;
+    affiliateUrl?: string | null;
+    contactEmail?: string | null;
+    phoneNumber?: string | null;
+    websiteURL?: string | null;
+    paymentDetails?: string | null;
+    commissionPercentage?: number | null;
+    dateJoined?: string | null;
+    status?: string | null;
+    balance?: number | null;
+    withdraws?: Array<{
+      __typename: "Withdraw";
+      id: string;
+      date?: string | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type AddCouponCodeMutation = {
@@ -1415,6 +1556,84 @@ export type GetSubscriptionPlansMutation = {
     updatedAt: string;
   } | null;
   subscriptionProviderPlanId?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateAffiliateMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateAffiliateMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteAffiliateMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2643,6 +2862,32 @@ export type GetUserQuery = {
     nextBillingDate?: string | null;
   } | null> | null;
   entryDates?: Array<string | null> | null;
+  refId?: string | null;
+  myAffiliate?: {
+    __typename: "Affiliate";
+    id: string;
+    affiliateID: string;
+    affiliateUrl?: string | null;
+    contactEmail?: string | null;
+    phoneNumber?: string | null;
+    websiteURL?: string | null;
+    paymentDetails?: string | null;
+    commissionPercentage?: number | null;
+    dateJoined?: string | null;
+    status?: string | null;
+    balance?: number | null;
+    withdraws?: Array<{
+      __typename: "Withdraw";
+      id: string;
+      date?: string | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
 };
 
 export type ListUsersQuery = {
@@ -2960,6 +3205,88 @@ export type ListUsersQuery = {
       nextBillingDate?: string | null;
     } | null> | null;
     entryDates?: Array<string | null> | null;
+    refId?: string | null;
+    myAffiliate?: {
+      __typename: "Affiliate";
+      id: string;
+      affiliateID: string;
+      affiliateUrl?: string | null;
+      contactEmail?: string | null;
+      phoneNumber?: string | null;
+      websiteURL?: string | null;
+      paymentDetails?: string | null;
+      commissionPercentage?: number | null;
+      dateJoined?: string | null;
+      status?: string | null;
+      balance?: number | null;
+      withdraws?: Array<{
+        __typename: "Withdraw";
+        id: string;
+        date?: string | null;
+        amount?: number | null;
+        currency?: string | null;
+        paymentWay?: string | null;
+        transactionId?: string | null;
+      } | null> | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetAffiliateQuery = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListAffiliatesQuery = {
+  __typename: "ModelAffiliateConnection";
+  items: Array<{
+    __typename: "Affiliate";
+    id: string;
+    affiliateID: string;
+    affiliateUrl?: string | null;
+    contactEmail?: string | null;
+    phoneNumber?: string | null;
+    websiteURL?: string | null;
+    paymentDetails?: string | null;
+    commissionPercentage?: number | null;
+    dateJoined?: string | null;
+    status?: string | null;
+    balance?: number | null;
+    withdraws?: Array<{
+      __typename: "Withdraw";
+      id: string;
+      date?: string | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+    createdAt: string;
+    updatedAt: string;
   } | null>;
   nextToken?: string | null;
 };
@@ -3538,6 +3865,84 @@ export type ListContactUsModelsQuery = {
     updatedAt: string;
   } | null>;
   nextToken?: string | null;
+};
+
+export type OnCreateAffiliateSubscription = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateAffiliateSubscription = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteAffiliateSubscription = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnCreateCouponCodesSubscription = {
@@ -4770,6 +5175,32 @@ export class APIService {
             nextBillingDate
           }
           entryDates
+          refId
+          myAffiliate {
+            __typename
+            id
+            affiliateID
+            affiliateUrl
+            contactEmail
+            phoneNumber
+            websiteURL
+            paymentDetails
+            commissionPercentage
+            dateJoined
+            status
+            balance
+            withdraws {
+              __typename
+              id
+              date
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -4887,7 +5318,7 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
   }
-  async GetSubscriptionPlansForOrgs(
+async GetSubscriptionPlansForOrgs(
     input: userInput
   ): Promise<Array<GetSubscriptionPlansMutation>> {
     const statement = `mutation GetSubscriptionPlans($input: userInput!) {
@@ -4964,9 +5395,7 @@ export class APIService {
       input
     };
     const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+      graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <Array<GetSubscriptionPlansMutation>>(
       response.data.GetSubscriptionPlans
@@ -5009,6 +5438,132 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.IncrementPackEntries;
+  }
+  async CreateAffiliate(
+    input: CreateAffiliateInput,
+    condition?: ModelAffiliateConditionInput
+  ): Promise<CreateAffiliateMutation> {
+    const statement = `mutation CreateAffiliate($input: CreateAffiliateInput!, $condition: ModelAffiliateConditionInput) {
+        createAffiliate(input: $input, condition: $condition) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateAffiliateMutation>response.data.createAffiliate;
+  }
+  async UpdateAffiliate(
+    input: UpdateAffiliateInput,
+    condition?: ModelAffiliateConditionInput
+  ): Promise<UpdateAffiliateMutation> {
+    const statement = `mutation UpdateAffiliate($input: UpdateAffiliateInput!, $condition: ModelAffiliateConditionInput) {
+        updateAffiliate(input: $input, condition: $condition) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateAffiliateMutation>response.data.updateAffiliate;
+  }
+  async DeleteAffiliate(
+    input: DeleteAffiliateInput,
+    condition?: ModelAffiliateConditionInput
+  ): Promise<DeleteAffiliateMutation> {
+    const statement = `mutation DeleteAffiliate($input: DeleteAffiliateInput!, $condition: ModelAffiliateConditionInput) {
+        deleteAffiliate(input: $input, condition: $condition) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteAffiliateMutation>response.data.deleteAffiliate;
   }
   async CreateSubscriptionPlan(
     input: CreateSubscriptionPlanInput,
@@ -6772,6 +7327,32 @@ export class APIService {
             nextBillingDate
           }
           entryDates
+          refId
+          myAffiliate {
+            __typename
+            id
+            affiliateID
+            affiliateUrl
+            contactEmail
+            phoneNumber
+            websiteURL
+            paymentDetails
+            commissionPercentage
+            dateJoined
+            status
+            balance
+            withdraws {
+              __typename
+              id
+              date
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
+            createdAt
+            updatedAt
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -7103,6 +7684,32 @@ export class APIService {
               nextBillingDate
             }
             entryDates
+            refId
+            myAffiliate {
+              __typename
+              id
+              affiliateID
+              affiliateUrl
+              contactEmail
+              phoneNumber
+              websiteURL
+              paymentDetails
+              commissionPercentage
+              dateJoined
+              status
+              balance
+              withdraws {
+                __typename
+                id
+                date
+                amount
+                currency
+                paymentWay
+                transactionId
+              }
+              createdAt
+              updatedAt
+            }
           }
           nextToken
         }
@@ -7121,6 +7728,93 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
+  }
+  async GetAffiliate(id: string): Promise<GetAffiliateQuery> {
+    const statement = `query GetAffiliate($id: ID!) {
+        getAffiliate(id: $id) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetAffiliateQuery>response.data.getAffiliate;
+  }
+  async ListAffiliates(
+    filter?: ModelAffiliateFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListAffiliatesQuery> {
+    const statement = `query ListAffiliates($filter: ModelAffiliateFilterInput, $limit: Int, $nextToken: String) {
+        listAffiliates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            affiliateID
+            affiliateUrl
+            contactEmail
+            phoneNumber
+            websiteURL
+            paymentDetails
+            commissionPercentage
+            dateJoined
+            status
+            balance
+            withdraws {
+              __typename
+              id
+              date
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListAffiliatesQuery>response.data.listAffiliates;
   }
   async GetCouponCodes(id: string): Promise<GetCouponCodesQuery> {
     const statement = `query GetCouponCodes($id: ID!) {
@@ -7844,7 +8538,7 @@ export class APIService {
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
-  async ListCardsPacksForPreview(
+async ListCardsPacksForPreview(
     filter?: ModelCardsPackFilterInput,
     limit?: number,
     nextToken?: string
@@ -8138,6 +8832,135 @@ export class APIService {
     )) as any;
     return <ListContactUsModelsQuery>response.data.listContactUsModels;
   }
+  OnCreateAffiliateListener(
+    contactEmail?: string
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
+  > {
+    const statement = `subscription OnCreateAffiliate($contactEmail: String) {
+        onCreateAffiliate(contactEmail: $contactEmail) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (contactEmail) {
+      gqlAPIServiceArguments.contactEmail = contactEmail;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
+    >;
+  }
+
+  OnUpdateAffiliateListener(
+    contactEmail?: string
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
+  > {
+    const statement = `subscription OnUpdateAffiliate($contactEmail: String) {
+        onUpdateAffiliate(contactEmail: $contactEmail) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (contactEmail) {
+      gqlAPIServiceArguments.contactEmail = contactEmail;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
+    >;
+  }
+
+  OnDeleteAffiliateListener(
+    contactEmail?: string
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
+  > {
+    const statement = `subscription OnDeleteAffiliate($contactEmail: String) {
+        onDeleteAffiliate(contactEmail: $contactEmail) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (contactEmail) {
+      gqlAPIServiceArguments.contactEmail = contactEmail;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
+    >;
+  }
+
   OnCreateCouponCodesListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
   > = API.graphql(

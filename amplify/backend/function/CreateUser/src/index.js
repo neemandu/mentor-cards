@@ -131,7 +131,6 @@ exports.handler = async (event) => {
     var email = event.arguments.input['email'];
     var phone = event.arguments.input['phone'];
     var fullName = event.arguments.input['fullName'];
-    var refId = event.arguments.input['refId'];
 
     console.log(event);
     console.log('Adding new user:');
@@ -139,7 +138,6 @@ exports.handler = async (event) => {
     console.log(email);
     console.log(phone);
     console.log(fullName);
-    console.log(refId);
 
     AWS.config.update({
         region: env.REGION
@@ -178,8 +176,7 @@ exports.handler = async (event) => {
             "favouritePacks": [],
             "entries": 1,
             "externalPacksSubscriptions":[],
-            "entryDates":[new Date().toISOString()],
-            "refId": refId
+            "entryDates":[new Date().toISOString()]
         };
     
         console.log("Adding a new user...");

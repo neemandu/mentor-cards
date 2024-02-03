@@ -132,7 +132,7 @@ async function insertRecordsToMessagingQueue(users){
 }
 
 exports.handler = async (event) => {
-    /*var users = await getAllRelevantUsers();
+    var users = await getAllRelevantUsers();
     if(users.length > 0){
         users.forEach(function(user) { console.log(user.email);});
         console.log(users)
@@ -140,5 +140,5 @@ exports.handler = async (event) => {
     }
     else{
         console.log("No users should be notified");
-    }*/
+    }
 };

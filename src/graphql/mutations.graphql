@@ -283,6 +283,30 @@ mutation CreateUser($input: CreateUserInput!) {
       nextBillingDate
     }
     entryDates
+    refId
+    myAffiliate {
+      id
+      affiliateID
+      affiliateUrl
+      contactEmail
+      phoneNumber
+      websiteURL
+      paymentDetails
+      commissionPercentage
+      dateJoined
+      status
+      balance
+      withdraws {
+        id
+        date
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+      createdAt
+      updatedAt
+    }
   }
 }
 mutation AddCardsPack($input: addCardsPackInput!) {
@@ -350,6 +374,90 @@ mutation LikeClicked($input: cardPackIdInput!) {
 }
 mutation IncrementPackEntries($input: cardPackIdInput!) {
   IncrementPackEntries(input: $input)
+}
+mutation CreateAffiliate(
+  $input: CreateAffiliateInput!
+  $condition: ModelAffiliateConditionInput
+) {
+  createAffiliate(input: $input, condition: $condition) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateAffiliate(
+  $input: UpdateAffiliateInput!
+  $condition: ModelAffiliateConditionInput
+) {
+  updateAffiliate(input: $input, condition: $condition) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteAffiliate(
+  $input: DeleteAffiliateInput!
+  $condition: ModelAffiliateConditionInput
+) {
+  deleteAffiliate(input: $input, condition: $condition) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
 }
 mutation CreateSubscriptionPlan(
   $input: CreateSubscriptionPlanInput!

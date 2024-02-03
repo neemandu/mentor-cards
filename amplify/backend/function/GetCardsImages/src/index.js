@@ -178,9 +178,6 @@ exports.handler = async (event, context, callback) => {
     if(event.identity == null){
         return [];
     }
-    if(!("claims" in event.identity)){
-        return [];
-    }
 
     AWS.config.update({
         region: env.REGION
