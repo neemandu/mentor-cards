@@ -56,6 +56,18 @@ type User
   entryDates: [AWSDateTime]
   refId: String
   myAffiliate: Affiliate @connection
+  payments: [Payment]
+}
+
+type Payment
+{
+  id: ID!
+  date: AWSDateTime
+  payedMonths: Int
+  amount: Float
+  currency: String
+  paymentWay: String
+  transactionId: String
 }
 
 type Affiliate

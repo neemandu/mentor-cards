@@ -92,6 +92,7 @@ export type User = {
   entryDates?: Array<string | null> | null;
   refId?: string | null;
   myAffiliate?: Affiliate | null;
+  payments?: Array<Payment | null> | null;
 };
 
 export type MonthlySubscription = {
@@ -222,6 +223,17 @@ export type Withdraw = {
   __typename: "Withdraw";
   id: string;
   date?: string | null;
+  amount?: number | null;
+  currency?: string | null;
+  paymentWay?: string | null;
+  transactionId?: string | null;
+};
+
+export type Payment = {
+  __typename: "Payment";
+  id: string;
+  date?: string | null;
+  payedMonths?: number | null;
   amount?: number | null;
   currency?: string | null;
   paymentWay?: string | null;
@@ -1520,6 +1532,16 @@ export type CreateUserMutation = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  payments?: Array<{
+    __typename: "Payment";
+    id: string;
+    date?: string | null;
+    payedMonths?: number | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
 };
 
 export type AddCouponCodeMutation = {
@@ -2888,6 +2910,16 @@ export type GetUserQuery = {
     createdAt: string;
     updatedAt: string;
   } | null;
+  payments?: Array<{
+    __typename: "Payment";
+    id: string;
+    date?: string | null;
+    payedMonths?: number | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
 };
 
 export type ListUsersQuery = {
@@ -3231,6 +3263,16 @@ export type ListUsersQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
+    payments?: Array<{
+      __typename: "Payment";
+      id: string;
+      date?: string | null;
+      payedMonths?: number | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -5200,6 +5242,16 @@ export class APIService {
             }
             createdAt
             updatedAt
+          }
+          payments {
+            __typename
+            id
+            date
+            payedMonths
+            amount
+            currency
+            paymentWay
+            transactionId
           }
         }
       }`;
@@ -7353,6 +7405,16 @@ async GetSubscriptionPlansForOrgs(
             createdAt
             updatedAt
           }
+          payments {
+            __typename
+            id
+            date
+            payedMonths
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -7709,6 +7771,16 @@ async GetSubscriptionPlansForOrgs(
               }
               createdAt
               updatedAt
+            }
+            payments {
+              __typename
+              id
+              date
+              payedMonths
+              amount
+              currency
+              paymentWay
+              transactionId
             }
           }
           nextToken

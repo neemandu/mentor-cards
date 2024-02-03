@@ -307,6 +307,15 @@ query GetUser($id: ID!) {
       createdAt
       updatedAt
     }
+    payments {
+      id
+      date
+      payedMonths
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
   }
 }
 query ListUsers(
@@ -615,6 +624,15 @@ query ListUsers(
         }
         createdAt
         updatedAt
+      }
+      payments {
+        id
+        date
+        payedMonths
+        amount
+        currency
+        paymentWay
+        transactionId
       }
     }
     nextToken
