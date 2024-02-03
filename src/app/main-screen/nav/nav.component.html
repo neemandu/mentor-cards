@@ -1,7 +1,4 @@
 <div  [dir]="langDirectionService.currentLangDirection">
-
-  
-
 <div *ngIf="showBanner" class="banner">
   <span class="close-icon" (click)="showBanner = false">X</span>
   <p>
@@ -61,7 +58,7 @@
     <button class="btn navbar-btn" (click)="navigate('/contact-us')">
       {{ "pages.nav.navbar.contact-us" | translate }}
     </button>
-    <app-select-language></app-select-language>
+    <app-select-language style="display: flex; align-items: center;"></app-select-language>
 
     <button
       class="btn navbar-btn"

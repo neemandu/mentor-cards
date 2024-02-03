@@ -205,7 +205,7 @@
     "register": {
       "form": {
         "name-label": "Full Name",
-        "name-hint": "Hebrew/English",
+        "name-hint": "עב/English",
         "phone-label": "Mobile Phone",
         "phone-hint": "For example: 0501234567",
         "phone-error": "Please enter numbers only",

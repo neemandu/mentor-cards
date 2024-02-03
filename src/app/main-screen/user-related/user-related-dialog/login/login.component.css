@@ -1,6 +1,5 @@
 * {
   font-family: 'rubik';
-
   --white: #fff;
   --google-blue: hwb(217 26% 4%);
   --google-blue-hover: hwb(217 26% 10%);
@@ -186,8 +185,6 @@ mat-progress-bar {
   display: flex;
   justify-content: space-between;
 }
-
-
 
 [dir=rtl] #confirmation-code-info {
   direction: rtl;
