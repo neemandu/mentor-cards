@@ -36,8 +36,12 @@ import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/all-packs-page', pathMatch: 'full' },
-  { path: 'home-page', redirectTo: '/all-packs-page', pathMatch: 'full' },
+  { path: '', redirectTo: '/home-page', pathMatch: 'full' },
+  { path: 'all-packs-page', redirectTo: '/home-page', pathMatch: 'full' },
+  {
+    path: 'home-page',
+    component: HomePageComponent
+  },
   {
     path: 'no-program-page',
     component: NoProgramPageComponent

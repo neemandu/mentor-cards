@@ -125,7 +125,7 @@ export class UserAuthService {
       email: newUserEmail,
       phone: newUserPhone,
       fullName: newUserFullName,
-      refId: affiliateId
+      affiliateId: affiliateId
     };
     this.api.CreateUser(user).then(
       (value) => {
