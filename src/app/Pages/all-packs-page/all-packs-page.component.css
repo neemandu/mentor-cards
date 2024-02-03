@@ -41,7 +41,7 @@
   display: none;
 }
 
-.autocomplete-options {
+[dir = "rtl"] .autocomplete-options {
   position: absolute;
   z-index: 1000;
   width: 100%;
@@ -53,7 +53,19 @@
   direction: rtl;
 }
 
-.autocomplete-options mat-option {
+[dir = "ltr"] .autocomplete-options {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+  direction: ltr;
+}
+
+[dir = "rtl"] .autocomplete-options mat-option {
   padding: 10px;
   cursor: pointer;
   direction: rtl;
@@ -61,16 +73,27 @@
   direction: rtl;
 }
 
+[dir = "ltr"] .autocomplete-options mat-option {
+  padding: 10px;
+  cursor: pointer;
+  direction: ltr;
+  text-align: left;
+  direction: ltr;
+}
+
 .autocomplete-options mat-option:hover {
   background-color: #d6a45ac9;;
 }
 
-.mat-option-text{
+[dir = "rtl"] .mat-option-text {
   text-align: right;
   direction: rtl;
 }
 
-
+[dir = "ltr"] .mat-option-text {
+  text-align: left;
+  direction: ltr;
+}
 .search {
   width: 90%;
   align-self: center;
@@ -144,14 +167,25 @@ app-pack {
   border-radius: 10px;
 }
 
-#filter-by-text {
+[dir = "rtl"] #filter-by-text {
   text-align: right;
   margin: 0px 10px 0px 0px;
 }
 
-#filter-by-options-title {
+[dir = "ltr"] #filter-by-text {
+  text-align: left;
+  margin: 0px 0px 0px 10px;
+}
+
+[dir = "rtl"] #filter-by-options-title {
   text-align: right;
   margin: 5px 10px 0px 0px;
+  font-weight: 700;
+}
+
+[dir = "ltr"] #filter-by-options-title {
+  text-align: left;
+  margin: 5px 0px 0px 10px;
   font-weight: 700;
 }
 
@@ -160,12 +194,25 @@ app-pack {
   text-align: right;
 }
 
-mat-form-field {
+[dir="rtl"] :host ::ng-deep .mat-list-item-content {
+  text-align: right;
+}
+
+[dir="ltr"] :host ::ng-deep .mat-list-item-content {
+  text-align: left;
+}
+
+[dir = "rtl"] mat-form-field {
   text-align: right;
   margin-right: 10px;
   margin-left: 10px;
 }
 
+[dir = "ltr"] mat-form-field {
+  text-align: left;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 .mat-list-base .mat-list-item,
 .mat-list-base .mat-list-option {
   height: 35px;

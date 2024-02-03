@@ -1,3 +1,7 @@
+<div  [dir]="langDirectionService.currentLangDirection">
+
+  
+
 <div *ngIf="showBanner" class="banner">
   <span class="close-icon" (click)="showBanner = false">X</span>
   <p>
@@ -278,3 +282,4 @@
     <div>{{ "pages.nav.management-menu.receipts-management" | translate }}</div>
   </button>
 </mat-menu>
+</div>

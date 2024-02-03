@@ -1,5 +1,5 @@
 <title>{{'pages.all-packs-page.title' | translate}}</title>
-<div id="content">
+<div id="content" [dir]="langDirectionService.currentLangDirection">
 
   <div id="filters" class="float-right">
 
@@ -19,7 +19,6 @@
 
       <mat-list-option
         disableRipple
-        [dir]="langDirectionService.currentLangDirection"
         *ngFor="let category of allCategories"
         [selected]="selectedCategories.includes(category)"
         [value]="category"
@@ -48,7 +47,6 @@
     >
       <mat-list-option
         disableRipple
-        [dir]="langDirectionService.currentLangDirection"
         *ngFor="let fav of getAllFavoritesDesc()"
         [selected]="selectedFavorites.includes(fav)"
         [value]="fav"

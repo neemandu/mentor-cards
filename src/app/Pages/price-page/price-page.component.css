@@ -111,19 +111,32 @@ p {
   border: gray 2px solid;
 }
 
-ul {
+[dir="rtl"] ul {
   text-align: right;
+}
+
+[dir="ltr"] ul {
+  text-align: left;
 }
 
 #list-header {
   margin-right: 3%;
 }
 
-li {
+[dir="rtl"] li {
   font-size: 1.1rem;
   padding-bottom: 10px;
   list-style-type: ' ✔ ';
   text-align: right;
+  transition: transform 0.2s linear;
+  position: relative;
+}
+
+[dir="ltr"] li {
+  font-size: 1.1rem;
+  padding-bottom: 10px;
+  list-style-type: ' ✔ ';
+  text-align: left;
   transition: transform 0.2s linear;
   position: relative;
 }
@@ -141,11 +154,15 @@ ul li::before {
   color: blue
 }
 
-#list-header {
+[dir = "rtl"] #list-header {
   font-size: 1rem;
   text-align: right;
 }
 
+[dir = "ltr"] #list-header {
+  font-size: 1rem;
+  text-align: left;
+}
 .program-cards {
   display: flex;
   flex-direction: row;
@@ -198,11 +215,24 @@ mat-card-actions {
   color: white;
 }
 
-
-mat-card {
-  /* margin: 0 0.5vw; */
+[dir="rtl"] mat-card {
+   /* margin: 0 0.5vw; */
   /* border: 2px var(--main-color) solid; */
   width: 20rem;
+  height: 320px;
+  transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
+  border: 2px var(--main-color) solid;
+  border-radius: 10px;
+  font-family: var(--main-font-family);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+[dir="ltr"]  mat-card {
+  /* margin: 0 0.5vw; */
+  /* border: 2px var(--main-color) solid; */
+  width: 30rem;
   height: 320px;
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;

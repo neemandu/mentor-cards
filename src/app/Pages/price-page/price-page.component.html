@@ -1,4 +1,4 @@
-<div id="content" class="d-flex flex-column align-items-center">
+<div id="content" class="d-flex flex-column align-items-center" [dir]="langDirectionService.currentLangDirection">
   <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
   <img
     id="top-image"
@@ -9,7 +9,7 @@
   >
   <br />
 </div>
-<div style="text-align: center">
+<div style="text-align: center" [dir]="langDirectionService.currentLangDirection">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
       <mat-card-title>  {{ "pages.price-page.monthly-plan-title" | translate }}</mat-card-title>

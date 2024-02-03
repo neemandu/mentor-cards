@@ -47,9 +47,16 @@ li {
   flex-direction: row;
 }
 
-#content {
+[dir=rtl] #content {
   margin: 2% 2%;
   text-align: right;
+  font-size: larger;
+  width: 48%;
+}
+
+[dir=ltr] #content {
+  margin: 2% 2%;
+  text-align: left;
   font-size: larger;
   width: 48%;
 }

@@ -3,7 +3,7 @@
     "all-packs-page": {
       "title": "Mentor-Cards כל ערכות הקלפים",
       "coupon-code-btn-1": "View courses",
-      "coupon-code-btn-2": "<<<Our Digits",
+      "coupon-code-btn-2": "Our Digits>>>",
       "mat-section-title": "Categories",
       "categories": {
         "ערכות להתנסות חופשית": "FREE TRIAL KITS",
@@ -582,15 +582,15 @@
       },
       "accordion": {
         "mat-accordion": {
-          "mat-button":{
-            "btn1":"What is Mentor - Cards?",
-            "btn2":"How do you connect to the site?",
-            "btn3":"How to enter a benefit code?",
-            "btn4":"Our guide books",
-            "btn5":"Our card sets",
-            "btn6":"Plans, prices and cancellations",
-            "btn7":"Key principles in working with cards",
-            "btn8":"How to work with a digital card set"
+          "mat-button": {
+            "btn1": "What is Mentor - Cards?",
+            "btn2": "How do you connect to the site?",
+            "btn3": "How to enter a benefit code?",
+            "btn4": "Our guide books",
+            "btn5": "Our card sets",
+            "btn6": "Plans, prices and cancellations",
+            "btn7": "Key principles in working with cards",
+            "btn8": "How to work with a digital card set"
           },
           "mat-expansion-panel1": {
             "mat-panel-title": "What is Mentor - Cards?",
@@ -771,6 +771,13 @@
           }
         }
       }
+    },
+    "siteRules": {
+      "span": {
+        "text": "Copyright © 2021 Mentor-Cards. All rights reserved.",
+        "siteRulesLink": "(To the site rules)"
+      },
+      "siteRulesSm":  "(To the site rules)"
     }
   },
   "components": {}

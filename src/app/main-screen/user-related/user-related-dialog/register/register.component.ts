@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { AuthService, NewUser } from 'src/app/Services/auth.service';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -34,7 +35,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService,
-    private mixpanel: MixpanelService) { }
+    private mixpanel: MixpanelService,
+    public langDirectionService: LangDirectionService) { }
 
   ngOnInit(): void {
   }

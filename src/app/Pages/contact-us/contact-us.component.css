@@ -1,6 +1,5 @@
 * {
   font-family: 'rubik';
-  direction: rtl;
 }
 
 p {
@@ -23,6 +22,8 @@ p {
   height: 2rem;
   width: 4rem;
 }
+
+
 
 .action-button:hover {
   background: #e69900;
@@ -67,11 +68,14 @@ mat-toolbar {
   margin-left: -20px;
 }
 
-.mat-form-field {
-  text-align: right;
-  font-size: medium;
+
+[dir = "rtl"] .mat-form-field {
+  text-align: right !important;
 }
 
+[dir = "ltr"] .mat-form-field {
+  text-align: left !important;
+}
 .contact-form {
   margin: 2%;
 }

@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content" [dir]="langDirectionService.currentLangDirection">
   <div class="d-flex flex-column" id="register-div">
     <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSignupSubmit()">
       <div class="d-flex flex-column">

@@ -1,6 +1,6 @@
 <title>{{ "pages.guide-page.title" | translate }}</title>
 <h1 id="title">{{ title }}</h1>
-<div id="layout">
+<div id="layout" [dir]="langDirectionService.currentLangDirection">
   <div id="buttons" class="d-flex flex-column">
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 1 }"
@@ -352,7 +352,7 @@
   />
 </div>
 
-<div id="accordion">
+<div id="accordion" [dir]="langDirectionService.currentLangDirection">
   <mat-accordion>
     <mat-expansion-panel (click)="selectedTopicChanged(1, '?')">
       <mat-expansion-panel-header>

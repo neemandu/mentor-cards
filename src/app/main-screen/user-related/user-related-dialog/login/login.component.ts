@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
   confirmCodeSent: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService, public router: Router,
+    public langDirectionService: LangDirectionService,
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService, private ngZone: NgZone) { }
 
   ngOnInit(): void {

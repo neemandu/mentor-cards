@@ -1,6 +1,6 @@
 <title>Mentor-Cards עמוד הדרכה על שימוש באתר</title>
 <h1 id="title">{{title}}</h1>
-<div id="layout">
+<div id="layout" [dir]="langDirectionService.currentLangDirection">
   <div id="buttons" class="d-flex flex-column">
     <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==1}" type="button"
       (click)="selectedTopicChanged(1, 'הוספת ערכת קלפים ל Mentor-cards')" mat-menu-item>הוספת ערכת קלפים ל
@@ -321,7 +321,7 @@
   <!-- <img onload="this.style.opacity='1'" src="../../../assets/class.jpeg" class="flower-img" alt="Decorative image"> -->
 </div>
 
-<div id="accordion">
+<div id="accordion" [dir]="langDirectionService.currentLangDirection">
   <mat-accordion>
     <mat-expansion-panel (click)="selectedTopicChanged(1, 'הוספת ערכת קלפים ל Mentor-cards')">
       <mat-expansion-panel-header>
@@ -642,4 +642,4 @@
   </mat-accordion>
 </div>
 
-<app-information-bar></app-information-bar>
+<app-information-bar [dir]="langDirectionService.currentLangDirection"></app-information-bar>

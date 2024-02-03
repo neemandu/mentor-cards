@@ -15,10 +15,18 @@
   padding-top: 1%;
 }
 
-.mat-form-field {
+/* .mat-form-field {
   text-align: right;
   margin-bottom: 5px;
   direction: rtl;
+} */
+
+[dir=rtl] .mat-form-field {
+  text-align: right !important;
+}
+
+[dir=ltr] .mat-form-field  {
+  text-align: left !important;
 }
 
 .option-btn {
@@ -72,10 +80,16 @@ mat-progress-bar {
   width: 100%;
 }
 
-#not-receive-code {
+[dir=rtl] #not-receive-code {
   text-align: right;
   font-size: 14px;
 }
+
+[dir=ltr] #not-receive-code {
+  text-align: left;
+  font-size: 14px;
+}
+
 
 /* add appropriate colors to fb, twitter and google buttons */
 .fb {
@@ -93,9 +107,14 @@ mat-progress-bar {
   color: white;
 }
 
-#social-media-login {
+[dir=rtl] #social-media-login {
   direction: rtl;
 }
+
+[dir=ltr] #social-media-login {
+  direction: ltr;
+}
+
 
 .first-line,
 .second-line {
@@ -155,8 +174,12 @@ mat-progress-bar {
   width: 99%;
 }
 
-#formFooter {
+[dir=rtl] #formFooter {
   direction: rtl;
+}
+
+[dir=ltr] #formFooter {
+  direction: ltr;
 }
 
 .footerLogin {
@@ -164,8 +187,16 @@ mat-progress-bar {
   justify-content: space-between;
 }
 
-#confirmation-code-info {
+
+
+[dir=rtl] #confirmation-code-info {
   direction: rtl;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+[dir=ltr] #confirmation-code-info {
+  direction: ltr;
   font-size: 12px;
   margin-top: 10px;
 }

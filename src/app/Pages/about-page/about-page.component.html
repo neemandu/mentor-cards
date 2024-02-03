@@ -1,5 +1,5 @@
 <title>{{'pages.about-us.title' | translate}}</title>
-<div id="about-text">
+<div id="about-text"  [dir]="langDirectionService.currentLangDirection">
   <img
     onload="this.style.opacity='1'"
     src="../../../assets/flowers.png"

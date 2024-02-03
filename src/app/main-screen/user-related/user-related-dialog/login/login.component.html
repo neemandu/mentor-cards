@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content"  [dir]="langDirectionService.currentLangDirection">
   <div class="d-flex flex-column" id="login-div" [hidden]="!showLogin">
     <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" *ngIf="showLogin">
       <div class="d-flex flex-column">

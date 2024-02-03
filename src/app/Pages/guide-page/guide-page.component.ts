@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class GuidePageComponent implements OnInit {
   playerHeight: number;
 
   constructor(
-    private mixpanelService: MixpanelService) { }
+    private mixpanelService: MixpanelService ,  
+    public langDirectionService: LangDirectionService
+    ) { }
 
   ngOnInit(): void {
     

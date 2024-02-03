@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { APIService, CreateContactUsModelInput } from 'src/app/API.service';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
@@ -16,7 +17,9 @@ export class ServicesComponent implements OnInit {
   playerHeight: number;
   contactForm: FormGroup;
 
-  constructor(private overlaySpinnerService: OverlaySpinnerService, private formBuilder: FormBuilder, private api: APIService, private userAuthService: UserAuthService) { }
+  constructor(private overlaySpinnerService: OverlaySpinnerService, private formBuilder: FormBuilder, private api: APIService, private userAuthService: UserAuthService , 
+    public langDirectionService: LangDirectionService
+    ) { }
 
   ngOnInit(): void {
     this.playerWidth = window.innerWidth;
