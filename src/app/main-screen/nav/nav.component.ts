@@ -75,7 +75,7 @@ export class NavComponent implements OnInit {
   }
 
   openNewTab(): void {
-    const url = 'https://school.mentor-cards.com/bundles'; 
+    const url = 'https://mentor-cards.vp4.me/my-courses'; 
     window.open(url, '_blank');
   }
 

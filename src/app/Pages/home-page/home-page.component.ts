@@ -29,8 +29,10 @@ export class HomePageComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnInit(): void {
+        console.log('home page ngOnInit!');
         this.route.queryParams.subscribe(params => {
             const refId = params['ref'];
+            console.log('refId:', refId);
             if (refId) {
               localStorage.setItem('refId', refId);
               console.log('refId ID stored:', refId);
