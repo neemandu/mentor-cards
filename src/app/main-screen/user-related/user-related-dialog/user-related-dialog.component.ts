@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 // import { LoginComponent } from './login/login.component';
 // import { RegisterComponent } from './register/register.component';
 
@@ -18,7 +19,9 @@ export class UserRelatedDialogComponent implements OnInit {
   registeredEmail: string;
   registeredPW: string;
 
-  constructor(public dialogRef: MatDialogRef<UserRelatedDialogComponent>,) { }
+  constructor(public dialogRef: MatDialogRef<UserRelatedDialogComponent>,
+    public langDirectionService: LangDirectionService,
+    ) { }
 
   ngOnInit(): void {
   }

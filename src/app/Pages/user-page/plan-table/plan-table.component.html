@@ -1,64 +1,96 @@
 <table mat-table [dataSource]="dataSource">
-
   <!-- plan Column -->
   <ng-container matColumnDef="planName">
-    <th mat-header-cell *matHeaderCellDef> תכנית </th>
-    <td mat-cell *matCellDef="let element"> {{element.planName}} </td>
+    <th mat-header-cell *matHeaderCellDef>
+      {{ "pages.plan-table.plan-column-title" | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.planName }}</td>
   </ng-container>
 
   <!-- startDate Column -->
   <ng-container matColumnDef="startDate">
-    <th mat-header-cell *matHeaderCellDef> תאריך התחלה </th>
-    <td mat-cell *matCellDef="let element"> {{element.startDate | date: 'dd/MM/yyyy'}} </td>
+    <th mat-header-cell *matHeaderCellDef>
+      {{ "pages.plan-table.start-date-column-title" | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.startDate | date : "dd/MM/yyyy" }}
+    </td>
   </ng-container>
 
   <!-- updateDate Column -->
   <ng-container matColumnDef="updateDate">
-    <th mat-header-cell *matHeaderCellDef> תאריך עדכון </th>
+    <th mat-header-cell *matHeaderCellDef>
+      {{ "pages.plan-table.update-date-column-title" | translate }}
+    </th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="element.cancellationDate">
-        {{element.cancellationDate | date: 'dd/MM/yyyy'}}
+        {{ element.cancellationDate | date : "dd/MM/yyyy" }}
       </div>
-      <div *ngIf="!element.cancellationDate">
-      </div>
+      <div *ngIf="!element.cancellationDate"></div>
     </td>
   </ng-container>
 
   <!-- nextBillingDate Column -->
   <ng-container matColumnDef="nextBillingDate">
-    <th mat-header-cell *matHeaderCellDef> תאריך תשלום הבא </th>
+    <th mat-header-cell *matHeaderCellDef>
+      {{ "pages.plan-table.next-billing-date-column-title" | translate }}
+    </th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="element.nextBillingDate">
-        {{element.nextBillingDate | date: 'dd/MM/yyyy'}}
+        {{ element.nextBillingDate | date : "dd/MM/yyyy" }}
       </div>
-      <div *ngIf="!element.nextBillingDate">
-      </div>
+      <div *ngIf="!element.nextBillingDate"></div>
     </td>
   </ng-container>
 
   <!-- monthlyYearly Column -->
   <ng-container matColumnDef="yearlyMonthly">
-    <th mat-header-cell *matHeaderCellDef> מחזור חיוב </th>
-    <td mat-cell *matCellDef="let element"> {{element.yearlyMonthly === 0 ? 'חודשי' : 'שנתי'}} </td>
+    <th mat-header-cell *matHeaderCellDef>
+      {{ "pages.plan-table.billing-cycle-column-title" | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.yearlyMonthly === 0 ? "חודשי" : "שנתי" }}
+    </td>
   </ng-container>
 
   <!-- price Column -->
   <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> מחיר </th>
-    <td mat-cell *matCellDef="let element"> {{element.price}} ש"ח </td>
+    <th mat-header-cell *matHeaderCellDef>
+      {{ "pages.plan-table.price-column-title" | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.price }}  {{ "pages.plan-table.price-column-description" | translate }}</td>
   </ng-container>
 
   <!-- cancel Column -->
   <ng-container matColumnDef="cancel">
-    <th mat-header-cell *matHeaderCellDef> פעולות </th>
-    <td mat-cell *matCellDef="let element; let i = index;">
-      <a href="javascript:;" *ngIf="!element.cancellationDate" (click)="openCancelDialogModal(element, i)">לביטול החיוב
-        האוטומטי</a>
-      <a href="javascript:;" *ngIf="element.cancellationDate && !element.homePlan" (click)="openApprovePurchaseDialog(element, i)">לחידוש תוכנית ערכת VIP</a>
-      <a href="javascript:;" *ngIf="element.cancellationDate && element.homePlan" (click)="openApprovePurchaseDialog(element, i)">לחידוש תכנית הבית</a>
+    <th mat-header-cell *matHeaderCellDef>
+      {{ "pages.plan-table.actions-column-title" | translate }}
+    </th>
+    <td mat-cell *matCellDef="let element; let i = index">
+      <a
+        href="javascript:;"
+        *ngIf="!element.cancellationDate"
+        (click)="openCancelDialogModal(element, i)"
+      >
+        {{ "pages.plan-table.cancel-automatic-billing" | translate }}
+      </a>
+      <a
+        href="javascript:;"
+        *ngIf="element.cancellationDate && !element.homePlan"
+        (click)="openApprovePurchaseDialog(element, i)"
+      >
+        {{ "pages.plan-table.renew-vip-plan" | translate }}</a
+      >
+      <a
+        href="javascript:;"
+        *ngIf="element.cancellationDate && element.homePlan"
+        (click)="openApprovePurchaseDialog(element, i)"
+      >
+        {{ "pages.plan-table.renew-home-plan" | translate }}</a
+      >
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

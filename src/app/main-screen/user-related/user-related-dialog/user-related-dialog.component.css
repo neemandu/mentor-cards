@@ -12,8 +12,12 @@ mat-dialog-content {
   transition: width 2s, height 2s
 }
 
-.mat-tab-body-wrapper {
-  direction: rtl;
+[dir = "rtl"] .mat-tab-label {
+  direction: ltr;
+}
+
+[dir = "ltr"] .mat-tab-label {
+  direction: ltr;
 }
 
 ::ng-deep.mat-tab-body {
@@ -51,6 +55,15 @@ mat-dialog-content {
 
 .iconButton {
   margin: -10px;
+}
+
+[dir= "ltr"] #close-button {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+[dir= "rtl"] #close-button {
+  display: block;
 }
 
 .loginRegisterLabel {

@@ -1,23 +1,22 @@
-<div id="content" class="d-flex flex-column align-items-center">
+<div id="content" class="d-flex flex-column align-items-center" [dir]="langDirectionService.currentLangDirection">
   <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
   <img
     id="top-image"
     src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
     alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
   />
-  <span id="title" *ngIf="!userData?.orgMembership"
-    >התוכניות שלנו</span
+  <span id="title" *ngIf="!userData?.orgMembership"> {{ "pages.price-page.our-plans-title" | translate }}</span
   >
   <br />
 </div>
-<div style="text-align: center">
+<div style="text-align: center" [dir]="langDirectionService.currentLangDirection">
   <div *ngIf="subPlans" class="program-cards">
     <mat-card>
-      <mat-card-title>תכנית חודשית</mat-card-title>
+      <mat-card-title>  {{ "pages.price-page.monthly-plan-title" | translate }}</mat-card-title>
       <mat-card-content>
         <br>
         <p class="price-line">
-          חודש /
+          {{ "pages.price-page.month-label" | translate }} /
           <span class="price-number"
             >₪{{
               monthlySubscription.fullPrice /
@@ -28,11 +27,11 @@
         <br />
         <ul>
           <li>
-            גישה מלאה לעשרות ערכות קלפים          </li>
+            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
             <li>
-              מגוון עצום של ספרי הדרכה, רעיונות להפעלה, ושאלות מנחות            </li>
+              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
             <li>
-              אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...            </li>
+              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
         </ul>
       </mat-card-content>
       <mat-card-actions>
@@ -46,7 +45,7 @@
           type="button"
           (click)="checkFreePeriod(monthlySubscription.id)"
         >
-          להצטרפות >>
+        {{ "pages.price-page.join-button-text" | translate }}  
         </button>
         <button
           *ngIf="userSingedIn &&
@@ -57,25 +56,25 @@
           type="button"
           disabled
         >
-          הינך רשום לתכנית זו
+      {{ "pages.price-page.already-registered-button-text" | translate }}  
         </button>
         <button
         *ngIf="!userSingedIn"
         class="popular-purchase-btn purchase-btn"
         type="button"
         (click)="signInSignUp()">
-          להצטרפות >>
+        {{ "pages.price-page.join-button-text" | translate }}  
         </button>
       </mat-card-actions>
     </mat-card>
     <mat-card id="popular-mat-card">
       <!-- <span id="best-pack">הכי משתלמת</span> -->
       <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
-      <mat-card-title>תכנית Life-Time!</mat-card-title>
+      <mat-card-title>   {{ "pages.price-page.popularMatCard.title" | translate }}   </mat-card-title>
       <mat-card-content>
         <br>
         <p class="price-line">
-          תשלום <b><u>חד פעמי</u></b> בסך
+          {{ "pages.price-page.popularMatCard.payment" | translate }}  <b><u>  {{ "pages.price-page.popularMatCard.onceBold" | translate }}  </u></b>  {{ "pages.price-page.popularMatCard.inTotal" | translate }}
           <span class="price-number"
             >₪{{
              lifeTimeSubscription.fullPrice
@@ -85,13 +84,13 @@
         <br />     
         <ul>
           <li>
-            גישה מלאה לעשרות ערכות קלפים - לכל החיים!          </li>
+            {{ "pages.price-page.popularMatCard.benefits.fullAccess" | translate }}     </li>
             <li>
-              גישה לכל ערכות הקלפים שיעלו לאתר בעתיד!             </li>
+              {{ "pages.price-page.popularMatCard.benefits.futureAccess" | translate }}         </li>
             <li>
-              מגוון עצום של ספרי הדרכה, רעיונות להפעלה ושאלות מנחות            </li>
+              {{ "pages.price-page.popularMatCard.benefits.variety" | translate }}      </li>
             <li>
-              אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...
+              {{ "pages.price-page.popularMatCard.benefits.connectAnywhere" | translate }}  
             </li>
         </ul></mat-card-content>
       <mat-card-actions>
@@ -103,7 +102,7 @@
           class="popular-purchase-btn purchase-btn"
           (click)="checkFreePeriod(lifeTimeSubscription.id)"
         >
-          להצטרפות >>
+        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}  
         </button>
         <button
           *ngIf="userSingedIn &&
@@ -113,19 +112,19 @@
           class="disabled-btn purchase-btn"
           disabled
         >
-          הינך רשום לתכנית זו
+        {{ "pages.price-page.popularMatCard.registeredBtn" | translate }}  
         </button>
         <button
         *ngIf="!userSingedIn"
         class="popular-purchase-btn purchase-btn"
         (click)="signInSignUp()">
-          להצטרפות >>
+        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}     
         </button>
       </mat-card-actions>
     </mat-card>  
     <mat-card>
-      <mat-card-title>מוסדות וארגונים</mat-card-title>
-      <mat-card-content class="orgs">זה הזמן לאפשר לקלפים להכנס לסביבה הארגונית שלכם וליצור שיח מקרב, מקדם ומפתח. שדרגו יחד איתנו את ארגז הכלים הארגוני שלכם. דברו איתנו ונתאים לכם את התכנית המשתלמת ביותר. 
+      <mat-card-title>     {{ "pages.price-page.orgsMatCard.title" | translate }}   </mat-card-title>
+      <mat-card-content class="orgs"> {{ "pages.price-page.orgsMatCard.content" | translate }}  
       </mat-card-content>
       <mat-card-actions>
         <button
@@ -133,7 +132,7 @@
           type="button"
           (click)="navigate('/contact-us')"
         >
-          דברו איתנו!
+        {{ "pages.price-page.orgsMatCard.contactBtn" | translate }}  
         </button>
       </mat-card-actions>
     </mat-card>
@@ -144,7 +143,7 @@ id="couponCodeBtn"
 type="button"
 (click)="openEnterCouponCodeModal()"
 >
-להזנת קוד הטבה לחצו כאן
+{{ "pages.price-page.couponBtn" | translate }}  
 </button><br>
   <img
     id="payment-img"

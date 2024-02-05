@@ -2,10 +2,14 @@ mat-icon {
   font-family: 'Material Icons';
 }
 
-* {
+[dir = "rtl"] {
   font-family: 'rubik';
-  direction: rtl;
   text-align: right;
+}
+
+[dir = "ltr"] {
+  font-family: 'rubik';
+  text-align: left;
 }
 
 /* .actions {
@@ -80,6 +84,17 @@ li {
   text-align: right;
 }
 
+[dir = "rtl"] ::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: rtl;
+  text-align: right;
+}
+
+[dir = "ltr"] ::ng-deep .tooltip-class {
+  font-size: 0.8rem;
+  direction: ltr;
+  text-align: left;
+}
 ul {
   line-height: 1.5rem;
   padding-right: 1rem;

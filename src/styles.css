@@ -63,6 +63,14 @@ body {
   min-width: 0 !important;
 }
 
+.ltr-snackbar {
+  direction: ltr !important;
+  color: black;
+  background-color: #feefd7;
+  border: 4px double #ffcf00;
+  min-width: 0 !important;
+}
+
 .rtl-error-snackbar {
   direction: rtl !important;
   color: black;

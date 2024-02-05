@@ -14,7 +14,11 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 // import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
 import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
+<<<<<<< HEAD
 import { ReadTermsDialogComponent } from './read-terms-dialog/read-terms-dialog.component';
+=======
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
+>>>>>>> feature/multi-lang
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInTwoWeeks: number = 1209600000;
 
@@ -45,7 +49,9 @@ export class PricePageComponent implements OnInit {
 
   constructor(public _snackBar: MatSnackBar, public router: Router, private api: APIService,private ngZone: NgZone,
     private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog,
-    private mixpanelService: MixpanelService) {
+    private mixpanelService: MixpanelService,
+    public langDirectionService: LangDirectionService
+    ) {
   }
 
   ngOnInit(): void {

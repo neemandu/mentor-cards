@@ -7,15 +7,20 @@
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
 </mat-toolbar> -->
+
+<div [dir]="langDirectionService.currentLangDirection">
+
+
 <div mat-dialog-title style="text-align: center;">
     <button class="iconButton" mat-icon-button (click)="closeDialog()">
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
-    <span class="title">כל הזכויות שמורות ליוצרי האתר Mentor-Cards ©</span>
+    <span class="title">{{ "components.siteRules.title"| translate}}</span>
 </div>
 <div class="line"></div>
 <div id='summery' mat-dialog-content>
     <ul>
+<<<<<<< HEAD
         <li>
             כל מידע ו/או תצוגה באתר לרבות גרפיקה, עיצוב, הצגה מילולית, סימני מסחר, סימני “לוגו” וכן עריכתם והצגתם של
             אלה, הינם בבעלות הבלעדית של האתר ואין להעתיק, לשכפל, להפיץ, להציג בפומבי, למסור לצד שלישי, לפרסם או להשתמש
@@ -42,8 +47,18 @@
 Mentor-Cards רשאית לשנות את ערכות הקלפים המוצעות כהתנסות לפי ראות עיניה.        </li>
 
 <li>בתוכנית Life-Time, הגישה לערכות הקלפים באתר תהיה זמינה ללקוחות כל עוד האתר עובד ונגיש לציבור. במידה ופעילות האתר תופסק מכל סיבה שהיא לא תהא גישה לערכות הקלפים. לקוחות האתר מצהירים בזאת כי הם מודיעים לתנאי השימוש באתר ולתקנון החברה כי הם קראו את תקנון החברה טרם רכישת מסלול כלשהו וכי הם לא יבואו בטענה ו/או מענה כלפי מנהלי ו/או בעלי האתר בגין הפסקת האתר ו/או בגין הפסקת גישה לערכות קלפים.</li>
+=======
+        <li> {{ "components.siteRules.summery.rule1"| translate}}</li>
+        <li> {{ "components.siteRules.summery.rule2"| translate}}</li>
+        <li> {{ "components.siteRules.summery.rule3"| translate}}</li>
+        <li> {{ "components.siteRules.summery.rule4"| translate}}</li>
+        <li> {{ "components.siteRules.summery.rule5"| translate}}</li>
+        <li> {{ "components.siteRules.summery.rule6"| translate}}</li>
+>>>>>>> feature/multi-lang
     </ul>
     <div class="line"></div>
+</div>
+
 </div>
 <!-- <div *ngIf="data" class="buttons d-flex flex-column" mat-dialog-actions>
     <p>יש להסכים לתנאים על מנת להתחיל להשתמש באתר</p>

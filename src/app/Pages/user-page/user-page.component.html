@@ -1,14 +1,14 @@
 <div class="content">
   <div class="content user-info" *ngIf="userData !== undefined">
     <div class="user-info-section">
-      <h1>פרטי משתמש</h1>
+      <h1>  {{ "pages.user-page.user-details-title" | translate }}</h1>
       <div class="line"></div>
-      <p>שם: {{userData.fullName}}</p>
-      <p>מייל: {{userData.email}}</p>
-      <p>תאריך הרשמה לאתר: {{userData.createdAt | date: 'd/M/yy'}}</p>
+      <p> {{ "pages.user-page.name-label" | translate }}: {{userData.fullName}}</p>
+      <p> {{ "pages.user-page.email-label" | translate }}: {{userData.email}}</p>
+      <p> {{ "pages.user-page.registration-date-label" | translate }} : {{userData.createdAt | date: 'd/M/yy'}}</p>
     </div>
     <div class="user-info-section">
-      <h1>תכניות</h1>
+      <h1> {{ "pages.user-page.plans-title" | translate }}</h1>
       <div class="line"></div>
         <app-plan-table [tableData]="tableData" [userData]="userData"></app-plan-table>
     </div>

@@ -1,7 +1,3 @@
-* {
-  direction: rtl;
-  /* overflow-y: scroll; */
-}
 
 amplify-authenticator {
   position: fixed;
