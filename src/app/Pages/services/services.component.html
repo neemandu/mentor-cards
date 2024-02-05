@@ -1,645 +1,746 @@
-<title>Mentor-Cards עמוד הדרכה על שימוש באתר</title>
-<h1 id="title">{{title}}</h1>
+<title>{{ "pages.service-page.title" | translate }}</title>
+<h1 id="title">{{ title | translate }}</h1>
 <div id="layout" [dir]="langDirectionService.currentLangDirection">
   <div id="buttons" class="d-flex flex-column">
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==1}" type="button"
-      (click)="selectedTopicChanged(1, 'הוספת ערכת קלפים ל Mentor-cards')" mat-menu-item>הוספת ערכת קלפים ל
-      Mentor-cards</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==2}" type="button"
-      (click)="selectedTopicChanged(2, 'יצירת ערכת קלפים דיגטלית באתר שלכם')" mat-menu-item>יצירת ערכת קלפים דיגטלית
-      באתר שלכם</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==3}" type="button"
-      (click)="selectedTopicChanged(3, 'פיתוח ערכת קלפים דיגיטלית מקצה לקצה')" mat-menu-item>פיתוח ערכת קלפים דיגיטלית
-      "מקצה לקצה"</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==4}" type="button"
-      (click)="selectedTopicChanged(4, 'הדרכות וסדנאות')" mat-menu-item>הדרכות וסדנאות</button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 1 }"
+      type="button"
+      (click)="selectedTopicChanged(1)"
+      mat-menu-item
+    >
+      {{ "pages.service-page.layout.buttons.button1" | translate }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 2 }"
+      type="button"
+      (click)="selectedTopicChanged(2)"
+      mat-menu-item
+    >
+      {{ "pages.service-page.layout.buttons.button2" | translate }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 3 }"
+      type="button"
+      (click)="selectedTopicChanged(3)"
+      mat-menu-item
+    >
+      {{ "pages.service-page.layout.buttons.button3" | translate }}
+    </button>
+    <button
+      [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 4 }"
+      type="button"
+      (click)="selectedTopicChanged(4)"
+      mat-menu-item
+    >
+      {{ "pages.service-page.layout.buttons.button4" | translate }}
+    </button>
   </div>
   <div id="line"></div>
   <div id="content">
-    <div id="content1" *ngIf="selectedBtn===1">
-      <h2><b>למי זה מתאים?</b></h2>
+    <div id="content1" *ngIf="selectedBtn === 1">
+      <h2><b>    {{ "pages.service-page.content1.suitableForTitle" | translate }}</b></h2>
       <p>
-        לבעלי ערכות קלפים קיימות שרוצים ליצור גרסה דיגיטלית באתר Mentor-cards.
+        {{ "pages.service-page.content1.suitableForDescription" | translate }}
       </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>  {{ "pages.service-page.content1.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
         <li>
-          <b>התאמת תוכן ואסטרטגיה לדיגיטל</b> - הצוות שלנו יקרא את התוכן שלכם ויבצע התאמה לדיגיטל ברמה המקצועית (בהחלטה
-          משותפת ובמידת הצורך).
+          <b>>  {{ "pages.service-page.content1.benefits.adaptContentTitle" | translate }}</b> -
+          {{ "pages.service-page.content1.benefits.adaptContentDescription" | translate }}
         </li>
         <li>
-          <b>יוזר פרימיום</b> - יוזר VIP ללא הגבלת זמן לאתר Mentor-cards המקנה שימוש בכל ערכות הקלפים באתר שלנו.
+          <b>>  {{ "pages.service-page.content1.benefits.premiumUserTitle" | translate }}</b> -
+          {{ "pages.service-page.content1.benefits.premiumUserDescription" | translate }}
         </li>
         <li>
-          <b>דיגיטליזציה</b> - ערכת הקלפים שלכם מותאמת לדיגיטל - ערבוב, שליפת קלף אקראי, קלפים סמויים , גלויים, הצגה של
-          מספר קלפים על המסך ועוד! את כל מה שאנחנו נפתח בעתיד לערכות הקלפים שלנו, נפתח גם עבורכם.
+          <b>>  {{ "pages.service-page.content1.benefits.digitalizationTitle" | translate }}</b> -
+          {{ "pages.service-page.content1.benefits.digitalizationDescription" | translate }}
         </li>
         <li>
-          <b> "על היוצר"</b> - הצגה אישית ועסקית בעמוד ערכת הקלפים באופן קבוע.
-          חשיפה לכלל לקוחות Mentor-cards בהווה ובעתיד.
+          <b>>  {{ "pages.service-page.content1.benefits.creatorTitle" | translate }}</b> -
+          {{ "pages.service-page.content1.benefits.creatorDescription" | translate }}
         </li>
         <li>
-          <b>השקה ברשתות </b>- השקת ערכת הקלפים בקבוצת הפייסבוק, אינסטגרם, ודיוור יזום לכלל לקוחות Mentor-cards בעבר
-          ובהווה.
-          קהל יעד של אלפי מאמנים, מטפלים ומנחי קבוצות ייחשף לערכת הקלפים הדיגיטלית שלכם.
+          <b>>  {{ "pages.service-page.content1.benefits.networkLaunchTitle" | translate }}</b> -
+          {{ "pages.service-page.content1.benefits.networkLaunchDescription" | translate }}
         </li>
         <li>
-          <b>קישור לרכישה של ערכת הקלפים
-          </b>- בפוסט ההשקה ובעמוד ערכת הקלפים באתר באופן קבוע יהיה קישור המפנה את הלקוחות לעמוד נבחר לרכישת ערכת הקלפים
-          שלכם.
+          <b>>  {{ "pages.service-page.content1.benefits.purchaseLinkTitle" | translate }}</b> -
+          {{ "pages.service-page.content1.benefits.purchaseLinkDescription" | translate }}
         </li>
       </ul>
-      <b> לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      </b>
-      <br><br>
+      <b> {{ "pages.service-page.content1.getPriceQuote" | translate }}</b>
+      <br /><br />
       <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>{{ "pages.service-page.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.form.emailErrorRequired" | translate }} 
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.form.submitButton" | translate }}
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
-    <div id="content2" *ngIf="selectedBtn===2">
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        לבעלי ערכות קלפים קיימות שרוצים ליצור גרסה דיגיטלית באתר שלהם.
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+    <div id="content2" *ngIf="selectedBtn === 2">
+      <h2><b> {{ "pages.service-page.content2.suitableForTitle" | translate }}</b></h2>
+      <p>{{ "pages.service-page.content2.suitableForDescription" | translate }}</p>
+      <h2><b> {{ "pages.service-page.content2.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
         <li>
-          <b>התאמת תוכן ואסטרטגיה לדיגיטל</b> - הצוות שלנו יקרא את התוכן שלכם ויבצע התאמה לדיגיטל ברמה המקצועית (בהחלטה
-          משותפת ובמידת הצורך).
+          <b>>  {{ "pages.service-page.content2.benefits.adaptContentTitle" | translate }}</b> -
+          {{ "pages.service-page.content2.benefits.adaptContentDescription" | translate }}
         </li>
         <li>
-          <b>דיגיטליזציה</b> - ערכת הקלפים שלכם מותאמת לדיגיטל - ערבוב, שליפת קלף אקראי, קלפים סמויים , גלויים, הצגה של
-          מספר קלפים על המסך ועוד!<br>
-          נבצע התאמת גודל ותוכן לאתר שלכם ונספק שירות ותמיכה טכנית בכל מה שקשור לשימוש ותפעול ערכת הקלפים שלכם.
+          <b>>  {{ "pages.service-page.content2.benefits.digitalizationTitle" | translate }}</b> -
+          {{ "pages.service-page.content2.benefits.digitalizationDescription" | translate }}
         </li>
         <li>
-          <b>זכויות יוצרים</b> - זכויות היוצרים שייכות לכם, המוצר הסופי הוא 100% שלכם.
+          <b>>  {{ "pages.service-page.content2.benefits.copyrightTitle" | translate }}</b> -
+          {{ "pages.service-page.content2.benefits.copyrightDescription" | translate }}
         </li>
         <li>
-          <b>ממשק לקוח</b>- אנחנו נפגשים פעמיים - פגישת תיאום ציפיות בתחילת התהליך ופגישה לקראת סוף התהליך להצגת ערכת
-          הקלפים שלכם בדיגיטל, שאלות שלנו ודגשים שלכם.
+          <b>>  {{ "pages.service-page.content2.benefits.customerInterfaceTitle" | translate }}</b> -
+          {{ "pages.service-page.content2.benefits.customerInterfaceDescription" | translate }}
         </li>
       </ul>
-      <b> לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      </b>
-      <br><br>
+      <b> {{ "pages.service-page.content2.getPriceQuote" | translate }}</b>
+      <br /><br />
       <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>{{ "pages.service-page.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.form.emailErrorRequired" | translate }} 
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.form.submitButton" | translate }}
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
-    <div id="content3" *ngIf="selectedBtn===3">
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        למי שעדיין אין ערכת קלפים ורוצה שתהיה לו!
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+    <div id="content3" *ngIf="selectedBtn === 3">
+      <h2><b> {{ "pages.service-page.content3.suitableForTitle" | translate }}</b></h2>
+      <p>{{ "pages.service-page.content3.suitableForDescription" | translate }}</p>
+      <h2><b>{{ "pages.service-page.content3.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
         <li>
-          <b>יצירת ערכת קלפים "מאפס"</b> - אתם שולחים לנו דוגמאות ורעיונות שצברתם עד כה, אנחנו עובדים עם מאיירים
-          מקצועיים שיהפכו עבורכם את הרעיון למוצר אמיתי!
+          <b>>  {{ "pages.service-page.content3.benefits.createCardSetTitle" | translate }}</b> -
+          {{ "pages.service-page.content3.benefits.createCardSetDescription" | translate }}
         </li>
         <li>
-          <b>התאמת תוכן ואסטרטגיה לדיגיטל</b> - נבחר יחד שם ייחודי לערכה, נכתוב את תיאור הערכה (כמו הצד האחורי של ספר),
-          ואת גולת הכותרת - ספר ההדרכה של ערכת הקלפים להכוונה מלאה של קהל היעד שלכם.
+          <b>>  {{ "pages.service-page.content3.benefits.adaptContentTitle" | translate }}</b> -
+          {{ "pages.service-page.content3.benefits.adaptContentDescription" | translate }}
         </li>
         <li>
-          <b>דיגיטליזציה</b> - ערכת הקלפים מותאמת לדיגיטל - ערבוב, שליפת קלף אקראי, קלפים סמויים , גלויים, הצגה של מספר
-          קלפים על המסך ועוד!
-          כל היכולות מ"העולם האמיתי" בערכת הקלפים הדיגיטלית שלכם!
+          <b>>  {{ "pages.service-page.content3.benefits.digitalizationTitle" | translate }}</b> -
+          {{ "pages.service-page.content3.benefits.digitalizationDescription" | translate }}
         </li>
         <li>
-          <b>זכויות יוצרים</b> - זכויות היוצרים שייכות לכם, המוצר הסופי הוא 100% שלכם.
+          <b>>  {{ "pages.service-page.content3.benefits.copyrightTitle" | translate }}</b> -
+          {{ "pages.service-page.content3.benefits.copyrightDescription" | translate }}
         </li>
         <li>
-          <b>ממשק לקוח</b>- אנחנו נפגשים שלוש פעמים- פגישת תיאום ציפיות בתחילת התהליך, פגישת אמצע לדיוקים, שינויים
-          והתאמות, פגישה לקראת סוף התהליך להצגת ערכת הקלפים שלכם בדיגיטל, שאלות שלנו ודגשים שלכם.
+          <b>>  {{ "pages.service-page.content3.benefits.customerInterfaceTitle" | translate }}</b> -
+          {{ "pages.service-page.content3.benefits.customerInterfaceDescription" | translate }}
         </li>
       </ul>
-      <b> לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      </b>
-      <br><br>
-      <mat-card>
+      <b>{{ "pages.service-page.content3.benefits.getPriceQuote" | translate }}</b>
+      <br /><br />
+        <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>{{ "pages.service-page.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.form.emailErrorRequired" | translate }} 
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.form.submitButton" | translate }}
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
-    <div id="content4" *ngIf="selectedBtn===4">
-      <h2><b><u>שם הסדנא</u></b></h2>
+    <div id="content4" *ngIf="selectedBtn === 4">
+      <h2>
+        <b><u>{{ "pages.service-page.content4.workshop1.workshopName" | translate }}</u></b>
+      </h2>
+      <p>{{ "pages.service-page.content4.workshop1.workshopDescription" | translate }}</p>
+      <h2><b>{{ "pages.service-page.content4.workshop1.suitableForTitle" | translate }}</b></h2>
       <p>
-        כל מה שצריך לדעת על עבודה עם קלפים השלכתיים און ליין
+        {{ "pages.service-page.content4.workshop1.suitableForDescription" | translate }}
       </p>
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        מכללות ובתי ספר, מאמנים, מטפלים, אנשי חינוך, מנחי קבוצות ואנשים שעוסקים בעבודה עם אנשים.
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>{{ "pages.service-page.content4.workshop1.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
-        <li>
-          עקרונות מפתח בעבודה עם קלפים השלכתיים.
-        </li>
-        <li>
-          מהן האפשרויות הקיימות לעבודה עם קלפים השלכתיים און ליין?
-        </li>
-        <li>
-          מתי הכי מומלץ לשלב קלפים בתהליך הנחיה / אימון / טיפול?
-        </li>
-        <li>
-          דוגמאות לשאלות וטכניקות עבודה עם קלפים און ליין.
-        </li>
-        <li>
-          התנסות משותפת - מרגישים כמה עבודה עם קלפים משמעותית ועוצמתית.
-        </li>
-        <li>
-          סוגי התנגדויות לעבודה עם קלפים ואופן התמודדות.
-        </li>
+        <li>{{ "pages.service-page.content4.workshop1.benefits.keyPrinciples" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop1.benefits.existingOptions" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop1.benefits.whenToUseCards" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop1.benefits.examples" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop1.benefits.jointExperience" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop1.benefits.resistance" | translate }}</li>
       </ul>
-      <p>משך הסדנא 3-5 שעות תלוי בכמות המשתתפים</p>
-      <br>
+      <p>{{ "pages.service-page.content4.workshop1.workshopDuration" | translate }}</p>
+      <br />
       <div class="line"></div>
-      <br>
-      <h2><b><u>שם הסדנא</u></b></h2>
+      <br />
+      <h2>
+        <b><u>{{ "pages.service-page.content4.workshop2.workshopName" | translate }}</u></b>
+      </h2>
+      <p>{{ "pages.service-page.content4.workshop2.workshopDescription" | translate }}</p>
+      <h2><b>{{ "pages.service-page.content4.workshop2.suitableForTitle" | translate }}</b></h2>
       <p>
-        ערכים ככלי מחבר בין העובדים לארגון
+        {{ "pages.service-page.content4.workshop2.suitableForDescription" | translate }}
       </p>
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        ארגונים פרטיים וציבוריים, גופים מוסדיים השואפים ליצור חיבור בין הסגל הניהולי והעובדים לבין ערכי הליבה של הארגון
-        בדרך יצירתית וחוויתית.
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>{{ "pages.service-page.content4.workshop2.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
-        <li>
-          הגדרת המושג ערך – מה זה ערך ולמה זה חשוב להכיר את הערכים המובילים שלי ושל הארגון בו אני עובד?
-        </li>
-        <li>
-          היכרות פרטנית של כל עובד עם ערכיו וביסוס סולם הערכים הפרטי שלו.
-        </li>
-        <li>
-          קבוצות חשיבה: מציאתם והגדרתם של 5 ערכי הליבה של הארגון בעזרת משחק קלפים (הכי קשה ששיחקתם).
-        </li>
-        <li>
-          איך מחברים בין הערכים שמצאנו למטרה ולחזון של הארגון?
-        </li>
-        <li>
-          מה עושים כשעובד/קולגה שלי פועל בניגוד לערכי?
-        </li>
-      </ul>
-      <p>משך הסדנא 4-6 שעות תלוי בכמות המשתתפים</p>
-      <b> לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      </b>
-      <br><br>
+        <li>{{ "pages.service-page.content4.workshop2.benefits.valueDefinition" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop2.benefits.personalValues" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop2.benefits.thinkingGroups" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop2.benefits.connectingValues" | translate }}</li>
+        <li>{{ "pages.service-page.content4.workshop2.benefits.opposingValues" | translate }}</li>
+       </ul>
+       <p>{{ "pages.service-page.content4.workshop2.workshopDuration" | translate }}</p>
+     <b> {{ "pages.service-page.content4.getPriceQuote" | translate }}</b>
+      <br /><br />
       <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.contactForm.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.contactForm.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>  {{ "pages.service-page.contactForm.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.contactForm.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.contactForm.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.contactForm.form.emailErrorRequired" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.contactForm.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.contactForm.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
-        </mat-card-actions>
-      </mat-card><br>
-      <img src="../../../assets/class.png" class="class-img" alt="Class image">
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.contactForm.form.submitButton" | translate }}
+          </button>
+        </mat-card-actions> </mat-card
+      ><br />
+      <img
+        src="../../../assets/class.png"
+        class="class-img"
+        alt="Class image"
+      />
     </div>
   </div>
-  <img onload="this.style.opacity='1'" src="../../../assets/flowers.png" class="flower-img" alt="Decorative flowers">
+  <img
+    onload="this.style.opacity='1'"
+    src="../../../assets/flowers.png"
+    class="flower-img"
+    alt="Decorative flowers"
+  />
   <!-- <img onload="this.style.opacity='1'" src="../../../assets/class.jpeg" class="flower-img" alt="Decorative image"> -->
 </div>
 
 <div id="accordion" [dir]="langDirectionService.currentLangDirection">
   <mat-accordion>
-    <mat-expansion-panel (click)="selectedTopicChanged(1, 'הוספת ערכת קלפים ל Mentor-cards')">
+    <mat-expansion-panel
+      (click)="selectedTopicChanged(1)"
+    >
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          הוספת ערכת קלפים ל Mentor-cards</mat-panel-title>
+        <mat-panel-title>{{ "pages.service-page.accordion.workshop1.workshopName" | translate }}</mat-panel-title>
       </mat-expansion-panel-header>
-      <h2><b>למי זה מתאים?</b></h2>
+      <h2><b>{{ "pages.service-page.accordion.workshop1.suitableForTitle" | translate }}</b></h2>
       <p>
-        לבעלי ערכות קלפים קיימות שרוצים ליצור גרסה דיגיטלית באתר Mentor-cards.
+        {{ "pages.service-page.accordion.workshop1.suitableForDescription" | translate }}
       </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>  {{ "pages.service-page.accordion.workshop1.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
         <li>
-          <b>התאמת תוכן ואסטרטגיה לדיגיטל</b> - הצוות שלנו יקרא את התוכן שלכם ויבצע התאמה לדיגיטל ברמה המקצועית (בהחלטה
-          משותפת ובמידת הצורך).
+          <b> {{ "pages.service-page.accordion.workshop1.benefits.adaptContentTitle" | translate }}</b> 
+           {{ "pages.service-page.accordion.workshop1.benefits.adaptContentDescription" | translate }}
         </li>
         <li>
-          <b>יוזר פרימיום</b> - יוזר VIP ללא הגבלת זמן לאתר Mentor-cards המקנה שימוש בכל ערכות הקלפים באתר שלנו.
+          <b> {{ "pages.service-page.accordion.workshop1.benefits.premiumUserTitle" | translate }}</b> 
+           {{ "pages.service-page.accordion.workshop1.benefits.premiumUserDescription" | translate }}
         </li>
         <li>
-          <b>דיגיטליזציה</b> - ערכת הקלפים שלכם מותאמת לדיגיטל - ערבוב, שליפת קלף אקראי, קלפים סמויים , גלויים, הצגה של
-          מספר קלפים על המסך ועוד! את כל מה שאנחנו נפתח בעתיד לערכות הקלפים שלנו, נפתח גם עבורכם.
+          <b> {{ "pages.service-page.accordion.workshop1.benefits.digitalizationTitle" | translate }}</b> 
+           {{ "pages.service-page.accordion.workshop1.benefits.digitalizationDescription" | translate }}
         </li>
         <li>
-          <b> "על היוצר"</b> - הצגה אישית ועסקית בעמוד ערכת הקלפים באופן קבוע.
-          חשיפה לכלל לקוחות Mentor-cards בהווה ובעתיד.
+          <b> {{ "pages.service-page.accordion.workshop1.benefits.aboutTheCreatorTitle" | translate }}</b> 
+           {{ "pages.service-page.accordion.workshop1.benefits.aboutTheCreatorDescription" | translate }}
         </li>
         <li>
-          <b>השקה ברשתות </b>- השקת ערכת הקלפים בקבוצת הפייסבוק, אינסטגרם, ודיוור יזום לכלל לקוחות Mentor-cards בעבר
-          ובהווה.
-          קהל יעד של אלפי מאמנים, מטפלים ומנחי קבוצות ייחשף לערכת הקלפים הדיגיטלית שלכם.
+          <b> {{ "pages.service-page.accordion.workshop1.benefits.networkLaunchTitle" | translate }}</b> 
+           {{ "pages.service-page.accordion.workshop1.benefits.networkLaunchDescription" | translate }}
         </li>
         <li>
-          <b>קישור לרכישה של ערכת הקלפים
-          </b>- בפוסט ההשקה ובעמוד ערכת הקלפים באתר באופן קבוע יהיה קישור המפנה את הלקוחות לעמוד נבחר לרכישת ערכת הקלפים
-          שלכם.
+          <b> {{ "pages.service-page.accordion.workshop1.benefits.purchaseLinkTitle" | translate }}</b> 
+           {{ "pages.service-page.accordion.workshop1.benefits.purchaseLinkDescription" | translate }}
         </li>
       </ul>
-      <b> לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      </b>
-      <br><br>
-      <mat-card>
+      <b>{{ "pages.service-page.accordion.workshop1.getPriceQuote" | translate }}</b>
+      <br /><br />
+        <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>{{ "pages.service-page.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.form.emailErrorRequired" | translate }} 
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.form.submitButton" | translate }}
+          </button>
         </mat-card-actions>
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(2, 'יצירת ערכת קלפים דיגטלית באתר שלכם')">
+    <mat-expansion-panel
+      (click)="selectedTopicChanged(2)"
+    >
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          יצירת ערכת קלפים דיגטלית באתר שלכם</mat-panel-title>
+        <mat-panel-title>  {{ "pages.service-page.accordion.workshop2.workshopName" | translate }}</mat-panel-title>
       </mat-expansion-panel-header>
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        לבעלי ערכות קלפים קיימות שרוצים ליצור גרסה דיגיטלית באתר שלהם.
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>{{ "pages.service-page.accordion.workshop2.suitableForTitle" | translate }}</b></h2>
+      <p>{{ "pages.service-page.accordion.workshop2.suitableForDescription" | translate }}</p>
+      <h2><b>{{ "pages.service-page.accordion.workshop2.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
         <li>
-          <b>התאמת תוכן ואסטרטגיה לדיגיטל</b> - הצוות שלנו יקרא את התוכן שלכם ויבצע התאמה לדיגיטל ברמה המקצועית (בהחלטה
-          משותפת ובמידת הצורך).
+          <b>{{ "pages.service-page.accordion.workshop2.benefits.adaptContentTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop2.benefits.adaptContentDescription" | translate }}
         </li>
         <li>
-          <b>דיגיטליזציה</b> - ערכת הקלפים שלכם מותאמת לדיגיטל - ערבוב, שליפת קלף אקראי, קלפים סמויים , גלויים, הצגה של
-          מספר קלפים על המסך ועוד!
-          נבצע התאמת גודל ותוכן לאתר שלכם ונספק שירות ותמיכה טכנית בכל מה שקשור לשימוש ותפעול ערכת הקלפים שלכם.
+          <b>{{ "pages.service-page.accordion.workshop2.benefits.digitalizationTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop2.benefits.digitalizationDescription" | translate }}
         </li>
         <li>
-          <b>זכויות יוצרים</b> - זכויות היוצרים שייכות לכם, המוצר הסופי הוא 100% שלכם.
+          <b>{{ "pages.service-page.accordion.workshop2.benefits.copyrightTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop2.benefits.copyrightDescription" | translate }}
         </li>
         <li>
-          <b>ממשק לקוח</b>- אנחנו נפגשים פעמיים - פגישת תיאום ציפיות בתחילת התהליך ופגישה לקראת סוף התהליך להצגת ערכת
-          הקלפים שלכם בדיגיטל, שאלות שלנו ודגשים שלכם.
+          <b>{{ "pages.service-page.accordion.workshop2.benefits.customerInterfaceTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop2.benefits.customerInterfaceDescription" | translate }}
         </li>
       </ul>
-      לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      <br><br>
-      <mat-card>
+      {{ "pages.service-page.accordion.workshop2.getPriceQuote" | translate }}
+      <br /><br />
+        <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>{{ "pages.service-page.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.form.emailErrorRequired" | translate }} 
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.form.submitButton" | translate }}
+          </button>
         </mat-card-actions>
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(3, 'פיתוח ערכת קלפים דיגיטלית מקצה לקצה')">
+    <mat-expansion-panel
+      (click)="selectedTopicChanged(3)"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          פיתוח ערכת קלפים דיגיטלית "מקצה לקצה"
+          {{ "pages.service-page.accordion.workshop3.workshopName" | translate }}
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        למי שעדיין אין ערכת קלפים ורוצה שתהיה לו!
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>     {{ "pages.service-page.accordion.workshop3.suitableForTitle" | translate }}</b></h2>
+      <p> {{ "pages.service-page.accordion.workshop3.suitableForDescription" | translate }}</p>
+      <h2><b>{{ "pages.service-page.accordion.workshop3.whatDoYouGetTitle" | translate }}</b></h2>
       <ul>
         <li>
-          <b>יצירת ערכת קלפים "מאפס"</b> - אתם שולחים לנו דוגמאות ורעיונות שצברתם עד כה, אנחנו עובדים עם מאיירים
-          מקצועיים שיהפכו עבורכם את הרעיון למוצר אמיתי!
+          <b>{{ "pages.service-page.accordion.workshop3.benefits.createFromScratchTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop3.benefits.createFromScratchDescription" | translate }}
         </li>
         <li>
-          <b>התאמת תוכן ואסטרטגיה לדיגיטל</b> - נבחר יחד שם ייחודי לערכה, נכתוב את תיאור הערכה (כמו הצד האחורי של ספר),
-          ואת גולת הכותרת - ספר ההדרכה של ערכת הקלפים להכוונה מלאה של קהל היעד שלכם.
+          <b>{{ "pages.service-page.accordion.workshop3.benefits.adaptContentTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop3.benefits.adaptContentDescription" | translate }}
         </li>
         <li>
-          <b>דיגיטליזציה</b> - ערכת הקלפים מותאמת לדיגיטל - ערבוב, שליפת קלף אקראי, קלפים סמויים , גלויים, הצגה של מספר
-          קלפים על המסך ועוד!
-          כל היכולות מ"העולם האמיתי" בערכת הקלפים הדיגיטלית שלכם!
+          <b>{{ "pages.service-page.accordion.workshop3.benefits.digitalizationTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop3.benefits.digitalizationDescription" | translate }}
         </li>
         <li>
-          <b>זכויות יוצרים</b> - זכויות היוצרים שייכות לכם, המוצר הסופי הוא 100% שלכם.
+          <b>{{ "pages.service-page.accordion.workshop3.benefits.copyrightTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop3.benefits.copyrightDescription" | translate }}
         </li>
         <li>
-          <b>ממשק לקוח</b>- אנחנו נפגשים שלוש פעמים- פגישת תיאום ציפיות בתחילת התהליך, פגישת אמצע לדיוקים, שינויים
-          והתאמות, פגישה לקראת סוף התהליך להצגת ערכת הקלפים שלכם בדיגיטל, שאלות שלנו ודגשים שלכם.
+          <b>{{ "pages.service-page.accordion.workshop3.benefits.customerInterfaceTitle" | translate }}</b>
+          {{ "pages.service-page.accordion.workshop3.benefits.customerInterfaceDescription" | translate }}
         </li>
       </ul>
-      <b> לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      </b>
-      <br><br>
-      <mat-card>
+      <b>      {{ "pages.service-page.accordion.workshop3.getPriceQuote" | translate }}</b>
+      <br /><br />
+        <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>{{ "pages.service-page.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.form.emailErrorRequired" | translate }} 
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.form.submitButton" | translate }}
+          </button>
         </mat-card-actions>
       </mat-card>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(4, 'הדרכות וסדנאות')">
+    <mat-expansion-panel (click)="selectedTopicChanged(4)">
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          הדרכות וסדנאות
-        </mat-panel-title>
+        <mat-panel-title> {{ "pages.service-page.accordion.workshop4.workshopName" | translate }}</mat-panel-title>
       </mat-expansion-panel-header>
-      <h2><b><u>שם הסדנא</u></b></h2>
+      <h2>
+        <b><u>{{ "pages.service-page.accordion.workshop4.workshopDescription" | translate }} </u></b>
+      </h2>
+      <p>{{ "pages.service-page.accordion.workshop4.workshop1.workshopName" | translate }} </p>
+      <h2><b>{{ "pages.service-page.accordion.workshop4.workshop1.suitableForTitle" | translate }} </b></h2>
       <p>
-        כל מה שצריך לדעת על עבודה עם קלפים השלכתיים און ליין
+        {{ "pages.service-page.accordion.workshop4.workshop1.suitableForDescription" | translate }}
       </p>
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        מכללות ובתי ספר, מאמנים, מטפלים, אנשי חינוך, מנחי קבוצות ואנשים שעוסקים בעבודה עם אנשים.
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>  {{ "pages.service-page.accordion.workshop4.workshop1.whatDoYouGetTitle" | translate }}
+      </b></h2>
       <ul>
-        <li>
-          עקרונות מפתח בעבודה עם קלפים השלכתיים.
-        </li>
-        <li>
-          מהן האפשרויות הקיימות לעבודה עם קלפים השלכתיים און ליין?
-        </li>
-        <li>
-          מתי הכי מומלץ לשלב קלפים בתהליך הנחיה / אימון / טיפול?
-        </li>
-        <li>
-          דוגמאות לשאלות וטכניקות עבודה עם קלפים און ליין.
-        </li>
-        <li>
-          התנסות משותפת - מרגישים כמה עבודה עם קלפים משמעותית ועוצמתית.
-        </li>
-        <li>
-          סוגי התנגדויות לעבודה עם קלפים ואופן התמודדות.
-        </li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop1.benefit1" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop1.benefit2" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop1.benefit3" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop1.benefit4" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop1.benefit5" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop1.benefit6" | translate }}</li>
       </ul>
-      <p>משך הסדנא 3-5 שעות תלוי בכמות המשתתפים</p>
-      <h2><b><u>שם הסדנא</u></b></h2>
+      <p> {{ "pages.service-page.accordion.workshop4.workshop1.workshopDuration" | translate }}</p>
+      <h2>
+        <b><u>{{ "pages.service-page.accordion.workshop4.workshopName" | translate }} </u></b>
+      </h2>
+      <p>{{ "pages.service-page.accordion.workshop4.workshop2.workshopName" | translate }} </p>
+      <h2><b>{{ "pages.service-page.accordion.workshop4.workshop2.suitableForTitle" | translate }} </b></h2>
       <p>
-        ערכים ככלי מחבר בין העובדים לארגון
+        {{ "pages.service-page.accordion.workshop4.workshop2.suitableForDescription" | translate }}
       </p>
-      <h2><b>למי זה מתאים?</b></h2>
-      <p>
-        ארגונים פרטיים וציבוריים, גופים מוסדיים השואפים ליצור חיבור בין הסגל הניהולי והעובדים לבין ערכי הליבה של הארגון
-        בדרך יצירתית וחוויתית.
-      </p>
-      <h2><b>מה מקבלים?</b></h2>
+      <h2><b>  {{ "pages.service-page.accordion.workshop4.workshop2.whatDoYouGetTitle" | translate }}
+      </b></h2>
       <ul>
-        <li>
-          הגדרת המושג ערך – מה זה ערך ולמה זה חשוב להכיר את הערכים המובילים שלי ושל הארגון בו אני עובד?
-        </li>
-        <li>
-          היכרות פרטנית של כל עובד עם ערכיו וביסוס סולם הערכים הפרטי שלו.
-        </li>
-        <li>
-          קבוצות חשיבה: מציאתם והגדרתם של 5 ערכי הליבה של הארגון בעזרת משחק קלפים (הכי קשה ששיחקתם).
-        </li>
-        <li>
-          איך מחברים בין הערכים שמצאנו למטרה ולחזון של הארגון?
-        </li>
-        <li>
-          מה עושים כשעובד/קולגה שלי פועל בניגוד לערכי?
-        </li>
-      </ul>
-      <p>משך הסדנא 4-6 שעות תלוי בכמות המשתתפים</p>
-      <b> לקבלת הצעת מחיר השאירו פרטים ונחזור אליכם
-      </b>
-      <br><br>
-      <mat-card>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop2.benefit1" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop2.benefit2" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop2.benefit3" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop2.benefit4" | translate }}</li>
+        <li> {{ "pages.service-page.accordion.workshop4.workshop2.benefit5" | translate }}</li>
+        </ul>
+        <p> {{ "pages.service-page.accordion.workshop4.workshop2.workshopDuration" | translate }}</p>
+      <b> {{ "pages.service-page.accordion.workshop4.workshop2.getPriceQuote" | translate }}</b>
+      <br /><br />
+        <mat-card>
         <mat-card-content>
           <form class="d-flex flex-column" [formGroup]="contactForm">
             <mat-form-field>
-              <mat-label>שם</mat-label>
-              <input type="text" matInput formControlName="name">
+              <mat-label>{{ "pages.service-page.form.nameLabel" | translate }}</mat-label>
+              <input type="text" matInput formControlName="name" />
               <mat-error *ngIf="formControls.name.hasError('required')">
-                חובה להזין שם
+                {{ "pages.service-page.form.nameError" | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>מייל</mat-label>
-              <input type="email" matInput formControlName="email" placeholder="לדוגמא name@example.com">
-              <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
-                יש להזין מייל תקין
+              <mat-label>{{ "pages.service-page.form.emailLabel" | translate }}</mat-label>
+              <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="{{ 'pages.service-page.form.emailPlaceholder' | translate }}" />
+              <mat-error
+                *ngIf="
+                  formControls.email.hasError('email') &&
+                  !formControls.email.hasError('required')
+                "
+              >
+              {{ "pages.service-page.form.emailErrorInvalid" | translate }}
               </mat-error>
               <mat-error *ngIf="formControls.email.hasError('required')">
-                חובה להזין מייל
+                {{ "pages.service-page.form.emailErrorRequired" | translate }} 
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <mat-label>תוכן</mat-label>
+              <mat-label>{{ "pages.service-page.form.contentLabel" | translate }}</mat-label>
               <textarea matInput formControlName="content"></textarea>
               <mat-error *ngIf="formControls.content.hasError('required')">
-                חובה להזין תוכן
+                {{ "pages.service-page.form.contentError" | translate }}
               </mat-error>
             </mat-form-field>
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button id="contactUsFormSubmission" class="action-button" type="button"
-            [disabled]="contactForm.invalid || !contactForm.dirty" (click)="sendContent()">שלח</button>
+          <button
+            id="contactUsFormSubmission"
+            class="action-button"
+            type="button"
+            [disabled]="contactForm.invalid || !contactForm.dirty"
+            (click)="sendContent()"
+          >
+          {{ "pages.service-page.form.submitButton" | translate }}
+          </button>
         </mat-card-actions>
       </mat-card>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
 
-<app-information-bar [dir]="langDirectionService.currentLangDirection"></app-information-bar>
+<app-information-bar
+  [dir]="langDirectionService.currentLangDirection"
+></app-information-bar>

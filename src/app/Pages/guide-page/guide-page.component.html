@@ -5,7 +5,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 1 }"
       type="button"
-      (click)="selectedTopicChanged(1, 'מה זה מנטור - קארדס?')"
+      (click)="selectedTopicChanged(1)"
       mat-menu-item
     >
       {{ "pages.guide-page.layout.buttons.what-is-mentor-cards" | translate }}
@@ -13,7 +13,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 2 }"
       type="button"
-      (click)="selectedTopicChanged(2, 'איך מתחברים לאתר?')"
+      (click)="selectedTopicChanged(2)"
       mat-menu-item
     >
       {{ "pages.guide-page.layout.buttons.how-to-connect" | translate }}
@@ -21,7 +21,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 3 }"
       type="button"
-      (click)="selectedTopicChanged(3, 'איך מזינים קוד הטבה?')"
+      (click)="selectedTopicChanged(3)"
       mat-menu-item
     >
       {{
@@ -31,7 +31,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 4 }"
       type="button"
-      (click)="selectedTopicChanged(4, 'ספרי ההדרכה שלנו')"
+      (click)="selectedTopicChanged(4)"
       mat-menu-item
     >
       {{ "pages.guide-page.layout.buttons.our-guide-books" | translate }}
@@ -39,7 +39,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 5 }"
       type="button"
-      (click)="selectedTopicChanged(5, 'ערכות הקלפים שלנו')"
+      (click)="selectedTopicChanged(5)"
       mat-menu-item
     >
       {{ "pages.guide-page.layout.buttons.our-card-sets" | translate }}
@@ -47,7 +47,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 6 }"
       type="button"
-      (click)="selectedTopicChanged(6, 'תכניות, מחירים וביטולים')"
+      (click)="selectedTopicChanged(6)"
       mat-menu-item
     >
       {{
@@ -57,7 +57,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 7 }"
       type="button"
-      (click)="selectedTopicChanged(7, 'עקרונות מפתח בעבודה עם קלפים')"
+      (click)="selectedTopicChanged(7)"
       mat-menu-item
     >
       {{
@@ -68,7 +68,7 @@
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 8 }"
       type="button"
-      (click)="selectedTopicChanged(8, 'איך עובדים עם ערכת קלפים דיגיטלית?')"
+      (click)="selectedTopicChanged(8)"
       mat-menu-item
     >
       {{
@@ -354,7 +354,7 @@
 
 <div id="accordion" [dir]="langDirectionService.currentLangDirection">
   <mat-accordion>
-    <mat-expansion-panel (click)="selectedTopicChanged(1, '?')">
+    <mat-expansion-panel (click)="selectedTopicChanged(1)">
       <mat-expansion-panel-header>
         <mat-panel-title>{{
           "pages.guide-page.accordion.mat-accordion.mat-expansion-panel1.mat-panel-title"
@@ -382,7 +382,7 @@
       />
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(2, 'איך מתחברים לאתר?')">
+    <mat-expansion-panel (click)="selectedTopicChanged(2)">
       <mat-expansion-panel-header>
         <mat-panel-title>{{
           "pages.guide-page.accordion.mat-accordion.mat-expansion-panel2.mat-panel-title"
@@ -406,7 +406,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel
-      (click)="selectedTopicChanged(3, 'איך מזינים קוד הטבה?')"
+      (click)="selectedTopicChanged(3)"
     >
       <mat-expansion-panel-header>
         <mat-panel-title>{{
@@ -430,7 +430,7 @@
       ></iframe>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(4, 'ספרי ההדרכה שלנו')">
+    <mat-expansion-panel (click)="selectedTopicChanged(4)">
       <mat-expansion-panel-header>
         <mat-panel-title>{{
           "pages.guide-page.accordion.mat-accordion.mat-expansion-panel4.mat-panel-title"
@@ -560,7 +560,7 @@
       ></iframe>
     </mat-expansion-panel>
 
-    <mat-expansion-panel (click)="selectedTopicChanged(5, 'ערכות הקלפים שלנו')">
+    <mat-expansion-panel (click)="selectedTopicChanged(5)">
       <mat-expansion-panel-header>
         <mat-panel-title>{{
           "pages.guide-page.accordion.mat-accordion.mat-expansion-panel5.mat-panel-title"
@@ -657,7 +657,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel
-      (click)="selectedTopicChanged(6, 'תכניות, מחירים וביטולים')"
+      (click)="selectedTopicChanged(6)"
     >
       <mat-expansion-panel-header>
         <mat-panel-title>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel6.mat_expansion_panel_header.mat_panel_title"| translate }} </mat-panel-title>
@@ -686,7 +686,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel
-      (click)="selectedTopicChanged(7, 'עקרונות מפתח בעבודה עם קלפים')"
+      (click)="selectedTopicChanged(7)"
     >
       <mat-expansion-panel-header>
         <mat-panel-title>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel7.mat_expansion_panel_header.mat_panel_title"| translate }}</mat-panel-title>
@@ -739,7 +739,7 @@
     </mat-expansion-panel>
 
     <mat-expansion-panel
-      (click)="selectedTopicChanged(8, 'איך עובדים עם ערכת קלפים דיגיטלית?')"
+      (click)="selectedTopicChanged(8)"
     >
       <mat-expansion-panel-header>
         <mat-panel-title>{{"pages.guide-page.accordion.mat-accordion.mat_expansion_panel8.mat_expansion_panel_header.mat_panel_title"| translate }}</mat-panel-title>

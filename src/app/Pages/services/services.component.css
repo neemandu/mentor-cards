@@ -66,8 +66,13 @@ mat-toolbar {
   margin-left: -20px;
 }
 
-.mat-form-field {
+[dir = "rtl"].mat-form-field {
   text-align: right;
+  font-size: medium;
+}
+
+[dir = "ltr"].mat-form-field {
+  text-align: left;
   font-size: medium;
 }
 
@@ -180,20 +185,29 @@ li {
   flex-direction: row;
 }
 
-#content {
+[dir= "rtl"] #content {
   margin: 2% 2%;
   text-align: right;
   font-size: larger;
   width: 48%;
 }
 
+[dir= "ltr"] #content {
+  margin: 2% 2%;
+  text-align: left;
+  font-size: larger;
+  width: 48%;
+}
 #all-screens-img {
   width: 85%;
 }
 
-.btn {
-  margin-bottom: 1vh;
+[dir = "rtl"] .btn {
   text-align: start;
+}
+
+[dir = "ltr"] .btn {
+  text-align: end;
 }
 
 .btn:hover {
@@ -304,8 +318,17 @@ button {
   border-radius: 100% 0 0 100%
 }
 
-mat-expansion-panel {
+
+[dir= "rtl"] mat-expansion-panel {
   text-align: start;
+}
+
+[dir= "ltr"] mat-expansion-panel {
+  text-align: end;
+}
+
+[dir= "rtl"] .mat-expansion-panel-header-title {
+  margin-right: 0px !important;
 }
 
 ::ng-deep .mat-expansion-panel-body {

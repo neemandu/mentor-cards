@@ -189,11 +189,6 @@ app-pack {
   font-weight: 700;
 }
 
-:host ::ng-deep .mat-list-item-content {
-  /* padding-right: 10px; */
-  text-align: right;
-}
-
 [dir="rtl"] :host ::ng-deep .mat-list-item-content {
   text-align: right;
 }

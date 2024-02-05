@@ -1,6 +1,7 @@
 <title>{{'pages.all-packs-page.title' | translate}}</title>
 <div id="content" [dir]="langDirectionService.currentLangDirection">
-  <div id="filters" class="float-right">
+  <!-- <div *ngIf="langDirectionService.currentLangDirection == 'rtl'" id="filters" class="float-right"> -->
+    <div id="filters" ngClass="{{langDirectionService.currentLangDirection == 'rtl' ? 'float-right' : 'float-left'}}">
     <button
       id="couponCodeBtn"
       type="button"
@@ -169,6 +170,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <!-- <app-fb-chat></app-fb-chat> -->

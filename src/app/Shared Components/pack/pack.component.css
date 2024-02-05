@@ -163,7 +163,23 @@ mat-icon {
   margin-right: 5%;
 }
 
-.lock-icon {
+[dir="ltr"] .lock-icon {
+  position: relative;
+  top: 190px;
+  right:-125px;
+  color: #616161;
+  scale: 1.2;
+  margin-bottom: -24px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.7rem;
+  border: solid 2px;
+}
+
+[dir="rtl"] .lock-icon {
   position: relative;
   top: 190px;
   right: 125px;
