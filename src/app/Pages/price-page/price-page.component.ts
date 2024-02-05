@@ -14,11 +14,8 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 // import * as programData from '../../../assets/Bundle Configurations/BundleConfigs.json'
 import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approve-purchase-dialog.component';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
-<<<<<<< HEAD
 import { ReadTermsDialogComponent } from './read-terms-dialog/read-terms-dialog.component';
-=======
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
->>>>>>> feature/multi-lang
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInTwoWeeks: number = 1209600000;
 

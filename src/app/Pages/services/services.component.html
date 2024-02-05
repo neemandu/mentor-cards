@@ -2,21 +2,6 @@
 <h1 id="title">{{ title | translate }}</h1>
 <div id="layout" [dir]="langDirectionService.currentLangDirection">
   <div id="buttons" class="d-flex flex-column">
-<<<<<<< HEAD
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==1}" type="button"
-      (click)="selectedTopicChanged(1, 'הוספת ערכת קלפים ל Mentor-cards')" mat-menu-item>הוספת ערכת קלפים ל
-      Mentor-cards</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==2}" type="button"
-      (click)="selectedTopicChanged(2, 'יצירת ערכת קלפים דיגטלית באתר שלכם')" mat-menu-item>יצירת ערכת קלפים דיגטלית
-      באתר שלכם</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==3}" type="button"
-      (click)="selectedTopicChanged(3, 'פיתוח ערכת קלפים דיגיטלית מקצה לקצה')" mat-menu-item>פיתוח ערכת קלפים דיגיטלית
-      "מקצה לקצה"</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==4}" type="button"
-      (click)="selectedTopicChanged(4, 'הדרכות וסדנאות')" mat-menu-item>הדרכות וסדנאות</button>
-    <button [ngClass]="{'btn': true, 'selected-btn': selectedBtn==5}" type="button"
-      (click)="selectedTopicChanged(5, 'סופרוויזן - הדרכת מאמנים')" mat-menu-item>סופרוויזן - הדרכת מאמנים</button>
-=======
     <button
       [ngClass]="{ btn: true, 'selected-btn': selectedBtn == 1 }"
       type="button"
@@ -49,7 +34,6 @@
     >
       {{ "pages.service-page.layout.buttons.button4" | translate }}
     </button>
->>>>>>> feature/multi-lang
   </div>
   <div id="line"></div>
   <div id="content">
