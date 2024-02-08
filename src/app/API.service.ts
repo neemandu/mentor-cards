@@ -8752,14 +8752,14 @@ async GetSubscriptionPlansForOrgs(
   }
   async GetCardsPack(id: string, link: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!, $link: String) {
-        getCardsPack(id: $id) {
+        getCardsPack(id: $id, link: $link) {
           __typename
           id
           imgUrl
           description
           tags
           categories
-          cards(link: $link) {
+          cards {
             __typename
             backImgUrl
             frontImgUrl

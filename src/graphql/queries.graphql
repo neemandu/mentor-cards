@@ -1083,13 +1083,13 @@ query ListNewss(
   }
 }
 query GetCardsPack($id: ID!, $link: String) {
-  getCardsPack(id: $id) {
+  getCardsPack(id: $id, link: $link) {
     id
     imgUrl
     description
     tags
     categories
-    cards (link: $link){
+    cards {
       backImgUrl
       frontImgUrl
     }
