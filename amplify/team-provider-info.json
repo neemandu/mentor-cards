@@ -324,7 +324,11 @@
         },
         "GetAffiliateData": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetAffiliateData-5a4c68424334654e7172-build.zip"
+          "s3Key": "amplify-builds/GetAffiliateData-4c705731413572354e63-build.zip"
+        },
+        "CreateCommonLink": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/CreateCommonLink-6a306345657362313546-build.zip"
         }
       },
       "auth": {

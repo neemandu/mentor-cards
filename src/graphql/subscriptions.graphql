@@ -1,4 +1,28 @@
 # this is an auto generated file. This will be overwritten
+subscription OnCreateCommonLink {
+  onCreateCommonLink {
+    id
+    experationDate
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCommonLink {
+  onUpdateCommonLink {
+    id
+    experationDate
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCommonLink {
+  onDeleteCommonLink {
+    id
+    experationDate
+    createdAt
+    updatedAt
+  }
+}
 subscription OnCreateAffiliate($contactEmail: String) {
   onCreateAffiliate(contactEmail: $contactEmail) {
     id

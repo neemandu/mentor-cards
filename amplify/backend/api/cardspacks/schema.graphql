@@ -1,4 +1,5 @@
 type Mutation {
+  makeCommonLink(input: CreateCommonLinkInput! ): String @function(name: "CreateCommonLink-${env}")
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
@@ -12,6 +13,21 @@ type Mutation {
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
+}
+
+type CommonLink
+  @model
+  @auth(
+    rules: [
+      {
+        allow: private
+        operations: [create, read, update]
+        provider: userPools
+      }
+    ]
+  ) {
+  id: ID!
+  experationDate: AWSDateTime
 }
 
 type User
@@ -359,6 +375,10 @@ input CreateUserInput {
   phone: String
   fullName: String
   affiliateId: String
+}
+
+input CreateCommonLinkInput {
+  packId: Int
 }
 
 input addCardsPackInput {

@@ -1,4 +1,27 @@
 # this is an auto generated file. This will be overwritten
+query GetCommonLink($id: ID!) {
+  getCommonLink(id: $id) {
+    id
+    experationDate
+    createdAt
+    updatedAt
+  }
+}
+query ListCommonLinks(
+  $filter: ModelCommonLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCommonLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      experationDate
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetUser($id: ID!) {
   getUser(id: $id) {
     id

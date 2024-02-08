@@ -13,6 +13,9 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
+  onCreateCommonLink: OnCreateCommonLinkSubscription;
+  onUpdateCommonLink: OnUpdateCommonLinkSubscription;
+  onDeleteCommonLink: OnDeleteCommonLinkSubscription;
   onCreateAffiliate: OnCreateAffiliateSubscription;
   onUpdateAffiliate: OnUpdateAffiliateSubscription;
   onDeleteAffiliate: OnDeleteAffiliateSubscription;
@@ -49,6 +52,10 @@ export type __SubscriptionContainer = {
   onCreateContactUsModel: OnCreateContactUsModelSubscription;
   onUpdateContactUsModel: OnUpdateContactUsModelSubscription;
   onDeleteContactUsModel: OnDeleteContactUsModelSubscription;
+};
+
+export type CreateCommonLinkInput = {
+  packId?: number | null;
 };
 
 export type CreateUserInput = {
@@ -294,6 +301,69 @@ export type cardPackIdInput = {
   cardsPackId?: number | null;
 };
 
+export type ModelCommonLinkConditionInput = {
+  experationDate?: ModelStringInput | null;
+  and?: Array<ModelCommonLinkConditionInput | null> | null;
+  or?: Array<ModelCommonLinkConditionInput | null> | null;
+  not?: ModelCommonLinkConditionInput | null;
+};
+
+export type ModelStringInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null"
+}
+
+export type ModelSizeInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+};
+
+export type CommonLink = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCommonLinkInput = {
+  id: string;
+  experationDate?: string | null;
+};
+
+export type DeleteCommonLinkInput = {
+  id: string;
+};
+
 export type CreateAffiliateInput = {
   id?: string | null;
   affiliateID: string;
@@ -334,45 +404,6 @@ export type ModelAffiliateConditionInput = {
 };
 
 export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null"
-}
-
-export type ModelSizeInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-};
-
-export type ModelStringInput = {
   ne?: string | null;
   eq?: string | null;
   le?: string | null;
@@ -946,6 +977,20 @@ export type CreateContactUsModelInput = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+};
+
+export type ModelCommonLinkFilterInput = {
+  id?: ModelIDInput | null;
+  experationDate?: ModelStringInput | null;
+  and?: Array<ModelCommonLinkFilterInput | null> | null;
+  or?: Array<ModelCommonLinkFilterInput | null> | null;
+  not?: ModelCommonLinkFilterInput | null;
+};
+
+export type ModelCommonLinkConnection = {
+  __typename: "ModelCommonLinkConnection";
+  items: Array<CommonLink | null>;
+  nextToken?: string | null;
 };
 
 export type ModelUserFilterInput = {
@@ -1578,6 +1623,30 @@ export type GetSubscriptionPlansMutation = {
     updatedAt: string;
   } | null;
   subscriptionProviderPlanId?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateCommonLinkMutation = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCommonLinkMutation = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteCommonLinkMutation = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2561,6 +2630,26 @@ export type CreateContactUsModelMutation = {
   email?: string | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type GetCommonLinkQuery = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListCommonLinksQuery = {
+  __typename: "ModelCommonLinkConnection";
+  items: Array<{
+    __typename: "CommonLink";
+    id: string;
+    experationDate?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
 };
 
 export type GetUserQuery = {
@@ -3909,6 +3998,30 @@ export type ListContactUsModelsQuery = {
   nextToken?: string | null;
 };
 
+export type OnCreateCommonLinkSubscription = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateCommonLinkSubscription = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteCommonLinkSubscription = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type OnCreateAffiliateSubscription = {
   __typename: "Affiliate";
   id: string;
@@ -4894,6 +5007,18 @@ export type OnDeleteContactUsModelSubscription = {
   providedIn: "root"
 })
 export class APIService {
+  async MakeCommonLink(input: CreateCommonLinkInput): Promise<string | null> {
+    const statement = `mutation MakeCommonLink($input: CreateCommonLinkInput!) {
+        makeCommonLink(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <string | null>response.data.makeCommonLink;
+  }
   async CreateUser(input: CreateUserInput): Promise<CreateUserMutation> {
     const statement = `mutation CreateUser($input: CreateUserInput!) {
         createUser(input: $input) {
@@ -5492,6 +5617,78 @@ async GetSubscriptionPlansForOrgs(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.IncrementPackEntries;
+  }
+  async CreateCommonLink(
+    input: CreateCommonLinkInput,
+    condition?: ModelCommonLinkConditionInput
+  ): Promise<CreateCommonLinkMutation> {
+    const statement = `mutation CreateCommonLink($input: CreateCommonLinkInput!, $condition: ModelCommonLinkConditionInput) {
+        createCommonLink(input: $input, condition: $condition) {
+          __typename
+          id
+          experationDate
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateCommonLinkMutation>response.data.createCommonLink;
+  }
+  async UpdateCommonLink(
+    input: UpdateCommonLinkInput,
+    condition?: ModelCommonLinkConditionInput
+  ): Promise<UpdateCommonLinkMutation> {
+    const statement = `mutation UpdateCommonLink($input: UpdateCommonLinkInput!, $condition: ModelCommonLinkConditionInput) {
+        updateCommonLink(input: $input, condition: $condition) {
+          __typename
+          id
+          experationDate
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCommonLinkMutation>response.data.updateCommonLink;
+  }
+  async DeleteCommonLink(
+    input: DeleteCommonLinkInput,
+    condition?: ModelCommonLinkConditionInput
+  ): Promise<DeleteCommonLinkMutation> {
+    const statement = `mutation DeleteCommonLink($input: DeleteCommonLinkInput!, $condition: ModelCommonLinkConditionInput) {
+        deleteCommonLink(input: $input, condition: $condition) {
+          __typename
+          id
+          experationDate
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteCommonLinkMutation>response.data.deleteCommonLink;
   }
   async CreateAffiliate(
     input: CreateAffiliateInput,
@@ -7057,6 +7254,57 @@ async GetSubscriptionPlansForOrgs(
         authMode: GRAPHQL_AUTH_MODE.API_KEY}
     )) as any;
     return <CreateContactUsModelMutation>response.data.createContactUsModel;
+  }
+  async GetCommonLink(id: string): Promise<GetCommonLinkQuery> {
+    const statement = `query GetCommonLink($id: ID!) {
+        getCommonLink(id: $id) {
+          __typename
+          id
+          experationDate
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetCommonLinkQuery>response.data.getCommonLink;
+  }
+  async ListCommonLinks(
+    filter?: ModelCommonLinkFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCommonLinksQuery> {
+    const statement = `query ListCommonLinks($filter: ModelCommonLinkFilterInput, $limit: Int, $nextToken: String) {
+        listCommonLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            experationDate
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCommonLinksQuery>response.data.listCommonLinks;
   }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: ID!) {
@@ -8906,6 +9154,60 @@ async ListCardsPacksForPreview(
     )) as any;
     return <ListContactUsModelsQuery>response.data.listContactUsModels;
   }
+  OnCreateCommonLinkListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateCommonLink {
+        onCreateCommonLink {
+          __typename
+          id
+          experationDate
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
+  >;
+
+  OnUpdateCommonLinkListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateCommonLink {
+        onUpdateCommonLink {
+          __typename
+          id
+          experationDate
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
+  >;
+
+  OnDeleteCommonLinkListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteCommonLink {
+        onDeleteCommonLink {
+          __typename
+          id
+          experationDate
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
+  >;
+
   OnCreateAffiliateListener(
     contactEmail?: string
   ): Observable<
