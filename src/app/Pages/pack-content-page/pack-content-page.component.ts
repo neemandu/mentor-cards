@@ -71,7 +71,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
-      this.commonLink = params['link'];
     });
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userData = userData;
@@ -80,7 +79,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.route.queryParams.subscribe(params => {
+      this.commonLink = params['link'];
+      console.log('link:', this.commonLink);
+    });
     this.userData = this.userAuthService.userData;
 
     this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
@@ -112,7 +114,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.api.GetCardsPack(this.id, this.commonLink).then(
         (pack) => {
           this.pack = new PackContent().deseralize(pack);
-          this.isDoubleSided = pack.cards[0].backImgUrl ? false : true;
+          this.isDoubleSided = pack.cards[0].backImgUrl ? true : false;
           if(this.pack.cards.length == 0){
             this.unauthorized = true;
           }
@@ -311,7 +313,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.mixpanelService.track("ActionButtonClicked", { "Action": "Create Common Link", 'Pack id': this.id, 'Pack name': this.pack?.name });
     
     this.api.MakeCommonLink({packId:this.id}).then(data => {
-      const text = "הוזמנת להצטרף לחווית עבודה משותפת במנטור-קארדס!, לכניסה, לחצו על הקישור: "
+      const text = " הוזמנת להצטרף לחווית עבודה משותפת במנטור-קארדס! לכניסה, לחצו על הקישור: "
       const url = window.location.hostname + "/pack-view/" + data;
       navigator.clipboard.writeText(url + text).then(() => {
         this.dialog.open(CopyCommonLinkDialogComponent);

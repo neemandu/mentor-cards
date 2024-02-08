@@ -1,6 +1,9 @@
 {
   "permissions": {
     "storage": {
+      "CommonLink:@model(appsync)": [
+        "read"
+      ],
       "User:@model(appsync)": [
         "create",
         "read",

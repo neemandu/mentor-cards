@@ -8752,14 +8752,14 @@ async GetSubscriptionPlansForOrgs(
   }
   async GetCardsPack(id: string, link: string): Promise<GetCardsPackQuery> {
     const statement = `query GetCardsPack($id: ID!, $link: String) {
-        getCardsPack(id: $id, link: $link) {
+        getCardsPack(id: $id) {
           __typename
           id
           imgUrl
           description
           tags
           categories
-          cards {
+          cards (link: $link){
             __typename
             backImgUrl
             frontImgUrl
@@ -8851,7 +8851,7 @@ async GetSubscriptionPlansForOrgs(
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id, link
     };
     const response = (await API.graphql(
       { query: statement,

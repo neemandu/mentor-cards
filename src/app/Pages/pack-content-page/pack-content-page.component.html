@@ -29,11 +29,15 @@
     </button>
   </div>
   <br />
-    <div *ngIf="unauthorized" class="d-flex justify-content-center">
+    <div *ngIf="unauthorized" class="d-flex justify-content-center" style="font-size: larger;">
       {{ 'pages.packContent.unauthorized' | translate }} 
     </div>
 
-    <div *ngIf="!unauthorized" class="sticky-top d-flex justify-content-center">
+    <div *ngIf="commonLink && cards.length == 0" class="d-flex justify-content-center" style="font-size: larger;">
+      {{ 'pages.packContent.linkexpired' | translate }} 
+    </div>
+
+    <div *ngIf="!unauthorized  && (!commonLink || cards.length >0)" class="sticky-top d-flex justify-content-center">
       <div id="actions">
         <button
           id="multipleChoise"
@@ -111,8 +115,8 @@
         <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
       </button> -->
     </div>
-    <br>
-    <div class="right-side-container">
+    <div *ngIf="!commonLink" class="right-side-container">
+      <br>
       <button mat-button (click)="createCommomLink()" class="link-button">
         <mat-icon>share</mat-icon>
         לינק לשיתוף
@@ -391,7 +395,6 @@
         src="{{ card.frontImgUrl }}"
         data-src="{{ card.frontImgUrl }}"
       />
-    </div>
     <div *ngIf="isDoubleSided && !flipped">
       <img (click)="imgClick($event)"
         *ngFor="let card of selectedCards"

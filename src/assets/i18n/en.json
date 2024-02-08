@@ -373,6 +373,7 @@
       "aboutAuthor": "(About the Pack Creator)",
       "guideBook": "Guide Book",
       "unauthorized": "You do not have sufficient permissions to view this pack",
+      "linkexpired": "This link is expired. Please create a new one.",
       "actions": {
         "multipleChoice": {
           "showMultiple": "Show multiple cards",
