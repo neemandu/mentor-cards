@@ -169,7 +169,7 @@ exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
     console.log('event');
     console.log(event);
-
+    
     // user was not identified in cognito
     if(!("identity" in event)){
         return [];

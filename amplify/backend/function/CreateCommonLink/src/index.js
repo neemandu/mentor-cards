@@ -46,7 +46,7 @@ async function insertToDb(url){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     const now = new Date();
-    now.setHours(now.getHours() + 5);
+    now.setHours(now.getHours() + 3);
     
     const item = {
         id: url,
@@ -69,12 +69,16 @@ async function insertToDb(url){
 }
 
 function generateRandomString(length) {
+    console.log("generateRandomString" );
+
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+    console.log("random: " + result );
+
     return result;
   }
 

@@ -193,7 +193,7 @@
         },
         "GetCardsImages": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetCardsImages-53387561587359355933-build.zip"
+          "s3Key": "amplify-builds/GetCardsImages-323376464c3959553179-build.zip"
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -328,7 +328,7 @@
         },
         "CreateCommonLink": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateCommonLink-6a306345657362313546-build.zip"
+          "s3Key": "amplify-builds/CreateCommonLink-43676434324c4d624345-build.zip"
         }
       },
       "auth": {

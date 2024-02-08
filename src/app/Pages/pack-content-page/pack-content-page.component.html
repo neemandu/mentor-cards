@@ -111,6 +111,14 @@
         <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
       </button> -->
     </div>
+    <br>
+    <div class="right-side-container">
+      <button mat-button (click)="createCommomLink()" class="link-button">
+        <mat-icon>share</mat-icon>
+        לינק לשיתוף
+      </button>
+    </div>
+    
 <div class="d-flex flex-column align-items-center cards-container">
   <div
     *ngIf="pack && !showEditPack"

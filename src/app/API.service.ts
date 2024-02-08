@@ -8750,8 +8750,8 @@ async GetSubscriptionPlansForOrgs(
     )) as any;
     return <ListNewssQuery>response.data.listNewss;
   }
-  async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
-    const statement = `query GetCardsPack($id: ID!) {
+  async GetCardsPack(id: string, link: string): Promise<GetCardsPackQuery> {
+    const statement = `query GetCardsPack($id: ID!, $link: String) {
         getCardsPack(id: $id) {
           __typename
           id
@@ -8759,7 +8759,7 @@ async GetSubscriptionPlansForOrgs(
           description
           tags
           categories
-          cards {
+          cards(link: $link) {
             __typename
             backImgUrl
             frontImgUrl

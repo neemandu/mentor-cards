@@ -170,6 +170,10 @@ type CouponCodes
   organization: OrganizationMembership @connection
 }
 
+input CardsImgsInput {
+  link: String
+}
+
 type Organizations
   @model
   @auth(
@@ -253,7 +257,7 @@ type CardsPack
   description: String
   tags: [String]
   categories: [String]
-  cards: [Cards] @function(name: "GetCardsImages-${env}")
+  cards(link: String): [Cards] @function(name: "GetCardsImages-${env}")
   cardsPreview: [String]
   groupsIds: [String]
   guideBook: [GuideBookElement]
