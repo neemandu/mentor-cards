@@ -146,6 +146,7 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/read-terms-dialog.component';
 import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/select-language.component';
 import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
+import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 
 @NgModule({
   declarations: [
@@ -196,8 +197,9 @@ import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-co
     BlogDetailComponent,
     AllBlogsComponent,
     ReadTermsDialogComponent,
+    CopyCommonLinkDialogComponent,
     SelectLanguageComponent,
-    CopyCommonLinkDialogComponent
+    AffiliatesPageComponent
   ],
   imports: [
     BrowserModule,

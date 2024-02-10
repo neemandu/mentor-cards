@@ -15,6 +15,7 @@
     >
 
       <mat-list-option
+        color="primary"
         disableRipple
         *ngFor="let category of allCategories"
         [selected]="selectedCategories.includes(category)"
@@ -86,7 +87,7 @@
      <h1 class="header">"{{'pages.all-packs-page.sub-header' | translate}}"</h1>
     <br /> 
     <div class="searchbar">
-      <p style="text-align: center; font-size: X-large;padding-top: 1rem; max-width: 90%;margin-bottom: -0.1rem;">{{'pages.all-packs-page.sub-header-2' | translate}}</p>
+      <p style="text-align: center; font-size: X-large;padding-top: 0.5rem; padding-bottom:0.5rem; max-width: 90%;margin-bottom: -0.1rem;">{{'pages.all-packs-page.sub-header-2' | translate}}</p>
       <mat-form-field class="search">
         <mat-label>{{'pages.all-packs-page.search-placeholder' | translate}}</mat-label>
         <input
