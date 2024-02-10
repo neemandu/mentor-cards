@@ -91,6 +91,7 @@
         "additional-services": "שירותים נוספים",
         "about-us": "עלינו",
         "contact-us": "צור קשר",
+        "affiliates": "תוכנית שותפים",
         "admin": "אדמין",
         "coupon-codes": "  יש לך קוד הטבה?"
       },
@@ -1027,7 +1028,7 @@
         },
         "card4":{
           "card-header":"מטפחים איתכם קהילה",
-          "card-container1":"מטפחים איתכם קהילה",
+          "card-container1":"מיצוב אישי כאוטוריטה מקצועית בקהילת הפייסבוק",
           "card-container2":"“Mentor-Cards”",
           "card-container3":"הדרכות מקצועיות, מפגשי נטוורקינג ועוד פינוקים!"
         },

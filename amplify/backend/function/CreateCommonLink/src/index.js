@@ -42,7 +42,7 @@ async function getUser(username){
     return user;
 }
 
-async function insertToDb(url){
+async function insertToDb(url, username){
     var docClient = new AWS.DynamoDB.DocumentClient();
 
     const now = new Date();
@@ -50,7 +50,8 @@ async function insertToDb(url){
     
     const item = {
         id: url,
-        experationDate: now.toISOString()
+        experationDate: now.toISOString(),
+        createdBy: username
     }
 
     var table = env.API_CARDSPACKS_COMMONLINKTABLE_NAME;
@@ -115,7 +116,7 @@ exports.handler = async (event) => {
 
     const url = packid+"?link="+randomString;
 
-    await insertToDb(url);
+    await insertToDb(url, username);
 
-    return url;
+    return randomString;
 };

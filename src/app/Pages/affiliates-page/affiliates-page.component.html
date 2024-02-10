@@ -111,21 +111,27 @@
           <input
             type="text"
             matInput
-            formControlName="firstname"
-            placeholder=" {{
-              'pages.affiliates-page.form.form.firstname' | translate
-            }}"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            type="text"
-            matInput
             formControlName="lastname"
             placeholder=" {{
               'pages.affiliates-page.form.form.lastname' | translate
             }}"
           />
+          <mat-error *ngIf="formControls.lastname.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.name-error-required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            formControlName="firstname"
+            placeholder=" {{
+              'pages.affiliates-page.form.form.firstname' | translate
+            }}"
+          />
+          <mat-error *ngIf="formControls.firstname.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.name-error-required' | translate }}
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -136,6 +142,12 @@
               'pages.affiliates-page.form.form.email' | translate
             }}"
           />
+          <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.email-error-valid' | translate }}
+          </mat-error>
+          <mat-error *ngIf="formControls.email.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.email-error-required' | translate }}
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input

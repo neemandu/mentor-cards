@@ -303,6 +303,7 @@ export type cardPackIdInput = {
 
 export type ModelCommonLinkConditionInput = {
   experationDate?: ModelStringInput | null;
+  createdBy?: ModelStringInput | null;
   and?: Array<ModelCommonLinkConditionInput | null> | null;
   or?: Array<ModelCommonLinkConditionInput | null> | null;
   not?: ModelCommonLinkConditionInput | null;
@@ -351,6 +352,7 @@ export type CommonLink = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -358,6 +360,7 @@ export type CommonLink = {
 export type UpdateCommonLinkInput = {
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
 };
 
 export type DeleteCommonLinkInput = {
@@ -982,6 +985,7 @@ export type CreateContactUsModelInput = {
 export type ModelCommonLinkFilterInput = {
   id?: ModelIDInput | null;
   experationDate?: ModelStringInput | null;
+  createdBy?: ModelStringInput | null;
   and?: Array<ModelCommonLinkFilterInput | null> | null;
   or?: Array<ModelCommonLinkFilterInput | null> | null;
   not?: ModelCommonLinkFilterInput | null;
@@ -1631,6 +1635,7 @@ export type CreateCommonLinkMutation = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1639,6 +1644,7 @@ export type UpdateCommonLinkMutation = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1647,6 +1653,7 @@ export type DeleteCommonLinkMutation = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2636,6 +2643,7 @@ export type GetCommonLinkQuery = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2646,6 +2654,7 @@ export type ListCommonLinksQuery = {
     __typename: "CommonLink";
     id: string;
     experationDate?: string | null;
+    createdBy?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -4002,6 +4011,7 @@ export type OnCreateCommonLinkSubscription = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4010,6 +4020,7 @@ export type OnUpdateCommonLinkSubscription = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4018,6 +4029,7 @@ export type OnDeleteCommonLinkSubscription = {
   __typename: "CommonLink";
   id: string;
   experationDate?: string | null;
+  createdBy?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5627,6 +5639,7 @@ async GetSubscriptionPlansForOrgs(
           __typename
           id
           experationDate
+          createdBy
           createdAt
           updatedAt
         }
@@ -5651,6 +5664,7 @@ async GetSubscriptionPlansForOrgs(
           __typename
           id
           experationDate
+          createdBy
           createdAt
           updatedAt
         }
@@ -5675,6 +5689,7 @@ async GetSubscriptionPlansForOrgs(
           __typename
           id
           experationDate
+          createdBy
           createdAt
           updatedAt
         }
@@ -7261,6 +7276,7 @@ async GetSubscriptionPlansForOrgs(
           __typename
           id
           experationDate
+          createdBy
           createdAt
           updatedAt
         }
@@ -7285,6 +7301,7 @@ async GetSubscriptionPlansForOrgs(
             __typename
             id
             experationDate
+            createdBy
             createdAt
             updatedAt
           }
@@ -9163,6 +9180,7 @@ async ListCardsPacksForPreview(
           __typename
           id
           experationDate
+          createdBy
           createdAt
           updatedAt
         }
@@ -9181,6 +9199,7 @@ async ListCardsPacksForPreview(
           __typename
           id
           experationDate
+          createdBy
           createdAt
           updatedAt
         }
@@ -9199,6 +9218,7 @@ async ListCardsPacksForPreview(
           __typename
           id
           experationDate
+          createdBy
           createdAt
           updatedAt
         }

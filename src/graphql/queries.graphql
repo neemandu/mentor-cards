@@ -3,6 +3,7 @@ query GetCommonLink($id: ID!) {
   getCommonLink(id: $id) {
     id
     experationDate
+    createdBy
     createdAt
     updatedAt
   }
@@ -16,6 +17,7 @@ query ListCommonLinks(
     items {
       id
       experationDate
+      createdBy
       createdAt
       updatedAt
     }

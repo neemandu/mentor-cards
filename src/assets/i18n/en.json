@@ -91,6 +91,7 @@
         "additional-services": "Additional Services",
         "about-us": "About Us",
         "contact-us": "Contact Us",
+        "affiliates": "Affiliates Program",
         "admin": "Admin",
         "coupon-codes": "Do you have a discount code?"
       },
@@ -1011,7 +1012,7 @@
         },
         "card4": {
           "card-header": "We cultivate a community with you",
-          "card-container1": "We cultivate a community with you",
+          "card-container1": "Position yourself as an authority in our community",
           "card-container2": "“Mentor-Cards”",
           "card-container3": "Professional training, networking meetings and more treats!"
         },

@@ -28,6 +28,7 @@ type CommonLink
   ) {
   id: ID!
   experationDate: AWSDateTime
+  createdBy: String
 }
 
 type User

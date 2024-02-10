@@ -314,8 +314,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     
     this.api.MakeCommonLink({packId:this.id}).then(data => {
       const text = " הוזמנת להצטרף לחווית עבודה משותפת במנטור-קארדס! לכניסה, לחצו על הקישור: "
-      const url = window.location.hostname + "/pack-view/" + data;
-      navigator.clipboard.writeText(url + text).then(() => {
+      const url = window.location.href + "?link=" + data;
+      navigator.clipboard.writeText(text+url).then(() => {
         this.dialog.open(CopyCommonLinkDialogComponent);
       });
     })

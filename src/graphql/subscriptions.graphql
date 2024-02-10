@@ -3,6 +3,7 @@ subscription OnCreateCommonLink {
   onCreateCommonLink {
     id
     experationDate
+    createdBy
     createdAt
     updatedAt
   }
@@ -11,6 +12,7 @@ subscription OnUpdateCommonLink {
   onUpdateCommonLink {
     id
     experationDate
+    createdBy
     createdAt
     updatedAt
   }
@@ -19,6 +21,7 @@ subscription OnDeleteCommonLink {
   onDeleteCommonLink {
     id
     experationDate
+    createdBy
     createdAt
     updatedAt
   }
