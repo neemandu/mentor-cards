@@ -335,6 +335,11 @@ li span {
   gap: 5px; /* Adjust the gap between the icon and text */
 }
 
+::ng-deep .custom-tooltip .mat-tooltip {
+  font-size: x-large;
+}
+
+
 .link-button .mat-icon {
   vertical-align: middle;
 }
