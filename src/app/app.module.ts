@@ -144,6 +144,7 @@ import { BlogCardComponent } from './Shared Components/blog-card/blog-card.compo
 import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/select-language.component';
+import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 
 @NgModule({
   declarations: [
@@ -193,7 +194,8 @@ import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/
     BlogCardComponent,
     BlogDetailComponent,
     AllBlogsComponent,
-    SelectLanguageComponent
+    SelectLanguageComponent,
+    AffiliatesPageComponent
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,7 @@ import { DashboardComponent } from './Modules/management/dashboard/dashboard.com
 import { ServicesComponent } from './Pages/services/services.component';
 import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
+import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/all-packs-page', pathMatch: 'full' },
@@ -57,6 +58,8 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'all-blogs', component: AllBlogsComponent },
   { path: 'detail/:slug', component: BlogDetailComponent },
+  {path: 'affiliates-page', component: AffiliatesPageComponent},
+  
   {
     path: 'pack-view/:id',
     component: PackContentPageComponent//,
@@ -117,7 +120,6 @@ const routes: Routes = [
     component: ReceiptsManagementComponent,
     canActivate: [AuthGuardSiteContentManagementService],
   },
-
   { path: '**', redirectTo: '/all-packs-page' },
 ];
 

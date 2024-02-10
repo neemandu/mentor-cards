@@ -992,6 +992,48 @@
           }
         }
       }
+    },
+    "affiliates-page": {
+      "header": "Come be our partners!!",
+      "top-container-body": "Our affiliate program will allow you, in addition to additional and regular income, to receive professional tools from us, meetings with new customers, networking and business opportunities.",
+      "top-container-button": "Want to join?",
+      "card-container-header": "What does it mean in practice?",
+      "card-container-header-container": "Being our partners comes with many cool things: commissions from profits, fast support and personal attention, personal benefits for your customers, exposure to potential audience, and most importantly - joining our professional partners community!",
+      "card": {
+        "card2": {
+          "card-header": "Digital card set - on us!",
+          "card-container": "Do you have your own card set? We will create a digital version for you on our site with all your details! (Your copyrights are at the top of our priorities) + Direct link to purchase your physical card set!"
+        },
+        "card1": {
+          "card-header": "We share profits with you",
+          "card-container": "10% from system licenses for every paying customer who came through you"
+        },
+        "card4": {
+          "card-header": "We cultivate a community with you",
+          "card-container1": "We cultivate a community with you",
+          "card-container2": "“Mentor-Cards”",
+          "card-container3": "Professional training, networking meetings and more treats!"
+        },
+        "card3": {
+          "card-header": "We help you grow",
+          "card-container1": "Free system license - all card sets open at no cost, for your professionalization in the system - Walk the Talk!",
+          "card-container2": "25% discount for those who register through you on their first payment"
+        }
+      },
+      "card-container-footer": "Who is the program intended for?",
+      "card-container-footer-container": "Personal coaches | Therapists | Educators | Managers | Card set owners",
+      "form": {
+        "title": "How to join?",
+        "body": "Super simple! Leave your details here and we will get back to you with all the details:",
+        "form": {
+          "firstname": "Last name",
+          "lastname": "First name",
+          "email": "Email",
+          "mobile": "Mobile",
+          "submit-button": "Talk to me"
+        }
+      },
+      "footer": "So what do you say, shall we be partners?"
     }
   },
   "components": {
@@ -1004,6 +1046,7 @@
         "rule4": "Those interested in displaying content from this site or collaborations should contact Mentor-cards in writing and only after our written approval can you use the contents.",
         "rule5": "Mentor-cards reserves copyright and all content of the site is original or has appropriate approvals.",
         "rule6": "The availability of card packs and content may change from time to time."
-      }}
+      }
+    }
   }
 }
