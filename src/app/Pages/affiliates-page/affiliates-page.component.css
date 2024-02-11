@@ -25,7 +25,7 @@
 }
 
 .top-container__header .body {
-  font-size: 1rem;
+  font-size: 1.15rem;
   margin-bottom: 4vh;
 }
 
@@ -52,7 +52,7 @@
 
 .card-container-header .body {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.15rem;
   margin-bottom: 5vh;
   padding-inline: 30vw;
 }
@@ -98,14 +98,19 @@
   padding-right: 0;
 }
 
+.card-container-card-container{  
+  font-size: 1.07rem;
+}
 
 .card-container-card-button {
+  font-size: 1.15rem;
   border: none;
   background-color: white;
   color: #d27c2c;
 }
 
 .card-container-card-header {
+  font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 0;
 }
@@ -125,8 +130,13 @@
   color: #c67326;
 }
 
+.card-container-footer-container {
+  font-size: 1.15rem;
+}
+
 @media screen and (max-width: 600px) {
   .card-container-footer-container {
+    font-size: 1.15rem;
     padding-inline: 7vw;
   }
 }
@@ -152,11 +162,13 @@
 }
 
 .form-container .line {
+  font-size: 1.15rem;
   margin-inline: 28vw;
 }
 
 @media screen and (max-width: 600px) {
   .form-container .line {
+    font-size: 1.15rem;
     margin-inline: 17vw;
   }
 }

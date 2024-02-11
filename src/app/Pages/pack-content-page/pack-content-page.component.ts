@@ -51,10 +51,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   cards: Card[] = [];
   unauthorized: boolean = false;
   isDoubleSided: boolean = false;
-
+  isLoaded: boolean = false;
   randomSelectedCard: Card;
   randomCardIndex: number = 0;
-  commonLink: any;
+  commonLink: any = undefined;
 
   constructor(
     public route: ActivatedRoute,
@@ -119,9 +119,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
             this.unauthorized = true;
           }
           this.cards = [...this.pack.cards];
+          this.isLoaded = true;
           this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
         },
         (reject) => {
+          this.isLoaded = true;
           console.log(
             'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
             reject

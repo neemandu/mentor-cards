@@ -13,6 +13,7 @@ type Mutation {
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
+  getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")
 }
 
 type CommonLink

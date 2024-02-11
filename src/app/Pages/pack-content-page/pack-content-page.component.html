@@ -29,12 +29,12 @@
     </button>
   </div>
   <br />
-    <div *ngIf="unauthorized" class="d-flex justify-content-center" style="font-size: larger;">
+    <div *ngIf="isLoaded && unauthorized" class="d-flex justify-content-center" style="font-size: larger;">
       {{ 'pages.packContent.unauthorized' | translate }} 
     </div>
 
-    <div *ngIf="commonLink && cards.length == 0" class="d-flex justify-content-center" style="font-size: larger;">
-      {{ 'pages.packContent.linkexpired' | translate }} 
+    <div *ngIf="isLoaded && commonLink && cards.length == 0" class="d-flex justify-content-center" style="font-size: larger;">
+      {{ 'pages.packContent.linkexpired' | translate }}
     </div>
 
     <div *ngIf="!unauthorized  && (!commonLink || cards.length >0)" class="sticky-top d-flex justify-content-center">
@@ -395,6 +395,7 @@
         src="{{ card.frontImgUrl }}"
         data-src="{{ card.frontImgUrl }}"
       />
+    </div>
     <div *ngIf="isDoubleSided && !flipped">
       <img (click)="imgClick($event)"
         *ngFor="let card of selectedCards"

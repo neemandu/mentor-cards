@@ -175,7 +175,6 @@ export class AllPacksPageComponent implements OnInit {
         }
       )
     );
-    this.overlaySpinnerService.changeOverlaySpinner(true);
     this.userData = this.userAuthService.userData;
     this.getAllPacks();
   }
@@ -211,6 +210,7 @@ export class AllPacksPageComponent implements OnInit {
       this.setAllCategoryPacksToShow();
       this.setAllFavPacksToShow();
       this.initializeFilteredOptions();
+      this.overlaySpinnerService.changeOverlaySpinner(false);
       // this.sortPacks();
     } else {
       let sub = this.cardsService.allPacksReadyEmmiter.subscribe(() => {
@@ -219,6 +219,8 @@ export class AllPacksPageComponent implements OnInit {
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+
       });
       this.cardsService.getAllPacks();
     }
@@ -288,7 +290,7 @@ export class AllPacksPageComponent implements OnInit {
   packLoaded(): void {
     this.loadedPacks++;
     if (this.loadedPacks == this.allPacks.length) {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+      //this.overlaySpinnerService.changeOverlaySpinner(false);
     }
   }
 
