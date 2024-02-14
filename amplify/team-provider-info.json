@@ -86,7 +86,7 @@
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-43316d536e39634f4f50-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-4264775877756b665a53-build.zip"
         },
         "mentorcards91f3dc29CustomMessage": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
