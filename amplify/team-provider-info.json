@@ -157,8 +157,14 @@
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-736a65445a766932474b-build.zip"
         },
-        "GetAffiliateData": {},
-        "CreateCommonLink": {}
+        "GetAffiliateData": {
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/GetAffiliateData-4c705731413572354e63-build.zip"
+        },
+        "CreateCommonLink": {
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/CreateCommonLink-4a34516a526957792b68-build.zip"
+        }
       },
       "api": {
         "cardspacks": {},

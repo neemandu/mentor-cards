@@ -8,7 +8,10 @@
         "delete"
       ],
       "User:@model(appsync)": [
-        "read"
+        "create",
+        "read",
+        "update",
+        "delete"
       ]
     }
   },
