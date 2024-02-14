@@ -68,8 +68,63 @@
       </mat-card-actions>
     </mat-card>
     <mat-card id="popular-mat-card">
-      <!-- <span id="best-pack">הכי משתלמת</span> -->
-      <!-- <img id="best-deal" src="/assets/best-deal.png" alt="Best deal banner" />-->
+      <mat-card-title>  {{ "pages.price-page.yearly-plan-title" | translate }}</mat-card-title>
+      <mat-card-content>
+        <br>
+        <p class="price-line">
+          {{ "pages.price-page.year-label" | translate }} /
+          <span class="price-number"
+            >₪{{
+              yearlySubscription.fullPrice
+            }}</span
+          >
+        </p>
+        <br />
+        <ul>
+          <li>
+            {{ "pages.price-page.free-two-months-instruction" | translate }}    </li>
+          <li>
+            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
+            <li>
+              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
+            <li>
+              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          id="monthlySubscription"
+          *ngIf="userSingedIn &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
+          "
+          class="popular-purchase-btn purchase-btn"
+          type="button"
+          (click)="checkFreePeriod(monthlySubscription.id)"
+        >
+        {{ "pages.price-page.join-button-text" | translate }}  
+        </button>
+        <button
+          *ngIf="userSingedIn &&
+            userData?.status === 'PLAN' &&
+            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
+          "
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+      {{ "pages.price-page.already-registered-button-text" | translate }}  
+        </button>
+        <button
+        *ngIf="!userSingedIn"
+        class="popular-purchase-btn purchase-btn"
+        type="button"
+        (click)="signInSignUp()">
+        {{ "pages.price-page.join-button-text" | translate }}  
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <!--<mat-card id="popular-mat-card">
       <mat-card-title>   {{ "pages.price-page.popularMatCard.title" | translate }}   </mat-card-title>
       <mat-card-content>
         <br>
@@ -121,7 +176,8 @@
         {{ "pages.price-page.popularMatCard.joinBtn" | translate }}     
         </button>
       </mat-card-actions>
-    </mat-card>  
+    </mat-card>  -->
+ 
     <mat-card>
       <mat-card-title>     {{ "pages.price-page.orgsMatCard.title" | translate }}   </mat-card-title>
       <mat-card-content class="orgs"> {{ "pages.price-page.orgsMatCard.content" | translate }}  

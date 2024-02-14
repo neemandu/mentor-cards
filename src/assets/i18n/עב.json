@@ -317,7 +317,10 @@
     "price-page": {
       "our-plans-title": "התוכניות שלנו",
       "monthly-plan-title": "תכנית חודשית",
+      "yearly-plan-title": "תכנית שנתית",
+      "year-label": "שנה",
       "month-label": "חודש",
+      "free-two-months-instruction": "משלמים על 10 חודשים ומקבלים חודשיים במתנה!",
       "full-access-instruction": "גישה מלאה לעשרות ערכות קלפים",
       "variety-of-guides-instruction": "מגוון עצום של ספרי הדרכה, רעיונות להפעלה, ושאלות מנחות",
       "connect-from-anywhere-instruction": "אפשר להתחבר מכל מקום בעולם ומכל מכשיר - מחשב, טלפון נייד, טאבלט, מקרן ועוד...",
