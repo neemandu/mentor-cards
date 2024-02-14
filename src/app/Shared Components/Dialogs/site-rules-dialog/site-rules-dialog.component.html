@@ -19,14 +19,578 @@
 </div>
 <div class="line"></div>
 <div id='summery' mat-dialog-content>
-    <ul>
-        <li> {{ "components.siteRules.summery.rule1"| translate}}</li>
-        <li> {{ "components.siteRules.summery.rule2"| translate}}</li>
-        <li> {{ "components.siteRules.summery.rule3"| translate}}</li>
-        <li> {{ "components.siteRules.summery.rule4"| translate}}</li>
-        <li> {{ "components.siteRules.summery.rule5"| translate}}</li>
-        <li> {{ "components.siteRules.summery.rule6"| translate}}</li>
-    </ul>
+    
+    <style>
+        div {
+            text-align: right;
+            line-height: 115%;
+            font-family: Calibri;
+            font-size: 11pt
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 0pt 0pt 10pt
+        }
+
+        li {
+            margin-top: 0pt;
+            margin-bottom: 10pt
+        }
+
+        h1 {
+            margin-top: 12pt;
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 115%;
+            font-family: Calibri;
+            font-size: 16pt;
+            font-weight: normal;
+            color: #2f5496
+        }
+
+        h2 {
+            margin-bottom: 0pt;
+            text-align: justify;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 115%;
+            font-family: Arial;
+            font-size: 12pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        h3 {
+            margin-top: 14pt;
+            margin-bottom: 4pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 115%;
+            font-family: Calibri;
+            font-size: 14pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        h4 {
+            margin-top: 2pt;
+            margin-bottom: 0pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 115%;
+            font-family: Calibri;
+            font-size: 11pt;
+            font-weight: normal;
+            font-style: italic;
+            color: #2f5496
+        }
+
+        h5 {
+            margin-top: 11pt;
+            margin-bottom: 2pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 115%;
+            font-family: Calibri;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        h6 {
+            margin-top: 10pt;
+            margin-bottom: 2pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 115%;
+            font-family: Calibri;
+            font-size: 10pt;
+            font-weight: bold;
+            color: #000000
+        }
+
+        .Subtitle {
+            margin-top: 18pt;
+            margin-bottom: 4pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: 115%;
+            font-family: Georgia;
+            font-size: 24pt;
+            font-style: italic;
+            color: #666666
+        }
+
+        .Title {
+            margin-top: 24pt;
+            margin-bottom: 6pt;
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            line-height: normal;
+            font-family: 'Times New Roman';
+            font-size: 36pt;
+            font-weight: bold
+        }
+
+        .normal0 {
+            margin-bottom: 10pt;
+            line-height: 115%;
+            font-size: 11pt
+        }
+
+        .awlist1 {
+            list-style: none;
+            counter-reset: awlistcounter2_0
+        }
+
+        .awlist1>li:before {
+            content: counter(awlistcounter2_0) '.';
+            counter-increment: awlistcounter2_0
+        }
+
+        .awlist2 {
+            list-style: none;
+            counter-reset: awlistcounter2_1
+        }
+
+        .awlist2>li:before {
+            content: counter(awlistcounter2_0) '.'counter(awlistcounter2_1) '.';
+            counter-increment: awlistcounter2_1
+        }
+
+        .awlist3 {
+            list-style: none;
+            counter-reset: awlistcounter2_0 1
+        }
+
+        .awlist3>li:before {
+            content: counter(awlistcounter2_0) '.';
+            counter-increment: awlistcounter2_0
+        }
+
+        .awlist4 {
+            list-style: none;
+            counter-reset: awlistcounter2_2
+        }
+
+        .awlist4>li:before {
+            content: counter(awlistcounter2_0) '.'counter(awlistcounter2_1) '.'counter(awlistcounter2_2) '.';
+            counter-increment: awlistcounter2_2
+        }
+
+        .awlist5 {
+            list-style: none;
+            counter-reset: awlistcounter2_3
+        }
+
+        .awlist5>li:before {
+            content: counter(awlistcounter2_0) '.'counter(awlistcounter2_1) '.'counter(awlistcounter2_2) '.'counter(awlistcounter2_3) '.';
+            counter-increment: awlistcounter2_3
+        }
+
+        .awlist6 {
+            list-style: none;
+            counter-reset: awlistcounter2_0 9
+        }
+
+        .awlist6>li:before {
+            content: counter(awlistcounter2_0) '.';
+            counter-increment: awlistcounter2_0
+        }
+
+        .awlist7 {
+            list-style: none;
+            counter-reset: awlistcounter2_0 10
+        }
+
+        .awlist7>li:before {
+            content: counter(awlistcounter2_0) '.';
+            counter-increment: awlistcounter2_0
+        }
+
+        .awlist8 {
+            list-style: none;
+            counter-reset: awlistcounter1_0
+        }
+
+        .awlist8>li:before {
+            content: counter(awlistcounter1_0) '.';
+            counter-increment: awlistcounter1_0
+        }
+
+        .awlist9 {
+            list-style: none;
+            counter-reset: awlistcounter1_1
+        }
+
+        .awlist9>li:before {
+            content: counter(awlistcounter1_0) '.'counter(awlistcounter1_1) '.';
+            counter-increment: awlistcounter1_1
+        }
+
+        .awlist10 {
+            list-style: none;
+            counter-reset: awlistcounter1_2
+        }
+
+        .awlist10>li:before {
+            content: counter(awlistcounter1_0) '.'counter(awlistcounter1_1) '.'counter(awlistcounter1_2) '.';
+            counter-increment: awlistcounter1_2
+        }
+
+        .awlist11 {
+            list-style: none;
+            counter-reset: awlistcounter1_0 3
+        }
+
+        .awlist11>li:before {
+            content: counter(awlistcounter1_0) '.';
+            counter-increment: awlistcounter1_0
+        }
+
+        .awlist12 {
+            list-style: none;
+            counter-reset: awlistcounter1_0 4
+        }
+
+        .awlist12>li:before {
+            content: counter(awlistcounter1_0) '.';
+            counter-increment: awlistcounter1_0
+        }
+
+        .awlist13 {
+            list-style: none;
+            counter-reset: awlistcounter1_0 5
+        }
+
+        .awlist13>li:before {
+            content: counter(awlistcounter1_0) '.';
+            counter-increment: awlistcounter1_0
+        }
+    </style>
+
+
+<div class="vsc-initialized" data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1149.0">
+    <p dir="rtl" class="normal0" style="text-align:center; line-height:115%; font-size:14pt;"><u><span style="font-family:David;">תקנון, תנאי שימוש ומדיניות שינויים וביטולים לאתר מנטור-קארדס</span></u></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-bottom:7.2pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;">מנטור קארדס מברכים את בחירתכם לגלוש באתר האינטרנט שלנו המופעל בכתובת&nbsp;</span><a href="https://www.mentor-cards.com/" style="text-decoration:none;">https://www.mentor-cards.com/</a><span dir="rtl"></span><span style="font-family:David;">(״האתר״).</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-bottom:7.2pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;">באמצעות האתר אנו מספקים מגוון רחב של שירותים &ndash;</span><span style="font-family:David;">&nbsp;&nbsp;</span><span style="font-family:David;">קורסים מוקלטים ללימוד (להלן: &quot;הקורסים&quot;), רכישת חבילות קלפים ושירותים דיגיטליים נוספים, והכל כפי שמובא בהרחבה באתר (כלל שירותים יחד, להלן: &quot;השירותים</span><span style="font-family:David;" dir="rtl">&quot;).</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-bottom:7.2pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-bottom:7.2pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;">האתר מופעל על ידי דודי נאמן</span><span style="font-family:David;">&nbsp;&nbsp;</span><span style="font-family:David;">ת.ז/ח.פ</span><span style="font-family:David;">&nbsp;&nbsp;</span><span style="font-family:David;">021577911 (להלן: &quot;מפעיל/ת האתר&quot;)</span><span style="font-family:David;" dir="rtl">.</span></p>
+    <ol class="awlist1" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>כללי</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>הגלישה באתר כפופה לתנאים המפורטים בתקנון ותנאי שימוש אלו (״התקנון״). אנא קרא את התקנון בקפידה, שכן הגלישה באתר וביצוע פעולות בו מעידים על הסכמתך לתנאים הכלולים בתקנון. כמו כן, האתר שומר את זכותו לשנות את תנאי התקנון, מעת לעת, על פי שיקול דעתו הבלעדי וללא הודעה מוקדמת. מועד החלת השינוי כאמור יהיה מרגע פרסומו באתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האמור בתקנון זה מתייחס באופן שווה לבני שני המינים והשימוש בלשון זכר או נקבה הוא מטעמי נוחות בלבד.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>תנאי התקנון חלים על שימוש באתר ובתכנים הכלולים בו באמצעות כל מחשב או מכשיר תקשורת אחר (כדוגמת טלפון סלולרי, מחשבי טאבלט וכיו&quot;ב). כמו כן הם חלים על השימוש באתר, בין באמצעות רשת האינטרנט ובין באמצעות כל רשת או אמצעי תקשורת אחרים.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>הגלישה באתר מותרת בכל גיל. פעולה של קטין מתחת לגיל 18 מחייבת אישור הורה או אפוטרופוס.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>הלקוח מתחייב לשפות את מפעיל האתר בגין כל נזק שיגרם לו עקב מסירת פרטים כוזבים ושיבוש הפעלת האתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span> סרטוני הדרכה, תמונות והצגת המוצרים הינן לשם המחשה בלבד ואינם מחייבים את מפעיל האתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>במקרה שייקבע כי הוראה בתקנון זה אינה ניתנת לאכיפה או שהינה חסרת תוקף מטעם כלשהו, לא יהא בכך כדי להשפיע או לפגוע בחוקיותן, תקפותן ואכיפתן של שאר הוראות התקנון.</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-right:39.65pt; margin-bottom:6pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <ol start="2" class="awlist3" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>הגלישה באתר</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>הגלישה באתר והעיון בו אינם דורשים הרשמה, והוא פתוח לכל גולש.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>בעת השארת פרטים באתר יתבקש הגולש למסור פרטים אישיים כגון: שם פרטי, שם משפחה, טלפון וכן כתובת דואר אלקטרוני פעילה (לשיקול דעתו של האתר). מסירת פרטים חלקיים או שגויים עלולים למנוע את האפשרות להשתמש בשירות ולסכל יצירת קשר במקרה הצורך. במקרה של שינוי פרטים יש לעדכנם באתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מובהר כי אין חובה על-פי חוק למסור את המידע, אולם בלא למוסרו לא ניתן יהיה להשתמש בשירותי האתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר לא יעשה בפרטים שנמסרו שימוש, אלא בהתאם למדיניות הפרטיות של האתר המהווה חלק בלתי נפרד מתקנון זה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>השארת פרטים באתר, בכפוף להסכמת הגולש, כוללת, בין היתר, קבלת תוכן שיווקי, מידע ביחס למבצעים, עדכונים והנחות המוצעים למשתמשים רשומים.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר רשאי לקבוע, מעת לעת, דרכי זיהוי לכניסה לאתר ובכלל זה התחברות לאתר דרך הפייסבוק ו/או רשת חברתית אחרת ו/או פלטפורמה אחרת.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר רשאי למנוע מכל גולש שימוש באתר לפי שיקול דעתו המוחלט. מבלי לגרוע מהאמור לעיל, רשאי האתר לחסום גישתו אליו בכל אחד מהמקרים הבאים:<ol class="awlist4" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>אם בעת השארת פרטים באתר נמסרו במתכוון פרטים שגויים;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>במקרה שנעשה שימוש באתר לביצוע או כדי לנסות לבצע מעשה בלתי חוקי על-פי דיני מדינת ישראל, או מעשה הנחזה על פניו כבלתי חוקי כאמור, או כדי לאפשר, להקל, לסייע או לעודד ביצועו של מעשה כזה;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>אם הופרו תנאי תקנון זה;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>במקרה שנעשה שימוש באתר בניסיון להתחרות באתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>אם נעשתה על ידי גולש כל פעולה שתמנע מאחרים לגלוש ולהשתמש באתר בכל דרך שהיא.</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>השירותים המוצעים באתר</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>השירותים המוצעים על ידי האתר יופיעו ויוצגו בדפי האתר.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר שומר לעצמו את הזכות לשנות את מגוון השירותים או להפסיקם או לשנות את מחיר השירותים המוצעים באתר ומחוצה לו, ללא הודעה מוקדמת.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר אינו מחויב, בכל דרך שהיא, לקיים מגוון כלשהו של שירותים.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אופן הצגת השירותים וחבילות הקלפים באתר הינו על-פי שיקול דעתו הבלעדי של האתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>התשלום בגין רכישת שירות באתר יתבצע באמצעות כרטיס אשראי השייך לרוכש או בכל אמצעי תשלום אחר המופיע בעמוד התשלום.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>בנוסף להוראות התקנון יחולו גם הוראות תקנון חברת הסליקה או אמצעי התשלום האחר. על אף האמור לעיל, האתר שומר לעצמו את הזכות לקבוע הסדרי תשלומים אחרים לנרשמים, והכל על-פי שיקול דעתו הבלעדי.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>הרכישה באתר תבוצע בכפוף לאישור העסקה על ידי חברת האשראי. במקרה בו לא אושרה העסקה על ידי חברת האשראי, המזמין יקבל הודעה וחשבונו לא יחויב בגין העסקה.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>שירותי הקורסים המוצעים באתר</u><span dir="rtl">:</span>
+            <ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>המחיר המופיע באתר בצמוד לקורסים הינו המחיר העדכני. המחיר עשוי להשתנות מעת לעת. האתר שומר לעצמו את הזכות לשנות את מגוון השירותים והתכנים או להפסיקם או לשנות את מחיר הקורסים והשירותים המוצעים באתר ומחוצה לו, ללא הודעה מוקדמת.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר אינו מחויב, בכל דרך שהיא, לקיים מגוון כלשהו של שירותים ו/או מאמרים ו/או סרטוני הדרכה בקורסים.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אופן הצגת הקורסים והתכנים באתר הינו על-פי שיקול דעתו הבלעדי של האתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span><u>הרשמה לקורס באתר</u><span dir="rtl">:</span>
+                    <ol class="awlist4" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>על מנת לרכוש ולצפות בקורסים, האתר דורש הרשמה לאתר.</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לאחר ההרשמה ובהתאם לפרטים שהוזנו, לקוחות האתר יקבלו גישה לקורסים באמצעות סיסמה אישית.</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>בהרשמה לאתר הנך מסכים לשמור את סיסמתך בסודיות, והנך מאשר כי: (1) חשבונך הוא אישי; (2) אתה תהיה האחראי הבלעדי לכל פעולה או שימוש שיעשו מחשבונך; (3) לא תאפשר לאחר גישה לחשבונך; (4) לא תפיץ ו/או תעביר לאחר ו/או בכל אמצעי את התכנים המוצגים בחשבונך.</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>האתר שומר את זכותו לשנות את שם המשתמש שבחרת או להסיר אותו במידה וייקבע כי שם המשתמש אינו הולם או מגונה, לשיקול דעתו הבלעדי של האתר.</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>מתן השירות יתאפשר בכפוף לשיקול דעתו הבלעדי של האתר והאתר לא יהא אחראי לכל איחור ו/או עיכוב במתן השירות ו/או אי-מתן השירות, כתוצאה מכוח עליון ו/או תקלות טכניות ו/או מאירועים שאינם בשליטתו, לרבות תקלות טכניות או אחרות אצל צד שלישי.</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>התשלום בגין הרשמה לקורסים באתר יתבצע באמצעות כרטיס אשראי השייך לנרשם או בכל אמצעי תשלום אחר המופיע בעמוד התשלום.</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>בנוסף להוראות התקנון יחולו גם הוראות תקנון חברת הסליקה או אמצעי התשלום האחר. על אף האמור לעיל, האתר שומר לעצמו את הזכות לקבוע הסדרי תשלומים אחרים לנרשמים, והכל על-פי שיקול דעתו הבלעדי.</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>ההרשמה והתשלום באתר יבוצעו בכפוף לאישור העסקה על ידי חברת האשראי. במקרה בו לא אושרה העסקה על ידי חברת האשראי, יקבל הנרשם הודעה וחשבונו לא יחויב בגין העסקה.</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>ביצוע הזמנה</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>בביצוע הזמנה באתר, יתבקש המשתמש להקליד פרטים בסיסיים כמו שם, כתובת, כתובת דואר אלקטרוני, מספר טלפון ומספר כרטיס אשראי. על מנת שההזמנה תבוצע במהירות וללא תקלות יש להקפיד על מסירת הפרטים הנכונים אחרת מפעיל האתר לא יוכל להבטיח את ביצוע ההזמנה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>יודגש, כי מסירת פרטים כוזבים ביודעין עלולה לעלות כדי עבירה פלילית. נגד מגישי פרטים כוזבים עלולים להינקט צעדים משפטיים אזרחיים ופליליים, לרבות תביעות נזיקין בגין נזקים שיגרמו למפעיל האתר עקב שיבוש הפעלת האתר. כמו כן, המידע שיימסר על ידי המשתמש באתר ישמש בין השאר לשליחת דואר אלקטרוני בנוגע למבצעים מיוחדים או עדכונים באתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>במעמד ביצוע ההזמנה יבצע האתר בדיקה של אמצעי התשלום שנמסר על ידי הרוכש, ועם קבלת אישור ההזמנה ע&quot;י חברות כרטיסי האשראי תימסר למשתמש הודעה מתאימה כי ההזמנה אושרה. מובהר כי חיוב מבצע הפעולה בגין עלות הפריט הנרכש על ידו, יתבצע מיד עם סיום ביצוע ההזמנה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>עסקת הרכישה תבוצע רק לאחר השלמת תהליך ההזמנה ולאחר שמפעיל האתר יקבל אישור מהגורם הרלוונטי על ביצוע החיוב, בהתאם לנהלי העבודה הקיימים ביניהם. במקרה בו לא אושרה העסקה ע&quot;י חברות האשראי יקבל הלקוח הודעה מתאימה. השלמת עסקת הרכישה מותנית גם בכך שהפריטים המבוקשים קיימים במלאי בעת השלמת הליך ההזמנה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>ההזמנה תרשם במחשבי מפעיל האתר ויישלח אישור בדואר אלקטרוני על ביצוע הפעולה מייד בסמוך לסיום ביצוע עסקת הרכישה על ידי המשתמש באתר. במקרה של אי קבלת הודעת האישור במייל יש לפנות לשירות הלקוחות.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>המשתמש באתר יקבל חשבונית עבור ביצוע התשלום לאחר ביצועו לחשבון האמייל אותו הזין במעמד הרכישה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>יובהר ויודגש, משלוח הודעת דואר אלקטרוני בדבר רישום ההזמנה במערכת הממוחשבת של מפעיל האתר אינה מהווה ראיה בדבר השלמת הפעולה ואין במשלוח הודעת הדוא&quot;ל כדי לחייב את מפעיל האתר. מובהר כי רישומי מערכת המחשב של מפעיל האתר הכוללים רישום ממוחשב ואוטומטי של כל הפעולות באתר מהווים ראיה לכאורה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>פרטי ההזמנה כפי שהזין המשתמש בטופס ההזמנה ורישום העסקה במחשבי האתר יהוו ראייה חלוטה וסופית לנכונות העסקה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>במקרה בו לא אושרה העסקה ע״י חברת האשראי, יקבל המשתמש הודעה מתאימה על כך והוא יידרש למסור אמצעי תשלום אחר.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>אספקת מוצרים</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>על מנת להבטיח את ביצוע ההזמנה ביעילות וללא תקלות, יש להקפיד על מסירת כל הפרטים הנדרשים באתר באופן מדויק ועדכני. אם בעת ביצוע ההזמנה יימסרו פרטים שגויים, מפעיל האתר לא יוכל להבטיח שההזמנה תיקלט.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מפעיל האתר אינו אחראי לטיב השירות שניתן לידו ואינו מבטיח תוצאות מכל סוג שהוא.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>חבילות הקלפים יישלחו למשתמש בסמוך לאחר ביצוע ההזמנה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>על הלקוח מוטל האחריות לבדוק את אישור ההזמנה שנשלח בדואר האלקטרוני שמסר בכדי לוודא שאין טעות בהזמנה. לא תתקבל כל טענה כי הוזמן משהו שונה מתוכן אישור ההזמנה.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:0pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>מדיניות שינויים וביטולים</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>בקשה לשינוי או ביטול שירות תועבר לאתר באחד מאמצעי ההתקשרות המופיעים בתחתית התקנון.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>שינוי ו/או ביטול הזמנת שירות וקבלת החזר כספי יתאפשרו בתוך 14 ימים מביצוע העסקה או ממועד קבלת פרטי העסקה &nbsp;(לפי המאוחר) ובהתאם ללוחות הזמנים הבאים:<ol class="awlist4" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>עד יומיים טרם מועד מתן השירות בהחזר כספי מלא (טרם קבלת המוצרים הדיגיטליים בפועל);</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span> בטווח זמן של פחות מיומיים טרם <u>מועד מתן השירות</u> לא יינתן החזר כספי כלל (מועד מתן השירות הינו מועד התחלת ביצוע העבודה עבור השירות הנרכש, כפי שיובא בעמוד המוצר או בהסכמה בין הצדדים).</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>בשירות מתמשך (קרי שירות שנרכש ומתחדש כל חודש)&ndash; ניתן לבטל בהתאם להוראות חוק הגנת הצרכן .</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>ככל ומשתמש מעוניין לבטל חבילה שנרכשה במסגרת &quot;חבילה חודשית&quot; המשולמת מדי חודש, הוא רשאי לעשות זאת בכל עת, ובכפוף לאמור להלן:<ol class="awlist5" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                                <li dir="rtl" class="normal0" style="margin-right:0.4pt; margin-bottom:6pt; line-height:150%; font-size:12pt;">ככל שהודעת הביטול תומצא לחברה לא יאוחר מן השעה 23:59 ביום בו בוצעה עסקת הרכישה &ndash; המשתמש יזוכה במלוא עלות הרכישה.</li>
+                                <li dir="rtl" class="normal0" style="margin-right:0.4pt; margin-bottom:6pt; line-height:150%; font-size:12pt;">ככל שהודעת הביטול תומצא לחברה לאחר המועד הנקוב בסעיף &rlm;7.2.4.1 לעיל &ndash; הביטול ייכנס לתוקף בתום החודש הקלנדרי בו ניתנה ההודעה, המשתמש לא יהיה זכאי לזיכוי כלשהו, אך הוא יוכל לעשות שימוש בשירותים שמאפשרת לו חבילת השימוש עד לתום אותו חודש קלנדרי, בכפוף לתנאי חבילת השימוש.</li>
+                            </ol>
+                        </li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>יובהר, כי לא יתקבלו בקשות להחזר כספי בגין חודשים בהם הלקוח לא השתמש במערכת. על הלקוח לבקש את ביטול המנוי בהתאם ובכפוף לאמור להלן.</li>
+                    </ol>
+                </li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>ההחזר הכספי יעשה באמצעי התשלום שבו ביצע הלקוח את התשלום.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span><a id="_heading_h.gjdgxs"></a>שינוי או ביטול יאושרו לאחר שהלקוח יקבל הודעה מהאתר המאשרת זאת.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האמור בסעיף זה כפוף להוראות ביטול עסקה בהתאם לחוק הגנת הצרכן, התשמ&quot;א-1981.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>אחריות האתר</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אין לראות במידע המופיע באתר משום הבטחה לתוצאה כלשהי ו/או אחריות לאופן הפעילויות של השירותים המוצעים בו. האתר לא יהיה אחראי לשום נזק, ישיר או עקיף, אשר ייגרם לגולש כתוצאה מהסתמכות על מידע המופיע באתר ו/או בקישורים לאתרים אחרים ו/או כל מקור מידע פנימי ו/או חיצוני אחר ו/או שימוש בשירותים אשר מוצגים על ידו.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האחריות על שימוש באתר במוצריו ובהשלכות הנובעות מהם הינם באחריות המשתמש בלבד.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>המשתמש מצהיר כי השימוש שהוא עושה באתר הוא חוקי ובכל אופן האתר לא יישא בשום אחריות הנובעת משימוש לא נאות במוצרי האתר. המשתמש ישפה את מפעיל האתר בגין כל נזק שייגרם לו, במישרין ובעקיפין וכולל פיצוי בגין פגיעה במוניטין ושם טוב, בגין שימוש לא נאות באתר ושימוש במוצריו לצרכים שאינם חוקיים/ מוסריים.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-32.65pt; line-height:150%; font-size:12pt;"><span style="width:14.65pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>מידע ומצגים אודות שירותים המוצגים באתר, שמקורו בשותפיו העסקיים של האתר ששירותיהם מופיעים באתר (ככל ויופיעו) וכל תוכן ביחס לשירותים נמצאים באחריותם הבלעדית של השותפים העסקיים כאמור, ועל כן, מובן שלאתר אין כל אחריות בגין מידע מעין זה, ואין האתר ערב למידת הדיוק של מידע זה.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-32.65pt; line-height:150%; font-size:12pt;"><span style="width:14.65pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>השימוש באתר ייעשה על אחריותו הבלעדית והמלאה של כל גולש. כל החלטה שתתקבל ביחס לתכנים שיתפרסמו באתר הינה באחריותו המלאה של הגולש. האתר אינו מתחייב כי התכנים המתפרסמים באתר, יהיו מלאים, נכונים, חוקיים או מדויקים או יהלמו את ציפיותיו ודרישותיו של כל גולש. האתר לא יישא באחריות כלשהי לכל תוצאה שתנבע מהם, או משימוש בהם, או מהסתמכות עליהם.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-32.65pt; line-height:150%; font-size:12pt;"><span style="width:14.65pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>האתר לא יהיה אחראי לכל נזק (ישיר או עקיף), הפסד, עגמת נפש והוצאות שייגרמו לגולשים ו/או למשאיר פרטים באתר ו/או לצדדים שלישיים כלשהם בעקבות שימוש או הסתמכות על כל תוכן, מידע, נתון, מצג, תמונה, וידאו, אודיו, פרסומת, מוצר, שירות וכו&apos; המופעים באתר. כל הסתמכות כאמור נעשית על-פי שיקול דעתו ואחריותו הבלעדית של הגולש באתר.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-32.65pt; line-height:150%; font-size:12pt;"><span style="width:14.65pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>האתר בשום מקרה לא יהיה אחראי לנזק שנגרם לגולש האתר באמצעות יצירת קשר עם שותפיו העסקיים של האתר.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-32.65pt; line-height:150%; font-size:12pt;"><span style="width:14.65pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>האתר ממליץ לגולשים באתר לנהוג בזהירות, ולקרוא בעיון את המידע המוצג באתר ובכלל זה את המידע ביחס לשירות עצמו, תיאורו והתאמתו, כמתואר להלן.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-32.65pt; line-height:150%; font-size:12pt;"><span style="width:14.65pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>האתר בכללותו, לרבות כל המידע המופיע בו, מוצע לציבור כמות שהוא, ויהיה מדויק ונכון ככל הניתן, ואולם, יתכן והמידע אינו שלם או לחלופין, יתכן ונפלו טעויות טכניות או אחרות במידע.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>השימוש באתר ייעשה על אחריותו הבלעדית והמלאה של כל גולש. האתר אינו מתחייב כי תכנים ושירותים המתפרסמים באתר, יהיו מלאים, נכונים, חוקיים או מדויקים או יהלמו את ציפיותיו ודרישותיו של כל גולש. האתר לא יישא באחריות כלשהי לכל תוצאה שתנבע מהם, או משימוש בהם, או מהסתמכות עליהם, לרבות: (1) שגיאות, טעויות ואי-דיוקים; (2) נזק לגוף או לרכוש, מכל סוג, הנגרם עקב השימוש באתר ו/או בשירותי האתר; (3) הפרעה בגישה לאתר או מהאתר; (4) כל באג, וירוס, סוסי טרויאני וכיו״ב שעלולים להיות מועברים לאתר על ידי צד שלישי כלשהו.&nbsp;</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u>פעילות אסורה באתר</u><span dir="rtl">:</span>
+            <ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אינך רשאי להשתמש באתר אלא למטרות שלשמן הוא נועד. השימוש באתר מותר למטרות פרטיות ואישיות בלבד ואין לעשות בו שימוש למטרות מסחריות למעט כאלו שיאושרו על ידי האתר באופן ספציפי.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>כמשתמש האתר, אתה מסכים שלא:<ol class="awlist4" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לאחזר נתונים או תוכן אחר מהאתר כדי ליצור או להרכיב אוסף, מסד נתונים או מדריך ללא אישור מראש ובכתב מהאתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לעשות כל שימוש בעיצובי האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לעשות שימוש לא מורשה באתר, לרבות איסוף כתובות דוא&quot;ל וכיו״ב באמצעים אלקטרוניים או אחרים לצורך שליחת דוא&quot;ל באמצעים אוטומטיים;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לעקוף, להשבית או להפריע בדרך אחרת לאבטחה האתר, לרבות שימוש ביישומים המונעים או מגבילים את השימוש או ההעתקה של תוכן כלשהו;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>להונות או להטעות את האתר ו/או את משתמשיו;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לעשות שימוש לא נכון בשירותי התמיכה של האתר או להגיש דוחות כוזבים בנוגע לשימוש באתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לעשות שימוש אוטומטי במערכת, כגון שימוש בסקריפטים לשליחת הערות או הודעות, או שימוש בכריית נתונים, רובוטים או כלי איסוף וחילוץ נתונים דומים;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לנסות להתחזות לאדם אחר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>להשתמש במידע שהתקבל באתר על מנת להטריד, להתעלל או לפגוע באדם אחר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>להשתמש באתר כחלק מכל מאמץ להתחרות באתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>לאחזר, לפענח או להנדס לאחור חלק מהאתר, אפשרות באתר או יישום באתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>להטריד, להפחיד או לאיים על כל אחד מעובדי או סוכני האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>למחוק את זכויות היוצרים או את הודעת הזכויות הקנייניות מכל תוכן או סימן;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>להעתיק או להתאים את &nbsp;קוד האתר או חלק ממנו, כולל אך לא רק, <span dir="rtl">HTML, Java Script, PHP, CSS, JSON</span><span dir="rtl">&nbsp;או קוד אחר;</span></li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>להעלות או להעביר (או לנסות להעלות או להעביר) וירוסים, סוסים טרויאניים, או חומר אחר, כולל שימוש בדואר זבל, אשר יפריע לשימוש באתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>לבצע פעולה שתפגע או תזיק לאתר, בהתאם לשיקול דעתו של האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>להשתמש באתר באופן שאינו עולה בקנה אחד החוק, התקנות והפסיקה.</li>
+                    </ol>
+                </li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אין לקשר לתכנים מהאתר, שאינם דף הבית של האתרים (&quot;קישור עמוק&quot;) ואין להציג, או לפרסם תכנים כאמור בכל דרך אחרת, אלא אם הקישור העמוק יהיה לדף אינטרנט באתר במלואו וכפי שהוא (<span dir="rtl">AS IS</span><span dir="rtl">) כך שניתן יהיה לצפות ולהשתמש בו באופן הזהה לחלוטין לשימוש ולצפייה בו באתר. במסגרת זו, חל איסור לקשר לתכנים מהאתר, במנותק מדפי האינטרנט שבהם הם מופיעים באתרים (לדוגמה: אסור לקשר במישרין לתמונה או לקובץ גרפי באתר, אלא לעמוד המלא שבו הם מופיעים). כמו כן על כתובתו המדויקת של דף האינטרנט באתר להופיע במקום הרגיל המיועד לכך בממשק המשתמש, לדוגמה: בשורת הכתובת (</span><span dir="rtl">Status Bar</span><span dir="rtl">) בדפדפן של המשתמש. אין לשנות, לסלף או להסתיר כתובת זו ואין להחליפה בכל כתובת אחרת.</span></li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר רשאי לדרוש ביטול כל קישור עמוק כאמור לפי שיקול דעתו הבלעדי ובמקרה זה לא תעמוד כל טענה, דרישה או תביעה כלפי האתר בעניין זה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר לא יישא בכל אחריות לכל נזק שייגרם כתוצאה מכל קישור לתכנים מהאתר ומכל הצגה או פרסום של תכנים כאמור בכל דרך אחרת. האחריות המלאה והבלעדית לכל קישור, הצגה או פרסום של התכנים, היא על מבצע הקישור בלבד.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>כל שימוש באתר תוך הפרה של האמור לעיל עלול לגרום, בין היתר, לסיום או השעיית זכויותיך לשימוש באתר.</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-right:36.4pt; margin-bottom:6pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <ol start="10" class="awlist6" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span><u>תוכן צדדים שלישיים</u><span dir="rtl">:</span>
+            <ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>האתר רשאי להשתמש בקישורים לאתרים אחרים (&quot;אתרי צד שלישי&quot;) וכן במאמרים, תמונות, טקסט, גרפיקה, תמונות, עיצובים, מוסיקה, סאונד, וידאו, מידע, אפליקציות, תוכנה ותכנים או פריטים אחרים השייכים או שמקורם באתרי צד שלישי (&quot;תוכן של צד שלישי&quot;). אתרי צד שלישי ותוכן של צד שלישי אינם נחקרים, מנוטרים, או נבדקים על ידי האתר והאתר לא אחראי לתוכן של צד שלישי שפורסם דרך האתר, שהגעת אליו דרך האתר, שזמין דרך האתר או מותקן בו, כולל תוכן, חוות דעת, אמינות, נוהלי פרטיות או מדיניות אחרת של או כלולים באתרי שלישי או בתוכן של צד שלישי. שימוש בקישור או התרת שימוש או התקנה של אתרים של צד שלישי או כל תוכן של צד שלישי כלשהו אינה מרמזת על אישור או אישור לכך על ידינו.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>האתר לא לוקח אחריות על כל רכישה שתבצע מאתרי צד שלישי או מחברות אחרות אשר יבוצעו ויהיו בתוקף באופן בלעדי בינך לבין הצד השלישי הרלוונטי.</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-right:36.4pt; margin-bottom:6pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <ol start="11" class="awlist7" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span><u>השימוש באתר</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>השימוש באתר מותר למטרות פרטיות ואישיות בלבד. אין להעתיק ולהשתמש או לאפשר לאחרים להשתמש, בכל דרך אחרת בתכנים מתוך האתר, לרבות באתרי אינטרנט אחרים, בפרסומים אלקטרוניים, בפרסומי דפוס וכיו&quot;ב, לכל מטרה, בין מסחרית ובין שאינה מסחרית, שאיננה לצורך שימוש אישי ופרטי, למעט בכפוף לקבלת אישור ו/או הסכמה מפורשת מראש ובכתב.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>אין להפעיל או לאפשר להפעיל כל יישום מחשב או כל אמצעי אחר, לרבות תוכנות מסוג &nbsp;<span dir="rtl">Crawlers Robots</span><span dir="rtl">&nbsp;&nbsp;</span>וכדומה, לשם חיפוש, סריקה, העתקה או אחזור אוטומטי של תכנים מתוך האתר. בכלל זה, אין ליצור ואין להשתמש באמצעים כאמור לשם יצירת לקט, אוסף או מאגר שיכילו תכנים מהאתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>אין להציג תכנים מהאתר בכל דרך שהיא ובכלל זה באמצעות כל תוכנה, מכשיר, אביזר או פרוטוקול תקשורת המשנים את עיצובם באתר או מחסירים מהם תכנים כלשהם ובפרט פרסומות ותכנים מסחריים.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>אין לקשר לאתר מכל אתר המכיל תכנים פורנוגראפיים, תכנים המעודדים לגזענות או להפליה פסולה, או המנוגדים לחוק, או שפרסומם מנוגד לחוק או המעודדים פעילות המנוגדת לחוק.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>אין לקשר לתכנים מהאתר, שאינם דף הבית של האתרים (&quot;קישור עמוק&quot;) ואין להציג, או לפרסם תכנים כאמור בכל דרך אחרת, אלא אם הקישור העמוק יהיה לדף אינטרנט באתר במלואו וכפי שהוא (&quot;<span style="font-weight:bold;" dir="rtl">AS IS</span><span dir="rtl">&quot;) כך שניתן יהיה לצפות ולהשתמש בו באופן הזהה לחלוטין לשימוש ולצפייה בו באתר. במסגרת זו, חל איסור לקשר לתכנים מהאתר, במנותק מדפי האינטרנט שבהם הם מופיעים באתרים (לדוגמה: אסור לקשר במישרין לתמונה או לקובץ גרפי באתר, אלא לעמוד המלא שבו הם מופיעים). כמו כן על כתובתו המדויקת של דף האינטרנט באתר להופיע במקום הרגיל המיועד לכך בממשק המשתמש, לדוגמה: בשורת הכתובת (</span><span style="font-weight:bold;" dir="rtl">Status Bar&quot;</span><span dir="rtl">&quot;) בדפדפן של המשתמש. אין לשנות, לסלף או להסתיר כתובת זו ואין להחליפה בכל כתובת אחרת;</span></li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>האתר רשאי לדרוש ביטול כל קישור עמוק כאמור לפי שיקול דעתו הבלעדי ובמקרה זה לא תעמוד כל טענה, דרישה או תביעה כלפי האתר בעניין זה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>האתר לא יישא בכל אחריות לכל נזק שייגרם כתוצאה מכל קישור לתכנים מהאתר ומכל הצגה או פרסום של תכנים כאמור בכל דרך אחרת. האחריות המלאה והבלעדית לכל קישור, הצגה או פרסום של התכנים, היא על מבצע הקישור בלבד.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>על הגולש לשפות את האתר, עובדיו, מנהליו, שותפיו העסקיים או מי מטעמו בגין כל נזק, הפסד, אבדן רווח, תשלום או הוצאה שייגרמו להם - ובכלל זה שכ&quot;ט עו&quot;ד והוצאות משפט עקב הפרת תקנון זה. בנוסף, ישפה המשתמש את האתר, עובדיו, מנהליו או מי מטעמו בגין כל טענה, תביעה ו/או דרישה שתועלה נגדם על ידי צד שלישי כלשהו כתוצאה מתכנים שנמסרו על ידו לפרסום באתר וכתוצאה מקישורים שביצע לאתר.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span><u>שינויים באתר, תקלות והפסקות שירות</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>מבלי לגרוע מהאמור לעיל, האתר יוכל לשנות מעת לעת את מבנה האתר, ו/או המראה ו/או העיצוב של האתר, את היקפם וזמינותם של השירותים באתר, יהיה רשאי לגבות תשלום בעד תכנים ושירותים כאלה או אחרים על פי החלטתו. כמו כן, האתר יהיה רשאי לשנות כל היבט אחר הכרוך באתר והכל, בלא צורך להודיע על כך מראש.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>שינויים כאמור יבוצעו, בין השאר, בהתחשב באופי הדינאמי של רשת האינטרנט ובשינויים הטכנולוגיים והאחרים המתרחשים בה. מטבעם, שינויים מסוג זה עלולים להיות כרוכים בתקלות ו/או לעורר בתחילה אי נוחות וכיו&quot;ב. לא תהיה לגולשים באתר כל טענה, תביעה ו/או דרישה כלפי האתר בגין ביצוע שינויים כאמור ו/או תקלות שיתרחשו אגב ביצועם.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>האתר אינו מתחייב ששירותי האתר לא יופרעו, יינתנו כסדרם או בלא הפסקות, יתקיימו בבטחה וללא טעויות ויהיו חסינים מפני גישה בלתי מורשית למחשבי האתר או מפני נזקים, קלקולים, תקלות או כשלים - &nbsp;והכל, בחומרה, בתוכנה, בקווי ובמערכות תקשורת אצל האתר או אצל מי מספקיו.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span><u>קניין רוחני</u>:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>כל זכויות היוצרים והקניין הרוחני הם בבעלות האתר בלבד, או בבעלות צד שלישי, &nbsp;שהרשה לאתר לעשות שימוש על פי דין בתכנים אלו ובכלל זה שותפיה העסקיים של האתר. לשותפיה העסקיים של האתר אשר מעלים את חבילות הקלפים שלהם &ndash; זכויות הקניין שלהם יישמרו ובתנאי שאין מדובר בהפרה של זכויות אחרות של האתר, או של גורם צד שלישי אחר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>אין להעתיק, להפיץ, להציג בפומבי, לבצע בפומבי, להעביר לציבור, לשנות, לעבד, ליצור יצירות נגזרות, למכור או להשכיר כל חלק מן הנ&quot;ל, בין ישירות ובין באמצעות או בשיתוף צד שלישי, בכל דרך או אמצעי בין אם אלקטרוניים, מכאניים, אופטיים, אמצעי צילום או הקלטה, או בכל אמצעי ודרך אחרת, בלא קבלת הסכמה בכתב ומראש מהאתר או מבעלי הזכויות האחרים, לפי העניין, ובכפוף לתנאי ההסכמה )ככל שתינתן). הוראה זו תקפה גם ביחס לכל עיבוד, עריכה או תרגום שנעשו על ידי האתר לתכנים שהוזנו או נמסרו על ידי הגולשים לאתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>אם וככל שניתנה הסכמה כאמור, יש להימנע מלהסיר, למחוק או לשבש כל הודעה או סימן בעניין זכויות קניין רוחני, לדוגמה: סימון זכויות היוצרים ,&copy; או סימן מסחר &reg;, הנלווים לתכנים שיעשה בהם שימוש.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>סימני המסחר, צילומים, תמונות תכנים ומודעות הפרסומת של שותפיה העסקיים של האתר הינם קניינם של מפרסמים אלה בלבד. גם בהם אין לעשות בהם שימוש בלא הסכמת המפרסם מראש ובכתב.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span><u>סמכות שיפוט:</u>
+            <ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>על תקנון זה יחולו אך ורק דיני מדינת ישראל, אולם לא תהיה תחולה לכללי ברירת הדין הבינלאומי הקבועים בהם.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>לבתי המשפט במחוז השיפוט של &nbsp;באר שבע תהיה סמכות שיפוט ייחודית בכל עניין הנובע ו/או הקשור לתקנון זה.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt;"><span style="width:3pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp;&nbsp;</span>צרו קשר:<ol class="awlist2" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>האתר מקפיד על קיום הוראות החוק ומכבד את זכותם של משתמשי האתר ואחרים לפרטיות ולשם טוב. אם אתה סבור כי פורסם באתר תוכן הפוגע בך מטעם כלשהו, נא פנה אלינו לפי הפרטים שלהלן ואנו נשתדל לטפל בפנייתך בכל ההקדם. פניות כאמור ניתן להעביר באמצעים הבאים:</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:40.5pt; margin-bottom:6pt; text-align:justify;"><u><span style="font-family:David;">כתובת</span></u><span style="font-family:David;" dir="rtl">:</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:40.5pt; margin-bottom:6pt; text-align:justify; line-height:115%; font-size:12pt;"><span style="font-family:David;">מגלן 4 מיתר</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:40.5pt; margin-bottom:6pt; text-align:justify;"><u><span style="font-family:David;">טלפון</span></u><span style="font-family:David;" dir="rtl">:</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:40.5pt; margin-bottom:6pt; text-align:justify; line-height:115%; font-size:12pt;"><span style="font-family:David;" dir="rtl">0549139859</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:40.5pt; margin-bottom:6pt; text-align:justify;"><u><span style="font-family:David;">דוא&quot;ל</span></u><span style="font-family:David;" dir="rtl">:</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-bottom:7.2pt; text-indent:36pt; line-height:200%;"><span style="font-family:David;" dir="rtl">support@mentor-cards.com</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:7.2pt; margin-bottom:7.2pt; text-indent:36pt; text-align:justify; line-height:200%;"><u><span style="font-family:David;">עדכון אחרון</span></u><span style="font-family:David;">: ינואר, 2024.</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:6pt; margin-bottom:0pt; text-align:justify; line-height:150%; font-size:12pt;"><u><span style="font-family:David;">מדיניות פרטיות ושמירת סודיות</span></u></p>
+    <p dir="rtl" class="normal0" style="margin-top:6pt; margin-bottom:0pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David; font-weight:bold;" dir="rtl">&nbsp;</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:6pt; margin-bottom:0pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;">מפעיל האתר מכבד את פרטיות המשתמשים באתר ורואה חשיבות רבה בשמירה עליה.&nbsp;</span></p>
+    <p dir="rtl" class="normal0" style="margin-top:6pt; margin-bottom:0pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;">מטרת מדיניות הפרטיות המובאת להלן הינה לפרט את יחס מפעיל האתר לכל נושא הפרטיות של המשתמשים באתר, לרבות המידע שמסרו המשתמשים באתר, המידע שנאסף על נוהגיהם באתר והשימוש שעושה האתר במידע זה.</span></p>
+    <p dir="rtl" class="normal0" style="margin-bottom:6pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <ol class="awlist8" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt; font-weight:bold;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u><span style="font-weight:normal;">מדיניות פרטיות</span></u>:<ol class="awlist9" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר מכבד את פרטיות הלקוחות.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>על מנת לספק שירות איכותי, אנו עשויים להשתמש בנתונים האישיים שלך, ובין היתר, מידע על השימוש שלך באתר ומידע על המכשיר הנייד שלך &nbsp;או המחשב (&quot;המידע הנאסף באתר&quot;). המידע הנאסף באתר עשוי לשמש את האתר לצרכים הבאים:<ol class="awlist10" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לספק לך שירותים ולשפר את האתר ו/או את השירותים;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>תפעולו התקין של האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לנתח את ולנהל את האתר באופן תקין;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>שיפור שירות הלקוחות של האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>ליצירת קשר או לספק לך נתונים בקשר לאתר או לשירות.</li>
+                    </ol>
+                </li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>בעת השימוש באתר, האתר עשוי לאסוף מידע מסוים באופן אוטומטי. לדוגמה:<ol class="awlist10" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>כתובת ה- <span dir="rtl">IP</span><span dir="rtl">&nbsp;שלך, פרוטוקול האינטרנט, ספק האינטרנט או הדפדפן וסוג המכשיר ממנו אתה גולש;</span></li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>הקלטת הפעילות שלך באתר או תרשים העמודים בהם ביקרת;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>שימוש בעוגיות על מנת לזהות את המכשיר ממנו אתה גולש. קובץ עוגיות הם קובץ טקסט קטן שאתר, יישום מקוון או דואר אלקטרוני עשויים לשמור בדפדפן האינטרנט ו/או בכונן הקשיח של המחשב לשימוש בביקורים הבאים באתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>מידע שתזין, תשתף או שניתן להשיג מהשימוש שלך באתר.</li>
+                    </ol>
+                </li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אנו עשויים לשתף את המידע האישי שלך (למעט מידע רגיש כגון פרטי אשראי ומספרי תעודות זהות) עם צדדים שלישיים, כולל עם שותפינו העסקיים ונותני שירותים.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>דוגמאות לפעולות שנותני שירותים עשויים לבצע הכרוכים במידע שלך:<ol class="awlist10" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לפתח ולתחזק את האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לצבור מידע על לקוחות ו/או גולשים ולשפר את שירות הלקוחות. לאחר מכן, האתר עשוי לשתף מידע כאמור עם שותפי שיווק פוטנציאליים ומפרסמים;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>שיתוף רשתות חברתיות כגון פייסבוק, אינסטגרם ואחרות ומפרסמים נוספים ברשת כגון גוגל, טאבולה ואחרים;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:15.15pt; margin-bottom:6pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>לצרכים סטטיסטים &ndash; אנו מספקים מידע אישי לגופים וחברות שאנו נותנים בהן אמון כדי שיעבדו את המידע עבורנו לפי הוראות האתר ובאופן העולה בקנה אחד עם תקנון זה ומדיניות האתר. ככלל, וככל שלא ניתנה הסכמה מראש למסירת מידע אישי, מידע המועבר לצרכים סטטיסטים אינו כולל פרטים מזהים.</li>
+                    </ol>
+                </li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>במידה והאתר ימוזג לתוך פעילות גוף אחר או אם האתר יעבור לבעלות תאגיד אחר ניתן יהיה להעביר לתאגיד החדש את המידע הקיים באתר, אבל רק במקרה שהתאגיד יתחייב לשמור על תנאי תקנון זה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>לנותני שירותים ושותפים עסקיים כאמור ניתנת גישה לכל או לחלק מהמידע שלך, והם עשויים להשתמש בעוגיות (כהגדרתן לעיל) או בטכנולוגיית איסוף אחרות.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>חשוב לזכור שלא ניתן לערוב במאת האחוזים מפני פעילות עוינת ונחושה מצד גורמים זרים ולכן אין בפעולות אלה בטחון מוחלט והאתר לא מתחייב שהשירותים באתר יהיו חסינים באופן מוחלט מפני גישה בלתי מורשית למידע הנאסף בו.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt; font-weight:bold;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u><span style="font-weight:normal;">הרשאה לדיוור, פרסומים ופרסומת</span></u>:<ol class="awlist9" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>גולש שהשאיר פרטים באתר ומצורף לרשימת הדיוור של האתר, מאשר שימוש בפרטיו לצורך קבלת מידע שיווקי, עדכונים ופרסומות שיבצע האתר מעת לעת.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>על גולש שהשאיר פרטים כאמור תחולנה הוראות הדיוור המפורטות בתקנון להלן.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אין להשאיר פרטים של אדם אחר באתר שלא בהסכמתו ו/או ללא נוכחותו מול המסך בשעת השארת הפרטים ולאחר שהוסברו לו כל תנאי התקנון.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>בעת השארת הפרטים יתבקש הגולש למסור פרטים אישיים כגון: שם פרטי, שם משפחה, וכן כתובת דואר אלקטרוני פעילה. מסירת פרטים חלקיים או שגויים עלולים למנוע את האפשרות להשתמש בשירות ולסכל יצירת קשר במקרה הצורך. במקרה של שינוי פרטים יש לעדכנם באתר.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מובהר כי אין חובה על-פי חוק למסור פרטים באתר, אולם בלא למוסרם לא ניתן יהיה לקבל תוכן שיווקי ועדכונים מהאתר.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר לא יעשה בפרטים שנמסרו שימוש, אלא בהתאם למדיניות הפרטיות של האתר המהווה חלק בלתי נפרד מהתקנון.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>השארת פרטים באתר ואישור לקבלת תוכן שיווקי כוללת, בין היתר, קבלת תוכן שיווקי, מידע ביחס למבצעים, עדכונים והנחות המוצעים למשתמשים רשומים.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אישור דיוור (קבלת תוכן שיווקי) כאמור, מהווה את הסכמתו של הגולש למשלוח דברי פרסומת על-פי חוק התקשורת (בזק ושידורים) (תיקון מס&apos; 40) התשס&quot;ח &ndash; 2008 (<span style="font-weight:bold;" dir="rtl">&quot;</span><span dir="rtl">חוק התקשורת</span><span dir="rtl">&quot;</span>).</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מובהר כי באפשרות משאיר הפרטים להסיר עצמו בכל עת מהדיוור באמצעות לחיצה על &quot;להסרה מרשימת התפוצה&quot; שמופיע בתחתית כל דיוור שנשלח או באמצעות פנייה בדוא&quot;ל לאתר. כל עוד לא הסירו עצמו הנרשם מרשימת הדיוור כאמור, רשאי האתר, בכפוף לחוק התקשורת, להעביר לנרשם דיוור ישיר כאמור.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>אין לראות במידע בדיוור משום הבטחה לתוצאה כלשהי ו/או אחריות לשירות המוצע בו.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>הדיוור בכללותו, לרבות כל המידע המופיע בו, מוצע כמות שהוא, ויהיה מדויק ונכון ככל הניתן, ואולם, יתכן והמידע אינו שלם או לחלופין, יתכן ונפלו טעויות טכניות או אחרות במידע.</li>
+                <li dir="rtl" class="normal0" style="margin-top:7.2pt; margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:4.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp;</span>הגולש מאשר כי לא תהיה לו כל טענה בקשר למודעות פרסום ו/או פרסומות המוצגות באתר, לרבות בקשר למיקומן באתר. מובהר כי בכל הנוגע למודעות פרסום המוצגות בחסות צד שלישי, לאתר אין כל התערבות בבחירת הפרסומות המוצגות, אמיתות תוכנן וסדר הופעתן.</li>
+            </ol>
+        </li>
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt; font-weight:bold;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u><span style="font-weight:normal;">נהלי אבטחה&nbsp;</span></u>
+            <ol class="awlist9" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מפעיל האתר משתמש בתקני אבטחה גבוהים על מנת לשמור ככל האפשר על סודיות המידע ופרטיות לקוחותיה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר עושה שימוש במערכות תוכנה מתקדמות ובנהלי אבטחה מחמירים במטרה למזער סיכוני חדירה למערכותיה ולמזער חשיפה לא מורשית למאגרי המידע שבבעלותה. עם זאת, אנו מבהירים כי אין פתרון אבטחתי מושלם וכי היא אינה מתחייבת לחסינות מוחלטת של מערכותיה מפני גישה בלתי מורשית.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר מאובטח באמצעות פרוטוקול <span dir="rtl">SSL</span><span dir="rtl">,</span>&nbsp; כלומר כל התקשורת שבין הדפדפן (אצל הלקוח) לאתר (כלומר שרת האינטרנט המאחסן את העמודים) הינה מוצפנת כך שלא ניתן לפענח את המידע המועבר בין הדפדפן לאתר.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>במקרים שאינם בשליטה ו/או נובעים מכוח עליון, מפעיל האתר לא יישא באחריות לכל נזק מכל סוג שהוא, עקיף או ישיר שיגרם למשתמש ו/או למי מטעמו, אם מידע יאבד או יגיע לגורם עוין ו/או יעשה בו שימוש שלא בהרשאה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מפעיל האתר עושה מאמץ לספק למשתמש שירות תקין ובאיכות גבוהה. יחד עם זאת, מפעיל האתר אינו מתחייב שהשירות באתר לא יופרע, יינתן כסדרו או בלא הפסקות, יתקיים בבטחה וללא טעויות, ויהיה חסין מפני גישה בלתי-מורשית למחשבי מפעיל האתר, נזקים, קלקולים, תקלות או כשלים - לרבות תקלות בחומרה, בתוכנה או בקווי התקשורת לאתר - אצל מפעיל האתר או אצל מי מספקיה.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>המידע עליך מאוחסן במאגרי מידע המנוהלים על ידי מפעיל האתר ו/או על ידי צד שלישי מטעמה בכפוף לתקנות הגנת הפרטיות (אבטחת מידע), התשע&quot;ז-2017. &nbsp;מידע רגיש, כגון סיסמאות, נשמר במאגרי המידע בצורה מוצפנת. מאגרי המידע עשויים להימצא מחוץ לגבולות מדינת ישראל. בעצם השימוש באתר, אתה מסכים להעברת המידע עליך ולשמירתו מחוץ לגבולות ישראל.</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-top:6pt; margin-right:36pt; margin-bottom:0pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <ol start="4" class="awlist11" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt; font-weight:bold;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u><span style="font-weight:normal;">הזכות לעיון במידע</span></u>
+            <ol class="awlist9" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>לפי חוק הגנת הפרטיות, התשמ&quot;א-1981, הינך רשאי לעיין במידע עליך המוחזק במאגרי המידע של האתר. באם תמצא כי המידע עליך אינו נכון, שלם, ברור או מעודכן, הינך רשאי לפנות לחברה בבקשה לתקן את המידע עליך או למוחקו. אם המידע שבמאגרי המידע של האתר משמש לצורך פניה אישית אליך, הינך זכאי לדרוש שמידע זה יימחק.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>כל פנייה שלך לחברה בנוגע לעיון במידע עליך ו/או שינויו, תעשה בכתב לפי הפרטים המופיעים בעמוד יצירת הקשר באתר. מחובתך לוודא כי פנייתך הגיעה לחברה ומטופלת על ידה. מפעילת האתר מסירה מעצמה אחריות לפניות שלא הגיעו אליה ו/או שהגיעו אליה שלא בכתב ו/או שאינן קריאות וברורות.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>אם לדעתך האתר פוגע בפרטיות המשתמשים בו ככלל, או בפרטיותך כפרט, אנא פנה לחברה בכתב לפי הפרטים המופיעים בעמוד יצירת הקשר באתר.</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <ol start="5" class="awlist12" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt; font-weight:bold;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u><span style="font-weight:normal;">שימוש במידע:</span></u>
+            <ol class="awlist9" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>בפרטים אישיים שנמסרו לנו דרך האתר שלנו ייעשה שימוש למטרות שצוינו במדיניות זו, או בעמודים הרלוונטיים שבאתר. ייתכן שנשתמש בפרטים האישיים שלכם למטרות הבאות:<ol class="awlist10" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>ניהול האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>שליחת דיוור ישיר על ידי תוכנות דיוור ככל שהמשתמש אישר קבלת דיוור ישיר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>שליחת מוצרים ו/או אספקת שירותים שרכשתם דרך האתר (יובהר כי האתר רשאי להעביר את המידע &nbsp;כאמור בסעיף 84 לצדדים שליישים, וביניהם הספקים מהם נרכשת הסחורה);</li>
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>אספקה של מידע סטטיסטי בנוגע למשתמשים שלנו לצד ג&apos;;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>פרסום (ובין היתר, <span dir="rtl">Remarketing</span><span dir="rtl">)</span>&nbsp; - העברת המידע לצדדים שלישיים (גוגל, פייסבוק ועוד) לטובת קידום האתר;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>טיפול בבירורים ותלונות שהוגשו על ידכם או נוגעות אליכם וקשורות לאתר שלנו;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>שמירת האתר מאובטח ומניעת הונאות;</li>
+                        <li dir="rtl" class="normal0" style="margin-top:6pt; margin-right:15.15pt; margin-bottom:0pt; text-indent:-36pt; line-height:150%; font-size:12pt;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span>אימות של היענות לתנאי השירות המכתיבים את אופן השימוש באתר.</li>
+                    </ol>
+                </li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר מתחייב שלא לעשות כל שימוש בפרטים של לקוחותיה הרשומים באתר אלא לצרכיו של תפעול האתר ועל מנת לאפשר לבצע את ההזמנה על הצד הטוב ביותר ועל מנת להעביר מידע ללקוחות.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מפעיל האתר מתחייב כי לא יעשה שימוש בפרטי המשתמשים הרשומים באתר אלא לצרכי תפעול האתר בלבד ועל מנת לאפשר את ביצוע קבלת האינפורמציה וכן, לצורך שמירת קשר עם המשתמש.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מפעיל האתר עשוי לעשות שימוש ב&quot;עוגיות&quot;, המוכרות גם כ-&quot;<span dir="rtl">Cookies</span><span dir="rtl">&quot;,</span>&nbsp; על המחשבים של המשתמשים ועל מכשירי המובייל. מדובר בנוהל סטנדרטי הנהוג בקרב כל חנויות האינטרנט.</li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>מפעיל האתר מייחס חשיבות עליונה לאבטחת המידע של לקוחותיה, כל מידע המתקבל באתר, בין אם נמסר על-ידי הלקוח ובין אם נאסף על-ידי <span dir="rtl">Cookie</span><span dir="rtl">&nbsp;בעת שימוש באתר, הוא לשימוש בלעדי של אתר (כפוף למתן הסכמת הלקוח להיכלל ברשימת התפוצה של האתר).&nbsp;</span></li>
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>למרות האמור לעיל, מפעיל האתר יהא רשאי להעביר פרטיו האישיים של משתמש לצד שלישי במקרים בהם המשתמש ביצע מעשה או מחדל הפוגעים ו/או העלולים לפגוע במפעיל האתר ו/או בצדדים שלישיים כלשהם, המשתמש עשה שימוש בשירותי מעפילת האתר לביצוע מעשה בלתי חוקי, אם התקבל בידי מפעיל האתר צו שיפוטי המורה לו למסור את פרטי המשתמש לצד שלישי וכן בכל מחלוקת או הליך משפטי.</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-right:36.4pt; margin-bottom:6pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <ol start="6" class="awlist13" style="margin:0pt;">
+        <li dir="rtl" class="normal0" style="margin-right:18.4pt; margin-bottom:6pt; text-indent:-18pt; text-align:justify; line-height:150%; font-family:David; font-size:12pt; font-weight:bold;"><span style="width:9pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp;&nbsp;</span><u><span style="font-weight:normal;">צרו קשר</span></u>:<ol class="awlist9" style="margin-right:0pt; margin-left:0pt; padding-right:0pt;">
+                <li dir="rtl" class="normal0" style="margin-right:21.25pt; margin-bottom:6pt; text-indent:-28.35pt; line-height:150%; font-size:12pt; font-weight:normal;"><span style="width:10.35pt; font:7pt 'Times New Roman'; display:inline-block;">&nbsp; &nbsp; &nbsp; &nbsp;</span>האתר מקפיד על קיום הוראות החוק ומכבד את זכותם של משתמשי האתר ואחרים לפרטיות ולשם טוב. אם אתה סבור כי פורסם באתר תוכן הפוגע בך מטעם כלשהו, נא פנה אלינו לפי הפרטים שלהלן ואנו נשתדל לטפל בפנייתך בכל ההקדם. פניות כאמור ניתן להעביר באמצעים הבאים:</li>
+            </ol>
+        </li>
+    </ol>
+    <p dir="rtl" class="normal0" style="margin-right:36.4pt; margin-bottom:6pt; text-align:justify; line-height:150%; font-size:12pt;"><span style="font-family:David;">אימייל:&nbsp;</span><span style="font-family:David;" dir="rtl">support@mentor-cards.com</span></p>
+    <p dir="rtl" class="normal0"><span style="font-family:David;" dir="rtl">&nbsp;</span></p>
+    <p style="bottom: 10px; right: 10px; position: absolute;"><a href="https://wordtohtml.net" target="_blank" style="font-size:11px; color: #d0d0d0;">Converted to HTML with WordToHTML.net</a></p>
+</div>
     <div class="line"></div>
 </div>
 

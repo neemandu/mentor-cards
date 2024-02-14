@@ -4,12 +4,14 @@
       "User:@model(appsync)": [
         "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ],
       "Invoices:@model(appsync)": [
         "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ]
     }
   },

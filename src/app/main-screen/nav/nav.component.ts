@@ -27,6 +27,7 @@ export class NavComponent implements OnInit {
   news: any[];
   newsNotification: boolean = false;
   showBanner: boolean = true;
+  countdown = '';
 
   localesList = [
     { code: 'en', label: 'English' },
@@ -40,6 +41,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
 
+    this.startCountdown();
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userAttributes = userData;
       this.loggedIn = userData ? true : false;
@@ -55,6 +57,29 @@ export class NavComponent implements OnInit {
     }, error => {
       console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.ListNewss ~ error", error)
     })
+  }
+
+
+  startCountdown() {
+    const countDownDate = new Date('2024-01-31').getTime();
+
+    let x = setInterval(() => {
+      let now = new Date().getTime();
+      let distance = countDownDate - now;
+
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      this.countdown = days + " ימים " + hours + " שעות "
+        + minutes + " דקות ו-" + seconds + " שניות";
+
+      if (distance < 0) {
+        clearInterval(x);
+        this.countdown = "EXPIRED";
+      }
+    }, 1000);
   }
 
   viewNotifications(): void {

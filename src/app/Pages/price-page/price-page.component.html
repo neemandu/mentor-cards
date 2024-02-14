@@ -132,12 +132,13 @@
           {{ "pages.price-page.popularMatCard.payment" | translate }}  <b><u>  {{ "pages.price-page.popularMatCard.onceBold" | translate }}  </u></b>  {{ "pages.price-page.popularMatCard.inTotal" | translate }}
           <span class="price-number"
             >₪{{
-             lifeTimeSubscription.fullPrice
-            }}!
+             yearlySubscription.fullPrice
+            }}
           </span>
         </p>
         <br />     
         <ul>
+          <li>חודשיים מתנה!</li>
           <li>
             {{ "pages.price-page.popularMatCard.benefits.fullAccess" | translate }}     </li>
             <li>
@@ -152,17 +153,17 @@
         <button
           *ngIf="userSingedIn &&
             (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1200)
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
           "
           class="popular-purchase-btn purchase-btn"
-          (click)="checkFreePeriod(lifeTimeSubscription.id)"
+          (click)="checkFreePeriod(yearlySubscription.id)"
         >
         {{ "pages.price-page.popularMatCard.joinBtn" | translate }}  
         </button>
         <button
           *ngIf="userSingedIn &&
             userData?.status === 'PLAN' &&
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 1200
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
           "
           class="disabled-btn purchase-btn"
           disabled
