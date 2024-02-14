@@ -209,6 +209,14 @@
           "s3Key": "amplify-builds/mentorcards56dbf153PreSignup-355647464a3946654c70-build.zip"
         },
         "CreateShareLink": {},
+        "GetAffiliateData": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/GetAffiliateData-4c705731413572354e63-build.zip"
+        },
+        "CreateCommonLink": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/CreateCommonLink-4a34516a526957792b68-build.zip"
+        },
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/CreateUser-72644a36496f6c336f69-build.zip"
@@ -251,7 +259,7 @@
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-555a2f4b795265644151-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-50746f67726a4a4e5050-build.zip"
         },
         "mentorcards91f3dc29CustomMessage": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -285,7 +293,7 @@
         },
         "EmailEndOfTrialNotice": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/EmailEndOfTrialNotice-4f37325964343639766a-build.zip"
+          "s3Key": "amplify-builds/EmailEndOfTrialNotice-75314746556734554966-build.zip"
         },
         "GetNextReceiptId": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -321,14 +329,6 @@
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-736a65445a766932474b-build.zip"
-        },
-        "GetAffiliateData": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetAffiliateData-4c705731413572354e63-build.zip"
-        },
-        "CreateCommonLink": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/CreateCommonLink-4a34516a526957792b68-build.zip"
         }
       },
       "auth": {
