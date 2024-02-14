@@ -154,12 +154,12 @@ async function addUnsubscribeEmailToMessageQueue(email, phone, fullName) {
       });
 }
 
-async function createInvoice(user, amount, transaction_id){
+async function createInvoice(user, amount, transaction_id, subscription){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
     var d = new Date();
     var id = user.id + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    var subscription = getSubByTxID(user, transaction_id);
+    
     var extraDesc = " לערכות הבית ";
     if(subscription?.includedCardPacksIds?.length){
         extraDesc = subscription.includedCardPacksIds[0].name + " לערכת ";
@@ -238,7 +238,22 @@ exports.handler = async (event) => {
             }
             else if(event_type == "PAYMENT.SALE.COMPLETED"){
                 var amount = paypal_body.resource.amount.total;
-                await createInvoice(user, amount, transaction_id);
+                if(!user.payments){
+                    user.payments = [];
+                }
+                var subscription = getSubByTxID(user, transaction_id);
+                var now = new Date().toISOString();
+                user.payments.push({
+                    id: user.id+"_"+date,
+                    date: now,
+                    payedMonths: subscription.subscriptionPlan.billingCycleInMonths,
+                    amount: amount,
+                    currency: paypal_body.resource.amount.currency,
+                    paymentWay: "PayPal",
+                    transactionId: transaction_id
+                });
+                await saveUser(user);
+                await createInvoice(user, amount, transaction_id, subscription);
             }
         }
         const response = {

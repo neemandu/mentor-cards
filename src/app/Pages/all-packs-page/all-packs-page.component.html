@@ -1,27 +1,28 @@
-<title>Mentor-Cards כל ערכות הקלפים</title>
-<div id="content">
-
-  <div id="filters" class="float-right">
+<title>{{'pages.all-packs-page.title' | translate}}</title>
+<div id="content" [dir]="langDirectionService.currentLangDirection">
+  <!-- <div *ngIf="langDirectionService.currentLangDirection == 'rtl'" id="filters" class="float-right"> -->
+    <div id="filters" ngClass="{{langDirectionService.currentLangDirection == 'rtl' ? 'float-right' : 'float-left'}}">
     <button
       id="couponCodeBtn"
       type="button"
       (click)="openNewTab()"
     >
-    צפו בקורסים<br> הדיגיטלים שלנו >>>   </button>
-    <h3 id="filter-by-options-title">קטגוריות</h3>
+  {{'pages.all-packs-page.coupon-code-btn-1' | translate}}<br> {{'pages.all-packs-page.coupon-code-btn-2' | translate}} </button>
+    <h3 id="filter-by-options-title">{{'pages.all-packs-page.mat-section-title' | translate}}</h3>
     <mat-selection-list
       #categories
       (selectionChange)="categoriesSelectedChange($event); filterPacks()"
     >
+
       <mat-list-option
+        color="primary"
         disableRipple
-        style="direction: ltr"
         *ngFor="let category of allCategories"
         [selected]="selectedCategories.includes(category)"
         [value]="category"
       >
         <!-- <span> -->
-        {{ category }}
+          {{ 'pages.all-packs-page.categories.' + category | translate}}
         <!-- <div class="d-flex justify-content-end align-items-baseline category">
           <mat-icon class="category-color-dot" [style.color]="getCategoryColor(category)">
             circle
@@ -37,14 +38,13 @@
       </button> -->
     </mat-selection-list>
     <br />
-    <h3 id="filter-by-options-title" *ngIf="allFavPacks.length != 0">המועדפים שלי</h3>
+    <h3 id="filter-by-options-title" *ngIf="allFavPacks.length != 0">{{'pages.all-packs-page.my-Favorite'|translate}}</h3>
     <mat-selection-list
       #favorites
       (selectionChange)="favoritesSelectedChange($event); filterPacks()"
     >
       <mat-list-option
         disableRipple
-        style="direction: ltr"
         *ngFor="let fav of getAllFavoritesDesc()"
         [selected]="selectedFavorites.includes(fav)"
         [value]="fav"
@@ -84,12 +84,12 @@
   </div> -->
   <!--test-->
   <div id="test" class="all-packs-view" #new>
-     <h1 class="header">"כשנגמרות המילים, נכנסים הקלפים"</h1>
+     <h1 class="header">"{{'pages.all-packs-page.sub-header' | translate}}"</h1>
     <br /> 
     <div class="searchbar">
-      <p style="text-align: center; font-size: X-large;padding-top: 1rem; max-width: 90%;margin-bottom: -0.1rem;">מצאו את ערכת הקלפים המתאימה לכם</p>
+      <p style="text-align: center; font-size: X-large;padding-top: 0.5rem; padding-bottom:0.5rem; max-width: 90%;margin-bottom: -0.1rem;">{{'pages.all-packs-page.sub-header-2' | translate}}</p>
       <mat-form-field class="search">
-        <mat-label> חפשו לפי נושא המפגש, יוצר הערכה, מטרת הפעילות ועוד...</mat-label>
+        <mat-label>{{'pages.all-packs-page.search-placeholder' | translate}}</mat-label>
         <input
           #filterText
           matInput
@@ -215,6 +215,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <!-- <app-fb-chat></app-fb-chat> -->

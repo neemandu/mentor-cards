@@ -7,11 +7,15 @@
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
 </mat-toolbar> -->
+
+<div [dir]="langDirectionService.currentLangDirection">
+
+
 <div mat-dialog-title style="text-align: center;">
     <button class="iconButton" mat-icon-button (click)="closeDialog()">
         <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
     </button>
-    <span class="title">כל הזכויות שמורות ליוצרי האתר Mentor-Cards ©</span>
+    <span class="title">{{ "components.siteRules.title"| translate}}</span>
 </div>
 <div class="line"></div>
 <div id='summery' mat-dialog-content>
@@ -588,6 +592,8 @@
     <p style="bottom: 10px; right: 10px; position: absolute;"><a href="https://wordtohtml.net" target="_blank" style="font-size:11px; color: #d0d0d0;">Converted to HTML with WordToHTML.net</a></p>
 </div>
     <div class="line"></div>
+</div>
+
 </div>
 <!-- <div *ngIf="data" class="buttons d-flex flex-column" mat-dialog-actions>
     <p>יש להסכים לתנאים על מנת להתחיל להשתמש באתר</p>

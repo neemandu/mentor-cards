@@ -1,73 +1,73 @@
-<div id="content">
+<div id="content" [dir]="langDirectionService.currentLangDirection">
   <div class="d-flex flex-column" id="register-div">
     <form id="register-form" [formGroup]="registerForm" (ngSubmit)="onSignupSubmit()">
       <div class="d-flex flex-column">
         <mat-form-field>
-          <mat-label>שם מלא</mat-label>
+          <mat-label>{{ 'pages.register.form.name-label' | translate }}</mat-label>
           <input autocomplete="given-name" formControlName="name" matInput>
-          <mat-hint>עברית/אנגלית</mat-hint>
+          <mat-hint>{{ 'pages.register.form.name-hint' | translate }}</mat-hint>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>טלפון נייד</mat-label>
+          <mat-label>{{ 'pages.register.form.name-label' | translate }}</mat-label>
           <input autocomplete="tel" formControlName="phone" matInput inputmode="numeric">
-          <mat-hint>לדוגמא: 0501234567</mat-hint>
-          <mat-error *ngIf="registerForm.controls.phone.errors">נא להזין מספרים בלבד
+          <mat-hint>{{ 'pages.register.form.name-hint' | translate }}</mat-hint>
+          <mat-error *ngIf="registerForm.controls.phone.errors">{{ 'pages.register.form.phone-error' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>אימייל</mat-label>
+          <mat-label>{{ 'pages.register.form.email-label' | translate }}</mat-label>
           <input autocomplete="email" formControlName="username" matInput inputmode="email"
             (focusout)="trimSpacesEmail(registerForm)">
-          <mat-error *ngIf="registerForm.controls.username.errors?.UsernameExistsException">מייל זה קיים במערכת
+          <mat-error *ngIf="registerForm.controls.username.errors?.UsernameExistsException">{{ 'pages.register.form.email-error-exists' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>אימות אימייל</mat-label>
+          <mat-label>{{ 'pages.register.form.email-confirm-label' | translate }}</mat-label>
           <input autocomplete="email" formControlName="usernameConfirm" matInput (focusout)="checkUsernameConfirm()"
             inputmode="email">
-          <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.notSameEmail">מייל לא תואם
+          <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.notSameEmail">{{ 'pages.register.form.email-confirm-error-notsame' | translate }}
           </mat-error>
-          <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.UsernameExistsException">מייל זה קיים במערכת
+          <mat-error *ngIf="registerForm.controls.usernameConfirm.errors?.UsernameExistsException">{{ 'pages.register.form.email-confirm-error-exists' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>סיסמא</mat-label>
+          <mat-label>{{ 'pages.register.form.password-label' | translate }}</mat-label>
           <input autocomplete="new-password" formControlName="password" matInput [type]="hidePW ? 'password' : 'text'"
             onkeypress="() => {return (event.charCode >= 33 && event.charCode <= 126)}">
-          <mat-error *ngIf="registerForm.controls.password.errors">סיסמא לא חוקית, נסו שנית. יש להכיל ספרה, אות קטנה ואות גדולה (אנגלית בלבד)</mat-error>
-          <mat-hint>8 תווים לפחות, יש להכיל ספרה, אות קטנה וגדולה (באנגלית)</mat-hint>
+          <mat-error *ngIf="registerForm.controls.password.errors">{{ 'pages.register.form.password-error' | translate }}</mat-error>
+          <mat-hint>{{ 'pages.register.form.password-hint' | translate }}</mat-hint>
           <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>אימות סיסמא</mat-label>
+          <mat-label> {{ 'pages.register.form.password-confirm-label' | translate }}</mat-label>
           <input autocomplete="new-password" formControlName="passwordConfirm" matInput
             [type]="hidePWConfirm ? 'password' : 'text'"
             onkeypress="() => {return (event.charCode >= 33 && event.charCode <= 126)}"
             (focusout)="checkPasswordConfirm()">
           <!-- <mat-error *ngIf="registerForm.controls.password.errors?.badPassword">סיסמא לא חוקית, נסו שנית</mat-error> -->
-          <mat-error *ngIf="registerForm.controls.passwordConfirm.errors?.notSamePassword">סיסמא לא תואמת</mat-error>
-          <mat-hint>8 תווים לפחות, יש להכיל ספרה, אות קטנה וגדולה (באנגלית)</mat-hint>
+          <mat-error *ngIf="registerForm.controls.passwordConfirm.errors?.notSamePassword">{{ 'pages.register.form.password-confirm-error-notsame' | translate }}</mat-error>
+          <mat-hint>{{ 'pages.register.form.password-confirm-hint' | translate }}</mat-hint>
           <button type="button" mat-icon-button matSuffix (click)="hidePWConfirm = !hidePWConfirm">
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
         <mat-checkbox style="direction: rtl; text-align: start; margin-top: 5px; margin-right: -8px;"
           formControlName="allowEmails" [(ngModel)]="allowEmails"><span style="margin-right: 10px;">
-            אני מאשר/ת קבלת דיוורים מ Mentor-Cards
+            {{ 'pages.register.form.allow-emails' | translate }}
           </span>
         </mat-checkbox>
-        <mat-error id="emails-error" *ngIf="!allowEmails">יש לסמן את התיבה על מנת להירשם</mat-error>
+        <mat-error id="emails-error" *ngIf="!allowEmails">    {{ 'pages.register.form.allow-emails-error' | translate }}</mat-error>
         <button type="submit" class="option-btn" id="login-button"
-          [disabled]="!registerForm.valid || !allowEmails">הרשמה</button>
+          [disabled]="!registerForm.valid || !allowEmails">  {{ 'pages.register.form.submit-button' | translate }}</button>
       </div>
     </form>
 
     <div id="social-login">
       <div id="seperator">
         <div class="first-line"></div>
-        <span class="categrory-title">או</span>
+        <span class="categrory-title">  {{ 'pages.register.social-login.seperator' | translate }}</span>
         <div class="second-line"></div>
       </div>
       <div id="social-media-login" class="d-flex flex-column">
@@ -81,7 +81,7 @@
           <div class="google-icon-wrapper">
             <img class="google-icon" src="../../../../../assets/icons/Google_G_Logo.svg" />
           </div>
-          <p class="btn-text"><b>הרשמה עם Google</b></p>
+          <p class="btn-text"><b>  {{ 'pages.register.social-login.social-media-login.google-btn' | translate }}</b></p>
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@
     <mat-divider></mat-divider>
     <br>
     <div id="formFooter">
-        <a class="underlineHover" style="cursor: pointer;" (click)="moveToLoginForm();">לקוח קיים?</a>
+        <a class="underlineHover" style="cursor: pointer;" (click)="moveToLoginForm();">  {{ 'pages.register.social-login.formFooter.existing-customer' | translate }}</a>
     </div>
   </div>
 </div>

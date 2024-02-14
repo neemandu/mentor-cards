@@ -1,3 +1,4 @@
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { Component, EventEmitter, NgZone, OnInit, Output, HostListener } from '@angular/core';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Router } from '@angular/router';
@@ -34,7 +35,8 @@ export class NavComponent implements OnInit {
   ]
 
   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,
-    private api: APIService, private amplifyAuthService: AuthService) {
+    private api: APIService, private amplifyAuthService: AuthService,
+    public langDirectionService: LangDirectionService,) {
   }
 
   ngOnInit() {
@@ -100,7 +102,7 @@ export class NavComponent implements OnInit {
   }
 
   openNewTab(): void {
-    const url = 'https://school.mentor-cards.com/bundles'; 
+    const url = 'https://mentor-cards.vp4.me/my-courses'; 
     window.open(url, '_blank');
   }
 

@@ -1,6 +1,18 @@
 /* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_CARDSPACKTABLE_ARN
 	API_CARDSPACKS_CARDSPACKTABLE_NAME
+	API_CARDSPACKS_COMMONLINKTABLE_ARN
+	API_CARDSPACKS_COMMONLINKTABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_GROUPTABLE_ARN
+	API_CARDSPACKS_GROUPTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_CARDSPACKTABLE_ARN
+	API_CARDSPACKS_CARDSPACKTABLE_NAME
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_GROUPTABLE_ARN
 	API_CARDSPACKS_GROUPTABLE_NAME
@@ -165,20 +177,70 @@ function isFreeTrialPeriod(firstDate, allPackagesDate) {
     return false;
 }
 
+async function getCommonLink(link){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    var table = env.API_CARDSPACKS_COMMONLINKTABLE_NAME;
+
+    
+    var params = {
+        TableName: table,
+        Key:{
+            "id": link
+        }
+    };
+
+    console.log("searching for common link - " + link);
+
+    var linkItem;
+
+    await docClient.get(params).promise().then(data => {
+        console.log("Get common link succeeded:", JSON.stringify(data, null, 2));
+        linkItem = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+    if(!linkItem){
+        throw Error ('no common link - ' + linkItem);
+    }
+
+    return linkItem;
+}
+
 exports.handler = async (event, context, callback) => {
     console.log('getCardsImages');
     console.log('event');
     console.log(event);
 
+    var commonLink = event?.arguments?.link;
+
+    if(commonLink){
+        var linkStr = event.source['id']+"?link="+commonLink;
+        console.log('common link: ' + linkStr);
+        var link = await getCommonLink(linkStr);
+        if(!link){
+            console.log('no such common link: ' + linkStr);
+            return [];
+        }
+        var now = new Date();
+        var experationDate = new Date(link.experationDate);
+        console.log('common link experationDate: ' + experationDate.toISOString());
+        console.log('now: ' + now.toISOString());
+        if(experationDate > now){
+          return event.source['cards'];
+        }
+        else{
+            return [];
+        }
+    }
+    
     // user was not identified in cognito
     if(!("identity" in event)){
         return [];
     }
 
     if(event.identity == null){
-        return [];
-    }
-    if(!("claims" in event.identity)){
         return [];
     }
 

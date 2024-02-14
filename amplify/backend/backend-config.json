@@ -40,11 +40,11 @@
     "GetCardsImages": {
       "dependsOn": [
         {
+          "category": "api",
+          "resourceName": "cardspacks",
           "attributes": [
             "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
+          ]
         }
       ]
     },
@@ -93,6 +93,34 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "GetAffiliateData": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
+    },
+    "CreateCommonLink": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "cardspacks",
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ]
+        }
+      ]
     }
   },
   "parameters": {

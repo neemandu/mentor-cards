@@ -15,10 +15,20 @@ button {
   position: relative;
 }
 
-.close-icon {
+
+
+[dir = "rtl"] .close-icon {
   cursor: pointer;
   position: absolute;
   left: 10px; 
+  top: 50%; 
+  transform: translateY(-50%);
+}
+
+[dir = "ltr"] .close-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 10px; 
   top: 50%; 
   transform: translateY(-50%);
 }

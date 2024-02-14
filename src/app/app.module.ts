@@ -90,6 +90,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { I18nModule } from './Modules/i18n/i18n.module';
 
 
 //Components
@@ -143,6 +144,9 @@ import { BlogCardComponent } from './Shared Components/blog-card/blog-card.compo
 import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/read-terms-dialog.component';
+import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/select-language.component';
+import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
+import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 
 @NgModule({
   declarations: [
@@ -193,6 +197,9 @@ import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/r
     BlogDetailComponent,
     AllBlogsComponent,
     ReadTermsDialogComponent,
+    CopyCommonLinkDialogComponent,
+    SelectLanguageComponent,
+    AffiliatesPageComponent
   ],
   imports: [
     BrowserModule,
@@ -205,6 +212,7 @@ import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/r
     FormsModule,
     PortalModule,
     ManagementModule,
+    I18nModule,
     //Material
     MatButtonModule,
     MatIconModule,

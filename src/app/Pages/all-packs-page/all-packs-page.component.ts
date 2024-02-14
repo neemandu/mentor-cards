@@ -9,7 +9,7 @@ import {
   AfterViewInit,
   QueryList,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { APIService } from 'src/app/API.service';
@@ -21,6 +21,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { MixpanelService, EventTypes } from 'src/app/Services/mixpanel.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOption } from '@angular/material/core';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 
 interface CategoryPack {
   category: string;
@@ -79,17 +80,19 @@ export class AllPacksPageComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService,
     private api: APIService,
     private userAuthService: UserAuthService,
-    public router: Router,
+    public router: ActivatedRoute,
+    public routNavigate: Router,
     private ngZone: NgZone,
     public dialog: MatDialog,
-    private mixpanelService: MixpanelService
+    private mixpanelService: MixpanelService,
+    public langDirectionService: LangDirectionService
 
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
   openNewTab(): void {
-    const url = 'https://school.mentor-cards.com/bundles'; 
+    const url = 'https://mentor-cards.vp4.me/my-courses'; 
     window.open(url, '_blank');
   }
 
@@ -145,6 +148,14 @@ export class AllPacksPageComponent implements OnInit {
   
 
   ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      const refId = params['ref'];
+      if (refId) {
+        localStorage.setItem('refId', refId);
+        console.log('refId ID stored:', refId);
+      }
+    });
+
     // track events
     this.mixpanelService.track("PageViewed", { 'Page Title': 'all-packs-page' });
 
@@ -164,7 +175,6 @@ export class AllPacksPageComponent implements OnInit {
         }
       )
     );
-    this.overlaySpinnerService.changeOverlaySpinner(true);
     this.userData = this.userAuthService.userData;
     this.getAllPacks();
   }
@@ -200,6 +210,7 @@ export class AllPacksPageComponent implements OnInit {
       this.setAllCategoryPacksToShow();
       this.setAllFavPacksToShow();
       this.initializeFilteredOptions();
+      this.overlaySpinnerService.changeOverlaySpinner(false);
       // this.sortPacks();
     } else {
       let sub = this.cardsService.allPacksReadyEmmiter.subscribe(() => {
@@ -208,6 +219,8 @@ export class AllPacksPageComponent implements OnInit {
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+
       });
       this.cardsService.getAllPacks();
     }
@@ -218,6 +231,7 @@ export class AllPacksPageComponent implements OnInit {
     this.allCategories = this.cardsService.allCategories.map(
       (category) => category
     );
+    console.log(this.allCategories);
     this.allFavorites = this.userAuthService.favorites;
     
     this.isPageLoaded = true;
@@ -276,7 +290,7 @@ export class AllPacksPageComponent implements OnInit {
   packLoaded(): void {
     this.loadedPacks++;
     if (this.loadedPacks == this.allPacks.length) {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+      //this.overlaySpinnerService.changeOverlaySpinner(false);
     }
   }
 
@@ -366,7 +380,7 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   public navigate(path: string): void {
-    this.ngZone.run(() => this.router.navigate([path]));
+    this.ngZone.run(() => this.routNavigate.navigate([path]));
   }
 
   ngOnDestroy(): void {

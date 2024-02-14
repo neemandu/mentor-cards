@@ -2,10 +2,9 @@
     <div mat-dialog-content>
         <mat-icon>screen_rotation</mat-icon>
         <span>
-            לחווית שימוש מיטבית, כדאי לעבור לתצוגה אופקית
-        </span>
+            {{ 'pages.portraitWarningDialog.content.message' | translate }} </span>
     </div>
     <div mat-dialog-actions style="justify-content: center;">
-        <button mat-raised-button (click)="closeDialog()">הבנתי</button>
+        <button mat-raised-button (click)="closeDialog()">{{ 'pages.portraitWarningDialog.actions.buttonText' | translate }}</button>
     </div>
 </div>

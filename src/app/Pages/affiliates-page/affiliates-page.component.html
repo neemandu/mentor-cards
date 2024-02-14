@@ -1,0 +1,177 @@
+<div [dir]="langDirectionService.currentLangDirection">
+  <div class="top-container">
+    <div class="top-container__header">
+      <h1 class="header">{{ "pages.affiliates-page.header" | translate }}</h1>
+      <p class="body">
+        {{ "pages.affiliates-page.top-container-body" | translate }}
+      </p>
+      <button class="button" (click)="scrollToFormContainer()">
+        {{ "pages.affiliates-page.top-container-button" | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="card-container">
+    <div class="card-container-header">
+      <h2 class="header">
+        {{ "pages.affiliates-page.card-container-header" | translate }}
+      </h2>
+      <p class="body">
+        {{
+          "pages.affiliates-page.card-container-header-container" | translate
+        }}
+      </p>
+    </div>
+    <div class="card-container-card">
+      <mat-card>
+        <button class="card-container-card-button">
+          <mat-icon>add</mat-icon>
+        </button>
+        <h4 class="card-container-card-header">
+          {{ "pages.affiliates-page.card.card1.card-header" | translate }}
+        </h4>
+        <p class="card-container-card-container">
+          {{ "pages.affiliates-page.card.card1.card-container" | translate }}
+        </p>
+      </mat-card>
+
+      <mat-card>
+        <div class="second-card">
+          <button class="card-container-card-button">
+            <mat-icon>add</mat-icon>
+          </button>
+          <h4 class="card-container-card-header">
+            {{ "pages.affiliates-page.card.card2.card-header" | translate }}
+          </h4>
+          <p class="card-container-card-container">
+            {{ "pages.affiliates-page.card.card2.card-container" | translate }}
+          </p>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <button class="card-container-card-button">
+          <mat-icon>add</mat-icon>
+        </button>
+        <h4 class="card-container-card-header">
+          {{ "pages.affiliates-page.card.card3.card-header" | translate }}
+        </h4>
+        <p class="card-container-card-container">
+          {{ "pages.affiliates-page.card.card3.card-container1" | translate }}
+        </p>
+        <p class="card-container-card-container">
+          {{ "pages.affiliates-page.card.card3.card-container2" | translate }}
+        </p>
+      </mat-card>
+
+      <mat-card>
+        <button class="card-container-card-button">
+          <mat-icon>add</mat-icon>
+        </button>
+        <h4 class="card-container-card-header">
+          {{ "pages.affiliates-page.card.card4.card-header" | translate }}
+        </h4>
+        <p class="card-container-card-container">
+          {{ "pages.affiliates-page.card.card4.card-container1" | translate }}
+        </p>
+        <a href="https://www.facebook.com/groups/mentorcards" target="_blank" class="card-container-card4-container3">
+          {{ "pages.affiliates-page.card.card4.card-container2" | translate }}
+        </a>
+        <p class="card-container-card-container">
+          {{ "pages.affiliates-page.card.card4.card-container3" | translate }}
+        </p>
+      </mat-card>
+    </div>
+    <div class="card-container-footer">
+      <h2 class="header">
+        {{ "pages.affiliates-page.card-container-footer" | translate }}
+      </h2>
+      <p class="card-container-footer-container">
+        {{
+          "pages.affiliates-page.card-container-footer-container" | translate
+        }}
+      </p>
+    </div>
+  </div>
+  <div #formContainer class="form-container">
+    <div class="form-header">
+      <div class="title">
+        {{ "pages.affiliates-page.form.title" | translate }}
+      </div>
+      <div class="line">
+        {{ "pages.affiliates-page.form.body" | translate }}
+      </div>
+    </div>
+    <form
+      class="d-flex flex-column"
+      [formGroup]="affiliateForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="form-field">
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            formControlName="lastname"
+            placeholder=" {{
+              'pages.affiliates-page.form.form.lastname' | translate
+            }}"
+          />
+          <mat-error *ngIf="formControls.lastname.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.name-error-required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            formControlName="firstname"
+            placeholder=" {{
+              'pages.affiliates-page.form.form.firstname' | translate
+            }}"
+          />
+          <mat-error *ngIf="formControls.firstname.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.name-error-required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            placeholder=" {{
+              'pages.affiliates-page.form.form.email' | translate
+            }}"
+          />
+          <mat-error *ngIf="formControls.email.hasError('email') && !formControls.email.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.email-error-valid' | translate }}
+          </mat-error>
+          <mat-error *ngIf="formControls.email.hasError('required')">
+            {{ 'pages.contact-us.contact-form.form.email-error-required' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            formControlName="mobile"
+            placeholder=" {{
+              'pages.affiliates-page.form.form.mobile' | translate
+            }}"
+          />
+        </mat-form-field>
+      </div>
+      <button
+        id="contactUsFormSubmission"
+        class="action-button"
+        type="submit"
+        [disabled]="affiliateForm.invalid || !affiliateForm.dirty"
+      >
+        {{ "pages.affiliates-page.form.form.submit-button" | translate }}
+      </button>
+    </form>
+  </div>
+
+  <div class="footer">
+    {{ "pages.affiliates-page.footer" | translate }}
+  </div>
+</div>

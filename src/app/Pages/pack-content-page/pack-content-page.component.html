@@ -1,16 +1,16 @@
-<title>Mentor-Cards תוכן ערכת הקלפים</title>
+<title> {{ 'pages.packContent.title' | translate }}</title>
 
   <div class="d-flex align-items-center flex-column">
     <div class="title d-flex justify-content-center align-items-baseline">
       <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
-      <h1 style="text-align: center" *ngIf="!id">החיות שבתוכנו</h1>
+      <h1 style="text-align: center" *ngIf="!id">{{ 'pages.packContent.defaultName' | translate }} </h1>
       <h2
         *ngIf="pack?.about && !unauthorized"
         id="about-author"
         class="clickable"
         (click)="openAboutDialog()"
       >
-        (על יוצר הערכה)
+      {{ 'pages.packContent.aboutAuthor' | translate }}
       </h2>
     </div>
     <button *ngIf="!unauthorized"
@@ -25,15 +25,19 @@
       (click)="openGuideBook()"
     >
       <mat-icon id="guide-book-icon" class="guide-icon" style="font-family: 'Material Icons'"
-        >local_library</mat-icon>ספר הדרכה 
+        >local_library</mat-icon>  {{ 'pages.packContent.guideBook' | translate }} 
     </button>
   </div>
   <br />
-    <div *ngIf="unauthorized" class="d-flex justify-content-center">
-      אין לך מספיק הרשאות כדי לצפות בערכה זו
+    <div *ngIf="isLoaded && unauthorized" class="d-flex justify-content-center" style="font-size: larger;">
+      {{ 'pages.packContent.unauthorized' | translate }} 
     </div>
 
-    <div *ngIf="!unauthorized" class="sticky-top d-flex justify-content-center">
+    <div *ngIf="isLoaded && commonLink && cards.length == 0" class="d-flex justify-content-center" style="font-size: larger;">
+      {{ 'pages.packContent.linkexpired' | translate }}
+    </div>
+
+    <div *ngIf="!unauthorized  && (!commonLink || cards.length >0)" class="sticky-top d-flex justify-content-center">
       <div id="actions">
         <button
           id="multipleChoise"
@@ -46,8 +50,9 @@
           (click)="multipileChanged()"
           [disabled]="showEditPack"
         >
-          {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
-        </button>
+        {{ multipileChecked ? ('pages.packContent.actions.multipleChoice.showSingle' | translate) : ('pages.packContent.actions.multipleChoice.showMultiple' | translate) }}
+
+      </button>
         <button
           id="mixCards"
           type="button"
@@ -59,7 +64,7 @@
           }"
           (click)="shuffle()"
         >
-          ערבב
+        {{ 'pages.packContent.actions.mixCards' | translate }}
         </button>
         <button
           id="flipCards"
@@ -72,7 +77,7 @@
           }"
           (click)="flip()"
         >
-          הפוך את הקלפים
+        {{ 'pages.packContent.actions.flipCards' | translate }}
         </button>
         <button
           id="randomCard"
@@ -85,7 +90,7 @@
           }"
           (click)="toggleRandomCardsModal()"
         >
-          הצג קלף אקראי
+        {{ 'pages.packContent.actions.randomCard' | translate }}
         </button>
         <button
           id="editPack"
@@ -93,8 +98,7 @@
           [ngClass]="{ 'option-btn top-option-btn': true }"
           (click)="editPack()"
         >
-          {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
-        </button>
+        {{ showEditPack ? ('pages.packContent.actions.editPack.endEdit' | translate) : ('pages.packContent.actions.editPack.edit' | translate) }}        </button>
       </div>
       <button
         type="button"
@@ -103,7 +107,7 @@
         [matMenuTriggerFor]="actions"
       >
         <mat-icon>list</mat-icon>
-        <span>פעולות</span>
+        <span>   {{ 'pages.packContent.actions.menuActions' | translate }}</span>
       </button>
       <!-- <button type="button" [disabled]="showEditPack"
         [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
@@ -111,6 +115,14 @@
         <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
       </button> -->
     </div>
+    <div *ngIf="!commonLink" class="right-side-container">
+      <br>
+      <button mat-button (click)="createCommomLink()" class="link-button" matTooltip="שתפו את הקישור והזמינו לעבודה אינטראקטיבית">
+        <mat-icon>share</mat-icon>
+        צור קישור לעבודה משותפת
+      </button>
+    </div>
+    
 <div class="d-flex flex-column align-items-center cards-container">
   <div
     *ngIf="pack && !showEditPack"
@@ -180,28 +192,24 @@
         font-weight: 700;
       "
     >
-      שימו <span style="color: coral">&#10084;</span>
+    {{ 'pages.packContent.actions.introduction.attention' | translate }} <span style="color: coral">&#10084;</span>
     </p>
     <ul>
-      <li><span>באתר קיימות עשרות ערכות קלפים לבחירתכם</span></li>
-      <li><span>כל ערכה כוללת מעל ל-40 קלפים</span></li>
-      <li>
-        <span
-          >כל הערכות מגיעות עם ספר הדרכה הכולל שאלות מנחות לשימוש בקלפים</span
-        >
-      </li>
-      <li><span>במסגרת 14 ימי הניסיון כל ערכות הקלפים לרשותכם</span></li>
+      <li><span> {{ 'pages.packContent.actions.introduction.list.dozensOfPacks' | translate }}</span></li>
+      <li><span>{{ 'pages.packContent.actions.introduction.list.over40Cards' | translate }}</span></li>
+      <li><span>{{ 'pages.packContent.actions.introduction.list.guideBook' | translate }}</span></li>
+      <li><span>{{ 'pages.packContent.actions.introduction.list.trialPeriod' | translate }}</span></li>
     </ul>
     <div class="line"></div>
     <div id="actions" class="d-flex flex-column align-items-center">
       <span id="middle" *ngIf="!userData"
-        >הירשמו, והתחילו את תקופת הניסיון</span
+        >{{ 'pages.packContent.actions.introduction.actions.register' | translate }}</span
       >
       <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'"
-        >עדין לא נרשמתם לתוכנית?</span
+        > {{ 'pages.packContent.actions.introduction.actions.notRegistered' | translate }}</span
       >
       <span id="middle" *ngIf="userData && userData.status === 'PLAN'"
-        >אתם כבר מחוברים, למה אתם מחכים? לעבודה :)</span
+        >{{ 'pages.packContent.actions.introduction.actions.alreadyRegistered' | translate }}</span
       >
       <br />
       <button
@@ -210,7 +218,7 @@
         type="button"
         (click)="signInSignUp()"
       >
-        התחברות/הרשמה
+      {{ 'pages.packContent.actions.introduction.actions.loginRegisterBtn' | translate }}
       </button>
       <button
         class="action-button"
@@ -218,7 +226,7 @@
         type="button"
         (click)="navigate('/price-page')"
       >
-        להרשמה לתוכנית
+      {{ 'pages.packContent.actions.introduction.actions.registerPlanBtn' | translate }} 
       </button>
       <button
         class="action-button"
@@ -226,7 +234,7 @@
         type="button"
         (click)="navigate('/all-packs-page')"
       >
-        לכל הערכות
+      {{ 'pages.packContent.actions.introduction.actions.allPacksBtn' | translate }}  
       </button>
     </div>
   </div>
@@ -246,7 +254,7 @@
       [disabled]="selectedCards.length == 0"
       (click)="toggleChosenCardsModal()"
     >
-      הצג קלפים שנבחרו
+    {{ 'pages.packContent.nav.showChosenCards' | translate }}    
     </button>
     <button
       type="button"
@@ -254,11 +262,11 @@
       (click)="selectedCards = []"
       [disabled]="selectedCards.length == 0"
     >
-      איפוס בחירה
+    {{ 'pages.packContent.nav.resetChoice' | translate }}  
     </button>
   </div>
   <div id="amountChosen">
-    <p>{{ selectedCards.length }}/5 קלפים נבחרו</p>
+    <p>{{ selectedCards.length }}/5   {{ 'pages.packContent.nav.cardsChosen' | translate }}</p>
   </div>
 </nav>
 
@@ -275,21 +283,20 @@
       [ngClass]="{ 'option-btn bottom-option-btn': true }"
       (click)="resetEditPack()"
     >
-      איפוס ערכה
+    {{ 'pages.packContent.nav.resetPack' | translate }}
     </button>
     <button
       type="button"
       [ngClass]="{ 'option-btn bottom-option-btn': true }"
       (click)="editPack()"
     >
-      סיום עריכה
+    {{ 'pages.packContent.nav.endEditing' | translate }}
     </button>
   </div>
   <div id="amountChosen">
     <p style="font-weight: bold">
-      לחיצה על אייקון העין
-      <mat-icon class="remove-icon">visibility_off</mat-icon> תסתיר את הקלף
-      מתחתיו
+      {{ 'pages.packContent.nav.hideCardBeforeIcon' | translate }}
+      <mat-icon class="remove-icon">visibility_off</mat-icon>       {{ 'pages.packContent.nav.hideCardAfterIcon' | translate }}
     </p>
   </div>
 </nav>
@@ -301,8 +308,12 @@
   class="option-menu-btn top-option-btn"
   (click)="multipileChanged()"
 >
-  {{ !multipileChecked ? "הצג מספר קלפים" : "הצג קלף יחיד" }}
-  <mat-icon *ngIf="multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+
+
+{{ multipileChecked ? ('pages.packContent.matMenu.toggleCardDisplayModeButton.false' | translate) : ('pages.packContent.matMenu.toggleCardDisplayModeButton.true' | translate) }}
+
+
+<mat-icon *ngIf="multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
 >photo_icon</mat-icon>
 <mat-icon *ngIf="!multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
 >burst_mode_icon</mat-icon>
@@ -314,7 +325,7 @@
     (click)="shuffle()"
   >
 
-    ערבב
+  {{ 'pages.packContent.matMenu.shuffleCardsButton' | translate }} 
     <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
   >style_icon</mat-icon>
   </button>
@@ -325,7 +336,7 @@
     class="option-menu-btn top-option-btn"
     (click)="flipped = !flipped; selectedCards = []"
   >
-    הפוך חפיסה
+  {{ 'pages.packContent.matMenu.flipDeckButton' | translate }}  
     <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
     >flip_camera_android_icon</mat-icon>
   </button>
@@ -335,7 +346,7 @@
     class="option-menu-btn top-option-btn"
     (click)="toggleRandomCardsModal()"
   >
-    הצג קלף אקראי
+  {{ 'pages.packContent.matMenu.showRandomCardButton' | translate }}  
     <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
     >shuffle_icon</mat-icon>
   </button>
@@ -345,8 +356,9 @@
     class="option-menu-btn top-option-btn"
     (click)="editPack()"
   >
-    {{ !showEditPack ? "עריכה" : "סיום עריכה" }}
-    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
+  {{ showEditPack ? ('pages.packContent.matMenu.editPackButton.false' | translate) : ('pages.packContent.matMenu.editPackButton.true' | translate) }}
+
+  <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
       >edit_icon</mat-icon>
   </button>
 </mat-menu>

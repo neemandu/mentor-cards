@@ -15,12 +15,17 @@
   padding-top: 1%;
 }
 
-.mat-form-field {
+[dir = "rtl"] .mat-form-field-label {
   text-align: right;
   margin-bottom: 5px;
   direction: rtl;
 }
 
+[dir = "ltr"] .mat-form-field-label {
+  text-align: left;
+  margin-bottom: 5px;
+  direction: ltr;
+}
 .option-btn {
   /* margin-left: 10px; */
   height: 39px;
@@ -73,12 +78,20 @@ mat-progress-bar {
   /* width: 18vw; */
 }
 
-#emails-error {
+[dir = "rtl"] #emails-error {
   font-size: small;
   text-align: start;
   direction: rtl;
   margin-top: -10px;
 }
+
+[dir = "ltr"] #emails-error {
+  font-size: small;
+  text-align: start;
+  direction: ltr;
+  margin-top: -10px;
+}
+
 
 /* add appropriate colors to fb, twitter and google buttons */
 .fb {
@@ -96,9 +109,14 @@ mat-progress-bar {
   color: white;
 }
 
-#social-media-login {
+[dir = "rtl"] #social-media-login {
   direction: rtl;
 }
+
+[dir = "ltr"] #social-media-login {
+  direction: ltr;
+}
+
 
 .first-line,
 .second-line {
@@ -158,6 +176,10 @@ mat-progress-bar {
   width: 99%;
 }
 
-#formFooter {
+[dir = "rtl"] #formFooter {
   direction: rtl;
+}
+
+[dir = "ltr"] #formFooter {
+  direction: ltr;
 }

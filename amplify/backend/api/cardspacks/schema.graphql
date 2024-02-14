@@ -1,4 +1,5 @@
 type Mutation {
+  makeCommonLink(input: CreateCommonLinkInput! ): String @function(name: "CreateCommonLink-${env}")
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
@@ -12,6 +13,23 @@ type Mutation {
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
+  getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")
+}
+
+type CommonLink
+  @model
+  @auth(
+    rules: [
+      {
+        allow: private
+        operations: [create, read, update]
+        provider: userPools
+      }
+    ]
+  ) {
+  id: ID!
+  experationDate: AWSDateTime
+  createdBy: String
 }
 
 type User
@@ -54,6 +72,55 @@ type User
   entries: Int
   externalPacksSubscriptions: [MonthlySubscription] 
   entryDates: [AWSDateTime]
+  refId: String
+  myAffiliate: Affiliate @connection
+  payments: [Payment]
+}
+
+type Payment
+{
+  id: ID!
+  date: AWSDateTime
+  payedMonths: Int
+  amount: Float
+  currency: String
+  paymentWay: String
+  transactionId: String
+}
+
+type Affiliate
+  @model
+  @auth(
+    rules: [
+      {
+        allow: owner
+        ownerField: "contactEmail"
+        operations: [read, update]
+        provider: userPools
+      },
+      { allow: groups, groups: ["Admins"] }
+    ]
+  ) {
+    affiliateID: ID!
+    affiliateUrl: String
+    contactEmail: AWSEmail
+    phoneNumber: String
+    websiteURL: String
+    paymentDetails: String
+    commissionPercentage: Float
+    dateJoined: AWSDateTime
+    status: String 
+    balance: Float
+    withdraws: [Withdraw]
+}
+
+type Withdraw{
+  id: ID!
+  date: AWSDateTime
+  amount: Float
+  currency: String
+  paymentWay: String
+  transactionId: String
 }
 
 type MonthlySubscription {
@@ -188,7 +255,7 @@ type CardsPack
   description: String
   tags: [String]
   categories: [String]
-  cards: [Cards] @function(name: "GetCardsImages-${env}")
+  cards(link: String): [Cards] @function(name: "GetCardsImages-${env}")
   cardsPreview: [String]
   groupsIds: [String]
   guideBook: [GuideBookElement]
@@ -309,6 +376,11 @@ input CreateUserInput {
   email: AWSEmail
   phone: String
   fullName: String
+  affiliateId: String
+}
+
+input CreateCommonLinkInput {
+  packId: Int
 }
 
 input addCardsPackInput {

@@ -25,6 +25,7 @@ import { AboutAuthorComponent } from 'src/app/Shared Components/pack/about-autho
 import { Card } from 'src/app/Objects/card';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { CopyCommonLinkDialogComponent } from 'src/app/Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 
 @Component({
@@ -50,9 +51,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   cards: Card[] = [];
   unauthorized: boolean = false;
   isDoubleSided: boolean = false;
-
+  isLoaded: boolean = false;
   randomSelectedCard: Card;
   randomCardIndex: number = 0;
+  commonLink: any = undefined;
 
   constructor(
     public route: ActivatedRoute,
@@ -77,7 +79,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.route.queryParams.subscribe(params => {
+      this.commonLink = params['link'];
+      console.log('link:', this.commonLink);
+    });
     this.userData = this.userAuthService.userData;
 
     this.api.IncrementPackEntries({ cardsPackId: parseInt(this.id) }).then(
@@ -106,17 +111,19 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       }
       this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
     } else {
-      this.api.GetCardsPack(this.id).then(
+      this.api.GetCardsPack(this.id, this.commonLink).then(
         (pack) => {
           this.pack = new PackContent().deseralize(pack);
-          this.isDoubleSided = pack.cards[0].backImgUrl ? false : true;
+          this.isDoubleSided = pack.cards[0].backImgUrl ? true : false;
           if(this.pack.cards.length == 0){
             this.unauthorized = true;
           }
           this.cards = [...this.pack.cards];
+          this.isLoaded = true;
           this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
         },
         (reject) => {
+          this.isLoaded = true;
           console.log(
             'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
             reject
@@ -302,6 +309,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   navigate(path: string): void {
     this.ngZone.run(() => this.router.navigate([path]));
+  }
+
+  createCommomLink(): void {
+    this.mixpanelService.track("ActionButtonClicked", { "Action": "Create Common Link", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    
+    this.api.MakeCommonLink({packId:this.id}).then(data => {
+      const text = " הוזמנת להצטרף לחווית עבודה משותפת במנטור-קארדס! לכניסה, לחצו על הקישור: "
+      const url = window.location.href + "?link=" + data;
+      navigator.clipboard.writeText(text+url).then(() => {
+        this.dialog.open(CopyCommonLinkDialogComponent);
+      });
+    })
   }
 
   ngOnDestroy(): void {

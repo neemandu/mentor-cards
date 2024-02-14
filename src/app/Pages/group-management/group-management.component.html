@@ -1,40 +1,40 @@
 <div class="content">
     <div class="content user-info">
         <div class="user-info-section">
-            <h1>פרטי קבוצה</h1>
+            <h1> {{ 'pages.group-management.group-details-title' | translate }}</h1>
             <div class="line"></div>
         </div>
 
         <div class="d-flex flex-row">
             <div id="instructions">
                 <div class="user-info-section">
-                    <h2>הוראות לניהול הקבוצה</h2>
+                    <h2>{{ 'pages.group-management.group-management-instructions-title' | translate }}</h2>
                     <div class="line line-short"></div>
                 </div>
                 <div id="instructions-content">
                     <ol>
-                        <li>להוספת משתמש חדש לקבוצה לחצו על 'הוספת משתמש'</li>
+                        <li> {{ 'pages.group-management.add-new-user-instruction' | translate }}</li>
                         <ul>
-                            <li>'משתמש'- בעל גישה לערכות הקלפים</li>
-                            <li>'מנהל'- בעל גישה לערכות הקלפים ובעל הרשאות לעריכה של משתמשי הקבוצה</li>
-                            <li>אין הגבלה לכמות המנהלים בקבוצה</li>
+                            <li>{{ 'pages.group-management.user-role-description' | translate }}</li>
+                            <li>{{ 'pages.group-management.admin-role-description' | translate }}</li>
+                            <li>{{ 'pages.group-management.no-admin-limit-instruction' | translate }}</li>
                         </ul>
-                        <li>ניתן ללחוץ על כפתור העיפרון בטבלה על מנת לערוך משתמש קיים</li>
-                        <li>ניתן ללחוץ על כפתור הפח על מנת למחוק משתמש קיים מהקבוצה</li>
-                        <li>כל שינוי יבקש אימות ובסופו תתבצע שמירה במערכת</li>
+                        <li>{{ 'pages.group-management.edit-existing-user-instruction' | translate }}</li>
+                        <li>{{ 'pages.group-management.delete-existing-user-instruction' | translate }}</li>
+                        <li>{{ 'pages.group-management.change-confirmation-instruction' | translate }}</li>
                     </ol>
                 </div>
                 <div class="user-info-section">
-                    <h2>הוראות לצירוף משתמשים חדשים</h2>
+                    <h2>{{ 'pages.group-management.new-user-instructions-title' | translate }}</h2>
                     <div class="line line-medium"></div>
                 </div>
                 <div id="instructions-content">
                     <ol>
-                        <li>בקש מהמשתמשים החדשים להיכנס לאתר ולהירשם באמצעות כתובת המייל שהוזנה עבורם בדף זה</li>
-                        <li>בעמוד הראשי באתר בקש מהמשתמשים ללחוץ על כפתור "אתם חלק מקבוצה?" ולהזין את קוד הקבוצה:
+                        <li>{{ 'pages.group-management.new-user-registration-instruction' | translate }}</li>
+                        <li>{{ 'pages.group-management.group-code-instruction' | translate }}
                             <b>{{userData.groupId}}</b>
                         </li>
-                        <li>המשתמשים החדשים יכולים להתחיל להשתמש בקלפים!</li>
+                        <li>{{ 'pages.group-management.start-using-cards-instruction' | translate }}</li>
                     </ol>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <table mat-table [dataSource]="dataSource" class="table table-striped table-hover">
                     <!-- Email Column -->
                     <ng-container matColumnDef="email">
-                        <th mat-header-cell *matHeaderCellDef> אימייל </th>
+                        <th mat-header-cell *matHeaderCellDef> {{ 'pages.group-management.email-column-title' | translate }} </th>
                         <td mat-cell *matCellDef="let groupUser">
                             {{groupUser.email}}
                         </td>
@@ -50,7 +50,7 @@
 
                     <!-- Role Column -->
                     <ng-container matColumnDef="role">
-                        <th mat-header-cell *matHeaderCellDef> תפקיד </th>
+                        <th mat-header-cell *matHeaderCellDef> {{ 'pages.group-management.role-column-title' | translate }} </th>
                         <td mat-cell *matCellDef="let groupUser">
                             {{groupUser.role === 'ADMIN' ? 'מנהל' : 'משתמש'}}
                         </td>
@@ -58,7 +58,7 @@
 
                     <!-- Edit Column -->
                     <ng-container matColumnDef="edit">
-                        <th mat-header-cell *matHeaderCellDef> עריכה </th>
+                        <th mat-header-cell *matHeaderCellDef>  {{ 'pages.group-management.edit-column-title' | translate }} </th>
                         <td mat-cell *matCellDef="let groupUser">
                             <div *ngIf="groupUser.email !== userData.email" (click)="addEditGroupUser(groupUser)">
                                 <mat-icon class="iconButton"> edit </mat-icon>
@@ -68,7 +68,7 @@
 
                     <!-- Delete Column -->
                     <ng-container matColumnDef="delete">
-                        <th mat-header-cell *matHeaderCellDef> מחיקה </th>
+                        <th mat-header-cell *matHeaderCellDef>  {{ 'pages.group-management.delete-column-title' | translate }} </th>
                         <td mat-cell *matCellDef="let groupUser">
                             <div *ngIf="groupUser.email !== userData.email" (click)="deleteGroupMember(groupUser)">
                                 <mat-icon class="iconButton">
@@ -83,7 +83,7 @@
                 </table>
                 <button class="action-button" type="button" (click)="addEditGroupUser()"
                     [disabled]="groupData.groupUsers.length == userData.subscription.subscriptionPlan.numberOfUsers">
-                    הוספת משתמש
+                    {{ 'pages.group-management.add-new-user-button' | translate }} 
                 </button>
             </div>
         </div>

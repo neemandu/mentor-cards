@@ -1,4 +1,7 @@
 # this is an auto generated file. This will be overwritten
+mutation MakeCommonLink($input: CreateCommonLinkInput!) {
+  makeCommonLink(input: $input)
+}
 mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     id
@@ -283,6 +286,39 @@ mutation CreateUser($input: CreateUserInput!) {
       nextBillingDate
     }
     entryDates
+    refId
+    myAffiliate {
+      id
+      affiliateID
+      affiliateUrl
+      contactEmail
+      phoneNumber
+      websiteURL
+      paymentDetails
+      commissionPercentage
+      dateJoined
+      status
+      balance
+      withdraws {
+        id
+        date
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+      createdAt
+      updatedAt
+    }
+    payments {
+      id
+      date
+      payedMonths
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
   }
 }
 mutation AddCardsPack($input: addCardsPackInput!) {
@@ -350,6 +386,445 @@ mutation LikeClicked($input: cardPackIdInput!) {
 }
 mutation IncrementPackEntries($input: cardPackIdInput!) {
   IncrementPackEntries(input: $input)
+}
+mutation GetAffiliateData($input: userInput!) {
+  getAffiliateData(input: $input) {
+    id
+    username
+    email
+    phone
+    status
+    subscription {
+      id
+      startDate
+      paymentProvider
+      providerTransactionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        subscriptionProviderPlanId
+        createdAt
+        updatedAt
+      }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          backImgUrl
+          frontImgUrl
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          subscriptionProviderPlanId
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    firstProgramRegistrationDate
+    groupId
+    numberOfUsedPacks
+    groupRole
+    cancellationDate
+    couponCodes {
+      id
+      couponCode
+      discount
+      trialPeriodInDays
+      allowedCardsPacks
+      organization {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    cardsPacksIds
+    providerTransactionId
+    fullName
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
+      createdAt
+      updatedAt
+    }
+    endOfTrialDate
+    createdAt
+    updatedAt
+    favouritePacks
+    entries
+    externalPacksSubscriptions {
+      id
+      startDate
+      paymentProvider
+      providerTransactionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        subscriptionProviderPlanId
+        createdAt
+        updatedAt
+      }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          backImgUrl
+          frontImgUrl
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          subscriptionProviderPlanId
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
+    }
+    entryDates
+    refId
+    myAffiliate {
+      id
+      affiliateID
+      affiliateUrl
+      contactEmail
+      phoneNumber
+      websiteURL
+      paymentDetails
+      commissionPercentage
+      dateJoined
+      status
+      balance
+      withdraws {
+        id
+        date
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+      createdAt
+      updatedAt
+    }
+    payments {
+      id
+      date
+      payedMonths
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+  }
+}
+mutation CreateCommonLink(
+  $input: CreateCommonLinkInput!
+  $condition: ModelCommonLinkConditionInput
+) {
+  createCommonLink(input: $input, condition: $condition) {
+    id
+    experationDate
+    createdBy
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCommonLink(
+  $input: UpdateCommonLinkInput!
+  $condition: ModelCommonLinkConditionInput
+) {
+  updateCommonLink(input: $input, condition: $condition) {
+    id
+    experationDate
+    createdBy
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCommonLink(
+  $input: DeleteCommonLinkInput!
+  $condition: ModelCommonLinkConditionInput
+) {
+  deleteCommonLink(input: $input, condition: $condition) {
+    id
+    experationDate
+    createdBy
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateAffiliate(
+  $input: CreateAffiliateInput!
+  $condition: ModelAffiliateConditionInput
+) {
+  createAffiliate(input: $input, condition: $condition) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateAffiliate(
+  $input: UpdateAffiliateInput!
+  $condition: ModelAffiliateConditionInput
+) {
+  updateAffiliate(input: $input, condition: $condition) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteAffiliate(
+  $input: DeleteAffiliateInput!
+  $condition: ModelAffiliateConditionInput
+) {
+  deleteAffiliate(input: $input, condition: $condition) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
 }
 mutation CreateSubscriptionPlan(
   $input: CreateSubscriptionPlanInput!

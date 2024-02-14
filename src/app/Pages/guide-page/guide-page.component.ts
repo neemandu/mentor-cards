@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { SharedDialogsService } from 'src/app/Services/shared-dialogs.service';
 
@@ -9,12 +10,35 @@ import { SharedDialogsService } from 'src/app/Services/shared-dialogs.service';
 })
 export class GuidePageComponent implements OnInit {
   selectedBtn: number = 1;
-  title: string = "מה זה מנטור - קארדס?";
+  title: string;
   playerWidth: number;
   playerHeight: number;
 
+  title_Hebrew :string[] = [
+      "מה זה מנטור - קארדס?",
+      "איך מתחברים לאתר?",
+      "איך מזינים קוד הטבה?",
+      "ספרי ההדרכה שלנו",
+      "ערכות הקלפים שלנו",
+      "תכניות, מחירים וביטולים",
+      "עקרונות מפתח בעבודה עם קלפים",
+      "איך עובדים עם ערכת קלפים דיגיטלית?"
+  ]
+
+  title_English: string[] = [
+    "What is Mentor-Cards?",
+    "How to connect to the site?",
+    "How to enter a coupon code?",
+    "Our guide books",
+    "Our card sets",
+    "Plans, prices, and cancellations",
+    "Key principles in working with cards",
+    "How to work with a digital card set?"
+  ]
   constructor(
-    private mixpanelService: MixpanelService, private sharedDialogsService: SharedDialogsService) { }
+    private mixpanelService: MixpanelService ,  
+    public langDirectionService: LangDirectionService
+    ) { }
 
   ngOnInit(): void {
     
@@ -22,14 +46,21 @@ export class GuidePageComponent implements OnInit {
     this.mixpanelService.track("PageViewed", { 'Page Title': 'guide-page' });
     this.playerWidth = window.innerWidth;
     this.playerHeight = this.playerWidth / 1.78
+    if(this.langDirectionService.currentLangDirection == 'rtl') {
+      this.title = this.title_Hebrew[0];
+    }
+    else {
+      this.title = this.title_English[0];
+    }
   }
 
-  openSiteRulesModal(): void {
-    this.sharedDialogsService.openSiteRulesDialog();
-  }
-
-  selectedTopicChanged(index: number, title: string): void {
-    this.title = title;
+  selectedTopicChanged(index: number): void {
+    if(this.langDirectionService.currentLangDirection == 'rtl') {
+      this.title = this.title_Hebrew[index-1];
+    }
+    else {
+      this.title = this.title_English[index-1];
+    }
     this.selectedBtn = index;
   }
 

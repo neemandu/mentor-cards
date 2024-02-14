@@ -13,6 +13,12 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
+  onCreateCommonLink: OnCreateCommonLinkSubscription;
+  onUpdateCommonLink: OnUpdateCommonLinkSubscription;
+  onDeleteCommonLink: OnDeleteCommonLinkSubscription;
+  onCreateAffiliate: OnCreateAffiliateSubscription;
+  onUpdateAffiliate: OnUpdateAffiliateSubscription;
+  onDeleteAffiliate: OnDeleteAffiliateSubscription;
   onCreateCouponCodes: OnCreateCouponCodesSubscription;
   onUpdateCouponCodes: OnUpdateCouponCodesSubscription;
   onDeleteCouponCodes: OnDeleteCouponCodesSubscription;
@@ -48,12 +54,18 @@ export type __SubscriptionContainer = {
   onDeleteContactUsModel: OnDeleteContactUsModelSubscription;
 };
 
+export type CreateCommonLinkInput = {
+  packId?: number | null;
+};
+
 export type CreateUserInput = {
   username?: string | null;
   email?: string | null;
   phone?: string | null;
   fullName?: string | null;
+  affiliateId?: string | null;
   userOrgMembershipId?: string | null;
+  userMyAffiliateId?: string | null;
 };
 
 export type User = {
@@ -85,6 +97,9 @@ export type User = {
   entries?: number | null;
   externalPacksSubscriptions?: Array<MonthlySubscription | null> | null;
   entryDates?: Array<string | null> | null;
+  refId?: string | null;
+  myAffiliate?: Affiliate | null;
+  payments?: Array<Payment | null> | null;
 };
 
 export type MonthlySubscription = {
@@ -193,6 +208,45 @@ export type CouponCodes = {
   updatedAt: string;
 };
 
+export type Affiliate = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<Withdraw | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Withdraw = {
+  __typename: "Withdraw";
+  id: string;
+  date?: string | null;
+  amount?: number | null;
+  currency?: string | null;
+  paymentWay?: string | null;
+  transactionId?: string | null;
+};
+
+export type Payment = {
+  __typename: "Payment";
+  id: string;
+  date?: string | null;
+  payedMonths?: number | null;
+  amount?: number | null;
+  currency?: string | null;
+  paymentWay?: string | null;
+  transactionId?: string | null;
+};
+
 export type addCardsPackInput = {
   cardsPackId?: string | null;
 };
@@ -247,33 +301,12 @@ export type cardPackIdInput = {
   cardsPackId?: number | null;
 };
 
-export type CreateSubscriptionPlanInput = {
-  id?: string | null;
-  name?: string | null;
-  description?: string | null;
-  providerPlanId: string;
-  numberOfUsers?: number | null;
-  numberOfCardPacks?: number | null;
-  billingCycleInMonths?: number | null;
-  fullPrice?: number | null;
-  discount?: number | null;
-  subscriptionProviderPlanId?: string | null;
-  subscriptionPlanOrgMembershipId?: string | null;
-};
-
-export type ModelSubscriptionPlanConditionInput = {
-  name?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  providerPlanId?: ModelStringInput | null;
-  numberOfUsers?: ModelIntInput | null;
-  numberOfCardPacks?: ModelIntInput | null;
-  billingCycleInMonths?: ModelIntInput | null;
-  fullPrice?: ModelFloatInput | null;
-  discount?: ModelFloatInput | null;
-  subscriptionProviderPlanId?: ModelStringInput | null;
-  and?: Array<ModelSubscriptionPlanConditionInput | null> | null;
-  or?: Array<ModelSubscriptionPlanConditionInput | null> | null;
-  not?: ModelSubscriptionPlanConditionInput | null;
+export type ModelCommonLinkConditionInput = {
+  experationDate?: ModelStringInput | null;
+  createdBy?: ModelStringInput | null;
+  and?: Array<ModelCommonLinkConditionInput | null> | null;
+  or?: Array<ModelCommonLinkConditionInput | null> | null;
+  not?: ModelCommonLinkConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -315,7 +348,81 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type ModelIntInput = {
+export type CommonLink = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCommonLinkInput = {
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+};
+
+export type DeleteCommonLinkInput = {
+  id: string;
+};
+
+export type CreateAffiliateInput = {
+  id?: string | null;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<WithdrawInput | null> | null;
+};
+
+export type WithdrawInput = {
+  id: string;
+  date?: string | null;
+  amount?: number | null;
+  currency?: string | null;
+  paymentWay?: string | null;
+  transactionId?: string | null;
+};
+
+export type ModelAffiliateConditionInput = {
+  affiliateID?: ModelIDInput | null;
+  affiliateUrl?: ModelStringInput | null;
+  phoneNumber?: ModelStringInput | null;
+  websiteURL?: ModelStringInput | null;
+  paymentDetails?: ModelStringInput | null;
+  commissionPercentage?: ModelFloatInput | null;
+  dateJoined?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  balance?: ModelFloatInput | null;
+  and?: Array<ModelAffiliateConditionInput | null> | null;
+  or?: Array<ModelAffiliateConditionInput | null> | null;
+  not?: ModelAffiliateConditionInput | null;
+};
+
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
+export type ModelFloatInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -327,7 +434,55 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null;
 };
 
-export type ModelFloatInput = {
+export type UpdateAffiliateInput = {
+  id: string;
+  affiliateID?: string | null;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<WithdrawInput | null> | null;
+};
+
+export type DeleteAffiliateInput = {
+  id: string;
+};
+
+export type CreateSubscriptionPlanInput = {
+  id?: string | null;
+  name?: string | null;
+  description?: string | null;
+  providerPlanId: string;
+  numberOfUsers?: number | null;
+  numberOfCardPacks?: number | null;
+  billingCycleInMonths?: number | null;
+  fullPrice?: number | null;
+  discount?: number | null;
+  subscriptionProviderPlanId?: string | null;
+  subscriptionPlanOrgMembershipId?: string | null;
+};
+
+export type ModelSubscriptionPlanConditionInput = {
+  name?: ModelStringInput | null;
+  description?: ModelStringInput | null;
+  providerPlanId?: ModelStringInput | null;
+  numberOfUsers?: ModelIntInput | null;
+  numberOfCardPacks?: ModelIntInput | null;
+  billingCycleInMonths?: ModelIntInput | null;
+  fullPrice?: ModelFloatInput | null;
+  discount?: ModelFloatInput | null;
+  subscriptionProviderPlanId?: ModelStringInput | null;
+  and?: Array<ModelSubscriptionPlanConditionInput | null> | null;
+  or?: Array<ModelSubscriptionPlanConditionInput | null> | null;
+  not?: ModelSubscriptionPlanConditionInput | null;
+};
+
+export type ModelIntInput = {
   ne?: number | null;
   eq?: number | null;
   le?: number | null;
@@ -827,6 +982,21 @@ export type CreateContactUsModelInput = {
   email?: string | null;
 };
 
+export type ModelCommonLinkFilterInput = {
+  id?: ModelIDInput | null;
+  experationDate?: ModelStringInput | null;
+  createdBy?: ModelStringInput | null;
+  and?: Array<ModelCommonLinkFilterInput | null> | null;
+  or?: Array<ModelCommonLinkFilterInput | null> | null;
+  not?: ModelCommonLinkFilterInput | null;
+};
+
+export type ModelCommonLinkConnection = {
+  __typename: "ModelCommonLinkConnection";
+  items: Array<CommonLink | null>;
+  nextToken?: string | null;
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null;
   username?: ModelIDInput | null;
@@ -851,30 +1021,37 @@ export type ModelUserFilterInput = {
   favouritePacks?: ModelIntInput | null;
   entries?: ModelIntInput | null;
   entryDates?: ModelStringInput | null;
+  refId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
 };
 
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
 export type ModelUserConnection = {
   __typename: "ModelUserConnection";
   items: Array<User | null>;
+  nextToken?: string | null;
+};
+
+export type ModelAffiliateFilterInput = {
+  affiliateID?: ModelIDInput | null;
+  affiliateUrl?: ModelStringInput | null;
+  contactEmail?: ModelStringInput | null;
+  phoneNumber?: ModelStringInput | null;
+  websiteURL?: ModelStringInput | null;
+  paymentDetails?: ModelStringInput | null;
+  commissionPercentage?: ModelFloatInput | null;
+  dateJoined?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  balance?: ModelFloatInput | null;
+  and?: Array<ModelAffiliateFilterInput | null> | null;
+  or?: Array<ModelAffiliateFilterInput | null> | null;
+  not?: ModelAffiliateFilterInput | null;
+};
+
+export type ModelAffiliateConnection = {
+  __typename: "ModelAffiliateConnection";
+  items: Array<Affiliate | null>;
   nextToken?: string | null;
 };
 
@@ -1378,6 +1555,42 @@ export type CreateUserMutation = {
     nextBillingDate?: string | null;
   } | null> | null;
   entryDates?: Array<string | null> | null;
+  refId?: string | null;
+  myAffiliate?: {
+    __typename: "Affiliate";
+    id: string;
+    affiliateID: string;
+    affiliateUrl?: string | null;
+    contactEmail?: string | null;
+    phoneNumber?: string | null;
+    websiteURL?: string | null;
+    paymentDetails?: string | null;
+    commissionPercentage?: number | null;
+    dateJoined?: string | null;
+    status?: string | null;
+    balance?: number | null;
+    withdraws?: Array<{
+      __typename: "Withdraw";
+      id: string;
+      date?: string | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  payments?: Array<{
+    __typename: "Payment";
+    id: string;
+    date?: string | null;
+    payedMonths?: number | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
 };
 
 export type AddCouponCodeMutation = {
@@ -1414,6 +1627,470 @@ export type GetSubscriptionPlansMutation = {
     updatedAt: string;
   } | null;
   subscriptionProviderPlanId?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GetAffiliateDataMutation = {
+  __typename: "User";
+  id: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  status?: string | null;
+  subscription?: {
+    __typename: "MonthlySubscription";
+    id: string;
+    startDate?: string | null;
+    paymentProvider?: string | null;
+    providerTransactionId?: string | null;
+    subscriptionPlan?: {
+      __typename: "SubscriptionPlan";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      subscriptionProviderPlanId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    includedCardPacksIds?: Array<{
+      __typename: "CardsPack";
+      id: string;
+      imgUrl: string;
+      description?: string | null;
+      tags?: Array<string | null> | null;
+      categories?: Array<string | null> | null;
+      cards?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
+      cardsPreview?: Array<string | null> | null;
+      groupsIds?: Array<string | null> | null;
+      guideBook?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+      name?: string | null;
+      freeUntilDate?: string | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      isOwnedByOrg?: boolean | null;
+      brief?: string | null;
+      likesCounter?: number | null;
+      visitorsCounter?: number | null;
+      backImgUrl?: string | null;
+      isExternalPack?: boolean | null;
+      authorizedDomains?: Array<string | null> | null;
+      subscriptionPlans?: Array<{
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        subscriptionProviderPlanId?: string | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null> | null;
+      topQuestions?: Array<string | null> | null;
+      usersUsage?: Array<{
+        __typename: "UserUsage";
+        user?: string | null;
+        entries?: number | null;
+      } | null> | null;
+      isFree?: boolean | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null> | null;
+    cancellationDate?: string | null;
+    nextBillingDate?: string | null;
+  } | null;
+  numberOfPacksSubstitutions?: number | null;
+  lastPackSubstitutionDate?: string | null;
+  numberOfPlansSubstitutions?: number | null;
+  lastPlanSubstitutionDate?: string | null;
+  firstProgramRegistrationDate?: string | null;
+  groupId?: string | null;
+  numberOfUsedPacks?: number | null;
+  groupRole?: string | null;
+  cancellationDate?: string | null;
+  couponCodes?: Array<{
+    __typename: "CouponCodes";
+    id: string;
+    couponCode?: string | null;
+    discount?: number | null;
+    trialPeriodInDays?: number | null;
+    allowedCardsPacks?: Array<string | null> | null;
+    organization?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  cardsPacksIds?: Array<string | null> | null;
+  providerTransactionId?: string | null;
+  fullName?: string | null;
+  orgMembership?: {
+    __typename: "OrganizationMembership";
+    id: string;
+    name?: string | null;
+    trialPeriodInDays?: number | null;
+    numberOfallowedCardsPacks?: number | null;
+    about?: {
+      __typename: "About";
+      text?: string | null;
+      imgUrl?: string | null;
+      link?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  endOfTrialDate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  favouritePacks?: Array<number | null> | null;
+  entries?: number | null;
+  externalPacksSubscriptions?: Array<{
+    __typename: "MonthlySubscription";
+    id: string;
+    startDate?: string | null;
+    paymentProvider?: string | null;
+    providerTransactionId?: string | null;
+    subscriptionPlan?: {
+      __typename: "SubscriptionPlan";
+      id: string;
+      name?: string | null;
+      description?: string | null;
+      providerPlanId: string;
+      numberOfUsers?: number | null;
+      numberOfCardPacks?: number | null;
+      billingCycleInMonths?: number | null;
+      fullPrice?: number | null;
+      discount?: number | null;
+      orgMembership?: {
+        __typename: "OrganizationMembership";
+        id: string;
+        name?: string | null;
+        trialPeriodInDays?: number | null;
+        numberOfallowedCardsPacks?: number | null;
+        about?: {
+          __typename: "About";
+          text?: string | null;
+          imgUrl?: string | null;
+          link?: string | null;
+        } | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null;
+      subscriptionProviderPlanId?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    includedCardPacksIds?: Array<{
+      __typename: "CardsPack";
+      id: string;
+      imgUrl: string;
+      description?: string | null;
+      tags?: Array<string | null> | null;
+      categories?: Array<string | null> | null;
+      cards?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
+      cardsPreview?: Array<string | null> | null;
+      groupsIds?: Array<string | null> | null;
+      guideBook?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+      name?: string | null;
+      freeUntilDate?: string | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      isOwnedByOrg?: boolean | null;
+      brief?: string | null;
+      likesCounter?: number | null;
+      visitorsCounter?: number | null;
+      backImgUrl?: string | null;
+      isExternalPack?: boolean | null;
+      authorizedDomains?: Array<string | null> | null;
+      subscriptionPlans?: Array<{
+        __typename: "SubscriptionPlan";
+        id: string;
+        name?: string | null;
+        description?: string | null;
+        providerPlanId: string;
+        numberOfUsers?: number | null;
+        numberOfCardPacks?: number | null;
+        billingCycleInMonths?: number | null;
+        fullPrice?: number | null;
+        discount?: number | null;
+        orgMembership?: {
+          __typename: "OrganizationMembership";
+          id: string;
+          name?: string | null;
+          trialPeriodInDays?: number | null;
+          numberOfallowedCardsPacks?: number | null;
+          about?: {
+            __typename: "About";
+            text?: string | null;
+            imgUrl?: string | null;
+            link?: string | null;
+          } | null;
+          createdAt: string;
+          updatedAt: string;
+        } | null;
+        subscriptionProviderPlanId?: string | null;
+        createdAt: string;
+        updatedAt: string;
+      } | null> | null;
+      topQuestions?: Array<string | null> | null;
+      usersUsage?: Array<{
+        __typename: "UserUsage";
+        user?: string | null;
+        entries?: number | null;
+      } | null> | null;
+      isFree?: boolean | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null> | null;
+    cancellationDate?: string | null;
+    nextBillingDate?: string | null;
+  } | null> | null;
+  entryDates?: Array<string | null> | null;
+  refId?: string | null;
+  myAffiliate?: {
+    __typename: "Affiliate";
+    id: string;
+    affiliateID: string;
+    affiliateUrl?: string | null;
+    contactEmail?: string | null;
+    phoneNumber?: string | null;
+    websiteURL?: string | null;
+    paymentDetails?: string | null;
+    commissionPercentage?: number | null;
+    dateJoined?: string | null;
+    status?: string | null;
+    balance?: number | null;
+    withdraws?: Array<{
+      __typename: "Withdraw";
+      id: string;
+      date?: string | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  payments?: Array<{
+    __typename: "Payment";
+    id: string;
+    date?: string | null;
+    payedMonths?: number | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+};
+
+export type CreateCommonLinkMutation = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateCommonLinkMutation = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteCommonLinkMutation = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateAffiliateMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateAffiliateMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteAffiliateMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2321,6 +2998,28 @@ export type CreateContactUsModelMutation = {
   updatedAt: string;
 };
 
+export type GetCommonLinkQuery = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListCommonLinksQuery = {
+  __typename: "ModelCommonLinkConnection";
+  items: Array<{
+    __typename: "CommonLink";
+    id: string;
+    experationDate?: string | null;
+    createdBy?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
 export type GetUserQuery = {
   __typename: "User";
   id: string;
@@ -2642,6 +3341,42 @@ export type GetUserQuery = {
     nextBillingDate?: string | null;
   } | null> | null;
   entryDates?: Array<string | null> | null;
+  refId?: string | null;
+  myAffiliate?: {
+    __typename: "Affiliate";
+    id: string;
+    affiliateID: string;
+    affiliateUrl?: string | null;
+    contactEmail?: string | null;
+    phoneNumber?: string | null;
+    websiteURL?: string | null;
+    paymentDetails?: string | null;
+    commissionPercentage?: number | null;
+    dateJoined?: string | null;
+    status?: string | null;
+    balance?: number | null;
+    withdraws?: Array<{
+      __typename: "Withdraw";
+      id: string;
+      date?: string | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  payments?: Array<{
+    __typename: "Payment";
+    id: string;
+    date?: string | null;
+    payedMonths?: number | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
 };
 
 export type ListUsersQuery = {
@@ -2959,6 +3694,98 @@ export type ListUsersQuery = {
       nextBillingDate?: string | null;
     } | null> | null;
     entryDates?: Array<string | null> | null;
+    refId?: string | null;
+    myAffiliate?: {
+      __typename: "Affiliate";
+      id: string;
+      affiliateID: string;
+      affiliateUrl?: string | null;
+      contactEmail?: string | null;
+      phoneNumber?: string | null;
+      websiteURL?: string | null;
+      paymentDetails?: string | null;
+      commissionPercentage?: number | null;
+      dateJoined?: string | null;
+      status?: string | null;
+      balance?: number | null;
+      withdraws?: Array<{
+        __typename: "Withdraw";
+        id: string;
+        date?: string | null;
+        amount?: number | null;
+        currency?: string | null;
+        paymentWay?: string | null;
+        transactionId?: string | null;
+      } | null> | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    payments?: Array<{
+      __typename: "Payment";
+      id: string;
+      date?: string | null;
+      payedMonths?: number | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetAffiliateQuery = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListAffiliatesQuery = {
+  __typename: "ModelAffiliateConnection";
+  items: Array<{
+    __typename: "Affiliate";
+    id: string;
+    affiliateID: string;
+    affiliateUrl?: string | null;
+    contactEmail?: string | null;
+    phoneNumber?: string | null;
+    websiteURL?: string | null;
+    paymentDetails?: string | null;
+    commissionPercentage?: number | null;
+    dateJoined?: string | null;
+    status?: string | null;
+    balance?: number | null;
+    withdraws?: Array<{
+      __typename: "Withdraw";
+      id: string;
+      date?: string | null;
+      amount?: number | null;
+      currency?: string | null;
+      paymentWay?: string | null;
+      transactionId?: string | null;
+    } | null> | null;
+    createdAt: string;
+    updatedAt: string;
   } | null>;
   nextToken?: string | null;
 };
@@ -3537,6 +4364,111 @@ export type ListContactUsModelsQuery = {
     updatedAt: string;
   } | null>;
   nextToken?: string | null;
+};
+
+export type OnCreateCommonLinkSubscription = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateCommonLinkSubscription = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteCommonLinkSubscription = {
+  __typename: "CommonLink";
+  id: string;
+  experationDate?: string | null;
+  createdBy?: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateAffiliateSubscription = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateAffiliateSubscription = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteAffiliateSubscription = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateID: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnCreateCouponCodesSubscription = {
@@ -4446,6 +5378,18 @@ export type OnDeleteContactUsModelSubscription = {
   providedIn: "root"
 })
 export class APIService {
+  async MakeCommonLink(input: CreateCommonLinkInput): Promise<string | null> {
+    const statement = `mutation MakeCommonLink($input: CreateCommonLinkInput!) {
+        makeCommonLink(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <string | null>response.data.makeCommonLink;
+  }
   async CreateUser(input: CreateUserInput): Promise<CreateUserMutation> {
     const statement = `mutation CreateUser($input: CreateUserInput!) {
         createUser(input: $input) {
@@ -4769,6 +5713,42 @@ export class APIService {
             nextBillingDate
           }
           entryDates
+          refId
+          myAffiliate {
+            __typename
+            id
+            affiliateID
+            affiliateUrl
+            contactEmail
+            phoneNumber
+            websiteURL
+            paymentDetails
+            commissionPercentage
+            dateJoined
+            status
+            balance
+            withdraws {
+              __typename
+              id
+              date
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
+            createdAt
+            updatedAt
+          }
+          payments {
+            __typename
+            id
+            date
+            payedMonths
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -4886,7 +5866,7 @@ export class APIService {
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
   }
-  async GetSubscriptionPlansForOrgs(
+async GetSubscriptionPlansForOrgs(
     input: userInput
   ): Promise<Array<GetSubscriptionPlansMutation>> {
     const statement = `mutation GetSubscriptionPlans($input: userInput!) {
@@ -5008,6 +5988,578 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.IncrementPackEntries;
+  }
+  async GetAffiliateData(
+    input: userInput
+  ): Promise<Array<GetAffiliateDataMutation>> {
+    const statement = `mutation GetAffiliateData($input: userInput!) {
+        getAffiliateData(input: $input) {
+          __typename
+          id
+          username
+          email
+          phone
+          status
+          subscription {
+            __typename
+            id
+            startDate
+            paymentProvider
+            providerTransactionId
+            subscriptionPlan {
+              __typename
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
+                __typename
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
+              }
+              subscriptionProviderPlanId
+              createdAt
+              updatedAt
+            }
+            includedCardPacksIds {
+              __typename
+              id
+              imgUrl
+              description
+              tags
+              categories
+              cards {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
+              cardsPreview
+              groupsIds
+              guideBook {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              name
+              freeUntilDate
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              isOwnedByOrg
+              brief
+              likesCounter
+              visitorsCounter
+              backImgUrl
+              isExternalPack
+              authorizedDomains
+              subscriptionPlans {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                subscriptionProviderPlanId
+                createdAt
+                updatedAt
+              }
+              topQuestions
+              usersUsage {
+                __typename
+                user
+                entries
+              }
+              isFree
+              createdAt
+              updatedAt
+            }
+            cancellationDate
+            nextBillingDate
+          }
+          numberOfPacksSubstitutions
+          lastPackSubstitutionDate
+          numberOfPlansSubstitutions
+          lastPlanSubstitutionDate
+          firstProgramRegistrationDate
+          groupId
+          numberOfUsedPacks
+          groupRole
+          cancellationDate
+          couponCodes {
+            __typename
+            id
+            couponCode
+            discount
+            trialPeriodInDays
+            allowedCardsPacks
+            organization {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            createdAt
+            updatedAt
+          }
+          cardsPacksIds
+          providerTransactionId
+          fullName
+          orgMembership {
+            __typename
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          endOfTrialDate
+          createdAt
+          updatedAt
+          favouritePacks
+          entries
+          externalPacksSubscriptions {
+            __typename
+            id
+            startDate
+            paymentProvider
+            providerTransactionId
+            subscriptionPlan {
+              __typename
+              id
+              name
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
+                __typename
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
+              }
+              subscriptionProviderPlanId
+              createdAt
+              updatedAt
+            }
+            includedCardPacksIds {
+              __typename
+              id
+              imgUrl
+              description
+              tags
+              categories
+              cards {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
+              cardsPreview
+              groupsIds
+              guideBook {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              name
+              freeUntilDate
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              isOwnedByOrg
+              brief
+              likesCounter
+              visitorsCounter
+              backImgUrl
+              isExternalPack
+              authorizedDomains
+              subscriptionPlans {
+                __typename
+                id
+                name
+                description
+                providerPlanId
+                numberOfUsers
+                numberOfCardPacks
+                billingCycleInMonths
+                fullPrice
+                discount
+                orgMembership {
+                  __typename
+                  id
+                  name
+                  trialPeriodInDays
+                  numberOfallowedCardsPacks
+                  about {
+                    __typename
+                    text
+                    imgUrl
+                    link
+                  }
+                  createdAt
+                  updatedAt
+                }
+                subscriptionProviderPlanId
+                createdAt
+                updatedAt
+              }
+              topQuestions
+              usersUsage {
+                __typename
+                user
+                entries
+              }
+              isFree
+              createdAt
+              updatedAt
+            }
+            cancellationDate
+            nextBillingDate
+          }
+          entryDates
+          refId
+          myAffiliate {
+            __typename
+            id
+            affiliateID
+            affiliateUrl
+            contactEmail
+            phoneNumber
+            websiteURL
+            paymentDetails
+            commissionPercentage
+            dateJoined
+            status
+            balance
+            withdraws {
+              __typename
+              id
+              date
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
+            createdAt
+            updatedAt
+          }
+          payments {
+            __typename
+            id
+            date
+            payedMonths
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<GetAffiliateDataMutation>>response.data.getAffiliateData;
+  }
+  async CreateCommonLink(
+    input: CreateCommonLinkInput,
+    condition?: ModelCommonLinkConditionInput
+  ): Promise<CreateCommonLinkMutation> {
+    const statement = `mutation CreateCommonLink($input: CreateCommonLinkInput!, $condition: ModelCommonLinkConditionInput) {
+        createCommonLink(input: $input, condition: $condition) {
+          __typename
+          id
+          experationDate
+          createdBy
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateCommonLinkMutation>response.data.createCommonLink;
+  }
+  async UpdateCommonLink(
+    input: UpdateCommonLinkInput,
+    condition?: ModelCommonLinkConditionInput
+  ): Promise<UpdateCommonLinkMutation> {
+    const statement = `mutation UpdateCommonLink($input: UpdateCommonLinkInput!, $condition: ModelCommonLinkConditionInput) {
+        updateCommonLink(input: $input, condition: $condition) {
+          __typename
+          id
+          experationDate
+          createdBy
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateCommonLinkMutation>response.data.updateCommonLink;
+  }
+  async DeleteCommonLink(
+    input: DeleteCommonLinkInput,
+    condition?: ModelCommonLinkConditionInput
+  ): Promise<DeleteCommonLinkMutation> {
+    const statement = `mutation DeleteCommonLink($input: DeleteCommonLinkInput!, $condition: ModelCommonLinkConditionInput) {
+        deleteCommonLink(input: $input, condition: $condition) {
+          __typename
+          id
+          experationDate
+          createdBy
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteCommonLinkMutation>response.data.deleteCommonLink;
+  }
+  async CreateAffiliate(
+    input: CreateAffiliateInput,
+    condition?: ModelAffiliateConditionInput
+  ): Promise<CreateAffiliateMutation> {
+    const statement = `mutation CreateAffiliate($input: CreateAffiliateInput!, $condition: ModelAffiliateConditionInput) {
+        createAffiliate(input: $input, condition: $condition) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateAffiliateMutation>response.data.createAffiliate;
+  }
+  async UpdateAffiliate(
+    input: UpdateAffiliateInput,
+    condition?: ModelAffiliateConditionInput
+  ): Promise<UpdateAffiliateMutation> {
+    const statement = `mutation UpdateAffiliate($input: UpdateAffiliateInput!, $condition: ModelAffiliateConditionInput) {
+        updateAffiliate(input: $input, condition: $condition) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateAffiliateMutation>response.data.updateAffiliate;
+  }
+  async DeleteAffiliate(
+    input: DeleteAffiliateInput,
+    condition?: ModelAffiliateConditionInput
+  ): Promise<DeleteAffiliateMutation> {
+    const statement = `mutation DeleteAffiliate($input: DeleteAffiliateInput!, $condition: ModelAffiliateConditionInput) {
+        deleteAffiliate(input: $input, condition: $condition) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteAffiliateMutation>response.data.deleteAffiliate;
   }
   async CreateSubscriptionPlan(
     input: CreateSubscriptionPlanInput,
@@ -6448,6 +8000,59 @@ export class APIService {
     )) as any;
     return <CreateContactUsModelMutation>response.data.createContactUsModel;
   }
+  async GetCommonLink(id: string): Promise<GetCommonLinkQuery> {
+    const statement = `query GetCommonLink($id: ID!) {
+        getCommonLink(id: $id) {
+          __typename
+          id
+          experationDate
+          createdBy
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetCommonLinkQuery>response.data.getCommonLink;
+  }
+  async ListCommonLinks(
+    filter?: ModelCommonLinkFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListCommonLinksQuery> {
+    const statement = `query ListCommonLinks($filter: ModelCommonLinkFilterInput, $limit: Int, $nextToken: String) {
+        listCommonLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            experationDate
+            createdBy
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListCommonLinksQuery>response.data.listCommonLinks;
+  }
   async GetUser(id: string): Promise<GetUserQuery> {
     const statement = `query GetUser($id: ID!) {
         getUser(id: $id) {
@@ -6771,6 +8376,42 @@ export class APIService {
             nextBillingDate
           }
           entryDates
+          refId
+          myAffiliate {
+            __typename
+            id
+            affiliateID
+            affiliateUrl
+            contactEmail
+            phoneNumber
+            websiteURL
+            paymentDetails
+            commissionPercentage
+            dateJoined
+            status
+            balance
+            withdraws {
+              __typename
+              id
+              date
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
+            createdAt
+            updatedAt
+          }
+          payments {
+            __typename
+            id
+            date
+            payedMonths
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -7102,6 +8743,42 @@ export class APIService {
               nextBillingDate
             }
             entryDates
+            refId
+            myAffiliate {
+              __typename
+              id
+              affiliateID
+              affiliateUrl
+              contactEmail
+              phoneNumber
+              websiteURL
+              paymentDetails
+              commissionPercentage
+              dateJoined
+              status
+              balance
+              withdraws {
+                __typename
+                id
+                date
+                amount
+                currency
+                paymentWay
+                transactionId
+              }
+              createdAt
+              updatedAt
+            }
+            payments {
+              __typename
+              id
+              date
+              payedMonths
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
           }
           nextToken
         }
@@ -7120,6 +8797,93 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
+  }
+  async GetAffiliate(id: string): Promise<GetAffiliateQuery> {
+    const statement = `query GetAffiliate($id: ID!) {
+        getAffiliate(id: $id) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetAffiliateQuery>response.data.getAffiliate;
+  }
+  async ListAffiliates(
+    filter?: ModelAffiliateFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListAffiliatesQuery> {
+    const statement = `query ListAffiliates($filter: ModelAffiliateFilterInput, $limit: Int, $nextToken: String) {
+        listAffiliates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            affiliateID
+            affiliateUrl
+            contactEmail
+            phoneNumber
+            websiteURL
+            paymentDetails
+            commissionPercentage
+            dateJoined
+            status
+            balance
+            withdraws {
+              __typename
+              id
+              date
+              amount
+              currency
+              paymentWay
+              transactionId
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListAffiliatesQuery>response.data.listAffiliates;
   }
   async GetCouponCodes(id: string): Promise<GetCouponCodesQuery> {
     const statement = `query GetCouponCodes($id: ID!) {
@@ -7733,8 +9497,8 @@ export class APIService {
     )) as any;
     return <ListNewssQuery>response.data.listNewss;
   }
-  async GetCardsPack(id: string): Promise<GetCardsPackQuery> {
-    const statement = `query GetCardsPack($id: ID!) {
+  async GetCardsPack(id: string, link: string): Promise<GetCardsPackQuery> {
+    const statement = `query GetCardsPack($id: ID!, $link: String) {
         getCardsPack(id: $id) {
           __typename
           id
@@ -7742,7 +9506,7 @@ export class APIService {
           description
           tags
           categories
-          cards {
+          cards (link: $link){
             __typename
             backImgUrl
             frontImgUrl
@@ -7834,7 +9598,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id, link
     };
     const response = (await API.graphql(
       { query: statement,
@@ -7843,7 +9607,7 @@ export class APIService {
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
-  async ListCardsPacksForPreview(
+async ListCardsPacksForPreview(
     filter?: ModelCardsPackFilterInput,
     limit?: number,
     nextToken?: string
@@ -8137,6 +9901,192 @@ export class APIService {
     )) as any;
     return <ListContactUsModelsQuery>response.data.listContactUsModels;
   }
+  OnCreateCommonLinkListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateCommonLink {
+        onCreateCommonLink {
+          __typename
+          id
+          experationDate
+          createdBy
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
+  >;
+
+  OnUpdateCommonLinkListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateCommonLink {
+        onUpdateCommonLink {
+          __typename
+          id
+          experationDate
+          createdBy
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
+  >;
+
+  OnDeleteCommonLinkListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteCommonLink {
+        onDeleteCommonLink {
+          __typename
+          id
+          experationDate
+          createdBy
+          createdAt
+          updatedAt
+        }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
+  >;
+
+  OnCreateAffiliateListener(
+    contactEmail?: string
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
+  > {
+    const statement = `subscription OnCreateAffiliate($contactEmail: String) {
+        onCreateAffiliate(contactEmail: $contactEmail) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (contactEmail) {
+      gqlAPIServiceArguments.contactEmail = contactEmail;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
+    >;
+  }
+
+  OnUpdateAffiliateListener(
+    contactEmail?: string
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
+  > {
+    const statement = `subscription OnUpdateAffiliate($contactEmail: String) {
+        onUpdateAffiliate(contactEmail: $contactEmail) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (contactEmail) {
+      gqlAPIServiceArguments.contactEmail = contactEmail;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
+    >;
+  }
+
+  OnDeleteAffiliateListener(
+    contactEmail?: string
+  ): Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
+  > {
+    const statement = `subscription OnDeleteAffiliate($contactEmail: String) {
+        onDeleteAffiliate(contactEmail: $contactEmail) {
+          __typename
+          id
+          affiliateID
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (contactEmail) {
+      gqlAPIServiceArguments.contactEmail = contactEmail;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
+    >;
+  }
+
   OnCreateCouponCodesListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
   > = API.graphql(

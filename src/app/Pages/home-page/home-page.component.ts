@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { UserData } from 'src/app/Objects/user-related';
@@ -22,13 +22,23 @@ export class HomePageComponent implements OnInit, OnDestroy, AfterViewInit {
     news: any[] = [];
 
     constructor(private userAuthService: UserAuthService, private overlaySpinnerService: OverlaySpinnerService,
+        public route: ActivatedRoute,
         public router: Router, private ngZone: NgZone, private api: APIService, private cardsService: CardsService,
         private mixpanelService: MixpanelService
     ) {
     }
 
     ngOnInit(): void {
-        
+        console.log('home page ngOnInit!');
+        this.route.queryParams.subscribe(params => {
+            const refId = params['ref'];
+            console.log('refId:', refId);
+            if (refId) {
+              localStorage.setItem('refId', refId);
+              console.log('refId ID stored:', refId);
+            }
+          });
+
         // track events
         this.mixpanelService.track("PageViewed", { 'Page Title': 'home-page' });
         this.api.ListNewss().then(news => {

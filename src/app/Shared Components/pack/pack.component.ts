@@ -14,6 +14,7 @@ import {
   PackPreviewComponent,
   previewData,
 } from './pack-preview/pack-preview.component';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 
 @Component({
   selector: 'app-pack',
@@ -32,7 +33,8 @@ export class PackComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    private userAuthService: UserAuthService
+    private userAuthService: UserAuthService,
+    public langDirectionService: LangDirectionService
   ) {}
 
   ngOnInit() {

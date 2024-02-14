@@ -1,4 +1,29 @@
 # this is an auto generated file. This will be overwritten
+query GetCommonLink($id: ID!) {
+  getCommonLink(id: $id) {
+    id
+    experationDate
+    createdBy
+    createdAt
+    updatedAt
+  }
+}
+query ListCommonLinks(
+  $filter: ModelCommonLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCommonLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      experationDate
+      createdBy
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetUser($id: ID!) {
   getUser(id: $id) {
     id
@@ -283,6 +308,39 @@ query GetUser($id: ID!) {
       nextBillingDate
     }
     entryDates
+    refId
+    myAffiliate {
+      id
+      affiliateID
+      affiliateUrl
+      contactEmail
+      phoneNumber
+      websiteURL
+      paymentDetails
+      commissionPercentage
+      dateJoined
+      status
+      balance
+      withdraws {
+        id
+        date
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+      createdAt
+      updatedAt
+    }
+    payments {
+      id
+      date
+      payedMonths
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
   }
 }
 query ListUsers(
@@ -568,6 +626,96 @@ query ListUsers(
         nextBillingDate
       }
       entryDates
+      refId
+      myAffiliate {
+        id
+        affiliateID
+        affiliateUrl
+        contactEmail
+        phoneNumber
+        websiteURL
+        paymentDetails
+        commissionPercentage
+        dateJoined
+        status
+        balance
+        withdraws {
+          id
+          date
+          amount
+          currency
+          paymentWay
+          transactionId
+        }
+        createdAt
+        updatedAt
+      }
+      payments {
+        id
+        date
+        payedMonths
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+    }
+    nextToken
+  }
+}
+query GetAffiliate($id: ID!) {
+  getAffiliate(id: $id) {
+    id
+    affiliateID
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListAffiliates(
+  $filter: ModelAffiliateFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAffiliates(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      affiliateID
+      affiliateUrl
+      contactEmail
+      phoneNumber
+      websiteURL
+      paymentDetails
+      commissionPercentage
+      dateJoined
+      status
+      balance
+      withdraws {
+        id
+        date
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+      createdAt
+      updatedAt
     }
     nextToken
   }
@@ -936,14 +1084,14 @@ query ListNewss(
     nextToken
   }
 }
-query GetCardsPack($id: ID!) {
+query GetCardsPack($id: ID!, $link: String!) {
   getCardsPack(id: $id) {
     id
     imgUrl
     description
     tags
     categories
-    cards {
+    cards(link: $link) {
       backImgUrl
       frontImgUrl
     }

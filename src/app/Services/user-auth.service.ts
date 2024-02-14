@@ -121,11 +121,13 @@ export class UserAuthService {
     var newUserEmail: string = this.cognitoUserData['email'];
     var newUserPhone: string = this.cognitoUserData['phone_number'];
     var newUserFullName: string = this.cognitoUserData['given_name'];
+    var affiliateId: string = localStorage.getItem('refId');
     var user: CreateUserInput = {
       username: newUsername,
       email: newUserEmail,
       phone: newUserPhone,
       fullName: newUserFullName,
+      affiliateId: affiliateId
     };
     this.api.CreateUser(user).then(
       (value) => {

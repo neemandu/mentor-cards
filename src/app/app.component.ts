@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LangDirectionService } from './Services/LangDirectionService.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
   chatBtnSub: Subscription;
   chatButton: any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public langDirectionService: LangDirectionService) {}
 
   ngOnInit() {
     this.chatBtnSub = this.router.events.subscribe((val) => {
