@@ -238,7 +238,7 @@ exports.handler = async (event, context, callback) => {
     if(!isExternalPack && user){
         console.log('Checking if its a free trial period');
         var allPackagesDate = new Date();
-        var trialPeriodInDays = 0;
+        var trialPeriodInDays = 14;
         var startFreePeriodDate = user.createdAt;
         console.log('allPackagesDate');
         console.log(allPackagesDate);

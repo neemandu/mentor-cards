@@ -145,13 +145,11 @@
         "AddNewUserToEmailsContactList": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4f6e5963496264373845-build.zip",
-          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
-          "contactListId": "2"
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-3631732b777757364674-build.zip",
-          "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter"
+          "s3Key": "amplify-builds/InvoiceHandler-3631732b777757364674-build.zip"
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
