@@ -267,7 +267,7 @@
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetFreeUntilDate-50746f67726a4a4e5050-build.zip"
+          "s3Key": "amplify-builds/GetFreeUntilDate-4264775877756b665a53-build.zip"
         },
         "mentorcards91f3dc29CustomMessage": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -301,7 +301,7 @@
         },
         "EmailEndOfTrialNotice": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/EmailEndOfTrialNotice-75314746556734554966-build.zip"
+          "s3Key": "amplify-builds/EmailEndOfTrialNotice-34666e493148736e4d4b-build.zip"
         },
         "GetNextReceiptId": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -331,7 +331,7 @@
         },
         "InvoiceHandler": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-3631732b777757364674-build.zip",
+          "s3Key": "amplify-builds/InvoiceHandler-31486757713242306d4c-build.zip",
           "receiptsUrl": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev"
         },
         "IncrementCardPackLike": {
