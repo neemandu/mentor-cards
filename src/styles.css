@@ -57,17 +57,9 @@ body {
 
 .rtl-snackbar {
   direction: rtl !important;
-  color: black;
-  background-color: #feefd7;
-  border: 4px double #ffcf00;
-  min-width: 0 !important;
-}
-
-.ltr-snackbar {
-  direction: ltr !important;
-  color: black;
-  background-color: #feefd7;
-  border: 4px double #ffcf00;
+  color: black !important; 
+  background-color: #feefd7 !important;
+  border: 4px double #ffcf00 !important;
   min-width: 0 !important;
 }
 

@@ -1,47 +1,47 @@
 * {
-  font-family: 'rubik' !important;
+  font-family: "rubik" !important;
   font-size: inherit;
 }
 
 .more-less-categories-icon {
   font-size: 1.5rem;
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   /* cursor: pointer; */
 }
 
-.float-right{
+.float-right {
   width: 15%;
 }
 
-.searchbar{
-  border-color: #D39539;
+.searchbar {
+  border-color: #d39539;
   border-radius: 100px;
   border-width: 1px;
   border-style: solid;
   background-color: white;
   align-self: center;
-  width: 50%;  
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.mat-input-element{
-  caret-color:#D39539;
+.mat-input-element {
+  caret-color: #d39539;
 }
 
 .mat-form-field-underline {
-  background-color: #D39539;
+  background-color: #d39539;
 }
 .mat-form-field-ripple {
-  background-color: #D39539;
+  background-color: #d39539;
 }
 .placeholder {
   display: none;
 }
 
-[dir = "rtl"] .autocomplete-options {
+[dir="rtl"] .autocomplete-options {
   position: absolute;
   z-index: 1000;
   width: 100%;
@@ -53,7 +53,7 @@
   direction: rtl;
 }
 
-[dir = "ltr"] .autocomplete-options {
+[dir="ltr"] .autocomplete-options {
   position: absolute;
   z-index: 1000;
   width: 100%;
@@ -65,7 +65,7 @@
   direction: ltr;
 }
 
-[dir = "rtl"] .autocomplete-options mat-option {
+[dir="rtl"] .autocomplete-options mat-option {
   padding: 10px;
   cursor: pointer;
   direction: rtl;
@@ -73,7 +73,7 @@
   direction: rtl;
 }
 
-[dir = "ltr"] .autocomplete-options mat-option {
+[dir="ltr"] .autocomplete-options mat-option {
   padding: 10px;
   cursor: pointer;
   direction: ltr;
@@ -82,27 +82,27 @@
 }
 
 .autocomplete-options mat-option:hover {
-  background-color: #d6a45ac9;;
+  background-color: #d6a45ac9;
 }
 
-[dir = "rtl"] .mat-option-text {
+[dir="rtl"] .mat-option-text {
   text-align: right;
   direction: rtl;
 }
 
-[dir = "ltr"] .mat-option-text {
+[dir="ltr"] .mat-option-text {
   text-align: left;
   direction: ltr;
 }
 .search {
   width: 90%;
   align-self: center;
-  position: relative; 
+  position: relative;
   font-size: large;
 }
 
-.header{
-  text-align: center; 
+.header {
+  text-align: center;
   font-size: xx-large;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -167,23 +167,23 @@ app-pack {
   border-radius: 10px;
 }
 
-[dir = "rtl"] #filter-by-text {
+[dir="rtl"] #filter-by-text {
   text-align: right;
   margin: 0px 10px 0px 0px;
 }
 
-[dir = "ltr"] #filter-by-text {
+[dir="ltr"] #filter-by-text {
   text-align: left;
   margin: 0px 0px 0px 10px;
 }
 
-[dir = "rtl"] #filter-by-options-title {
+[dir="rtl"] #filter-by-options-title {
   text-align: right;
   margin: 5px 10px 0px 0px;
   font-weight: 700;
 }
 
-[dir = "ltr"] #filter-by-options-title {
+[dir="ltr"] #filter-by-options-title {
   text-align: left;
   margin: 5px 0px 0px 10px;
   font-weight: 700;
@@ -197,13 +197,13 @@ app-pack {
   text-align: left;
 }
 
-[dir = "rtl"] mat-form-field {
+[dir="rtl"] mat-form-field {
   text-align: right;
   margin-right: 10px;
   margin-left: 10px;
 }
 
-[dir = "ltr"] mat-form-field {
+[dir="ltr"] mat-form-field {
   text-align: left;
   margin-right: 10px;
   margin-left: 10px;
@@ -211,6 +211,10 @@ app-pack {
 .mat-list-base .mat-list-item,
 .mat-list-base .mat-list-option {
   height: 35px;
+}
+
+.mat-selection-list {
+  direction: ltr;
 }
 
 #couponCodeBtn {
@@ -245,8 +249,8 @@ h1 {
 
 .category-color-dot {
   font-size: 12px;
-  font-family: 'Material Icons'
-    /* margin-right: -10px;
+  font-family: "Material Icons";
+  /* margin-right: -10px;
   margin-bottom: -4px; */
 }
 
@@ -257,7 +261,7 @@ h1 {
 .categrory-title {
   text-align: center;
   margin-block-end: -5px;
-  font-size: 1.5EM;
+  font-size: 1.5em;
   font-weight: 600;
   color: #ffa800;
   transition: transform 0.5s;
@@ -288,15 +292,20 @@ h1 {
   transform: translateX(15px) scaleX(1.1);
 } */
 
-.category-line:hover>.categrory-title {
+.category-line:hover > .categrory-title {
   transform: scale(1.2);
 }
 
-::ng-deep .mat-list-text {
+[dir="rtl"] ::ng-deep .mat-list-text {
   direction: rtl;
 }
 
-@media screen and (max-width: 1024px) {}
+[dir="ltr"] ::ng-deep .mat-list-text {
+  direction: ltr;
+}
+
+@media screen and (max-width: 1024px) {
+}
 
 @media screen and (max-width: 768px) {
   #filters {
@@ -313,10 +322,10 @@ h1 {
     margin: 5px 6px;
   }
 
-  .header{
+  .header {
     font-size: large;
   }
-  .category-line:hover>.categrory-title {
+  .category-line:hover > .categrory-title {
     transform: none;
   }
 
@@ -325,17 +334,21 @@ h1 {
     width: 25%;
   }
 
-  .searchbar{
+  .searchbar {
     background-color: white;
-    border-color: #D39539;
+    border-color: #d39539;
     border-radius: 20px;
     border-width: 1px;
     border-style: solid;
     align-self: center;
-    width: 90%;  
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+}
+
+.mat-list-text {
+  margin-inline: 10px;
 }

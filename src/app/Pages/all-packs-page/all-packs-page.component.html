@@ -12,6 +12,7 @@
     <mat-selection-list
       #categories
       (selectionChange)="categoriesSelectedChange($event); filterPacks()"
+      [dir]="langDirectionService.currentLangDirection"
     >
 
       <mat-list-option
