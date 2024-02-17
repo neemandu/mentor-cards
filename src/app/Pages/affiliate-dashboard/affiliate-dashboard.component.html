@@ -17,7 +17,11 @@
             </button>
           </div>
         </div>
-        <div class="discount-body-text">    {{ "pages.affiliates-dashboard-page.discount-body-text1" | translate }} </div>
+        <div class="discount-body-text">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text1" | translate
+          }}
+        </div>
       </div>
       <div class="discount-details-user">
         <div class="discount-user">
@@ -32,7 +36,11 @@
             </button>
           </div>
         </div>
-        <div class="discount-body-text">   {{ "pages.affiliates-dashboard-page.discount-body-text2" | translate }}   </div>
+        <div class="discount-body-text">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text2" | translate
+          }}
+        </div>
       </div>
     </div>
     <div class="affiliate-dashboard-discount-values">
@@ -45,13 +53,72 @@
         />
       </div>
       <div class="discount-values">
-        <div class="discount-body-text"> {{ "pages.affiliates-dashboard-page.discount-body-text3" | translate }}  </div>
-        <div class="discount-body-text discount-values-secont">{{ "pages.affiliates-dashboard-page.discount-body-text4" | translate }} </div>
+        <div class="discount-body-text">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text3" | translate
+          }}
+        </div>
+        <div class="discount-body-text discount-values-secont">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text4" | translate
+          }}
+        </div>
       </div>
     </div>
 
-    <div class="table-header">
-      הנרשמים שלי
+    <div class="table-header">הנרשמים שלי</div>
+
+    <div style="margin-inline: 5vw;" >
+      <div class="card ">
+        <div class="card-body">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            class="table table-bordered table-striped table-hover"
+          >
+            <thead>
+              <tr>
+                <th>עמלה</th>
+                <th>אימייל</th>
+                <th>מתחדש כל</th>
+                <th>סוג מנוי</th>
+                <th>תאריך רכישה</th>
+                <th>שם</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let affiliate of affiliateData">
+                <tr>
+                  <td>{{ affiliate.quantity }}</td>
+                  <td>{{ affiliate.email }}</td>
+                  <td>{{ affiliate.renewsAll }}</td>
+                  <td>{{ affiliate.subscriptionType }}</td>
+                  <td>{{ affiliate.purchaseDate }}</td>
+                  <td >
+                    {{ affiliate.Name }}
+                    <img
+                      src="../../../assets/icons/plus.png"
+                      alt="Expand data"
+                      width="20px"
+                      (click)="affiliate.isExpanded = !affiliate.isExpanded"
+                    />
+                  </td>
+                </tr>
+                <ng-container *ngIf="affiliate.isExpanded">
+                  <tr *ngFor="let _affiliate of affiliate.pastPurchases" style="background-color: #eaeaea;">
+                    <td>{{ _affiliate.quantity }}</td>
+                    <td>{{ _affiliate.email }}</td>
+                    <td>{{ _affiliate.renewsAll }}</td>
+                    <td>{{ _affiliate.subscriptionType }}</td>
+                    <td>{{ _affiliate.purchaseDate }}</td>
+                    <td>{{ _affiliate.Name }}</td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -91,6 +91,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { I18nModule } from './Modules/i18n/i18n.module';
+import {DataTablesModule} from 'angular-datatables';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -213,6 +214,7 @@ import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/af
     PortalModule,
     ManagementModule,
     I18nModule,
+    DataTablesModule,
     //Material
     MatButtonModule,
     MatIconModule,

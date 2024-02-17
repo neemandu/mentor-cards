@@ -8,7 +8,7 @@
 
 .affiliate-dashboard-content{
     background-color: #ffefd7 ;
-    height: 76vh;
+    height: 96vh;
     padding-top: 6vh;
     
 }
@@ -114,3 +114,20 @@ button{
     font-size: 2rem;
     text-align: center  ;
 }
+
+/* table {
+    width: 100%;
+    border: 1px solid black;
+  }
+  
+  tr {
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  
+ 
+   */
+   
+   td{
+   text-align: right;
+  }
