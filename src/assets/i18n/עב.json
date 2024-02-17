@@ -1054,6 +1054,13 @@
         }
       },
       "footer":"אז מה אתם אומרים, נהיה שותפים?"                                        
+    },
+    "affiliates-dashboard-page":{
+      "header":"שותפים",
+      "discount-body-text1":"קוד ההטבה ללקוחות שלי",
+      "discount-body-text2":"קישור ההפצה שלך",
+      "discount-body-text3":"עמלה: 10%",
+      "discount-body-text4":"הכנסה קרובה: 0"
     }
   },
   "components": {

@@ -1,0 +1,57 @@
+<div dir="ltr">
+  <div class="affiliate-dashboard-header">
+    {{ "pages.affiliates-dashboard-page.header" | translate }}
+  </div>
+  <div class="affiliate-dashboard-content">
+    <div class="affiliate-dashboard-discount-details">
+      <div class="discount-details-code">
+        <div class="discount-code">
+          <div class="discount-code-text">{{ data.discountCode }}</div>
+          <div>
+            <button (click)="copyTextToClipboard(data.discountCode)">
+              <img
+                src="../../../assets/icons/clipboard.png"
+                alt="clipboard"
+                width="40px"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="discount-body-text">    {{ "pages.affiliates-dashboard-page.discount-body-text1" | translate }} </div>
+      </div>
+      <div class="discount-details-user">
+        <div class="discount-user">
+          <div class="discount-user-text">{{ data.user }}</div>
+          <div>
+            <button (click)="copyTextToClipboard(data.user)">
+              <img
+                src="../../../assets/icons/clipboard.png"
+                alt="clipboard"
+                width="40px"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="discount-body-text">   {{ "pages.affiliates-dashboard-page.discount-body-text2" | translate }}   </div>
+      </div>
+    </div>
+    <div class="affiliate-dashboard-discount-values">
+      <div class="discount-values-link">
+        משוך כסף מהיתרה
+        <img
+          src="../../../assets/icons/information.png"
+          alt="information"
+          width="20px"
+        />
+      </div>
+      <div class="discount-values">
+        <div class="discount-body-text"> {{ "pages.affiliates-dashboard-page.discount-body-text3" | translate }}  </div>
+        <div class="discount-body-text discount-values-secont">{{ "pages.affiliates-dashboard-page.discount-body-text4" | translate }} </div>
+      </div>
+    </div>
+
+    <div class="table-header">
+      הנרשמים שלי
+    </div>
+  </div>
+</div>
