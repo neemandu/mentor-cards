@@ -3,6 +3,7 @@ import { GuideBookElement, PackContent } from 'src/app/Objects/packs';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { PopoutData, POPOUT_MODAL_DATA } from 'src/app/Services/popout.service';
 import { DynamicPrintService } from 'src/app/Services/dynamic-print.service';
+import { MixpanelService } from 'src/app/Services/mixpanel.service';
 
 @Component({
   selector: 'app-guide-book',
@@ -20,6 +21,7 @@ export class GuideBookComponent implements OnInit {
   constructor(
     @Inject(POPOUT_MODAL_DATA) public data: PopoutData,
     private overlaySpinnerService: OverlaySpinnerService,
+    private mixpanelService: MixpanelService,
     private printPdfService: DynamicPrintService
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -60,6 +62,7 @@ export class GuideBookComponent implements OnInit {
   }
 
   printPdf(): void {
+    this.mixpanelService.track("ButtonClicked", { "Name": "Print GuideBook"});
     let html_url = '/assets/htmlTemplates/guidebook.html'
     this.printPdfService.printHtmlContent(html_url, this.packName, this.packDesc, this.guideBook, this.imgUrl);
   }
