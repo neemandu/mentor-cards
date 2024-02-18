@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { GuideBookElement, PackContent } from 'src/app/Objects/packs';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { PopoutData, POPOUT_MODAL_DATA } from 'src/app/Services/popout.service';
+import { DynamicPrintService } from 'src/app/Services/dynamic-print.service';
 
 @Component({
   selector: 'app-guide-book',
@@ -14,10 +15,12 @@ export class GuideBookComponent implements OnInit {
   packName: string;
   packDesc: string;
   title: string;
+  imgUrl: string;
 
   constructor(
     @Inject(POPOUT_MODAL_DATA) public data: PopoutData,
-    private overlaySpinnerService: OverlaySpinnerService
+    private overlaySpinnerService: OverlaySpinnerService,
+    private printPdfService: DynamicPrintService
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
@@ -29,6 +32,7 @@ export class GuideBookComponent implements OnInit {
       this.guideBook = this.data.guideBook;
       this.packName = this.data.packName;
       this.packDesc = this.data.packDesc;
+      this.imgUrl = this.data.imgUrl;
     }
     else {
       this.guideBook = new Array<GuideBookElement>();
@@ -53,5 +57,10 @@ export class GuideBookComponent implements OnInit {
       panel.style.padding = "1vh 0vw"
       subjectDivRef.style.marginTop = "2vh"
     }
+  }
+
+  printPdf(): void {
+    let html_url = '/assets/htmlTemplates/guidebook.html'
+    this.printPdfService.printHtmlContent(html_url, this.packName, this.packDesc, this.guideBook, this.imgUrl);
   }
 }
