@@ -90,6 +90,8 @@ import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule} from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
 import {DataTablesModule} from 'angular-datatables';
 //Components
@@ -240,6 +242,10 @@ import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/af
     DragDropModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule
+
   ],
   providers: [AuthService,
     {

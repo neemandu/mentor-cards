@@ -6,13 +6,13 @@
     <div class="affiliate-dashboard-discount-details">
       <div class="discount-details-code">
         <div class="discount-code">
-          <div class="discount-code-text">{{ data.discountCode }}</div>
+          <div class="discount-code-text">{{ userData.discountCode }}</div>
           <div>
-            <button (click)="copyTextToClipboard(data.discountCode)">
+            <button (click)="copyTextToClipboard(userData.discountCode)">
               <img
                 src="../../../assets/icons/clipboard.png"
                 alt="clipboard"
-                width="40px"
+                wnameth="40px"
               />
             </button>
           </div>
@@ -25,9 +25,9 @@
       </div>
       <div class="discount-details-user">
         <div class="discount-user">
-          <div class="discount-user-text">{{ data.user }}</div>
+          <div class="discount-user-text">{{ userData.user }}</div>
           <div>
-            <button (click)="copyTextToClipboard(data.user)">
+            <button (click)="copyTextToClipboard(userData.user)">
               <img
                 src="../../../assets/icons/clipboard.png"
                 alt="clipboard"
@@ -68,55 +68,92 @@
 
     <div class="table-header">הנרשמים שלי</div>
 
-    <div style="margin-inline: 5vw;" >
-      <div class="card ">
+    <div style="margin-inline: 5vw">
+      <div class="card">
         <div class="card-body">
-          <table
-            datatable
-            [dtOptions]="dtOptions"
-            class="table table-bordered table-striped table-hover"
-          >
-            <thead>
-              <tr>
-                <th>עמלה</th>
-                <th>אימייל</th>
-                <th>מתחדש כל</th>
-                <th>סוג מנוי</th>
-                <th>תאריך רכישה</th>
-                <th>שם</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let affiliate of affiliateData">
-                <tr>
-                  <td>{{ affiliate.quantity }}</td>
-                  <td>{{ affiliate.email }}</td>
-                  <td>{{ affiliate.renewsAll }}</td>
-                  <td>{{ affiliate.subscriptionType }}</td>
-                  <td>{{ affiliate.purchaseDate }}</td>
-                  <td >
-                    {{ affiliate.Name }}
-                    <img
+          <div class="mat-elevation-z8">
+            <div class="example-container mat-elevation-z8">
+              <mat-table #table [dataSource]="dataSource" [dir]="langDirectionService.currentLangDirection">
+
+                <!-- name Column -->
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef> שם </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> 
+                    <button mat-button (click)="toggleExpand(element)" style="width: 10px; margin-inline:0px">
+                      <img
+                      *ngIf="element != expandedElement"
                       src="../../../assets/icons/plus.png"
                       alt="Expand data"
                       width="20px"
-                      (click)="affiliate.isExpanded = !affiliate.isExpanded"
                     />
-                  </td>
-                </tr>
-                <ng-container *ngIf="affiliate.isExpanded">
-                  <tr *ngFor="let _affiliate of affiliate.pastPurchases" style="background-color: #eaeaea;">
-                    <td>{{ _affiliate.quantity }}</td>
-                    <td>{{ _affiliate.email }}</td>
-                    <td>{{ _affiliate.renewsAll }}</td>
-                    <td>{{ _affiliate.subscriptionType }}</td>
-                    <td>{{ _affiliate.purchaseDate }}</td>
-                    <td>{{ _affiliate.Name }}</td>
-                  </tr>
+
+                    <img
+                    *ngIf="element == expandedElement"
+                    src="../../../assets/icons/minus.png"
+                    alt="Expand data"
+                    width="20px"
+                  />
+
+                    </button>
+                    {{element.name}}
+                  </mat-cell>
                 </ng-container>
-              </ng-container>
-            </tbody>
-          </table>
+            
+                <!-- purchaseDate Column -->
+                <ng-container matColumnDef="purchaseDate">
+                  <mat-header-cell *matHeaderCellDef>    תאריך רכישה </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.purchaseDate}} </mat-cell>
+                </ng-container>
+            
+                <!-- subscriptionType  Column -->
+                <ng-container matColumnDef="subscriptionType">
+                  <mat-header-cell *matHeaderCellDef>     סוג מנוי </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.subscriptionType}} </mat-cell>
+                </ng-container>
+
+                   <!-- renewsEvery Column -->
+                <ng-container matColumnDef="renewsEvery">
+                  <mat-header-cell *matHeaderCellDef>   מתחדש כל </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.renewsEvery}} </mat-cell>
+                </ng-container>
+            
+                <!-- email Column -->
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef>   אימייל  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                </ng-container>
+            
+                <!-- commission  Column -->
+                <ng-container matColumnDef="commission">
+                  <mat-header-cell *matHeaderCellDef>     סוג מנוי </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.commission}} </mat-cell>
+                </ng-container>
+            
+                <!-- Expanded Content Column - The detail row is made up of this one column -->
+                <ng-container matColumnDef="expandedDetail">
+                  <mat-cell *matCellDef="let detail" style="background-color:#eaeaea"> 
+                    <div style="display: grid; grid-template-columns: repeat(6, 1fr); width:90vw; text-align:right; ">
+                      <div sty>{{detail.element.name}}</div>
+                      <div>{{detail.element.purchaseDate}}</div>
+                      <div>{{detail.element.subscriptionType}}</div>
+                      <div>{{detail.element.renewsEvery}}</div>
+                      <div>{{detail.element.email}}</div>
+                      <div>{{detail.element.commission}}</div>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"
+                        matRipple 
+                        class="element-row" 
+                     ></mat-row>
+                <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+                        [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+                        style="overflow: hidden"> 
+                </mat-row>
+              </mat-table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
