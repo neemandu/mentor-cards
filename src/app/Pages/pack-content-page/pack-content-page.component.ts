@@ -283,6 +283,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       guideBook: this.pack.guideBook,
       packName: this.pack?.name,
       packDesc: this.pack.description,
+      imgUrl: this.pack.imgUrl
     };
     this.popoutService.openPopoutModal(modalData);
   }

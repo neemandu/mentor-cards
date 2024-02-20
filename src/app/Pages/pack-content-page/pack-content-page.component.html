@@ -13,7 +13,7 @@
       {{ 'pages.packContent.aboutAuthor' | translate }}
       </h2>
     </div>
-    <button *ngIf="!unauthorized"
+    <button *ngIf="!unauthorized || !commonLink"
       id="guideBook"
       type="button"
       [disabled]="showEditPack"

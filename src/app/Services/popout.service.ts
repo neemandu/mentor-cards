@@ -92,6 +92,7 @@ export interface PopoutData {
   guideBook: GuideBookElement[];
   packName: string;
   packDesc: string;
+  imgUrl: string;
 }
 
 export const POPOUT_MODAL_DATA = new InjectionToken<PopoutData>('POPOUT_MODAL_DATA');
