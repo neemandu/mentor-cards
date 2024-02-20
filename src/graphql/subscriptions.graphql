@@ -725,6 +725,8 @@ subscription OnCreateCardsPack {
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -810,6 +812,8 @@ subscription OnUpdateCardsPack {
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -895,6 +899,8 @@ subscription OnDeleteCardsPack {
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }

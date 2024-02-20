@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackContent } from '../Objects/packs';
 import { UserAuthService } from './user-auth.service';
 import { UserData } from '../Objects/user-related';
-import { APIService, ListCardsPacksQuery } from '../API.service';
+import { APIService, ListCardsPacksByLanguageQuery } from '../API.service';
 import { OverlaySpinnerService } from './overlay-spinner.service';
 // import { AuthService } from 'src/app/Services/auth.service';
 
@@ -89,8 +89,9 @@ export class CardsService {
 
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    (this.isLoggedIn ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
-      this.allPacks = packs.items.map(pack => {
+    (this.isLoggedIn ? this.api.ListCardsPacksByLanguage('he') : this.api.ListCardsPacksByLanguageForPreview('he')).then((packs) => {
+      console.log(packs);
+      this.allPacks = packs.map(pack => {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))
             this.allCategories.push(category);

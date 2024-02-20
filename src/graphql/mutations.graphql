@@ -115,6 +115,8 @@ mutation CreateUser($input: CreateUserInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -279,6 +281,8 @@ mutation CreateUser($input: CreateUserInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -500,6 +504,8 @@ mutation GetAffiliateData($input: userInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -664,6 +670,8 @@ mutation GetAffiliateData($input: userInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -1386,6 +1394,8 @@ mutation CreateCardsPack(
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -1474,6 +1484,8 @@ mutation UpdateCardsPack(
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -1562,6 +1574,8 @@ mutation DeleteCardsPack(
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }

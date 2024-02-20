@@ -174,6 +174,8 @@ export type CardsPack = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsage | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -732,6 +734,8 @@ export type CreateCardsPackInput = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsageInput | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
 };
 
 export type CardsInput = {
@@ -767,6 +771,8 @@ export type ModelCardsPackConditionInput = {
   authorizedDomains?: ModelStringInput | null;
   topQuestions?: ModelStringInput | null;
   isFree?: ModelBooleanInput | null;
+  language?: ModelStringInput | null;
+  isActive?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -795,6 +801,8 @@ export type UpdateCardsPackInput = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsageInput | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -1188,36 +1196,6 @@ export type ModelNewsConnection = {
   nextToken?: string | null;
 };
 
-export type ModelCardsPackFilterInput = {
-  id?: ModelIDInput | null;
-  imgUrl?: ModelStringInput | null;
-  description?: ModelStringInput | null;
-  tags?: ModelStringInput | null;
-  categories?: ModelStringInput | null;
-  cardsPreview?: ModelStringInput | null;
-  groupsIds?: ModelStringInput | null;
-  name?: ModelStringInput | null;
-  freeUntilDate?: ModelStringInput | null;
-  isOwnedByOrg?: ModelBooleanInput | null;
-  brief?: ModelStringInput | null;
-  likesCounter?: ModelIntInput | null;
-  visitorsCounter?: ModelIntInput | null;
-  backImgUrl?: ModelStringInput | null;
-  isExternalPack?: ModelBooleanInput | null;
-  authorizedDomains?: ModelStringInput | null;
-  topQuestions?: ModelStringInput | null;
-  isFree?: ModelBooleanInput | null;
-  and?: Array<ModelCardsPackFilterInput | null> | null;
-  or?: Array<ModelCardsPackFilterInput | null> | null;
-  not?: ModelCardsPackFilterInput | null;
-};
-
-export type ModelCardsPackConnection = {
-  __typename: "ModelCardsPackConnection";
-  items: Array<CardsPack | null>;
-  nextToken?: string | null;
-};
-
 export type ModelContactUsModelFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
@@ -1363,6 +1341,8 @@ export type CreateUserMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language: string;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1548,6 +1528,8 @@ export type CreateUserMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language: string;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1760,6 +1742,8 @@ export type GetAffiliateDataMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language: string;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1945,6 +1929,8 @@ export type GetAffiliateDataMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language: string;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2641,6 +2627,8 @@ export type CreateCardsPackMutation = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2739,6 +2727,8 @@ export type UpdateCardsPackMutation = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2837,6 +2827,8 @@ export type DeleteCardsPackMutation = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2998,6 +2990,106 @@ export type CreateContactUsModelMutation = {
   updatedAt: string;
 };
 
+export type ListCardsPacksByLanguageQuery = {
+  __typename: "CardsPack";
+  id: string;
+  imgUrl: string;
+  description?: string | null;
+  tags?: Array<string | null> | null;
+  categories?: Array<string | null> | null;
+  cards?: Array<{
+    __typename: "Cards";
+    backImgUrl?: string | null;
+    frontImgUrl?: string | null;
+  } | null> | null;
+  cardsPreview?: Array<string | null> | null;
+  groupsIds?: Array<string | null> | null;
+  guideBook?: Array<{
+    __typename: "GuideBookElement";
+    name?: string | null;
+    subElements?: Array<{
+      __typename: "GuideBookElement";
+      name?: string | null;
+      subElements?: Array<{
+        __typename: "GuideBookElement";
+        name?: string | null;
+        subElements?: Array<{
+          __typename: "GuideBookElement";
+          name?: string | null;
+          subElements?: Array<{
+            __typename: "GuideBookElement";
+            name?: string | null;
+            subElements?: Array<{
+              __typename: "GuideBookElement";
+              name?: string | null;
+              subElements?: Array<{
+                __typename: "GuideBookElement";
+                name?: string | null;
+              } | null> | null;
+            } | null> | null;
+          } | null> | null;
+        } | null> | null;
+      } | null> | null;
+    } | null> | null;
+  } | null> | null;
+  name?: string | null;
+  freeUntilDate?: string | null;
+  about?: {
+    __typename: "About";
+    text?: string | null;
+    imgUrl?: string | null;
+    link?: string | null;
+  } | null;
+  isOwnedByOrg?: boolean | null;
+  brief?: string | null;
+  likesCounter?: number | null;
+  visitorsCounter?: number | null;
+  backImgUrl?: string | null;
+  isExternalPack?: boolean | null;
+  authorizedDomains?: Array<string | null> | null;
+  subscriptionPlans?: Array<{
+    __typename: "SubscriptionPlan";
+    id: string;
+    name?: string | null;
+    description?: string | null;
+    providerPlanId: string;
+    numberOfUsers?: number | null;
+    numberOfCardPacks?: number | null;
+    billingCycleInMonths?: number | null;
+    fullPrice?: number | null;
+    discount?: number | null;
+    orgMembership?: {
+      __typename: "OrganizationMembership";
+      id: string;
+      name?: string | null;
+      trialPeriodInDays?: number | null;
+      numberOfallowedCardsPacks?: number | null;
+      about?: {
+        __typename: "About";
+        text?: string | null;
+        imgUrl?: string | null;
+        link?: string | null;
+      } | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    subscriptionProviderPlanId?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  topQuestions?: Array<string | null> | null;
+  usersUsage?: Array<{
+    __typename: "UserUsage";
+    user?: string | null;
+    entries?: number | null;
+  } | null> | null;
+  isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type GetCommonLinkQuery = {
   __typename: "CommonLink";
   id: string;
@@ -3149,6 +3241,8 @@ export type GetUserQuery = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language: string;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3334,6 +3428,8 @@ export type GetUserQuery = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language: string;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3506,6 +3602,8 @@ export type ListUsersQuery = {
           entries?: number | null;
         } | null> | null;
         isFree?: boolean | null;
+        language: string;
+        isActive?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3687,6 +3785,8 @@ export type ListUsersQuery = {
           entries?: number | null;
         } | null> | null;
         isFree?: boolean | null;
+        language: string;
+        isActive?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -4240,106 +4340,10 @@ export type GetCardsPackQuery = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
-};
-
-export type ListCardsPacksQuery = {
-  __typename: "ModelCardsPackConnection";
-  items: Array<{
-    __typename: "CardsPack";
-    id: string;
-    imgUrl: string;
-    description?: string | null;
-    tags?: Array<string | null> | null;
-    categories?: Array<string | null> | null;
-    cards?: Array<{
-      __typename: "Cards";
-      backImgUrl?: string | null;
-      frontImgUrl?: string | null;
-    } | null> | null;
-    cardsPreview?: Array<string | null> | null;
-    groupsIds?: Array<string | null> | null;
-    guideBook?: Array<{
-      __typename: "GuideBookElement";
-      name?: string | null;
-      subElements?: Array<{
-        __typename: "GuideBookElement";
-        name?: string | null;
-        subElements?: Array<{
-          __typename: "GuideBookElement";
-          name?: string | null;
-          subElements?: Array<{
-            __typename: "GuideBookElement";
-            name?: string | null;
-            subElements?: Array<{
-              __typename: "GuideBookElement";
-              name?: string | null;
-              subElements?: Array<{
-                __typename: "GuideBookElement";
-                name?: string | null;
-              } | null> | null;
-            } | null> | null;
-          } | null> | null;
-        } | null> | null;
-      } | null> | null;
-    } | null> | null;
-    name?: string | null;
-    freeUntilDate?: string | null;
-    about?: {
-      __typename: "About";
-      text?: string | null;
-      imgUrl?: string | null;
-      link?: string | null;
-    } | null;
-    isOwnedByOrg?: boolean | null;
-    brief?: string | null;
-    likesCounter?: number | null;
-    visitorsCounter?: number | null;
-    backImgUrl?: string | null;
-    isExternalPack?: boolean | null;
-    authorizedDomains?: Array<string | null> | null;
-    subscriptionPlans?: Array<{
-      __typename: "SubscriptionPlan";
-      id: string;
-      name?: string | null;
-      description?: string | null;
-      providerPlanId: string;
-      numberOfUsers?: number | null;
-      numberOfCardPacks?: number | null;
-      billingCycleInMonths?: number | null;
-      fullPrice?: number | null;
-      discount?: number | null;
-      orgMembership?: {
-        __typename: "OrganizationMembership";
-        id: string;
-        name?: string | null;
-        trialPeriodInDays?: number | null;
-        numberOfallowedCardsPacks?: number | null;
-        about?: {
-          __typename: "About";
-          text?: string | null;
-          imgUrl?: string | null;
-          link?: string | null;
-        } | null;
-        createdAt: string;
-        updatedAt: string;
-      } | null;
-      subscriptionProviderPlanId?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null> | null;
-    topQuestions?: Array<string | null> | null;
-    usersUsage?: Array<{
-      __typename: "UserUsage";
-      user?: string | null;
-      entries?: number | null;
-    } | null> | null;
-    isFree?: boolean | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
 };
 
 export type GetContactUsModelQuery = {
@@ -5144,6 +5148,8 @@ export type OnCreateCardsPackSubscription = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5242,6 +5248,8 @@ export type OnUpdateCardsPackSubscription = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5340,6 +5348,8 @@ export type OnDeleteCardsPackSubscription = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language: string;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5521,6 +5531,8 @@ export class APIService {
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -5706,6 +5718,8 @@ export class APIService {
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -6122,6 +6136,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -6307,6 +6323,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -7422,6 +7440,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -7536,6 +7556,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -7650,6 +7672,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -8000,6 +8024,236 @@ async GetSubscriptionPlansForOrgs(
     )) as any;
     return <CreateContactUsModelMutation>response.data.createContactUsModel;
   }
+  async ListCardsPacksByLanguage(
+    language: string
+  ): Promise<Array<ListCardsPacksByLanguageQuery>> {
+    const statement = `query ListCardsPacksByLanguage($language: String!) {
+        listCardsPacksByLanguage(language: $language) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          isOwnedByOrg
+          brief
+          likesCounter
+          visitorsCounter
+          backImgUrl
+          isExternalPack
+          authorizedDomains
+          subscriptionPlans {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            subscriptionProviderPlanId
+            createdAt
+            updatedAt
+          }
+          topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
+          language
+          isActive
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      language
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<ListCardsPacksByLanguageQuery>>(
+      response.data.listCardsPacksByLanguage
+    );
+  }
+  async ListCardsPacksByLanguageForPreview(
+    language: string
+  ): Promise<Array<ListCardsPacksByLanguageQuery>> {
+    const statement = `query ListCardsPacksByLanguage($language: String!) {
+        listCardsPacksByLanguage(language: $language) {
+          __typename
+          id
+          imgUrl
+          description
+          tags
+          categories
+          cards {
+            __typename
+            backImgUrl
+            frontImgUrl
+          }
+          cardsPreview
+          groupsIds
+          guideBook {
+            __typename
+            name
+            subElements {
+              __typename
+              name
+              subElements {
+                __typename
+                name
+                subElements {
+                  __typename
+                  name
+                  subElements {
+                    __typename
+                    name
+                    subElements {
+                      __typename
+                      name
+                      subElements {
+                        __typename
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          name
+          freeUntilDate
+          about {
+            __typename
+            text
+            imgUrl
+            link
+          }
+          isOwnedByOrg
+          brief
+          likesCounter
+          visitorsCounter
+          backImgUrl
+          isExternalPack
+          authorizedDomains
+          subscriptionPlans {
+            __typename
+            id
+            name
+            description
+            providerPlanId
+            numberOfUsers
+            numberOfCardPacks
+            billingCycleInMonths
+            fullPrice
+            discount
+            orgMembership {
+              __typename
+              id
+              name
+              trialPeriodInDays
+              numberOfallowedCardsPacks
+              about {
+                __typename
+                text
+                imgUrl
+                link
+              }
+              createdAt
+              updatedAt
+            }
+            subscriptionProviderPlanId
+            createdAt
+            updatedAt
+          }
+          topQuestions
+          usersUsage {
+            __typename
+            user
+            entries
+          }
+          isFree
+          language
+          isActive
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      language
+    };
+    const response = (await API.graphql(
+      { query: statement,
+        variables: gqlAPIServiceArguments,
+        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+    )) as any;
+    return <Array<ListCardsPacksByLanguageQuery>>(
+      response.data.listCardsPacksByLanguage
+    );
+  }
   async GetCommonLink(id: string): Promise<GetCommonLinkQuery> {
     const statement = `query GetCommonLink($id: ID!) {
         getCommonLink(id: $id) {
@@ -8184,6 +8438,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -8369,6 +8625,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -8555,6 +8813,8 @@ async GetSubscriptionPlansForOrgs(
                   entries
                 }
                 isFree
+                language
+                isActive
                 createdAt
                 updatedAt
               }
@@ -8736,6 +8996,8 @@ async GetSubscriptionPlansForOrgs(
                   entries
                 }
                 isFree
+                language
+                isActive
                 createdAt
                 updatedAt
               }
@@ -9593,6 +9855,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -9606,245 +9870,6 @@ async GetSubscriptionPlansForOrgs(
         authMode: GRAPHQL_AUTH_MODE.API_KEY}
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
-  }
-async ListCardsPacksForPreview(
-    filter?: ModelCardsPackFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCardsPacksQuery> {
-    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-      listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-        __typename
-        items {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards {
-            __typename
-            backImgUrl
-            frontImgUrl
-          }            
-          usersUsage {
-            __typename
-            user
-            entries
-          }
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            name
-            subElements {
-              __typename
-              name
-              subElements {
-                __typename
-                name
-                subElements {
-                  __typename
-                  name
-                  subElements {
-                    __typename
-                    name
-                    subElements {
-                      __typename
-                      name
-                    }
-                  }
-                }
-              }
-            }
-          }
-          name
-          freeUntilDate
-          isFree
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          isOwnedByOrg
-          brief
-          likesCounter
-          visitorsCounter
-          backImgUrl
-          isExternalPack
-          authorizedDomains
-          subscriptionPlans {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                __typename
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          topQuestions
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-    }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      { query: statement,
-        variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
-    )) as any;
-    return <ListCardsPacksQuery>response.data.listCardsPacks;
-  }
-  async ListCardsPacks(
-    filter?: ModelCardsPackFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCardsPacksQuery> {
-    const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            imgUrl
-            description
-            tags
-            categories
-            cards {
-              __typename
-              backImgUrl
-              frontImgUrl
-            }
-            cardsPreview
-            groupsIds
-            guideBook {
-              __typename
-              name
-              subElements {
-                __typename
-                name
-                subElements {
-                  __typename
-                  name
-                  subElements {
-                    __typename
-                    name
-                    subElements {
-                      __typename
-                      name
-                      subElements {
-                        __typename
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            name
-            freeUntilDate
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            isOwnedByOrg
-            brief
-            likesCounter
-            visitorsCounter
-            backImgUrl
-            isExternalPack
-            authorizedDomains
-            subscriptionPlans {
-              __typename
-              id
-              name
-              description
-              providerPlanId
-              numberOfUsers
-              numberOfCardPacks
-              billingCycleInMonths
-              fullPrice
-              discount
-              orgMembership {
-                __typename
-                id
-                name
-                trialPeriodInDays
-                numberOfallowedCardsPacks
-                about {
-                  __typename
-                  text
-                  imgUrl
-                  link
-                }
-                createdAt
-                updatedAt
-              }
-              subscriptionProviderPlanId
-              createdAt
-              updatedAt
-            }
-            topQuestions
-            usersUsage {
-              __typename
-              user
-              entries
-            }
-            isFree
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
   async GetContactUsModel(id: string): Promise<GetContactUsModelQuery> {
     const statement = `query GetContactUsModel($id: ID!) {
@@ -11059,6 +11084,8 @@ async ListCardsPacksForPreview(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -11167,6 +11194,8 @@ async ListCardsPacksForPreview(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -11275,6 +11304,8 @@ async ListCardsPacksForPreview(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }

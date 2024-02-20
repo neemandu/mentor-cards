@@ -62,8 +62,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllData(): void {
-    this.api.ListCardsPacks().then((res) => {
-      this.cards = [...res.items];
+    this.api.ListCardsPacksByLanguage('he').then((res) => {
+      this.cards = [...res];
       var series = [];
       var labels = [];
       for(var i =0 ; i< this.cards.length; i++){
