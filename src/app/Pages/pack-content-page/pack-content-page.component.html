@@ -379,6 +379,7 @@
         'selected-content-one-card': selectedCards.length == 1
       }"
     >
+    <div style="position: absolute; margin-top:20vw" class="card-view  one-cards">hi</div>
     <div *ngIf="isDoubleSided && flipped">
       <img (click)="imgClick($event)"
         *ngFor="let card of selectedCards"

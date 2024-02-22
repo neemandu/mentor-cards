@@ -15,12 +15,13 @@
 .affiliate-dashboard-discount-details {
   padding-top: 2vh;
   padding-bottom: 2vh;
+  padding-inline: 2vw;
   margin-inline: 5vw;
   font-size: 1.5rem;
   background-color: white;
   border-radius: 15px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .discount-code {

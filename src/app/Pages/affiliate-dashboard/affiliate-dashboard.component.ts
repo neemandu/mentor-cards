@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, OnInit, VERSION, ViewChild} from '@angular/core';
+import { Affiliate } from './../../API.service';
+import {AfterViewInit, Component, Inject, OnInit, VERSION, ViewChild} from '@angular/core';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import {Observable, Subject, of} from 'rxjs';
@@ -8,6 +9,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DataSource } from '@angular/cdk/collections';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
+
 
 @Component({
   selector: 'app-affiliate-dashboard',
@@ -24,6 +33,10 @@ import { DataSource } from '@angular/cdk/collections';
 
 export class AffiliatesDashboardPageComponent{
 
+  animal: string;
+  name: string;
+
+
   displayedColumns: string[] = ['name', 'purchaseDate', 'subscriptionType', 'renewsEvery', 'email', 'commission'];
   dataSource = new ExampleDataSource();
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
@@ -33,9 +46,23 @@ export class AffiliatesDashboardPageComponent{
   constructor(
     private overlaySpinnerService: OverlaySpinnerService,
     public langDirectionService: LangDirectionService,
-    private snackBarCoponent: MatSnackBar
+    private snackBarCoponent: MatSnackBar,
+    public dialog: MatDialog
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AffiliateDialog, {
+      width: '350px',
+      height: '350px',
+      data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
   }
 
   // ngAfterViewInit() {
@@ -168,4 +195,21 @@ export class ExampleDataSource extends DataSource<any> {
   }
 
   disconnect() { }
+}
+
+
+@Component({
+  selector: 'dialog',
+  templateUrl: './dialog.html',
+})
+export class AffiliateDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<AffiliateDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

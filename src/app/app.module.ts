@@ -148,7 +148,7 @@ import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/r
 import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/select-language.component';
 import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
-import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
+import { AffiliatesDashboardPageComponent, AffiliateDialog } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -202,7 +202,8 @@ import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/af
     CopyCommonLinkDialogComponent,
     SelectLanguageComponent,
     AffiliatesPageComponent,
-    AffiliatesDashboardPageComponent
+    AffiliatesDashboardPageComponent,
+    AffiliateDialog
   ],
   imports: [
     BrowserModule,
