@@ -16,10 +16,6 @@ type Mutation {
   getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")  
 }
 
-type Query {
-  listCardsPacksByLanguage(language: String!): [CardsPack] @function(name: "ListCardsPacksByLanguage-${env}")   @aws_cognito_user_pools @aws_api_key
-}
-
 type CommonLink
   @model
   @auth(
@@ -243,7 +239,7 @@ type News
 }
 
 type CardsPack
-  @model(queries: { get: "getCardsPack", list: null })
+  @model
   @auth(
     rules: [
       {
@@ -277,7 +273,7 @@ type CardsPack
   topQuestions: [String]
   usersUsage: [UserUsage]
   isFree: Boolean
-  language: String!
+  language: String
   isActive: Boolean
 }
 

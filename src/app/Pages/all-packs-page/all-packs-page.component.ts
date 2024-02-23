@@ -161,6 +161,7 @@ export class AllPacksPageComponent implements OnInit {
 
     this.Subscription.add(
       this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+        console.log('allpacks page sub');
         userData ? this.getAllPacks() : null;
         this.userData = userData;
         this.allFavorites = this.userAuthService.favorites;
@@ -175,6 +176,7 @@ export class AllPacksPageComponent implements OnInit {
         }
       )
     );
+    console.log('allpacks page sub 2');
     this.userData = this.userAuthService.userData;
     this.getAllPacks();
   }
@@ -205,6 +207,7 @@ export class AllPacksPageComponent implements OnInit {
    * Retrive all packs
    */
   getAllPacks(): void {
+    console.log('allpackspage');
     if (this.cardsService.allPacks) {
       this.setAllPacksData();
       this.setAllCategoryPacksToShow();

@@ -1,91 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query ListCardsPacksByLanguage($language: String!) {
-  listCardsPacksByLanguage(language: $language) {
-    id
-    imgUrl
-    description
-    tags
-    categories
-    cards {
-      backImgUrl
-      frontImgUrl
-    }
-    cardsPreview
-    groupsIds
-    guideBook {
-      name
-      subElements {
-        name
-        subElements {
-          name
-          subElements {
-            name
-            subElements {
-              name
-              subElements {
-                name
-                subElements {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    name
-    freeUntilDate
-    about {
-      text
-      imgUrl
-      link
-    }
-    isOwnedByOrg
-    brief
-    likesCounter
-    visitorsCounter
-    backImgUrl
-    isExternalPack
-    authorizedDomains
-    subscriptionPlans {
-      id
-      name
-      description
-      providerPlanId
-      numberOfUsers
-      numberOfCardPacks
-      billingCycleInMonths
-      fullPrice
-      discount
-      orgMembership {
-        id
-        name
-        trialPeriodInDays
-        numberOfallowedCardsPacks
-        about {
-          text
-          imgUrl
-          link
-        }
-        createdAt
-        updatedAt
-      }
-      subscriptionProviderPlanId
-      createdAt
-      updatedAt
-    }
-    topQuestions
-    usersUsage {
-      user
-      entries
-    }
-    isFree
-    language
-    isActive
-    createdAt
-    updatedAt
-  }
-}
 query GetCommonLink($id: ID!) {
   getCommonLink(id: $id) {
     id
@@ -1264,6 +1177,97 @@ query GetCardsPack($id: ID!, $link: String!) {
     isActive
     createdAt
     updatedAt
+  }
+}
+query ListCardsPacks(
+  $filter: ModelCardsPackFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      imgUrl
+      description
+      tags
+      categories
+      cards {
+        backImgUrl
+        frontImgUrl
+      }
+      cardsPreview
+      groupsIds
+      guideBook {
+        name
+        subElements {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+      name
+      freeUntilDate
+      about {
+        text
+        imgUrl
+        link
+      }
+      isOwnedByOrg
+      brief
+      likesCounter
+      visitorsCounter
+      backImgUrl
+      isExternalPack
+      authorizedDomains
+      subscriptionPlans {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        subscriptionProviderPlanId
+        createdAt
+        updatedAt
+      }
+      topQuestions
+      usersUsage {
+        user
+        entries
+      }
+      isFree
+      language
+      isActive
+      createdAt
+      updatedAt
+    }
+    nextToken
   }
 }
 query GetContactUsModel($id: ID!) {

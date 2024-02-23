@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackContent } from '../Objects/packs';
 import { UserAuthService } from './user-auth.service';
 import { UserData } from '../Objects/user-related';
-import { APIService, ListCardsPacksByLanguageQuery } from '../API.service';
+import { APIService } from '../API.service';
 import { OverlaySpinnerService } from './overlay-spinner.service';
 // import { AuthService } from 'src/app/Services/auth.service';
 
@@ -89,32 +89,50 @@ export class CardsService {
 
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    (this.isLoggedIn ? this.api.ListCardsPacksByLanguage('he') : this.api.ListCardsPacksByLanguageForPreview('he')).then((packs) => {
-      console.log(packs);
-      this.allPacks = packs.map(pack => {
-        pack.categories.forEach(category => {
-          if (!this.allCategories.includes(category))
-            this.allCategories.push(category);
+    let nextToken = null;
+    let items = [];
+    const filterCondition = {
+      or: [
+        { language: { eq: "he" } },
+        { language: { attributeExists: false } }
+      ]
+    };
+
+    do {
+      (this.isLoggedIn ? this.api.ListCardsPacks(filterCondition, 100, nextToken) : 
+      this.api.ListCardsPacksForPreview(filterCondition, 100, nextToken)).then((packs) => {
+        console.log('packs');
+        console.log(packs.items);
+        items = items.concat(packs.items);
+        nextToken = packs.nextToken;
+      }, reject => {
+        console.log('reject'); 
+        console.log(reject);
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        let snackBarRef = this._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
+          duration: 20000,
         });
-        this.allCategories.sort((a, b) => {
-          return this.categoriesOrder.indexOf(a) - this.categoriesOrder.indexOf(b);
+        snackBarRef.onAction().subscribe(() => {
+          window.location.reload();
         });
-        return new PackContent().deseralize(pack)
+      })
+      
+    } while (nextToken);
+
+    console.log('here');
+    this.allPacks = items.map(pack => {
+      pack.categories.forEach(category => {
+        if (!this.allCategories.includes(category))
+          this.allCategories.push(category);
       });
-      this.sortPacks();
-      this.allPacksReadyEmmiter.emit();
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-    }, reject => {
-      console.log('reject'); 
-      console.log(reject);
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      let snackBarRef = this._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
-        duration: 20000,
+      this.allCategories.sort((a, b) => {
+        return this.categoriesOrder.indexOf(a) - this.categoriesOrder.indexOf(b);
       });
-      snackBarRef.onAction().subscribe(() => {
-        window.location.reload();
-      });
-    })
+      return new PackContent().deseralize(pack)
+    });
+    this.sortPacks();
+    this.allPacksReadyEmmiter.emit();
+    this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
   /**
