@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DataSource } from '@angular/cdk/collections';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AffiliateDialogComponent } from './affiliate-dialog/affiliate-dialog.component';
 
 
 export interface DialogData {
@@ -53,9 +54,9 @@ export class AffiliatesDashboardPageComponent{
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AffiliateDialog, {
-      width: '350px',
-      height: '350px',
+    const dialogRef = this.dialog.open(AffiliateDialogComponent, {
+      width: '26vw',
+      height: '260px',
       data: {name: this.name, animal: this.animal}
     });
 
@@ -195,21 +196,4 @@ export class ExampleDataSource extends DataSource<any> {
   }
 
   disconnect() { }
-}
-
-
-@Component({
-  selector: 'dialog',
-  templateUrl: './dialog.html',
-})
-export class AffiliateDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<AffiliateDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }

@@ -2,6 +2,7 @@ export class Card {
     frontImgUrl: string;
     backImgUrl: string;
     index: number;
+    flipped: boolean = false;
 
     constructor() { }
 

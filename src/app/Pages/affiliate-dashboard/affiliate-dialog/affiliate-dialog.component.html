@@ -1,0 +1,25 @@
+<div [dir]="langDirectionService.currentLangDirection">
+<div mat-dialog-title>
+  <div style="display: flex ;    align-items: center; justify-content: space-between;">
+    <div>סכום למשיכה</div>
+    <mat-form-field>
+      <mat-label></mat-label>
+      <input matInput [(ngModel)]="data.animal" />
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-content>
+  <ul>
+    <li style="text-align: right;">
+       ניתן למשוך רק במידה ויש מעל 500 ש”ח בהכנסה הקרובה. נציג יצור עימך קשר לגבי
+    פרטי ההעברה.  
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions style="display: flex; justify-content: center">
+  <button mat-raised-button color="primary" (click)="onNoClick()"><span style="font-size: 1.5rem; font-weight:200; color:black">  הגש בקשה</span></button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>
+
+
+</div>

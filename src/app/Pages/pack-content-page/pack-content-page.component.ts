@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   NgZone,
@@ -27,11 +28,24 @@ import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { CopyCommonLinkDialogComponent } from 'src/app/Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-pack-content-page',
   templateUrl: './pack-content-page.component.html',
   styleUrls: ['./pack-content-page.component.css'],
+  animations: [
+    trigger('flipState', [
+      state('active', style({
+        transform: 'rotateY(179.9deg)'
+      })),
+      state('inactive', style({
+        transform: 'rotateY(0)'
+      })),
+      transition('active => inactive', animate('500ms ease-out')),
+      transition('inactive => active', animate('500ms ease-in'))
+    ])
+  ]
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
   Subscription: Subscription = new Subscription();
@@ -55,6 +69,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   randomSelectedCard: Card;
   randomCardIndex: number = 0;
   commonLink: any = undefined;
+  flipCard: string = 'inactive';
 
   constructor(
     public route: ActivatedRoute,
@@ -67,7 +82,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private userAuthService: UserAuthService,
     private ngZone: NgZone,
-    private mixpanelService: MixpanelService
+    private mixpanelService: MixpanelService,
+    private cdr: ChangeDetectorRef
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -100,6 +116,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         (pack) => pack.id === this.id
       );
       this.cards = [...this.pack.cards];
+      console.log('cards in packs conent:', this.cards);
       if(!this.pack.cards[0].backImgUrl){
         this.isDoubleSided = false;
       }
@@ -193,6 +210,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  toggleFlipped(card): void {
+    console.log('flipped');
+    card.flipped = !card.flipped;
+    this.flipCard = (this.flipCard == 'inactive') ? 'active' : 'inactive';
+  }
+
   toggleChosenCardsModal(): void {
     if (!this.showSelectedCards) {
       if (
@@ -210,8 +233,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  imgClick(event): void {
+  imgClick(event, card: Card): void {
+    this.flipCard = (this.flipCard == 'inactive') ? 'active' : 'inactive';
+    card.flipped = !card.flipped;
     event.stopPropagation();
+    this.cdr.detectChanges(); // manually trigger change detection
   }
 
   openPortraitToLandscapeAlert(): void {
@@ -328,6 +354,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }
+
+ 
 }
 
 @Component({

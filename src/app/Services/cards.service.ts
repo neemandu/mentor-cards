@@ -97,44 +97,46 @@ export class CardsService {
         { language: { attributeExists: false } }
       ]
     };
-
-    do {
-      (this.isLoggedIn ? this.api.ListCardsPacks(filterCondition, 100, nextToken) : 
-      this.api.ListCardsPacksForPreview(filterCondition, 100, nextToken)).then((packs) => {
-        console.log('packs');
-        console.log(packs.items);
+  
+    const fetchPacks = (nextToken) => {
+      return this.isLoggedIn ? this.api.ListCardsPacks(filterCondition, 100, nextToken) : 
+      this.api.ListCardsPacksForPreview(filterCondition, 100, nextToken);
+    };
+  
+    const fetchAllPacks = async () => {
+      do {
+        const packs = await fetchPacks(nextToken);
         items = items.concat(packs.items);
         nextToken = packs.nextToken;
-      }, reject => {
-        console.log('reject'); 
-        console.log(reject);
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        let snackBarRef = this._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
-          duration: 20000,
+      } while (nextToken);
+  
+      this.allPacks = items.map(pack => {
+        pack.categories.forEach(category => {
+          if (!this.allCategories.includes(category))
+            this.allCategories.push(category);
         });
-        snackBarRef.onAction().subscribe(() => {
-          window.location.reload();
+        this.allCategories.sort((a, b) => {
+          return this.categoriesOrder.indexOf(a) - this.categoriesOrder.indexOf(b);
         });
-      })
-      
-    } while (nextToken);
-
-    console.log('here');
-    this.allPacks = items.map(pack => {
-      pack.categories.forEach(category => {
-        if (!this.allCategories.includes(category))
-          this.allCategories.push(category);
+        return new PackContent().deseralize(pack)
       });
-      this.allCategories.sort((a, b) => {
-        return this.categoriesOrder.indexOf(a) - this.categoriesOrder.indexOf(b);
+      this.sortPacks();
+      this.allPacksReadyEmmiter.emit();
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+    };
+  
+    fetchAllPacks().catch(reject => {
+      console.log('reject'); 
+      console.log(reject);
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      let snackBarRef = this._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {
+        duration: 20000,
       });
-      return new PackContent().deseralize(pack)
+      snackBarRef.onAction().subscribe(() => {
+        window.location.reload();
+      });
     });
-    this.sortPacks();
-    this.allPacksReadyEmmiter.emit();
-    this.overlaySpinnerService.changeOverlaySpinner(false);
   }
-
   /**
    * Save pack after changes 
    * @param index - index of pack

@@ -1,128 +1,161 @@
-<title> {{ 'pages.packContent.title' | translate }}</title>
+<title>{{ "pages.packContent.title" | translate }}</title>
 
-  <div class="d-flex align-items-center flex-column">
-    <div class="title d-flex justify-content-center align-items-baseline">
-      <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
-      <h1 style="text-align: center" *ngIf="!id">{{ 'pages.packContent.defaultName' | translate }} </h1>
-      <h2
-        *ngIf="pack?.about && !unauthorized"
-        id="about-author"
-        class="clickable"
-        (click)="openAboutDialog()"
-      >
-      {{ 'pages.packContent.aboutAuthor' | translate }}
-      </h2>
-    </div>
-    <button *ngIf="!unauthorized || !commonLink"
-      id="guideBook"
+<div class="d-flex align-items-center flex-column">
+  <div class="title d-flex justify-content-center align-items-baseline">
+    <h1 style="text-align: center" *ngIf="pack">{{ pack.name }}</h1>
+    <h1 style="text-align: center" *ngIf="!id">
+      {{ "pages.packContent.defaultName" | translate }}
+    </h1>
+    <h2
+      *ngIf="pack?.about && !unauthorized"
+      id="about-author"
+      class="clickable"
+      (click)="openAboutDialog()"
+    >
+      {{ "pages.packContent.aboutAuthor" | translate }}
+    </h2>
+  </div>
+  <button
+    *ngIf="!unauthorized || !commonLink"
+    id="guideBook"
+    type="button"
+    [disabled]="showEditPack"
+    [ngClass]="{
+      'guide-btn': true,
+      'top-option-btn': !showEditPack,
+      'top-option-btn-disabled': showEditPack
+    }"
+    (click)="openGuideBook()"
+  >
+    <mat-icon
+      id="guide-book-icon"
+      class="guide-icon"
+      style="font-family: 'Material Icons'"
+      >local_library</mat-icon
+    >
+    {{ "pages.packContent.guideBook" | translate }}
+  </button>
+</div>
+<br />
+<div
+  *ngIf="isLoaded && unauthorized"
+  class="d-flex justify-content-center"
+  style="font-size: larger"
+>
+  {{ "pages.packContent.unauthorized" | translate }}
+</div>
+
+<div
+  *ngIf="isLoaded && commonLink && cards.length == 0"
+  class="d-flex justify-content-center"
+  style="font-size: larger"
+>
+  {{ "pages.packContent.linkexpired" | translate }}
+</div>
+
+<div
+  *ngIf="!unauthorized && (!commonLink || cards.length > 0)"
+  class="sticky-top d-flex justify-content-center"
+>
+  <div id="actions">
+    <button
+      id="multipleChoise"
       type="button"
-      [disabled]="showEditPack"
       [ngClass]="{
-        'guide-btn': true,
+        'option-btn': true,
         'top-option-btn': !showEditPack,
         'top-option-btn-disabled': showEditPack
       }"
-      (click)="openGuideBook()"
+      (click)="multipileChanged()"
+      [disabled]="showEditPack"
     >
-      <mat-icon id="guide-book-icon" class="guide-icon" style="font-family: 'Material Icons'"
-        >local_library</mat-icon>  {{ 'pages.packContent.guideBook' | translate }} 
+      {{
+        multipileChecked
+          ? ("pages.packContent.actions.multipleChoice.showSingle" | translate)
+          : ("pages.packContent.actions.multipleChoice.showMultiple"
+            | translate)
+      }}
+    </button>
+    <button
+      id="mixCards"
+      type="button"
+      [disabled]="showEditPack"
+      [ngClass]="{
+        'option-btn': true,
+        'top-option-btn': !showEditPack,
+        'top-option-btn-disabled': showEditPack
+      }"
+      (click)="shuffle()"
+    >
+      {{ "pages.packContent.actions.mixCards" | translate }}
+    </button>
+    <button
+      id="flipCards"
+      type="button"
+      [disabled]="showEditPack"
+      [ngClass]="{
+        'option-btn': true,
+        'top-option-btn': !showEditPack,
+        'top-option-btn-disabled': showEditPack
+      }"
+      (click)="flip()"
+    >
+      {{ "pages.packContent.actions.flipCards" | translate }}
+    </button>
+    <button
+      id="randomCard"
+      type="button"
+      [disabled]="showEditPack"
+      [ngClass]="{
+        'option-btn': true,
+        'top-option-btn': !showEditPack,
+        'top-option-btn-disabled': showEditPack
+      }"
+      (click)="toggleRandomCardsModal()"
+    >
+      {{ "pages.packContent.actions.randomCard" | translate }}
+    </button>
+    <button
+      id="editPack"
+      type="button"
+      [ngClass]="{ 'option-btn top-option-btn': true }"
+      (click)="editPack()"
+    >
+      {{
+        showEditPack
+          ? ("pages.packContent.actions.editPack.endEdit" | translate)
+          : ("pages.packContent.actions.editPack.edit" | translate)
+      }}
     </button>
   </div>
-  <br />
-    <div *ngIf="isLoaded && unauthorized" class="d-flex justify-content-center" style="font-size: larger;">
-      {{ 'pages.packContent.unauthorized' | translate }} 
-    </div>
-
-    <div *ngIf="isLoaded && commonLink && cards.length == 0" class="d-flex justify-content-center" style="font-size: larger;">
-      {{ 'pages.packContent.linkexpired' | translate }}
-    </div>
-
-    <div *ngIf="!unauthorized  && (!commonLink || cards.length >0)" class="sticky-top d-flex justify-content-center">
-      <div id="actions">
-        <button
-          id="multipleChoise"
-          type="button"
-          [ngClass]="{
-            'option-btn': true,
-            'top-option-btn': !showEditPack,
-            'top-option-btn-disabled': showEditPack
-          }"
-          (click)="multipileChanged()"
-          [disabled]="showEditPack"
-        >
-        {{ multipileChecked ? ('pages.packContent.actions.multipleChoice.showSingle' | translate) : ('pages.packContent.actions.multipleChoice.showMultiple' | translate) }}
-
-      </button>
-        <button
-          id="mixCards"
-          type="button"
-          [disabled]="showEditPack"
-          [ngClass]="{
-            'option-btn': true,
-            'top-option-btn': !showEditPack,
-            'top-option-btn-disabled': showEditPack
-          }"
-          (click)="shuffle()"
-        >
-        {{ 'pages.packContent.actions.mixCards' | translate }}
-        </button>
-        <button
-          id="flipCards"
-          type="button"
-          [disabled]="showEditPack"
-          [ngClass]="{
-            'option-btn': true,
-            'top-option-btn': !showEditPack,
-            'top-option-btn-disabled': showEditPack
-          }"
-          (click)="flip()"
-        >
-        {{ 'pages.packContent.actions.flipCards' | translate }}
-        </button>
-        <button
-          id="randomCard"
-          type="button"
-          [disabled]="showEditPack"
-          [ngClass]="{
-            'option-btn': true,
-            'top-option-btn': !showEditPack,
-            'top-option-btn-disabled': showEditPack
-          }"
-          (click)="toggleRandomCardsModal()"
-        >
-        {{ 'pages.packContent.actions.randomCard' | translate }}
-        </button>
-        <button
-          id="editPack"
-          type="button"
-          [ngClass]="{ 'option-btn top-option-btn': true }"
-          (click)="editPack()"
-        >
-        {{ showEditPack ? ('pages.packContent.actions.editPack.endEdit' | translate) : ('pages.packContent.actions.editPack.edit' | translate) }}        </button>
-      </div>
-      <button
-        type="button"
-        id="menu-actions"
-        class="btn option-btn"
-        [matMenuTriggerFor]="actions"
-      >
-        <mat-icon>list</mat-icon>
-        <span>   {{ 'pages.packContent.actions.menuActions' | translate }}</span>
-      </button>
-      <!-- <button type="button" [disabled]="showEditPack"
+  <button
+    type="button"
+    id="menu-actions"
+    class="btn option-btn"
+    [matMenuTriggerFor]="actions"
+  >
+    <mat-icon>list</mat-icon>
+    <span> {{ "pages.packContent.actions.menuActions" | translate }}</span>
+  </button>
+  <!-- <button type="button" [disabled]="showEditPack"
         [ngClass]="{'option-btn': true, 'top-option-btn': !showEditPack, 'top-option-btn-disabled': showEditPack}"
         (click)="openGuideBook()">
         <mat-icon id="guide-book-icon" style="font-family: 'Material Icons';">local_library</mat-icon>ספר הדרכה
       </button> -->
-    </div>
-    <div *ngIf="!commonLink" class="right-side-container">
-      <br>
-      <button mat-button (click)="createCommomLink()" class="link-button" matTooltip="שתפו את הקישור והזמינו לעבודה אינטראקטיבית">
-        <mat-icon>share</mat-icon>
-        צור קישור לעבודה משותפת
-      </button>
-    </div>
-    
+</div>
+<div *ngIf="!commonLink" class="right-side-container">
+  <br />
+  <button
+    mat-button
+    (click)="createCommomLink()"
+    class="link-button"
+    matTooltip="שתפו את הקישור והזמינו לעבודה אינטראקטיבית"
+  >
+    <mat-icon>share</mat-icon>
+    צור קישור לעבודה משותפת
+  </button>
+</div>
+
 <div class="d-flex flex-column align-items-center cards-container">
   <div
     *ngIf="pack && !showEditPack"
@@ -192,25 +225,49 @@
         font-weight: 700;
       "
     >
-    {{ 'pages.packContent.actions.introduction.attention' | translate }} <span style="color: coral">&#10084;</span>
+      {{ "pages.packContent.actions.introduction.attention" | translate }}
+      <span style="color: coral">&#10084;</span>
     </p>
     <ul>
-      <li><span> {{ 'pages.packContent.actions.introduction.list.dozensOfPacks' | translate }}</span></li>
-      <li><span>{{ 'pages.packContent.actions.introduction.list.over40Cards' | translate }}</span></li>
-      <li><span>{{ 'pages.packContent.actions.introduction.list.guideBook' | translate }}</span></li>
-      <li><span>{{ 'pages.packContent.actions.introduction.list.trialPeriod' | translate }}</span></li>
+      <li>
+        <span>
+          {{
+            "pages.packContent.actions.introduction.list.dozensOfPacks"
+              | translate
+          }}</span
+        >
+      </li>
+      <li>
+        <span>{{
+          "pages.packContent.actions.introduction.list.over40Cards" | translate
+        }}</span>
+      </li>
+      <li>
+        <span>{{
+          "pages.packContent.actions.introduction.list.guideBook" | translate
+        }}</span>
+      </li>
+      <li>
+        <span>{{
+          "pages.packContent.actions.introduction.list.trialPeriod" | translate
+        }}</span>
+      </li>
     </ul>
     <div class="line"></div>
     <div id="actions" class="d-flex flex-column align-items-center">
-      <span id="middle" *ngIf="!userData"
-        >{{ 'pages.packContent.actions.introduction.actions.register' | translate }}</span
+      <span id="middle" *ngIf="!userData">{{
+        "pages.packContent.actions.introduction.actions.register" | translate
+      }}</span>
+      <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">
+        {{
+          "pages.packContent.actions.introduction.actions.notRegistered"
+            | translate
+        }}</span
       >
-      <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'"
-        > {{ 'pages.packContent.actions.introduction.actions.notRegistered' | translate }}</span
-      >
-      <span id="middle" *ngIf="userData && userData.status === 'PLAN'"
-        >{{ 'pages.packContent.actions.introduction.actions.alreadyRegistered' | translate }}</span
-      >
+      <span id="middle" *ngIf="userData && userData.status === 'PLAN'">{{
+        "pages.packContent.actions.introduction.actions.alreadyRegistered"
+          | translate
+      }}</span>
       <br />
       <button
         class="action-button"
@@ -218,7 +275,10 @@
         type="button"
         (click)="signInSignUp()"
       >
-      {{ 'pages.packContent.actions.introduction.actions.loginRegisterBtn' | translate }}
+        {{
+          "pages.packContent.actions.introduction.actions.loginRegisterBtn"
+            | translate
+        }}
       </button>
       <button
         class="action-button"
@@ -226,7 +286,10 @@
         type="button"
         (click)="navigate('/price-page')"
       >
-      {{ 'pages.packContent.actions.introduction.actions.registerPlanBtn' | translate }} 
+        {{
+          "pages.packContent.actions.introduction.actions.registerPlanBtn"
+            | translate
+        }}
       </button>
       <button
         class="action-button"
@@ -234,7 +297,10 @@
         type="button"
         (click)="navigate('/all-packs-page')"
       >
-      {{ 'pages.packContent.actions.introduction.actions.allPacksBtn' | translate }}  
+        {{
+          "pages.packContent.actions.introduction.actions.allPacksBtn"
+            | translate
+        }}
       </button>
     </div>
   </div>
@@ -254,7 +320,7 @@
       [disabled]="selectedCards.length == 0"
       (click)="toggleChosenCardsModal()"
     >
-    {{ 'pages.packContent.nav.showChosenCards' | translate }}    
+      {{ "pages.packContent.nav.showChosenCards" | translate }}
     </button>
     <button
       type="button"
@@ -262,11 +328,14 @@
       (click)="selectedCards = []"
       [disabled]="selectedCards.length == 0"
     >
-    {{ 'pages.packContent.nav.resetChoice' | translate }}  
+      {{ "pages.packContent.nav.resetChoice" | translate }}
     </button>
   </div>
   <div id="amountChosen">
-    <p>{{ selectedCards.length }}/5   {{ 'pages.packContent.nav.cardsChosen' | translate }}</p>
+    <p>
+      {{ selectedCards.length }}/5
+      {{ "pages.packContent.nav.cardsChosen" | translate }}
+    </p>
   </div>
 </nav>
 
@@ -283,51 +352,65 @@
       [ngClass]="{ 'option-btn bottom-option-btn': true }"
       (click)="resetEditPack()"
     >
-    {{ 'pages.packContent.nav.resetPack' | translate }}
+      {{ "pages.packContent.nav.resetPack" | translate }}
     </button>
     <button
       type="button"
       [ngClass]="{ 'option-btn bottom-option-btn': true }"
       (click)="editPack()"
     >
-    {{ 'pages.packContent.nav.endEditing' | translate }}
+      {{ "pages.packContent.nav.endEditing" | translate }}
     </button>
   </div>
   <div id="amountChosen">
     <p style="font-weight: bold">
-      {{ 'pages.packContent.nav.hideCardBeforeIcon' | translate }}
-      <mat-icon class="remove-icon">visibility_off</mat-icon>       {{ 'pages.packContent.nav.hideCardAfterIcon' | translate }}
+      {{ "pages.packContent.nav.hideCardBeforeIcon" | translate }}
+      <mat-icon class="remove-icon">visibility_off</mat-icon>
+      {{ "pages.packContent.nav.hideCardAfterIcon" | translate }}
     </p>
   </div>
 </nav>
 
 <mat-menu #actions="matMenu">
   <button
-  mat-menu-item
-  type="button"
-  class="option-menu-btn top-option-btn"
-  (click)="multipileChanged()"
->
+    mat-menu-item
+    type="button"
+    class="option-menu-btn top-option-btn"
+    (click)="multipileChanged()"
+  >
+    {{
+      multipileChecked
+        ? ("pages.packContent.matMenu.toggleCardDisplayModeButton.false"
+          | translate)
+        : ("pages.packContent.matMenu.toggleCardDisplayModeButton.true"
+          | translate)
+    }}
 
-
-{{ multipileChecked ? ('pages.packContent.matMenu.toggleCardDisplayModeButton.false' | translate) : ('pages.packContent.matMenu.toggleCardDisplayModeButton.true' | translate) }}
-
-
-<mat-icon *ngIf="multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
->photo_icon</mat-icon>
-<mat-icon *ngIf="!multipileChecked" id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
->burst_mode_icon</mat-icon>
-</button>
+    <mat-icon
+      *ngIf="multipileChecked"
+      id="guide-book-icon"
+      style="color: #e69900; font-family: 'Material Icons'"
+      >photo_icon</mat-icon
+    >
+    <mat-icon
+      *ngIf="!multipileChecked"
+      id="guide-book-icon"
+      style="color: #e69900; font-family: 'Material Icons'"
+      >burst_mode_icon</mat-icon
+    >
+  </button>
   <button
     mat-menu-item
     type="button"
     class="option-menu-btn top-option-btn"
     (click)="shuffle()"
   >
-
-  {{ 'pages.packContent.matMenu.shuffleCardsButton' | translate }} 
-    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
-  >style_icon</mat-icon>
+    {{ "pages.packContent.matMenu.shuffleCardsButton" | translate }}
+    <mat-icon
+      id="guide-book-icon"
+      style="color: #e69900; font-family: 'Material Icons'"
+      >style_icon</mat-icon
+    >
   </button>
 
   <button
@@ -336,9 +419,12 @@
     class="option-menu-btn top-option-btn"
     (click)="flipped = !flipped; selectedCards = []"
   >
-  {{ 'pages.packContent.matMenu.flipDeckButton' | translate }}  
-    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
-    >flip_camera_android_icon</mat-icon>
+    {{ "pages.packContent.matMenu.flipDeckButton" | translate }}
+    <mat-icon
+      id="guide-book-icon"
+      style="color: #e69900; font-family: 'Material Icons'"
+      >flip_camera_android_icon</mat-icon
+    >
   </button>
   <button
     mat-menu-item
@@ -346,9 +432,12 @@
     class="option-menu-btn top-option-btn"
     (click)="toggleRandomCardsModal()"
   >
-  {{ 'pages.packContent.matMenu.showRandomCardButton' | translate }}  
-    <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
-    >shuffle_icon</mat-icon>
+    {{ "pages.packContent.matMenu.showRandomCardButton" | translate }}
+    <mat-icon
+      id="guide-book-icon"
+      style="color: #e69900; font-family: 'Material Icons'"
+      >shuffle_icon</mat-icon
+    >
   </button>
   <button
     mat-menu-item
@@ -356,31 +445,79 @@
     class="option-menu-btn top-option-btn"
     (click)="editPack()"
   >
-  {{ showEditPack ? ('pages.packContent.matMenu.editPackButton.false' | translate) : ('pages.packContent.matMenu.editPackButton.true' | translate) }}
+    {{
+      showEditPack
+        ? ("pages.packContent.matMenu.editPackButton.false" | translate)
+        : ("pages.packContent.matMenu.editPackButton.true" | translate)
+    }}
 
-  <mat-icon id="guide-book-icon" style="color:#e69900  ; font-family: 'Material Icons'"
-      >edit_icon</mat-icon>
+    <mat-icon
+      id="guide-book-icon"
+      style="color: #e69900; font-family: 'Material Icons'"
+      >edit_icon</mat-icon
+    >
   </button>
 </mat-menu>
 
-
-<div *ngIf="showSelectedCards" class="selected-cards-modal" (click)="toggleChosenCardsModal()">
-  <div class="selected-cards-modal-content">    
-    <button
-      class="iconButton close-cards-view"
-      mat-icon-button
-      (click)="toggleChosenCardsModal()"
-    >
-      <mat-icon class="mat-icon-close">highlight_off</mat-icon>
-    </button>
-    <div style="height: 100%"
+<div
+  *ngIf="showSelectedCards"
+  class="selected-cards-modal"
+  (click)="toggleChosenCardsModal()"
+>
+  <div class="selected-cards-modal-content" (click)="$event.stopPropagation()">
+    <div
+      style="height: 100%"
       [ngClass]="{
         'selected-content': true,
         'selected-content-one-card': selectedCards.length == 1
       }"
     >
-    <div style="position: absolute; margin-top:20vw" class="card-view  one-cards">hi</div>
-    <div *ngIf="isDoubleSided && flipped">
+      <ng-container *ngIf="isDoubleSided">
+        <div
+          *ngFor="let card of selectedCards"
+          style="display: flex; flex-direction: column; align-items: center ;"
+        >
+          <div style="display: flex; justify-content: flex-end">
+            <button
+              class="iconButton close-cards-view"
+              mat-icon-button
+              (click)="toggleChosenCardsModal()"
+            >
+              <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+            </button>
+          </div>
+
+          <div [ngStyle]="{ 'transform': card.flipped ? 'rotateY(180deg)' : '' }">
+            <img
+              [@flipState]="flipCard"
+              (click)="imgClick($event, card)"
+              alt="one of the selected cards shown"
+              [ngClass]="{
+                'card-view': true,
+                'one-cards': selectedCards.length == 1,
+                'two-cards': selectedCards.length == 2,
+                'three-cards': selectedCards.length == 3,
+                'four-cards': selectedCards.length == 4,
+                'five-cards': selectedCards.length == 5
+              }"
+              loading="eager"
+              [src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
+              [data-src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
+            />
+          </div>
+          <div>
+            <button (click)="toggleFlipped(card)" style="margin-top: 1vh">
+              <img
+                src="../../../assets/icons/flip.png"
+                alt="Expand data"
+                width="20px"
+                style="height: 4vh; width: auto"
+              />
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <!-- <div *ngIf="isDoubleSided && flipped">
       <img (click)="imgClick($event)"
         *ngFor="let card of selectedCards"
         alt="one of the selected cards shown"
@@ -413,25 +550,39 @@
         src="{{ card.backImgUrl }}"
         data-src="{{ card.backImgUrl }}"
       />
-    </div>
-    <div *ngIf="!isDoubleSided">
-      <img (click)="imgClick($event)"
-        
-        *ngFor="let card of selectedCards"
-        alt="one of the selected cards shown"
-        [ngClass]="{
-          'card-view': true,
-          'one-cards': selectedCards.length == 1,
-          'two-cards': selectedCards.length == 2,
-          'three-cards': selectedCards.length == 3,
-          'four-cards': selectedCards.length == 4,
-          'five-cards': selectedCards.length == 5
-        }"
-        loading="eager"
-        src="{{ card.frontImgUrl }}"
-        data-src="{{ card.frontImgUrl }}"
-      />
-    </div>
+    </div> -->
+      <div
+        *ngIf="!isDoubleSided"
+        style="display: flex; flex-direction: column; align-items: center"
+      >
+        <div style="display: flex; justify-content: flex-end">
+          <button
+            class="iconButton close-cards-view"
+            mat-icon-button
+            (click)="toggleChosenCardsModal()"
+          >
+            <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+          </button>
+        </div>
+        <div>
+          <img
+            (click)="imgClick($event)"
+            *ngFor="let card of selectedCards"
+            alt="one of the selected cards shown"
+            [ngClass]="{
+              'card-view': true,
+              'one-cards': selectedCards.length == 1,
+              'two-cards': selectedCards.length == 2,
+              'three-cards': selectedCards.length == 3,
+              'four-cards': selectedCards.length == 4,
+              'five-cards': selectedCards.length == 5
+            }"
+            loading="eager"
+            src="{{ card.frontImgUrl }}"
+            data-src="{{ card.frontImgUrl }}"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </div>
