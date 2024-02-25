@@ -489,6 +489,7 @@
 
           <div [ngStyle]="{ 'transform': flipCard == 'inactive' ? 'rotateY(0)' : 'rotateY(180deg)' }">
             <img
+            *ngIf="!flipped"
               [@flipState]="flipCard"
               (click)="imgClick($event, card)"
               alt="one of the selected cards shown"
@@ -501,9 +502,26 @@
                 'five-cards': selectedCards.length == 5
               }"
               loading="eager"
-              [src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
-              [data-src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
+              [src]="card.flipped ? card.frontImgUrl : card.backImgUrl"
+              [data-src]="card.flipped ? card.frontImgUrl : card.backImgUrl"
             />
+            <img
+            *ngIf="flipped"
+            [@flipState]="flipCard"
+            (click)="imgClick($event, card)"
+            alt="one of the selected cards shown"
+            [ngClass]="{
+              'card-view': true,
+              'one-cards': selectedCards.length == 1,
+              'two-cards': selectedCards.length == 2,
+              'three-cards': selectedCards.length == 3,
+              'four-cards': selectedCards.length == 4,
+              'five-cards': selectedCards.length == 5
+            }"
+            loading="eager"
+            [src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
+            [data-src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
+          />
           </div>
           <div>
             <button (click)="toggleFlipped(card)" style="margin-top: 1vh">
