@@ -426,11 +426,11 @@ li span {
 
 .random-content, .selected-content {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   gap: 1rem;
   height: 80%;
   align-items: center;
+  flex-direction: column;
 }
 
 .selected-content-one-card {
@@ -476,7 +476,7 @@ mat-icon {
 }
 
 .mat-icon-close {
-  font-size: 40px;
+  font-size: 50px;
 }
 
 .mat-icon-close-random {
