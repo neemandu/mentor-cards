@@ -496,6 +496,10 @@ mat-icon {
 
   
 }
+.card-button{
+  display: flex;
+  justify-content: flex-end;
+}
 
 @media (orientation: portrait) {
   .selected-content {
@@ -515,12 +519,19 @@ mat-icon {
   .three-cards,
   .four-cards,
   .five-cards {
-    width: 85vw;
+    /* width: 85vw; */
+    height: 50vh;
   }
 
   .mat-icon-close {
     margin-top: 50px;
   }
+
+.card-button{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5vh;
+}
 }
 
 /* 
