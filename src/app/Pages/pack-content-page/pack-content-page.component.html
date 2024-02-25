@@ -487,7 +487,7 @@
             </button>
           </div>
 
-          <div [ngStyle]="{ 'transform': card.flipped ? 'rotateY(180deg)' : '' }">
+          <div [ngStyle]="{ 'transform': flipCard == 'inactive' ? 'rotateY(0)' : 'rotateY(180deg)' }">
             <img
               [@flipState]="flipCard"
               (click)="imgClick($event, card)"
