@@ -1,5 +1,6 @@
-h1,h2 {
-  font-family: 'rubik';
+h1,
+h2 {
+  font-family: "rubik";
 }
 
 .nav {
@@ -67,8 +68,8 @@ app-card:hover {
   border-color: var(--main-color);
   font-weight: 500;
   font-size: large;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .option-menu-btn {
@@ -87,7 +88,7 @@ button:focus {
 }
 
 .top-option-btn:hover {
-  background: #fff5e2
+  background: #fff5e2;
 }
 
 .top-option-btn:active {
@@ -159,14 +160,13 @@ ul {
 }
 
 ul li:before {
-  content: '✓';
+  content: "✓";
 }
 
 li span {
   position: relative;
   left: -10px;
 }
-
 
 #introduction {
   align-items: center;
@@ -231,7 +231,7 @@ li span {
 #mult-choise-btn-txt {
   font-size: 1rem;
   margin-left: 5px;
-  color: var(--main-color)
+  color: var(--main-color);
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
@@ -239,7 +239,7 @@ li span {
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
-  background-color: var(--main-color-light)
+  background-color: var(--main-color-light);
 }
 
 #actions {
@@ -258,7 +258,8 @@ li span {
   animation: fadeIn 0.4s, slideUp 0.6s;
 } */
 
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+}
 
 @media screen and (max-width: 768px) {
   ::ng-deep .cdk-overlay-pane {
@@ -339,7 +340,6 @@ li span {
   font-size: x-large;
 }
 
-
 .link-button .mat-icon {
   vertical-align: middle;
 }
@@ -353,10 +353,9 @@ li span {
 
 .right-side-container {
   display: flex;
-  justify-content: center ; /* Aligns children (the button) to the right */
+  justify-content: center; /* Aligns children (the button) to the right */
   width: 100%;
 }
-
 
 .guide-btn {
   margin-left: 10px;
@@ -371,8 +370,8 @@ li span {
   font-weight: 500;
   font-family: var(--main-font-family);
   font-size: large;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;   
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .guide-btn:hover {
@@ -382,7 +381,6 @@ li span {
 .guide-btn:active {
   background: #db9200;
 }
-
 
 /* The Modal (background) */
 .selected-cards-modal {
@@ -424,7 +422,8 @@ li span {
   }
 }
 
-.random-content, .selected-content {
+.random-content,
+.selected-content {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -446,19 +445,19 @@ li span {
 .one-cards,
 .two-cards {
   /* width: calc(100vw /3.2); */
-  height: calc(100vw /2.5);
+  height: calc(100vw / 2.5);
 }
 
 .three-cards {
-  width: calc(100vw /4);
+  width: calc(100vw / 4);
 }
 
 .four-cards {
-  width: calc(100vw /5);
+  width: calc(100vw / 5);
 }
 
 .five-cards {
-  width: calc(100vw /6);
+  width: calc(100vw / 6);
 }
 
 .remove-btn {
@@ -470,9 +469,8 @@ mat-icon {
   color: var(--main-color);
 }
 
-.guide-icon{
+.guide-icon {
   color: white;
-
 }
 
 .mat-icon-close {
@@ -484,7 +482,6 @@ mat-icon {
   margin-top: 30px;
 }
 
-
 .mat-icon-arrow:disabled {
   color: #747474;
 }
@@ -493,12 +490,16 @@ mat-icon {
   .selected-cards-modal-content {
     height: 90%;
   }
-
-  
 }
-.card-button{
+.card-button {
   display: flex;
   justify-content: flex-end;
+}
+
+.card-close-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2vh;
 }
 
 @media (orientation: portrait) {
@@ -509,10 +510,15 @@ mat-icon {
     /* height: 90%; */
   }
 
+  .card-close-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 6vh;
+  }
+
   .random-content {
     flex-direction: column;
   }
-
 
   .one-cards,
   .two-cards,
@@ -527,11 +533,11 @@ mat-icon {
     margin-top: 50px;
   }
 
-.card-button{
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 5vh;
-}
+  .card-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5vh;
+  }
 }
 
 /* 
