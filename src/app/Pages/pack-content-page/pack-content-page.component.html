@@ -475,7 +475,7 @@
       <ng-container *ngIf="isDoubleSided">
         <div
           *ngFor="let card of selectedCards"
-          style="display: flex; flex-direction: column; align-items: center ;"
+          style="display: flex; flex-direction: column; align-items: center"
         >
           <div style="display: flex; justify-content: flex-end">
             <button
@@ -487,10 +487,8 @@
             </button>
           </div>
 
-          <div [ngStyle]="{ 'transform': flipCard == 'inactive' ? 'rotateY(0)' : 'rotateY(180deg)' }">
-            <img
-            *ngIf="!flipped"
-              [@flipState]="flipCard"
+          <div>
+            <!-- <img
               (click)="imgClick($event, card)"
               alt="one of the selected cards shown"
               [ngClass]="{
@@ -504,24 +502,50 @@
               loading="eager"
               [src]="card.flipped ? card.frontImgUrl : card.backImgUrl"
               [data-src]="card.flipped ? card.frontImgUrl : card.backImgUrl"
-            />
-            <img
-            *ngIf="flipped"
-            [@flipState]="flipCard"
-            (click)="imgClick($event, card)"
-            alt="one of the selected cards shown"
-            [ngClass]="{
-              'card-view': true,
-              'one-cards': selectedCards.length == 1,
-              'two-cards': selectedCards.length == 2,
-              'three-cards': selectedCards.length == 3,
-              'four-cards': selectedCards.length == 4,
-              'five-cards': selectedCards.length == 5
-            }"
-            loading="eager"
-            [src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
-            [data-src]="card.flipped ? card.backImgUrl : card.frontImgUrl"
-          />
+            /> -->
+            <div class="d-flex flex-column">
+              <!-- <div> -->
+              <div [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }">
+                <!-- Card Back -->
+                <div class="flip-box-front">
+                  <img
+                    alt="Mentor-cards unique cards design for the back of the card"
+                    src="{{ card.frontImgUrl }}"
+                    data-src="{{ card.frontImgUrl }}"
+                    [ngClass]="{
+                      'img-unselected': !selected,
+                      'img-selected': selected,
+                      'card-view': true,
+                      'one-cards': selectedCards.length == 1,
+                      'two-cards': selectedCards.length == 2,
+                      'three-cards': selectedCards.length == 3,
+                      'four-cards': selectedCards.length == 4,
+                      'five-cards': selectedCards.length == 5
+                    }"
+                    (contextmenu)="onRightClick()"
+                  />
+                </div>
+                <!-- Card Front -->
+                <div class="flip-box-back">
+                  <img
+                    loading="eager"
+                    [ngClass]="{
+                      'img-unselected': !selected,
+                      'img-selected': selected,
+                      'card-view': true,
+                      'one-cards': selectedCards.length == 1,
+                      'two-cards': selectedCards.length == 2,
+                      'three-cards': selectedCards.length == 3,
+                      'four-cards': selectedCards.length == 4,
+                      'five-cards': selectedCards.length == 5
+                    }"
+                    src="{{ card.backImgUrl }}"
+                    data-src="{{ card.backImgUrl }}"
+                    (contextmenu)="onRightClick()"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <button (click)="toggleFlipped(card)" style="margin-top: 1vh">

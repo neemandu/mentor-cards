@@ -33,19 +33,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 @Component({
   selector: 'app-pack-content-page',
   templateUrl: './pack-content-page.component.html',
-  styleUrls: ['./pack-content-page.component.css'],
-  animations: [
-    trigger('flipState', [
-      state('active', style({
-        transform: 'rotateY(179.9deg)'
-      })),
-      state('inactive', style({
-        transform: 'rotateY(0)'
-      })),
-      transition('active => inactive', animate('500ms ease-out')),
-      transition('inactive => active', animate('500ms ease-in'))
-    ])
-  ]
+  styleUrls: ['./pack-content-page.component.css']
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
   Subscription: Subscription = new Subscription();
@@ -93,7 +81,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     });
     this.userData = this.userAuthService.userData;
   }
-
+  onRightClick(): boolean {
+    return false;
+  }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.commonLink = params['link'];
