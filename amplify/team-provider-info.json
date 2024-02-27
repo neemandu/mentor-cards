@@ -341,6 +341,10 @@
         "ListCardsPacksByLanguage": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/ListCardsPacksByLanguage-4741766a4f6e372f4f55-build.zip"
+        },
+        "NewAffiliateHandler": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/NewAffiliateHandler-2f69344a36567a74566d-build.zip"
         }
       },
       "auth": {
