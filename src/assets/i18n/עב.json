@@ -101,6 +101,7 @@
         "user-details": "פרטי משתמש",
         "register-plan": "הרשמה לתכנית",
         "group-management": "ניהול קבוצה",
+        "affiliate": "דשבורד שותפים",
         "logout": "התנתק"
       },
       "tour-menu": {
@@ -311,6 +312,7 @@
       "user-details-title": "פרטי משתמש",
       "name-label": "שם",
       "email-label": "מייל",
+      "affiliate": "דשבורד שותפים",
       "registration-date-label": "תאריך הרשמה לאתר",
       "plans-title": "תכניות"
     },

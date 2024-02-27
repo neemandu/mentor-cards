@@ -101,6 +101,7 @@
         "user-details": "User Details",
         "register-plan": "Register for a Plan",
         "group-management": "Group Management",
+        "affiliate": "Affiliates Dashboard",
         "logout": "Logout"
       },
       "tourMenu": {
@@ -309,6 +310,7 @@
     },
     "user-page": {
       "user-details-title": "User Details",
+      "affiliate": "Affiliates Dashboard",
       "name-label": "Name",
       "email-label": "Email",
       "registration-date-label": "Registration Date",
