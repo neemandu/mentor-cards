@@ -116,7 +116,8 @@
         "orgs-management": "Organizations Management",
         "packs-management": "Card Packs Management",
         "payment-programs-management": "Payment Programs Management",
-        "receipts-management": "Receipts and Payments Management"
+        "receipts-management": "Receipts and Payments Management",
+        "users-management": "Users Management"
       }
     },
     "login": {

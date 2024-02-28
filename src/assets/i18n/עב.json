@@ -116,7 +116,8 @@
         "orgs-management": "ארגונים",
         "packs-management": "ערכות קלפים",
         "payment-programs-management": "חבילות תשלום",
-        "receipts-management": "קבלות ותשלומים"
+        "receipts-management": "קבלות ותשלומים",
+        "affiliate-management": "שותפים"
       }
     },
     "login": {

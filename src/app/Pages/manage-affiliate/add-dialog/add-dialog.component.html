@@ -1,0 +1,90 @@
+<!-- edit-dialog.component.html -->
+<div mat-dialog-content dir="rtl"> 
+  <form class="d-flex flex-column" [formGroup]="affiliateForm">
+   
+    <!-- Affiliate URL Field -->
+    <mat-form-field>
+      <mat-label>כתובת URL של השותף</mat-label>
+      <input type="text" matInput formControlName="affiliateUrl" />
+      <mat-error *ngIf="formControls.affiliateUrl.hasError('required')">
+        כתובת URL של השותף היא חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Contact Email Field -->
+    <mat-form-field>
+      <mat-label>אימייל ליצירת קשר</mat-label>
+      <input type="email" matInput formControlName="contactEmail" />
+      <mat-error
+        *ngIf="
+          formControls.contactEmail.hasError('email') &&
+          !formControls.contactEmail.hasError('required')
+        "
+      >
+        אנא הזן כתובת אימייל חוקית
+      </mat-error>
+      <mat-error *ngIf="formControls.contactEmail.hasError('required')">
+        אימייל ליצירת קשר הוא חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Phone Number Field -->
+    <mat-form-field>
+      <mat-label>מספר טלפון</mat-label>
+      <input type="text" matInput formControlName="phoneNumber" />
+      <mat-error *ngIf="formControls.phoneNumber.hasError('required')">
+        מספר טלפון הוא חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Website URL Field -->
+    <mat-form-field>
+      <mat-label>כתובת אתר</mat-label>
+      <input type="text" matInput formControlName="websiteURL" />
+      <mat-error *ngIf="formControls.websiteURL.hasError('required')">
+        כתובת אתר היא חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Payment Details Field -->
+    <mat-form-field>
+      <mat-label>פרטי תשלום</mat-label>
+      <input type="text" matInput formControlName="paymentDetails" />
+      <mat-error *ngIf="formControls.paymentDetails.hasError('required')">
+        פרטי תשלום הם חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Commission Percentage Field -->
+    <mat-form-field>
+      <mat-label>אחוז העמלה</mat-label>
+      <input type="text" matInput formControlName="commissionPercentage" />
+      <mat-error *ngIf="formControls.commissionPercentage.hasError('required')">
+        אחוז העמלה הוא חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Status Field -->
+    <mat-checkbox dir="rtl" formControlName="status">סטטוס</mat-checkbox>
+    <mat-error *ngIf="formControls.status.hasError('required')">
+      סטטוס הוא חובה
+    </mat-error>
+  </form>
+</div>
+
+<div mat-dialog-actions class="flex justify-end" dir="rtl">
+  <button
+    style="border: 2px solid #d39538; border-radius: 4px"
+    mat-button
+    (click)="dialogRef.close()"
+  >
+    לְבַטֵל
+  </button>
+  <button
+    style="border: 2px solid #d39538; border-radius: 4px; margin-right: 10px;"
+    mat-button
+    (click)="save()"
+  >
+  שמור
+  </button>
+</div>

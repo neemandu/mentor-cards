@@ -1,0 +1,165 @@
+<div
+  style="
+    display: flex;
+    margin-right: calc(15rem /* 240px */ * var(--tw-space-x-reverse));
+    margin-left: calc(15rem /* 240px */ * calc(1 - var(--tw-space-x-reverse)));
+    margin-top: 3rem;
+  "
+>
+  <div
+    style="
+      --tw-space-y-reverse: 0;
+      margin-top: calc(0.5rem /* 8px */ * calc(1 - var(--tw-space-y-reverse)));
+      margin-bottom: calc(0.5rem /* 8px */ * var(--tw-space-y-reverse));
+      display: flex;
+      justify-items: end;
+    "
+  >
+    <button mat-button class="border-2 tablebutton" (click)="openAddDialog()">
+      <div
+        style="
+          display: flex;
+          margin-left: 1rem /* 16px */;
+          margin-right: 1rem /* 16px */;
+          font-weight: 700;
+        "
+      >
+        הוסף שותף
+        <img
+          style="margin-right: 0.5rem"
+          src="../../../assets/icons/plus.svg"
+          alt="Logo"
+        />
+      </div>
+    </button>
+  </div>
+</div>
+
+<!-- <mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8 mt-2"
+  style="margin-inline: 3vw; margin-top: 2vh;"
+>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">פעולות</div></mat-header-cell
+    >
+    <mat-cell *matCellDef="let element">
+      <div class="flex">
+        <button mat-button (click)="deleteItem(element.id)">
+          <img class="w-4" src="../../../assets/icons/bin.svg" alt="Logo" />
+        </button>
+        <button mat-button (click)="editItem(element.id)">
+          <img
+            class="ml-2 w-5"
+            src="../../../assets/icons/pen.svg"
+            alt="Logo"
+          />
+        </button>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+<ng-container matColumnDef="affiliateID">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">מזהה שותף</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.affiliateID }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="affiliateUrl">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;" >כתובת URL של השותף</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.affiliateUrl }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="contactEmail">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">אימייל ליצירת קשר</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.contactEmail }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="phoneNumber">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">מספר טלפון</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element" style="text-align: end;"> {{ element.phoneNumber }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="websiteURL">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">כתובת אתר</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.websiteURL }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="paymentDetails">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">פרטי תשלום</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.paymentDetails }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="commissionPercentage">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">אחוז העמלה</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.commissionPercentage }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem;">סטטוס</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.status }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumn"></mat-row>
+</mat-table> -->
+
+<div  style="margin-inline: 3vw; margin-top: 2vh;">
+  <table  datatable [dtOptions]="dtOptions" class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>פעולות</th>
+        <th>מזהה שותף</th>
+        <th>כתובת URL של השותף</th>
+        <th>אימייל ליצירת קשר</th>
+        <th>מספר טלפון</th>
+        <th>כתובת אתר</th>
+        <th>פרטי תשלום</th>
+        <th>אחוז העמלה</th>
+        <th>סטטוס</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let element of affiliateData">
+        <tr>
+          <td>
+            <div class="flex">
+              <button (click)="deleteItem(element.id)" style="border: none; margin-inline:.4vw">
+                <img style="width: 20px;" src="../../../assets/icons/bin.svg" alt="Logo" />
+              </button>
+              <button (click)="editItem(element.id)" style="border: none; margin-inline:.4vw">
+                <img style="width: 20px;" src="../../../assets/icons/pen.svg" alt="Logo"  />
+              </button>
+            </div>
+          </td>
+          <td>{{ element.affiliateID }}</td>
+          <td class="url-column">{{ element.affiliateUrl }}</td>
+          <td>{{ element.contactEmail }}</td>
+          <td style="text-align: end;">{{ element.phoneNumber }}</td>
+          <td>{{ element.websiteURL }}</td>
+          <td class="bank-details-column">{{ element.paymentDetails }}</td>
+          <td>{{ element.commissionPercentage }}</td>
+          <td>{{ element.status }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
