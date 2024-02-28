@@ -147,7 +147,9 @@ exports.handler = async (event) => {
     });
 
     var user = await getUser(username);
-
+    if(!refId){
+        refId = "NoRef"
+    }
     if(!user){
 
         console.log('user ' + email + " was NOT found");
@@ -227,6 +229,9 @@ exports.handler = async (event) => {
 
     user.entries++;
     user.entryDates.push(new Date().toISOString());
+    if(!user.refId){
+        user.refId = refId;
+    }
     await saveUser(user);
     console.log('user ' + email + " was found");
     console.log(user);

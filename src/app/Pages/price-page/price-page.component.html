@@ -96,18 +96,18 @@
           id="monthlySubscription"
           *ngIf="userSingedIn &&
             (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
           "
           class="popular-purchase-btn purchase-btn"
           type="button"
-          (click)="checkFreePeriod(monthlySubscription.id)"
+          (click)="checkFreePeriod(yearlySubscription.id)"
         >
         {{ "pages.price-page.join-button-text" | translate }}  
         </button>
         <button
           *ngIf="userSingedIn &&
             userData?.status === 'PLAN' &&
-            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
+            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12
           "
           class="disabled-btn purchase-btn"
           type="button"
