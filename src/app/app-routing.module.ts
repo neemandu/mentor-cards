@@ -36,16 +36,17 @@ import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
+import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
   {
     path: 'home-page',
-    component: HomePageComponent
+    component: HomePageComponent,
   },
   {
     path: 'no-program-page',
-    component: NoProgramPageComponent
+    component: NoProgramPageComponent,
   },
   {
     path: 'user-page',
@@ -62,19 +63,20 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'all-blogs', component: AllBlogsComponent },
   { path: 'detail/:slug', component: BlogDetailComponent },
-  {path: 'affiliates-page', component: AffiliatesPageComponent},
-  {path: 'affiliate-dashboard', component: AffiliatesDashboardPageComponent},
-  
+  { path: 'affiliates-page', component: AffiliatesPageComponent },
+  { path: 'affiliate-dashboard', component: AffiliatesDashboardPageComponent },
+  // { path: 'manage-affiliate', component: ManageAffiliateComponent },
+
   {
     path: 'pack-view/:id',
-    component: PackContentPageComponent//,
+    component: PackContentPageComponent, //,
     //canActivate: [AuthGuardPackContentService],
   },
   { path: 'example-pack', component: PackContentPageComponent },
   { path: 'guide-book', component: GuideBookComponent },
   {
     path: 'price-page',
-    component: PricePageComponent
+    component: PricePageComponent,
   },
   { path: 'guide-page', component: GuidePageComponent },
   { path: 'services', component: ServicesComponent },
@@ -90,6 +92,13 @@ const routes: Routes = [
     canDeactivate: [CanDeactivateGuardService],
   },
   // Management //
+
+  {
+    path: 'affiliate-management',
+    component: ManageAffiliateComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+
   {
     path: 'dashboard',
     component: DashboardComponent,

@@ -282,4 +282,11 @@
   >
     <div>{{ "pages.nav.management-menu.receipts-management" | translate }}</div>
   </button>
+  <button
+    mat-menu-item
+    (click)="navigate('/affiliate-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
+    <div>{{ "pages.nav.management-menu.affiliate-management" | translate }}</div>
+  </button>
 </mat-menu>

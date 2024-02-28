@@ -150,6 +150,9 @@ import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-co
 import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
 import { AffiliateDialogComponent } from './Pages/affiliate-dashboard/affiliate-dialog/affiliate-dialog.component';
+import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
+import { EditDialogComponent } from './Pages/manage-affiliate/edit-dialog/edit-dialog.component';
+import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dialog.component';
 
 @NgModule({
   declarations: [
@@ -167,6 +170,8 @@ import { AffiliateDialogComponent } from './Pages/affiliate-dashboard/affiliate-
     OverlaySpinnerComponent,
     RandomCardRevealDialogComponent,
     TransitionGroupComponent,
+    EditDialogComponent,
+    addDialogComponent,
     TransitionGroupItemDirective,
     LoginComponent,
     RegisterComponent,
@@ -204,7 +209,8 @@ import { AffiliateDialogComponent } from './Pages/affiliate-dashboard/affiliate-
     SelectLanguageComponent,
     AffiliatesPageComponent,
     AffiliatesDashboardPageComponent,
-    AffiliateDialogComponent
+    AffiliateDialogComponent,
+    ManageAffiliateComponent
   ],
   imports: [
     BrowserModule,
