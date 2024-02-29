@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -8,6 +8,9 @@ import { Subject } from 'rxjs';
 import { APIService } from 'src/app/API.service';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface Element {
   id: string;
@@ -26,12 +29,11 @@ export interface Element {
   templateUrl: './manage-affiliate.component.html',
   styleUrls: ['./manage-affiliate.component.css'],
 })
-export class ManageAffiliateComponent implements OnInit {
+export class ManageAffiliateComponent implements OnInit , AfterViewInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
   displayedColumn: string[] = [
-    'affiliateID',
     'affiliateUrl',
     'contactEmail',
     'phoneNumber',
@@ -43,6 +45,7 @@ export class ManageAffiliateComponent implements OnInit {
   ];
 
   affiliateData: any[];
+  dataSource: MatTableDataSource<Element>;
 
   // = [
   //   // {
@@ -90,20 +93,40 @@ export class ManageAffiliateComponent implements OnInit {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit(): void {
     this.dtOptions = {
       columnDefs: [
-        { orderable: false, targets: [0] }, // replace 0 with the indexes of the columns you want to disable sorting for
+        { orderable: false, targets: [0] }, // replace 0 with the affiliateIDes of the columns you want to disable sorting for
       ],
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Hebrew.json',
-      },
     };
+    this.getAffiliates();
+    this.dataSource = new MatTableDataSource(this.affiliateData);
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  getAffiliates(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.apiService.ListAffiliates().then(
       (affiliate) => {
         this.affiliateData = affiliate.items;
+        this.dataSource = new MatTableDataSource(this.affiliateData);
+        this.dataSource.sort = this.sort;
         this.overlaySpinnerService.changeOverlaySpinner(false);
+        
         console.log(this.affiliateData, 'here');
       },
       (error) => {
@@ -116,31 +139,7 @@ export class ManageAffiliateComponent implements OnInit {
     );
   }
 
-  // ID: 'qbn1p2bqv9cn7jr8ututw';
-  // affiliateUrl: 'asd';
-  // commissionPercentage: 'asd';
-  // contactEmail: 'ada';
-  // paymentDetails: 'asd';
-  // phoneNumber: 'ada';
-  // status: true;
-  // websiteURL: 'asd';
-
-  // export type CreateAffiliateInput = {
-  //   id?: string | null;
-  //   affiliateID: string;
-  //   affiliateUrl?: string | null;
-  //   contactEmail?: string | null;
-  //   phoneNumber?: string | null;
-  //   websiteURL?: string | null;
-  //   paymentDetails?: string | null;
-  //   commissionPercentage?: number | null;
-  //   dateJoined?: string | null;
-  //   status?: string | null;
-  //   balance?: number | null;
-  //   withdraws?: Array<WithdrawInput | null> | null;
-  // };
-
-  deleteItem(index: any): void {
+  deleteItem(affiliateID: any): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -159,11 +158,12 @@ export class ManageAffiliateComponent implements OnInit {
       if (result) {
         this.overlaySpinnerService.changeOverlaySpinner(true);
         this.apiService
-          .DeleteAffiliate({ id: this.affiliateData[index].id })
+          .DeleteAffiliate({ id: this.affiliateData.find(item => item.affiliateID === affiliateID).id  })
           .then(
             (res) => {
-              this.affiliateData.splice(index, 1);
+              this.affiliateData.splice(affiliateID, 1);
               this.overlaySpinnerService.changeOverlaySpinner(false);
+              this.getAffiliates();
             },
             (error) => {
               this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -185,18 +185,19 @@ export class ManageAffiliateComponent implements OnInit {
     addDialofRef.afterClosed().subscribe((result) => {
       if (result) {
         // Generate a random ID
-        const id =
+        const affiliateID =
           Math.random().toString(36).substring(2, 15) +
           Math.random().toString(36).substring(2, 15);
 
-        // Add the id to the result object
-        result.id = id;
+        // Add the affiliateID to the result object
+        result.affiliateID = affiliateID;
 
         console.log(result);
         this.apiService.CreateAffiliate(result).then(
           (res) => {
             this.affiliateData = [...this.affiliateData, res];
             this.overlaySpinnerService.changeOverlaySpinner(false);
+            this.getAffiliates();
           },
           (error) => {
             this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -210,18 +211,12 @@ export class ManageAffiliateComponent implements OnInit {
     });
   }
 
-  // this.api.CreateOrganizations({ organizationsMembershipId: orgId }).then(res => {
-  //   this.orgsData = [...this.orgsData, res];
-  //   this.dataSource = new MatTableDataSource(this.orgsData);
-  //   this.mngService.overlaySpinner(false);
-  //   this.mngService.snackBarPositive("הארגון נשמר בהצלחה");
-  // }, error => {
-  //   console.log("🚀 ~ file: organization-management.component.ts ~ line 64 ~ this.api.CreateOrganizations ~ error", error)
-  //   this.mngService.overlaySpinner(false);
-  //   this.mngService.snackBarNegative("קרתה שגיאה, נסו שוב מאוחר יותר");
-  // })
-  editItem(index: number) {
-    const item = this.affiliateData[index];
+  editItem(affiliateID: number) {
+    const item = this.affiliateData.find(item => item.affiliateID === affiliateID);
+    console.log(affiliateID,'affiliateID');
+    console.log(this.affiliateData,'affiliateData');
+    console.log(this.affiliateData[affiliateID],'affiliateID');
+    console.log(item);
 
     const editDialogRef = this.dialog.open(EditDialogComponent, {
       width: '250px',
@@ -232,19 +227,21 @@ export class ManageAffiliateComponent implements OnInit {
       .afterClosed()
       .subscribe((newAffiliateValue: any) => {
         sub.unsubscribe();
+        console.log(newAffiliateValue , 'here aff');
         if (newAffiliateValue) {
           this.overlaySpinnerService.changeOverlaySpinner(true);
-          if (index != undefined) {
+          if (affiliateID != undefined) {
             //has id
             this.apiService
               .UpdateAffiliate({
-                id: this.affiliateData[index].id,
+                id: this.affiliateData.find(item => item.affiliateID === affiliateID).id,
                 ...newAffiliateValue,
               })
               .then(
                 (res) => {
-                  this.affiliateData[index] = res;
+                  this.affiliateData[affiliateID] = res;
                   this.overlaySpinnerService.changeOverlaySpinner(false);
+                  this.getAffiliates();
                 },
                 (error) => {
                   this.overlaySpinnerService.changeOverlaySpinner(false);

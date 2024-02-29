@@ -9,17 +9,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './edit-dialog.component.html',
 })
 export class EditDialogComponent {
-  form: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.form = new FormGroup({
-      description: new FormControl(data.description),
-      date: new FormControl(data.date),
-    });
-  }
+  ) {}
 
   affiliateForm = new FormGroup({
     affiliateUrl: new FormControl(this.data.affiliateUrl, Validators.required),
@@ -35,6 +29,6 @@ export class EditDialogComponent {
 
 
   save() {
-    this.dialogRef.close(this.form.value);
+    this.dialogRef.close(this.affiliateForm.value);
   }
 }

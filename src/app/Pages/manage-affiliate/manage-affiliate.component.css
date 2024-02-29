@@ -111,10 +111,16 @@
       hyphens: auto;
     }
      
-    .url-column {
-      width: 220px; /* adjust as needed */
-    }
+ 
     
-    .bank-details-column {
-      width: 220px; /* adjust as needed */
+    .wide-cell {
+      flex: 0 0 200px; /* adjust as needed */
+    }
+
+  .small-cell {
+    flex: 0 0 155px; /* adjust as needed */
+  }
+
+    mat-header-row{
+      background-color: #fadda3;
     }

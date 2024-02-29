@@ -6531,39 +6531,18 @@ async GetSubscriptionPlansForOrgs(
     input: UpdateAffiliateInput,
     condition?: ModelAffiliateConditionInput
   ): Promise<UpdateAffiliateMutation> {
-    const statement = `mutation UpdateAffiliate($input: UpdateAffiliateInput!, $condition: ModelAffiliateConditionInput) {
-        updateAffiliate(input: $input, condition: $condition) {
+    const statement = `mutation UpdateAffiliate($input: UpdateAffiliateInput!) {
+        updateAffiliate(input: $input) {
           __typename
           id
-          affiliateID
-          affiliateUrl
-          contactEmail
-          phoneNumber
-          websiteURL
-          paymentDetails
-          commissionPercentage
-          dateJoined
-          status
-          balance
-          withdraws {
-            __typename
-            id
-            date
-            amount
-            currency
-            paymentWay
-            transactionId
-          }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
       input
     };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
+    // if (condition) {
+    //   gqlAPIServiceArguments.condition = condition;
+    // }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
