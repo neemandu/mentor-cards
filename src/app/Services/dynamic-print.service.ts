@@ -22,7 +22,7 @@ export class DynamicPrintService {
         if (depth === 0) {
             htmlContent += `<h2 style="margin-right:${indent}px;"><b>${numberStr} ${elementName}</b></h2>`;
         } else if (depth === 1) {
-            htmlContent += `<h3 style="margin-right:${indent}px;"><b>${numberStr} ${elementName}</b></h3>`;
+            htmlContent += `<p style="margin-right:${indent}px;">${numberStr} ${elementName}</p>`;
         } else {
             htmlContent += `<p style="margin-right:${indent}px;">${numberStr} ${elementName}</p>`;
         }
@@ -40,7 +40,9 @@ export class DynamicPrintService {
   }
 
   printHtmlContent(templatePath: string, packName: string, packDesc: string, guideBook: GuideBookElement[], imgUrl: string): void {
-    this.http.get(templatePath, { responseType: 'text' }).subscribe(template => {
+    
+    try{
+      this.http.get(templatePath, { responseType: 'text' }).subscribe(template => {
       let filledTemplate = template;
       filledTemplate = filledTemplate.replace(new RegExp(`{{name}}`, 'g'), packName);
       filledTemplate = filledTemplate.replace(new RegExp(`{{description}}`, 'g'), packDesc);
@@ -57,5 +59,8 @@ export class DynamicPrintService {
         printWindow.close();
       }, 250);
     });
+    }catch(err){
+        console.log(err);
+    }
   }
 }
