@@ -63,7 +63,8 @@ export class GuideBookComponent implements OnInit {
 
   printPdf(): void {
     this.mixpanelService.track("ButtonClicked", { "Name": "Print GuideBook"});
-    let html_url = '/assets/htmlTemplates/guidebook.html'
+    console.log('Print Guidebook');
+    let html_url = '/assets/htmlTemplates/guidebook.html';
     this.printPdfService.printHtmlContent(html_url, this.packName, this.packDesc, this.guideBook, this.imgUrl);
   }
 }

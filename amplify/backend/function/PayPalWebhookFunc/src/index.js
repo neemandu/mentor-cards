@@ -206,6 +206,7 @@ exports.handler = async (event) => {
         var transaction_id = "";
         var user_id_mydb = "";
         var shouldProcess = true;
+        
         if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
             transaction_id = paypal_body.resource.id;
 
@@ -229,14 +230,16 @@ exports.handler = async (event) => {
                 user = await getUser(user_id_mydb);
             }
             else{
-                user = await getUserByPayPalTxId(transaction_id);
+                if(transaction_id != 'I-40UYAVKL9JYM'){
+                    user = await getUserByPayPalTxId(transaction_id);
+                }
             }
 
-            if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+            if(user && event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
                 await cancelUserSubscription(user, transaction_id);
                 await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
             }
-            else if(event_type == "PAYMENT.SALE.COMPLETED"){
+            else if(user && event_type == "PAYMENT.SALE.COMPLETED"){
                 var amount = paypal_body.resource.amount.total;
                 if(!user.payments){
                     user.payments = [];
@@ -244,7 +247,7 @@ exports.handler = async (event) => {
                 var subscription = getSubByTxID(user, transaction_id);
                 var now = new Date().toISOString();
                 user.payments.push({
-                    id: user.id+"_"+date,
+                    id: user.id+"_"+now,
                     date: now,
                     payedMonths: subscription.subscriptionPlan.billingCycleInMonths,
                     amount: amount,
