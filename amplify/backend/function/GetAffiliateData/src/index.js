@@ -62,7 +62,7 @@ exports.handler = async (event) => {
             return null;
         }
 
-        var refId = user?.myAffiliate?.affiliateUrl;
+        var refId = user?.userMyAffiliateId?.affiliateUrl;
 
         const queryParams = {
             TableName: env.API_CARDSPACKS_USERTABLE_NAME, 

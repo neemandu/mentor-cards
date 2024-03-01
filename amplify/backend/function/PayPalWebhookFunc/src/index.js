@@ -206,7 +206,7 @@ exports.handler = async (event) => {
         var transaction_id = "";
         var user_id_mydb = "";
         var shouldProcess = true;
-        
+
         if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
             transaction_id = paypal_body.resource.id;
 
@@ -230,9 +230,7 @@ exports.handler = async (event) => {
                 user = await getUser(user_id_mydb);
             }
             else{
-                if(transaction_id != 'I-40UYAVKL9JYM'){
-                    user = await getUserByPayPalTxId(transaction_id);
-                }
+                user = await getUserByPayPalTxId(transaction_id);
             }
 
             if(user && event_type == "BILLING.SUBSCRIPTION.CANCELLED"){

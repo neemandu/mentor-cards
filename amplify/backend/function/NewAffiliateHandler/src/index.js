@@ -6,6 +6,11 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
+
+const AWS = require('aws-sdk');
+const { env } = require("process");
+
+
 async function saveUser(user){
   var docClient = new AWS.DynamoDB.DocumentClient();
 
@@ -55,23 +60,22 @@ async function getUserByEmail(email){
 
 }
 
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
 exports.handler = async (event) => {
-  console.log(`EVENT: ${JSON.stringify(event)}`);
-  event.Records.forEach(record => {
-    console.log(record.eventID);
-    console.log(record.eventName);
-    console.log('DynamoDB Record: %j', record.dynamodb);
-    let email = record.dynamodb.NewImage.contactEmail.S;
-    let affiliate_id = record.dynamodb.NewImage.affiliateID.S;
-    var user = await getUserByEmail(email);
-    if(user){
-      user.userMyAffiliateId = affiliate_id;
-      user.groupRole = "VIP_USER";
-      saveUser(affiliate_id);
-    }
-  });
-  return Promise.resolve('Successfully processed DynamoDB record');
+    console.log(`EVENT: ${JSON.stringify(event)}`);
+    for (const record of event.Records) {
+        console.log(record.eventID);
+        console.log(record.eventName);
+        console.log('DynamoDB Record: %j', record.dynamodb);
+        if(record.eventName === "INSERT"){
+          let email = record.dynamodb.NewImage.contactEmail.S;
+          let affiliate_id = record.dynamodb.NewImage.affiliateID.S;
+          var user = await getUserByEmail(email); // Now valid within an async function
+          if(user){
+              user.userMyAffiliateId = affiliate_id;
+              user.groupRole = user.groupRole == "SUPER_USER" ? "SUPER_USER" : "VIP_USER";
+              await saveUser(user); // This should be user instead of affiliate_id
+          }
+        }
+    };
+    return 'Successfully processed DynamoDB record'; // No need to wrap in Promise.resolve
 };

@@ -147,7 +147,7 @@ exports.handler = async (event) => {
     });
 
     var user = await getUser(username);
-    if(!refId){
+if(!refId){
         refId = "NoRef"
     }
     if(!user){
@@ -182,7 +182,6 @@ exports.handler = async (event) => {
             "externalPacksSubscriptions":[],
             "entryDates":[new Date().toISOString()],
             "refId": refId,
-            "myAffiliate": null,
             "payments": []
         };
     
@@ -229,7 +228,7 @@ exports.handler = async (event) => {
 
     user.entries++;
     user.entryDates.push(new Date().toISOString());
-    if(!user.refId){
+if(!user.refId){
         user.refId = refId;
     }
     await saveUser(user);

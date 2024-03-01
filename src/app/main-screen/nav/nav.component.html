@@ -192,7 +192,7 @@
   </button>
   <button
     mat-menu-item
-    *ngIf="loggedIn && userAttributes?.myAffiliate"
+    *ngIf="loggedIn && userAttributes?.userMyAffiliateId"
     (click)="navigate('/affiliate-dashboard')"
   >
   {{ "pages.nav.user-menu.register-plan" | translate }}
