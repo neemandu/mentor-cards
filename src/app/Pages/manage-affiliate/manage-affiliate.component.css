@@ -123,4 +123,13 @@
 
     mat-header-row{
       background-color: #fadda3;
+      justify-content: center;
+    }
+
+    mat-header-cell{
+      justify-content: center;
+    }
+
+    mat-cell{
+      justify-content: center;
     }

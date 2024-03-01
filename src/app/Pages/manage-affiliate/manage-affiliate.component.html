@@ -35,7 +35,7 @@
     </button>
   </div>
 </div>
-<div style="display: flex; justify-items: end">
+<div style="display: flex;">
   <input
     style="
       width: 10vw;
@@ -45,6 +45,7 @@
       margin-inline: 3vw;
       padding: 1vh;
       border-radius: 5px;
+      text-align: right;
     "
     matInput
     (keyup)="applyFilter($event.target.value)"
@@ -58,10 +59,12 @@
 >
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef class="small-cell">
-      <div style="font-size: 1.1rem">פעולות</div></mat-header-cell
+      <div style="font-size: 1.1rem; text-align: center">
+        פעולות
+      </div></mat-header-cell
     >
     <mat-cell
-      style="font-size: 0.9rem"
+      style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
       class="small-cell"
     >
@@ -82,28 +85,34 @@
 
   <ng-container matColumnDef="affiliateUrl">
     <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div style="font-size: 1.1rem">URL</div>
+      <div style="font-size: 1.1rem; text-align: center">URL</div>
     </mat-header-cell>
-    <mat-cell style="font-size: 0.9rem" *matCellDef="let element">
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >
       {{ element.affiliateUrl }}
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="contactEmail">
     <mat-header-cell *matHeaderCellDef>
-      <div style="font-size: 1.1rem">אימייל ליצירת קשר</div>
+      <div style="font-size: 1.1rem; text-align: center">אימייל ליצירת קשר</div>
     </mat-header-cell>
-    <mat-cell style="font-size: 0.9rem" *matCellDef="let element">
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >
       {{ element.contactEmail }}
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="phoneNumber">
     <mat-header-cell *matHeaderCellDef>
-      <div style="font-size: 1.1rem">מספר טלפון</div>
+      <div style="font-size: 1.1rem; text-align: center">מספר טלפון</div>
     </mat-header-cell>
     <mat-cell
-      style="font-size: 0.9rem"
+      style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
       style="text-align: end"
     >
@@ -113,10 +122,10 @@
 
   <ng-container matColumnDef="websiteURL">
     <mat-header-cell *matHeaderCellDef class="wide-cell">
-      <div style="font-size: 1.1rem">כתובת אתר</div>
+      <div style="font-size: 1.1rem; text-align: center">כתובת אתר</div>
     </mat-header-cell>
     <mat-cell
-      style="font-size: 0.9rem"
+      style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
       class="wide-cell"
     >
@@ -126,10 +135,10 @@
 
   <ng-container matColumnDef="paymentDetails">
     <mat-header-cell *matHeaderCellDef class="wide-cell">
-      <div style="font-size: 1.1rem">פרטי תשלום</div>
+      <div style="font-size: 1.1rem; text-align: center">פרטי תשלום</div>
     </mat-header-cell>
     <mat-cell
-      style="font-size: 0.9rem"
+      style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
       class="wide-cell"
     >
@@ -139,18 +148,24 @@
 
   <ng-container matColumnDef="commissionPercentage">
     <mat-header-cell *matHeaderCellDef>
-      <div style="font-size: 1.1rem">אחוז העמלה</div>
+      <div style="font-size: 1.1rem; text-align: center">אחוז העמלה</div>
     </mat-header-cell>
-    <mat-cell style="font-size: 0.9rem" *matCellDef="let element">
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >
       {{ element.commissionPercentage }}
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div style="font-size: 1.1rem">סטטוס</div>
+      <div style="font-size: 1.1rem; text-align: center">סטטוס</div>
     </mat-header-cell>
-    <mat-cell style="font-size: 0.9rem" *matCellDef="let element">
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >
       {{ element.status }}
     </mat-cell>
   </ng-container>
@@ -159,8 +174,13 @@
   <mat-row *matRowDef="let row; columns: displayedColumn"></mat-row>
 </mat-table>
 
-<mat-paginator dir="ltr" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
+<div style="display: flex; justify-content: center">
+  <mat-paginator
+    dir="ltr"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
 <!-- <div style="margin-inline: 3vw; margin-top: 2vh">
   <table
     datatable
