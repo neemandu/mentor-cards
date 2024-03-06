@@ -243,6 +243,9 @@ export class AllPacksPageComponent implements OnInit {
   setAllCategoryPacksToShow(): void {
     this.allCategoryPacks = this.allCategories
       .filter((category) => {
+        if (this.userData?.status === 'PLAN' && category === 'ערכות להתנסות חופשית') {
+          return false;
+        }
         return this.selectedCategories.length != 0
           ? this.selectedCategories.includes(category)
           : true;
