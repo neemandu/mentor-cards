@@ -94,6 +94,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
 import {DataTablesModule} from 'angular-datatables';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -154,6 +155,9 @@ import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affili
 import { EditDialogComponent } from './Pages/manage-affiliate/edit-dialog/edit-dialog.component';
 import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dialog.component';
 
+import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
+import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/add-dialog-withdraws/add-dialog-withdraws.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -210,7 +214,9 @@ import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dial
     AffiliatesPageComponent,
     AffiliatesDashboardPageComponent,
     AffiliateDialogComponent,
-    ManageAffiliateComponent
+    ManageAffiliateComponent,
+    AffiliateWithdrawsComponent,
+    addDialogWithdrawsComponent
   ],
   imports: [
     BrowserModule,
@@ -252,7 +258,8 @@ import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dial
     MatCheckboxModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule
 
   ],
   providers: [AuthService,
