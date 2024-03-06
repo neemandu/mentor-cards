@@ -37,6 +37,7 @@ import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
 import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
+import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -65,7 +66,8 @@ const routes: Routes = [
   { path: 'detail/:slug', component: BlogDetailComponent },
   { path: 'affiliates-page', component: AffiliatesPageComponent },
   { path: 'affiliate-dashboard', component: AffiliatesDashboardPageComponent },
-  // { path: 'manage-affiliate', component: ManageAffiliateComponent },
+  { path: 'manage-affiliate', component: ManageAffiliateComponent },
+  { path: 'affiliate-withdraws/:id', component: AffiliateWithdrawsComponent },
 
   {
     path: 'pack-view/:id',
@@ -93,11 +95,17 @@ const routes: Routes = [
   },
   // Management //
 
-  {
-    path: 'affiliate-management',
-    component: ManageAffiliateComponent,
-    canActivate: [AuthGuardSiteContentManagementService],
-  },
+  // {
+  //   path: 'affiliate-management',
+  //   component: ManageAffiliateComponent,
+  //   canActivate: [AuthGuardSiteContentManagementService],
+  // },
+
+  // {
+  //   path: 'affiliate-withdraws',
+  //   component: AffiliateWithdrawsComponent,
+  //   canActivate: [AuthGuardSiteContentManagementService],
+  // },
 
   {
     path: 'dashboard',
@@ -134,7 +142,7 @@ const routes: Routes = [
     component: ReceiptsManagementComponent,
     canActivate: [AuthGuardSiteContentManagementService],
   },
-  { path: '**', redirectTo: '/all-packs-page' },
+  // { path: '**', redirectTo: '/all-packs-page' },
 ];
 
 @NgModule({

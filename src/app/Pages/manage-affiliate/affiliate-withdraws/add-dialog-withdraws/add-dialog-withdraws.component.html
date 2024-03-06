@@ -1,0 +1,59 @@
+<!-- edit-dialog.component.html -->
+<div mat-dialog-content dir="rtl">
+  <form class="d-flex flex-column" [formGroup]="affiliateWithdrawsForm">
+    <!-- Date Field -->
+    <mat-form-field>
+      <mat-label>תאריך</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="formControls.date.hasError('required')">
+        תאריך הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Amount Field -->
+    <mat-form-field>
+      <mat-label>סכום</mat-label>
+      <input type="number" matInput formControlName="amount" />
+      <mat-error *ngIf="formControls.amount.hasError('required')">
+        סכום הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Currency Field -->
+    <mat-form-field>
+      <mat-label>מטבע</mat-label>
+      <input type="text" matInput formControlName="currency" />
+      <mat-error *ngIf="formControls.currency.hasError('required')">
+        מטבע הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Payment Way Field -->
+    <mat-form-field>
+      <mat-label>דרך תשלום</mat-label>
+      <input type="text" matInput formControlName="paymentWay" />
+      <mat-error *ngIf="formControls.paymentWay.hasError('required')">
+        דרך תשלום היא שדה חובה
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions class="flex justify-end" dir="rtl">
+  <button
+    style="border: 2px solid #d39538; border-radius: 4px"
+    mat-button
+    (click)="dialogRef.close()"
+  >
+    לְבַטֵל
+  </button>
+  <button
+    style="border: 2px solid #d39538; border-radius: 4px; margin-right: 10px"
+    mat-button
+    (click)="save()"
+  >
+    שמור
+  </button>
+</div>

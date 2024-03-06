@@ -94,6 +94,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
 import {DataTablesModule} from 'angular-datatables';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -153,6 +154,9 @@ import { AffiliateDialogComponent } from './Pages/affiliate-dashboard/affiliate-
 import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
 import { EditDialogComponent } from './Pages/manage-affiliate/edit-dialog/edit-dialog.component';
 import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dialog.component';
+
+import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
+import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/add-dialog-withdraws/add-dialog-withdraws.component';
 import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dialog/user-login-dialog.component';
 
 @NgModule({
@@ -212,6 +216,8 @@ import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dial
     AffiliatesDashboardPageComponent,
     AffiliateDialogComponent,
     ManageAffiliateComponent,
+    AffiliateWithdrawsComponent,
+    addDialogWithdrawsComponent,
     PopupDialogComponent,
     UserLoginDialogComponent
   ],
@@ -255,7 +261,8 @@ import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dial
     MatCheckboxModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule
 
   ],
   providers: [AuthService,
