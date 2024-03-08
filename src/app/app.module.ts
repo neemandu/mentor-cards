@@ -125,7 +125,7 @@ import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new
 import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
-import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
+import { GuideBookComponent, PopupDialogComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
 import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
 import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
@@ -153,6 +153,7 @@ import { AffiliateDialogComponent } from './Pages/affiliate-dashboard/affiliate-
 import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
 import { EditDialogComponent } from './Pages/manage-affiliate/edit-dialog/edit-dialog.component';
 import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dialog.component';
+import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dialog/user-login-dialog.component';
 
 @NgModule({
   declarations: [
@@ -210,7 +211,9 @@ import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dial
     AffiliatesPageComponent,
     AffiliatesDashboardPageComponent,
     AffiliateDialogComponent,
-    ManageAffiliateComponent
+    ManageAffiliateComponent,
+    PopupDialogComponent,
+    UserLoginDialogComponent
   ],
   imports: [
     BrowserModule,

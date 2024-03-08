@@ -22,6 +22,7 @@ import { MixpanelService, EventTypes } from 'src/app/Services/mixpanel.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOption } from '@angular/material/core';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
+import { UserLoginDialogComponent } from './user-login-dialog/user-login-dialog.component';
 
 interface CategoryPack {
   category: string;
@@ -35,12 +36,13 @@ interface CategoryPack {
 })
 export class AllPacksPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
-  @ViewChild('filterText') filterTextInput: ElementRef;  
-  @ViewChildren('autocompleteOptions') autocompleteOptions: QueryList<MatOption>;
+  @ViewChild('filterText') filterTextInput: ElementRef;
+  @ViewChildren('autocompleteOptions')
+  autocompleteOptions: QueryList<MatOption>;
 
   Subscription: Subscription = new Subscription();
   filteredOptions = [];
-  allOptions = []; 
+  allOptions = [];
   // mobile: boolean;
 
   allPacks: PackContent[] = [];
@@ -86,13 +88,12 @@ export class AllPacksPageComponent implements OnInit {
     public dialog: MatDialog,
     private mixpanelService: MixpanelService,
     public langDirectionService: LangDirectionService
-
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
 
   openNewTab(): void {
-    const url = 'https://mentor-cards.vp4.me/my-courses'; 
+    const url = 'https://mentor-cards.vp4.me/my-courses';
     window.open(url, '_blank');
   }
 
@@ -108,15 +109,14 @@ export class AllPacksPageComponent implements OnInit {
 
   handleKeyDown(event: KeyboardEvent) {
     this.stopGenerateOptions = false;
-    if(this.freeTextFilterSelected === ''){
-      this.showCategoryLine = true;      
+    if (this.freeTextFilterSelected === '') {
+      this.showCategoryLine = true;
     }
-    if(event.key === 'Escape'){
+    if (event.key === 'Escape') {
       this.clickOutside(event);
-    }
-    else if(event.key === 'Enter'){
+    } else if (event.key === 'Enter') {
       let option = this.filteredOptions[this.currentFocusIndex];
-      if(!option){
+      if (!option) {
         option = this.freeTextFilterSelected;
       }
       this.selectOption(option);
@@ -128,7 +128,6 @@ export class AllPacksPageComponent implements OnInit {
       this.changeFocus(-1); // Move focus up
     }
   }
-  
 
   changeFocus(direction: number) {
     this.currentFocusIndex += direction;
@@ -138,17 +137,16 @@ export class AllPacksPageComponent implements OnInit {
     } else if (this.currentFocusIndex < 0) {
       this.currentFocusIndex = this.filteredOptions.length - 1;
     }
-  
+
     const optionsArray = this.autocompleteOptions.toArray();
     const optionToFocus = optionsArray[this.currentFocusIndex];
     if (optionToFocus) {
       optionToFocus.focus();
     }
   }
-  
 
   ngOnInit() {
-    this.router.queryParams.subscribe(params => {
+    this.router.queryParams.subscribe((params) => {
       const refId = params['ref'];
       if (refId) {
         localStorage.setItem('refId', refId);
@@ -157,7 +155,9 @@ export class AllPacksPageComponent implements OnInit {
     });
 
     // track events
-    this.mixpanelService.track("PageViewed", { 'Page Title': 'all-packs-page' });
+    this.mixpanelService.track('PageViewed', {
+      'Page Title': 'all-packs-page',
+    });
 
     this.Subscription.add(
       this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
@@ -178,24 +178,26 @@ export class AllPacksPageComponent implements OnInit {
     );
     console.log('allpacks page sub 2');
     this.userData = this.userAuthService.userData;
+    if (!this.userData || this.userData.status === 'NOPLAN') {
+      this.openDialog();
+    }
     this.getAllPacks();
   }
 
   filterOptions() {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
 
-    if(filterValue){
-      this.filteredOptions = this.allOptions.filter(tag =>
-        tag.toLowerCase().includes(filterValue));
-    }
-    else{
+    if (filterValue) {
+      this.filteredOptions = this.allOptions.filter((tag) =>
+        tag.toLowerCase().includes(filterValue)
+      );
+    } else {
       this.getAllPacks();
     }
   }
 
   openEnterCouponCodeModal(): void {
-    
-    this.mixpanelService.track("ButtonClicked", { "Name": "Enter Coupon code"});
+    this.mixpanelService.track('ButtonClicked', { Name: 'Enter Coupon code' });
     if (this.userData) {
       this.userAuthService.openEnterCouponCodeModal();
     } else {
@@ -223,7 +225,6 @@ export class AllPacksPageComponent implements OnInit {
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
-
       });
       this.cardsService.getAllPacks();
     }
@@ -236,7 +237,7 @@ export class AllPacksPageComponent implements OnInit {
     );
     console.log(this.allCategories);
     this.allFavorites = this.userAuthService.favorites;
-    
+
     this.isPageLoaded = true;
   }
 
@@ -257,7 +258,8 @@ export class AllPacksPageComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
-    const clickedInsideAutocomplete = this.filterTextInput.nativeElement.contains(event.target);
+    const clickedInsideAutocomplete =
+      this.filterTextInput.nativeElement.contains(event.target);
     if (!clickedInsideAutocomplete) {
       this.filteredOptions = [];
       this.currentFocusIndex = -1;
@@ -350,8 +352,8 @@ export class AllPacksPageComponent implements OnInit {
 
   freeTextFilter(): void {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
-    this.allPacks = this.allPacks.filter(packContent =>
-      packContent.tags.some(tag => tag.toLowerCase() === filterValue)
+    this.allPacks = this.allPacks.filter((packContent) =>
+      packContent.tags.some((tag) => tag.toLowerCase() === filterValue)
     );
   }
 
@@ -384,6 +386,17 @@ export class AllPacksPageComponent implements OnInit {
 
   public navigate(path: string): void {
     this.ngZone.run(() => this.routNavigate.navigate([path]));
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UserLoginDialogComponent, {
+      width: '40vw',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 
   ngOnDestroy(): void {
