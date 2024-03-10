@@ -1,4 +1,4 @@
-import { Affiliate } from './../../API.service';
+import { APIService, Affiliate } from './../../API.service';
 import {AfterViewInit, Component, Inject, OnInit, VERSION, ViewChild} from '@angular/core';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
@@ -32,11 +32,11 @@ export interface DialogData {
   ],
 }) 
 
-export class AffiliatesDashboardPageComponent{
+export class AffiliatesDashboardPageComponent implements OnInit{
 
   animal: string;
   name: string;
-
+  affiliateData: any
 
   displayedColumns: string[] = ['name', 'purchaseDate', 'subscriptionType', 'renewsEvery', 'email', 'commission'];
   dataSource = new ExampleDataSource();
@@ -48,11 +48,16 @@ export class AffiliatesDashboardPageComponent{
     private overlaySpinnerService: OverlaySpinnerService,
     public langDirectionService: LangDirectionService,
     private snackBarCoponent: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private apiService: APIService
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
+
+  ngOnInit(): void {
+    this.getAffiliates();
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(AffiliateDialogComponent, {
       width: '26vw',
@@ -105,6 +110,26 @@ export class AffiliatesDashboardPageComponent{
     this.expandedElement = this.expandedElement === row ? null : row;
   }
 
+  getAffiliates(): void {
+    this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.apiService.GetAffiliateData(
+     { username :this.userData.user}
+    ).then(
+      (affiliate) => {
+        this.affiliateData = affiliate;
+        this.dataSource = new MatTableDataSource(this.affiliateData);
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        console.log(this.affiliateData, 'here');
+      },
+      (error) => {
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        console.log(
+          'file: manage-affiliate.component.ts ~ line 42 ~ this.api.ListAffiliates ~ error',
+          error
+        );
+      }
+    );
+  }
 
   // selectItemCoverages(index: number) {
   //   // this.openCoverages = this.openCoverages && this.indexSelectedCoverage === index ? false : true;

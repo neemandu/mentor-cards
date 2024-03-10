@@ -40,8 +40,10 @@
     </div>
   </div>
   <div id="title" style="margin: 2vh 3vh;">
+    <div style="display: flex;justify-content: space-between;align-items: center; direction: ltr;">
+      <div></div>
+      <div *ngIf="isError"> Please allow pop-ups for this website  </div>
     <h1 style="text-align: center;">{{title}}</h1>
-    <div style="display: flex;justify-content: center;align-items: center;">
       <button style="margin-left: 10px;
       height: 39px;
       border-radius: 5px;
@@ -53,7 +55,13 @@
       font-size: large;
       transition: color .15s ease-in-out, background-color .15s ease-in-out;
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;" 
-      (click)="printPdf()">הדפסה</button>
+      (click)="printPdf()">הדפסה 
+      <img
+      src="../../../assets/icons/print.png"
+      alt="print data"
+      width="20px"
+    />
+    </button>
     </div>
     <h3 style="text-align: center;">{{packName}}</h3>
     <h4 style="text-align: center;">{{packDesc}}</h4>
