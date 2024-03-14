@@ -109,10 +109,15 @@ exports.handler = async (event) => {
                 ':refId': affiliate.affiliateUrl
             }
         };
+        var users;
+        await docClient.query(queryParams).promise().then(data => {
+            users = data["Items"];
+            console.log('found ' + users?.length + ' users', JSON.stringify(data, null, 2));
+        }).catch(err => {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        });
 
-        const queryResult = await docClient.query(queryParams).promise();
-        const users = queryResult.Items;
-        console.log('found ' + users?.length + ' users');
+
 
         return users;
     } catch (error) {
