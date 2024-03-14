@@ -58,6 +58,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   randomCardIndex: number = 0;
   commonLink: any = undefined;
   flipCard: string = 'inactive';
+  rotation:number = 0;
 
   constructor(
     public route: ActivatedRoute,
@@ -205,6 +206,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     card.flipped = !card.flipped;
     this.flipCard = (this.flipCard == 'inactive') ? 'active' : 'inactive';
   }
+
+
+  rotateCard() {
+    this.rotation = (this.rotation + 90) % 360;
+  }
+
 
   toggleChosenCardsModal(): void {
     if (!this.showSelectedCards) {

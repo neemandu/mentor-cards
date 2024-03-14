@@ -519,7 +519,7 @@
               <div class="d-flex flex-column">
                 <!-- <div> -->
                 <div
-                *ngIf="!flipped"
+                  *ngIf="!flipped"
                   [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
                 >
                   <!-- Card Back -->
@@ -529,6 +529,10 @@
                       src="{{ card.frontImgUrl }}"
                       data-src="{{ card.frontImgUrl }}"
                       [ngClass]="{
+                        'rotate-0': rotation === 0,
+                        'rotate-90': rotation === 90,
+                        'rotate-180': rotation === 180,
+                        'rotate-270': rotation === 270,
                         'img-unselected': !selected,
                         'img-selected': selected,
                         'card-view': true,
@@ -546,6 +550,10 @@
                     <img
                       loading="eager"
                       [ngClass]="{
+                        'rotate-0': rotation === 0,
+                        'rotate-90': rotation === 90,
+                        'rotate-180': rotation === 180,
+                        'rotate-270': rotation === 270,
                         'img-unselected': !selected,
                         'img-selected': selected,
                         'card-view': true,
@@ -562,7 +570,7 @@
                   </div>
                 </div>
                 <div
-                *ngIf="flipped"
+                  *ngIf="flipped"
                   [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
                 >
                   <!-- Card Back -->
@@ -606,15 +614,27 @@
                 </div>
               </div>
             </div>
-            <div>
-              <button (click)="toggleFlipped(card)" style="margin-top: 1vh">
-                <img
-                  src="../../../assets/icons/flip.png"
-                  alt="Expand data"
-                  width="20px"
-                  style="height: 4vh; width: auto"
-                />
-              </button>
+            <div style="display: flex">
+              <div>
+                <button (click)="toggleFlipped(card)" style="margin-top: 1vh">
+                  <img
+                    src="../../../assets/icons/flip.png"
+                    alt="Expand data"
+                    width="20px"
+                    style="height: 4vh; width: auto"
+                  />
+                </button>
+              </div>
+              <div style="margin-right: 2vw">
+                <button (click)="rotateCard(card)" style="margin-top: 1vh">
+                  <img
+                    src="../../../assets/icons/rotate-left-90.png"
+                    alt="Expand data"
+                    width="20px"
+                    style="height: 4vh; width: auto"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         </div>
