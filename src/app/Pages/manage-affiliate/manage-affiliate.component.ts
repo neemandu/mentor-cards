@@ -1,3 +1,4 @@
+import { Withdraw } from './../../API.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
@@ -11,6 +12,7 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 export interface Element {
   id: string;
@@ -22,6 +24,7 @@ export interface Element {
   paymentDetails: string;
   commissionPercentage: number;
   status: string;
+  Withdraws?: Withdraw[];
 }
 
 @Component({
@@ -30,9 +33,7 @@ export interface Element {
   styleUrls: ['./manage-affiliate.component.css'],
 })
 export class ManageAffiliateComponent implements OnInit , AfterViewInit {
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
-
+ 
   displayedColumn: string[] = [
     'affiliateUrl',
     'contactEmail',
@@ -88,7 +89,8 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
     private dialog: MatDialog,
     private overlaySpinnerService: OverlaySpinnerService,
     public langDirectionService: LangDirectionService,
-    private apiService: APIService
+    private apiService: APIService,
+    private router: Router
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
@@ -97,11 +99,7 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
-    this.dtOptions = {
-      columnDefs: [
-        { orderable: false, targets: [0] }, // replace 0 with the affiliateIDes of the columns you want to disable sorting for
-      ],
-    };
+    
     this.getAffiliates();
     this.dataSource = new MatTableDataSource(this.affiliateData);
   }
@@ -269,5 +267,10 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
           }
         }
       });
+  }
+
+  clickWithdraws(id: string, rowData: Element){
+    console.log(id);
+    this.router.navigate(['/affiliate-withdraws/', id],  { state: { data: rowData } });
   }
 }
