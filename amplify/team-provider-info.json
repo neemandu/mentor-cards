@@ -113,7 +113,7 @@
         "CreateShareLink": {},
         "GetAffiliateData": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetAffiliateData-7a38794f566833704334-build.zip"
+          "s3Key": "amplify-builds/GetAffiliateData-5a353745513455616a69-build.zip"
         },
         "CreateCommonLink": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
@@ -234,7 +234,11 @@
         },
         "NewAffiliateHandler": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/NewAffiliateHandler-45512f434143544b4b67-build.zip"
+          "s3Key": "amplify-builds/NewAffiliateHandler-485a3654433779484150-build.zip"
+        },
+        "AffiliateBalanceHandler": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/AffiliateBalanceHandler-4e4b3748554d2f632b71-build.zip"
         }
       },
       "auth": {

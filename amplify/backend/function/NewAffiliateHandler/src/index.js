@@ -68,7 +68,7 @@ exports.handler = async (event) => {
         console.log('DynamoDB Record: %j', record.dynamodb);
         if(record.eventName === "INSERT"){
           let email = record.dynamodb.NewImage.contactEmail.S;
-          let affiliate_id = record.dynamodb.NewImage.affiliateID.S;
+          let affiliate_id = record.dynamodb.NewImage.id.S;
           var user = await getUserByEmail(email); // Now valid within an async function
           if(user){
               user.userMyAffiliateId = affiliate_id;

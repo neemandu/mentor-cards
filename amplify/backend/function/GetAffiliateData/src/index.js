@@ -8,6 +8,7 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
+const { env } = require("process");
 const AWS = require('aws-sdk');
 AWS.config.update({ region: env.REGION }); 
 const docClient = new AWS.DynamoDB.DocumentClient();
