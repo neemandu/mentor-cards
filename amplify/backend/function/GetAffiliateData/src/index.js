@@ -70,11 +70,9 @@ async function getAffiliate(refId){
     var user;
     console.log("searching for affiliate refId- " + refId);
   
-    await docClient.query(userParams).promise().then(data => {
+    await docClient.get(userParams).promise().then(data => {
         console.log("Get affiliate by refId succeeded:", JSON.stringify(data, null, 2));
-        if(data["Items"] && data["Items"].length > 0){
-            user = data["Items"][0];
-        }
+        user = data["Item"];
     }).catch(err => {
         console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
     });
@@ -105,7 +103,7 @@ exports.handler = async (event) => {
 
         const queryParams = {
             TableName: env.API_CARDSPACKS_USERTABLE_NAME, 
-            IndexName: username,
+            IndexName: 'refId-index',
             KeyConditionExpression: 'refId = :refId',
             ExpressionAttributeValues: {
                 ':refId': affiliate.affiliateUrl
@@ -114,7 +112,7 @@ exports.handler = async (event) => {
 
         const queryResult = await docClient.query(queryParams).promise();
         const users = queryResult.Items;
-        console.log('found ' + user.length + ' users');
+        console.log('found ' + users?.length + ' users');
 
         return users;
     } catch (error) {
