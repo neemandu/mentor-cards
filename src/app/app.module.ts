@@ -155,10 +155,6 @@ import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affili
 import { EditDialogComponent } from './Pages/manage-affiliate/edit-dialog/edit-dialog.component';
 import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dialog.component';
 
-import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
-import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/add-dialog-withdraws/add-dialog-withdraws.component';
-import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dialog/user-login-dialog.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -215,11 +211,7 @@ import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dial
     AffiliatesPageComponent,
     AffiliatesDashboardPageComponent,
     AffiliateDialogComponent,
-    ManageAffiliateComponent,
-    AffiliateWithdrawsComponent,
-    addDialogWithdrawsComponent,
-    PopupDialogComponent,
-    UserLoginDialogComponent
+    ManageAffiliateComponent
   ],
   imports: [
     BrowserModule,
