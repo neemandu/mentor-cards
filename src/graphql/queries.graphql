@@ -315,7 +315,6 @@ query GetUser($id: ID!) {
     refId
     myAffiliate {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber
@@ -637,7 +636,6 @@ query ListUsers(
       refId
       myAffiliate {
         id
-        affiliateID
         affiliateUrl
         contactEmail
         phoneNumber
@@ -674,7 +672,6 @@ query ListUsers(
 query GetAffiliate($id: ID!) {
   getAffiliate(id: $id) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -704,7 +701,6 @@ query ListAffiliates(
   listAffiliates(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber

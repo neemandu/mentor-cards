@@ -113,7 +113,7 @@
         "CreateShareLink": {},
         "GetAffiliateData": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetAffiliateData-5a353745513455616a69-build.zip"
+          "s3Key": "amplify-builds/GetAffiliateData-62584365376752776555-build.zip"
         },
         "CreateCommonLink": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",

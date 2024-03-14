@@ -293,7 +293,6 @@ mutation CreateUser($input: CreateUserInput!) {
     refId
     myAffiliate {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber
@@ -682,7 +681,6 @@ mutation GetAffiliateData($input: userInput!) {
     refId
     myAffiliate {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber
@@ -756,7 +754,6 @@ mutation CreateAffiliate(
 ) {
   createAffiliate(input: $input, condition: $condition) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -784,7 +781,6 @@ mutation UpdateAffiliate(
 ) {
   updateAffiliate(input: $input, condition: $condition) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -812,7 +808,6 @@ mutation DeleteAffiliate(
 ) {
   deleteAffiliate(input: $input, condition: $condition) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber

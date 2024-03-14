@@ -174,7 +174,7 @@ export type CardsPack = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsage | null> | null;
   isFree?: boolean | null;
-  language: string;
+  language?: string | null;
   isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
@@ -213,7 +213,6 @@ export type CouponCodes = {
 export type Affiliate = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -371,7 +370,6 @@ export type DeleteCommonLinkInput = {
 
 export type CreateAffiliateInput = {
   id?: string | null;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -394,7 +392,6 @@ export type WithdrawInput = {
 };
 
 export type ModelAffiliateConditionInput = {
-  affiliateID?: ModelIDInput | null;
   affiliateUrl?: ModelStringInput | null;
   phoneNumber?: ModelStringInput | null;
   websiteURL?: ModelStringInput | null;
@@ -406,22 +403,6 @@ export type ModelAffiliateConditionInput = {
   and?: Array<ModelAffiliateConditionInput | null> | null;
   or?: Array<ModelAffiliateConditionInput | null> | null;
   not?: ModelAffiliateConditionInput | null;
-};
-
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
 };
 
 export type ModelFloatInput = {
@@ -438,7 +419,6 @@ export type ModelFloatInput = {
 
 export type UpdateAffiliateInput = {
   id: string;
-  affiliateID?: string | null;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -734,7 +714,7 @@ export type CreateCardsPackInput = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsageInput | null> | null;
   isFree?: boolean | null;
-  language: string;
+  language?: string | null;
   isActive?: boolean | null;
 };
 
@@ -999,6 +979,22 @@ export type ModelCommonLinkFilterInput = {
   not?: ModelCommonLinkFilterInput | null;
 };
 
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
 export type ModelCommonLinkConnection = {
   __typename: "ModelCommonLinkConnection";
   items: Array<CommonLink | null>;
@@ -1042,7 +1038,7 @@ export type ModelUserConnection = {
 };
 
 export type ModelAffiliateFilterInput = {
-  affiliateID?: ModelIDInput | null;
+  id?: ModelIDInput | null;
   affiliateUrl?: ModelStringInput | null;
   contactEmail?: ModelStringInput | null;
   phoneNumber?: ModelStringInput | null;
@@ -1373,7 +1369,7 @@ export type CreateUserMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
-      language?: string;
+      language?: string | null;
       isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
@@ -1573,7 +1569,6 @@ export type CreateUserMutation = {
   myAffiliate?: {
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -1974,7 +1969,6 @@ export type GetAffiliateDataMutation = {
   myAffiliate?: {
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -2038,7 +2032,6 @@ export type DeleteCommonLinkMutation = {
 export type CreateAffiliateMutation = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -2064,7 +2057,6 @@ export type CreateAffiliateMutation = {
 export type UpdateAffiliateMutation = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -2090,7 +2082,6 @@ export type UpdateAffiliateMutation = {
 export type DeleteAffiliateMutation = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -3373,7 +3364,6 @@ export type GetUserQuery = {
   myAffiliate?: {
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -3730,7 +3720,6 @@ export type ListUsersQuery = {
     myAffiliate?: {
       __typename: "Affiliate";
       id: string;
-      affiliateID: string;
       affiliateUrl?: string | null;
       contactEmail?: string | null;
       phoneNumber?: string | null;
@@ -3769,7 +3758,6 @@ export type ListUsersQuery = {
 export type GetAffiliateQuery = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -3797,7 +3785,6 @@ export type ListAffiliatesQuery = {
   items: Array<{
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -4432,7 +4419,6 @@ export type OnDeleteCommonLinkSubscription = {
 export type OnCreateAffiliateSubscription = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -4458,7 +4444,6 @@ export type OnCreateAffiliateSubscription = {
 export type OnUpdateAffiliateSubscription = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -4484,7 +4469,6 @@ export type OnUpdateAffiliateSubscription = {
 export type OnDeleteAffiliateSubscription = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -5763,7 +5747,6 @@ export class APIService {
           myAffiliate {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -6368,7 +6351,6 @@ async GetSubscriptionPlansForOrgs(
           myAffiliate {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -6493,7 +6475,6 @@ async GetSubscriptionPlansForOrgs(
         createAffiliate(input: $input, condition: $condition) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -6531,18 +6512,38 @@ async GetSubscriptionPlansForOrgs(
     input: UpdateAffiliateInput,
     condition?: ModelAffiliateConditionInput
   ): Promise<UpdateAffiliateMutation> {
-    const statement = `mutation UpdateAffiliate($input: UpdateAffiliateInput!) {
-        updateAffiliate(input: $input) {
+    const statement = `mutation UpdateAffiliate($input: UpdateAffiliateInput!, $condition: ModelAffiliateConditionInput) {
+        updateAffiliate(input: $input, condition: $condition) {
           __typename
           id
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
       input
     };
-    // if (condition) {
-    //   gqlAPIServiceArguments.condition = condition;
-    // }
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
@@ -6556,7 +6557,6 @@ async GetSubscriptionPlansForOrgs(
         deleteAffiliate(input: $input, condition: $condition) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -8419,7 +8419,6 @@ async GetSubscriptionPlansForOrgs(
           myAffiliate {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -8790,7 +8789,6 @@ async GetSubscriptionPlansForOrgs(
             myAffiliate {
               __typename
               id
-              affiliateID
               affiliateUrl
               contactEmail
               phoneNumber
@@ -8846,7 +8844,6 @@ async GetSubscriptionPlansForOrgs(
         getAffiliate(id: $id) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -8888,7 +8885,6 @@ async GetSubscriptionPlansForOrgs(
           items {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -9652,7 +9648,7 @@ async GetSubscriptionPlansForOrgs(
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
-  async ListCardsPacksForPreview(
+async ListCardsPacksForPreview(
     filter?: ModelCardsPackFilterInput,
     limit?: number,
     nextToken?: string
@@ -10017,7 +10013,6 @@ async GetSubscriptionPlansForOrgs(
         onCreateAffiliate(contactEmail: $contactEmail) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -10060,7 +10055,6 @@ async GetSubscriptionPlansForOrgs(
         onUpdateAffiliate(contactEmail: $contactEmail) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -10103,7 +10097,6 @@ async GetSubscriptionPlansForOrgs(
         onDeleteAffiliate(contactEmail: $contactEmail) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber

@@ -101,7 +101,7 @@ type Affiliate
       { allow: groups, groups: ["Admins"] }
     ]
   ) {
-    affiliateID: ID!
+    id: ID!
     affiliateUrl: String
     contactEmail: AWSEmail
     phoneNumber: String
