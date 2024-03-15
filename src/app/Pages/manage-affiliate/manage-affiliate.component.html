@@ -35,7 +35,7 @@
     </button>
   </div>
 </div>
-<div style="display: flex;">
+<div style="display: flex">
   <input
     style="
       width: 10vw;
@@ -69,15 +69,32 @@
       class="small-cell"
     >
       <div class="flex">
-        <button mat-button (click)="deleteItem(element.affiliateID)">
-          <img class="w-4" src="../../../assets/icons/bin.svg" alt="Logo" />
+        <button
+          mat-button
+          style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+          (click)="deleteItem(element.id)"
+        >
+          <!-- <img class="w-4" src="../../../assets/icons/bin.svg" alt="Logo" /> -->
+          <mat-icon>remove_circle</mat-icon>
         </button>
-        <button mat-button (click)="editItem(element.affiliateID)">
-          <img
+        <button
+          mat-button
+          style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+          (click)="editItem(element.id)"
+        >
+          <!-- <img
             class="ml-2 w-5"
             src="../../../assets/icons/pen.svg"
             alt="Logo"
-          />
+          /> -->
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-button
+          style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+          (click)="clickWithdraws(element.id)"
+        >
+          <mat-icon> monetization_on</mat-icon>
         </button>
       </div>
     </mat-cell>

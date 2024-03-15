@@ -1,3 +1,4 @@
+import { Withdraw } from './../../API.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
@@ -11,6 +12,7 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 export interface Element {
   id: string;
@@ -22,6 +24,7 @@ export interface Element {
   paymentDetails: string;
   commissionPercentage: number;
   status: string;
+  Withdraws?: Withdraw[];
 }
 
 @Component({
@@ -30,9 +33,7 @@ export interface Element {
   styleUrls: ['./manage-affiliate.component.css'],
 })
 export class ManageAffiliateComponent implements OnInit , AfterViewInit {
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
-
+ 
   displayedColumn: string[] = [
     'affiliateUrl',
     'contactEmail',
@@ -88,7 +89,8 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
     private dialog: MatDialog,
     private overlaySpinnerService: OverlaySpinnerService,
     public langDirectionService: LangDirectionService,
-    private apiService: APIService
+    private apiService: APIService,
+    private router: Router
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
@@ -97,11 +99,7 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
-    this.dtOptions = {
-      columnDefs: [
-        { orderable: false, targets: [0] }, // replace 0 with the affiliateIDes of the columns you want to disable sorting for
-      ],
-    };
+    
     this.getAffiliates();
     this.dataSource = new MatTableDataSource(this.affiliateData);
   }
@@ -118,6 +116,9 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+
+
   getAffiliates(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.apiService.ListAffiliates().then(
@@ -184,14 +185,6 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
 
     addDialofRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Generate a random ID
-        const affiliateID =
-          Math.random().toString(36).substring(2, 15) +
-          Math.random().toString(36).substring(2, 15);
-
-        // Add the affiliateID to the result object
-        result.affiliateID = affiliateID;
-
         console.log(result);
         this.apiService.CreateAffiliate(result).then(
           (res) => {
@@ -211,11 +204,11 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
     });
   }
 
-  editItem(affiliateID: number) {
-    const item = this.affiliateData.find(item => item.affiliateID === affiliateID);
-    console.log(affiliateID,'affiliateID');
+  editItem(id: string) {
+    const item = this.affiliateData.find(item => item.id === id);
+    console.log(id,'id');
     console.log(this.affiliateData,'affiliateData');
-    console.log(this.affiliateData[affiliateID],'affiliateID');
+    console.log(this.affiliateData[id],'id');
     console.log(item);
 
     const editDialogRef = this.dialog.open(EditDialogComponent, {
@@ -230,16 +223,16 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
         console.log(newAffiliateValue , 'here aff');
         if (newAffiliateValue) {
           this.overlaySpinnerService.changeOverlaySpinner(true);
-          if (affiliateID != undefined) {
+          if (id != undefined) {
             //has id
             this.apiService
               .UpdateAffiliate({
-                id: this.affiliateData.find(item => item.affiliateID === affiliateID).id,
+                id: this.affiliateData.find(item => item.id === id).id,
                 ...newAffiliateValue,
               })
               .then(
                 (res) => {
-                  this.affiliateData[affiliateID] = res;
+                  this.affiliateData[id] = res;
                   this.overlaySpinnerService.changeOverlaySpinner(false);
                   this.getAffiliates();
                 },
@@ -269,5 +262,14 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
           }
         }
       });
+  }
+
+  clickWithdraws(id: string) {
+    const item = this.affiliateData.find(item => item.id === id);
+    console.log(id,'id');
+    console.log(this.affiliateData,'affiliateData');
+    console.log(this.affiliateData[id],'id');
+    console.log(item);
+    this.router.navigate(['/affiliate-withdraws/', id],  { state: { data: item } });
   }
 }
