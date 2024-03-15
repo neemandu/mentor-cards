@@ -14,7 +14,7 @@ export class addDialogWithdrawsComponent {
   ) {}
 
   affiliateWithdrawsForm = new FormGroup({
-    id: new FormControl(1),
+    id: new FormControl(Math.random().toString(36).substr(2, 9)),
     date: new FormControl('', [Validators.required]),
     amount: new FormControl('', [Validators.required]),
     currency: new FormControl('', [Validators.required]),

@@ -1,6 +1,6 @@
 import { Withdraw } from './../../../API.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,9 @@ import { APIService } from 'src/app/API.service';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
 import { addDialogWithdrawsComponent } from './add-dialog-withdraws/add-dialog-withdraws.component';
+import { EditDialogWithdrawsComponent } from './edit-dialog-withdraws/edit-dialog-withdraws.component';
+import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
+import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 // date
 // amount
 // currency
@@ -29,7 +32,7 @@ export interface Element {
   styleUrls: ['./affiliate-withdraws.component.css'],
 })
 export class AffiliateWithdrawsComponent implements OnInit {
-  displayedColumn: string[] = ['date', 'amount', 'currency', 'paymentway'];
+  displayedColumn: string[] = ['date', 'amount', 'currency', 'paymentway', 'id'];
 
   affiliate: any;
   newAffiliate: any;
@@ -53,29 +56,35 @@ export class AffiliateWithdrawsComponent implements OnInit {
   id: string;
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.affiliate = history.state.data;
-    console.log(this.affiliate, 'affiliate');
-    this.withdraws = this.affiliate.withdraws;
-    console.log(this.withdraws, 'withdraws');
-    this.dataSource = new MatTableDataSource(this.withdraws);
-    console.log(this.dataSource, 'dataSource');
+    this.getAffiliate(this.id);
   }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  
+  getAffiliate(id:string):void{
+    this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.apiService.GetAffiliate(id).then(
+      (affiliate) => {
+        console.log(affiliate);
+        this.affiliate = affiliate;
+        this.withdraws = this.affiliate.withdraws;
+        this.dataSource = new MatTableDataSource(this.withdraws);
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+      },
+      (error) => {
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        console.log(
+          'file: manage-affiliate.component.ts ~ line 42 ~ this.api.GetAffiliate ~ error',
+          error
+        );
+      }
+    );
   }
-
   ngAfterViewInit() {
     if (this.withdraws) {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
   }
-
   updateWithdraw(withdraw: any) {
-    // this.overlaySpinnerService.changeOverlaySpinner(true);
     this.newAffiliate = {
       ...this.affiliate,
       withdraws: withdraw,
@@ -83,7 +92,12 @@ export class AffiliateWithdrawsComponent implements OnInit {
     console.log(this.newAffiliate);
     this.editAffiliate(this.id, this.newAffiliate);
   }
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   addWithdraw(withdraw: any) {
     if (withdraw && this.affiliate) {
       // Convert the affiliate's withdraws object into an array if it's not null
@@ -108,9 +122,6 @@ export class AffiliateWithdrawsComponent implements OnInit {
     console.log(newAffiliateValue, 'newAffiliateValue in editAffiliate');
     console.log(id, 'id in editAffiliate');
 
-
-
-
     if (newAffiliateValue) {
       this.overlaySpinnerService.changeOverlaySpinner(true);
       if (id != undefined) {
@@ -123,6 +134,8 @@ export class AffiliateWithdrawsComponent implements OnInit {
             (res) => {
               this.affiliate = res;
               this.overlaySpinnerService.changeOverlaySpinner(false);
+              this.getAffiliate(this.id);
+              console.log('re fetched affiliate', this.affiliate,);
             },
             (error) => {
               this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -137,6 +150,9 @@ export class AffiliateWithdrawsComponent implements OnInit {
           (res) => {
             this.affiliate.push(res);
             this.overlaySpinnerService.changeOverlaySpinner(false);
+            this.getAffiliate(this.id);
+            console.log('re fetched affiliate', this.affiliate,);
+          
           },
           (error) => {
             this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -150,6 +166,80 @@ export class AffiliateWithdrawsComponent implements OnInit {
     }
   }
 
+  editItem(id:string) {
+    const item = this.withdraws.find(item => item.id === id);
+    console.log(id,'id');
+    console.log(this.withdraws,'withdraws');
+    console.log(this.withdraws[id],'id');
+    console.log(item);
+    const editDialogRef = this.dialog.open(EditDialogWithdrawsComponent, {
+      width: '250px',
+      data: item,
+    });
+    var sub = editDialogRef
+      .afterClosed()
+      .subscribe((newWithdrawData: any) => {
+        sub.unsubscribe();
+        console.log(newWithdrawData , 'here aff');
+        if (newWithdrawData) {
+          this.overlaySpinnerService.changeOverlaySpinner(true);
+          if (id != undefined) {
+            //has id
+            this.affiliate = {
+              ...this.affiliate,
+              withdraws: this.withdraws.map((withdraw) => {
+                if (withdraw.id === id) {
+                  return {
+                    ...withdraw,
+                    ...newWithdrawData,
+                  };
+                }
+                return withdraw;
+              }),
+            };
+            delete this.affiliate.__typename;
+            delete this.affiliate.createdAt;
+            delete this.affiliate.updatedAt;
+            this.affiliate.withdraws.forEach(withdraw => delete withdraw.__typename);
+            this.apiService
+              .UpdateAffiliate({
+                id: this.id,
+                ...this.affiliate,
+              })
+              .then(
+                (res) => {
+                  this.withdraws[id] = res;
+                  this.overlaySpinnerService.changeOverlaySpinner(false);
+                  console.log('re fetched affiliate', this.affiliate,);
+                  this.getAffiliate(this.id);
+                },
+                (error) => {
+                  this.overlaySpinnerService.changeOverlaySpinner(false);
+                  console.log(
+                    'file: manage-affiliate.component.ts ~ line 42 ~ this.api.UpdateAffiliate ~ error',
+                    error
+                  );
+                }
+              );
+          } else {
+            //has no id
+            this.apiService.CreateAffiliate(this.affiliate).then(
+              (res) => {
+                this.withdraws.push(res);
+                this.overlaySpinnerService.changeOverlaySpinner(false);
+              },
+              (error) => {
+                this.overlaySpinnerService.changeOverlaySpinner(false);
+                console.log(
+                  'file: manage-affiliate.component.ts ~ line 42 ~ this.api.UpdateAffiliate ~ error',
+                  error
+                );
+              }
+            );
+          }
+        }
+      });
+  }
   openAddDialog() {
     const addDialofRef = this.dialog.open(addDialogWithdrawsComponent, {
       width: '250px',
@@ -177,5 +267,60 @@ export class AffiliateWithdrawsComponent implements OnInit {
         this.addWithdraw(withdraw);
       }
     });
+  }
+
+  deleteItem(id: string): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = new DynamicDialogData(
+      'מחיקת שותף',
+      ['האם למחוק שותף זה?'],
+      'אישור',
+      'ביטול'
+    );
+    const dialogRef = this.dialog.open(
+      DynamicDialogYesNoComponent,
+      dialogConfig
+    );
+    var dialogSub = dialogRef.afterClosed().subscribe((result: boolean) => {
+      dialogSub.unsubscribe();
+      if (result) {
+        this.overlaySpinnerService.changeOverlaySpinner(true);
+  
+        // Remove the withdraw with the specified id
+        const withdraws = this.affiliate.withdraws ? this.affiliate.withdraws.filter(withdraw => withdraw.id !== id) : [];
+  
+        this.affiliate = {
+          ...this.affiliate,
+          withdraws: withdraws,
+        };
+        delete this.affiliate.__typename;
+        delete this.affiliate.createdAt;
+        delete this.affiliate.updatedAt;
+        this.affiliate.withdraws.forEach(withdraw => delete withdraw.__typename);
+        this.apiService
+          .UpdateAffiliate({
+            id: this.id,
+            ...this.affiliate,
+          })
+          .then(
+            (res) => {
+              // Update the withdraws array in the component's state
+              this.withdraws = withdraws;
+              this.overlaySpinnerService.changeOverlaySpinner(false);
+              console.log('re fetched affiliate', this.affiliate,);
+              this.getAffiliate(this.id);
+            },
+            (error) => {
+              this.overlaySpinnerService.changeOverlaySpinner(false);
+              console.log(
+                'file: manage-affiliate.component.ts ~ line 42 ~ this.api.UpdateAffiliate ~ error',
+                error
+              );
+            }
+          );
+      }}
+    );
   }
 }

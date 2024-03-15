@@ -116,6 +116,9 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+
+
   getAffiliates(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.apiService.ListAffiliates().then(
