@@ -50,9 +50,9 @@ export class AffiliateWithdrawsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  id: number;
+  id: string;
   ngOnInit(): void {
-    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id');
     this.affiliate = history.state.data;
     console.log(this.affiliate, 'affiliate');
     this.withdraws = this.affiliate.withdraws;
@@ -85,28 +85,35 @@ export class AffiliateWithdrawsComponent implements OnInit {
   }
 
   addWithdraw(withdraw: any) {
-    // Convert the withdraws object into an array
-    const withdrawsArray = Object.values(this.affiliate.withdraws);
-    withdraw.transactionId = null;
-    withdraw.__typename = 'Withdraw';
-
-    // Append the new withdraw to the array
-    withdrawsArray.push(withdraw);
-
-    // Update the affiliate with the new withdraws array
-    this.newAffiliate = {
-      ...this.affiliate,
-      withdraws: withdrawsArray,
-    };
-
-    console.log(this.newAffiliate);
-    this.editAffiliate(this.id, this.newAffiliate);
+    if (withdraw && this.affiliate) {
+      // Convert the affiliate's withdraws object into an array if it's not null
+      const withdrawsArray = this.affiliate.withdraws ? Object.values(this.affiliate.withdraws) : [];
+      // withdraw.transactionId = null;
+      // withdraw.__typename = 'Withdraw';
+  
+      // Append the new withdraw to the array
+      withdrawsArray.push(withdraw);
+  
+      // Update the affiliate with the new withdraws array
+      this.newAffiliate = {
+        ...this.affiliate,
+        withdraws: withdrawsArray,
+      };
+  
+      console.log(this.newAffiliate);
+      this.editAffiliate(this.id, this.newAffiliate);
+    }
   }
+  editAffiliate(id: string, newAffiliateValue: any) {
+    console.log(newAffiliateValue, 'newAffiliateValue in editAffiliate');
+    console.log(id, 'id in editAffiliate');
 
-  editAffiliate(affiliateID: number, newAffiliateValue: any) {
+
+
+
     if (newAffiliateValue) {
       this.overlaySpinnerService.changeOverlaySpinner(true);
-      if (affiliateID != undefined) {
+      if (id != undefined) {
         this.apiService
           .UpdateAffiliate({
             id: this.id,
@@ -150,12 +157,21 @@ export class AffiliateWithdrawsComponent implements OnInit {
 
     addDialofRef.afterClosed().subscribe((withdraw) => {
       if (withdraw) {
+        console.log(withdraw, 'withdraw in openAddDialog');
         delete this.affiliate.createdAt;
         delete this.affiliate.updatedAt;
         delete this.affiliate.__typename;
+        delete withdraw.__typename;
+      
+        // Create a new array of withdraws without the __typename property
+        const withdraws = this.affiliate.withdraws ? this.affiliate.withdraws.map((withdraw: any) => {
+          delete withdraw.__typename;
+          return withdraw;
+        }) : [];
+      
         this.newAffiliate = {
           ...this.affiliate,
-          withdraws: [...(this.affiliate.withdraws || []), withdraw],
+          withdraws: [...withdraws, withdraw],
         };
         console.log(this.newAffiliate, 'here');
         this.addWithdraw(withdraw);

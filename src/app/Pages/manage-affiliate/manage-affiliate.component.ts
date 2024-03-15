@@ -182,14 +182,6 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
 
     addDialofRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Generate a random ID
-        const affiliateID =
-          Math.random().toString(36).substring(2, 15) +
-          Math.random().toString(36).substring(2, 15);
-
-        // Add the affiliateID to the result object
-        result.affiliateID = affiliateID;
-
         console.log(result);
         this.apiService.CreateAffiliate(result).then(
           (res) => {
@@ -209,11 +201,11 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
     });
   }
 
-  editItem(affiliateID: number) {
-    const item = this.affiliateData.find(item => item.affiliateID === affiliateID);
-    console.log(affiliateID,'affiliateID');
+  editItem(id: string) {
+    const item = this.affiliateData.find(item => item.id === id);
+    console.log(id,'id');
     console.log(this.affiliateData,'affiliateData');
-    console.log(this.affiliateData[affiliateID],'affiliateID');
+    console.log(this.affiliateData[id],'id');
     console.log(item);
 
     const editDialogRef = this.dialog.open(EditDialogComponent, {
@@ -228,16 +220,16 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
         console.log(newAffiliateValue , 'here aff');
         if (newAffiliateValue) {
           this.overlaySpinnerService.changeOverlaySpinner(true);
-          if (affiliateID != undefined) {
+          if (id != undefined) {
             //has id
             this.apiService
               .UpdateAffiliate({
-                id: this.affiliateData.find(item => item.affiliateID === affiliateID).id,
+                id: this.affiliateData.find(item => item.id === id).id,
                 ...newAffiliateValue,
               })
               .then(
                 (res) => {
-                  this.affiliateData[affiliateID] = res;
+                  this.affiliateData[id] = res;
                   this.overlaySpinnerService.changeOverlaySpinner(false);
                   this.getAffiliates();
                 },
@@ -269,8 +261,12 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
       });
   }
 
-  clickWithdraws(id: string, rowData: Element){
-    console.log(id);
-    this.router.navigate(['/affiliate-withdraws/', id],  { state: { data: rowData } });
+  clickWithdraws(id: string) {
+    const item = this.affiliateData.find(item => item.id === id);
+    console.log(id,'id');
+    console.log(this.affiliateData,'affiliateData');
+    console.log(this.affiliateData[id],'id');
+    console.log(item);
+    this.router.navigate(['/affiliate-withdraws/', id],  { state: { data: item } });
   }
 }

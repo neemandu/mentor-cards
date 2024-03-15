@@ -1,5 +1,4 @@
-<p>affiliate-withdraws works!</p>
-<div>{{ id }} :id</div>
+<button mat-button (click)="openAddDialog()">Add withdraws</button>
 
 <mat-table
   [dataSource]="dataSource"
@@ -35,4 +34,3 @@
   <mat-row *matRowDef="let row; columns: displayedColumn"></mat-row>
 </mat-table>
 
-<button mat-button (click)="openAddDialog()">Open Dialog</button>

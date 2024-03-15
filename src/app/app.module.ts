@@ -157,6 +157,7 @@ import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dial
 import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
 import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/add-dialog-withdraws/add-dialog-withdraws.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EditDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/edit-dialog-withdraws/edit-dialog-withdraws.component';
 
 @NgModule({
   declarations: [
@@ -218,7 +219,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     PopupDialogComponent,
     UserLoginDialogComponent,
     AffiliateWithdrawsComponent,
-    addDialogWithdrawsComponent
+    addDialogWithdrawsComponent,
+    EditDialogWithdrawsComponent
   ],
   imports: [
     BrowserModule,
