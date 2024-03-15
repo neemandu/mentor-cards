@@ -628,7 +628,7 @@
               <div style="margin-right: 2vw">
                 <button (click)="rotateCard(card)" style="margin-top: 1vh">
                   <img
-                    src="../../../assets/icons/rotate-left-90.png"
+                    src="../../../assets/icons/rotate-right-90.png"
                     alt="Expand data"
                     width="20px"
                     style="height: 4vh; width: auto"
@@ -673,36 +673,51 @@
         data-src="{{ card.backImgUrl }}"
       />
     </div> -->
-      <div
-        *ngIf="!isDoubleSided"
-        style="display: flex; flex-direction: column; align-items: center"
-      >
-        <div style="display: flex; justify-content: flex-end">
-          <button
-            class="iconButton close-cards-view"
-            mat-icon-button
-            (click)="toggleChosenCardsModal()"
-          >
-            <mat-icon class="mat-icon-close">highlight_off</mat-icon>
-          </button>
-        </div>
-        <div>
-          <img
-            (click)="imgClick($event)"
-            *ngFor="let card of selectedCards"
-            alt="one of the selected cards shown"
-            [ngClass]="{
-              'card-view': true,
-              'one-cards': selectedCards.length == 1,
-              'two-cards': selectedCards.length == 2,
-              'three-cards': selectedCards.length == 3,
-              'four-cards': selectedCards.length == 4,
-              'five-cards': selectedCards.length == 5
-            }"
-            loading="eager"
-            src="{{ card.frontImgUrl }}"
-            data-src="{{ card.frontImgUrl }}"
-          />
+      <div *ngIf="!isDoubleSided">
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <div class="doubleSidedIconButton">
+            <button
+              class="iconButton close-cards-view"
+              mat-icon-button
+              (click)="toggleChosenCardsModal()"
+            >
+              <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+            </button>
+          </div>
+
+          <div>
+            <img
+              (click)="imgClick($event)"
+              *ngFor="let card of selectedCards"
+              alt="one of the selected cards shown"
+              [ngClass]="{
+                'rotate-0': rotation === 0,
+                'rotate-90': rotation === 90,
+                'rotate-180': rotation === 180,
+                'rotate-270': rotation === 270,
+                'card-view': true,
+                'one-cards': selectedCards.length == 1,
+                'two-cards': selectedCards.length == 2,
+                'three-cards': selectedCards.length == 3,
+                'four-cards': selectedCards.length == 4,
+                'five-cards': selectedCards.length == 5
+              }"
+              loading="eager"
+              src="{{ card.frontImgUrl }}"
+              data-src="{{ card.frontImgUrl }}"
+            />
+          </div>
+
+          <div>
+            <button (click)="rotateCard(card)" style="margin-top: 1vh">
+              <img
+                src="../../../assets/icons/rotate-right-90.png"
+                alt="Expand data"
+                width="20px"
+                style="height: 4vh; width: auto"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>

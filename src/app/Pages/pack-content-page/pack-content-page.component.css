@@ -486,6 +486,9 @@ mat-icon {
   color: #747474;
 }
 
+.doubleSidedIconButton{
+ /* margin-bottom: -4vh; */
+}
 @media (orientation: landscape) and (max-height: 480px) {
   .selected-cards-modal-content {
     height: 90%;
@@ -508,6 +511,10 @@ mat-icon {
     overflow: auto;
     justify-content: initial;
     /* height: 90%; */
+  }
+
+  .doubleSidedIconButton{
+    margin-bottom: 10vh;
   }
 
   .card-close-btn {
