@@ -1,20 +1,29 @@
-<div style="margin: 10px">
-    <button mat-icon-button mat-dialog-close class="close-icon" style="align-items: right;">
-      <mat-icon>close</mat-icon>
-    </button>
-    <mat-dialog-content>
-      <p style="margin-top: 20px; font-size: 18px; text-align: right">
+<div style="margin: 10px" [dir]="langDirectionService.currentLangDirection">
+  <mat-dialog-content>
+    <div style="display: flex">
+      <div>
+        <button
+          mat-icon-button
+          mat-dialog-close
+          class="close-icon"
+          style="align-items: right"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div style="margin-top: 10px; font-size: 18px; text-align: center; overflow:hidden;  margin-top:1vh; margin-bottom:2vh">
         היי, איזה כיף שבאתם! 2 ערכות קלפים פתוחות לשימושכם ללא עלות תחת הקטגוריה
         “ערכות להתנסות חופשית” - נסו אותן ❤
-      </p>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button
-        mat-button
-        mat-dialog-close
-        style="background-color: #ffa800; color: white; font-size: 18px"
-      >
-        אישור
-      </button>
-    </mat-dialog-actions>
-  </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button
+      mat-button
+      mat-dialog-close
+      style="background-color: #ffa800; color: white; font-size: 18px"
+    >
+      אישור
+    </button>
+  </mat-dialog-actions>
+</div>

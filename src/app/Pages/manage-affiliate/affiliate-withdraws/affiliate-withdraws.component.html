@@ -103,15 +103,8 @@
 </ng-container>
 
 <ng-container matColumnDef="amount">
-  <mat-header-cell *matHeaderCellDef> <div style="font-size: 1.1rem; text-align: center">כמות</div> </mat-header-cell>
-  <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element">{{ element.amount }}</mat-cell>
-</ng-container>
-
-<ng-container matColumnDef="currency">
-  <mat-header-cell *matHeaderCellDef
-    > <div style="font-size: 1.1rem; text-align: center">מטבע</div> </mat-header-cell
-  >
-  <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element">{{ element.currency }}</mat-cell>
+  <mat-header-cell *matHeaderCellDef> <div style="font-size: 1.1rem; text-align: center">סכום </div> </mat-header-cell>
+  <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element"> {{ element.currency }} {{ element.amount }}</mat-cell>
 </ng-container>
 
 <ng-container matColumnDef="paymentway">

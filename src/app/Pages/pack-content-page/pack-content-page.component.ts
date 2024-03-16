@@ -202,14 +202,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   toggleFlipped(card): void {
-    console.log('flipped');
+    console.log('flipped card:', card);
     card.flipped = !card.flipped;
     this.flipCard = (this.flipCard == 'inactive') ? 'active' : 'inactive';
   }
 
 
-  rotateCard() {
-    this.rotation = (this.rotation + 90) % 360;
+  rotateCard(card: Card) {
+    card.rotation = (card.rotation + 90) % 360; // This will rotate the card 90 degrees clockwise on each click
+    console.log('rotation:', card.rotation);
+    console.log('card:', card);
   }
 
 
