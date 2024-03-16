@@ -134,7 +134,6 @@ export class AffiliatesDashboardPageComponent implements OnInit {
   }
 
   getAffiliates(): void {
-    debugger;
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.apiService.GetAffiliateData({ username: '' }).then(
       (affiliate) => {

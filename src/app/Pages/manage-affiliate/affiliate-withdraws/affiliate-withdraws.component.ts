@@ -21,7 +21,6 @@ export interface Element {
   id: string;
   date: string;
   amount: number;
-  currency: string;
   paymentway: string;
   transactionID: string;
 }
@@ -32,7 +31,7 @@ export interface Element {
   styleUrls: ['./affiliate-withdraws.component.css'],
 })
 export class AffiliateWithdrawsComponent implements OnInit {
-  displayedColumn: string[] = ['date', 'amount', 'currency', 'paymentway', 'id'];
+  displayedColumn: string[] = ['date', 'amount', 'paymentway', 'id'];
 
   affiliate: any;
   newAffiliate: any;
@@ -274,8 +273,8 @@ export class AffiliateWithdrawsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = new DynamicDialogData(
-      'מחיקת שותף',
-      ['האם למחוק שותף זה?'],
+      'מחיקת הפקדה',
+      ['האם למחוק הפקדה זו?'],
       'אישור',
       'ביטול'
     );

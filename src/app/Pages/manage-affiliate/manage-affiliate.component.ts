@@ -140,7 +140,7 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
     );
   }
 
-  deleteItem(affiliateID: any): void {
+  deleteItem(id: string): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -159,10 +159,10 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
       if (result) {
         this.overlaySpinnerService.changeOverlaySpinner(true);
         this.apiService
-          .DeleteAffiliate({ id: this.affiliateData.find(item => item.affiliateID === affiliateID).id  })
+          .DeleteAffiliate({ id: this.affiliateData.find(item => item.id === id).id  })
           .then(
             (res) => {
-              this.affiliateData.splice(affiliateID, 1);
+              // this.affiliateData.splice(id, 1);
               this.overlaySpinnerService.changeOverlaySpinner(false);
               this.getAffiliates();
             },

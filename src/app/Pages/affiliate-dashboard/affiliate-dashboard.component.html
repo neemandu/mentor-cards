@@ -8,7 +8,8 @@
         <div class="discount-code">
           <div class="discount-code-text">{{ userData.discountCode }}</div>
           <div>
-            <button (click)="copyTextToClipboard(userData.discountCode)">
+            <button (click)="copyTextToClipboard(userData.discountCode)"   matTooltip="העתק"
+            [matTooltipClass]="{ 'tooltip-class': true }">
               <img
                 src="../../../assets/icons/clipboard.png"
                 alt="clipboard"
@@ -27,7 +28,8 @@
         <div class="discount-user">
           <div class="discount-user-text">{{ userData.user }}</div>
           <div>
-            <button (click)="copyTextToClipboard(userData.user)">
+            <button (click)="copyTextToClipboard(userData.user)"  matTooltip="העתק"
+            [matTooltipClass]="{ 'tooltip-class': true }">
               <img
                 src="../../../assets/icons/clipboard.png"
                 alt="clipboard"

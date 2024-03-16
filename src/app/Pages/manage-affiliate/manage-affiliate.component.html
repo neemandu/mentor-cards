@@ -73,6 +73,8 @@
           mat-button
           style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
           (click)="deleteItem(element.id)"
+          matTooltip="מחק"
+          [matTooltipClass]="{ 'tooltip-class': true }"
         >
           <!-- <img class="w-4" src="../../../assets/icons/bin.svg" alt="Logo" /> -->
           <mat-icon>remove_circle</mat-icon>
@@ -81,6 +83,8 @@
           mat-button
           style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
           (click)="editItem(element.id)"
+          matTooltip="ערוך"
+          [matTooltipClass]="{ 'tooltip-class': true }"
         >
           <!-- <img
             class="ml-2 w-5"
@@ -93,6 +97,8 @@
           mat-button
           style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
           (click)="clickWithdraws(element.id)"
+          matTooltip="צפה במשיכות"
+          [matTooltipClass]="{ 'tooltip-class': true }"
         >
           <mat-icon> monetization_on</mat-icon>
         </button>

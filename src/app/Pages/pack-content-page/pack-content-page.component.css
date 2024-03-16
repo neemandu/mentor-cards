@@ -442,6 +442,13 @@ li span {
   margin: 10px;
 }
 
+/* 'rotated-one-cards': selectedCards.length == 1 && card.rotation !== 0,
+'rotated-two-cards': selectedCards.length == 2 && card.rotation !== 0,
+'rotated-three-cards': selectedCards.length == 3 && card.rotation !== 0,
+'rotated-four-cards': selectedCards.length == 4 && card.rotation !== 0,
+'rotated-five-cards': selectedCards.length == 5 && card.rotation !== 0 */
+
+
 .one-cards,
 .two-cards {
   /* width: calc(100vw /3.2); */
@@ -460,6 +467,33 @@ li span {
   width: calc(100vw / 6);
 }
 
+.two-cards,
+.rotated-two-cards {
+  height: calc(100vw / 3);
+  /* width: calc(100vw / 5); */
+  margin-inline: 6vw;
+}
+
+.three-cards,
+.rotated-three-cards {
+  width: auto;
+  height: calc(55vh);
+  margin-inline: 5vw;
+}
+
+.four-cards,
+.rotated-four-cards {
+  width: auto;
+    height: 48vh;
+    margin-inline: 4vw;
+}
+
+.five-cards,
+.rotated-five-cards {
+  width: auto;
+    height: 35vh;
+    margin-inline: 3vw 
+}
 .remove-btn {
   margin-bottom: -15px;
   animation: fadeIn 0.4s, slideUp 0.4s;

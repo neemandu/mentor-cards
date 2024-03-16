@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 
 @Component({
   selector: 'app-user-login-dialog',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserLoginDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public langDirectionService: LangDirectionService
+  ) { }
 
   ngOnInit(): void {
   }
