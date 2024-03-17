@@ -143,7 +143,7 @@ mat-header-row {
   max-height: 500px;
   min-width: 300px;
 }
-
+/* 
 .mat-table {
   overflow: auto;
   max-height: 500px;
@@ -169,4 +169,33 @@ mat-header-row {
     font-size: 1.5rem;
     font-weight: 800;
     color: black;
+} */
+
+table {
+  width: 100%;
 }
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+

@@ -8,8 +8,11 @@
         <div class="discount-code">
           <div class="discount-code-text">{{ userData.discountCode }}</div>
           <div>
-            <button (click)="copyTextToClipboard(userData.discountCode)"   matTooltip="העתק"
-            [matTooltipClass]="{ 'tooltip-class': true }">
+            <button
+              (click)="copyTextToClipboard(userData.discountCode)"
+              matTooltip="העתק"
+              [matTooltipClass]="{ 'tooltip-class': true }"
+            >
               <img
                 src="../../../assets/icons/clipboard.png"
                 alt="clipboard"
@@ -28,8 +31,11 @@
         <div class="discount-user">
           <div class="discount-user-text">{{ userData.user }}</div>
           <div>
-            <button (click)="copyTextToClipboard(userData.user)"  matTooltip="העתק"
-            [matTooltipClass]="{ 'tooltip-class': true }">
+            <button
+              (click)="copyTextToClipboard(userData.user)"
+              matTooltip="העתק"
+              [matTooltipClass]="{ 'tooltip-class': true }"
+            >
               <img
                 src="../../../assets/icons/clipboard.png"
                 alt="clipboard"
@@ -46,7 +52,7 @@
       </div>
     </div>
     <div class="affiliate-dashboard-discount-values">
-     <!-- <button class="discount-values-link" mat-raised-button (click)="openDialog()">
+      <!-- <button class="discount-values-link" mat-raised-button (click)="openDialog()">
         משוך כסף מהיתרה
         <img
           src="../../../assets/icons/information.png"
@@ -75,9 +81,9 @@
         <div class="card-body">
           <div class="mat-elevation-z8">
             <div class="example-container mat-elevation-z8">
-              <mat-table #table [dataSource]="dataSource" [dir]="langDirectionService.currentLangDirection">
+              <!-- <mat-table #table [dataSource]="dataSource" [dir]="langDirectionService.currentLangDirection">
 
-                <!-- name Column -->
+
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef> שם </mat-header-cell>
                   <mat-cell *matCellDef="let element"> 
@@ -101,31 +107,30 @@
                   </mat-cell>
                 </ng-container>
             
-                <!-- purchaseDate Column -->
+
                 <ng-container matColumnDef="purchaseDate">
-                  <mat-header-cell *matHeaderCellDef>    תאריך רכישה </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef>    תאריך_רכישה </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.purchaseDate}} </mat-cell>
                 </ng-container>
 
-                   <!-- renewsEvery Column -->
                 <ng-container matColumnDef="renewsEvery">
                   <mat-header-cell *matHeaderCellDef>   מתחדש כל </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.renewsEvery}} </mat-cell>
                 </ng-container>
             
-                <!-- email Column -->
+
                 <ng-container matColumnDef="email">
                   <mat-header-cell *matHeaderCellDef>   אימייל  </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
                 </ng-container>
             
-                <!-- commission  Column -->
+
                 <ng-container matColumnDef="commission">
                   <mat-header-cell *matHeaderCellDef>     סוג מנוי </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.commission}} </mat-cell>
                 </ng-container>
             
-                <!-- Expanded Content Column - The detail row is made up of this one column -->
+
                 <ng-container matColumnDef="expandedDetail">
                   <mat-cell *matCellDef="let detail" style="background-color:#eaeaea"> 
                     <div style="display: grid; grid-template-columns: repeat(6, 1fr); width:90vw; text-align:right; ">
@@ -147,7 +152,84 @@
                         [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
                         style="overflow: hidden"> 
                 </mat-row>
-              </mat-table>
+              </mat-table> -->
+
+              <table
+                mat-table
+                [dataSource]="dataSource"
+                multiTemplateDataRows
+                class="mat-elevation-z8"
+              >
+                <ng-container
+                  matColumnDef="{{ column }}"
+                  *ngFor="let column of columnsToDisplay"
+                >
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    style="background-color: #f5a100; padding-inline: 2vw"
+                  >
+                    {{ column }}
+                  </th>
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    style="padding-inline: 2vw"
+                  >
+                    {{ element[column] }}
+                  </td>
+                </ng-container>
+
+                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                <ng-container matColumnDef="expandedDetail">
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    [attr.colspan]="columnsToDisplay.length"
+                  >
+                    <div
+                      class="example-element-detail"
+                      [@detailExpand]="
+                        element == expandedElement ? 'expanded' : 'collapsed'
+                      "
+                    >
+                      <div
+                        *ngFor="let child of element.childElement"
+                        style="display: flex ; justify-content:space-between; padding: 1vw; background-color: #eaeaea; margin-bottom: 1vw;"
+                      >
+                        <div >{{ child.name }}</div>
+                        <div >
+                          {{ child.purchaseDate }}
+                        </div>
+                        <div >
+                          {{ child.renewsEvery }}
+                        </div>
+                        <div >{{ child.email }}</div>
+                        <div >
+                          {{ child.commission }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let element; columns: columnsToDisplay"
+                  class="example-element-row"
+                  [class.example-expanded-row]="expandedElement === element"
+                  (click)="
+                    expandedElement =
+                      expandedElement === element ? null : element
+                  "
+                ></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: ['expandedDetail']"
+                  class="example-detail-row"
+                ></tr>
+              </table>
             </div>
           </div>
         </div>
