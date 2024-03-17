@@ -87,10 +87,10 @@ export class GuideBookComponent implements OnInit {
 
 @Component({
   selector: 'app-popup-dialog',
-  template: `<h1 mat-dialog-title>Pop-up Blocked</h1>
-    <div mat-dialog-content>Please allow pop-ups for this website</div>
+  template: `<h1 mat-dialog-title>חסימת חלונות קופצים</h1>
+    <div mat-dialog-content>אנא אפשר חלונות קופצים עבור אתר זה</div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">OK</button>
+      <button mat-button (click)="onNoClick()">אישור</button>
     </div>`,
 })
 export class PopupDialogComponent {
