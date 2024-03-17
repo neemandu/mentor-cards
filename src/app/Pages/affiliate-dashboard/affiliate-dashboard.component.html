@@ -167,9 +167,14 @@
                   <th
                     mat-header-cell
                     *matHeaderCellDef
-                    style="background-color: #f5a100; padding-inline: 2vw ; font-size: 1.5vw; color: black;"
+                    style="
+                      background-color: #f5a100;
+                      padding-inline: 2vw;
+                      font-size: 1.5vw;
+                      color: black;
+                    "
                   >
-                  {{ columnTranslations[column] }}
+                    {{ columnTranslations[column] }}
                   </th>
                   <td
                     mat-cell
@@ -177,6 +182,29 @@
                     style="padding-inline: 2vw"
                   >
                     {{ element[column] }}
+                    <button
+                      mat-button
+                      *ngIf="column === 'commission'"
+                      (click)="
+                        $event.stopPropagation();
+                        expandedElement =
+                          expandedElement === element ? null : element
+                      "
+                    >
+                      <img
+                        *ngIf="element != expandedElement"
+                        src="../../../assets/icons/plus.png"
+                        alt="Expand data"
+                        width="20px"
+                      />
+
+                      <img
+                        *ngIf="element == expandedElement"
+                        src="../../../assets/icons/minus.png"
+                        alt="Expand data"
+                        width="20px"
+                      />
+                    </button>
                   </td>
                 </ng-container>
 
@@ -195,17 +223,23 @@
                     >
                       <div
                         *ngFor="let child of element.childElement"
-                        style="display: flex ; justify-content:space-between; padding: 1vw; background-color: #eaeaea; margin-bottom: 1vw;"
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          padding: 1vw;
+                          background-color: #eaeaea;
+                          margin-bottom: 1vw;
+                        "
                       >
-                        <div >{{ child.name }}</div>
-                        <div >
+                        <div>{{ child.name }}</div>
+                        <div>
                           {{ child.purchaseDate }}
                         </div>
-                        <div >
+                        <div>
                           {{ child.renewsEvery }}
                         </div>
-                        <div >{{ child.email }}</div>
-                        <div >
+                        <div>{{ child.email }}</div>
+                        <div>
                           {{ child.commission }}
                         </div>
                       </div>
@@ -219,10 +253,6 @@
                   *matRowDef="let element; columns: columnsToDisplay"
                   class="example-element-row"
                   [class.example-expanded-row]="expandedElement === element"
-                  (click)="
-                    expandedElement =
-                      expandedElement === element ? null : element
-                  "
                 ></tr>
                 <tr
                   mat-row
