@@ -541,11 +541,16 @@
                         'three-cards': selectedCards.length == 3,
                         'four-cards': selectedCards.length == 4,
                         'five-cards': selectedCards.length == 5,
-                        'rotated-one-cards': selectedCards.length == 1 && card.rotation !== 0,
-                        'rotated-two-cards': selectedCards.length == 2 && card.rotation !== 0,
-                        'rotated-three-cards': selectedCards.length == 3 && card.rotation !== 0,
-                        'rotated-four-cards': selectedCards.length == 4 && card.rotation !== 0,
-                        'rotated-five-cards': selectedCards.length == 5 && card.rotation !== 0
+                        'rotated-one-cards':
+                          selectedCards.length == 1 && card.rotation !== 0,
+                        'rotated-two-cards':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards':
+                          selectedCards.length == 5 && card.rotation !== 0
                       }"
                       (contextmenu)="onRightClick()"
                     />
@@ -563,14 +568,22 @@
                         'img-selected': selected,
                         'card-view': true,
                         'one-cards': selectedCards.length == 1,
-                        'two-cards': selectedCards.length == 2 && card.rotation == 0,
-                        'three-cards': selectedCards.length == 3 && card.rotation == 0,
-                        'four-cards': selectedCards.length == 4 && card.rotation == 0,
-                        'five-cards': selectedCards.length == 5 && card.rotation == 0,
-                        'rotated-two-cards': selectedCards.length == 2 && card.rotation !== 0,
-                        'rotated-three-cards': selectedCards.length == 3 && card.rotation !== 0,
-                        'rotated-four-cards': selectedCards.length == 4 && card.rotation !== 0,
-                        'rotated-five-cards': selectedCards.length == 5 && card.rotation !== 0
+                        'two-cards':
+                          selectedCards.length == 2 && card.rotation == 0,
+                        'three-cards':
+                          selectedCards.length == 3 && card.rotation == 0,
+                        'four-cards':
+                          selectedCards.length == 4 && card.rotation == 0,
+                        'five-cards':
+                          selectedCards.length == 5 && card.rotation == 0,
+                        'rotated-two-cards':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards':
+                          selectedCards.length == 5 && card.rotation !== 0
                       }"
                       src="{{ card.backImgUrl }}"
                       data-src="{{ card.backImgUrl }}"
@@ -597,14 +610,22 @@
                         'img-selected': selected,
                         'card-view': true,
                         'one-cards': selectedCards.length == 1,
-                        'two-cards': selectedCards.length == 2 && card.rotation == 0,
-                        'three-cards': selectedCards.length == 3 && card.rotation == 0,
-                        'four-cards': selectedCards.length == 4 && card.rotation == 0,
-                        'five-cards': selectedCards.length == 5 && card.rotation == 0,
-                        'rotated-two-cards': selectedCards.length == 2 && card.rotation !== 0,
-                        'rotated-three-cards': selectedCards.length == 3 && card.rotation !== 0,
-                        'rotated-four-cards': selectedCards.length == 4 && card.rotation !== 0,
-                        'rotated-five-cards': selectedCards.length == 5 && card.rotation !== 0
+                        'two-cards':
+                          selectedCards.length == 2 && card.rotation == 0,
+                        'three-cards':
+                          selectedCards.length == 3 && card.rotation == 0,
+                        'four-cards':
+                          selectedCards.length == 4 && card.rotation == 0,
+                        'five-cards':
+                          selectedCards.length == 5 && card.rotation == 0,
+                        'rotated-two-cards':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards':
+                          selectedCards.length == 5 && card.rotation !== 0
                       }"
                       (contextmenu)="onRightClick()"
                     />
@@ -614,7 +635,7 @@
                     <img
                       loading="eager"
                       [ngClass]="{
-                         'rotate-0': card.rotation === 0,
+                        'rotate-0': card.rotation === 0,
                         'rotate-90': card.rotation === 90,
                         'rotate-180': card.rotation === 180,
                         'rotate-270': card.rotation === 270,
@@ -622,14 +643,22 @@
                         'img-selected': selected,
                         'card-view': true,
                         'one-cards': selectedCards.length == 1,
-                        'two-cards': selectedCards.length == 2 && card.rotation == 0,
-                        'three-cards': selectedCards.length == 3 && card.rotation == 0,
-                        'four-cards': selectedCards.length == 4 && card.rotation == 0,
-                        'five-cards': selectedCards.length == 5 && card.rotation == 0,
-                        'rotated-two-cards': selectedCards.length == 2 && card.rotation !== 0,
-                        'rotated-three-cards': selectedCards.length == 3 && card.rotation !== 0,
-                        'rotated-four-cards': selectedCards.length == 4 && card.rotation !== 0,
-                        'rotated-five-cards': selectedCards.length == 5 && card.rotation !== 0
+                        'two-cards':
+                          selectedCards.length == 2 && card.rotation == 0,
+                        'three-cards':
+                          selectedCards.length == 3 && card.rotation == 0,
+                        'four-cards':
+                          selectedCards.length == 4 && card.rotation == 0,
+                        'five-cards':
+                          selectedCards.length == 5 && card.rotation == 0,
+                        'rotated-two-cards':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards':
+                          selectedCards.length == 5 && card.rotation !== 0
                       }"
                       src="{{ card.frontImgUrl }}"
                       data-src="{{ card.frontImgUrl }}"
@@ -699,49 +728,53 @@
       />
     </div> -->
       <div *ngIf="!isDoubleSided">
-        <div style="display: flex; flex-direction: column; align-items: center">
-          <div class="doubleSidedIconButton">
-            <button
-              class="iconButton close-cards-view"
-              mat-icon-button
-              (click)="toggleChosenCardsModal()"
+        <div class="doubleSidedIconButton" style="justify-content: center; display:flex">
+          <button
+            class="iconButton close-cards-view"
+            mat-icon-button
+            (click)="toggleChosenCardsModal()"
+          >
+            <mat-icon class="mat-icon-close">highlight_off</mat-icon>
+          </button>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: center">
+          
+          <div *ngFor="let card of selectedCards" style="display: block;">
+
+            <div
+              style="display: flex; flex-direction: column; align-items: center"
             >
-              <mat-icon class="mat-icon-close">highlight_off</mat-icon>
-            </button>
-          </div>
-
-          <div>
-            <img
-              (click)="imgClick($event)"
-              *ngFor="let card of selectedCards"
-              alt="one of the selected cards shown"
-              [ngClass]="{
-                'rotate-0': rotation === 0,
-                'rotate-90': rotation === 90,
-                'rotate-180': rotation === 180,
-                'rotate-270': rotation === 270,
-                'card-view': true,
-                'one-cards': selectedCards.length == 1,
-                'two-cards': selectedCards.length == 2,
-                'three-cards': selectedCards.length == 3,
-                'four-cards': selectedCards.length == 4,
-                'five-cards': selectedCards.length == 5
-              }"
-              loading="eager"
-              src="{{ card.frontImgUrl }}"
-              data-src="{{ card.frontImgUrl }}"
-            />
-          </div>
-
-          <div>
-            <button (click)="rotateCard(card)" style="margin-top: 1vh">
               <img
-                src="../../../assets/icons/rotate-right-90.png"
-                alt="Expand data"
-                width="20px"
-                style="height: 4vh; width: auto"
+                (click)="imgClick($event)"
+                alt="one of the selected cards shown"
+                [ngClass]="{
+                  'rotate-0': card.rotation === 0,
+                  'rotate-90': card.rotation === 90,
+                  'rotate-180': card.rotation === 180,
+                  'rotate-270': card.rotation === 270,
+                  'card-view': true,
+                  'one-cards': selectedCards.length == 1,
+                  'two-cards': selectedCards.length == 2,
+                  'three-cards': selectedCards.length == 3,
+                  'four-cards': selectedCards.length == 4,
+                  'five-cards': selectedCards.length == 5
+                }"
+                loading="eager"
+                src="{{ card.frontImgUrl }}"
+                data-src="{{ card.frontImgUrl }}"
               />
-            </button>
+
+              <div>
+                <button (click)="rotateCard(card)" style="margin-top: 1vh">
+                  <img
+                    src="../../../assets/icons/rotate-right-90.png"
+                    alt="Expand data"
+                    width="20px"
+                    style="height: 4vh; width: auto"
+                  />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
