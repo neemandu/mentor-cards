@@ -178,8 +178,13 @@ export class AllPacksPageComponent implements OnInit {
     );
     console.log('allpacks page sub 2');
     this.userData = this.userAuthService.userData;
+    console.log(localStorage.getItem('isDialogOpen'),'isDialogOpen href');
     if (!this.userData || this.userData.status === 'NOPLAN') {
-      this.openDialog();
+      if (localStorage.getItem('isDialogOpen') === 'false') {
+        localStorage.setItem('isDialogOpen', 'true');
+        console.log(localStorage.getItem('isDialogOpen'),'after set isDialogOpen href');
+        this.openDialog();
+      }
     }
     this.getAllPacks();
   }
@@ -244,7 +249,10 @@ export class AllPacksPageComponent implements OnInit {
   setAllCategoryPacksToShow(): void {
     this.allCategoryPacks = this.allCategories
       .filter((category) => {
-        if (this.userData?.status === 'PLAN' && category === 'ערכות להתנסות חופשית') {
+        if (
+          this.userData?.status === 'PLAN' &&
+          category === 'ערכות להתנסות חופשית'
+        ) {
           return false;
         }
         return this.selectedCategories.length != 0
