@@ -791,7 +791,7 @@
     >
       <mat-icon class="mat-icon-close-random">highlight_off</mat-icon>
     </button>
-    <div class="random-content" style="height: 100%">
+    <div class="random-content" style="height: 80%">
       <button
         class="btn btn-light"
         [disabled]="randomCardIndex == cards.length - 1"
@@ -800,7 +800,8 @@
         <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
       </button>
       <img
-        class="card-view one-cards"
+        class="card-view"
+        style="height:69vh"
         loading="eager"
         src="{{ cards[randomCardIndex].frontImgUrl }}"
         data-src="{{ cards[randomCardIndex].frontImgUrl }}"
