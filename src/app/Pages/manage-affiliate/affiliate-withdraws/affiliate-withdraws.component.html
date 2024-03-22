@@ -1,0 +1,128 @@
+<!-- <button mat-button (click)="openAddDialog()">Add withdraws</button> -->
+<div
+  style="
+    display: flex;
+    margin-right: calc(15rem /* 240px */ * var(--tw-space-x-reverse));
+    margin-left: calc(15rem /* 240px */ * calc(1 - var(--tw-space-x-reverse)));
+    margin-top: 3rem;
+  "
+>
+  <div
+    style="
+      --tw-space-y-reverse: 0;
+      margin-top: calc(0.5rem /* 8px */ * calc(1 - var(--tw-space-y-reverse)));
+      margin-bottom: calc(0.5rem /* 8px */ * var(--tw-space-y-reverse));
+      display: flex;
+      justify-items: end;
+      margin-inline: 3vw;
+    "
+  >
+    <button mat-button class="border-2 tablebutton" (click)="openAddDialog()">
+      <div
+        style="
+          display: flex;
+          margin-left: 1rem /* 16px */;
+          margin-right: 1rem /* 16px */;
+          font-weight: 700;
+        "
+      >
+      הוסף הפקדה 
+        <img
+          style="margin-right: 0.5rem"
+          src="../../../assets/icons/plus.svg"
+          alt="Logo"
+        />
+      </div>
+    </button>
+  </div>
+</div>
+
+<!-- <div style="display: flex">
+  <input
+    style="
+      width: 10vw;
+      margin-top: 5vh;
+      margin-bottom: 2vh;
+      border: 1px solid #9a9696;
+      margin-inline: 3vw;
+      padding: 1vh;
+      border-radius: 5px;
+      text-align: right;
+    "
+    matInput
+    (keyup)="applyFilter($event.target.value)"
+    placeholder="לחפש"
+  />
+</div> -->
+
+<mat-table
+  [dataSource]="dataSource"
+  matSort
+  style="margin-inline: 3vw; margin-top: 2vh"
+>
+
+<ng-container matColumnDef="id">
+  <mat-header-cell *matHeaderCellDef class="small-cell">
+    <div style="font-size: 1.1rem; text-align: center">
+      פעולות
+    </div></mat-header-cell
+  >
+  <mat-cell
+    style="font-size: 0.9rem; text-align: center"
+    *matCellDef="let element"
+    class="small-cell"
+  >
+    <div class="flex">
+      <button
+        mat-button
+        style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+        (click)="deleteItem(element.id)"
+      >
+        <!-- <img class="w-4" src="../../../assets/icons/bin.svg" alt="Logo" /> -->
+        <mat-icon>remove_circle</mat-icon>
+      </button>
+      <button
+        mat-button
+        style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+        (click)="editItem(element.id)"
+      >
+        <!-- <img
+          class="ml-2 w-5"
+          src="../../../assets/icons/pen.svg"
+          alt="Logo"
+        /> -->
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="date">
+  <mat-header-cell *matHeaderCellDef>  <div style="font-size: 1.1rem; text-align: center">תאריך</div> </mat-header-cell>
+  <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element">{{ element.date |date }}</mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="amount">
+  <mat-header-cell *matHeaderCellDef> <div style="font-size: 1.1rem; text-align: center">סכום </div> </mat-header-cell>
+  <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element"> {{ element.currency }} {{ element.amount }}</mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="paymentway">
+  <mat-header-cell *matHeaderCellDef
+    ><div style="font-size: 1.1rem; text-align: center">דרך תשלום</div></mat-header-cell
+  >
+  <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element">{{ element.paymentWay }}</mat-cell>
+</ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumn"></mat-row>
+</mat-table>
+
+<div style="display: flex; justify-content: center">
+  <mat-paginator
+    dir="ltr"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
+

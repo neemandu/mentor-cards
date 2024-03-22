@@ -137,6 +137,8 @@ query GetUser($id: ID!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -301,6 +303,8 @@ query GetUser($id: ID!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -311,7 +315,6 @@ query GetUser($id: ID!) {
     refId
     myAffiliate {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber
@@ -458,6 +461,8 @@ query ListUsers(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -619,6 +624,8 @@ query ListUsers(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -629,7 +636,6 @@ query ListUsers(
       refId
       myAffiliate {
         id
-        affiliateID
         affiliateUrl
         contactEmail
         phoneNumber
@@ -666,7 +672,6 @@ query ListUsers(
 query GetAffiliate($id: ID!) {
   getAffiliate(id: $id) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -696,7 +701,6 @@ query ListAffiliates(
   listAffiliates(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber
@@ -1165,6 +1169,8 @@ query GetCardsPack($id: ID!, $link: String!) {
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -1252,6 +1258,8 @@ query ListCardsPacks(
         entries
       }
       isFree
+      language
+      isActive
       createdAt
       updatedAt
     }

@@ -7,6 +7,12 @@
         "update",
         "delete"
       ],
+      "Affiliate:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
       "Invoices:@model(appsync)": [
         "create",
         "read",

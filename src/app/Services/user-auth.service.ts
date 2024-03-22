@@ -171,7 +171,7 @@ export class UserAuthService {
 
         this.checkOrgTrial();
 
-        this.overlaySpinnerService.changeOverlaySpinner(false);
+        // this.overlaySpinnerService.changeOverlaySpinner(false);
         // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
         this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
           duration: 5000,
@@ -183,7 +183,7 @@ export class UserAuthService {
           '🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject',
           reject
         );
-        this.overlaySpinnerService.changeOverlaySpinner(false);
+        // this.overlaySpinnerService.changeOverlaySpinner(false);
         let snackBarRef = this._snackBar.open(
           'שגיאה במימוש משתמש, נסו שנית',
           'רענן',

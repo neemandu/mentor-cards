@@ -1,0 +1,269 @@
+<div dir="ltr">
+  <div class="affiliate-dashboard-header">
+    {{ "pages.affiliates-dashboard-page.header" | translate }}
+  </div>
+  <div class="affiliate-dashboard-content">
+    <div class="affiliate-dashboard-discount-details">
+      <div class="discount-details-code">
+        <div class="discount-code">
+          <div class="discount-code-text">{{ userData.discountCode }}</div>
+          <div>
+            <button
+              (click)="copyTextToClipboard(userData.discountCode)"
+              matTooltip="העתק"
+              [matTooltipClass]="{ 'tooltip-class': true }"
+            >
+              <img
+                src="../../../assets/icons/clipboard.png"
+                alt="clipboard"
+                wnameth="40px"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="discount-body-text">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text1" | translate
+          }}
+        </div>
+      </div>
+      <div class="discount-details-user">
+        <div class="discount-user">
+          <div class="discount-user-text">{{ userData.user }}</div>
+          <div>
+            <button
+              (click)="copyTextToClipboard(userData.user)"
+              matTooltip="העתק"
+              [matTooltipClass]="{ 'tooltip-class': true }"
+            >
+              <img
+                src="../../../assets/icons/clipboard.png"
+                alt="clipboard"
+                width="40px"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="discount-body-text">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text2" | translate
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="affiliate-dashboard-discount-values">
+      <!-- <button class="discount-values-link" mat-raised-button (click)="openDialog()">
+        משוך כסף מהיתרה
+        <img
+          src="../../../assets/icons/information.png"
+          alt="information"
+          width="20px"
+        />
+      </button>-->
+      <div class="discount-values">
+        <div class="discount-body-text">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text3" | translate
+          }}
+        </div>
+        <div class="discount-body-text discount-values-secont">
+          {{
+            "pages.affiliates-dashboard-page.discount-body-text4" | translate
+          }}
+        </div>
+      </div>
+    </div>
+
+    <div class="table-header">הנרשמים שלי</div>
+
+    <div style="margin-inline: 5vw">
+      <div class="card">
+        <div class="card-body">
+          <div class="mat-elevation-z8">
+            <div class="example-container mat-elevation-z8">
+              <!-- <mat-table #table [dataSource]="dataSource" [dir]="langDirectionService.currentLangDirection">
+
+
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef> שם </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> 
+                    <button mat-button (click)="toggleExpand(element)" style="width: 10px; margin-inline:0px">
+                      <img
+                      *ngIf="element != expandedElement"
+                      src="../../../assets/icons/plus.png"
+                      alt="Expand data"
+                      width="20px"
+                    />
+
+                    <img
+                    *ngIf="element == expandedElement"
+                    src="../../../assets/icons/minus.png"
+                    alt="Expand data"
+                    width="20px"
+                  />
+
+                    </button>
+                    {{element.name}}
+                  </mat-cell>
+                </ng-container>
+            
+
+                <ng-container matColumnDef="purchaseDate">
+                  <mat-header-cell *matHeaderCellDef>    תאריך_רכישה </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.purchaseDate}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="renewsEvery">
+                  <mat-header-cell *matHeaderCellDef>   מתחדש כל </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.renewsEvery}} </mat-cell>
+                </ng-container>
+            
+
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef>   אימייל  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                </ng-container>
+            
+
+                <ng-container matColumnDef="commission">
+                  <mat-header-cell *matHeaderCellDef>     סוג מנוי </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.commission}} </mat-cell>
+                </ng-container>
+            
+
+                <ng-container matColumnDef="expandedDetail">
+                  <mat-cell *matCellDef="let detail" style="background-color:#eaeaea"> 
+                    <div style="display: grid; grid-template-columns: repeat(6, 1fr); width:90vw; text-align:right; ">
+                      <div sty>{{detail.element.name}}</div>
+                      <div>{{detail.element.purchaseDate}}</div>
+                      <div>{{detail.element.subscriptionType}}</div>
+                      <div>{{detail.element.renewsEvery}}</div>
+                      <div>{{detail.element.email}}</div>
+                      <div>{{detail.element.commission}}</div>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"
+                        matRipple 
+                        class="element-row" 
+                     ></mat-row>
+                <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+                        [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+                        style="overflow: hidden"> 
+                </mat-row>
+              </mat-table> -->
+
+              <table
+                mat-table
+                [dataSource]="dataSource"
+                multiTemplateDataRows
+                class="mat-elevation-z8"
+              >
+                <ng-container
+                  matColumnDef="{{ column }}"
+                  *ngFor="let column of columnsToDisplay"
+                >
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    style="
+                      background-color: #f5a100;
+                      padding-inline: 2vw;
+                      font-size: 1.5vw;
+                      color: black;
+                    "
+                  >
+                    {{ columnTranslations[column] }}
+                  </th>
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    style="padding-inline: 2vw"
+                  >
+                    {{ element[column] }}
+                    <button
+                      mat-button
+                      *ngIf="column === 'commission'"
+                      (click)="
+                        $event.stopPropagation();
+                        expandedElement =
+                          expandedElement === element ? null : element
+                      "
+                    >
+                      <img
+                        *ngIf="element != expandedElement"
+                        src="../../../assets/icons/plus.png"
+                        alt="Expand data"
+                        width="20px"
+                      />
+
+                      <img
+                        *ngIf="element == expandedElement"
+                        src="../../../assets/icons/minus.png"
+                        alt="Expand data"
+                        width="20px"
+                      />
+                    </button>
+                  </td>
+                </ng-container>
+
+                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                <ng-container matColumnDef="expandedDetail">
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    [attr.colspan]="columnsToDisplay.length"
+                  >
+                    <div
+                      class="example-element-detail"
+                      [@detailExpand]="
+                        element == expandedElement ? 'expanded' : 'collapsed'
+                      "
+                    >
+                      <div
+                        *ngFor="let child of element.childElement"
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          padding: 1vw;
+                          background-color: #eaeaea;
+                          margin-bottom: 1vw;
+                        "
+                      >
+                        <div>{{ child.name }}</div>
+                        <div>
+                          {{ child.purchaseDate }}
+                        </div>
+                        <div>
+                          {{ child.renewsEvery }}
+                        </div>
+                        <div>{{ child.email }}</div>
+                        <div>
+                          {{ child.commission }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let element; columns: columnsToDisplay"
+                  class="example-element-row"
+                  [class.example-expanded-row]="expandedElement === element"
+                ></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: ['expandedDetail']"
+                  class="example-detail-row"
+                ></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

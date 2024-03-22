@@ -8,8 +8,7 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string",
-            "CreatedSNSRole": "string",
-            "GoogleWebClient": "string"
+            "CreatedSNSRole": "string"
         }
     },
     "api": {
@@ -213,14 +212,14 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "GetProviderPlanId": {
+        "GetNextBillingDate": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string",
             "LambdaExecutionRoleArn": "string"
         },
-        "GetNextBillingDate": {
+        "GetProviderPlanId": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
@@ -234,13 +233,25 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRoleArn": "string"
         },
+        "GetAffiliateData": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
         "CreateCommonLink": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "GetAffiliateData": {
+        "NewAffiliateHandler": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "AffiliateBalanceHandler": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

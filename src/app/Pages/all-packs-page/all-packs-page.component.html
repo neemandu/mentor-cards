@@ -12,6 +12,7 @@
     <mat-selection-list
       #categories
       (selectionChange)="categoriesSelectedChange($event); filterPacks()"
+      [dir]="langDirectionService.currentLangDirection"
     >
 
       <mat-list-option
@@ -22,7 +23,7 @@
         [value]="category"
       >
         <!-- <span> -->
-          {{ 'pages.all-packs-page.categories.' + category | translate}}
+        <span style="margin-right: 10px;">  {{ 'pages.all-packs-page.categories.' + category | translate}} </span>
         <!-- <div class="d-flex justify-content-end align-items-baseline category">
           <mat-icon class="category-color-dot" [style.color]="getCategoryColor(category)">
             circle

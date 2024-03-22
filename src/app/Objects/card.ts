@@ -2,6 +2,8 @@ export class Card {
     frontImgUrl: string;
     backImgUrl: string;
     index: number;
+    flipped: boolean = false;
+    rotation: number = 0; // 0, 90, 180, 270
 
     constructor() { }
 

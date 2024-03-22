@@ -1,4 +1,14 @@
 /* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_AFFILIATETABLE_ARN
+	API_CARDSPACKS_AFFILIATETABLE_NAME
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_INVOICESTABLE_ARN
+	API_CARDSPACKS_INVOICESTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 	API_CARDSPACKS_INVOICESTABLE_ARN
 	API_CARDSPACKS_INVOICESTABLE_NAME
@@ -8,6 +18,7 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
+const { env } = require("process");
 const AWS = require('aws-sdk');
 AWS.config.update({ region: env.REGION }); 
 const docClient = new AWS.DynamoDB.DocumentClient();
@@ -44,6 +55,32 @@ async function getUserByUserName (username){
 
 }
 
+async function getAffiliate(refId){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+  
+    var userTable = env.API_CARDSPACKS_AFFILIATETABLE_NAME;
+  
+    
+    var userParams = {
+        TableName:userTable,
+        Key:{
+            "id": refId
+        }
+    };
+    var user;
+    console.log("searching for affiliate refId- " + refId);
+  
+    await docClient.get(userParams).promise().then(data => {
+        console.log("Get affiliate by refId succeeded:", JSON.stringify(data, null, 2));
+        user = data["Item"];
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+  
+    return user;
+  
+  }
+
 exports.handler = async (event) => {
     if (!event || !event.identity || !event.identity.claims) {
         return { error: "Event or identity claims are not provided" };
@@ -58,23 +95,29 @@ exports.handler = async (event) => {
 
         var user = await getUserByUserName(username);
         
-        if(!user?.myAffiliate?.affiliateUrl){
+        if(!user?.userMyAffiliateId){
             return null;
         }
 
-        var refId = user?.myAffiliate?.affiliateUrl;
+        var affiliate = await getAffiliate(user?.userMyAffiliateId);
 
         const queryParams = {
             TableName: env.API_CARDSPACKS_USERTABLE_NAME, 
-            IndexName: username,
+            IndexName: 'refId-index',
             KeyConditionExpression: 'refId = :refId',
             ExpressionAttributeValues: {
-                ':refId': refId
+                ':refId': affiliate.affiliateUrl
             }
         };
+        var users;
+        await docClient.query(queryParams).promise().then(data => {
+            users = data["Items"];
+            console.log('found ' + users?.length + ' users', JSON.stringify(data, null, 2));
+        }).catch(err => {
+            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        });
 
-        const queryResult = await docClient.query(queryParams).promise();
-        const users = queryResult.Items;
+
 
         return users;
     } catch (error) {

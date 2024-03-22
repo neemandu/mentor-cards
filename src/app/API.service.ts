@@ -174,6 +174,8 @@ export type CardsPack = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsage | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -211,7 +213,6 @@ export type CouponCodes = {
 export type Affiliate = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -369,7 +370,6 @@ export type DeleteCommonLinkInput = {
 
 export type CreateAffiliateInput = {
   id?: string | null;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -392,7 +392,6 @@ export type WithdrawInput = {
 };
 
 export type ModelAffiliateConditionInput = {
-  affiliateID?: ModelIDInput | null;
   affiliateUrl?: ModelStringInput | null;
   phoneNumber?: ModelStringInput | null;
   websiteURL?: ModelStringInput | null;
@@ -404,22 +403,6 @@ export type ModelAffiliateConditionInput = {
   and?: Array<ModelAffiliateConditionInput | null> | null;
   or?: Array<ModelAffiliateConditionInput | null> | null;
   not?: ModelAffiliateConditionInput | null;
-};
-
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
 };
 
 export type ModelFloatInput = {
@@ -436,7 +419,6 @@ export type ModelFloatInput = {
 
 export type UpdateAffiliateInput = {
   id: string;
-  affiliateID?: string | null;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -732,6 +714,8 @@ export type CreateCardsPackInput = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsageInput | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
 };
 
 export type CardsInput = {
@@ -767,6 +751,8 @@ export type ModelCardsPackConditionInput = {
   authorizedDomains?: ModelStringInput | null;
   topQuestions?: ModelStringInput | null;
   isFree?: ModelBooleanInput | null;
+  language?: ModelStringInput | null;
+  isActive?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -795,6 +781,8 @@ export type UpdateCardsPackInput = {
   topQuestions?: Array<string | null> | null;
   usersUsage?: Array<UserUsageInput | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -991,6 +979,22 @@ export type ModelCommonLinkFilterInput = {
   not?: ModelCommonLinkFilterInput | null;
 };
 
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
 export type ModelCommonLinkConnection = {
   __typename: "ModelCommonLinkConnection";
   items: Array<CommonLink | null>;
@@ -1034,7 +1038,7 @@ export type ModelUserConnection = {
 };
 
 export type ModelAffiliateFilterInput = {
-  affiliateID?: ModelIDInput | null;
+  id?: ModelIDInput | null;
   affiliateUrl?: ModelStringInput | null;
   contactEmail?: ModelStringInput | null;
   phoneNumber?: ModelStringInput | null;
@@ -1207,6 +1211,8 @@ export type ModelCardsPackFilterInput = {
   authorizedDomains?: ModelStringInput | null;
   topQuestions?: ModelStringInput | null;
   isFree?: ModelBooleanInput | null;
+  language?: ModelStringInput | null;
+  isActive?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1363,6 +1369,8 @@ export type CreateUserMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language?: string | null;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1548,6 +1556,8 @@ export type CreateUserMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language?: string | null;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1559,7 +1569,6 @@ export type CreateUserMutation = {
   myAffiliate?: {
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -1760,6 +1769,8 @@ export type GetAffiliateDataMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language?: string | null;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1945,6 +1956,8 @@ export type GetAffiliateDataMutation = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language?: string | null;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1956,7 +1969,6 @@ export type GetAffiliateDataMutation = {
   myAffiliate?: {
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -2020,7 +2032,6 @@ export type DeleteCommonLinkMutation = {
 export type CreateAffiliateMutation = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -2046,7 +2057,6 @@ export type CreateAffiliateMutation = {
 export type UpdateAffiliateMutation = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -2072,7 +2082,6 @@ export type UpdateAffiliateMutation = {
 export type DeleteAffiliateMutation = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -2641,6 +2650,8 @@ export type CreateCardsPackMutation = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2739,6 +2750,8 @@ export type UpdateCardsPackMutation = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2837,6 +2850,8 @@ export type DeleteCardsPackMutation = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3149,6 +3164,8 @@ export type GetUserQuery = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language?: string | null;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3334,6 +3351,8 @@ export type GetUserQuery = {
         entries?: number | null;
       } | null> | null;
       isFree?: boolean | null;
+      language?: string | null;
+      isActive?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3345,7 +3364,6 @@ export type GetUserQuery = {
   myAffiliate?: {
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -3506,6 +3524,8 @@ export type ListUsersQuery = {
           entries?: number | null;
         } | null> | null;
         isFree?: boolean | null;
+        language?: string | null;
+        isActive?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3687,6 +3707,8 @@ export type ListUsersQuery = {
           entries?: number | null;
         } | null> | null;
         isFree?: boolean | null;
+        language?: string | null;
+        isActive?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3698,7 +3720,6 @@ export type ListUsersQuery = {
     myAffiliate?: {
       __typename: "Affiliate";
       id: string;
-      affiliateID: string;
       affiliateUrl?: string | null;
       contactEmail?: string | null;
       phoneNumber?: string | null;
@@ -3737,7 +3758,6 @@ export type ListUsersQuery = {
 export type GetAffiliateQuery = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -3765,7 +3785,6 @@ export type ListAffiliatesQuery = {
   items: Array<{
     __typename: "Affiliate";
     id: string;
-    affiliateID: string;
     affiliateUrl?: string | null;
     contactEmail?: string | null;
     phoneNumber?: string | null;
@@ -4240,6 +4259,8 @@ export type GetCardsPackQuery = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4336,6 +4357,8 @@ export type ListCardsPacksQuery = {
       entries?: number | null;
     } | null> | null;
     isFree?: boolean | null;
+    language?: string | null;
+    isActive?: boolean | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -4396,7 +4419,6 @@ export type OnDeleteCommonLinkSubscription = {
 export type OnCreateAffiliateSubscription = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -4422,7 +4444,6 @@ export type OnCreateAffiliateSubscription = {
 export type OnUpdateAffiliateSubscription = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -4448,7 +4469,6 @@ export type OnUpdateAffiliateSubscription = {
 export type OnDeleteAffiliateSubscription = {
   __typename: "Affiliate";
   id: string;
-  affiliateID: string;
   affiliateUrl?: string | null;
   contactEmail?: string | null;
   phoneNumber?: string | null;
@@ -5144,6 +5164,8 @@ export type OnCreateCardsPackSubscription = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5242,6 +5264,8 @@ export type OnUpdateCardsPackSubscription = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5340,6 +5364,8 @@ export type OnDeleteCardsPackSubscription = {
     entries?: number | null;
   } | null> | null;
   isFree?: boolean | null;
+  language?: string | null;
+  isActive?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5521,6 +5547,8 @@ export class APIService {
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -5706,6 +5734,8 @@ export class APIService {
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -5717,7 +5747,6 @@ export class APIService {
           myAffiliate {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -6122,6 +6151,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -6307,6 +6338,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -6318,7 +6351,6 @@ async GetSubscriptionPlansForOrgs(
           myAffiliate {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -6443,7 +6475,6 @@ async GetSubscriptionPlansForOrgs(
         createAffiliate(input: $input, condition: $condition) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -6485,7 +6516,6 @@ async GetSubscriptionPlansForOrgs(
         updateAffiliate(input: $input, condition: $condition) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -6527,7 +6557,6 @@ async GetSubscriptionPlansForOrgs(
         deleteAffiliate(input: $input, condition: $condition) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -7422,6 +7451,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -7536,6 +7567,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -7650,6 +7683,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -8184,6 +8219,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -8369,6 +8406,8 @@ async GetSubscriptionPlansForOrgs(
                 entries
               }
               isFree
+              language
+              isActive
               createdAt
               updatedAt
             }
@@ -8380,7 +8419,6 @@ async GetSubscriptionPlansForOrgs(
           myAffiliate {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -8555,6 +8593,8 @@ async GetSubscriptionPlansForOrgs(
                   entries
                 }
                 isFree
+                language
+                isActive
                 createdAt
                 updatedAt
               }
@@ -8736,6 +8776,8 @@ async GetSubscriptionPlansForOrgs(
                   entries
                 }
                 isFree
+                language
+                isActive
                 createdAt
                 updatedAt
               }
@@ -8747,7 +8789,6 @@ async GetSubscriptionPlansForOrgs(
             myAffiliate {
               __typename
               id
-              affiliateID
               affiliateUrl
               contactEmail
               phoneNumber
@@ -8803,7 +8844,6 @@ async GetSubscriptionPlansForOrgs(
         getAffiliate(id: $id) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -8845,7 +8885,6 @@ async GetSubscriptionPlansForOrgs(
           items {
             __typename
             id
-            affiliateID
             affiliateUrl
             contactEmail
             phoneNumber
@@ -9593,6 +9632,8 @@ async GetSubscriptionPlansForOrgs(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -9613,31 +9654,23 @@ async ListCardsPacksForPreview(
     nextToken?: string
   ): Promise<ListCardsPacksQuery> {
     const statement = `query ListCardsPacks($filter: ModelCardsPackFilterInput, $limit: Int, $nextToken: String) {
-      listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-        __typename
-        items {
+        listCardsPacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards {
+          items {
             __typename
-            backImgUrl
-            frontImgUrl
-          }            
-          usersUsage {
-            __typename
-            user
-            entries
-          }
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            name
-            subElements {
+            id
+            imgUrl
+            description
+            tags
+            categories
+            cards {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
+            cardsPreview
+            groupsIds
+            guideBook {
               __typename
               name
               subElements {
@@ -9652,64 +9685,75 @@ async ListCardsPacksForPreview(
                     subElements {
                       __typename
                       name
+                      subElements {
+                        __typename
+                        name
+                      }
                     }
                   }
                 }
               }
             }
-          }
-          name
-          freeUntilDate
-          isFree
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          isOwnedByOrg
-          brief
-          likesCounter
-          visitorsCounter
-          backImgUrl
-          isExternalPack
-          authorizedDomains
-          subscriptionPlans {
-            __typename
-            id
             name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
+            freeUntilDate
+            about {
+              __typename
+              text
+              imgUrl
+              link
+            }
+            isOwnedByOrg
+            brief
+            likesCounter
+            visitorsCounter
+            backImgUrl
+            isExternalPack
+            authorizedDomains
+            subscriptionPlans {
               __typename
               id
               name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
+              description
+              providerPlanId
+              numberOfUsers
+              numberOfCardPacks
+              billingCycleInMonths
+              fullPrice
+              discount
+              orgMembership {
                 __typename
-                text
-                imgUrl
-                link
+                id
+                name
+                trialPeriodInDays
+                numberOfallowedCardsPacks
+                about {
+                  __typename
+                  text
+                  imgUrl
+                  link
+                }
+                createdAt
+                updatedAt
               }
+              subscriptionProviderPlanId
               createdAt
               updatedAt
             }
+            topQuestions
+            usersUsage {
+              __typename
+              user
+              entries
+            }
+            isFree
+            language
+            isActive
             createdAt
             updatedAt
           }
-          topQuestions
-          createdAt
-          updatedAt
+          nextToken
         }
-        nextToken
-      }
-    }`;
+      }`;
     const gqlAPIServiceArguments: any = {};
     if (filter) {
       gqlAPIServiceArguments.filter = filter;
@@ -9825,6 +9869,8 @@ async ListCardsPacksForPreview(
               entries
             }
             isFree
+            language
+            isActive
             createdAt
             updatedAt
           }
@@ -9967,7 +10013,6 @@ async ListCardsPacksForPreview(
         onCreateAffiliate(contactEmail: $contactEmail) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -10010,7 +10055,6 @@ async ListCardsPacksForPreview(
         onUpdateAffiliate(contactEmail: $contactEmail) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -10053,7 +10097,6 @@ async ListCardsPacksForPreview(
         onDeleteAffiliate(contactEmail: $contactEmail) {
           __typename
           id
-          affiliateID
           affiliateUrl
           contactEmail
           phoneNumber
@@ -11059,6 +11102,8 @@ async ListCardsPacksForPreview(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -11167,6 +11212,8 @@ async ListCardsPacksForPreview(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }
@@ -11275,6 +11322,8 @@ async ListCardsPacksForPreview(
             entries
           }
           isFree
+          language
+          isActive
           createdAt
           updatedAt
         }

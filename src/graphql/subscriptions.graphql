@@ -29,7 +29,6 @@ subscription OnDeleteCommonLink {
 subscription OnCreateAffiliate($contactEmail: String) {
   onCreateAffiliate(contactEmail: $contactEmail) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -54,7 +53,6 @@ subscription OnCreateAffiliate($contactEmail: String) {
 subscription OnUpdateAffiliate($contactEmail: String) {
   onUpdateAffiliate(contactEmail: $contactEmail) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -79,7 +77,6 @@ subscription OnUpdateAffiliate($contactEmail: String) {
 subscription OnDeleteAffiliate($contactEmail: String) {
   onDeleteAffiliate(contactEmail: $contactEmail) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -725,6 +722,8 @@ subscription OnCreateCardsPack {
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -810,6 +809,8 @@ subscription OnUpdateCardsPack {
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -895,6 +896,8 @@ subscription OnDeleteCardsPack {
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }

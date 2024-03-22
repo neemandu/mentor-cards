@@ -115,6 +115,8 @@ mutation CreateUser($input: CreateUserInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -279,6 +281,8 @@ mutation CreateUser($input: CreateUserInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -289,7 +293,6 @@ mutation CreateUser($input: CreateUserInput!) {
     refId
     myAffiliate {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber
@@ -500,6 +503,8 @@ mutation GetAffiliateData($input: userInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -664,6 +669,8 @@ mutation GetAffiliateData($input: userInput!) {
           entries
         }
         isFree
+        language
+        isActive
         createdAt
         updatedAt
       }
@@ -674,7 +681,6 @@ mutation GetAffiliateData($input: userInput!) {
     refId
     myAffiliate {
       id
-      affiliateID
       affiliateUrl
       contactEmail
       phoneNumber
@@ -748,7 +754,6 @@ mutation CreateAffiliate(
 ) {
   createAffiliate(input: $input, condition: $condition) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -776,7 +781,6 @@ mutation UpdateAffiliate(
 ) {
   updateAffiliate(input: $input, condition: $condition) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -804,7 +808,6 @@ mutation DeleteAffiliate(
 ) {
   deleteAffiliate(input: $input, condition: $condition) {
     id
-    affiliateID
     affiliateUrl
     contactEmail
     phoneNumber
@@ -1386,6 +1389,8 @@ mutation CreateCardsPack(
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -1474,6 +1479,8 @@ mutation UpdateCardsPack(
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }
@@ -1562,6 +1569,8 @@ mutation DeleteCardsPack(
       entries
     }
     isFree
+    language
+    isActive
     createdAt
     updatedAt
   }

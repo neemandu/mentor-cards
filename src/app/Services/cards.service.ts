@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PackContent } from '../Objects/packs';
 import { UserAuthService } from './user-auth.service';
 import { UserData } from '../Objects/user-related';
-import { APIService, ListCardsPacksQuery } from '../API.service';
+import { APIService } from '../API.service';
 import { OverlaySpinnerService } from './overlay-spinner.service';
 // import { AuthService } from 'src/app/Services/auth.service';
 
@@ -89,8 +89,28 @@ export class CardsService {
 
   getAllPacks(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    (this.isLoggedIn ? this.api.ListCardsPacks() : this.api.ListCardsPacksForPreview()).then((packs: ListCardsPacksQuery) => {
-      this.allPacks = packs.items.map(pack => {
+    let nextToken = null;
+    let items = [];
+    const filterCondition = {
+      or: [
+        { language: { eq: "he" } },
+        { language: { attributeExists: false } }
+      ]
+    };
+  
+    const fetchPacks = (nextToken) => {
+      return this.isLoggedIn ? this.api.ListCardsPacks(filterCondition, 100, nextToken) : 
+      this.api.ListCardsPacksForPreview(filterCondition, 100, nextToken);
+    };
+  
+    const fetchAllPacks = async () => {
+      do {
+        const packs = await fetchPacks(nextToken);
+        items = items.concat(packs.items);
+        nextToken = packs.nextToken;
+      } while (nextToken);
+  
+      this.allPacks = items.map(pack => {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))
             this.allCategories.push(category);
@@ -103,7 +123,9 @@ export class CardsService {
       this.sortPacks();
       this.allPacksReadyEmmiter.emit();
       this.overlaySpinnerService.changeOverlaySpinner(false);
-    }, reject => {
+    };
+  
+    fetchAllPacks().catch(reject => {
       console.log('reject'); 
       console.log(reject);
       this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -113,9 +135,8 @@ export class CardsService {
       snackBarRef.onAction().subscribe(() => {
         window.location.reload();
       });
-    })
+    });
   }
-
   /**
    * Save pack after changes 
    * @param index - index of pack

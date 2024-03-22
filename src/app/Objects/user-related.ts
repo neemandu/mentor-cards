@@ -24,6 +24,9 @@ export class UserData {
     orgMembership: OrgMembership;
     favouritePacks: number[] | null;
     externalPacksSubscriptions: any[];
+    refId: String
+    myAffiliate: Affiliate
+    payments: [Payment]
 
     deseralize(input: any) {
         Object.assign(this, input);
@@ -31,7 +34,42 @@ export class UserData {
         this.createdAt = input.createdAt ? new Date(input.createdAt) : undefined;
         this.couponCodes = input.couponCodes?.map(couponCode => new CouponCode(couponCode));
         this.endOfTrialDate = input.endOfTrialDate ? new Date(input.endOfTrialDate) : undefined;
+        this.payments = input.payments?.map(payment => new Payment(payment));
+        this.myAffiliate = input.myAffiliate ? new Affiliate(input.myAffiliate) : undefined;
         return this;
+    }
+}
+
+export class Affiliate{
+    affiliateID: string
+    affiliateUrl: string
+    contactEmail: string
+    phoneNumber: string
+    websiteURL: string
+    paymentDetails: string
+    commissionPercentage: number
+    dateJoined: Date
+    status: string 
+    balance: number
+
+    constructor(input) {
+        Object.assign(this, input);
+        this.dateJoined = new Date(input.dateJoined);
+    }
+}
+
+export class Payment{
+    id: string;
+    date: Date
+    payedMonths: number
+    amount: number
+    currency: string
+    paymentWay: string
+    transactionId: string
+
+    constructor(input) {
+        Object.assign(this, input);
+        this.date = new Date(input.date);
     }
 }
 

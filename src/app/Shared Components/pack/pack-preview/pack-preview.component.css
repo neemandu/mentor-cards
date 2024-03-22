@@ -207,6 +207,10 @@ mat-icon {
   border-radius: 100%;
 }
 
+.top-part{
+  height: auto;
+}
+
 .top-part,
 .about-author {
   display: flex;
@@ -220,6 +224,7 @@ mat-icon {
   text-align: start;
   align-items: start;
   padding: 0px 4%;
+  height: 30vh;
 }
 
 .about-author-text {

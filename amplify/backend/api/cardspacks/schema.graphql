@@ -13,7 +13,7 @@ type Mutation {
   UpdateSelectedCardPacks(input: selectedCardPacksInput!): Boolean @function(name: "UpdateSelectedCardPacks-${env}")
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
-  getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")
+  getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")  
 }
 
 type CommonLink
@@ -101,7 +101,7 @@ type Affiliate
       { allow: groups, groups: ["Admins"] }
     ]
   ) {
-    affiliateID: ID!
+    id: ID!
     affiliateUrl: String
     contactEmail: AWSEmail
     phoneNumber: String
@@ -273,6 +273,8 @@ type CardsPack
   topQuestions: [String]
   usersUsage: [UserUsage]
   isFree: Boolean
+  language: String
+  isActive: Boolean
 }
 
 type UserUsage {
@@ -361,6 +363,10 @@ input updatePaymentProgramInput {
 
 input couponCodeInput {
   couponCode: String!
+}
+
+input LanguageInput{
+  language: String!
 }
 
 input deleteGroupInput {

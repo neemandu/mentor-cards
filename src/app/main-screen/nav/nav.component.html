@@ -53,15 +53,15 @@
     <button class="btn navbar-btn" (click)="navigate('/contact-us')">
       {{ "pages.nav.navbar.contact-us" | translate }}
     </button>
-   
 
+  
     <button
       class="btn navbar-btn"
       id="admin-drop-down"
       *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
       [matMenuTriggerFor]="managementMenu"
     >
-    {{ "pages.nav.navbar.admin" | translate }}
+      {{ "pages.nav.navbar.admin" | translate }}
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <!-- <button class="btn navbar-btn" (click)="navigate('/company-pack-choise')">בחירת ערכות</button> -->
@@ -162,16 +162,22 @@
   <button mat-menu-item (click)="navigate('/guide-page')">
     {{ "pages.nav.navbar.faq" | translate }}
   </button>
-  <button mat-menu-item (click)="navigate('/services')">  {{ "pages.nav.navbar.additional-services" | translate }}</button>
+  <button mat-menu-item (click)="navigate('/services')">
+    {{ "pages.nav.navbar.additional-services" | translate }}
+  </button>
   <!--<button mat-menu-item (click)="navigate('/all-blogs')">מרכז למידה</button>-->
-  <button mat-menu-item (click)="navigate('/about-page')">  {{ "pages.nav.navbar.about-us" | translate }}</button>
-  <button mat-menu-item (click)="navigate('/contact-us')">{{ "pages.nav.navbar.contact-us" | translate }}</button>
+  <button mat-menu-item (click)="navigate('/about-page')">
+    {{ "pages.nav.navbar.about-us" | translate }}
+  </button>
+  <button mat-menu-item (click)="navigate('/contact-us')">
+    {{ "pages.nav.navbar.contact-us" | translate }}
+  </button>
   <button
     mat-menu-item
     *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
     [matMenuTriggerFor]="managementMenu"
   >
-  {{ "pages.nav.navbar.admin" | translate }}
+    {{ "pages.nav.navbar.admin" | translate }}
   </button>
   <mat-divider *ngIf="loggedIn"></mat-divider>
   <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">
@@ -185,10 +191,25 @@
   </button>
   <button
     mat-menu-item
+    *ngIf="loggedIn && userAttributes?.MyAffiliate !== null"
+    (click)="navigate('/affiliate-dashboard')"
+  >
+    דוח שותפים
+  </button>
+  <button
+    mat-menu-item
     *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'"
     (click)="navigate('/price-page')"
   >
-  {{ "pages.nav.user-menu.register-plan" | translate }}
+    {{ "pages.nav.user-menu.register-plan" | translate }}
+  </button>
+
+  <button
+    mat-menu-item
+    *ngIf="loggedIn && userAttributes?.userMyAffiliateId"
+    (click)="navigate('/affiliate-dashboard')"
+  >
+    {{ "pages.nav.user-menu.register-plan" | translate }}
   </button>
   <button
     mat-menu-item
@@ -201,17 +222,19 @@
     "
     (click)="navigate('/group-management')"
   >
-  {{ "pages.nav.user-menu.group-management" | translate }}
+    {{ "pages.nav.user-menu.group-management" | translate }}
   </button>
   <!-- <button mat-menu-item [matMenuTriggerFor]="managementMenu"
     *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'">
     <span>ניהול תוכן האתר</span></button> -->
-  <button mat-menu-item *ngIf="loggedIn" (click)="logout()"> {{ "pages.nav.user-menu.logout" | translate }}</button>
+  <button mat-menu-item *ngIf="loggedIn" (click)="logout()">
+    {{ "pages.nav.user-menu.logout" | translate }}
+  </button>
 </mat-menu>
 
 <mat-menu #tourMenu="matMenu" backdropClass="mat-menu">
   <button mat-menu-item (click)="navigate('/all-packs-page')" *ngIf="showTour">
-    <div> {{ "pages.nav.tour-menu.tour-main-page" | translate }}</div>
+    <div>{{ "pages.nav.tour-menu.tour-main-page" | translate }}</div>
   </button>
   <button mat-menu-item (click)="navigate('/pack-view/50')" *ngIf="showTour">
     <div>{{ "pages.nav.tour-menu.how-to-work-with-cards" | translate }}</div>
@@ -231,21 +254,25 @@
     (click)="navigate('/news-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div> {{ "pages.nav.news-updates" | translate }}</div>
+    <div>{{ "pages.nav.news-updates" | translate }}</div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/guide-book-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>{{ "pages.nav.management-menu.guidebook-management" | translate }}</div>
+    <div>
+      {{ "pages.nav.management-menu.guidebook-management" | translate }}
+    </div>
   </button>
   <button
     mat-menu-item
     (click)="navigate('/coupon-codes-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>{{ "pages.nav.management-menu.coupon-codes-management" | translate }}</div>
+    <div>
+      {{ "pages.nav.management-menu.coupon-codes-management" | translate }}
+    </div>
   </button>
   <button
     mat-menu-item
@@ -266,7 +293,9 @@
     (click)="navigate('/payment-programs-management')"
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
-    <div>{{ "pages.nav.management-menu.payment-programs-management" | translate }}</div>
+    <div>
+      {{ "pages.nav.management-menu.payment-programs-management" | translate }}
+    </div>
   </button>
   <button
     mat-menu-item
@@ -274,5 +303,14 @@
     *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
   >
     <div>{{ "pages.nav.management-menu.receipts-management" | translate }}</div>
+  </button>
+  <button
+    mat-menu-item
+    (click)="navigate('/affiliate-management')"
+    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
+  >
+    <div>
+      {{ "pages.nav.management-menu.affiliate-management" | translate }}
+    </div>
   </button>
 </mat-menu>

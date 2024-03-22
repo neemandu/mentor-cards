@@ -101,6 +101,7 @@
         "user-details": "User Details",
         "register-plan": "Register for a Plan",
         "group-management": "Group Management",
+        "affiliate": "Affiliates Dashboard",
         "logout": "Logout"
       },
       "tourMenu": {
@@ -115,7 +116,8 @@
         "orgs-management": "Organizations Management",
         "packs-management": "Card Packs Management",
         "payment-programs-management": "Payment Programs Management",
-        "receipts-management": "Receipts and Payments Management"
+        "receipts-management": "Receipts and Payments Management",
+        "users-management": "Users Management"
       }
     },
     "login": {
@@ -309,6 +311,7 @@
     },
     "user-page": {
       "user-details-title": "User Details",
+      "affiliate": "Affiliates Dashboard",
       "name-label": "Name",
       "email-label": "Email",
       "registration-date-label": "Registration Date",

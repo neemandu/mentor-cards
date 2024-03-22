@@ -90,9 +90,10 @@ import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule} from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
-
-
+import {DataTablesModule} from 'angular-datatables';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -124,7 +125,7 @@ import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new
 import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
-import { GuideBookComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
+import { GuideBookComponent, PopupDialogComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
 import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
 import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
@@ -147,6 +148,16 @@ import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/r
 import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/select-language.component';
 import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
+import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
+import { AffiliateDialogComponent } from './Pages/affiliate-dashboard/affiliate-dialog/affiliate-dialog.component';
+import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
+import { EditDialogComponent } from './Pages/manage-affiliate/edit-dialog/edit-dialog.component';
+import { addDialogComponent } from './Pages/manage-affiliate/add-dialog/add-dialog.component';
+import { UserLoginDialogComponent } from './Pages/all-packs-page/user-login-dialog/user-login-dialog.component';
+import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
+import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/add-dialog-withdraws/add-dialog-withdraws.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { EditDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/edit-dialog-withdraws/edit-dialog-withdraws.component';
 
 @NgModule({
   declarations: [
@@ -164,6 +175,8 @@ import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page
     OverlaySpinnerComponent,
     RandomCardRevealDialogComponent,
     TransitionGroupComponent,
+    EditDialogComponent,
+    addDialogComponent,
     TransitionGroupItemDirective,
     LoginComponent,
     RegisterComponent,
@@ -199,7 +212,15 @@ import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page
     ReadTermsDialogComponent,
     CopyCommonLinkDialogComponent,
     SelectLanguageComponent,
-    AffiliatesPageComponent
+    AffiliatesPageComponent,
+    AffiliatesDashboardPageComponent,
+    AffiliateDialogComponent,
+    ManageAffiliateComponent,
+    PopupDialogComponent,
+    UserLoginDialogComponent,
+    AffiliateWithdrawsComponent,
+    addDialogWithdrawsComponent,
+    EditDialogWithdrawsComponent
   ],
   imports: [
     BrowserModule,
@@ -213,6 +234,7 @@ import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page
     PortalModule,
     ManagementModule,
     I18nModule,
+    DataTablesModule,
     //Material
     MatButtonModule,
     MatIconModule,
@@ -238,6 +260,11 @@ import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page
     DragDropModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatDatepickerModule
+
   ],
   providers: [AuthService,
     {
