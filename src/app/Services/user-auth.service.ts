@@ -65,8 +65,12 @@ export class UserAuthService {
     private mixpanelService: MixpanelService,
     private pendoService: PendoService
   ) {
-    this.rememebrMe();
-    this.getSubscriptionPlans();
+    this.initializeService();
+  }
+
+  async initializeService(): Promise<void> {
+    await this.rememebrMe();
+    await this.getSubscriptionPlans();
   }
 
   async rememebrMe(): Promise<void> {
@@ -75,10 +79,11 @@ export class UserAuthService {
         bypassCache: true,
       });
       if (user) {
-        this.loggedIn(user);
+        await this.loggedIn(user);
         this.rememberMeDone = true;
       } else {
         this.rememberMeDone = true;
+        this.overlaySpinnerService.changeOverlaySpinner(false);
         throw 'No current user - rememberMe retured VOID';
       }
     } catch (err) {
@@ -89,7 +94,6 @@ export class UserAuthService {
         err
       );
       this.rememberMeDone = true;
-      this.getSubscriptionPlans();
     }
   }
 
@@ -97,8 +101,9 @@ export class UserAuthService {
    * After succesful log in, save cookies and let all components know we logged in
    * @param userData - data returned from the BE for the user (tokens etc')
    */
-  loggedIn(cognitoUserData?: any): void {
+  async loggedIn(cognitoUserData?: any): Promise<void> {
     if (!cognitoUserData && !this.cognitoUserData) {
+      this.isLoggedIn = true;
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
@@ -113,90 +118,88 @@ export class UserAuthService {
     }
     this.mixpanelService.identify(this.cognitoUserData['email']);
     this.mixpanelService.track("UserLoggedIn");
-    this.createUser();
+    await this.createUser();
   }
 
-  createUser(): void {
-    var newUsername: string = this.cognitoUserData["username"];
-    var newUserEmail: string = this.cognitoUserData['email'];
-    var newUserPhone: string = this.cognitoUserData['phone_number'];
-    var newUserFullName: string = this.cognitoUserData['given_name'];
-    var affiliateId: string = localStorage.getItem('refId');
-    var user: CreateUserInput = {
-      username: newUsername,
-      email: newUserEmail,
-      phone: newUserPhone,
-      fullName: newUserFullName,
-      affiliateId: affiliateId
-    };
-    this.api.CreateUser(user).then(
-      (value) => {
-        this.userData = new UserData().deseralize(value);
-        this.isLoggedIn = true;
-        this.favorites = this.userData.favouritePacks;
-        this.subPlans = undefined;
-        this.getSubscriptionPlans();
-        this.userDataEmmiter.emit(this.userData);
-
-        // tracking tools
-        LogRocket.identify(this.userData.email);
-        this.mixpanelService.setPeopleProperties(this.userData);
-
-        
-        // Pendo
-        this.pendoService.initialize(this.userData);
-
-        const currentTime = new Date();
-        // Create a new Date object for 5 minutes ago
-        const fiveMinutesAgo = new Date(currentTime.getTime() - (5 * 60 * 1000));
-        if (this.userData.createdAt >= fiveMinutesAgo && this.userData.createdAt <= currentTime) {
-          this.mixpanelService.track("SignUp");
-        } else {
-          this.mixpanelService.track("UserLoggedIn");
-        }
-
-
-        if (this.userData.groupId) this.updateGroupData();
-        if (this.userData.couponCodes.length != 0) {
-          this.userData.couponCodes.forEach((coupon) => {
-            if (
-              !coupon.trialPeriodInDays ||
-              coupon.createdAt?.getTime() +
-                coupon.trialPeriodInDays * millisecondsInDay >
-                new Date().getTime()
-            )
-              this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks);
-          });
-        }
-
-        this.checkOrgTrial();
-
-        // this.overlaySpinnerService.changeOverlaySpinner(false);
-        // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
-        this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
-          duration: 5000,
-          panelClass: ['rtl-snackbar'],
-        });
-      },
-      (reject) => {
-        console.log(
-          '🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject',
-          reject
-        );
-        // this.overlaySpinnerService.changeOverlaySpinner(false);
-        let snackBarRef = this._snackBar.open(
-          'שגיאה במימוש משתמש, נסו שנית',
-          'רענן',
-          {
-            duration: 20000,
-            panelClass: ['rtl-snackbar'],
-          }
-        );
-        snackBarRef.onAction().subscribe(() => {
-          window.location.reload();
+  async createUser(): Promise<void> {
+    try{
+      var newUsername: string = this.cognitoUserData["username"];
+      var newUserEmail: string = this.cognitoUserData['email'];
+      var newUserPhone: string = this.cognitoUserData['phone_number'];
+      var newUserFullName: string = this.cognitoUserData['given_name'];
+      var affiliateId: string = localStorage.getItem('refId');
+      var user: CreateUserInput = {
+        username: newUsername,
+        email: newUserEmail,
+        phone: newUserPhone,
+        fullName: newUserFullName,
+        affiliateId: affiliateId
+      };
+      let value = await this.api.CreateUser(user);
+      this.userData = new UserData().deseralize(value);
+      this.isLoggedIn = true;
+      this.favorites = this.userData.favouritePacks;
+      this.subPlans = undefined;
+      this.userDataEmmiter.emit(this.userData);
+  
+      // tracking tools
+      LogRocket.identify(this.userData.email);
+      this.mixpanelService.setPeopleProperties(this.userData);
+  
+      
+      // Pendo
+      this.pendoService.initialize(this.userData);
+  
+      const currentTime = new Date();
+      // Create a new Date object for 5 minutes ago
+      const fiveMinutesAgo = new Date(currentTime.getTime() - (5 * 60 * 1000));
+      if (this.userData.createdAt >= fiveMinutesAgo && this.userData.createdAt <= currentTime) {
+        this.mixpanelService.track("SignUp");
+      } else {
+        this.mixpanelService.track("UserLoggedIn");
+      }
+  
+  
+      if (this.userData.groupId) this.updateGroupData();
+      if (this.userData.couponCodes.length != 0) {
+        this.userData.couponCodes.forEach((coupon) => {
+          if (
+            !coupon.trialPeriodInDays ||
+            coupon.createdAt?.getTime() +
+              coupon.trialPeriodInDays * millisecondsInDay >
+              new Date().getTime()
+          )
+            this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks);
         });
       }
-    );
+  
+      this.checkOrgTrial();
+  
+      // this.overlaySpinnerService.changeOverlaySpinner(false);
+      // (this.userData.status === 'PLAN' || this.codeCouponExpDate) ? this.ngZone.run(() => this.router.navigate(['/all-packs-page'])) : this.ngZone.run(() => this.router.navigate(['/no-program-page']))
+      this._snackBar.open('התחברות מוצלחת! ברוכים הבאים ', '', {
+        duration: 5000,
+        panelClass: ['rtl-snackbar'],
+      });
+    }
+    catch(reject){
+      console.log(
+        '🚀 ~ file: user-auth.service.ts ~ line 73 ~ UserAuthService ~ this.api.CreateUser ~ reject',
+        reject
+      );
+      // this.overlaySpinnerService.changeOverlaySpinner(false);
+      let snackBarRef = this._snackBar.open(
+        'שגיאה במימוש משתמש, נסו שנית',
+        'רענן',
+        {
+          duration: 20000,
+          panelClass: ['rtl-snackbar'],
+        }
+      );
+      snackBarRef.onAction().subscribe(() => {
+        window.location.reload();
+      });
+    }
   }
 
   /**

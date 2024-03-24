@@ -159,15 +159,23 @@ export class AllPacksPageComponent implements OnInit {
       'Page Title': 'all-packs-page',
     });
 
-    this.Subscription.add(
-      this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-        console.log('allpacks page sub');
-        userData ? this.getAllPacks() : null;
-        this.userData = userData;
-        this.allFavorites = this.userAuthService.favorites;
-        this.setAllFavPacksToShow();
-      })
-    );
+    if(this.userAuthService.isLoggedIn){
+      this.userData = this.userAuthService.userData;
+      this.allFavorites = this.userAuthService.favorites;
+      this.setAllFavPacksToShow();
+      this.getAllPacks();
+    }
+    else{
+      this.Subscription.add(
+        this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+          userData ? this.getAllPacks() : null;
+          this.userData = userData;
+          this.allFavorites = this.userAuthService.favorites;
+          this.setAllFavPacksToShow();
+        })
+      );
+    }
+
     this.Subscription.add(
       this.userAuthService.favoritesChangeEmmiter.subscribe(
         (favorites: number[]) => {
@@ -177,16 +185,15 @@ export class AllPacksPageComponent implements OnInit {
       )
     );
     console.log('allpacks page sub 2');
-    this.userData = this.userAuthService.userData;
-    console.log(localStorage.getItem('isDialogOpen'),'isDialogOpen href');
+    console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
     if (!this.userData || this.userData.status === 'NOPLAN') {
-      if (localStorage.getItem('isDialogOpen') === 'false') {
-        localStorage.setItem('isDialogOpen', 'true');
-        console.log(localStorage.getItem('isDialogOpen'),'after set isDialogOpen href');
+      if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
+        localStorage.setItem('isTrialPacksDialogOpen', 'true');
+        console.log(localStorage.getItem('isTrialPacksDialogOpen'),'after set isTrialPacksDialogOpen href');
         this.openDialog();
       }
     }
-    this.getAllPacks();
+    //this.getAllPacks();
   }
 
   filterOptions() {
