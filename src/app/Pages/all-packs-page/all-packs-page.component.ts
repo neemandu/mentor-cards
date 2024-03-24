@@ -166,9 +166,10 @@ export class AllPacksPageComponent implements OnInit {
       this.getAllPacks();
     }
     else{
+      this.getAllPacks();
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-          userData ? this.getAllPacks() : null;
+          this.getAllPacks();
           this.userData = userData;
           this.allFavorites = this.userAuthService.favorites;
           this.setAllFavPacksToShow();
