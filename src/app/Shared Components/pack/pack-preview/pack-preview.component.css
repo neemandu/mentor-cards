@@ -281,6 +281,16 @@ mat-icon {
     max-width: unset;
     padding: unset;
   }
+
+  .top-part-text,
+  .about-author-text {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: start;
+    padding: 0px 4%;
+    height: 40vh;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -288,5 +298,29 @@ mat-icon {
   .card-preview,
   .about-author-image-container {
     max-width: 50vw;
+  }
+
+  .top-part-text,
+  .about-author-text {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: start;
+    padding: 0px 4%;
+    height: 60vh;
+  }
+}
+
+
+@media screen and (max-width: 340px) {
+
+  .top-part-text,
+  .about-author-text {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: start;
+    padding: 0px 4%;
+    height: 65vh;
   }
 }
