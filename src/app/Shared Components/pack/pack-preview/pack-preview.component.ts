@@ -14,6 +14,7 @@ import { ApprovePurchaseDialogComponent } from 'src/app/Pages/price-page/approve
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { AboutAuthorComponent } from '../about-author/about-author.component';
+import { Platform } from '@angular/cdk/platform';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -30,6 +31,7 @@ export class PackPreviewComponent implements OnInit {
   monthlyPlan: SubscriptionPlan;
   discount: number;
   neverShowAgain: boolean = false;
+  isMobile: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: previewData,
@@ -38,8 +40,9 @@ export class PackPreviewComponent implements OnInit {
     private userAuthService: UserAuthService,
     public router: Router,
     private ngZone: NgZone,
-    private mixpanel: MixpanelService
-  ) {}
+    private mixpanel: MixpanelService,
+    private platform: Platform
+  ) { }
 
   ngOnInit(): void {
     let sub = this.userAuthService.userDataEmmiter.subscribe(() => {
@@ -60,36 +63,43 @@ export class PackPreviewComponent implements OnInit {
       this.yearlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el?.billingCycleInMonths === 12
       );
-      if(this.yearlyPlan){
+      if (this.yearlyPlan) {
         this.yearlyPlan['priceForMentorCardsMembers'] =
-        Math.round(
-          this.yearlyPlan?.fullPrice * (1 - this.yearlyPlan?.discount / 100) * 10
-        ) / 10;
+          Math.round(
+            this.yearlyPlan?.fullPrice * (1 - this.yearlyPlan?.discount / 100) * 10
+          ) / 10;
       }
 
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el?.billingCycleInMonths === 1
       );
-      if(this.monthlyPlan){
-      this.monthlyPlan['priceForMentorCardsMembers'] =
-        Math.round(
-          this.monthlyPlan?.fullPrice *
+      if (this.monthlyPlan) {
+        this.monthlyPlan['priceForMentorCardsMembers'] =
+          Math.round(
+            this.monthlyPlan?.fullPrice *
             (1 - this.monthlyPlan?.discount / 100) *
             10
-        ) / 10;
+          ) / 10;
       }
       this.discount = Math.round(
         (1 - this.yearlyPlan?.fullPrice / (this.monthlyPlan?.fullPrice * 12)) *
-          100
+        100
       );
     }
+
+    if (this.platform.ANDROID || this.platform.IOS) {
+      this.isMobile = true;
+    }
+
   }
 
   redirect(): void {
-    this.mixpanel.track("RedirectToExternalCreator", 
-    {"Pack ID": this.data.pack.id, 
-    "Pack name" : this.data.pack?.name,
-    "Link" : this.data.pack?.about.link});
+    this.mixpanel.track("RedirectToExternalCreator",
+      {
+        "Pack ID": this.data.pack.id,
+        "Pack name": this.data.pack?.name,
+        "Link": this.data.pack?.about.link
+      });
     window.open(this.data.pack.about.link, '_blank');
   }
 

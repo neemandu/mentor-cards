@@ -29,6 +29,7 @@ import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/d
 import { CopyCommonLinkDialogComponent } from 'src/app/Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -59,6 +60,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   commonLink: any = undefined;
   flipCard: string = 'inactive';
   rotation:number = 0;
+  isMobile: boolean = false;
 
   constructor(
     public route: ActivatedRoute,
@@ -72,7 +74,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     private userAuthService: UserAuthService,
     private ngZone: NgZone,
     private mixpanelService: MixpanelService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private platform: Platform
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -86,6 +89,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     return false;
   }
   ngOnInit(): void {
+
+    if (this.platform.ANDROID || this.platform.IOS) {
+      this.isMobile = true;
+    }
     this.route.queryParams.subscribe(params => {
       this.commonLink = params['link'];
       console.log('link:', this.commonLink);

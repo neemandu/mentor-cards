@@ -23,6 +23,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOption } from '@angular/material/core';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { UserLoginDialogComponent } from './user-login-dialog/user-login-dialog.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 interface CategoryPack {
   category: string;
@@ -87,7 +88,8 @@ export class AllPacksPageComponent implements OnInit {
     private ngZone: NgZone,
     public dialog: MatDialog,
     private mixpanelService: MixpanelService,
-    public langDirectionService: LangDirectionService
+    public langDirectionService: LangDirectionService,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
   }
@@ -400,11 +402,18 @@ export class AllPacksPageComponent implements OnInit {
   }
 
   openDialog(): void {
+    let dialogWidth = '40vw'; // default width
+  
+    // Check if the screen size is small (mobile)
+    if (this.breakpointObserver.isMatched(Breakpoints.XSmall)) {
+      dialogWidth = '80vw'; // width for mobile screens
+    }
+  
     const dialogRef = this.dialog.open(UserLoginDialogComponent, {
-      width: '40vw',
+      width: dialogWidth,
       disableClose: true,
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
