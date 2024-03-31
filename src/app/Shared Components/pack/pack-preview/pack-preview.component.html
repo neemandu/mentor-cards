@@ -6,7 +6,7 @@
     <p class="title">ערכת VIP</p>
   </div>
   <div class="top-part">
-    <div class="top-part-text" [ngStyle]="isMobile ? {'height':'80vh'} : {}">
+    <div class="top-part-text">
       <p class="main-header">{{data.pack.name}}</p>
       <p class="content categories-tags">{{data.pack.description}}</p>
       <div *ngIf="data.pack.topQuestions && data.pack.topQuestions.length !== 0" class="selected-questions">

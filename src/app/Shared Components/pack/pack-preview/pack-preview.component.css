@@ -224,7 +224,7 @@ mat-icon {
   text-align: start;
   align-items: start;
   padding: 0px 4%;
-  height: 40vh;
+  height: max-content;
 }
 
 .about-author-text {
@@ -268,6 +268,16 @@ mat-icon {
   .categories-tags {
     max-width: 65vw;
   }
+
+  .top-part-text,
+  .about-author-text {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: start;
+    padding: 0px 4%;
+    height: max-content !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -282,15 +292,7 @@ mat-icon {
     padding: unset;
   }
 
-  .top-part-text,
-  .about-author-text {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    align-items: start;
-    padding: 0px 4%;
-    height: 40vh;
-  }
+  
 }
 
 @media screen and (max-width: 480px) {
@@ -298,81 +300,5 @@ mat-icon {
   .card-preview,
   .about-author-image-container {
     max-width: 50vw;
-  }
-
-  .top-part-text,
-  .about-author-text {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    align-items: start;
-    padding: 0px 4%;
-    height: 60vh;
-  }
-}
-
-
-@media screen and (max-width: 340px) {
-
-  .top-part-text,
-  .about-author-text {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    align-items: start;
-    padding: 0px 4%;
-    height: 65vh;
-  }
-}
-
-@media screen and (max-width: 320px) {
-
-  .top-part-text,
-  .about-author-text {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    align-items: start;
-    padding: 0px 4%;
-    height: 70vh;
-  }
-}
-
-@media screen and (max-width: 300px) {
-
-  .top-part-text,
-  .about-author-text {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    align-items: start;
-    padding: 0px 4%;
-    height: 75vh;
-  }
-}
-
-@media screen and (max-width: 280px) {
-
-  .top-part-text,
-  .about-author-text {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    align-items: start;
-    padding: 0px 4%;
-    height: 80vh;
-  }
-}
-
-@media screen and (max-width: 260px) {
-
-  .top-part-text,
-  .about-author-text {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    align-items: start;
-    padding: 0px 4%;
-    height: 90vh;
   }
 }
