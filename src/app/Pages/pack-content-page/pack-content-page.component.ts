@@ -30,6 +30,7 @@ import { CopyCommonLinkDialogComponent } from 'src/app/Pages/pack-content-page/c
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
+import { DataService } from 'src/app/Services/data-service.service';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -72,6 +73,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     public componentFactoryResolver: ComponentFactoryResolver,
     private router: Router,
     private userAuthService: UserAuthService,
+    private dataService: DataService,
     private ngZone: NgZone,
     private mixpanelService: MixpanelService,
     private cdr: ChangeDetectorRef,
@@ -309,7 +311,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   openGuideBook(): void {
     this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id, 'Pack name': this.pack?.name });
-    // debugger
     const modalData: PopoutData = {
       modalName: 'guide-book',
       guideBook: this.pack.guideBook,
@@ -317,7 +318,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       packDesc: this.pack.description,
       imgUrl: this.pack.imgUrl
     };
-    this.popoutService.openPopoutModal(modalData);
+    this.dataService.setData(modalData);
+    console.log('modalData: in data srvice',JSON.parse(localStorage.getItem('data')));
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/print']));
+    window.open(url, '_blank');
   }
 
   sleep(ms) {

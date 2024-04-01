@@ -158,6 +158,7 @@ import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-
 import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/add-dialog-withdraws/add-dialog-withdraws.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EditDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/edit-dialog-withdraws/edit-dialog-withdraws.component';
+import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-pop-up/print-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -220,7 +221,8 @@ import { EditDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate
     UserLoginDialogComponent,
     AffiliateWithdrawsComponent,
     addDialogWithdrawsComponent,
-    EditDialogWithdrawsComponent
+    EditDialogWithdrawsComponent,
+    PrintPopUpComponent,
   ],
   imports: [
     BrowserModule,

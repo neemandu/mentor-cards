@@ -38,6 +38,7 @@ import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page
 import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
 import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
 import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
+import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-pop-up/print-pop-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -67,6 +68,7 @@ const routes: Routes = [
   { path: 'affiliates-page', component: AffiliatesPageComponent },
   { path: 'affiliate-dashboard', component: AffiliatesDashboardPageComponent },
   { path: 'affiliate-withdraws/:id', component: AffiliateWithdrawsComponent},
+  { path:'print', component: PrintPopUpComponent},
   // { path: 'manage-affiliate', component: ManageAffiliateComponent },
 
   {
