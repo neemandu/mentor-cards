@@ -2,23 +2,12 @@
   "lambdaLayers": [],
   "environmentVariableList": [
     {
-      "cloudFormationParameterName": "contactListId",
-      "environmentVariableName": "contactListId"
-    },
-    {
-      "cloudFormationParameterName": "contactListId",
-      "environmentVariableName": "contactListId"
-    },
-    {
-      "cloudFormationParameterName": "contactListId",
-      "environmentVariableName": "contactListId"
-    },
-    {
-      "cloudFormationParameterName": "contactListId",
-      "environmentVariableName": "contactListId"
+      "cloudFormationParameterName": "922666",
+      "environmentVariableName": "922666"
     }
   ],
   "secretNames": [
-    "sendinblueAPIKey"
+    "sendinblueAPIKey",
+    "smooveApiKey"
   ]
 }

@@ -2,6 +2,9 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.15\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
+    "922666": {
+      "Type": "String"
+    },
     "CloudWatchRule": {
       "Type": "String",
       "Default": "NONE",
@@ -25,9 +28,6 @@
       "Default": "apicardspacksGraphQLAPIEndpointOutput"
     },
     "secretsPathAmplifyAppId": {
-      "Type": "String"
-    },
-    "contactListId": {
       "Type": "String"
     }
   },
@@ -78,6 +78,9 @@
         },
         "Environment": {
           "Variables": {
+            "922666": {
+              "Ref": "922666"
+            },
             "ENV": {
               "Ref": "env"
             },
@@ -106,8 +109,27 @@
                 ]
               ]
             },
-            "contactListId": {
-              "Ref": "contactListId"
+            "smooveApiKey": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "AddNewUserToEmailsContactList"
+                      }
+                    ]
+                  },
+                  "smooveApiKey"
+                ]
+              ]
             }
           }
         },

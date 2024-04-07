@@ -131,6 +131,28 @@
             },
             "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apicardspacksGraphQLAPIIdOutput"
+            },
+            "smooveApiKey": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "MessagingService"
+                      }
+                    ]
+                  },
+                  "smooveApiKey"
+                ]
+              ]
             }
           }
         },

@@ -1,7 +1,8 @@
 {
   "lambdaLayers": [],
   "secretNames": [
-    "sendinblueAPIKey"
+    "sendinblueAPIKey",
+    "smooveApiKey"
   ],
   "permissions": {
     "storage": {

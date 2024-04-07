@@ -200,7 +200,7 @@
         },
         "MessagingService": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/MessagingService-73795534774d7156476f-build.zip",
+          "s3Key": "amplify-builds/MessagingService-57576e54466f316c3158-build.zip",
           "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "EmailUpcomingPayment": {
@@ -236,10 +236,10 @@
           "s3Key": "amplify-builds/IsCardsPackOwnedByOrgForUser-4878756f746e64524341-build.zip"
         },
         "AddNewUserToEmailsContactList": {
+          "922666": "922666",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4f6e5963496264373845-build.zip",
-          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
-          "contactListId": "1"
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-586e794231384d65584b-build.zip",
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
