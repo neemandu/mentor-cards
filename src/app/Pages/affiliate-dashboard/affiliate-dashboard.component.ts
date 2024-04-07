@@ -117,7 +117,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
 
   userData = {
     discountCode: 'MC25PER',
-    user: 'https://www.mentor-cards.com/yossi',
+    user: 'https://www.mentor-cards.com/'
   };
 
   copyTextToClipboard(text: string) {
@@ -145,6 +145,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
     this.apiService.GetAffiliateData({ username: '' }).then(
       (affiliate) => {
         this.affiliateData = affiliate;
+        this.userData.user = 'https://www.mentor-cards.com/' + this.affiliateData[0].refId;
         this.overlaySpinnerService.changeOverlaySpinner(false);
       },
       (error) => {

@@ -31,18 +31,6 @@
     {
       "cloudFormationParameterName": "receiptsUrl",
       "environmentVariableName": "receiptsUrl"
-    },
-    {
-      "cloudFormationParameterName": "receiptsUrl",
-      "environmentVariableName": "receiptsUrl"
-    },
-    {
-      "cloudFormationParameterName": "receiptsUrl",
-      "environmentVariableName": "receiptsUrl"
-    },
-    {
-      "cloudFormationParameterName": "receiptsUrl",
-      "environmentVariableName": "receiptsUrl"
     }
   ]
 }

@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService, private ngZone: NgZone) { }
 
   ngOnInit(): void {
-    localStorage.setItem('isDialogOpen', 'false');
+    //localStorage.setItem('isDialogOpen', 'false');
   }
 
   ngOnChanges(changes: SimpleChanges): void {

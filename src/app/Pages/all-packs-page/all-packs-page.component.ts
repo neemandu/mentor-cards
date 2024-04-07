@@ -23,6 +23,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOption } from '@angular/material/core';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { UserLoginDialogComponent } from './user-login-dialog/user-login-dialog.component';
+import { bool } from 'aws-sdk/clients/signer';
 
 interface CategoryPack {
   category: string;
@@ -159,15 +160,24 @@ export class AllPacksPageComponent implements OnInit {
       'Page Title': 'all-packs-page',
     });
 
-    this.Subscription.add(
-      this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-        console.log('allpacks page sub');
-        userData ? this.getAllPacks() : null;
-        this.userData = userData;
-        this.allFavorites = this.userAuthService.favorites;
-        this.setAllFavPacksToShow();
-      })
-    );
+    if(this.userAuthService.isLoggedIn){
+      this.userData = this.userAuthService.userData;
+      this.allFavorites = this.userAuthService.favorites;
+      this.setAllFavPacksToShow();
+      this.getAllPacks(true);
+    }
+    else{
+      this.getAllPacks(true);
+      this.Subscription.add(
+        this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+          this.getAllPacks(false);
+          this.userData = userData;
+          this.allFavorites = this.userAuthService.favorites;
+          this.setAllFavPacksToShow();
+        })
+      );
+    }
+
     this.Subscription.add(
       this.userAuthService.favoritesChangeEmmiter.subscribe(
         (favorites: number[]) => {
@@ -177,16 +187,15 @@ export class AllPacksPageComponent implements OnInit {
       )
     );
     console.log('allpacks page sub 2');
-    this.userData = this.userAuthService.userData;
-    console.log(localStorage.getItem('isDialogOpen'),'isDialogOpen href');
+    console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
     if (!this.userData || this.userData.status === 'NOPLAN') {
-      if (localStorage.getItem('isDialogOpen') === 'false') {
-        localStorage.setItem('isDialogOpen', 'true');
-        console.log(localStorage.getItem('isDialogOpen'),'after set isDialogOpen href');
+      if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
+        localStorage.setItem('isTrialPacksDialogOpen', 'true');
+        console.log(localStorage.getItem('isTrialPacksDialogOpen'),'after set isTrialPacksDialogOpen href');
         this.openDialog();
       }
     }
-    this.getAllPacks();
+    //this.getAllPacks();
   }
 
   filterOptions() {
@@ -197,7 +206,7 @@ export class AllPacksPageComponent implements OnInit {
         tag.toLowerCase().includes(filterValue)
       );
     } else {
-      this.getAllPacks();
+      this.getAllPacks(true);
     }
   }
 
@@ -213,26 +222,40 @@ export class AllPacksPageComponent implements OnInit {
   /**
    * Retrive all packs
    */
-  getAllPacks(): void {
-    console.log('allpackspage');
-    if (this.cardsService.allPacks) {
-      this.setAllPacksData();
-      this.setAllCategoryPacksToShow();
-      this.setAllFavPacksToShow();
-      this.initializeFilteredOptions();
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      // this.sortPacks();
-    } else {
-      let sub = this.cardsService.allPacksReadyEmmiter.subscribe(() => {
-        sub.unsubscribe();
+  getAllPacks(useCache: bool): void {
+    console.log('useCache: '  + useCache);
+    if(useCache){
+      if (this.cardsService.allPacks) {
+        this.setAllPacksData();
+        this.setAllCategoryPacksToShow();
+        this.setAllFavPacksToShow();
+        this.initializeFilteredOptions();
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        // this.sortPacks();
+      } else {
+        this.cardsService.allPacksReadyEmmiter.subscribe(() => {
+          this.setAllPacksData();
+          this.setAllCategoryPacksToShow();
+          this.setAllFavPacksToShow();
+          this.initializeFilteredOptions();
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+        });
+        this.cardsService.getAllPacks();
+      }
+    }
+    else{
+      this.cardsService.allPacksReadyEmmiter.subscribe(() => {
+        console.log('getAllPacks finished!');
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
       });
+      console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
     }
+    
   }
 
   setAllPacksData(): void {
