@@ -241,22 +241,9 @@
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "contactListId": "1"
         },
-        "InvoiceHandler": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-622f4853374f46313846-build.zip",
-          "receiptsUrl": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev"
-        },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-736a65445a766932474b-build.zip"
-        },
-        "NewAffiliateHandler": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/NewAffiliateHandler-485a3654433779484150-build.zip"
-        },
-        "AffiliateBalanceHandler": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AffiliateBalanceHandler-4e4b3748554d2f632b71-build.zip"
         }
       },
       "auth": {
