@@ -488,7 +488,7 @@
         <div style="display: flex">
           <div
             *ngFor="let card of selectedCards"
-            style="display: flex; flex-direction: column; align-items: center"
+            style="display: flex; flex-direction: column; align-items: center"   
           >
             <div *ngIf="selectedCards.length == 1" class="card-close-btn">
               <button
@@ -737,7 +737,7 @@
             <mat-icon class="mat-icon-close">highlight_off</mat-icon>
           </button>
         </div>
-        <div style="display: flex; flex-direction: row; align-items: center">
+        <div style="display: flex; flex-direction: row; align-items: center; overflow-x: scroll;width: 100vw; padding-bottom: 2vw; justify-content: center;">
           
           <div *ngFor="let card of selectedCards" style="display: block;">
 
