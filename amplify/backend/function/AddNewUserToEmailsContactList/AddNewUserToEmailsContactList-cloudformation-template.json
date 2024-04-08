@@ -2,9 +2,6 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.15\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
-    "922666": {
-      "Type": "String"
-    },
     "CloudWatchRule": {
       "Type": "String",
       "Default": "NONE",
@@ -28,6 +25,9 @@
       "Default": "apicardspacksGraphQLAPIEndpointOutput"
     },
     "secretsPathAmplifyAppId": {
+      "Type": "String"
+    },
+    "contactListId": {
       "Type": "String"
     }
   },
@@ -78,9 +78,6 @@
         },
         "Environment": {
           "Variables": {
-            "922666": {
-              "Ref": "922666"
-            },
             "ENV": {
               "Ref": "env"
             },
@@ -130,6 +127,9 @@
                   "smooveApiKey"
                 ]
               ]
+            },
+            "CONTACT_LIST_ID": {
+              "Ref": "contactListId"
             }
           }
         },

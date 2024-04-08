@@ -2,8 +2,8 @@
   "lambdaLayers": [],
   "environmentVariableList": [
     {
-      "cloudFormationParameterName": "922666",
-      "environmentVariableName": "922666"
+      "cloudFormationParameterName": "contactListId",
+      "environmentVariableName": "CONTACT_LIST_ID"
     }
   ],
   "secretNames": [
