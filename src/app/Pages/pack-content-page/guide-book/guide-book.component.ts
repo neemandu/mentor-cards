@@ -64,25 +64,24 @@ export class GuideBookComponent implements OnInit {
   }
 
   printPdf(): void {
-    // const newWindow = window.open('', '_blank');
-    // if (newWindow === null || typeof newWindow === 'undefined') {
-    //   this.isError = true;
-    //   this.dialog.open(PopupDialogComponent);
+    const newWindow = window.open('', '_blank');
+    if (newWindow === null || typeof newWindow === 'undefined') {
+      this.isError = true;
+      this.dialog.open(PopupDialogComponent);
 
-    // } else {
-    //   this.isError = false;
-    //   this.mixpanelService.track('ButtonClicked', { Name: 'Print GuideBook' });
-    //   console.log('Print Guidebook');
-    //   let html_url = '/assets/htmlTemplates/guidebook.html';
-    //   this.printPdfService.printHtmlContent(
-    //     html_url,
-    //     this.packName,
-    //     this.packDesc,
-    //     this.guideBook,
-    //     this.imgUrl
-
-    //   );
-    // }
+    } else {
+      this.isError = false;
+      this.mixpanelService.track('ButtonClicked', { Name: 'Print GuideBook' });
+      console.log('Print Guidebook');
+      let html_url = '/assets/htmlTemplates/guidebook.html';
+      this.printPdfService.printHtmlContent(
+        html_url,
+        this.packName,
+        this.packDesc,
+        this.guideBook,
+        this.imgUrl
+      );
+    }
   }
 }
 

@@ -30,8 +30,6 @@ import { CopyCommonLinkDialogComponent } from 'src/app/Pages/pack-content-page/c
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
-import { DataService } from 'src/app/Services/data-service.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -74,12 +72,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     public componentFactoryResolver: ComponentFactoryResolver,
     private router: Router,
     private userAuthService: UserAuthService,
-    private dataService: DataService,
     private ngZone: NgZone,
     private mixpanelService: MixpanelService,
     private cdr: ChangeDetectorRef,
-    private platform: Platform,
-    private http: HttpClient
+    private platform: Platform
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -312,68 +308,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   openGuideBook(): void {
-    // this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id, 'Pack name': this.pack?.name });
-    // const modalData: PopoutData = {
-    //   modalName: 'guide-book',
-    //   guideBook: this.pack.guideBook,
-    //   packName: this.pack?.name,
-    //   packDesc: this.pack.description,
-    //   imgUrl: this.pack.imgUrl
-    // };
-    // this.dataService.setData(modalData);
-    // console.log('modalData: in data srvice',JSON.parse(localStorage.getItem('data')));
-    // const url = this.router.serializeUrl(this.router.createUrlTree(['/print']));
-    // window.open(url, '_blank');
-   
-    this.mixpanelService.track('ButtonClicked', { Name: 'Print GuideBook' });
-    let html_url = '/assets/htmlTemplates/guidebook.html';
-    console.log('Print Guidebook in new window 2');
-    this.http.get(html_url, { responseType: 'text' }).subscribe(template => {
-      let filledTemplate = template;
-      filledTemplate = filledTemplate.replace(new RegExp(`{{name}}`, 'g'), this.pack?.name);
-      filledTemplate = filledTemplate.replace(new RegExp(`{{description}}`, 'g'),this.pack.description);
-      filledTemplate = filledTemplate.replace(new RegExp(`{{imgUrl}}`, 'g'),this.pack.imgUrl);
-      let guidbookHtml = this.generateGuideBookHtml(this.pack.guideBook);
-      filledTemplate = filledTemplate.replace(new RegExp(`{{guidebook}}`, 'g'), guidbookHtml);
-      const printWindow = window.open('', '_blank');
-      printWindow.document.write(filledTemplate);
-      printWindow.document.close();
-      printWindow.focus();
-      setTimeout(() => {
-        printWindow.print();
-        printWindow.close();
-      }, 250);
-    });
+    this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    // debugger
+    const modalData: PopoutData = {
+      modalName: 'guide-book',
+      guideBook: this.pack.guideBook,
+      packName: this.pack?.name,
+      packDesc: this.pack.description,
+      imgUrl: this.pack.imgUrl
+    };
+    this.popoutService.openPopoutModal(modalData);
   }
 
-  generateGuideBookHtml(guideBook): string {
-    return this.processGuidebookElement(guideBook, 0, []);
-  }
-
-  processGuidebookElement(elements, depth = 0, numbers = []): string {
-    let htmlContent = '';
-    elements.forEach((element, index) => {
-      const currentNumbers = [...numbers, index + 1];
-      const numberStr = currentNumbers.join(".");
-      const indent = depth * 20; // Increase indentation by 20px for each level
-
-      // Remove the specified string from element name if exists and apply numbering
-      const elementName = element.name.replace("לפתיחה לחצו כאן", "");
-      if (depth === 0) {
-        htmlContent += `<h2 style="margin-right:${indent}px;"><b>${numberStr} ${elementName}</b></h2>`;
-      } else if (depth === 1) {
-        htmlContent += `<p style="margin-right:${indent}px;">${numberStr} ${elementName}</p>`;
-      } else {
-        htmlContent += `<p style="margin-right:${indent}px;">${numberStr} ${elementName}</p>`;
-      }
-
-      // Process sub-elements if any, increasing the depth and passing the current numbering path
-      if ('subElements' in element && element.subElements) {
-        htmlContent += this.processGuidebookElement(element.subElements, depth + 1, currentNumbers);
-      }
-    });
-    return htmlContent;
-  }
   sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
