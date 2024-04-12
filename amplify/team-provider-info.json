@@ -63,7 +63,40 @@
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-736a65445a766932474b-build.zip"
-        }
+        },
+        "MessagingService": {
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/MessagingService-2b327935755956617432-build.zip"
+        },
+        "AddNewUserToEmailsContactList": {
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/AddNewUserToEmailsContactList-4f6e5963496264373845-build.zip"
+        },
+        "CreateUser": {},
+        "AddCardsPack": {},
+        "ChangeCardsPack": {},
+        "UpdateGroupUsersList": {},
+        "UnSubscribe": {},
+        "JoinExistingGroup": {},
+        "DeleteGroup": {},
+        "getGroup": {},
+        "IsInGroup": {},
+        "AddCouponCode": {},
+        "GetFreeUntilDate": {},
+        "mentorcards91f3dc29CustomMessage": {},
+        "ContactUsTrigger": {},
+        "UpdatePaymentProgram": {},
+        "EmailGuideIntroduction": {},
+        "EmailUpcomingPayment": {},
+        "EmailUpcomingEndOfTrialNotice": {},
+        "EmailEndOfTrialNotice": {},
+        "GetNextReceiptId": {},
+        "GetSubscriptionPlans": {},
+        "UpdateSelectedCardPacks": {},
+        "GetEndOfTrialDate": {},
+        "IsCardsPackOwnedByOrgForUser": {}
       },
       "api": {
         "cardspacks": {},
