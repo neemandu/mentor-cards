@@ -5,7 +5,7 @@ const aws = require('aws-sdk');
 
 const { Parameters } = await (new aws.SSM())
   .getParameters({
-    Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
+    Names: ["sendinblueAPIKey","smooveApiKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
   })
   .promise();
@@ -71,25 +71,26 @@ async function upsertNewContact(user){
       }
   };
   var list_id = parseInt(env.CONTACT_LIST_ID);
-  var body = JSON.stringify({
-    "EMAIL": user.EMAIL,
-    "FIRSTNAME": user.FIRSTNAME,
-    "LASTNAME": "",
-    "SMS": user.SMS,
-    "WHATSAPP": user.WHATSAPP,
-    "PLAN_STATUS": user.PLAN_STATUS,
-    "CREATED_AT": user.CREATED_AT,
-    "FIRST_PROGRAM_REGISTRATION_DATE": user.FIRST_PROGRAM_REGISTRATION_DATE,
-    "CANCELLATION_DATE": user.CANCELLATION_DATE,
-    "COUPON_CODES": user.COUPON_CODES,
-    "PAYPAL_TRANSACTION_ID": user.PAYPAL_TRANSACTION_ID,
-    "ORGANIZATION": user.ORGANIZATION,
-    "END_OF_TRIAL_DATE": user.END_OF_TRIAL_DATE,
-    "UPDATE_AT": user.UPDATE_AT
-});
+  var body = JSON.stringify(
+    {
+      "email": user.EMAIL,
+      "lastName": "hill",
+      "customFields": {
+        "SMS": user.SMS,
+        "WHATSAPP": user.WHATSAPP,
+        "PLAN_STATUS": user.PLAN_STATUS,
+        "CREATED_AT": user.CREATED_AT,
+        "FIRST_PROGRAM_REGISTRATION_DATE": user.FIRST_PROGRAM_REGISTRATION_DATE,
+        "CANCELLATION_DATE": user.CANCELLATION_DATE,
+        "COUPON_CODES": user.COUPON_CODES,
+        "PAYPAL_TRANSACTION_ID": user.PAYPAL_TRANSACTION_ID,
+        "ORGANIZATION": user.ORGANIZATION,
+      },
+      "firstName": user.FIRSTNAME,
+    });
   console.log("upsertNewContact: sending POST Start");
 
-  await post(defaultOptions, `/api/contacts/${list_id}`, body);
+  await post(defaultOptions, `v1/async/contacts?updateIfExists=false&restoreIfDeleted=false&restoreIfUnsubscribed=false&overrideNullableValue=false`, body);
   console.log("upsertNewContact: sending POST End");
 }
 
