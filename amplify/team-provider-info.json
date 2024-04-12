@@ -169,11 +169,11 @@
         },
         "NewAffiliateHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/NewAffiliateHandler-68526143376661316859-build.zip"
+          "s3Key": "amplify-builds/NewAffiliateHandler-426e2f56705665474d72-build.zip"
         },
         "AffiliateBalanceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AffiliateBalanceHandler-4e4b3748554d2f632b71-build.zip"
+          "s3Key": "amplify-builds/AffiliateBalanceHandler-7973324e612f2f367233-build.zip"
         },
         "dudi": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",

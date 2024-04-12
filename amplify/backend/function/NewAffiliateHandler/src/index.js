@@ -10,10 +10,9 @@ Amplify Params - DO NOT EDIT */
 const AWS = require('aws-sdk');
 const { env } = require("process");
 
-
+ 
 async function saveUser(user){
   var docClient = new AWS.DynamoDB.DocumentClient();
-
   user.updatedAt = new Date().toISOString();
   var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
   var updatedUserParams = {

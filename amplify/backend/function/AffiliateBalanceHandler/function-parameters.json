@@ -4,12 +4,14 @@
       "User:@model(appsync)": [
         "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ],
       "Affiliate:@model(appsync)": [
         "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ]
     }
   },
