@@ -81,28 +81,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "sendinblueAPIKey": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "MessagingService"
-                      }
-                    ]
-                  },
-                  "sendinblueAPIKey"
-                ]
-              ]
-            },
             "API_CARDSPACKS_MESSAGEQUEUETABLE_NAME": {
               "Fn::ImportValue": {
                 "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
