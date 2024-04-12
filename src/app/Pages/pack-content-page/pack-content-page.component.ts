@@ -135,9 +135,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
           }
           this.cards = [...this.pack.cards];
           this.isLoaded = true;
+          
+          this.overlaySpinnerService.changeOverlaySpinner(false);
           this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
         },
         (reject) => {
+          console.log('2');
           this.isLoaded = true;
           console.log(
             'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
