@@ -37,14 +37,56 @@
     }
   },
   "function": {
+    "AffiliateBalanceHandler": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "CreateCommonLink": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "GetAffiliateData": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "GetCardsImages": {
       "dependsOn": [
         {
-          "category": "api",
-          "resourceName": "cardspacks",
           "attributes": [
             "GraphQLAPIIdOutput"
-          ]
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
         }
       ]
     },
@@ -78,6 +120,54 @@
         }
       ]
     },
+    "InvoiceHandler": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "ApiName",
+            "ApiId"
+          ],
+          "category": "api",
+          "resourceName": "receiptsAPI"
+        },
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "Invoices"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ]
+    },
+    "NewAffiliateHandler": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "PayPalWebhookFunc": {
       "dependsOn": [
         {
@@ -89,103 +179,26 @@
         }
       ]
     },
-    "mentorcards56dbf153PreSignup": {
+    "dudi": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "GetAffiliateData": {
+    "mentorcards56dbf153PreSignup": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
-    },
-    "CreateCommonLink": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
-    },
-    "InvoiceHandler": {
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "receiptsAPI",
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ]
-        },
-        {
-          "category": "storage",
-          "resourceName": "Invoices",
-          "attributes": [
-            "BucketName"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
-    },
-    "NewAffiliateHandler": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        },
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
-    },
-    "AffiliateBalanceHandler": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "cardspacks",
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ]
-        }
-      ]
+      "service": "Lambda"
     }
   },
   "parameters": {
+    "AMPLIFY_auth_mentorcards56dbf153_googleClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mentorcards56dbf153"
+        }
+      ]
+    },
     "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
       "usedBy": [
         {
@@ -250,6 +263,22 @@
         }
       ]
     },
+    "AMPLIFY_function_AffiliateBalanceHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AffiliateBalanceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_AffiliateBalanceHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AffiliateBalanceHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_ChangeCardsPack_deploymentBucketName": {
       "usedBy": [
         {
@@ -282,27 +311,19 @@
         }
       ]
     },
-    "AMPLIFY_function_CreateShareLink_deploymentBucketName": {
+    "AMPLIFY_function_CreateCommonLink_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "CreateShareLink"
+          "resourceName": "CreateCommonLink"
         }
       ]
     },
-    "AMPLIFY_function_CreateShareLink_s3Key": {
+    "AMPLIFY_function_CreateCommonLink_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "CreateShareLink"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateShareLink_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateShareLink"
+          "resourceName": "CreateCommonLink"
         }
       ]
     },
@@ -407,6 +428,22 @@
         {
           "category": "function",
           "resourceName": "EmailUpcomingPayment"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetAffiliateData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAffiliateData"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetAffiliateData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAffiliateData"
         }
       ]
     },
@@ -650,6 +687,22 @@
         }
       ]
     },
+    "AMPLIFY_function_NewAffiliateHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "NewAffiliateHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_NewAffiliateHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "NewAffiliateHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_PayPalWebhookFunc_deploymentBucketName": {
       "usedBy": [
         {
@@ -727,6 +780,22 @@
         {
           "category": "function",
           "resourceName": "UpdateSelectedCardPacks"
+        }
+      ]
+    },
+    "AMPLIFY_function_dudi_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dudi"
+        }
+      ]
+    },
+    "AMPLIFY_function_dudi_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dudi"
         }
       ]
     },

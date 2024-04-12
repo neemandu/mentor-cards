@@ -1,256 +1,265 @@
 export type AmplifyDependentResourcesAttributes = {
-    "auth": {
-        "mentorcards56dbf153": {
-            "HostedUIDomain": "string",
-            "OAuthMetadata": "string",
-            "UserPoolId": "string",
-            "UserPoolArn": "string",
-            "UserPoolName": "string",
-            "AppClientIDWeb": "string",
-            "AppClientID": "string",
-            "CreatedSNSRole": "string",
-            "GoogleWebClient": "string"
-        }
+  "api": {
+    "PayPalWebhookAPI": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
     },
-    "api": {
-        "cardspacks": {
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        },
-        "PayPalWebhookAPI": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
-        },
-        "receiptsAPI": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
-        }
+    "cardspacks": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string"
     },
-    "function": {
-        "CreateUser": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "AddCardsPack": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "ChangeCardsPack": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "UpdateGroupUsersList": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "UnSubscribe": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "JoinExistingGroup": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "DeleteGroup": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "GetCardsImages": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "getGroup": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "IsInGroup": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "AddCouponCode": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "GetFreeUntilDate": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "mentorcards91f3dc29CustomMessage": {
-            "Name": "string",
-            "Arn": "string",
-            "LambdaExecutionRole": "string",
-            "Region": "string"
-        },
-        "ContactUsTrigger": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "UpdatePaymentProgram": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "EmailGuideIntroduction": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "MessagingService": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "EmailUpcomingPayment": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "EmailUpcomingEndOfTrialNotice": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "EmailEndOfTrialNotice": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "GetNextReceiptId": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "PayPalWebhookFunc": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "GetSubscriptionPlans": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "UpdateSelectedCardPacks": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "GetEndOfTrialDate": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "IsCardsPackOwnedByOrgForUser": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "AddNewUserToEmailsContactList": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "InvoiceHandler": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "IncrementCardPackLike": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "IncrementPackEntries": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "GetProviderPlanId": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "LambdaExecutionRoleArn": "string"
-        },
-        "GetNextBillingDate": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "LambdaExecutionRoleArn": "string"
-        },
-        "mentorcards56dbf153PreSignup": {
-            "Name": "string",
-            "Arn": "string",
-            "LambdaExecutionRole": "string",
-            "Region": "string",
-            "LambdaExecutionRoleArn": "string"
-        },
-        "CreateCommonLink": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "GetAffiliateData": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        }
-    },
-    "storage": {
-        "Invoices": {
-            "BucketName": "string",
-            "Region": "string"
-        }
+    "receiptsAPI": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
     }
+  },
+  "auth": {
+    "mentorcards56dbf153": {
+      "AppClientID": "string",
+      "AppClientIDWeb": "string",
+      "CreatedSNSRole": "string",
+      "GoogleWebClient": "string",
+      "HostedUIDomain": "string",
+      "OAuthMetadata": "string",
+      "UserPoolArn": "string",
+      "UserPoolId": "string",
+      "UserPoolName": "string"
+    }
+  },
+  "function": {
+    "AddCardsPack": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "AddCouponCode": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "AddNewUserToEmailsContactList": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "ChangeCardsPack": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "ContactUsTrigger": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "CreateCommonLink": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "CreateUser": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "DeleteGroup": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "EmailEndOfTrialNotice": {
+      "Arn": "string",
+      "CloudWatchEventRule": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "EmailGuideIntroduction": {
+      "Arn": "string",
+      "CloudWatchEventRule": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "EmailUpcomingEndOfTrialNotice": {
+      "Arn": "string",
+      "CloudWatchEventRule": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "EmailUpcomingPayment": {
+      "Arn": "string",
+      "CloudWatchEventRule": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetAffiliateData": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetCardsImages": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetEndOfTrialDate": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetFreeUntilDate": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetNextBillingDate": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetNextReceiptId": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetProviderPlanId": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetSubscriptionPlans": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "IncrementCardPackLike": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "IncrementPackEntries": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "InvoiceHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "IsCardsPackOwnedByOrgForUser": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "IsInGroup": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "JoinExistingGroup": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "MessagingService": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "PayPalWebhookFunc": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "UnSubscribe": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "UpdateGroupUsersList": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "UpdatePaymentProgram": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "UpdateSelectedCardPacks": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "dudi": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "getGroup": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "mentorcards56dbf153PreSignup": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "mentorcards91f3dc29CustomMessage": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    }
+  },
+  "storage": {
+    "Invoices": {
+      "BucketName": "string",
+      "Region": "string"
+    }
+  }
 }

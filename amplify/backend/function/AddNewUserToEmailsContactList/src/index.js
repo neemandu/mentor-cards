@@ -87,7 +87,7 @@ async function upsertNewContact(user){
          "ORGANIZATION": user.ORGANIZATION,
          "END_OF_TRIAL_DATE": user.END_OF_TRIAL_DATE,
          "UPDATE_AT": user.UPDATE_AT
-    },
+    }, 
     "listIds": [
       list_id
     ],

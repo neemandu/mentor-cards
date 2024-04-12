@@ -46,7 +46,7 @@ async function getParam(){
     Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
   })
-  .promise();
+  .promise(); 
   
   console.log('Parameters:');
   console.log(Parameters);

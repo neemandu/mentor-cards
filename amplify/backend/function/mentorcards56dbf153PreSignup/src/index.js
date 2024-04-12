@@ -29,5 +29,5 @@ exports.handler = async (event, context) => {
    * order of names in the `MODULES` var.
    */
   await Promise.all(modules.map(module => module.handler(event, context)));
-  return event;
+  return event; 
 };

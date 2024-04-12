@@ -19,7 +19,7 @@ async function saveUser(user){
   var updatedUserParams = {
       TableName: userTable,
       Item: user
-  };
+  }; 
 
   console.log("updating user " + user.id );
 

@@ -17,7 +17,7 @@ async function getUserByEmail(email){
 
   var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
 
-  
+   
   var userParams = {
       TableName:userTable,
       IndexName: "email-index",

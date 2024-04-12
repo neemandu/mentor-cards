@@ -222,7 +222,7 @@ exports.handler = async (event, context, callback) => {
         if(!link){
             console.log('no such common link: ' + linkStr);
             return [];
-        }
+        } 
         var now = new Date();
         var experationDate = new Date(link.experationDate);
         console.log('common link experationDate: ' + experationDate.toISOString());

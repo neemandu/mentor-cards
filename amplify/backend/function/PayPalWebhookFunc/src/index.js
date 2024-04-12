@@ -241,7 +241,7 @@ exports.handler = async (event) => {
                 var amount = paypal_body.resource.amount.total;
                 if(!user.payments){
                     user.payments = [];
-                }
+                } 
                 var subscription = getSubByTxID(user, transaction_id);
                 var now = new Date().toISOString();
                 user.payments.push({
