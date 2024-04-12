@@ -199,6 +199,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "NewAffiliateHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "PayPalWebhookFunc": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

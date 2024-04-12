@@ -169,7 +169,7 @@
         },
         "NewAffiliateHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/NewAffiliateHandler-485a3654433779484150-build.zip"
+          "s3Key": "amplify-builds/NewAffiliateHandler-68526143376661316859-build.zip"
         },
         "AffiliateBalanceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",

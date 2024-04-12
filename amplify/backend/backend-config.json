@@ -151,14 +151,6 @@
       "dependsOn": [
         {
           "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        },
-        {
-          "attributes": [
             "GraphQLAPIIdOutput"
           ],
           "category": "api",

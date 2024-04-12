@@ -61,7 +61,7 @@ async function getUserByEmail(email){
 }
 
 exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
+    console.log(`EVENT: ${JSON.stringify(event)}`); 
     for (const record of event.Records) {
         console.log(record.eventID);
         console.log(record.eventName);
