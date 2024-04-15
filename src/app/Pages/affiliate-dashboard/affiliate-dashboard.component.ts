@@ -10,8 +10,10 @@ import {
 } from '@angular/core';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { OverlaySpinnerService } from 'src/app/Services/overlay-spinner.service';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, Subject, of, Subscription } from 'rxjs';
+import { UserData } from 'src/app/Objects/user-related';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -57,11 +59,12 @@ export interface Element {
   ],
 })
 export class AffiliatesDashboardPageComponent implements OnInit {
-
+  userAuthData: UserData;
   // dataSource = ELEMENT_DATA;
   // columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   expandedElement: Element   | null;
 
+  Subscription: Subscription = new Subscription();
   columnTranslations = {
     'name': 'שם',
     'purchaseDate': 'תאריך רכישה',
@@ -92,6 +95,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService,
     public langDirectionService: LangDirectionService,
     private snackBarCoponent: MatSnackBar,
+    private userAuthService: UserAuthService,
     public dialog: MatDialog,
     private apiService: APIService,
     private changeDetectorRefs: ChangeDetectorRef
@@ -100,7 +104,22 @@ export class AffiliatesDashboardPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAffiliates();
+    if(this.userAuthService.isLoggedIn){
+      this.userAuthData = this.userAuthService.userData;
+      this.getAffiliates();
+    }
+    else{
+      this.Subscription.add(
+        this.userAuthService.userDataEmmiter.subscribe((userAuthData: UserData) => {
+          this.userAuthData = userAuthData;        
+          this.getAffiliates();
+        })
+      );
+    }
+
+
+
+
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AffiliateDialogComponent, {
@@ -142,10 +161,12 @@ export class AffiliatesDashboardPageComponent implements OnInit {
 
   getAffiliates(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
+    console.log('userAuthData');
+    console.log(this.userAuthData);
     this.apiService.GetAffiliateData({ username: '' }).then(
       (affiliate) => {
         this.affiliateData = affiliate;
-        this.userData.user = 'https://www.mentor-cards.com/' + this.affiliateData[0].refId;
+        this.userData.user = 'https://www.mentor-cards.com/home-page?ref=' + this.userAuthData.refId;
         this.overlaySpinnerService.changeOverlaySpinner(false);
       },
       (error) => {
@@ -183,6 +204,11 @@ export class AffiliatesDashboardPageComponent implements OnInit {
         this.changeDetectorRefs.detectChanges(); // Trigger change detection
       }
     );
+  }
+
+  
+  ngOnDestroy(): void {
+    this.Subscription.unsubscribe();
   }
 }
 

@@ -56,7 +56,7 @@
         },
         "CreateUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateUser-666c4a5643426564644c-build.zip"
+          "s3Key": "amplify-builds/CreateUser-6a48666647394c4e3231-build.zip"
         },
         "AddCardsPack": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",

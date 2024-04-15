@@ -3,7 +3,7 @@
   margin-bottom: 6vh;
   justify-content: center;
   text-align: center;
-  font-size: 3rem;
+  font-size: 1rem;
 }
 
 .affiliate-dashboard-content {
@@ -16,8 +16,8 @@
   padding-top: 2vh;
   padding-bottom: 2vh;
   padding-inline: 2vw;
-  margin-inline: 5vw;
-  font-size: 1.5rem;
+  margin-inline: 10vw;
+  font-size: 1rem;
   background-color: white;
   border-radius: 15px;
   display: flex;
@@ -78,14 +78,15 @@ button {
 
 .discount-body-text {
   font-weight: 600;
+  margin-left: 3vw;
 }
 .affiliate-dashboard-discount-values {
   margin-top: 3vh;
   height: 11vh;
   padding-top: 2vh;
   padding-bottom: 2vh;
-  margin-inline: 5vw;
-  font-size: 1.5rem;
+  margin-inline: 10vw;
+  font-size: 1rem;
   background-color: white;
   border-radius: 15px;
   display: flex;
@@ -111,7 +112,7 @@ button {
 .table-header {
   margin-top: 5vh;
   margin-bottom: 5vh;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: center;
 }
 
@@ -132,7 +133,7 @@ td {
 
 mat-header-row {
   background-color: #fcd191;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: black;
   font-weight: 600;
 }
@@ -164,12 +165,12 @@ mat-header-row {
 .element-row.expanded {
   border-bottom-color: transparent;
 }
-
+*/
 .mat-header-cell {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1rem;
+    font-weight: 500;
     color: black;
-} */
+} 
 
 table {
   width: 100%;
