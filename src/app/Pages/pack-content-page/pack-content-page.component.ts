@@ -130,10 +130,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       else{
         this.isDoubleSided = true;
       }
+      console.log('hi111');
       this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
     } else {
       this.api.GetCardsPack(this.id, this.commonLink).then(
         (pack) => {
+          console.log('hi');
           this.pack = new PackContent().deseralize(pack);
           this.isDoubleSided = pack.cards[0].backImgUrl ? true : false;
           if(this.pack.cards.length == 0){
@@ -141,10 +143,14 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
           }
           this.cards = [...this.pack.cards];
           this.isLoaded = true;
+          
+          this.overlaySpinnerService.changeOverlaySpinner(false);
           this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
         },
         (reject) => {
           this.isLoaded = true;
+          
+          console.log('errrror');
           console.log(
             'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
             reject
