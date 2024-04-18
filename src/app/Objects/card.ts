@@ -4,6 +4,7 @@ export class Card {
     index: number;
     flipped: boolean = false;
     rotation: number = 0; // 0, 90, 180, 270
+    isPortrait: boolean = true;
 
     constructor() { }
 
