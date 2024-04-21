@@ -258,8 +258,7 @@ li span {
   animation: fadeIn 0.4s, slideUp 0.6s;
 } */
 
-@media screen and (max-width: 1024px) {
-}
+@media screen and (max-width: 1024px) {}
 
 @media screen and (max-width: 768px) {
   ::ng-deep .cdk-overlay-pane {
@@ -326,14 +325,16 @@ li span {
 
 .link-button {
   background-color: transparent;
-  color: #007bff; /* Bootstrap link color */
+  color: #007bff;
+  /* Bootstrap link color */
   text-decoration: underline;
   padding: 0;
   font-size: large;
   border: none;
   display: inline-flex;
   align-items: center;
-  gap: 5px; /* Adjust the gap between the icon and text */
+  gap: 5px;
+  /* Adjust the gap between the icon and text */
 }
 
 ::ng-deep .custom-tooltip .mat-tooltip {
@@ -349,11 +350,13 @@ li span {
   background-color: transparent;
   opacity: 0.75;
 }
+
 /* Existing .link-button and .mat-icon styles remain the same */
 
 .right-side-container {
   display: flex;
-  justify-content: center; /* Aligns children (the button) to the right */
+  justify-content: center;
+  /* Aligns children (the button) to the right */
   width: 100%;
 }
 
@@ -448,6 +451,73 @@ li span {
 'rotated-four-cards': selectedCards.length == 4 && card.rotation !== 0,
 'rotated-five-cards': selectedCards.length == 5 && card.rotation !== 0 */
 
+.one-cards-landscape,
+.two-cards-landscape,
+.three-cards-landscape,
+.four-cards-landscape,
+.five-cards-landscape {
+  /* width: 85vw; */
+  height: 20vh;
+}
+
+
+.one-cards-landscape,
+.two-cards-landscape {
+  /* width: calc(100vw /3.2); */
+  height: calc(100vw / 3.5);
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
+
+.three-cards-landscape {
+  width: calc(100vw / 4);
+  margin-top: 14vh;
+  margin-bottom: 14vh;
+}
+
+.four-cards-landscape {
+  width: calc(100vw / 5);
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
+
+.five-cards-landscape {
+  width: calc(100vw / 6);
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
+
+.two-cards-landscape,
+.rotated-two-cards-landscape {
+  height: calc(100vw / 3.5);
+  margin-inline: 3vw;
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
+
+.three-cards-landscape,
+.rotated-three-cards-landscape {
+  width: auto;
+  height: calc(40vh);
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
+
+.four-cards-landscape,
+.rotated-four-cards-landscape {
+  width: auto;
+  height: 30vh;
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
+
+.five-cards-landscape,
+.rotated-five-cards-landscape {
+  width: auto;
+  height: 25vh;
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
 
 .one-cards,
 .two-cards {
@@ -484,16 +554,17 @@ li span {
 .four-cards,
 .rotated-four-cards {
   width: auto;
-    height: 48vh;
-    margin-inline: 4vw;
+  height: 48vh;
+  margin-inline: 4vw;
 }
 
 .five-cards,
 .rotated-five-cards {
   width: auto;
-    height: 35vh;
-    margin-inline: 3vw 
+  height: 35vh;
+  margin-inline: 3vw
 }
+
 .remove-btn {
   margin-bottom: -15px;
   animation: fadeIn 0.4s, slideUp 0.4s;
@@ -520,14 +591,16 @@ mat-icon {
   color: #747474;
 }
 
-.doubleSidedIconButton{
- /* margin-bottom: -4vh; */
+.doubleSidedIconButton {
+  /* margin-bottom: -4vh; */
 }
+
 @media (orientation: landscape) and (max-height: 480px) {
   .selected-cards-modal-content {
     height: 90%;
   }
 }
+
 .card-button {
   display: flex;
   justify-content: flex-end;
@@ -547,7 +620,7 @@ mat-icon {
     /* height: 90%; */
   }
 
-  .doubleSidedIconButton{
+  .doubleSidedIconButton {
     margin-bottom: 10vh;
   }
 

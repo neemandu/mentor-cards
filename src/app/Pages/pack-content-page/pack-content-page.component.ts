@@ -30,6 +30,7 @@ import { CopyCommonLinkDialogComponent } from 'src/app/Pages/pack-content-page/c
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -75,7 +76,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private mixpanelService: MixpanelService,
     private cdr: ChangeDetectorRef,
-    private platform: Platform
+    private platform: Platform,
+    private http: HttpClient
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -114,6 +116,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         (pack) => pack.id === this.id
       );
       this.cards = [...this.pack.cards];
+
+      this.cards.forEach((card) => {
+        this.checkCardOrientation(card);
+      })
       console.log('cards in packs conent:', this.cards);
       if(!this.pack.cards[0].backImgUrl){
         this.isDoubleSided = false;
@@ -151,6 +157,24 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }, 300);
+
+    
+  }
+
+  checkIfImageIsPortrait(url: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => resolve(img.height > img.width);
+      img.onerror = reject;
+    });
+  }
+
+  async checkCardOrientation(card: Card) {
+    const isPortrait = await this.checkIfImageIsPortrait(card.frontImgUrl);
+    card.isPortrait = isPortrait;
+    console.log(card,'card')
+    // console.log(`Card at ${card.frontImgUrl} is ${isPortrait ? 'portrait' : 'landscape'}`);
   }
 
   changeRandomCard(b){
@@ -355,6 +379,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       });
     })
   }
+
+  
 
   ngOnDestroy(): void {
     this.popoutService.closePopoutModal();

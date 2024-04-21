@@ -516,14 +516,14 @@
               [src]="card.flipped ? card.frontImgUrl : card.backImgUrl"
               [data-src]="card.flipped ? card.frontImgUrl : card.backImgUrl"
             /> -->
-              <div class="d-flex flex-column">
+              <div class="d-flex flex-column"  *ngIf="card.isPortrait">
                 <!-- <div> -->
                 <div
                   *ngIf="!flipped"
                   [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
                 >
                   <!-- Card Back -->
-                  <div class="flip-box-front">
+                  <div class="flip-box-front" >
                     <img
                       alt="Mentor-cards unique cards design for the back of the card"
                       src="{{ card.frontImgUrl }}"
@@ -667,6 +667,170 @@
                   </div>
                 </div>
               </div>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class="d-flex flex-column"  *ngIf="!card.isPortrait">
+                <!-- <div> -->
+                <div
+                  *ngIf="!flipped"
+                  [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
+                >
+                  <!-- Card Back -->
+                  <div class="flip-box-front" >
+                    <img
+                      alt="Mentor-cards unique cards design for the back of the card"
+                      src="{{ card.frontImgUrl }}"
+                      data-src="{{ card.frontImgUrl }}"
+                      [ngClass]="{
+                        'rotate-0': card.rotation === 0,
+                        'rotate-90': card.rotation === 90,
+                        'rotate-180': card.rotation === 180,
+                        'rotate-270': card.rotation === 270,
+                        'img-unselected': !selected,
+                        'img-selected': selected,
+                        'card-view': true,
+                        'one-cards-landscape': selectedCards.length == 1,
+                        'two-cards-landscape': selectedCards.length == 2,
+                        'three-cards-landscape': selectedCards.length == 3,
+                        'four-cards-landscape': selectedCards.length == 4,
+                        'five-cards-landscape': selectedCards.length == 5,
+                        'rotated-one-cards-landscape':
+                          selectedCards.length == 1 && card.rotation !== 0,
+                        'rotated-two-cards-landscape':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards-landscape':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards-landscape':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards-landscape':
+                          selectedCards.length == 5 && card.rotation !== 0
+                      }"
+                      (contextmenu)="onRightClick()"
+                    />
+                  </div>
+                  <!-- Card Front -->
+                  <div class="flip-box-back">
+                    <img
+                      loading="eager"
+                      [ngClass]="{
+                        'rotate-0': card.rotation === 0,
+                        'rotate-90': card.rotation === 90,
+                        'rotate-180': card.rotation === 180,
+                        'rotate-270': card.rotation === 270,
+                        'img-unselected': !selected,
+                        'img-selected': selected,
+                        'card-view': true,
+                        'one-cards-landscape': selectedCards.length == 1,
+                        'two-cards-landscape':
+                          selectedCards.length == 2 && card.rotation == 0,
+                        'three-cards-landscape':
+                          selectedCards.length == 3 && card.rotation == 0,
+                        'four-cards-landscape':
+                          selectedCards.length == 4 && card.rotation == 0,
+                        'five-cards-landscape':
+                          selectedCards.length == 5 && card.rotation == 0,
+                        'rotated-two-cards-landscape':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards-landscape':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards-landscape':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards-landscape':
+                          selectedCards.length == 5 && card.rotation !== 0
+                      }"
+                      src="{{ card.backImgUrl }}"
+                      data-src="{{ card.backImgUrl }}"
+                      (contextmenu)="onRightClick()"
+                    />
+                  </div>
+                </div>
+                <div
+                  *ngIf="flipped"
+                  [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
+                >
+                  <!-- Card Back -->
+                  <div class="flip-box-front">
+                    <img
+                      alt="Mentor-cards unique cards design for the back of the card"
+                      src="{{ card.backImgUrl }}"
+                      data-src="{{ card.backImgUrl }}"
+                      [ngClass]="{
+                        'rotate-0': card.rotation === 0,
+                        'rotate-90': card.rotation === 90,
+                        'rotate-180': card.rotation === 180,
+                        'rotate-270': card.rotation === 270,
+                        'img-unselected': !selected,
+                        'img-selected': selected,
+                        'card-view': true,
+                        'one-cards-landscape': selectedCards.length == 1,
+                        'two-cards-landscape':
+                          selectedCards.length == 2 && card.rotation == 0,
+                        'three-cards-landscape':
+                          selectedCards.length == 3 && card.rotation == 0,
+                        'four-cards-landscape':
+                          selectedCards.length == 4 && card.rotation == 0,
+                        'five-cards-landscape':
+                          selectedCards.length == 5 && card.rotation == 0,
+                        'rotated-two-cards-landscape':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards-landscape':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards-landscape':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards-landscape':
+                          selectedCards.length == 5 && card.rotation !== 0
+                      }"
+                      (contextmenu)="onRightClick()"
+                    />
+                  </div>
+                  <!-- Card Front -->
+                  <div class="flip-box-back">
+                    <img
+                      loading="eager"
+                      [ngClass]="{
+                        'rotate-0': card.rotation === 0,
+                        'rotate-90': card.rotation === 90,
+                        'rotate-180': card.rotation === 180,
+                        'rotate-270': card.rotation === 270,
+                        'img-unselected': !selected,
+                        'img-selected': selected,
+                        'card-view': true,
+                        'one-cards-landscape': selectedCards.length == 1,
+                        'two-cards-landscape':
+                          selectedCards.length == 2 && card.rotation == 0,
+                        'three-cards-landscape':
+                          selectedCards.length == 3 && card.rotation == 0,
+                        'four-cards-landscape':
+                          selectedCards.length == 4 && card.rotation == 0,
+                        'five-cards-landscape':
+                          selectedCards.length == 5 && card.rotation == 0,
+                        'rotated-two-cards-landscape':
+                          selectedCards.length == 2 && card.rotation !== 0,
+                        'rotated-three-cards-landscape':
+                          selectedCards.length == 3 && card.rotation !== 0,
+                        'rotated-four-cards-landscape':
+                          selectedCards.length == 4 && card.rotation !== 0,
+                        'rotated-five-cards-landscape':
+                          selectedCards.length == 5 && card.rotation !== 0
+                      }"
+                      src="{{ card.frontImgUrl }}"
+                      data-src="{{ card.frontImgUrl }}"
+                      (contextmenu)="onRightClick()"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             <div style="display: flex">
               <div>
@@ -738,10 +902,11 @@
           </button>
         </div>
         <div style="display: flex; flex-direction: row; align-items: center; overflow-x: scroll;width: 100vw; padding-bottom: 2vw; justify-content: center;">
-          
+         
+          <!-- *ngIf="!card.isPortrait" -->
           <div *ngFor="let card of selectedCards" style="display: block;">
 
-            <div
+            <div *ngIf="!card.isPortrait"
               style="display: flex; flex-direction: column; align-items: center"
             >
               <img
@@ -753,11 +918,11 @@
                   'rotate-180': card.rotation === 180,
                   'rotate-270': card.rotation === 270,
                   'card-view': true,
-                  'one-cards': selectedCards.length == 1,
-                  'two-cards': selectedCards.length == 2,
-                  'three-cards': selectedCards.length == 3,
-                  'four-cards': selectedCards.length == 4,
-                  'five-cards': selectedCards.length == 5
+                  'one-cards-landscape': selectedCards.length == 1,
+                  'two-cards-landscape': selectedCards.length == 2,
+                  'three-cards-landscape': selectedCards.length == 3,
+                  'four-cards-landscape': selectedCards.length == 4,
+                  'five-cards-landscape': selectedCards.length == 5
                 }"
                 loading="eager"
                 src="{{ card.frontImgUrl }}"
@@ -775,6 +940,42 @@
                 </button>
               </div>
             </div>
+
+
+            <div *ngIf="card.isPortrait"
+            style="display: flex; flex-direction: column; align-items: center"
+          >
+            <img
+              (click)="imgClick($event)"
+              alt="one of the selected cards shown"
+              [ngClass]="{
+                'rotate-0': card.rotation === 0,
+                'rotate-90': card.rotation === 90,
+                'rotate-180': card.rotation === 180,
+                'rotate-270': card.rotation === 270,
+                'card-view': true,
+                'one-cards': selectedCards.length == 1,
+                'two-cards': selectedCards.length == 2,
+                'three-cards': selectedCards.length == 3,
+                'four-cards': selectedCards.length == 4,
+                'five-cards': selectedCards.length == 5
+              }"
+              loading="eager"
+              src="{{ card.frontImgUrl }}"
+              data-src="{{ card.frontImgUrl }}"
+            />
+
+            <div>
+              <button (click)="rotateCard(card)" style="margin-top: 1vh">
+                <img
+                  src="../../../assets/icons/rotate-right-90.png"
+                  alt="Expand data"
+                  width="20px"
+                  style="height: 4vh; width: auto"
+                />
+              </button>
+            </div>
+          </div>
           </div>
         </div>
       </div>
