@@ -5,7 +5,7 @@ const aws = require('aws-sdk');
 
 const { Parameters } = await (new aws.SSM())
   .getParameters({
-    Names: ["sendinblueAPIKey","smooveApiKey"].map(secretName => process.env[secretName]),
+    Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
   })
   .promise();
@@ -42,7 +42,7 @@ const post = (defaultOptions, path, payload) => new Promise((resolve, reject) =>
 async function getParam(){
   var { Parameters } = await (new aws.SSM())
   .getParameters({
-    Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
+    Names: ["sendinblueAPIKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
   })
   .promise();
@@ -62,35 +62,44 @@ async function upsertNewContact(user){
   var api_key = await getParam();
 
   var defaultOptions = {
-      host: 'rest.smoove.io',
+      host: 'api.sendinblue.com',
       port: 443, 
       headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer ' + api_key
+          'api-key': api_key
       }
   };
   var list_id = parseInt(env.CONTACT_LIST_ID);
-  var body = JSON.stringify(
-    {
-      "email": user.EMAIL,
-      "lastName": "hill",
-      "customFields": {
-        "SMS": user.SMS,
-        "WHATSAPP": user.WHATSAPP,
-        "PLAN_STATUS": user.PLAN_STATUS,
-        "CREATED_AT": user.CREATED_AT,
-        "FIRST_PROGRAM_REGISTRATION_DATE": user.FIRST_PROGRAM_REGISTRATION_DATE,
-        "CANCELLATION_DATE": user.CANCELLATION_DATE,
-        "COUPON_CODES": user.COUPON_CODES,
-        "PAYPAL_TRANSACTION_ID": user.PAYPAL_TRANSACTION_ID,
-        "ORGANIZATION": user.ORGANIZATION,
-      },
-      "firstName": user.FIRSTNAME,
-    });
+  var body = JSON.stringify({
+    "attributes": {
+         "EMAIL": user.EMAIL,
+         "FIRSTNAME": user.FIRSTNAME,
+         "LASTNAME": "",
+         "SMS": user.SMS,
+         "WHATSAPP": user.WHATSAPP,
+         "PLAN_STATUS": user.PLAN_STATUS,
+         "CREATED_AT": user.CREATED_AT,
+         "FIRST_PROGRAM_REGISTRATION_DATE": user.FIRST_PROGRAM_REGISTRATION_DATE,
+         "CANCELLATION_DATE": user.CANCELLATION_DATE,
+         "COUPON_CODES": user.COUPON_CODES,
+         "PAYPAL_TRANSACTION_ID": user.PAYPAL_TRANSACTION_ID,
+         "ORGANIZATION": user.ORGANIZATION,
+         "END_OF_TRIAL_DATE": user.END_OF_TRIAL_DATE,
+         "UPDATE_AT": user.UPDATE_AT
+    }, 
+    "listIds": [
+      list_id
+    ],
+    "updateEnabled": true,
+    "smtpBlacklistSender": [],
+    "email": user.EMAIL,
+    "emailBlacklisted": false,
+    "smsBlacklisted": false
+  });
   console.log("upsertNewContact: sending POST Start");
 
-  await post(defaultOptions, `v1/async/contacts?updateIfExists=false&restoreIfDeleted=false&restoreIfUnsubscribed=false&overrideNullableValue=false`, body);
+  await post(defaultOptions, "/v3/contacts", body);
   console.log("upsertNewContact: sending POST End");
 }
 

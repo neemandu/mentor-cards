@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.5.2\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.10.3\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -78,35 +78,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_CARDSPACKS_AFFILIATETABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:AffiliateTable:Name"
-              }
-            },
-            "API_CARDSPACKS_AFFILIATETABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:AffiliateTable:Name"
-                    }
-                  }
-                ]
-              ]
-            },
-            "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apicardspacksGraphQLAPIIdOutput"
-            },
             "API_CARDSPACKS_USERTABLE_NAME": {
               "Fn::ImportValue": {
                 "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
@@ -132,6 +103,35 @@
                   }
                 ]
               ]
+            },
+            "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apicardspacksGraphQLAPIIdOutput"
+            },
+            "API_CARDSPACKS_AFFILIATETABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:AffiliateTable:Name"
+              }
+            },
+            "API_CARDSPACKS_AFFILIATETABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:AffiliateTable:Name"
+                    }
+                  }
+                ]
+              ]
             }
           }
         },
@@ -141,7 +141,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs18.x",
         "Layers": [],
         "Timeout": 25
       }
@@ -152,12 +152,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole5bfa7cee",
+            "mentorcardsLambdaRole78783287",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole5bfa7cee",
+                  "mentorcardsLambdaRole78783287",
                   "-",
                   {
                     "Ref": "env"
@@ -249,14 +249,19 @@
                 "dynamodb:Put*",
                 "dynamodb:Create*",
                 "dynamodb:BatchWriteItem",
+                "dynamodb:PartiQLInsert",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
                 "dynamodb:Query",
+                "dynamodb:PartiQLSelect",
                 "dynamodb:Update*",
-                "dynamodb:RestoreTable*"
+                "dynamodb:RestoreTable*",
+                "dynamodb:PartiQLUpdate",
+                "dynamodb:Delete*",
+                "dynamodb:PartiQLDelete"
               ],
               "Resource": [
                 {
@@ -310,14 +315,19 @@
                 "dynamodb:Put*",
                 "dynamodb:Create*",
                 "dynamodb:BatchWriteItem",
+                "dynamodb:PartiQLInsert",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
                 "dynamodb:Query",
+                "dynamodb:PartiQLSelect",
                 "dynamodb:Update*",
-                "dynamodb:RestoreTable*"
+                "dynamodb:RestoreTable*",
+                "dynamodb:PartiQLUpdate",
+                "dynamodb:Delete*",
+                "dynamodb:PartiQLDelete"
               ],
               "Resource": [
                 {
@@ -448,6 +458,14 @@
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "LambdaExecutionRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "LambdaExecutionRole",
+          "Arn"
+        ]
       }
     }
   }

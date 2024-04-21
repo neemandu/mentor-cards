@@ -222,7 +222,7 @@ exports.handler = async (event, context, callback) => {
         if(!link){
             console.log('no such common link: ' + linkStr);
             return [];
-        }
+        } 
         var now = new Date();
         var experationDate = new Date(link.experationDate);
         console.log('common link experationDate: ' + experationDate.toISOString());
@@ -300,7 +300,8 @@ exports.handler = async (event, context, callback) => {
     if(!isExternalPack && user){
         console.log('Checking if its a free trial period');
         var allPackagesDate = new Date();
-        var trialPeriodInDays = 14;
+        //var trialPeriodInDays = 14;
+        var trialPeriodInDays = 0;
         var startFreePeriodDate = user.createdAt;
         console.log('allPackagesDate');
         console.log(allPackagesDate);

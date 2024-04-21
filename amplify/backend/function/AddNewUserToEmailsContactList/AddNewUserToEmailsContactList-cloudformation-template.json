@@ -84,28 +84,6 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "sendinblueAPIKey": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Sub": [
-                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
-                      {
-                        "appId": {
-                          "Ref": "secretsPathAmplifyAppId"
-                        },
-                        "env": {
-                          "Ref": "env"
-                        },
-                        "functionName": "AddNewUserToEmailsContactList"
-                      }
-                    ]
-                  },
-                  "sendinblueAPIKey"
-                ]
-              ]
-            },
             "smooveApiKey": {
               "Fn::Join": [
                 "",
@@ -129,6 +107,9 @@
               ]
             },
             "CONTACT_LIST_ID": {
+              "Ref": "contactListId"
+            },
+            "contactListId": {
               "Ref": "contactListId"
             }
           }

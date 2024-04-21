@@ -228,7 +228,7 @@ if(!refId){
 
     user.entries++;
     user.entryDates.push(new Date().toISOString());
-if(!user.refId){
+if(!user.refId || user.refId == "NoRef"){
         user.refId = refId;
     }
     await saveUser(user);

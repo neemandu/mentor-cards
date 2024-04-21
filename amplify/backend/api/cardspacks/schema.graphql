@@ -93,9 +93,8 @@ type Affiliate
   @auth(
     rules: [
       {
-        allow: owner
-        ownerField: "contactEmail"
-        operations: [read, update]
+        allow: private
+        operations: [create, read, update]
         provider: userPools
       },
       { allow: groups, groups: ["Admins"] }

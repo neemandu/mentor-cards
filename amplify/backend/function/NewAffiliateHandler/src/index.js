@@ -10,16 +10,15 @@ Amplify Params - DO NOT EDIT */
 const AWS = require('aws-sdk');
 const { env } = require("process");
 
-
+ 
 async function saveUser(user){
   var docClient = new AWS.DynamoDB.DocumentClient();
-
   user.updatedAt = new Date().toISOString();
   var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
   var updatedUserParams = {
       TableName: userTable,
       Item: user
-  };
+  }; 
 
   console.log("updating user " + user.id );
 
@@ -61,7 +60,7 @@ async function getUserByEmail(email){
 }
 
 exports.handler = async (event) => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
+    console.log(`EVENT: ${JSON.stringify(event)}`); 
     for (const record of event.Records) {
         console.log(record.eventID);
         console.log(record.eventName);

@@ -5,7 +5,7 @@ const aws = require('aws-sdk');
 
 const { Parameters } = await (new aws.SSM())
   .getParameters({
-    Names: ["sendinblueAPIKey","smooveApiKey"].map(secretName => process.env[secretName]),
+    Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
   })
   .promise();
@@ -46,7 +46,7 @@ async function getParam(){
     Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
   })
-  .promise();
+  .promise(); 
   
   console.log('Parameters:');
   console.log(Parameters);

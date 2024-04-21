@@ -67,7 +67,7 @@ exports.handler = async (event) => {
     if(!("identity" in event)){
         return null;
     }
-
+ 
     if(event.identity == null){
         return null;
     }
