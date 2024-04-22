@@ -258,7 +258,8 @@ li span {
   animation: fadeIn 0.4s, slideUp 0.6s;
 } */
 
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+}
 
 @media screen and (max-width: 768px) {
   ::ng-deep .cdk-overlay-pane {
@@ -589,10 +590,6 @@ mat-icon {
 
 .mat-icon-arrow:disabled {
   color: #747474;
-}
-
-.doubleSidedIconButton {
-  /* margin-bottom: -4vh; */
 }
 
 @media (orientation: landscape) and (max-height: 480px) {

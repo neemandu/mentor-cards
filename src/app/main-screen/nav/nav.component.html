@@ -191,13 +191,6 @@
   </button>
   <button
     mat-menu-item
-    *ngIf="loggedIn && userAttributes?.MyAffiliate !== null"
-    (click)="navigate('/affiliate-dashboard')"
-  >
-    דוח שותפים
-  </button>
-  <button
-    mat-menu-item
     *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'"
     (click)="navigate('/price-page')"
   >
@@ -206,7 +199,7 @@
 
   <button
     mat-menu-item
-    *ngIf="loggedIn && userAttributes?.userMyAffiliateId"
+    *ngIf="loggedIn && userAttributes?.myAffiliate"
     (click)="navigate('/affiliate-dashboard')"
   >
     {{ "pages.nav.user-menu.affiliate" | translate }}

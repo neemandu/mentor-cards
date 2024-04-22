@@ -107,8 +107,6 @@ export class UserAuthService {
       this.overlaySpinnerService.changeOverlaySpinner(false);
       return;
     }
-    console.log('cognitoUserData');
-    console.log(cognitoUserData);
     if(cognitoUserData){
       this.cognitoUserData = cognitoUserData;
       this.cognitoUserData["username"] = cognitoUserData["userDataKey"]?.split('.')[2] ??  cognitoUserData.attributes["sub"];
@@ -172,7 +170,7 @@ export class UserAuthService {
             this.addCouponCodeToFavs.emit(coupon.allowedCardsPacks);
         });
       }
-  
+      
       this.checkOrgTrial();
   
       // this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -298,7 +296,7 @@ export class UserAuthService {
       if (this.userData.endOfTrialDate.getTime() <= new Date().getTime()) {
         const id = this.userData.orgMembership.id;
         const cc = this.userData.couponCodes.find(
-          (coupon) => (coupon.organization.id = id)
+          (coupon) => (coupon.organization && (coupon.organization.id = id))
         );
         if (cc.allowedCardsPacks?.length == 0) {
           this.overlaySpinnerService.changeOverlaySpinner(false);
