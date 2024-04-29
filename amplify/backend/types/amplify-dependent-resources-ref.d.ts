@@ -85,34 +85,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "EmailEndOfTrialNotice": {
-      "Arn": "string",
-      "CloudWatchEventRule": "string",
-      "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "EmailGuideIntroduction": {
-      "Arn": "string",
-      "CloudWatchEventRule": "string",
-      "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "EmailUpcomingEndOfTrialNotice": {
-      "Arn": "string",
-      "CloudWatchEventRule": "string",
-      "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "EmailUpcomingPayment": {
-      "Arn": "string",
-      "CloudWatchEventRule": "string",
-      "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "GetAffiliateData": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -176,12 +148,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "InvoiceHandler": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "IsCardsPackOwnedByOrgForUser": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -240,13 +206,6 @@ export type AmplifyDependentResourcesAttributes = {
     "UpdateSelectedCardPacks": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "dudi": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
       "Name": "string",
       "Region": "string"
     },
