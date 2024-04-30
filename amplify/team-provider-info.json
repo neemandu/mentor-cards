@@ -34,7 +34,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-424c304f4472364a4e43-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-6b45662f77467568452f-build.zip"
         },
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
