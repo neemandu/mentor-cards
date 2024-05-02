@@ -1,7 +1,9 @@
 # this is an auto generated file. This will be overwritten
+
 mutation MakeCommonLink($input: CreateCommonLinkInput!) {
   makeCommonLink(input: $input)
 }
+
 mutation CreateUser($input: CreateUserInput!) {
   createUser(input: $input) {
     id
@@ -33,13 +35,16 @@ mutation CreateUser($input: CreateUserInput!) {
             text
             imgUrl
             link
+            __typename
           }
           createdAt
           updatedAt
+          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
+        __typename
       }
       includedCardPacksIds {
         id
@@ -50,6 +55,7 @@ mutation CreateUser($input: CreateUserInput!) {
         cards {
           backImgUrl
           frontImgUrl
+          __typename
         }
         cardsPreview
         groupsIds
@@ -63,10 +69,15 @@ mutation CreateUser($input: CreateUserInput!) {
                 name
                 subElements {
                   name
+                  __typename
                 }
+                __typename
               }
+              __typename
             }
+            __typename
           }
+          __typename
         }
         name
         freeUntilDate
@@ -74,6 +85,7 @@ mutation CreateUser($input: CreateUserInput!) {
           text
           imgUrl
           link
+          __typename
         }
         isOwnedByOrg
         brief
@@ -101,27 +113,33 @@ mutation CreateUser($input: CreateUserInput!) {
               text
               imgUrl
               link
+              __typename
             }
             createdAt
             updatedAt
+            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
+          __typename
         }
         topQuestions
         usersUsage {
           user
           entries
+          __typename
         }
         isFree
         language
         isActive
         createdAt
         updatedAt
+        __typename
       }
       cancellationDate
       nextBillingDate
+      __typename
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
@@ -147,12 +165,15 @@ mutation CreateUser($input: CreateUserInput!) {
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     cardsPacksIds
     providerTransactionId
@@ -166,9 +187,11 @@ mutation CreateUser($input: CreateUserInput!) {
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     endOfTrialDate
     createdAt
@@ -199,13 +222,16 @@ mutation CreateUser($input: CreateUserInput!) {
             text
             imgUrl
             link
+            __typename
           }
           createdAt
           updatedAt
+          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
+        __typename
       }
       includedCardPacksIds {
         id
@@ -216,6 +242,7 @@ mutation CreateUser($input: CreateUserInput!) {
         cards {
           backImgUrl
           frontImgUrl
+          __typename
         }
         cardsPreview
         groupsIds
@@ -229,10 +256,15 @@ mutation CreateUser($input: CreateUserInput!) {
                 name
                 subElements {
                   name
+                  __typename
                 }
+                __typename
               }
+              __typename
             }
+            __typename
           }
+          __typename
         }
         name
         freeUntilDate
@@ -240,6 +272,7 @@ mutation CreateUser($input: CreateUserInput!) {
           text
           imgUrl
           link
+          __typename
         }
         isOwnedByOrg
         brief
@@ -267,27 +300,33 @@ mutation CreateUser($input: CreateUserInput!) {
               text
               imgUrl
               link
+              __typename
             }
             createdAt
             updatedAt
+            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
+          __typename
         }
         topQuestions
         usersUsage {
           user
           entries
+          __typename
         }
         isFree
         language
         isActive
         createdAt
         updatedAt
+        __typename
       }
       cancellationDate
       nextBillingDate
+      __typename
     }
     entryDates
     refId
@@ -309,9 +348,11 @@ mutation CreateUser($input: CreateUserInput!) {
         currency
         paymentWay
         transactionId
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     payments {
       id
@@ -321,37 +362,49 @@ mutation CreateUser($input: CreateUserInput!) {
       currency
       paymentWay
       transactionId
+      __typename
     }
+    __typename
   }
 }
+
 mutation AddCardsPack($input: addCardsPackInput!) {
   addCardsPack(input: $input)
 }
+
 mutation ChangeCardsPack($input: changeCardsPackInput!) {
   changeCardsPack(input: $input)
 }
+
 mutation UpdateGroupUsersList($input: groupUsersListInput!) {
   updateGroupUsersList(input: $input)
 }
+
 mutation Unsubscribe($input: unSubscribeInput!) {
   Unsubscribe(input: $input)
 }
+
 mutation JoinExistingGroup($input: joinExistingGroupInput!) {
   JoinExistingGroup(input: $input)
 }
+
 mutation DeleteGroupById($input: deleteGroupInput!) {
   DeleteGroupById(input: $input)
 }
+
 mutation AddCouponCode($input: couponCodeInput!) {
   AddCouponCode(input: $input) {
     text
     imgUrl
     link
+    __typename
   }
 }
+
 mutation UpdatePaymentProgram($input: updatePaymentProgramInput!) {
   UpdatePaymentProgram(input: $input)
 }
+
 mutation GetSubscriptionPlans($input: userInput!) {
   GetSubscriptionPlans(input: $input) {
     id
@@ -372,24 +425,31 @@ mutation GetSubscriptionPlans($input: userInput!) {
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     subscriptionProviderPlanId
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateSelectedCardPacks($input: selectedCardPacksInput!) {
   UpdateSelectedCardPacks(input: $input)
 }
+
 mutation LikeClicked($input: cardPackIdInput!) {
   LikeClicked(input: $input)
 }
+
 mutation IncrementPackEntries($input: cardPackIdInput!) {
   IncrementPackEntries(input: $input)
 }
+
 mutation GetAffiliateData($input: userInput!) {
   getAffiliateData(input: $input) {
     id
@@ -421,13 +481,16 @@ mutation GetAffiliateData($input: userInput!) {
             text
             imgUrl
             link
+            __typename
           }
           createdAt
           updatedAt
+          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
+        __typename
       }
       includedCardPacksIds {
         id
@@ -438,6 +501,7 @@ mutation GetAffiliateData($input: userInput!) {
         cards {
           backImgUrl
           frontImgUrl
+          __typename
         }
         cardsPreview
         groupsIds
@@ -451,10 +515,15 @@ mutation GetAffiliateData($input: userInput!) {
                 name
                 subElements {
                   name
+                  __typename
                 }
+                __typename
               }
+              __typename
             }
+            __typename
           }
+          __typename
         }
         name
         freeUntilDate
@@ -462,6 +531,7 @@ mutation GetAffiliateData($input: userInput!) {
           text
           imgUrl
           link
+          __typename
         }
         isOwnedByOrg
         brief
@@ -489,27 +559,33 @@ mutation GetAffiliateData($input: userInput!) {
               text
               imgUrl
               link
+              __typename
             }
             createdAt
             updatedAt
+            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
+          __typename
         }
         topQuestions
         usersUsage {
           user
           entries
+          __typename
         }
         isFree
         language
         isActive
         createdAt
         updatedAt
+        __typename
       }
       cancellationDate
       nextBillingDate
+      __typename
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
@@ -535,12 +611,15 @@ mutation GetAffiliateData($input: userInput!) {
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     cardsPacksIds
     providerTransactionId
@@ -554,9 +633,11 @@ mutation GetAffiliateData($input: userInput!) {
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     endOfTrialDate
     createdAt
@@ -587,13 +668,16 @@ mutation GetAffiliateData($input: userInput!) {
             text
             imgUrl
             link
+            __typename
           }
           createdAt
           updatedAt
+          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
+        __typename
       }
       includedCardPacksIds {
         id
@@ -604,6 +688,7 @@ mutation GetAffiliateData($input: userInput!) {
         cards {
           backImgUrl
           frontImgUrl
+          __typename
         }
         cardsPreview
         groupsIds
@@ -617,10 +702,15 @@ mutation GetAffiliateData($input: userInput!) {
                 name
                 subElements {
                   name
+                  __typename
                 }
+                __typename
               }
+              __typename
             }
+            __typename
           }
+          __typename
         }
         name
         freeUntilDate
@@ -628,6 +718,7 @@ mutation GetAffiliateData($input: userInput!) {
           text
           imgUrl
           link
+          __typename
         }
         isOwnedByOrg
         brief
@@ -655,27 +746,33 @@ mutation GetAffiliateData($input: userInput!) {
               text
               imgUrl
               link
+              __typename
             }
             createdAt
             updatedAt
+            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
+          __typename
         }
         topQuestions
         usersUsage {
           user
           entries
+          __typename
         }
         isFree
         language
         isActive
         createdAt
         updatedAt
+        __typename
       }
       cancellationDate
       nextBillingDate
+      __typename
     }
     entryDates
     refId
@@ -697,9 +794,11 @@ mutation GetAffiliateData($input: userInput!) {
         currency
         paymentWay
         transactionId
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     payments {
       id
@@ -709,9 +808,12 @@ mutation GetAffiliateData($input: userInput!) {
       currency
       paymentWay
       transactionId
+      __typename
     }
+    __typename
   }
 }
+
 mutation CreateCommonLink(
   $input: CreateCommonLinkInput!
   $condition: ModelCommonLinkConditionInput
@@ -722,8 +824,10 @@ mutation CreateCommonLink(
     createdBy
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateCommonLink(
   $input: UpdateCommonLinkInput!
   $condition: ModelCommonLinkConditionInput
@@ -734,8 +838,10 @@ mutation UpdateCommonLink(
     createdBy
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteCommonLink(
   $input: DeleteCommonLinkInput!
   $condition: ModelCommonLinkConditionInput
@@ -746,8 +852,10 @@ mutation DeleteCommonLink(
     createdBy
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateAffiliate(
   $input: CreateAffiliateInput!
   $condition: ModelAffiliateConditionInput
@@ -770,11 +878,14 @@ mutation CreateAffiliate(
       currency
       paymentWay
       transactionId
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateAffiliate(
   $input: UpdateAffiliateInput!
   $condition: ModelAffiliateConditionInput
@@ -797,11 +908,14 @@ mutation UpdateAffiliate(
       currency
       paymentWay
       transactionId
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteAffiliate(
   $input: DeleteAffiliateInput!
   $condition: ModelAffiliateConditionInput
@@ -824,11 +938,14 @@ mutation DeleteAffiliate(
       currency
       paymentWay
       transactionId
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateSubscriptionPlan(
   $input: CreateSubscriptionPlanInput!
   $condition: ModelSubscriptionPlanConditionInput
@@ -852,15 +969,19 @@ mutation CreateSubscriptionPlan(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     subscriptionProviderPlanId
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateSubscriptionPlan(
   $input: UpdateSubscriptionPlanInput!
   $condition: ModelSubscriptionPlanConditionInput
@@ -884,15 +1005,19 @@ mutation UpdateSubscriptionPlan(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     subscriptionProviderPlanId
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteSubscriptionPlan(
   $input: DeleteSubscriptionPlanInput!
   $condition: ModelSubscriptionPlanConditionInput
@@ -916,15 +1041,19 @@ mutation DeleteSubscriptionPlan(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     subscriptionProviderPlanId
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateCouponCodes(
   $input: CreateCouponCodesInput!
   $condition: ModelCouponCodesConditionInput
@@ -944,14 +1073,18 @@ mutation CreateCouponCodes(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateCouponCodes(
   $input: UpdateCouponCodesInput!
   $condition: ModelCouponCodesConditionInput
@@ -971,14 +1104,18 @@ mutation UpdateCouponCodes(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteCouponCodes(
   $input: DeleteCouponCodesInput!
   $condition: ModelCouponCodesConditionInput
@@ -998,14 +1135,18 @@ mutation DeleteCouponCodes(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateOrganizations(
   $input: CreateOrganizationsInput!
   $condition: ModelOrganizationsConditionInput
@@ -1022,15 +1163,19 @@ mutation CreateOrganizations(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     verifyPersonByEmail
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateOrganizations(
   $input: UpdateOrganizationsInput!
   $condition: ModelOrganizationsConditionInput
@@ -1047,15 +1192,19 @@ mutation UpdateOrganizations(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     verifyPersonByEmail
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteOrganizations(
   $input: DeleteOrganizationsInput!
   $condition: ModelOrganizationsConditionInput
@@ -1072,15 +1221,19 @@ mutation DeleteOrganizations(
         text
         imgUrl
         link
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
     verifyPersonByEmail
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateOrganizationMembership(
   $input: CreateOrganizationMembershipInput!
   $condition: ModelOrganizationMembershipConditionInput
@@ -1094,11 +1247,14 @@ mutation CreateOrganizationMembership(
       text
       imgUrl
       link
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateOrganizationMembership(
   $input: UpdateOrganizationMembershipInput!
   $condition: ModelOrganizationMembershipConditionInput
@@ -1112,11 +1268,14 @@ mutation UpdateOrganizationMembership(
       text
       imgUrl
       link
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteOrganizationMembership(
   $input: DeleteOrganizationMembershipInput!
   $condition: ModelOrganizationMembershipConditionInput
@@ -1130,11 +1289,14 @@ mutation DeleteOrganizationMembership(
       text
       imgUrl
       link
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteReceiptsId(
   $input: DeleteReceiptsIdInput!
   $condition: ModelReceiptsIdConditionInput
@@ -1144,8 +1306,10 @@ mutation DeleteReceiptsId(
     counter
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateGroup(
   $input: CreateGroupInput!
   $condition: ModelGroupConditionInput
@@ -1155,6 +1319,7 @@ mutation CreateGroup(
     groupUsers {
       email
       role
+      __typename
     }
     paymentProgram {
       id
@@ -1175,18 +1340,23 @@ mutation CreateGroup(
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateGroup(
   $input: UpdateGroupInput!
   $condition: ModelGroupConditionInput
@@ -1196,6 +1366,7 @@ mutation UpdateGroup(
     groupUsers {
       email
       role
+      __typename
     }
     paymentProgram {
       id
@@ -1216,18 +1387,23 @@ mutation UpdateGroup(
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteGroup(
   $input: DeleteGroupInput!
   $condition: ModelGroupConditionInput
@@ -1237,6 +1413,7 @@ mutation DeleteGroup(
     groupUsers {
       email
       role
+      __typename
     }
     paymentProgram {
       id
@@ -1257,18 +1434,23 @@ mutation DeleteGroup(
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
+      __typename
     }
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateNews(
   $input: CreateNewsInput!
   $condition: ModelNewsConditionInput
@@ -1279,8 +1461,10 @@ mutation CreateNews(
     order
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateNews(
   $input: UpdateNewsInput!
   $condition: ModelNewsConditionInput
@@ -1291,8 +1475,10 @@ mutation UpdateNews(
     order
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteNews(
   $input: DeleteNewsInput!
   $condition: ModelNewsConditionInput
@@ -1303,8 +1489,10 @@ mutation DeleteNews(
     order
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateCardsPack(
   $input: CreateCardsPackInput!
   $condition: ModelCardsPackConditionInput
@@ -1318,6 +1506,7 @@ mutation CreateCardsPack(
     cards {
       backImgUrl
       frontImgUrl
+      __typename
     }
     cardsPreview
     groupsIds
@@ -1335,12 +1524,19 @@ mutation CreateCardsPack(
                 name
                 subElements {
                   name
+                  __typename
                 }
+                __typename
               }
+              __typename
             }
+            __typename
           }
+          __typename
         }
+        __typename
       }
+      __typename
     }
     name
     freeUntilDate
@@ -1348,6 +1544,7 @@ mutation CreateCardsPack(
       text
       imgUrl
       link
+      __typename
     }
     isOwnedByOrg
     brief
@@ -1375,26 +1572,32 @@ mutation CreateCardsPack(
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
+      __typename
     }
     topQuestions
     usersUsage {
       user
       entries
+      __typename
     }
     isFree
     language
     isActive
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateCardsPack(
   $input: UpdateCardsPackInput!
   $condition: ModelCardsPackConditionInput
@@ -1408,6 +1611,7 @@ mutation UpdateCardsPack(
     cards {
       backImgUrl
       frontImgUrl
+      __typename
     }
     cardsPreview
     groupsIds
@@ -1425,12 +1629,19 @@ mutation UpdateCardsPack(
                 name
                 subElements {
                   name
+                  __typename
                 }
+                __typename
               }
+              __typename
             }
+            __typename
           }
+          __typename
         }
+        __typename
       }
+      __typename
     }
     name
     freeUntilDate
@@ -1438,6 +1649,7 @@ mutation UpdateCardsPack(
       text
       imgUrl
       link
+      __typename
     }
     isOwnedByOrg
     brief
@@ -1465,26 +1677,32 @@ mutation UpdateCardsPack(
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
+      __typename
     }
     topQuestions
     usersUsage {
       user
       entries
+      __typename
     }
     isFree
     language
     isActive
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteCardsPack(
   $input: DeleteCardsPackInput!
   $condition: ModelCardsPackConditionInput
@@ -1498,6 +1716,7 @@ mutation DeleteCardsPack(
     cards {
       backImgUrl
       frontImgUrl
+      __typename
     }
     cardsPreview
     groupsIds
@@ -1515,12 +1734,19 @@ mutation DeleteCardsPack(
                 name
                 subElements {
                   name
+                  __typename
                 }
+                __typename
               }
+              __typename
             }
+            __typename
           }
+          __typename
         }
+        __typename
       }
+      __typename
     }
     name
     freeUntilDate
@@ -1528,6 +1754,7 @@ mutation DeleteCardsPack(
       text
       imgUrl
       link
+      __typename
     }
     isOwnedByOrg
     brief
@@ -1555,26 +1782,32 @@ mutation DeleteCardsPack(
           text
           imgUrl
           link
+          __typename
         }
         createdAt
         updatedAt
+        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
+      __typename
     }
     topQuestions
     usersUsage {
       user
       entries
+      __typename
     }
     isFree
     language
     isActive
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateMessageQueue(
   $input: CreateMessageQueueInput!
   $condition: ModelMessageQueueConditionInput
@@ -1590,8 +1823,10 @@ mutation CreateMessageQueue(
     params
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateMessageQueue(
   $input: UpdateMessageQueueInput!
   $condition: ModelMessageQueueConditionInput
@@ -1607,8 +1842,10 @@ mutation UpdateMessageQueue(
     params
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteMessageQueue(
   $input: DeleteMessageQueueInput!
   $condition: ModelMessageQueueConditionInput
@@ -1624,8 +1861,10 @@ mutation DeleteMessageQueue(
     params
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateContactUsModel(
   $input: UpdateContactUsModelInput!
   $condition: ModelContactUsModelConditionInput
@@ -1637,8 +1876,10 @@ mutation UpdateContactUsModel(
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteContactUsModel(
   $input: DeleteContactUsModelInput!
   $condition: ModelContactUsModelConditionInput
@@ -1650,8 +1891,10 @@ mutation DeleteContactUsModel(
     email
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateInvoices(
   $input: CreateInvoicesInput!
   $condition: ModelInvoicesConditionInput
@@ -1667,6 +1910,7 @@ mutation CreateInvoices(
       itemName
       pricePerItem
       numberOfItems
+      __typename
     }
     businessName
     businessPhoneNumber
@@ -1675,8 +1919,10 @@ mutation CreateInvoices(
     invoiceType
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateInvoices(
   $input: UpdateInvoicesInput!
   $condition: ModelInvoicesConditionInput
@@ -1692,6 +1938,7 @@ mutation UpdateInvoices(
       itemName
       pricePerItem
       numberOfItems
+      __typename
     }
     businessName
     businessPhoneNumber
@@ -1700,8 +1947,10 @@ mutation UpdateInvoices(
     invoiceType
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation DeleteInvoices(
   $input: DeleteInvoicesInput!
   $condition: ModelInvoicesConditionInput
@@ -1717,6 +1966,7 @@ mutation DeleteInvoices(
       itemName
       pricePerItem
       numberOfItems
+      __typename
     }
     businessName
     businessPhoneNumber
@@ -1725,8 +1975,10 @@ mutation DeleteInvoices(
     invoiceType
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateReceiptsId(
   $input: CreateReceiptsIdInput!
   $condition: ModelReceiptsIdConditionInput
@@ -1736,8 +1988,10 @@ mutation CreateReceiptsId(
     counter
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation UpdateReceiptsId(
   $input: UpdateReceiptsIdInput!
   $condition: ModelReceiptsIdConditionInput
@@ -1747,8 +2001,10 @@ mutation UpdateReceiptsId(
     counter
     createdAt
     updatedAt
+    __typename
   }
 }
+
 mutation CreateContactUsModel(
   $input: CreateContactUsModelInput!
   $condition: ModelContactUsModelConditionInput
@@ -1760,5 +2016,6 @@ mutation CreateContactUsModel(
     email
     createdAt
     updatedAt
+    __typename
   }
 }

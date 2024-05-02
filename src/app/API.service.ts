@@ -393,6 +393,7 @@ export type WithdrawInput = {
 
 export type ModelAffiliateConditionInput = {
   affiliateUrl?: ModelStringInput | null;
+  contactEmail?: ModelStringInput | null;
   phoneNumber?: ModelStringInput | null;
   websiteURL?: ModelStringInput | null;
   paymentDetails?: ModelStringInput | null;
@@ -10041,10 +10042,10 @@ async ListCardsPacksForPreview(
     }
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
-    >;
-  }
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
+  >;
+}
 
   OnUpdateAffiliateListener(
     contactEmail?: string
@@ -10083,10 +10084,10 @@ async ListCardsPacksForPreview(
     }
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
-    >;
-  }
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
+  >;
+}
 
   OnDeleteAffiliateListener(
     contactEmail?: string
@@ -10125,10 +10126,10 @@ async ListCardsPacksForPreview(
     }
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
-    >;
-  }
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
+  >;
+}
 
   OnCreateCouponCodesListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
