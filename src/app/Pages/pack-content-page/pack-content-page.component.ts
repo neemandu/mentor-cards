@@ -340,14 +340,22 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   openGuideBook(): void {
     this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id, 'Pack name': this.pack?.name });
     // debugger
-    const modalData: PopoutData = {
-      modalName: 'guide-book',
-      guideBook: this.pack.guideBook,
-      packName: this.pack?.name,
-      packDesc: this.pack.description,
-      imgUrl: this.pack.imgUrl
-    };
-    this.popoutService.openPopoutModal(modalData);
+    console.log('this.pack.guidebookUrl');
+    console.log(this.pack.guidebookUrl);
+    if(this.pack.guidebookUrl && this.pack.guidebookUrl != ""){
+      
+      window.open(this.pack.guidebookUrl, '_blank');
+    }
+    else{
+      const modalData: PopoutData = {
+        modalName: 'guide-book',
+        guideBook: this.pack.guideBook,
+        packName: this.pack?.name,
+        packDesc: this.pack.description,
+        imgUrl: this.pack.imgUrl
+      };
+      this.popoutService.openPopoutModal(modalData);
+    }
   }
 
   sleep(ms) {

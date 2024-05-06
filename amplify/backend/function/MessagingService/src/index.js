@@ -51,9 +51,6 @@ async function getParam(){
   console.log('Parameters:');
   console.log(Parameters);
 
-  // Do not do anything after the await, only the return
-  //var request = await (new aws.SSM()).getParameter(params).promise();
-  console.log(Parameters[0].Value);
   return Parameters[0].Value; 
 }
 

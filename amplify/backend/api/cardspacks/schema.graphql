@@ -75,6 +75,7 @@ type User
   refId: String
   myAffiliate: Affiliate @connection
   payments: [Payment]
+  profession: String
 }
 
 type Payment
@@ -274,6 +275,7 @@ type CardsPack
   isFree: Boolean
   language: String
   isActive: Boolean
+  guidebookUrl: String
 }
 
 type UserUsage {

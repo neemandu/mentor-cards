@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.15\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.10.3\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -25,9 +25,6 @@
       "Default": "apicardspacksGraphQLAPIEndpointOutput"
     },
     "secretsPathAmplifyAppId": {
-      "Type": "String"
-    },
-    "contactListId": {
       "Type": "String"
     }
   },
@@ -61,12 +58,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "AddNewUserToEmailsContactList",
+            "AddUserToEmailList",
             {
               "Fn::Join": [
                 "",
                 [
-                  "AddNewUserToEmailsContactList",
+                  "AddUserToEmailList",
                   "-",
                   {
                     "Ref": "env"
@@ -98,19 +95,13 @@
                         "env": {
                           "Ref": "env"
                         },
-                        "functionName": "AddNewUserToEmailsContactList"
+                        "functionName": "AddUserToEmailList"
                       }
                     ]
                   },
                   "smooveApiKey"
                 ]
               ]
-            },
-            "CONTACT_LIST_ID": {
-              "Ref": "contactListId"
-            },
-            "contactListId": {
-              "Ref": "contactListId"
             }
           }
         },
@@ -120,7 +111,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Layers": [],
         "Timeout": 25
       }
@@ -131,12 +122,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole2ec91412",
+            "mentorcardsLambdaRole125b3bb9",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole2ec91412",
+                  "mentorcardsLambdaRole125b3bb9",
                   "-",
                   {
                     "Ref": "env"
@@ -304,7 +295,7 @@
                           "env": {
                             "Ref": "env"
                           },
-                          "functionName": "AddNewUserToEmailsContactList"
+                          "functionName": "AddUserToEmailList"
                         }
                       ]
                     },
@@ -343,6 +334,14 @@
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "LambdaExecutionRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "LambdaExecutionRole",
+          "Arn"
+        ]
       }
     }
   }

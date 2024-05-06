@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseurl: "https://seo4gndjt8.execute-api.eu-west-2.amazonaws.com/",
+  paypalClientId: 'AQAYUSLDLPzoqz8J7lzcQmhxUjVee4-652_r5xKmUHL0nDp41hyf9V4qsMXIIUmhCxzIwOa9cUX269lj'
 };
 
 /*

@@ -1,6 +1,12 @@
 {
   "permissions": {
     "storage": {
+      "Invoices": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
       "User:@model(appsync)": [
         "create",
         "read",

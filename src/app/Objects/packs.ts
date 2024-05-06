@@ -20,6 +20,7 @@ export class PackInfo {
     isExternalPack: boolean;
     subscriptionPlans: SubscriptionPlan[];
     topQuestions: string[];
+    guidebookUrl: string;
 
     constructor() { }
 
@@ -49,11 +50,13 @@ export class PackContent {
     topQuestions: string[];
     subscriptionPlans: SubscriptionPlan[];
     isExternalPack: boolean;
+    guidebookUrl: string;
 
     constructor() { }
 
     deseralize(input: any) {
         Object.assign(this, input);
+        this.guidebookUrl = input.guidebookUrl;
         input.cards ? this.cards = input.cards.map(card => new Card().deseralize(card, input.backImgUrl)) : null;
         input.guideBook ? this.guideBook = input.guideBook.map(element => new GuideBookElement().deseralize(element)) : null;
         // input.guideBook ? this.guideBook = input.guideBook.map(element => new GuideBookElement().deseralize(element)) : null;

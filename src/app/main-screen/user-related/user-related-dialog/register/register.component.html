@@ -8,9 +8,9 @@
           <mat-hint>{{ 'pages.register.form.name-hint' | translate }}</mat-hint>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ 'pages.register.form.name-label' | translate }}</mat-label>
+          <mat-label>{{ 'pages.register.form.phone-label' | translate }}</mat-label>
           <input autocomplete="tel" formControlName="phone" matInput inputmode="numeric">
-          <mat-hint>{{ 'pages.register.form.name-hint' | translate }}</mat-hint>
+          <mat-hint>{{ 'pages.register.form.phone-hint' | translate }}</mat-hint>
           <mat-error *ngIf="registerForm.controls.phone.errors">{{ 'pages.register.form.phone-error' | translate }}
           </mat-error>
         </mat-form-field>

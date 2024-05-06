@@ -37,6 +37,21 @@
     }
   },
   "function": {
+    "AddUserToEmailList": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "AffiliateBalanceHandler": {
       "build": true,
       "dependsOn": [
@@ -128,32 +143,6 @@
         }
       ]
     },
-    "InvoiceHandler": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "receiptsAPI"
-        },
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "Invoices"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        }
-      ]
-    },
     "NewAffiliateHandler": {
       "build": true,
       "dependsOn": [
@@ -172,17 +161,19 @@
       "dependsOn": [
         {
           "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "Invoices"
+        },
+        {
+          "attributes": [
             "GraphQLAPIIdOutput"
           ],
           "category": "api",
           "resourceName": "cardspacks"
         }
       ]
-    },
-    "dudi": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     },
     "mentorcards56dbf153PreSignup": {
       "build": true,
@@ -260,6 +251,14 @@
         {
           "category": "function",
           "resourceName": "AddNewUserToEmailsContactList"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddUserToEmailList_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },
@@ -356,78 +355,6 @@
         {
           "category": "function",
           "resourceName": "DeleteGroup"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailEndOfTrialNotice_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailEndOfTrialNotice"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailEndOfTrialNotice_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailEndOfTrialNotice"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailGuideIntroduction_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailGuideIntroduction"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailGuideIntroduction_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailGuideIntroduction"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailGuideIntroduction_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailGuideIntroduction"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailUpcomingEndOfTrialNotice_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailUpcomingEndOfTrialNotice"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailUpcomingEndOfTrialNotice_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailUpcomingEndOfTrialNotice"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailUpcomingPayment_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailUpcomingPayment"
-        }
-      ]
-    },
-    "AMPLIFY_function_EmailUpcomingPayment_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "EmailUpcomingPayment"
         }
       ]
     },
@@ -588,30 +515,6 @@
         {
           "category": "function",
           "resourceName": "IncrementPackEntries"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_receiptsUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
         }
       ]
     },
@@ -780,22 +683,6 @@
         {
           "category": "function",
           "resourceName": "UpdateSelectedCardPacks"
-        }
-      ]
-    },
-    "AMPLIFY_function_dudi_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "dudi"
-        }
-      ]
-    },
-    "AMPLIFY_function_dudi_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "dudi"
         }
       ]
     },

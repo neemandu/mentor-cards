@@ -41,12 +41,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "AddNewUserToEmailsContactList": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "AffiliateBalanceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
