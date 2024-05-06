@@ -37,6 +37,21 @@
     }
   },
   "function": {
+    "AddUserToEmailList": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "AffiliateBalanceHandler": {
       "build": true,
       "dependsOn": [
@@ -199,35 +214,27 @@
         }
       ]
     },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_contactListId": {
+    "AMPLIFY_function_AddUserToEmailList_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_deploymentBucketName": {
+    "AMPLIFY_function_AddUserToEmailList_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_s3Key": {
+    "AMPLIFY_function_AddUserToEmailList_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
-        }
-      ]
-    },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },

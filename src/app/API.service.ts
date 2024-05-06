@@ -100,6 +100,7 @@ export type User = {
   refId?: string | null;
   myAffiliate?: Affiliate | null;
   payments?: Array<Payment | null> | null;
+  profession?: string | null;
 };
 
 export type MonthlySubscription = {
@@ -176,6 +177,7 @@ export type CardsPack = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -717,6 +719,7 @@ export type CreateCardsPackInput = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
 };
 
 export type CardsInput = {
@@ -754,6 +757,7 @@ export type ModelCardsPackConditionInput = {
   isFree?: ModelBooleanInput | null;
   language?: ModelStringInput | null;
   isActive?: ModelBooleanInput | null;
+  guidebookUrl?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -784,6 +788,7 @@ export type UpdateCardsPackInput = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -1027,6 +1032,7 @@ export type ModelUserFilterInput = {
   entries?: ModelIntInput | null;
   entryDates?: ModelStringInput | null;
   refId?: ModelStringInput | null;
+  profession?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -1214,6 +1220,7 @@ export type ModelCardsPackFilterInput = {
   isFree?: ModelBooleanInput | null;
   language?: ModelStringInput | null;
   isActive?: ModelBooleanInput | null;
+  guidebookUrl?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1372,6 +1379,7 @@ export type CreateUserMutation = {
       isFree?: boolean | null;
       language?: string | null;
       isActive?: boolean | null;
+      guidebookUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1559,6 +1567,7 @@ export type CreateUserMutation = {
       isFree?: boolean | null;
       language?: string | null;
       isActive?: boolean | null;
+      guidebookUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1601,6 +1610,7 @@ export type CreateUserMutation = {
     paymentWay?: string | null;
     transactionId?: string | null;
   } | null> | null;
+  profession?: string | null;
 };
 
 export type AddCouponCodeMutation = {
@@ -1772,6 +1782,7 @@ export type GetAffiliateDataMutation = {
       isFree?: boolean | null;
       language?: string | null;
       isActive?: boolean | null;
+      guidebookUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1959,6 +1970,7 @@ export type GetAffiliateDataMutation = {
       isFree?: boolean | null;
       language?: string | null;
       isActive?: boolean | null;
+      guidebookUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2001,6 +2013,7 @@ export type GetAffiliateDataMutation = {
     paymentWay?: string | null;
     transactionId?: string | null;
   } | null> | null;
+  profession?: string | null;
 };
 
 export type CreateCommonLinkMutation = {
@@ -2653,6 +2666,7 @@ export type CreateCardsPackMutation = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2753,6 +2767,7 @@ export type UpdateCardsPackMutation = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2853,6 +2868,7 @@ export type DeleteCardsPackMutation = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3167,6 +3183,7 @@ export type GetUserQuery = {
       isFree?: boolean | null;
       language?: string | null;
       isActive?: boolean | null;
+      guidebookUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3354,6 +3371,7 @@ export type GetUserQuery = {
       isFree?: boolean | null;
       language?: string | null;
       isActive?: boolean | null;
+      guidebookUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3396,6 +3414,7 @@ export type GetUserQuery = {
     paymentWay?: string | null;
     transactionId?: string | null;
   } | null> | null;
+  profession?: string | null;
 };
 
 export type ListUsersQuery = {
@@ -3527,6 +3546,7 @@ export type ListUsersQuery = {
         isFree?: boolean | null;
         language?: string | null;
         isActive?: boolean | null;
+        guidebookUrl?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3710,6 +3730,7 @@ export type ListUsersQuery = {
         isFree?: boolean | null;
         language?: string | null;
         isActive?: boolean | null;
+        guidebookUrl?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3752,6 +3773,7 @@ export type ListUsersQuery = {
       paymentWay?: string | null;
       transactionId?: string | null;
     } | null> | null;
+    profession?: string | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -4262,6 +4284,7 @@ export type GetCardsPackQuery = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4360,6 +4383,7 @@ export type ListCardsPacksQuery = {
     isFree?: boolean | null;
     language?: string | null;
     isActive?: boolean | null;
+    guidebookUrl?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -5167,6 +5191,7 @@ export type OnCreateCardsPackSubscription = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5267,6 +5292,7 @@ export type OnUpdateCardsPackSubscription = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5367,6 +5393,7 @@ export type OnDeleteCardsPackSubscription = {
   isFree?: boolean | null;
   language?: string | null;
   isActive?: boolean | null;
+  guidebookUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5550,6 +5577,7 @@ export class APIService {
               isFree
               language
               isActive
+              guidebookUrl
               createdAt
               updatedAt
             }
@@ -5737,6 +5765,7 @@ export class APIService {
               isFree
               language
               isActive
+              guidebookUrl
               createdAt
               updatedAt
             }
@@ -5779,6 +5808,7 @@ export class APIService {
             paymentWay
             transactionId
           }
+          profession
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -6154,6 +6184,7 @@ async GetSubscriptionPlansForOrgs(
               isFree
               language
               isActive
+              guidebookUrl
               createdAt
               updatedAt
             }
@@ -6341,6 +6372,7 @@ async GetSubscriptionPlansForOrgs(
               isFree
               language
               isActive
+              guidebookUrl
               createdAt
               updatedAt
             }
@@ -6383,6 +6415,7 @@ async GetSubscriptionPlansForOrgs(
             paymentWay
             transactionId
           }
+          profession
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -7454,6 +7487,7 @@ async GetSubscriptionPlansForOrgs(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
         }
@@ -7570,6 +7604,7 @@ async GetSubscriptionPlansForOrgs(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
         }
@@ -7686,6 +7721,7 @@ async GetSubscriptionPlansForOrgs(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
         }
@@ -8222,6 +8258,7 @@ async GetSubscriptionPlansForOrgs(
               isFree
               language
               isActive
+              guidebookUrl
               createdAt
               updatedAt
             }
@@ -8409,6 +8446,7 @@ async GetSubscriptionPlansForOrgs(
               isFree
               language
               isActive
+              guidebookUrl
               createdAt
               updatedAt
             }
@@ -8451,6 +8489,7 @@ async GetSubscriptionPlansForOrgs(
             paymentWay
             transactionId
           }
+          profession
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -8596,6 +8635,7 @@ async GetSubscriptionPlansForOrgs(
                 isFree
                 language
                 isActive
+                guidebookUrl
                 createdAt
                 updatedAt
               }
@@ -8779,6 +8819,7 @@ async GetSubscriptionPlansForOrgs(
                 isFree
                 language
                 isActive
+                guidebookUrl
                 createdAt
                 updatedAt
               }
@@ -8821,6 +8862,7 @@ async GetSubscriptionPlansForOrgs(
               paymentWay
               transactionId
             }
+            profession
           }
           nextToken
         }
@@ -9635,6 +9677,7 @@ async GetSubscriptionPlansForOrgs(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
         }
@@ -9872,6 +9915,7 @@ async ListCardsPacksForPreview(
             isFree
             language
             isActive
+            guidebookUrl
             createdAt
             updatedAt
           }
@@ -11105,6 +11149,7 @@ async ListCardsPacksForPreview(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
         }
@@ -11215,6 +11260,7 @@ async ListCardsPacksForPreview(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
         }
@@ -11325,6 +11371,7 @@ async ListCardsPacksForPreview(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
         }

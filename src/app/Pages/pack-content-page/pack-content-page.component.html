@@ -16,7 +16,7 @@
     </h2>
   </div>
   <button
-    *ngIf="!unauthorized || !commonLink"
+    *ngIf="!unauthorized && !commonLink"
     id="guideBook"
     type="button"
     [disabled]="showEditPack"
@@ -54,7 +54,7 @@
 </div>
 
 <div
-  *ngIf="!unauthorized && (!commonLink || cards.length > 0)"
+  *ngIf="!unauthorized && cards.length > 0"
   class="sticky-top d-flex justify-content-center"
 >
   <div id="actions">
@@ -118,6 +118,7 @@
     <button
       id="editPack"
       type="button"
+      *ngIf="!commonLink"
       [ngClass]="{ 'option-btn top-option-btn': true }"
       (click)="editPack()"
     >

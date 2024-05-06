@@ -159,6 +159,7 @@ query GetUser($id: ID!) {
         isFree
         language
         isActive
+        guidebookUrl
         createdAt
         updatedAt
         __typename
@@ -346,6 +347,7 @@ query GetUser($id: ID!) {
         isFree
         language
         isActive
+        guidebookUrl
         createdAt
         updatedAt
         __typename
@@ -390,6 +392,7 @@ query GetUser($id: ID!) {
       transactionId
       __typename
     }
+    profession
     __typename
   }
 }
@@ -524,6 +527,7 @@ query ListUsers(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
           __typename
@@ -707,6 +711,7 @@ query ListUsers(
           isFree
           language
           isActive
+          guidebookUrl
           createdAt
           updatedAt
           __typename
@@ -751,6 +756,7 @@ query ListUsers(
         transactionId
         __typename
       }
+      profession
       __typename
     }
     nextToken
@@ -1339,6 +1345,7 @@ query GetCardsPack($id: ID!, $link: String!) {
     isFree
     language
     isActive
+    guidebookUrl
     createdAt
     updatedAt
     __typename
@@ -1442,6 +1449,7 @@ query ListCardsPacks(
       isFree
       language
       isActive
+      guidebookUrl
       createdAt
       updatedAt
       __typename

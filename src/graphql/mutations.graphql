@@ -133,6 +133,7 @@ mutation CreateUser($input: CreateUserInput!) {
         isFree
         language
         isActive
+        guidebookUrl
         createdAt
         updatedAt
         __typename
@@ -320,6 +321,7 @@ mutation CreateUser($input: CreateUserInput!) {
         isFree
         language
         isActive
+        guidebookUrl
         createdAt
         updatedAt
         __typename
@@ -364,6 +366,7 @@ mutation CreateUser($input: CreateUserInput!) {
       transactionId
       __typename
     }
+    profession
     __typename
   }
 }
@@ -579,6 +582,7 @@ mutation GetAffiliateData($input: userInput!) {
         isFree
         language
         isActive
+        guidebookUrl
         createdAt
         updatedAt
         __typename
@@ -766,6 +770,7 @@ mutation GetAffiliateData($input: userInput!) {
         isFree
         language
         isActive
+        guidebookUrl
         createdAt
         updatedAt
         __typename
@@ -810,6 +815,7 @@ mutation GetAffiliateData($input: userInput!) {
       transactionId
       __typename
     }
+    profession
     __typename
   }
 }
@@ -1592,6 +1598,7 @@ mutation CreateCardsPack(
     isFree
     language
     isActive
+    guidebookUrl
     createdAt
     updatedAt
     __typename
@@ -1697,6 +1704,7 @@ mutation UpdateCardsPack(
     isFree
     language
     isActive
+    guidebookUrl
     createdAt
     updatedAt
     __typename
@@ -1802,6 +1810,7 @@ mutation DeleteCardsPack(
     isFree
     language
     isActive
+    guidebookUrl
     createdAt
     updatedAt
     __typename

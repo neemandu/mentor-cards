@@ -843,6 +843,7 @@ subscription OnCreateCardsPack {
     isFree
     language
     isActive
+    guidebookUrl
     createdAt
     updatedAt
     __typename
@@ -945,6 +946,7 @@ subscription OnUpdateCardsPack {
     isFree
     language
     isActive
+    guidebookUrl
     createdAt
     updatedAt
     __typename
@@ -1047,6 +1049,7 @@ subscription OnDeleteCardsPack {
     isFree
     language
     isActive
+    guidebookUrl
     createdAt
     updatedAt
     __typename
