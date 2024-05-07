@@ -40,7 +40,7 @@
     "jquery": "^3.4.1",
     "logrocket": "^1.0.14",
     "mixpanel-browser": "^2.45.0",
-    "ng-apexcharts": "^1.5.12",
+    "ng-apexcharts": "^1.6.0",
     "npm-cli": "^0.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
