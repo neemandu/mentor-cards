@@ -386,10 +386,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.mixpanelService.track("ActionButtonClicked", { "Action": "Create Common Link", 'Pack id': this.id, 'Pack name': this.pack?.name });
     
     this.api.MakeCommonLink({packId:this.id}).then(data => {
-      const text = " הוזמנת להצטרף לחווית עבודה משותפת במנטור-קארדס! לכניסה, לחצו על הקישור: "
       const url = window.location.href + "?link=" + data;
-      navigator.clipboard.writeText(text+url).then(() => {
-        this.dialog.open(CopyCommonLinkDialogComponent);
+      this.dialog.open(CopyCommonLinkDialogComponent, {
+        data: { linkUrl: url }
       });
     })
   }
