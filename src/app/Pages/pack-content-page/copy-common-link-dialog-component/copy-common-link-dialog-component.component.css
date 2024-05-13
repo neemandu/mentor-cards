@@ -2,3 +2,9 @@
     text-align: center;
     direction: rtl;
   }
+
+  .custom-menu .mat-menu-item {
+    text-align: right; /* Aligns text to the right */
+    display: flex;
+    justify-content: flex-end; /* Aligns content to the right in flex containers */
+  }

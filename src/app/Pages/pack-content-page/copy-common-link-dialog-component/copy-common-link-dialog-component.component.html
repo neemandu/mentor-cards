@@ -1,5 +1,26 @@
 <div class="dialog-content">
-    <h1>הקישור נוצר בהצלחה!</h1>
-    <h1>ניתן להדביקו ע"י Ctrl+V או לחיצה על "הדבק" עם העכבר בכל מקום.</h1>
-    <h2 style="font-size: large;">שימו לב שהקישור פתוח ל-3 השעות הקרובות. בהצלחה!</h2>
-  </div>
+  <h1>הקישור נוצר בהצלחה!</h1>
+  <h2>
+    <button mat-icon-button [matMenuTriggerFor]="shareMenu" matTooltip="שתף">
+      <mat-icon>share</mat-icon>
+    </button>
+    {{ data.linkUrl }}
+    <mat-menu #shareMenu="matMenu">
+      <button mat-menu-item (click)="copyLink(data.linkUrl)">
+        <mat-icon>content_copy</mat-icon><span>העתק </span>
+      </button>
+      <button mat-menu-item (click)="shareViaWhatsApp(data.linkUrl)">
+        
+        <img
+                    src="../../../assets/icons/whatsapp.png"
+                    alt="Whatsapp"
+                    style="height: 2vh; width: auto"
+                  /><span>WhatsApp </span>
+      </button>
+      <button mat-menu-item (click)="shareViaEmail(data.linkUrl)">
+        <mat-icon>email</mat-icon><span>אימייל </span>
+      </button>
+    </mat-menu>
+  </h2>
+  <h2 style="font-size: large;">שימו לב שהקישור פתוח ל-3 השעות הקרובות. בהצלחה!</h2>
+</div>

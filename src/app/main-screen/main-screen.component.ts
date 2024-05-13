@@ -12,7 +12,7 @@ import { SharedDialogsService } from '../Services/shared-dialogs.service';
 export class MainScreenComponent implements OnInit, OnDestroy {
 
   subs: Subscription = new Subscription();
-  showSpinner: boolean = true;
+  showSpinner: boolean = false;
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog, private sharedDialogsService: SharedDialogsService) { }
 
