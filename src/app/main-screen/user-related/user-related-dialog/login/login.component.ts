@@ -159,22 +159,22 @@ export class LoginComponent implements OnInit {
   forgotPasswordVarifyEmail(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     var user = this.forgotPasswordForm.get("username").value.toLowerCase();
-    this.userAuthService.forgotPasswordVarifyEmail(user)
-      .then(res => {
-        this.confirmCodeSent = true;
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        // this.forgotPasswordForm.enable();
-        this.newPasswordPhaseEnable();
-        this.userAuthService._snackBar.open('נשלח קוד אימות בהודעה לנייד', '', {
-          duration: 5000,
-          panelClass: ['rtl-snackbar']
-        });
-      })
-      .catch(err => {
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        console.log("file: login.component.ts ~ line 137 ~ forgotPasswordVarifyEmail ~ err", err)
-        this.forgotPasswordErrorHandle(err);
-      });
+    // this.userAuthService.forgotPasswordVarifyEmail(user)
+    //   .then(res => {
+    //     this.confirmCodeSent = true;
+    //     this.overlaySpinnerService.changeOverlaySpinner(false);
+    //     // this.forgotPasswordForm.enable();
+    //     this.newPasswordPhaseEnable();
+    //     this.userAuthService._snackBar.open('נשלח קוד אימות בהודעה לנייד', '', {
+    //       duration: 5000,
+    //       panelClass: ['rtl-snackbar']
+    //     });
+    //   })
+    //   .catch(err => {
+    //     this.overlaySpinnerService.changeOverlaySpinner(false);
+    //     console.log("file: login.component.ts ~ line 137 ~ forgotPasswordVarifyEmail ~ err", err)
+    //     this.forgotPasswordErrorHandle(err);
+    //   });
   }
 
   forgotPasswordReset(): void {
@@ -182,21 +182,21 @@ export class LoginComponent implements OnInit {
     var user = this.forgotPasswordForm.get("username").value.toLowerCase();
     var confirmationCode = this.forgotPasswordForm.get("confirmationCode").value.trim();
     var newPassword = this.forgotPasswordForm.get("newPassword").value;
-    this.userAuthService.forgotPasswordReset(user, confirmationCode, newPassword)
-      .then(res => {
-        this.newPasswordPhaseDisable();
-        this.loginForm.controls['username'].setValue(this.forgotPasswordForm.controls['username'].value)
-        this.showLoginForm();
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        this.userAuthService._snackBar.open('סיסמתך שונתה בהצלחה. יש לבצע התחברות', '', {
-          duration: 5000,
-          panelClass: ['rtl-snackbar']
-        });
-      })
-      .catch(err => {
-        console.log("file: login.component.ts ~ line 163 ~ forgotPasswordReset ~ err", err)
-        this.forgotPasswordErrorHandle(err);
-      });
+    // this.userAuthService.forgotPasswordReset(user, confirmationCode, newPassword)
+    //   .then(res => {
+    //     this.newPasswordPhaseDisable();
+    //     this.loginForm.controls['username'].setValue(this.forgotPasswordForm.controls['username'].value)
+    //     this.showLoginForm();
+    //     this.overlaySpinnerService.changeOverlaySpinner(false);
+    //     this.userAuthService._snackBar.open('סיסמתך שונתה בהצלחה. יש לבצע התחברות', '', {
+    //       duration: 5000,
+    //       panelClass: ['rtl-snackbar']
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log("file: login.component.ts ~ line 163 ~ forgotPasswordReset ~ err", err)
+    //     this.forgotPasswordErrorHandle(err);
+    //   });
   }
 
   /**

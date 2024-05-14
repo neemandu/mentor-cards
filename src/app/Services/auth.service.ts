@@ -3,10 +3,12 @@ import { CognitoHostedUIIdentityProvider, Auth } from '@aws-amplify/auth';
 // import { BehaviorSubject } from 'rxjs';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 
-import {
-  SocialAuthService,
-  GoogleLoginProvider,
-} from 'angularx-social-login';
+// import {
+//   SocialAuthService,
+//   GoogleLoginProvider,
+// } from 'angularx-social-login';
+
+import { GoogleLoginProvider, SocialAuthService, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 
 export interface AuthState {
   isLoggedIn: boolean;

@@ -58,12 +58,12 @@ Amplify.configure(updatedAwsConfig);
 import LogRocket from 'logrocket';
 LogRocket.init('cyu6kh/mentor-cards');
 
-import {
-  SocialAuthServiceConfig,
-  SocialAuthService,
-  GoogleLoginProvider,
-} from 'angularx-social-login';
-
+// import {
+//   SocialAuthServiceConfig,
+//   SocialAuthService,
+//   GoogleLoginProvider,
+// } from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 //Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -93,7 +93,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
-import {DataTablesModule} from 'angular-datatables';
+// import {DataTablesModule} from 'angular-datatables';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -236,7 +236,7 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
         PortalModule,
         ManagementModule,
         I18nModule,
-        DataTablesModule,
+        // DataTablesModule,
         //Material
         MatButtonModule,
         MatIconModule,

@@ -4,9 +4,16 @@
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import awsconfig from '../aws-exports';
-API.configure(awsconfig)
+// API.configure(awsconfig)
+
+import { Amplify } from 'aws-amplify';
+import { generateClient } from 'aws-amplify/api';
+Amplify.configure(awsconfig);
+
+const client = generateClient();
+
 import { Observable } from "zen-observable-ts";
-import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
+// import {GRAPHQL_AUTH_MODE} from "@aws-amplify/api-graphql/lib-esm/types/index";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -5439,7 +5446,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <string | null>response.data.makeCommonLink;
@@ -5814,7 +5821,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateUserMutation>response.data.createUser;
@@ -5826,7 +5833,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.addCardsPack;
@@ -5838,7 +5845,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.changeCardsPack;
@@ -5852,7 +5859,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.updateGroupUsersList;
@@ -5864,7 +5871,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.Unsubscribe;
@@ -5878,7 +5885,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.JoinExistingGroup;
@@ -5890,7 +5897,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.DeleteGroupById;
@@ -5907,7 +5914,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <AddCouponCodeMutation>response.data.AddCouponCode;
@@ -5921,7 +5928,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.UpdatePaymentProgram;
@@ -5957,7 +5964,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <Array<GetSubscriptionPlansMutation>>(
@@ -6002,10 +6009,11 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+        authMode: 'iam'
+      }
     )) as any;
     return <Array<GetSubscriptionPlansMutation>>(
       response.data.GetSubscriptionPlans
@@ -6020,7 +6028,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.UpdateSelectedCardPacks;
@@ -6032,7 +6040,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.LikeClicked;
@@ -6044,7 +6052,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.IncrementPackEntries;
@@ -6421,7 +6429,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       input
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <Array<GetAffiliateDataMutation>>response.data.getAffiliateData;
@@ -6446,7 +6454,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateCommonLinkMutation>response.data.createCommonLink;
@@ -6471,7 +6479,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateCommonLinkMutation>response.data.updateCommonLink;
@@ -6496,7 +6504,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteCommonLinkMutation>response.data.deleteCommonLink;
@@ -6537,7 +6545,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateAffiliateMutation>response.data.createAffiliate;
@@ -6578,7 +6586,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateAffiliateMutation>response.data.updateAffiliate;
@@ -6619,7 +6627,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteAffiliateMutation>response.data.deleteAffiliate;
@@ -6666,7 +6674,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateSubscriptionPlanMutation>response.data.createSubscriptionPlan;
@@ -6713,7 +6721,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateSubscriptionPlanMutation>response.data.updateSubscriptionPlan;
@@ -6760,7 +6768,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteSubscriptionPlanMutation>response.data.deleteSubscriptionPlan;
@@ -6802,7 +6810,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateCouponCodesMutation>response.data.createCouponCodes;
@@ -6844,7 +6852,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateCouponCodesMutation>response.data.updateCouponCodes;
@@ -6886,7 +6894,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteCouponCodesMutation>response.data.deleteCouponCodes;
@@ -6926,7 +6934,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateOrganizationsMutation>response.data.createOrganizations;
@@ -6966,7 +6974,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateOrganizationsMutation>response.data.updateOrganizations;
@@ -7006,7 +7014,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteOrganizationsMutation>response.data.deleteOrganizations;
@@ -7038,7 +7046,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateOrganizationMembershipMutation>(
@@ -7072,7 +7080,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateOrganizationMembershipMutation>(
@@ -7106,7 +7114,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteOrganizationMembershipMutation>(
@@ -7132,7 +7140,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteReceiptsIdMutation>response.data.deleteReceiptsId;
@@ -7190,7 +7198,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateGroupMutation>response.data.createGroup;
@@ -7248,7 +7256,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateGroupMutation>response.data.updateGroup;
@@ -7306,7 +7314,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteGroupMutation>response.data.deleteGroup;
@@ -7331,7 +7339,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateNewsMutation>response.data.createNews;
@@ -7356,7 +7364,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateNewsMutation>response.data.updateNews;
@@ -7381,7 +7389,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteNewsMutation>response.data.deleteNews;
@@ -7498,7 +7506,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateCardsPackMutation>response.data.createCardsPack;
@@ -7615,7 +7623,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateCardsPackMutation>response.data.updateCardsPack;
@@ -7732,7 +7740,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteCardsPackMutation>response.data.deleteCardsPack;
@@ -7762,7 +7770,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateMessageQueueMutation>response.data.createMessageQueue;
@@ -7792,7 +7800,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateMessageQueueMutation>response.data.updateMessageQueue;
@@ -7822,7 +7830,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteMessageQueueMutation>response.data.deleteMessageQueue;
@@ -7848,7 +7856,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateContactUsModelMutation>response.data.updateContactUsModel;
@@ -7874,7 +7882,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteContactUsModelMutation>response.data.deleteContactUsModel;
@@ -7913,7 +7921,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateInvoicesMutation>response.data.createInvoices;
@@ -7952,7 +7960,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateInvoicesMutation>response.data.updateInvoices;
@@ -7991,7 +7999,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteInvoicesMutation>response.data.deleteInvoices;
@@ -8015,7 +8023,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateReceiptsIdMutation>response.data.createReceiptsId;
@@ -8039,7 +8047,7 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateReceiptsIdMutation>response.data.updateReceiptsId;
@@ -8065,10 +8073,10 @@ async GetSubscriptionPlansForOrgs(
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+        authMode: 'iam'}
     )) as any;
     return <CreateContactUsModelMutation>response.data.createContactUsModel;
   }
@@ -8086,7 +8094,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetCommonLinkQuery>response.data.getCommonLink;
@@ -8120,7 +8128,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCommonLinksQuery>response.data.listCommonLinks;
@@ -8495,7 +8503,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetUserQuery>response.data.getUser;
@@ -8877,7 +8885,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListUsersQuery>response.data.listUsers;
@@ -8912,7 +8920,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetAffiliateQuery>response.data.getAffiliate;
@@ -8962,7 +8970,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListAffiliatesQuery>response.data.listAffiliates;
@@ -8998,7 +9006,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetCouponCodesQuery>response.data.getCouponCodes;
@@ -9049,7 +9057,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCouponCodessQuery>response.data.listCouponCodess;
@@ -9083,7 +9091,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetOrganizationsQuery>response.data.getOrganizations;
@@ -9132,7 +9140,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListOrganizationssQuery>response.data.listOrganizationss;
@@ -9160,7 +9168,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetOrganizationMembershipQuery>(
@@ -9203,7 +9211,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListOrganizationMembershipsQuery>(
@@ -9257,7 +9265,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetGroupQuery>response.data.getGroup;
@@ -9324,7 +9332,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListGroupsQuery>response.data.listGroups;
@@ -9348,7 +9356,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetMessageQueueQuery>response.data.getMessageQueue;
@@ -9387,7 +9395,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListMessageQueuesQuery>response.data.listMessageQueues;
@@ -9420,7 +9428,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetInvoicesQuery>response.data.getInvoices;
@@ -9468,7 +9476,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListInvoicessQuery>response.data.listInvoicess;
@@ -9486,7 +9494,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetReceiptsIdQuery>response.data.getReceiptsId;
@@ -9519,7 +9527,7 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListReceiptsIdsQuery>response.data.listReceiptsIds;
@@ -9538,7 +9546,7 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetNewsQuery>response.data.getNews;
@@ -9572,10 +9580,10 @@ async GetSubscriptionPlansForOrgs(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+        authMode: 'iam'}
     )) as any;
     return <ListNewssQuery>response.data.listNewss;
   }
@@ -9685,10 +9693,10 @@ async GetSubscriptionPlansForOrgs(
     const gqlAPIServiceArguments: any = {
       id, link
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+        authMode: 'iam'}
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
@@ -9808,10 +9816,10 @@ async ListCardsPacksForPreview(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       { query: statement,
         variables: gqlAPIServiceArguments,
-        authMode: GRAPHQL_AUTH_MODE.API_KEY}
+        authMode: 'iam'}
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
   }
@@ -9932,7 +9940,7 @@ async ListCardsPacksForPreview(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCardsPacksQuery>response.data.listCardsPacks;
@@ -9952,7 +9960,7 @@ async ListCardsPacksForPreview(
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetContactUsModelQuery>response.data.getContactUsModel;
@@ -9987,1469 +9995,1472 @@ async ListCardsPacksForPreview(
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListContactUsModelsQuery>response.data.listContactUsModels;
   }
-  OnCreateCommonLinkListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateCommonLink {
-        onCreateCommonLink {
-          __typename
-          id
-          experationDate
-          createdBy
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
-  >;
 
-  OnUpdateCommonLinkListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateCommonLink {
-        onUpdateCommonLink {
-          __typename
-          id
-          experationDate
-          createdBy
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
-  >;
 
-  OnDeleteCommonLinkListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteCommonLink {
-        onDeleteCommonLink {
-          __typename
-          id
-          experationDate
-          createdBy
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
-  >;
+//   OnCreateCommonLinkListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateCommonLink {
+//         onCreateCommonLink {
+//           __typename
+//           id
+//           experationDate
+//           createdBy
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCommonLink">>
+//   >;
 
-  OnCreateAffiliateListener(
-    contactEmail?: string
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
-  > {
-    const statement = `subscription OnCreateAffiliate($contactEmail: String) {
-        onCreateAffiliate(contactEmail: $contactEmail) {
-          __typename
-          id
-          affiliateUrl
-          contactEmail
-          phoneNumber
-          websiteURL
-          paymentDetails
-          commissionPercentage
-          dateJoined
-          status
-          balance
-          withdraws {
-            __typename
-            id
-            date
-            amount
-            currency
-            paymentWay
-            transactionId
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (contactEmail) {
-      gqlAPIServiceArguments.contactEmail = contactEmail;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
-  >;
-}
+//   OnUpdateCommonLinkListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateCommonLink {
+//         onUpdateCommonLink {
+//           __typename
+//           id
+//           experationDate
+//           createdBy
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCommonLink">>
+//   >;
 
-  OnUpdateAffiliateListener(
-    contactEmail?: string
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
-  > {
-    const statement = `subscription OnUpdateAffiliate($contactEmail: String) {
-        onUpdateAffiliate(contactEmail: $contactEmail) {
-          __typename
-          id
-          affiliateUrl
-          contactEmail
-          phoneNumber
-          websiteURL
-          paymentDetails
-          commissionPercentage
-          dateJoined
-          status
-          balance
-          withdraws {
-            __typename
-            id
-            date
-            amount
-            currency
-            paymentWay
-            transactionId
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (contactEmail) {
-      gqlAPIServiceArguments.contactEmail = contactEmail;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
-  >;
-}
+//   OnDeleteCommonLinkListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteCommonLink {
+//         onDeleteCommonLink {
+//           __typename
+//           id
+//           experationDate
+//           createdBy
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
+//   >;
 
-  OnDeleteAffiliateListener(
-    contactEmail?: string
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
-  > {
-    const statement = `subscription OnDeleteAffiliate($contactEmail: String) {
-        onDeleteAffiliate(contactEmail: $contactEmail) {
-          __typename
-          id
-          affiliateUrl
-          contactEmail
-          phoneNumber
-          websiteURL
-          paymentDetails
-          commissionPercentage
-          dateJoined
-          status
-          balance
-          withdraws {
-            __typename
-            id
-            date
-            amount
-            currency
-            paymentWay
-            transactionId
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (contactEmail) {
-      gqlAPIServiceArguments.contactEmail = contactEmail;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
-  >;
-}
+//   OnCreateAffiliateListener(
+//     contactEmail?: string
+//   ): Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
+//   > {
+//     const statement = `subscription OnCreateAffiliate($contactEmail: String) {
+//         onCreateAffiliate(contactEmail: $contactEmail) {
+//           __typename
+//           id
+//           affiliateUrl
+//           contactEmail
+//           phoneNumber
+//           websiteURL
+//           paymentDetails
+//           commissionPercentage
+//           dateJoined
+//           status
+//           balance
+//           withdraws {
+//             __typename
+//             id
+//             date
+//             amount
+//             currency
+//             paymentWay
+//             transactionId
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`;
+//     const gqlAPIServiceArguments: any = {};
+//     if (contactEmail) {
+//       gqlAPIServiceArguments.contactEmail = contactEmail;
+//     }
+//     return client.graphql(
+//       graphqlOperation(statement, gqlAPIServiceArguments)
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
+//   >;
+// }
 
-  OnCreateCouponCodesListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateCouponCodes {
-        onCreateCouponCodes {
-          __typename
-          id
-          couponCode
-          discount
-          trialPeriodInDays
-          allowedCardsPacks
-          organization {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
-  >;
+//   OnUpdateAffiliateListener(
+//     contactEmail?: string
+//   ): Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
+//   > {
+//     const statement = `subscription OnUpdateAffiliate($contactEmail: String) {
+//         onUpdateAffiliate(contactEmail: $contactEmail) {
+//           __typename
+//           id
+//           affiliateUrl
+//           contactEmail
+//           phoneNumber
+//           websiteURL
+//           paymentDetails
+//           commissionPercentage
+//           dateJoined
+//           status
+//           balance
+//           withdraws {
+//             __typename
+//             id
+//             date
+//             amount
+//             currency
+//             paymentWay
+//             transactionId
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`;
+//     const gqlAPIServiceArguments: any = {};
+//     if (contactEmail) {
+//       gqlAPIServiceArguments.contactEmail = contactEmail;
+//     }
+//     return client.graphql(
+//       graphqlOperation(statement, gqlAPIServiceArguments)
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
+//   >;
+// }
 
-  OnUpdateCouponCodesListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCouponCodes">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateCouponCodes {
-        onUpdateCouponCodes {
-          __typename
-          id
-          couponCode
-          discount
-          trialPeriodInDays
-          allowedCardsPacks
-          organization {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCouponCodes">>
-  >;
+//   OnDeleteAffiliateListener(
+//     contactEmail?: string
+//   ): Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
+//   > {
+//     const statement = `subscription OnDeleteAffiliate($contactEmail: String) {
+//         onDeleteAffiliate(contactEmail: $contactEmail) {
+//           __typename
+//           id
+//           affiliateUrl
+//           contactEmail
+//           phoneNumber
+//           websiteURL
+//           paymentDetails
+//           commissionPercentage
+//           dateJoined
+//           status
+//           balance
+//           withdraws {
+//             __typename
+//             id
+//             date
+//             amount
+//             currency
+//             paymentWay
+//             transactionId
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`;
+//     const gqlAPIServiceArguments: any = {};
+//     if (contactEmail) {
+//       gqlAPIServiceArguments.contactEmail = contactEmail;
+//     }
+//     return client.graphql(
+//       graphqlOperation(statement, gqlAPIServiceArguments)
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
+//   >;
+// }
 
-  OnDeleteCouponCodesListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCouponCodes">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteCouponCodes {
-        onDeleteCouponCodes {
-          __typename
-          id
-          couponCode
-          discount
-          trialPeriodInDays
-          allowedCardsPacks
-          organization {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCouponCodes">>
-  >;
+//   OnCreateCouponCodesListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateCouponCodes {
+//         onCreateCouponCodes {
+//           __typename
+//           id
+//           couponCode
+//           discount
+//           trialPeriodInDays
+//           allowedCardsPacks
+//           organization {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
+//   >;
 
-  OnCreateOrganizationsListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrganizations">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateOrganizations {
-        onCreateOrganizations {
-          __typename
-          id
-          membersEmails
-          membership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          verifyPersonByEmail
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrganizations">>
-  >;
+//   OnUpdateCouponCodesListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCouponCodes">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateCouponCodes {
+//         onUpdateCouponCodes {
+//           __typename
+//           id
+//           couponCode
+//           discount
+//           trialPeriodInDays
+//           allowedCardsPacks
+//           organization {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCouponCodes">>
+//   >;
 
-  OnUpdateOrganizationsListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrganizations">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateOrganizations {
-        onUpdateOrganizations {
-          __typename
-          id
-          membersEmails
-          membership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          verifyPersonByEmail
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrganizations">>
-  >;
+//   OnDeleteCouponCodesListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCouponCodes">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteCouponCodes {
+//         onDeleteCouponCodes {
+//           __typename
+//           id
+//           couponCode
+//           discount
+//           trialPeriodInDays
+//           allowedCardsPacks
+//           organization {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCouponCodes">>
+//   >;
 
-  OnDeleteOrganizationsListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrganizations">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteOrganizations {
-        onDeleteOrganizations {
-          __typename
-          id
-          membersEmails
-          membership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          verifyPersonByEmail
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrganizations">>
-  >;
+//   OnCreateOrganizationsListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrganizations">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateOrganizations {
+//         onCreateOrganizations {
+//           __typename
+//           id
+//           membersEmails
+//           membership {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           verifyPersonByEmail
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrganizations">>
+//   >;
 
-  OnCreateOrganizationMembershipListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateOrganizationMembership">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateOrganizationMembership {
-        onCreateOrganizationMembership {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateOrganizationMembership">
-    >
-  >;
+//   OnUpdateOrganizationsListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrganizations">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateOrganizations {
+//         onUpdateOrganizations {
+//           __typename
+//           id
+//           membersEmails
+//           membership {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           verifyPersonByEmail
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrganizations">>
+//   >;
 
-  OnUpdateOrganizationMembershipListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onUpdateOrganizationMembership">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateOrganizationMembership {
-        onUpdateOrganizationMembership {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onUpdateOrganizationMembership">
-    >
-  >;
+//   OnDeleteOrganizationsListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrganizations">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteOrganizations {
+//         onDeleteOrganizations {
+//           __typename
+//           id
+//           membersEmails
+//           membership {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           verifyPersonByEmail
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrganizations">>
+//   >;
 
-  OnDeleteOrganizationMembershipListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onDeleteOrganizationMembership">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteOrganizationMembership {
-        onDeleteOrganizationMembership {
-          __typename
-          id
-          name
-          trialPeriodInDays
-          numberOfallowedCardsPacks
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onDeleteOrganizationMembership">
-    >
-  >;
+//   OnCreateOrganizationMembershipListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onCreateOrganizationMembership">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateOrganizationMembership {
+//         onCreateOrganizationMembership {
+//           __typename
+//           id
+//           name
+//           trialPeriodInDays
+//           numberOfallowedCardsPacks
+//           about {
+//             __typename
+//             text
+//             imgUrl
+//             link
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onCreateOrganizationMembership">
+//     >
+//   >;
 
-  OnCreateGroupListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateGroup">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateGroup {
-        onCreateGroup {
-          __typename
-          id
-          groupUsers {
-            __typename
-            email
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                __typename
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
-            }
-            subscriptionProviderPlanId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateGroup">>
-  >;
+//   OnUpdateOrganizationMembershipListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onUpdateOrganizationMembership">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateOrganizationMembership {
+//         onUpdateOrganizationMembership {
+//           __typename
+//           id
+//           name
+//           trialPeriodInDays
+//           numberOfallowedCardsPacks
+//           about {
+//             __typename
+//             text
+//             imgUrl
+//             link
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onUpdateOrganizationMembership">
+//     >
+//   >;
 
-  OnUpdateGroupListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateGroup">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateGroup {
-        onUpdateGroup {
-          __typename
-          id
-          groupUsers {
-            __typename
-            email
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                __typename
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
-            }
-            subscriptionProviderPlanId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateGroup">>
-  >;
+//   OnDeleteOrganizationMembershipListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onDeleteOrganizationMembership">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteOrganizationMembership {
+//         onDeleteOrganizationMembership {
+//           __typename
+//           id
+//           name
+//           trialPeriodInDays
+//           numberOfallowedCardsPacks
+//           about {
+//             __typename
+//             text
+//             imgUrl
+//             link
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onDeleteOrganizationMembership">
+//     >
+//   >;
 
-  OnDeleteGroupListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteGroup">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteGroup {
-        onDeleteGroup {
-          __typename
-          id
-          groupUsers {
-            __typename
-            email
-            role
-          }
-          paymentProgram {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                __typename
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
-            }
-            subscriptionProviderPlanId
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteGroup">>
-  >;
+//   OnCreateGroupListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateGroup">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateGroup {
+//         onCreateGroup {
+//           __typename
+//           id
+//           groupUsers {
+//             __typename
+//             email
+//             role
+//           }
+//           paymentProgram {
+//             __typename
+//             id
+//             name
+//             description
+//             providerPlanId
+//             numberOfUsers
+//             numberOfCardPacks
+//             billingCycleInMonths
+//             fullPrice
+//             discount
+//             orgMembership {
+//               __typename
+//               id
+//               name
+//               trialPeriodInDays
+//               numberOfallowedCardsPacks
+//               about {
+//                 __typename
+//                 text
+//                 imgUrl
+//                 link
+//               }
+//               createdAt
+//               updatedAt
+//             }
+//             subscriptionProviderPlanId
+//             createdAt
+//             updatedAt
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateGroup">>
+//   >;
 
-  OnCreateMessageQueueListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateMessageQueue">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateMessageQueue {
-        onCreateMessageQueue {
-          __typename
-          id
-          email
-          emailDeliveryTime
-          phone
-          smsDeliveryTime
-          emailTemplateId
-          name
-          params
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateMessageQueue">>
-  >;
+//   OnUpdateGroupListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateGroup">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateGroup {
+//         onUpdateGroup {
+//           __typename
+//           id
+//           groupUsers {
+//             __typename
+//             email
+//             role
+//           }
+//           paymentProgram {
+//             __typename
+//             id
+//             name
+//             description
+//             providerPlanId
+//             numberOfUsers
+//             numberOfCardPacks
+//             billingCycleInMonths
+//             fullPrice
+//             discount
+//             orgMembership {
+//               __typename
+//               id
+//               name
+//               trialPeriodInDays
+//               numberOfallowedCardsPacks
+//               about {
+//                 __typename
+//                 text
+//                 imgUrl
+//                 link
+//               }
+//               createdAt
+//               updatedAt
+//             }
+//             subscriptionProviderPlanId
+//             createdAt
+//             updatedAt
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateGroup">>
+//   >;
 
-  OnUpdateMessageQueueListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateMessageQueue">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateMessageQueue {
-        onUpdateMessageQueue {
-          __typename
-          id
-          email
-          emailDeliveryTime
-          phone
-          smsDeliveryTime
-          emailTemplateId
-          name
-          params
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateMessageQueue">>
-  >;
+//   OnDeleteGroupListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteGroup">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteGroup {
+//         onDeleteGroup {
+//           __typename
+//           id
+//           groupUsers {
+//             __typename
+//             email
+//             role
+//           }
+//           paymentProgram {
+//             __typename
+//             id
+//             name
+//             description
+//             providerPlanId
+//             numberOfUsers
+//             numberOfCardPacks
+//             billingCycleInMonths
+//             fullPrice
+//             discount
+//             orgMembership {
+//               __typename
+//               id
+//               name
+//               trialPeriodInDays
+//               numberOfallowedCardsPacks
+//               about {
+//                 __typename
+//                 text
+//                 imgUrl
+//                 link
+//               }
+//               createdAt
+//               updatedAt
+//             }
+//             subscriptionProviderPlanId
+//             createdAt
+//             updatedAt
+//           }
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteGroup">>
+//   >;
 
-  OnDeleteMessageQueueListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteMessageQueue">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteMessageQueue {
-        onDeleteMessageQueue {
-          __typename
-          id
-          email
-          emailDeliveryTime
-          phone
-          smsDeliveryTime
-          emailTemplateId
-          name
-          params
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteMessageQueue">>
-  >;
+//   OnCreateMessageQueueListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateMessageQueue">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateMessageQueue {
+//         onCreateMessageQueue {
+//           __typename
+//           id
+//           email
+//           emailDeliveryTime
+//           phone
+//           smsDeliveryTime
+//           emailTemplateId
+//           name
+//           params
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateMessageQueue">>
+//   >;
 
-  OnCreateInvoicesListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateInvoices">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateInvoices {
-        onCreateInvoices {
-          __typename
-          id
-          email
-          fullName
-          customerAddress
-          date
-          invoiceRunningId
-          items {
-            __typename
-            itemName
-            pricePerItem
-            numberOfItems
-          }
-          businessName
-          businessPhoneNumber
-          businessAddress
-          businessWebsite
-          invoiceType
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateInvoices">>
-  >;
+//   OnUpdateMessageQueueListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateMessageQueue">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateMessageQueue {
+//         onUpdateMessageQueue {
+//           __typename
+//           id
+//           email
+//           emailDeliveryTime
+//           phone
+//           smsDeliveryTime
+//           emailTemplateId
+//           name
+//           params
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateMessageQueue">>
+//   >;
 
-  OnUpdateInvoicesListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateInvoices">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateInvoices {
-        onUpdateInvoices {
-          __typename
-          id
-          email
-          fullName
-          customerAddress
-          date
-          invoiceRunningId
-          items {
-            __typename
-            itemName
-            pricePerItem
-            numberOfItems
-          }
-          businessName
-          businessPhoneNumber
-          businessAddress
-          businessWebsite
-          invoiceType
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateInvoices">>
-  >;
+//   OnDeleteMessageQueueListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteMessageQueue">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteMessageQueue {
+//         onDeleteMessageQueue {
+//           __typename
+//           id
+//           email
+//           emailDeliveryTime
+//           phone
+//           smsDeliveryTime
+//           emailTemplateId
+//           name
+//           params
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteMessageQueue">>
+//   >;
 
-  OnDeleteInvoicesListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteInvoices">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteInvoices {
-        onDeleteInvoices {
-          __typename
-          id
-          email
-          fullName
-          customerAddress
-          date
-          invoiceRunningId
-          items {
-            __typename
-            itemName
-            pricePerItem
-            numberOfItems
-          }
-          businessName
-          businessPhoneNumber
-          businessAddress
-          businessWebsite
-          invoiceType
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteInvoices">>
-  >;
+//   OnCreateInvoicesListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateInvoices">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateInvoices {
+//         onCreateInvoices {
+//           __typename
+//           id
+//           email
+//           fullName
+//           customerAddress
+//           date
+//           invoiceRunningId
+//           items {
+//             __typename
+//             itemName
+//             pricePerItem
+//             numberOfItems
+//           }
+//           businessName
+//           businessPhoneNumber
+//           businessAddress
+//           businessWebsite
+//           invoiceType
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateInvoices">>
+//   >;
 
-  OnCreateSubscriptionPlanListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateSubscriptionPlan">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateSubscriptionPlan {
-        onCreateSubscriptionPlan {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          subscriptionProviderPlanId
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateSubscriptionPlan">
-    >
-  >;
+//   OnUpdateInvoicesListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateInvoices">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateInvoices {
+//         onUpdateInvoices {
+//           __typename
+//           id
+//           email
+//           fullName
+//           customerAddress
+//           date
+//           invoiceRunningId
+//           items {
+//             __typename
+//             itemName
+//             pricePerItem
+//             numberOfItems
+//           }
+//           businessName
+//           businessPhoneNumber
+//           businessAddress
+//           businessWebsite
+//           invoiceType
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateInvoices">>
+//   >;
 
-  OnUpdateSubscriptionPlanListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onUpdateSubscriptionPlan">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateSubscriptionPlan {
-        onUpdateSubscriptionPlan {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          subscriptionProviderPlanId
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onUpdateSubscriptionPlan">
-    >
-  >;
+//   OnDeleteInvoicesListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteInvoices">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteInvoices {
+//         onDeleteInvoices {
+//           __typename
+//           id
+//           email
+//           fullName
+//           customerAddress
+//           date
+//           invoiceRunningId
+//           items {
+//             __typename
+//             itemName
+//             pricePerItem
+//             numberOfItems
+//           }
+//           businessName
+//           businessPhoneNumber
+//           businessAddress
+//           businessWebsite
+//           invoiceType
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteInvoices">>
+//   >;
 
-  OnDeleteSubscriptionPlanListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onDeleteSubscriptionPlan">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteSubscriptionPlan {
-        onDeleteSubscriptionPlan {
-          __typename
-          id
-          name
-          description
-          providerPlanId
-          numberOfUsers
-          numberOfCardPacks
-          billingCycleInMonths
-          fullPrice
-          discount
-          orgMembership {
-            __typename
-            id
-            name
-            trialPeriodInDays
-            numberOfallowedCardsPacks
-            about {
-              __typename
-              text
-              imgUrl
-              link
-            }
-            createdAt
-            updatedAt
-          }
-          subscriptionProviderPlanId
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onDeleteSubscriptionPlan">
-    >
-  >;
+//   OnCreateSubscriptionPlanListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onCreateSubscriptionPlan">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateSubscriptionPlan {
+//         onCreateSubscriptionPlan {
+//           __typename
+//           id
+//           name
+//           description
+//           providerPlanId
+//           numberOfUsers
+//           numberOfCardPacks
+//           billingCycleInMonths
+//           fullPrice
+//           discount
+//           orgMembership {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           subscriptionProviderPlanId
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onCreateSubscriptionPlan">
+//     >
+//   >;
 
-  OnCreateReceiptsIdListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateReceiptsId">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateReceiptsId {
-        onCreateReceiptsId {
-          __typename
-          id
-          counter
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateReceiptsId">>
-  >;
+//   OnUpdateSubscriptionPlanListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onUpdateSubscriptionPlan">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateSubscriptionPlan {
+//         onUpdateSubscriptionPlan {
+//           __typename
+//           id
+//           name
+//           description
+//           providerPlanId
+//           numberOfUsers
+//           numberOfCardPacks
+//           billingCycleInMonths
+//           fullPrice
+//           discount
+//           orgMembership {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           subscriptionProviderPlanId
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onUpdateSubscriptionPlan">
+//     >
+//   >;
 
-  OnUpdateReceiptsIdListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateReceiptsId">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateReceiptsId {
-        onUpdateReceiptsId {
-          __typename
-          id
-          counter
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateReceiptsId">>
-  >;
+//   OnDeleteSubscriptionPlanListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onDeleteSubscriptionPlan">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteSubscriptionPlan {
+//         onDeleteSubscriptionPlan {
+//           __typename
+//           id
+//           name
+//           description
+//           providerPlanId
+//           numberOfUsers
+//           numberOfCardPacks
+//           billingCycleInMonths
+//           fullPrice
+//           discount
+//           orgMembership {
+//             __typename
+//             id
+//             name
+//             trialPeriodInDays
+//             numberOfallowedCardsPacks
+//             about {
+//               __typename
+//               text
+//               imgUrl
+//               link
+//             }
+//             createdAt
+//             updatedAt
+//           }
+//           subscriptionProviderPlanId
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onDeleteSubscriptionPlan">
+//     >
+//   >;
 
-  OnDeleteReceiptsIdListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteReceiptsId">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteReceiptsId {
-        onDeleteReceiptsId {
-          __typename
-          id
-          counter
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteReceiptsId">>
-  >;
+//   OnCreateReceiptsIdListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateReceiptsId">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateReceiptsId {
+//         onCreateReceiptsId {
+//           __typename
+//           id
+//           counter
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateReceiptsId">>
+//   >;
 
-  OnCreateNewsListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateNews">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateNews {
-        onCreateNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateNews">>
-  >;
+//   OnUpdateReceiptsIdListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateReceiptsId">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateReceiptsId {
+//         onUpdateReceiptsId {
+//           __typename
+//           id
+//           counter
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateReceiptsId">>
+//   >;
 
-  OnUpdateNewsListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateNews">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateNews {
-        onUpdateNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateNews">>
-  >;
+//   OnDeleteReceiptsIdListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteReceiptsId">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteReceiptsId {
+//         onDeleteReceiptsId {
+//           __typename
+//           id
+//           counter
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteReceiptsId">>
+//   >;
 
-  OnDeleteNewsListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteNews">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteNews {
-        onDeleteNews {
-          __typename
-          id
-          message
-          order
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteNews">>
-  >;
+//   OnCreateNewsListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateNews">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateNews {
+//         onCreateNews {
+//           __typename
+//           id
+//           message
+//           order
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateNews">>
+//   >;
 
-  OnCreateCardsPackListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCardsPack">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateCardsPack {
-        onCreateCardsPack {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards {
-            __typename
-            backImgUrl
-            frontImgUrl
-          }
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            name
-            subElements {
-              __typename
-              name
-              subElements {
-                __typename
-                name
-                subElements {
-                  __typename
-                  name
-                  subElements {
-                    __typename
-                    name
-                    subElements {
-                      __typename
-                      name
-                      subElements {
-                        __typename
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          isOwnedByOrg
-          brief
-          likesCounter
-          visitorsCounter
-          backImgUrl
-          isExternalPack
-          authorizedDomains
-          subscriptionPlans {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                __typename
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
-            }
-            subscriptionProviderPlanId
-            createdAt
-            updatedAt
-          }
-          topQuestions
-          usersUsage {
-            __typename
-            user
-            entries
-          }
-          isFree
-          language
-          isActive
-          guidebookUrl
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCardsPack">>
-  >;
+//   OnUpdateNewsListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateNews">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateNews {
+//         onUpdateNews {
+//           __typename
+//           id
+//           message
+//           order
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateNews">>
+//   >;
 
-  OnUpdateCardsPackListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCardsPack">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateCardsPack {
-        onUpdateCardsPack {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards {
-            __typename
-            backImgUrl
-            frontImgUrl
-          }
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            name
-            subElements {
-              __typename
-              name
-              subElements {
-                __typename
-                name
-                subElements {
-                  __typename
-                  name
-                  subElements {
-                    __typename
-                    name
-                    subElements {
-                      __typename
-                      name
-                      subElements {
-                        __typename
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          isOwnedByOrg
-          brief
-          likesCounter
-          visitorsCounter
-          backImgUrl
-          isExternalPack
-          authorizedDomains
-          subscriptionPlans {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                __typename
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
-            }
-            subscriptionProviderPlanId
-            createdAt
-            updatedAt
-          }
-          topQuestions
-          usersUsage {
-            __typename
-            user
-            entries
-          }
-          isFree
-          language
-          isActive
-          guidebookUrl
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCardsPack">>
-  >;
+//   OnDeleteNewsListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteNews">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteNews {
+//         onDeleteNews {
+//           __typename
+//           id
+//           message
+//           order
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteNews">>
+//   >;
 
-  OnDeleteCardsPackListener: Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCardsPack">>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteCardsPack {
-        onDeleteCardsPack {
-          __typename
-          id
-          imgUrl
-          description
-          tags
-          categories
-          cards {
-            __typename
-            backImgUrl
-            frontImgUrl
-          }
-          cardsPreview
-          groupsIds
-          guideBook {
-            __typename
-            name
-            subElements {
-              __typename
-              name
-              subElements {
-                __typename
-                name
-                subElements {
-                  __typename
-                  name
-                  subElements {
-                    __typename
-                    name
-                    subElements {
-                      __typename
-                      name
-                      subElements {
-                        __typename
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          name
-          freeUntilDate
-          about {
-            __typename
-            text
-            imgUrl
-            link
-          }
-          isOwnedByOrg
-          brief
-          likesCounter
-          visitorsCounter
-          backImgUrl
-          isExternalPack
-          authorizedDomains
-          subscriptionPlans {
-            __typename
-            id
-            name
-            description
-            providerPlanId
-            numberOfUsers
-            numberOfCardPacks
-            billingCycleInMonths
-            fullPrice
-            discount
-            orgMembership {
-              __typename
-              id
-              name
-              trialPeriodInDays
-              numberOfallowedCardsPacks
-              about {
-                __typename
-                text
-                imgUrl
-                link
-              }
-              createdAt
-              updatedAt
-            }
-            subscriptionProviderPlanId
-            createdAt
-            updatedAt
-          }
-          topQuestions
-          usersUsage {
-            __typename
-            user
-            entries
-          }
-          isFree
-          language
-          isActive
-          guidebookUrl
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCardsPack">>
-  >;
+//   OnCreateCardsPackListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCardsPack">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateCardsPack {
+//         onCreateCardsPack {
+//           __typename
+//           id
+//           imgUrl
+//           description
+//           tags
+//           categories
+//           cards {
+//             __typename
+//             backImgUrl
+//             frontImgUrl
+//           }
+//           cardsPreview
+//           groupsIds
+//           guideBook {
+//             __typename
+//             name
+//             subElements {
+//               __typename
+//               name
+//               subElements {
+//                 __typename
+//                 name
+//                 subElements {
+//                   __typename
+//                   name
+//                   subElements {
+//                     __typename
+//                     name
+//                     subElements {
+//                       __typename
+//                       name
+//                       subElements {
+//                         __typename
+//                         name
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//           name
+//           freeUntilDate
+//           about {
+//             __typename
+//             text
+//             imgUrl
+//             link
+//           }
+//           isOwnedByOrg
+//           brief
+//           likesCounter
+//           visitorsCounter
+//           backImgUrl
+//           isExternalPack
+//           authorizedDomains
+//           subscriptionPlans {
+//             __typename
+//             id
+//             name
+//             description
+//             providerPlanId
+//             numberOfUsers
+//             numberOfCardPacks
+//             billingCycleInMonths
+//             fullPrice
+//             discount
+//             orgMembership {
+//               __typename
+//               id
+//               name
+//               trialPeriodInDays
+//               numberOfallowedCardsPacks
+//               about {
+//                 __typename
+//                 text
+//                 imgUrl
+//                 link
+//               }
+//               createdAt
+//               updatedAt
+//             }
+//             subscriptionProviderPlanId
+//             createdAt
+//             updatedAt
+//           }
+//           topQuestions
+//           usersUsage {
+//             __typename
+//             user
+//             entries
+//           }
+//           isFree
+//           language
+//           isActive
+//           guidebookUrl
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCardsPack">>
+//   >;
 
-  OnCreateContactUsModelListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateContactUsModel">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateContactUsModel {
-        onCreateContactUsModel {
-          __typename
-          id
-          name
-          content
-          email
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onCreateContactUsModel">
-    >
-  >;
+//   OnUpdateCardsPackListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCardsPack">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateCardsPack {
+//         onUpdateCardsPack {
+//           __typename
+//           id
+//           imgUrl
+//           description
+//           tags
+//           categories
+//           cards {
+//             __typename
+//             backImgUrl
+//             frontImgUrl
+//           }
+//           cardsPreview
+//           groupsIds
+//           guideBook {
+//             __typename
+//             name
+//             subElements {
+//               __typename
+//               name
+//               subElements {
+//                 __typename
+//                 name
+//                 subElements {
+//                   __typename
+//                   name
+//                   subElements {
+//                     __typename
+//                     name
+//                     subElements {
+//                       __typename
+//                       name
+//                       subElements {
+//                         __typename
+//                         name
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//           name
+//           freeUntilDate
+//           about {
+//             __typename
+//             text
+//             imgUrl
+//             link
+//           }
+//           isOwnedByOrg
+//           brief
+//           likesCounter
+//           visitorsCounter
+//           backImgUrl
+//           isExternalPack
+//           authorizedDomains
+//           subscriptionPlans {
+//             __typename
+//             id
+//             name
+//             description
+//             providerPlanId
+//             numberOfUsers
+//             numberOfCardPacks
+//             billingCycleInMonths
+//             fullPrice
+//             discount
+//             orgMembership {
+//               __typename
+//               id
+//               name
+//               trialPeriodInDays
+//               numberOfallowedCardsPacks
+//               about {
+//                 __typename
+//                 text
+//                 imgUrl
+//                 link
+//               }
+//               createdAt
+//               updatedAt
+//             }
+//             subscriptionProviderPlanId
+//             createdAt
+//             updatedAt
+//           }
+//           topQuestions
+//           usersUsage {
+//             __typename
+//             user
+//             entries
+//           }
+//           isFree
+//           language
+//           isActive
+//           guidebookUrl
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateCardsPack">>
+//   >;
 
-  OnUpdateContactUsModelListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onUpdateContactUsModel">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateContactUsModel {
-        onUpdateContactUsModel {
-          __typename
-          id
-          name
-          content
-          email
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onUpdateContactUsModel">
-    >
-  >;
+//   OnDeleteCardsPackListener: Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCardsPack">>
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteCardsPack {
+//         onDeleteCardsPack {
+//           __typename
+//           id
+//           imgUrl
+//           description
+//           tags
+//           categories
+//           cards {
+//             __typename
+//             backImgUrl
+//             frontImgUrl
+//           }
+//           cardsPreview
+//           groupsIds
+//           guideBook {
+//             __typename
+//             name
+//             subElements {
+//               __typename
+//               name
+//               subElements {
+//                 __typename
+//                 name
+//                 subElements {
+//                   __typename
+//                   name
+//                   subElements {
+//                     __typename
+//                     name
+//                     subElements {
+//                       __typename
+//                       name
+//                       subElements {
+//                         __typename
+//                         name
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//           name
+//           freeUntilDate
+//           about {
+//             __typename
+//             text
+//             imgUrl
+//             link
+//           }
+//           isOwnedByOrg
+//           brief
+//           likesCounter
+//           visitorsCounter
+//           backImgUrl
+//           isExternalPack
+//           authorizedDomains
+//           subscriptionPlans {
+//             __typename
+//             id
+//             name
+//             description
+//             providerPlanId
+//             numberOfUsers
+//             numberOfCardPacks
+//             billingCycleInMonths
+//             fullPrice
+//             discount
+//             orgMembership {
+//               __typename
+//               id
+//               name
+//               trialPeriodInDays
+//               numberOfallowedCardsPacks
+//               about {
+//                 __typename
+//                 text
+//                 imgUrl
+//                 link
+//               }
+//               createdAt
+//               updatedAt
+//             }
+//             subscriptionProviderPlanId
+//             createdAt
+//             updatedAt
+//           }
+//           topQuestions
+//           usersUsage {
+//             __typename
+//             user
+//             entries
+//           }
+//           isFree
+//           language
+//           isActive
+//           guidebookUrl
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCardsPack">>
+//   >;
 
-  OnDeleteContactUsModelListener: Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onDeleteContactUsModel">
-    >
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteContactUsModel {
-        onDeleteContactUsModel {
-          __typename
-          id
-          name
-          content
-          email
-          createdAt
-          updatedAt
-        }
-      }`
-    )
-  ) as Observable<
-    SubscriptionResponse<
-      Pick<__SubscriptionContainer, "onDeleteContactUsModel">
-    >
-  >;
+//   OnCreateContactUsModelListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onCreateContactUsModel">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnCreateContactUsModel {
+//         onCreateContactUsModel {
+//           __typename
+//           id
+//           name
+//           content
+//           email
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onCreateContactUsModel">
+//     >
+//   >;
+
+//   OnUpdateContactUsModelListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onUpdateContactUsModel">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnUpdateContactUsModel {
+//         onUpdateContactUsModel {
+//           __typename
+//           id
+//           name
+//           content
+//           email
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onUpdateContactUsModel">
+//     >
+//   >;
+
+//   OnDeleteContactUsModelListener: Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onDeleteContactUsModel">
+//     >
+//   > = client.graphql(
+//     graphqlOperation(
+//       `subscription OnDeleteContactUsModel {
+//         onDeleteContactUsModel {
+//           __typename
+//           id
+//           name
+//           content
+//           email
+//           createdAt
+//           updatedAt
+//         }
+//       }`
+//     )
+//   ) as Observable<
+//     SubscriptionResponse<
+//       Pick<__SubscriptionContainer, "onDeleteContactUsModel">
+//     >
+//   >;
+// 
 }

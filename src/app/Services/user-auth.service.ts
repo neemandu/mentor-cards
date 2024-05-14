@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Auth } from 'aws-amplify';
+import  Auth  from 'aws-amplify';
 import {
   About,
   APIService,
@@ -69,33 +69,33 @@ export class UserAuthService {
   }
 
   async initializeService(): Promise<void> {
-    await this.rememebrMe();
+    // await this.rememebrMe();
     await this.getSubscriptionPlans();
   }
 
-  async rememebrMe(): Promise<void> {
-    try {
-      const user: void | CognitoUser = await Auth.currentUserPoolUser({
-        bypassCache: true,
-      });
-      if (user) {
-        await this.loggedIn(user);
-        this.rememberMeDone = true;
-      } else {
-        this.rememberMeDone = true;
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        throw 'No current user - rememberMe retured VOID';
-      }
-    } catch (err) {
-      this.overlaySpinnerService.changeOverlaySpinner(false);
-      localStorage.removeItem('signedin');
-      console.log(
-        'file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err',
-        err
-      );
-      this.rememberMeDone = true;
-    }
-  }
+  // async rememebrMe(): Promise<void> {
+  //   try {
+  //     const user: void | CognitoUser = await Auth.currentUserPoolUser({
+  //       bypassCache: true,
+  //     });
+  //     if (user) {
+  //       await this.loggedIn(user);
+  //       this.rememberMeDone = true;
+  //     } else {
+  //       this.rememberMeDone = true;
+  //       this.overlaySpinnerService.changeOverlaySpinner(false);
+  //       throw 'No current user - rememberMe retured VOID';
+  //     }
+  //   } catch (err) {
+  //     this.overlaySpinnerService.changeOverlaySpinner(false);
+  //     localStorage.removeItem('signedin');
+  //     console.log(
+  //       'file: user-auth.service.ts ~ line 48 ~ rememebrMe ~ err',
+  //       err
+  //     );
+  //     this.rememberMeDone = true;
+  //   }
+  // }
 
   /**
    * After succesful log in, save cookies and let all components know we logged in
@@ -344,9 +344,9 @@ export class UserAuthService {
    * Check username (email) and send varification email with code
    * @param user - username (email) to reset password for
    */
-  forgotPasswordVarifyEmail(user): Promise<any> {
-    return Auth.forgotPassword(user);
-  }
+  // forgotPasswordVarifyEmail(user): Promise<any> {
+  //   // return Auth.forgotPassword(user);
+  // }
 
   /**
    * After receiving email with verification code, create a new password
@@ -354,21 +354,21 @@ export class UserAuthService {
    * @param confirmationCode - code received via email
    * @param newPassword
    */
-  forgotPasswordReset(user, confirmationCode, newPassword): Promise<any> {
-    return Auth.forgotPasswordSubmit(user, confirmationCode, newPassword);
-  }
+  // forgotPasswordReset(user, confirmationCode, newPassword): Promise<any> {
+  //   return Auth.forgotPasswordSubmit(user, confirmationCode, newPassword);
+  // }
 
   logOut(): void {
-    Auth.signOut()
-      .then((data) => {
-        this.loggedOut();
-        this._snackBar.open('להתראות, ועד הפעם הבאה!', '', {
-          duration: 5000,
-          panelClass: ['rtl-snackbar'],
-        });
-      })
-      .catch((err) => console.log(err));
-    // return Auth.signOut();
+    // Auth.signOut()
+    //   .then((data) => {
+    //     this.loggedOut();
+    //     this._snackBar.open('להתראות, ועד הפעם הבאה!', '', {
+    //       duration: 5000,
+    //       panelClass: ['rtl-snackbar'],
+    //     });
+    //   })
+    //   .catch((err) => console.log(err));
+    // // return Auth.signOut();
   }
 
   loggedOut(): void {
