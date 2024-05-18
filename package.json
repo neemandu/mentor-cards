@@ -27,7 +27,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^3.0.1",
     "angular-datatables": "^12.0.0",
-    "angularx-social-login": "^3.5.7",
+    "angularx-social-login": "^4.1.0",
     "apexcharts": "^3.37.1",
     "aws-amplify": "^3.3.14",
     "aws-sdk": "^2.1599.0",
