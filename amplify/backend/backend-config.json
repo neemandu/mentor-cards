@@ -182,14 +182,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_mentorcards56dbf153_googleClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "mentorcards56dbf153"
-        }
-      ]
-    },
     "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
       "usedBy": [
         {
@@ -222,35 +214,19 @@
         }
       ]
     },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_contactListId": {
+    "AMPLIFY_function_AddUserToEmailList_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_deploymentBucketName": {
+    "AMPLIFY_function_AddUserToEmailList_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
-        }
-      ]
-    },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
-        }
-      ]
-    },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },
