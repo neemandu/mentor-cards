@@ -16,9 +16,9 @@ const { Parameters } = await (new aws.SSM())
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
 
-const aws = require('aws-sdk');
+const AWS = require('aws-sdk');
 const { env } = require("process");
-const http = require('https'); // or https 
+const https = require('https'); // or https 
 
 const post = (defaultOptions, path, payload) => new Promise((resolve, reject) => {
   console.log('post payload: ' + payload);
@@ -26,7 +26,7 @@ const post = (defaultOptions, path, payload) => new Promise((resolve, reject) =>
   console.log('post defaultOptions: ');
   console.log(defaultOptions);
   const options = { ...defaultOptions, path, method: 'POST' };
-  const req = http.request(options, res => {
+  const req = https.request(options, res => {
       let buffer = "";
       res.on('data', chunk => buffer += chunk);
       res.on('end', () => {
@@ -49,44 +49,52 @@ async function getParam(){
     WithDecryption: true,
   })
   .promise(); 
-  
-  console.log('Parameters:');
-  console.log(Parameters);
 
   return Parameters[0].Value; 
 }
 
 async function addContactToEmailList(user){
- var api_key = await getParam();
+  const body = JSON.stringify(user);
 
-  var defaultOptions = {
-      host: 'rest.smoove.io',
-      port: 443, 
-      headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'api-key': api_key
-      }
+  var bearerToken = await getParam();  // Ensure getParam() correctly fetches the token
+  console.log('Got Smoove API token: ' + bearerToken);
+  console.log('Request Body:');
+  console.log(body);
+
+  const options = {
+    hostname: 'rest.smoove.io',
+    port: 443,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${bearerToken}`
+    }
   };
-  
-  var body = JSON.stringify(user);
-  console.log("upsertNewContact: sending POST Start");
 
-  await post(defaultOptions, "/v1/async/contacts", body);
-  console.log("upsertNewContact: sending POST End");
+  var msg = await post(options, '/v1/Contacts?updateIfExists=true&restoreIfUnsubscribed=true', body);
+  console.log('msg');
+  console.log(msg);
+  console.log("Send Email: sending POST End");
 }
 
 exports.handler = async (event) => {
   for (const streamedItem of event.Records) {
+    console.log('user handler!');
     if (streamedItem.eventName === 'INSERT') {
-          
+          var cellPhone="";
+
+
       var user = {
         "email": streamedItem.dynamodb.NewImage.email.S,
         "lists_ToSubscribe": [916068], 
         "firstName": streamedItem.dynamodb.NewImage.fullName?.S ?? "",
-        "cellPhone": streamedItem.dynamodb.NewImage.phone?.S ?? "",
         "canReceiveEmails": true,
         "canReceiveSmsMessages": true
+        }
+
+        if(streamedItem.dynamodb.NewImage.phone?.S){
+          user["cellPhone"] = streamedItem.dynamodb.NewImage.phone?.S;
         }
 
       await addContactToEmailList(user);

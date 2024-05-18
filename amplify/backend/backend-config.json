@@ -143,6 +143,35 @@
         }
       ]
     },
+    "InvoiceHandler": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "ApiName",
+            "ApiId"
+          ],
+          "category": "api",
+          "resourceName": "receiptsAPI"
+        },
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "Invoices"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "NewAffiliateHandler": {
       "build": true,
       "dependsOn": [
@@ -222,35 +251,19 @@
         }
       ]
     },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_contactListId": {
+    "AMPLIFY_function_AddUserToEmailList_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_deploymentBucketName": {
+    "AMPLIFY_function_AddUserToEmailList_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
-        }
-      ]
-    },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
-        }
-      ]
-    },
-    "AMPLIFY_function_AddNewUserToEmailsContactList_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AddNewUserToEmailsContactList"
+          "resourceName": "AddUserToEmailList"
         }
       ]
     },
@@ -515,6 +528,38 @@
         {
           "category": "function",
           "resourceName": "IncrementPackEntries"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvoiceHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvoiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvoiceHandler_receiptsUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvoiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvoiceHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvoiceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvoiceHandler_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvoiceHandler"
         }
       ]
     },

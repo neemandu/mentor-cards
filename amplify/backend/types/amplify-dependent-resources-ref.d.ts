@@ -41,6 +41,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "AddUserToEmailList": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "AffiliateBalanceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -139,6 +146,13 @@ export type AmplifyDependentResourcesAttributes = {
     "IncrementPackEntries": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "InvoiceHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
       "Name": "string",
       "Region": "string"
     },
