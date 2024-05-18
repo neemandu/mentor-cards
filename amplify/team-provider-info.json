@@ -34,7 +34,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-58627169495a446d634f-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-4d4479336f7761513751-build.zip"
         },
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -152,6 +152,9 @@
         "AffiliateBalanceHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
           "s3Key": "amplify-builds/AffiliateBalanceHandler-7973324e612f2f367233-build.zip"
+        },
+        "AddUserToEmailList": {
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q"
         }
       },
       "api": {

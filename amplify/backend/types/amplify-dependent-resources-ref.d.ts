@@ -20,6 +20,7 @@ export type AmplifyDependentResourcesAttributes = {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "CreatedSNSRole": "string",
+      "GoogleWebClient": "string",
       "HostedUIDomain": "string",
       "OAuthMetadata": "string",
       "UserPoolArn": "string",
@@ -37,13 +38,6 @@ export type AmplifyDependentResourcesAttributes = {
     "AddCouponCode": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "AddUserToEmailList": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
       "Name": "string",
       "Region": "string"
     },
