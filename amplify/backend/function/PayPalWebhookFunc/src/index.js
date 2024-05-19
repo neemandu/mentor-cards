@@ -199,13 +199,11 @@ async function addToUnsubscribersList(email) {
   console.log("Send Email: sending POST End");
 }
 
-async function createInvoiceRecord(user, amount, subscription, extraDesc, invoiceRunningId){
+async function createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
     var d = new Date();
     var id = user.id + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
-    
-    var subDescription = extraDesc + subscription.subscriptionPlan.description + " מנוי";
     var params = {
         TableName: table,
         Item: {
@@ -218,12 +216,12 @@ async function createInvoiceRecord(user, amount, subscription, extraDesc, invoic
             "customerAddress": "",
             "date": new Date().toISOString(),
             "email": user.email,
-            "fullName": user.fullName,
+            "fullName": name,
             "invoiceType": "קבלה",
             "invoiceRunningId": invoiceRunningId,
             "items": [
              {
-              "itemName": subDescription,
+              "itemName": extraDesc,
               "numberOfItems": 1,
               "pricePerItem": amount
              }
@@ -267,6 +265,7 @@ exports.handler = async (event) => {
         var paypal_body = JSON.parse(event.body);
         var event_type = paypal_body.event_type;
         var transaction_id = "";
+        var id = "";
         var user_id_mydb = "";
         var shouldProcess = true;
 
@@ -284,6 +283,8 @@ exports.handler = async (event) => {
                 transaction_id = paypal_body.resource.id;
             }
             user_id_mydb = paypal_body.resource.custom;
+            
+            id = paypal_body.id;
         }
         console.log('event_type: ' + event_type);
         console.log('transaction_id: ' + transaction_id);
@@ -310,25 +311,47 @@ exports.handler = async (event) => {
                 } 
                 var subscription = getSubByTxID(user, transaction_id);
                 var now = new Date().toISOString();
-                user.payments.push({
-                    id: user.id+"_"+now,
-                    date: now,
-                    payedMonths: subscription.subscriptionPlan.billingCycleInMonths,
-                    amount: amount,
-                    currency: paypal_body.resource.amount.currency,
-                    paymentWay: "PayPal",
-                    transactionId: transaction_id
-                });
-                await saveUser(user);
+                let paymentId = user.id+"_"+id;
 
-                var extraDesc = " לערכות הבית ";
-                if(subscription?.includedCardPacksIds?.length){
-                    extraDesc = subscription.includedCardPacksIds[0].name + " לערכת ";
+                let paymentExists = false;
+                for(let i=0; i< user.payments.length; i++){
+                    if(user.payments[i].id == paymentId){
+                        paymentExists = true;
+                    }
+                }
+                
+                if(!paymentExists){
+                    user.payments.push({
+                        id: user.id+"_"+id,
+                        date: now,
+                        payedMonths: subscription.subscriptionPlan.billingCycleInMonths,
+                        amount: amount,
+                        currency: paypal_body.resource.amount.currency,
+                        paymentWay: "PayPal",
+                        transactionId: transaction_id
+                    });
+                    await saveUser(user);
+                }
+
+                let months = subscription.subscriptionPlan.billingCycleInMonths;
+                var extraDesc = "";
+                if(months == "1"){
+                    extraDesc = "מנוי חודשי לערכות קלפים דיגיטליות";
+                }
+                else if(months == "12"){
+                    extraDesc = "מנוי שנתי לערכות קלפים דיגיטליות";
+                }
+                else if(months == "6"){
+                    extraDesc = "מנוי חצי-שנתי לערכות קלפים דיגיטליות";
                 }
                 
                 let invoiceRunningId = await getinvoiceRunningId();
-
-                await createInvoiceRecord(user, amount, subscription, extraDesc, invoiceRunningId);
+                
+                let name = ((paypal_body.resource?.subscriber?.name?.given_name ?? "") + " " + (paypal_body.resource?.subscriber?.name?.surname ?? "")).trim();
+                if(!name || (name == " ")){
+                    name = user.fullName;
+                }
+                await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
             }
         }
         const response = {

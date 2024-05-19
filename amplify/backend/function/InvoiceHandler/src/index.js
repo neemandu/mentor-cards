@@ -491,7 +491,7 @@ async function updateEmailList(email, amount, subDescription, invoiceRunningId, 
 }
 
 async function updateinvoice(invoice) {
-  console.log("updating Invoice Running Id...");
+  console.log("updating Invoice...");
   var table1 = env.API_CARDSPACKS_INVOICESTABLE_NAME;
   var params1 = {
       TableName: table1,
@@ -499,9 +499,9 @@ async function updateinvoice(invoice) {
   };
   var docClient = new AWS.DynamoDB.DocumentClient();
   docClient.put(params1).promise().then(data => {
-      console.log("updateInvoiceRunningId:", JSON.stringify(data, null, 2));
+      console.log("updateInvoice:", JSON.stringify(data, null, 2));
   }).catch(err => {
-      console.error("Unable to updateInvoiceRunningId . Error JSON:", JSON.stringify(err, null, 2));
+      console.error("Unable to updateInvoice . Error JSON:", JSON.stringify(err, null, 2));
   });
 }
 
@@ -558,7 +558,7 @@ exports.handler = async (event) => {
               console.log('here');
               var subDescription = invoice.items[0].itemName;
               var amount = invoice.items[0].pricePerItem;
-              let name = invoice.fullName ? invoice.fullName : invoice.fullName;
+              let name = invoice.fullName ? invoice.fullName : invoice.email;
               let s3Url = await createPDFandUpload(name, invoiceRunningId, amount, subDescription)
               invoice.s3Url = s3Url;
               await updateinvoice(invoice);

@@ -705,6 +705,14 @@
         }
       ]
     },
+    "AMPLIFY_function_PayPalWebhookFunc_receiptsUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
     "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
       "usedBy": [
         {
