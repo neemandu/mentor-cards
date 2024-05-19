@@ -30,7 +30,6 @@ import { OrganizationManagementComponent } from './Modules/management/organizati
 import { PacksManagementComponent } from './Modules/management/packs-management/packs-management.component';
 import { PaymentProgramsManagementComponent } from './Modules/management/payment-programs-management/payment-programs-management.component';
 import { ReceiptsManagementComponent } from './Modules/management/receipts-management/receipts-management.component';
-import { DashboardComponent } from './Modules/management/dashboard/dashboard.component';
 import { ServicesComponent } from './Pages/services/services.component';
 import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
@@ -100,12 +99,6 @@ const routes: Routes = [
   {
     path: 'affiliate-management',
     component: ManageAffiliateComponent,
-    canActivate: [AuthGuardSiteContentManagementService],
-  },
-
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
     canActivate: [AuthGuardSiteContentManagementService],
   },
   {

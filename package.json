@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
-  }, 
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.2.0",
@@ -28,7 +28,6 @@
     "@ngx-translate/http-loader": "^3.0.1",
     "angular-datatables": "^10.0.0",
     "angularx-social-login": "^3.5.7",
-    "apexcharts": "^3.37.1",
     "aws-amplify": "^3.3.14",
     "aws-sdk": "^2.1599.0",
     "buttercms": "^1.2.12",
@@ -41,7 +40,6 @@
     "jquery": "^3.4.1",
     "logrocket": "^1.0.14",
     "mixpanel-browser": "^2.45.0",
-    "ng-apexcharts": "^1.5.12",
     "npm-cli": "^0.1.0",
     "puppeteer-core": "^22.8.1",
     "rxjs": "~6.6.0",
@@ -50,7 +48,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1002.0",
+    "@angular-devkit/build-angular": "^0.1002.4",
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
     "@angular/localize": "^10.2.3",
