@@ -1,0 +1,70 @@
+<section>
+    <div class="flex me-40 justify-between">
+        <div class="flex space-x-8">
+            <div>
+                <button *ngIf="!loggedIn" (click)="signInSignUp()" class="h-4">
+                    {{ "pages.nav.navbar.signin-signup" | translate }}
+                </button>
+                <button id="user-drop-down" *ngIf="loggedIn" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">
+                    <mat-icon id="account_circle">account_circle</mat-icon>
+                    <mat-icon>arrow_drop_down</mat-icon>
+                </button>
+            </div>
+            <div>
+                <div >
+                    <mat-form-field>
+                        <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
+                        <input #filterText matInput type="text" autocomplete="off" />
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="flex align-middle items-center">
+            <div *ngFor="let item of navBarItems" class="flex items-center align-middle">
+                <button [routerLink]="item.route" routerLinkActive="active" class="text-black hover:cursor-pointer mx-2"
+                    (mouseenter)="hover(item)" (mouseleave)="leave(item)">
+                    <div style="font-weight: 700; font-size: 13px;">
+                        {{item.name | translate}}
+                    </div>
+                    <div class="underline-on-hover" [class.hidden]="!item.hovering">
+                        &nbsp;
+                    </div>
+                    <div class="no-underline-on-hover" [class.hidden]="item.hovering">
+                        &nbsp;
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class=" flex items-center">
+            <img id="logo-name" src="/assets/New/nav-bar/logo.svg" alt="Mentor-Cards full logo" />
+        </div>
+    </div>
+
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item *ngIf="loggedIn" (click)="navigate('/user-page')">
+            {{ "pages.nav.user-menu.user-details" | translate }}
+        </button>
+        <button mat-menu-item *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'" (click)="navigate('/price-page')">
+            {{ "pages.nav.user-menu.register-plan" | translate }}
+        </button>
+
+        <button mat-menu-item *ngIf="loggedIn && userAttributes?.myAffiliate"
+            (click)="navigate('/affiliate-dashboard')">
+            {{ "pages.nav.user-menu.affiliate" | translate }}
+        </button>
+        <button mat-menu-item type="button" *ngIf="
+            loggedIn &&
+            userAttributes?.groupId &&
+            (userAttributes?.groupRole === 'ADMIN' ||
+              userAttributes?.groupRole === 'SUPER_USER')
+          " (click)="navigate('/group-management')">
+            {{ "pages.nav.user-menu.group-management" | translate }}
+        </button>
+        <!-- <button mat-menu-item [matMenuTriggerFor]="managementMenu"
+          *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'">
+          <span>ניהול תוכן האתר</span></button> -->
+        <button mat-menu-item *ngIf="loggedIn" (click)="logout()">
+            {{ "pages.nav.user-menu.logout" | translate }}
+        </button>
+    </mat-menu>
+</section>
