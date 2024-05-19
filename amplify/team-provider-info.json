@@ -34,7 +34,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-7739445241744f486f69-build.zip"
+          "s3Key": "amplify-builds/PayPalWebhookFunc-45485662415731507663-build.zip"
         },
         "IncrementPackEntries": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -92,7 +92,7 @@
         },
         "AddCouponCode": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddCouponCode-7a57487a485032536543-build.zip"
+          "s3Key": "amplify-builds/AddCouponCode-374d656a725049672b7a-build.zip"
         },
         "GetFreeUntilDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -104,7 +104,7 @@
         },
         "ContactUsTrigger": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/ContactUsTrigger-6f6839513530684f5536-build.zip"
+          "s3Key": "amplify-builds/ContactUsTrigger-70376737786c43586f48-build.zip"
         },
         "UpdatePaymentProgram": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -117,7 +117,7 @@
         },
         "GetNextReceiptId": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetNextReceiptId-70655550704e6557734e-build.zip"
+          "s3Key": "amplify-builds/GetNextReceiptId-323639676f574f773953-build.zip"
         },
         "GetSubscriptionPlans": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -125,11 +125,11 @@
         },
         "UpdateSelectedCardPacks": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/UpdateSelectedCardPacks-4a6e69345351526e6650-build.zip"
+          "s3Key": "amplify-builds/UpdateSelectedCardPacks-746c616c6e6253637350-build.zip"
         },
         "GetEndOfTrialDate": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/GetEndOfTrialDate-34334172466c46335171-build.zip"
+          "s3Key": "amplify-builds/GetEndOfTrialDate-712f507a6b5063547661-build.zip"
         },
         "IsCardsPackOwnedByOrgForUser": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -137,7 +137,7 @@
         },
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/IncrementCardPackLike-736a65445a766932474b-build.zip"
+          "s3Key": "amplify-builds/IncrementCardPackLike-41366c2b3237732b524b-build.zip"
         },
         "NewAffiliateHandler": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
@@ -150,13 +150,18 @@
         "AddUserToEmailList": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/AddUserToEmailList-735a6a71714e37517257-build.zip"
+          "s3Key": "amplify-builds/AddUserToEmailList-4673537a55384a684b4e-build.zip"
         },
         "InvoiceHandler": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/InvoiceHandler-7738737738726d466138-build.zip",
+          "s3Key": "amplify-builds/InvoiceHandler-764a6f703265374c5044-build.zip",
           "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter"
+        },
+        "CreateInvoice": {
+          "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter",
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/CreateInvoice-4c67614d616d7933676b-build.zip"
         }
       },
       "api": {

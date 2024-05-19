@@ -199,7 +199,7 @@ async function addToUnsubscribersList(email) {
   console.log("Send Email: sending POST End");
 }
 
-async function createInvoiceRecord(user, amount, subscription, extraDesc){
+async function createInvoiceRecord(user, amount, subscription, extraDesc, invoiceRunningId){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
     var d = new Date();
@@ -220,7 +220,7 @@ async function createInvoiceRecord(user, amount, subscription, extraDesc){
             "email": user.email,
             "fullName": user.fullName,
             "invoiceType": "קבלה",
-            "invoiceRunningId": -1,
+            "invoiceRunningId": invoiceRunningId,
             "items": [
              {
               "itemName": subDescription,
@@ -237,6 +237,27 @@ async function createInvoiceRecord(user, amount, subscription, extraDesc){
         console.error("Unable to add invoice message to: " + user.email + ". Error JSON:", JSON.stringify(err, null, 2));
       });
 }
+
+function getinvoiceRunningId() {
+    return new Promise((resolve, reject) => {
+        let dataString = ''; // This variable will accumulate data chunks
+        console.log('API_RECEIPTSAPI_APINAME: ' + env.receiptsUrl);
+        const req = https.get(env.receiptsUrl, function(res) {
+            res.on('data', chunk => {
+                dataString += chunk; // Accumulate chunks of data as they arrive
+            });
+            res.on('end', () => {
+                resolve(dataString); // Resolve the promise with the accumulated result when the stream ends
+            });
+        });
+  
+        req.on('error', (e) => {
+            reject(e); // Reject the promise if there's an error during the request
+        });
+  
+        req.end(); // Ensure the request is properly ended
+    });
+  }
 
 exports.handler = async (event) => {
     try{
@@ -304,8 +325,10 @@ exports.handler = async (event) => {
                 if(subscription?.includedCardPacksIds?.length){
                     extraDesc = subscription.includedCardPacksIds[0].name + " לערכת ";
                 }
+                
+                let invoiceRunningId = await getinvoiceRunningId();
 
-                await createInvoiceRecord(user, amount, subscription, extraDesc);
+                await createInvoiceRecord(user, amount, subscription, extraDesc, invoiceRunningId);
             }
         }
         const response = {

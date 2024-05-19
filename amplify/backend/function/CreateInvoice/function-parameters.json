@@ -4,22 +4,11 @@
       "receiptsAPI": [
         "create",
         "read",
-        "update"
+        "update",
+        "delete"
       ]
     },
     "storage": {
-      "Invoices": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "User:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
       "Invoices:@model(appsync)": [
         "create",
         "read",
@@ -29,11 +18,6 @@
     }
   },
   "lambdaLayers": [],
-  "secretNames": [
-    "DigitalSignKey",
-    "smooveApiKey",
-    "passphrase"
-  ],
   "environmentVariableList": [
     {
       "cloudFormationParameterName": "receiptsUrl",

@@ -1,6 +1,10 @@
 [
   {
-    "Action": [],
-    "Resource": []
+    "Effect": "Allow",
+    "Action": [
+      "secretsmanager:GetSecretValue"
+    ],
+    "Resource": [ "arn:aws:secretsmanager:eu-west-2:150827790089:secret:digisign-yOeA1M",
+                  "arn:aws:secretsmanager:eu-west-2:150827790089:secret:p12certbase64-HZv3Pu"]
   }
 ]

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CreateInvoicesInput, InvoiceItemsInput, UpdateInvoicesInput } from 'src/app/API.service';
+import { InvoicesInput, InvoiceItemsInput } from 'src/app/API.service';
 
 @Component({
   selector: 'app-new-edit-receipt-dialog',
@@ -61,17 +61,15 @@ export class NewEditReceiptDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const res: CreateInvoicesInput | UpdateInvoicesInput = {
+    const res: InvoicesInput = {
       id: this.data.receipt?.id ? this.data.receipt.id : null,
       email: this.receiptForm.controls.email.value,
       fullName: this.receiptForm.controls.fullName.value,
       customerAddress: this.receiptForm.controls.customerAddress.value,
       date: new Date(this.receiptForm.controls.date.value).toISOString(),
-      items: [{
-        itemName: this.receiptForm.controls.itemName.value,
-        pricePerItem: this.receiptForm.controls.pricePerItem.value,
-        numberOfItems: this.receiptForm.controls.numberOfItems.value
-      }],
+      itemName: this.receiptForm.controls.itemName.value,
+      pricePerItem: this.receiptForm.controls.pricePerItem.value,
+      numberOfItems: this.receiptForm.controls.numberOfItems.value,
       invoiceType: this.receiptForm.controls.invoiceType.value,
     }
     this.dialogRef.close(res);

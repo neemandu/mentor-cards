@@ -88,6 +88,28 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "CreateInvoice": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "ApiName",
+            "ApiId"
+          ],
+          "category": "api",
+          "resourceName": "receiptsAPI"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "GetAffiliateData": {
       "build": true,
       "dependsOn": [
@@ -336,6 +358,30 @@
         {
           "category": "function",
           "resourceName": "CreateCommonLink"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateInvoice_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateInvoice"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateInvoice_receiptsUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateInvoice"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateInvoice_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateInvoice"
         }
       ]
     },

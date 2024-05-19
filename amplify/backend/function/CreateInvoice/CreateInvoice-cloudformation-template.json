@@ -1,24 +1,35 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.12.0\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
       "Default": "NONE",
       "Description": " Schedule Expression"
     },
-    "env": {
+    "deploymentBucketName": {
       "Type": "String"
     },
-    "apicardspacksGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apicardspacksGraphQLAPIIdOutput"
-    },
-    "deploymentBucketName": {
+    "env": {
       "Type": "String"
     },
     "s3Key": {
       "Type": "String"
+    },
+    "receiptsUrl": {
+      "Type": "String"
+    },
+    "apireceiptsAPIApiName": {
+      "Type": "String",
+      "Default": "apireceiptsAPIApiName"
+    },
+    "apireceiptsAPIApiId": {
+      "Type": "String",
+      "Default": "apireceiptsAPIApiId"
+    },
+    "apicardspacksGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apicardspacksGraphQLAPIIdOutput"
     }
   },
   "Conditions": {
@@ -39,16 +50,24 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "CreateUser",
+            "CreateInvoice",
             {
               "Fn::Join": [
                 "",
                 [
-                  "CreateUser",
+                  "CreateInvoice",
                   "-",
                   {
                     "Ref": "env"
@@ -66,12 +85,18 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_CARDSPACKS_USERTABLE_NAME": {
+            "API_RECEIPTSAPI_APINAME": {
+              "Ref": "apireceiptsAPIApiName"
+            },
+            "API_RECEIPTSAPI_APIID": {
+              "Ref": "apireceiptsAPIApiId"
+            },
+            "API_CARDSPACKS_INVOICESTABLE_NAME": {
               "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:InvoicesTable:Name"
               }
             },
-            "API_CARDSPACKS_USERTABLE_ARN": {
+            "API_CARDSPACKS_INVOICESTABLE_ARN": {
               "Fn::Join": [
                 "",
                 [
@@ -86,7 +111,7 @@
                   ":table/",
                   {
                     "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
+                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:InvoicesTable:Name"
                     }
                   }
                 ]
@@ -95,57 +120,8 @@
             "API_CARDSPACKS_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apicardspacksGraphQLAPIIdOutput"
             },
-            "API_CARDSPACKS_GROUPTABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:GroupTable:Name"
-              }
-            },
-            "API_CARDSPACKS_GROUPTABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:GroupTable:Name"
-                    }
-                  }
-                ]
-              ]
-            },
-            "API_CARDSPACKS_MESSAGEQUEUETABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
-              }
-            },
-            "API_CARDSPACKS_MESSAGEQUEUETABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
-                    }
-                  }
-                ]
-              ]
+            "receiptsUrl": {
+              "Ref": "receiptsUrl"
             }
           }
         },
@@ -155,17 +131,9 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Layers": [],
-        "Timeout": "25",
-        "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        }
+        "Timeout": 25
       }
     },
     "LambdaExecutionRole": {
@@ -174,12 +142,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRole2939a222",
+            "mentorcardsLambdaRolef6087d51",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRole2939a222",
+                  "mentorcardsLambdaRolef6087d51",
                   "-",
                   {
                     "Ref": "env"
@@ -268,59 +236,28 @@
             {
               "Effect": "Allow",
               "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:Update*",
-                "dynamodb:RestoreTable*"
+                "apigateway:POST",
+                "apigateway:PUT",
+                "apigateway:GET",
+                "apigateway:HEAD",
+                "apigateway:OPTIONS",
+                "apigateway:PATCH",
+                "apigateway:DELETE"
               ],
               "Resource": [
                 {
                   "Fn::Join": [
                     "",
                     [
-                      "arn:aws:dynamodb:",
+                      "arn:aws:apigateway:",
                       {
                         "Ref": "AWS::Region"
                       },
-                      ":",
+                      "::/restapis/",
                       {
-                        "Ref": "AWS::AccountId"
+                        "Ref": "apireceiptsAPIApiName"
                       },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
-                        }
-                      }
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:dynamodb:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:UserTable:Name"
-                        }
-                      },
-                      "/index/*"
+                      "/*"
                     ]
                   ]
                 }
@@ -332,15 +269,19 @@
                 "dynamodb:Put*",
                 "dynamodb:Create*",
                 "dynamodb:BatchWriteItem",
+                "dynamodb:PartiQLInsert",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
                 "dynamodb:Query",
+                "dynamodb:PartiQLSelect",
                 "dynamodb:Update*",
                 "dynamodb:RestoreTable*",
-                "dynamodb:Delete*"
+                "dynamodb:PartiQLUpdate",
+                "dynamodb:Delete*",
+                "dynamodb:PartiQLDelete"
               ],
               "Resource": [
                 {
@@ -358,7 +299,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:InvoicesTable:Name"
                         }
                       }
                     ]
@@ -379,63 +320,7 @@
                       ":table/",
                       {
                         "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:MessageQueueTable:Name"
-                        }
-                      },
-                      "/index/*"
-                    ]
-                  ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:dynamodb:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:GroupTable:Name"
-                        }
-                      }
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:dynamodb:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:GroupTable:Name"
+                          "Fn::Sub": "${apicardspacksGraphQLAPIIdOutput}:GetAtt:InvoicesTable:Name"
                         }
                       },
                       "/index/*"

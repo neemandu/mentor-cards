@@ -14,6 +14,7 @@ type Mutation {
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
   getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")  
+  createInvoice(input: InvoicesInput!): [Boolean] @function(name: "CreateInvoice-${env}")  
 }
 
 type CommonLink
@@ -331,6 +332,7 @@ type Invoices @model @auth(rules: [{ allow: groups, groups: ["Admins"] }]) {
   businessAddress: String
   businessWebsite: String
   invoiceType: String
+  s3Url: String
 }
 
 type InvoiceItems {
@@ -360,6 +362,19 @@ input updatePaymentProgramInput {
   paymentProgramId: String!
   providerTransactionId: String
   fullName: String
+}
+
+input InvoicesInput {
+  id: String
+  email: String
+  fullName: String
+  customerAddress: String
+  date: AWSDateTime
+  invoiceRunningId: Int
+  itemName: String
+  pricePerItem: Float
+  numberOfItems: Int
+  invoiceType: String
 }
 
 input couponCodeInput {

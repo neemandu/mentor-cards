@@ -820,6 +820,10 @@ mutation GetAffiliateData($input: userInput!) {
   }
 }
 
+mutation CreateInvoice($input: InvoicesInput!) {
+  createInvoice(input: $input)
+}
+
 mutation CreateCommonLink(
   $input: CreateCommonLinkInput!
   $condition: ModelCommonLinkConditionInput
@@ -1926,6 +1930,7 @@ mutation CreateInvoices(
     businessAddress
     businessWebsite
     invoiceType
+    s3Url
     createdAt
     updatedAt
     __typename
@@ -1954,6 +1959,7 @@ mutation UpdateInvoices(
     businessAddress
     businessWebsite
     invoiceType
+    s3Url
     createdAt
     updatedAt
     __typename
@@ -1982,6 +1988,7 @@ mutation DeleteInvoices(
     businessAddress
     businessWebsite
     invoiceType
+    s3Url
     createdAt
     updatedAt
     __typename

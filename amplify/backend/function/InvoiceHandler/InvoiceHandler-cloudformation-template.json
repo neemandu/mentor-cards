@@ -206,6 +206,50 @@
             },
             "receiptsUrl": {
               "Ref": "receiptsUrl"
+            },
+            "DigitalSignKey": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "InvoiceHandler"
+                      }
+                    ]
+                  },
+                  "DigitalSignKey"
+                ]
+              ]
+            },
+            "passphrase": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "InvoiceHandler"
+                      }
+                    ]
+                  },
+                  "passphrase"
+                ]
+              ]
             }
           }
         },
@@ -217,7 +261,8 @@
         },
         "Runtime": "nodejs18.x",
         "Layers": [],
-        "Timeout": 25
+        "Timeout": 600,
+        "MemorySize": 2048
       }
     },
     "LambdaExecutionRole": {
@@ -633,6 +678,33 @@
       "DependsOn": [
         "LambdaExecutionRole"
       ]
+    },
+    "CustomLambdaExecutionPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "custom-lambda-execution-policy",
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "secretsmanager:GetSecretValue"
+              ],
+              "Resource": [
+                "arn:aws:secretsmanager:eu-west-2:150827790089:secret:digisign-yOeA1M",
+                "arn:aws:secretsmanager:eu-west-2:150827790089:secret:p12certbase64-HZv3Pu"
+              ]
+            }
+          ]
+        },
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ]
+      },
+      "DependsOn": "LambdaExecutionRole"
     }
   },
   "Outputs": {
