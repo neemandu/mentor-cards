@@ -13,31 +13,10 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
   styleUrls: ['./nav-bar-new.component.css']
 })
 export class NavBarNewComponent implements OnInit {
-
-  @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
-  @HostListener('window:resize', ['$event'])
-  onWindowResize(event: any) {
-    this.showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
-  }
-
-  userAttributes: any;
-  loggedIn: boolean = true;
-  news: any[];
-  newsNotification: boolean = false;
-  showBanner: boolean = true;
-  countdown = '';
-
-  localesList = [
-    { code: 'en', label: 'English' },
-    { code: 'he', label: 'עברית' }
-  ]
-
-
+  matRippleColor:"red"
   navBarItems = [
     { name: 'pages.nav.navbar.all-card-packs', route: '/all-packs-page', placeholder: 'All Card Packs' },
-    { name: 'pages.nav.navbar.digital-courses', route: 'openNewTab()', placeholder: 'Digital Courses' },
+    { name: 'pages.nav.navbar.digital-courses', placeholder: 'Digital Courses' },
     { name: 'pages.nav.navbar.our-plans', route: '/price-page', placeholder: 'Our Plans' },
     { name: 'pages.nav.navbar.faq', route: '/guide-page', placeholder: 'FAQ' },
     { name: 'pages.nav.navbar.additional-services', route: '/services', placeholder: 'Additional Services' },
@@ -53,6 +32,27 @@ export class NavBarNewComponent implements OnInit {
   leave(item) {
     item.hovering = false;
   }
+
+  
+  @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any) {
+    this.showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
+  }
+  
+  userAttributes: any;
+  loggedIn: boolean = false;
+  news: any[];
+  newsNotification: boolean = false;
+  showBanner: boolean = true;
+  countdown = '';
+
+  localesList = [
+    { code: 'en', label: 'English' },
+    { code: 'he', label: 'עברית' }
+  ]
 
   constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,
     private api: APIService, private amplifyAuthService: AuthService,
@@ -80,15 +80,6 @@ export class NavBarNewComponent implements OnInit {
   }
 
 
-    /**
-   * @returns a string with all news to save\compare 
-   */
-    private getNewsList(): string {
-      let res = this.news.map(n => n.message).toString();
-      return res;
-    }
-
-    
   startCountdown() {
     const countDownDate = new Date('2024-01-31').getTime();
 
@@ -111,11 +102,35 @@ export class NavBarNewComponent implements OnInit {
     }, 1000);
   }
 
+  viewNotifications(): void {
+    if (this.newsNotification) {
+      localStorage.setItem("news", this.getNewsList());
+      this.newsNotification = false;
+    }
+  }
+
+  openEnterCouponCodeModal(): void {
+    this.userAuthService.openEnterCouponCodeModal();
+  }
+
+  /**
+   * @returns a string with all news to save\compare 
+   */
+  private getNewsList(): string {
+    let res = this.news.map(n => n.message).toString();
+    return res;
+  }
+
+  openNewTab(): void {
+    console.log('openNewTab');
+    const url = 'https://mentor-cards.vp4.me/my-courses'; 
+    window.open(url, '_blank');
+  }
+
   public navigate(path: string): void {
     // console.log(path)
     this.ngZone.run(() => this.router.navigate([path]));
   }
-
 
   logout(): void {
     this.userAuthService.logOut();
@@ -125,4 +140,5 @@ export class NavBarNewComponent implements OnInit {
   signInSignUp(): void {
     this.userAuthService.showSignInModal();
   }
+
 }
