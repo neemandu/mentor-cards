@@ -269,91 +269,95 @@ exports.handler = async (event) => {
         var user_id_mydb = "";
         var shouldProcess = true;
 
-        if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
-            transaction_id = paypal_body.resource.id;
-
-            // Liftetime plan - we should not cancel for our customers.
-            if(paypal_body.resource.plan_id == 'P-38W13427H3924681HMVGLNDA'){
-                shouldProcess = false;
-            }
-        }
-        if(event_type == "PAYMENT.SALE.COMPLETED"){
-            transaction_id = paypal_body.resource.billing_agreement_id;
-            if(!transaction_id){
-                transaction_id = paypal_body.resource.id;
-            }
-            user_id_mydb = paypal_body.resource.custom;
-            
-            id = paypal_body.id;
-        }
-        console.log('event_type: ' + event_type);
-        console.log('transaction_id: ' + transaction_id);
-        console.log('user_id_mydb: ' + user_id_mydb);
-
-
-        if(shouldProcess){
-            var user;
-            if(user_id_mydb){
-                user = await getUser(user_id_mydb);
-            }
-            if(!user){
-                user = await getUserByPayPalTxId(transaction_id);
-            }
-
-            if(user && event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
-                await cancelUserSubscription(user, transaction_id);
-                await addToUnsubscribersList(user.email, user.phone, user.fullName);
-            }
-            else if(user && event_type == "PAYMENT.SALE.COMPLETED"){
-                var amount = paypal_body.resource.amount.total;
-                if(!user.payments){
-                    user.payments = [];
-                } 
-                var subscription = getSubByTxID(user, transaction_id);
-                var now = new Date().toISOString();
-                let paymentId = user.id+"_"+id;
-
-                let paymentExists = false;
-                for(let i=0; i< user.payments.length; i++){
-                    if(user.payments[i].id == paymentId){
-                        paymentExists = true;
+        if(event_type == "BILLING.SUBSCRIPTION.CANCELLED" || 
+            event_type == "PAYMENT.SALE.COMPLETED"){
+                if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+                    transaction_id = paypal_body.resource.id;
+        
+                    // Liftetime plan - we should not cancel for our customers.
+                    if(paypal_body.resource.plan_id == 'P-38W13427H3924681HMVGLNDA'){
+                        shouldProcess = false;
                     }
                 }
-                
-                if(!paymentExists){
-                    user.payments.push({
-                        id: user.id+"_"+id,
-                        date: now,
-                        payedMonths: subscription.subscriptionPlan.billingCycleInMonths,
-                        amount: amount,
-                        currency: paypal_body.resource.amount.currency,
-                        paymentWay: "PayPal",
-                        transactionId: transaction_id
-                    });
-                    await saveUser(user);
+                if(event_type == "PAYMENT.SALE.COMPLETED"){
+                    transaction_id = paypal_body.resource.billing_agreement_id;
+                    if(!transaction_id){
+                        transaction_id = paypal_body.resource.id;
+                    }
+                    user_id_mydb = paypal_body.resource.custom;
+                    
+                    id = paypal_body.id;
                 }
-
-                let months = subscription.subscriptionPlan.billingCycleInMonths;
-                var extraDesc = "";
-                if(months == "1"){
-                    extraDesc = "מנוי חודשי לערכות קלפים דיגיטליות";
+                console.log('event_type: ' + event_type);
+                console.log('transaction_id: ' + transaction_id);
+                console.log('user_id_mydb: ' + user_id_mydb);
+        
+        
+                if(shouldProcess){
+                    var user;
+                    if(user_id_mydb){
+                        user = await getUser(user_id_mydb);
+                    }
+                    if(!user){
+                        user = await getUserByPayPalTxId(transaction_id);
+                    }
+        
+                    if(user && event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+                        await cancelUserSubscription(user, transaction_id);
+                        await addToUnsubscribersList(user.email, user.phone, user.fullName);
+                    }
+                    else if(user && event_type == "PAYMENT.SALE.COMPLETED"){
+                        var amount = paypal_body.resource.amount.total;
+                        if(!user.payments){
+                            user.payments = [];
+                        } 
+                        var subscription = getSubByTxID(user, transaction_id);
+                        var now = new Date().toISOString();
+                        let paymentId = user.id+"_"+id;
+        
+                        let paymentExists = false;
+                        for(let i=0; i< user.payments.length; i++){
+                            if(user.payments[i].id == paymentId){
+                                paymentExists = true;
+                            }
+                        }
+                        
+                        if(!paymentExists){
+                            user.payments.push({
+                                id: user.id+"_"+id,
+                                date: now,
+                                payedMonths: subscription.subscriptionPlan.billingCycleInMonths,
+                                amount: amount,
+                                currency: paypal_body.resource.amount.currency,
+                                paymentWay: "PayPal",
+                                transactionId: transaction_id
+                            });
+                            await saveUser(user);
+                        }
+        
+                        let months = subscription.subscriptionPlan.billingCycleInMonths;
+                        var extraDesc = "";
+                        if(months == "1"){
+                            extraDesc = "מנוי חודשי לערכות קלפים דיגיטליות";
+                        }
+                        else if(months == "12"){
+                            extraDesc = "מנוי שנתי לערכות קלפים דיגיטליות";
+                        }
+                        else if(months == "6"){
+                            extraDesc = "מנוי חצי-שנתי לערכות קלפים דיגיטליות";
+                        }
+                        
+                        let invoiceRunningId = await getinvoiceRunningId();
+                        
+                        let name = ((paypal_body.resource?.subscriber?.name?.given_name ?? "") + " " + (paypal_body.resource?.subscriber?.name?.surname ?? "")).trim();
+                        if(!name || (name == " ")){
+                            name = user.fullName;
+                        }
+                        await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
+                    }
                 }
-                else if(months == "12"){
-                    extraDesc = "מנוי שנתי לערכות קלפים דיגיטליות";
-                }
-                else if(months == "6"){
-                    extraDesc = "מנוי חצי-שנתי לערכות קלפים דיגיטליות";
-                }
-                
-                let invoiceRunningId = await getinvoiceRunningId();
-                
-                let name = ((paypal_body.resource?.subscriber?.name?.given_name ?? "") + " " + (paypal_body.resource?.subscriber?.name?.surname ?? "")).trim();
-                if(!name || (name == " ")){
-                    name = user.fullName;
-                }
-                await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
             }
-        }
+        
         const response = {
             statusCode: 200,
         //  Uncomment below to enable CORS requests

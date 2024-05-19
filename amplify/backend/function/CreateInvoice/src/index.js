@@ -10,6 +10,7 @@
 Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
+const https = require('https');
 
 function getinvoiceRunningId() {
     return new Promise((resolve, reject) => {
@@ -37,7 +38,7 @@ function getinvoiceRunningId() {
     var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
     var d = new Date();
     if(!invoice.id  || invoice.id == "-1"){
-        invoice.id = user.id + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
+        invoice.id = invoice.email + "_invoice_" + d.getFullYear() + "_" + d.getMonth() + "_" + d.getDate();
     }
     
     var params = {
@@ -68,7 +69,7 @@ function getinvoiceRunningId() {
     await docClient.put(params).promise().then(data => {
         console.log("Added item to invoice queue item:", JSON.stringify(data, null, 2));
       }).catch(err => {
-        console.error("Unable to add invoice message to: " + user.email + ". Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to add invoice message to: " + invoice.email + ". Error JSON:", JSON.stringify(err, null, 2));
       });
 }
 
@@ -80,17 +81,17 @@ exports.handler = async (event) => {
 
     console.log(`EVENT: ${JSON.stringify(event)}`);
     let invoice = {
-        id = event.arguments.input['id'],
-        email = event.arguments.input['email'],
-        fullName = event.arguments.input['fullName'],
-        customerAddress = event.arguments.input['customerAddress'],
-        date = event.arguments.input['date'],
-        itemName = event.arguments.input['itemName'],
-        pricePerItem = event.arguments.input['pricePerItem'],
-        numberOfItems = event.arguments.input['numberOfItems'],
-        invoiceType = event.arguments.input['invoiceType'],
-        s3Url = ""
-    }
+        "id": event.arguments.input['id'],
+        "email": event.arguments.input['email'],
+        "fullName": event.arguments.input['fullName'],
+        "customerAddress": event.arguments.input['customerAddress'],
+        "date": event.arguments.input['date'],
+        "itemName" : event.arguments.input['itemName'],
+        "pricePerItem": event.arguments.input['pricePerItem'],
+        "numberOfItems": event.arguments.input['numberOfItems'],
+        "invoiceType": event.arguments.input['invoiceType'],
+        "s3Url": ""
+    };
 
     invoice.invoiceRunningId = await getinvoiceRunningId();
 
@@ -98,13 +99,5 @@ exports.handler = async (event) => {
     await createInvoiceRecord(invoice);
 
 
-    return {
-        statusCode: 200,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  },
-        body: JSON.stringify('Hello from Lambda!'),
-    };
+    return true;
 };

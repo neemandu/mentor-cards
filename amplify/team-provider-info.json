@@ -34,7 +34,7 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-7978784d5559726a5859-build.zip",
+          "s3Key": "amplify-builds/PayPalWebhookFunc-6a46627844766c764d4b-build.zip",
           "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter"
         },
         "IncrementPackEntries": {
@@ -162,7 +162,7 @@
         "CreateInvoice": {
           "receiptsUrl": "https://un4bfgiz13.execute-api.eu-west-2.amazonaws.com/prod/counter",
           "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
-          "s3Key": "amplify-builds/CreateInvoice-4c67614d616d7933676b-build.zip"
+          "s3Key": "amplify-builds/CreateInvoice-4a2f5146736e56336147-build.zip"
         }
       },
       "api": {

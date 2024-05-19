@@ -14,7 +14,7 @@ type Mutation {
   LikeClicked(input: cardPackIdInput!): Boolean @function(name: "IncrementCardPackLike-${env}")
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
   getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")  
-  createInvoice(input: InvoicesInput!): [Boolean] @function(name: "CreateInvoice-${env}")  
+  createInvoice(input: InvoicesInput!): Boolean @function(name: "CreateInvoice-${env}")  
 }
 
 type CommonLink

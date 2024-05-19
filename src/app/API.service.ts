@@ -6452,7 +6452,7 @@ async GetSubscriptionPlansForOrgs(
     )) as any;
     return <Array<GetAffiliateDataMutation>>response.data.getAffiliateData;
   }
-  async CreateInvoice(input: InvoicesInput): Promise<Array<boolean | null>> {
+  async CreateInvoice(input: InvoicesInput): Promise<boolean | null> {
     const statement = `mutation CreateInvoice($input: InvoicesInput!) {
         createInvoice(input: $input)
       }`;
@@ -6462,7 +6462,7 @@ async GetSubscriptionPlansForOrgs(
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <Array<boolean | null>>response.data.createInvoice;
+    return <boolean | null>response.data.createInvoice;
   }
   async CreateCommonLink(
     input: CreateCommonLinkInput,
@@ -9214,7 +9214,11 @@ async GetSubscriptionPlansForOrgs(
     nextToken?: string
   ): Promise<ListOrganizationMembershipsQuery> {
     const statement = `query ListOrganizationMemberships($filter: ModelOrganizationMembershipFilterInput, $limit: Int, $nextToken: String) {
-        listOrganizationMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+        listOrganizationMemberships(
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
           __typename
           items {
             __typename
