@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageHowToUseComponent implements OnInit {
 
+  imgSrc = ''
   constructor() { }
 
   ngOnInit(): void {
   }
+  
+  changeImageSrc(event: any, imageName: string) {
+    event.target.src = `/assets/New/home-page/icons/${imageName}-blue.svg`;
+  }
+
+  resetImageSrc(event: any, imageName: string) {
+    event.target.src = `/assets/New/home-page/icons/${imageName}-pink.svg`;
+  }
+
 
 }

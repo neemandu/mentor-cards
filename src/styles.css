@@ -4,10 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.mt-12 {
-  margin-top: 3rem/* 48px */;
+.h-7 {
+  height: 1.75rem/* 28px */;
 }
-
 html,
 body {
   height: 100%;
