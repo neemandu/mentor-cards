@@ -172,6 +172,7 @@ import { HomePageClientsCardComponent } from './Pages/home-page-new/home-page-cl
 import { HomePagePartnersComponent } from './Pages/home-page-new/home-page-partners/home-page-partners.component';
 import { HomePageUpdatesComponent } from './Pages/home-page-new/home-page-updates/home-page-updates.component';
 import { HomePageContactUsComponent } from './Pages/home-page-new/home-page-contact-us/home-page-contact-us.component';
+import { HomePageFooterComponent } from './Pages/home-page-new/home-page-footer/home-page-footer.component';
 
 @NgModule({
   declarations: [
@@ -249,6 +250,7 @@ import { HomePageContactUsComponent } from './Pages/home-page-new/home-page-cont
     HomePagePartnersComponent,
     HomePageUpdatesComponent,
     HomePageContactUsComponent,
+    HomePageFooterComponent,
   ],
   imports: [
     BrowserModule,

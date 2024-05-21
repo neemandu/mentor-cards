@@ -4,9 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.h-7 {
-  height: 1.75rem/* 28px */;
-}
 html,
 body {
   height: 100%;
