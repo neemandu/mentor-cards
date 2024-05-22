@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "api": {
+      "receiptsAPI": [
+        "create",
+        "read",
+        "update"
+      ]
+    },
+    "storage": {
+      "Invoices": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Invoices:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "secretNames": [
+    "DigitalSignKey",
+    "smooveApiKey",
+    "passphrase"
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "receiptsUrl",
+      "environmentVariableName": "receiptsUrl"
+    }
+  ]
+}

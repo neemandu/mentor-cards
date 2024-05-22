@@ -44,7 +44,7 @@ export class ReceiptsManagementComponent implements OnInit {
       dialogSub.unsubscribe();
       if (!newReceipt) return;
       this.mngService.overlaySpinner(true);
-      (oldReceipt ? this.api.UpdateInvoices(newReceipt) : this.api.CreateInvoices(newReceipt)).then(res => {
+      this.api.CreateInvoice(newReceipt).then(res => {
         console.log("🚀 ~ file: organization-management.component.ts ~ line 49 ~ res", res)
         if (oldReceipt) {//update
           this.receiptsData.splice(index, 1, res);

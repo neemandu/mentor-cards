@@ -529,6 +529,7 @@ subscription OnCreateInvoices {
     businessAddress
     businessWebsite
     invoiceType
+    s3Url
     createdAt
     updatedAt
     __typename
@@ -554,6 +555,7 @@ subscription OnUpdateInvoices {
     businessAddress
     businessWebsite
     invoiceType
+    s3Url
     createdAt
     updatedAt
     __typename
@@ -579,6 +581,7 @@ subscription OnDeleteInvoices {
     businessAddress
     businessWebsite
     invoiceType
+    s3Url
     createdAt
     updatedAt
     __typename

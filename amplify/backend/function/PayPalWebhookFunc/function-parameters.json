@@ -21,5 +21,11 @@
       ]
     }
   },
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "receiptsUrl",
+      "environmentVariableName": "receiptsUrl"
+    }
+  ]
 }

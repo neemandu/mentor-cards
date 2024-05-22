@@ -163,10 +163,12 @@ export class AffiliatesDashboardPageComponent implements OnInit {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     console.log('userAuthData');
     console.log(this.userAuthData);
+    this.userData.user = 'https://www.mentor-cards.com/home-page?ref=' + this.userAuthData.refId;
     this.apiService.GetAffiliateData({ username: '' }).then(
       (affiliate) => {
         this.affiliateData = affiliate;
-        this.userData.user = 'https://www.mentor-cards.com/home-page?ref=' + this.userAuthData.refId;
+        console.log('affiliate');
+        console.log(this.affiliateData);
         this.overlaySpinnerService.changeOverlaySpinner(false);
       },
       (error) => {

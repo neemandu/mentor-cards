@@ -1153,6 +1153,7 @@ query GetInvoices($id: ID!) {
     businessAddress
     businessWebsite
     invoiceType
+    s3Url
     createdAt
     updatedAt
     __typename
@@ -1183,6 +1184,7 @@ query ListInvoicess(
       businessAddress
       businessWebsite
       invoiceType
+      s3Url
       createdAt
       updatedAt
       __typename

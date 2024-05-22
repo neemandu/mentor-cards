@@ -23,6 +23,9 @@
     "storageInvoicesBucketName": {
       "Type": "String",
       "Default": "storageInvoicesBucketName"
+    },
+    "receiptsUrl": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -135,6 +138,9 @@
             },
             "STORAGE_INVOICES_BUCKETNAME": {
               "Ref": "storageInvoicesBucketName"
+            },
+            "receiptsUrl": {
+              "Ref": "receiptsUrl"
             }
           }
         },
@@ -451,6 +457,14 @@
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
+      }
+    },
+    "LambdaExecutionRoleArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "LambdaExecutionRole",
+          "Arn"
+        ]
       }
     }
   }

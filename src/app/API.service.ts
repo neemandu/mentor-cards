@@ -304,6 +304,19 @@ export type cardPackIdInput = {
   cardsPackId?: number | null;
 };
 
+export type InvoicesInput = {
+  id?: string | null;
+  email?: string | null;
+  fullName?: string | null;
+  customerAddress?: string | null;
+  date?: string | null;
+  invoiceRunningId?: number | null;
+  itemName?: string | null;
+  pricePerItem?: number | null;
+  numberOfItems?: number | null;
+  invoiceType?: string | null;
+};
+
 export type ModelCommonLinkConditionInput = {
   experationDate?: ModelStringInput | null;
   createdBy?: ModelStringInput | null;
@@ -891,6 +904,7 @@ export type CreateInvoicesInput = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
 };
 
 export type InvoiceItemsInput = {
@@ -910,6 +924,7 @@ export type ModelInvoicesConditionInput = {
   businessAddress?: ModelStringInput | null;
   businessWebsite?: ModelStringInput | null;
   invoiceType?: ModelStringInput | null;
+  s3Url?: ModelStringInput | null;
   and?: Array<ModelInvoicesConditionInput | null> | null;
   or?: Array<ModelInvoicesConditionInput | null> | null;
   not?: ModelInvoicesConditionInput | null;
@@ -929,6 +944,7 @@ export type Invoices = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -953,6 +969,7 @@ export type UpdateInvoicesInput = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
 };
 
 export type DeleteInvoicesInput = {
@@ -1159,6 +1176,7 @@ export type ModelInvoicesFilterInput = {
   businessAddress?: ModelStringInput | null;
   businessWebsite?: ModelStringInput | null;
   invoiceType?: ModelStringInput | null;
+  s3Url?: ModelStringInput | null;
   and?: Array<ModelInvoicesFilterInput | null> | null;
   or?: Array<ModelInvoicesFilterInput | null> | null;
   not?: ModelInvoicesFilterInput | null;
@@ -2954,6 +2972,7 @@ export type CreateInvoicesMutation = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2977,6 +2996,7 @@ export type UpdateInvoicesMutation = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3000,6 +3020,7 @@ export type DeleteInvoicesMutation = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4115,6 +4136,7 @@ export type GetInvoicesQuery = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4140,6 +4162,7 @@ export type ListInvoicessQuery = {
     businessAddress?: string | null;
     businessWebsite?: string | null;
     invoiceType?: string | null;
+    s3Url?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -4901,6 +4924,7 @@ export type OnCreateInvoicesSubscription = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4924,6 +4948,7 @@ export type OnUpdateInvoicesSubscription = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4947,6 +4972,7 @@ export type OnDeleteInvoicesSubscription = {
   businessAddress?: string | null;
   businessWebsite?: string | null;
   invoiceType?: string | null;
+  s3Url?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -6426,6 +6452,18 @@ async GetSubscriptionPlansForOrgs(
     )) as any;
     return <Array<GetAffiliateDataMutation>>response.data.getAffiliateData;
   }
+  async CreateInvoice(input: InvoicesInput): Promise<boolean | null> {
+    const statement = `mutation CreateInvoice($input: InvoicesInput!) {
+        createInvoice(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.createInvoice;
+  }
   async CreateCommonLink(
     input: CreateCommonLinkInput,
     condition?: ModelCommonLinkConditionInput
@@ -7903,6 +7941,7 @@ async GetSubscriptionPlansForOrgs(
           businessAddress
           businessWebsite
           invoiceType
+          s3Url
           createdAt
           updatedAt
         }
@@ -7942,6 +7981,7 @@ async GetSubscriptionPlansForOrgs(
           businessAddress
           businessWebsite
           invoiceType
+          s3Url
           createdAt
           updatedAt
         }
@@ -7981,6 +8021,7 @@ async GetSubscriptionPlansForOrgs(
           businessAddress
           businessWebsite
           invoiceType
+          s3Url
           createdAt
           updatedAt
         }
@@ -9173,7 +9214,11 @@ async GetSubscriptionPlansForOrgs(
     nextToken?: string
   ): Promise<ListOrganizationMembershipsQuery> {
     const statement = `query ListOrganizationMemberships($filter: ModelOrganizationMembershipFilterInput, $limit: Int, $nextToken: String) {
-        listOrganizationMemberships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+        listOrganizationMemberships(
+          filter: $filter
+          limit: $limit
+          nextToken: $nextToken
+        ) {
           __typename
           items {
             __typename
@@ -9413,6 +9458,7 @@ async GetSubscriptionPlansForOrgs(
           businessAddress
           businessWebsite
           invoiceType
+          s3Url
           createdAt
           updatedAt
         }
@@ -9452,6 +9498,7 @@ async GetSubscriptionPlansForOrgs(
             businessAddress
             businessWebsite
             invoiceType
+            s3Url
             createdAt
             updatedAt
           }
@@ -10727,6 +10774,7 @@ async ListCardsPacksForPreview(
           businessAddress
           businessWebsite
           invoiceType
+          s3Url
           createdAt
           updatedAt
         }
@@ -10760,6 +10808,7 @@ async ListCardsPacksForPreview(
           businessAddress
           businessWebsite
           invoiceType
+          s3Url
           createdAt
           updatedAt
         }
@@ -10793,6 +10842,7 @@ async ListCardsPacksForPreview(
           businessAddress
           businessWebsite
           invoiceType
+          s3Url
           createdAt
           updatedAt
         }
