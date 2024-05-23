@@ -88,28 +88,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "CreateInvoice": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "receiptsAPI"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "GetAffiliateData": {
       "build": true,
       "dependsOn": [
@@ -164,35 +142,6 @@
           "resourceName": "cardspacks"
         }
       ]
-    },
-    "InvoiceHandler": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "receiptsAPI"
-        },
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "Invoices"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     },
     "NewAffiliateHandler": {
       "build": true,
@@ -350,30 +299,6 @@
         {
           "category": "function",
           "resourceName": "CreateCommonLink"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_receiptsUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
         }
       ]
     },
@@ -566,38 +491,6 @@
         {
           "category": "function",
           "resourceName": "IncrementPackEntries"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_receiptsUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
         }
       ]
     },

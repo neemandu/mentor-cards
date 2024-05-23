@@ -1,10 +1,25 @@
 export type AmplifyDependentResourcesAttributes = {
+  "api": {
+    "PayPalWebhookAPI": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
+    "cardspacks": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string"
+    },
+    "receiptsAPI": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    }
+  },
   "auth": {
     "mentorcards56dbf153": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "CreatedSNSRole": "string",
-      "GoogleWebClient": "string",
       "HostedUIDomain": "string",
       "OAuthMetadata": "string",
       "UserPoolArn": "string",
@@ -13,7 +28,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "AddUserToEmailList": {
+    "AddCardsPack": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -21,6 +36,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "AddCouponCode": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "AddUserToEmailList": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -49,13 +71,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "CreateCommonLink": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "CreateInvoice": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -140,13 +155,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "IncrementPackEntries": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "InvoiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
