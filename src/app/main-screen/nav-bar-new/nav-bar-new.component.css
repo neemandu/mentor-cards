@@ -1,0 +1,14 @@
+
+.underline-on-hover{
+    text-decoration: none;
+    background-image: linear-gradient(90deg, #E67C73, #7986CB);
+    background-repeat: no-repeat;
+    background-size: 100% 30px;
+    background-position: 0% 100%;
+    border-radius: 10px;
+    height: 5px;
+}
+
+.no-underline-on-hover{
+    height: 5px;
+}

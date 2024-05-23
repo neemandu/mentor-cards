@@ -233,14 +233,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_mentorcards56dbf153_googleClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "mentorcards56dbf153"
-        }
-      ]
-    },
     "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
       "usedBy": [
         {

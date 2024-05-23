@@ -38,12 +38,13 @@ import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/af
 import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
 import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
 import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-pop-up/print-pop-up.component';
+import { HomePageNewComponent } from './Pages/home-page-new/home-page-new.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
   {
     path: 'home-page',
-    component: HomePageComponent,
+    component: HomePageNewComponent,
   },
   {
     path: 'no-program-page',
