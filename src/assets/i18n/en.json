@@ -23,7 +23,8 @@
       "header": "",
       "sub-header": "When words run out, the cards come in",
       "sub-header-2": "Find the card set that suits you",
-      "search-placeholder": "Search by meeting topic, creator of the kit, purpose of the activity and more..."
+      "search-placeholder": "Search by meeting topic, creator of the kit, purpose of the activity and more...",
+      "new-search-placeholder": "What is the topic of your meeting? Look for a kit"
     },
     "about-us": {
       "title": "Mentor-Cards About Us Page",

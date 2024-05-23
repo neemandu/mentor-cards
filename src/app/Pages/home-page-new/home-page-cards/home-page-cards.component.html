@@ -1,0 +1,18 @@
+<div class="flex items-center justify-center bg-white rounded-3xl mx-10 flex-col">
+    <div class="flex items-center my-4">
+        <mat-form-field>
+            <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
+            <input matInput type="text" autocomplete="off" style="color: aquamarine;" />
+        </mat-form-field>
+        <img src="/assets/New/home-page/search-icon.svg" alt="user image" class="h-5 ms-2" />
+    </div>
+    <div class="grid grid-cols-4 gap-4 mb-20">
+        <div *ngFor="let item of cardsList; let isLast=last" class="col-span-1">
+            <div
+                [ngClass]="{'bg-[#e67c73] flex justify-center items-center w-48 h-40 flex-col card': true, 'last-card': isLast}">
+                <img [src]="item.image" alt="user image" />
+                <div class="font-bold text-lg">{{item.content}}</div>
+            </div>
+        </div>
+    </div>
+</div>
