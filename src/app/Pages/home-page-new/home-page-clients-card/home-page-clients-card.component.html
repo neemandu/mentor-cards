@@ -1,13 +1,13 @@
-<div class="grid grid-cols-3 bg-[#3d3a3b] rounded-3xl mx-10 mt-12">
+<div class="sm:grid sm:grid-cols-3 bg-[#3d3a3b] rounded-3xl mx-2-sm-mx-10 mt-12">
 
     <div class="col-span-1 flex justify-center items-center">
-        <div class="grid grid-cols-5 w-full mx-10 gap-4">
+        <div class="grid sm:grid-cols-5 grid-cols-3 w-full mx-10 gap-4">
             <div class="col-span-1  mt-8 mb-12">
                 <div *ngFor="let item of clientList | slice:0:5" class="mt-8">
                     <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
                 </div>
             </div>
-            <div class="col-span-1   mb-12">
+            <div class="col-span-1  mb-12">
                 <div *ngFor="let item of clientList | slice:5:10" class="mt-8">
                     <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
                 </div>
@@ -17,12 +17,12 @@
                     <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
                 </div>
             </div>
-            <div class="col-span-1   mb-12">
+            <div class="col-span-1   mb-12 hidden sm:block">
                 <div *ngFor="let item of clientList | slice:15:20" class="mt-8">
                     <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
                 </div>
             </div>
-            <div class="col-span-1  mt-8 mb-12">
+            <div class="col-span-1  mt-8 mb-12 hidden sm:block">
                 <div *ngFor="let item of clientList | slice:20:25" class="mt-8">
                     <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
                 </div>
@@ -32,12 +32,12 @@
 
     <div class="col-span-1 flex justify-center items-center">
         <div class="w-full">
-            <div class=" text-white text-4xl font-bold mt-24 text-center">
+            <div class=" text-white sm:text-4xl text-2xl font-bold sm:mt-24 mt-8 text-center">
                 יותר שותפים, יותר קלפים, <br>
                 יותר לקוחות, יותר הצלחות
             </div>
 
-            <div class=" text-white  w-[35vw] mt-8 text-center">
+            <div class=" text-white  sm:w-[35vw] mt-8 text-center">
                 מנטור- קארדס היא הרבה מעבר לפלטפורמת שימוש קלה, רעיונות והשראה לערכות קלפים דיגיטליים. כאן הבמה והמקום
                 להכניס גם
                 אתכם ואת הערכות שלכם לתמונה. <br>
