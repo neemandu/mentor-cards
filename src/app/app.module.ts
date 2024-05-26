@@ -93,6 +93,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
+// import {DataTablesModule} from 'angular-datatables';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -158,6 +159,20 @@ import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EditDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/edit-dialog-withdraws/edit-dialog-withdraws.component';
 import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-pop-up/print-pop-up.component';
+import { HomePageNewComponent } from './Pages/home-page-new/home-page-new.component';
+import { NavBarNewComponent } from './main-screen/nav-bar-new/nav-bar-new.component';
+import { HomePageHeroComponent } from './Pages/home-page-new/home-page-hero/home-page-hero.component';
+import { HomePageSubHeroComponent } from './Pages/home-page-new/home-page-sub-hero/home-page-sub-hero.component';
+import { HomePageCardsComponent } from './Pages/home-page-new/home-page-cards/home-page-cards.component';
+import { HomePageTryThisComponent } from './Pages/home-page-new/home-page-try-this/home-page-try-this.component';
+import { HomePageHowToUseComponent } from './Pages/home-page-new/home-page-how-to-use/home-page-how-to-use.component';
+import { HomePageAdvantageComponent } from './Pages/home-page-new/home-page-advantage/home-page-advantage.component';
+import { HomePageClientsComponent } from './Pages/home-page-new/home-page-clients/home-page-clients.component';
+import { HomePageClientsCardComponent } from './Pages/home-page-new/home-page-clients-card/home-page-clients-card.component';
+import { HomePagePartnersComponent } from './Pages/home-page-new/home-page-partners/home-page-partners.component';
+import { HomePageUpdatesComponent } from './Pages/home-page-new/home-page-updates/home-page-updates.component';
+import { HomePageContactUsComponent } from './Pages/home-page-new/home-page-contact-us/home-page-contact-us.component';
+import { HomePageFooterComponent } from './Pages/home-page-new/home-page-footer/home-page-footer.component';
 
 @NgModule({
   declarations: [
@@ -222,6 +237,20 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
     addDialogWithdrawsComponent,
     EditDialogWithdrawsComponent,
     PrintPopUpComponent,
+    HomePageNewComponent,
+    NavBarNewComponent,
+    HomePageHeroComponent,
+    HomePageSubHeroComponent,
+    HomePageCardsComponent,
+    HomePageTryThisComponent,
+    HomePageHowToUseComponent,
+    HomePageAdvantageComponent,
+    HomePageClientsComponent,
+    HomePageClientsCardComponent,
+    HomePagePartnersComponent,
+    HomePageUpdatesComponent,
+    HomePageContactUsComponent,
+    HomePageFooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -235,6 +264,7 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
     PortalModule,
     ManagementModule,
     I18nModule,
+    // DataTablesModule,
     //Material
     MatButtonModule,
     MatIconModule,
