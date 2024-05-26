@@ -1,7 +1,7 @@
 <section class=" flex justify-evenly  sm:justify-between items-center mt-2 sm:mt-0">
     <div class="flex h-10">
         <div dir="rtl" class=" flex items-center justify-between ms-4">
-            <button class="xl:hidden block" [matMenuTriggerFor]="allButtons">
+            <button class="sm:hidden block" [matMenuTriggerFor]="allButtons">
                 <mat-icon>menu</mat-icon>
             </button>
             <button *ngIf="!loggedIn" class="hidden sm:flex items-center" (click)="signInSignUp()">
