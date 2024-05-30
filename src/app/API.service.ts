@@ -991,6 +991,7 @@ export type CreateContactUsModelInput = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
 };
 
 export type ModelCommonLinkFilterInput = {

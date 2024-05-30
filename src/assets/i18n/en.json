@@ -266,6 +266,7 @@
           "email-placeholder": "For example, name@example.com",
           "email-error-valid": "Please enter a valid email",
           "email-error-required": "Email is required",
+          "phone-error-required": "Phone number is required",
           "content-label": "Content",
           "content-error-required": "Content is required",
           "submit-button": "Submit"
@@ -1048,14 +1049,8 @@
           "component": "app-home-page-hero",
           "content": {
             "title": "When words run out, the cards come in",
-            "buttons": [
-              {
-                "text": "Enter the card sets"
-              },
-              {
-                "text": "I want a subscription"
-              }
-            ]
+            "button-1-text": "Enter the card sets",
+            "button-2-text": "I want a subscription"
           }
         },
         "sub-hero": {
@@ -1075,18 +1070,42 @@
             "search-placeholder": "What is the topic of your meeting? Look for a kit",
             "cardsList": [
               {
-                "content": "Card Set 1"
+                  "content": "Acquaintance and Connection"
               },
               {
-                "content": "Card Set 2"
+                  "content": "Relationship Systems"
               },
               {
-                "content": "Card Set 3"
+                  "content": "Children and Youth"
               },
               {
-                "content": "Card Set 4"
+                  "content": "Connection to Myself"
+              },
+              {
+                  "content": "Leadership"
+              },
+              {
+                  "content": "Vision and Goals"
+              },
+              {
+                  "content": "Empowerment"
+              },
+              {
+                  "content": "Holidays"
+              },
+              {
+                  "content": "Career"
+              },
+              {
+                  "content": "Emotions"
+              },
+              {
+                  "content": "Crises"
+              },
+              {
+                  "content": "For All Values"
               }
-            ]
+          ]
           }
         },
         "try-this": {

@@ -33,6 +33,7 @@
     "aws-sdk": "^2.1599.0",
     "buttercms": "^1.2.12",
     "chrome-aws-lambda": "^10.1.0",
+    "countup.js": "^2.8.0",
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",
     "graphql": "^0.11.7",

@@ -266,6 +266,7 @@
           "email-placeholder": "לדוגמא name@example.com",
           "email-error-valid": "יש להזין מייל תקין",
           "email-error-required": "חובה להזין מייל",
+          "phone-error-required": "חובה להזין מספר טלפון",
           "content-label": "תוכן",
           "content-error-required": "חובה להזין תוכן",
           "submit-button": "שלח"
@@ -273,7 +274,7 @@
         "emails": {
           "title": "המיילים שלנו"
         }
-      }
+    }
     },
     "group-management": {
       "group-details-title": "פרטי קבוצה",
@@ -1072,14 +1073,8 @@
           "component": "app-home-page-hero",
           "content": {
             "title": "כשנגמרות המילים נכנסים הקלפים",
-            "buttons": [
-              {
-                "text": "כניסה לערכות הקלפים"
-              },
-              {
-                "text": "אני רוצה מנוי"
-              }
-            ]
+            "button-1-text": "כניסה לערכות הקלפים",
+            "button-2-text": "אני רוצה מנוי"
           }
         },
         "sub-hero": {
@@ -1099,18 +1094,42 @@
             "search-placeholder": "What is the topic of your meeting? Look for a kit",
             "cardsList": [
               {
-                "content": "Card Set 1"
+                  "content": "הכרות וחיבור"
               },
               {
-                "content": "Card Set 2"
+                  "content": "מערכות יחסים"
               },
               {
-                "content": "Card Set 3"
+                  "content": "ילדים ונוער"
               },
               {
-                "content": "Card Set 4"
+                  "content": "חיבור לעצמי"
+              },
+              {
+                  "content": "מנהיגות"
+              },
+              {
+                  "content": "חזון ומטרות"
+              },
+              {
+                  "content": "העצמה"
+              },
+              {
+                  "content": "חגים"
+              },
+              {
+                  "content": "קריירה"
+              },
+              {
+                  "content": "רגשות"
+              },
+              {
+                  "content": "משברים"
+              },
+              {
+                  "content": "לכל הערכות"
               }
-            ]
+          ]
           }
         },
         "try-this": {
@@ -1193,8 +1212,16 @@
             "description5": "רק להתחבר לנייד, למחשב או לטאבלט מכל מקום בארץ או בעולם ולהנות מחוויית משתמש ידידותית וקלה שכבר כן הכרתם! פשוט",
             "description6": "אולי עדין לא בקלפים...",
             "statistics": [
-              { "value": "+40", "label1": "ערכות", "label2": "קלפים" },
-              { "value": "+5700", "label1": "משתמשים", "label2": "באתר" },
+              {
+                "value": "+40",
+                "label1": "ערכות",
+                "label2": "קלפים"
+              },
+              {
+                "value": "+5700",
+                "label1": "משתמשים",
+                "label2": "באתר"
+              },
               {
                 "value": "+300",
                 "label1": "רעיונות",
@@ -1266,42 +1293,86 @@
             "contact": "support@mentor-cards.com",
             "follow-us": "עקבו אחרי הקהילה שלנו לטיפים",
             "social-icons": [
-              { "alt": "tik-tok image" },
-              { "alt": "fb image" },
-              { "alt": "insta image" },
-              { "alt": "you-tube image" }
+              {
+                "alt": "tik-tok image"
+              },
+              {
+                "alt": "fb image"
+              },
+              {
+                "alt": "insta image"
+              },
+              {
+                "alt": "you-tube image"
+              }
             ],
             "links": [
               {
                 "category": "main-links",
                 "items": [
-                  { "text": "ערכות הקלפים" },
-                  { "text": "קורסים דיגיטליים" },
-                  { "text": "התוכניות שלנו" },
-                  { "text": "שאלות נפוצות" }
+                  {
+                    "text": "ערכות הקלפים"
+                  },
+                  {
+                    "text": "קורסים דיגיטליים"
+                  },
+                  {
+                    "text": "התוכניות שלנו"
+                  },
+                  {
+                    "text": "שאלות נפוצות"
+                  }
                 ]
               },
               {
                 "category": "extra-links",
                 "items": [
-                  { "text": "שירותים" },
-                  { "text": "אודות" },
-                  { "text": "תוכנית שותפים" },
-                  { "text": "הצהרת נגישות" }
+                  {
+                    "text": "שירותים"
+                  },
+                  {
+                    "text": "אודות"
+                  },
+                  {
+                    "text": "תוכנית שותפים"
+                  },
+                  {
+                    "text": "הצהרת נגישות"
+                  }
                 ]
               }
             ],
             "mobile-links": [
-              { "text": "תקנון האתר" },
-              { "text": "ערכות הקלפים" },
-              { "text": "קורסים דיגיטליים" },
-              { "text": "התוכניות שלנו" },
-              { "text": "שאלות נפוצות" },
-              { "text": "שירותים" },
-              { "text": "אודות" },
-              { "text": "תוכנית שותפים" },
-              { "text": "הצהרת נגישות" },
-              { "text": "צור קשר" }
+              {
+                "text": "תקנון האתר"
+              },
+              {
+                "text": "ערכות הקלפים"
+              },
+              {
+                "text": "קורסים דיגיטליים"
+              },
+              {
+                "text": "התוכניות שלנו"
+              },
+              {
+                "text": "שאלות נפוצות"
+              },
+              {
+                "text": "שירותים"
+              },
+              {
+                "text": "אודות"
+              },
+              {
+                "text": "תוכנית שותפים"
+              },
+              {
+                "text": "הצהרת נגישות"
+              },
+              {
+                "text": "צור קשר"
+              }
             ],
             "copyright": "© 2024 Mentor-Cards. All rights reserved."
           }

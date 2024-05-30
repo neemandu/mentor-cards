@@ -18,13 +18,14 @@
                 <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
                 <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
                     (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
-                    <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options" id="autocomplete-options">
-                        <mat-option *ngFor="let option of filteredOptions; let i = index"
-                        (keydown)="handleKeyDown($event)" #autocompleteOptions (click)="selectOption(option)">
-                          {{ option }}
-                        </mat-option>
-                      </div>
-                </mat-form-field>
+                <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options"
+                    id="autocomplete-options">
+                    <mat-option *ngFor="let option of filteredOptions; let i = index" (keydown)="handleKeyDown($event)"
+                        #autocompleteOptions (click)="selectOption(option)">
+                        {{ option }}
+                    </mat-option>
+                </div>
+            </mat-form-field>
             <img src="/assets/New/nav-bar/search.svg" alt="user image" class="h-5 ms-2" />
         </div>
     </div>
@@ -43,9 +44,9 @@
                     &nbsp;
                 </div>
             </button>
-            <button *ngIf="item.name != 'pages.nav.navbar.digital-courses'" [routerLink]="item.route"
-                routerLinkActive="active" class="text-black hover:cursor-pointer mx-2" (mouseenter)="hover(item)"
-                (mouseleave)="leave(item)" (touchstart)="hover(item)" (touchend)="leave(item)">
+            <button *ngIf="item.name != 'pages.nav.navbar.digital-courses'" class="text-black hover:cursor-pointer mx-2"
+                (click)="navigateTo(item.route)" (mouseenter)="hover(item)" (mouseleave)="leave(item)"
+                (touchstart)="hover(item)" (touchend)="leave(item)">
                 <div style="font-weight: 700; font-size: 13px;">
                     {{item.name | translate}}
                 </div>
@@ -59,8 +60,11 @@
         </div>
         <button id="admin-drop-down" *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
             [matMenuTriggerFor]="managementMenu">
-            {{ "pages.nav.navbar.admin" | translate }}
-            <mat-icon>arrow_drop_down</mat-icon>
+            <div style="font-weight: 700; font-size: 13px; " >
+                {{ "pages.nav.navbar.admin" | translate }}
+
+                <mat-icon>arrow_drop_down</mat-icon>
+            </div>
         </button>
     </div>
     <div class="lg:me-40" matRipple [matRippleColor]="matRippleColor" (click)="navigate('/home-page')">
@@ -89,13 +93,12 @@
     <button *ngIf="!loggedIn" class=" flex items-center" (click)="signInSignUp()">
         <img src="/assets/New/nav-bar/user.svg" alt="user image" /> <span class="text-[#e67c73] ms-2"> כניסה </span>
     </button>
-    <button id="user-drop-down" *ngIf="loggedIn" class="btn navbar-btn" [matMenuTriggerFor]="userMenu">
+    <button id="user-drop-down" *ngIf="loggedIn" class="btn navbar-btn"  mat-menu-item  [matMenuTriggerFor]="userMenu">
         <mat-icon id="account_circle">account_circle</mat-icon>
-        <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <div class="align-middle items-center">
         <div *ngFor="let item of navBarItems" class="flex items-center align-middle">
-            <button [routerLink]="item.route" routerLinkActive="active" class="text-black hover:cursor-pointer mx-2"
+            <button [routerLink]="item.route" routerLinkActive="active" class="text-black hover:cursor-pointer mx-2 mt-2"
                 (mouseenter)="hover(item)" (mouseleave)="leave(item)" (touchstart)="hover(item)"
                 (touchend)="leave(item)">
                 <div style="font-weight: 700; font-size: 13px;">
@@ -113,11 +116,15 @@
 
     <button mat-menu-item *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
         [matMenuTriggerFor]="managementMenu">
-        {{ "pages.nav.navbar.admin" | translate }}
+        <div style="font-weight: 700; font-size: 13px;">
+            {{ "pages.nav.navbar.admin" | translate }}
+        </div>
     </button>
     <mat-divider *ngIf="loggedIn"></mat-divider>
     <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">
-        {{ "pages.nav.navbar.coupon-codes" | translate }}
+        <div style="font-weight: 700; font-size: 13px;">
+            {{ "pages.nav.navbar.coupon-codes" | translate }}
+        </div>
     </button>
 </mat-menu>
 

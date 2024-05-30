@@ -23,6 +23,7 @@ export class HomePageNewComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('home page ngOnInit!');
+    this.route.fragment.subscribe(fragment => { this.scrollTo(fragment); });
     this.route.queryParams.subscribe(params => {
         const refId = params['ref'];
         console.log('refId:', refId);
@@ -42,4 +43,9 @@ export class HomePageNewComponent implements OnInit {
     this.userData = this.userAuthService.userData;
   }
 
+  scrollTo(id) {
+    const element = document.querySelector("#" + id);
+    if (element) element.scrollIntoView();
+  }
+  
 }

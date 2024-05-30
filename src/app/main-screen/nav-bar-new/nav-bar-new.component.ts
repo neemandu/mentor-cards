@@ -34,7 +34,7 @@ export class NavBarNewComponent implements OnInit {
     { name: 'pages.nav.navbar.additional-services', route: '/services', placeholder: 'Additional Services' },
     { name: 'pages.nav.navbar.about-us', route: '/about-page', placeholder: 'About Us' },
     { name: 'pages.nav.navbar.affiliates', route: '/affiliates-page', placeholder: 'Affiliates' },
-    { name: 'pages.nav.navbar.contact-us', route: '/contact-us', placeholder: 'Contact Us' },
+    { name: 'pages.nav.navbar.contact-us', route: '/home-page#contact-us-section', placeholder: 'Contact Us' },
   ].map(item => ({ ...item, hovering: false }));
 
   // @ViewChild('videoPlayer') videoplayer: ElementRef;
@@ -197,10 +197,10 @@ export class NavBarNewComponent implements OnInit {
   }
 
 
-  // openNewTab(): void {
-  //   const url = 'https://mentor-cards.vp4.me/my-courses';
-  //   window.open(url, '_blank');
-  // }
+  openNewTab(): void {
+    const url = 'https://mentor-cards.vp4.me/my-courses';
+    window.open(url, '_blank');
+  }
 
   initializeFilteredOptions() {
     // Extract names
@@ -517,5 +517,7 @@ export class NavBarNewComponent implements OnInit {
   public navigate(path: string): void {
     this.ngZone.run(() => this.routNavigate.navigate([path]));
   }
-
+  navigateTo(route: string) {
+    this.router.navigateByUrl(route);
+}
 }

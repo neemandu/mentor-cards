@@ -132,7 +132,7 @@ const routes: Routes = [
     component: ReceiptsManagementComponent,
     canActivate: [AuthGuardSiteContentManagementService],
   },
-  { path: '**', redirectTo: '/all-packs-page' },
+  // { path: '**', redirectTo: '/all-packs-page' },
 ];
 
 @NgModule({

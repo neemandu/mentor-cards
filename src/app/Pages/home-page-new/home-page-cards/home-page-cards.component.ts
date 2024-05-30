@@ -82,7 +82,8 @@ export class HomePageCardsComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService,
     public routNavigate: Router,
     private userAuthService: UserAuthService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private router: Router
 
   ) { }
 
@@ -165,6 +166,9 @@ export class HomePageCardsComponent implements OnInit {
     }
   }
 
+  handleClick(){
+   this.showCategoryLine = !this.showCategoryLine;
+  }
   // ngOnInit() {
   //   this.router.queryParams.subscribe((params) => {
   //     const refId = params['ref'];
@@ -208,15 +212,7 @@ export class HomePageCardsComponent implements OnInit {
   //   console.log('allpacks page sub 2');
   //   console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
   //   if (!this.userData || this.userData.status === 'NOPLAN') {
-  //     if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
-  //       localStorage.setItem('isTrialPacksDialogOpen', 'true');
-  //       console.log(localStorage.getItem('isTrialPacksDialogOpen'),'after set isTrialPacksDialogOpen href');
-  //       this.openDialog();
-  //     }
-  //   }
-  //   //this.getAllPacks();
-  // }
-
+  //   
   filterOptions() {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
 
@@ -432,5 +428,10 @@ export class HomePageCardsComponent implements OnInit {
   public navigate(path: string): void {
     this.ngZone.run(() => this.routNavigate.navigate([path]));
   }
+
+  navigateTo(route: string) {
+    this.router.navigateByUrl(route);
+  }
+
 
 }

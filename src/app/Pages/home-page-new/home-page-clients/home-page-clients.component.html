@@ -1,36 +1,47 @@
 <div class="sm:mt-32 mt-8 flex flex-col justify-center items-center">
-    <div class=" sm:text-4xl text-2xl text-center font-bold">
-        כל כך הרבה ערכות, <br>
-        כל כך מעט זמן
+    <div class="sm:text-4xl text-2xl text-center font-bold">
+        {{ 'pages.home-page.sections.clients.content.title1' | translate }}<br>
+        {{ 'pages.home-page.sections.clients.content.title2' | translate }}
     </div>
 
-    <div class=" justify-center text-center mt-8 sm:w-[35vw] w-full font-bold">
-        את האוכל שלנו רובנו מזמינים דרך אפליקציה, את הספרים קוראים בדיגיטל. זה היה רק ענין של זמן עד שקלפי טיפול
-        השלכתיים יצטרפו לאופן שבו אנחנו אוהבים לצרוך את המוצרים שלנו, ויעלו לאון ליין. <br>
-        מנטור-קארדס הוא גן עדן דיגיטלי עבורכם - אינספור ערכות קלפים, הדרכות והשראה במגוון עדכני שמתאים לכל אחד מהלקוחות
-        או המטרות שלכם. <br>
-        רק להתחבר לנייד, למחשב או לטאבלט מכל מקום בארץ או בעולם ולהנות מחוויית משתמש ידידותית וקלה שכבר כן הכרתם! פשוט
-        אולי עדין לא בקלפים...
+    <div class="justify-center text-center mt-8 sm:w-[35vw] w-full font-bold">
+        {{ 'pages.home-page.sections.clients.content.description1' | translate }}<br>
+        {{ 'pages.home-page.sections.clients.content.description2' | translate }}<br>
+        {{ 'pages.home-page.sections.clients.content.description3' | translate }}<br>
+        {{ 'pages.home-page.sections.clients.content.description4' | translate }}<br>
+        {{ 'pages.home-page.sections.clients.content.description5' | translate }}<br>
+        {{ 'pages.home-page.sections.clients.content.description6' | translate }}
     </div>
 
-    <div class="flex justify-center gap-8 mt-10 sm:flex-row flex-col">
-        <div class="text-center">
-            <div class="text-6xl font-bold gradient-text">+40</div>
-            <div class="text-lg font-extrabold">ערכות <br>
-                קלפים</div>
+    <div class="flex justify-center gap-8 mt-10 sm:flex-row flex-col" #countUpSection>
+        <div class="text-center w-60">
+            <div id="countUp1" class="text-6xl font-bold gradient-text">
+                +40
+            </div>
+            <div class="text-lg font-extrabold">
+                {{ 'pages.home-page.sections.clients.content.statistics.0.label1' | translate }}<br>
+                {{ 'pages.home-page.sections.clients.content.statistics.0.label2' | translate }}
+            </div>
         </div>
 
-        <div class="text-center">
-            <div class="text-6xl font-bold gradient-text">+5700</div>
-            <div class="text-lg font-extrabold">משתמשים <br>
-                באתר</div>
+        <div class="text-center w-60">
+            <div id="countUp2" class="text-6xl font-bold gradient-text">
+                +5700
+            </div>
+            <div class="text-lg font-extrabold">
+                {{ 'pages.home-page.sections.clients.content.statistics.1.label1' | translate }}<br>
+                {{ 'pages.home-page.sections.clients.content.statistics.1.label2' | translate }}
+            </div>
         </div>
 
-        <div class="text-center">
-            <div class="text-6xl font-bold gradient-text">+300</div>
-            <div class="text-lg font-extrabold">רעיונות <br>
-                לשימוש בקלפים</div>
+        <div class="text-center w-60">
+            <div id="countUp3" class="text-6xl font-bold gradient-text">
+                +300
+            </div>
+            <div class="text-lg font-extrabold">
+                {{ 'pages.home-page.sections.clients.content.statistics.2.label1' | translate }}<br>
+                {{ 'pages.home-page.sections.clients.content.statistics.2.label2' | translate }}
+            </div>
         </div>
     </div>
-
 </div>
