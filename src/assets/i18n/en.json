@@ -1040,6 +1040,245 @@
         }
       },
       "footer": "So what do you say, shall we be partners?"
+    },
+    "home-page": {
+      "bg-color": "#fcf4f2",
+      "sections": {
+        "hero": {
+          "component": "app-home-page-hero",
+          "content": {
+            "title": "When words run out, the cards come in",
+            "buttons": [
+              {
+                "text": "Enter the card sets"
+              },
+              {
+                "text": "I want a subscription"
+              }
+            ]
+          }
+        },
+        "sub-hero": {
+          "component": "app-home-page-sub-hero",
+          "content": {
+            "title1": "Mentor-Cards",
+            "title2": "A home for digital card sets",
+            "description1": "Welcome to the right era, the space where projective work cards are digital.",
+            "description2": "At Mentor-Cards you will find digital card sets on any subject and for any need, as well as guidebooks, activation ideas, and inspiring guiding questions. All this is divided by categories and goals: group meetings, personal meetings, process work, with groups and more.",
+            "description3": "If you belong to the professions of therapy, guidance, coaching, management, educators, lecturers, or simply people who love working with people – Mentor-Cards is your winning card."
+          }
+        },
+        "cards": {
+          "component": "app-home-page-cards",
+          "content": {
+            "title": "All Card Packs",
+            "search-placeholder": "What is the topic of your meeting? Look for a kit",
+            "cardsList": [
+              {
+                "content": "Card Set 1"
+              },
+              {
+                "content": "Card Set 2"
+              },
+              {
+                "content": "Card Set 3"
+              },
+              {
+                "content": "Card Set 4"
+              }
+            ]
+          }
+        },
+        "try-this": {
+          "content": {
+            "title1": "Mentor-Cards -",
+            "title2": "This platform is your ace!",
+            "description1": "Mentor-Cards are much more than projective card sets.",
+            "description2": "In addition to full access to a huge database of constantly updated sets, you can enjoy a huge variety of guidebooks on various topics, activation ideas, and inspiring guiding questions. All this is divided by categories and goals: group meetings, personal meetings, process work, with groups and more.",
+            "description3": "From word cards to picture cards, from message cards to question cards, from opening cards to subconscious bypass cards – we have a set for every method!",
+            "description4": "Try it, you might fall in love",
+            "description5": "Two card sets are available for you to try, without a subscription and without commitment, offered with love.",
+            "description6": "Feel free to experience, try and discover how Mentor-Cards is everything you were looking for.",
+            "button": {
+              "text": "Try the sets for free"
+            }
+          }
+        },
+        "how-to-use": {
+          "component": "app-home-page-how-to-use",
+          "content": {
+            "title": "How to use Mentor Cards?",
+            "follow-us": {
+              "text": "Want to get more tips and ideas? Follow us",
+              "social-icons": [
+                {
+                  "alt": "tik-tok image"
+                },
+                {
+                  "alt": "fb image"
+                },
+                {
+                  "alt": "insta image"
+                },
+                {
+                  "alt": "you-tube image"
+                },
+                {
+                  "alt": "whats-app image"
+                }
+              ]
+            }
+          }
+        },
+        "advantage": {
+          "content": {
+            "title1": "Sorry,",
+            "title2": "what's all the buzz",
+            "title3": "around projective cards?",
+            "description1": "If you are not yet addicted or familiar enough with all the goodness of working with projective cards, let's reveal some advantages",
+            "description2": "for you",
+            "description3": "or for your patients and clients:",
+            "advantages": [
+              {
+                "title1": "Cards peel and open",
+                "title2": "the subconscious",
+                "description1": "Our thinking brain is full of fears, limiting beliefs, and inhibitions. Cards are a projective tool that allows us to connect to the true desire that",
+                "description2": "is often well hidden in the depths of the subconscious. In other words – processes are shortened and discoveries are surprising."
+              },
+              {
+                "title1": "Mirror, mirror",
+                "title2": "on the wall",
+                "description": "Cards are much more than cards, they create an opportunity for indirect dialogue in sensitive places where it hurts too much to approach. A possible and gentle way for healing and recovery dialogue, an opportunity for significant closeness between the person and themselves."
+              },
+              {
+                "title1": "If you work with cards",
+                "title2": "you reach wonderful places",
+                "description": "Working with cards opens the heart and mind. Using cards makes every meeting unforgettable, dynamic, and interactive. The fun way to increase involvement in the process and success."
+              }
+            ]
+          }
+        },
+        "clients": {
+          "content": {
+            "title1": "So many sets,",
+            "title2": "so little time",
+            "description1": "Most of us order our food through an app, read books digitally. It was only a matter of time before therapeutic",
+            "description2": "projective cards would join the way we like to consume our products and go online.",
+            "description3": "Mentor-Cards is a digital paradise for you - countless card sets, guides, and inspiration in an up-to-date variety that suits each of your clients",
+            "description4": "or your goals.",
+            "description5": "Just connect to a mobile, computer, or tablet from anywhere in the country or the world and enjoy a friendly and easy user experience that you already know! Just",
+            "description6": "maybe not yet with cards...",
+            "statistics": [
+              { "value": "+40", "label1": "sets", "label2": "cards" },
+              { "value": "+5700", "label1": "users", "label2": "on the site" },
+              { "value": "+300", "label1": "ideas", "label2": "for using cards" }
+            ]
+          }
+        },
+        "clients-card": {
+          "content": {
+            "title1": "More partners, more cards,",
+            "title2": "more clients, more successes",
+            "description1": "Mentor-Cards is much more than an easy-to-use platform, ideas, and inspiration for digital card sets. Here is the stage and place to also include you and your sets in the picture.",
+            "description2": "Earn commissions, expand the customer circle, enjoy tutorials, nurture a community, and much more.",
+            "description3": "Do you have sets that everyone must work with, know and see? Come be our partners.",
+            "button": {
+              "text": "Join the action"
+            }
+          }
+        },
+        "partners": {
+          "content": {
+            "title1": "Organizations and partners",
+            "description1": "The people behind",
+            "description2": "the cards",
+            "description3": "Hi, nice to meet you, Yarden Stampu and Dudi Neman, people who dream and mostly fulfill, partners in the way and the vision. Out of a desire to enable growth and development for thousands of therapists and coaches in Israel and around the world, we built a friendly and super intuitive platform for our users, where they can work with cards in front of their clients. All this in online meetings exactly in the same way they used to in face-to-face meetings, with guidebooks full of explanations and examples. With one significant difference – without carrying, without effort, without feeling like dinosaurs. 😊",
+            "description4": "And no less important, with a lot of room for our service and the desire to be your address for anything or any card.",
+            "button": {
+              "text": "Read more about us"
+            }
+          }
+        },
+        "updates": {
+          "content": {
+            "title": "News and updates",
+            "description1": "We are constantly innovating and improving and our system is constantly being updated,",
+            "description2": "you should see what's new with us.",
+            "updates": [
+              {
+                "date": "(20.02.2024)",
+                "description": "We have added a new feature for interactive joint work on the site! Click on the link inside the card set, send it to others on WhatsApp and they have free access to the card set on the site for a whole 3 hours! Try it, it's genius :)"
+              },
+              {
+                "date": "(04.03.2024)",
+                "description": "We have renewed the emoji set! Now waiting for you in the set are 80 different and familiar emoji cards. Works wonderfully with children and teenagers, and of course, with adults :)"
+              },
+              {
+                "date": "(04.03.2024)",
+                "description": "Ahead of the Purim holiday, we have opened access to the mask set for everyone! 👹🤠🤡"
+              }
+            ]
+          }
+        },
+        "contact-us": {
+          "content": {
+            "title": "Talk to us in cards",
+            "description": "We will be happy to serve you on any topic!",
+            "form": {
+              "name-label": "Name",
+              "phone-label": "Phone",
+              "email-label": "Email",
+              "message-label": "How can we help?",
+              "submit-button": "Send"
+            }
+          }
+        },
+        "footer": {
+          "content": {
+            "contact": "support@mentor-cards.com",
+            "follow-us": "Follow our community for tips",
+            "social-icons": [
+              { "alt": "tik-tok image" },
+              { "alt": "fb image" },
+              { "alt": "insta image" },
+              { "alt": "you-tube image" }
+            ],
+            "links": [
+              {
+                "category": "main-links",
+                "items": [
+                  { "text": "Card Sets" },
+                  { "text": "Digital Courses" },
+                  { "text": "Our Plans" },
+                  { "text": "FAQ" }
+                ]
+              },
+              {
+                "category": "extra-links",
+                "items": [
+                  { "text": "Services" },
+                  { "text": "About" },
+                  { "text": "Affiliate Program" },
+                  { "text": "Accessibility Statement" }
+                ]
+              }
+            ],
+            "mobile-links": [
+              { "text": "Site Policy" },
+              { "text": "Card Sets" },
+              { "text": "Digital Courses" },
+              { "text": "Our Plans" },
+              { "text": "FAQ" },
+              { "text": "Services" },
+              { "text": "About" },
+              { "text": "Affiliate Program" },
+              { "text": "Accessibility Statement" },
+              { "text": "Contact" }
+            ],
+            "copyright": "© 2024 Mentor-Cards. All rights reserved."
+          }
+        }
+      }
     }
   },
   "components": {

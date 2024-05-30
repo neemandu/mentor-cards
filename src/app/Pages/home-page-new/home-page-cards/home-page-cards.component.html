@@ -2,7 +2,14 @@
     <div class="flex items-center my-4">
         <mat-form-field>
             <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
-            <input matInput type="text" autocomplete="off" style="color: aquamarine;" />
+            <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
+                    (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
+                    <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options" id="autocomplete-options">
+                        <mat-option *ngFor="let option of filteredOptions; let i = index"
+                        (keydown)="handleKeyDown($event)" #autocompleteOptions (click)="selectOption(option)">
+                          {{ option }}
+                        </mat-option>
+                      </div>
         </mat-form-field>
         <img src="/assets/New/home-page/search-icon.svg" alt="user image" class="h-5 ms-2" />
     </div>
