@@ -1,12 +1,11 @@
 <div>
-    <div class=" text-black sm:text-4xl text-2xl font-bold mt-24 text-center">
-        ארגונים ושותפים
+    <div class="text-black sm:text-4xl text-2xl font-bold mt-24 text-center">
+        {{ 'pages.home-page.sections.partners.content.title1' | translate }}
     </div>
-    <div class=" flex justify-center sm:gap-8 gap-2  mt-8">
+    <div class="flex justify-center sm:gap-8 gap-2 mt-8">
         <img src="/assets/New/home-page/partners-1.png" alt="partners-1">
         <img src="/assets/New/home-page/partners-2.png" alt="partners-2">
         <img src="/assets/New/home-page/partners-3.png" alt="partners-3">
-
     </div>
 </div>
 
@@ -15,23 +14,18 @@
     </div>
     <div class="col-span-1 flex justify-center items-center">
         <div class="w-full">
-            <div class=" text-whblackite sm:text-4xl text-2xl font-bold sm:mt-24 mt-8 text-center">
-                האנשים מאחורי <br>
-                הקלפים
+            <div class="text-whblackite sm:text-4xl text-2xl font-bold sm:mt-24 mt-8 text-center">
+                {{ 'pages.home-page.sections.partners.content.description1' | translate }}<br>
+                {{ 'pages.home-page.sections.partners.content.description2' | translate }}
             </div>
-            <div class=" text-black font-bold sm:w-[35vw] w-full mt-8 text-center">
-                היי נעים מאד, ירדן סטמפו ודודי נאמן, אנשים שחולמים ובעיקר מגשימים, שותפים לדרך ולחזון. מתוך רצון לאפשר
-                התפתחות וגדילה לאלפי מטפלים ומאמנים בארץ ובעולם, בנינו
-                פלטפורמה ידידותית וסופר אינטואיטיבית למשתמשים שלנו, בה ניתן לעבוד עם קלפים מול הלקוחות שלהם. הכל בפגישות
-                אונליין בדיוק באותו האופן בו נהגו בפגישות פרונטליות, עם ספרי הדרכה מלאים בהסברים ודוגמאות. בהבדל משמעותי
-                אחד – בלי לסחוב, בלי להתאמץ, בלי להרגיש דינוזאורים.😊 <br>
-                ולא פחות חשוב, עם הרבה מקום לשרות שלנו והרצון להיות הכתובת שלכם לכל דבר או קלף.
+            <div class="text-black font-bold sm:w-[35vw] w-full mt-8 text-center">
+                {{ 'pages.home-page.sections.partners.content.description3' | translate }}<br>
+                {{ 'pages.home-page.sections.partners.content.description4' | translate }}
             </div>
             <div class="flex justify-center">
-
-                <button
-                    class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold client-button text-lg mt-8 mb-24 text-center">קראו
-                    עוד עלינו</button>
+                <button class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold client-button text-lg mt-8 mb-24 text-center" (click)="handleClick()">
+                    {{ 'pages.home-page.sections.partners.content.button.text' | translate }}
+                </button>
             </div>
         </div>
     </div>
