@@ -15,6 +15,7 @@ type Mutation {
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
   getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")  
   createInvoice(input: InvoicesInput!): Boolean @function(name: "CreateInvoice-${env}")  
+  askTheAI(input: AiInput!): AiAnswer @function(name: "AskTheAI-${env}")  
 }
 
 type CommonLink
@@ -77,6 +78,14 @@ type User
   myAffiliate: Affiliate @connection
   payments: [Payment]
   profession: String
+  AiConversations: [AiConversation]
+}
+
+type AiConversation{
+  question: String
+  answer: String
+  date: AWSDateTime
+  threadId: String
 }
 
 type Payment
@@ -277,6 +286,7 @@ type CardsPack
   language: String
   isActive: Boolean
   guidebookUrl: String
+  ownerName: String
 }
 
 type UserUsage {
@@ -362,6 +372,21 @@ input updatePaymentProgramInput {
   paymentProgramId: String!
   providerTransactionId: String
   fullName: String
+}
+
+input AiInput {
+  question: String
+}
+
+type AiAnswer {
+  generalAnswer: String
+  recommendedPacks: [RecommendedPack]
+}
+
+type RecommendedPack {
+  packId: Int
+  reason: String
+  guide: String
 }
 
 input InvoicesInput {

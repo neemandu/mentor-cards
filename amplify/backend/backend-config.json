@@ -74,6 +74,20 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "AskTheAI": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "CreateCommonLink": {
       "build": true,
       "dependsOn": [
@@ -233,14 +247,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_mentorcards56dbf153_googleClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "mentorcards56dbf153"
-        }
-      ]
-    },
     "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
       "usedBy": [
         {
@@ -358,30 +364,6 @@
         {
           "category": "function",
           "resourceName": "CreateCommonLink"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_receiptsUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
         }
       ]
     },
@@ -577,38 +559,6 @@
         }
       ]
     },
-    "AMPLIFY_function_InvoiceHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_receiptsUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
     "AMPLIFY_function_IsCardsPackOwnedByOrgForUser_deploymentBucketName": {
       "usedBy": [
         {
@@ -698,14 +648,6 @@
       ]
     },
     "AMPLIFY_function_PayPalWebhookFunc_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "PayPalWebhookFunc"
-        }
-      ]
-    },
-    "AMPLIFY_function_PayPalWebhookFunc_receiptsUrl": {
       "usedBy": [
         {
           "category": "function",

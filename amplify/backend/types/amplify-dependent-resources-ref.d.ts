@@ -8,11 +8,6 @@ export type AmplifyDependentResourcesAttributes = {
     "cardspacks": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string"
-    },
-    "receiptsAPI": {
-      "ApiId": "string",
-      "ApiName": "string",
-      "RootUrl": "string"
     }
   },
   "auth": {
@@ -20,7 +15,6 @@ export type AmplifyDependentResourcesAttributes = {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "CreatedSNSRole": "string",
-      "GoogleWebClient": "string",
       "HostedUIDomain": "string",
       "OAuthMetadata": "string",
       "UserPoolArn": "string",
@@ -57,6 +51,12 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "AskTheAI": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "ChangeCardsPack": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -72,13 +72,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "CreateCommonLink": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "CreateInvoice": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -163,13 +156,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "IncrementPackEntries": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "InvoiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
