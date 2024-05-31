@@ -443,7 +443,7 @@ li span {
 .card-view {
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 10px;
+  margin-top: 13px;
 }
 
 /* 'rotated-one-cards': selectedCards.length == 1 && card.rotation !== 0,
@@ -462,7 +462,13 @@ li span {
 }
 
 
-.one-cards-landscape,
+.one-cards-landscape {
+  width: 100%;
+  max-width: 80vw;
+  height: 100vw;
+  margin-top: 12vh;
+  margin-bottom: 12vh;
+}
 .two-cards-landscape {
   /* width: calc(100vw /3.2); */
   height: calc(100vw / 3.5);
@@ -491,6 +497,8 @@ li span {
 .two-cards-landscape,
 .rotated-two-cards-landscape {
   height: calc(100vw / 3.5);
+  width: 100%;
+  max-width: 80vw;
   margin-inline: 3vw;
   margin-top: 12vh;
   margin-bottom: 12vh;
@@ -523,24 +531,33 @@ li span {
 .one-cards,
 .two-cards {
   /* width: calc(100vw /3.2); */
+  width: 100%;
+  max-width: 80vw;
   height: calc(100vw / 2.5);
 }
 
 .three-cards {
+  width: 100%;
+  max-width: 80vw;
   width: calc(100vw / 4);
 }
 
 .four-cards {
+  width: 100%;
+  max-width: 80vw;
   width: calc(100vw / 5);
 }
 
 .five-cards {
+  width: 100%;
+  max-width: 80vw;
   width: calc(100vw / 6);
 }
 
 .two-cards,
 .rotated-two-cards {
-  height: calc(100vw / 3);
+  height: calc(100vw / 3);width: 100%;
+  max-width: 80vw;
   /* width: calc(100vw / 5); */
   margin-inline: 6vw;
 }
