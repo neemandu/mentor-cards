@@ -21,60 +21,60 @@ interface CategoryPack {
 export class HomePageCardsComponent implements OnInit {
 
   cardsList = [
-    {title: 'Card 1', content: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg'},
-    {title: 'Card 2', content: 'מערכות יחסים', image: '/assets/New/home-page/cards/2.svg'},
-    {title: 'Card 3', content: 'ילדים ונוער', image: '/assets/New/home-page/cards/3.svg'},
-    {title: 'Card 4', content: 'חיבור לעצמי', image: '/assets/New/home-page/cards/4.svg'},
-    {title: 'Card 5', content: 'מנהיגות', image: '/assets/New/home-page/cards/5.svg'},
-    {title: 'Card 6', content: 'חזון ומטרות', image: '/assets/New/home-page/cards/6.svg'},
-    {title: 'Card 7', content: 'העצמה ', image: '/assets/New/home-page/cards/7.svg'},
-    {title: 'Card 8', content: 'חגים', image: '/assets/New/home-page/cards/8.svg'},
-    {title: 'Card 9', content: 'קריירה', image: '/assets/New/home-page/cards/9.svg'},
-    {title: 'Card 10', content: 'רגשות', image: '/assets/New/home-page/cards/10.svg'},
-    {title: 'Card 11', content: 'משברים', image: '/assets/New/home-page/cards/11.svg'},
-    {title: 'Card 12', content: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg'},
+    { title: 'Card 1', content: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg' },
+    { title: 'Card 2', content: 'מערכות יחסים', image: '/assets/New/home-page/cards/2.svg' },
+    { title: 'Card 3', content: 'ילדים ונוער', image: '/assets/New/home-page/cards/3.svg' },
+    { title: 'Card 4', content: 'חיבור לעצמי', image: '/assets/New/home-page/cards/4.svg' },
+    { title: 'Card 5', content: 'מנהיגות', image: '/assets/New/home-page/cards/5.svg' },
+    { title: 'Card 6', content: 'חזון ומטרות', image: '/assets/New/home-page/cards/6.svg' },
+    { title: 'Card 7', content: 'העצמה ', image: '/assets/New/home-page/cards/7.svg' },
+    { title: 'Card 8', content: 'חגים', image: '/assets/New/home-page/cards/8.svg' },
+    { title: 'Card 9', content: 'קריירה', image: '/assets/New/home-page/cards/9.svg' },
+    { title: 'Card 10', content: 'רגשות', image: '/assets/New/home-page/cards/10.svg' },
+    { title: 'Card 11', content: 'משברים', image: '/assets/New/home-page/cards/11.svg' },
+    { title: 'Card 12', content: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
   ]
- // @ViewChild('videoPlayer') videoplayer: ElementRef;
- @ViewChild('filterText') filterTextInput: ElementRef;
- // @ViewChildren('autocompleteOptions')
- autocompleteOptions: QueryList<MatOption>;
+  // @ViewChild('videoPlayer') videoplayer: ElementRef;
+  @ViewChild('filterText') filterTextInput: ElementRef;
+  // @ViewChildren('autocompleteOptions')
+  autocompleteOptions: QueryList<MatOption>;
 
- Subscription: Subscription = new Subscription();
- filteredOptions = [];
- allOptions = [];
- // mobile: boolean;
+  Subscription: Subscription = new Subscription();
+  filteredOptions = [];
+  allOptions = [];
+  // mobile: boolean;
 
- allPacks: PackContent[] = [];
- allFavPacks: PackContent[] = [];
- allCategoryPacks: CategoryPack[] = [];
- // categoriesOrder: string[] = [
- //   'ערכות להתנסות חופשית',
- //   'קלפי תמונה',
- //   'שיתופי פעולה',
- //   'קלפי שאלות',
- //   'קלפי חגים',
- //   'קלפי מילה',
- //   'קלפי תמונה + מילה',
- //   'קלפי מסרים',
- //   'קלפי ערכים',
- //   'הייטק',
- //   'מתנה',
- // ];
- userData: UserData;
- allCategories: string[] = [];
- allFavorites: number[] = [];
- loadedPacks: number = 0;
- // categoriesToShow: number = 5;
- isPageLoaded: boolean = false;
+  allPacks: PackContent[] = [];
+  allFavPacks: PackContent[] = [];
+  allCategoryPacks: CategoryPack[] = [];
+  // categoriesOrder: string[] = [
+  //   'ערכות להתנסות חופשית',
+  //   'קלפי תמונה',
+  //   'שיתופי פעולה',
+  //   'קלפי שאלות',
+  //   'קלפי חגים',
+  //   'קלפי מילה',
+  //   'קלפי תמונה + מילה',
+  //   'קלפי מסרים',
+  //   'קלפי ערכים',
+  //   'הייטק',
+  //   'מתנה',
+  // ];
+  userData: UserData;
+  allCategories: string[] = [];
+  allFavorites: number[] = [];
+  loadedPacks: number = 0;
+  // categoriesToShow: number = 5;
+  isPageLoaded: boolean = false;
 
- //Filters
- showCategoryLine: boolean = true;
- freeTextFilterSelected: string = '';
- selectedCategories: string[] = [];
- selectedFavorites: string[] = [];
- showBottomArrow: boolean = true;
- stopGenerateOptions: boolean = true;
- currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
+  //Filters
+  showCategoryLine: boolean = true;
+  freeTextFilterSelected: string = '';
+  selectedCategories: string[] = [];
+  selectedFavorites: string[] = [];
+  showBottomArrow: boolean = true;
+  stopGenerateOptions: boolean = true;
+  currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
 
 
   constructor(
@@ -88,13 +88,13 @@ export class HomePageCardsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.userAuthService.isLoggedIn){
+    if (this.userAuthService.isLoggedIn) {
       this.userData = this.userAuthService.userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
       this.getAllPacks(true);
     }
-    else{
+    else {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
@@ -114,8 +114,8 @@ export class HomePageCardsComponent implements OnInit {
       )
     );
     console.log('allpacks page sub 2');
-    console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
-  
+    console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'isTrialPacksDialogOpen href');
+
   }
 
   initializeFilteredOptions() {
@@ -182,8 +182,8 @@ export class HomePageCardsComponent implements OnInit {
    * Retrive all packs
    */
   getAllPacks(useCache: bool): void {
-    console.log('useCache: '  + useCache);
-    if(useCache){
+    console.log('useCache: ' + useCache);
+    if (useCache) {
       if (this.cardsService.allPacks) {
         this.setAllPacksData();
         // this.setAllCategoryPacksToShow();
@@ -202,7 +202,7 @@ export class HomePageCardsComponent implements OnInit {
         this.cardsService.getAllPacks();
       }
     }
-    else{
+    else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
         console.log('getAllPacks finished!');
         this.setAllPacksData();
@@ -214,7 +214,7 @@ export class HomePageCardsComponent implements OnInit {
       console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
     }
-    
+
   }
 
   setAllPacksData(): void {
@@ -296,6 +296,19 @@ export class HomePageCardsComponent implements OnInit {
 
   navigateTo(route: string) {
     this.router.navigateByUrl(route);
+  }
+
+  handleCardClick(content: string) {
+    console.log('content', content);
+    if (content === 'לכל הערכות') {
+      console.log('all packs');
+      this.router.navigate(['all-packs-page']);
+    }
+    else{
+      console.log('content', content);
+      this.router.navigate(['all-packs-page'], { queryParams: { filter: content } });
+
+    }
   }
 
 
