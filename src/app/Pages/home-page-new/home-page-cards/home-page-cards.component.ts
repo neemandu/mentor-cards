@@ -165,54 +165,6 @@ export class HomePageCardsComponent implements OnInit {
       optionToFocus.focus();
     }
   }
-
-  handleClick(){
-   this.showCategoryLine = !this.showCategoryLine;
-  }
-  // ngOnInit() {
-  //   this.router.queryParams.subscribe((params) => {
-  //     const refId = params['ref'];
-  //     if (refId) {
-  //       localStorage.setItem('refId', refId);
-  //       console.log('refId ID stored:', refId);
-  //     }
-  //   });
-
-  //   // track events
-  //   this.mixpanelService.track('PageViewed', {
-  //     'Page Title': 'all-packs-page',
-  //   });
-
-  //   if(this.userAuthService.isLoggedIn){
-  //     this.userData = this.userAuthService.userData;
-  //     this.allFavorites = this.userAuthService.favorites;
-  //     this.setAllFavPacksToShow();
-  //     this.getAllPacks(true);
-  //   }
-  //   else{
-  //     this.getAllPacks(true);
-  //     this.Subscription.add(
-  //       this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-  //         this.getAllPacks(false);
-  //         this.userData = userData;
-  //         this.allFavorites = this.userAuthService.favorites;
-  //         this.setAllFavPacksToShow();
-  //       })
-  //     );
-  //   }
-
-  //   this.Subscription.add(
-  //     this.userAuthService.favoritesChangeEmmiter.subscribe(
-  //       (favorites: number[]) => {
-  //         this.allFavorites = favorites;
-  //         this.setAllFavPacksToShow();
-  //       }
-  //     )
-  //   );
-  //   console.log('allpacks page sub 2');
-  //   console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
-  //   if (!this.userData || this.userData.status === 'NOPLAN') {
-  //   
   filterOptions() {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
 
@@ -234,7 +186,7 @@ export class HomePageCardsComponent implements OnInit {
     if(useCache){
       if (this.cardsService.allPacks) {
         this.setAllPacksData();
-        this.setAllCategoryPacksToShow();
+        // this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -242,7 +194,7 @@ export class HomePageCardsComponent implements OnInit {
       } else {
         this.cardsService.allPacksReadyEmmiter.subscribe(() => {
           this.setAllPacksData();
-          this.setAllCategoryPacksToShow();
+          // this.setAllCategoryPacksToShow();
           this.setAllFavPacksToShow();
           this.initializeFilteredOptions();
           this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -254,7 +206,7 @@ export class HomePageCardsComponent implements OnInit {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
         console.log('getAllPacks finished!');
         this.setAllPacksData();
-        this.setAllCategoryPacksToShow();
+        // this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
@@ -274,27 +226,6 @@ export class HomePageCardsComponent implements OnInit {
     this.allFavorites = this.userAuthService.favorites;
 
     this.isPageLoaded = true;
-  }
-
-  setAllCategoryPacksToShow(): void {
-    this.allCategoryPacks = this.allCategories
-      .filter((category) => {
-        if (
-          this.userData?.status === 'PLAN' &&
-          category === 'ערכות להתנסות חופשית'
-        ) {
-          return false;
-        }
-        return this.selectedCategories.length != 0
-          ? this.selectedCategories.includes(category)
-          : true;
-      })
-      .map((category) => {
-        let packs = this.allPacks.filter((pack) =>
-          pack.categories.includes(category)
-        );
-        if (packs.length != 0) return { category: category, packs: packs };
-      });
   }
 
   @HostListener('document:click', ['$event'])
@@ -336,60 +267,10 @@ export class HomePageCardsComponent implements OnInit {
   packLoaded(): void {
     this.loadedPacks++;
     if (this.loadedPacks == this.allPacks.length) {
-      //this.overlaySpinnerService.changeOverlaySpinner(false);
     }
   }
 
-  // getAllFavoritesDesc(): string[] {
-  //   if (!this.allFavorites) {
-  //     this.allFavorites = [];
-  //   }
-  //   return this.cardsService.allPacks
-  //     ? this.cardsService.allPacks
-  //         .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
-  //         .map((pack) => pack.name)
-  //     : this.allPacks
-  //         .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
-  //         .map((pack) => pack.name);
-  //   // return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
-  // }
 
-  categoriesSelectedChange(event): void {
-    var index = this.selectedCategories.findIndex(
-      (el) => el === event.option._value
-    );
-    index == -1
-      ? this.selectedCategories.push(event.option._value)
-      : this.selectedCategories.splice(index, 1);
-  }
-
-  favoritesSelectedChange(event): void {
-    var index = this.selectedFavorites.findIndex(
-      (el) => el === event.option._value
-    );
-    index == -1
-      ? this.selectedFavorites.push(event.option._value)
-      : this.selectedFavorites.splice(index, 1);
-  }
-
-  filterPacks(): void {
-    this.loadedPacks = 0;
-    this.allPacks = this.cardsService.allPacks?.map((pack) => pack);
-    if (this.allPacks) {
-      if (this.freeTextFilterSelected !== '') {
-        this.freeTextFilter();
-      }
-      if (this.selectedCategories.length != 0) {
-        this.categoryFilter();
-      }
-      if (this.selectedFavorites.length != 0) {
-        this.favoritesFilter();
-      }
-      // this.sortPacks();
-    }
-    this.setAllCategoryPacksToShow();
-    this.setAllFavPacksToShow();
-  }
 
   freeTextFilter(): void {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
@@ -404,25 +285,9 @@ export class HomePageCardsComponent implements OnInit {
     this.freeTextFilterSelected = option;
     this.stopGenerateOptions = true;
     this.filteredOptions = [];
-    this.filterPacks();
-  }
-
-  categoryFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackContent) => {
-      let res = false;
-      pack.categories.forEach((category) => {
-        if (this.selectedCategories.includes(category)) {
-          res = true;
-        }
-      });
-      return res;
-    });
-  }
-
-  favoritesFilter(): void {
-    this.allPacks = this.allPacks.filter((pack: PackContent) =>
-      this.selectedFavorites.includes(pack.name)
-    );
+    console.log('selected option: ' + option);
+    // this.router.navigate(['all-packs-page', { filter: option }]);
+    this.router.navigate(['all-packs-page'], { queryParams: { filter: option } });
   }
 
   public navigate(path: string): void {

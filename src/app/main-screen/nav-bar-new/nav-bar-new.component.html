@@ -1,4 +1,4 @@
-<section class=" flex justify-evenly  sm:justify-between items-center mt-2 sm:mt-0">
+<section class=" flex justify-between mx-2  sm:justify-between items-center mt-2 sm:mt-0">
     <div class="flex h-10">
         <div dir="rtl" class=" flex items-center justify-between ms-4">
             <button class="sm:hidden block" [matMenuTriggerFor]="allButtons">
@@ -18,13 +18,13 @@
                 <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
                 <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
                     (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
-                <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options"
-                    id="autocomplete-options">
-                    <mat-option *ngFor="let option of filteredOptions; let i = index" (keydown)="handleKeyDown($event)"
-                        #autocompleteOptions (click)="selectOption(option)">
-                        {{ option }}
-                    </mat-option>
-                </div>
+                    <div  *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options absolute z-40 bg-white"
+                        id="autocomplete-options">
+                        <mat-option *ngFor="let option of filteredOptions; let i = index" (keydown)="handleKeyDown($event)"
+                            #autocompleteOptions (click)="selectOption(option)">
+                            {{ option }}
+                        </mat-option>
+                    </div>
             </mat-form-field>
             <img src="/assets/New/nav-bar/search.svg" alt="user image" class="h-5 ms-2" />
         </div>
@@ -37,10 +37,10 @@
                 <div style="font-weight: 700; font-size: 13px;">
                     {{item.name | translate}}
                 </div>
-                <div class="underline-on-hover" [class.hidden]="!item.hovering">
+                <div class="underline-on-hover" [class.hidden]="!item.hovering && !isActive(item)">
                     &nbsp;
                 </div>
-                <div class="no-underline-on-hover" [class.hidden]="item.hovering">
+                <div class="no-underline-on-hover" [class.hidden]="item.hovering && isActive(item)">
                     &nbsp;
                 </div>
             </button>
@@ -50,10 +50,10 @@
                 <div style="font-weight: 700; font-size: 13px;">
                     {{item.name | translate}}
                 </div>
-                <div class="underline-on-hover" [class.hidden]="!item.hovering">
+                <div class="underline-on-hover" [class.hidden]="!item.hovering && !isActive(item)">
                     &nbsp;
                 </div>
-                <div class="no-underline-on-hover" [class.hidden]="item.hovering">
+                <div class="no-underline-on-hover" [class.hidden]="item.hovering && isActive(item)">
                     &nbsp;
                 </div>
             </button>
