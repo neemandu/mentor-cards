@@ -6,24 +6,12 @@
         {{ 'pages.home-page.sections.updates.content.description1' | translate }}<br>
         {{ 'pages.home-page.sections.updates.content.description2' | translate }}
     </div>
-    <div class=" sm:flex justify-center gap-8 mb-16">
-        <div class="sm:w-[22vw] w-[90vw] text-center sm:mt-4 mt-16 mx-auto justify-center">
+    <div class="sm:flex justify-center gap-8 mb-16">
+        <div class="sm:w-[22vw] w-[90vw] text-center sm:mt-4 mt-16 mx-auto justify-center" *ngFor="let n of news">
             <div class="mt-4">
-                {{ 'pages.home-page.sections.updates.content.updates.0.description' | translate }}
+                {{ n.message }}
             </div>
-            <div>{{ 'pages.home-page.sections.updates.content.updates.0.date' | translate }}</div>
-        </div>
-        <div class="sm:w-[22vw] w-[90vw] text-center sm:mt-4 mt-16 mx-auto justify-center">
-            <div class="mt-4">
-                {{ 'pages.home-page.sections.updates.content.updates.1.description' | translate }}
-            </div>
-            <div>{{ 'pages.home-page.sections.updates.content.updates.1.date' | translate }}</div>
-        </div>
-        <div class="sm:w-[22vw] w-[90vw] text-center sm:mt-4 mt-16 mx-auto justify-center">
-            <div class="mt-4">
-                {{ 'pages.home-page.sections.updates.content.updates.2.description' | translate }}
-            </div>
-            <div>{{ 'pages.home-page.sections.updates.content.updates.2.date' | translate }}</div>
+            <div>{{ n.createdAt | date : "dd.MM.yyyy" }}</div>
         </div>
     </div>
 </div>

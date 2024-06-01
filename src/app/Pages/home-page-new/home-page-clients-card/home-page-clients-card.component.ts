@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page-clients-card',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageClientsCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -42,4 +43,8 @@ export class HomePageClientsCardComponent implements OnInit {
 
   ]
 
+  navigateTo(route: string) {
+    this.router.navigateByUrl(route);
+  }
+  
 }

@@ -17,8 +17,8 @@
   }
 }
 
-.w-60 {
-  width: 15rem/* 240px */;
+.z-40 {
+  z-index: 40;
 }
 html,
 body {

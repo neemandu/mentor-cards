@@ -1091,7 +1091,7 @@
           "component": "app-home-page-cards",
           "content": {
             "title": "All Card Packs",
-            "search-placeholder": "What is the topic of your meeting? Look for a kit",
+            "search-placeholder": "מהו הנושא של הפגישה שלך? חפש ערכה",
             "cardsList": [
               {
                   "content": "הכרות וחיבור"

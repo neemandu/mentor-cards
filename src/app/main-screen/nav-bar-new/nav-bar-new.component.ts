@@ -37,6 +37,10 @@ export class NavBarNewComponent implements OnInit {
     { name: 'pages.nav.navbar.contact-us', route: '/home-page#contact-us-section', placeholder: 'Contact Us' },
   ].map(item => ({ ...item, hovering: false }));
 
+  isActive(item) {
+    return this.router.url === item.route;
+  }
+  
   // @ViewChild('videoPlayer') videoplayer: ElementRef;
   @ViewChild('filterText') filterTextInput: ElementRef;
   // @ViewChildren('autocompleteOptions')
@@ -493,7 +497,7 @@ export class NavBarNewComponent implements OnInit {
     this.freeTextFilterSelected = option;
     this.stopGenerateOptions = true;
     this.filteredOptions = [];
-    this.filterPacks();
+    this.router.navigate(['all-packs-page'], { queryParams: { filter: option } });
   }
 
   categoryFilter(): void {
