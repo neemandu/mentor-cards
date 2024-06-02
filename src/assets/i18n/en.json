@@ -1312,5 +1312,6 @@
         "rule6": "The availability of card packs and content may change from time to time."
       }
     }
-  }
+  },
+  "selectLanguageTooltip": "Select a language"
 }

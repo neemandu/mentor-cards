@@ -1392,5 +1392,23 @@
         "rule6": "זמינות ערכות הקלפים והתכנים עשויה להשתנות מעת לעת."
       }
     }
-  }
+  },
+  "selectLanguageTooltip": "בחר שפה"
 }
+
+<button class="sm:hidden block" [matMenuTriggerFor]="selectLanguage">
+<mat-icon>menu</mat-icon>
+</button>
+<mat-menu class="mat-menu-news" #selectLanguage="matMenu">
+<div class="news">
+<span id="news-title">{{ "pages.nav.news-updates" | translate }}</span>
+<div class="line"></div>
+<ul id="news-list">
+<li class="news-list-item" *ngFor="let n of news">
+<span class="news-list-data">{{ n.message }}
+    <span class="news-list-date">({{ n.createdAt | date : "dd.MM.yyyy" }})</span>
+</span>
+</li>
+</ul>
+</div>
+</mat-menu>

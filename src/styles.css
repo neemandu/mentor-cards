@@ -17,8 +17,8 @@
   }
 }
 
-.z-40 {
-  z-index: 40;
+.gap-16 {
+  gap: 4rem/* 64px */;
 }
 html,
 body {

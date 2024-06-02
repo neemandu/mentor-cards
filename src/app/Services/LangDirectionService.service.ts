@@ -8,14 +8,14 @@ export class LangDirectionService {
   currentLangDirection = 'rtl'; // default direction
 
   constructor(translate: TranslateService) {
-    translate.addLangs(['en', 'עב']);
-    translate.setDefaultLang('עב');
-    translate.use('עב');
+    translate.addLangs(['EN', 'HE']);
+    translate.setDefaultLang('HE');
+    translate.use('HE');
 
     // Listen for language changes
     translate.onLangChange.subscribe((event) => {
       // Set text direction based on current language
-      this.currentLangDirection = event.lang === 'עב' ? 'rtl' : 'ltr';
+      this.currentLangDirection = event.lang === 'HE' ? 'rtl' : 'ltr';
     });
   }
 }
