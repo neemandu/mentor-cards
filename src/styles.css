@@ -17,8 +17,8 @@
   }
 }
 
-.gap-16 {
-  gap: 4rem/* 64px */;
+.w-\[80vw\] {
+  width: 80vw;
 }
 html,
 body {
