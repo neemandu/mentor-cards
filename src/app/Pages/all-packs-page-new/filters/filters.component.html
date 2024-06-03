@@ -1,0 +1,8 @@
+<!-- src/app/category-button/category-button.component.html -->
+<button class="flex justify-center items-center mx-auto hover:border-4 rounded-xl
+         hover:border-[#e67c73] w-[90%]  m-2 flex-col " (click)="handleClick()">
+    <div class="pt-4 px-2 pb-2">
+        <img [src]="imageSrc" alt="" width="auto" style="height:35px">
+    </div>
+    <div style="font-weight: 700; font-size: 13px;">{{ buttonText }}</div>
+</button>

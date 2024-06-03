@@ -16,9 +16,8 @@
       margin-right: 2.5rem/* 40px */;
   }
 }
-
-.w-\[80vw\] {
-  width: 80vw;
+.h-36 {
+  height: 9rem/* 144px */;
 }
 html,
 body {
