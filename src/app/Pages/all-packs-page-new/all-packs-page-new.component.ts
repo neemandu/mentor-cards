@@ -80,7 +80,7 @@ export class AllPacksPageNewComponent implements OnInit {
 
   filterList = [
     { filterText: 'לכל הערכות', buttonText: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
-    { filterText: '', buttonText: 'הכרות וחיבור', imageSrc: '/assets/New/home-page/cards/1.svg' },
+    { filterText: '', buttonText: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg' },
     { filterText: 'מערכות יחסים', buttonText: 'מערכות יחסים', image: '/assets/New/home-page/cards/2.svg' },
     { filterText: 'ילדים ונוער', buttonText: 'ילדים ונוער', image: '/assets/New/home-page/cards/3.svg' },
     { filterText: 'חיבור לעצמי', buttonText: 'חיבור לעצמי', image: '/assets/New/home-page/cards/4.svg' },
@@ -93,6 +93,21 @@ export class AllPacksPageNewComponent implements OnInit {
     { filterText: 'משברים', buttonText: 'משברים', image: '/assets/New/home-page/cards/11.svg' },
   ]
 
+  cardsColors =[
+    {color: '#E67C73'},
+    {color: '#BB7264'},
+    {color: '#2B7B5C'},
+    {color: '#009FB4'},
+    {color: '#2D427B'},
+    {color: '#7986CB'},
+    {color: '#7973CD'},
+    {color: '#7A275F'},
+    {color: '#E49200'},
+    {color: '#FF9E6B'},
+    {color: '#B3980B'},
+    {color: '#7A680C'},
+  ]
+  
   constructor(
     private cardsService: CardsService,
     private overlaySpinnerService: OverlaySpinnerService,

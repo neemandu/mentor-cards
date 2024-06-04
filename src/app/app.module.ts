@@ -175,6 +175,7 @@ import { HomePageContactUsComponent } from './Pages/home-page-new/home-page-cont
 import { HomePageFooterComponent } from './Pages/home-page-new/home-page-footer/home-page-footer.component';
 import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-page-new.component';
 import { FiltersComponent } from './Pages/all-packs-page-new/filters/filters.component';
+import { PacksCardComponent } from './Pages/all-packs-page-new/packs-card/packs-card.component';
 
 @NgModule({
   declarations: [
@@ -255,6 +256,7 @@ import { FiltersComponent } from './Pages/all-packs-page-new/filters/filters.com
     HomePageFooterComponent,
     AllPacksPageNewComponent,
     FiltersComponent,
+    PacksCardComponent,
   ],
   imports: [
     BrowserModule,

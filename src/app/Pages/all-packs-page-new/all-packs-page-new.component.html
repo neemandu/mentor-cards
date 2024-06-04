@@ -1,124 +1,88 @@
 <title>{{'pages.all-packs-page.title' | translate}}</title>
 <div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen">
-    <div id="content" [dir]="langDirectionService.currentLangDirection"
-        class="w-[90vw] h-36 mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
-        <div class="w-[7%] border-l-2 border-black h-[90%] ">
-            <div class=" mb-2 text-center" style="font-weight: 700; font-size: 13px; ">
-                המעודפים שלי
+    <div class="w-screen overflow-x-scroll lg:overflow-visible mb-2 z-20"
+        style="margin-bottom: 20px; padding-right: 15px;">
+
+
+        <div id="content" [dir]="langDirectionService.currentLangDirection"
+            class="w-[1522px] h-32 mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
+            <div class="w-[12.5%] border-l-2 border-black h-[90%] px-2">
+                <div class="text-center" style="font-weight: 700; font-size: 12px; ">
+                    המעודפים שלי
+                </div>
+                <div class=" grid grid-cols-2 w-full justify-between pt-2">
+                    <app-filters class=" col-span-1" [imageSrc]="'/assets/New/home-page/cards/0.svg'"
+                        [buttonText]="'לכל הערכות'" [filterText]="''" (categoryClick)="handleCategoryClick($event)">
+                    </app-filters>
+                    <app-filters class=" col-span-1" [imageSrc]="'/assets/New/home-page/cards/12.svg'"
+                        [buttonText]="'לכל הערכות'" [filterText]="''" (categoryClick)="handleCategoryClick($event)">
+                    </app-filters>
+                </div>
             </div>
-            <app-filters [imageSrc]="'/assets/New/home-page/cards/12.svg'" [buttonText]="'לכל הערכות'" [filterText]="''"
-                (categoryClick)="handleCategoryClick($event)">
-            </app-filters>
-        </div>
-        <div class=" h-[90%] w-[70%] ">
-            <div class="text-right" style="font-weight: 700; font-size: 13px; margin-right: 10px; ">
-                המעודפים שלי
+            <div class="h-[90%] w-[70%] ">
+                <div class="text-right" style="font-weight: 700; font-size: 12px; margin-right: 10px; ">
+                    המעודפים שלי
+                </div>
+                <div class="grid grid-cols-12 mx-1 pt-2">
+                    <app-filters *ngFor="let filter of filterList" [imageSrc]="filter.image"
+                        [buttonText]="filter.buttonText" [filterText]="filter.filterText"
+                        (categoryClick)="handleCategoryClick($event)" class="col-span-1">
+                    </app-filters>
+                </div>
             </div>
-            <div class="grid grid-cols-12 ">
-                <app-filters *ngFor="let filter of filterList" [imageSrc]="filter.image"
-                    [buttonText]="filter.buttonText" [filterText]="filter.filterText"
-                    (categoryClick)="handleCategoryClick($event)" class="col-span-1">
+
+            <div class="w-[22%] flex items-start  h-[100%]  ">
+                <div class=" text-right border-r-2 border-black h-[90%]" style="padding-inline: 10px;">
+                    <div style="font-weight: 700; font-size: 12px; margin-bottom: 10px;">סוג קלפים</div>
+                    <div style="font-size: 12px;">סוגי תצוגה של קלפים</div>
+                    <div class=" flex gap-4 mt-4">
+                        <div>
+                            <input type="checkbox" id="checkbox1" name="checkbox1" style="accent-color: #000000;">
+                            <div style="font-size: 10px;" for="checkbox1">תמונה</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="checkbox2" name="checkbox2" style="accent-color: #000000;">
+                            <div style="font-size: 10px;" for="checkbox2">שאלה</div>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="checkbox3" name="checkbox3" style="accent-color: #000000;">
+                            <div style="font-size: 10px;" for="checkbox3">מילה</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right  border-r-2 border-black h-[90%]" style="padding-inline: 10px;">
+                    <div style="font-weight: 700; font-size: 12px; margin-bottom: 10px;">שפת המפגש</div>
+                    <div style="font-size: 12px;">שפת הקלפים וספר ההדרכה</div>
+                    <div class=" flex gap-4 mt-4">
+                        <div>
+                            <input type="radio" id="radio1" name="radioGroup" style="accent-color: #000000;">
+                            <div style="font-size: 10px;" for="radio1">רוסית</div>
+                        </div>
+                        <div>
+                            <input type="radio" id="radio2" name="radioGroup" style="accent-color: #000000;">
+                            <div style="font-size: 10px;" for="radio2">ערבית</div>
+                        </div>
+                        <div>
+                            <input type="radio" id="radio3" name="radioGroup" style="accent-color: #000000;">
+                            <div style="font-size: 10px;" for="radio3">אנגלית</div>
+                        </div>
+                        <div>
+                            <input type="radio" id="radio4" name="radioGroup" style="accent-color: #000000;">
+                            <div style="font-size: 10px;" for="radio4">עברית</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[7%] border-r-2 border-black h-[90%] ">
+                <div>&nbsp;</div>
+                <app-filters [imageSrc]="'/assets/New/home-page/cards/13.svg'" [buttonText]="'לכל הערכות'"
+                    [filterText]="''" (categoryClick)="handleCategoryClick($event)">
                 </app-filters>
             </div>
         </div>
-
-        <div class="w-[22%] flex items-start  h-[100%]  ">
-            <div class=" text-right border-r-2 border-black h-[90%]" style="padding-inline: 10px;">
-                <div style="font-weight: 700; font-size: 13px; margin-bottom: 10px;">סוג קלפים</div>
-                <div>סוגי תצוגה של קלפים</div>
-                <div class=" flex gap-4 mt-4">
-                    <div>
-                        <input type="checkbox" id="checkbox1" name="checkbox1">
-                        <div for="checkbox1">תמונה</div>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="checkbox2" name="checkbox2">
-                        <div for="checkbox2">שאלה</div>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="checkbox3" name="checkbox3">
-                        <div for="checkbox3">מילה</div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-right  border-r-2 border-black h-[90%]" style="padding-inline: 10px;">
-                <div style="font-weight: 700; font-size: 13px; margin-bottom: 10px;">שפת המפגש</div>
-                <div>שפת הקלפים וספר ההדרכה</div>
-                <div class=" flex gap-4 mt-4">
-                    <div>
-                        <input type="radio" id="radio1" name="radioGroup">
-                        <div for="radio1">רוסית</div>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio2" name="radioGroup">
-                        <div for="radio2">ערבית</div>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio3" name="radioGroup">
-                        <div for="radio3">אנגלית</div>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio4" name="radioGroup">
-                        <div for="radio4">עברית</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-[7%] border-r-2 border-black h-[90%] ">
-            <app-filters [imageSrc]="'/assets/New/home-page/cards/12.svg'" [buttonText]="'לכל הערכות'" [filterText]="''"
-                (categoryClick)="handleCategoryClick($event)">
-            </app-filters>
-        </div>
     </div>
-    <!-- <div id="filters" ngClass="{{langDirectionService.currentLangDirection == 'rtl' ? 'float-right' : 'float-left'}}">
-        <button id="couponCodeBtn" type="button" (click)="openNewTab()">
-            {{'pages.all-packs-page.coupon-code-btn-1' | translate}}<br> {{'pages.all-packs-page.coupon-code-btn-2' |
-            translate}}
-        </button>
-        <h3 id="filter-by-options-title">{{'pages.all-packs-page.mat-section-title' | translate}}</h3>
-        <mat-selection-list #categories (selectionChange)="categoriesSelectedChange($event); filterPacks()"
-            [dir]="langDirectionService.currentLangDirection">
-
-            <mat-list-option color="primary" disableRipple *ngFor="let category of allCategories"
-                [selected]="selectedCategories.includes(category)" [value]="category">
-                <span style="margin-right: 10px;"> {{ 'pages.all-packs-page.categories.' + category | translate}}
-                </span>
-
-            </mat-list-option>
-
-        </mat-selection-list>
-        <br />
-        <h3 id="filter-by-options-title" *ngIf="allFavPacks.length != 0">
-            {{'pages.all-packs-page.my-Favorite'|translate}}</h3>
-        <mat-selection-list #favorites (selectionChange)="favoritesSelectedChange($event); filterPacks()">
-            <mat-list-option disableRipple *ngFor="let fav of getAllFavoritesDesc()"
-                [selected]="selectedFavorites.includes(fav)" [value]="fav">
-                <span style="direction: rtl">{{ fav }}</span>
-            </mat-list-option>
-        </mat-selection-list>
-    </div> -->
-
     <div id="test" class="all-packs-view" #new>
-        <h1 class="header">"{{'pages.all-packs-page.sub-header' | translate}}"</h1>
-        <br />
-        <div class="searchbar">
-            <p
-                style="text-align: center; font-size: X-large;padding-top: 0.5rem; padding-bottom:0.5rem; max-width: 90%;margin-bottom: -0.1rem;">
-                {{'pages.all-packs-page.sub-header-2' | translate}}</p>
-            <mat-form-field class="search">
-                <mat-label>{{'pages.all-packs-page.search-placeholder' | translate}}</mat-label>
-                <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
-                    (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
-                <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options"
-                    id="autocomplete-options">
-                    <mat-option *ngFor="let option of filteredOptions; let i = index" (keydown)="handleKeyDown($event)"
-                        #autocompleteOptions (click)="selectOption(option)">
-                        {{ option }}
-                    </mat-option>
-                </div>
-            </mat-form-field>
-        </div>
-        <br /><br /><br />
+
         <div class="d-flex flex-row flex-wrap card-section" *ngIf="!showCategoryLine ">
             <app-pack class="pack" *ngFor="let packInfo of allPacks" [packInfo]="packInfo"
                 [orgName]="userData?.orgMembership?.name" (loaded)="packLoaded()">
@@ -140,7 +104,7 @@
         </div>
         <div *ngIf="showCategoryLine && selectedFavorites.length == 0">
             <div class="all-packs-view__section" *ngFor="let categoryPacks of allCategoryPacks; let i = index">
-                <div *ngIf="categoryPacks" class="category-line d-flex align-items-center justify-content-around">
+                <!-- <div *ngIf="categoryPacks" class="category-line d-flex align-items-center justify-content-around">
                     <div class="first-line"></div>
                     <h3 class="categrory-title"
                         *ngIf="categoryPacks.category === 'ערכות להתנסות חופשית' && userData?.status === 'NOPLAN'"
@@ -190,11 +154,15 @@
                         {{ categoryPacks.category }}</h3>
 
                     <div class="second-line"></div>
-                </div>
-                <div *ngIf="categoryPacks" class="d-flex flex-row flex-wrap card-section">
-                    <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
+                </div> -->
+                <div *ngIf="categoryPacks" class="flex overflow-x-scroll w-[100%] gap-4">
+                    <app-packs-card [backgroundColor]="cardsColors[i % cardsColors.length].color"
+                        *ngFor="let packInfo of categoryPacks.packs; let i = index" [packInfo]="packInfo"
+                        (loaded)="packLoaded()">
+                    </app-packs-card>
+                    <!-- <app-pack class="pack" *ngFor="let packInfo of categoryPacks.packs" [packInfo]="packInfo"
                         [orgName]="userData?.orgMembership?.name" (loaded)="packLoaded()">
-                    </app-pack>
+                    </app-pack> -->
                 </div>
             </div>
         </div>
