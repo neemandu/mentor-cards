@@ -26,6 +26,27 @@
       "search-placeholder": "Search by meeting topic, creator of the kit, purpose of the activity and more...",
       "new-search-placeholder": "What is the topic of your meeting? Look for a kit"
     },
+    "all-packs-page-new": {
+      "title": "All Packs Page",
+      "content": {
+        "favorites": "My Favorites",
+        "allPacks": "All Packs",
+        "cardTypes": "Card Types",
+        "cardDisplayTypes": "Card Display Types",
+        "image": "Image",
+        "question": "Question",
+        "word": "Word",
+        "meetingLanguage": "Meeting Language",
+        "cardLanguageAndGuide": "Card Language and Guidebook",
+        "russian": "Russian",
+        "arabic": "Arabic",
+        "english": "English",
+        "hebrew": "Hebrew",
+        "packsForYourMeeting": "These are the packs suitable for your meeting",
+        "category": "Category",
+        "resetFilters": "Reset Filters"
+      }
+    },
     "about-us": {
       "title": "Mentor-Cards About Us Page",
       "introduction-full": {

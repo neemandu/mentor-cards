@@ -27,6 +27,27 @@
       "search-error-message": "מצטערים אך לא מצאנו משהו שעונה על החיפוש שלך...",
       "new-search-placeholder": "מה נושא המפגש שלכם? חפשו ערכה"
     },
+    "all-packs-page-new": {
+      "title": "All Packs Page",
+      "content": {
+        "favorites": "המעודפים שלי",
+        "allPacks": "לכל הערכות",
+        "cardTypes": "סוג קלפים",
+        "cardDisplayTypes": "סוגי תצוגה של קלפים",
+        "image": "תמונה",
+        "question": "שאלה",
+        "word": "מילה",
+        "meetingLanguage": "שפת המפגש",
+        "cardLanguageAndGuide": "שפת הקלפים וספר ההדרכה",
+        "russian": "רוסית",
+        "arabic": "ערבית",
+        "english": "אנגלית",
+        "hebrew": "עברית",
+        "packsForYourMeeting": "אלה הערכות שמתאימות למפגש שלכם",
+        "category": "קטגוריה",
+        "resetFilters": "איפוס מסננים"
+      }
+    },
     "about-us": {
       "title": "Mentor-Cards עמוד עלינו",
       "introduction-full": {

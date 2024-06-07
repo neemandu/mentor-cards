@@ -44,6 +44,12 @@ export class AllPacksPageNewComponent implements OnInit {
   Subscription: Subscription = new Subscription();
   filteredOptions = [];
   allOptions = [];
+  filterOption = {
+    image: false,
+    question: false,
+    word: false,
+    language: ''
+  };
   // mobile: boolean;
 
   allPacks: PackContent[] = [];
@@ -68,6 +74,7 @@ export class AllPacksPageNewComponent implements OnInit {
   loadedPacks: number = 0;
   categoriesToShow: number = 5;
   isPageLoaded: boolean = false;
+  isfavSelected: boolean = false;
 
   //Filters
   showCategoryLine: boolean = true;
@@ -93,21 +100,21 @@ export class AllPacksPageNewComponent implements OnInit {
     { filterText: 'משברים', buttonText: 'משברים', image: '/assets/New/home-page/cards/11.svg' },
   ]
 
-  cardsColors =[
-    {color: '#E67C73'},
-    {color: '#BB7264'},
-    {color: '#2B7B5C'},
-    {color: '#009FB4'},
-    {color: '#2D427B'},
-    {color: '#7986CB'},
-    {color: '#7973CD'},
-    {color: '#7A275F'},
-    {color: '#E49200'},
-    {color: '#FF9E6B'},
-    {color: '#B3980B'},
-    {color: '#7A680C'},
+  cardsColors = [
+    { color: '#E67C73' },
+    { color: '#BB7264' },
+    { color: '#2B7B5C' },
+    { color: '#009FB4' },
+    { color: '#2D427B' },
+    { color: '#7986CB' },
+    { color: '#7973CD' },
+    { color: '#7A275F' },
+    { color: '#E49200' },
+    { color: '#FF9E6B' },
+    { color: '#B3980B' },
+    { color: '#7A680C' },
   ]
-  
+
   constructor(
     private cardsService: CardsService,
     private overlaySpinnerService: OverlaySpinnerService,
@@ -122,6 +129,28 @@ export class AllPacksPageNewComponent implements OnInit {
     private breakpointObserver: BreakpointObserver
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
+  }
+  private scrollSpeed = 10;
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
+    if (scrollContainer) {
+      console.log('scrollContainer:')
+      const { clientX } = event;
+      const { offsetWidth, scrollLeft, scrollWidth, clientWidth } = scrollContainer;
+      const boundary = 0.1 * clientWidth; // 10% from the edges
+      const maxScrollLeft = scrollWidth - clientWidth;
+      const mouseX = clientX - scrollContainer.getBoundingClientRect().left;
+      // console.log(`mouseX: ${mouseX}, clientX: ${clientX}, offsetWidth: ${offsetWidth}, scrollLeft: ${scrollLeft}, scrollWidth: ${scrollWidth}, clientWidth: ${clientWidth}, boundary: ${boundary}, maxScrollLeft: ${maxScrollLeft}`);
+      if (clientX < 100) {
+        console.log('scrollLeft:')
+        const newScrollLeft = scrollLeft - this.scrollSpeed;
+        scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
+      } else if (clientX > clientWidth - boundary && scrollLeft < maxScrollLeft) {
+        console.log('right:')
+        const newScrollLeft = scrollLeft + this.scrollSpeed;
+        scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
+      }
+    }
   }
 
   openNewTab(): void {
@@ -145,7 +174,7 @@ export class AllPacksPageNewComponent implements OnInit {
       this.showCategoryLine = true;
     }
     if (event.key === 'Escape') {
-      this.clickOutside(event);
+      // this.clickOutside(event);
     } else if (event.key === 'Enter') {
       let option = this.filteredOptions[this.currentFocusIndex];
       if (!option) {
@@ -159,6 +188,10 @@ export class AllPacksPageNewComponent implements OnInit {
       event.preventDefault();
       this.changeFocus(-1); // Move focus up
     }
+  }
+
+  handleResetClick(){
+    window.location.reload();
   }
 
   changeFocus(direction: number) {
@@ -190,6 +223,11 @@ export class AllPacksPageNewComponent implements OnInit {
       }
     });
   }
+
+  toggleIsFavSelected() {
+    this.isfavSelected = !this.isfavSelected;
+  }
+
   ngOnInit() {
     this.router.queryParams.subscribe((params) => {
       const refId = params['ref'];
@@ -335,15 +373,15 @@ export class AllPacksPageNewComponent implements OnInit {
       });
   }
 
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: Event) {
-    const clickedInsideAutocomplete =
-      this.filterTextInput.nativeElement.contains(event.target);
-    if (!clickedInsideAutocomplete) {
-      this.filteredOptions = [];
-      this.currentFocusIndex = -1;
-    }
-  }
+  // @HostListener('document:click', ['$event'])
+  // clickOutside(event: Event) {
+  //   const clickedInsideAutocomplete =
+  //     this.filterTextInput.nativeElement.contains(event.target);
+  //   if (!clickedInsideAutocomplete) {
+  //     this.filteredOptions = [];
+  //     this.currentFocusIndex = -1;
+  //   }
+  // }
 
   setAllFavPacksToShow(): void {
     this.allFavPacks = this.allPacks.filter((pack) =>
