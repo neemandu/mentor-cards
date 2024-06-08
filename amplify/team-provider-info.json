@@ -322,7 +322,9 @@
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/AddUserToEmailList-37617953634b55343067-build.zip"
         },
-        "AskTheAI": {}
+        "AskTheAI": {
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q"
+        }
       },
       "auth": {
         "mentorcards56dbf153": {}

@@ -8,6 +8,11 @@ export type AmplifyDependentResourcesAttributes = {
     "cardspacks": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string"
+    },
+    "receiptsAPI": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
     }
   },
   "auth": {
@@ -54,6 +59,7 @@ export type AmplifyDependentResourcesAttributes = {
     "AskTheAI": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
       "Name": "string",
       "Region": "string"
     },
