@@ -21,5 +21,26 @@ export class HomePageHowToUseComponent implements OnInit {
     event.target.src = `/assets/New/home-page/icons/${imageName}-pink.svg`;
   }
 
+  videos = [
+    {
+        src: '/assets/New/home-page/videos/how-to-use-1.mp4',
+        thumbnail: '/assets/New/home-page/how-to-use-1.png',
+        isPlaying: false
+    },
+    {
+        src: '/assets/New/home-page/videos/how-to-use-2.mp4',
+        thumbnail: '/assets/New/home-page/how-to-use-2.png',
+        isPlaying: false
+    },
+    {
+        src: '/assets/New/home-page/videos/how-to-use-3.mp4',
+        thumbnail: '/assets/New/home-page/how-to-use-3.png',
+        isPlaying: false
+    }
+];
+
+playVideo(video) {
+    video.isPlaying = true;
+}
 
 }

@@ -173,6 +173,9 @@ import { HomePagePartnersComponent } from './Pages/home-page-new/home-page-partn
 import { HomePageUpdatesComponent } from './Pages/home-page-new/home-page-updates/home-page-updates.component';
 import { HomePageContactUsComponent } from './Pages/home-page-new/home-page-contact-us/home-page-contact-us.component';
 import { HomePageFooterComponent } from './Pages/home-page-new/home-page-footer/home-page-footer.component';
+import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-page-new.component';
+import { FiltersComponent } from './Pages/all-packs-page-new/filters/filters.component';
+import { PacksCardComponent } from './Pages/all-packs-page-new/packs-card/packs-card.component';
 
 @NgModule({
   declarations: [
@@ -251,6 +254,9 @@ import { HomePageFooterComponent } from './Pages/home-page-new/home-page-footer/
     HomePageUpdatesComponent,
     HomePageContactUsComponent,
     HomePageFooterComponent,
+    AllPacksPageNewComponent,
+    FiltersComponent,
+    PacksCardComponent,
   ],
   imports: [
     BrowserModule,

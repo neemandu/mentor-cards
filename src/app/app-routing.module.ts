@@ -39,6 +39,7 @@ import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affili
 import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
 import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-pop-up/print-pop-up.component';
 import { HomePageNewComponent } from './Pages/home-page-new/home-page-new.component';
+import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-page-new.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -60,7 +61,7 @@ const routes: Routes = [
     component: GroupManagementComponent,
     canActivate: [AuthGuardGroupManagementService],
   },
-  { path: 'all-packs-page', component: AllPacksPageComponent },
+  { path: 'all-packs-page', component: AllPacksPageNewComponent },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'all-blogs', component: AllBlogsComponent },

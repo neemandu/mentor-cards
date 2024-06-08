@@ -16,9 +16,8 @@
       margin-right: 2.5rem/* 40px */;
   }
 }
-
-.z-40 {
-  z-index: 40;
+.w-\[1590px\] {
+  width: 1590px;
 }
 html,
 body {
