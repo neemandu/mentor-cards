@@ -102,28 +102,6 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "CreateInvoice": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "receiptsAPI"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "GetAffiliateData": {
       "build": true,
       "dependsOn": [
@@ -154,6 +132,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "GetNumberOfCardsInPack": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "GetProviderPlanId": {
       "build": true,
       "dependsOn": [
@@ -178,35 +161,6 @@
           "resourceName": "cardspacks"
         }
       ]
-    },
-    "InvoiceHandler": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "receiptsAPI"
-        },
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "Invoices"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     },
     "NewAffiliateHandler": {
       "build": true,
@@ -244,6 +198,584 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddCardsPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddCardsPack_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddCardsPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddCouponCode_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddCouponCode"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddCouponCode_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddCouponCode"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddUserToEmailList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddUserToEmailList"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddUserToEmailList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddUserToEmailList"
+        }
+      ]
+    },
+    "AMPLIFY_function_AddUserToEmailList_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AddUserToEmailList"
+        }
+      ]
+    },
+    "AMPLIFY_function_AffiliateBalanceHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AffiliateBalanceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_AffiliateBalanceHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AffiliateBalanceHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_AskTheAI_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AskTheAI"
+        }
+      ]
+    },
+    "AMPLIFY_function_AskTheAI_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AskTheAI"
+        }
+      ]
+    },
+    "AMPLIFY_function_AskTheAI_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AskTheAI"
+        }
+      ]
+    },
+    "AMPLIFY_function_ChangeCardsPack_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ChangeCardsPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_ChangeCardsPack_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ChangeCardsPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_ContactUsTrigger_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ContactUsTrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_ContactUsTrigger_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "ContactUsTrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateCommonLink_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateCommonLink"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateCommonLink_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateCommonLink"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_DeleteGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "DeleteGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_DeleteGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "DeleteGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetAffiliateData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAffiliateData"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetAffiliateData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAffiliateData"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetCardsImages_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetCardsImages"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetCardsImages_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetCardsImages"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetEndOfTrialDate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetEndOfTrialDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetEndOfTrialDate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetEndOfTrialDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetFreeUntilDate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetFreeUntilDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetFreeUntilDate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetFreeUntilDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextBillingDate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextBillingDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextBillingDate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextBillingDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextReceiptId_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextReceiptId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNextReceiptId_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNextReceiptId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNumberOfCardsInPack_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNumberOfCardsInPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNumberOfCardsInPack_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNumberOfCardsInPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetProviderPlanId_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetProviderPlanId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetProviderPlanId_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetProviderPlanId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetSubscriptionPlans_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetSubscriptionPlans"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetSubscriptionPlans_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetSubscriptionPlans"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementCardPackLike_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementCardPackLike"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementCardPackLike_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementCardPackLike"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementPackEntries_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementPackEntries"
+        }
+      ]
+    },
+    "AMPLIFY_function_IncrementPackEntries_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IncrementPackEntries"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsCardsPackOwnedByOrgForUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsCardsPackOwnedByOrgForUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsCardsPackOwnedByOrgForUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsCardsPackOwnedByOrgForUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsInGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsInGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_IsInGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "IsInGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_JoinExistingGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "JoinExistingGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_JoinExistingGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "JoinExistingGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_MessagingService_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MessagingService"
+        }
+      ]
+    },
+    "AMPLIFY_function_MessagingService_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MessagingService"
+        }
+      ]
+    },
+    "AMPLIFY_function_MessagingService_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "MessagingService"
+        }
+      ]
+    },
+    "AMPLIFY_function_NewAffiliateHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "NewAffiliateHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_NewAffiliateHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "NewAffiliateHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_PayPalWebhookFunc_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_PayPalWebhookFunc_receiptsUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_UnSubscribe_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UnSubscribe"
+        }
+      ]
+    },
+    "AMPLIFY_function_UnSubscribe_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UnSubscribe"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateGroupUsersList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateGroupUsersList"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateGroupUsersList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateGroupUsersList"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdatePaymentProgram_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdatePaymentProgram"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdatePaymentProgram_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdatePaymentProgram"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateSelectedCardPacks_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateSelectedCardPacks"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateSelectedCardPacks_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateSelectedCardPacks"
+        }
+      ]
+    },
+    "AMPLIFY_function_getGroup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_getGroup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getGroup"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards56dbf153PreSignup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards56dbf153PreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards56dbf153PreSignup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards56dbf153PreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards91f3dc29CustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards91f3dc29CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_mentorcards91f3dc29CustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "mentorcards91f3dc29CustomMessage"
+        }
+      ]
     }
   },
   "storage": {

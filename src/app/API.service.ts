@@ -101,6 +101,7 @@ export type User = {
   myAffiliate?: Affiliate | null;
   payments?: Array<Payment | null> | null;
   profession?: string | null;
+  AiConversations?: Array<AiConversation | null> | null;
 };
 
 export type MonthlySubscription = {
@@ -178,6 +179,8 @@ export type CardsPack = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -250,6 +253,14 @@ export type Payment = {
   transactionId?: string | null;
 };
 
+export type AiConversation = {
+  __typename: "AiConversation";
+  question?: string | null;
+  answer?: string | null;
+  date?: string | null;
+  threadId?: string | null;
+};
+
 export type addCardsPackInput = {
   cardsPackId?: string | null;
 };
@@ -315,6 +326,23 @@ export type InvoicesInput = {
   pricePerItem?: number | null;
   numberOfItems?: number | null;
   invoiceType?: string | null;
+};
+
+export type AiInput = {
+  question?: string | null;
+};
+
+export type AiAnswer = {
+  __typename: "AiAnswer";
+  generalAnswer?: string | null;
+  recommendedPacks?: Array<RecommendedPack | null> | null;
+};
+
+export type RecommendedPack = {
+  __typename: "RecommendedPack";
+  packId?: number | null;
+  reason?: string | null;
+  guide?: string | null;
 };
 
 export type ModelCommonLinkConditionInput = {
@@ -733,6 +761,8 @@ export type CreateCardsPackInput = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
 };
 
 export type CardsInput = {
@@ -771,6 +801,8 @@ export type ModelCardsPackConditionInput = {
   language?: ModelStringInput | null;
   isActive?: ModelBooleanInput | null;
   guidebookUrl?: ModelStringInput | null;
+  ownerName?: ModelStringInput | null;
+  numberOfCards?: ModelIntInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -802,6 +834,8 @@ export type UpdateCardsPackInput = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -991,7 +1025,6 @@ export type CreateContactUsModelInput = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
-  phone?: string | null;
 };
 
 export type ModelCommonLinkFilterInput = {
@@ -1240,6 +1273,8 @@ export type ModelCardsPackFilterInput = {
   language?: ModelStringInput | null;
   isActive?: ModelBooleanInput | null;
   guidebookUrl?: ModelStringInput | null;
+  ownerName?: ModelStringInput | null;
+  numberOfCards?: ModelIntInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1399,6 +1434,8 @@ export type CreateUserMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1587,6 +1624,8 @@ export type CreateUserMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1630,6 +1669,13 @@ export type CreateUserMutation = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AiConversations?: Array<{
+    __typename: "AiConversation";
+    question?: string | null;
+    answer?: string | null;
+    date?: string | null;
+    threadId?: string | null;
+  } | null> | null;
 };
 
 export type AddCouponCodeMutation = {
@@ -1802,6 +1848,8 @@ export type GetAffiliateDataMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1990,6 +2038,8 @@ export type GetAffiliateDataMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2033,6 +2083,24 @@ export type GetAffiliateDataMutation = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AiConversations?: Array<{
+    __typename: "AiConversation";
+    question?: string | null;
+    answer?: string | null;
+    date?: string | null;
+    threadId?: string | null;
+  } | null> | null;
+};
+
+export type AskTheAIMutation = {
+  __typename: "AiAnswer";
+  generalAnswer?: string | null;
+  recommendedPacks?: Array<{
+    __typename: "RecommendedPack";
+    packId?: number | null;
+    reason?: string | null;
+    guide?: string | null;
+  } | null> | null;
 };
 
 export type CreateCommonLinkMutation = {
@@ -2686,6 +2754,8 @@ export type CreateCardsPackMutation = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2787,6 +2857,8 @@ export type UpdateCardsPackMutation = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2888,6 +2960,8 @@ export type DeleteCardsPackMutation = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3206,6 +3280,8 @@ export type GetUserQuery = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3394,6 +3470,8 @@ export type GetUserQuery = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3437,6 +3515,13 @@ export type GetUserQuery = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AiConversations?: Array<{
+    __typename: "AiConversation";
+    question?: string | null;
+    answer?: string | null;
+    date?: string | null;
+    threadId?: string | null;
+  } | null> | null;
 };
 
 export type ListUsersQuery = {
@@ -3569,6 +3654,8 @@ export type ListUsersQuery = {
         language?: string | null;
         isActive?: boolean | null;
         guidebookUrl?: string | null;
+        ownerName?: string | null;
+        numberOfCards?: number | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3753,6 +3840,8 @@ export type ListUsersQuery = {
         language?: string | null;
         isActive?: boolean | null;
         guidebookUrl?: string | null;
+        ownerName?: string | null;
+        numberOfCards?: number | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3796,6 +3885,13 @@ export type ListUsersQuery = {
       transactionId?: string | null;
     } | null> | null;
     profession?: string | null;
+    AiConversations?: Array<{
+      __typename: "AiConversation";
+      question?: string | null;
+      answer?: string | null;
+      date?: string | null;
+      threadId?: string | null;
+    } | null> | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -4309,6 +4405,8 @@ export type GetCardsPackQuery = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4408,6 +4506,8 @@ export type ListCardsPacksQuery = {
     language?: string | null;
     isActive?: boolean | null;
     guidebookUrl?: string | null;
+    ownerName?: string | null;
+    numberOfCards?: number | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -5219,6 +5319,8 @@ export type OnCreateCardsPackSubscription = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5320,6 +5422,8 @@ export type OnUpdateCardsPackSubscription = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5421,6 +5525,8 @@ export type OnDeleteCardsPackSubscription = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5605,6 +5711,8 @@ export class APIService {
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
               createdAt
               updatedAt
             }
@@ -5793,6 +5901,8 @@ export class APIService {
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
               createdAt
               updatedAt
             }
@@ -5836,6 +5946,13 @@ export class APIService {
             transactionId
           }
           profession
+          AiConversations {
+            __typename
+            question
+            answer
+            date
+            threadId
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -6212,6 +6329,8 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
               createdAt
               updatedAt
             }
@@ -6400,6 +6519,8 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
               createdAt
               updatedAt
             }
@@ -6443,6 +6564,13 @@ async GetSubscriptionPlansForOrgs(
             transactionId
           }
           profession
+          AiConversations {
+            __typename
+            question
+            answer
+            date
+            threadId
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -6464,6 +6592,27 @@ async GetSubscriptionPlansForOrgs(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.createInvoice;
+  }
+  async AskTheAI(input: AiInput): Promise<AskTheAIMutation> {
+    const statement = `mutation AskTheAI($input: AiInput!) {
+        askTheAI(input: $input) {
+          __typename
+          generalAnswer
+          recommendedPacks {
+            __typename
+            packId
+            reason
+            guide
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <AskTheAIMutation>response.data.askTheAI;
   }
   async CreateCommonLink(
     input: CreateCommonLinkInput,
@@ -7527,6 +7676,8 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
         }
@@ -7644,6 +7795,8 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
         }
@@ -7761,6 +7914,8 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
         }
@@ -8301,6 +8456,8 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
               createdAt
               updatedAt
             }
@@ -8489,6 +8646,8 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
               createdAt
               updatedAt
             }
@@ -8532,6 +8691,13 @@ async GetSubscriptionPlansForOrgs(
             transactionId
           }
           profession
+          AiConversations {
+            __typename
+            question
+            answer
+            date
+            threadId
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -8678,6 +8844,8 @@ async GetSubscriptionPlansForOrgs(
                 language
                 isActive
                 guidebookUrl
+                ownerName
+                numberOfCards
                 createdAt
                 updatedAt
               }
@@ -8862,6 +9030,8 @@ async GetSubscriptionPlansForOrgs(
                 language
                 isActive
                 guidebookUrl
+                ownerName
+                numberOfCards
                 createdAt
                 updatedAt
               }
@@ -8905,6 +9075,13 @@ async GetSubscriptionPlansForOrgs(
               transactionId
             }
             profession
+            AiConversations {
+              __typename
+              question
+              answer
+              date
+              threadId
+            }
           }
           nextToken
         }
@@ -9726,6 +9903,8 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
         }
@@ -9964,6 +10143,8 @@ async ListCardsPacksForPreview(
             language
             isActive
             guidebookUrl
+            ownerName
+            numberOfCards
             createdAt
             updatedAt
           }
@@ -11201,6 +11382,8 @@ async ListCardsPacksForPreview(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
         }
@@ -11312,6 +11495,8 @@ async ListCardsPacksForPreview(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
         }
@@ -11423,6 +11608,8 @@ async ListCardsPacksForPreview(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
         }

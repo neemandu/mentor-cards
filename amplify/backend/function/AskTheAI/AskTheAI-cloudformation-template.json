@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.8.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -127,6 +127,50 @@
                   "chatgptsecret"
                 ]
               ]
+            },
+            "chatgptorg": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "AskTheAI"
+                      }
+                    ]
+                  },
+                  "chatgptorg"
+                ]
+              ]
+            },
+            "chatgptproj": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "AskTheAI"
+                      }
+                    ]
+                  },
+                  "chatgptproj"
+                ]
+              ]
             }
           }
         },
@@ -136,7 +180,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs18.x",
         "Layers": [],
         "Timeout": 25
       }
@@ -147,12 +191,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "mentorcardsLambdaRolecb34c8d5",
+            "mentorcardsLambdaRole7075f724",
             {
               "Fn::Join": [
                 "",
                 [
-                  "mentorcardsLambdaRolecb34c8d5",
+                  "mentorcardsLambdaRole7075f724",
                   "-",
                   {
                     "Ref": "env"
@@ -251,7 +295,8 @@
                 "dynamodb:Scan",
                 "dynamodb:Query",
                 "dynamodb:Update*",
-                "dynamodb:RestoreTable*"
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {

@@ -287,6 +287,7 @@ type CardsPack
   isActive: Boolean
   guidebookUrl: String
   ownerName: String
+  numberOfCards: Int @function(name: "GetNumberOfCardsInPack-${env}") 
 }
 
 type UserUsage {

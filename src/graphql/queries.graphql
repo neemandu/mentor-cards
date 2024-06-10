@@ -1,5 +1,4 @@
 # this is an auto generated file. This will be overwritten
-
 query GetCommonLink($id: ID!) {
   getCommonLink(id: $id) {
     id
@@ -7,10 +6,8 @@ query GetCommonLink($id: ID!) {
     createdBy
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListCommonLinks(
   $filter: ModelCommonLinkFilterInput
   $limit: Int
@@ -23,13 +20,10 @@ query ListCommonLinks(
       createdBy
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetUser($id: ID!) {
   getUser(id: $id) {
     id
@@ -61,16 +55,13 @@ query GetUser($id: ID!) {
             text
             imgUrl
             link
-            __typename
           }
           createdAt
           updatedAt
-          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
-        __typename
       }
       includedCardPacksIds {
         id
@@ -81,7 +72,6 @@ query GetUser($id: ID!) {
         cards {
           backImgUrl
           frontImgUrl
-          __typename
         }
         cardsPreview
         groupsIds
@@ -95,15 +85,10 @@ query GetUser($id: ID!) {
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
-          __typename
         }
         name
         freeUntilDate
@@ -111,7 +96,6 @@ query GetUser($id: ID!) {
           text
           imgUrl
           link
-          __typename
         }
         isOwnedByOrg
         brief
@@ -139,34 +123,30 @@ query GetUser($id: ID!) {
               text
               imgUrl
               link
-              __typename
             }
             createdAt
             updatedAt
-            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
-          __typename
         }
         topQuestions
         usersUsage {
           user
           entries
-          __typename
         }
         isFree
         language
         isActive
         guidebookUrl
+        ownerName
+        numberOfCards
         createdAt
         updatedAt
-        __typename
       }
       cancellationDate
       nextBillingDate
-      __typename
     }
     numberOfPacksSubstitutions
     lastPackSubstitutionDate
@@ -192,15 +172,12 @@ query GetUser($id: ID!) {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     cardsPacksIds
     providerTransactionId
@@ -214,11 +191,9 @@ query GetUser($id: ID!) {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     endOfTrialDate
     createdAt
@@ -249,16 +224,13 @@ query GetUser($id: ID!) {
             text
             imgUrl
             link
-            __typename
           }
           createdAt
           updatedAt
-          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
-        __typename
       }
       includedCardPacksIds {
         id
@@ -269,7 +241,6 @@ query GetUser($id: ID!) {
         cards {
           backImgUrl
           frontImgUrl
-          __typename
         }
         cardsPreview
         groupsIds
@@ -283,15 +254,10 @@ query GetUser($id: ID!) {
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
-          __typename
         }
         name
         freeUntilDate
@@ -299,7 +265,6 @@ query GetUser($id: ID!) {
           text
           imgUrl
           link
-          __typename
         }
         isOwnedByOrg
         brief
@@ -327,34 +292,30 @@ query GetUser($id: ID!) {
               text
               imgUrl
               link
-              __typename
             }
             createdAt
             updatedAt
-            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
-          __typename
         }
         topQuestions
         usersUsage {
           user
           entries
-          __typename
         }
         isFree
         language
         isActive
         guidebookUrl
+        ownerName
+        numberOfCards
         createdAt
         updatedAt
-        __typename
       }
       cancellationDate
       nextBillingDate
-      __typename
     }
     entryDates
     refId
@@ -376,11 +337,9 @@ query GetUser($id: ID!) {
         currency
         paymentWay
         transactionId
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     payments {
       id
@@ -390,13 +349,16 @@ query GetUser($id: ID!) {
       currency
       paymentWay
       transactionId
-      __typename
     }
     profession
-    __typename
+    AiConversations {
+      question
+      answer
+      date
+      threadId
+    }
   }
 }
-
 query ListUsers(
   $filter: ModelUserFilterInput
   $limit: Int
@@ -433,16 +395,13 @@ query ListUsers(
               text
               imgUrl
               link
-              __typename
             }
             createdAt
             updatedAt
-            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
-          __typename
         }
         includedCardPacksIds {
           id
@@ -453,7 +412,6 @@ query ListUsers(
           cards {
             backImgUrl
             frontImgUrl
-            __typename
           }
           cardsPreview
           groupsIds
@@ -465,13 +423,9 @@ query ListUsers(
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
           name
           freeUntilDate
@@ -479,7 +433,6 @@ query ListUsers(
             text
             imgUrl
             link
-            __typename
           }
           isOwnedByOrg
           brief
@@ -507,34 +460,30 @@ query ListUsers(
                 text
                 imgUrl
                 link
-                __typename
               }
               createdAt
               updatedAt
-              __typename
             }
             subscriptionProviderPlanId
             createdAt
             updatedAt
-            __typename
           }
           topQuestions
           usersUsage {
             user
             entries
-            __typename
           }
           isFree
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
-          __typename
         }
         cancellationDate
         nextBillingDate
-        __typename
       }
       numberOfPacksSubstitutions
       lastPackSubstitutionDate
@@ -560,15 +509,12 @@ query ListUsers(
             text
             imgUrl
             link
-            __typename
           }
           createdAt
           updatedAt
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       cardsPacksIds
       providerTransactionId
@@ -582,11 +528,9 @@ query ListUsers(
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       endOfTrialDate
       createdAt
@@ -617,16 +561,13 @@ query ListUsers(
               text
               imgUrl
               link
-              __typename
             }
             createdAt
             updatedAt
-            __typename
           }
           subscriptionProviderPlanId
           createdAt
           updatedAt
-          __typename
         }
         includedCardPacksIds {
           id
@@ -637,7 +578,6 @@ query ListUsers(
           cards {
             backImgUrl
             frontImgUrl
-            __typename
           }
           cardsPreview
           groupsIds
@@ -649,13 +589,9 @@ query ListUsers(
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
           name
           freeUntilDate
@@ -663,7 +599,6 @@ query ListUsers(
             text
             imgUrl
             link
-            __typename
           }
           isOwnedByOrg
           brief
@@ -691,34 +626,30 @@ query ListUsers(
                 text
                 imgUrl
                 link
-                __typename
               }
               createdAt
               updatedAt
-              __typename
             }
             subscriptionProviderPlanId
             createdAt
             updatedAt
-            __typename
           }
           topQuestions
           usersUsage {
             user
             entries
-            __typename
           }
           isFree
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
           createdAt
           updatedAt
-          __typename
         }
         cancellationDate
         nextBillingDate
-        __typename
       }
       entryDates
       refId
@@ -740,11 +671,9 @@ query ListUsers(
           currency
           paymentWay
           transactionId
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       payments {
         id
@@ -754,16 +683,18 @@ query ListUsers(
         currency
         paymentWay
         transactionId
-        __typename
       }
       profession
-      __typename
+      AiConversations {
+        question
+        answer
+        date
+        threadId
+      }
     }
     nextToken
-    __typename
   }
 }
-
 query GetAffiliate($id: ID!) {
   getAffiliate(id: $id) {
     id
@@ -783,14 +714,11 @@ query GetAffiliate($id: ID!) {
       currency
       paymentWay
       transactionId
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListAffiliates(
   $filter: ModelAffiliateFilterInput
   $limit: Int
@@ -815,17 +743,13 @@ query ListAffiliates(
         currency
         paymentWay
         transactionId
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetCouponCodes($id: ID!) {
   getCouponCodes(id: $id) {
     id
@@ -842,18 +766,14 @@ query GetCouponCodes($id: ID!) {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListCouponCodess(
   $filter: ModelCouponCodesFilterInput
   $limit: Int
@@ -875,21 +795,16 @@ query ListCouponCodess(
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetOrganizations($id: ID!) {
   getOrganizations(id: $id) {
     id
@@ -903,19 +818,15 @@ query GetOrganizations($id: ID!) {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     verifyPersonByEmail
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListOrganizationss(
   $filter: ModelOrganizationsFilterInput
   $limit: Int
@@ -934,22 +845,17 @@ query ListOrganizationss(
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       verifyPersonByEmail
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetOrganizationMembership($id: ID!) {
   getOrganizationMembership(id: $id) {
     id
@@ -960,14 +866,11 @@ query GetOrganizationMembership($id: ID!) {
       text
       imgUrl
       link
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListOrganizationMemberships(
   $filter: ModelOrganizationMembershipFilterInput
   $limit: Int
@@ -987,24 +890,19 @@ query ListOrganizationMemberships(
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetGroup($id: ID!) {
   getGroup(id: $id) {
     id
     groupUsers {
       email
       role
-      __typename
     }
     paymentProgram {
       id
@@ -1025,23 +923,18 @@ query GetGroup($id: ID!) {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListGroups(
   $filter: ModelGroupFilterInput
   $limit: Int
@@ -1053,7 +946,6 @@ query ListGroups(
       groupUsers {
         email
         role
-        __typename
       }
       paymentProgram {
         id
@@ -1074,26 +966,20 @@ query ListGroups(
             text
             imgUrl
             link
-            __typename
           }
           createdAt
           updatedAt
-          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetMessageQueue($id: ID!) {
   getMessageQueue(id: $id) {
     id
@@ -1106,10 +992,8 @@ query GetMessageQueue($id: ID!) {
     params
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListMessageQueues(
   $filter: ModelMessageQueueFilterInput
   $limit: Int
@@ -1127,13 +1011,10 @@ query ListMessageQueues(
       params
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetInvoices($id: ID!) {
   getInvoices(id: $id) {
     id
@@ -1146,7 +1027,6 @@ query GetInvoices($id: ID!) {
       itemName
       pricePerItem
       numberOfItems
-      __typename
     }
     businessName
     businessPhoneNumber
@@ -1156,10 +1036,8 @@ query GetInvoices($id: ID!) {
     s3Url
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListInvoicess(
   $filter: ModelInvoicesFilterInput
   $limit: Int
@@ -1177,7 +1055,6 @@ query ListInvoicess(
         itemName
         pricePerItem
         numberOfItems
-        __typename
       }
       businessName
       businessPhoneNumber
@@ -1187,23 +1064,18 @@ query ListInvoicess(
       s3Url
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetReceiptsId($id: ID!) {
   getReceiptsId(id: $id) {
     id
     counter
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListReceiptsIds(
   $filter: ModelReceiptsIdFilterInput
   $limit: Int
@@ -1215,13 +1087,10 @@ query ListReceiptsIds(
       counter
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetNews($id: ID!) {
   getNews(id: $id) {
     id
@@ -1229,10 +1098,8 @@ query GetNews($id: ID!) {
     order
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListNewss(
   $filter: ModelNewsFilterInput
   $limit: Int
@@ -1245,10 +1112,8 @@ query ListNewss(
       order
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
 query GetCardsPack($id: ID!, $link: String!) {
@@ -1261,7 +1126,6 @@ query GetCardsPack($id: ID!, $link: String!) {
     cards(link: $link) {
       backImgUrl
       frontImgUrl
-      __typename
     }
     cardsPreview
     groupsIds
@@ -1279,19 +1143,12 @@ query GetCardsPack($id: ID!, $link: String!) {
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
-          __typename
         }
-        __typename
       }
-      __typename
     }
     name
     freeUntilDate
@@ -1299,7 +1156,6 @@ query GetCardsPack($id: ID!, $link: String!) {
       text
       imgUrl
       link
-      __typename
     }
     isOwnedByOrg
     brief
@@ -1327,33 +1183,29 @@ query GetCardsPack($id: ID!, $link: String!) {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     topQuestions
     usersUsage {
       user
       entries
-      __typename
     }
     isFree
     language
     isActive
     guidebookUrl
+    ownerName
+    numberOfCards
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListCardsPacks(
   $filter: ModelCardsPackFilterInput
   $limit: Int
@@ -1369,7 +1221,6 @@ query ListCardsPacks(
       cards {
         backImgUrl
         frontImgUrl
-        __typename
       }
       cardsPreview
       groupsIds
@@ -1385,17 +1236,11 @@ query ListCardsPacks(
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
-          __typename
         }
-        __typename
       }
       name
       freeUntilDate
@@ -1403,7 +1248,6 @@ query ListCardsPacks(
         text
         imgUrl
         link
-        __typename
       }
       isOwnedByOrg
       brief
@@ -1431,36 +1275,31 @@ query ListCardsPacks(
             text
             imgUrl
             link
-            __typename
           }
           createdAt
           updatedAt
-          __typename
         }
         subscriptionProviderPlanId
         createdAt
         updatedAt
-        __typename
       }
       topQuestions
       usersUsage {
         user
         entries
-        __typename
       }
       isFree
       language
       isActive
       guidebookUrl
+      ownerName
+      numberOfCards
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
-
 query GetContactUsModel($id: ID!) {
   getContactUsModel(id: $id) {
     id
@@ -1469,10 +1308,8 @@ query GetContactUsModel($id: ID!) {
     email
     createdAt
     updatedAt
-    __typename
   }
 }
-
 query ListContactUsModels(
   $filter: ModelContactUsModelFilterInput
   $limit: Int
@@ -1486,9 +1323,7 @@ query ListContactUsModels(
       email
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }

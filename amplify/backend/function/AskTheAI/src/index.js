@@ -3,13 +3,6 @@ Use the following code to retrieve configured secrets from SSM:
 
 const aws = require('aws-sdk');
 
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["chatgptsecret"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
 /* Amplify Params - DO NOT EDIT
@@ -30,10 +23,12 @@ AWS.config.update({
     //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 });
 
-const openai = new OpenAI({
-    organization: "org-UWDplrClL62LSu8nHcg4HH7q",
-    project: "$proj_arl8SvqYJkXqAfkifDLBD3tL",
-});
+const { Parameters } = await (new AWS.SSM())
+  .getParameters({
+    Names: ["chatgptsecret","chatgptorg","chatgptproj"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
 
 async function getUser(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -83,27 +78,39 @@ function generatePrompt(conversations, newQuestion, username) {
 }
 
 async function getAIResponse(prompt, threadId) {
-    if(!threadId){
-        let thread = openai.beta.threads.create();
-        threadId = thread.id;
-    }
+  const chatgptsecret = Parameters.find(param => param.Name === process.env["chatgptsecret"]);
+  const chatgptorg = Parameters.find(param => param.Name === process.env["chatgptorg"]);
+  const chatgptproj = Parameters.find(param => param.Name === process.env["chatgptproj"]);
+  const openai = new OpenAI({
+    apiKey: chatgptsecret,
+    organization: chatgptorg,
+    project: chatgptproj,
+  });
 
-    let message = openai.beta.threads.messages.create(
-        threadId=threadId,
-        body=prompt
-      );
+  if(!threadId){
+      let thread = await openai.beta.threads.create();
+      threadId = thread.id;
+  }
+  console.log("Adding a new message to thread: " + threadId);
+  let message = await openai.beta.threads.messages.create(
+      threadId=threadId, {
+        role: "user",
+        content: prompt
+      }
+    );
 
-    let run = openai.beta.threads.runs.createAndPoll(
-        threadId=threadId,
-        assistantId="asst_uP8m411Fx1btiLacl8olBcti",
-        body="Please address the user as " + username  + "."
-      );
-    let messages = [];
-    if(run.status == 'completed')
-      messages = openai.beta.threads.messages.list(
-        threadId=threadId
-      );
-    return messages;
+  console.log("Running assistant for thread: " + threadId);
+  let run = await openai.beta.threads.runs.createAndPoll(
+      threadId=threadId,{
+        assistantId: "asst_uP8m411Fx1btiLacl8olBcti"
+      });
+
+  let messages = [];
+  if(run.status == 'completed')
+    messages = openai.beta.threads.messages.list(
+      threadId=threadId
+    );
+  return messages;
 }
 
 exports.handler = async (event) => {
@@ -130,23 +137,11 @@ exports.handler = async (event) => {
 
     getAIResponse(prompt)
     .then(response => {
-        console.log("AI Response:", response);
+        console.log("AI Response:");
+        console.log(response);
+        return response
     })
     .catch(error => {
         console.error(error);
     });
-
-
-
-
-
-
-    const stream = await openai.chat.completions.create({
-        model: "gpt-4o",
-        messages: [{ role: "user", content: question }],
-        stream: true,
-    });
-    for await (const chunk of stream) {
-        process.stdout.write(chunk.choices[0]?.delta?.content || "");
-    }
 };
