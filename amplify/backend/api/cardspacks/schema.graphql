@@ -328,6 +328,7 @@ type ContactUsModel
   name: String
   content: String
   email: String
+  phone: String
 }
 
 type Invoices @model @auth(rules: [{ allow: groups, groups: ["Admins"] }]) {

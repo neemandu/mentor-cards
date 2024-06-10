@@ -900,12 +900,14 @@ export type UpdateContactUsModelInput = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
 };
 
 export type ModelContactUsModelConditionInput = {
   name?: ModelStringInput | null;
   content?: ModelStringInput | null;
   email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
   and?: Array<ModelContactUsModelConditionInput | null> | null;
   or?: Array<ModelContactUsModelConditionInput | null> | null;
   not?: ModelContactUsModelConditionInput | null;
@@ -917,6 +919,7 @@ export type ContactUsModel = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -1025,6 +1028,7 @@ export type CreateContactUsModelInput = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
 };
 
 export type ModelCommonLinkFilterInput = {
@@ -1291,6 +1295,7 @@ export type ModelContactUsModelFilterInput = {
   name?: ModelStringInput | null;
   content?: ModelStringInput | null;
   email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
   and?: Array<ModelContactUsModelFilterInput | null> | null;
   or?: Array<ModelContactUsModelFilterInput | null> | null;
   not?: ModelContactUsModelFilterInput | null;
@@ -3014,6 +3019,7 @@ export type UpdateContactUsModelMutation = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3024,6 +3030,7 @@ export type DeleteContactUsModelMutation = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3122,6 +3129,7 @@ export type CreateContactUsModelMutation = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4520,6 +4528,7 @@ export type GetContactUsModelQuery = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4532,6 +4541,7 @@ export type ListContactUsModelsQuery = {
     name?: string | null;
     content?: string | null;
     email?: string | null;
+    phone?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -5537,6 +5547,7 @@ export type OnCreateContactUsModelSubscription = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5547,6 +5558,7 @@ export type OnUpdateContactUsModelSubscription = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5557,6 +5569,7 @@ export type OnDeleteContactUsModelSubscription = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -8032,6 +8045,7 @@ async GetSubscriptionPlansForOrgs(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -8058,6 +8072,7 @@ async GetSubscriptionPlansForOrgs(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -8252,6 +8267,7 @@ async GetSubscriptionPlansForOrgs(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -10174,6 +10190,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -10200,6 +10217,7 @@ async ListCardsPacksForPreview(
             name
             content
             email
+            phone
             createdAt
             updatedAt
           }
@@ -11632,6 +11650,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -11656,6 +11675,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -11680,6 +11700,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }

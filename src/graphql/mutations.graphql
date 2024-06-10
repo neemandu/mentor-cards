@@ -1683,6 +1683,7 @@ mutation UpdateContactUsModel(
     name
     content
     email
+    phone
     createdAt
     updatedAt
   }
@@ -1696,6 +1697,7 @@ mutation DeleteContactUsModel(
     name
     content
     email
+    phone
     createdAt
     updatedAt
   }
@@ -1809,6 +1811,7 @@ mutation CreateContactUsModel(
     name
     content
     email
+    phone
     createdAt
     updatedAt
   }

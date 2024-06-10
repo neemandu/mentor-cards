@@ -920,6 +920,7 @@ subscription OnCreateContactUsModel {
     name
     content
     email
+    phone
     createdAt
     updatedAt
   }
@@ -930,6 +931,7 @@ subscription OnUpdateContactUsModel {
     name
     content
     email
+    phone
     createdAt
     updatedAt
   }
@@ -940,6 +942,7 @@ subscription OnDeleteContactUsModel {
     name
     content
     email
+    phone
     createdAt
     updatedAt
   }

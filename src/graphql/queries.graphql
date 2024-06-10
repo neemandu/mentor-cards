@@ -1306,6 +1306,7 @@ query GetContactUsModel($id: ID!) {
     name
     content
     email
+    phone
     createdAt
     updatedAt
   }
@@ -1321,6 +1322,7 @@ query ListContactUsModels(
       name
       content
       email
+      phone
       createdAt
       updatedAt
     }
