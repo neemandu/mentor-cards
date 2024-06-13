@@ -174,8 +174,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between "
-                    >
+                <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between ">
                     <div
                         class="sm:items-center sm:w-40 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 ">
                         כל הערכות</div>
@@ -230,6 +229,9 @@
         </div>
     </div>
     <app-home-page-footer></app-home-page-footer>
+    <div style="position: absolute; bottom: 0; left: 0; z-index: 10; justify-content: start;">
+        <app-ai-chat></app-ai-chat>
+    </div>
 </div>
 
 
@@ -303,28 +305,28 @@
                     <div>
                         <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
                             value="Russian" (ngModelChange)="handleCategoryClick('רוסית')"
-                            style="accent-color: #000000;"  class="large-radio">
+                            style="accent-color: #000000;" class="large-radio">
                         <div style="font-size: 10px;" for="radio1">{{ 'pages.all-packs-page-new.content.russian' |
                             translate }}</div>
                     </div>
                     <div>
                         <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="Arabic" (ngModelChange)="handleCategoryClick('ערבית')"
-                            style="accent-color: #000000;"  class="large-radio">
+                            value="Arabic" (ngModelChange)="handleCategoryClick('ערבית')" style="accent-color: #000000;"
+                            class="large-radio">
                         <div style="font-size: 10px;" for="radio2">{{ 'pages.all-packs-page-new.content.arabic' |
                             translate }}</div>
                     </div>
                     <div>
                         <input type="radio" id="radio3" name="radioGroup" [(ngModel)]="filterOption.language"
                             value="English" (ngModelChange)="handleCategoryClick('אנגלית')"
-                            style="accent-color: #000000;"  class="large-radio">
+                            style="accent-color: #000000;" class="large-radio">
                         <div style="font-size: 10px;" for="radio3">{{ 'pages.all-packs-page-new.content.english' |
                             translate }}</div>
                     </div>
                     <div>
                         <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="Hebrew" (ngModelChange)="handleCategoryClick('עברית')"
-                            style="accent-color: #000000;"  class="large-radio">
+                            value="Hebrew" (ngModelChange)="handleCategoryClick('עברית')" style="accent-color: #000000;"
+                            class="large-radio">
                         <div style="font-size: 10px;" for="radio4">{{ 'pages.all-packs-page-new.content.hebrew' |
                             translate }}</div>
                     </div>
