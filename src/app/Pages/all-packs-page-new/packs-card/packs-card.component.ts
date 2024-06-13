@@ -8,13 +8,19 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
   templateUrl: './packs-card.component.html',
   styleUrls: ['./packs-card.component.css']
 })
-export class PacksCardComponent {
+export class PacksCardComponent implements OnInit {
 
-  constructor(public langDirectionService: LangDirectionService,     private userAuthService: UserAuthService) { }
+  constructor(public langDirectionService: LangDirectionService, private userAuthService: UserAuthService) { }
 
   @Input() backgroundColor: string;
   @Input() packInfo: PackInfo;
   fav: boolean = false;
+  initialLikeCounter: number = 0;
+  isFavCard: boolean = false;
+
+  ngOnInit(): void {
+    this.initialLikeCounter = this.packInfo.likesCounter;
+  }
 
   addRemoveFavorite(): void {
     if (!this.fav) {

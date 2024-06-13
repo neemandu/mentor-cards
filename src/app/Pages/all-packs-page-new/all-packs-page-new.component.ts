@@ -40,6 +40,7 @@ export class AllPacksPageNewComponent implements OnInit {
   @ViewChild('filterText') filterTextInput: ElementRef;
   @ViewChildren('autocompleteOptions')
   autocompleteOptions: QueryList<MatOption>;
+  isMobileScreen: boolean;
 
   Subscription: Subscription = new Subscription();
   filteredOptions = [];
@@ -84,6 +85,7 @@ export class AllPacksPageNewComponent implements OnInit {
   showBottomArrow: boolean = true;
   stopGenerateOptions: boolean = true;
   currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
+  selectedFilter: string;
 
   filterList = [
     { filterText: 'לכל הערכות', buttonText: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
@@ -91,7 +93,7 @@ export class AllPacksPageNewComponent implements OnInit {
     { filterText: 'מערכות יחסים', buttonText: 'מערכות יחסים', image: '/assets/New/home-page/cards/2.svg' },
     { filterText: 'ילדים ונוער', buttonText: 'ילדים ונוער', image: '/assets/New/home-page/cards/3.svg' },
     { filterText: 'חיבור לעצמי', buttonText: 'חיבור לעצמי', image: '/assets/New/home-page/cards/4.svg' },
-    { filterText: 'העצמה ', buttonText: 'העצמה ', image: '/assets/New/home-page/cards/7.svg' },
+    { filterText: 'העצמה', buttonText: 'העצמה', image: '/assets/New/home-page/cards/7.svg' },
     { filterText: 'חגים', buttonText: 'חגים', image: '/assets/New/home-page/cards/8.svg' },
     { filterText: 'מנהיגות', buttonText: 'מנהיגות', image: '/assets/New/home-page/cards/5.svg' },
     { filterText: 'חזון ומטרות', buttonText: 'חזון ומטרות', image: '/assets/New/home-page/cards/6.svg' },
@@ -129,6 +131,7 @@ export class AllPacksPageNewComponent implements OnInit {
     private breakpointObserver: BreakpointObserver
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.checkScreenSize();
   }
   private scrollSpeed = 10;
   @HostListener('mousemove', ['$event'])
@@ -151,6 +154,15 @@ export class AllPacksPageNewComponent implements OnInit {
         scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
       }
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize() {
+    this.isMobileScreen = window.innerWidth < 640; // Example breakpoint for mobile screens
   }
 
   openNewTab(): void {
@@ -207,6 +219,15 @@ export class AllPacksPageNewComponent implements OnInit {
     const optionToFocus = optionsArray[this.currentFocusIndex];
     if (optionToFocus) {
       optionToFocus.focus();
+    }
+  }
+
+  handleFilterChange(filter: string) {
+    if (filter === 'fav') {
+      this.toggleIsFavSelected();
+    } else if (filter === 'category') {
+      this.isfavSelected = false;
+      this.handleCategoryClick('');
     }
   }
 

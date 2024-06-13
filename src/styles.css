@@ -16,8 +16,36 @@
       margin-right: 2.5rem/* 40px */;
   }
 }
-.w-\[1590px\] {
-  width: 1590px;
+@media (min-width: 640px) {
+  .sm\:border-r-2 {
+      border-right-width: 2px;
+  }
+}
+
+@media (min-width: 640px) {
+  .sm\:border-l-2 {
+      border-left-width: 2px;
+  }
+}
+.border-b-1 {
+  border-bottom-width: 1px;
+}
+
+@media (min-width: 640px) {
+    .sm\:w-\[1590px\] {
+        width: 1590px;
+    }
+}
+
+@media (min-width: 1773px) {
+  .custom-grid-cols-8 {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+
+.border-b-2 {
+  border-bottom-width: 2px;
 }
 html,
 body {
