@@ -42,10 +42,8 @@
       grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 }
-
-
-.border-b-2 {
-  border-bottom-width: 2px;
+.justify-evenly {
+  justify-content: space-evenly;
 }
 html,
 body {

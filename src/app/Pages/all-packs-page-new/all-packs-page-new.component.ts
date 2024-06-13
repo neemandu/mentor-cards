@@ -25,6 +25,7 @@ import { LangDirectionService } from 'src/app/Services/LangDirectionService.serv
 import { bool } from 'aws-sdk/clients/signer';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { UserLoginDialogComponent } from '../all-packs-page/user-login-dialog/user-login-dialog.component';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 interface CategoryPack {
   category: string;
@@ -86,6 +87,7 @@ export class AllPacksPageNewComponent implements OnInit {
   stopGenerateOptions: boolean = true;
   currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
   selectedFilter: string;
+  isFilterDialogOpen: boolean = false;
 
   filterList = [
     { filterText: 'לכל הערכות', buttonText: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
@@ -116,7 +118,7 @@ export class AllPacksPageNewComponent implements OnInit {
     { color: '#B3980B' },
     { color: '#7A680C' },
   ]
-
+  @ViewChild('settingsMenuTrigger') settingsMenuTrigger: MatMenuTrigger;
   constructor(
     private cardsService: CardsService,
     private overlaySpinnerService: OverlaySpinnerService,
@@ -178,6 +180,15 @@ export class AllPacksPageNewComponent implements OnInit {
 
     // Remove duplicates
     this.allOptions = Array.from(new Set(allTags));
+  }
+
+  openFilterDialog() {
+    console.log('openFilterDialog');
+    this.isFilterDialogOpen = true;
+  }
+
+  closeFilterDialog() {
+    this.isFilterDialogOpen = false;
   }
 
   handleKeyDown(event: KeyboardEvent) {

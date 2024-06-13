@@ -177,6 +177,7 @@ import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-p
 import { FiltersComponent } from './Pages/all-packs-page-new/filters/filters.component';
 import { PacksCardComponent } from './Pages/all-packs-page-new/packs-card/packs-card.component';
 import { SubscribeCardComponent } from './Pages/all-packs-page-new/subscribe-card/subscribe-card.component';
+import { FilterDialogComponent } from './Pages/all-packs-page-new/filter-dialog/filter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -259,6 +260,7 @@ import { SubscribeCardComponent } from './Pages/all-packs-page-new/subscribe-car
     FiltersComponent,
     PacksCardComponent,
     SubscribeCardComponent,
+    FilterDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,3 +14,28 @@
   .scroller::-webkit-scrollbar {
     display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
   }
+  
+  .dialog-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  .dialog-container .content {
+    margin-top: 48px;
+    /* Additional styles if needed */
+  }
+  
+  .dialog-container button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+
+  .large-radio {
+    transform: scale(1.5); /* Adjust the scale value as needed */
+    margin: 10px; /* Add some margin to avoid overlap with other elements */
+  }
