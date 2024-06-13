@@ -127,7 +127,7 @@
                 </div>
                 <div *ngIf="!isMobileScreen" class="w-[7%] border-black h-[90%] ">
                     <div>&nbsp;</div>
-                    <app-filters [imageSrc]="'/assets/New/home-page/cards/13.svg'" [buttonText]="'איפוס חיפוש'"
+                    <app-filters [imageSrc]="'/assets/New/home-page/cards/undo.svg'" [buttonText]="'איפוס חיפוש'"
                         [filterText]="''" (categoryClick)="handleResetClick()">
                     </app-filters>
                 </div>
@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between "
-                    *ngIf="this.userData?.status === 'NOPLAN'">
+                    >
                     <div
                         class="sm:items-center sm:w-40 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 ">
                         כל הערכות</div>
