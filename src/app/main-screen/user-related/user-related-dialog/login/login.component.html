@@ -15,7 +15,7 @@
           <mat-label>{{ 'pages.login.login-div.login-form.password.label' | translate }}</mat-label>
           <input autocomplete="current-password" formControlName="password" matInput
             [type]="hidePW ? 'password' : 'text'">
-          <mat-error *ngIf="loginForm.controls.password.errors?.usernamePwWrong">{{ 'pages.login.login-div.password.errors.usernamePwWrong' | translate }}</mat-error>
+          <mat-error *ngIf="loginForm.controls.password.errors?.usernamePwWrong">{{ 'pages.login.login-div.login-form.password.errors.usernamePwWrong' | translate }}</mat-error>
           <button type="button" mat-icon-button matSuffix (click)="hidePW = !hidePW">
             <mat-icon style="font-family: 'Material Icons';">{{hidePW ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>

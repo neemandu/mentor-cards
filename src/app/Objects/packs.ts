@@ -21,6 +21,7 @@ export class PackInfo {
     subscriptionPlans: SubscriptionPlan[];
     topQuestions: string[];
     guidebookUrl: string;
+    numberOfCards:number;
 
     constructor() { }
 
@@ -51,6 +52,7 @@ export class PackContent {
     subscriptionPlans: SubscriptionPlan[];
     isExternalPack: boolean;
     guidebookUrl: string;
+    numberOfCards:number;
 
     constructor() { }
 

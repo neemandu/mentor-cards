@@ -45,6 +45,22 @@
         "packsForYourMeeting": "These are the packs suitable for your meeting",
         "category": "Category",
         "resetFilters": "Reset Filters"
+      },
+      "filterText": {
+        "לכל הערכות": "All Packs",
+        "הכרות וחיבור": "Introduction and Connection",
+        "מערכות יחסים": "Relationships",
+        "ילדים ונוער": "Children and Youth",
+        "חיבור לעצמי": "Self-Connection",
+        "העצמה": "Empowerment",
+        "חגים": "Holidays",
+        "מנהיגות": "Leadership",
+        "חזון ומטרות": "Vision and Goals",
+        "קריירה": "Career",
+        "רגשות": "Emotions",
+        "משברים": "Crises",
+        "המועדפים עלי": "My Favorites",
+        "איפוס חיפוש": "Reset Search"
       }
     },
     "about-us": {
@@ -1091,42 +1107,42 @@
             "search-placeholder": "What is the topic of your meeting? Look for a kit",
             "cardsList": [
               {
-                  "content": "Acquaintance and Connection"
+                "content": "Acquaintance and Connection"
               },
               {
-                  "content": "Relationship Systems"
+                "content": "Relationship Systems"
               },
               {
-                  "content": "Children and Youth"
+                "content": "Children and Youth"
               },
               {
-                  "content": "Connection to Myself"
+                "content": "Connection to Myself"
               },
               {
-                  "content": "Leadership"
+                "content": "Leadership"
               },
               {
-                  "content": "Vision and Goals"
+                "content": "Vision and Goals"
               },
               {
-                  "content": "Empowerment"
+                "content": "Empowerment"
               },
               {
-                  "content": "Holidays"
+                "content": "Holidays"
               },
               {
-                  "content": "Career"
+                "content": "Career"
               },
               {
-                  "content": "Emotions"
+                "content": "Emotions"
               },
               {
-                  "content": "Crises"
+                "content": "Crises"
               },
               {
-                  "content": "For All Values"
+                "content": "For All Values"
               }
-          ]
+            ]
           }
         },
         "try-this": {
@@ -1209,9 +1225,21 @@
             "description5": "Just connect to a mobile, computer, or tablet from anywhere in the country or the world and enjoy a friendly and easy user experience that you already know! Just",
             "description6": "maybe not yet with cards...",
             "statistics": [
-              { "value": "+40", "label1": "sets", "label2": "cards" },
-              { "value": "+5700", "label1": "users", "label2": "on the site" },
-              { "value": "+300", "label1": "ideas", "label2": "for using cards" }
+              {
+                "value": "+40",
+                "label1": "sets",
+                "label2": "cards"
+              },
+              {
+                "value": "+5700",
+                "label1": "users",
+                "label2": "on the site"
+              },
+              {
+                "value": "+300",
+                "label1": "ideas",
+                "label2": "for using cards"
+              }
             ]
           }
         },
@@ -1278,42 +1306,86 @@
             "contact": "support@mentor-cards.com",
             "follow-us": "Follow our community for tips",
             "social-icons": [
-              { "alt": "tik-tok image" },
-              { "alt": "fb image" },
-              { "alt": "insta image" },
-              { "alt": "you-tube image" }
+              {
+                "alt": "tik-tok image"
+              },
+              {
+                "alt": "fb image"
+              },
+              {
+                "alt": "insta image"
+              },
+              {
+                "alt": "you-tube image"
+              }
             ],
             "links": [
               {
                 "category": "main-links",
                 "items": [
-                  { "text": "Card Sets" },
-                  { "text": "Digital Courses" },
-                  { "text": "Our Plans" },
-                  { "text": "FAQ" }
+                  {
+                    "text": "Card Sets"
+                  },
+                  {
+                    "text": "Digital Courses"
+                  },
+                  {
+                    "text": "Our Plans"
+                  },
+                  {
+                    "text": "FAQ"
+                  }
                 ]
               },
               {
                 "category": "extra-links",
                 "items": [
-                  { "text": "Services" },
-                  { "text": "About" },
-                  { "text": "Affiliate Program" },
-                  { "text": "Accessibility Statement" }
+                  {
+                    "text": "Services"
+                  },
+                  {
+                    "text": "About"
+                  },
+                  {
+                    "text": "Affiliate Program"
+                  },
+                  {
+                    "text": "Accessibility Statement"
+                  }
                 ]
               }
             ],
             "mobile-links": [
-              { "text": "Site Policy" },
-              { "text": "Card Sets" },
-              { "text": "Digital Courses" },
-              { "text": "Our Plans" },
-              { "text": "FAQ" },
-              { "text": "Services" },
-              { "text": "About" },
-              { "text": "Affiliate Program" },
-              { "text": "Accessibility Statement" },
-              { "text": "Contact" }
+              {
+                "text": "Site Policy"
+              },
+              {
+                "text": "Card Sets"
+              },
+              {
+                "text": "Digital Courses"
+              },
+              {
+                "text": "Our Plans"
+              },
+              {
+                "text": "FAQ"
+              },
+              {
+                "text": "Services"
+              },
+              {
+                "text": "About"
+              },
+              {
+                "text": "Affiliate Program"
+              },
+              {
+                "text": "Accessibility Statement"
+              },
+              {
+                "text": "Contact"
+              }
             ],
             "copyright": "© 2024 Mentor-Cards. All rights reserved."
           }

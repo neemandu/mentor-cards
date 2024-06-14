@@ -1,0 +1,26 @@
+<div class="chat-container" dir="rtl">
+    <div class="chat-box">
+        <div class="chat-message">
+            <p class="chat-text">קשה לבחור? רוצה להתייעץ?</p>
+        </div>
+        <div class="chat-input">
+            <input type="text" [(ngModel)]="userInput" (focus)="hidePlaceholder()" (blur)="showPlaceholder()">
+            <span class="placeholder-text" [class.hidden]="placeholderHidden">הייעוץ זמין למנויים בלבד <span
+                    class="red-heart">❤</span></span>
+            <button (click)="sendMessage()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<div *ngIf="isChatDialogOpen"
+    class="fixed inset-0 z-20 bg-gray-950 bg-opacity-80 overflow-y-auto h-full w-full flex items-center justify-center">
+    <div style="background-color: white; width: 80vw; height: 80vh; border-radius: 10px; position: relative;">
+        <div>
+            hi
+        </div>
+
+    </div>
+</div> -->

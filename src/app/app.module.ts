@@ -176,6 +176,9 @@ import { HomePageFooterComponent } from './Pages/home-page-new/home-page-footer/
 import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-page-new.component';
 import { FiltersComponent } from './Pages/all-packs-page-new/filters/filters.component';
 import { PacksCardComponent } from './Pages/all-packs-page-new/packs-card/packs-card.component';
+import { SubscribeCardComponent } from './Pages/all-packs-page-new/subscribe-card/subscribe-card.component';
+import { FilterDialogComponent } from './Pages/all-packs-page-new/filter-dialog/filter-dialog.component';
+import { AiChatComponent } from './Pages/all-packs-page-new/ai-chat/ai-chat.component';
 
 @NgModule({
   declarations: [
@@ -257,6 +260,9 @@ import { PacksCardComponent } from './Pages/all-packs-page-new/packs-card/packs-
     AllPacksPageNewComponent,
     FiltersComponent,
     PacksCardComponent,
+    SubscribeCardComponent,
+    FilterDialogComponent,
+    AiChatComponent,
   ],
   imports: [
     BrowserModule,
