@@ -67,20 +67,20 @@
                         <div class="flex gap-4">
                             <div>
                                 <input type="checkbox" id="checkbox1" name="checkbox1" [(ngModel)]="filterOption.image"
-                                    (ngModelChange)="handleCategoryClick('תמונה')" style="accent-color: #000000;">
+                                    (ngModelChange)="categoriesSelectedChange('קלפי תמונה')" style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="checkbox1">{{'pages.all-packs-page-new.content.image' | translate}}</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="checkbox2" name="checkbox2"
-                                    [(ngModel)]="filterOption.question" (ngModelChange)="handleCategoryClick('שאלה')"
+                                    [(ngModel)]="filterOption.question" (ngModelChange)="categoriesSelectedChange('קלפי שאלות')"
                                     style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="checkbox2">{{'pages.all-packs-page-new.content.question' | translate}}</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="checkbox3" name="checkbox3" [(ngModel)]="filterOption.word"
-                                    (ngModelChange)="handleCategoryClick('מילה')" style="accent-color: #000000;">
+                                    (ngModelChange)="categoriesSelectedChange('קלפי מילה')" style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="checkbox3">{{'pages.all-packs-page-new.content.word' | translate}}</label>
                             </div>
@@ -271,21 +271,21 @@
                 <div class="flex gap-4 justify-center mt-4">
                     <div>
                         <input type="checkbox" id="checkbox1" name="checkbox1" [(ngModel)]="filterOption.image"
-                            (ngModelChange)="handleCategoryClick('תמונה')" style="accent-color: #000000;"
+                            (ngModelChange)="categoriesSelectedChange('קלפי תמונה')" style="accent-color: #000000;"
                             class="large-radio">
                         <div style="font-size: 13px;" for="checkbox1">{{ 'pages.all-packs-page-new.content.image' |
                             translate }}</div>
                     </div>
                     <div>
                         <input type="checkbox" id="checkbox2" name="checkbox2" [(ngModel)]="filterOption.question"
-                            (ngModelChange)="handleCategoryClick('שאלה')" style="accent-color: #000000;"
+                            (ngModelChange)="categoriesSelectedChange('קלפי שאלות')" style="accent-color: #000000;"
                             class="large-radio">
                         <div style="font-size: 13px;" for="checkbox2">{{ 'pages.all-packs-page-new.content.question' |
                             translate }}</div>
                     </div>
                     <div>
                         <input type="checkbox" id="checkbox3" name="checkbox3" [(ngModel)]="filterOption.word"
-                            (ngModelChange)="handleCategoryClick('מילה')" style="accent-color: #000000;"
+                            (ngModelChange)="categoriesSelectedChange('קלפי מילה')" style="accent-color: #000000;"
                             class="large-radio">
                         <div style="font-size: 13px;" for="checkbox3">{{ 'pages.all-packs-page-new.content.word' |
                             translate }}</div>

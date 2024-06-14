@@ -91,8 +91,7 @@ export class AllPacksPageNewComponent implements OnInit {
   isLoading: boolean = false;
 
   filterList = [
-    { filterText: 'לכל הערכות', buttonText: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
-    { filterText: '', buttonText: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg' },
+    { filterText: 'הכרות וחיבור', buttonText: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg' },
     { filterText: 'מערכות יחסים', buttonText: 'מערכות יחסים', image: '/assets/New/home-page/cards/2.svg' },
     { filterText: 'ילדים ונוער', buttonText: 'ילדים ונוער', image: '/assets/New/home-page/cards/3.svg' },
     { filterText: 'חיבור לעצמי', buttonText: 'חיבור לעצמי', image: '/assets/New/home-page/cards/4.svg' },
@@ -387,6 +386,7 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   setAllCategoryPacksToShow(): void {
+    console.log('setAllCategoryPacksToShow');
     this.allCategoryPacks = this.allCategories
       .filter((category) => {
         if (
@@ -465,12 +465,15 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   categoriesSelectedChange(event): void {
+    console.log('categoriesSelectedChange');
+    console.log(event);
     var index = this.selectedCategories.findIndex(
-      (el) => el === event.option._value
+      (el) => el === event
     );
     index == -1
-      ? this.selectedCategories.push(event.option._value)
+      ? this.selectedCategories.push(event)
       : this.selectedCategories.splice(index, 1);
+    this.filterPacks();
   }
 
   favoritesSelectedChange(event): void {
@@ -483,16 +486,23 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   filterPacks(): void {
+    console.log('filterPacks');
     this.loadedPacks = 0;
     this.allPacks = this.cardsService.allPacks?.map((pack) => pack);
     if (this.allPacks) {
       if (this.freeTextFilterSelected !== '') {
+        console.log('freeTextFilterSelected');
+        console.log(this.freeTextFilterSelected);
         this.freeTextFilter();
       }
       if (this.selectedCategories.length != 0) {
+        console.log('selectedCategories');
+        console.log(this.selectedCategories);
         this.categoryFilter();
       }
       if (this.selectedFavorites.length != 0) {
+        console.log('selectedFavorites');
+        console.log(this.selectedFavorites);
         this.favoritesFilter();
       }
       // this.sortPacks();
