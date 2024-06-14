@@ -43,9 +43,13 @@
   }
 }
 @media (min-width: 640px) {
-  .sm\:flex-row {
-      flex-direction: row;
+  .sm\:hidden {
+      display: none;
   }
+}
+
+.block {
+  display: block;
 }
 html,
 body {

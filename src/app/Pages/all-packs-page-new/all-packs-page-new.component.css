@@ -39,3 +39,37 @@
     transform: scale(1.5); /* Adjust the scale value as needed */
     margin: 10px; /* Add some margin to avoid overlap with other elements */
   }
+
+  .message-bubble {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f3f9f9;
+    border-radius: 20px;
+    position: relative;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+  }
+
+  
+  .message-bubble  p {
+    margin-bottom: 0;
+  }
+  
+  .message-bubble::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #f3f9f9;
+    transform: translateY(-50%);
+  }
+  
+  .icon {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
