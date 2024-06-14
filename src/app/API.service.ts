@@ -10033,7 +10033,9 @@ async ListCardsPacksForPreview(
               entries
             }
             isFree
-            language
+            language          
+            ownerName
+            numberOfCards
             isActive
             createdAt
             updatedAt
