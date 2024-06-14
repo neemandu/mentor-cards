@@ -22,6 +22,7 @@ export class PackInfo {
     topQuestions: string[];
     guidebookUrl: string;
     numberOfCards:number;
+    ownerName: string;
 
     constructor() { }
 
@@ -53,6 +54,7 @@ export class PackContent {
     isExternalPack: boolean;
     guidebookUrl: string;
     numberOfCards:number;
+    ownerName: string;
 
     constructor() { }
 
