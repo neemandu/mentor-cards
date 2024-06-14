@@ -91,7 +91,7 @@ export class AllPacksPageNewComponent implements OnInit {
   isLoading: boolean = false;
 
   filterList = [
-    { filterText: 'לכל הערכות', buttonText: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
+    { filterText: '', buttonText: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
     { filterText: '', buttonText: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg' },
     { filterText: 'מערכות יחסים', buttonText: 'מערכות יחסים', image: '/assets/New/home-page/cards/2.svg' },
     { filterText: 'ילדים ונוער', buttonText: 'ילדים ונוער', image: '/assets/New/home-page/cards/3.svg' },

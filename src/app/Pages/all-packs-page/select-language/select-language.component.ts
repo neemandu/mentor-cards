@@ -7,7 +7,14 @@ import { MatMenuTrigger } from '@angular/material/menu';
   template: `
   <div>
     <button mat-button [matMenuTriggerFor]="menu" [matTooltip]="'selectLanguageTooltip' | translate">
-      {{ translate.currentLang }}
+      <div  class=" flex gap-2 items-center">
+        <div>
+          {{ translate.currentLang }}
+        </div>
+        <div>
+          <img src="/assets/New/nav-bar/lang.svg" alt="" class="w-4">
+        </div>
+      </div>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let lang of translate.getLangs()" (click)="translate.use(lang)">
@@ -16,7 +23,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
     </mat-menu>
   </div>
   `,
-  styles:[`
+  styles: [`
     ::ng-deep .mat-tooltip {
       background-color: #333;
       color: #fff;
@@ -27,5 +34,5 @@ import { MatMenuTrigger } from '@angular/material/menu';
   `]
 })
 export class SelectLanguageComponent {
-  constructor(public translate: TranslateService) {}
+  constructor(public translate: TranslateService) { }
 }

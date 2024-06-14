@@ -3,9 +3,9 @@
         {{ 'pages.home-page.sections.how-to-use.content.title' | translate }}
     </div>
 
-    <div class="md:flex gap-8 justify-center w-[90vw] mx-auto mt-8">
-        <div *ngFor="let video of videos" class="video-container mx-2 relative" style="height: 60vh;">
-            <img [src]="video.thumbnail" class="video-thumbnail" [hidden]="video.isPlaying">
+    <div class="flex flex-col sm:flex-row gap-8 justify-center w-[90vw] mx-auto mt-8  space-y-4">
+        <div *ngFor="let video of videos" class="video-container mx-2 relative" >
+            <img [src]="video.thumbnail" class="video-thumbnail" [hidden]="video.isPlaying" height="60vh">
             <!-- <button class="play-button absolute top-1/3 left-1/2" (click)="playVideo(video)" [hidden]="video.isPlaying" style="background-color: aqua; height: 40px; width: 40px;">Play</button> -->
             <video #videoPlayer controls [src]="video.src" class="video-player  max-h-[50vh] rounded-2xl" [hidden]="!video.isPlaying" >
                 Your browser does not support the video tag.
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="text-xl font-bold text-center">
+    <div class="text-xl font-bold text-center mt-4">
         {{ 'pages.home-page.sections.how-to-use.content.follow-us.text' | translate }}
     </div>
 

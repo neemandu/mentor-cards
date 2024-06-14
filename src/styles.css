@@ -42,8 +42,10 @@
       grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 }
-.justify-evenly {
-  justify-content: space-evenly;
+@media (min-width: 640px) {
+  .sm\:flex-row {
+      flex-direction: row;
+  }
 }
 html,
 body {
