@@ -23,6 +23,7 @@ export class PackInfo {
     guidebookUrl: string;
     numberOfCards:number;
     ownerName: string;
+    language: string;
 
     constructor() { }
 
@@ -55,6 +56,7 @@ export class PackContent {
     guidebookUrl: string;
     numberOfCards:number;
     ownerName: string;
+    language: string;
 
     constructor() { }
 
