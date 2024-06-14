@@ -9,8 +9,8 @@
                         (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
                     <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0"
                         class="autocomplete-options absolute z-40 bg-white " id="autocomplete-options">
-                        <mat-option *ngFor="let option of filteredOptions; let i = index"  (keydown)="handleKeyDown($event)" 
-                        #autocompleteOptions (click)="selectOption(option)">
+                        <mat-option *ngFor="let option of filteredOptions; let i = index"
+                            (keydown)="handleKeyDown($event)" #autocompleteOptions (click)="selectOption(option)">
                             {{ option }}
                         </mat-option>
                     </div>
@@ -55,16 +55,16 @@
                     </div>
                 </div>
 
-                <div *ngIf="!isMobileScreen" class="w-[22%] flex items-start  h-[100%]  ">
+                <div *ngIf="!isMobileScreen" class="w-[24%] flex items-start  h-[100%]  ">
                     <div class="text-right  border-black h-[90%]" style="padding-inline: 10px;"
                         [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
                         <div style="font-weight: 700; font-size: 12px; margin-bottom: 10px;">
                             {{'pages.all-packs-page-new.content.cardTypes' | translate}}</div>
-                        <div>
+                        <div style="font-size: 12px;">
                             {{'pages.all-packs-page-new.content.cardDisplayTypes' | translate}}
+
                         </div>
-                        <div style="font-size: 12px;"></div>
-                        <div class="flex gap-4">
+                        <div class="flex gap-4 mt-4">
                             <div>
                                 <input type="checkbox" id="checkbox1" name="checkbox1" [(ngModel)]="filterOption.image"
                                     (ngModelChange)="categoriesSelectedChange('קלפי תמונה')" style="accent-color: #000000;">
@@ -229,9 +229,17 @@
         </div>
     </div>
     <app-home-page-footer></app-home-page-footer>
-    <div style="position: absolute; bottom: 0; left: 0; z-index: 10; justify-content: start;">
+    <div style="position: absolute; bottom: 0; left: 0; z-index: 10; justify-content: start;" class="hidden sm:block  ">
         <app-ai-chat></app-ai-chat>
     </div>
+
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;justify-content: center; align-items: center; z-index: 10;" class="sm:hidden flex">
+        <div class="message-bubble">
+            <img src="/assets/New/home-page/icons/chat-icon.svg" alt="" style="margin-left: 1rem;">
+            <p>קשה לבחור? רוצה להתייעץ?</p>
+        </div>
+    </div>
+
 </div>
 
 
@@ -304,8 +312,8 @@
                 <div class="flex gap-4 mt-4 justify-center">
                     <div>
                         <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="Russian" (ngModelChange)="handleCategoryClick('ru')"
-                            style="accent-color: #000000;" class="large-radio">
+                            value="Russian" (ngModelChange)="handleCategoryClick('ru')" style="accent-color: #000000;"
+                            class="large-radio">
                         <div style="font-size: 10px;" for="radio1">{{ 'pages.all-packs-page-new.content.russian' |
                             translate }}</div>
                     </div>

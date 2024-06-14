@@ -192,6 +192,7 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   handleKeyDown(event: KeyboardEvent) {
+    debugger
     this.stopGenerateOptions = false;
     if (this.freeTextFilterSelected === '') {
       this.showCategoryLine = true;
