@@ -23,8 +23,8 @@ export class HomePageHowToUseComponent implements OnInit {
 
   videos = [
     {
-        src: 'https://master-cards.s3.eu-west-2.amazonaws.com/videos/%D7%90%D7%99%D7%9A+%D7%9E%D7%A0%D7%98%D7%95%D7%A8+%D7%A7%D7%90%D7%A8%D7%93%D7%A1+%D7%A2%D7%95%D7%91%D7%93.mov',
-        thumbnail: '/assets/New/home-page/how-to-use-1.png',
+        src: 'https://master-cards.s3.eu-west-2.amazonaws.com/videos/got+stuck.mp4',
+        thumbnail: 'https://master-cards.s3.eu-west-2.amazonaws.com/videos/image1.png',
         isPlaying: false
     },
     {

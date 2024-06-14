@@ -1,0 +1,8 @@
+.white-icon {
+    color: white;
+    font-size: 50px;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.white-icon svg {
+    fill: white;
+}
