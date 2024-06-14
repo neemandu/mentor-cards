@@ -192,13 +192,13 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    debugger
+    console.log('handleKeyDown');
     this.stopGenerateOptions = false;
     if (this.freeTextFilterSelected === '') {
       this.showCategoryLine = true;
     }
     if (event.key === 'Escape') {
-      // this.clickOutside(event);
+      this.clickOutside(event);
     } else if (event.key === 'Enter') {
       let option = this.filteredOptions[this.currentFocusIndex];
       if (!option) {
@@ -218,6 +218,18 @@ export class AllPacksPageNewComponent implements OnInit {
     window.location.reload();
   }
 
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    const clickedInsideAutocomplete =
+      this.filterTextInput.nativeElement.contains(event.target);
+    if (!clickedInsideAutocomplete) {
+      this.filteredOptions = [];
+      this.currentFocusIndex = -1;
+    }
+  }
+
+  
   changeFocus(direction: number) {
     this.currentFocusIndex += direction;
     // Loop back to the start or end if necessary

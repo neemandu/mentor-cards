@@ -1,7 +1,7 @@
 <title>{{'pages.all-packs-page-new.title' | translate}}</title>
 <div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen relative">
     <div class=" min-h-screen">
-        <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2">
+        <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2"  *ngIf="isMobileScreen">
             <div class="items-center h-4 flex me-4">
                 <mat-form-field class=" w-60">
                     <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
@@ -26,7 +26,7 @@
             [ngStyle]="isMobileScreen ? {'padding-right':' 0px'} : {'padding-right': '15px'}">
 
             <div id="content" [dir]="langDirectionService.currentLangDirection"
-                class=" sm:w-[1590px] w-[1350px] h-32 mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
+                class=" sm:w-[1500px] w-[1350px] h-32 mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
                 <div *ngIf="!isMobileScreen" class="w-[12.5%] border-black h-[90%] px-2"
                     [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
                     <div class="text-center" style="font-weight: 700; font-size: 12px;">
@@ -47,7 +47,7 @@
                         style="font-weight: 700; font-size: 12px; margin-right: 10px; ">
                         {{'pages.all-packs-page-new.content.favorites' | translate}}
                     </div>
-                    <div class="grid grid-cols-12 mx-1 pt-2">
+                    <div class="grid grid-cols-11 mx-1 pt-2">
                         <app-filters *ngFor="let filter of filterList" [imageSrc]="filter.image"
                             [buttonText]="filter.buttonText" [filterText]="filter.filterText"
                             (categoryClick)="handleCategoryClick($event)" class="col-span-1">
