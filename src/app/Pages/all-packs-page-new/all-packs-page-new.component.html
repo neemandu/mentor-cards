@@ -1,7 +1,7 @@
 <title>{{'pages.all-packs-page-new.title' | translate}}</title>
 <div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen relative">
     <div class=" min-h-screen">
-        <div *ngIf="isMobileScreen" class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2">
+        <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2">
             <div class="items-center h-4 flex me-4">
                 <mat-form-field class=" w-60">
                     <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
@@ -9,8 +9,8 @@
                         (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
                     <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0"
                         class="autocomplete-options absolute z-40 bg-white " id="autocomplete-options">
-                        <mat-option *ngFor="let option of filteredOptions; let i = index"
-                            (keydown)="handleKeyDown($event)" #autocompleteOptions (click)="selectOption(option)">
+                        <mat-option *ngFor="let option of filteredOptions; let i = index"  (keydown)="handleKeyDown($event)" 
+                        #autocompleteOptions (click)="selectOption(option)">
                             {{ option }}
                         </mat-option>
                     </div>
@@ -237,7 +237,7 @@
 
 <div *ngIf="isFilterDialogOpen"
     class="fixed inset-0 z-20 bg-gray-950 bg-opacity-80 overflow-y-auto h-full w-full flex items-center justify-center">
-    <div style="background-color: white; width: 80vw; height: 80vh; border-radius: 10px; position: relative;">
+    <div style="background-color: white; width: 80vw; border-radius: 10px; position: relative;">
         <div>
 
             <button mat-icon-button (click)="closeFilterDialog()" style="position: absolute; top: 0; right: 0;">

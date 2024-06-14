@@ -93,12 +93,10 @@
     </div>
 </mat-menu>
 
+
 <mat-menu #allButtons="matMenu">
-    <div style="width: 48vw; height: 340px;">
-        <div class=" flex justify-center">
-            <img id="logo-name" src="/assets/New/nav-bar/logo.svg" alt="Mentor-Cards full logo" />
-        </div>
-        <div class=" flex justify-center mt-4">
+    <div style="width: 48vw;">
+        <div class=" flex justify-center mt-2">
             <button *ngIf="!loggedIn" class=" flex items-center w-24" (click)="signInSignUp()">
                 <img src="/assets/New/nav-bar/user.svg" alt="user image" /> <span class="text-[#e67c73] ms-2"> כניסה
                 </span>
@@ -116,7 +114,7 @@
                 >
                 <button [routerLink]="item.route" routerLinkActive="active"
                     class="text-black hover:cursor-pointer mx-2 mt-2">
-                    <div style="font-weight: 700; font-size: 13px;">
+                    <div style="font-weight: 700; font-size: 13px; margin-bottom: 5px;">
                         {{item.name | translate}}
                     </div>
                 </button>

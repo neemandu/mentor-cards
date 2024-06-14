@@ -18,7 +18,7 @@
         <div *ngFor="let item of cardsList; let i = index; let isLast=last;" class="col-span-1">
             <button (click)="handleCardClick(item.content)"
                 [ngClass]="{'bg-[#e67c73] flex justify-center items-center sm:w-48 w-36 sm:h-40 h-28 flex-col card sm:p-8': true, 'last-card': isLast}">
-                <img [src]="item.image" alt="user image"  class="lg:h-[20vh] md:h-[20vh] h-[9vh] p-4" />
+                <img [src]="item.image" alt="user image"  class="lg:h-[20vh] md:h-[20vh] h-[9vh] sm:p-4 p-1" />
                 <div class="font-bold md:text-lg text-sm absolute bottom-1 " style="line-height: 0.9rem;">{{ 'pages.home-page.sections.cards.content.cardsList.' + i +
                     '.content' | translate }}</div>
             </button>           
