@@ -88,6 +88,7 @@ export class AllPacksPageNewComponent implements OnInit {
   currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
   selectedFilter: string;
   isFilterDialogOpen: boolean = false;
+  isLoading: boolean = false;
 
   filterList = [
     { filterText: 'לכל הערכות', buttonText: 'לכל הערכות', image: '/assets/New/home-page/cards/12.svg' },
@@ -346,6 +347,7 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.isLoading = false;
         // this.sortPacks();
       } else {
         this.cardsService.allPacksReadyEmmiter.subscribe(() => {

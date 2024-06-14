@@ -175,13 +175,13 @@
                     </div>
                 </div>
                 <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between ">
-                    <div
+                    <div *ngIf="!isLoading"
                         class="sm:items-center sm:w-40 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 ">
                         כל הערכות</div>
                     <div #allPacksScrollContainer
                         class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
                         (mousemove)="onMouseMove($event, allPacksScrollContainer)">
-                        <app-subscribe-card></app-subscribe-card>
+                        <app-subscribe-card *ngIf="!isLoading"></app-subscribe-card>
                         <div *ngFor="let packInfo of allPacks; let k = index">
                             <app-packs-card [backgroundColor]="cardsColors[k % cardsColors.length].color" class=""
                                 [packInfo]="packInfo" (loaded)="packLoaded()">
