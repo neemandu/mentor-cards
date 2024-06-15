@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-ai-chat',
@@ -9,25 +8,26 @@ import { MatDialog } from '@angular/material/dialog';
 export class AiChatComponent {
   userInput: string = '';
   placeholderHidden: boolean = false;
-  isChatDialogOpen: boolean = false;
-
-  constructor(public dialog: MatDialog) {}
-
-  sendMessage() {
-    console.log(this.userInput);
-    this.userInput = '';
-  }
+  isExpanded: boolean = false;
+  responses: string[] = [];
 
   hidePlaceholder() {
     this.placeholderHidden = true;
-    this.isChatDialogOpen = true;
   }
 
   showPlaceholder() {
-    if (!this.userInput) {
-      this.placeholderHidden = false;
-      this.isChatDialogOpen = false;
-    }
+    this.placeholderHidden = !this.userInput;
   }
 
+  sendMessage() {
+    this.isExpanded = true;
+    this.responses.push(this.userInput); // Add the user input to the responses
+    this.userInput = ''; // Clear the input field
+    this.showPlaceholder(); // Show the placeholder if the input field is empty
+
+    // Simulate a response from the backend
+    setTimeout(() => {
+      this.responses.push('Placeholder response from backend');
+    }, 1000);
+  }
 }
