@@ -139,19 +139,15 @@ export class AllPacksPageNewComponent implements OnInit {
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
     if (scrollContainer) {
-      console.log('scrollContainer:')
       const { clientX } = event;
       const { offsetWidth, scrollLeft, scrollWidth, clientWidth } = scrollContainer;
       const boundary = 0.1 * clientWidth; // 10% from the edges
       const maxScrollLeft = scrollWidth - clientWidth;
       const mouseX = clientX - scrollContainer.getBoundingClientRect().left;
-      // console.log(`mouseX: ${mouseX}, clientX: ${clientX}, offsetWidth: ${offsetWidth}, scrollLeft: ${scrollLeft}, scrollWidth: ${scrollWidth}, clientWidth: ${clientWidth}, boundary: ${boundary}, maxScrollLeft: ${maxScrollLeft}`);
       if (clientX < 100) {
-        console.log('scrollLeft:')
         const newScrollLeft = scrollLeft - this.scrollSpeed;
         scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
       } else if (clientX > clientWidth - boundary && scrollLeft < maxScrollLeft) {
-        console.log('right:')
         const newScrollLeft = scrollLeft + this.scrollSpeed;
         scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
       }
@@ -183,7 +179,6 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   openFilterDialog() {
-    console.log('openFilterDialog');
     this.isFilterDialogOpen = true;
   }
 
@@ -192,7 +187,6 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    console.log('handleKeyDown');
     this.stopGenerateOptions = false;
     if (this.freeTextFilterSelected === '') {
       this.showCategoryLine = true;
