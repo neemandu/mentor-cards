@@ -1,11 +1,14 @@
 .chat-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 300px;
+  width: 25%;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    width: 100%;
+  }
 }
 
 .chat-box {
@@ -13,11 +16,30 @@
   flex-direction: column;
   padding: 15px;
   transition: height 0.3s ease;
-  height: 100px; /* Initial height */
+  height: 150px; /* Initial height */
+  position: relative; /* Add this line */
 }
 
 .chat-box.expanded {
   height: 400px; /* Expanded height */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .chat-message {
@@ -69,10 +91,12 @@ mat-icon {
   position: absolute;
   color: #999;
   pointer-events: none;
+  right: 15px;
+  transition: opacity 0.3s;
 }
 
-.hidden {
-  display: none;
+.placeholder-text.hidden {
+  opacity: 0;
 }
 
 .red-heart {

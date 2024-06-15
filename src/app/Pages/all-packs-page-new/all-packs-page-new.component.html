@@ -1,5 +1,5 @@
 <title>{{'pages.all-packs-page-new.title' | translate}}</title>
-<div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen relative">
+<div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen ">
     <div class=" min-h-screen">
         <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2"  *ngIf="isMobileScreen">
             <div class="items-center h-4 flex me-4">
@@ -229,17 +229,21 @@
         </div>
     </div>
     <app-home-page-footer></app-home-page-footer>
-    <div style="position: absolute; bottom: 0; left: 0; z-index: 10; justify-content: start;" class="hidden sm:block  ">
-        <app-ai-chat></app-ai-chat>
-    </div>
+    
+    
+    
+</div>
+<!-- Web Screen Chat Component at the Bottom -->
+<div style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10;" class="hidden sm:block">
+    <app-ai-chat class=" flex justify-end"></app-ai-chat>
+</div>
 
-    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;justify-content: center; align-items: center; z-index: 10;" class="sm:hidden flex">
-        <div class="message-bubble">
-            <img src="/assets/New/home-page/icons/chat-icon.svg" alt="" style="margin-left: 1rem;">
-            <p>קשה לבחור? רוצה להתייעץ?</p>
-        </div>
+<!-- Mobile View Chat Bubble -->
+<div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; justify-content: center; align-items: center; z-index: 10;" class="sm:hidden flex">
+    <div class="message-bubble" (click)="openChatDialog()">
+        <img src="/assets/New/home-page/icons/chat-icon.svg" alt="" style="margin-left: 1rem;">
+        <p>קשה לבחור? רוצה להתייעץ?</p>
     </div>
-
 </div>
 
 

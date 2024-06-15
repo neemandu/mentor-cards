@@ -11,12 +11,15 @@ export class AiChatComponent {
   isExpanded: boolean = false;
   responses: string[] = [];
 
+  toggleExpand() {
+    this.isExpanded = !this.isExpanded;
+  }
   hidePlaceholder() {
     this.placeholderHidden = true;
   }
 
   showPlaceholder() {
-    this.placeholderHidden = !this.userInput;
+    this.placeholderHidden = this.userInput.length > 0;
   }
 
   sendMessage() {

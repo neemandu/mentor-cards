@@ -1,17 +1,21 @@
 <div class="chat-container" dir="rtl">
     <div class="chat-box" [ngClass]="{'expanded': isExpanded}">
         <div class="chat-message">
-            <p class="chat-text">קשה לבחור? רוצה להתייעץ?</p>
-        </div>
-        <div class="chat-response">
-            <p *ngFor="let response of responses">{{ response }}</p>
-        </div>
-        <div class="chat-input">
-            <button class="send-button" (click)="sendMessage()">
-                <mat-icon>send</mat-icon>
-            </button>
-            <input type="text" [(ngModel)]="userInput" (focus)="hidePlaceholder()" (blur)="showPlaceholder()">
-            <span class="placeholder-text" [class.hidden]="placeholderHidden">הייעוץ זמין למנויים בלבד <span class="red-heart">❤</span></span>
-        </div>
+          <button class="toggle-button" (click)="toggleExpand()">
+            <mat-icon>{{ isExpanded ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+          </button>
+        <p class="chat-text">קשה לבחור? רוצה להתייעץ?</p>
+      </div>
+      <div class="chat-response">
+        <p *ngFor="let response of responses">{{ response }}</p>
+      </div>
+      <div class="chat-input">
+        <button class="send-button" (click)="sendMessage()">
+          <mat-icon>send</mat-icon>
+        </button>
+        <input type="text" [(ngModel)]="userInput" (input)="showPlaceholder()" (focus)="hidePlaceholder()" (blur)="showPlaceholder()">
+        <span class="placeholder-text" [class.hidden]="placeholderHidden">הייעוץ זמין למנויים בלבד <span class="red-heart">❤</span></span>
+      </div>
     </div>
-</div>
+  </div>
+  

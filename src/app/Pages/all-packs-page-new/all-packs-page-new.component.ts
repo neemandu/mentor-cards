@@ -26,6 +26,7 @@ import { bool } from 'aws-sdk/clients/signer';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { UserLoginDialogComponent } from '../all-packs-page/user-login-dialog/user-login-dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { AiChatComponent } from './ai-chat/ai-chat.component';
 
 interface CategoryPack {
   category: string;
@@ -210,6 +211,28 @@ export class AllPacksPageNewComponent implements OnInit {
 
   handleResetClick(){
     window.location.reload();
+  }
+
+  // openChatDialog() {
+  //   this.dialog.open(AiChatComponent, {
+  //     width: '100%',
+  //     height: '100%',
+  //     maxWidth: '100vw',
+  //     maxHeight: '100vh',
+  //     panelClass: 'full-screen-dialog'
+  //   });
+  // }
+
+  openChatDialog(): void {
+    const dialogRef = this.dialog.open(AiChatComponent, {
+      width: '400px',
+      data: { /* pass any data if needed */ }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // handle the result if needed
+    });
   }
 
 
