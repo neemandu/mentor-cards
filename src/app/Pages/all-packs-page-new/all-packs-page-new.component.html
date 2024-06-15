@@ -235,9 +235,8 @@
 </div>
 <!-- Web Screen Chat Component at the Bottom -->
 <div style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10;" class="hidden sm:block">
-    <app-ai-chat class=" flex justify-end"></app-ai-chat>
-</div>
-
+    <app-ai-chat [userStatus]="sanitizedUserStatus" class="flex justify-end"></app-ai-chat>
+  </div>
 <!-- Mobile View Chat Bubble -->
 <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; justify-content: center; align-items: center; z-index: 10;" class="sm:hidden flex">
     <div class="message-bubble" (click)="openChatDialog()">

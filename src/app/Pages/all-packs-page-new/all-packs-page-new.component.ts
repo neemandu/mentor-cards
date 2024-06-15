@@ -236,13 +236,18 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
 
+  get sanitizedUserStatus(): string {
+    return this.userData?.status ?? '';
+  }
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
-    const clickedInsideAutocomplete =
-      this.filterTextInput.nativeElement.contains(event.target);
-    if (!clickedInsideAutocomplete) {
-      this.filteredOptions = [];
-      this.currentFocusIndex = -1;
+    if(this.filteredOptions.length > 0){
+      const clickedInsideAutocomplete =
+        this.filterTextInput.nativeElement.contains(event.target);
+      if (!clickedInsideAutocomplete) {
+        this.filteredOptions = [];
+        this.currentFocusIndex = -1;
+      }
     }
   }
 
