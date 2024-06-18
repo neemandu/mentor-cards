@@ -91,25 +91,31 @@ export class CardsService {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     let nextToken = null;
     let items = [];
+    let lang = 'he';
+    if (localStorage.getItem('packsLanguage') != null) {
+      lang = localStorage.getItem('packsLanguage').toLowerCase();
+
+    }
+
     const filterCondition = {
       or: [
-        { language: { eq: "he" } },
+        { language: { eq: lang } },
         { language: { attributeExists: false } }
       ]
     };
-  
+
     const fetchPacks = (nextToken) => {
-      return this.isLoggedIn ? this.api.ListCardsPacks(filterCondition, 100, nextToken) : 
-      this.api.ListCardsPacksForPreview(filterCondition, 100, nextToken);
+      return this.isLoggedIn ? this.api.ListCardsPacks(filterCondition, 100, nextToken) :
+        this.api.ListCardsPacksForPreview(filterCondition, 100, nextToken);
     };
-  
+
     const fetchAllPacks = async () => {
       do {
         const packs = await fetchPacks(nextToken);
         items = items.concat(packs.items);
         nextToken = packs.nextToken;
       } while (nextToken);
-  
+
       this.allPacks = items.map(pack => {
         pack.categories.forEach(category => {
           if (!this.allCategories.includes(category))
@@ -124,9 +130,9 @@ export class CardsService {
       this.allPacksReadyEmmiter.emit();
       this.overlaySpinnerService.changeOverlaySpinner(false);
     };
-  
+
     fetchAllPacks().catch(reject => {
-      console.log('reject'); 
+      console.log('reject');
       console.log(reject);
       this.overlaySpinnerService.changeOverlaySpinner(false);
       let snackBarRef = this._snackBar.open('שגיאה במשיכת ערכות הקלפים, נסו שנית', 'רענן', {

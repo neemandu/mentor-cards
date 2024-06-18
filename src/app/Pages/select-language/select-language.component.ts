@@ -34,5 +34,13 @@ import { MatMenuTrigger } from '@angular/material/menu';
   `]
 })
 export class SelectLanguageComponent {
-  constructor(public translate: TranslateService) { }
+
+  constructor(public translate: TranslateService) { 
+    translate.onLangChange.subscribe((event) => {
+      localStorage.setItem('lang', event.lang);
+    }
+  );
+
+  }
+
 }

@@ -145,7 +145,7 @@ import { BlogCardComponent } from './Shared Components/blog-card/blog-card.compo
 import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/read-terms-dialog.component';
-import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/select-language.component';
+import { SelectLanguageComponent } from './Pages/select-language/select-language.component';
 import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';

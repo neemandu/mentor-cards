@@ -209,10 +209,17 @@ export class AllPacksPageNewComponent implements OnInit {
     }
   }
 
-  handleResetClick(){
+  handleResetClick() {
     window.location.reload();
   }
 
+  handlePacksLanguageChange(lang: string) {
+    console.log('lang: ' + lang);
+    if (localStorage.getItem('packsLanguage') !== lang) {
+      localStorage.setItem('packsLanguage', lang);
+      this.getAllPacks(false);
+    }
+  }
   // openChatDialog() {
   //   this.dialog.open(AiChatComponent, {
   //     width: '100%',
@@ -241,7 +248,7 @@ export class AllPacksPageNewComponent implements OnInit {
   }
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
-    if(this.filteredOptions.length > 0){
+    if (this.filteredOptions.length > 0) {
       const clickedInsideAutocomplete =
         this.filterTextInput.nativeElement.contains(event.target);
       if (!clickedInsideAutocomplete) {
@@ -251,7 +258,7 @@ export class AllPacksPageNewComponent implements OnInit {
     }
   }
 
-  
+
   changeFocus(direction: number) {
     this.currentFocusIndex += direction;
     // Loop back to the start or end if necessary

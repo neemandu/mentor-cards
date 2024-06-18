@@ -9,12 +9,13 @@ export class LangDirectionService {
 
   constructor(translate: TranslateService) {
     translate.addLangs(['EN', 'HE']);
-    translate.setDefaultLang('HE');
+    if (localStorage.getItem('lang')) {
+      translate.use(localStorage.getItem('lang') as string);
+    } else {
+      translate.use('HE');
+    }
     translate.use('HE');
-
-    // Listen for language changes
     translate.onLangChange.subscribe((event) => {
-      // Set text direction based on current language
       this.currentLangDirection = event.lang === 'HE' ? 'rtl' : 'ltr';
     });
   }
