@@ -1,5 +1,5 @@
 * {
-  font-family: 'rubik' !important;
+  font-family: 'Open Sans Hebrew', sans-serif !important;
   /* align-items: center; */
   direction: rtl;
 }
@@ -175,7 +175,7 @@ mat-icon {
   margin-right: 8px;
   font-size: medium;
   font-weight: normal;
-  font-family: 'rubik' !important;
+  font-family: 'Open Sans Hebrew', sans-serif !important;
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar,
