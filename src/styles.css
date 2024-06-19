@@ -48,8 +48,10 @@
   }
 }
 
-.mt-2 {
-  margin-top: 0.5rem/* 8px */;
+@media (min-width: 640px) {
+  .sm\:hidden {
+      display: none;
+  }
 }
 html,
 body {
@@ -135,7 +137,7 @@ button:focus {
 
 @font-face {
   font-family: rubik;
-  src: url(\assets\Fonts\Rubik-VariableFont_wght.ttf) format("opentype");
+  src: url(\assets\Fonts\rubik-VariableFont_wght.ttf) format("opentype");
 }
 
 ::ng-deep .tooltip-class {
