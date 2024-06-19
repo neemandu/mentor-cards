@@ -5,20 +5,21 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './ai-chat.component.html',
   styleUrls: ['./ai-chat.component.css']
 })
-export class AiChatComponent implements OnInit {
+export class AiChatComponent {
   @Input() userStatus: string = '';
+  @Input() placeholderText: string = '';
   userInput: string = '';
   placeholderHidden: boolean = false;
   isExpanded: boolean = false;
   responses: string[] = [];
   // userStatus: string = 'PLAN';  // Change this value to test different statuses
-  placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
+  // placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
 
-  ngOnInit() {
-    if (this.userStatus === 'PLAN') {
-      this.placeholderText = 'איך אפשר לעזור?';
-    }
-  }
+  // ngOnInit() {
+  //   if (this.userStatus === 'PLAN') {
+  //     this.placeholderText = 'איך אפשר לעזור?';
+  //   }
+  // }
   hidePlaceholder() {
     this.placeholderHidden = true;
   }

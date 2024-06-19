@@ -43,6 +43,8 @@ export class AllPacksPageNewComponent implements OnInit {
   @ViewChildren('autocompleteOptions')
   autocompleteOptions: QueryList<MatOption>;
   isMobileScreen: boolean;
+  placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
+
 
   Subscription: Subscription = new Subscription();
   filteredOptions = [];
@@ -213,13 +215,20 @@ export class AllPacksPageNewComponent implements OnInit {
     window.location.reload();
   }
 
-  handlePacksLanguageChange(lang: string) {
-    console.log('lang: ' + lang);
-    if (localStorage.getItem('packsLanguage') !== lang) {
-      localStorage.setItem('packsLanguage', lang);
-      this.getAllPacks(false);
-    }
-  }
+  async handlePacksLanguageChange(lang: string) {
+    localStorage.removeItem('packsLanguage');
+    localStorage.setItem('packsLanguage', lang);
+    this.cardsService.allPacksReadyEmmiter.subscribe(() => {
+      this.setAllPacksData();
+      this.setAllCategoryPacksToShow();
+      this.setAllFavPacksToShow();
+      this.initializeFilteredOptions();
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+    });
+    this.cardsService.getAllPacks();
+
+    console.log(this.allPacks, 'allPacks .........  ...........................');
+}
   // openChatDialog() {
   //   this.dialog.open(AiChatComponent, {
   //     width: '100%',
@@ -351,6 +360,9 @@ export class AllPacksPageNewComponent implements OnInit {
         console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'after set isTrialPacksDialogOpen href');
         this.openDialog();
       }
+    }
+    if (this.userData.status === 'PLAN') {
+      this.placeholderText = 'איך אפשר לעזור?';
     }
     //this.getAllPacks();
   }
@@ -559,6 +571,7 @@ export class AllPacksPageNewComponent implements OnInit {
       packContent.tags.some((tag) => tag.toLowerCase() === filterValue)
     );
   }
+  
 
   selectOption(option: string) {
     this.currentFocusIndex = -1;

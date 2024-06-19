@@ -91,12 +91,12 @@ export class CardsService {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     let nextToken = null;
     let items = [];
-    let lang = 'he';
+    let lang = '';
     if (localStorage.getItem('packsLanguage') != null) {
       lang = localStorage.getItem('packsLanguage').toLowerCase();
-
+    } else{
+      lang = 'ru';
     }
-
     const filterCondition = {
       or: [
         { language: { eq: lang } },

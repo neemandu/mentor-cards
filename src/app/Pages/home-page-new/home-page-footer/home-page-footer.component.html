@@ -21,7 +21,7 @@
         </div>
         <div class="flex justify-between sm:hidden mt-8">
             <div>
-                <ul class="text-right">
+                <ul class="text-center space-y-4">
                     <li>{{ 'pages.home-page.sections.footer.content.mobile-links.0.text' | translate }}</li>
                     <li><button (click)="navigateTo('/home-page#contact-us-section')">{{ 'pages.home-page.sections.footer.content.mobile-links.1.text' | translate }}</button></li>
                     <li><button (click)="navigateTo('/all-packs-page')">{{ 'pages.home-page.sections.footer.content.mobile-links.2.text' | translate }}</button></li>
@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div>
-                <ul class="text-right">
+                <ul class="text-center space-y-4">
                     <li>{{ 'pages.home-page.sections.footer.content.mobile-links.5.text' | translate }}</li>
                     <li><button (click)="navigateTo('/guide-page')">{{ 'pages.home-page.sections.footer.content.mobile-links.6.text' | translate }}</button></li>
                     <li><button (click)="navigateTo('/services')">{{ 'pages.home-page.sections.footer.content.mobile-links.7.text' | translate }}</button></li>
@@ -39,8 +39,8 @@
                 </ul>
             </div>
         </div>
-        <div class="col-span-2">
-            <div class="hidden sm:flex justify-start gap-4">
+        <div class="col-span-2 space-y-4">
+            <div class="hidden sm:flex justify-start gap-4 ">
                 <button (click)="navigateTo('/home-page#contact-us-section')">{{ 'pages.home-page.sections.footer.content.mobile-links.0.text' | translate }}</button>
                 <button (click)="openSiteRulesModal()">{{ 'pages.home-page.sections.footer.content.mobile-links.9.text' | translate }}</button>
             </div>

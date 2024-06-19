@@ -61,12 +61,11 @@
   }
 }
 
-@media (min-width: 640px) {
-  .sm\:hidden {
-    display: none;
-  }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem/* 16px */ * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem/* 16px */ * var(--tw-space-y-reverse));
 }
-
 html,
 body {
   height: 100%;

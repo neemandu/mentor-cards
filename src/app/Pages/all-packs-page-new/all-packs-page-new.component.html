@@ -1,6 +1,6 @@
 <title>{{'pages.all-packs-page-new.title' | translate}}</title>
 <div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen ">
-    <div class=" min-h-screen">
+    <div class=" min-h-screen" >
         <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2"  *ngIf="isMobileScreen">
             <div class="items-center h-4 flex me-4">
                 <mat-form-field class=" w-60">
@@ -26,7 +26,8 @@
             [ngStyle]="isMobileScreen ? {'padding-right':' 0px'} : {'padding-right': '15px'}">
 
             <div id="content" [dir]="langDirectionService.currentLangDirection"
-                class=" sm:w-[1500px] w-[1350px] h-32 mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
+            [ngClass]="{'content-ltr': langDirectionService.currentLangDirection === 'ltr', 'content-rtl': langDirectionService.currentLangDirection === 'rtl'}"
+                class=" w-[1350px]  mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
                 <div *ngIf="!isMobileScreen" class="w-[13%] border-black h-[90%] px-2"
                     [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
                     <div class="text-center" style="font-weight: 700; font-size: 12px;">
@@ -126,7 +127,7 @@
                     </div>
                 </div>
                 <div *ngIf="!isMobileScreen" class="w-[7%] border-black h-[90%] ">
-                    <div>&nbsp;</div>
+                    <div class="h-8">&nbsp;</div>
                     <app-filters [imageSrc]="'/assets/New/home-page/cards/undo.svg'" [buttonText]="'איפוס חיפוש'"
                         [filterText]="''" (categoryClick)="handleResetClick()">
                     </app-filters>
@@ -142,7 +143,7 @@
                     {{'pages.all-packs-page-new.content.packsForYourMeeting' | translate}}</div>
                 <div class="all-packs-view__section flex justify-between mb-16">
                     <div
-                        class=" w-40 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
+                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
                         &nbsp;</div>
                     <div #packScrollContainer
                         class="scroller overflow-x-scroll w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
@@ -154,7 +155,7 @@
                         </div>
                     </div>
                     <div
-                        class=" w-40 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
+                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
                         &nbsp;</div>
                 </div>
             </div>
@@ -162,7 +163,7 @@
             <div *ngIf="!isfavSelected && showCategoryLine && selectedFavorites.length == 0" class=" mt-2 sm:mt-16">
                 <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between ">
                     <div
-                        class="  sm:items-center sm:w-40 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
+                        class="  sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
                         {{allCategoryPacks[0].category}} </div>
                     <div *ngIf="allCategoryPacks[0]" #allPacksScrollContainer
                         class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 sm:mb-16 mb-8"
@@ -176,7 +177,7 @@
                 </div>
                 <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between ">
                     <div *ngIf="!isLoading"
-                        class="sm:items-center sm:w-40 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 ">
+                        class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 ">
                         כל הערכות</div>
                     <div #allPacksScrollContainer
                         class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
@@ -193,7 +194,7 @@
                 <div class="all-packs-view__section flex flex-col sm:flex-row justify-between"
                     *ngFor="let categoryPacks of allCategoryPacks; let i = index">
                     <div *ngIf="i > 0"
-                        class="sm:items-center sm:w-40 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
+                        class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
                         {{categoryPacks.category}} </div>
                     <div *ngIf="categoryPacks  && i>0 " #allPacksScrollContainer
                         class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0  mb-16 "
@@ -210,7 +211,7 @@
             <div *ngIf="isfavSelected" class=" mt-2 sm:mt-16">
                 <div class="all-packs-view__section flex justify-between mb-16 ">
                     <div
-                        class=" w-40 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
+                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
                         &nbsp;</div>
                     <div #allFavPackScrollContainer
                         class="scroller  w-[100%] gap-4  grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
@@ -222,20 +223,17 @@
                         </div>
                     </div>
                     <div
-                        class=" w-40 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
+                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
                         &nbsp;</div>
                 </div>
             </div>
         </div>
     </div>
     <app-home-page-footer></app-home-page-footer>
-    
-    
-    
 </div>
 <!-- Web Screen Chat Component at the Bottom -->
 <div style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10;" class="hidden sm:block">
-    <app-ai-chat [userStatus]="sanitizedUserStatus" class="flex justify-end"></app-ai-chat>
+    <app-ai-chat [userStatus]="sanitizedUserStatus" [placeholderText]="placeholderText" class="flex justify-end"></app-ai-chat>
   </div>
 <!-- Mobile View Chat Bubble -->
 <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); justify-content: center; align-items: center; z-index: 10; width: 80vw;" class="sm:hidden flex">
