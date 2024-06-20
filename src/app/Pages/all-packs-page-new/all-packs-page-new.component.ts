@@ -53,7 +53,7 @@ export class AllPacksPageNewComponent implements OnInit {
     image: false,
     question: false,
     word: false,
-    language: ''
+    language: 'he'
   };
   // mobile: boolean;
 
@@ -136,6 +136,7 @@ export class AllPacksPageNewComponent implements OnInit {
     private breakpointObserver: BreakpointObserver
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
+    this.isLoading = true;
     this.checkScreenSize();
   }
   private scrollSpeed = 10;
@@ -218,17 +219,20 @@ export class AllPacksPageNewComponent implements OnInit {
   async handlePacksLanguageChange(lang: string) {
     localStorage.removeItem('packsLanguage');
     localStorage.setItem('packsLanguage', lang);
+    this.filterOption.language = lang;
+    localStorage.setItem('packsLanguageLocalStorage', lang);
     this.cardsService.allPacksReadyEmmiter.subscribe(() => {
       this.setAllPacksData();
       this.setAllCategoryPacksToShow();
       this.setAllFavPacksToShow();
       this.initializeFilteredOptions();
       this.overlaySpinnerService.changeOverlaySpinner(false);
+      this.isLoading = false;
     });
     this.cardsService.getAllPacks();
 
-    console.log(this.allPacks, 'allPacks .........  ...........................');
-}
+    // console.log(this.allPacks, 'allPacks .........  ...........................');
+  }
   // openChatDialog() {
   //   this.dialog.open(AiChatComponent, {
   //     width: '100%',
@@ -246,7 +250,7 @@ export class AllPacksPageNewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       // handle the result if needed
     });
   }
@@ -300,7 +304,7 @@ export class AllPacksPageNewComponent implements OnInit {
     this.router.queryParams.subscribe((params) => {
       let filter = params['filter'];
       if (filter) {
-        console.log('filter:..............', filter);
+        // console.log('filter:..............', filter);
         this.selectOption(filter);
         // Rest of your code
       }
@@ -312,12 +316,13 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initializeLanguage();
     this.router.queryParams.subscribe((params) => {
       const refId = params['ref'];
 
       if (refId) {
         localStorage.setItem('refId', refId);
-        console.log('refId ID stored:', refId);
+        // console.log('refId ID stored:', refId);
       }
     });
 
@@ -367,6 +372,16 @@ export class AllPacksPageNewComponent implements OnInit {
     //this.getAllPacks();
   }
 
+  initializeLanguage(): void {
+    const storedLanguage = localStorage.getItem('packsLanguageLocalStorage');
+    if (storedLanguage) {
+      this.filterOption.language = storedLanguage;
+    } else {
+      this.filterOption.language = 'he';
+      localStorage.setItem('packsLanguageLocalStorage', 'he');
+    }
+  }
+
   filterOptions() {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
 
@@ -409,6 +424,7 @@ export class AllPacksPageNewComponent implements OnInit {
           this.setAllFavPacksToShow();
           this.initializeFilteredOptions();
           this.overlaySpinnerService.changeOverlaySpinner(false);
+          this.isLoading = false;
         });
         this.cardsService.getAllPacks();
       }
@@ -421,6 +437,7 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.isLoading = false;
       });
       console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
@@ -571,7 +588,7 @@ export class AllPacksPageNewComponent implements OnInit {
       packContent.tags.some((tag) => tag.toLowerCase() === filterValue)
     );
   }
-  
+
 
   selectOption(option: string) {
     this.currentFocusIndex = -1;

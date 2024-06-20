@@ -1,7 +1,7 @@
 <title>{{'pages.all-packs-page-new.title' | translate}}</title>
 <div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen ">
-    <div class=" min-h-screen" >
-        <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2"  *ngIf="isMobileScreen">
+    <div class=" min-h-screen">
+        <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2" *ngIf="isMobileScreen">
             <div class="items-center h-4 flex me-4">
                 <mat-form-field class=" w-60">
                     <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
@@ -26,7 +26,7 @@
             [ngStyle]="isMobileScreen ? {'padding-right':' 0px'} : {'padding-right': '15px'}">
 
             <div id="content" [dir]="langDirectionService.currentLangDirection"
-            [ngClass]="{'content-ltr': langDirectionService.currentLangDirection === 'ltr', 'content-rtl': langDirectionService.currentLangDirection === 'rtl'}"
+                [ngClass]="{'content-ltr': langDirectionService.currentLangDirection === 'ltr', 'content-rtl': langDirectionService.currentLangDirection === 'rtl'}"
                 class=" w-[1350px]  mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
                 <div *ngIf="!isMobileScreen" class="w-[13%] border-black h-[90%] px-2"
                     [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
@@ -68,20 +68,23 @@
                         <div class="flex gap-4 mt-4">
                             <div>
                                 <input type="checkbox" id="checkbox1" name="checkbox1" [(ngModel)]="filterOption.image"
-                                    (ngModelChange)="categoriesSelectedChange('קלפי תמונה')" style="accent-color: #000000;">
+                                    (ngModelChange)="categoriesSelectedChange('קלפי תמונה')"
+                                    style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="checkbox1">{{'pages.all-packs-page-new.content.image' | translate}}</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="checkbox2" name="checkbox2"
-                                    [(ngModel)]="filterOption.question" (ngModelChange)="categoriesSelectedChange('קלפי שאלות')"
+                                    [(ngModel)]="filterOption.question"
+                                    (ngModelChange)="categoriesSelectedChange('קלפי שאלות')"
                                     style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="checkbox2">{{'pages.all-packs-page-new.content.question' | translate}}</label>
                             </div>
                             <div>
                                 <input type="checkbox" id="checkbox3" name="checkbox3" [(ngModel)]="filterOption.word"
-                                    (ngModelChange)="categoriesSelectedChange('קלפי מילה')" style="accent-color: #000000;">
+                                    (ngModelChange)="categoriesSelectedChange('קלפי מילה')"
+                                    style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="checkbox3">{{'pages.all-packs-page-new.content.word' | translate}}</label>
                             </div>
@@ -97,28 +100,28 @@
                         <div class="flex gap-4 mt-4">
                             <div>
                                 <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="Russian" (ngModelChange)="handlePacksLanguageChange('ru')"
+                                    value="ru" (ngModelChange)="handlePacksLanguageChange('ru')"
                                     style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="radio1">{{'pages.all-packs-page-new.content.russian' | translate}}</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="Arabic" (ngModelChange)="handlePacksLanguageChange('ar')"
+                                    value="ar" (ngModelChange)="handlePacksLanguageChange('ar')"
                                     style="accent-color: #000000;">
                                 <label style="font-size: 10px;" for="radio2">{{'pages.all-packs-page-new.content.arabic'
                                     | translate}}</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio3" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="English" (ngModelChange)="handlePacksLanguageChange('en')"
+                                    value="en" (ngModelChange)="handlePacksLanguageChange('en')"
                                     style="accent-color: #000000;">
                                 <label style="font-size: 10px;"
                                     for="radio3">{{'pages.all-packs-page-new.content.english' | translate}}</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="Hebrew" (ngModelChange)="handlePacksLanguageChange('he')"
+                                    value="he" (ngModelChange)="handlePacksLanguageChange('he')"
                                     style="accent-color: #000000;">
                                 <label style="font-size: 10px;" for="radio4">{{'pages.all-packs-page-new.content.hebrew'
                                     | translate}}</label>
@@ -160,12 +163,14 @@
                 </div>
             </div>
 
-            <div *ngIf="!isfavSelected && showCategoryLine && selectedFavorites.length == 0" class=" mt-2 sm:mt-16">
-                <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between ">
+            <div *ngIf="!isfavSelected && showCategoryLine && selectedFavorites.length == 0 && allCategoryPacks.length >= 0 "
+                class=" mt-2 sm:mt-16">
+                <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between "
+                    *ngIf="allCategoryPacks[0]">
                     <div
                         class="  sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
-                        {{allCategoryPacks[0].category}} </div>
-                    <div *ngIf="allCategoryPacks[0]" #allPacksScrollContainer
+                        {{allCategoryPacks[0]?.category}} </div>
+                    <div #allPacksScrollContainer
                         class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 sm:mb-16 mb-8"
                         (mousemove)="onMouseMove($event, allPacksScrollContainer)">
                         <div *ngFor="let packInfo of allCategoryPacks[0].packs; let j = index">
@@ -193,9 +198,10 @@
 
                 <div class="all-packs-view__section flex flex-col sm:flex-row justify-between"
                     *ngFor="let categoryPacks of allCategoryPacks; let i = index">
-                    <div *ngIf="i > 0"
+
+                    <div *ngIf="i > 0 && categoryPacks?.category"
                         class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
-                        {{categoryPacks.category}} </div>
+                        {{categoryPacks?.category}} </div>
                     <div *ngIf="categoryPacks  && i>0 " #allPacksScrollContainer
                         class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0  mb-16 "
                         (mousemove)="onMouseMove($event, allPacksScrollContainer)">
@@ -233,10 +239,12 @@
 </div>
 <!-- Web Screen Chat Component at the Bottom -->
 <div style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10;" class="hidden sm:block">
-    <app-ai-chat [userStatus]="sanitizedUserStatus" [placeholderText]="placeholderText" class="flex justify-end"></app-ai-chat>
-  </div>
+    <app-ai-chat [userStatus]="sanitizedUserStatus" [placeholderText]="placeholderText"
+        class="flex justify-end"></app-ai-chat>
+</div>
 <!-- Mobile View Chat Bubble -->
-<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); justify-content: center; align-items: center; z-index: 10; width: 80vw;" class="sm:hidden flex">
+<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); justify-content: center; align-items: center; z-index: 10; width: 80vw;"
+    class="sm:hidden flex">
     <div class="message-bubble" (click)="openChatDialog()">
         <img src="/assets/New/home-page/icons/chat-icon.svg" alt="" style="margin-left: 1rem;">
         <p>קשה לבחור? רוצה להתייעץ?</p>
@@ -313,15 +321,15 @@
                 <div class="flex gap-4 mt-4 justify-center">
                     <div>
                         <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="Russian" (ngModelChange)="handlePacksLanguageChange('ru')" style="accent-color: #000000;"
-                            class="large-radio">
+                            value="Russian" (ngModelChange)="handlePacksLanguageChange('ru')"
+                            style="accent-color: #000000;" class="large-radio">
                         <div style="font-size: 10px;" for="radio1">{{ 'pages.all-packs-page-new.content.russian' |
                             translate }}</div>
                     </div>
                     <div>
                         <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="Arabic" (ngModelChange)="handlePacksLanguageChange('ar')" style="accent-color: #000000;"
-                            class="large-radio">
+                            value="Arabic" (ngModelChange)="handlePacksLanguageChange('ar')"
+                            style="accent-color: #000000;" class="large-radio">
                         <div style="font-size: 10px;" for="radio2">{{ 'pages.all-packs-page-new.content.arabic' |
                             translate }}</div>
                     </div>
@@ -334,8 +342,8 @@
                     </div>
                     <div>
                         <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="Hebrew" (ngModelChange)="handlePacksLanguageChange('he')" style="accent-color: #000000;"
-                            class="large-radio">
+                            value="Hebrew" (ngModelChange)="handlePacksLanguageChange('he')"
+                            style="accent-color: #000000;" class="large-radio">
                         <div style="font-size: 10px;" for="radio4">{{ 'pages.all-packs-page-new.content.hebrew' |
                             translate }}</div>
                     </div>
