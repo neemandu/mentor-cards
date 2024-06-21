@@ -71,7 +71,10 @@
         <app-select-language></app-select-language>
     </div>
     <div class="lg:me-40" matRipple [matRippleColor]="matRippleColor" (click)="navigate('/home-page')">
-        <img id="logo-name" src="/assets/New/nav-bar/logo.svg" alt="Mentor-Cards full logo" />
+        <div class=" w-32">
+
+            <img id="logo-name" src="/assets/New/nav-bar/logo.png" alt="Mentor-Cards full logo" />
+        </div>
     </div>
 
 </section>
@@ -112,7 +115,13 @@
                 class="flex justify-center items-center align-middle  border-[#7986cb]"
                 ngClass="{{i === navBarItems.length - 1 ? 'border-b-0' : 'border-b-1'}}"
                 >
-                <button [routerLink]="item.route" routerLinkActive="active"
+                <button *ngIf="item.name === 'pages.nav.navbar.digital-courses'" (click)="openNewTab()"  
+                    class="text-black hover:cursor-pointer mx-2 mt-2">
+                    <div style="font-weight: 700; font-size: 13px; margin-bottom: 5px;">
+                        {{item.name | translate}}
+                    </div>
+                </button>
+                <button *ngIf="item.name != 'pages.nav.navbar.digital-courses'" [routerLink]="item.route" routerLinkActive="active"
                     class="text-black hover:cursor-pointer mx-2 mt-2">
                     <div style="font-weight: 700; font-size: 13px; margin-bottom: 5px;">
                         {{item.name | translate}}
