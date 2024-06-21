@@ -9,7 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
     <button mat-button [matMenuTriggerFor]="menu" [matTooltip]="'selectLanguageTooltip' | translate">
       <div  class=" flex gap-2 items-center">
         <div>
-          {{ translate.currentLang }}
+          {{ translate.currentLang == 'en' ? 'EN' : 'HE' }}
         </div>
         <div>
           <img src="/assets/New/nav-bar/lang.svg" alt="" class="w-4">
@@ -18,7 +18,8 @@ import { MatMenuTrigger } from '@angular/material/menu';
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let lang of translate.getLangs()" (click)="translate.use(lang)">
-        {{ lang == 'EN' ? 'English' : 'עברית'}}
+        <!-- {{ lang }} -->
+        {{ lang == 'en' ? 'English' : 'עברית'}}
       </button>
     </mat-menu>
   </div>

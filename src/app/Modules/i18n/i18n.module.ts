@@ -17,9 +17,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 })
 export class I18nModule {
   constructor(translate: TranslateService) {
-    translate.addLangs(['EN', 'HE']);
-    translate.setDefaultLang('HE');
-    translate.use('HE');
+    translate.addLangs(['en', 'he']);
+    translate.setDefaultLang('he');
+    translate.use('he');
   }
 }
  
