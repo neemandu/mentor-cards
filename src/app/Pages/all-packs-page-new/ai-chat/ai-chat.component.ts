@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-ai-chat',
@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./ai-chat.component.css']
 })
 export class AiChatComponent {
+  hideChat: boolean = false;
   @Input() userStatus: string = '';
   @Input() placeholderText: string = '';
   userInput: string = '';
@@ -41,5 +42,19 @@ export class AiChatComponent {
     setTimeout(() => {
       this.responses.push('Placeholder response from backend');
     }, 1000);
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const footerHeight = document.querySelector('app-home-page-footer').clientHeight;
+    const chatContainer = document.querySelector('.chat-container') as HTMLElement;
+    const scrollPosition = window.pageYOffset + window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    if (scrollPosition >= documentHeight - footerHeight) {
+      this.hideChat = true;
+    } else {
+      this.hideChat = false;
+    }
   }
 }
