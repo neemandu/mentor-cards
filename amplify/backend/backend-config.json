@@ -194,6 +194,20 @@
         }
       ]
     },
+    "SchemaUpdate": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "mentorcards56dbf153PreSignup": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -662,6 +676,22 @@
         {
           "category": "function",
           "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_SchemaUpdate_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "SchemaUpdate"
+        }
+      ]
+    },
+    "AMPLIFY_function_SchemaUpdate_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "SchemaUpdate"
         }
       ]
     },

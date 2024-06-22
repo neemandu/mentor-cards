@@ -652,8 +652,12 @@ subscription OnCreateCardsPack {
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -742,8 +746,12 @@ subscription OnUpdateCardsPack {
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -832,8 +840,12 @@ subscription OnDeleteCardsPack {
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds

@@ -70,8 +70,12 @@ query GetUser($id: ID!) {
         tags
         categories
         cards {
-          backImgUrl
-          frontImgUrl
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
         }
         cardsPreview
         groupsIds
@@ -239,8 +243,12 @@ query GetUser($id: ID!) {
         tags
         categories
         cards {
-          backImgUrl
-          frontImgUrl
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
         }
         cardsPreview
         groupsIds
@@ -410,8 +418,12 @@ query ListUsers(
           tags
           categories
           cards {
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -576,8 +588,12 @@ query ListUsers(
           tags
           categories
           cards {
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -1124,8 +1140,12 @@ query GetCardsPack($id: ID!, $link: String!) {
     tags
     categories
     cards(link: $link) {
-      backImgUrl
-      frontImgUrl
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -1219,8 +1239,12 @@ query ListCardsPacks(
       tags
       categories
       cards {
-        backImgUrl
-        frontImgUrl
+        categoryName
+        categoryStepNumber
+        cardsImages {
+          backImgUrl
+          frontImgUrl
+        }
       }
       cardsPreview
       groupsIds

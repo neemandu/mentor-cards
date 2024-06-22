@@ -158,7 +158,7 @@ export type CardsPack = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<Cards | null> | null;
+  cards?: Array<Category | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElement | null> | null;
@@ -183,6 +183,13 @@ export type CardsPack = {
   numberOfCards?: number | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type Category = {
+  __typename: "Category";
+  categoryName?: string | null;
+  categoryStepNumber?: number | null;
+  cardsImages?: Array<Cards | null> | null;
 };
 
 export type Cards = {
@@ -741,7 +748,7 @@ export type CreateCardsPackInput = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<CardsInput | null> | null;
+  cards?: Array<CategoryInput | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElementInput | null> | null;
@@ -763,6 +770,12 @@ export type CreateCardsPackInput = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+};
+
+export type CategoryInput = {
+  categoryName?: string | null;
+  categoryStepNumber?: number | null;
+  cardsImages?: Array<CardsInput | null> | null;
 };
 
 export type CardsInput = {
@@ -814,7 +827,7 @@ export type UpdateCardsPackInput = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<CardsInput | null> | null;
+  cards?: Array<CategoryInput | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElementInput | null> | null;
@@ -1358,9 +1371,14 @@ export type CreateUserMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -1548,9 +1566,14 @@ export type CreateUserMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -1772,9 +1795,14 @@ export type GetAffiliateDataMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -1962,9 +1990,14 @@ export type GetAffiliateDataMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -2670,9 +2703,14 @@ export type CreateCardsPackMutation = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -2773,9 +2811,14 @@ export type UpdateCardsPackMutation = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -2876,9 +2919,14 @@ export type DeleteCardsPackMutation = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -3207,9 +3255,14 @@ export type GetUserQuery = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -3397,9 +3450,14 @@ export type GetUserQuery = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -3585,9 +3643,14 @@ export type ListUsersQuery = {
         tags?: Array<string | null> | null;
         categories?: Array<string | null> | null;
         cards?: Array<{
-          __typename: "Cards";
-          backImgUrl?: string | null;
-          frontImgUrl?: string | null;
+          __typename: "Category";
+          categoryName?: string | null;
+          categoryStepNumber?: number | null;
+          cardsImages?: Array<{
+            __typename: "Cards";
+            backImgUrl?: string | null;
+            frontImgUrl?: string | null;
+          } | null> | null;
         } | null> | null;
         cardsPreview?: Array<string | null> | null;
         groupsIds?: Array<string | null> | null;
@@ -3771,9 +3834,14 @@ export type ListUsersQuery = {
         tags?: Array<string | null> | null;
         categories?: Array<string | null> | null;
         cards?: Array<{
-          __typename: "Cards";
-          backImgUrl?: string | null;
-          frontImgUrl?: string | null;
+          __typename: "Category";
+          categoryName?: string | null;
+          categoryStepNumber?: number | null;
+          cardsImages?: Array<{
+            __typename: "Cards";
+            backImgUrl?: string | null;
+            frontImgUrl?: string | null;
+          } | null> | null;
         } | null> | null;
         cardsPreview?: Array<string | null> | null;
         groupsIds?: Array<string | null> | null;
@@ -4324,9 +4392,14 @@ export type GetCardsPackQuery = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -4429,9 +4502,14 @@ export type ListCardsPacksQuery = {
     tags?: Array<string | null> | null;
     categories?: Array<string | null> | null;
     cards?: Array<{
-      __typename: "Cards";
-      backImgUrl?: string | null;
-      frontImgUrl?: string | null;
+      __typename: "Category";
+      categoryName?: string | null;
+      categoryStepNumber?: number | null;
+      cardsImages?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
     } | null> | null;
     cardsPreview?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
@@ -5240,9 +5318,14 @@ export type OnCreateCardsPackSubscription = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -5343,9 +5426,14 @@ export type OnUpdateCardsPackSubscription = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -5446,9 +5534,14 @@ export type OnDeleteCardsPackSubscription = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -5644,8 +5737,13 @@ export class APIService {
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -5834,8 +5932,13 @@ export class APIService {
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -6262,8 +6365,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -6452,8 +6560,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -7601,8 +7714,13 @@ async GetSubscriptionPlansForOrgs(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -7720,8 +7838,13 @@ async GetSubscriptionPlansForOrgs(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -7839,8 +7962,13 @@ async GetSubscriptionPlansForOrgs(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -8392,8 +8520,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -8582,8 +8715,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -8784,8 +8922,13 @@ async GetSubscriptionPlansForOrgs(
                 categories
                 cards {
                   __typename
-                  backImgUrl
-                  frontImgUrl
+                  categoryName
+                  categoryStepNumber
+                  cardsImages {
+                    __typename
+                    backImgUrl
+                    frontImgUrl
+                  }
                 }
                 cardsPreview
                 groupsIds
@@ -8970,8 +9113,13 @@ async GetSubscriptionPlansForOrgs(
                 categories
                 cards {
                   __typename
-                  backImgUrl
-                  frontImgUrl
+                  categoryName
+                  categoryStepNumber
+                  cardsImages {
+                    __typename
+                    backImgUrl
+                    frontImgUrl
+                  }
                 }
                 cardsPreview
                 groupsIds
@@ -9829,10 +9977,15 @@ async GetSubscriptionPlansForOrgs(
           description
           tags
           categories
-          cards (link: $link){
+          cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -9935,7 +10088,7 @@ async GetSubscriptionPlansForOrgs(
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
-async ListCardsPacksForPreview(
+  async ListCardsPacksForPreview(
     filter?: ModelCardsPackFilterInput,
     limit?: number,
     nextToken?: string
@@ -9952,8 +10105,13 @@ async ListCardsPacksForPreview(
             categories
             cards {
               __typename
-              backImgUrl
-              frontImgUrl
+              categoryName
+              categoryStepNumber
+              cardsImages {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
             }
             cardsPreview
             groupsIds
@@ -10077,8 +10235,13 @@ async ListCardsPacksForPreview(
             categories
             cards {
               __typename
-              backImgUrl
-              frontImgUrl
+              categoryName
+              categoryStepNumber
+              cardsImages {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
             }
             cardsPreview
             groupsIds
@@ -11314,8 +11477,13 @@ async ListCardsPacksForPreview(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -11427,8 +11595,13 @@ async ListCardsPacksForPreview(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -11540,8 +11713,13 @@ async ListCardsPacksForPreview(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds

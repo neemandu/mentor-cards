@@ -333,6 +333,10 @@
         "IncrementCardPackLike": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-61482f507742426d7a4a-build.zip"
+        },
+        "SchemaUpdate": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/SchemaUpdate-736b6d6a73617a726c76-build.zip"
         }
       },
       "auth": {

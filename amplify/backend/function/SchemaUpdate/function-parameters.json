@@ -1,0 +1,91 @@
+{
+  "permissions": {
+    "storage": {
+      "CommonLink:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Affiliate:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "SubscriptionPlan:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "CouponCodes:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Organizations:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "OrganizationMembership:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "ReceiptsId:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Group:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "News:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "CardsPack:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "MessageQueue:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "ContactUsModel:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Invoices:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

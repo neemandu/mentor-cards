@@ -217,6 +217,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "SchemaUpdate": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "UnSubscribe": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

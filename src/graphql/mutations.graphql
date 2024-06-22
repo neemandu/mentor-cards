@@ -48,8 +48,12 @@ mutation CreateUser($input: CreateUserInput!) {
         tags
         categories
         cards {
-          backImgUrl
-          frontImgUrl
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
         }
         cardsPreview
         groupsIds
@@ -217,8 +221,12 @@ mutation CreateUser($input: CreateUserInput!) {
         tags
         categories
         cards {
-          backImgUrl
-          frontImgUrl
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
         }
         cardsPreview
         groupsIds
@@ -449,8 +457,12 @@ mutation GetAffiliateData($input: userInput!) {
         tags
         categories
         cards {
-          backImgUrl
-          frontImgUrl
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
         }
         cardsPreview
         groupsIds
@@ -618,8 +630,12 @@ mutation GetAffiliateData($input: userInput!) {
         tags
         categories
         cards {
-          backImgUrl
-          frontImgUrl
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
         }
         cardsPreview
         groupsIds
@@ -1355,8 +1371,12 @@ mutation CreateCardsPack(
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -1448,8 +1468,12 @@ mutation UpdateCardsPack(
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -1541,8 +1565,12 @@ mutation DeleteCardsPack(
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
