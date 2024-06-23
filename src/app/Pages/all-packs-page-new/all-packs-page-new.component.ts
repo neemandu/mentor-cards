@@ -92,6 +92,7 @@ export class AllPacksPageNewComponent implements OnInit {
   selectedFilter: string;
   isFilterDialogOpen: boolean = false;
   isLoading: boolean = false;
+  private queryParamSubscription: Subscription;
 
   filterList = [
     { filterText: 'הכרות וחיבור', buttonText: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg' },
@@ -121,6 +122,7 @@ export class AllPacksPageNewComponent implements OnInit {
     { color: '#B3980B' },
     { color: '#7A680C' },
   ]
+  selectedCardFilter: string = '';
   @ViewChild('settingsMenuTrigger') settingsMenuTrigger: MatMenuTrigger;
   constructor(
     private cardsService: CardsService,
@@ -133,7 +135,9 @@ export class AllPacksPageNewComponent implements OnInit {
     public dialog: MatDialog,
     private mixpanelService: MixpanelService,
     public langDirectionService: LangDirectionService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private activatedRoute: ActivatedRoute
+    
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.isLoading = true;
@@ -213,7 +217,17 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   handleResetClick() {
-    window.location.reload();
+    // Assuming filters are represented as query parameters, check if any are present
+    if (Object.keys(this.queryParamSubscription).length > 0) {
+      // Navigate without query parameters (removing filters)
+      this.routNavigate.navigate(['.'], { relativeTo: this.router, queryParams: {} }).then(() => {
+        // After navigation, reload the page
+        window.location.reload();
+      });
+    } else {
+      // If no filters are present, reload the page directly
+      window.location.reload();
+    }
   }
 
   async handlePacksLanguageChange(lang: string) {
@@ -299,12 +313,14 @@ export class AllPacksPageNewComponent implements OnInit {
 
   handleCategoryClick(category: string) {
     this.selectOption(category);
+    this.selectedCardFilter = category;
   }
   ngAfterViewInit() {
     this.router.queryParams.subscribe((params) => {
       let filter = params['filter'];
       if (filter) {
         // console.log('filter:..............', filter);
+        this.selectedCardFilter = filter;
         this.selectOption(filter);
         // Rest of your code
       }
@@ -316,6 +332,10 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.queryParamSubscription = this.activatedRoute.queryParams.subscribe(params => {
+      // Access queryParams here
+      console.log(params); // This will log the current query parameters
+    });
     this.initializeLanguage();
     this.router.queryParams.subscribe((params) => {
       const refId = params['ref'];
@@ -641,6 +661,9 @@ export class AllPacksPageNewComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.Subscription.unsubscribe();
+    if (this.queryParamSubscription) {
+      this.queryParamSubscription.unsubscribe();
+    }
   }
 }
 

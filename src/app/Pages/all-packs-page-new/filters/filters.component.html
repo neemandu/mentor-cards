@@ -1,5 +1,5 @@
 <button class="flex justify-center items-center mx-1 hover:border-4 rounded-xl
-         hover:border-[#e67c73] min-w-20  m-2 flex-col " (click)="handleClick()">
+         hover:border-[#e67c73] min-w-20  m-2 flex-col " [ngClass]="{'border-[#e67c73] border-4 ': isActive}" (click)="handleClick()">
     <div class="pt-3 pb-2">
         <img [src]="imageSrc" alt="" width="auto" style="height:35px">
     </div>

@@ -137,7 +137,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         (pack) => {
           console.log('hi');
           this.pack = new PackContent().deseralize(pack);
-          this.isDoubleSided = pack.cards[0].backImgUrl ? true : false;
+          this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl ? true : false;
           if(this.pack.cards.length == 0){
             this.unauthorized = true;
           }

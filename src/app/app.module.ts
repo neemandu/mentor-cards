@@ -179,6 +179,7 @@ import { PacksCardComponent } from './Pages/all-packs-page-new/packs-card/packs-
 import { SubscribeCardComponent } from './Pages/all-packs-page-new/subscribe-card/subscribe-card.component';
 import { FilterDialogComponent } from './Pages/all-packs-page-new/filter-dialog/filter-dialog.component';
 import { AiChatComponent } from './Pages/all-packs-page-new/ai-chat/ai-chat.component';
+import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripple.directive';
 
 @NgModule({
   declarations: [
@@ -263,6 +264,7 @@ import { AiChatComponent } from './Pages/all-packs-page-new/ai-chat/ai-chat.comp
     SubscribeCardComponent,
     FilterDialogComponent,
     AiChatComponent,
+    GradientRippleDirective
   ],
   imports: [
     BrowserModule,

@@ -35,10 +35,10 @@
                     </div>
                     <div class=" grid grid-cols-2 w-full justify-between pt-2">
                         <app-filters class=" col-span-1" [imageSrc]="'/assets/New/home-page/cards/0.svg'"
-                            [buttonText]="'המועדפים עלי'" [filterText]="''" (categoryClick)="toggleIsFavSelected()">
+                            [buttonText]="'המועדפים עלי'" [filterText]="''" (categoryClick)="toggleIsFavSelected()" [isActive]="isfavSelected">
                         </app-filters>
                         <app-filters class=" col-span-1" [imageSrc]="'/assets/New/home-page/cards/12.svg'"
-                            [buttonText]="'לכל הערכות'" [filterText]="''" (categoryClick)="handleCategoryClick($event)">
+                            [buttonText]="'לכל הערכות'" [filterText]="''" (categoryClick)="handleCategoryClick($event)"  [isActive]="'' === selectedCardFilter">
                         </app-filters>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="grid grid-cols-11 me-4 pt-2">
                         <app-filters *ngFor="let filter of filterList" [imageSrc]="filter.image"
-                            [buttonText]="filter.buttonText" [filterText]="filter.filterText"
+                            [buttonText]="filter.buttonText" [filterText]="filter.filterText"   [isActive]="filter.filterText === selectedCardFilter"
                             (categoryClick)="handleCategoryClick($event)" class="col-span-1">
                         </app-filters>
                     </div>

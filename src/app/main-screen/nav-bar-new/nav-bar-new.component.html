@@ -70,7 +70,7 @@
     <div>
         <app-select-language></app-select-language>
     </div>
-    <div class="lg:me-40" matRipple [matRippleColor]="matRippleColor" (click)="navigate('/home-page')">
+    <div class="lg:me-40"  mat-button matRipple appGradientRipple (click)="navigate('/home-page')">
         <div class=" w-32">
 
             <img id="logo-name" src="/assets/New/nav-bar/logo.png" alt="Mentor-Cards full logo" />
@@ -121,7 +121,7 @@
                         {{item.name | translate}}
                     </div>
                 </button>
-                <button *ngIf="item.name != 'pages.nav.navbar.digital-courses'" [routerLink]="item.route" routerLinkActive="active"
+                <button *ngIf="item.name != 'pages.nav.navbar.digital-courses'" (click)="navigateTo(item.route)" routerLinkActive="active"
                     class="text-black hover:cursor-pointer mx-2 mt-2">
                     <div style="font-weight: 700; font-size: 13px; margin-bottom: 5px;">
                         {{item.name | translate}}

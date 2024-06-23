@@ -1,6 +1,7 @@
 // import { Component, OnInit, Output } from '@angular/core';
 // import { EventEmitter } from 'stream';
-import { Component, EventEmitter, NgZone, OnInit, Output, HostListener, QueryList, ViewChildren, ViewChild, ElementRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, EventEmitter, NgZone, OnInit, Output, HostListener, QueryList, ViewChildren, ViewChild, ElementRef, Inject } from '@angular/core';
 import { MatOption } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { bool } from 'aws-sdk/clients/signer';
@@ -118,7 +119,9 @@ export class NavBarNewComponent implements OnInit {
     private cardsService: CardsService,
     private overlaySpinnerService: OverlaySpinnerService,
     public routNavigate: Router,
-    public langDirectionService: LangDirectionService,) {
+    public langDirectionService: LangDirectionService,
+    @Inject(DOCUMENT) private document: Document
+  ) {
   }
 
   ngOnInit() {
@@ -521,7 +524,20 @@ export class NavBarNewComponent implements OnInit {
   public navigate(path: string): void {
     this.ngZone.run(() => this.routNavigate.navigate([path]));
   }
-  navigateTo(route: string) {
-    this.router.navigateByUrl(route);
-}
+  navigateTo(route: string): void {
+    if (route.includes('#')) {
+      const [path, fragment] = route.split('#');
+      this.router.navigate([path]).then(() => {
+        // Wait for navigation to complete
+        setTimeout(() => {
+          const element = this.document.querySelector(`#${fragment}`);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100); // Adjust timeout as needed
+      });
+    } else {
+      this.router.navigate([route]);
+    }
+  }
 }

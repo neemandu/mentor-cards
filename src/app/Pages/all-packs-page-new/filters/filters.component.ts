@@ -10,6 +10,7 @@ export class FiltersComponent  {
   @Input() imageSrc: string = '';
   @Input() buttonText: string = '';
   @Input() filterText: string = '';
+  @Input() isActive: boolean = false;
   @Output() categoryClick = new EventEmitter<string>();
 
   handleClick() {
