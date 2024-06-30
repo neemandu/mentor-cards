@@ -127,6 +127,20 @@
         }
       ]
     },
+    "GetInvoicesFromS3": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "Invoices"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "GetNextBillingDate": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -452,6 +466,22 @@
         {
           "category": "function",
           "resourceName": "GetFreeUntilDate"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetInvoicesFromS3_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetInvoicesFromS3"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetInvoicesFromS3_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetInvoicesFromS3"
         }
       ]
     },

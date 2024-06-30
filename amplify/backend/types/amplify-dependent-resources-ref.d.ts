@@ -126,6 +126,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "GetInvoicesFromS3": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "GetNextBillingDate": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

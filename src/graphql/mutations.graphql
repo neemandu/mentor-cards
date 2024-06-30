@@ -124,6 +124,7 @@ mutation CreateUser($input: CreateUserInput!) {
         guidebookUrl
         ownerName
         numberOfCards
+        isHardCopyAvailable
         createdAt
         updatedAt
       }
@@ -297,6 +298,7 @@ mutation CreateUser($input: CreateUserInput!) {
         guidebookUrl
         ownerName
         numberOfCards
+        isHardCopyAvailable
         createdAt
         updatedAt
       }
@@ -533,6 +535,7 @@ mutation GetAffiliateData($input: userInput!) {
         guidebookUrl
         ownerName
         numberOfCards
+        isHardCopyAvailable
         createdAt
         updatedAt
       }
@@ -706,6 +709,7 @@ mutation GetAffiliateData($input: userInput!) {
         guidebookUrl
         ownerName
         numberOfCards
+        isHardCopyAvailable
         createdAt
         updatedAt
       }
@@ -765,6 +769,12 @@ mutation AskTheAI($input: AiInput!) {
       reason
       guide
     }
+  }
+}
+mutation GetInvoicesFromS3($input: userInput!) {
+  getInvoicesFromS3(input: $input) {
+    key
+    data
   }
 }
 mutation CreateCommonLink(
@@ -1453,6 +1463,7 @@ mutation CreateCardsPack(
     guidebookUrl
     ownerName
     numberOfCards
+    isHardCopyAvailable
     createdAt
     updatedAt
   }
@@ -1550,6 +1561,7 @@ mutation UpdateCardsPack(
     guidebookUrl
     ownerName
     numberOfCards
+    isHardCopyAvailable
     createdAt
     updatedAt
   }
@@ -1647,6 +1659,7 @@ mutation DeleteCardsPack(
     guidebookUrl
     ownerName
     numberOfCards
+    isHardCopyAvailable
     createdAt
     updatedAt
   }

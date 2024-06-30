@@ -41,13 +41,16 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 async function updateCardsPackTable() {
 	
 	try {
+	  var tableName = env.API_CARDSPACKS_CARDSPACKTABLE_NAME
 	  const params = {
-		TableName: env.API_CARDSPACKS_CARDSPACKTABLE_NAME
+		TableName: tableName
 	  };
   
 	  const data = await docClient.scan(params).promise();
 	  
 	  for (const item of data.Items) {
+		
+		console.log('start item: ' + item.id);
 		if (item.cards) {
 		  const updatedCards = [
 			{
@@ -67,18 +70,19 @@ async function updateCardsPackTable() {
 		  };
   
 		  await docClient.update(updateParams).promise();
+		  console.log('finish item: ' + item.id);
 		}
 	  }
   
 	  console.log('Update completed successfully.');
 	} catch (error) {
-	  console.error('Error updating the CardsPack table:', JSON.stringify(error, null, 2));
+	  console.error('Error updating the CardsPack table:' + error, JSON.stringify(error, null, 2));
 	}
   }
 
 exports.handler = async (event) => {
     console.log(`start`);
-    updateCardsPackTable();
+    await updateCardsPackTable();
     console.log(`finish`);
 
 };

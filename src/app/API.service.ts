@@ -181,6 +181,7 @@ export type CardsPack = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -350,6 +351,12 @@ export type RecommendedPack = {
   packId?: number | null;
   reason?: string | null;
   guide?: string | null;
+};
+
+export type S3Item = {
+  __typename: "S3Item";
+  key: string;
+  data: string;
 };
 
 export type ModelCommonLinkConditionInput = {
@@ -770,6 +777,7 @@ export type CreateCardsPackInput = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
 };
 
 export type CategoryInput = {
@@ -816,6 +824,7 @@ export type ModelCardsPackConditionInput = {
   guidebookUrl?: ModelStringInput | null;
   ownerName?: ModelStringInput | null;
   numberOfCards?: ModelIntInput | null;
+  isHardCopyAvailable?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -849,6 +858,7 @@ export type UpdateCardsPackInput = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -1292,6 +1302,7 @@ export type ModelCardsPackFilterInput = {
   guidebookUrl?: ModelStringInput | null;
   ownerName?: ModelStringInput | null;
   numberOfCards?: ModelIntInput | null;
+  isHardCopyAvailable?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1459,6 +1470,7 @@ export type CreateUserMutation = {
       guidebookUrl?: string | null;
       ownerName?: string | null;
       numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1654,6 +1666,7 @@ export type CreateUserMutation = {
       guidebookUrl?: string | null;
       ownerName?: string | null;
       numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1883,6 +1896,7 @@ export type GetAffiliateDataMutation = {
       guidebookUrl?: string | null;
       ownerName?: string | null;
       numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2078,6 +2092,7 @@ export type GetAffiliateDataMutation = {
       guidebookUrl?: string | null;
       ownerName?: string | null;
       numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2139,6 +2154,12 @@ export type AskTheAIMutation = {
     reason?: string | null;
     guide?: string | null;
   } | null> | null;
+};
+
+export type GetInvoicesFromS3Mutation = {
+  __typename: "S3Item";
+  key: string;
+  data: string;
 };
 
 export type CreateCommonLinkMutation = {
@@ -2799,6 +2820,7 @@ export type CreateCardsPackMutation = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2907,6 +2929,7 @@ export type UpdateCardsPackMutation = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3015,6 +3038,7 @@ export type DeleteCardsPackMutation = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3343,6 +3367,7 @@ export type GetUserQuery = {
       guidebookUrl?: string | null;
       ownerName?: string | null;
       numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3538,6 +3563,7 @@ export type GetUserQuery = {
       guidebookUrl?: string | null;
       ownerName?: string | null;
       numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3727,6 +3753,7 @@ export type ListUsersQuery = {
         guidebookUrl?: string | null;
         ownerName?: string | null;
         numberOfCards?: number | null;
+        isHardCopyAvailable?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3918,6 +3945,7 @@ export type ListUsersQuery = {
         guidebookUrl?: string | null;
         ownerName?: string | null;
         numberOfCards?: number | null;
+        isHardCopyAvailable?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -4488,6 +4516,7 @@ export type GetCardsPackQuery = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4594,6 +4623,7 @@ export type ListCardsPacksQuery = {
     guidebookUrl?: string | null;
     ownerName?: string | null;
     numberOfCards?: number | null;
+    isHardCopyAvailable?: boolean | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -5414,6 +5444,7 @@ export type OnCreateCardsPackSubscription = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5522,6 +5553,7 @@ export type OnUpdateCardsPackSubscription = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5630,6 +5662,7 @@ export type OnDeleteCardsPackSubscription = {
   guidebookUrl?: string | null;
   ownerName?: string | null;
   numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5824,6 +5857,7 @@ export class APIService {
               guidebookUrl
               ownerName
               numberOfCards
+              isHardCopyAvailable
               createdAt
               updatedAt
             }
@@ -6019,6 +6053,7 @@ export class APIService {
               guidebookUrl
               ownerName
               numberOfCards
+              isHardCopyAvailable
               createdAt
               updatedAt
             }
@@ -6452,6 +6487,7 @@ async GetSubscriptionPlansForOrgs(
               guidebookUrl
               ownerName
               numberOfCards
+              isHardCopyAvailable
               createdAt
               updatedAt
             }
@@ -6647,6 +6683,7 @@ async GetSubscriptionPlansForOrgs(
               guidebookUrl
               ownerName
               numberOfCards
+              isHardCopyAvailable
               createdAt
               updatedAt
             }
@@ -6739,6 +6776,24 @@ async GetSubscriptionPlansForOrgs(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <AskTheAIMutation>response.data.askTheAI;
+  }
+  async GetInvoicesFromS3(
+    input: userInput
+  ): Promise<Array<GetInvoicesFromS3Mutation>> {
+    const statement = `mutation GetInvoicesFromS3($input: userInput!) {
+        getInvoicesFromS3(input: $input) {
+          __typename
+          key
+          data
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<GetInvoicesFromS3Mutation>>response.data.getInvoicesFromS3;
   }
   async CreateCommonLink(
     input: CreateCommonLinkInput,
@@ -7809,6 +7864,7 @@ async GetSubscriptionPlansForOrgs(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -7933,6 +7989,7 @@ async GetSubscriptionPlansForOrgs(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -8057,6 +8114,7 @@ async GetSubscriptionPlansForOrgs(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -8607,6 +8665,7 @@ async GetSubscriptionPlansForOrgs(
               guidebookUrl
               ownerName
               numberOfCards
+              isHardCopyAvailable
               createdAt
               updatedAt
             }
@@ -8802,6 +8861,7 @@ async GetSubscriptionPlansForOrgs(
               guidebookUrl
               ownerName
               numberOfCards
+              isHardCopyAvailable
               createdAt
               updatedAt
             }
@@ -9005,6 +9065,7 @@ async GetSubscriptionPlansForOrgs(
                 guidebookUrl
                 ownerName
                 numberOfCards
+                isHardCopyAvailable
                 createdAt
                 updatedAt
               }
@@ -9196,6 +9257,7 @@ async GetSubscriptionPlansForOrgs(
                 guidebookUrl
                 ownerName
                 numberOfCards
+                isHardCopyAvailable
                 createdAt
                 updatedAt
               }
@@ -10074,6 +10136,7 @@ async GetSubscriptionPlansForOrgs(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -10194,6 +10257,7 @@ async GetSubscriptionPlansForOrgs(
             language          
             ownerName
             numberOfCards
+            isHardCopyAvailable
             isActive
             createdAt
             updatedAt
@@ -10326,6 +10390,7 @@ async GetSubscriptionPlansForOrgs(
             guidebookUrl
             ownerName
             numberOfCards
+            isHardCopyAvailable
             createdAt
             updatedAt
           }
@@ -11572,6 +11637,7 @@ async GetSubscriptionPlansForOrgs(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -11690,6 +11756,7 @@ async GetSubscriptionPlansForOrgs(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -11808,6 +11875,7 @@ async GetSubscriptionPlansForOrgs(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }

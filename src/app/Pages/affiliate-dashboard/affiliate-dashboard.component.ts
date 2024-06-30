@@ -68,6 +68,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
   columnTranslations = {
     'name': 'שם',
     'purchaseDate': 'תאריך רכישה',
+    'date': 'תאריך',
     'renewsEvery': 'מתחדש כל',
     'email': 'אימייל',
     'commission': 'עמלה'
@@ -77,6 +78,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
   name: string;
   affiliateData: any;
   data: Element[] = [];
+  nextIncome: number;
 
   columnsToDisplay: string[] = [
     'name',
@@ -85,7 +87,12 @@ export class AffiliatesDashboardPageComponent implements OnInit {
     'email',
     'commission',
   ];
+  withdrawsColumnsToDisplay: string[] = [
+    'date',
+    'commission',
+  ];
   dataSource: any;
+  withdrawsDataSource: any;
   isExpansionDetailRow = (i: number, row: Object) =>
     row.hasOwnProperty('detailRow');
   // expandedElement: any;
@@ -163,7 +170,8 @@ export class AffiliatesDashboardPageComponent implements OnInit {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     console.log('userAuthData');
     console.log(this.userAuthData);
-    this.userData.user = 'https://www.mentor-cards.com/home-page?ref=' + this.userAuthData.refId;
+    this.withdrawsDataSource = this.userAuthData.myAffiliate.withdraws;
+    this.userData.user = 'https://www.mentor-cards.com/home-page?ref=' + this.userAuthData.myAffiliate?.affiliateUrl;
     this.apiService.GetAffiliateData({ username: '' }).then(
       (affiliate) => {
         this.affiliateData = affiliate;
@@ -174,6 +182,11 @@ export class AffiliatesDashboardPageComponent implements OnInit {
       (error) => {
         this.affiliateData = error.data.getAffiliateData;
         this.overlaySpinnerService.changeOverlaySpinner(false);
+
+        const commisions = this.affiliateData.flatMap(obj => obj.payments).reduce((sum, payment) => sum + (payment.amount || 0), 0);
+        const income = this.userAuthData.myAffiliate.withdraws.reduce((sum, payment) => sum + (payment.amount || 0), 0);
+
+        this.nextIncome = commisions - income;
         console.log(this.affiliateData, 'here');
         if (Array.isArray(this.affiliateData)) {
           this.affiliateData.map((item: any) => {

@@ -16,6 +16,12 @@ type Mutation {
   getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")  
   createInvoice(input: InvoicesInput!): Boolean @function(name: "CreateInvoice-${env}")  
   askTheAI(input: AiInput!): AiAnswer @function(name: "AskTheAI-${env}")  
+  getInvoicesFromS3(input: userInput!): [S3Item!]! @function(name: "GetInvoicesFromS3-${env}")  
+}
+
+type S3Item {
+    key: String!
+    data: String!
 }
 
 type CommonLink
@@ -288,6 +294,7 @@ type CardsPack
   guidebookUrl: String
   ownerName: String
   numberOfCards: Int @function(name: "GetNumberOfCardsInPack-${env}") 
+  isHardCopyAvailable: Boolean
 }
 
 type UserUsage {

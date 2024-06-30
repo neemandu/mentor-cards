@@ -68,7 +68,7 @@
         </div>
         <div class="discount-body-text">
           {{
-            userAuthData.myAffiliate.balance === null ? 0 : userAuthData.myAffiliate.balance
+            nextIncome === null ? 0 : nextIncome
           }} ש"ח
         </div>        
         <div class="discount-body-text">
@@ -78,7 +78,6 @@
         </div>
       </div>
     </div>
-
     <div class="table-header">הנרשמים שלי</div>
 
     <div style="margin-inline: 5vw">
@@ -256,6 +255,90 @@
                 <tr
                   mat-row
                   *matRowDef="let element; columns: columnsToDisplay"
+                  class="example-element-row"
+                  [class.example-expanded-row]="expandedElement === element"
+                ></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: ['expandedDetail']"
+                  class="example-detail-row"
+                ></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-header">עמלות ששולמו</div>
+
+    <div style="margin-inline: 5vw">
+      <div class="card">
+        <div class="card-body">
+          <div class="mat-elevation-z8">
+            <div class="example-container mat-elevation-z8">
+              <table
+                mat-table
+                [dataSource]="withdrawsDataSource"
+                multiTemplateDataRows
+                class="mat-elevation-z8"
+              >
+                <ng-container
+                  matColumnDef="{{ column }}"
+                  *ngFor="let column of withdrawsColumnsToDisplay"
+                >
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    style="
+                      background-color: #f5a100;
+                      padding-inline: 5vw;
+                      font-size: 1vw;
+                      color: black;
+                    "
+                  >
+                    {{ columnTranslations[column] }}
+                  </th>
+                </ng-container>
+
+                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                <ng-container matColumnDef="expandedDetail">
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    [attr.colspan]="withdrawsColumnsToDisplay.length"
+                  >
+                    <div
+                      class="example-element-detail"
+                      [@detailExpand]="
+                        element == expandedElement ? 'expanded' : 'collapsed'
+                      "
+                    >
+                      <div
+                        *ngFor="let child of element.childElement"
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          padding: 1vw;
+                          background-color: #eaeaea;
+                          margin-bottom: 1vw;
+                        "
+                      >
+                        <div>
+                          {{ child.date }}
+                        </div>
+                        <div>
+                          {{ child.amount }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="withdrawsColumnsToDisplay"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let element; columns: withdrawsColumnsToDisplay"
                   class="example-element-row"
                   [class.example-expanded-row]="expandedElement === element"
                 ></tr>

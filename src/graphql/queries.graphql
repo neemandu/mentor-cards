@@ -146,6 +146,7 @@ query GetUser($id: ID!) {
         guidebookUrl
         ownerName
         numberOfCards
+        isHardCopyAvailable
         createdAt
         updatedAt
       }
@@ -319,6 +320,7 @@ query GetUser($id: ID!) {
         guidebookUrl
         ownerName
         numberOfCards
+        isHardCopyAvailable
         createdAt
         updatedAt
       }
@@ -491,6 +493,7 @@ query ListUsers(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -661,6 +664,7 @@ query ListUsers(
           guidebookUrl
           ownerName
           numberOfCards
+          isHardCopyAvailable
           createdAt
           updatedAt
         }
@@ -1222,6 +1226,7 @@ query GetCardsPack($id: ID!, $link: String!) {
     guidebookUrl
     ownerName
     numberOfCards
+    isHardCopyAvailable
     createdAt
     updatedAt
   }
@@ -1318,6 +1323,7 @@ query ListCardsPacks(
       guidebookUrl
       ownerName
       numberOfCards
+      isHardCopyAvailable
       createdAt
       updatedAt
     }

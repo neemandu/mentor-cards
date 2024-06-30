@@ -734,6 +734,7 @@ subscription OnCreateCardsPack {
     guidebookUrl
     ownerName
     numberOfCards
+    isHardCopyAvailable
     createdAt
     updatedAt
   }
@@ -828,6 +829,7 @@ subscription OnUpdateCardsPack {
     guidebookUrl
     ownerName
     numberOfCards
+    isHardCopyAvailable
     createdAt
     updatedAt
   }
@@ -922,6 +924,7 @@ subscription OnDeleteCardsPack {
     guidebookUrl
     ownerName
     numberOfCards
+    isHardCopyAvailable
     createdAt
     updatedAt
   }
