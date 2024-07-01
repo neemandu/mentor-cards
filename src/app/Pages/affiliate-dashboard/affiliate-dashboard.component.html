@@ -177,7 +177,7 @@
                       font-size: 1vw;
                       color: black;
                     "
-                  >
+                  > 
                     {{ columnTranslations[column] }}
                   </th>
                   <td
@@ -185,7 +185,8 @@
                     *matCellDef="let element"
                     style="padding-inline: 2vw"
                   >
-                    {{ element[column] }}
+                  {{ column === 'purchaseDate' ? (element[column] | date: "dd/MM/yyyy" ) : element[column] }}
+                    <!-- {{ element[column] }} -->
                     <button
                       mat-button
                       *ngIf="column === 'commission'"
@@ -237,7 +238,7 @@
                       >
                         <div>{{ child.name }}</div>
                         <div>
-                          {{ child.purchaseDate }}
+                          {{ child.purchaseDate | date: "dd/MM/yyyy"}}
                         </div>
                         <div>
                           {{ child.renewsEvery }}
@@ -277,77 +278,25 @@
         <div class="card-body">
           <div class="mat-elevation-z8">
             <div class="example-container mat-elevation-z8">
-              <table
-                mat-table
-                [dataSource]="withdrawsDataSource"
-                multiTemplateDataRows
-                class="mat-elevation-z8"
-              >
-                <ng-container
-                  matColumnDef="{{ column }}"
-                  *ngFor="let column of withdrawsColumnsToDisplay"
-                >
-                  <th
-                    mat-header-cell
-                    *matHeaderCellDef
-                    style="
-                      background-color: #f5a100;
-                      padding-inline: 5vw;
-                      font-size: 1vw;
-                      color: black;
-                    "
-                  >
-                    {{ columnTranslations[column] }}
-                  </th>
-                </ng-container>
-
-                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-                <ng-container matColumnDef="expandedDetail">
-                  <td
-                    mat-cell
-                    *matCellDef="let element"
-                    [attr.colspan]="withdrawsColumnsToDisplay.length"
-                  >
-                    <div
-                      class="example-element-detail"
-                      [@detailExpand]="
-                        element == expandedElement ? 'expanded' : 'collapsed'
-                      "
-                    >
-                      <div
-                        *ngFor="let child of element.childElement"
-                        style="
-                          display: flex;
-                          justify-content: space-between;
-                          padding: 1vw;
-                          background-color: #eaeaea;
-                          margin-bottom: 1vw;
-                        "
-                      >
-                        <div>
-                          {{ child.date }}
-                        </div>
-                        <div>
-                          {{ child.amount }}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="withdrawsColumnsToDisplay"></tr>
-                <tr
-                  mat-row
-                  *matRowDef="let element; columns: withdrawsColumnsToDisplay"
-                  class="example-element-row"
-                  [class.example-expanded-row]="expandedElement === element"
-                ></tr>
-                <tr
-                  mat-row
-                  *matRowDef="let row; columns: ['expandedDetail']"
-                  class="example-detail-row"
-                ></tr>
-              </table>
+              <mat-table
+              [dataSource]="withdrawsDataSource"
+              matSort
+              style="margin-inline: 3vw; margin-top: 2vh"
+            >
+            
+            <ng-container matColumnDef="date">
+              <mat-header-cell *matHeaderCellDef>  <div style="font-size: 1.1rem; text-align: center ; justify-content: center;">תאריך</div> </mat-header-cell>
+              <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element">{{ element.date | date:"dd/MM/yyyy" }}</mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="amount">
+              <mat-header-cell *matHeaderCellDef> <div style="font-size: 1.1rem; text-align: center ; justify-content: center;">סכום </div> </mat-header-cell>
+              <mat-cell style="font-size: 0.9rem; text-align: center" *matCellDef="let element"> {{ element.currency }} {{ element.amount }}</mat-cell>
+            </ng-container>
+            
+              <mat-header-row *matHeaderRowDef="withdrawsdisplayedColumn"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: withdrawsdisplayedColumn"></mat-row>
+            </mat-table>
             </div>
           </div>
         </div>

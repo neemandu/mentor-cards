@@ -93,6 +93,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
   ];
   dataSource: any;
   withdrawsDataSource: any;
+  withdrawsdisplayedColumn: string[] = ['date', 'amount'];
   isExpansionDetailRow = (i: number, row: Object) =>
     row.hasOwnProperty('detailRow');
   // expandedElement: any;
@@ -171,6 +172,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
     console.log('userAuthData');
     console.log(this.userAuthData);
     this.withdrawsDataSource = this.userAuthData.myAffiliate.withdraws;
+    console.log('this withdrows data',this.withdrawsDataSource);
     this.userData.user = 'https://www.mentor-cards.com/home-page?ref=' + this.userAuthData.myAffiliate?.affiliateUrl;
     this.apiService.GetAffiliateData({ username: '' }).then(
       (affiliate) => {
