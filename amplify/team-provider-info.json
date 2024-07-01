@@ -341,7 +341,8 @@
         "GetInvoicesFromS3": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/GetInvoicesFromS3-4b7577542f6775795955-build.zip"
-        }
+        },
+        "GetAllAffiliatesData": {}
       },
       "auth": {
         "mentorcards56dbf153": {}

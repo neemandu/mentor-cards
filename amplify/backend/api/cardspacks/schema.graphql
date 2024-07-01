@@ -17,6 +17,7 @@ type Mutation {
   createInvoice(input: InvoicesInput!): Boolean @function(name: "CreateInvoice-${env}")  
   askTheAI(input: AiInput!): AiAnswer @function(name: "AskTheAI-${env}")  
   getInvoicesFromS3(input: userInput!): [S3Item!]! @function(name: "GetInvoicesFromS3-${env}")  
+  GetAllAffiliatesData(input: userInput!): [Affiliate] @function(name: "GetAllAffiliatesData-${env}")  
 }
 
 type S3Item {
@@ -295,6 +296,7 @@ type CardsPack
   ownerName: String
   numberOfCards: Int @function(name: "GetNumberOfCardsInPack-${env}") 
   isHardCopyAvailable: Boolean
+  videoUrl: String
 }
 
 type UserUsage {

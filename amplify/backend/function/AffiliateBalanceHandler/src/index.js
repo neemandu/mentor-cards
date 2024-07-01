@@ -93,7 +93,8 @@ async function saveAffiliate(affiliate){
 
 exports.handler = async event => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
-  event.Records.forEach(record => {
+  for (const record of event.Records) 
+  {
     console.log(record.eventID);
     console.log(record.eventName);
     console.log('DynamoDB Record: %j', record.dynamodb);
@@ -145,6 +146,6 @@ exports.handler = async event => {
         console.log('user is not an affiliate');
       }
 
-  });
+  }
   return Promise.resolve('Successfully processed DynamoDB record');
 };

@@ -24,6 +24,17 @@ const https = require('https');
 const pdf = require('html-pdf');
 
 
+async function getParam(){
+    var { Parameters } = await (new AWS.SSM())
+    .getParameters({
+      Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
+      WithDecryption: true,
+    })
+    .promise(); 
+  
+    return Parameters[0].Value; 
+  }
+
 const post = (defaultOptions, path, payload) => new Promise((resolve, reject) => {
     console.log('post payload: ' + payload);
     console.log('post path: ' + path);
@@ -191,6 +202,42 @@ async function addToUnsubscribersList(email) {
   console.log("Send Email: sending POST End");
 }
 
+async function updateEmailList(email, amount, subDescription, invoiceRunningId, s3Url) {
+    const data = JSON.stringify({
+        "email": email,
+        "customFields": {
+            "i2": "PLAN",
+            "i4": subDescription.includes('חודש') ? 1 : (subDescription.includes('שנתי') ? 12 : -1),
+            "i6": parseInt(invoiceRunningId),
+            "i7": `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+            "i8": amount,
+            "i9": s3Url,
+            "i10": subDescription,
+            "i11": -1
+        },
+        "lists_ToSubscribe": [927198]
+    });
+  
+    var bearerToken = await getParam();
+    
+    const options = {
+        hostname: 'rest.smoove.io',
+        port: 443,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${bearerToken}`
+        }
+    };
+  
+    var msg = await post(options, '/v1/Contacts?updateIfExists=true&restoreIfUnsubscribed=true', data);
+    console.log('msg');
+    console.log(msg);
+    console.log("Send Email: sending POST End");
+  }
+  
+
 async function createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId){
     var docClient = new AWS.DynamoDB.DocumentClient();
     var table = env.API_CARDSPACKS_INVOICESTABLE_NAME;
@@ -346,6 +393,8 @@ exports.handler = async (event) => {
                             name = user.fullName;
                         }
                         await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
+                        await updateEmailList(user.email, amount, extraDesc, invoiceRunningId, "");
+
                     }
                 }
             }
@@ -365,11 +414,11 @@ exports.handler = async (event) => {
         await ses
         .sendEmail({
           Destination: {
-            ToAddresses: ["neemandu@gmail.com"],
+            ToAddresses: ["support@mentor-cards.com"],
           },
           Source: "support@mentor-cards.com",
           Message: {
-            Subject: { Data: 'Mentor-Cards: ERROR' },
+            Subject: { Data: 'Mentor-Cards: ERROR (PayPalWebhookFunc)' },
             Body: {
               Text: { Data: `error: ${ex}` },
             },
