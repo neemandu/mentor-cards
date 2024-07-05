@@ -182,6 +182,7 @@ export type CardsPack = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -778,6 +779,7 @@ export type CreateCardsPackInput = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
 };
 
 export type CategoryInput = {
@@ -825,6 +827,7 @@ export type ModelCardsPackConditionInput = {
   ownerName?: ModelStringInput | null;
   numberOfCards?: ModelIntInput | null;
   isHardCopyAvailable?: ModelBooleanInput | null;
+  videoUrl?: ModelStringInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -859,6 +862,7 @@ export type UpdateCardsPackInput = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -1303,6 +1307,7 @@ export type ModelCardsPackFilterInput = {
   ownerName?: ModelStringInput | null;
   numberOfCards?: ModelIntInput | null;
   isHardCopyAvailable?: ModelBooleanInput | null;
+  videoUrl?: ModelStringInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1471,6 +1476,7 @@ export type CreateUserMutation = {
       ownerName?: string | null;
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1667,6 +1673,7 @@ export type CreateUserMutation = {
       ownerName?: string | null;
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1897,6 +1904,7 @@ export type GetAffiliateDataMutation = {
       ownerName?: string | null;
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2093,6 +2101,7 @@ export type GetAffiliateDataMutation = {
       ownerName?: string | null;
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2160,6 +2169,31 @@ export type GetInvoicesFromS3Mutation = {
   __typename: "S3Item";
   key: string;
   data: string;
+};
+
+export type GetAllAffiliatesDataMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CreateCommonLinkMutation = {
@@ -2821,6 +2855,7 @@ export type CreateCardsPackMutation = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2930,6 +2965,7 @@ export type UpdateCardsPackMutation = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3039,6 +3075,7 @@ export type DeleteCardsPackMutation = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3368,6 +3405,7 @@ export type GetUserQuery = {
       ownerName?: string | null;
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3564,6 +3602,7 @@ export type GetUserQuery = {
       ownerName?: string | null;
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3754,6 +3793,7 @@ export type ListUsersQuery = {
         ownerName?: string | null;
         numberOfCards?: number | null;
         isHardCopyAvailable?: boolean | null;
+        videoUrl?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3946,6 +3986,7 @@ export type ListUsersQuery = {
         ownerName?: string | null;
         numberOfCards?: number | null;
         isHardCopyAvailable?: boolean | null;
+        videoUrl?: string | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -4517,6 +4558,7 @@ export type GetCardsPackQuery = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4624,6 +4666,7 @@ export type ListCardsPacksQuery = {
     ownerName?: string | null;
     numberOfCards?: number | null;
     isHardCopyAvailable?: boolean | null;
+    videoUrl?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -5445,6 +5488,7 @@ export type OnCreateCardsPackSubscription = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5554,6 +5598,7 @@ export type OnUpdateCardsPackSubscription = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5663,6 +5708,7 @@ export type OnDeleteCardsPackSubscription = {
   ownerName?: string | null;
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5858,6 +5904,7 @@ export class APIService {
               ownerName
               numberOfCards
               isHardCopyAvailable
+              videoUrl
               createdAt
               updatedAt
             }
@@ -6054,6 +6101,7 @@ export class APIService {
               ownerName
               numberOfCards
               isHardCopyAvailable
+              videoUrl
               createdAt
               updatedAt
             }
@@ -6488,6 +6536,7 @@ async GetSubscriptionPlansForOrgs(
               ownerName
               numberOfCards
               isHardCopyAvailable
+              videoUrl
               createdAt
               updatedAt
             }
@@ -6684,6 +6733,7 @@ async GetSubscriptionPlansForOrgs(
               ownerName
               numberOfCards
               isHardCopyAvailable
+              videoUrl
               createdAt
               updatedAt
             }
@@ -6794,6 +6844,45 @@ async GetSubscriptionPlansForOrgs(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <Array<GetInvoicesFromS3Mutation>>response.data.getInvoicesFromS3;
+  }
+  async GetAllAffiliatesData(
+    input: userInput
+  ): Promise<Array<GetAllAffiliatesDataMutation>> {
+    const statement = `mutation GetAllAffiliatesData($input: userInput!) {
+        GetAllAffiliatesData(input: $input) {
+          __typename
+          id
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<GetAllAffiliatesDataMutation>>(
+      response.data.GetAllAffiliatesData
+    );
   }
   async CreateCommonLink(
     input: CreateCommonLinkInput,
@@ -7865,6 +7954,7 @@ async GetSubscriptionPlansForOrgs(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -7990,6 +8080,7 @@ async GetSubscriptionPlansForOrgs(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -8115,6 +8206,7 @@ async GetSubscriptionPlansForOrgs(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -8666,6 +8758,7 @@ async GetSubscriptionPlansForOrgs(
               ownerName
               numberOfCards
               isHardCopyAvailable
+              videoUrl
               createdAt
               updatedAt
             }
@@ -8862,6 +8955,7 @@ async GetSubscriptionPlansForOrgs(
               ownerName
               numberOfCards
               isHardCopyAvailable
+              videoUrl
               createdAt
               updatedAt
             }
@@ -9066,6 +9160,7 @@ async GetSubscriptionPlansForOrgs(
                 ownerName
                 numberOfCards
                 isHardCopyAvailable
+                videoUrl
                 createdAt
                 updatedAt
               }
@@ -9258,6 +9353,7 @@ async GetSubscriptionPlansForOrgs(
                 ownerName
                 numberOfCards
                 isHardCopyAvailable
+                videoUrl
                 createdAt
                 updatedAt
               }
@@ -10137,6 +10233,7 @@ async GetSubscriptionPlansForOrgs(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -10259,6 +10356,7 @@ async GetSubscriptionPlansForOrgs(
             numberOfCards
             isHardCopyAvailable
             isActive
+            videoUrl
             createdAt
             updatedAt
           }
@@ -10391,6 +10489,7 @@ async GetSubscriptionPlansForOrgs(
             ownerName
             numberOfCards
             isHardCopyAvailable
+            videoUrl
             createdAt
             updatedAt
           }
@@ -11638,6 +11737,7 @@ async GetSubscriptionPlansForOrgs(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -11757,6 +11857,7 @@ async GetSubscriptionPlansForOrgs(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -11876,6 +11977,7 @@ async GetSubscriptionPlansForOrgs(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }

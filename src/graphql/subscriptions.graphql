@@ -735,6 +735,7 @@ subscription OnCreateCardsPack {
     ownerName
     numberOfCards
     isHardCopyAvailable
+    videoUrl
     createdAt
     updatedAt
   }
@@ -830,6 +831,7 @@ subscription OnUpdateCardsPack {
     ownerName
     numberOfCards
     isHardCopyAvailable
+    videoUrl
     createdAt
     updatedAt
   }
@@ -925,6 +927,7 @@ subscription OnDeleteCardsPack {
     ownerName
     numberOfCards
     isHardCopyAvailable
+    videoUrl
     createdAt
     updatedAt
   }

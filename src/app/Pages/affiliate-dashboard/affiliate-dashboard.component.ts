@@ -188,7 +188,7 @@ export class AffiliatesDashboardPageComponent implements OnInit {
         const commisions = this.affiliateData.flatMap(obj => obj.payments).reduce((sum, payment) => sum + (payment.amount || 0), 0);
         const income = this.userAuthData.myAffiliate.withdraws.reduce((sum, payment) => sum + (payment.amount || 0), 0);
 
-        this.nextIncome = commisions - income;
+        this.nextIncome = (commisions * (this.userAuthData.myAffiliate.commissionPercentage / 100)) - income;
         console.log(this.affiliateData, 'here');
         if (Array.isArray(this.affiliateData)) {
           this.affiliateData.map((item: any) => {

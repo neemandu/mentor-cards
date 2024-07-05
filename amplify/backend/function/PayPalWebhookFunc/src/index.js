@@ -1,3 +1,4 @@
+
 /* Amplify Params - DO NOT EDIT
         API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
         API_CARDSPACKS_INVOICESTABLE_ARN
@@ -418,7 +419,7 @@ exports.handler = async (event) => {
           },
           Source: "support@mentor-cards.com",
           Message: {
-            Subject: { Data: 'Mentor-Cards: ERROR (PayPalWebhookFunc)' },
+            Subject: { Data: 'Mentor-Cards: ERROR  (PayPalWebhookFunc)' },
             Body: {
               Text: { Data: `error: ${ex}` },
             },

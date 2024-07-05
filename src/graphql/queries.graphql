@@ -147,6 +147,7 @@ query GetUser($id: ID!) {
         ownerName
         numberOfCards
         isHardCopyAvailable
+        videoUrl
         createdAt
         updatedAt
       }
@@ -321,6 +322,7 @@ query GetUser($id: ID!) {
         ownerName
         numberOfCards
         isHardCopyAvailable
+        videoUrl
         createdAt
         updatedAt
       }
@@ -494,6 +496,7 @@ query ListUsers(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -665,6 +668,7 @@ query ListUsers(
           ownerName
           numberOfCards
           isHardCopyAvailable
+          videoUrl
           createdAt
           updatedAt
         }
@@ -1227,6 +1231,7 @@ query GetCardsPack($id: ID!, $link: String!) {
     ownerName
     numberOfCards
     isHardCopyAvailable
+    videoUrl
     createdAt
     updatedAt
   }
@@ -1324,6 +1329,7 @@ query ListCardsPacks(
       ownerName
       numberOfCards
       isHardCopyAvailable
+      videoUrl
       createdAt
       updatedAt
     }

@@ -125,6 +125,7 @@ mutation CreateUser($input: CreateUserInput!) {
         ownerName
         numberOfCards
         isHardCopyAvailable
+        videoUrl
         createdAt
         updatedAt
       }
@@ -299,6 +300,7 @@ mutation CreateUser($input: CreateUserInput!) {
         ownerName
         numberOfCards
         isHardCopyAvailable
+        videoUrl
         createdAt
         updatedAt
       }
@@ -536,6 +538,7 @@ mutation GetAffiliateData($input: userInput!) {
         ownerName
         numberOfCards
         isHardCopyAvailable
+        videoUrl
         createdAt
         updatedAt
       }
@@ -710,6 +713,7 @@ mutation GetAffiliateData($input: userInput!) {
         ownerName
         numberOfCards
         isHardCopyAvailable
+        videoUrl
         createdAt
         updatedAt
       }
@@ -775,6 +779,30 @@ mutation GetInvoicesFromS3($input: userInput!) {
   getInvoicesFromS3(input: $input) {
     key
     data
+  }
+}
+mutation GetAllAffiliatesData($input: userInput!) {
+  GetAllAffiliatesData(input: $input) {
+    id
+    affiliateUrl
+    contactEmail
+    phoneNumber
+    websiteURL
+    paymentDetails
+    commissionPercentage
+    dateJoined
+    status
+    balance
+    withdraws {
+      id
+      date
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    createdAt
+    updatedAt
   }
 }
 mutation CreateCommonLink(
@@ -1464,6 +1492,7 @@ mutation CreateCardsPack(
     ownerName
     numberOfCards
     isHardCopyAvailable
+    videoUrl
     createdAt
     updatedAt
   }
@@ -1562,6 +1591,7 @@ mutation UpdateCardsPack(
     ownerName
     numberOfCards
     isHardCopyAvailable
+    videoUrl
     createdAt
     updatedAt
   }
@@ -1660,6 +1690,7 @@ mutation DeleteCardsPack(
     ownerName
     numberOfCards
     isHardCopyAvailable
+    videoUrl
     createdAt
     updatedAt
   }

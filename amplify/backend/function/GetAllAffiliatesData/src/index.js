@@ -98,7 +98,7 @@ exports.handler = async (event) => {
                 commissionPercentage: affiliate.commissionPercentage,
                 dateJoined: affiliate.dateJoined,
                 status: affiliate.status,
-                balance: userPaymentSummaries.totalPayments - totalPastCommisions,
+                balance: (userPaymentSummaries.totalPayments * (affiliate.commissionPercentage / 100)) - totalPastCommisions,
                 withdraws: affiliate.withdraws
             });
         }
