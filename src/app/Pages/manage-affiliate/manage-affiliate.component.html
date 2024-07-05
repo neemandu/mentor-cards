@@ -193,6 +193,18 @@
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="balance">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <div style="font-size: 1.1rem; text-align: center">יתרה להעברה</div>
+    </mat-header-cell>
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >
+      {{ element.balance }}
+    </mat-cell>
+  </ng-container>
+
   <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumn"></mat-row>
 </mat-table>

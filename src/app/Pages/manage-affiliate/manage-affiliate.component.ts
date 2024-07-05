@@ -40,6 +40,7 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
     'phoneNumber',
     'websiteURL',
     'paymentDetails',
+    'balance',
     'commissionPercentage',
     'status',
     'id',
