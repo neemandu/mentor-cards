@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+# /dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -127,7 +127,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist
 
 # Gatsby files
 .cache/
@@ -153,7 +153,7 @@ dist
 #amplify
 amplify/backend/awscloudformation
 build/
-dist/
+# dist/
 # node_modules/
 aws-exports.js
 awsconfiguration.json
