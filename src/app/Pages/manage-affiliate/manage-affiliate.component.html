@@ -181,9 +181,20 @@
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="createdAt">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem; text-align: center">תאריך הצטרפות</div>
+    </mat-header-cell>
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >{{ element.createdAt | date:"dd/MM/yyyy" }}
+    </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div style="font-size: 1.1rem; text-align: center">סטטוס</div>
+      <div style="font-size: 1.1rem; text-align: center">האם פעיל?</div>
     </mat-header-cell>
     <mat-cell
       style="font-size: 0.9rem; text-align: center"

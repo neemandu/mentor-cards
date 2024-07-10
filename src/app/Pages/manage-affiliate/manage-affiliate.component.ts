@@ -23,6 +23,7 @@ export interface Element {
   websiteURL: string;
   paymentDetails: string;
   commissionPercentage: number;
+  createdAt: Date;
   status: string;
   Withdraws?: Withdraw[];
 }
@@ -42,6 +43,7 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
     'paymentDetails',
     'balance',
     'commissionPercentage',
+    'createdAt',
     'status',
     'id',
   ];
@@ -122,9 +124,9 @@ export class ManageAffiliateComponent implements OnInit , AfterViewInit {
 
   getAffiliates(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    this.apiService.ListAffiliates().then(
+    this.apiService.GetAllAffiliatesData({username:""}).then(
       (affiliate) => {
-        this.affiliateData = affiliate.items;
+        this.affiliateData = affiliate;
         this.dataSource = new MatTableDataSource(this.affiliateData);
         this.dataSource.sort = this.sort;
         this.overlaySpinnerService.changeOverlaySpinner(false);

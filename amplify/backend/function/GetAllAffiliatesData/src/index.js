@@ -66,27 +66,51 @@ function calculateTotalPastCommisions(affiliate) {
     return affiliate.withdraws.reduce((sum, payment) => sum + (payment.amount || 0), 0);
 }
 
+async function getUsersByAffiliateUrl(id){
+    const queryParams = {
+        TableName: env.API_CARDSPACKS_USERTABLE_NAME, 
+        IndexName: 'refId-index',
+        KeyConditionExpression: 'refId = :refId',
+        ExpressionAttributeValues: {
+            ':refId': id
+        }
+    };
+    var users;
+    await docClient.query(queryParams).promise().then(data => {
+        users = data["Items"];
+        console.log('found ' + users?.length + ' users', JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+    });
+
+
+
+    return users;
+}
+
 exports.handler = async (event) => {
     try {
+        console.log("get all affiliates");
         const affiliates = await getAllAffiliates();
         if (!affiliates || affiliates.length === 0) {
             return { error: "No affiliates found" };
         }
 
+        console.log("Found " + affiliates.length + " affiliates");
         let results = [];
 
         for (const affiliate of affiliates) {
             const totalPastCommisions = calculateTotalPastCommisions(affiliate);
-            const users = await getUsersByAffiliateUrl(affiliate.id);
-            if (!users || users.length === 0) {
-                continue;
-            }
+            const users = await getUsersByAffiliateUrl(affiliate.affiliateUrl);
+            
+            console.log("for affiliate " + affiliate.affiliateUrl + " found " + users.length + " users");
 
-            const userPaymentSummaries = users.map(user => ({
-                url: affiliate.id,
-                username: user.email,
-                totalPayments: calculateTotalPayments(user)
-            }));
+
+            console.log("calculateTotalPayments for affiliate " + affiliate.affiliateUrl);
+            const totalPayments = users
+                .map(user => user.payments.map(payment => parseFloat(payment.amount)))
+                .flat()
+                .reduce((total, amount) => total + amount, 0);
 
             results.push({
                 id: affiliate.id,
@@ -98,8 +122,10 @@ exports.handler = async (event) => {
                 commissionPercentage: affiliate.commissionPercentage,
                 dateJoined: affiliate.dateJoined,
                 status: affiliate.status,
-                balance: (userPaymentSummaries.totalPayments * (affiliate.commissionPercentage / 100)) - totalPastCommisions,
-                withdraws: affiliate.withdraws
+                balance: (totalPayments * (affiliate.commissionPercentage / 100)) - totalPastCommisions,
+                withdraws: affiliate.withdraws,
+                createdAt: affiliate.createdAt,
+                updatedAt: affiliate.updatedAt
             });
         }
 
