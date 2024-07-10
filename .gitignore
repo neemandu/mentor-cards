@@ -82,7 +82,7 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
+# build/Release
 
 # Dependency directories
 # node_modules/
@@ -136,7 +136,7 @@ typings/
 # public
 
 # vuepress build output
-.vuepress/dist
+# .vuepress/dist
 
 # Serverless directories
 .serverless/
@@ -152,7 +152,7 @@ typings/
 
 #amplify
 amplify/backend/awscloudformation
-build/
+# build/
 # dist/
 # node_modules/
 aws-exports.js
