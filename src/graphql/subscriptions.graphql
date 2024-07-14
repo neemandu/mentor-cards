@@ -736,6 +736,7 @@ subscription OnCreateCardsPack {
     numberOfCards
     isHardCopyAvailable
     videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
   }
@@ -832,6 +833,7 @@ subscription OnUpdateCardsPack {
     numberOfCards
     isHardCopyAvailable
     videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
   }
@@ -928,6 +930,7 @@ subscription OnDeleteCardsPack {
     numberOfCards
     isHardCopyAvailable
     videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
   }

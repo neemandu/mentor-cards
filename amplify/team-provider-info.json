@@ -330,10 +330,6 @@
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/IncrementCardPackLike-61482f507742426d7a4a-build.zip"
         },
-        "SchemaUpdate": {
-          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/SchemaUpdate-68756e4e37694a4c722f-build.zip"
-        },
         "GetInvoicesFromS3": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/GetInvoicesFromS3-4b7577542f6775795955-build.zip"

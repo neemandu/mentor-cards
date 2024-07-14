@@ -126,6 +126,7 @@ mutation CreateUser($input: CreateUserInput!) {
         numberOfCards
         isHardCopyAvailable
         videoUrl
+        isReadingGuidebookAMust
         createdAt
         updatedAt
       }
@@ -301,6 +302,7 @@ mutation CreateUser($input: CreateUserInput!) {
         numberOfCards
         isHardCopyAvailable
         videoUrl
+        isReadingGuidebookAMust
         createdAt
         updatedAt
       }
@@ -539,6 +541,7 @@ mutation GetAffiliateData($input: userInput!) {
         numberOfCards
         isHardCopyAvailable
         videoUrl
+        isReadingGuidebookAMust
         createdAt
         updatedAt
       }
@@ -714,6 +717,7 @@ mutation GetAffiliateData($input: userInput!) {
         numberOfCards
         isHardCopyAvailable
         videoUrl
+        isReadingGuidebookAMust
         createdAt
         updatedAt
       }
@@ -1493,6 +1497,7 @@ mutation CreateCardsPack(
     numberOfCards
     isHardCopyAvailable
     videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
   }
@@ -1592,6 +1597,7 @@ mutation UpdateCardsPack(
     numberOfCards
     isHardCopyAvailable
     videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
   }
@@ -1691,6 +1697,7 @@ mutation DeleteCardsPack(
     numberOfCards
     isHardCopyAvailable
     videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
   }

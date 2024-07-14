@@ -183,6 +183,7 @@ export type CardsPack = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -780,6 +781,7 @@ export type CreateCardsPackInput = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
 };
 
 export type CategoryInput = {
@@ -828,6 +830,7 @@ export type ModelCardsPackConditionInput = {
   numberOfCards?: ModelIntInput | null;
   isHardCopyAvailable?: ModelBooleanInput | null;
   videoUrl?: ModelStringInput | null;
+  isReadingGuidebookAMust?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -863,6 +866,7 @@ export type UpdateCardsPackInput = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -1308,6 +1312,7 @@ export type ModelCardsPackFilterInput = {
   numberOfCards?: ModelIntInput | null;
   isHardCopyAvailable?: ModelBooleanInput | null;
   videoUrl?: ModelStringInput | null;
+  isReadingGuidebookAMust?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1477,6 +1482,7 @@ export type CreateUserMutation = {
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
       videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1674,6 +1680,7 @@ export type CreateUserMutation = {
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
       videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1905,6 +1912,7 @@ export type GetAffiliateDataMutation = {
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
       videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2102,6 +2110,7 @@ export type GetAffiliateDataMutation = {
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
       videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2856,6 +2865,7 @@ export type CreateCardsPackMutation = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2966,6 +2976,7 @@ export type UpdateCardsPackMutation = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3076,6 +3087,7 @@ export type DeleteCardsPackMutation = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3406,6 +3418,7 @@ export type GetUserQuery = {
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
       videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3603,6 +3616,7 @@ export type GetUserQuery = {
       numberOfCards?: number | null;
       isHardCopyAvailable?: boolean | null;
       videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3794,6 +3808,7 @@ export type ListUsersQuery = {
         numberOfCards?: number | null;
         isHardCopyAvailable?: boolean | null;
         videoUrl?: string | null;
+        isReadingGuidebookAMust?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3987,6 +4002,7 @@ export type ListUsersQuery = {
         numberOfCards?: number | null;
         isHardCopyAvailable?: boolean | null;
         videoUrl?: string | null;
+        isReadingGuidebookAMust?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -4559,6 +4575,7 @@ export type GetCardsPackQuery = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4667,6 +4684,7 @@ export type ListCardsPacksQuery = {
     numberOfCards?: number | null;
     isHardCopyAvailable?: boolean | null;
     videoUrl?: string | null;
+    isReadingGuidebookAMust?: boolean | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -5489,6 +5507,7 @@ export type OnCreateCardsPackSubscription = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5599,6 +5618,7 @@ export type OnUpdateCardsPackSubscription = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5709,6 +5729,7 @@ export type OnDeleteCardsPackSubscription = {
   numberOfCards?: number | null;
   isHardCopyAvailable?: boolean | null;
   videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5905,6 +5926,7 @@ export class APIService {
               numberOfCards
               isHardCopyAvailable
               videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -6102,6 +6124,7 @@ export class APIService {
               numberOfCards
               isHardCopyAvailable
               videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -6537,6 +6560,7 @@ async GetSubscriptionPlansForOrgs(
               numberOfCards
               isHardCopyAvailable
               videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -6734,6 +6758,7 @@ async GetSubscriptionPlansForOrgs(
               numberOfCards
               isHardCopyAvailable
               videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -7955,6 +7980,7 @@ async GetSubscriptionPlansForOrgs(
           numberOfCards
           isHardCopyAvailable
           videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -8081,6 +8107,7 @@ async GetSubscriptionPlansForOrgs(
           numberOfCards
           isHardCopyAvailable
           videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -8207,6 +8234,7 @@ async GetSubscriptionPlansForOrgs(
           numberOfCards
           isHardCopyAvailable
           videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -8759,6 +8787,7 @@ async GetSubscriptionPlansForOrgs(
               numberOfCards
               isHardCopyAvailable
               videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -8956,6 +8985,7 @@ async GetSubscriptionPlansForOrgs(
               numberOfCards
               isHardCopyAvailable
               videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -9161,6 +9191,7 @@ async GetSubscriptionPlansForOrgs(
                 numberOfCards
                 isHardCopyAvailable
                 videoUrl
+                isReadingGuidebookAMust
                 createdAt
                 updatedAt
               }
@@ -9354,6 +9385,7 @@ async GetSubscriptionPlansForOrgs(
                 numberOfCards
                 isHardCopyAvailable
                 videoUrl
+                isReadingGuidebookAMust
                 createdAt
                 updatedAt
               }
@@ -10234,6 +10266,7 @@ async GetSubscriptionPlansForOrgs(
           numberOfCards
           isHardCopyAvailable
           videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -10357,6 +10390,7 @@ async GetSubscriptionPlansForOrgs(
             isHardCopyAvailable
             isActive
             videoUrl
+            isReadingGuidebookAMust
             createdAt
             updatedAt
           }
@@ -10490,6 +10524,7 @@ async GetSubscriptionPlansForOrgs(
             numberOfCards
             isHardCopyAvailable
             videoUrl
+            isReadingGuidebookAMust
             createdAt
             updatedAt
           }
@@ -11738,6 +11773,7 @@ async GetSubscriptionPlansForOrgs(
           numberOfCards
           isHardCopyAvailable
           videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -11858,6 +11894,7 @@ async GetSubscriptionPlansForOrgs(
           numberOfCards
           isHardCopyAvailable
           videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -11978,6 +12015,7 @@ async GetSubscriptionPlansForOrgs(
           numberOfCards
           isHardCopyAvailable
           videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }

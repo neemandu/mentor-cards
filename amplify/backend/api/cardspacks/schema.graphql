@@ -297,6 +297,7 @@ type CardsPack
   numberOfCards: Int @function(name: "GetNumberOfCardsInPack-${env}") 
   isHardCopyAvailable: Boolean
   videoUrl: String
+  isReadingGuidebookAMust: Boolean
 }
 
 type UserUsage {
