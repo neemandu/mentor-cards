@@ -9,7 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
     <button mat-button [matMenuTriggerFor]="menu" [matTooltip]="'selectLanguageTooltip' | translate">
       <div  class=" flex gap-2 items-center">
         <div>
-          {{ translate.currentLang == 'en' ? 'EN' : 'HE' }}
+        {{ getLanguageShortLabel() }}
         </div>
         <div>
           <img src="/assets/New/nav-bar/lang.svg" alt="" class="w-4">
@@ -19,7 +19,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let lang of translate.getLangs()" (click)="translate.use(lang)">
         <!-- {{ lang }} -->
-        {{ lang == 'en' ? 'English' : 'עברית'}}
+        {{ getLanguageLabel(lang) }}
       </button>
     </mat-menu>
   </div>
@@ -40,8 +40,39 @@ export class SelectLanguageComponent {
     translate.onLangChange.subscribe((event) => {
       localStorage.setItem('lang', event.lang);
     }
-  );
-
+  );}
+// 'ar', 'ru' , 'es'
+  getLanguageShortLabel(): string {
+    switch (this.translate.currentLang) {
+      case 'en':
+        return 'EN';
+      case 'he':
+        return 'HE';
+      case 'ar':
+        return 'AR';
+      case 'ru':
+        return 'RU';
+      case 'es':
+        return 'ES';
+      default:
+        return 'Unknown'; // Default case
+    }
   }
 
+  getLanguageLabel(lang:string): string {
+    switch (lang) {
+      case 'en':
+        return 'English';
+      case 'he':
+        return 'עברית';
+      case 'ar':
+        return 'العربية';
+      case 'ru':
+        return 'Русский';
+      case 'es':
+        return 'Español';
+      default:
+        return 'Unknown'; // Default case
+    }
+  }
 }

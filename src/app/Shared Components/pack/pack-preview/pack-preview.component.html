@@ -1,66 +1,188 @@
-<button class="iconButton" mat-icon-button (click)="closeDialog()">
-  <mat-icon>highlight_off</mat-icon>
-</button>
-<div class="d-flex flex-column align-items-center">
-  <div class="title-container" *ngIf="data.pack.isExternalPack">
-    <p class="title">ערכת VIP</p>
-  </div>
-  <div class="top-part">
-    <div class="top-part-text">
-      <p class="main-header">{{data.pack.name}}</p>
-      <p class="content categories-tags">{{data.pack.description}}</p>
-      <div *ngIf="data.pack.topQuestions && data.pack.topQuestions.length !== 0" class="selected-questions">
-        <p class="selected-quetions-title">שאלות נבחרות מספר ההדרכה</p>
-        <ul class="selected-quetions-list">
-          <li *ngFor="let question of data.pack.topQuestions">{{question}}</li>
-        </ul>
+<div [dir]="langDirectionService.currentLangDirection" class=" sm:w-[550px] w-[330px]">
+  <button (click)="closeDialog()" class="flex flex-row-reverse">
+    <img
+      src="/assets/New/pack-preview/close-icon.png"
+      alt=""
+      class="flex mx-auto"
+    />
+  </button>
+  <!-- <div class="relative w-[400px] bg-white rounded-lg shadow-lg p-4"> -->
+    <!-- Close button -->
+    <div class="relative w-full max-w-lg mx-auto p-4">
+
+    <div class="flex justify-end absolute right-0 items-center h-full">
+      <div class="text-right">
+        <div class="flex items-center justify-end mb-2 flex-col">
+          <img src="/assets/New/pack-preview/book-icon.svg" alt="User Avatar" class="w-6 h-6"/>
+          <div class="text-center font-bold" >מדריך</div>
+        </div>
+        <div class="flex items-center justify-end mb-2 flex-col">
+          <img src="/assets/New/pack-preview/packs-icon.svg" alt="User Avatar" class="w-6 h-6"/>
+          <div class="text-center font-bold">{{ data.pack.cards.length}}</div>
+         
+        </div>
+        <div class="flex items-center justify-end mb-2 flex-col">
+          <img src="/assets/New/pack-preview/likes-icon.svg" alt="User Avatar" class="w-6 h-6"/>
+          <div class="text-center font-bold">{{data.pack.likesCounter}}</div>
+        </div>
       </div>
     </div>
-    <!-- <div class="card-preview">
-      <img class="card-preview-img" style="width: 100%;" src={{data.pack.imgUrl}} alt="Pack cover photo">
-    </div> -->
-    <app-cards-carousel class="card-preview" [cards]="data.pack.cardsPreview"></app-cards-carousel>
-    <div class="line"></div>
-  </div>
-  <!-- Action buttons -->
-  <div id="not-logged-in" *ngIf="!userData" class="actions">
-    <button class="action-button" type="button" (click)="signInSignUp()">
-      התחברות/הרשמה
-    </button>
-  </div>
-
-  <!-- open for all 2023 war -->
-  <div id="logged-in" *ngIf="userData">
-  <!--<div id="logged-in" *ngIf="userData">  -->
-    <div id="pack-owned" *ngIf="data.pack.cards && data.pack.cards.length !== 0" class="actions">
-      <button class="action-button" type="button" (click)="navigateToPackView()">
-        כניסה לערכה
-      </button>
+<!-- Images -->
+    <div class="relative h-60 mb-4 sm:w-96 w-60 mx-auto">
+      <div class="absolute top-0 left-0 sm:w-40 w-32 h-56 transform z-10">
+        <img [src]="data.pack.cardsPreview[0]" alt="" class="sm:w-[180px] sm:h-[250px] w-[120px] h-[200px] object-cover rounded-lg shadow-md"/>
+      </div>
+      <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-56 z-20">
+        <img [src]="data.pack.cardsPreview[1]" alt="" class="sm:w-[180px] sm:h-[250px] w-[120px] h-[200px] object-cover rounded-lg shadow-md"/>
+      </div>
+      <div class="absolute top-0 right-0 w-32 sm:w-40 h-56 transform  z-40">
+        <img [src]="data.pack.cardsPreview[2]" alt="" class="sm:w-[180px] sm:h-[250px] w-[120px] h-[200px] object-cover rounded-lg shadow-md"/>
+      </div>
     </div>
+     
+</div>
+    
 
-    <div id="logged-in-has-no-program"
-      *ngIf="(!data.pack.cards || data.pack.cards.length === 0)" class="actions">
-      <button class="action-button" type="button" (click)="navigate('/price-page')">
-פתחו לי גישה לערכה >>>      </button>
+  
+    <!-- User info -->
+    <div class="flex justify-between">
+      <div class="flex items-center mb-4">
+        <img [src]="data.pack.about.imgUrl ? data.pack.about.imgUrl : 'https://placehold.co/60x60'"alt="User Avatar" class="w-16 h-16 rounded-full"/>
+        <div class=" ms-4 text-start">
+          <div class="font-bold text-xl">{{data.pack.ownerName}}</div>
+          <div class="text-sm font-bold">על היוצר</div>
+          <div class=" flex gap-4"> 
+            <img src="/assets/New/pack-preview/cart-icon.png" alt="User Avatar" class="w-8 h-8"/>
+            <div>
+              ניתן לרכוש גם ערכה מודפסת
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <button class="flex items-center justify-center w-12 h-12 rounded-full hero-button bg-[#E67C73]" (click)="toggleIsExpand()">
+          <img  [src]="isExpland ? '/assets/New/pack-preview/up-arrow-icon.png' : '/assets/New/pack-preview/down-arrow-icon.png'"  alt="User Avatar" class="w-6 h-4"/>
+        </button>
+      </div>
     </div>
-  </div>
+  
+    <!-- Description -->
+    <p [ngClass]="isExpland ? '' : 'line-clamp-2 overflow-hidden' " class="text-sm mb-4 text-right ">
+      {{data.pack.description}}
+    </p>
 
-  <div *ngIf="data.pack.about">
-    <div class="line"></div>
+  <div *ngIf="data.pack.about && isExpland">
     <div class="about-author">
       <div class="about-author-text categories-tags">
-        <p class="main-header">על היוצר</p>
-        <p class="content">{{data.pack.about.text}}</p>
+        <p class="content">
+          <span class=" font-bold">
+           אודות:
+          </span>{{data.pack.about.text}}
+        </p>
         <button (click)="redirect()">למעבר לאתר הבית של היוצר</button>
-      </div>
-      <div class="about-author-image-container">
-        <img class="about-author-image" src={{data.pack.about.imgUrl}} alt="Author Image">
       </div>
     </div>
   </div>
-  <mat-checkbox class="doNotShowCheckbox" *ngIf="data.pack.cards && data.pack.cards.length !== 0"
-    [(ngModel)]="neverShowAgain"><span style="margin-right: 10px;">
-      אל תציג שוב
-    </span>
-  </mat-checkbox>
+
+  <div class=" flex justify-center">
+
+    <!-- Button -->
+
+    <div id="not-logged-in" *ngIf="!userData" class="actions">
+      <button  class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg"  type="button" (click)="signInSignUp()">
+        התחברות/הרשמה
+      </button>
+    </div>
+  
+    <div id="logged-in" *ngIf="userData">
+      <div id="pack-owned" *ngIf="data.pack.cards && data.pack.cards.length !== 0" class="actions">
+        <button  class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg"  type="button" (click)="navigateToPackView()">
+          כניסה לערכה
+        </button>
+      </div>
+  
+      <div id="logged-in-has-no-program"
+        *ngIf="(!data.pack.cards || data.pack.cards.length === 0)" class="actions">
+        <button  class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg flex gap-4 items-center"  type="button" (click)="navigate('/price-page')">
+          <div>
+          שדרגו למנוי  
+        </div>
+        <img src="/assets/New/pack-preview/crow-icon.png" alt="User Avatar" class="w-6 h-4"/>
+        </button>
+      </div>
+    </div>
+
+    
+  
+    <!-- <button class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg w-72" >
+      הכנסו לערכה
+  </button> -->
+  </div>
+
+  <div class=" flex justify-center items-center">
+    <!-- Checkbox -->
+     <!-- <label >hi</label> -->
+    <mat-checkbox class="doNotShowCheckbox" *ngIf="data.pack.cards && data.pack.cards.length !== 0"
+    [(ngModel)]="neverShowAgain"><span style="margin-right: 10px;"> אל תציג שוב
+      </span>
+    </mat-checkbox>
+  </div>
+  <!-- </div> -->
+  <!-- <div class="d-flex flex-column align-items-center">
+    <div class="title-container" *ngIf="data.pack.isExternalPack">
+      <p class="title">ערכת VIP</p>
+    </div>
+    <div class="top-part">
+      <div class="top-part-text">
+        <p class="main-header">{{data.pack.name}}</p>
+        <p class="content categories-tags">{{data.pack.description}}</p>
+        <div *ngIf="data.pack.topQuestions && data.pack.topQuestions.length !== 0" class="selected-questions">
+          <p class="selected-quetions-title">שאלות נבחרות מספר ההדרכה</p>
+          <ul class="selected-quetions-list">
+            <li *ngFor="let question of data.pack.topQuestions">{{question}}</li>
+          </ul>
+        </div>
+      </div>
+      <app-cards-carousel class="card-preview" [cards]="data.pack.cardsPreview"></app-cards-carousel>
+      <div class="line"></div>
+    </div>
+    <div id="not-logged-in" *ngIf="!userData" class="actions">
+      <button class="action-button" type="button" (click)="signInSignUp()">
+        התחברות/הרשמה
+      </button>
+    </div>
+  
+    <div id="logged-in" *ngIf="userData">
+      <div id="pack-owned" *ngIf="data.pack.cards && data.pack.cards.length !== 0" class="actions">
+        <button class="action-button" type="button" (click)="navigateToPackView()">
+          כניסה לערכה
+        </button>
+      </div>
+  
+      <div id="logged-in-has-no-program"
+        *ngIf="(!data.pack.cards || data.pack.cards.length === 0)" class="actions">
+        <button class="action-button" type="button" (click)="navigate('/price-page')">
+  פתחו לי גישה לערכה >>>      </button>
+      </div>
+    </div>
+  
+    <div *ngIf="data.pack.about">
+      <div class="line"></div>
+      <div class="about-author">
+        <div class="about-author-text categories-tags">
+          <p class="main-header">על היוצר</p>
+          <p class="content">{{data.pack.about.text}}</p>
+          <button (click)="redirect()">למעבר לאתר הבית של היוצר</button>
+        </div>
+        <div class="about-author-image-container">
+          <img class="about-author-image" src={{data.pack.about.imgUrl}} alt="Author Image">
+        </div>
+      </div>
+    </div>
+    <mat-checkbox class="doNotShowCheckbox" *ngIf="data.pack.cards && data.pack.cards.length !== 0"
+      [(ngModel)]="neverShowAgain"><span style="margin-right: 10px;">
+        אל תציג שוב
+      </span>
+    </mat-checkbox>
+  </div> -->
 </div>

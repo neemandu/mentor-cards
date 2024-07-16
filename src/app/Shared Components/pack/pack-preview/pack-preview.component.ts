@@ -15,6 +15,7 @@ import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { AboutAuthorComponent } from '../about-author/about-author.component';
 import { Platform } from '@angular/cdk/platform';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -32,6 +33,7 @@ export class PackPreviewComponent implements OnInit {
   discount: number;
   neverShowAgain: boolean = false;
   isMobile: boolean = false;
+  isExpland: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: previewData,
@@ -41,7 +43,8 @@ export class PackPreviewComponent implements OnInit {
     public router: Router,
     private ngZone: NgZone,
     private mixpanel: MixpanelService,
-    private platform: Platform
+    private platform: Platform,
+    public langDirectionService: LangDirectionService,
   ) { }
 
   ngOnInit(): void {
@@ -110,6 +113,10 @@ export class PackPreviewComponent implements OnInit {
     // dialogConfig.maxWidth = '40vw';
     dialogConfig.data = this.data;
     this.dialog.open(AboutAuthorComponent, dialogConfig);
+  }
+
+  toggleIsExpand(): void {
+    this.isExpland = !this.isExpland
   }
 
   navigateToPackView(exists): void {

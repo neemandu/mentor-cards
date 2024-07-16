@@ -4,7 +4,10 @@
     <div class=" text-right text-white leading-4 w-[70%]">{{ packInfo.ownerName }}</div>
     <div class=" flex">
         <div class="" style="position: absolute; bottom:-3rem ; left: -2rem; width: 140px; height: auto;">
-            <img (click)="openPreviewDialog()" [src]="packInfo.imgUrl" alt="" style="transform: rotate(-16.16deg); border-radius: 20px; " class="packs-image">
+           
+            <img 
+            (pointerenter)="openPreviewDialog() " 
+            [src]="packInfo.imgUrl" alt="" style="transform: rotate(-16.16deg); border-radius: 20px; " class="packs-image">
         </div>
         <div>
             <div class="mt-3" *ngIf="packInfo.isFree">
