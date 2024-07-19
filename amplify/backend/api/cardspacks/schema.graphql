@@ -85,6 +85,7 @@ type User
   myAffiliate: Affiliate @connection
   payments: [Payment]
   profession: String
+  AithreadId: String
   AiConversations: [AiConversation]
 }
 
@@ -92,7 +93,6 @@ type AiConversation{
   question: String
   answer: String
   date: AWSDateTime
-  threadId: String
 }
 
 type Payment

@@ -102,29 +102,31 @@
                                 <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
                                     value="ru" (ngModelChange)="handlePacksLanguageChange('ru')"
                                     style="accent-color: #000000;">
-                                <label style="font-size: 10px;"
-                                    for="radio1">{{'pages.all-packs-page-new.content.russian' | translate}}</label>
+                                <label style="font-size: 10px;" for="radio1">Русский</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
                                     value="ar" (ngModelChange)="handlePacksLanguageChange('ar')"
                                     style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio2">{{'pages.all-packs-page-new.content.arabic'
-                                    | translate}}</label>
+                                <label style="font-size: 10px;" for="radio2">عربية</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio3" name="radioGroup" [(ngModel)]="filterOption.language"
                                     value="en" (ngModelChange)="handlePacksLanguageChange('en')"
                                     style="accent-color: #000000;">
-                                <label style="font-size: 10px;"
-                                    for="radio3">{{'pages.all-packs-page-new.content.english' | translate}}</label>
+                                <label style="font-size: 10px;" for="radio3">English</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
                                     value="he" (ngModelChange)="handlePacksLanguageChange('he')"
                                     style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio4">{{'pages.all-packs-page-new.content.hebrew'
-                                    | translate}}</label>
+                                <label style="font-size: 10px;" for="radio4">עברית</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
+                                    value="he" (ngModelChange)="handlePacksLanguageChange('es')"
+                                    style="accent-color: #000000;">
+                                <label style="font-size: 10px;" for="radio4">Español</label>
                             </div>
                         </div>
                     </div>
@@ -139,7 +141,9 @@
         </div>
 
         <div id="test" class="all-packs-view" #new>
+
             <div *ngIf="!showCategoryLine && !isfavSelected" class=" mt-2 sm:mt-16">
+
                 <div class="mt-8 sm:text-4xl text-2xl text-center font-bold mb-16">
                     {{'pages.all-packs-page-new.content.packsForYourMeeting' | translate}}</div>
                 <div class="all-packs-view__section flex justify-between mb-16">
@@ -324,29 +328,31 @@
                         <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
                             value="ru" (ngModelChange)="handlePacksLanguageChange('ru')"
                             style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio1">{{ 'pages.all-packs-page-new.content.russian' |
-                            translate }}</div>
+                        <div style="font-size: 10px;" for="radio1">Русский</div>
                     </div>
                     <div>
                         <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
                             value="ar" (ngModelChange)="handlePacksLanguageChange('ar')"
                             style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio2">{{ 'pages.all-packs-page-new.content.arabic' |
-                            translate }}</div>
+                        <div style="font-size: 10px;" for="radio2">عربية</div>
                     </div>
                     <div>
                         <input type="radio" id="radio3" name="radioGroup" [(ngModel)]="filterOption.language"
                             value="en" (ngModelChange)="handlePacksLanguageChange('en')"
                             style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio3">{{ 'pages.all-packs-page-new.content.english' |
-                            translate }}</div>
+                        <div style="font-size: 10px;" for="radio3">English</div>
                     </div>
                     <div>
                         <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
                             value="he" (ngModelChange)="handlePacksLanguageChange('he')"
                             style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio4">{{ 'pages.all-packs-page-new.content.hebrew' |
-                            translate }}</div>
+                        <div style="font-size: 10px;" for="radio4">עברית</div>
+                    </div>
+                    <div>
+                        <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
+                            value="he" (ngModelChange)="handlePacksLanguageChange('es')"
+                            style="accent-color: #000000;" class="large-radio">
+                        <div style="font-size: 10px;" for="radio4">Español</div>
                     </div>
                 </div>
             </div>

@@ -343,11 +343,11 @@ mutation CreateUser($input: CreateUserInput!) {
       transactionId
     }
     profession
+    AithreadId
     AiConversations {
       question
       answer
       date
-      threadId
     }
   }
 }
@@ -758,11 +758,11 @@ mutation GetAffiliateData($input: userInput!) {
       transactionId
     }
     profession
+    AithreadId
     AiConversations {
       question
       answer
       date
-      threadId
     }
   }
 }

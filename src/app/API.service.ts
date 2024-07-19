@@ -101,6 +101,7 @@ export type User = {
   myAffiliate?: Affiliate | null;
   payments?: Array<Payment | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
   AiConversations?: Array<AiConversation | null> | null;
 };
 
@@ -268,7 +269,6 @@ export type AiConversation = {
   question?: string | null;
   answer?: string | null;
   date?: string | null;
-  threadId?: string | null;
 };
 
 export type addCardsPackInput = {
@@ -1119,6 +1119,7 @@ export type ModelUserFilterInput = {
   entryDates?: ModelStringInput | null;
   refId?: ModelStringInput | null;
   profession?: ModelStringInput | null;
+  AithreadId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -1724,12 +1725,12 @@ export type CreateUserMutation = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
   AiConversations?: Array<{
     __typename: "AiConversation";
     question?: string | null;
     answer?: string | null;
     date?: string | null;
-    threadId?: string | null;
   } | null> | null;
 };
 
@@ -2154,12 +2155,12 @@ export type GetAffiliateDataMutation = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
   AiConversations?: Array<{
     __typename: "AiConversation";
     question?: string | null;
     answer?: string | null;
     date?: string | null;
-    threadId?: string | null;
   } | null> | null;
 };
 
@@ -3660,12 +3661,12 @@ export type GetUserQuery = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
   AiConversations?: Array<{
     __typename: "AiConversation";
     question?: string | null;
     answer?: string | null;
     date?: string | null;
-    threadId?: string | null;
   } | null> | null;
 };
 
@@ -4046,12 +4047,12 @@ export type ListUsersQuery = {
       transactionId?: string | null;
     } | null> | null;
     profession?: string | null;
+    AithreadId?: string | null;
     AiConversations?: Array<{
       __typename: "AiConversation";
       question?: string | null;
       answer?: string | null;
       date?: string | null;
-      threadId?: string | null;
     } | null> | null;
   } | null>;
   nextToken?: string | null;
@@ -6168,12 +6169,12 @@ export class APIService {
             transactionId
           }
           profession
+          AithreadId
           AiConversations {
             __typename
             question
             answer
             date
-            threadId
           }
         }
       }`;
@@ -6802,12 +6803,12 @@ async GetSubscriptionPlansForOrgs(
             transactionId
           }
           profession
+          AithreadId
           AiConversations {
             __typename
             question
             answer
             date
-            threadId
           }
         }
       }`;
@@ -9029,12 +9030,12 @@ async GetSubscriptionPlansForOrgs(
             transactionId
           }
           profession
+          AithreadId
           AiConversations {
             __typename
             question
             answer
             date
-            threadId
           }
         }
       }`;
@@ -9429,12 +9430,12 @@ async GetSubscriptionPlansForOrgs(
               transactionId
             }
             profession
+            AithreadId
             AiConversations {
               __typename
               question
               answer
               date
-              threadId
             }
           }
           nextToken

@@ -3,6 +3,20 @@ Use the following code to retrieve configured secrets from SSM:
 
 const aws = require('aws-sdk');
 
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["chatgptsecret","chatgptorg","chatgptproj"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
 /* Amplify Params - DO NOT EDIT
@@ -77,10 +91,15 @@ function generatePrompt(conversations, newQuestion, username) {
     return prompt;
 }
 
-async function getAIResponse(prompt, threadId) {
+async function getAIResponse(prompt, user) {
   const chatgptsecret = Parameters.find(param => param.Name === process.env["chatgptsecret"]);
   const chatgptorg = Parameters.find(param => param.Name === process.env["chatgptorg"]);
   const chatgptproj = Parameters.find(param => param.Name === process.env["chatgptproj"]);
+
+  console.log('chatgptsecret: ' + chatgptsecret);
+  console.log('chatgptorg: ' + chatgptorg);
+  console.log('chatgptproj: ' + chatgptproj);
+  
   const openai = new OpenAI({
     apiKey: chatgptsecret,
     organization: chatgptorg,
@@ -89,28 +108,52 @@ async function getAIResponse(prompt, threadId) {
 
   if(!threadId){
       let thread = await openai.beta.threads.create();
-      threadId = thread.id;
+      user.AithreadId = thread.id;
   }
-  console.log("Adding a new message to thread: " + threadId);
+  console.log("Adding a new message to thread: " + user.AithreadId);
   let message = await openai.beta.threads.messages.create(
-      threadId=threadId, {
+      threadId=user.AithreadId, {
         role: "user",
         content: prompt
       }
     );
 
-  console.log("Running assistant for thread: " + threadId);
+  console.log("Running assistant for thread: " + user.AithreadId);
+  
   let run = await openai.beta.threads.runs.createAndPoll(
-      threadId=threadId,{
+    user.AithreadId,{
         assistantId: "asst_uP8m411Fx1btiLacl8olBcti"
       });
 
   let messages = [];
-  if(run.status == 'completed')
-    messages = openai.beta.threads.messages.list(
-      threadId=threadId
+  if (run.status === 'completed') {
+    const messages = await openai.beta.threads.messages.list(
+      run.thread_id
     );
+    for (const message of messages.data.reverse()) {
+        messages.push(`${message.content[0].text.value}`);
+    }
+  } 
   return messages;
+}
+
+async function saveUser(user){
+    var docClient = new AWS.DynamoDB.DocumentClient();
+
+    user.updatedAt = new Date().toISOString();
+    var userTable = env.API_CARDSPACKS_USERTABLE_NAME;
+    var updatedUserParams = {
+        TableName: userTable,
+        Item: user
+    };
+
+    console.log("updating user " + user.id + " as unsubscribed" );
+
+    await docClient.put(updatedUserParams).promise().then(data => {
+        console.log("updated user " + user.id + " as unsubscribed", JSON.stringify(data, null, 2));
+    }).catch(err => {
+        console.error("Unable to updating user " + user.id + " as unsubscribed. Error JSON:", JSON.stringify(err, null, 2));
+        });        
 }
 
 exports.handler = async (event) => {
@@ -133,15 +176,22 @@ exports.handler = async (event) => {
 
     var newQuestion = event.arguments.input['question'];
 
-    const prompt = generatePrompt(user.AiConversations, newQuestion)
+    console.log("AI question:");
+    console.log(newQuestion);
+    //const prompt = generatePrompt(user.AiConversations, newQuestion)
 
-    getAIResponse(prompt)
-    .then(response => {
-        console.log("AI Response:");
-        console.log(response);
-        return response
-    })
-    .catch(error => {
-        console.error(error);
-    });
+    let response = await getAIResponse(newQuestion, user)
+    let converation = {
+        question: newQuestion,
+        answer: response,
+        date: new Date()
+    };
+    if(user.AiConversations == null){
+        user.AiConversations = [];
+    }
+    user.AiConversations.push(converation);
+
+    // Save the converation and thread id
+    await saveUser(user);
+    return response;
 };

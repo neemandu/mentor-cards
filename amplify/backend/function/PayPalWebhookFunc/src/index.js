@@ -169,7 +169,7 @@ async function getUserByPayPalTxId(transaction_id){
         console.error("Unable to read users. Error JSON:", JSON.stringify(err, null, 2));
     });
     if(!currUser){
-        throw Error ('no such user with paypal transaction - ' + transaction_id);
+        //throw Error ('no such user with paypal transaction - ' + transaction_id);
     }
     return currUser;
 }
@@ -395,7 +395,7 @@ exports.handler = async (event) => {
                         }
                         await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
                         await updateEmailList(user.email, amount, extraDesc, invoiceRunningId, "");
-
+                        await updateMorning(user.email, amount, extraDesc, invoiceRunningId, "");
                     }
                 }
             }
