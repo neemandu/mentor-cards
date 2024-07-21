@@ -188,7 +188,7 @@ if(!refId){
         console.log("Adding a new user...");
         await saveUser(userToInsert);
 
-        await addWelcomeEmailToMessageQueue(email, phone, fullName);
+        //await addWelcomeEmailToMessageQueue(email, phone, fullName);
     
         console.log("Done adding a new user...");
 

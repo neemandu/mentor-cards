@@ -420,7 +420,7 @@ exports.handler = async (event) => {
             console.log('Updating program to updated by user: ' + username);
             await updateMonthlySubscription(user, paymentProgram, transId);
             var templateId = 7;
-            await addNewSubscriptionEmailToMessageQueue(templateId, user.email, user.phone, user.fullName);
+            //await addNewSubscriptionEmailToMessageQueue(templateId, user.email, user.phone, user.fullName);
         }
         else{
             var pack = await getCardsPack(packId);

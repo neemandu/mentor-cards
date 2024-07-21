@@ -318,5 +318,5 @@ exports.handler = async (event) => {
 
     await saveUser(user);
 
-    await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
+    //await addUnsubscribeEmailToMessageQueue(user.email, user.phone, user.fullName);
 };
