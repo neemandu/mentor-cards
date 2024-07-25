@@ -152,7 +152,7 @@ export class AllPacksPageComponent implements OnInit {
     this.router.queryParams.subscribe((params) => {
       let filter = params['filter'];
       if (filter) {
-        console.log('filter:..............', filter);
+        // console.log('filter:..............', filter);
         this.selectOption(filter);
         // Rest of your code
       }
@@ -164,7 +164,7 @@ export class AllPacksPageComponent implements OnInit {
 
       if (refId) {
         localStorage.setItem('refId', refId);
-        console.log('refId ID stored:', refId);
+        // console.log('refId ID stored:', refId);
       }
     });
 
@@ -199,12 +199,12 @@ export class AllPacksPageComponent implements OnInit {
         }
       )
     );
-    console.log('allpacks page sub 2');
-    console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'isTrialPacksDialogOpen href');
+    // console.log('allpacks page sub 2');
+    // console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'isTrialPacksDialogOpen href');
     if (!this.userData || this.userData.status === 'NOPLAN') {
       if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
         localStorage.setItem('isTrialPacksDialogOpen', 'true');
-        console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'after set isTrialPacksDialogOpen href');
+        // console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'after set isTrialPacksDialogOpen href');
         this.openDialog();
       }
     }
@@ -236,7 +236,7 @@ export class AllPacksPageComponent implements OnInit {
    * Retrive all packs
    */
   getAllPacks(useCache: bool): void {
-    console.log('useCache: ' + useCache);
+    // console.log('useCache: ' + useCache);
     if (useCache) {
       if (this.cardsService.allPacks) {
         this.setAllPacksData();
@@ -258,14 +258,14 @@ export class AllPacksPageComponent implements OnInit {
     }
     else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
-        console.log('getAllPacks finished!');
+        // console.log('getAllPacks finished!');
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
       });
-      console.log('cardsService.getAllPacks');
+      // console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
     }
 
@@ -276,7 +276,6 @@ export class AllPacksPageComponent implements OnInit {
     this.allCategories = this.cardsService.allCategories.map(
       (category) => category
     );
-    console.log(this.allCategories);
     this.allFavorites = this.userAuthService.favorites;
 
     this.isPageLoaded = true;
@@ -449,7 +448,7 @@ export class AllPacksPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 

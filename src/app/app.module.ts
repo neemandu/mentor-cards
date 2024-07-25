@@ -180,6 +180,7 @@ import { SubscribeCardComponent } from './Pages/all-packs-page-new/subscribe-car
 import { FilterDialogComponent } from './Pages/all-packs-page-new/filter-dialog/filter-dialog.component';
 import { AiChatComponent } from './Pages/all-packs-page-new/ai-chat/ai-chat.component';
 import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripple.directive';
+import { TopQuestionsCustomDialogComponent } from './Pages/pack-content-page/top-questions-dialog';
 
 @NgModule({
   declarations: [
@@ -194,6 +195,7 @@ import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripp
     TooltipListViewPipe,
     AmountOfPacksViewPipe,
     CardsRevealDialogComponent,
+    TopQuestionsCustomDialogComponent,
     OverlaySpinnerComponent,
     RandomCardRevealDialogComponent,
     TransitionGroupComponent,
@@ -329,7 +331,7 @@ import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripp
     SocialAuthService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent,
+  entryComponents: [CardsRevealDialogComponent,TopQuestionsCustomDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent,
     PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
     GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent,AiChatComponent]
 })

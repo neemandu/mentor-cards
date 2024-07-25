@@ -10,7 +10,7 @@
     <mat-icon class="btn-icon">chevron_left
     </mat-icon>
   </button>
-  <img loading="eager" src={{selectedCard.frontImgUrl}} data-src={{selectedCard.frontImgUrl}}>
+  <img loading="eager" src={{selectedCard.cardsImages[0].frontImgUrl}} data-src={{selectedCard.cardsImages[0].frontImgUrl}}>
   <button type="button" class="btn btn-light" [disabled]="index == 0" (click)="prevCard()">
     <mat-icon class="btn-icon">chevron_left</mat-icon>
   </button>

@@ -204,7 +204,7 @@ export class HomePageCardsComponent implements OnInit {
     }
     else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
-        console.log('getAllPacks finished!');
+        // console.log('getAllPacks finished!');
         this.setAllPacksData();
         // this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();

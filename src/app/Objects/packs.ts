@@ -63,13 +63,17 @@ export class PackContent {
     deseralize(input: any) {
         Object.assign(this, input);
         this.guidebookUrl = input.guidebookUrl;
-        input.cards ? this.cards = input.cards.map(card => new Card().deseralize(card, input.backImgUrl)) : null;
+        if (input.cards) {
+            this.cards = input.cards.map(card => new Card().deserialize(card));
+          }
         input.guideBook ? this.guideBook = input.guideBook.map(element => new GuideBookElement().deseralize(element)) : null;
         // input.guideBook ? this.guideBook = input.guideBook.map(element => new GuideBookElement().deseralize(element)) : null;
         input.freeUntilDate ? this.freeUntilDate = new Date(input.freeUntilDate) : null;
         return this;
     }
 }
+
+// input.cards.map(card => new Card().deserialize(card, input.backImgUrl)) : null
 
 export class GuideBookElement {
     name: string;

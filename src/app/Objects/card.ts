@@ -1,19 +1,22 @@
 export class Card {
-    frontImgUrl: string;
-    backImgUrl: string;
+    categoryName: string;
+    categoryStepNumber: number;
+    cardsImages: cardsImages[]
     index: number;
-    flipped: boolean = false;
-    rotation: number = 0; // 0, 90, 180, 270
-    isPortrait: boolean = true;
 
     constructor() { }
 
-    deseralize(input: any, packBackImgUrl: string) {
-        this.frontImgUrl = input.frontImgUrl;
-        if (input.backImgUrl)
-            this.backImgUrl = input.backImgUrl;
-        else if (packBackImgUrl)
-            this.backImgUrl = packBackImgUrl;
+    deserialize(input: any) {
+        Object.assign(this, input);
         return this;
-    }
+      }
+}
+
+
+export class cardsImages {
+  backImgUrl: string;
+  frontImgUrl: string;
+  rotation: number // 0, 90, 180, 270
+  isPortrait: boolean ;
+  flipped: boolean;
 }

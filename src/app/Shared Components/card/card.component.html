@@ -1,20 +1,17 @@
-<div class="d-flex flex-column">
-  <!-- <div> -->
+<div class="d-flex flex-column relative">
   <div [ngClass]="{'flip-box-inner': true, 'flip': flipped}">
-    <!-- Card Back -->
     <div class="flip-box-front">
       <img *ngIf="!cardContent?.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
-        src="/assets/Mentor Cards Back.png" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}"
+        src="/assets/Mentor-Cards-Back.png" [ngClass]="{'': !selected, 'img-selected': selected}"
         (contextmenu)="onRightClick();">
       <img *ngIf="cardContent?.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
         src="{{cardContent?.backImgUrl}}" data-src={{cardContent?.backImgUrl}}
-        [ngClass]="{'img-unselected': !selected, 'img-selected': selected}" (contextmenu)="onRightClick();">
+        [ngClass]="{'': !selected, 'img-selected': selected}" (contextmenu)="onRightClick();">
     </div>
-    <!-- Card Front -->
     <div class="flip-box-back">
-      <img loading="eager" [ngClass]="{'img-unselected': !selected, 'img-selected': selected}"
+      <img loading="eager" [ngClass]="{'': !selected, 'img-selected': selected}"
         src={{cardContent.frontImgUrl}} data-src={{cardContent.frontImgUrl}} (contextmenu)="onRightClick();">
     </div>
   </div>
-  <span *ngIf="index" class="badge badge-pill badge-light">{{index}}</span>
+  <span *ngIf="index" class=" absolute right-6 top-1/2 bg-white rounded-full p-1 text-center w-6 h-6 ">{{index}}</span>
 </div>

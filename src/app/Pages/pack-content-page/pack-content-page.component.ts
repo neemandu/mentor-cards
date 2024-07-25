@@ -23,19 +23,26 @@ import { UserData } from 'src/app/Objects/user-related';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { Subscription } from 'rxjs';
 import { AboutAuthorComponent } from 'src/app/Shared Components/pack/about-author/about-author.component';
-import { Card } from 'src/app/Objects/card';
+import { Card, cardsImages } from 'src/app/Objects/card';
 import { DynamicDialogData } from 'src/app/Objects/dynamic-dialog-data';
 import { DynamicDialogYesNoComponent } from 'src/app/Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { CopyCommonLinkDialogComponent } from 'src/app/Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
 import { HttpClient } from '@angular/common/http';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 
 @Component({
   selector: 'app-pack-content-page',
   templateUrl: './pack-content-page.component.html',
-  styleUrls: ['./pack-content-page.component.css']
+  styleUrls: ['./pack-content-page.component.css'],
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
   Subscription: Subscription = new Subscription();
@@ -53,6 +60,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   showEditPack: boolean = false;
   removedCards: Card[] = [];
   cards: Card[] = [];
+  cardImages: cardsImages[] = [];
   unauthorized: boolean = false;
   isDoubleSided: boolean = false;
   isLoaded: boolean = false;
@@ -60,8 +68,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   randomCardIndex: number = 0;
   commonLink: any = undefined;
   flipCard: string = 'inactive';
-  rotation:number = 0;
+  rotation: number = 0;
   isMobile: boolean = false;
+  isDialogOpen = false;
 
   constructor(
     public route: ActivatedRoute,
@@ -77,7 +86,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     private mixpanelService: MixpanelService,
     private cdr: ChangeDetectorRef,
     private platform: Platform,
-    private http: HttpClient
+    private http: HttpClient,
+    public langDirectionService: LangDirectionService,
+    private mixpanel: MixpanelService
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -91,13 +102,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     return false;
   }
   ngOnInit(): void {
-
     if (this.platform.ANDROID || this.platform.IOS) {
       this.isMobile = true;
     }
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.commonLink = params['link'];
-      console.log('link:', this.commonLink);
+      // console.log('link:', this.commonLink);
     });
     this.userData = this.userAuthService.userData;
 
@@ -115,41 +125,56 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.pack = this.cardsService.allPacks.find(
         (pack) => pack.id === this.id
       );
+
+      console.log('pack:', this.pack);
       this.cards = [...this.pack.cards];
+
+      this.cardImages = this.pack.cards[0].cardsImages;
 
       this.cards.forEach((card) => {
         this.checkCardOrientation(card);
-      })
+      });
       console.log('cards in packs conent:', this.cards);
-      if(!this.pack.cards[0].backImgUrl){
+      if (!this.pack.cards[0].cardsImages[0].backImgUrl) {
         this.isDoubleSided = false;
-      }
-      else if(this.pack.cards[0].backImgUrl == this.pack.cards[1].backImgUrl){
+      } else if (
+        this.pack.cards[0].cardsImages[0].backImgUrl ==
+        this.pack.cards[1].cardsImages[0].backImgUrl
+      ) {
         this.isDoubleSided = false;
-      }
-      else{
+      } else {
         this.isDoubleSided = true;
       }
-      console.log('hi111');
-      this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
+      // console.log('hi111');
+      this.mixpanelService.track('PageViewed', {
+        'Page Title': 'pack-content-page',
+        'Pack id': this.id,
+        'Pack name': this.pack?.name,
+      });
     } else {
       this.api.GetCardsPack(this.id, this.commonLink).then(
         (pack) => {
-          console.log('hi');
+          // console.log('hi');
           this.pack = new PackContent().deseralize(pack);
-          this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl ? true : false;
-          if(this.pack.cards.length == 0){
+          this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
+            ? true
+            : false;
+          if (this.pack.cards.length == 0) {
             this.unauthorized = true;
           }
           this.cards = [...this.pack.cards];
           this.isLoaded = true;
-          
+
           this.overlaySpinnerService.changeOverlaySpinner(false);
-          this.mixpanelService.track("PageViewed", { 'Page Title': 'pack-content-page', 'Pack id': this.id, 'Pack name': this.pack?.name });
+          this.mixpanelService.track('PageViewed', {
+            'Page Title': 'pack-content-page',
+            'Pack id': this.id,
+            'Pack name': this.pack?.name,
+          });
         },
         (reject) => {
           this.isLoaded = true;
-          
+
           console.log('errrror');
           console.log(
             'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
@@ -163,8 +188,14 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }, 300);
+  }
 
-    
+  openDialog() {
+    this.isDialogOpen = true;
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false;
   }
 
   checkIfImageIsPortrait(url: string): Promise<boolean> {
@@ -177,23 +208,32 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   async checkCardOrientation(card: Card) {
-    const isPortrait = await this.checkIfImageIsPortrait(card.frontImgUrl);
-    card.isPortrait = isPortrait;
-    console.log(card,'card')
+    const isPortrait = await this.checkIfImageIsPortrait(
+      card.cardsImages[0].frontImgUrl
+    );
+    // card.isPortrait = isPortrait;
+    // console.log(card,'card')
     // console.log(`Card at ${card.frontImgUrl} is ${isPortrait ? 'portrait' : 'landscape'}`);
   }
 
-  changeRandomCard(b){
+  changeRandomCard(b) {
     this.randomCardIndex = this.randomCardIndex + b;
   }
   multipileChanged(): void {
     this.selectedCards = [];
     this.multipileChecked = !this.multipileChecked;
-    if(this.multipileChecked){
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show multiple cards", 'Pack id': this.id, 'Pack name': this.pack?.name });
-    }
-    else{
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Show one card", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    if (this.multipileChecked) {
+      this.mixpanelService.track('ActionButtonClicked', {
+        Action: 'Show multiple cards',
+        'Pack id': this.id,
+        'Pack name': this.pack?.name,
+      });
+    } else {
+      this.mixpanelService.track('ActionButtonClicked', {
+        Action: 'Show one card',
+        'Pack id': this.id,
+        'Pack name': this.pack?.name,
+      });
     }
   }
 
@@ -223,34 +263,45 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   shuffle(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Shuffle", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    console.log('shuffling');
+    this.mixpanelService.track('ActionButtonClicked', {
+      Action: 'Shuffle',
+      'Pack id': this.id,
+      'Pack name': this.pack?.name,
+    });
     this.selectedCards = [];
-    this.cards.sort(() => Math.random() - 0.5);
+    this.cardImages.sort(() => Math.random() - 0.5);
   }
 
-  flip(): void{
-    this.flipped = !this.flipped; this.selectedCards = [];
-    if(this.flipped){
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Back", 'Pack id': this.id, 'Pack name': this.pack?.name });
-    }
-    else{
-      this.mixpanelService.track("ActionButtonClicked", {"Action" : "Flip Front", 'Pack id': this.id, 'Pack name': this.pack?.name });
+  flip(): void {
+    this.flipped = !this.flipped;
+    this.selectedCards = [];
+    if (this.flipped) {
+      this.mixpanelService.track('ActionButtonClicked', {
+        Action: 'Flip Back',
+        'Pack id': this.id,
+        'Pack name': this.pack?.name,
+      });
+    } else {
+      this.mixpanelService.track('ActionButtonClicked', {
+        Action: 'Flip Front',
+        'Pack id': this.id,
+        'Pack name': this.pack?.name,
+      });
     }
   }
 
   toggleFlipped(card): void {
-    console.log('flipped card:', card);
+    // console.log('flipped card:', card);
     card.flipped = !card.flipped;
-    this.flipCard = (this.flipCard == 'inactive') ? 'active' : 'inactive';
+    this.flipCard = this.flipCard == 'inactive' ? 'active' : 'inactive';
   }
-
 
   rotateCard(card: Card) {
-    card.rotation = (card.rotation + 90) % 360; // This will rotate the card 90 degrees clockwise on each click
-    console.log('rotation:', card.rotation);
-    console.log('card:', card);
+    // card.rotation = (card.rotation + 90) % 360; // This will rotate the card 90 degrees clockwise on each click
+    // console.log('rotation:', card.rotation);
+    // console.log('card:', card);
   }
-
 
   toggleChosenCardsModal(): void {
     if (!this.showSelectedCards) {
@@ -270,8 +321,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   imgClick(event, card: Card): void {
-    this.flipCard = (this.flipCard == 'inactive') ? 'active' : 'inactive';
-    card.flipped = !card.flipped;
+    this.flipCard = this.flipCard == 'inactive' ? 'active' : 'inactive';
+    // card.flipped = !card.flipped;
     event.stopPropagation();
     this.cdr.detectChanges(); // manually trigger change detection
   }
@@ -284,7 +335,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   toggleRandomCardsModal(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show random card", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    console.log('toggleRandomCardsModal');
+    this.mixpanelService.track('ActionButtonClicked', {
+      Action: 'Show random card',
+      'Pack id': this.id,
+      'Pack name': this.pack?.name,
+    });
     if (this.showRandomCards) {
       this.showRandomCards = false;
     } else {
@@ -299,7 +355,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
    * Toggle edit pack
    */
   editPack(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Edit pack", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    this.mixpanelService.track('ActionButtonClicked', {
+      Action: 'Edit pack',
+      'Pack id': this.id,
+      'Pack name': this.pack?.name,
+    });
     if (!this.showEditPack) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -338,21 +398,23 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   openGuideBook(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action" : "Guide Book", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    this.mixpanelService.track('ActionButtonClicked', {
+      Action: 'Guide Book',
+      'Pack id': this.id,
+      'Pack name': this.pack?.name,
+    });
     // debugger
-    console.log('this.pack.guidebookUrl');
-    console.log(this.pack.guidebookUrl);
-    if(this.pack.guidebookUrl && this.pack.guidebookUrl != ""){
-      
+    // console.log('this.pack.guidebookUrl');
+    // console.log(this.pack.guidebookUrl);
+    if (this.pack.guidebookUrl && this.pack.guidebookUrl != '') {
       window.open(this.pack.guidebookUrl, '_blank');
-    }
-    else{
+    } else {
       const modalData: PopoutData = {
         modalName: 'guide-book',
         guideBook: this.pack.guideBook,
         packName: this.pack?.name,
         packDesc: this.pack.description,
-        imgUrl: this.pack.imgUrl
+        imgUrl: this.pack.imgUrl,
       };
       this.popoutService.openPopoutModal(modalData);
     }
@@ -367,8 +429,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   openAboutDialog(): void {
-    
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Show creator info", 'Pack id': this.id, 'Pack name': this.pack?.name });
+    this.mixpanelService.track('ActionButtonClicked', {
+      Action: 'Show creator info',
+      'Pack id': this.id,
+      'Pack name': this.pack?.name,
+    });
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -383,24 +448,33 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   createCommomLink(): void {
-    this.mixpanelService.track("ActionButtonClicked", { "Action": "Create Common Link", 'Pack id': this.id, 'Pack name': this.pack?.name });
-    
-    this.api.MakeCommonLink({packId:this.id}).then(data => {
-      const url = window.location.href + "?link=" + data;
+    this.mixpanelService.track('ActionButtonClicked', {
+      Action: 'Create Common Link',
+      'Pack id': this.id,
+      'Pack name': this.pack?.name,
+    });
+
+    this.api.MakeCommonLink({ packId: this.id }).then((data) => {
+      const url = window.location.href + '?link=' + data;
       this.dialog.open(CopyCommonLinkDialogComponent, {
-        data: { linkUrl: url }
+        data: { linkUrl: url },
       });
-    })
+    });
   }
 
-  
+  redirect(): void {
+    this.mixpanel.track('RedirectToExternalCreator', {
+      'Pack ID': this.pack?.id,
+      'Pack name': this.pack?.name,
+      Link: this.pack?.about.link,
+    });
+    window.open(this.pack?.about.link, '_blank');
+  }
 
   ngOnDestroy(): void {
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }
-
- 
 }
 
 @Component({

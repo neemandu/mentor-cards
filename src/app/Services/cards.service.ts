@@ -112,6 +112,7 @@ export class CardsService {
     const fetchAllPacks = async () => {
       do {
         const packs = await fetchPacks(nextToken);
+        console.log('packs ...',packs);
         items = items.concat(packs.items);
         nextToken = packs.nextToken;
       } while (nextToken);
@@ -126,6 +127,7 @@ export class CardsService {
         });
         return new PackContent().deseralize(pack)
       });
+      console.log('allPacks ...',this.allPacks);
       this.sortPacks();
       this.allPacksReadyEmmiter.emit();
       this.overlaySpinnerService.changeOverlaySpinner(false);

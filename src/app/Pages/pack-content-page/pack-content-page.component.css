@@ -1,6 +1,6 @@
 h1,
 h2 {
-  font-family: 'Open Sans Hebrew', sans-serif !important;
+  font-family: "Open Sans Hebrew", sans-serif !important;
 }
 
 .nav {
@@ -564,7 +564,8 @@ li span {
 
 .two-cards,
 .rotated-two-cards {
-  height: calc(100vw / 3);width: 100%;
+  height: calc(100vw / 3);
+  width: 100%;
   max-width: 80vw;
   /* width: calc(100vw / 5); */
   margin-inline: 6vw;
@@ -588,7 +589,7 @@ li span {
 .rotated-five-cards {
   width: auto;
   height: 35vh;
-  margin-inline: 3vw
+  margin-inline: 3vw;
 }
 
 .remove-btn {
@@ -753,7 +754,6 @@ img {
 .index-remove:hover>.remove-btn {
   display: initial;
 } */
-
 
 .rotate-0 {
   transform: rotate(0deg);
