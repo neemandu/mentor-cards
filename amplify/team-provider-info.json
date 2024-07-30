@@ -212,7 +212,8 @@
         },
         "PayPalWebhookFunc": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/PayPalWebhookFunc-30424d36715a54485569-build.zip",
+          "s3Key": "amplify-builds/PayPalWebhookFunc-70486670474943587342-build.zip",
+          "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "receiptsUrl": "https://vgi4o66wki.execute-api.eu-west-2.amazonaws.com/dev/counter"
         },
         "IncrementPackEntries": {

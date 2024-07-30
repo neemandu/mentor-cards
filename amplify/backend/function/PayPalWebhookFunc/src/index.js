@@ -1,3 +1,17 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["morningApiKey","morningApiSecret"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
 
 /* Amplify Params - DO NOT EDIT
         API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
@@ -25,15 +39,40 @@ const https = require('https');
 const pdf = require('html-pdf');
 
 
-async function getParam(){
+async function getParam(key){
     var { Parameters } = await (new AWS.SSM())
     .getParameters({
-      Names: ["smooveApiKey"].map(secretName => process.env[secretName]),
+      Names: [key].map(secretName => process.env[secretName]),
       WithDecryption: true,
     })
     .promise(); 
   
     return Parameters[0].Value; 
+  }
+
+  async function getMorningParam(){
+    var api_key = await getParam("morningApiKey");
+    var secret = await getParam("morningApiSecret");
+
+    const data = JSON.stringify({
+        id: api_key,
+        secret: secret
+      });
+  
+    
+    const options = {
+        hostname: 'api.greeninvoice.co.il',
+        port: 443,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+  
+    var response = await post(options, '/api/v1/account/token', data);
+    console.log("getMorningParam: " + response);
+    return response["token"];
+
   }
 
 const post = (defaultOptions, path, payload) => new Promise((resolve, reject) => {
@@ -183,7 +222,7 @@ async function addToUnsubscribersList(email) {
         "lists_ToSubscribe": [927539]
     });
 
-    var bearerToken = await getParam();
+    var bearerToken = await getParam("smooveApiKey");
     
   const options = {
     hostname: 'rest.smoove.io',
@@ -219,7 +258,7 @@ async function updateEmailList(email, amount, subDescription, invoiceRunningId, 
         "lists_ToSubscribe": [927198]
     });
   
-    var bearerToken = await getParam();
+    var bearerToken = await getParam("smooveApiKey");
     
     const options = {
         hostname: 'rest.smoove.io',
@@ -296,6 +335,71 @@ function getinvoiceRunningId() {
         req.end(); // Ensure the request is properly ended
     });
   }
+
+async function updateMorning(email, amount, description, fullName) {
+
+
+    var bearerToken = await getMorningParam();
+
+
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  
+    const data = JSON.stringify({
+        "description": description,
+        "type": amount,
+        "date": formattedDate,
+        "lang": "he",
+        "currency": "ILS",
+        "vatType": 0,
+        "signed": true,
+        "attachment": true,
+        "maxPayments": 1,
+        "client": {
+          "name": fullName,
+          "emails": [email],
+          "add": true,
+          "self": false
+        },
+        "income": [
+        {
+            "description": description,
+            "quantity": 1,
+            "price": amount,
+            "currency": "ILS",
+            "currencyRate": 1,
+            "vatType": 1
+        }
+        ],
+        "payment": [
+          {
+            "date": formattedDate,
+            "type": 5,
+            "price": amount,
+            "currency": "ILS",
+            "currencyRate": 1
+          }
+        ]
+      });
+  
+    
+    const options = {
+        hostname: 'api.greeninvoice.co.il',
+        port: 443,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${bearerToken}`
+        }
+    };
+  
+    var msg = await post(options, '/api/v1/documents', data);
+    console.log('updateMorning sending POST start');
+    console.log(msg);
+    console.log("updateMorning: sending POST End");
+
+}
 
 exports.handler = async (event) => {
     try{
@@ -395,7 +499,7 @@ exports.handler = async (event) => {
                         }
                         await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
                         await updateEmailList(user.email, amount, extraDesc, invoiceRunningId, "");
-                        await updateMorning(user.email, amount, extraDesc, invoiceRunningId, "");
+                        await updateMorning(user.email, amount, extraDesc, user.fullName);
                     }
                 }
             }
