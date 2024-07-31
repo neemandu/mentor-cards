@@ -687,6 +687,14 @@
         }
       ]
     },
+    "AMPLIFY_function_PayPalWebhookFunc_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
     "AMPLIFY_function_UnSubscribe_deploymentBucketName": {
       "usedBy": [
         {

@@ -27,5 +27,9 @@
       "cloudFormationParameterName": "receiptsUrl",
       "environmentVariableName": "receiptsUrl"
     }
+  ],
+  "secretNames": [
+    "morningApiKey",
+    "morningApiSecret"
   ]
 }
