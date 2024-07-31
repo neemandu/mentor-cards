@@ -1,7 +1,19 @@
 // import { Component, OnInit, Output } from '@angular/core';
 // import { EventEmitter } from 'stream';
 import { DOCUMENT } from '@angular/common';
-import { Component, EventEmitter, NgZone, OnInit, Output, HostListener, QueryList, ViewChildren, ViewChild, ElementRef, Inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  NgZone,
+  OnInit,
+  Output,
+  HostListener,
+  QueryList,
+  ViewChildren,
+  ViewChild,
+  ElementRef,
+  Inject,
+} from '@angular/core';
 import { MatOption } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { bool } from 'aws-sdk/clients/signer';
@@ -23,25 +35,52 @@ interface CategoryPack {
 @Component({
   selector: 'app-nav-bar-new',
   templateUrl: './nav-bar-new.component.html',
-  styleUrls: ['./nav-bar-new.component.css']
+  styleUrls: ['./nav-bar-new.component.css'],
 })
 export class NavBarNewComponent implements OnInit {
-  matRippleColor:"red"
+  matRippleColor: 'red';
   navBarItems = [
-    { name: 'pages.nav.navbar.all-card-packs', route: '/all-packs-page', placeholder: 'All Card Packs' },
-    { name: 'pages.nav.navbar.digital-courses', placeholder: 'Digital Courses' },
-    { name: 'pages.nav.navbar.our-plans', route: '/price-page', placeholder: 'Our Plans' },
+    {
+      name: 'pages.nav.navbar.all-card-packs',
+      route: '/all-packs-page',
+      placeholder: 'All Card Packs',
+    },
+    {
+      name: 'pages.nav.navbar.digital-courses',
+      placeholder: 'Digital Courses',
+    },
+    {
+      name: 'pages.nav.navbar.our-plans',
+      route: '/price-page',
+      placeholder: 'Our Plans',
+    },
     { name: 'pages.nav.navbar.faq', route: '/guide-page', placeholder: 'FAQ' },
-    { name: 'pages.nav.navbar.additional-services', route: '/services', placeholder: 'Additional Services' },
-    { name: 'pages.nav.navbar.about-us', route: '/about-page', placeholder: 'About Us' },
-    { name: 'pages.nav.navbar.affiliates', route: '/affiliates-page', placeholder: 'Affiliates' },
-    { name: 'pages.nav.navbar.contact-us', route: '/home-page#contact-us-section', placeholder: 'Contact Us' },
-  ].map(item => ({ ...item, hovering: false }));
+    {
+      name: 'pages.nav.navbar.additional-services',
+      route: '/services',
+      placeholder: 'Additional Services',
+    },
+    {
+      name: 'pages.nav.navbar.about-us',
+      route: '/about-page',
+      placeholder: 'About Us',
+    },
+    {
+      name: 'pages.nav.navbar.affiliates',
+      route: '/affiliates-page',
+      placeholder: 'Affiliates',
+    },
+    {
+      name: 'pages.nav.navbar.contact-us',
+      route: '/home-page#contact-us-section',
+      placeholder: 'Contact Us',
+    },
+  ].map((item) => ({ ...item, hovering: false }));
 
   isActive(item) {
     return this.router.url === item.route;
   }
-  
+
   // @ViewChild('videoPlayer') videoplayer: ElementRef;
   @ViewChild('filterText') filterTextInput: ElementRef;
   // @ViewChildren('autocompleteOptions')
@@ -84,7 +123,6 @@ export class NavBarNewComponent implements OnInit {
   stopGenerateOptions: boolean = true;
   currentFocusIndex: number = -1; // -1 indicates that no option is currently focused
 
-
   hover(item) {
     item.hovering = true;
   }
@@ -93,15 +131,15 @@ export class NavBarNewComponent implements OnInit {
     item.hovering = false;
   }
 
-  
-  @Output() showSignInModalEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() showSignInModalEmitter: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: any) {
     this.showTour = window.innerWidth >= 1024; // Adjust the breakpoint as needed
   }
-  
+
   userAttributes: any;
   loggedIn: boolean = false;
   news: any[];
@@ -111,44 +149,50 @@ export class NavBarNewComponent implements OnInit {
 
   localesList = [
     { code: 'en', label: 'English' },
-    { code: 'he', label: 'עברית' }
-  ]
+    { code: 'he', label: 'עברית' },
+  ];
 
-  constructor(private userAuthService: UserAuthService, public router: Router, private ngZone: NgZone,
-    private api: APIService, private amplifyAuthService: AuthService,
+  constructor(
+    private userAuthService: UserAuthService,
+    public router: Router,
+    private ngZone: NgZone,
+    private api: APIService,
+    private amplifyAuthService: AuthService,
     private cardsService: CardsService,
     private overlaySpinnerService: OverlaySpinnerService,
     public routNavigate: Router,
     public langDirectionService: LangDirectionService,
     @Inject(DOCUMENT) private document: Document
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-
     // this.startCountdown();
     this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
       this.userAttributes = userData;
       this.loggedIn = userData ? true : false;
-      this.showBanner = this.loggedIn && this.userAttributes?.subscription?.subscriptionPlan?.id !== 'MCLIFETIME';
-
-    })
-    this.api.ListNewss().then(news => {
-      this.news = news.items.sort((a, b) => a.order - b.order);
-      let oldNews = localStorage.getItem("news")
-      // if (oldNews !== this.getNewsList()) {
-      //   this.newsNotification = true;
-      // }
-    }, error => {
-      console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.ListNewss ~ error", error)
-    })  
-    if(this.userAuthService.isLoggedIn){
+      this.showBanner =
+        this.loggedIn &&
+        this.userAttributes?.subscription?.subscriptionPlan?.id !==
+          'MCLIFETIME';
+    });
+    this.api.ListNewss().then(
+      (news) => {
+        this.news = news.items.sort((a, b) => a.order - b.order);
+        let oldNews = localStorage.getItem('news');
+        // if (oldNews !== this.getNewsList()) {
+        //   this.newsNotification = true;
+        // }
+      },
+      (error) => {
+        // console.log("file: site-content-management.component.ts ~ line 42 ~ this.api.ListNewss ~ error", error)
+      }
+    );
+    if (this.userAuthService.isLoggedIn) {
       this.userData = this.userAuthService.userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
       this.getAllPacks(true);
-    }
-    else{
+    } else {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
@@ -167,9 +211,9 @@ export class NavBarNewComponent implements OnInit {
         }
       )
     );
-    console.log('allpacks page sub 2');
-    console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
-  
+    // console.log('allpacks page sub 2');
+    // console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
+
     // this.getAllPacks();
   }
 
@@ -185,14 +229,12 @@ export class NavBarNewComponent implements OnInit {
   // }
 
   // /**
-  //  * @returns a string with all news to save\compare 
+  //  * @returns a string with all news to save\compare
   //  */
   // private getNewsList(): string {
   //   let res = this.news.map(n => n.message).toString();
   //   return res;
   // }
-
-
 
   logout(): void {
     this.userAuthService.logOut();
@@ -202,7 +244,6 @@ export class NavBarNewComponent implements OnInit {
   signInSignUp(): void {
     this.userAuthService.showSignInModal();
   }
-
 
   openNewTab(): void {
     const url = 'https://mentor-cards.vp4.me/my-courses';
@@ -321,13 +362,12 @@ export class NavBarNewComponent implements OnInit {
     }
   }
 
-
   /**
    * Retrive all packs
    */
   getAllPacks(useCache: bool): void {
-    console.log('useCache: '  + useCache);
-    if(useCache){
+    // console.log('useCache: '  + useCache);
+    if (useCache) {
       if (this.cardsService.allPacks) {
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
@@ -345,8 +385,7 @@ export class NavBarNewComponent implements OnInit {
         });
         this.cardsService.getAllPacks();
       }
-    }
-    else{
+    } else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
         // console.log('getAllPacks finished!');
         this.setAllPacksData();
@@ -355,10 +394,9 @@ export class NavBarNewComponent implements OnInit {
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
       });
-      console.log('cardsService.getAllPacks');
+      // console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
     }
-    
   }
 
   setAllPacksData(): void {
@@ -366,7 +404,7 @@ export class NavBarNewComponent implements OnInit {
     this.allCategories = this.cardsService.allCategories.map(
       (category) => category
     );
-    console.log(this.allCategories);
+    // console.log(this.allCategories);
     this.allFavorites = this.userAuthService.favorites;
 
     this.isPageLoaded = true;
@@ -500,7 +538,9 @@ export class NavBarNewComponent implements OnInit {
     this.freeTextFilterSelected = option;
     this.stopGenerateOptions = true;
     this.filteredOptions = [];
-    this.router.navigate(['all-packs-page'], { queryParams: { filter: option } });
+    this.router.navigate(['all-packs-page'], {
+      queryParams: { filter: option },
+    });
   }
 
   categoryFilter(): void {

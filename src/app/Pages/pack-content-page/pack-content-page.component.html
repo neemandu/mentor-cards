@@ -159,8 +159,9 @@
         <div class="flex justify-start">
           <div class="relative">
             <img
+              *ngIf="pack?.imgUrl"
               [src]="pack.imgUrl"
-              alt=" pack image"
+              alt="Pack image"
               width="100"
               height=""
               class="rounded-sm"
@@ -397,6 +398,10 @@
         >
         </app-card>
       </div>
+    </div>
+
+    <div id="image-grid" class="image-grid">
+      <!-- Images will be dynamically inserted here -->
     </div>
 
     <div

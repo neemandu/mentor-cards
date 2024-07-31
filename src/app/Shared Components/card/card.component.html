@@ -1,17 +1,35 @@
 <div class="d-flex flex-column relative">
-  <div [ngClass]="{'flip-box-inner': true, 'flip': flipped}">
+  <div [ngClass]="{ 'flip-box-inner': true, flip: flipped }">
     <div class="flip-box-front">
-      <img *ngIf="!cardContent?.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
-        src="/assets/Mentor-Cards-Back.png" [ngClass]="{'': !selected, 'img-selected': selected}"
-        (contextmenu)="onRightClick();">
-      <img *ngIf="cardContent?.backImgUrl" alt="Mentor-cards unique cards design for the back of the card"
-        src="{{cardContent?.backImgUrl}}" data-src={{cardContent?.backImgUrl}}
-        [ngClass]="{'': !selected, 'img-selected': selected}" (contextmenu)="onRightClick();">
+      <img
+        *ngIf="!cardContent?.backImgUrl"
+        alt="Mentor-cards unique cards design for the back of the card"
+        src="/assets/Mentor-Cards-Back.png"
+        [ngClass]="{ '': !selected, 'img-selected': selected }"
+        (contextmenu)="onRightClick()"
+      />
+      <img
+        *ngIf="cardContent?.backImgUrl"
+        alt="Mentor-cards unique cards design for the back of the card"
+        src="{{ cardContent?.backImgUrl }}"
+        data-src="{{ cardContent?.backImgUrl }}"
+        [ngClass]="{ '': !selected, 'img-selected': selected }"
+        (contextmenu)="onRightClick()"
+      />
     </div>
     <div class="flip-box-back">
-      <img loading="eager" [ngClass]="{'': !selected, 'img-selected': selected}"
-        src={{cardContent.frontImgUrl}} data-src={{cardContent.frontImgUrl}} (contextmenu)="onRightClick();">
+      <img
+        loading="eager"
+        [ngClass]="{ '': !selected, 'img-selected': selected }"
+        src="{{ cardContent.frontImgUrl }}"
+        data-src="{{ cardContent.frontImgUrl }}"
+        (contextmenu)="onRightClick()"
+      />
     </div>
   </div>
-  <span *ngIf="index" class=" absolute right-6 top-1/2 bg-white rounded-full p-1 text-center w-6 h-6 ">{{index}}</span>
+  <span
+    *ngIf="index"
+    class="absolute right-6 top-1/2 bg-white rounded-full p-1 text-center w-6 h-6"
+    >{{ index }}</span
+  >
 </div>

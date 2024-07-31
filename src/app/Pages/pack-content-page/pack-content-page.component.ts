@@ -71,6 +71,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   rotation: number = 0;
   isMobile: boolean = false;
   isDialogOpen = false;
+  isLoading: boolean = false;
+  error: string = null;
 
   constructor(
     public route: ActivatedRoute,
@@ -121,75 +123,48 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       }
     );
     //a specific pack
-    if (this.cardsService.allPacks) {
-      this.pack = this.cardsService.allPacks.find(
-        (pack) => pack.id === this.id
-      );
-
-      console.log('pack:', this.pack);
-      this.cards = [...this.pack.cards];
-
-      this.cardImages = this.pack.cards[0].cardsImages;
-
-      this.cards.forEach((card) => {
-        this.checkCardOrientation(card);
-      });
-      console.log('cards in packs conent:', this.cards);
-      if (!this.pack.cards[0].cardsImages[0].backImgUrl) {
-        this.isDoubleSided = false;
-      } else if (
-        this.pack.cards[0].cardsImages[0].backImgUrl ==
-        this.pack.cards[1].cardsImages[0].backImgUrl
-      ) {
-        this.isDoubleSided = false;
-      } else {
-        this.isDoubleSided = true;
-      }
-      // console.log('hi111');
-      this.mixpanelService.track('PageViewed', {
-        'Page Title': 'pack-content-page',
-        'Pack id': this.id,
-        'Pack name': this.pack?.name,
-      });
-    } else {
-      this.api.GetCardsPack(this.id, this.commonLink).then(
-        (pack) => {
-          // console.log('hi');
-          this.pack = new PackContent().deseralize(pack);
-          this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
-            ? true
-            : false;
-          if (this.pack.cards.length == 0) {
-            this.unauthorized = true;
-          }
-          this.cards = [...this.pack.cards];
-          this.isLoaded = true;
-
-          this.overlaySpinnerService.changeOverlaySpinner(false);
-          this.mixpanelService.track('PageViewed', {
-            'Page Title': 'pack-content-page',
-            'Pack id': this.id,
-            'Pack name': this.pack?.name,
-          });
-        },
-        (reject) => {
-          this.isLoaded = true;
-
-          console.log('errrror');
-          console.log(
-            'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
-            reject
-          );
-          this.overlaySpinnerService.changeOverlaySpinner(false);
-        }
-      );
-    }
+    this.route.params.subscribe((params) => {
+      this.id = params['id'];
+      this.loadPack();
+    });
     // track events
     setTimeout(() => {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }, 300);
   }
 
+  loadPack(): void {
+    this.isLoading = true;
+    this.error = null;
+
+    if (this.cardsService.allPacks) {
+      this.setPack(
+        this.cardsService.allPacks.find((pack) => pack.id === this.id)
+      );
+      console.log('loading pack from service');
+    } else {
+      console.log('fetching pack');
+      console.log('this.id', this.id);
+      console.log('this.commonLink', this.commonLink);
+      this.setPack(
+        this.cardsService.allPacks.find((pack) => pack.id === this.id)
+      );
+    }
+  }
+
+  setPack(pack: PackContent | undefined): void {
+    if (pack) {
+      this.pack = pack;
+      this.cards = [...this.pack.cards];
+      this.cardImages = this.pack.cards[0]?.cardsImages || [];
+      this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
+      this.unauthorized = this.pack.cards.length === 0;
+    } else {
+      this.error = 'Pack not found';
+    }
+    this.isLoading = false;
+    this.overlaySpinnerService.changeOverlaySpinner(false);
+  }
   openDialog() {
     this.isDialogOpen = true;
   }

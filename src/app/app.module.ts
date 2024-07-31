@@ -181,6 +181,7 @@ import { FilterDialogComponent } from './Pages/all-packs-page-new/filter-dialog/
 import { AiChatComponent } from './Pages/all-packs-page-new/ai-chat/ai-chat.component';
 import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripple.directive';
 import { TopQuestionsCustomDialogComponent } from './Pages/pack-content-page/top-questions-dialog';
+import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-content-page-new.component';
 
 @NgModule({
   declarations: [
@@ -266,7 +267,8 @@ import { TopQuestionsCustomDialogComponent } from './Pages/pack-content-page/top
     SubscribeCardComponent,
     FilterDialogComponent,
     AiChatComponent,
-    GradientRippleDirective
+    GradientRippleDirective,
+    PackContentPageNewComponent
   ],
   imports: [
     BrowserModule,
