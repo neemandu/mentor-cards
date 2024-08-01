@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { APIService, AiInput } from 'src/app/API.service';
 
 @Component({
   selector: 'app-ai-chat',
@@ -13,6 +14,8 @@ export class AiChatComponent {
   placeholderHidden: boolean = false;
   isExpanded: boolean = false;
   responses: string[] = [];
+
+  constructor(private api: APIService){}
   // userStatus: string = 'PLAN';  // Change this value to test different statuses
   // placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
 
@@ -34,13 +37,19 @@ export class AiChatComponent {
 
   sendMessage() {
     this.isExpanded = true;
+    const userQuestion = this.userInput; // Store the user input in a local variable
     this.responses.push(this.userInput); // Add the user input to the responses
     this.userInput = ''; // Clear the input field
     this.showPlaceholder(); // Show the placeholder if the input field is empty
 
     // Simulate a response from the backend
-    setTimeout(() => {
-      this.responses.push('Placeholder response from backend');
+    setTimeout(() => {    
+      console.log("user question: " + userQuestion);
+      var input: AiInput = { "question": userQuestion };
+      this.api.AskTheAI(input).then(res => {this.responses.push(res.generalAnswer)}
+      , reject => {
+        console.log("file: ai-chat.component.ts ~ line 49 ~ this.api.sendMessage ~ reject", reject)
+      })      
     }, 1000);
   }
 

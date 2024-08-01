@@ -18,7 +18,7 @@
         </div>
         <div class="flex items-center justify-end mb-2 flex-col">
           <img src="/assets/New/pack-preview/packs-icon.svg" alt="User Avatar" class="w-6 h-6"/>
-          <div class="text-center font-bold">{{ data.pack.cards.length}}</div>
+          <div class="text-center font-bold">{{ data.pack.numberOfCards}}</div>
          
         </div>
         <div class="flex items-center justify-end mb-2 flex-col">
@@ -74,7 +74,7 @@
   <div *ngIf="data.pack.about && isExpland">
     <div class="about-author">
       <div class="about-author-text categories-tags">
-        <p class="content">
+        <p class="text-sm mb-4 text-right">
           <span class=" font-bold">
            אודות:
           </span>{{data.pack.about.text}}

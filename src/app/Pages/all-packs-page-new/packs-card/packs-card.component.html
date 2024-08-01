@@ -1,12 +1,11 @@
-<div class="rounded-xl w-44 h-64 p-3 relative" [dir]="langDirectionService.currentLangDirection"
+<div (pointerenter)="openPreviewDialog()" class="rounded-xl w-44 h-64 p-3 relative" [dir]="langDirectionService.currentLangDirection"
     [ngStyle]="{'background-color': backgroundColor, 'overflow': 'hidden'}">
-    <div class=" text-right text-lg font-bold text-white leading-4 mb-2">{{ packInfo.name }}</div>
-    <div class=" text-right text-white leading-4 w-[70%]">{{ packInfo.ownerName }}</div>
-    <div class=" flex">
+    <div class="text-right text-lg font-bold text-white leading-4 mb-2">{{ packInfo.name }}</div>
+    <div class="text-right text-white leading-4 w-[70%]">{{ packInfo.ownerName }}</div>
+    <div class="flex">
         <div class="" style="position: absolute; bottom:-3rem ; left: -2rem; width: 140px; height: auto;">
            
             <img 
-            (pointerenter)="openPreviewDialog() " 
             [src]="packInfo.imgUrl" alt="" style="transform: rotate(-16.16deg); border-radius: 20px; " class="packs-image">
         </div>
         <div>

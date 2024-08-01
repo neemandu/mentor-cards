@@ -71,6 +71,7 @@
 .chat-response {
   flex: 1;
   overflow-y: auto;
+  text-align: right;
 }
 
 .chat-input {

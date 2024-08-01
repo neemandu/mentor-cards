@@ -5,5 +5,10 @@
  */
 exports.handler = async (event) => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
-    return event.source['cards']?.length ?? 0;
+    let totalImagesCount = 0;
+    let cards = event.source['cards'];
+    for (const card of cards) {
+        totalImagesCount += card.cardsImages.length;
+    }
+    return totalImagesCount;
 };

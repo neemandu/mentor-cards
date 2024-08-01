@@ -246,11 +246,11 @@
         "AskTheAI": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AskTheAI-6533324e4d3645454e44-build.zip"
+          "s3Key": "amplify-builds/AskTheAI-77594d33463339547a66-build.zip"
         },
         "GetNumberOfCardsInPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/GetNumberOfCardsInPack-7454634d635052317447-build.zip"
+          "s3Key": "amplify-builds/GetNumberOfCardsInPack-4f652f35756445437946-build.zip"
         },
         "CreateInvoice": {},
         "InvoiceHandler": {},

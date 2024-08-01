@@ -64,7 +64,7 @@ export class PacksCardComponent implements OnInit, OnDestroy {
             dialogSub.unsubscribe();
             this.cardStateService.setCardOpen(false);
           });
-        }, 600);
+        }, 0);
       }
     });
   }

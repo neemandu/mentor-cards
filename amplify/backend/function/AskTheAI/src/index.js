@@ -17,6 +17,34 @@ Use the following code to retrieve configured secrets from SSM:
 
 const aws = require('aws-sdk');
 
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["chatgptsecret","chatgptorg","chatgptproj"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["chatgptsecret","chatgptorg","chatgptproj"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
 Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
 */
 /* Amplify Params - DO NOT EDIT
@@ -27,22 +55,25 @@ Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }
 	REGION
 Amplify Params - DO NOT EDIT */
 
-import OpenAI from "openai";
-
 const { env } = require("process");
 var AWS = require("aws-sdk");
+var OpenAI = require("openai");
 
 AWS.config.update({
     region: env.REGION
     //endpoint: env.API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
 });
 
-const { Parameters } = await (new AWS.SSM())
-  .getParameters({
-    Names: ["chatgptsecret","chatgptorg","chatgptproj"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
+async function getParams(){
+    var { Parameters } = await (new AWS.SSM())
+    .getParameters({
+      Names: ["chatgptsecret","chatgptorg","chatgptproj"].map(secretName => process.env[secretName]),
+      WithDecryption: true,
+    })
+    .promise(); 
+    
+  return Parameters; 
+}
 
 async function getUser(username){
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -92,21 +123,20 @@ function generatePrompt(conversations, newQuestion, username) {
 }
 
 async function getAIResponse(prompt, user) {
-  const chatgptsecret = Parameters.find(param => param.Name === process.env["chatgptsecret"]);
-  const chatgptorg = Parameters.find(param => param.Name === process.env["chatgptorg"]);
-  const chatgptproj = Parameters.find(param => param.Name === process.env["chatgptproj"]);
+  var Parameters = await getParams(); 
+  const chatgptsecret = Parameters.find(param => param.Name === process.env["chatgptsecret"]).Value;
+  const chatgptorg = Parameters.find(param => param.Name === process.env["chatgptorg"]).Value;
+  const chatgptproj = Parameters.find(param => param.Name === process.env["chatgptproj"]).Value;
 
   console.log('chatgptsecret: ' + chatgptsecret);
   console.log('chatgptorg: ' + chatgptorg);
   console.log('chatgptproj: ' + chatgptproj);
   
   const openai = new OpenAI({
-    apiKey: chatgptsecret,
-    organization: chatgptorg,
-    project: chatgptproj,
+    apiKey: chatgptsecret
   });
 
-  if(!threadId){
+  if(!user.AithreadId){
       let thread = await openai.beta.threads.create();
       user.AithreadId = thread.id;
   }
@@ -122,19 +152,29 @@ async function getAIResponse(prompt, user) {
   
   let run = await openai.beta.threads.runs.createAndPoll(
     user.AithreadId,{
-        assistantId: "asst_uP8m411Fx1btiLacl8olBcti"
+        assistant_id: "asst_IqJ1cIB8YbAfwamgyOTH9txk"
       });
 
-  let messages = [];
+  let messageChosen;
   if (run.status === 'completed') {
-    const messages = await openai.beta.threads.messages.list(
+    console.log("Finished running assistant for thread: " + user.AithreadId);
+
+    const response  = await openai.beta.threads.messages.list(
       run.thread_id
     );
-    for (const message of messages.data.reverse()) {
-        messages.push(`${message.content[0].text.value}`);
+    for (const message of response.data) {
+        console.log("message: ");
+        console.log(message);
+        console.log(message.content[0].text);
+        if(message.role == "assistant"){
+            messageChosen = JSON.parse(message.content[0].text.value);
+            break;
+        }
     }
-  } 
-  return messages;
+  }
+  console.log("return! ");
+  console.log(messageChosen);
+  return messageChosen;
 }
 
 async function saveUser(user){
@@ -184,7 +224,7 @@ exports.handler = async (event) => {
     let converation = {
         question: newQuestion,
         answer: response,
-        date: new Date()
+        date: new Date().toISOString()
     };
     if(user.AiConversations == null){
         user.AiConversations = [];
@@ -193,5 +233,10 @@ exports.handler = async (event) => {
 
     // Save the converation and thread id
     await saveUser(user);
-    return response;
+    /*var answer = {
+        generalAnswer: response.join(" "),
+        recommendedPacks: []
+    }
+    return answer;*/
+    return response
 };
