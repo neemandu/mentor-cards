@@ -246,7 +246,7 @@
         "AskTheAI": {
           "secretsPathAmplifyAppId": "d15egmtmsipj3q",
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
-          "s3Key": "amplify-builds/AskTheAI-77594d33463339547a66-build.zip"
+          "s3Key": "amplify-builds/AskTheAI-794a5146753955645744-build.zip"
         },
         "GetNumberOfCardsInPack": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",

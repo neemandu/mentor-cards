@@ -122,6 +122,75 @@ function generatePrompt(conversations, newQuestion, username) {
     return prompt;
 }
 
+function addGeneralGuidance(prompt){
+    return prompt + `. general guidance: you are a therapists that speaks Hebrew, English, Russian, Arabic and Spanish.
+    you are an expert in therapeutic cards which are projection cards. when someone ask you something about cards, look through your data base, which is a json file of a list of objects that each one is a different therapeutic card pack in many languages. look through the list and find the best matches of card packs for the need that was raised in the question. always return only card packs from the json, dont invent one yourself. the name of the card pack is under the property "name" in each object in the json array in your files. you can know what pack matches best by reading the description property and the guide book property of each pack. always answer in the language of the question you were asked.
+    inside the guidebook property you have different topics and each topic have a sub topic and inside the subtopic you have the questions that you can be asked as therapist.
+    the questions you are asked are asked by other therapists who need your advice about choosing the right card pack for their clients .
+    always return a response with a json that looks like this:
+    {
+      generalAnswer: String
+      recommendedPacks: [RecommendedPack]
+    }
+    type RecommendedPack {
+      packId: Int
+      reason: String
+      guide: String
+    }
+    packId is the "id" property in the pack object you take from your files.
+    inside the "guide" property of the response please give examples and suggestions on how to use the card pack, use the "guidebook property and description property to help you with it. try to provide examples that matches the user question need.
+    in the json file you have, you have a list of objects like this for example:
+    {
+            "isHardCopyAvailable": 
+            "likesCounter": ,
+            "usersUsage": [],
+            "name": 
+            "language": "",
+            "videoUrl": ,
+            "cardsPreview": [ ],
+            "groupsIds": [],
+            "isExternalPack": false,
+            "cards": [
+                {
+                    "cardsImages": [],
+                    "categoryName": "-1",
+                    "categoryStepNumber": -1
+                }
+            ],
+            "visitorsCounter": 2190,
+            "guideBook": [
+                {
+                    "name": "Ofertas de trabajo individualizado: haga clic aquí para abrir",
+                    "subElements": [
+                        {
+                            "name": "Trabajar con tarjetas en modo visible - para abrir haga clic aquí",
+                            
+                        }
+                    ]
+                }
+                      "id": "63",
+            "tags": [
+            ],
+            "__typename": "CardsPack",
+            "createdAt": "2020-12-22T00:00:00.001Z",
+            "imgUrl": "https://master-cards.s3.eu-west-2.amazonaws.com/mask_6.jpg",
+            "ownerName": "Mentor-Cards",
+            "numberOfCards": -1,
+            "backImgUrl": null,
+            "categories": [
+            ],
+            "updatedAt": "2023-01-04T12:09:12.268Z",
+            "description": "",
+            "topQuestions": [
+                "מהי המסכה שדוחפת אותך קדימה?",
+                "מהי המסכה שעליה אתה לא מוכן לוותר?",
+                "מהי המסכה שאיתה אתה מרגיש הכי בנוח?"
+            ],
+            "isFree": false,
+            "usersIds": [],
+            "authorizedDomains": []`;
+}
+
 async function getAIResponse(prompt, user) {
   var Parameters = await getParams(); 
   const chatgptsecret = Parameters.find(param => param.Name === process.env["chatgptsecret"]).Value;
@@ -140,6 +209,8 @@ async function getAIResponse(prompt, user) {
       let thread = await openai.beta.threads.create();
       user.AithreadId = thread.id;
   }
+
+
   console.log("Adding a new message to thread: " + user.AithreadId);
   let message = await openai.beta.threads.messages.create(
       threadId=user.AithreadId, {
@@ -160,7 +231,11 @@ async function getAIResponse(prompt, user) {
     console.log("Finished running assistant for thread: " + user.AithreadId);
 
     const response  = await openai.beta.threads.messages.list(
-      run.thread_id
+      run.thread_id,
+      {
+        limit: 2,
+        order: "desc"
+      }
     );
     for (const message of response.data) {
         console.log("message: ");
@@ -217,10 +292,12 @@ exports.handler = async (event) => {
     var newQuestion = event.arguments.input['question'];
 
     console.log("AI question:");
-    console.log(newQuestion);
+    
+    const newprompt = addGeneralGuidance(newQuestion);
+    console.log(newprompt);
     //const prompt = generatePrompt(user.AiConversations, newQuestion)
 
-    let response = await getAIResponse(newQuestion, user)
+    let response = await getAIResponse(newprompt, user)
     let converation = {
         question: newQuestion,
         answer: response,
