@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
+  HostListener,
   NgZone,
   OnDestroy,
   OnInit,
@@ -73,6 +74,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isDialogOpen = false;
   isLoading: boolean = false;
   error: string = null;
+  options: any[];
+
+  // For DropDown
+  isDropdownOpen = false;
+  selectedOption: string | null = null;
+  isEditing = false;
+  isEditingOption: number | null = null;
 
   constructor(
     public route: ActivatedRoute,
@@ -100,6 +108,79 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     });
     this.userData = this.userAuthService.userData;
   }
+
+    // Method For Trigger
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    }
+
+  // Update selectOption method
+  selectOption(option: { text: string; icon?: string }, index: number) {
+
+    const lastOption = this.options[this.options.length - 1];
+    if (option === lastOption) {
+      this.openGuideBook();
+    }
+
+    if (index === this.options.length - 2) {
+
+      // Make only the second-to-last option editable
+      this.isEditing = true;
+      this.isEditingOption = index;
+
+      // Set the selected option for display and editing
+      this.selectedOption = option.text;
+    } else {
+      this.selectedOption = option.text;
+      this.isDropdownOpen = false;
+      this.isEditing = false;
+      this.isEditingOption = null;
+    }
+  }
+
+
+  // Method to save the edited option
+  saveEdit(option: { text: string }, index: number) {
+    if (this.isEditing && this.isEditingOption === index) {
+      // Get the editable content
+      const editedText = (document.querySelector('.dropdown-option[contentEditable="true"]') as HTMLElement)?.textContent?.trim();
+
+      if (editedText) {
+
+        // Update the option with the edited text
+        this.options[index].text = editedText;
+        
+        // Update the selectedOption to reflect the change
+        this.selectedOption = editedText;
+      }
+
+      // Close the edit mode
+      this.isEditing = false;
+      this.isEditingOption = null;
+      this.isDropdownOpen = false;
+    }
+  }
+
+  // Add a method to handle clicks outside the dropdown to close it
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    const dropdown = document.querySelector('.dropdown') as HTMLElement;
+    if (dropdown && !dropdown.contains(clickedElement)) {
+      this.isDropdownOpen = false;
+      this.isEditing = false;
+      this.isEditingOption = null;
+    }
+  }
+  
+
+  openGuideBook1() {
+    // Your custom logic here
+    console.log('Guide book option selected!');
+    // You can add your specific logic here
+  }
+
+
   onRightClick(): boolean {
     return false;
   }
@@ -155,6 +236,19 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   setPack(pack: PackContent | undefined): void {
     if (pack) {
       this.pack = pack;
+
+   // Option Array List
+
+   this.options = [
+    ...this.pack.topQuestions.map(question => ({ text: question })),
+    { text: 'אני רוצה לכתוב שאלה משלי!' },
+    { 
+      text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות', 
+      icon: '/assets/New/pack-view/book-icon.svg' 
+    }
+  ];
+
+      
       this.cards = [...this.pack.cards];
       this.cardImages = this.pack.cards[0]?.cardsImages || [];
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;

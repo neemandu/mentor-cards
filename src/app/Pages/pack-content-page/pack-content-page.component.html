@@ -152,11 +152,11 @@
 </div> -->
   <div>
     <div
-      class="bg-[#ffe0d8] w-full py-6 ps-10"
+      class="bg-[#ffe0d8] w-full py-6 ps-10 padding-zero"
       [dir]="langDirectionService.currentLangDirection"
     >
-      <div class="flex justify-between items-center">
-        <div class="flex justify-start">
+      <div class="grid-display">
+        <div class="flex justify-start padding-20 background-white">
           <div class="relative">
             <img
               *ngIf="pack?.imgUrl"
@@ -164,7 +164,7 @@
               alt="Pack image"
               width="100"
               height=""
-              class="rounded-sm"
+              class="rounded-sm mb-2"
             />
             <div class="absolute z-20 text-center bottom-2 left-4">
               <img
@@ -196,7 +196,7 @@
             </h2>
             <h3 class="font-bold mb-0 text-start">Mentor Cards</h3>
 
-            <div class="flex gap-4">
+            <div class="flex gap-4 c-gap">
               <div class="justify-center flex flex-col items-center">
                 <button
                   class="w-10 h-8 flex items-center justify-center py-2"
@@ -209,7 +209,7 @@
                     height="25"
                   />
                 </button>
-                <div>ספר הדרכה</div>
+                <div class="text-size-10">ספר הדרכה</div>
               </div>
 
               <div class="justify-center flex flex-col items-center">
@@ -221,7 +221,7 @@
                     height="25"
                   />
                 </button>
-                <div>הדרכה</div>
+                <div class="text-size-10">הדרכה</div>
               </div>
 
               <div
@@ -239,7 +239,7 @@
                     height="25"
                   />
                 </button>
-                <div>היוצר</div>
+                <div class="text-size-10">היוצר</div>
               </div>
 
               <div
@@ -257,13 +257,13 @@
                     height="30"
                   />
                 </button>
-                <div>קנו חבילה</div>
+                <div class="text-size-10">קנו חבילה</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="flex-grow -ms-40">
+        <div class="mobile-bg">
           <div class="flex justify-center mb-2">
             <!-- <button class="border-b-2 border-[#e98980] text-start flex gap-2 items-center"
             (click)="openDialog()"
@@ -278,95 +278,125 @@
             (closeDialog)="closeDialog()"
           ></top-questions-dialog>
 
-          <div class="flex justify-center gap-2">
-            <button
-              class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 rounded-full"
-              id="flipCards"
-              type="button"
-              [disabled]="showEditPack"
-              (click)="flip()"
-              matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
-            >
-              <div class="w-10 h-8 flex items-center justify-center py-2">
-                <img
-                  src="/assets/New/pack-view/rotate-icon.svg"
-                  alt=""
-                  width="40"
-                  height="40"
-                />
+           <!-- Drop-down  -->
+          <div class="dropdown section-drop-down">
+            <div class="dropdown-select position-relative" (click)="toggleDropdown()">
+              <span class="selected-option">{{ selectedOption }}</span>
+              <span class="dropdown-icon">▼</span>
+            </div>
+            <div class="dropdown-options" [class.show]="isDropdownOpen">
+              <div 
+              [contentEditable]="isEditing && isEditingOption === index"
+              class="dropdown-option" 
+                *ngFor="let option of options; let index=index" 
+                (click)="selectOption(option,index)"
+                (keydown.enter)="saveEdit(option, index)"
+                (blur)="saveEdit(option, index)"
+                >
+                <img *ngIf="option.icon" [src]="option.icon" alt="icon" width="25" height="25" />
+                {{ option.text }}
               </div>
-              <div class="text-xs mb-2 mt-1">הפוך קלפים</div>
-            </button>
-            <button
-              class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 rounded-full"
-              id="randomCard"
-              type="button"
-              [disabled]="showEditPack"
-              (click)="toggleRandomCardsModal()"
-              matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
-            >
-              <div class="w-10 h-8 flex items-center justify-center py-2">
-                <img
-                  src="/assets/New/pack-view/info-icon.svg"
-                  alt=""
-                  width="15"
-                  height="15"
-                />
-              </div>
-              <div class="text-xs mb-2 mt-1">קלף אקראי</div>
-            </button>
-            <button
-              class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 rounded-full"
-              (click)="createCommomLink()"
-              matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
-            >
-              <div class="w-10 h-8 flex items-center justify-center py-2">
-                <img
-                  src="/assets/New/pack-view/link-icon.svg"
-                  alt=""
-                  width="50"
-                  height="50"
-                />
-              </div>
-              <div class="text-xs mb-2 mt-1">עבודה משותפת</div>
-            </button>
-            <button
-              class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-20 rounded-full"
-              id="mixCards"
-              type="button"
-              [disabled]="showEditPack"
-              (click)="shuffle()"
-              matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
-            >
-              <div class="w-10 h-8 flex items-center justify-center py-2">
-                <img
-                  src="/assets/New/pack-view/shuffle-icon.svg"
-                  alt=""
-                  width="25"
-                  height="25"
-                />
-              </div>
-              <div class="text-xs mb-2 mt-1">ערבב</div>
-            </button>
-            <button
-              class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 rounded-full"
-              id="editPack"
-              type="button"
-              *ngIf="!commonLink"
-              (click)="editPack()"
-              matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
-            >
-              <div class="w-10 h-8 flex items-center justify-center py-2">
-                <img
-                  src="/assets/New/pack-view/pen-icon.svg"
-                  alt=""
-                  width="25"
-                  height="25"
-                />
-              </div>
-              <div class="text-xs mb-2 mt-1">עריכת הערכה</div>
-            </button>
+            </div>
           </div>
+          
+          
+          <div class="section-drop-down background-white py-2">
+            <div class="flex ms-3 gap-2 justify-center">
+              <button
+                class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 btn-1 btn-height-35 rounded-full"
+                id="flipCards"
+                type="button"
+                [disabled]="showEditPack"
+                (click)="flip()"
+                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+              >
+                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                  <img
+                    src="/assets/New/pack-view/rotate-icon.svg"
+                    alt=""
+                    width="40"
+                    height="40"
+                    class="img-shuffle"
+                  />
+                </div>
+                <div class="text-xs mb-1 text-xxs">הפוך קלפים</div>
+              </button>
+              <button
+                class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 btn-2 btn-height-35 rounded-full"
+                id="randomCard"
+                type="button"
+                [disabled]="showEditPack"
+                (click)="toggleRandomCardsModal()"
+                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+              >
+                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                  <img
+                    src="/assets/New/pack-view/info-icon.svg"
+                    alt=""
+                    width="15"
+                    height="15"
+                    class="img-info"
+                  />
+                </div>
+                <div class="text-xs mb-1 text-xxs">קלף אקראי</div>
+              </button>
+              <button
+                class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 btn-1 btn-height-35 rounded-full"
+                (click)="createCommomLink()"
+                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+              >
+                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                  <img
+                    src="/assets/New/pack-view/link-icon.svg"
+                    alt=""
+                    width="50"
+                    height="50"
+                    class="img-link"
+                  />
+                </div>
+                <div class="text-xs mb-1 text-xxs">עבודה משותפת</div>
+              </button>
+              <button
+                class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-20 btn-4 btn-height-35 rounded-full"
+                id="mixCards"
+                type="button"
+                [disabled]="showEditPack"
+                (click)="shuffle()"
+                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+              >
+                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                  <img
+                    src="/assets/New/pack-view/shuffle-icon.svg"
+                    alt=""
+                    width="25"
+                    height="25"
+                    class="img-hand "
+                  />
+                </div>
+                <div class="text-xs mb-1 text-xxs">ערבב</div>
+              </button>
+              <button
+                class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 btn-1 btn-height-35 rounded-full"
+                id="editPack"
+                type="button"
+                *ngIf="!commonLink"
+                (click)="editPack()"
+                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+              >
+                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                  <img
+                    src="/assets/New/pack-view/pen-icon.svg"
+                    alt=""
+                    width="25"
+                    height="25"
+                    class="img-pen "
+                  />
+                </div>
+                <div class="text-xs mb-1 text-xxs">עריכת הערכה</div>
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1188,3 +1218,4 @@
     </div>
   </div>
 </div>
+

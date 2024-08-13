@@ -254,9 +254,78 @@ li span {
   border: none;
 }
 
+.grid-display {
+  display: grid;
+  grid-template-columns: 34% 1fr;
+}
+
+.section-drop-down {
+  width: 50% !important;
+}
 /* .reveal-card {
   animation: fadeIn 0.4s, slideUp 0.6s;
 } */
+ 
+
+/* Custom drop-down CSS */
+.dropdown {
+  position: relative;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown-select {
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #E67C73;  
+  cursor: pointer;
+  height: 50px;
+  background-color: transparent; 
+  text-align: center;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+  text-align: start
+}
+
+.dropdown-option {
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.dropdown-option:hover {
+  font-weight: bold;
+}
+
+.dropdown-options.show {
+  display: block;
+}
+
+.icon {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.dropdown-icon {
+  position:absolute;
+  left: -5px;
+  bottom: 8px;
+}
+
+/* End Drop-down CSS Here */
+
 
 @media screen and (max-width: 1024px) {
 }
@@ -265,6 +334,101 @@ li span {
   ::ng-deep .cdk-overlay-pane {
     max-width: 80vw !important;
   }
+
+  .grid-display {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  
+  .text-xxs {
+    font-size: 0.48rem;
+  }
+
+  .text-size-10 {
+    font-size: 10px;
+  }
+
+  .btn-1 { width: 70px; }
+  .btn-2 { width: 50px; }
+  .btn-4 { width: 61px; }
+
+  .padding-zero {
+    padding: 0px;
+  }
+
+  .padding-20{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px !important;
+  }
+
+  .section-drop-down {
+    width: 100% !important;
+    padding-left: 20px;
+  }
+
+  .background-white {
+    background-color: white;
+  }
+
+  .img-pen {
+    padding: 0;
+    height: 12px;
+    width: 12px;
+  }
+
+  .img-hand {
+    padding: 0;
+  height: 25px;
+  width: 25px;
+  }
+
+  .img-link {
+    padding: 0;
+    height: 11px;
+    width: 31px;
+  }
+
+  .img-info {
+    padding: 0;
+    width: 8px;
+    height: 15px;
+  }
+
+  .img-shuffle {
+    padding: 0;
+    height: 15px;
+    width: 32px;
+  }
+
+  .btn-height-35 {
+    text-align: center;
+    height: 35px;
+  }
+
+  .padding-none {
+    padding: 0px !important;
+  }
+  .c-gap {
+    grid-gap: 0.5rem !important;
+  }
+
+  .dropdown-icon {
+    position:absolute;
+    left: 3px;
+    bottom: 8px;
+  }
+
+  .dropdown-select {
+    margin-bottom: 10px;
+    height: 59px;
+  }
+
+  .mobile-bg {
+    background-color: #f8f9fa;
+
+  }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -796,3 +960,4 @@ img {
   font-weight: bold;
   text-align: center;
 }
+
