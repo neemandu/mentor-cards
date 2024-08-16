@@ -74,7 +74,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isDialogOpen = false;
   isLoading: boolean = false;
   error: string = null;
-  options: any[];
 
   // For DropDown
   isDropdownOpen = false;
@@ -109,6 +108,20 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.userData = this.userAuthService.userData;
   }
 
+
+    // Option Array List
+    options = [
+      { text: 'בחר קלף המהווה עבורך רגע בחיים שהיית רוצה לחזור אליו. מה ההרגשה המיוחדת שהייתה ברגע הזה? מה למדת ממנו?' },
+      { text: 'תיחת מפגש: התבונן בתמונות מהטבע ובחר אתמזג האוויר איתו אתה מגיע למפגש היום' },
+      { text: 'סיג האוויר איתו אתה יוצא מהפגישה שלנו.' },
+      { text: 'אין צורך בשאלה, אני אקח את זה מכאן' },
+      { text: 'אני רוצה לכתוב שאלה משלי!' },
+      { 
+        text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות', 
+        icon: '/assets/New/pack-view/book-icon.svg' 
+      }
+    ];
+    
     // Method For Trigger
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
@@ -172,18 +185,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.isEditingOption = null;
     }
   }
-  
-
-  openGuideBook1() {
-    // Your custom logic here
-    console.log('Guide book option selected!');
-    // You can add your specific logic here
-  }
 
 
   onRightClick(): boolean {
     return false;
   }
+
+
   ngOnInit(): void {
     if (this.platform.ANDROID || this.platform.IOS) {
       this.isMobile = true;
@@ -214,6 +222,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }, 300);
   }
 
+
   loadPack(): void {
     this.isLoading = true;
     this.error = null;
@@ -233,39 +242,31 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
+
   setPack(pack: PackContent | undefined): void {
     if (pack) {
       this.pack = pack;
-
-   // Option Array List
-
-   this.options = [
-    ...this.pack.topQuestions.map(question => ({ text: question })),
-    { text: 'אני רוצה לכתוב שאלה משלי!' },
-    { 
-      text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות', 
-      icon: '/assets/New/pack-view/book-icon.svg' 
-    }
-  ];
-
-      
       this.cards = [...this.pack.cards];
       this.cardImages = this.pack.cards[0]?.cardsImages || [];
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
       this.unauthorized = this.pack.cards.length === 0;
+      console.log(this.cardImages)
     } else {
       this.error = 'Pack not found';
     }
     this.isLoading = false;
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
+  
   openDialog() {
     this.isDialogOpen = true;
   }
 
+
   closeDialog() {
     this.isDialogOpen = false;
   }
+
 
   checkIfImageIsPortrait(url: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -276,6 +277,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     });
   }
 
+
   async checkCardOrientation(card: Card) {
     const isPortrait = await this.checkIfImageIsPortrait(
       card.cardsImages[0].frontImgUrl
@@ -285,9 +287,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     // console.log(`Card at ${card.frontImgUrl} is ${isPortrait ? 'portrait' : 'landscape'}`);
   }
 
+
   changeRandomCard(b) {
     this.randomCardIndex = this.randomCardIndex + b;
   }
+
+
   multipileChanged(): void {
     this.selectedCards = [];
     this.multipileChecked = !this.multipileChecked;

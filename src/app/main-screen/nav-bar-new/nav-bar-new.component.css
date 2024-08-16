@@ -1,5 +1,4 @@
 
-
 .underline-on-hover{
     text-decoration: none;
     background-image: linear-gradient(90deg, #E67C73, #7986CB);
@@ -16,6 +15,8 @@
 
 .menu-icon{
     color: #7986cb;
+    margin-right: 15px;
+    
 }
 
 .menu-icon:hover {
@@ -34,10 +35,23 @@
 }
 
 @media screen and (max-width: 768px) {
-.display-none {
-    display: none;
-}
-.w-32 {
-    width: 159px;
-}
+    .display-none {
+        display: none;
+    }
+    .w-32 {
+        width: 159px;
+    }
+
+    .mx-4 {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .nav-height {
+        height: 60px;
+        background-color: #fcf4f2;
+    }
+
+
  }

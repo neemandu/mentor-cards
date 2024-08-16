@@ -10,20 +10,23 @@
       />
       <img
         *ngIf="cardContent?.backImgUrl"
-        alt="Mentor-cards unique cards design for the back of the card"
+        alt="Mentor-cards unique cards design for the back of the card" 
         src="{{ cardContent?.backImgUrl }}"
         data-src="{{ cardContent?.backImgUrl }}"
         [ngClass]="{ '': !selected, 'img-selected': selected }"
         (contextmenu)="onRightClick()"
+        
       />
     </div>
-    <div class="flip-box-back">
+    <div class="flip-box-back " style="width: auto;">
       <img
         loading="eager"
         [ngClass]="{ '': !selected, 'img-selected': selected }"
         src="{{ cardContent.frontImgUrl }}"
         data-src="{{ cardContent.frontImgUrl }}"
         (contextmenu)="onRightClick()"
+        [style.width.px]="cardContent?.frontNewDimensions?.width"
+        [style.height.px]="cardContent?.frontNewDimensions?.height && !flipped"
       />
     </div>
   </div>

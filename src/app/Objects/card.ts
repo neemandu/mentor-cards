@@ -16,7 +16,11 @@ export class Card {
 export class cardsImages {
   backImgUrl: string;
   frontImgUrl: string;
-  rotation: number // 0, 90, 180, 270
-  isPortrait: boolean ;
+  rotation: number; // 0, 90, 180, 270
+  isPortrait: boolean;
   flipped: boolean;
+  resizedHeight: number;
+  resizedWidth: number;
+  height: any;
+  frontNewDimensions?: { width: number, height: number }; // Add this line to the interface
 }

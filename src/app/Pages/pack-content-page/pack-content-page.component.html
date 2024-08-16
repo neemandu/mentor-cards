@@ -417,6 +417,7 @@
         transition-group-item
       >
         <app-card
+          [class.card-width]="!flipped"
           [ngClass]="{ clickable: true }"
           [cardContent]="card"
           [selected]="selectedCards.includes(card)"
@@ -451,6 +452,7 @@
           <mat-icon class="remove-icon">visibility_off</mat-icon>
         </button>
         <app-card
+          [class.card-width]="flipped"
           [ngClass]="{ clickable: true }"
           [cardContent]="card"
           [selected]="selectedCards.includes(card)"
@@ -1122,6 +1124,7 @@
                   loading="eager"
                   src="{{ card.frontImgUrl }}"
                   data-src="{{ card.frontImgUrl }}"
+                  class="width-fixed"
                 />
 
                 <div>
