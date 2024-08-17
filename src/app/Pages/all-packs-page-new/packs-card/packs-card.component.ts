@@ -1,5 +1,5 @@
 // packs-card.component.ts
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PackInfo } from 'src/app/Objects/packs';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
@@ -26,7 +26,8 @@ export class PacksCardComponent implements OnInit, OnDestroy {
     public langDirectionService: LangDirectionService,
     private userAuthService: UserAuthService,
     public dialog: MatDialog,
-    private cardStateService: PacksCardService
+    private cardStateService: PacksCardService,
+    private elementRef: ElementRef
   ) { }
 
   ngOnInit(): void {
@@ -46,16 +47,21 @@ export class PacksCardComponent implements OnInit, OnDestroy {
     this.userAuthService.addRemoveFavorite(this.packInfo.id);
   }
 
-  openPreviewDialog(): void {
+  openPreviewDialog(event:any): void {
+    console.log(event)
     // Check if any card is currently open
     this.cardStateService.getCardOpenState().pipe(take(1)).subscribe(isOpen => {
       if (!isOpen) {
         this.cardStateService.setCardOpen(true);
         setTimeout(() => {
           const dialogConfig = new MatDialogConfig();
+          dialogConfig.panelClass = 'packs-card-preview';
           dialogConfig.autoFocus = true;
-          dialogConfig.maxWidth = '85vw';
-          dialogConfig.maxHeight = '95vh';
+          dialogConfig.maxWidth = '600px';
+          dialogConfig.maxHeight = '650px';
+    
+         dialogConfig.position = this.getDialogPosition(event)
+       
           const data: previewData = { pack: this.packInfo, showButtons: false };
           dialogConfig.data = data;
 
@@ -64,8 +70,36 @@ export class PacksCardComponent implements OnInit, OnDestroy {
             dialogSub.unsubscribe();
             this.cardStateService.setCardOpen(false);
           });
-        }, 0);
+        }, 1500);
       }
     });
+  }
+
+
+
+  private getDialogPosition(event:any): { top: string; left: string } {
+    const rect = event.srcElement.getBoundingClientRect();
+    const dialogWidth = 300; // estimated width of your dialog, adjust as needed
+    const dialogHeight = 350; // estimated height of your dialog, adjust as needed
+
+    let top = rect.top - dialogHeight;
+    let left = rect.left;
+
+    // Adjust if the dialog goes out of the viewport
+    if (top < 0) {
+      top = rect.bottom; // Position below the element if it goes above the viewport
+    }
+    if (left + dialogWidth > window.innerWidth) {
+      left = (window.innerWidth - dialogWidth) ; // Adjust to fit within the viewport width
+    }
+    if (left < 0) {
+      left = 0; // Ensure it doesn't go beyond the left edge of the viewport
+    }
+
+    return {
+      top: `${top}px`,
+      left: `${left-150}px`
+    };
+   
   }
 }

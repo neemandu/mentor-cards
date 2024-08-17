@@ -34,9 +34,9 @@ img {
 
 .flip-box-front {
   position: absolute;
-  -webkit-backface-visibility: hidden;
+  /*-webkit-backface-visibility: hidden;*/
   /* Safari */
-  backface-visibility: hidden;
+  /*backface-visibility: hidden;*/
 }
 
 .flip-box-back {

@@ -248,3 +248,10 @@ button:focus {
 .h-full {
   height: 100%;
 }
+
+
+.packs-card-preview {
+  .mat-dialog-container{
+    padding: 10px !important;
+  }
+}

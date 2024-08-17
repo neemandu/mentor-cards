@@ -155,7 +155,7 @@
                         (mousemove)="onMouseMove($event, packScrollContainer)">
                         <div *ngFor="let packInfo of allPacks; let j = index" class=" col-span-1">
                             <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color" class=""
-                                [packInfo]="packInfo" (loaded)="packLoaded()">
+                                [packInfo]="packInfo" [index]="j" [lastIndex]="allPacks?.length-1" (loaded)="packLoaded()">
                             </app-packs-card>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                         (mousemove)="onMouseMove($event, allPacksScrollContainer)">
                         <div *ngFor="let packInfo of allCategoryPacks[0].packs; let j = index">
                             <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color"
-                                [packInfo]="packInfo" (loaded)="packLoaded()">
+                                [packInfo]="packInfo" [index]="j" [lastIndex]="allCategoryPacks[0].packs?.length-1" (loaded)="packLoaded()">
                             </app-packs-card>
                         </div>
                     </div>
@@ -192,7 +192,7 @@
                         <app-subscribe-card *ngIf="!isLoading"></app-subscribe-card>
                         <div *ngFor="let packInfo of allPacks; let k = index">
                             <app-packs-card [backgroundColor]="cardsColors[k % cardsColors.length].color" class=""
-                                [packInfo]="packInfo" (loaded)="packLoaded()">
+                                [packInfo]="packInfo" [index]="k" [lastIndex]="allPacks?.length-1" (loaded)="packLoaded()">
                             </app-packs-card>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                         (mousemove)="onMouseMove($event, allPacksScrollContainer)">
                         <div *ngFor="let packInfo of categoryPacks.packs; let j = index">
                             <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color"
-                                [packInfo]="packInfo" (loaded)="packLoaded()">
+                                [packInfo]="packInfo" [index]="j" [lastIndex]="categoryPacks.packs?.length-1" (loaded)="packLoaded()">
                             </app-packs-card>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                         (mousemove)="onMouseMove($event, allFavPackScrollContainer)">
                         <div *ngFor="let packInfo of allFavPacks; let j = index" class=" col-span-1">
                             <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color"
-                                [packInfo]="packInfo" [isFavCard]="true" (loaded)="packLoaded()">
+                                [packInfo]="packInfo"  [lastIndex]="allFavPacks?.length-1"  [isFavCard]="true" (loaded)="packLoaded()">
                             </app-packs-card>
                         </div>
                     </div>

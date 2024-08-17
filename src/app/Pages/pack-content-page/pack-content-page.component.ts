@@ -74,12 +74,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isDialogOpen = false;
   isLoading: boolean = false;
   error: string = null;
+  panelCards: Array<any> = [];
+
 
   // For DropDown
   isDropdownOpen = false;
   selectedOption: string | null = null;
   isEditing = false;
   isEditingOption: number | null = null;
+  selectedIndex: number ;
 
   constructor(
     public route: ActivatedRoute,
@@ -184,6 +187,19 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.isEditing = false;
       this.isEditingOption = null;
     }
+  }
+
+  downloadImage(imageUrl: string ) {
+    const filename = 'test';
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = filename;
+    
+    // Trigger a click event on the link element
+    document.body.appendChild(link); // Append the link to the document
+    link.click(); // Simulate a click event to trigger the download
+    document.body.removeChild(link); // Remove the link from the document
   }
 
 
@@ -334,6 +350,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       card.index = index;
       this.toggleChosenCardsModal();
     }
+    if (this.selectedCards.length > 0) {
+      this.selectedCards.forEach(element => {
+        if (!this.panelCards.includes(element)) {
+          this.panelCards.push(element);
+        }
+      });
+      console.log(this.panelCards);
+    }
+  }
+  removeCardFromPanel(card: CardComponent): void {
+    this.panelCards.splice(this.panelCards.findIndex((cardToRemove) => cardToRemove == card), 1);
+
   }
 
   shuffle(): void {
