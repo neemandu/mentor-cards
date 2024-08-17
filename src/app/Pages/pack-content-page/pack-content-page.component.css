@@ -560,6 +560,10 @@ li span {
   background: #db9200;
 }
 
+.z-8 {
+  z-index: 8;
+}
+
 /* The Modal (background) */
 .selected-cards-modal {
   display: block;
