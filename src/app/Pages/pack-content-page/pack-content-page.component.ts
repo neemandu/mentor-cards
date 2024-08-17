@@ -190,7 +190,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   downloadImage(imageUrl: string ) {
-    const filename = 'test';
+    const filename = 'mentor-cards';
     // Create a temporary link element
     const link = document.createElement('a');
     link.href = imageUrl;
@@ -344,10 +344,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
           });
         }
         card.index = index;
+        this.selectedIndex = card.index;
       }
     } else {
       this.selectedCards = [card];
       card.index = index;
+      this.selectedIndex = card.index;
       this.toggleChosenCardsModal();
     }
     if (this.selectedCards.length > 0) {

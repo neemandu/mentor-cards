@@ -788,7 +788,11 @@ mat-icon {
   background: none;
   border: none;
 }
-
+.btn-close {
+  position: absolute;
+  top: 15px;
+  right:15px;
+  }
 .download-button {
   margin-top: 20px;
   font-size: 20px;
