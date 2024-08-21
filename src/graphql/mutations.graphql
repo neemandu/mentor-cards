@@ -845,6 +845,710 @@ mutation DeleteCommonLink(
     updatedAt
   }
 }
+mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    phone
+    status
+    subscription {
+      id
+      startDate
+      paymentProvider
+      providerTransactionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        subscriptionProviderPlanId
+        createdAt
+        updatedAt
+      }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          subscriptionProviderPlanId
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
+        language
+        isActive
+        guidebookUrl
+        ownerName
+        numberOfCards
+        isHardCopyAvailable
+        videoUrl
+        isReadingGuidebookAMust
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    firstProgramRegistrationDate
+    groupId
+    numberOfUsedPacks
+    groupRole
+    cancellationDate
+    couponCodes {
+      id
+      couponCode
+      discount
+      trialPeriodInDays
+      allowedCardsPacks
+      organization {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    cardsPacksIds
+    providerTransactionId
+    fullName
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
+      createdAt
+      updatedAt
+    }
+    endOfTrialDate
+    createdAt
+    updatedAt
+    favouritePacks
+    entries
+    externalPacksSubscriptions {
+      id
+      startDate
+      paymentProvider
+      providerTransactionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        subscriptionProviderPlanId
+        createdAt
+        updatedAt
+      }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          subscriptionProviderPlanId
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
+        language
+        isActive
+        guidebookUrl
+        ownerName
+        numberOfCards
+        isHardCopyAvailable
+        videoUrl
+        isReadingGuidebookAMust
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
+    }
+    entryDates
+    refId
+    myAffiliate {
+      id
+      affiliateUrl
+      contactEmail
+      phoneNumber
+      websiteURL
+      paymentDetails
+      commissionPercentage
+      dateJoined
+      status
+      balance
+      withdraws {
+        id
+        date
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+      createdAt
+      updatedAt
+    }
+    payments {
+      id
+      date
+      payedMonths
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    profession
+    AithreadId
+    AiConversations {
+      question
+      answer
+      date
+    }
+  }
+}
+mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    username
+    email
+    phone
+    status
+    subscription {
+      id
+      startDate
+      paymentProvider
+      providerTransactionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        subscriptionProviderPlanId
+        createdAt
+        updatedAt
+      }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          subscriptionProviderPlanId
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
+        language
+        isActive
+        guidebookUrl
+        ownerName
+        numberOfCards
+        isHardCopyAvailable
+        videoUrl
+        isReadingGuidebookAMust
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
+    }
+    numberOfPacksSubstitutions
+    lastPackSubstitutionDate
+    numberOfPlansSubstitutions
+    lastPlanSubstitutionDate
+    firstProgramRegistrationDate
+    groupId
+    numberOfUsedPacks
+    groupRole
+    cancellationDate
+    couponCodes {
+      id
+      couponCode
+      discount
+      trialPeriodInDays
+      allowedCardsPacks
+      organization {
+        id
+        name
+        trialPeriodInDays
+        numberOfallowedCardsPacks
+        about {
+          text
+          imgUrl
+          link
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+    cardsPacksIds
+    providerTransactionId
+    fullName
+    orgMembership {
+      id
+      name
+      trialPeriodInDays
+      numberOfallowedCardsPacks
+      about {
+        text
+        imgUrl
+        link
+      }
+      createdAt
+      updatedAt
+    }
+    endOfTrialDate
+    createdAt
+    updatedAt
+    favouritePacks
+    entries
+    externalPacksSubscriptions {
+      id
+      startDate
+      paymentProvider
+      providerTransactionId
+      subscriptionPlan {
+        id
+        name
+        description
+        providerPlanId
+        numberOfUsers
+        numberOfCardPacks
+        billingCycleInMonths
+        fullPrice
+        discount
+        orgMembership {
+          id
+          name
+          trialPeriodInDays
+          numberOfallowedCardsPacks
+          about {
+            text
+            imgUrl
+            link
+          }
+          createdAt
+          updatedAt
+        }
+        subscriptionProviderPlanId
+        createdAt
+        updatedAt
+      }
+      includedCardPacksIds {
+        id
+        imgUrl
+        description
+        tags
+        categories
+        cards {
+          categoryName
+          categoryStepNumber
+          cardsImages {
+            backImgUrl
+            frontImgUrl
+          }
+        }
+        cardsPreview
+        groupsIds
+        guideBook {
+          name
+          subElements {
+            name
+            subElements {
+              name
+              subElements {
+                name
+                subElements {
+                  name
+                }
+              }
+            }
+          }
+        }
+        name
+        freeUntilDate
+        about {
+          text
+          imgUrl
+          link
+        }
+        isOwnedByOrg
+        brief
+        likesCounter
+        visitorsCounter
+        backImgUrl
+        isExternalPack
+        authorizedDomains
+        subscriptionPlans {
+          id
+          name
+          description
+          providerPlanId
+          numberOfUsers
+          numberOfCardPacks
+          billingCycleInMonths
+          fullPrice
+          discount
+          orgMembership {
+            id
+            name
+            trialPeriodInDays
+            numberOfallowedCardsPacks
+            about {
+              text
+              imgUrl
+              link
+            }
+            createdAt
+            updatedAt
+          }
+          subscriptionProviderPlanId
+          createdAt
+          updatedAt
+        }
+        topQuestions
+        usersUsage {
+          user
+          entries
+        }
+        isFree
+        language
+        isActive
+        guidebookUrl
+        ownerName
+        numberOfCards
+        isHardCopyAvailable
+        videoUrl
+        isReadingGuidebookAMust
+        createdAt
+        updatedAt
+      }
+      cancellationDate
+      nextBillingDate
+    }
+    entryDates
+    refId
+    myAffiliate {
+      id
+      affiliateUrl
+      contactEmail
+      phoneNumber
+      websiteURL
+      paymentDetails
+      commissionPercentage
+      dateJoined
+      status
+      balance
+      withdraws {
+        id
+        date
+        amount
+        currency
+        paymentWay
+        transactionId
+      }
+      createdAt
+      updatedAt
+    }
+    payments {
+      id
+      date
+      payedMonths
+      amount
+      currency
+      paymentWay
+      transactionId
+    }
+    profession
+    AithreadId
+    AiConversations {
+      question
+      answer
+      date
+    }
+  }
+}
 mutation CreateAffiliate(
   $input: CreateAffiliateInput!
   $condition: ModelAffiliateConditionInput

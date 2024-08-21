@@ -42,7 +42,7 @@ type CommonLink
 }
 
 type User
-  @model(mutations: null)
+  @model(mutations: { create: null, update: "updateUser", delete: "deleteUser" })
   @auth(
     rules: [
       {
