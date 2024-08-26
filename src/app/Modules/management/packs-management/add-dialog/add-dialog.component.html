@@ -1,0 +1,304 @@
+<form [formGroup]="createCardsPackForm">
+  <div>
+    <label for="id">ID:</label>
+    <input id="id" formControlName="id" type="text" />
+  </div>
+
+  <div>
+    <label for="imgUrl">Image URL:</label>
+    <input id="imgUrl" formControlName="imgUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" class="w-100" formControlName="description"></textarea>
+  </div>
+
+  <div formArrayName="tags">
+    <label>Tags:</label>
+    <div *ngFor="let tag of tags.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="tags.removeAt(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addTag()">Add Tag</button>
+  </div>
+
+  <div formArrayName="categories">
+    <label>Categories:</label>
+    <div *ngFor="let category of categories.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="categories.removeAt(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addCategory()">Add Category</button>
+  </div>
+
+  <div formArrayName="cards">
+    <label>Cards:</label>
+    <div *ngFor="let card of cards.controls; let i = index" [formGroupName]="i">
+      <div>
+        <label>Category Name:</label>
+        <input formControlName="categoryName" type="text" />
+      </div>
+      <div>
+        <label>Category Step Number:</label>
+        <input formControlName="categoryStepNumber" type="number" />
+      </div>
+      <div formArrayName="cardsImages">
+        <label>Card Images:</label>
+        <div
+          *ngFor="let image of card.get('cardsImages').controls; let j = index"
+          [formGroupName]="j"
+        >
+          <label>Back Image URL:</label>
+          <input formControlName="backImgUrl" type="text" />
+          <label>Front Image URL:</label>
+          <input formControlName="frontImgUrl" type="text" />
+          <button type="button" (click)="card.get('cardsImages').removeAt(j)">
+            Remove
+          </button>
+        </div>
+        <button
+          type="button"
+          (click)="
+            card
+              .get('cardsImages')
+              .push(fb.group({ backImgUrl: null, frontImgUrl: null }))
+          "
+        >
+          Add Card Image
+        </button>
+      </div>
+      <button type="button" (click)="cards.removeAt(i)">Remove Card</button>
+    </div>
+    <button type="button" (click)="addCard()">Add Card</button>
+  </div>
+
+  <div formArrayName="cardsPreview">
+    <label>Cards Preview:</label>
+    <div *ngFor="let preview of cardsPreview.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="cardsPreview.removeAt(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addCardsPreview()">Add Cards Preview</button>
+  </div>
+
+  <div formArrayName="groupsIds">
+    <label>Groups IDs:</label>
+    <div *ngFor="let groupId of groupsIds.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="groupsIds.removeAt(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addGroupsId()">Add Groups ID</button>
+  </div>
+
+  <div formArrayName="guideBook">
+    <label>GuideBook:</label>
+    <div
+      *ngFor="let guide of guideBook.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div>
+        <label>Name:</label>
+        <input formControlName="name" type="text" />
+      </div>
+      <div formArrayName="subElements">
+        <label>Sub Elements:</label>
+        <div
+          *ngFor="let sub of guide.get('subElements').controls; let j = index"
+          [formGroupName]="j"
+        >
+          <label>Sub Name:</label>
+          <input formControlName="name" type="text" />
+          <button type="button" (click)="guide.get('subElements').removeAt(j)">
+            Remove Sub Element
+          </button>
+        </div>
+        <button
+          type="button"
+          (click)="
+            guide
+              .get('subElements')
+              .push(fb.group({ name: null, subElements: fb.array([]) }))
+          "
+        >
+          Add Sub Element
+        </button>
+      </div>
+      <button type="button" (click)="guideBook.removeAt(i)">
+        Remove GuideBook Element
+      </button>
+    </div>
+    <button type="button" (click)="addGuideBookElement()">
+      Add GuideBook Element
+    </button>
+  </div>
+
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" formControlName="name" type="text" />
+  </div>
+
+  <div>
+    <label for="freeUntilDate">Free Until Date:</label>
+    <input id="freeUntilDate" formControlName="freeUntilDate" type="date" />
+  </div>
+
+  <div>
+    <label for="isOwnedByOrg">Is Owned By Org:</label>
+    <input id="isOwnedByOrg" formControlName="isOwnedByOrg" type="checkbox" />
+  </div>
+
+  <div>
+    <label for="brief">Brief:</label>
+    <textarea id="brief" class="w-100" formControlName="brief"></textarea>
+  </div>
+
+  <div>
+    <label for="likesCounter">Likes Counter:</label>
+    <input id="likesCounter" formControlName="likesCounter" type="number" />
+  </div>
+
+  <div>
+    <label for="visitorsCounter">Visitors Counter:</label>
+    <input
+      id="visitorsCounter"
+      formControlName="visitorsCounter"
+      type="number"
+    />
+  </div>
+
+  <div>
+    <label for="backImgUrl">Back Image URL:</label>
+    <input id="backImgUrl" formControlName="backImgUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="isExternalPack">Is External Pack:</label>
+    <input
+      id="isExternalPack"
+      formControlName="isExternalPack"
+      type="checkbox"
+    />
+  </div>
+
+  <div formArrayName="authorizedDomains">
+    <label>Authorized Domains:</label>
+    <div *ngFor="let domain of authorizedDomains.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="authorizedDomains.removeAt(i)">
+        Remove
+      </button>
+    </div>
+    <button type="button" (click)="addAuthorizedDomain()">
+      Add Authorized Domain
+    </button>
+  </div>
+
+  <div formArrayName="topQuestions">
+    <label>Top Questions:</label>
+    <div *ngFor="let question of topQuestions.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="topQuestions.removeAt(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addTopQuestion()">Add Top Question</button>
+  </div>
+
+  <div formArrayName="usersUsage">
+    <label>Users Usage:</label>
+    <div
+      *ngFor="let usage of usersUsage.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div>
+        <label>User:</label>
+        <input formControlName="user" type="text" />
+      </div>
+      <div>
+        <label>Entries:</label>
+        <input formControlName="entries" type="number" />
+      </div>
+      <button type="button" (click)="usersUsage.removeAt(i)">
+        Remove User Usage
+      </button>
+    </div>
+    <button type="button" (click)="addUserUsage()">Add User Usage</button>
+  </div>
+
+  <div>
+    <label for="isFree">Is Free:</label>
+    <input id="isFree" formControlName="isFree" type="checkbox" />
+  </div>
+
+  <div>
+    <label for="language">Language:</label>
+    <input id="language" formControlName="language" type="text" />
+  </div>
+
+  <div>
+    <label for="isActive">Is Active:</label>
+    <input id="isActive" formControlName="isActive" type="checkbox" />
+  </div>
+
+  <div>
+    <label for="guidebookUrl">Guidebook URL:</label>
+    <input id="guidebookUrl" formControlName="guidebookUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="ownerName">Owner Name:</label>
+    <input id="ownerName" formControlName="ownerName" type="text" />
+  </div>
+
+  <div>
+    <label for="numberOfCards">Number of Cards:</label>
+    <input id="numberOfCards" formControlName="numberOfCards" type="number" />
+  </div>
+
+  <div>
+    <label for="isHardCopyAvailable">Is Hard Copy Available:</label>
+    <input
+      id="isHardCopyAvailable"
+      formControlName="isHardCopyAvailable"
+      type="checkbox"
+    />
+  </div>
+
+  <div>
+    <label for="videoUrl">Video URL:</label>
+    <input id="videoUrl" formControlName="videoUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="isReadingGuidebookAMust">Is Reading Guidebook a Must:</label>
+    <input
+      id="isReadingGuidebookAMust"
+      formControlName="isReadingGuidebookAMust"
+      type="checkbox"
+    />
+  </div>
+</form>
+
+<form [formGroup]="createCardsPackForm">
+  <!-- Other form controls -->
+
+  <div formGroupName="about">
+    <div>
+      <label for="aboutText">About Text:</label>
+      <textarea id="aboutText" class="w-100" formControlName="text"></textarea>
+    </div>
+
+    <div>
+      <label for="aboutImgUrl">About Image URL:</label>
+      <input id="aboutImgUrl" formControlName="imgUrl" type="text" />
+    </div>
+
+    <div>
+      <label for="aboutLink">About Link:</label>
+      <input id="aboutLink" formControlName="link" type="text" />
+    </div>
+  </div>
+</form>
+
+
+<button type="submit" (click)="onSubmit()">Create Cards Pack</button>
+

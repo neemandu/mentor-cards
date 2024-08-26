@@ -74,8 +74,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isDialogOpen = false;
   isLoading: boolean = false;
   error: string = null;
-  panelCards: Array<any> = [];
-
+ 
 
   // For DropDown
   isDropdownOpen = false;
@@ -83,6 +82,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isEditing = false;
   isEditingOption: number | null = null;
   selectedIndex: number ;
+
+  // Category
+  categoriesCard: any
+  toggleRow: boolean = true;
+  selectedRowIndex : number = -1;
+
 
   constructor(
     public route: ActivatedRoute,
@@ -189,8 +194,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
+
   downloadImage(imageUrl: string ) {
-    const filename = 'mentor-cards';
+    const filename = 'test';
     // Create a temporary link element
     const link = document.createElement('a');
     link.href = imageUrl;
@@ -201,7 +207,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     link.click(); // Simulate a click event to trigger the download
     document.body.removeChild(link); // Remove the link from the document
   }
-
 
   onRightClick(): boolean {
     return false;
@@ -266,6 +271,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.cardImages = this.pack.cards[0]?.cardsImages || [];
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
       this.unauthorized = this.pack.cards.length === 0;
+      if( this.pack.cards.length > 1 ){
+        this.categoriesCard = this.pack.cards
+        console.log(this.categoriesCard, "cards here")
+      }
       console.log(this.cardImages)
     } else {
       this.error = 'Pack not found';
@@ -273,6 +282,28 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.isLoading = false;
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
+
+  selectCategory(category: any) {
+    console.log(category, 'CATEGORY')
+    this.categoriesCard.forEach((element) => {
+      if (element.categoryStepNumber === category.categoryStepNumber) {
+        this.categoriesCard = [element]; // Reassign the array to only include the found category
+      }
+    });
+  }
+
+  showAll() {
+    this.categoriesCard = this.pack.cards;
+  }
+
+  toggle(index: number): void {
+    if (this.selectedRowIndex === index) {
+      this.selectedRowIndex = -1; // Collapse if the same row is clicked
+    } else {
+      this.selectedRowIndex = index; // Expand the clicked row
+    }
+  }
+
   
   openDialog() {
     this.isDialogOpen = true;
@@ -352,18 +383,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.selectedIndex = card.index;
       this.toggleChosenCardsModal();
     }
-    if (this.selectedCards.length > 0) {
-      this.selectedCards.forEach(element => {
-        if (!this.panelCards.includes(element)) {
-          this.panelCards.push(element);
-        }
-      });
-      console.log(this.panelCards);
-    }
-  }
-  removeCardFromPanel(card: CardComponent): void {
-    this.panelCards.splice(this.panelCards.findIndex((cardToRemove) => cardToRemove == card), 1);
-
   }
 
   shuffle(): void {

@@ -328,6 +328,33 @@ li span {
   font-size: 16px;
 }
 
+.dropdown-icon {
+  position:absolute;
+  left: -5px;
+  bottom: 8px;
+}
+
+/* End Drop-down CSS Here */
+
+
+.z-8 {
+  z-index: 8;
+}
+
+.btn-close {
+  position: absolute;
+  top: 15px;
+  right:15px;
+}
+
+
+.download-button {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
 
 .drop-down {
   max-width: 779px;
@@ -337,14 +364,69 @@ li span {
   margin-bottom: 5px;
 }
 
-.dropdown-icon {
-  position:absolute;
-  left: -5px;
-  bottom: 8px;
+/* Aside bar */
+.aside-bar {
+
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  width: 219px;
+  padding: 60px 0px 10px 0px; 
+
 }
 
-/* End Drop-down CSS Here */
+.aside-button {
+  width: 207px;
+  height: 47px;
+  background-color: #FFE0D8;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
 
+}
+
+.aside-button:active {
+  background-color: #7986CB;
+}
+
+.aside-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.category-section{
+  display: flex;
+  flex-direction: column;
+}
+
+.category-row {
+  border-bottom: 1px solid #E67C73;
+}
+
+.overflow-cards{
+  display: flex;
+  overflow-x: scroll;
+  white-space: nowrap;
+  padding-bottom: 10px; /* Optional: Adds padding below the cards */
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+  
+}
+
+app-card.scrollableCard{
+  flex: 0 0 300px; 
+  min-width: 200px; 
+  margin-right: 10px; 
+}
+
+.category-name {
+  position: relative;
+  text-align: right;
+}
 
 @media screen and (max-width: 1024px) {
 }
@@ -448,6 +530,31 @@ li span {
 
   }
 
+  .aside-bar {
+    display: none;
+  }
+
+  app-card.scrollableCard{
+    flex: 0 0 180px; 
+    min-width: 180px; 
+    margin-right: 10px; 
+  }
+
+  .overflow-cards {
+    max-width: 770px;
+  }
+  .category-name {
+    text-align: left;
+  }
+
+  .left-to-category {
+    left: -23px;
+  }
+
+  .category-container {
+    width: 50%;
+  }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -457,6 +564,10 @@ li span {
 
   #menu-actions {
     display: inherit;
+  }
+
+  .category-container {
+    width: 44%;
   }
 }
 
@@ -474,6 +585,9 @@ li span {
   .cards-container {
     padding-bottom: 6rem;
   }
+  .category-container {
+    width: 32%;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -481,6 +595,11 @@ li span {
     display: none;
     color: var(--main-color);
   }
+
+  .category-container {
+    width: 26%;
+  }
+
 }
 
 /* --------------------------------------------------------------------------------- */
@@ -567,10 +686,6 @@ li span {
 
 .guide-btn:active {
   background: #db9200;
-}
-
-.z-8 {
-  z-index: 8;
 }
 
 /* The Modal (background) */
@@ -801,18 +916,6 @@ mat-icon {
   background: none;
   border: none;
 }
-.btn-close {
-  position: absolute;
-  top: 15px;
-  right:15px;
-  }
-.download-button {
-  margin-top: 20px;
-  font-size: 20px;
-  color: #ffffff;
-  justify-content: center;
-  align-items: center;
-}
 
 .mat-icon-close-random {
   font-size: 40px;
@@ -823,6 +926,11 @@ mat-icon {
   color: #747474;
 }
 
+/* .width-fixed {
+  width: 588px;
+  height: 829px;
+  object-fit: cover;
+} */
 
 @media (orientation: landscape) and (max-height: 480px) {
   .selected-cards-modal-content {
@@ -995,115 +1103,5 @@ img {
   font-size: 18px;
   font-weight: bold;
   text-align: center;
-}
-
-.panel-image-container {
-  width: 82px;
-  height: 82px;
-  object-fit: contain;
-  overflow: hidden;
-  /* line-height: auto; */
-}
-
-
-@media only screen and (min-width: 768px) {
-  .panel-container {
-    min-height: 80px;
-    max-height: 162px;
-    height: auto;
-  }
-  .side-container {
-    width: auto;
-    flex-direction: column;
-    justify-content: start;
-  }
-}
-
-.side-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.side-buttons {
-  display: flex;
-  align-items: center;
-  margin: 12px 12px 0 12px;
-  padding: 4px 8px;
-  border-radius: 9999px;
-  width: fit-content;
-  height: fit-content;
-  border: 1px #E67C73 solid;
-}
-
-.side-button-text {
-  color: black;
-  font-size: 16px;
-  font-family: Open Sans Hebrew;
-  text-align: right;
-  font-weight: 400;
-  line-height: 30px;
-  word-wrap: break-word;
-}
-
-.vertical-panel-line {
-  display: hidden;
-  height: 120px;
-  width: 0px;
-  margin-top: 24px;
-  border: 2px rgba(230, 124, 115, 0.10) solid;
-}
-.no-items{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-}
-.card {
-  display: flex;
-  flex-direction: column;
-}
-
-.items-button {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-}
-
-.cancel {
-  top: 2%;
-  left: 90%;
-  /* color: #ff0011; */
-}
-.items-button-icon {
-  font-size: 16px;
-}
-.search {
-  top: 2%;
-  right: 60%;
-  /* color: #33363F; */
-}
-
-.panel-container {
-  max-width: 95%;
-  min-width: 95%;
-  min-height: 80px;
-  max-height: 180px;
-  width: 95%;
-  height: auto;   
-  overflow-y: auto;
-  /* padding: 4px 0px; */
-  display: flex;
-  flex-wrap: wrap;
-  position: fixed;
-  bottom: -1%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;  
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.15);
-  border-radius: 20px
 }
 

@@ -41,6 +41,7 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
 import { HomePageNewComponent } from './Pages/home-page-new/home-page-new.component';
 import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-page-new.component';
 import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-content-page-new.component';
+import { UserManagementComponent } from './Modules/management/user-management/user-management.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
@@ -126,6 +127,11 @@ const routes: Routes = [
   {
     path: 'packs-management',
     component: PacksManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+  {
+    path: 'user-management',
+    component: UserManagementComponent,
     canActivate: [AuthGuardSiteContentManagementService],
   },
   {

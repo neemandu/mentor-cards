@@ -11677,7 +11677,6 @@ async GetSubscriptionPlansForOrgs(
                 updatedAt
               }
               cancellationDate
-              nextBillingDate
             }
             numberOfPacksSubstitutions
             lastPackSubstitutionDate

@@ -1,0 +1,233 @@
+<form [formGroup]="userForm" (ngSubmit)="save()">
+  <!-- Basic Fields -->
+  <label for="id">ID:</label>
+  <input id="id" formControlName="id" type="text" disabled />
+
+  <label for="username">Username:</label>
+  <input id="username" formControlName="username" type="text" />
+  <div *ngIf="userForm.get('username').invalid && userForm.get('username').touched">
+    Username is required.
+  </div>
+
+  <label for="email">Email:</label>
+  <input id="email" formControlName="email" type="email" />
+
+  <label for="phone">Phone:</label>
+  <input id="phone" formControlName="phone" type="text" />
+
+  <label for="status">Status:</label>
+  <input id="status" formControlName="status" type="text" />
+
+  <!-- Subscription Fields -->
+  <label for="numberOfPacksSubstitutions">Number of Packs Substitutions:</label>
+  <input id="numberOfPacksSubstitutions" formControlName="numberOfPacksSubstitutions" type="number" />
+
+  <label for="lastPackSubstitutionDate">Last Pack Substitution Date:</label>
+  <input id="lastPackSubstitutionDate" formControlName="lastPackSubstitutionDate" type="date" />
+
+  <label for="numberOfPlansSubstitutions">Number of Plans Substitutions:</label>
+  <input id="numberOfPlansSubstitutions" formControlName="numberOfPlansSubstitutions" type="number" />
+
+  <label for="lastPlanSubstitutionDate">Last Plan Substitution Date:</label>
+  <input id="lastPlanSubstitutionDate" formControlName="lastPlanSubstitutionDate" type="date" />
+
+  <label for="firstProgramRegistrationDate">First Program Registration Date:</label>
+  <input id="firstProgramRegistrationDate" formControlName="firstProgramRegistrationDate" type="date" />
+
+  <label for="groupId">Group ID:</label>
+  <input id="groupId" formControlName="groupId" type="text" />
+
+  <label for="numberOfUsedPacks">Number of Used Packs:</label>
+  <input id="numberOfUsedPacks" formControlName="numberOfUsedPacks" type="number" />
+
+  <label for="groupRole">Group Role:</label>
+  <input id="groupRole" formControlName="groupRole" type="text" />
+
+  <label for="cancellationDate">Cancellation Date:</label>
+  <input id="cancellationDate" formControlName="cancellationDate" type="date" />
+
+  <label for="providerTransactionId">Provider Transaction ID:</label>
+  <input id="providerTransactionId" formControlName="providerTransactionId" type="text" />
+
+  <label for="fullName">Full Name:</label>
+  <input id="fullName" formControlName="fullName" type="text" />
+
+  <label for="createdAt">Created At:</label>
+  <input id="createdAt" formControlName="createdAt" type="datetime-local" />
+
+  <label for="updatedAt">Updated At:</label>
+  <input id="updatedAt" formControlName="updatedAt" type="datetime-local" />
+
+  <label for="entries">Entries:</label>
+  <input id="entries" formControlName="entries" type="number" />
+
+  <label for="orgMembership">user Org Membership Id:</label>
+  <input id="orgMembership" formControlName="orgMembership" type="text" />
+
+  <label for="myAffiliate">user My Affiliate Id:</label>
+  <input id="myAffiliate" formControlName="myAffiliate" type="text" />
+
+  <label for="refId">Ref ID:</label>
+  <input id="refId" formControlName="refId" type="text" />
+
+  <label for="profession">Profession:</label>
+  <input id="profession" formControlName="profession" type="text" />
+
+  <label for="AithreadId">AI Thread ID:</label>
+  <input id="AithreadId" formControlName="AithreadId" type="text" />
+
+<!-- Coupon Codes Array -->
+<div formArrayName="couponCodes">
+  <label>Coupon Codes:</label>
+  <div *ngFor="let code of couponCodes.controls; let i = index" [formGroupName]="i">
+      <label for="allowedCardsPacks">Allowed Cards Packs:</label>
+      <input id="allowedCardsPacks" formControlName="allowedCardsPacks" type="text" />
+
+      <label for="couponCode">Coupon Code:</label>
+      <input id="couponCode" formControlName="couponCode" type="text" />
+
+      <label for="createdAt">Created At:</label>
+      <input id="createdAt" formControlName="createdAt" type="date" />
+
+      <label for="discount">Discount:</label>
+      <input id="discount" formControlName="discount" type="number" />
+
+      <label for="id">ID:</label>
+      <input id="id" formControlName="id" type="text" />
+
+      <label for="organization">Organization:</label>
+      <input id="organization" formControlName="organization" type="text" />
+
+      <label for="trialPeriodInDays">Trial Period (Days):</label>
+      <input id="trialPeriodInDays" formControlName="trialPeriodInDays" type="number" />
+
+      <label for="updatedAt">Updated At:</label>
+      <input id="updatedAt" formControlName="updatedAt" type="date" />
+
+      <button type="button" (click)="removeCouponCode(i)">Remove</button>
+  </div>
+  <button type="button" (click)="addCouponCode()">Add Coupon Code</button>
+</div>
+
+
+<!-- Cards Packs IDs Array -->
+<div formArrayName="cardsPacksIds">
+  <label>Cards Packs IDs:</label>
+  <div *ngFor="let id of cardsPacksIds.controls; let i = index">
+    <input [formControlName]="i" type="text" />
+    <button type="button" (click)="removeCardPackId(i)">Remove</button>
+  </div>
+  <button type="button" (click)="addCardPackId()">Add Card Pack ID</button>
+</div>
+
+  <!-- Entry Dates Array -->
+<div formArrayName="entryDates">
+  <div *ngFor="let entryDate of entryDates.controls; let i = index">
+    <input [formControlName]="i" type="date" />
+    <button type="button" (click)="removeEntryDate(i)">Remove</button>
+  </div>
+  <button type="button" (click)="addEntryDate()">Add Entry Date</button>
+</div>
+
+
+<!-- Favourite Packs Array -->
+<div formArrayName="favouritePacks">
+  <label>Favourite Packs:</label>
+  <div *ngFor="let pack of favouritePacks.controls; let i = index">
+    <input [formControlName]="i" type="text" />
+    <button type="button" (click)="removeFavouritePack(i)">Remove</button>
+  </div>
+  <button type="button" (click)="addFavouritePack()">Add Favourite Pack</button>
+</div>
+
+<!-- External Packs Subscriptions Array -->
+<div formArrayName="externalPacksSubscriptions">
+  <div *ngFor="let subscription of externalPacksSubscriptions.controls; let i = index" [formGroupName]="i">
+
+    <!-- Subscription ID Input -->
+    <label for="id">Subscription ID</label>
+    <input id="id" formControlName="id">
+
+    <!-- Date Input -->
+    <label for="date">Date</label>
+    <input id="date" type="date" formControlName="date">
+
+  <button type="button" (click)="removeExternalPackSubscription(i)">Remove</button>
+  </div>
+  <button type="button" (click)="addExternalPackSubscription()">Add Subscription</button>
+</div>
+
+<!-- AiConversations Fields -->
+<div formArrayName="AiConversations">
+  <label>AI Conversations:</label>
+  <div *ngFor="let conversation of AiConversations.controls; let i = index" [formGroupName]="i">
+    <label for="question">Question:</label>
+    <input id="question" formControlName="question" type="text" />
+
+    <label for="answer">Answer:</label>
+    <input id="answer" formControlName="answer" type="text" />
+
+    <label for="date">Date:</label>
+    <input id="date" formControlName="date" type="date" />
+
+    <button type="button" (click)="removeAiConversion(i)">Remove</button>
+  </div>
+  <button type="button" (click)="addAiConversion()">Add AI Conversation</button>
+</div>
+
+<!-- Subscription Fields -->
+<form [formGroup]="userForm" (ngSubmit)="save()">
+  <label for="id">ID:</label>
+  <input id="id" formControlName="id" type="text" />
+
+  <label for="startDate">Start Date:</label>
+  <input id="startDate" formControlName="startDate" type="date" />
+
+  <label for="paymentProvider">Payment Provider:</label>
+  <input id="paymentProvider" formControlName="paymentProvider" type="text" />
+
+  <label for="providerTransactionId">Provider Transaction ID:</label>
+  <input id="providerTransactionId" formControlName="providerTransactionId" type="text" />
+
+  <label for="cancellationDate">Cancellation Date:</label>
+  <input id="cancellationDate" formControlName="cancellationDate" type="date" />
+
+  <label for="nextBillingDate">Next Billing Date:</label>
+  <input id="nextBillingDate" formControlName="nextBillingDate" type="date" />
+</form>
+  
+  
+<!-- Payments Array -->
+<div formArrayName="payments">
+  <label>Payments:</label>
+  <div *ngFor="let payment of payments.controls; let i = index" [formGroupName]="i">
+    <label for="id">Payment ID:</label>
+    <input id="id" formControlName="id" type="text" />
+
+    <label for="date">Date:</label>
+    <input id="date" formControlName="date" type="datetime-local" />
+
+    <label for="payedMonths">Payed Months:</label>
+    <input id="payedMonths" formControlName="payedMonths" type="number" />
+
+    <label for="amount">Amount:</label>
+    <input id="amount" formControlName="amount" type="number" step="0.01" />
+
+    <label for="currency">Currency:</label>
+    <input id="currency" formControlName="currency" type="text" />
+
+    <label for="paymentWay">Payment Way:</label>
+
+    <input id="paymentWay" formControlName="paymentWay" type="text" />
+
+    <label for="transactionId">Transaction ID:</label>
+    <input id="transactionId" formControlName="transactionId" type="text" />
+    <button type="button" (click)="removePayment(i)">Remove</button>
+  </div>
+  <button type="button" (click)="addPayment()">Add Payment</button>
+</div>
+
+<!-- Submit Button -->
+<button type="submit">Submit</button>
+
+</form>

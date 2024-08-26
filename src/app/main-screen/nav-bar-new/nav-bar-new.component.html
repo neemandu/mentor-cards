@@ -203,9 +203,7 @@
     <button mat-menu-item (click)="navigate('/orgs-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
         <div>{{ "pages.nav.management-menu.orgs-management" | translate }}</div>
     </button>
-    <button mat-menu-item (click)="navigate('/packs-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
-        <div>{{ "pages.nav.management-menu.packs-management" | translate }}</div>
-    </button>
+
     <button mat-menu-item (click)="navigate('/payment-programs-management')"
         *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
         <div>
@@ -221,4 +219,15 @@
             {{ "pages.nav.management-menu.affiliate-management" | translate }}
         </div>
     </button>
+
+    <button mat-menu-item (click)="navigate('/packs-management')" *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+        <div>{{ "pages.nav.management-menu.packs-management" | translate }}</div>
+    </button>
+    <button mat-menu-item (click)="navigate('/user-management')"
+        *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+        <div>
+           ניהול משתמשים
+        </div>
+    </button>
+    
 </mat-menu>
