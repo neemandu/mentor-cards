@@ -383,9 +383,6 @@ li span {
 
 }
 
-.aside-button:active {
-  background-color: #7986CB;
-}
 
 .aside-container {
   display: grid;
@@ -426,6 +423,10 @@ app-card.scrollableCard{
 .category-name {
   position: relative;
   text-align: right;
+}
+
+.selected-category {
+  opacity: 30%;
 }
 
 @media screen and (max-width: 1024px) {
@@ -1032,6 +1033,8 @@ img {
   -webkit-backface-visibility: hidden;
   /* Safari */
   backface-visibility: hidden;
+  display: flex;
+  justify-content: end;
 }
 
 .flip-box-back {
@@ -1039,6 +1042,8 @@ img {
   -webkit-backface-visibility: hidden;
   /* Safari */
   backface-visibility: hidden;
+  display: flex;
+  justify-content: end;
 }
 
 /* .badge {

@@ -100,15 +100,21 @@ export class UserManagementComponent implements OnInit {
             this.apiService
               .UpdateUser({
                 id: id,
-                ...userData,
-              })
+                username: userData.username,
+                cancellationDate: userData.cancellationDate,
+                fullName: userData.fullName,
+                groupId: userData.groupId,
+                groupRole: userData.groupRole,
+                numberOfPacksSubstitutions: userData.numberOfPacksSubstitutions,
+                numberOfPlansSubstitutions: userData.numberOfPlansSubstitutions,
+                numberOfUsedPacks: userData.numberOfUsedPacks,
+                phone: userData.phone,
+                profession: userData.profession,
+                providerTransactionId: userData.providerTransactionId,
+                status: userData.status              })
               .then(
                 (res) => {
-                  // Update the local userData array with the updated user
-                  const index = this.userData.findIndex(item => item.id === id);
-                  if (index !== -1) {
-                    this.userData[index] = res;
-                  }
+                 
                   this.overlaySpinnerService.changeOverlaySpinner(false);
                   this.getUsers();
                 },

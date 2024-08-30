@@ -1,6 +1,7 @@
 type Mutation {
   makeCommonLink(input: CreateCommonLinkInput! ): String @function(name: "CreateCommonLink-${env}")
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
+  updateUser(input: UpdateUserInput!): Boolean @function(name: "UpdateUser-${env}")
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
@@ -42,7 +43,7 @@ type CommonLink
 }
 
 type User
-  @model(mutations: { create: null, update: "updateUser", delete: "deleteUser" })
+  @model(mutations: null)
   @auth(
     rules: [
       {
@@ -442,6 +443,22 @@ input CreateUserInput {
   phone: String
   fullName: String
   affiliateId: String
+}
+
+input UpdateUserInput {
+  id: String!
+  username: String!
+  phone: String
+  status: String
+  numberOfPacksSubstitutions: Int
+  numberOfPlansSubstitutions: Int
+  groupId: String
+  numberOfUsedPacks: Int
+  groupRole: String
+  cancellationDate: AWSDateTime
+  providerTransactionId: String
+  fullName: String
+  profession: String
 }
 
 input CreateCommonLinkInput {

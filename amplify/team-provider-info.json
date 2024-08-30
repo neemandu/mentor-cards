@@ -338,6 +338,10 @@
         "GetAllAffiliatesData": {
           "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
           "s3Key": "amplify-builds/GetAllAffiliatesData-597655665a767142496c-build.zip"
+        },
+        "UpdateUser": {
+          "deploymentBucketName": "amplify-mentorcards-dev-214725-deployment",
+          "s3Key": "amplify-builds/UpdateUser-486e416c747355714553-build.zip"
         }
       },
       "auth": {

@@ -410,36 +410,39 @@
       <h1 style="font-size: 15px;" class="m-0">עבודה תהליכית / לפי נושאים</h1>
       <p style="font-size: 7px;" class="m-0">בחרו את הנושאים אותם תרצו להציג או להסתיר</p>
       <button class="aside-button mb-1" style="background-color: #7986CB;" (click)="showAll()">הצגת כל הקלפים</button>
-      <button *ngFor="let categories of categoriesCard" class="aside-button mb-1" (click)="selectCategory(categories)"> {{categories.categoryName}}</button>
+      <button *ngFor="let categories of categoriesCard" 
+      class="aside-button mb-1" 
+      [ngClass]="{'selected-category': selectedCategory?.categoryName === categories.categoryName}" 
+      (click)="selectCategory(categories)"> {{categories.categoryName}}</button>
     </ul>
   </aside>
 
   <div *ngIf="pack?.cards?.length > 1">
     <div
     class="category-row mb-2 d-flex flex-column"
-    *ngFor="let category of categoriesCard; let i = index"
+    *ngFor="let category of getFilteredCategories(); let i = index"
   >
   <div class="category-container">
     <p class="position-relative category-name">
       {{ category.categoryName }}
       <span 
-      *ngIf="selectedRowIndex !== i"
-        class="position-absolute left-to-category"
-        (click)="toggle(i, true)"
-      >
-        <img src="./../../../assets/icons/icondropclose.png" alt="">
-      </span>
-      <span 
-      *ngIf="selectedRowIndex === i"
-        class="position-absolute left-to-category"
-        (click)="toggle(i , false)"
+      *ngIf="!categoryOpenStates[i]"
+      class="position-absolute left-to-category"
+      (click)="toggle(i, true)"
       >
         <img src="./../../../assets/icons/icondropopen.png" alt="">
+      </span>
+      <span 
+      *ngIf="categoryOpenStates[i]"
+      class="position-absolute left-to-category"
+      (click)="toggle(i , false)"
+      >
+        <img src="./../../../assets/icons/icondropclose.png" alt="">
       </span>
     </p>
   </div>
   
-    <div class="d-flex overflow-cards" *ngIf="selectedRowIndex !== i">
+    <div class="d-flex overflow-cards" *ngIf="categoryOpenStates[i]">
       <app-card
         [class.scrollableCard]="id == 90"
         *ngFor="let card of category.cardsImages"
@@ -790,28 +793,53 @@
           <div
             *ngIf="selectedCards.length > 1"
             style="display: flex; justify-content: flex-end"
+            class="Cross-icon"
           >
-            <button
-              class="iconButton close-cards-view"
-              mat-icon-button
-              (click)="toggleChosenCardsModal()"
-            >
-              <mat-icon class="mat-icon-close"></mat-icon>
-            </button>
+          <button 
+          class="btn-close"
+          (click)="toggleChosenCardsModal()"
+          >
+            <img
+            src="../../../assets/icons/Close_round.svg"
+            alt="Expand data"
+            width="20px"
+            style="height: 40px; width: 40px"
+          />
+          </button>
           </div>
           <div style="display: flex">
             <div
               *ngFor="let card of selectedCards"
               style="display: flex; flex-direction: column; align-items: center"
             >
-              <div *ngIf="selectedCards.length == 1" class="card-close-btn">
-                <button
-                  class="iconButton close-cards-view"
-                  mat-icon-button
-                  (click)="toggleChosenCardsModal()"
-                >
-                  <mat-icon class="mat-icon-close">highlight_off</mat-icon>
-                </button>
+
+            <div class="right-90 d-flex justify-end w-100 align-items-center" 
+            >   
+          <div class="bg-white rounded-full mt-4 p-1 text-center w-6 h-6 d-flex justify-center align-items-center">{{selectedIndex}}</div>
+
+              <button class="d-flex justify-end" (click)="rotateCard(card)" style="margin-top: 1vh; width: 45%;">
+              <img
+                src="../../../assets/icons/right-90.svg"
+                alt="Expand data"
+                width="20px"
+                style="height: 40px; width: 40px;"
+              />
+            </button>
+
+           </div>
+
+              <div *ngIf="selectedCards.length == 1" class="Cross-icon">
+                  <button 
+                  class="btn-close"
+                    (click)="toggleChosenCardsModal()"
+                  >
+                    <img
+                    src="../../../assets/icons/Close_round.svg"
+                    alt="Expand data"
+                    width="20px"
+                    style="height: 40px; width: 40px"
+                  />
+                  </button>
               </div>
               <div>
                 <div class="d-flex flex-column" *ngIf="card.isPortrait">
@@ -1110,16 +1138,16 @@
               </div>
               <div style="display: flex">
                 <div>
-                  <button (click)="toggleFlipped(card)" style="margin-top: 1vh">
+                  <button (click)="toggleFlipped(card)" style="margin-top: 1vh; margin-right: 70px;">
                     <img
                       src="../../../assets/icons/flip.png"
                       alt="Expand data"
                       width="20px"
-                      style="height: 4vh; width: auto"
+                      style="height: 4vh; width: auto;margin-left: 40px;"
                     />
                   </button>
                 </div>
-                <div style="margin-right: 2vw">
+                <!-- <div style="margin-right: 2vw">
                   <button (click)="rotateCard(card)" style="margin-top: 1vh">
                     <img
                       src="../../../assets/icons/rotate-right-90.png"
@@ -1128,7 +1156,7 @@
                       style="height: 4vh; width: auto"
                     />
                   </button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -1174,7 +1202,7 @@
                 >   
               <div class="bg-white rounded-full mt-4 p-1 text-center w-6 h-6 d-flex justify-center align-items-center">{{selectedIndex}}</div>
 
-                  <button class="d-flex justify-end" (click)="rotateCard(card)" style="margin-top: 1vh; width: 50%;">
+                  <button class="d-flex justify-end" (click)="rotateCard(card)" style="margin-top: 1vh; width: 45%;">
                   <img
                     src="../../../assets/icons/right-90.svg"
                     alt="Expand data"
@@ -1242,12 +1270,12 @@
                 />
 
                 <div>
-                  <button (click)="rotateCard(card)" style="margin-top: 1vh">
+                  <button class="d-flex justify-end" (click)="rotateCard(card)" style="margin-top: 1vh; width: 45%;">
                     <img
-                      src="../../../assets/icons/rotate-right-90.png"
+                      src="../../../assets/icons/right-90.svg"
                       alt="Expand data"
                       width="20px"
-                      style="height: 4vh; width: auto"
+                      style="height: 40px; width: 40px; margin-left: 35px;"
                     />
                   </button>
                 </div>

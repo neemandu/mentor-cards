@@ -200,6 +200,20 @@
         }
       ]
     },
+    "UpdateUser": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "mentorcards56dbf153PreSignup": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -756,6 +770,22 @@
         {
           "category": "function",
           "resourceName": "UpdateSelectedCardPacks"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateUser"
         }
       ]
     },
