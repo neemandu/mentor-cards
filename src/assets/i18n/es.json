@@ -490,9 +490,9 @@
       },
       "content": {
         "content1": {
-          "paragraph1": "Mentor Cards es una plataforma digital innovadora que permite a facilitadores, formadores y terapeutas de una variedad de campos trabajar con las tarjetas proyectivas en línea.",
-          "paragraph2": "Mentor Cards tiene una gran variedad de juegos de cartas, por lo que puedes ajustar el juego de cartas a tu cliente.",
-          "paragraph3": "¡Puedes conectarte a Mentor Cards a través de una computadora, teléfono móvil y tableta!"
+          "paragraph1": "Mentor-Cards es una plataforma digital innovadora que permite a facilitadores, formadores y terapeutas de una variedad de campos trabajar con las tarjetas proyectivas en línea.",
+          "paragraph2": "Mentor-Cards tiene una gran variedad de juegos de cartas, por lo que puedes ajustar el juego de cartas a tu cliente.",
+          "paragraph3": "¡Puedes conectarte a Mentor-Cards a través de una computadora, teléfono móvil y tableta!"
         },
         "content4": {
           "p1": "Cada juego de tarjetas del sitio viene con un libro de instrucciones exclusivo.",
@@ -656,8 +656,8 @@
           },
           "mat-expansion-panel1": {
             "mat-panel-title": "¿Qué es Mentor - Cardes?",
-            "p1": "Mentor Cards es una plataforma digital innovadora que permite a facilitadores, formadores y terapeutas de una variedad de campos trabajar con las tarjetas proyectivas en línea.",
-            "p2": "Mentor Cards tiene una gran variedad de juegos de cartas, por lo que puedes ajustar el juego de cartas a tu cliente.",
+            "p1": "Mentor-Cards es una plataforma digital innovadora que permite a facilitadores, formadores y terapeutas de una variedad de campos trabajar con las tarjetas proyectivas en línea.",
+            "p2": "Mentor-Cards tiene una gran variedad de juegos de cartas, por lo que puedes ajustar el juego de cartas a tu cliente.",
             "p3": "Puede encontrar en el sitio tanto juegos de cartas que creamos nosotros como juegos de cartas de creadores externos de calidad."
           },
           "mat-expansion-panel2": {

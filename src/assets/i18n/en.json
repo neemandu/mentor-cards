@@ -639,8 +639,8 @@
           },
           "mat-expansion-panel1": {
             "mat-panel-title": "What is Mentor - Cards?",
-            "p1": "Mentor Cards is an innovative digital platform that allows mentors, coaches, and therapists from various fields to work with projective cards online!",
-            "p2": "Mentor Cards has a huge variety of card sets, so you can tailor the card set to your client.",
+            "p1": "Mentor-Cards is an innovative digital platform that allows mentors, coaches, and therapists from various fields to work with projective cards online!",
+            "p2": "Mentor-Cards has a huge variety of card sets, so you can tailor the card set to your client.",
             "p3": "You can also find on the site card sets that we have created, as well as card sets of quality creators from outside."
           },
           "mat-expansion-panel2": {
@@ -1163,7 +1163,7 @@
         "how-to-use": {
           "component": "app-home-page-how-to-use",
           "content": {
-            "title": "How to use Mentor Cards?",
+            "title": "How to use Mentor-Cards?",
             "follow-us": {
               "text": "Want to get more tips and ideas? Follow us",
               "social-icons": [

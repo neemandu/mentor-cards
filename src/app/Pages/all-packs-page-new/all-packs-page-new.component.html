@@ -99,16 +99,10 @@
                             translate}}</div>
                         <div class="flex gap-4 mt-4">
                             <div>
-                                <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="ru" (ngModelChange)="handlePacksLanguageChange('ru')"
+                                <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
+                                    value="he" (ngModelChange)="handlePacksLanguageChange('he')"
                                     style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio1">Русский</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="ar" (ngModelChange)="handlePacksLanguageChange('ar')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio2">عربية</label>
+                                <label style="font-size: 10px;" for="radio4">עברית</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio3" name="radioGroup" [(ngModel)]="filterOption.language"
@@ -117,10 +111,16 @@
                                 <label style="font-size: 10px;" for="radio3">English</label>
                             </div>
                             <div>
-                                <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="he" (ngModelChange)="handlePacksLanguageChange('he')"
+                                <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
+                                    value="ar" (ngModelChange)="handlePacksLanguageChange('ar')"
                                     style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio4">עברית</label>
+                                <label style="font-size: 10px;" for="radio2">عربية</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
+                                    value="ru" (ngModelChange)="handlePacksLanguageChange('ru')"
+                                    style="accent-color: #000000;">
+                                <label style="font-size: 10px;" for="radio1">Русский</label>
                             </div>
                             <div>
                                 <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
