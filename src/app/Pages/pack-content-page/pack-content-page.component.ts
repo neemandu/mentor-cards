@@ -39,6 +39,7 @@ import {
 import { Platform } from '@angular/cdk/platform';
 import { HttpClient } from '@angular/common/http';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
+import { bool } from 'aws-sdk/clients/signer';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -74,7 +75,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isDialogOpen = false;
   isLoading: boolean = false;
   error: string = null;
- 
 
   // For DropDown
   isDropdownOpen = false;
@@ -88,7 +88,22 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   toggleRow: boolean = true;
   selectedRowIndex : number = -1;
 
+  categoryOpenStates: { [key: number]: boolean } = {};
+  selectedCategory: any;
 
+  // TODO
+  multiSelectCard :Array<any> =[]
+  displayedCategories: Set<string> = new Set<string>(); // To track displayed categories
+  cardWidth: number = 10;  // in rem
+  cardHeight: number = 15; // in rem
+  imageWidth: number = 160;  // in px
+  imageHeight: number = 219;  // in px
+  aspectRatio: number = this.imageWidth / this.imageHeight;
+  containerPadding : number = 2;
+  overFlowCardContainerHeight: number =  340;
+
+  categoryBaseArray = [];
+  categoryScreen : boolean = false;
   constructor(
     public route: ActivatedRoute,
     private cardsService: CardsService,
@@ -194,20 +209,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  downloadImage(imageUrl: string ) {
-    const filename = 'test';
-    // Create a temporary link element
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = filename;
-    
-    // Trigger a click event on the link element
-    document.body.appendChild(link); // Append the link to the document
-    link.click(); // Simulate a click event to trigger the download
-    document.body.removeChild(link); // Remove the link from the document
-  }
-
   onRightClick(): boolean {
     return false;
   }
@@ -241,6 +242,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }, 300);
+
+    this.getFilteredCategories()?.forEach((_, index) => {
+      this.categoryOpenStates[index] = true;
+    });
+
+    if ( this.id == 90 ) {
+      this.imageWidth = 300;
+      this.imageHeight = 300;
+    }
+
   }
 
 
@@ -283,26 +294,95 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.overlaySpinnerService.changeOverlaySpinner(false);
   }
 
-  selectCategory(category: any) {
-    console.log(category, 'CATEGORY')
-    this.categoriesCard.forEach((element) => {
-      if (element.categoryStepNumber === category.categoryStepNumber) {
-        this.categoriesCard = [element]; // Reassign the array to only include the found category
+  downloadAllImages() {
+    if (!Array.isArray(this.selectedCards) || this.selectedCards.length === 0) {
+      console.error('No images to download.');
+      return;
+    }
+    this.selectedCards.forEach((item, index) => {
+      let imageUrl: string | undefined;
+      let filename: string;
+      // Handle different data formats
+      if (item?.card?.frontImgUrl) {
+        imageUrl = item.card.frontImgUrl;
+        filename = `image_${item.card.index ?? index}.jpg`;
+      } else if (item?.frontImgUrl) {
+        imageUrl = item.frontImgUrl;
+        filename = `image_${item.index ?? index}.jpg`;
+      } else {
+        console.error('Invalid image data:', item);
+        return;
       }
+      // Ensure filename is valid
+      if (!filename) {
+        console.error('Filename is missing or invalid.');
+        return;
+      }
+      this.downloadImage(imageUrl, filename);
     });
   }
 
-  showAll() {
-    this.categoriesCard = this.pack.cards;
+  downloadImage(imageUrl: string, filename: string) {
+    if (!imageUrl || !filename) {
+      console.error('Invalid imageUrl or filename.');
+      return;
+    }
+    try {
+      new URL(imageUrl); // Check if the URL is valid
+    } catch {
+      console.error('Invalid URL:', imageUrl);
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
-  toggle(index: number): void {
-    if (this.selectedRowIndex === index) {
-      this.selectedRowIndex = -1; // Collapse if the same row is clicked
-    } else {
-      this.selectedRowIndex = index; // Expand the clicked row
-    }
+  // selectCategory(category: any) {
+  //   console.log(category, 'CATEGORY')
+  //   this.categoriesCard.forEach((element) => {
+  //     if (element.categoryStepNumber === category.categoryStepNumber) {
+  //       this.categoriesCard = [element]; // Reassign the array to only include the found category
+  //     }
+  //   });
+  // }
+
+
+
+  // showAll() {
+  //   this.categoriesCard = this.pack.cards;
+  // }
+
+  // toggle(index: number): void {
+  //   if (this.selectedRowIndex === index) {
+  //     this.selectedRowIndex = -1; // Collapse if the same row is clicked
+  //   } else {
+  //     this.selectedRowIndex = index; // Expand the clicked row
+  //   }
+  // }
+
+  selectCategory(category: any) {
+    console.log(category, 'CATEGORY');
+    this.selectedCategory = category;
   }
+
+  getFilteredCategories() {
+    if (this.selectedCategory) {
+      return this.categoriesCard.filter((element) => element.categoryStepNumber === this.selectedCategory.categoryStepNumber);
+    }
+    return this.categoriesCard;
+  }
+
+showAll() {
+  this.selectedCategory = null; // Reset the selected category to show all cards
+}
+
+toggle(index: number): void {
+  this.categoryOpenStates[index] = !this.categoryOpenStates[index];
+}
 
   
   openDialog() {
@@ -358,32 +438,228 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  cardSelected(card: CardComponent, index: number): void {
-    if (this.multipileChecked) {
-      if (this.selectedCards.includes(card)) {
-        this.selectedCards.splice(
-          this.selectedCards.findIndex((existingCard) => existingCard == card),
-          1
-        );
-        card.index = undefined;
-      } else {
-        if (this.selectedCards.length < 5) this.selectedCards.push(card);
-        else {
-          this.cardsService._snackBar.open('ניתן לבחור עד 5 קלפים', '', {
-            duration: 3000,
-            panelClass: ['rtl-snackbar'],
-          });
-        }
-        card.index = index;
-        this.selectedIndex = card.index;
-      }
+  zoomIn() {
+    if ( this.id == 90 ) {
+      this.cardWidth += 1;
+      this.cardHeight += 1.5;  // Adjust proportionally
+      this.imageWidth += 16;  // Scale by 16px, consistent with 1rem = 16px
+      this.imageHeight = this.imageWidth / this.aspectRatio;
+      this.overFlowCardContainerHeight = this.cardHeight + 12;
     } else {
-      this.selectedCards = [card];
-      card.index = index;
-      this.selectedIndex = card.index;
-      this.toggleChosenCardsModal();
+      this.cardWidth += 1;
+      this.cardHeight += 1.5;  // Adjust proportionally
+      this.imageWidth += 16;  // Scale by 16px, consistent with 1rem = 16px
+      this.imageHeight = this.imageWidth / this.aspectRatio;
+      this.containerPadding += 10
     }
   }
+  zoomOut() {
+    if ( this.id  == 90) {
+      this.cardWidth -= 1;
+      this.cardHeight -= 1.5;
+      this.imageWidth -= 16;
+      this.imageHeight = this.imageWidth / this.aspectRatio;
+      this.containerPadding += -10
+    } else {
+      if (this.cardWidth > 1) {  // Ensure width doesn't go below 1
+        this.cardWidth -= 1;
+        this.cardHeight -= 1.5;
+        this.imageWidth -= 16;
+        this.imageHeight = this.imageWidth / this.aspectRatio;
+        this.containerPadding += -10
+      }
+    }
+  }
+
+singleCardCheck : boolean =false;
+singleCategoryBaseCard : boolean =false;
+
+  // TODO
+  cardSelected(card: CardComponent, index: number, flag:boolean = false, category? ): void {
+    console.log(card, index,)
+    this.singleCategoryBaseCard = false;
+    if ( flag ) {
+      // debugger;
+      this.singleCardCheck =  true;
+      if (this.multipileChecked) {
+        if (this.selectedCards.includes(card)) {
+          this.selectedCards.splice(
+            this.selectedCards.findIndex((existingCard) => existingCard == card),
+            1
+          );
+          card.index = undefined;
+        } else {
+          if (this.selectedCards.length < 5) this.selectedCards.push(card);
+          else {
+            this.cardsService._snackBar.open('ניתן לבחור עד 5 קלפים', '', {
+              duration: 3000,
+              panelClass: ['rtl-snackbar'],
+            });
+          }
+          card.index = index;
+          this.selectedIndex = card.index;
+        }
+      } else {
+        this.selectedCards = [card];
+        card.index = index;
+        this.selectedIndex = card.index;
+        this.toggleChosenCardsModal();
+      }
+    } else {
+      this.singleCardCheck =  false;
+      const obj = {
+        'card':card,
+        'index' :index,
+        'category':category || null,
+      }
+
+      const exists = this.multiSelectCard.some(item => {
+        if (obj.category !== null) {
+          return item.index === obj.index && item.category === obj.category;
+        } else {
+          return item.index === obj.index && item.category === null;
+        }
+      });
+      if (!exists) {
+
+        this.multiSelectCard.push(obj);
+      }
+    }
+    if (this.id === '90' && flag == false) {
+      this.categoryScreen = true;
+      this.categoryBaseArray = [];
+
+      this.multiSelectCard.forEach(element => {
+        // Check if the category already exists in the categoryBaseArray
+        let categoryObj = this.categoryBaseArray.find(category => category.categoryName === element.category);
+
+        if (!categoryObj) {
+          // If the category does not exist, create a new one
+          categoryObj = {
+            categoryName: element.category,
+            cards: []
+          };
+          this.categoryBaseArray.push(categoryObj);
+        }
+
+        // Push the card details into the cards array of the respective category
+        categoryObj.cards.push({
+          index: element.index,
+          backImgUrl: element.card.backImgUrl,
+          frontImgUrl: element.card.frontImgUrl
+        });
+      });
+
+      console.log(this.categoryBaseArray, "Category Base Array");
+      // Do whatever you need with categoryBaseArray here
+    }
+  }
+
+  categoryBaseCardSelected(card: CardComponent, index: number, flag:boolean = false, category?) {
+    this.singleCategoryBaseCard = true;
+    if ( flag ) {
+      this.categoryScreen =  false;
+      if (this.multipileChecked) {
+        if (this.selectedCards.includes(card)) {
+          this.selectedCards.splice(
+            this.selectedCards.findIndex((existingCard) => existingCard == card),
+            1
+          );
+          card.index = undefined;
+        } else {
+          if (this.selectedCards.length < 5) this.selectedCards.push(card);
+          else {
+            this.cardsService._snackBar.open('ניתן לבחור עד 5 קלפים', '', {
+              duration: 3000,
+              panelClass: ['rtl-snackbar'],
+            });
+          }
+          card.index = index;
+          this.selectedIndex = card.index;
+        }
+      } else {
+        this.selectedCards = [card];
+        card.index = index;
+        this.selectedIndex = card.index;
+        this.toggleChosenCardsModal();
+      }
+    }
+  }
+
+
+  // TODO
+  removeImage(item: { index: number, category: string | null }): void {
+    this.multiSelectCard = this.multiSelectCard.filter(card => {
+      if (item.category !== null) {
+        return card.index !== item.index || card.category !== item.category;
+      } else {
+        return card.index !== item.index;
+      }
+    });
+  }
+
+  removeCategoryBaseImage(index: number, category: string): void {
+    this.categoryBaseArray = this.categoryBaseArray.map(cat => {
+      if (cat.categoryName === category) {
+        return {
+          ...cat,
+          cards: cat.cards.filter(card => card.index !== index)
+        };
+      }
+      return cat;
+    });
+
+    this.multiSelectCard = this.multiSelectCard.filter(card => {
+      if (category !== null) {
+        return card.index !== index || card.category !== category;
+      } else {
+        return card.index !== index;
+      }
+    });
+  }
+  
+
+  showAllInDialog() {
+    this.cdr.detectChanges();
+    this.cdr.markForCheck();
+    this.singleCategoryBaseCard = true;
+    if (this.id == 90) {
+      this.categoryScreen = true
+      this.categoryBaseArray= [];
+  
+      this.multiSelectCard.forEach( element => {
+        // Check if the category already exists in the categoryBaseArray
+        let categoryObj = this.categoryBaseArray.find(category => category.categoryName === element.category);
+  
+        if (!categoryObj) {
+          // If the category does not exist, create a new one
+          categoryObj = {
+            categoryName: element.category,
+            cards: []
+          };
+          this.categoryBaseArray.push(categoryObj);
+        }
+  
+        // Push the card details into the cards array of the respective category
+        categoryObj.cards.push({
+          index: element.index,
+          backImgUrl: element.card.backImgUrl,
+          frontImgUrl: element.card.frontImgUrl
+        });
+      });
+  
+      console.log(this.categoryBaseArray, "Category Base Array");
+  
+      // Do whatever you need with categoryBaseArray here
+    } else {
+      this.categoryScreen = false;
+      this.singleCardCheck = false;
+      this.selectedCards = this.multiSelectCard;
+    }
+    this.toggleChosenCardsModal();
+  }
+
+
 
   shuffle(): void {
     console.log('shuffling');
@@ -414,6 +690,39 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  sortCardsByCategory(cards: any[]): any[] {
+    return cards.sort((a, b) => {
+      if (a.category === b.category) {
+        return a.index - b.index; // or another property to sort within category
+      }
+      return a.category.localeCompare(b.category);
+    });
+  }
+
+  get sortedCards() {
+    return this.sortCardsByCategory(this.multiSelectCard);
+  }
+
+  // Method to update displayed categories based on multiSelectCard
+  updateDisplayedCategories(): void {
+    this.displayedCategories.clear();
+    this.multiSelectCard.forEach(card => {
+      if (card.category) {
+        this.displayedCategories.add(card.category);
+      }
+    });
+  }
+
+  // Check if the category is the first in its list
+  isFirstCardOfCategory(item: any, index: number): boolean {
+    if (!item.category) return false;
+
+    // Find the first card in the same category
+    const firstCardIndex = this.sortedCards.findIndex(card => card.category === item.category);
+
+    return index === firstCardIndex;
+  }
+  
   toggleFlipped(card): void {
     // console.log('flipped card:', card);
     card.flipped = !card.flipped;
@@ -598,6 +907,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }
+
 }
 
 @Component({

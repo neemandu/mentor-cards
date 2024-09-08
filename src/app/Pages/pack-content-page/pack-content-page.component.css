@@ -15,7 +15,7 @@ app-card {
 }
 
 app-card.card-width {
-  width: 10rem !important;
+  width: 10rem;
 }
 
 app-card:hover {
@@ -36,6 +36,10 @@ app-card:hover {
 .nav-buttons {
   margin: 5px 10px 5px 0px;
   align-items: center;
+}
+
+.hideItDesktop {
+  display: none;
 }
 
 .cards-container {
@@ -386,7 +390,7 @@ li span {
 
 .aside-container {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto calc(100% - 10px);
 }
 
 .category-section{
@@ -398,27 +402,25 @@ li span {
   border-bottom: 1px solid #E67C73;
 }
 
-.overflow-cards{
+.overflow-cards {
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto; /* Ensure the scrolling is allowed */
   white-space: nowrap;
   padding-bottom: 10px; /* Optional: Adds padding below the cards */
-
+  min-height: 340px;
+  padding-left: 300px;
   /* Hide scrollbar */
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
-
-  &::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Opera */
-  }
-  
+      /* Hide scrollbar */
+      scrollbar-width: none; /* For Firefox */
+      -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
 
-app-card.scrollableCard{
-  flex: 0 0 300px; 
-  min-width: 200px; 
+app-card.scrollableCard {
+  flex: 0 0 auto; 
+  width: auto; 
   margin-right: 10px; 
 }
+
 
 .category-name {
   position: relative;
@@ -429,12 +431,245 @@ app-card.scrollableCard{
   opacity: 30%;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  min-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+.multi-card-container {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  gap: 5px;
+  margin-left: 5px;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+    }
+}
+.selected-card {
+  height: 100px;
+  margin-left: 10px;
+  display: inline-block;
+  width: 82px;
+  border-radius: 5px;
+}
+.multi-image {
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+}
+.category-img-box {
+  height: 82px;
+  width: 82px;
+  object-fit: cover;
+  margin-top: 20px;
+}
+.img-box {
+  height: 82px;
+  width: 82px;
+  object-fit: fill;
+}
+.dialog-container {
+  display: flex;
+  width: 50vw;
+  overflow-x: auto;
+  white-space: nowrap;
+      /* Hide scrollbar */
+      scrollbar-width: none; /* For Firefox */
+      -ms-overflow-style: none; /* For Internet Explorer and Edge */
+      &::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Opera */
+      }
+}
+.width-50vw {
+  width: 50vw;
+}
+.single-side-card{
+  display: flex;
+  align-items: center;
+  width: 50vw;
+  padding-bottom: 2vw;
+  white-space: nowrap;
+  overflow-x: auto;
+      /* Hide scrollbar */
+      scrollbar-width: none; /* For Firefox */
+      -ms-overflow-style: none; /* For Internet Explorer and Edge */
+      &::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Opera */
+      }
+}
+.show-all {
+  height: 35px;
+  width: 200px;
+  border-radius: 20px;
+  border: 1px solid #E67C73;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+.remove-all {
+  height: 35px;
+  width: 200px;
+  border-radius: 20px;
+  border: none;
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+.footer-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 97%;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+}
+.button-box {
+  border-left: 1px solid #E67C73;
+  padding: 20px;
+  margin-left: 5px;
+}
+
+.height-82 {
+  height: 82px;
+}
+.card-box {
+  display: flex;
+  width: 100%;
+}
+
+
+.zoom-control {
+  display: flex;
+  position: absolute;
+  left: 40px;
+  top: 10%;
+  gap: 10px;
+  z-index: 1000;
+}
+.zoom-btn {
+  width: 35px;  
+  height: 35px;
+}
+
+.category-title {
+  position: relative;
+  bottom: 14px;
+  right: 90px;
+}
+
+/* .single-card {
+  width: 600px;
+} */
+
+.single-card-img {
+  height: 829px !important;
+  width: 588px !important;
+}
+
+.zarori {
+  justify-content: center;
+  height: 600px;
+  width: 350px;
+}
+
+.category-base-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  border-bottom: 1px solid white;
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+}
+
+.category-base-flip {
+  width: 320px;
+}
+
+.category-base-scrollbar {
+  width: calc(100% - 10px);
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  /* Hide scrollbar */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    &::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+    }
+}
+
+.category-base-footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.category-base-card-container {
+  padding-left: 10px;
+  border-left: 1px solid #E67C73;
+  padding-right: 10px;
+  gap: 10px;
+  display: flex;
+}
+
+.category-location {
+  text-align: justify;
+} 
+
+.icons-top {
+  width: 45%;
+
+}
+.category-base-download {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Icon-90 {
+  margin-left: 25px;
+}
+
 @media screen and (max-width: 1024px) {
+
 }
 
 @media screen and (max-width: 768px) {
+
   ::ng-deep .cdk-overlay-pane {
     max-width: 80vw !important;
+  }
+  .category-base-download {
+    left: 21% !important;
+  }
+
+  .width-50vw {
+    width: 350px;
   }
 
   .grid-display {
@@ -528,7 +763,37 @@ app-card.scrollableCard{
 
   .mobile-bg {
     background-color: #f8f9fa;
+  }
 
+
+  .multi-card-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .right-90-icon {
+    height: 20px; 
+    width: 20px !important; 
+    /* margin-left: 35px;  */
+    margin-bottom: 5px;
+
+  }
+  .width-70 {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    font-size: 9px;
+  }
+
+  .width-30 {
+    width: 30%;
+  }
+
+  .Icon-90 {
+    margin-left: 12px;
   }
 
   .aside-bar {
@@ -537,7 +802,7 @@ app-card.scrollableCard{
 
   app-card.scrollableCard{
     flex: 0 0 180px; 
-    min-width: 180px; 
+    min-width: auto; 
     margin-right: 10px; 
   }
 
@@ -556,6 +821,172 @@ app-card.scrollableCard{
     width: 50%;
   }
 
+.hideItMobile {
+  display: none;
+}
+.hideItDesktop {
+  display: flex;
+}
+
+.zoom-controls {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.zoom-button {
+  background: #7A7A7A;
+  border: none;
+  border-radius: 25px;
+  width: 34px;
+  height: 127px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoom-icon {
+  color: #fff;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.divider {
+  width: 26px; /* Adjust width of the divider line */
+  height: 1px; /* Adjust height of the divider line */
+  background: #fff;
+  margin: 27px 1px; /* Adjust spacing around the divider line */
+}
+
+.footer-container {
+  flex-direction: column;
+}
+.button-box-mbl {
+  border-left: 0px;
+  justify-content: left;
+  padding-left: 20px;
+  gap: 25px;
+}
+.multi-card-container {
+  max-height: 300px;
+  overflow: scroll;
+  /* width: 90%; */
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 1px;
+}
+
+.category-title {
+  position: relative;
+
+ 
+}
+
+.category-img-box {
+  height: 82px;
+  width: 82px;
+  object-fit: cover;
+  margin-top: 50px;
+}
+
+.show-all-mbl {
+  width: 104px;
+  height: 26px;
+  font-size: 11px;
+  border-radius: 20px;
+  border: 1px solid #E67C73;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+.remove-all-mbl {
+  height: 26px;
+  width: 65px;
+  border-radius: 20px;
+  border: 1px solid #E67C73;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+.card-box {
+flex-direction: column;
+}
+
+.category-base-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.category-base-card-container {
+  border-left: 0px;
+  flex-wrap: wrap;
+}
+
+.category-location {
+  text-align: center;
+}
+
+.card-image-mobile {
+  height: 300px !important;
+  width: 212px !important;
+}
+
+.zarori {
+ height: auto !important;
+ width: auto !important;
+}
+
+.single-side-card {
+  flex-direction: column;
+  width: auto;
+}
+
+.index-icon {
+  height: 15px !important;
+  width: 15px !important;
+}
+
+.icons-top {
+justify-content: space-between;
+  
+}
+
+.margin-90 {
+  margin-right: 90px;
+}
+.category-base-dialog {
+      width: auto; 
+     overflow-x:hidden; 
+     white-space: normal ; 
+     scrollbar-width: none;
+}
+
+.one-cards-landscape {
+  height: calc(100vw) !important;
+
+}
 }
 
 @media screen and (max-width: 600px) {
@@ -743,10 +1174,12 @@ app-card.scrollableCard{
   justify-content: center !important;
 }
 
+/* TODO */
 .card-view {
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin-top: 13px;
+  /* margin-top: 13px; */
+  padding-left: 10px; 
 }
 
 /* 'rotated-one-cards': selectedCards.length == 1 && card.rotation !== 0,
@@ -775,7 +1208,7 @@ app-card.scrollableCard{
 
 .one-cards-landscape {
   position: relative;
-  height: calc(100vw / 2.5);
+  height: calc(100vw / 3);
   max-width: 90%;
   max-height: 90%;
   overflow: hidden;
@@ -783,26 +1216,26 @@ app-card.scrollableCard{
 .two-cards-landscape {
   /* width: calc(100vw /3.2); */
   height: calc(100vw / 3.5);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .three-cards-landscape {
   width: calc(100vw / 4);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .four-cards-landscape {
   width: calc(100vw / 5);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .five-cards-landscape {
   width: calc(100vw / 6);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .two-cards-landscape,
@@ -811,32 +1244,32 @@ app-card.scrollableCard{
   width: 100%;
   max-width: 80vw;
   margin-inline: 3vw;
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
 }
 
 .three-cards-landscape,
 .rotated-three-cards-landscape {
   width: auto;
   height: calc(40vh);
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
 }
 
 .four-cards-landscape,
 .rotated-four-cards-landscape {
   width: auto;
   height: 30vh;
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
 }
 
 .five-cards-landscape,
 .rotated-five-cards-landscape {
   width: auto;
   height: 25vh;
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
 }
 
 .one-cards,
@@ -932,6 +1365,13 @@ mat-icon {
   height: 829px;
   object-fit: cover;
 } */
+
+.multi-card-without-cat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (orientation: landscape) and (max-height: 480px) {
   .selected-cards-modal-content {
@@ -1043,7 +1483,9 @@ img {
   /* Safari */
   backface-visibility: hidden;
   display: flex;
-  justify-content: end;
+  width: 80%;
+  height: 80%;
+  justify-content: center;
 }
 
 /* .badge {

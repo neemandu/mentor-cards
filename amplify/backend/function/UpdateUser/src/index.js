@@ -99,7 +99,6 @@ exports.handler = async (event) => {
     user.groupId = groupId;
     user.numberOfUsedPacks = numberOfUsedPacks;
     user.groupRole = groupRole;
-    user.cancellationDate = new Date(cancellationDate);
     user.providerTransactionId = providerTransactionId;
     user.fullName = fullName;
     user.profession = profession;

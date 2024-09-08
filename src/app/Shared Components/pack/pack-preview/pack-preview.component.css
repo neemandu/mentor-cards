@@ -292,6 +292,11 @@ mat-icon {
     padding: unset;
   }
 
+  .icon-div {
+    right: -17px;
+    top: -15px;
+  }
+
   
 }
 

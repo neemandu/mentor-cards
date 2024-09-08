@@ -194,7 +194,7 @@
             <h2 class="font-bold mb-0 text-start" *ngIf="!id">
               {{ "pages.packContent.defaultName" | translate }}
             </h2>
-            <h3 class="font-bold mb-0 text-start">Mentor-Cards</h3>
+            <h3 class="font-bold mb-0 text-start">Mentor Cards</h3>
 
             <div class="flex gap-4 c-gap">
               <div class="justify-center flex flex-col items-center">
@@ -263,7 +263,35 @@
           </div>
         </div>
 
+        <!-- Zoom Control Button -->
+
+        <div class="hideItDesktop">
+          <div class="zoom-controls">
+            <button class="zoom-button">
+              <div class="icon-container">
+                <mat-icon class="zoom-icon" (click)="zoomIn()">add</mat-icon>
+                <div class="divider"></div>
+                <mat-icon class="zoom-icon" (click)="zoomOut()">remove</mat-icon>
+              </div>
+            </button>
+          </div>
+        </div>
+
         <div class="mobile-bg">
+          <div class="zoom-control hideItMobile">
+            <button class="zoom-btn" (click)="zoomOut()">
+              <div class="icon-container">
+                <img src="../../../assets/icons/zoomOut.png" />
+              </div>
+            </button>
+
+            <button class="zoom-btn" (click)="zoomIn()">
+              <div class="icon-container">
+                <img src="../../../assets/icons/zoomIn.png" />
+              </div>
+            </button>
+          </div>
+
           <div class="flex justify-center mb-2">
             <!-- <button class="border-b-2 border-[#e98980] text-start flex gap-2 items-center"
             (click)="openDialog()"
@@ -278,28 +306,36 @@
             (closeDialog)="closeDialog()"
           ></top-questions-dialog>
 
-           <!-- Drop-down  -->
+          <!-- Drop-down  -->
           <div class="dropdown section-drop-down">
-            <div class="dropdown-select position-relative" (click)="toggleDropdown()">
+            <div
+              class="dropdown-select position-relative"
+              (click)="toggleDropdown()"
+            >
               <span class="selected-option">{{ selectedOption }}</span>
               <span class="dropdown-icon">▼</span>
             </div>
             <div class="dropdown-options" [class.show]="isDropdownOpen">
-              <div 
-              [contentEditable]="isEditing && isEditingOption === index"
-              class="dropdown-option" 
-                *ngFor="let option of options; let index=index" 
-                (click)="selectOption(option,index)"
+              <div
+                [contentEditable]="isEditing && isEditingOption === index"
+                class="dropdown-option"
+                *ngFor="let option of options; let index = index"
+                (click)="selectOption(option, index)"
                 (keydown.enter)="saveEdit(option, index)"
                 (blur)="saveEdit(option, index)"
-                >
-                <img *ngIf="option.icon" [src]="option.icon" alt="icon" width="25" height="25" />
+              >
+                <img
+                  *ngIf="option.icon"
+                  [src]="option.icon"
+                  alt="icon"
+                  width="25"
+                  height="25"
+                />
                 {{ option.text }}
               </div>
             </div>
           </div>
-          
-          
+
           <div class="section-drop-down background-white py-2">
             <div class="flex ms-3 gap-2 justify-center">
               <button
@@ -310,7 +346,9 @@
                 (click)="flip()"
                 matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
               >
-                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                <div
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                >
                   <img
                     src="/assets/New/pack-view/rotate-icon.svg"
                     alt=""
@@ -329,7 +367,9 @@
                 (click)="toggleRandomCardsModal()"
                 matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
               >
-                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                <div
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                >
                   <img
                     src="/assets/New/pack-view/info-icon.svg"
                     alt=""
@@ -345,7 +385,9 @@
                 (click)="createCommomLink()"
                 matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
               >
-                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                <div
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                >
                   <img
                     src="/assets/New/pack-view/link-icon.svg"
                     alt=""
@@ -364,13 +406,15 @@
                 (click)="shuffle()"
                 matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
               >
-                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                <div
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                >
                   <img
                     src="/assets/New/pack-view/shuffle-icon.svg"
                     alt=""
                     width="25"
                     height="25"
-                    class="img-hand "
+                    class="img-hand"
                   />
                 </div>
                 <div class="text-xs mb-1 text-xxs">ערבב</div>
@@ -383,242 +427,285 @@
                 (click)="editPack()"
                 matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
               >
-                <div class="w-10 h-8 flex items-center justify-center py-2 padding-none">
+                <div
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                >
                   <img
                     src="/assets/New/pack-view/pen-icon.svg"
                     alt=""
                     width="25"
                     height="25"
-                    class="img-pen "
+                    class="img-pen"
                   />
                 </div>
                 <div class="text-xs mb-1 text-xxs">עריכת הערכה</div>
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </div>
 
-
   <div [class.aside-container]="pack?.cards?.length > 1">
-
-  <aside class="aside-bar" *ngIf="pack?.cards?.length > 1">
-    <ul>
-      <h1 style="font-size: 15px;" class="m-0">עבודה תהליכית / לפי נושאים</h1>
-      <p style="font-size: 7px;" class="m-0">בחרו את הנושאים אותם תרצו להציג או להסתיר</p>
-      <button class="aside-button mb-1" style="background-color: #7986CB;" (click)="showAll()">הצגת כל הקלפים</button>
-      <button *ngFor="let categories of categoriesCard" 
-      class="aside-button mb-1" 
-      [ngClass]="{'selected-category': selectedCategory?.categoryName === categories.categoryName}" 
-      (click)="selectCategory(categories)"> {{categories.categoryName}}</button>
-    </ul>
-  </aside>
-
-  <div *ngIf="pack?.cards?.length > 1">
-    <div
-    class="category-row mb-2 d-flex flex-column"
-    *ngFor="let category of getFilteredCategories(); let i = index"
-  >
-  <div class="category-container">
-    <p class="position-relative category-name">
-      {{ category.categoryName }}
-      <span 
-      *ngIf="!categoryOpenStates[i]"
-      class="position-absolute left-to-category"
-      (click)="toggle(i, true)"
-      >
-        <img src="./../../../assets/icons/icondropopen.png" alt="">
-      </span>
-      <span 
-      *ngIf="categoryOpenStates[i]"
-      class="position-absolute left-to-category"
-      (click)="toggle(i , false)"
-      >
-        <img src="./../../../assets/icons/icondropclose.png" alt="">
-      </span>
-    </p>
-  </div>
-  
-    <div class="d-flex overflow-cards" *ngIf="categoryOpenStates[i]">
-      <app-card
-        [class.scrollableCard]="id == 90"
-        *ngFor="let card of category.cardsImages"
-        [ngClass]="{ clickable: true }"
-        [cardContent]="card"
-        [mobileView]="true"
-        [selected]="selectedCards.includes(card)"
-        [index]="i + 1"
-        [flipped]="flipped || (!multipileChecked && selectedCards.includes(card))"
-        (click)="cardSelected(card, i + 1)"
-      >
-      </app-card>
-    </div>
-  </div>
-  
-  </div>
-  </div>
-
-<ng-container *ngIf="id != 90">
-  <div class="d-flex flex-column align-items-center cards-container">
-    <div
-      *ngIf="pack && !showEditPack"
-      [transition-group]="'flip-list'"
-      class="d-flex flex-row justify-content-center flex-wrap"
-    >
-      <div
-        *ngFor="let card of cardImages; let i = index"
-        [ngClass]="{
-          'd-flex flex-column align-items-center shuffle': true,
-          'shuffle-item': !showEditPack
-        }"
-        transition-group-item
-      >
-        <app-card
-          [class.card-width]="!flipped"
-          [ngClass]="{ clickable: true }"
-          [cardContent]="card"
-          [selected]="selectedCards.includes(card)"
-          [index]="i + 1"
-          [flipped]="
-            flipped || (!multipileChecked && selectedCards.includes(card))
-          "
-          (click)="cardSelected(card, i + 1)"
-        >
-        </app-card>
-      </div>
-    </div>
-
-    <div id="image-grid" class="image-grid">
-      <!-- Images will be dynamically inserted here -->
-    </div>
-
-    <div
-      *ngIf="pack && showEditPack"
-      class="d-flex flex-row justify-content-center flex-wrap"
-    >
-      <div
-        *ngFor="let card of cards; let i = index"
-        [ngClass]="{ 'd-flex flex-column align-items-center': true }"
-      >
-        <button
-          *ngIf="showEditPack"
-          mat-icon-button
-          class="remove-btn"
-          (click)="removeCard(i)"
-        >
-          <mat-icon class="remove-icon">visibility_off</mat-icon>
-        </button>
-        <app-card
-          [class.card-width]="flipped"
-          [ngClass]="{ clickable: true }"
-          [cardContent]="card"
-          [selected]="selectedCards.includes(card)"
-          [index]="i + 1"
-          [flipped]="
-            flipped || (!multipileChecked && selectedCards.includes(card))
-          "
-          (click)="cardSelected(card, i + 1)"
-        >
-        </app-card>
-      </div>
-    </div>
-
-    <div id="introduction" *ngIf="!id">
-      <p
-        style="
-          text-align: center;
-          font-size: 2rem;
-          margin-bottom: 1.5rem;
-          font-weight: 700;
-        "
-      >
-        {{ "pages.packContent.actions.introduction.attention" | translate }}
-        <span style="color: coral">&#10084;</span>
-      </p>
+    <aside class="aside-bar" *ngIf="pack?.cards?.length > 1">
       <ul>
-        <li>
-          <span>
+        <h1 style="font-size: 15px" class="m-0">עבודה תהליכית / לפי נושאים</h1>
+        <p style="font-size: 7px" class="m-0">
+          בחרו את הנושאים אותם תרצו להציג או להסתיר
+        </p>
+        <button
+          class="aside-button mb-1"
+          style="background-color: #7986cb"
+          (click)="showAll()"
+        >
+          הצגת כל הקלפים
+        </button>
+        <button
+          *ngFor="let categories of categoriesCard"
+          class="aside-button mb-1"
+          [ngClass]="{
+            'selected-category':
+              selectedCategory?.categoryName === categories.categoryName
+          }"
+          (click)="selectCategory(categories)"
+        >
+          {{ categories.categoryName }}
+        </button>
+      </ul>
+    </aside>
+
+    <div *ngIf="pack?.cards?.length > 1">
+      <div
+        class="category-row mb-2 d-flex flex-column"
+        *ngFor="let category of getFilteredCategories(); let i = index"
+      >
+        <div class="category-container">
+          <p class="position-relative category-name">
+            {{ category.categoryName }}
+            <span
+              *ngIf="!categoryOpenStates[i]"
+              class="position-absolute left-to-category"
+              (click)="toggle(i, true)"
+            >
+              <img src="./../../../assets/icons/icondropopen.png" alt="" />
+            </span>
+            <span
+              *ngIf="categoryOpenStates[i]"
+              class="position-absolute left-to-category"
+              (click)="toggle(i, false)"
+            >
+              <img src="./../../../assets/icons/icondropclose.png" alt="" />
+            </span>
+          </p>
+        </div>
+
+        <div
+          class="d-flex overflow-cards"
+          *ngIf="categoryOpenStates[i]"
+          [ngStyle]="!flipped ? { height: imageHeight + 'px' } : {}"
+        >
+          <app-card
+            [ngStyle]="
+              !flipped
+                ? { width: imageWidth + 'px', height: imageHeight + 'px' }
+                : {}
+            "
+            [imageWidth]="imageWidth"
+            [imageHeight]="imageHeight"
+            [flipBoxInnerInCat]="true"
+            [class.scrollableCard]="id == 90"
+            *ngFor="let card of category.cardsImages; let i = index"
+            [ngClass]="{ clickable: true }"
+            [cardContent]="card"
+            [mobileView]="true"
+            [selected]="selectedCards.includes(card)"
+            [index]="i + 1"
+            [flipped]="
+              flipped || (!multipileChecked && selectedCards.includes(card))
+            "
+            (click)="cardSelected(card, i + 1, false, category.categoryName)"
+          >
+            <!-- TODO -->
+          </app-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="id != 90">
+    <div class="d-flex flex-column align-items-center cards-container">
+      <div
+        *ngIf="pack && !showEditPack"
+        [transition-group]="'flip-list'"
+        class="d-flex flex-row justify-content-center flex-wrap"
+      >
+        <div
+          *ngFor="let card of cardImages; let i = index"
+          [ngClass]="{
+            'd-flex flex-column align-items-center shuffle': true,
+            'shuffle-item': !showEditPack
+          }"
+          transition-group-item
+        >
+          <app-card
+            [ngStyle]="
+              !flipped
+                ? { width: cardWidth + 'rem', height: cardHeight + 'rem' }
+                : {}
+            "
+            [imageWidth]="imageWidth"
+            [imageHeight]="imageHeight"
+            [class.card-width]="!flipped"
+            [ngClass]="{ clickable: true }"
+            [cardContent]="card"
+            [selected]="selectedCards.includes(card)"
+            [index]="i + 1"
+            [flipped]="
+              flipped || (!multipileChecked && selectedCards.includes(card))
+            "
+            (click)="cardSelected(card, i + 1)"
+          >
+          </app-card>
+        </div>
+      </div>
+
+      <div id="image-grid" class="image-grid">
+        <!-- Images will be dynamically inserted here -->
+      </div>
+
+      <div
+        *ngIf="pack && showEditPack"
+        class="d-flex flex-row justify-content-center flex-wrap"
+      >
+        <div
+          *ngFor="let card of cards; let i = index"
+          [ngClass]="{ 'd-flex flex-column align-items-center': true }"
+        >
+          <button
+            *ngIf="showEditPack"
+            mat-icon-button
+            class="remove-btn"
+            (click)="removeCard(i)"
+          >
+            <mat-icon class="remove-icon">visibility_off</mat-icon>
+          </button>
+          <app-card
+            [ngStyle]="
+              !flipped
+                ? { width: cardWidth + 'rem', height: cardHeight + 'rem' }
+                : {}
+            "
+            [imageWidth]="imageWidth"
+            [imageHeight]="imageHeight"
+            [class.card-width]="flipped"
+            [ngClass]="{ clickable: true }"
+            [cardContent]="card"
+            [selected]="selectedCards.includes(card)"
+            [index]="i + 1"
+            [flipped]="
+              flipped || (!multipileChecked && selectedCards.includes(card))
+            "
+            (click)="cardSelected(card, i + 1)"
+          >
+          </app-card>
+        </div>
+      </div>
+
+      <div id="introduction" *ngIf="!id">
+        <p
+          style="
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+          "
+        >
+          {{ "pages.packContent.actions.introduction.attention" | translate }}
+          <span style="color: coral">&#10084;</span>
+        </p>
+        <ul>
+          <li>
+            <span>
+              {{
+                "pages.packContent.actions.introduction.list.dozensOfPacks"
+                  | translate
+              }}</span
+            >
+          </li>
+          <li>
+            <span>{{
+              "pages.packContent.actions.introduction.list.over40Cards"
+                | translate
+            }}</span>
+          </li>
+          <li>
+            <span>{{
+              "pages.packContent.actions.introduction.list.guideBook"
+                | translate
+            }}</span>
+          </li>
+          <li>
+            <span>{{
+              "pages.packContent.actions.introduction.list.trialPeriod"
+                | translate
+            }}</span>
+          </li>
+        </ul>
+        <div class="line"></div>
+        <div id="actions" class="d-flex flex-column align-items-center">
+          <span id="middle" *ngIf="!userData">{{
+            "pages.packContent.actions.introduction.actions.register"
+              | translate
+          }}</span>
+          <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">
             {{
-              "pages.packContent.actions.introduction.list.dozensOfPacks"
+              "pages.packContent.actions.introduction.actions.notRegistered"
                 | translate
             }}</span
           >
-        </li>
-        <li>
-          <span>{{
-            "pages.packContent.actions.introduction.list.over40Cards"
+          <span id="middle" *ngIf="userData && userData.status === 'PLAN'">{{
+            "pages.packContent.actions.introduction.actions.alreadyRegistered"
               | translate
           }}</span>
-        </li>
-        <li>
-          <span>{{
-            "pages.packContent.actions.introduction.list.guideBook" | translate
-          }}</span>
-        </li>
-        <li>
-          <span>{{
-            "pages.packContent.actions.introduction.list.trialPeriod"
-              | translate
-          }}</span>
-        </li>
-      </ul>
-      <div class="line"></div>
-      <div id="actions" class="d-flex flex-column align-items-center">
-        <span id="middle" *ngIf="!userData">{{
-          "pages.packContent.actions.introduction.actions.register" | translate
-        }}</span>
-        <span id="middle" *ngIf="userData && userData.status === 'NOPLAN'">
-          {{
-            "pages.packContent.actions.introduction.actions.notRegistered"
-              | translate
-          }}</span
-        >
-        <span id="middle" *ngIf="userData && userData.status === 'PLAN'">{{
-          "pages.packContent.actions.introduction.actions.alreadyRegistered"
-            | translate
-        }}</span>
-        <br />
-        <button
-          class="action-button"
-          *ngIf="!userData"
-          type="button"
-          (click)="signInSignUp()"
-        >
-          {{
-            "pages.packContent.actions.introduction.actions.loginRegisterBtn"
-              | translate
-          }}
-        </button>
-        <button
-          class="action-button"
-          *ngIf="userData && userData.status === 'NOPLAN'"
-          type="button"
-          (click)="navigate('/price-page')"
-        >
-          {{
-            "pages.packContent.actions.introduction.actions.registerPlanBtn"
-              | translate
-          }}
-        </button>
-        <button
-          class="action-button"
-          *ngIf="userData && userData.status === 'PLAN'"
-          type="button"
-          (click)="navigate('/all-packs-page')"
-        >
-          {{
-            "pages.packContent.actions.introduction.actions.allPacksBtn"
-              | translate
-          }}
-        </button>
+          <br />
+          <button
+            class="action-button"
+            *ngIf="!userData"
+            type="button"
+            (click)="signInSignUp()"
+          >
+            {{
+              "pages.packContent.actions.introduction.actions.loginRegisterBtn"
+                | translate
+            }}
+          </button>
+          <button
+            class="action-button"
+            *ngIf="userData && userData.status === 'NOPLAN'"
+            type="button"
+            (click)="navigate('/price-page')"
+          >
+            {{
+              "pages.packContent.actions.introduction.actions.registerPlanBtn"
+                | translate
+            }}
+          </button>
+          <button
+            class="action-button"
+            *ngIf="userData && userData.status === 'PLAN'"
+            type="button"
+            (click)="navigate('/all-packs-page')"
+          >
+            {{
+              "pages.packContent.actions.introduction.actions.allPacksBtn"
+                | translate
+            }}
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</ng-container>
-
+  </ng-container>
 
   <nav
     *ngIf="pack && multipileChecked"
@@ -791,363 +878,421 @@
       >
         <ng-container *ngIf="isDoubleSided">
           <div
-            *ngIf="selectedCards.length > 1"
+            *ngIf="selectedCards.length > 1 || categoryBaseArray.length >= 1"
             style="display: flex; justify-content: flex-end"
             class="Cross-icon"
           >
-          <button 
-          class="btn-close"
-          (click)="toggleChosenCardsModal()"
-          >
-            <img
-            src="../../../assets/icons/Close_round.svg"
-            alt="Expand data"
-            width="20px"
-            style="height: 40px; width: 40px"
-          />
-          </button>
-          </div>
-          <div style="display: flex">
-            <div
-              *ngFor="let card of selectedCards"
-              style="display: flex; flex-direction: column; align-items: center"
-            >
-
-            <div class="right-90 d-flex justify-end w-100 align-items-center" 
-            >   
-          <div class="bg-white rounded-full mt-4 p-1 text-center w-6 h-6 d-flex justify-center align-items-center">{{selectedIndex}}</div>
-
-              <button class="d-flex justify-end" (click)="rotateCard(card)" style="margin-top: 1vh; width: 45%;">
+            <button class="btn-close" (click)="toggleChosenCardsModal()">
               <img
-                src="../../../assets/icons/right-90.svg"
+                src="../../../assets/icons/Close_round.svg"
                 alt="Expand data"
                 width="20px"
-                style="height: 40px; width: 40px;"
+                style="height: 40px; width: 40px"
               />
             </button>
+          </div>
 
-           </div>
-
-              <div *ngIf="selectedCards.length == 1" class="Cross-icon">
-                  <button 
-                  class="btn-close"
-                    (click)="toggleChosenCardsModal()"
-                  >
-                    <img
-                    src="../../../assets/icons/Close_round.svg"
-                    alt="Expand data"
-                    width="20px"
-                    style="height: 40px; width: 40px"
-                  />
-                  </button>
-              </div>
-              <div>
-                <div class="d-flex flex-column" *ngIf="card.isPortrait">
-                  <div
-                    *ngIf="!flipped"
-                    [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
-                  >
-                    <div class="flip-box-front">
-                      <img
-                        alt="Mentor-cards unique cards design for the back of the card"
-                        src="{{ card.frontImgUrl }}"
-                        data-src="{{ card.frontImgUrl }}"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards': selectedCards.length == 1,
-                          'two-cards': selectedCards.length == 2,
-                          'three-cards': selectedCards.length == 3,
-                          'four-cards': selectedCards.length == 4,
-                          'five-cards': selectedCards.length == 5,
-                          'rotated-one-cards':
-                            selectedCards.length == 1 && card.rotation !== 0,
-                          'rotated-two-cards':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                    <div class="flip-box-back">
-                      <img
-                        loading="eager"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards': selectedCards.length == 1,
-                          'two-cards':
-                            selectedCards.length == 2 && card.rotation == 0,
-                          'three-cards':
-                            selectedCards.length == 3 && card.rotation == 0,
-                          'four-cards':
-                            selectedCards.length == 4 && card.rotation == 0,
-                          'five-cards':
-                            selectedCards.length == 5 && card.rotation == 0,
-                          'rotated-two-cards':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        src="{{ card.backImgUrl }}"
-                        data-src="{{ card.backImgUrl }}"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    *ngIf="flipped"
-                    [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
-                  >
-                    <div class="flip-box-front">
-                      <img
-                        alt="Mentor-cards unique cards design for the back of the card"
-                        src="{{ card.backImgUrl }}"
-                        data-src="{{ card.backImgUrl }}"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards': selectedCards.length == 1,
-                          'two-cards':
-                            selectedCards.length == 2 && card.rotation == 0,
-                          'three-cards':
-                            selectedCards.length == 3 && card.rotation == 0,
-                          'four-cards':
-                            selectedCards.length == 4 && card.rotation == 0,
-                          'five-cards':
-                            selectedCards.length == 5 && card.rotation == 0,
-                          'rotated-two-cards':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                    <div class="flip-box-back">
-                      <img
-                        loading="eager"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards': selectedCards.length == 1,
-                          'two-cards':
-                            selectedCards.length == 2 && card.rotation == 0,
-                          'three-cards':
-                            selectedCards.length == 3 && card.rotation == 0,
-                          'four-cards':
-                            selectedCards.length == 4 && card.rotation == 0,
-                          'five-cards':
-                            selectedCards.length == 5 && card.rotation == 0,
-                          'rotated-two-cards':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        src="{{ card.frontImgUrl }}"
-                        data-src="{{ card.frontImgUrl }}"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="d-flex flex-column" *ngIf="!card.isPortrait">
-                  <div
-                    *ngIf="!flipped"
-                    [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
-                  >
-                    <div class="flip-box-front">
-                      <img
-                        alt="Mentor-cards unique cards design for the back of the card"
-                        src="{{ card.frontImgUrl }}"
-                        data-src="{{ card.frontImgUrl }}"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards-landscape': selectedCards.length == 1,
-                          'two-cards-landscape': selectedCards.length == 2,
-                          'three-cards-landscape': selectedCards.length == 3,
-                          'four-cards-landscape': selectedCards.length == 4,
-                          'five-cards-landscape': selectedCards.length == 5,
-                          'rotated-one-cards-landscape':
-                            selectedCards.length == 1 && card.rotation !== 0,
-                          'rotated-two-cards-landscape':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards-landscape':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards-landscape':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards-landscape':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                    <div class="flip-box-back">
-                      <img
-                        loading="eager"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards-landscape': selectedCards.length == 1,
-                          'two-cards-landscape':
-                            selectedCards.length == 2 && card.rotation == 0,
-                          'three-cards-landscape':
-                            selectedCards.length == 3 && card.rotation == 0,
-                          'four-cards-landscape':
-                            selectedCards.length == 4 && card.rotation == 0,
-                          'five-cards-landscape':
-                            selectedCards.length == 5 && card.rotation == 0,
-                          'rotated-two-cards-landscape':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards-landscape':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards-landscape':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards-landscape':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        src="{{ card.backImgUrl }}"
-                        data-src="{{ card.backImgUrl }}"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    *ngIf="flipped"
-                    [ngClass]="{ 'flip-box-inner': true, flip: !card.flipped }"
-                  >
-                    <div class="flip-box-front">
-                      <img
-                        alt="Mentor-cards unique cards design for the back of the card"
-                        src="{{ card.backImgUrl }}"
-                        data-src="{{ card.backImgUrl }}"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards-landscape': selectedCards.length == 1,
-                          'two-cards-landscape':
-                            selectedCards.length == 2 && card.rotation == 0,
-                          'three-cards-landscape':
-                            selectedCards.length == 3 && card.rotation == 0,
-                          'four-cards-landscape':
-                            selectedCards.length == 4 && card.rotation == 0,
-                          'five-cards-landscape':
-                            selectedCards.length == 5 && card.rotation == 0,
-                          'rotated-two-cards-landscape':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards-landscape':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards-landscape':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards-landscape':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                    <div class="flip-box-back">
-                      <img
-                        loading="eager"
-                        [ngClass]="{
-                          'rotate-0': card.rotation === 0,
-                          'rotate-90': card.rotation === 90,
-                          'rotate-180': card.rotation === 180,
-                          'rotate-270': card.rotation === 270,
-                          'img-unselected': !selected,
-                          'img-selected': selected,
-                          'card-view': true,
-                          'one-cards-landscape': selectedCards.length == 1,
-                          'two-cards-landscape':
-                            selectedCards.length == 2 && card.rotation == 0,
-                          'three-cards-landscape':
-                            selectedCards.length == 3 && card.rotation == 0,
-                          'four-cards-landscape':
-                            selectedCards.length == 4 && card.rotation == 0,
-                          'five-cards-landscape':
-                            selectedCards.length == 5 && card.rotation == 0,
-                          'rotated-two-cards-landscape':
-                            selectedCards.length == 2 && card.rotation !== 0,
-                          'rotated-three-cards-landscape':
-                            selectedCards.length == 3 && card.rotation !== 0,
-                          'rotated-four-cards-landscape':
-                            selectedCards.length == 4 && card.rotation !== 0,
-                          'rotated-five-cards-landscape':
-                            selectedCards.length == 5 && card.rotation !== 0
-                        }"
-                        src="{{ card.frontImgUrl }}"
-                        data-src="{{ card.frontImgUrl }}"
-                        (contextmenu)="onRightClick()"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div style="display: flex">
+          <div
+            class="dialog-container"
+            [class.category-base-dialog]="!categoryScreen"
+          >
+            <div *ngIf="!categoryScreen">
+              <div
+                *ngFor="let card of selectedCards"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  width: 50vw;
+                "
+              >
                 <div>
-                  <button (click)="toggleFlipped(card)" style="margin-top: 1vh; margin-right: 70px;">
+                  <P style="color: white">{{ selectedOption }}</P>
+                </div>
+                <div
+                  class="right-90 d-flex justify-center w-100 align-items-center"
+                >
+                  <div
+                    class="d-flex justify-center align-items-center"
+                    style="width: 68%"
+                  >
+                    <span class="bg-white rounded-full p-1 text-center w-6 h-6">
+                      {{ card.index }}
+                    </span>
+                  </div>
+
+                  <button
+                    class="d-flex justify-end"
+                    (click)="rotateCard(card)"
+                    style="
+                      margin-top: 1vh;
+                      width: 10%;
+                      justify-content: flex-start;
+                    "
+                  >
                     <img
-                      src="../../../assets/icons/flip.png"
+                      src="../../../assets/icons/right-90.svg"
                       alt="Expand data"
                       width="20px"
-                      style="height: 4vh; width: auto;margin-left: 40px;"
+                      style="height: 40px; width: 40px"
                     />
                   </button>
                 </div>
-                <!-- <div style="margin-right: 2vw">
+
+                <div *ngIf="selectedCards.length == 1" class="Cross-icon">
+                  <button class="btn-close" (click)="toggleChosenCardsModal()">
+                    <img
+                      src="../../../assets/icons/Close_round.svg"
+                      alt="Expand data"
+                      width="20px"
+                      style="height: 40px; width: 40px"
+                    />
+                  </button>
+                </div>
+                <div class="width-50vw">
+                  <div class="d-flex flex-column" *ngIf="card.isPortrait">
+                    <div
+                      *ngIf="!flipped"
+                      [ngClass]="{
+                        'flip-box-inner': true,
+                        flip: !card.flipped
+                      }"
+                    >
+                      <div class="flip-box-front">
+                        <img
+                          alt="Mentor-cards unique cards design for the back of the card"
+                          src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                          data-src="{{
+                            card.frontImgUrl || card.card.frontImgUrl
+                          }}"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards': selectedCards.length == 1,
+                            'two-cards': selectedCards.length == 2,
+                            'three-cards': selectedCards.length == 3,
+                            'four-cards': selectedCards.length == 4,
+                            'five-cards': selectedCards.length == 5,
+                            'rotated-one-cards':
+                              selectedCards.length == 1 && card.rotation !== 0,
+                            'rotated-two-cards':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                      <div class="flip-box-back">
+                        <img
+                          loading="eager"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards': selectedCards.length == 1,
+                            'two-cards':
+                              selectedCards.length == 2 && card.rotation == 0,
+                            'three-cards':
+                              selectedCards.length == 3 && card.rotation == 0,
+                            'four-cards':
+                              selectedCards.length == 4 && card.rotation == 0,
+                            'five-cards':
+                              selectedCards.length == 5 && card.rotation == 0,
+                            'rotated-two-cards':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          src="{{ card.backImgUrl || card.card.backImgUrl }}"
+                          data-src="{{
+                            card.backImgUrl || card.card.backImgUrl
+                          }}"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="flipped"
+                      [ngClass]="{
+                        'flip-box-inner': true,
+                        flip: !card.flipped
+                      }"
+                    >
+                      <div class="flip-box-front">
+                        <img
+                          alt="Mentor-cards unique cards design for the back of the card"
+                          src="{{ card.backImgUrl || card.card.backImgUrl }}"
+                          data-src="{{
+                            card.backImgUrl || card.card.backImgUrl
+                          }}"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards': selectedCards.length == 1,
+                            'two-cards':
+                              selectedCards.length == 2 && card.rotation == 0,
+                            'three-cards':
+                              selectedCards.length == 3 && card.rotation == 0,
+                            'four-cards':
+                              selectedCards.length == 4 && card.rotation == 0,
+                            'five-cards':
+                              selectedCards.length == 5 && card.rotation == 0,
+                            'rotated-two-cards':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                      <div class="flip-box-back">
+                        <img
+                          loading="eager"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards': selectedCards.length == 1,
+                            'two-cards':
+                              selectedCards.length == 2 && card.rotation == 0,
+                            'three-cards':
+                              selectedCards.length == 3 && card.rotation == 0,
+                            'four-cards':
+                              selectedCards.length == 4 && card.rotation == 0,
+                            'five-cards':
+                              selectedCards.length == 5 && card.rotation == 0,
+                            'rotated-two-cards':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                          data-src="{{
+                            card.frontImgUrl || card.card.frontImgUrl
+                          }}"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-column" *ngIf="!card.isPortrait">
+                    <div
+                      *ngIf="!flipped"
+                      [ngClass]="{
+                        'flip-box-inner': true,
+                        flip: !card.flipped
+                      }"
+                    >
+                      <div class="flip-box-front">
+                        <img
+                          alt="Mentor-cards unique cards design for the back of the card"
+                          src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                          data-src="{{
+                            card.frontImgUrl || card.card.frontImgUrl
+                          }}"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards-landscape': selectedCards.length == 1,
+                            'two-cards-landscape': selectedCards.length == 2,
+                            'three-cards-landscape': selectedCards.length == 3,
+                            'four-cards-landscape': selectedCards.length == 4,
+                            'five-cards-landscape': selectedCards.length == 5,
+                            'rotated-one-cards-landscape':
+                              selectedCards.length == 1 && card.rotation !== 0,
+                            'rotated-two-cards-landscape':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards-landscape':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards-landscape':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards-landscape':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                      <div class="flip-box-back">
+                        <img
+                          loading="eager"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards-landscape': selectedCards.length == 1,
+                            'two-cards-landscape':
+                              selectedCards.length == 2 && card.rotation == 0,
+                            'three-cards-landscape':
+                              selectedCards.length == 3 && card.rotation == 0,
+                            'four-cards-landscape':
+                              selectedCards.length == 4 && card.rotation == 0,
+                            'five-cards-landscape':
+                              selectedCards.length == 5 && card.rotation == 0,
+                            'rotated-two-cards-landscape':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards-landscape':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards-landscape':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards-landscape':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          src="{{ card.backImgUrl || card.card.backImgUrl }}"
+                          data-src="{{
+                            card.backImgUrl || card.card.backImgUrl
+                          }}"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="flipped"
+                      [ngClass]="{
+                        'flip-box-inner': true,
+                        flip: !card.flipped
+                      }"
+                    >
+                      <div class="flip-box-front">
+                        <img
+                          alt="Mentor-cards unique cards design for the back of the card"
+                          src="{{ card.backImgUrl || card.card.backImgUrl }}"
+                          data-src="{{
+                            card.backImgUrl || card.card.backImgUrl
+                          }}"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards-landscape': selectedCards.length == 1,
+                            'two-cards-landscape':
+                              selectedCards.length == 2 && card.rotation == 0,
+                            'three-cards-landscape':
+                              selectedCards.length == 3 && card.rotation == 0,
+                            'four-cards-landscape':
+                              selectedCards.length == 4 && card.rotation == 0,
+                            'five-cards-landscape':
+                              selectedCards.length == 5 && card.rotation == 0,
+                            'rotated-two-cards-landscape':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards-landscape':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards-landscape':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards-landscape':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                      <div class="flip-box-back">
+                        <img
+                          loading="eager"
+                          [ngClass]="{
+                            'rotate-0': card.rotation === 0,
+                            'rotate-90': card.rotation === 90,
+                            'rotate-180': card.rotation === 180,
+                            'rotate-270': card.rotation === 270,
+                            'img-unselected': !selected,
+                            'img-selected': selected,
+                            'card-view': true,
+                            'one-cards-landscape': selectedCards.length == 1,
+                            'two-cards-landscape':
+                              selectedCards.length == 2 && card.rotation == 0,
+                            'three-cards-landscape':
+                              selectedCards.length == 3 && card.rotation == 0,
+                            'four-cards-landscape':
+                              selectedCards.length == 4 && card.rotation == 0,
+                            'five-cards-landscape':
+                              selectedCards.length == 5 && card.rotation == 0,
+                            'rotated-two-cards-landscape':
+                              selectedCards.length == 2 && card.rotation !== 0,
+                            'rotated-three-cards-landscape':
+                              selectedCards.length == 3 && card.rotation !== 0,
+                            'rotated-four-cards-landscape':
+                              selectedCards.length == 4 && card.rotation !== 0,
+                            'rotated-five-cards-landscape':
+                              selectedCards.length == 5 && card.rotation !== 0
+                          }"
+                          src="{{ card.frontImgUrl }}"
+                          data-src="{{ card.frontImgUrl }}"
+                          (contextmenu)="onRightClick()"
+                          class="p-0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="display: flex">
+                  <div>
+                    <button
+                      (click)="toggleFlipped(card)"
+                      style="margin-top: 1vh; margin-right: 70px"
+                    >
+                      <img
+                        src="../../../assets/icons/flip.png"
+                        alt="Expand data"
+                        width="20px"
+                        style="height: 4vh; width: auto; margin-left: 40px"
+                      />
+                    </button>
+                  </div>
+                  <!-- <div style="margin-right: 2vw">
                   <button (click)="rotateCard(card)" style="margin-top: 1vh">
                     <img
                       src="../../../assets/icons/rotate-right-90.png"
@@ -1157,38 +1302,585 @@
                     />
                   </button>
                 </div> -->
+                </div>
               </div>
             </div>
           </div>
-        </ng-container>
-        <div *ngIf="!isDoubleSided">
-          <div class="Cross-icon">
-            <button 
-            class="btn-close"
-              (click)="toggleChosenCardsModal()"
-            >
-              <img
-              src="../../../assets/icons/Close_round.svg"
-              alt="Expand data"
-              width="20px"
-              style="height: 40px; width: 40px"
-            />
-            </button>
-        </div>
-
           <div
-            style="
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              width: 100vw;
-              padding-bottom: 2vw;
-              justify-content: center;
-            "
+            class="dialog-container w-100"
+            [class.category-base-dialog]="!categoryScreen"
+            style="justify-content: center"
           >
-          <p class="drop-down">{{this.selectedOption}}</p>
+            <div *ngIf="categoryScreen" class="w-100">
+              <P style="color: white; text-align: center">{{
+                selectedOption
+              }}</P>
+              <div
+                *ngFor="let category of categoryBaseArray"
+                class="category-base-container"
+              >
+                <p style="font-size: 30px; font-weight: bold; color: white">
+                  {{ category.categoryName }}
+                </p>
+                <div class="d-flex category-base-scrollbar">
+                  <div
+                    *ngFor="let card of category.cards"
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <div
+                      class="right-90 d-flex justify-end w-100 align-items-center"
+                      style="justify-content: space-evenly"
+                    >
+                      <button (click)="toggleFlipped(card)">
+                        <img
+                          src="../../../assets/icons/flipDoubleSideImg.png"
+                          alt="Expand data"
+                          width="20px"
+                          style="width: auto"
+                        />
+                      </button>
+                      <div
+                        class="bg-white rounded-full p-1 text-center w-6 h-6 d-flex justify-center align-items-center"
+                      >
+                        {{ card.index }}
+                      </div>
 
-            <div *ngFor="let card of selectedCards" style="display: block">
+                      <button
+                        class="d-flex justify-end"
+                        (click)="rotateCard(card)"
+                      >
+                        <img
+                          src="../../../assets/icons/right-90.svg"
+                          alt="Expand data"
+                          width="20px"
+                          style="height: 40px; width: 40px"
+                        />
+                      </button>
+                    </div>
+
+                    <div *ngIf="selectedCards.length == 1" class="Cross-icon">
+                      <button
+                        class="btn-close"
+                        (click)="toggleChosenCardsModal()"
+                      >
+                        <img
+                          src="../../../assets/icons/Close_round.svg"
+                          alt="Expand data"
+                          width="20px"
+                          style="height: 40px; width: 40px"
+                        />
+                      </button>
+                    </div>
+                    <div class="w-100">
+                      <div class="d-flex flex-column" *ngIf="card.isPortrait">
+                        <div
+                          *ngIf="!flipped"
+                          [ngClass]="{
+                            'flip-box-inner': true,
+                            flip: !card.flipped
+                          }"
+                          class="category-base-flip"
+                        >
+                          <div class="flip-box-front">
+                            <img
+                              class="p-0 card-image-mobile"
+                              alt="Mentor-cards unique cards design for the back of the card"
+                              src="{{
+                                card.frontImgUrl || card.card.frontImgUrl
+                              }}"
+                              data-src="{{
+                                card.frontImgUrl || card.card.frontImgUrl
+                              }}"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards': selectedCards.length == 1,
+                                'two-cards': selectedCards.length == 2,
+                                'three-cards': selectedCards.length == 3,
+                                'four-cards': selectedCards.length == 4,
+                                'five-cards': selectedCards.length == 5,
+                                'rotated-one-cards':
+                                  selectedCards.length == 1 &&
+                                  card.rotation !== 0,
+                                'rotated-two-cards':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                          <div class="flip-box-back">
+                            <img
+                              class="p-0 card-image-mobile"
+                              loading="eager"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards': selectedCards.length == 1,
+                                'two-cards':
+                                  selectedCards.length == 2 &&
+                                  card.rotation == 0,
+                                'three-cards':
+                                  selectedCards.length == 3 &&
+                                  card.rotation == 0,
+                                'four-cards':
+                                  selectedCards.length == 4 &&
+                                  card.rotation == 0,
+                                'five-cards':
+                                  selectedCards.length == 5 &&
+                                  card.rotation == 0,
+                                'rotated-two-cards':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              data-src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="flipped"
+                          [ngClass]="{
+                            'flip-box-inner': true,
+                            flip: !card.flipped
+                          }"
+                          class="category-base-flip"
+                        >
+                          <div class="flip-box-front">
+                            <img
+                              class="p-0 card-image-mobile"
+                              alt="Mentor-cards unique cards design for the back of the card"
+                              src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              data-src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards': selectedCards.length == 1,
+                                'two-cards':
+                                  selectedCards.length == 2 &&
+                                  card.rotation == 0,
+                                'three-cards':
+                                  selectedCards.length == 3 &&
+                                  card.rotation == 0,
+                                'four-cards':
+                                  selectedCards.length == 4 &&
+                                  card.rotation == 0,
+                                'five-cards':
+                                  selectedCards.length == 5 &&
+                                  card.rotation == 0,
+                                'rotated-two-cards':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                          <div class="flip-box-back">
+                            <img
+                              class="p-0 card-image-mobile"
+                              loading="eager"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards': selectedCards.length == 1,
+                                'two-cards':
+                                  selectedCards.length == 2 &&
+                                  card.rotation == 0,
+                                'three-cards':
+                                  selectedCards.length == 3 &&
+                                  card.rotation == 0,
+                                'four-cards':
+                                  selectedCards.length == 4 &&
+                                  card.rotation == 0,
+                                'five-cards':
+                                  selectedCards.length == 5 &&
+                                  card.rotation == 0,
+                                'rotated-two-cards':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              src="{{
+                                card.frontImgUrl || card.card.frontImgUrl
+                              }}"
+                              data-src="{{
+                                card.frontImgUrl || card.card.frontImgUrl
+                              }}"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-column" *ngIf="!card.isPortrait">
+                        <div
+                          *ngIf="!flipped"
+                          [ngClass]="{
+                            'flip-box-inner': true,
+                            flip: !card.flipped
+                          }"
+                          class="category-base-flip"
+                        >
+                          <div class="flip-box-front">
+                            <img
+                              class="p-0 card-image-mobile"
+                              alt="Mentor-cards unique cards design for the back of the card"
+                              src="{{
+                                card.frontImgUrl || card.card.frontImgUrl
+                              }}"
+                              data-src="{{
+                                card.frontImgUrl || card.card.frontImgUrl
+                              }}"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards-landscape':
+                                  selectedCards.length == 1,
+                                'two-cards-landscape':
+                                  selectedCards.length == 2,
+                                'three-cards-landscape':
+                                  selectedCards.length == 3,
+                                'four-cards-landscape':
+                                  selectedCards.length == 4,
+                                'five-cards-landscape':
+                                  selectedCards.length == 5,
+                                'rotated-one-cards-landscape':
+                                  selectedCards.length == 1 &&
+                                  card.rotation !== 0,
+                                'rotated-two-cards-landscape':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards-landscape':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards-landscape':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards-landscape':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                          <div class="flip-box-back">
+                            <img
+                              class="p-0 card-image-mobile"
+                              loading="eager"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards-landscape':
+                                  selectedCards.length == 1,
+                                'two-cards-landscape':
+                                  selectedCards.length == 2 &&
+                                  card.rotation == 0,
+                                'three-cards-landscape':
+                                  selectedCards.length == 3 &&
+                                  card.rotation == 0,
+                                'four-cards-landscape':
+                                  selectedCards.length == 4 &&
+                                  card.rotation == 0,
+                                'five-cards-landscape':
+                                  selectedCards.length == 5 &&
+                                  card.rotation == 0,
+                                'rotated-two-cards-landscape':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards-landscape':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards-landscape':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards-landscape':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              data-src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="flipped"
+                          [ngClass]="{
+                            'flip-box-inner': true,
+                            flip: !card.flipped
+                          }"
+                          class="category-base-flip"
+                        >
+                          <div class="flip-box-front">
+                            <img
+                              class="p-0 card-image-mobile"
+                              alt="Mentor-cards unique cards design for the back of the card"
+                              src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              data-src="{{
+                                card.backImgUrl || card.card.backImgUrl
+                              }}"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards-landscape':
+                                  selectedCards.length == 1,
+                                'two-cards-landscape':
+                                  selectedCards.length == 2 &&
+                                  card.rotation == 0,
+                                'three-cards-landscape':
+                                  selectedCards.length == 3 &&
+                                  card.rotation == 0,
+                                'four-cards-landscape':
+                                  selectedCards.length == 4 &&
+                                  card.rotation == 0,
+                                'five-cards-landscape':
+                                  selectedCards.length == 5 &&
+                                  card.rotation == 0,
+                                'rotated-two-cards-landscape':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards-landscape':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards-landscape':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards-landscape':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                          <div class="flip-box-back">
+                            <img
+                              class="p-0 card-image-mobile"
+                              loading="eager"
+                              [ngClass]="{
+                                'rotate-0': card.rotation === 0,
+                                'rotate-90': card.rotation === 90,
+                                'rotate-180': card.rotation === 180,
+                                'rotate-270': card.rotation === 270,
+                                'img-unselected': !selected,
+                                'img-selected': selected,
+                                'card-view': true,
+                                'one-cards-landscape':
+                                  selectedCards.length == 1,
+                                'two-cards-landscape':
+                                  selectedCards.length == 2 &&
+                                  card.rotation == 0,
+                                'three-cards-landscape':
+                                  selectedCards.length == 3 &&
+                                  card.rotation == 0,
+                                'four-cards-landscape':
+                                  selectedCards.length == 4 &&
+                                  card.rotation == 0,
+                                'five-cards-landscape':
+                                  selectedCards.length == 5 &&
+                                  card.rotation == 0,
+                                'rotated-two-cards-landscape':
+                                  selectedCards.length == 2 &&
+                                  card.rotation !== 0,
+                                'rotated-three-cards-landscape':
+                                  selectedCards.length == 3 &&
+                                  card.rotation !== 0,
+                                'rotated-four-cards-landscape':
+                                  selectedCards.length == 4 &&
+                                  card.rotation !== 0,
+                                'rotated-five-cards-landscape':
+                                  selectedCards.length == 5 &&
+                                  card.rotation !== 0
+                              }"
+                              src="{{ card.frontImgUrl }}"
+                              data-src="{{ card.frontImgUrl }}"
+                              (contextmenu)="onRightClick()"
+                              [ngStyle]="
+                                !singleCardCheck
+                                  ? { height: '451px', width: '320px' }
+                                  : { height: '829px', width: '' }
+                              "
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display: flex">
+                      <div></div>
+                      <!-- <div style="margin-right: 2vw">
+                  <button (click)="rotateCard(card)" style="margin-top: 1vh">
+                    <img
+                      src="../../../assets/icons/rotate-right-90.png"
+                      alt="Expand data"
+                      width="20px"
+                      style="height: 4vh; width: auto"
+                    />
+                  </button>
+                </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div
+            *ngIf="categoryScreen || singleCategoryBaseCard"
+            class="download-btn category-base-download"
+          >
+            <button
+              class="d-flex gap-2 download-button"
+              (click)="downloadAllImages()"
+            >
+              <img src="../../../assets/icons/download-bottom.svg" />שמירת פריסה
+              כתמונה
+            </button>
+          </div> -->
+        </ng-container>
+        <div
+          *ngIf="!isDoubleSided"
+          class="multi-card-mobile multi-card-without-cat"
+        >
+          <div class="Cross-icon">
+            <button class="btn-close" (click)="toggleChosenCardsModal()">
+              <img
+                src="../../../assets/icons/Close_round.svg"
+                alt="Expand data"
+                width="20px"
+                style="height: 40px; width: 40px"
+              />
+            </button>
+          </div>
+          <p class="drop-down">{{ this.selectedOption }}</p>
+          <div [class.single-side-card]="selectedCards.length > 1">
+            <div
+              [class.single-card]="selectedCards.length == 1"
+              *ngFor="let card of selectedCards"
+              style="display: block"
+            >
               <div
                 *ngIf="!card.isPortrait"
                 style="
@@ -1196,25 +1888,32 @@
                   flex-direction: column;
                   align-items: center;
                 "
+                [class.zarori]="!singleCardCheck"
               >
+                <div
+                  class="right-90 d-flex justify-end w-100 align-items-center"
+                >
+                  <div class="width-70">
+                    <div
+                      class="bg-white rounded-full p-1 text-center w-6 h-6 d-flex justify-center align-items-center"
+                    >
+                      {{ card.index }}
+                    </div>
+                  </div>
 
-              <div class="right-90 d-flex justify-end w-100 align-items-center" 
-                >   
-              <div class="bg-white rounded-full mt-4 p-1 text-center w-6 h-6 d-flex justify-center align-items-center">{{selectedIndex}}</div>
+                  <button
+                    class="d-flex justify-end right-90-icon width-30"
+                    (click)="rotateCard(card)"
+                    style="margin-top: 1vh; width: 45%"
+                  >
+                    <img
+                    class="Icon-90"
+                      src="../../../assets/icons/right-90.svg"
+                      alt="Expand data"
+                    />
+                  </button>
+                </div>
 
-                  <button class="d-flex justify-end" (click)="rotateCard(card)" style="margin-top: 1vh; width: 45%;">
-                  <img
-                    src="../../../assets/icons/right-90.svg"
-                    alt="Expand data"
-                    width="20px"
-                    style="height: 40px; width: 40px; margin-left: 35px;"
-                  />
-                </button>
-
-               </div>
-    
-              
-    
                 <img
                   (click)="imgClick($event)"
                   alt="one of the selected cards shown"
@@ -1231,57 +1930,76 @@
                     'five-cards-landscape': selectedCards.length == 5
                   }"
                   loading="eager"
-                  src="{{ card.frontImgUrl }}"
-                  data-src="{{ card.frontImgUrl }}"
-                  class="width-fixed"
+                  src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                  data-src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                  class="width-fixed m-0 p-0 card-image-mobile"
+                  [ngStyle]="
+                    !singleCardCheck
+                      ? { height: '451px', width: '320px' }
+                      : { width: '588' }
+                  "
+                  class="p-0 card-image-mobile"
                 />
 
-                <div class="download-btn">
-                  <button class="d-flex gap-2 download-button" (click)="downloadImage(card.frontImgUrl)"> <img src="../../../assets/icons/download-bottom.svg">שמירת פריסה כתמונה </button>
-                </div>
-              </div>
+                <div
+                  *ngIf="card.isPortrait"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  <img
+                    class="p-0 card-image-mobile"
+                    (click)="imgClick($event)"
+                    alt="one of the selected cards shown"
+                    [ngClass]="{
+                      'rotate-0': card.rotation === 0,
+                      'rotate-90': card.rotation === 90,
+                      'rotate-180': card.rotation === 180,
+                      'rotate-270': card.rotation === 270,
+                      'card-view': true,
+                      'one-cards': selectedCards.length == 1,
+                      'two-cards': selectedCards.length == 2,
+                      'three-cards': selectedCards.length == 3,
+                      'four-cards': selectedCards.length == 4,
+                      'five-cards': selectedCards.length == 5
+                    }"
+                    loading="eager"
+                    src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                    data-src="{{ card.frontImgUrl }}"
+                  />
 
-              <div
-                *ngIf="card.isPortrait"
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                "
-              >
-                <img
-                  (click)="imgClick($event)"
-                  alt="one of the selected cards shown"
-                  [ngClass]="{
-                    'rotate-0': card.rotation === 0,
-                    'rotate-90': card.rotation === 90,
-                    'rotate-180': card.rotation === 180,
-                    'rotate-270': card.rotation === 270,
-                    'card-view': true,
-                    'one-cards': selectedCards.length == 1,
-                    'two-cards': selectedCards.length == 2,
-                    'three-cards': selectedCards.length == 3,
-                    'four-cards': selectedCards.length == 4,
-                    'five-cards': selectedCards.length == 5
-                  }"
-                  loading="eager"
-                  src="{{ card.frontImgUrl }}"
-                  data-src="{{ card.frontImgUrl }}"
-                />
-
-                <div>
-                  <button class="d-flex justify-end" (click)="rotateCard(card)" style="margin-top: 1vh; width: 45%;">
-                    <img
-                      src="../../../assets/icons/right-90.svg"
-                      alt="Expand data"
-                      width="20px"
-                      style="height: 40px; width: 40px; margin-left: 35px;"
-                    />
-                  </button>
+                  <div>
+                    <button
+                      class="d-flex justify-end"
+                      (click)="rotateCard(card)"
+                      style="margin-top: 1vh; width: 45%"
+                    >
+                      <img
+                        src="../../../assets/icons/right-90.svg"
+                        alt="Expand data"
+                        width="20px"
+                        style="height: 40px; width: 40px; margin-left: 35px"
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- <div
+            class="download-btn"
+            style="display: flex; justify-content: space-around"
+          >
+            <button
+              class="d-flex gap-2 download-button"
+              (click)="downloadAllImages()"
+            >
+              <img src="../../../assets/icons/download-bottom.svg" />שמירת פריסה
+              כתמונה
+            </button>
+          </div> -->
         </div>
       </div>
     </div>
@@ -1324,3 +2042,218 @@
   </div>
 </div>
 
+<!-- TODO -->
+<footer
+  class="footer"
+  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id != '90'"
+>
+  <div class="footer-container">
+    <div class="w-100" *ngIf="multiSelectCard.length > 0">
+      <img src="../../../assets/icons/black_cross.png" />
+    </div>
+    <span
+      class="selected-option"
+      *ngIf="multiSelectCard.length === 0 && selectedOption"
+      >{{ selectedOption }}</span
+    >
+    <div class="card-box">
+      <div *ngIf="multiSelectCard.length > 0" class="button-box hideItMobile">
+        <button class="show-all" (click)="showAllInDialog()">
+          <img src="../../../assets/icons/zoomPlus.png" />
+          הצגת הקלפים שבחרתם
+        </button>
+        <button class="remove-all" (click)="multiSelectCard = []">
+          <img src="../../../assets/icons/undo.png" />
+          איפוס בחירה
+        </button>
+      </div>
+
+      <div
+        *ngIf="multiSelectCard.length > 0"
+        class="button-box-mbl hideItDesktop"
+      >
+        <button class="show-all-mbl" (click)="showAllInDialog()">
+          <img
+            src="../../../assets/icons/zoomPlus.png"
+            style="width: 13px; height: 13px"
+          />
+          הצגת הקלפים
+        </button>
+
+        <button class="remove-all-mbl" (click)="multiSelectCard = []">
+          <img
+            src="../../../assets/icons/undo.png"
+            style="width: 11px; height: 11px"
+          />
+          איפוס
+        </button>
+      </div>
+      <div class="multi-card-container d-flex" [class.pb-6]="true">
+        <ng-container *ngFor="let item of sortedCards; let i = index">
+          <!-- Display category name only if it's the first card of its category -->
+          <div class="category-title">
+            <!-- <p>{{ category.categoryName }}</p> -->
+            <p
+              *ngIf="isFirstCardOfCategory(item, i)"
+              style="margin-bottom: 0px"
+            >
+              {{ item?.category }}
+            </p>
+          </div>
+          <div
+            class="position-relative"
+            [class.img-box]="!item?.category"
+            [class.category-img-box]="item?.category"
+          >
+            <span
+              *ngIf="item.index"
+              class="bg-white rounded-full p-1 text-center w-6 h-6"
+              style="margin-left: 33px"
+              >{{ item?.index }}</span
+            >
+            <img
+              class="position-absolute"
+              style="left: 8px; top: 25px"
+              src="../../../assets/icons/zoomPlus.png"
+              (click)="cardSelected(item.card, item.index, true)"
+            />
+            <img
+              [class.height-82]="item?.category"
+              class="img-box"
+              *ngIf="!item?.card.backImgUrl"
+              alt="Mentor-cards unique cards design for the back of the card"
+              src="/assets/Mentor-Cards-Back.png"
+            />
+            <img
+              *ngIf="item.card.backImgUrl"
+              class="img-box"
+              alt="Mentor-cards unique cards design for the back of the card"
+              [src]="item?.card.backImgUrl"
+              data-src="{{ cardContent?.backImgUrl }}"
+            />
+            <img
+              src="../../../assets/icons/black_cross.png"
+              class="absolute"
+              style="top: 25px; right: 12px"
+              (click)="removeImage(item)"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<footer
+  class="footer"
+  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id === '90'"
+>
+  <div class="footer-container">
+    <div class="w-100" *ngIf="multiSelectCard.length > 0">
+      <img src="../../../assets/icons/black_cross.png" />
+    </div>
+    <span
+      class="selected-option"
+      *ngIf="multiSelectCard.length === 0 && selectedOption"
+      >{{ selectedOption }}</span
+    >
+    <div class="card-box">
+      <div *ngIf="multiSelectCard.length > 0" class="button-box hideItMobile">
+        <button class="show-all" (click)="showAllInDialog()">
+          <img src="../../../assets/icons/zoomPlus.png" />
+          הצגת הקלפים שבחרתם
+        </button>
+        <button class="remove-all" (click)="multiSelectCard = []">
+          <img src="../../../assets/icons/undo.png" />
+          איפוס בחירה
+        </button>
+      </div>
+
+      <div
+        *ngIf="multiSelectCard.length > 0"
+        class="button-box-mbl hideItDesktop"
+      >
+        <button class="show-all-mbl" (click)="showAllInDialog()">
+          <img
+            src="../../../assets/icons/zoomPlus.png"
+            style="width: 13px; height: 13px"
+          />
+          הצגת הקלפים
+        </button>
+
+        <button class="remove-all-mbl" (click)="multiSelectCard = []">
+          <img
+            src="../../../assets/icons/undo.png"
+            style="width: 11px; height: 11px"
+          />
+          איפוס
+        </button>
+      </div>
+      <div class="multi-card-container d-flex mb-6">
+        <div class="w-100 category-base-footer">
+          <div *ngFor="let category of categoryBaseArray">
+            <p
+              class="category-location"
+              style="font-size: 15px; font-weight: bold; color: rgb(0, 0, 0)"
+            >
+              {{ category.categoryName }}
+            </p>
+            <div class="category-base-card-container">
+              <div
+                *ngFor="let card of category.cards"
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  class="position-relative"
+                  [class.img-box]="!card?.category"
+                  [class.category-img-box]="card?.category"
+                >
+                  <span
+                    *ngIf="card.index"
+                    class="bg-white rounded-full p-1 text-center w-6 h-6"
+                    style="margin-left: 33px"
+                    >{{ card?.index }}</span
+                  >
+                  <img
+                    class="position-absolute"
+                    style="left: 8px; top: 25px"
+                    src="../../../assets/icons/zoomPlus.png"
+                    (click)="
+                      categoryBaseCardSelected(card, card.index, true, true)
+                    "
+                  />
+                  <img
+                    [class.height-82]="card?.category"
+                    class="img-box"
+                    *ngIf="!card?.backImgUrl"
+                    alt="Mentor-cards unique cards design for the back of the card"
+                    src="/assets/Mentor-Cards-Back.png"
+                  />
+                  <img
+                    *ngIf="card.backImgUrl"
+                    class="img-box"
+                    alt="Mentor-cards unique cards design for the back of the card"
+                    [src]="card?.backImgUrl"
+                    data-src="{{ card?.backImgUrl }}"
+                  />
+                  <img
+                    src="../../../assets/icons/black_cross.png"
+                    class="absolute"
+                    style="top: 25px; right: 12px"
+                    (click)="
+                      removeCategoryBaseImage(card.index, category.categoryName)
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

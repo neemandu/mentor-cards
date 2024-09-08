@@ -34,9 +34,9 @@ img {
 
 .flip-box-front {
   position: absolute;
-  /*-webkit-backface-visibility: hidden;*/
+  -webkit-backface-visibility: hidden;
   /* Safari */
-  /*backface-visibility: hidden;*/
+  backface-visibility: hidden;
 }
 
 .flip-box-back {
@@ -52,6 +52,13 @@ img {
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (max-width: 768px) {
+
+  .min-height {
+    min-height: 121px !important;
+  }
 }
 
 /* .badge {

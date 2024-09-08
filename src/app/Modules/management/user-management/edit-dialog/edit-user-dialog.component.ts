@@ -318,59 +318,17 @@ save(): void {
       const filteredData: UpdateUserInput = {
         id: formData?.id || '',
         username: formData?.username || null,
-        email: formData?.email || null,
         phone: formData?.phone || null,
         status: formData?.status || null,
-        subscription: formData?.subscription ? {
-          id: formData?.subscription.id || '',
-          startDate: formData?.subscription.startDate || null,
-          paymentProvider: formData?.subscription.paymentProvider || null,
-          providerTransactionId: formData?.subscription.providerTransactionId || null,
-          cancellationDate: formData?.subscription.cancellationDate || null,
-          nextBillingDate: formData?.subscription.nextBillingDate || null
-        } : null,
         numberOfPacksSubstitutions: formData?.numberOfPacksSubstitutions || null,
-        lastPackSubstitutionDate: formatDate(formData?.lastPackSubstitutionDate),
         numberOfPlansSubstitutions: formData?.numberOfPlansSubstitutions || null,
-        lastPlanSubstitutionDate: formatDate(formData?.lastPlanSubstitutionDate),
-        firstProgramRegistrationDate: formatDate(formData?.firstProgramRegistrationDate),
         groupId: formData?.groupId || null,
         numberOfUsedPacks: formData?.numberOfUsedPacks || null,
         groupRole: formData?.groupRole || null,
         cancellationDate: formatDate(formData?.cancellationDate),
         providerTransactionId: formData?.providerTransactionId || null,
         fullName: formData?.fullName || null,
-        endOfTrialDate: formatDate(formData?.endOfTrialDate),
-        createdAt: formatDate(formData?.createdAt),
-        updatedAt: formatDate(formData?.updatedAt),
-        favouritePacks: formData?.favouritePacks || [],
-        entries: formData?.entries || null,
-        externalPacksSubscriptions: formData?.externalPacksSubscriptions?.map((sub: any) => ({
-          id: sub?.id || '',
-          startDate: formatDate(sub?.startDate),
-          paymentProvider: sub?.paymentProvider || null,
-          providerTransactionId: sub?.providerTransactionId || null,
-          cancellationDate: formatDate(sub?.cancellationDate),
-          nextBillingDate: formatDate(sub?.nextBillingDate)
-        })) || [],
-        entryDates: formData?.entryDates?.map(date => formatDate(date)) || [],
-        refId: formData?.refId || null,
-        payments: formData?.payments?.map((payment: any) => ({
-          id: payment?.id || '',
-          date: formatDate(payment?.date),
-          payedMonths: payment?.payedMonths || null,
-          amount: payment?.amount || null,
-          currency: payment?.currency || null,
-          paymentWay: payment?.paymentWay || null,
-          transactionId: payment?.transactionId || null
-        })) || [],
         profession: formData?.profession || null,
-        AithreadId: formData?.AithreadId || null,
-        AiConversations: formData.AiConversations?.map((conv: any) => ({
-          question: conv?.question || null,
-          answer: conv?.answer || null,
-          date: formatDate(conv?.date)
-        })) || [],
         userOrgMembershipId: formData?.userOrgMembershipId || null,
         userMyAffiliateId: formData?.userMyAffiliateId || null
       };
