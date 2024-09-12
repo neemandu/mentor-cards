@@ -437,8 +437,10 @@ toggle(index: number): void {
       });
     }
   }
+  flippedCardwidth : number = 0
 
   zoomIn() {
+    if (!this.flipped) {
     if ( this.id == 90 ) {
       this.cardWidth += 1;
       this.cardHeight += 1.5;  // Adjust proportionally
@@ -452,8 +454,12 @@ toggle(index: number): void {
       this.imageHeight = this.imageWidth / this.aspectRatio;
       this.containerPadding += 10
     }
+  } else if (this.flipped) {
+      this.flippedCardwidth +=30
+  }
   }
   zoomOut() {
+    if (!this.flipped) {
     if ( this.id  == 90) {
       this.cardWidth -= 1;
       this.cardHeight -= 1.5;
@@ -469,6 +475,10 @@ toggle(index: number): void {
         this.containerPadding += -10
       }
     }
+  }
+    else if (this.flipped) {
+      this.flippedCardwidth -=30
+  }
   }
 
 singleCardCheck : boolean =false;
@@ -584,6 +594,15 @@ singleCategoryBaseCard : boolean =false;
         this.toggleChosenCardsModal();
       }
     }
+  }
+
+  resetCategoryFooter () {
+    console.log(this.categoryBaseArray)
+
+   this.categoryBaseArray = [];
+   this.multiSelectCard = [];
+   console.log(this.categoryBaseArray)
+
   }
 
 

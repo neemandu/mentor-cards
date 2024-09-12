@@ -247,6 +247,19 @@ mat-icon {
   margin-top: 2%;
 }
 
+.icons-container {
+  right: -45px;
+  top: 35px;
+}
+
+.image-container {
+  left: -18px;
+  top: 17px;
+}
+.h-60 {
+  height: 14rem !important;
+}
+
 @media screen and (max-width: 1024px) {
   .top-part {
     flex-direction: column;
@@ -290,11 +303,6 @@ mat-icon {
   .categories-tags {
     max-width: unset;
     padding: unset;
-  }
-
-  .icon-div {
-    right: -17px;
-    top: -15px;
   }
 
   

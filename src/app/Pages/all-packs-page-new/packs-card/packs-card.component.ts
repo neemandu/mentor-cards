@@ -58,13 +58,13 @@ export class PacksCardComponent implements OnInit, OnDestroy {
   
     // Assuming the dialog has maxWidth and maxHeight defined as 60vw and 70vh, 
     // we need to calculate the offset to center the dialog over the div
-    const dialogMaxWidth = window.innerWidth * 0.6; // 60vw
+    const dialogMaxWidth = window.innerWidth * 0.4; // 60vw
     const dialogMaxHeight = window.innerHeight * 0.7; // 70vh
   
     // Calculate the top and left to center the dialog over the div
     const dialogPosition: DialogPosition = {
-      left: `${divCenterX - dialogMaxWidth / 6.5}px`,
-      top: `${divCenterY - dialogMaxHeight / 4}px`
+      left: `${divCenterX - dialogMaxWidth / 4}px`,
+      top: `${divCenterY - dialogMaxHeight / 3}px`
     };
 
     const isMobile = window.innerWidth <= 768;
@@ -75,8 +75,8 @@ export class PacksCardComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             const dialogConfig = new MatDialogConfig();
             dialogConfig.autoFocus = true;
-            dialogConfig.maxWidth = isMobile ? '90vw' : '480px'
-            dialogConfig.maxHeight = isMobile ? '60vh' : '460px'; 
+            dialogConfig.maxWidth = isMobile ? '90vw' : '520px'
+            dialogConfig.maxHeight = isMobile ? '60vh' : '500px'; 
             if ( !isMobile ){
               dialogConfig.position = dialogPosition;
             }
