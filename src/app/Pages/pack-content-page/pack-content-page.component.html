@@ -212,7 +212,7 @@
                 <div class="text-size-10">ספר הדרכה</div>
               </div>
 
-              <div class="justify-center flex flex-col items-center">
+              <!-- <div class="justify-center flex flex-col items-center">
                 <button class="w-10 h-8 flex items-center justify-center py-2">
                   <img
                     src="/assets/New/pack-view/play-icon.svg"
@@ -222,7 +222,7 @@
                   />
                 </button>
                 <div class="text-size-10">הדרכה</div>
-              </div>
+              </div> -->
 
               <div
                 class="justify-center flex flex-col items-center"
@@ -271,7 +271,9 @@
               <div class="icon-container">
                 <mat-icon class="zoom-icon" (click)="zoomIn()">add</mat-icon>
                 <div class="divider"></div>
-                <mat-icon class="zoom-icon" (click)="zoomOut()">remove</mat-icon>
+                <mat-icon class="zoom-icon" (click)="zoomOut()"
+                  >remove</mat-icon
+                >
               </div>
             </button>
           </div>
@@ -914,19 +916,15 @@
                 </div>
                 <div
                   class="right-90 d-flex justify-center w-100 align-items-center"
-
                 >
-                <button
-                (click)="toggleFlipped(card)"
-              >
-                <img
-                  src="../../../assets/icons/flipDoubleSideImg.png "
-                  alt="Expand data"
-                  width="20px"
-                  class="flipDoubleSideIcon"
-
-                />
-              </button>
+                  <button (click)="toggleFlipped(card)">
+                    <img
+                      src="../../../assets/icons/flipDoubleSideImg.png "
+                      alt="Expand data"
+                      width="20px"
+                      class="flipDoubleSideIcon"
+                    />
+                  </button>
                   <div
                     class="d-flex justify-center align-items-center"
                     style="width: 60%"
@@ -939,9 +937,7 @@
                   <button
                     class="d-flex justify-end"
                     (click)="rotateCard(card)"
-                    style="
-                      justify-content: flex-start;
-                    "
+                    style="justify-content: flex-start"
                   >
                     <img
                       src="../../../assets/icons/right-90.svg"
@@ -1004,7 +1000,6 @@
                           }"
                           (contextmenu)="onRightClick()"
                           class="p-0"
-                          
                         />
                       </div>
                       <div class="flip-box-back">
@@ -1440,12 +1435,11 @@
                               }"
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
-                              !singleCardCheck
-                                ? { height: '415px', width: 'auto' }
-                                : { width: '588' }
-                            "
-                            [class.card-default]="!singleCardCheck"
-                            
+                                !singleCardCheck
+                                  ? { height: '415px', width: 'auto' }
+                                  : { width: '588' }
+                              "
+                              [class.card-default]="!singleCardCheck"
                             />
                           </div>
                           <div class="flip-box-back">
@@ -1493,7 +1487,8 @@
                                 card.backImgUrl || card.card.backImgUrl
                               }}"
                               (contextmenu)="onRightClick()"
-                              d-flex category-base-scrollbar
+                              d-flex
+                              category-base-scrollbar
                             />
                           </div>
                         </div>
@@ -1504,7 +1499,6 @@
                             flip: !card.flipped
                           }"
                           class="category-base-flip"
-                        
                         >
                           <div class="flip-box-front">
                             <img
@@ -1552,11 +1546,11 @@
                               }"
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
-                              !singleCardCheck
-                                ? { height: '376px', width: 'auto' }
-                                : { width: '588' }
-                            "
-                            [class.card-default]="!singleCardCheck"
+                                !singleCardCheck
+                                  ? { height: '376px', width: 'auto' }
+                                  : { width: '588' }
+                              "
+                              [class.card-default]="!singleCardCheck"
                             />
                           </div>
                           <div class="flip-box-back">
@@ -1605,12 +1599,11 @@
                               }}"
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
-                              !singleCardCheck
-                                ? { height: 'auto', width: 'auto' }
-                                : { width: '588' }
-                            "
-                            [class.card-default]="!singleCardCheck"
-                           
+                                !singleCardCheck
+                                  ? { height: 'auto', width: 'auto' }
+                                  : { width: '588' }
+                              "
+                              [class.card-default]="!singleCardCheck"
                             />
                           </div>
                         </div>
@@ -1671,11 +1664,11 @@
                               }"
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
-                              !singleCardCheck
-                                ? { height: '376px', width: 'auto' }
-                                : { width: '588' }
-                            "
-                            [class.card-default]="!singleCardCheck"
+                                !singleCardCheck
+                                  ? { height: '376px', width: 'auto' }
+                                  : { width: '588' }
+                              "
+                              [class.card-default]="!singleCardCheck"
                             />
                           </div>
                           <div class="flip-box-back">
@@ -1725,12 +1718,12 @@
                               }}"
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
-                              !singleCardCheck
-                                ? { height: 'auto', width: 'auto' }
-                                : { width: '588' }
-                            "
-                            [class.card-default]="!singleCardCheck"
-                            [class.min-width-auto]="!singleCardCheck"
+                                !singleCardCheck
+                                  ? { height: 'auto', width: 'auto' }
+                                  : { width: '588' }
+                              "
+                              [class.card-default]="!singleCardCheck"
+                              [class.min-width-auto]="!singleCardCheck"
                             />
                           </div>
                         </div>
@@ -1741,7 +1734,6 @@
                             flip: !card.flipped
                           }"
                           class="category-base-flip"
-                        
                         >
                           <div class="flip-box-front">
                             <img
@@ -1790,12 +1782,12 @@
                               }"
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
-                              !singleCardCheck
-                                ? { height: '376px', width: 'auto' }
-                                : { width: '588' }
-                            "
-                            [class.card-default]="!singleCardCheck"
-                            [class.min-width-auto]="!singleCardCheck"
+                                !singleCardCheck
+                                  ? { height: '376px', width: 'auto' }
+                                  : { width: '588' }
+                              "
+                              [class.card-default]="!singleCardCheck"
+                              [class.min-width-auto]="!singleCardCheck"
                             />
                           </div>
                           <div class="flip-box-back">
@@ -1841,12 +1833,12 @@
                               data-src="{{ card.frontImgUrl }}"
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
-                              !singleCardCheck
-                                ? { height: 'auto', width: 'auto' }
-                                : { width: '588' }
-                            "
-                            [class.card-default]="!singleCardCheck"
-                            [class.min-width-auto]="!singleCardCheck"
+                                !singleCardCheck
+                                  ? { height: 'auto', width: 'auto' }
+                                  : { width: '588' }
+                              "
+                              [class.card-default]="!singleCardCheck"
+                              [class.min-width-auto]="!singleCardCheck"
                             />
                           </div>
                         </div>
@@ -1931,7 +1923,7 @@
                     style="margin-top: 1vh; width: 45%"
                   >
                     <img
-                    class="Icon-90"
+                      class="Icon-90"
                       src="../../../assets/icons/right-90.svg"
                       alt="Expand data"
                     />
@@ -2071,9 +2063,9 @@
   *ngIf="(multiSelectCard.length > 0 || selectedOption) && id != '90'"
 >
   <div class="footer-container">
-    <div class="w-100" *ngIf="multiSelectCard.length > 0">
+    <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
       <img src="../../../assets/icons/black_cross.png" />
-    </div>
+    </div> -->
     <span
       class="selected-option"
       *ngIf="multiSelectCard.length === 0 && selectedOption"
@@ -2179,11 +2171,18 @@
     </div>
     <span
       class="selected-option"
-      *ngIf="(multiSelectCard.length === 0 && categoryBaseArray.length === 0) && selectedOption"
+      *ngIf="
+        multiSelectCard.length === 0 &&
+        categoryBaseArray.length === 0 &&
+        selectedOption
+      "
       >{{ selectedOption }}</span
     >
     <div class="card-box">
-      <div *ngIf="multiSelectCard.length > 0 || categoryBaseArray.length > 0" class="button-box hideItMobile">
+      <div
+        *ngIf="multiSelectCard.length > 0 || categoryBaseArray.length > 0"
+        class="button-box hideItMobile"
+      >
         <button class="show-all" (click)="showAllInDialog()">
           <img src="../../../assets/icons/zoomPlus.png" />
           הצגת הקלפים שבחרתם
@@ -2214,8 +2213,6 @@
           איפוס
         </button>
       </div>
-
-
 
       <div class="multi-card-container d-flex mb-6">
         <div class="w-100 category-base-footer">
@@ -2299,4 +2296,3 @@
     </div>
   </div>
 </footer>
-

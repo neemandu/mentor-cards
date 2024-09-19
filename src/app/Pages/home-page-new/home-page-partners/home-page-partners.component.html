@@ -1,35 +1,95 @@
 <div>
-    <div class="text-black sm:text-4xl text-2xl font-bold mt-24 text-center">
-        {{ 'pages.home-page.sections.partners.content.title1' | translate }}
+  <div class="text-black sm:text-4xl text-2xl font-bold mt-24 text-center">
+    {{ "pages.home-page.sections.partners.content.title1" | translate }}
+  </div>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap justify-center gap-4 sm:gap-8 mt-8">
+      <img
+        src="../../../assets/About images/Clients/maccabi.png"
+        alt="Client logo PNG"
+        class="h-[60px] w-auto object-contain"
+        style="height: 60px"
+      />
+      <img
+        src="../../../assets/About images/Clients/lishka.png"
+        alt="Client logo PNG"
+        class="h-[60px] w-auto object-contain"
+        style="height: 60px"
+      />
+      <img
+        src="../../../assets/About images/Clients/logos.png"
+        alt="Client logo PNG"
+        class="h-[60px] w-auto object-contain"
+        style="height: 60px"
+      />
+      <img
+        src="../../../assets/About images/Clients/merchaz.png"
+        alt="Client logo PNG"
+        class="h-[60px] w-auto object-contain"
+        style="height: 60px"
+      />
+      <img
+        src="../../../assets/About images/Clients/tnoofa.png"
+        alt="Client logo PNG"
+        class="h-[60px] w-auto object-contain"
+        style="height: 60px"
+      />
+      <img
+        src="../../../assets/About images/Clients/yozmot.png"
+        alt="Client logo PNG"
+        class="h-[60px] w-auto object-contain"
+        style="height: 60px"
+      />
+      <img
+        src="../../../assets/About images/Clients/standard_logo_transparent.png"
+        alt="Client logo PNG"
+        class="h-[60px] w-auto object-contain"
+        style="height: 60px"
+      />
     </div>
-    <div class="flex justify-center sm:gap-8 gap-2 mt-8">
-        <img src="/assets/New/home-page/partners-1.png" alt="partners-1">
-        <img src="/assets/New/home-page/partners-2.png" alt="partners-2">
-        <img src="/assets/New/home-page/partners-3.png" alt="partners-3">
-    </div>
+  </div>
 </div>
 
 <div class="sm:grid sm:grid-cols-3 rounded-3xl mx-10 mt-12">
-    <div class="col-span-1 flex justify-center items-center">
+  <div class="col-span-1 flex justify-center items-center"></div>
+  <div class="col-span-1 flex justify-center items-center">
+    <div class="w-full mx-12">
+      <div
+        class="text-whblackite sm:text-4xl text-2xl font-bold sm:mt-24 mt-8 text-center"
+      >
+        {{ "pages.home-page.sections.partners.content.description1" | translate
+        }}<br />
+        {{
+          "pages.home-page.sections.partners.content.description2" | translate
+        }}
+      </div>
+      <div class="text-black font-bold w-full mt-8 text-center">
+        {{ "pages.home-page.sections.partners.content.description3" | translate
+        }}<br />
+        {{
+          "pages.home-page.sections.partners.content.description4" | translate
+        }}
+      </div>
+      <div class="flex justify-center">
+        <button
+          class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold client-button text-lg mt-8 mb-24 text-center"
+          (click)="handleClick()"
+        >
+          {{
+            "pages.home-page.sections.partners.content.button.text" | translate
+          }}
+        </button>
+      </div>
     </div>
-    <div class="col-span-1 flex justify-center items-center">
-        <div class="w-full">
-            <div class="text-whblackite sm:text-4xl text-2xl font-bold sm:mt-24 mt-8 text-center">
-                {{ 'pages.home-page.sections.partners.content.description1' | translate }}<br>
-                {{ 'pages.home-page.sections.partners.content.description2' | translate }}
-            </div>
-            <div class="text-black font-bold sm:w-[35vw] w-full mt-8 text-center">
-                {{ 'pages.home-page.sections.partners.content.description3' | translate }}<br>
-                {{ 'pages.home-page.sections.partners.content.description4' | translate }}
-            </div>
-            <div class="flex justify-center">
-                <button class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold client-button text-lg mt-8 mb-24 text-center" (click)="handleClick()">
-                    {{ 'pages.home-page.sections.partners.content.button.text' | translate }}
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="col-span-1 flex justify-center items-center">
-        <img src="/assets/New/home-page/partners-4.png" alt="partners-3">
-    </div>
+  </div>
+  <div
+    class="col-span-1 flex justify-center items-center"
+    style="margin-right: 3rem"
+  >
+    <img
+      src="/assets/New/home-page/partners-4.jpeg"
+      alt="partners-3"
+      class="rounded-xl"
+    />
+  </div>
 </div>
