@@ -78,32 +78,32 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   // For DropDown
   isDropdownOpen = false;
-  selectedOption: string | null = null;
+  selectedOption: string = 'כתבו או בחרו שאלה להתבוננות והעמקה';
   isEditing = false;
   isEditingOption: number | null = null;
-  selectedIndex: number ;
+  selectedIndex: number;
 
   // Category
-  categoriesCard: any
+  categoriesCard: any;
   toggleRow: boolean = true;
-  selectedRowIndex : number = -1;
+  selectedRowIndex: number = -1;
 
   categoryOpenStates: { [key: number]: boolean } = {};
   selectedCategory: any;
 
   // TODO
-  multiSelectCard :Array<any> =[]
+  multiSelectCard: Array<any> = [];
   displayedCategories: Set<string> = new Set<string>(); // To track displayed categories
-  cardWidth: number = 10;  // in rem
+  cardWidth: number = 10; // in rem
   cardHeight: number = 15; // in rem
-  imageWidth: number = 160;  // in px
-  imageHeight: number = 219;  // in px
+  imageWidth: number = 160; // in px
+  imageHeight: number = 219; // in px
   aspectRatio: number = this.imageWidth / this.imageHeight;
-  containerPadding : number = 2;
-  overFlowCardContainerHeight: number =  340;
+  containerPadding: number = 2;
+  overFlowCardContainerHeight: number = 340;
 
   categoryBaseArray = [];
-  categoryScreen : boolean = false;
+  categoryScreen: boolean = false;
   constructor(
     public route: ActivatedRoute,
     private cardsService: CardsService,
@@ -131,35 +131,36 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.userData = this.userAuthService.userData;
   }
 
+  // Option Array List
+  options = [
+    {
+      text: 'בחר קלף המהווה עבורך רגע בחיים שהיית רוצה לחזור אליו. מה ההרגשה המיוחדת שהייתה ברגע הזה? מה למדת ממנו?',
+    },
+    {
+      text: 'תיחת מפגש: התבונן בתמונות מהטבע ובחר אתמזג האוויר איתו אתה מגיע למפגש היום',
+    },
+    { text: 'סיג האוויר איתו אתה יוצא מהפגישה שלנו.' },
+    { text: 'אין צורך בשאלה, אני אקח את זה מכאן' },
+    { text: 'אני רוצה לכתוב שאלה משלי!' },
+    {
+      text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות',
+      icon: '/assets/New/pack-view/book-icon.svg',
+    },
+  ];
 
-    // Option Array List
-    options = [
-      { text: 'בחר קלף המהווה עבורך רגע בחיים שהיית רוצה לחזור אליו. מה ההרגשה המיוחדת שהייתה ברגע הזה? מה למדת ממנו?' },
-      { text: 'תיחת מפגש: התבונן בתמונות מהטבע ובחר אתמזג האוויר איתו אתה מגיע למפגש היום' },
-      { text: 'סיג האוויר איתו אתה יוצא מהפגישה שלנו.' },
-      { text: 'אין צורך בשאלה, אני אקח את זה מכאן' },
-      { text: 'אני רוצה לכתוב שאלה משלי!' },
-      { 
-        text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות', 
-        icon: '/assets/New/pack-view/book-icon.svg' 
-      }
-    ];
-    
-    // Method For Trigger
-    toggleDropdown() {
-      this.isDropdownOpen = !this.isDropdownOpen;
-    }
+  // Method For Trigger
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 
   // Update selectOption method
   selectOption(option: { text: string; icon?: string }, index: number) {
-
     const lastOption = this.options[this.options.length - 1];
     if (option === lastOption) {
       this.openGuideBook();
     }
 
     if (index === this.options.length - 2) {
-
       // Make only the second-to-last option editable
       this.isEditing = true;
       this.isEditingOption = index;
@@ -174,18 +175,20 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
   // Method to save the edited option
   saveEdit(option: { text: string }, index: number) {
     if (this.isEditing && this.isEditingOption === index) {
       // Get the editable content
-      const editedText = (document.querySelector('.dropdown-option[contentEditable="true"]') as HTMLElement)?.textContent?.trim();
+      const editedText = (
+        document.querySelector(
+          '.dropdown-option[contentEditable="true"]'
+        ) as HTMLElement
+      )?.textContent?.trim();
 
       if (editedText) {
-
         // Update the option with the edited text
         this.options[index].text = editedText;
-        
+
         // Update the selectedOption to reflect the change
         this.selectedOption = editedText;
       }
@@ -212,7 +215,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   onRightClick(): boolean {
     return false;
   }
-
 
   ngOnInit(): void {
     if (this.platform.ANDROID || this.platform.IOS) {
@@ -247,13 +249,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.categoryOpenStates[index] = true;
     });
 
-    if ( this.id == 90 ) {
+    if (this.id == 90) {
       this.imageWidth = 300;
       this.imageHeight = 300;
     }
-
   }
-
 
   loadPack(): void {
     this.isLoading = true;
@@ -274,7 +274,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
   setPack(pack: PackContent | undefined): void {
     if (pack) {
       this.pack = pack;
@@ -282,11 +281,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.cardImages = this.pack.cards[0]?.cardsImages || [];
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
       this.unauthorized = this.pack.cards.length === 0;
-      if( this.pack.cards.length > 1 ){
-        this.categoriesCard = this.pack.cards
-        console.log(this.categoriesCard, "cards here")
+      if (this.pack.cards.length > 1) {
+        this.categoriesCard = this.pack.cards;
+        console.log(this.categoriesCard, 'cards here');
       }
-      console.log(this.cardImages)
+      console.log(this.cardImages);
     } else {
       this.error = 'Pack not found';
     }
@@ -350,8 +349,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   //   });
   // }
 
-
-
   // showAll() {
   //   this.categoriesCard = this.pack.cards;
   // }
@@ -371,29 +368,30 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   getFilteredCategories() {
     if (this.selectedCategory) {
-      return this.categoriesCard.filter((element) => element.categoryStepNumber === this.selectedCategory.categoryStepNumber);
+      return this.categoriesCard.filter(
+        (element) =>
+          element.categoryStepNumber ===
+          this.selectedCategory.categoryStepNumber
+      );
     }
     return this.categoriesCard;
   }
 
-showAll() {
-  this.selectedCategory = null; // Reset the selected category to show all cards
-}
+  showAll() {
+    this.selectedCategory = null; // Reset the selected category to show all cards
+  }
 
-toggle(index: number): void {
-  this.categoryOpenStates[index] = !this.categoryOpenStates[index];
-}
+  toggle(index: number): void {
+    this.categoryOpenStates[index] = !this.categoryOpenStates[index];
+  }
 
-  
   openDialog() {
     this.isDialogOpen = true;
   }
 
-
   closeDialog() {
     this.isDialogOpen = false;
   }
-
 
   checkIfImageIsPortrait(url: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -404,7 +402,6 @@ toggle(index: number): void {
     });
   }
 
-
   async checkCardOrientation(card: Card) {
     const isPortrait = await this.checkIfImageIsPortrait(
       card.cardsImages[0].frontImgUrl
@@ -414,11 +411,9 @@ toggle(index: number): void {
     // console.log(`Card at ${card.frontImgUrl} is ${isPortrait ? 'portrait' : 'landscape'}`);
   }
 
-
   changeRandomCard(b) {
     this.randomCardIndex = this.randomCardIndex + b;
   }
-
 
   multipileChanged(): void {
     this.selectedCards = [];
@@ -437,64 +432,71 @@ toggle(index: number): void {
       });
     }
   }
-  flippedCardwidth : number = 0
+  flippedCardwidth: number = 0;
 
   zoomIn() {
     if (!this.flipped) {
-    if ( this.id == 90 ) {
-      this.cardWidth += 1;
-      this.cardHeight += 1.5;  // Adjust proportionally
-      this.imageWidth += 16;  // Scale by 16px, consistent with 1rem = 16px
-      this.imageHeight = this.imageWidth / this.aspectRatio;
-      this.overFlowCardContainerHeight = this.cardHeight + 12;
-    } else {
-      this.cardWidth += 1;
-      this.cardHeight += 1.5;  // Adjust proportionally
-      this.imageWidth += 16;  // Scale by 16px, consistent with 1rem = 16px
-      this.imageHeight = this.imageWidth / this.aspectRatio;
-      this.containerPadding += 10
+      if (this.id == 90) {
+        this.cardWidth += 1;
+        this.cardHeight += 1.5; // Adjust proportionally
+        this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
+        this.imageHeight = this.imageWidth / this.aspectRatio;
+        this.overFlowCardContainerHeight = this.cardHeight + 12;
+      } else {
+        this.cardWidth += 1;
+        this.cardHeight += 1.5; // Adjust proportionally
+        this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
+        this.imageHeight = this.imageWidth / this.aspectRatio;
+        this.containerPadding += 10;
+      }
+    } else if (this.flipped) {
+      this.flippedCardwidth += 30;
     }
-  } else if (this.flipped) {
-      this.flippedCardwidth +=30
-  }
   }
   zoomOut() {
     if (!this.flipped) {
-    if ( this.id  == 90) {
-      this.cardWidth -= 1;
-      this.cardHeight -= 1.5;
-      this.imageWidth -= 16;
-      this.imageHeight = this.imageWidth / this.aspectRatio;
-      this.containerPadding += -10
-    } else {
-      if (this.cardWidth > 1) {  // Ensure width doesn't go below 1
+      if (this.id == 90) {
         this.cardWidth -= 1;
         this.cardHeight -= 1.5;
         this.imageWidth -= 16;
         this.imageHeight = this.imageWidth / this.aspectRatio;
-        this.containerPadding += -10
+        this.containerPadding += -10;
+      } else {
+        if (this.cardWidth > 1) {
+          // Ensure width doesn't go below 1
+          this.cardWidth -= 1;
+          this.cardHeight -= 1.5;
+          this.imageWidth -= 16;
+          this.imageHeight = this.imageWidth / this.aspectRatio;
+          this.containerPadding += -10;
+        }
       }
+    } else if (this.flipped) {
+      this.flippedCardwidth -= 30;
     }
   }
-    else if (this.flipped) {
-      this.flippedCardwidth -=30
-  }
-  }
 
-singleCardCheck : boolean =false;
-singleCategoryBaseCard : boolean =false;
+  singleCardCheck: boolean = false;
+  singleCategoryBaseCard: boolean = false;
 
   // TODO
-  cardSelected(card: CardComponent, index: number, flag:boolean = false, category? ): void {
-    console.log(card, index,)
+  cardSelected(
+    card: CardComponent,
+    index: number,
+    flag: boolean = false,
+    category?
+  ): void {
+    console.log(card, index);
     this.singleCategoryBaseCard = false;
-    if ( flag ) {
+    if (flag) {
       // debugger;
-      this.singleCardCheck =  true;
+      this.singleCardCheck = true;
       if (this.multipileChecked) {
         if (this.selectedCards.includes(card)) {
           this.selectedCards.splice(
-            this.selectedCards.findIndex((existingCard) => existingCard == card),
+            this.selectedCards.findIndex(
+              (existingCard) => existingCard == card
+            ),
             1
           );
           card.index = undefined;
@@ -516,14 +518,14 @@ singleCategoryBaseCard : boolean =false;
         this.toggleChosenCardsModal();
       }
     } else {
-      this.singleCardCheck =  false;
+      this.singleCardCheck = false;
       const obj = {
-        'card':card,
-        'index' :index,
-        'category':category || null,
-      }
+        card: card,
+        index: index,
+        category: category || null,
+      };
 
-      const exists = this.multiSelectCard.some(item => {
+      const exists = this.multiSelectCard.some((item) => {
         if (obj.category !== null) {
           return item.index === obj.index && item.category === obj.category;
         } else {
@@ -531,7 +533,6 @@ singleCategoryBaseCard : boolean =false;
         }
       });
       if (!exists) {
-
         this.multiSelectCard.push(obj);
       }
     }
@@ -539,15 +540,17 @@ singleCategoryBaseCard : boolean =false;
       this.categoryScreen = true;
       this.categoryBaseArray = [];
 
-      this.multiSelectCard.forEach(element => {
+      this.multiSelectCard.forEach((element) => {
         // Check if the category already exists in the categoryBaseArray
-        let categoryObj = this.categoryBaseArray.find(category => category.categoryName === element.category);
+        let categoryObj = this.categoryBaseArray.find(
+          (category) => category.categoryName === element.category
+        );
 
         if (!categoryObj) {
           // If the category does not exist, create a new one
           categoryObj = {
             categoryName: element.category,
-            cards: []
+            cards: [],
           };
           this.categoryBaseArray.push(categoryObj);
         }
@@ -556,23 +559,30 @@ singleCategoryBaseCard : boolean =false;
         categoryObj.cards.push({
           index: element.index,
           backImgUrl: element.card.backImgUrl,
-          frontImgUrl: element.card.frontImgUrl
+          frontImgUrl: element.card.frontImgUrl,
         });
       });
 
-      console.log(this.categoryBaseArray, "Category Base Array");
+      console.log(this.categoryBaseArray, 'Category Base Array');
       // Do whatever you need with categoryBaseArray here
     }
   }
 
-  categoryBaseCardSelected(card: CardComponent, index: number, flag:boolean = false, category?) {
+  categoryBaseCardSelected(
+    card: CardComponent,
+    index: number,
+    flag: boolean = false,
+    category?
+  ) {
     this.singleCategoryBaseCard = true;
-    if ( flag ) {
-      this.categoryScreen =  false;
+    if (flag) {
+      this.categoryScreen = false;
       if (this.multipileChecked) {
         if (this.selectedCards.includes(card)) {
           this.selectedCards.splice(
-            this.selectedCards.findIndex((existingCard) => existingCard == card),
+            this.selectedCards.findIndex(
+              (existingCard) => existingCard == card
+            ),
             1
           );
           card.index = undefined;
@@ -596,19 +606,17 @@ singleCategoryBaseCard : boolean =false;
     }
   }
 
-  resetCategoryFooter () {
-    console.log(this.categoryBaseArray)
+  resetCategoryFooter() {
+    console.log(this.categoryBaseArray);
 
-   this.categoryBaseArray = [];
-   this.multiSelectCard = [];
-   console.log(this.categoryBaseArray)
-
+    this.categoryBaseArray = [];
+    this.multiSelectCard = [];
+    console.log(this.categoryBaseArray);
   }
 
-
   // TODO
-  removeImage(item: { index: number, category: string | null }): void {
-    this.multiSelectCard = this.multiSelectCard.filter(card => {
+  removeImage(item: { index: number; category: string | null }): void {
+    this.multiSelectCard = this.multiSelectCard.filter((card) => {
       if (item.category !== null) {
         return card.index !== item.index || card.category !== item.category;
       } else {
@@ -618,17 +626,17 @@ singleCategoryBaseCard : boolean =false;
   }
 
   removeCategoryBaseImage(index: number, category: string): void {
-    this.categoryBaseArray = this.categoryBaseArray.map(cat => {
+    this.categoryBaseArray = this.categoryBaseArray.map((cat) => {
       if (cat.categoryName === category) {
         return {
           ...cat,
-          cards: cat.cards.filter(card => card.index !== index)
+          cards: cat.cards.filter((card) => card.index !== index),
         };
       }
       return cat;
     });
 
-    this.multiSelectCard = this.multiSelectCard.filter(card => {
+    this.multiSelectCard = this.multiSelectCard.filter((card) => {
       if (category !== null) {
         return card.index !== index || card.category !== category;
       } else {
@@ -636,39 +644,40 @@ singleCategoryBaseCard : boolean =false;
       }
     });
   }
-  
 
   showAllInDialog() {
     this.cdr.detectChanges();
     this.cdr.markForCheck();
     this.singleCategoryBaseCard = true;
     if (this.id == 90) {
-      this.categoryScreen = true
-      this.categoryBaseArray= [];
-  
-      this.multiSelectCard.forEach( element => {
+      this.categoryScreen = true;
+      this.categoryBaseArray = [];
+
+      this.multiSelectCard.forEach((element) => {
         // Check if the category already exists in the categoryBaseArray
-        let categoryObj = this.categoryBaseArray.find(category => category.categoryName === element.category);
-  
+        let categoryObj = this.categoryBaseArray.find(
+          (category) => category.categoryName === element.category
+        );
+
         if (!categoryObj) {
           // If the category does not exist, create a new one
           categoryObj = {
             categoryName: element.category,
-            cards: []
+            cards: [],
           };
           this.categoryBaseArray.push(categoryObj);
         }
-  
+
         // Push the card details into the cards array of the respective category
         categoryObj.cards.push({
           index: element.index,
           backImgUrl: element.card.backImgUrl,
-          frontImgUrl: element.card.frontImgUrl
+          frontImgUrl: element.card.frontImgUrl,
         });
       });
-  
-      console.log(this.categoryBaseArray, "Category Base Array");
-  
+
+      console.log(this.categoryBaseArray, 'Category Base Array');
+
       // Do whatever you need with categoryBaseArray here
     } else {
       this.categoryScreen = false;
@@ -677,8 +686,6 @@ singleCategoryBaseCard : boolean =false;
     }
     this.toggleChosenCardsModal();
   }
-
-
 
   shuffle(): void {
     console.log('shuffling');
@@ -725,7 +732,7 @@ singleCategoryBaseCard : boolean =false;
   // Method to update displayed categories based on multiSelectCard
   updateDisplayedCategories(): void {
     this.displayedCategories.clear();
-    this.multiSelectCard.forEach(card => {
+    this.multiSelectCard.forEach((card) => {
       if (card.category) {
         this.displayedCategories.add(card.category);
       }
@@ -737,11 +744,13 @@ singleCategoryBaseCard : boolean =false;
     if (!item.category) return false;
 
     // Find the first card in the same category
-    const firstCardIndex = this.sortedCards.findIndex(card => card.category === item.category);
+    const firstCardIndex = this.sortedCards.findIndex(
+      (card) => card.category === item.category
+    );
 
     return index === firstCardIndex;
   }
-  
+
   toggleFlipped(card): void {
     // console.log('flipped card:', card);
     card.flipped = !card.flipped;
@@ -926,7 +935,6 @@ singleCategoryBaseCard : boolean =false;
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }
-
 }
 
 @Component({

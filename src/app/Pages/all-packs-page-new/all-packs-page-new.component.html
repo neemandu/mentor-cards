@@ -1,382 +1,706 @@
-<title>{{'pages.all-packs-page-new.title' | translate}}</title>
-<div id="content" [dir]="langDirectionService.currentLangDirection" class=" bg-[#fcf4f2] min-h-screen ">
-    <div class=" min-h-screen">
-        <div class=" flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2" *ngIf="isMobileScreen">
-            <div class="items-center h-4 flex me-4">
-                <mat-form-field class=" w-60">
-                    <mat-label>{{'pages.all-packs-page.new-search-placeholder' | translate}}</mat-label>
-                    <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
-                        (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
-                    <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0"
-                        class="autocomplete-options absolute z-40 bg-white " id="autocomplete-options">
-                        <mat-option *ngFor="let option of filteredOptions; let i = index"
-                            (keydown)="handleKeyDown($event)" #autocompleteOptions (click)="selectOption(option)">
-                            {{ option }}
-                        </mat-option>
-                    </div>
-                </mat-form-field>
-                <img src="/assets/New/nav-bar/search.svg" alt="user image" class="h-4 ms-2" />
-            </div>
+<title>{{ "pages.all-packs-page-new.title" | translate }}</title>
+<div
+  id="content"
+  [dir]="langDirectionService.currentLangDirection"
+  class="bg-[#fcf4f2] min-h-screen"
+>
+  <div class="min-h-screen">
+    <div
+      class="flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2"
+      *ngIf="isMobileScreen"
+    >
+      <div class="items-center h-4 flex me-4">
+        <mat-form-field class="w-60">
+          <mat-label>{{
+            "pages.all-packs-page.new-search-placeholder" | translate
+          }}</mat-label>
+          <input
+            #filterText
+            matInput
+            type="text"
+            autocomplete="off"
+            [(ngModel)]="freeTextFilterSelected"
+            (keyup)="filterOptions()"
+            (keydown)="handleKeyDown($event)"
+          />
+          <div
+            *ngIf="!stopGenerateOptions && filteredOptions.length > 0"
+            class="autocomplete-options absolute z-40 bg-white"
+            id="autocomplete-options"
+          >
+            <mat-option
+              *ngFor="let option of filteredOptions; let i = index"
+              (keydown)="handleKeyDown($event)"
+              #autocompleteOptions
+              (click)="selectOption(option)"
+            >
+              {{ option }}
+            </mat-option>
+          </div>
+        </mat-form-field>
+        <img
+          src="/assets/New/nav-bar/search.svg"
+          alt="user image"
+          class="h-4 ms-2"
+        />
+      </div>
 
-            <button (click)="openFilterDialog()">
-                <img src="/assets/New/home-page/icons/settings.svg" alt="" class=" ms-4">
-            </button>
-        </div>
-        <div class="w-screen overflow-x-scroll lg:overflow-visible mb-2 z-20" style="margin-bottom: 20px; "
-            [ngStyle]="isMobileScreen ? {'padding-right':' 0px'} : {'padding-right': '15px'}">
-
-            <div id="content" [dir]="langDirectionService.currentLangDirection"
-                [ngClass]="{'content-ltr': langDirectionService.currentLangDirection === 'ltr', 'content-rtl': langDirectionService.currentLangDirection === 'rtl'}"
-                class=" w-[1350px]  mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center">
-                <div *ngIf="!isMobileScreen" class="w-[13%] border-black h-[90%] px-2"
-                    [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
-                    <div class="text-center" style="font-weight: 700; font-size: 12px;">
-                        {{'pages.all-packs-page-new.content.favorites' | translate}}
-                    </div>
-                    <div class=" grid grid-cols-2 w-full justify-between pt-2">
-                        <app-filters class=" col-span-1" [imageSrc]="'/assets/New/home-page/cards/0.svg'"
-                            [buttonText]="'המועדפים עלי'" [filterText]="''" (categoryClick)="toggleIsFavSelected()" [isActive]="isfavSelected">
-                        </app-filters>
-                        <app-filters class=" col-span-1" [imageSrc]="'/assets/New/home-page/cards/12.svg'"
-                            [buttonText]="'לכל הערכות'" [filterText]="''" (categoryClick)="handleCategoryClick($event)"  [isActive]="'' === selectedCardFilter">
-                        </app-filters>
-                    </div>
-                </div>
-                <div class="h-[90%] sm:w-[60%] w-[100%] border-black"
-                    [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
-                    <div *ngIf="!isMobileScreen" class="text-right"
-                        style="font-weight: 700; font-size: 12px; margin-right: .5rem; ">
-                        {{'pages.all-packs-page-new.content.favorites' | translate}}
-                    </div>
-                    <div class="grid grid-cols-11 me-4 pt-2">
-                        <app-filters *ngFor="let filter of filterList" [imageSrc]="filter.image"
-                            [buttonText]="filter.buttonText" [filterText]="filter.filterText"   [isActive]="filter.filterText === selectedCardFilter"
-                            (categoryClick)="handleCategoryClick($event)" class="col-span-1">
-                        </app-filters>
-                    </div>
-                </div>
-
-                <div *ngIf="!isMobileScreen" class="w-[24%] flex items-start  h-[100%]  ">
-                    <div class="text-right  border-black h-[90%]" style="padding-inline: 10px;"
-                        [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
-                        <div style="font-weight: 700; font-size: 12px; margin-bottom: 10px;">
-                            {{'pages.all-packs-page-new.content.cardTypes' | translate}}</div>
-                        <div style="font-size: 12px;">
-                            {{'pages.all-packs-page-new.content.cardDisplayTypes' | translate}}
-
-                        </div>
-                        <div class="flex gap-4 mt-4">
-                            <div>
-                                <input type="checkbox" id="checkbox1" name="checkbox1" [(ngModel)]="filterOption.image"
-                                    (ngModelChange)="categoriesSelectedChange('קלפי תמונה')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;"
-                                    for="checkbox1">{{'pages.all-packs-page-new.content.image' | translate}}</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="checkbox2" name="checkbox2"
-                                    [(ngModel)]="filterOption.question"
-                                    (ngModelChange)="categoriesSelectedChange('קלפי שאלות')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;"
-                                    for="checkbox2">{{'pages.all-packs-page-new.content.question' | translate}}</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="checkbox3" name="checkbox3" [(ngModel)]="filterOption.word"
-                                    (ngModelChange)="categoriesSelectedChange('קלפי מילה')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;"
-                                    for="checkbox3">{{'pages.all-packs-page-new.content.word' | translate}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-right border-black h-[90%]" style="padding-inline: 10px;"
-                        [ngClass]="{'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr', 'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'}">
-                        <div *ngIf="!isMobileScreen" style="font-weight: 700; font-size: 12px; margin-bottom: 10px;">
-                            {{'pages.all-packs-page-new.content.meetingLanguage' | translate}}</div>
-                        <div *ngIf="!isMobileScreen" style="font-size: 12px;">
-                            {{'pages.all-packs-page-new.content.cardLanguageAndGuide' |
-                            translate}}</div>
-                        <div class="flex gap-4 mt-4">
-                            <div>
-                                <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="he" (ngModelChange)="handlePacksLanguageChange('he')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio4">עברית</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="radio3" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="en" (ngModelChange)="handlePacksLanguageChange('en')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio3">English</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="ar" (ngModelChange)="handlePacksLanguageChange('ar')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio2">عربية</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="ru" (ngModelChange)="handlePacksLanguageChange('ru')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio1">Русский</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                                    value="he" (ngModelChange)="handlePacksLanguageChange('es')"
-                                    style="accent-color: #000000;">
-                                <label style="font-size: 10px;" for="radio4">Español</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="!isMobileScreen" class="w-[7%] border-black h-[90%] ">
-                    <div class="h-8">&nbsp;</div>
-                    <app-filters [imageSrc]="'/assets/New/home-page/cards/undo.svg'" [buttonText]="'איפוס חיפוש'"
-                        [filterText]="''" (categoryClick)="handleResetClick()">
-                    </app-filters>
-                </div>
-            </div>
-        </div>
-
-        <div id="test" class="all-packs-view" #new>
-
-            <div *ngIf="!showCategoryLine && !isfavSelected" class=" mt-2 sm:mt-16">
-
-                <div class="mt-8 sm:text-4xl text-2xl text-center font-bold mb-16">
-                    {{'pages.all-packs-page-new.content.packsForYourMeeting' | translate}}</div>
-                <div class="all-packs-view__section flex justify-between mb-16">
-                    <div
-                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
-                        &nbsp;</div>
-                    <div #packScrollContainer
-                        class="scroller overflow-x-scroll w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
-                        (mousemove)="onMouseMove($event, packScrollContainer)">
-                        <div *ngFor="let packInfo of allPacks; let j = index" class=" col-span-1">
-                            <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color" class=""
-                                [packInfo]="packInfo" [index]="j" [lastIndex]="allPacks?.length-1" (loaded)="packLoaded()">
-                            </app-packs-card>
-                        </div>
-                    </div>
-                    <div
-                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
-                        &nbsp;</div>
-                </div>
-            </div>
-
-            <div *ngIf="!isfavSelected && showCategoryLine && selectedFavorites.length == 0 && allCategoryPacks.length >= 0 "
-                class=" mt-2 sm:mt-16">
-                <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between "
-                    *ngIf="allCategoryPacks[0]">
-                    <div
-                        class="  sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
-                        {{allCategoryPacks[0]?.category}} </div>
-                    <div #allPacksScrollContainer
-                        class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 sm:mb-16 mb-8"
-                        (mousemove)="onMouseMove($event, allPacksScrollContainer)">
-                        <div *ngFor="let packInfo of allCategoryPacks[0].packs; let j = index">
-                            <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color"
-                                [packInfo]="packInfo" [index]="j" [lastIndex]="allCategoryPacks[0].packs?.length-1" (loaded)="packLoaded()">
-                            </app-packs-card>
-                        </div>
-                    </div>
-                </div>
-                <div class="all-packs-view__section flex flex-col sm:flex-row  justify-between ">
-                    <div *ngIf="!isLoading"
-                        class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 ">
-                        כל הערכות</div>
-                    <div #allPacksScrollContainer
-                        class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
-                        (mousemove)="onMouseMove($event, allPacksScrollContainer)">
-                        <app-subscribe-card *ngIf="!isLoading"></app-subscribe-card>
-                        <div *ngFor="let packInfo of allPacks; let k = index">
-                            <app-packs-card [backgroundColor]="cardsColors[k % cardsColors.length].color" class=""
-                                [packInfo]="packInfo" [index]="k" [lastIndex]="allPacks?.length-1" (loaded)="packLoaded()">
-                            </app-packs-card>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="all-packs-view__section flex flex-col sm:flex-row justify-between"
-                    *ngFor="let categoryPacks of allCategoryPacks; let i = index">
-
-                    <div *ngIf="i > 0 && categoryPacks?.category"
-                        class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4">
-                        {{categoryPacks?.category}} </div>
-                    <div *ngIf="categoryPacks  && i>0 " #allPacksScrollContainer
-                        class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0  mb-16 "
-                        (mousemove)="onMouseMove($event, allPacksScrollContainer)">
-                        <div *ngFor="let packInfo of categoryPacks.packs; let j = index">
-                            <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color"
-                                [packInfo]="packInfo" [index]="j" [lastIndex]="categoryPacks.packs?.length-1" (loaded)="packLoaded()">
-                            </app-packs-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div *ngIf="isfavSelected" class=" mt-2 sm:mt-16">
-                <div class="all-packs-view__section flex justify-between mb-16 ">
-                    <div
-                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
-                        &nbsp;</div>
-                    <div #allFavPackScrollContainer
-                        class="scroller  w-[100%] gap-4  grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
-                        (mousemove)="onMouseMove($event, allFavPackScrollContainer)">
-                        <div *ngFor="let packInfo of allFavPacks; let j = index" class=" col-span-1">
-                            <app-packs-card [backgroundColor]="cardsColors[j % cardsColors.length].color"
-                                [packInfo]="packInfo"  [lastIndex]="allFavPacks?.length-1"  [isFavCard]="true" (loaded)="packLoaded()">
-                            </app-packs-card>
-                        </div>
-                    </div>
-                    <div
-                        class=" w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4">
-                        &nbsp;</div>
-                </div>
-            </div>
-        </div>
+      <button (click)="openFilterDialog()">
+        <img
+          src="/assets/New/home-page/icons/settings.svg"
+          alt=""
+          class="ms-4"
+        />
+      </button>
     </div>
-    <app-home-page-footer></app-home-page-footer>
+    <div
+      class="w-screen overflow-x-scroll lg:overflow-visible mb-2 z-20"
+      style="margin-bottom: 20px"
+      [ngStyle]="
+        isMobileScreen
+          ? { 'padding-right': ' 0px' }
+          : { 'padding-right': '15px' }
+      "
+    >
+      <div
+        id="content"
+        [dir]="langDirectionService.currentLangDirection"
+        [ngClass]="{
+          'content-ltr': langDirectionService.currentLangDirection === 'ltr',
+          'content-rtl': langDirectionService.currentLangDirection === 'rtl'
+        }"
+        class="w-[1350px] mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center"
+      >
+        <div
+          *ngIf="!isMobileScreen"
+          class="w-[13%] border-black h-[90%] px-2"
+          [ngClass]="{
+            'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr',
+            'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'
+          }"
+        >
+          <div class="text-center" style="font-weight: 700; font-size: 12px">
+            {{ "pages.all-packs-page-new.content.favorites" | translate }}
+          </div>
+          <div class="grid grid-cols-2 w-full justify-between pt-2">
+            <app-filters
+              class="col-span-1"
+              [imageSrc]="'/assets/New/home-page/cards/0.svg'"
+              [buttonText]="'המועדפים עלי'"
+              [filterText]="''"
+              (categoryClick)="toggleIsFavSelected()"
+              [isActive]="isfavSelected"
+            >
+            </app-filters>
+            <app-filters
+              class="col-span-1"
+              [imageSrc]="'/assets/New/home-page/cards/12.svg'"
+              [buttonText]="'לכל הערכות'"
+              [filterText]="''"
+              (categoryClick)="handleCategoryClick($event)"
+              [isActive]="'' === selectedCardFilter"
+            >
+            </app-filters>
+          </div>
+        </div>
+        <div
+          class="h-[90%] sm:w-[60%] w-[100%] border-black"
+          [ngClass]="{
+            'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr',
+            'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'
+          }"
+        >
+          <div
+            *ngIf="!isMobileScreen"
+            class="text-right"
+            style="font-weight: 700; font-size: 12px; margin-right: 0.5rem"
+          >
+            {{ "pages.all-packs-page-new.content.favorites" | translate }}
+          </div>
+          <div class="grid grid-cols-11 me-4 pt-2">
+            <app-filters
+              *ngFor="let filter of filterList"
+              [imageSrc]="filter.image"
+              [buttonText]="filter.buttonText"
+              [filterText]="filter.filterText"
+              [isActive]="filter.filterText === selectedCardFilter"
+              (categoryClick)="handleCategoryClick($event)"
+              class="col-span-1"
+            >
+            </app-filters>
+          </div>
+        </div>
+
+        <div *ngIf="!isMobileScreen" class="w-[24%] flex items-start h-[100%]">
+          <div
+            class="text-right border-black h-[90%]"
+            style="padding-inline: 10px"
+            [ngClass]="{
+              'sm:border-r-2':
+                langDirectionService.currentLangDirection == 'ltr',
+              'sm:border-l-2':
+                langDirectionService.currentLangDirection != 'ltr'
+            }"
+          >
+            <div style="font-weight: 700; font-size: 12px; margin-bottom: 10px">
+              {{ "pages.all-packs-page-new.content.cardTypes" | translate }}
+            </div>
+            <div style="font-size: 12px">
+              {{
+                "pages.all-packs-page-new.content.cardDisplayTypes" | translate
+              }}
+            </div>
+            <div class="flex gap-4 mt-4">
+              <div>
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  name="checkbox1"
+                  [(ngModel)]="filterOption.image"
+                  (ngModelChange)="categoriesSelectedChange('קלפי תמונה')"
+                  style="accent-color: #000000"
+                />
+                <label style="font-size: 10px" for="checkbox1">{{
+                  "pages.all-packs-page-new.content.image" | translate
+                }}</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="checkbox2"
+                  name="checkbox2"
+                  [(ngModel)]="filterOption.question"
+                  (ngModelChange)="categoriesSelectedChange('קלפי שאלות')"
+                  style="accent-color: #000000"
+                />
+                <label style="font-size: 10px" for="checkbox2">{{
+                  "pages.all-packs-page-new.content.question" | translate
+                }}</label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="checkbox3"
+                  name="checkbox3"
+                  [(ngModel)]="filterOption.word"
+                  (ngModelChange)="categoriesSelectedChange('קלפי מילה')"
+                  style="accent-color: #000000"
+                />
+                <label style="font-size: 10px" for="checkbox3">{{
+                  "pages.all-packs-page-new.content.word" | translate
+                }}</label>
+              </div>
+            </div>
+          </div>
+          <div
+            class="text-right border-black h-[90%]"
+            style="padding-inline: 10px"
+            [ngClass]="{
+              'sm:border-r-2':
+                langDirectionService.currentLangDirection == 'ltr',
+              'sm:border-l-2':
+                langDirectionService.currentLangDirection != 'ltr'
+            }"
+          >
+            <div
+              *ngIf="!isMobileScreen"
+              style="font-weight: 700; font-size: 12px; margin-bottom: 10px"
+            >
+              {{
+                "pages.all-packs-page-new.content.meetingLanguage" | translate
+              }}
+            </div>
+            <div *ngIf="!isMobileScreen" style="font-size: 12px">
+              {{
+                "pages.all-packs-page-new.content.cardLanguageAndGuide"
+                  | translate
+              }}
+            </div>
+            <div class="flex gap-4 mt-4">
+              <div>
+                <input
+                  type="radio"
+                  id="he"
+                  name="language"
+                  style="accent-color: #000000"
+                  value="he"
+                  [checked]="filterOption.language === 'he'"
+                  (change)="handlePacksLanguageChange('he')"
+                />
+                <label for="he" style="font-size: 10px">עברית</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="en"
+                  name="language"
+                  style="accent-color: #000000"
+                  value="en"
+                  [checked]="filterOption.language === 'en'"
+                  (change)="handlePacksLanguageChange('en')"
+                />
+                <label for="en" style="font-size: 10px">English</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="ar"
+                  name="language"
+                  style="accent-color: #000000"
+                  value="ar"
+                  [checked]="filterOption.language === 'ar'"
+                  (change)="handlePacksLanguageChange('ar')"
+                />
+                <label for="ar" style="font-size: 10px">عربية</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="ru"
+                  name="language"
+                  style="accent-color: #000000"
+                  value="ru"
+                  [checked]="filterOption.language === 'ru'"
+                  (change)="handlePacksLanguageChange('ru')"
+                />
+                <label for="ru" style="font-size: 10px">Русский</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="es"
+                  name="language"
+                  style="accent-color: #000000"
+                  value="es"
+                  [checked]="filterOption.language === 'es'"
+                  (change)="handlePacksLanguageChange('es')"
+                />
+                <label for="es" style="font-size: 10px">Español</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!isMobileScreen" class="w-[7%] border-black h-[90%]">
+          <div class="h-8">&nbsp;</div>
+          <app-filters
+            [imageSrc]="'/assets/New/home-page/cards/undo.svg'"
+            [buttonText]="'איפוס חיפוש'"
+            [filterText]="''"
+            (categoryClick)="handleResetClick()"
+          >
+          </app-filters>
+        </div>
+      </div>
+    </div>
+
+    <div id="test" class="all-packs-view" #new>
+      <div *ngIf="!showCategoryLine && !isfavSelected" class="mt-2 sm:mt-16">
+        <div class="mt-8 sm:text-4xl text-2xl text-center font-bold mb-16">
+          {{
+            "pages.all-packs-page-new.content.packsForYourMeeting" | translate
+          }}
+        </div>
+        <div class="all-packs-view__section flex justify-between mb-16">
+          <div
+            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
+          >
+            &nbsp;
+          </div>
+          <div
+            #packScrollContainer
+            class="scroller overflow-x-scroll w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+            (mousemove)="onMouseMove($event, packScrollContainer)"
+          >
+            <div
+              *ngFor="let packInfo of allPacks; let j = index"
+              class="col-span-1"
+            >
+              <app-packs-card
+                [backgroundColor]="cardsColors[j % cardsColors.length].color"
+                class=""
+                [packInfo]="packInfo"
+                [index]="j"
+                [lastIndex]="allPacks?.length - 1"
+                (loaded)="packLoaded()"
+              >
+              </app-packs-card>
+            </div>
+          </div>
+          <div
+            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
+          >
+            &nbsp;
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          !isfavSelected &&
+          showCategoryLine &&
+          selectedFavorites.length == 0 &&
+          allCategoryPacks.length >= 0
+        "
+        class="mt-2 sm:mt-16"
+      >
+        <div
+          class="all-packs-view__section flex flex-col sm:flex-row justify-between"
+          *ngIf="allCategoryPacks[0]"
+        >
+          <div
+            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4"
+          >
+            {{ allCategoryPacks[0]?.category }}
+          </div>
+          <div
+            #allPacksScrollContainer
+            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 sm:mb-16 mb-8"
+            (mousemove)="onMouseMove($event, allPacksScrollContainer)"
+          >
+            <div
+              *ngFor="let packInfo of allCategoryPacks[0].packs; let j = index"
+            >
+              <app-packs-card
+                [backgroundColor]="cardsColors[j % cardsColors.length].color"
+                [packInfo]="packInfo"
+                [index]="j"
+                [lastIndex]="allCategoryPacks[0].packs?.length - 1"
+                (loaded)="packLoaded()"
+              >
+              </app-packs-card>
+            </div>
+          </div>
+        </div>
+        <div
+          class="all-packs-view__section flex flex-col sm:flex-row justify-between"
+        >
+          <div
+            *ngIf="!isLoading"
+            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4"
+          >
+            כל הערכות
+          </div>
+          <div
+            #allPacksScrollContainer
+            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
+            (mousemove)="onMouseMove($event, allPacksScrollContainer)"
+          >
+            <app-subscribe-card *ngIf="!isLoading"></app-subscribe-card>
+            <div *ngFor="let packInfo of allPacks; let k = index">
+              <app-packs-card
+                [backgroundColor]="cardsColors[k % cardsColors.length].color"
+                class=""
+                [packInfo]="packInfo"
+                [index]="k"
+                [lastIndex]="allPacks?.length - 1"
+                (loaded)="packLoaded()"
+              >
+              </app-packs-card>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="all-packs-view__section flex flex-col sm:flex-row justify-between"
+          *ngFor="let categoryPacks of allCategoryPacks; let i = index"
+        >
+          <div
+            *ngIf="i > 0 && categoryPacks?.category"
+            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4"
+          >
+            {{ categoryPacks?.category }}
+          </div>
+          <div
+            *ngIf="categoryPacks && i > 0"
+            #allPacksScrollContainer
+            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
+            (mousemove)="onMouseMove($event, allPacksScrollContainer)"
+          >
+            <div *ngFor="let packInfo of categoryPacks.packs; let j = index">
+              <app-packs-card
+                [backgroundColor]="cardsColors[j % cardsColors.length].color"
+                [packInfo]="packInfo"
+                [index]="j"
+                [lastIndex]="categoryPacks.packs?.length - 1"
+                (loaded)="packLoaded()"
+              >
+              </app-packs-card>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="isfavSelected" class="mt-2 sm:mt-16">
+        <div class="all-packs-view__section flex justify-between mb-16">
+          <div
+            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
+          >
+            &nbsp;
+          </div>
+          <div
+            #allFavPackScrollContainer
+            class="scroller w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+            (mousemove)="onMouseMove($event, allFavPackScrollContainer)"
+          >
+            <div
+              *ngFor="let packInfo of allFavPacks; let j = index"
+              class="col-span-1"
+            >
+              <app-packs-card
+                [backgroundColor]="cardsColors[j % cardsColors.length].color"
+                [packInfo]="packInfo"
+                [lastIndex]="allFavPacks?.length - 1"
+                [isFavCard]="true"
+                (loaded)="packLoaded()"
+              >
+              </app-packs-card>
+            </div>
+          </div>
+          <div
+            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
+          >
+            &nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-home-page-footer></app-home-page-footer>
 </div>
 
-
-
-<!-- Web Screen Chat Component at the Bottom -->
-<div style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10;" class="hidden sm:block">
+<!-- <div style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10;" class="hidden sm:block">
     <app-ai-chat [userStatus]="sanitizedUserStatus" [placeholderText]="placeholderText"
         class="flex justify-end"></app-ai-chat>
 </div>
-<!-- Mobile View Chat Bubble -->
 <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); justify-content: center; align-items: center; z-index: 10; width: 80vw;"
     class="sm:hidden flex">
     <div class="message-bubble" (click)="openChatDialog()">
         <img src="/assets/New/home-page/icons/chat-icon.svg" alt="" style="margin-left: 1rem;">
         <p>קשה לבחור? רוצה להתייעץ?</p>
     </div>
-</div>
+</div> -->
 
+<div
+  *ngIf="isFilterDialogOpen"
+  class="fixed inset-0 z-20 bg-gray-950 bg-opacity-80 overflow-y-auto h-full w-full flex items-center justify-center"
+>
+  <div
+    style="
+      background-color: white;
+      width: 80vw;
+      border-radius: 10px;
+      position: relative;
+    "
+  >
+    <div>
+      <button
+        mat-icon-button
+        (click)="closeFilterDialog()"
+        style="position: absolute; top: 0; right: 0"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <div class="text-center font-bold text-lg mt-2">
+        אפשרויות סינון מתקדמות
+      </div>
+      <div
+        class="grid grid-cols-2 mt-8 border-b-2 border-black pb-4 w-[90%] mx-auto"
+      >
+        <label class="grid col-span-1 justify-center">
+          <input
+            type="radio"
+            class="large-radio"
+            name="filter"
+            value="fav"
+            (change)="handleFilterChange('fav')"
+            [(ngModel)]="selectedFilter"
+            style="accent-color: #000000"
+          />
+          {{ "pages.all-packs-page-new.filterText.המועדפים עלי" | translate }}
+        </label>
+        <label class="grid col-span-1 justify-center">
+          <input
+            type="radio"
+            class="large-radio"
+            name="filter"
+            value="category"
+            (change)="handleFilterChange('category')"
+            [(ngModel)]="selectedFilter"
+            style="accent-color: #000000"
+          />
+          {{ "pages.all-packs-page-new.filterText.לכל הערכות" | translate }}
+        </label>
+      </div>
 
-<div *ngIf="isFilterDialogOpen"
-    class="fixed inset-0 z-20 bg-gray-950 bg-opacity-80 overflow-y-auto h-full w-full flex items-center justify-center">
-    <div style="background-color: white; width: 80vw; border-radius: 10px; position: relative;">
-        <div>
-
-            <button mat-icon-button (click)="closeFilterDialog()" style="position: absolute; top: 0; right: 0;">
-                <mat-icon>close</mat-icon>
-            </button>
-            <div class="text-center font-bold text-lg mt-2">
-                אפשרויות סינון מתקדמות
-            </div>
-            <div class="grid grid-cols-2 mt-8 border-b-2 border-black pb-4 w-[90%] mx-auto">
-                <label class="grid col-span-1 justify-center">
-                    <input type="radio" class="large-radio" name="filter" value="fav"
-                        (change)="handleFilterChange('fav')" [(ngModel)]="selectedFilter"
-                        style="accent-color: #000000;">
-                    {{ 'pages.all-packs-page-new.filterText.המועדפים עלי' | translate }}
-                </label>
-                <label class="grid col-span-1 justify-center">
-                    <input type="radio" class="large-radio" name="filter" value="category"
-                        (change)="handleFilterChange('category')" [(ngModel)]="selectedFilter"
-                        style="accent-color: #000000;">
-                    {{ 'pages.all-packs-page-new.filterText.לכל הערכות' | translate }}
-                </label>
-            </div>
-
-            <div class="mt-8 border-b-2 border-black pb-4 w-[90%] mx-auto">
-                <div class="text-center" style="font-weight: 700; font-size: 16px; margin-bottom: 10px;">
-                    {{ 'pages.all-packs-page-new.content.cardTypes' | translate }}
-                </div>
-                <div class="text-center">
-                    {{ 'pages.all-packs-page-new.content.cardDisplayTypes' | translate }}
-                </div>
-                <div class="flex gap-4 justify-center mt-4">
-                    <div>
-                        <input type="checkbox" id="checkbox1" name="checkbox1" [(ngModel)]="filterOption.image"
-                            (ngModelChange)="categoriesSelectedChange('קלפי תמונה')" style="accent-color: #000000;"
-                            class="large-radio">
-                        <div style="font-size: 13px;" for="checkbox1">{{ 'pages.all-packs-page-new.content.image' |
-                            translate }}</div>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="checkbox2" name="checkbox2" [(ngModel)]="filterOption.question"
-                            (ngModelChange)="categoriesSelectedChange('קלפי שאלות')" style="accent-color: #000000;"
-                            class="large-radio">
-                        <div style="font-size: 13px;" for="checkbox2">{{ 'pages.all-packs-page-new.content.question' |
-                            translate }}</div>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="checkbox3" name="checkbox3" [(ngModel)]="filterOption.word"
-                            (ngModelChange)="categoriesSelectedChange('קלפי מילה')" style="accent-color: #000000;"
-                            class="large-radio">
-                        <div style="font-size: 13px;" for="checkbox3">{{ 'pages.all-packs-page-new.content.word' |
-                            translate }}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 border-b-2 border-black  pb-4 w-[90%] mx-auto">
-                <div class="text-center" *ngIf="isMobileScreen"
-                    style="font-weight: 700; font-size: 16px; margin-bottom: 10px;">
-                    {{ 'pages.all-packs-page-new.content.meetingLanguage' | translate }}
-                </div>
-                <div class="text-center" *ngIf="isMobileScreen" style="font-size: 12px;">
-                    {{ 'pages.all-packs-page-new.content.cardLanguageAndGuide' | translate }}
-                </div>
-                <div class="flex gap-4 mt-4 justify-center">
-                    <div>
-                        <input type="radio" id="radio1" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="ru" (ngModelChange)="handlePacksLanguageChange('ru')"
-                            style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio1">Русский</div>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio2" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="ar" (ngModelChange)="handlePacksLanguageChange('ar')"
-                            style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio2">عربية</div>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio3" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="en" (ngModelChange)="handlePacksLanguageChange('en')"
-                            style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio3">English</div>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="he" (ngModelChange)="handlePacksLanguageChange('he')"
-                            style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio4">עברית</div>
-                    </div>
-                    <div>
-                        <input type="radio" id="radio4" name="radioGroup" [(ngModel)]="filterOption.language"
-                            value="he" (ngModelChange)="handlePacksLanguageChange('es')"
-                            style="accent-color: #000000;" class="large-radio">
-                        <div style="font-size: 10px;" for="radio4">Español</div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 mt-8 justify-center">
-                <div class="flex justify-center">
-                    <button class="flex justify-center items-center mx-1  min-w-20  m-2 flex-col "
-                        (click)="closeFilterDialog()">
-                        <div class="pt-3 pb-2">
-                            <img src="/assets/New/home-page/icons/settings.svg" alt="" class=" ms-4">
-                        </div>
-                        <div style="font-weight: 700; font-size: 10px;"> סנן חבילות</div>
-                    </button>
-                </div>
-                <div class="flex justify-center">
-                    <button class="flex justify-center items-center mx-1  min-w-20  m-2 flex-col "
-                        (click)="handleResetClick()">
-                        <div class="pt-3 pb-2">
-                            <img src="/assets/New/home-page/cards/13.svg" alt="" class=" ms-4">
-                        </div>
-                        <div style="font-weight: 700; font-size: 10px;">איפוס חיפוש</div>
-                    </button>
-                </div>
-            </div>
+      <div class="mt-8 border-b-2 border-black pb-4 w-[90%] mx-auto">
+        <div
+          class="text-center"
+          style="font-weight: 700; font-size: 16px; margin-bottom: 10px"
+        >
+          {{ "pages.all-packs-page-new.content.cardTypes" | translate }}
         </div>
+        <div class="text-center">
+          {{ "pages.all-packs-page-new.content.cardDisplayTypes" | translate }}
+        </div>
+        <div class="flex gap-4 justify-center mt-4">
+          <div>
+            <input
+              type="checkbox"
+              id="checkbox1"
+              name="checkbox1"
+              [(ngModel)]="filterOption.image"
+              (ngModelChange)="categoriesSelectedChange('קלפי תמונה')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 13px" for="checkbox1">
+              {{ "pages.all-packs-page-new.content.image" | translate }}
+            </div>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="checkbox2"
+              name="checkbox2"
+              [(ngModel)]="filterOption.question"
+              (ngModelChange)="categoriesSelectedChange('קלפי שאלות')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 13px" for="checkbox2">
+              {{ "pages.all-packs-page-new.content.question" | translate }}
+            </div>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="checkbox3"
+              name="checkbox3"
+              [(ngModel)]="filterOption.word"
+              (ngModelChange)="categoriesSelectedChange('קלפי מילה')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 13px" for="checkbox3">
+              {{ "pages.all-packs-page-new.content.word" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="mt-8 border-b-2 border-black pb-4 w-[90%] mx-auto">
+        <div
+          class="text-center"
+          *ngIf="isMobileScreen"
+          style="font-weight: 700; font-size: 16px; margin-bottom: 10px"
+        >
+          {{ "pages.all-packs-page-new.content.meetingLanguage" | translate }}
+        </div>
+        <div class="text-center" *ngIf="isMobileScreen" style="font-size: 12px">
+          {{
+            "pages.all-packs-page-new.content.cardLanguageAndGuide" | translate
+          }}
+        </div>
+        <div class="flex gap-4 mt-4 justify-center">
+          <div>
+            <input
+              type="radio"
+              id="radio1"
+              name="radioGroup"
+              [(ngModel)]="filterOption.language"
+              value="ru"
+              (ngModelChange)="handlePacksLanguageChange('ru')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 10px" for="radio1">Русский</div>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="radio2"
+              name="radioGroup"
+              [(ngModel)]="filterOption.language"
+              value="ar"
+              (ngModelChange)="handlePacksLanguageChange('ar')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 10px" for="radio2">عربية</div>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="radio3"
+              name="radioGroup"
+              [(ngModel)]="filterOption.language"
+              value="en"
+              (ngModelChange)="handlePacksLanguageChange('en')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 10px" for="radio3">English</div>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="radio4"
+              name="radioGroup"
+              [(ngModel)]="filterOption.language"
+              value="he"
+              (ngModelChange)="handlePacksLanguageChange('he')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 10px" for="radio4">עברית</div>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="radio4"
+              name="radioGroup"
+              [(ngModel)]="filterOption.language"
+              value="he"
+              (ngModelChange)="handlePacksLanguageChange('es')"
+              style="accent-color: #000000"
+              class="large-radio"
+            />
+            <div style="font-size: 10px" for="radio4">Español</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 mt-8 justify-center">
+        <div class="flex justify-center">
+          <button
+            class="flex justify-center items-center mx-1 min-w-20 m-2 flex-col"
+            (click)="closeFilterDialog()"
+          >
+            <div class="pt-3 pb-2">
+              <img
+                src="/assets/New/home-page/icons/settings.svg"
+                alt=""
+                class="ms-4"
+              />
+            </div>
+            <div style="font-weight: 700; font-size: 10px">סנן חבילות</div>
+          </button>
+        </div>
+        <div class="flex justify-center">
+          <button
+            class="flex justify-center items-center mx-1 min-w-20 m-2 flex-col"
+            (click)="handleResetClick()"
+          >
+            <div class="pt-3 pb-2">
+              <img
+                src="/assets/New/home-page/cards/13.svg"
+                alt=""
+                class="ms-4"
+              />
+            </div>
+            <div style="font-weight: 700; font-size: 10px">איפוס חיפוש</div>
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

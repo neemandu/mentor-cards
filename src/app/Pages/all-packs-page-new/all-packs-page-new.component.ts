@@ -35,7 +35,7 @@ interface CategoryPack {
 @Component({
   selector: 'app-all-packs-page-new',
   templateUrl: './all-packs-page-new.component.html',
-  styleUrls: ['./all-packs-page-new.component.css']
+  styleUrls: ['./all-packs-page-new.component.css'],
 })
 export class AllPacksPageNewComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
@@ -45,7 +45,6 @@ export class AllPacksPageNewComponent implements OnInit {
   isMobileScreen: boolean;
   placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
 
-
   Subscription: Subscription = new Subscription();
   filteredOptions = [];
   allOptions = [];
@@ -53,7 +52,7 @@ export class AllPacksPageNewComponent implements OnInit {
     image: false,
     question: false,
     word: false,
-    language: 'he'
+    language: 'he',
   };
   // mobile: boolean;
 
@@ -95,18 +94,62 @@ export class AllPacksPageNewComponent implements OnInit {
   private queryParamSubscription: Subscription;
 
   filterList = [
-    { filterText: 'הכרות וחיבור', buttonText: 'הכרות וחיבור', image: '/assets/New/home-page/cards/1.svg' },
-    { filterText: 'מערכות יחסים', buttonText: 'מערכות יחסים', image: '/assets/New/home-page/cards/2.svg' },
-    { filterText: 'ילדים ונוער', buttonText: 'ילדים ונוער', image: '/assets/New/home-page/cards/3.svg' },
-    { filterText: 'חיבור לעצמי', buttonText: 'חיבור לעצמי', image: '/assets/New/home-page/cards/4.svg' },
-    { filterText: 'העצמה', buttonText: 'העצמה', image: '/assets/New/home-page/cards/7.svg' },
-    { filterText: 'חגים', buttonText: 'חגים', image: '/assets/New/home-page/cards/8.svg' },
-    { filterText: 'מנהיגות', buttonText: 'מנהיגות', image: '/assets/New/home-page/cards/5.svg' },
-    { filterText: 'חזון ומטרות', buttonText: 'חזון ומטרות', image: '/assets/New/home-page/cards/6.svg' },
-    { filterText: 'קריירה', buttonText: 'קריירה', image: '/assets/New/home-page/cards/9.svg' },
-    { filterText: 'רגשות', buttonText: 'רגשות', image: '/assets/New/home-page/cards/10.svg' },
-    { filterText: 'משברים', buttonText: 'משברים', image: '/assets/New/home-page/cards/11.svg' },
-  ]
+    {
+      filterText: 'הכרות וחיבור',
+      buttonText: 'הכרות וחיבור',
+      image: '/assets/New/home-page/cards/1.svg',
+    },
+    {
+      filterText: 'מערכות יחסים',
+      buttonText: 'מערכות יחסים',
+      image: '/assets/New/home-page/cards/2.svg',
+    },
+    {
+      filterText: 'ילדים ונוער',
+      buttonText: 'ילדים ונוער',
+      image: '/assets/New/home-page/cards/3.svg',
+    },
+    {
+      filterText: 'חיבור לעצמי',
+      buttonText: 'חיבור לעצמי',
+      image: '/assets/New/home-page/cards/4.svg',
+    },
+    {
+      filterText: 'העצמה',
+      buttonText: 'העצמה',
+      image: '/assets/New/home-page/cards/7.svg',
+    },
+    {
+      filterText: 'חגים',
+      buttonText: 'חגים',
+      image: '/assets/New/home-page/cards/8.svg',
+    },
+    {
+      filterText: 'מנהיגות',
+      buttonText: 'מנהיגות',
+      image: '/assets/New/home-page/cards/5.svg',
+    },
+    {
+      filterText: 'חזון ומטרות',
+      buttonText: 'חזון ומטרות',
+      image: '/assets/New/home-page/cards/6.svg',
+    },
+    {
+      filterText: 'קריירה',
+      buttonText: 'קריירה',
+      image: '/assets/New/home-page/cards/9.svg',
+    },
+    {
+      filterText: 'רגשות',
+      buttonText: 'רגשות',
+      image: '/assets/New/home-page/cards/10.svg',
+    },
+    {
+      filterText: 'משברים',
+      buttonText: 'משברים',
+      image: '/assets/New/home-page/cards/11.svg',
+    },
+  ];
 
   cardsColors = [
     { color: '#E67C73' },
@@ -121,7 +164,7 @@ export class AllPacksPageNewComponent implements OnInit {
     { color: '#FF9E6B' },
     { color: '#B3980B' },
     { color: '#7A680C' },
-  ]
+  ];
   selectedCardFilter: string = '';
   @ViewChild('settingsMenuTrigger') settingsMenuTrigger: MatMenuTrigger;
   constructor(
@@ -137,7 +180,6 @@ export class AllPacksPageNewComponent implements OnInit {
     public langDirectionService: LangDirectionService,
     private breakpointObserver: BreakpointObserver,
     private activatedRoute: ActivatedRoute
-    
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.isLoading = true;
@@ -148,14 +190,18 @@ export class AllPacksPageNewComponent implements OnInit {
   onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
     if (scrollContainer) {
       const { clientX } = event;
-      const { offsetWidth, scrollLeft, scrollWidth, clientWidth } = scrollContainer;
+      const { offsetWidth, scrollLeft, scrollWidth, clientWidth } =
+        scrollContainer;
       const boundary = 0.1 * clientWidth; // 10% from the edges
       const maxScrollLeft = scrollWidth - clientWidth;
       const mouseX = clientX - scrollContainer.getBoundingClientRect().left;
       if (clientX < 100) {
         const newScrollLeft = scrollLeft - this.scrollSpeed;
         scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
-      } else if (clientX > clientWidth - boundary && scrollLeft < maxScrollLeft) {
+      } else if (
+        clientX > clientWidth - boundary &&
+        scrollLeft < maxScrollLeft
+      ) {
         const newScrollLeft = scrollLeft + this.scrollSpeed;
         scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
       }
@@ -220,10 +266,12 @@ export class AllPacksPageNewComponent implements OnInit {
     // Assuming filters are represented as query parameters, check if any are present
     if (Object.keys(this.queryParamSubscription).length > 0) {
       // Navigate without query parameters (removing filters)
-      this.routNavigate.navigate(['.'], { relativeTo: this.router, queryParams: {} }).then(() => {
-        // After navigation, reload the page
-        window.location.reload();
-      });
+      this.routNavigate
+        .navigate(['.'], { relativeTo: this.router, queryParams: {} })
+        .then(() => {
+          // After navigation, reload the page
+          window.location.reload();
+        });
     } else {
       // If no filters are present, reload the page directly
       window.location.reload();
@@ -260,15 +308,16 @@ export class AllPacksPageNewComponent implements OnInit {
   openChatDialog(): void {
     const dialogRef = this.dialog.open(AiChatComponent, {
       width: '400px',
-      data: { /* pass any data if needed */ }
+      data: {
+        /* pass any data if needed */
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       // console.log('The dialog was closed');
       // handle the result if needed
     });
   }
-
 
   get sanitizedUserStatus(): string {
     return this.userData?.status ?? '';
@@ -284,7 +333,6 @@ export class AllPacksPageNewComponent implements OnInit {
       }
     }
   }
-
 
   changeFocus(direction: number) {
     this.currentFocusIndex += direction;
@@ -332,10 +380,12 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.queryParamSubscription = this.activatedRoute.queryParams.subscribe(params => {
-      // Access queryParams here
-      console.log(params); // This will log the current query parameters
-    });
+    this.queryParamSubscription = this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        // Access queryParams here
+        console.log(params); // This will log the current query parameters
+      }
+    );
     this.initializeLanguage();
     this.router.queryParams.subscribe((params) => {
       const refId = params['ref'];
@@ -356,8 +406,7 @@ export class AllPacksPageNewComponent implements OnInit {
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
       this.getAllPacks(true);
-    }
-    else {
+    } else {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
@@ -378,11 +427,17 @@ export class AllPacksPageNewComponent implements OnInit {
       )
     );
     console.log('allpacks page sub 2');
-    console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'isTrialPacksDialogOpen href');
+    console.log(
+      localStorage.getItem('isTrialPacksDialogOpen'),
+      'isTrialPacksDialogOpen href'
+    );
     if (!this.userData || this.userData.status === 'NOPLAN') {
       if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
         localStorage.setItem('isTrialPacksDialogOpen', 'true');
-        console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'after set isTrialPacksDialogOpen href');
+        console.log(
+          localStorage.getItem('isTrialPacksDialogOpen'),
+          'after set isTrialPacksDialogOpen href'
+        );
         this.openDialog();
       }
     }
@@ -397,11 +452,10 @@ export class AllPacksPageNewComponent implements OnInit {
     if (storedLanguage) {
       this.filterOption.language = storedLanguage;
     } else {
-      this.filterOption.language = 'he';
+      this.filterOption.language = 'he'; // Set Hebrew as default
       localStorage.setItem('packsLanguageLocalStorage', 'he');
     }
   }
-
   filterOptions() {
     const filterValue = this.freeTextFilterSelected.toLowerCase();
 
@@ -448,8 +502,7 @@ export class AllPacksPageNewComponent implements OnInit {
         });
         this.cardsService.getAllPacks();
       }
-    }
-    else {
+    } else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
         // console.log('getAllPacks finished!');
         this.setAllPacksData();
@@ -462,7 +515,6 @@ export class AllPacksPageNewComponent implements OnInit {
       console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
     }
-
   }
 
   setAllPacksData(): void {
@@ -547,20 +599,18 @@ export class AllPacksPageNewComponent implements OnInit {
     }
     return this.cardsService.allPacks
       ? this.cardsService.allPacks
-        .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
-        .map((pack) => pack.name)
+          .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
+          .map((pack) => pack.name)
       : this.allPacks
-        .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
-        .map((pack) => pack.name);
+          .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
+          .map((pack) => pack.name);
     // return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
   }
 
   categoriesSelectedChange(event): void {
     console.log('categoriesSelectedChange');
     console.log(event);
-    var index = this.selectedCategories.findIndex(
-      (el) => el === event
-    );
+    var index = this.selectedCategories.findIndex((el) => el === event);
     index == -1
       ? this.selectedCategories.push(event)
       : this.selectedCategories.splice(index, 1);
@@ -608,7 +658,6 @@ export class AllPacksPageNewComponent implements OnInit {
       packContent.tags.some((tag) => tag.toLowerCase() === filterValue)
     );
   }
-
 
   selectOption(option: string) {
     this.currentFocusIndex = -1;
@@ -666,4 +715,3 @@ export class AllPacksPageNewComponent implements OnInit {
     }
   }
 }
-

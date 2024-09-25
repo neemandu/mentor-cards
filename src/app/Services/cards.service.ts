@@ -176,7 +176,7 @@ export class CardsService {
         });
         return new PackContent().deseralize(pack);
       });
-      // console.log('allPacks ...',this.allPacks);
+      console.log('allPacks ... here', this.allPacks);
       this.sortPacks();
       this.allPacksReadyEmmiter.emit();
       this.overlaySpinnerService.changeOverlaySpinner(false);
