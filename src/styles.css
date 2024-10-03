@@ -72,6 +72,19 @@
 .-ms-40 {
   margin-inline-start: -10rem /* -160px */;
 }
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-270 {
+  transform: rotate(270deg);
+}
+
 html,
 body {
   height: 100%;
@@ -249,9 +262,8 @@ button:focus {
   height: 100%;
 }
 
-
 .packs-card-preview {
-  .mat-dialog-container{
+  .mat-dialog-container {
     padding: 10px !important;
   }
 }

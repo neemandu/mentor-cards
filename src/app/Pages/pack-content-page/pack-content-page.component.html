@@ -349,7 +349,7 @@
                 type="button"
                 [disabled]="showEditPack"
                 (click)="flip()"
-                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+                matTooltip="הקלפים יתהפכו לצידם השני"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -370,7 +370,7 @@
                 type="button"
                 [disabled]="showEditPack"
                 (click)="toggleRandomCardsModal()"
-                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+                matTooltip="המערכת תשלוף קלף אקראי"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -388,7 +388,7 @@
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 btn-1 btn-height-35 rounded-full"
                 (click)="createCommomLink()"
-                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+                matTooltip="יצירת קישור לעבודה משותפת"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -409,7 +409,7 @@
                 type="button"
                 [disabled]="showEditPack"
                 (click)="shuffle()"
-                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+                matTooltip="ערבוב הקלפים"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -430,7 +430,7 @@
                 type="button"
                 *ngIf="!commonLink"
                 (click)="editPack()"
-                matTooltip="הקלפים יתהפכו ממהצד העליון לתחתון"
+                matTooltip="הורדה קלפים מהערכה באופן זמני"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"

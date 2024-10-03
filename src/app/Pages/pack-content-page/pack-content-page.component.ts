@@ -406,9 +406,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     const isPortrait = await this.checkIfImageIsPortrait(
       card.cardsImages[0].frontImgUrl
     );
-    // card.isPortrait = isPortrait;
-    // console.log(card,'card')
-    // console.log(`Card at ${card.frontImgUrl} is ${isPortrait ? 'portrait' : 'landscape'}`);
   }
 
   changeRandomCard(b) {
@@ -758,9 +755,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   rotateCard(card: Card) {
-    // card.rotation = (card.rotation + 90) % 360; // This will rotate the card 90 degrees clockwise on each click
-    // console.log('rotation:', card.rotation);
-    // console.log('card:', card);
+    if (isNaN(card.rotation)) {
+      card.rotation = 0;
+    }
+    card.rotation = (card.rotation + 90) % 360; // This will rotate the card 90 degrees clockwise on each click
+    console.log('card:', card);
   }
 
   toggleChosenCardsModal(): void {

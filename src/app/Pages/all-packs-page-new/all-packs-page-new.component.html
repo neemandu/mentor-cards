@@ -53,6 +53,7 @@
         />
       </button>
     </div>
+    <!-- filter section -->
     <div
       class="w-screen overflow-x-scroll lg:overflow-visible mb-2 z-20"
       style="margin-bottom: 20px"
@@ -65,11 +66,7 @@
       <div
         id="content"
         [dir]="langDirectionService.currentLangDirection"
-        [ngClass]="{
-          'content-ltr': langDirectionService.currentLangDirection === 'ltr',
-          'content-rtl': langDirectionService.currentLangDirection === 'rtl'
-        }"
-        class="w-[1350px] mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center"
+        class="w-[1350px] content-ltr mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center"
       >
         <div
           *ngIf="!isMobileScreen"

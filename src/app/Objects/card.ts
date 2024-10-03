@@ -1,17 +1,16 @@
 export class Card {
-    categoryName: string;
-    categoryStepNumber: number;
-    cardsImages: cardsImages[]
-    index: number;
+  categoryName: string;
+  categoryStepNumber: number;
+  cardsImages: cardsImages[];
+  index: number;
+  rotation: number;
+  constructor() {}
 
-    constructor() { }
-
-    deserialize(input: any) {
-        Object.assign(this, input);
-        return this;
-      }
+  deserialize(input: any) {
+    Object.assign(this, input);
+    return this;
+  }
 }
-
 
 export class cardsImages {
   backImgUrl: string;
@@ -22,5 +21,5 @@ export class cardsImages {
   resizedHeight: number;
   resizedWidth: number;
   height: any;
-  frontNewDimensions?: { width: number, height: number }; // Add this line to the interface
+  frontNewDimensions?: { width: number; height: number }; // Add this line to the interface
 }
