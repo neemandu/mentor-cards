@@ -73,6 +73,11 @@
   margin-inline-start: -10rem /* -160px */;
 }
 
+.text-xl {
+  font-size: 1.25rem /* 20px */;
+  line-height: 1.75rem /* 28px */;
+}
+
 .rotate-90 {
   transform: rotate(90deg);
 }

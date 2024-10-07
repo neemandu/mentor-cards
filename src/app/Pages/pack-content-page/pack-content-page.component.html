@@ -317,7 +317,7 @@
               class="dropdown-select position-relative"
               (click)="toggleDropdown()"
             >
-              <span class="selected-option">{{ selectedOption }}</span>
+              <span class="selected-option text-xl">{{ selectedOption }}</span>
               <span class="dropdown-icon">▼</span>
             </div>
             <div class="dropdown-options" [class.show]="isDropdownOpen">
@@ -1907,8 +1907,8 @@
                   flex-direction: column;
                   align-items: center;
                 "
-                [class.zarori]="!singleCardCheck"
               >
+                <!-- [class.zarori]="!singleCardCheck" -->
                 <div
                   class="right-90 d-flex justify-end w-100 align-items-center"
                 >
@@ -1933,32 +1933,32 @@
                   </button>
                 </div>
 
-                <img
-                  (click)="imgClick($event)"
-                  alt="one of the selected cards shown"
-                  [ngClass]="{
-                    'rotate-0': card.rotation === 0,
-                    'rotate-90': card.rotation === 90,
-                    'rotate-180': card.rotation === 180,
-                    'rotate-270': card.rotation === 270,
-                    'card-view': true,
-                    'one-cards-landscape': selectedCards.length == 1,
-                    'three-cards-landscape': selectedCards.length == 3,
-                    'four-cards-landscape': selectedCards.length == 4,
-                    'five-cards-landscape': selectedCards.length == 5
-                  }"
-                  loading="eager"
-                  src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
-                  data-src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
-                  class="width-fixed m-0 p-0 card-image-mobile"
-                  [ngStyle]="
-                    !singleCardCheck
-                      ? { height: 'auto', width: 'auto' }
-                      : { width: '588' }
-                  "
-                  [class.card-default]="!singleCardCheck"
-                  class="p-0 card-image-mobile"
-                />
+                <div
+                  style="width: 100%; height: 400px; overflow: hidden"
+                  ngClass="{
+                  'rotate-0': card.rotation === 0,
+                  'rotate-90': card.rotation === 90,
+                  'rotate-180': card.rotation === 180,
+                  'rotate-270': card.rotation === 270,
+                }"
+                >
+                  <img
+                    (click)="imgClick($event)"
+                    alt="one of the selected cards shown"
+                    loading="eager"
+                    src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                    data-src="{{ card.frontImgUrl || card.card.frontImgUrl }}"
+                    class="width-fixed m-0 p-0 card-image-mobile"
+                    [ngStyle]="
+                      !singleCardCheck
+                        ? { height: '400px', width: 'auto' }
+                        : { width: '588' }
+                    "
+                    [class.card-default]="!singleCardCheck"
+                    class="p-0 card-image-mobile"
+                    style="width: 100%; height: 400px; object-fit: cover"
+                  />
+                </div>
 
                 <div
                   *ngIf="card.isPortrait"

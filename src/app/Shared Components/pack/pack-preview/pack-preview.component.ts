@@ -44,10 +44,11 @@ export class PackPreviewComponent implements OnInit {
     private ngZone: NgZone,
     private mixpanel: MixpanelService,
     private platform: Platform,
-    public langDirectionService: LangDirectionService,
-  ) { }
+    public langDirectionService: LangDirectionService
+  ) {}
 
   ngOnInit(): void {
+    console.log('pack preview', this.data.pack);
     let sub = this.userAuthService.userDataEmmiter.subscribe(() => {
       sub.unsubscribe();
       this.closeDialog();
@@ -69,7 +70,9 @@ export class PackPreviewComponent implements OnInit {
       if (this.yearlyPlan) {
         this.yearlyPlan['priceForMentorCardsMembers'] =
           Math.round(
-            this.yearlyPlan?.fullPrice * (1 - this.yearlyPlan?.discount / 100) * 10
+            this.yearlyPlan?.fullPrice *
+              (1 - this.yearlyPlan?.discount / 100) *
+              10
           ) / 10;
       }
 
@@ -80,29 +83,27 @@ export class PackPreviewComponent implements OnInit {
         this.monthlyPlan['priceForMentorCardsMembers'] =
           Math.round(
             this.monthlyPlan?.fullPrice *
-            (1 - this.monthlyPlan?.discount / 100) *
-            10
+              (1 - this.monthlyPlan?.discount / 100) *
+              10
           ) / 10;
       }
       this.discount = Math.round(
         (1 - this.yearlyPlan?.fullPrice / (this.monthlyPlan?.fullPrice * 12)) *
-        100
+          100
       );
     }
 
     if (this.platform.ANDROID || this.platform.IOS) {
       this.isMobile = true;
     }
-
   }
 
   redirect(): void {
-    this.mixpanel.track("RedirectToExternalCreator",
-      {
-        "Pack ID": this.data.pack.id,
-        "Pack name": this.data.pack?.name,
-        "Link": this.data.pack?.about.link
-      });
+    this.mixpanel.track('RedirectToExternalCreator', {
+      'Pack ID': this.data.pack.id,
+      'Pack name': this.data.pack?.name,
+      Link: this.data.pack?.about.link,
+    });
     window.open(this.data.pack.about.link, '_blank');
   }
 
@@ -116,7 +117,7 @@ export class PackPreviewComponent implements OnInit {
   }
 
   toggleIsExpand(): void {
-    this.isExpland = !this.isExpland
+    this.isExpland = !this.isExpland;
   }
 
   navigateToPackView(exists): void {

@@ -15,6 +15,7 @@ export class PackInfo {
   isFree: boolean;
   about: AboutInput;
   isOwnedByOrg: boolean;
+  isHardCopyAvailable: boolean;
   brief: string;
   likesCounter: number;
   isExternalPack: boolean;
