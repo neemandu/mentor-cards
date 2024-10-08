@@ -60,7 +60,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   showRandomCards: boolean = false;
   portraitToLandscapeAlertShown: boolean = false;
   showEditPack: boolean = false;
-  removedCards: Card[] = [];
+  removedCards: cardsImages[] = [];
   cards: Card[] = [];
   cardImages: cardsImages[] = [];
   unauthorized: boolean = false;
@@ -845,14 +845,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   /**
    * Return all removed cards to the pack
    */
+
+  // cardImages
   resetEditPack(): void {
-    this.cards = [...this.cards, ...this.removedCards];
+    this.cardImages = [...this.cardImages, ...this.removedCards];
     this.removedCards = [];
     this.editPack();
   }
 
   removeCard(index: number): void {
-    const removed = this.cards.splice(index, 1);
+    const removed = this.cardImages.splice(index, 1);
     this.removedCards = [...this.removedCards, ...removed];
   }
 
