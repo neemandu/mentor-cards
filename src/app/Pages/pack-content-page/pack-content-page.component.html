@@ -194,7 +194,7 @@
             <h2 class="font-bold mb-0 text-start" *ngIf="!id">
               {{ "pages.packContent.defaultName" | translate }}
             </h2>
-            <h3 class="font-bold mb-0 text-start">Mentor Cards</h3>
+            <h3 class="font-bold mb-0 text-start">Mentor-Cards</h3>
 
             <div class="flex gap-4 c-gap">
               <div class="justify-center flex flex-col items-center">
@@ -260,7 +260,7 @@
                     height="30"
                   />
                 </button>
-                <div class="text-size-10">קנו חבילה</div>
+                <div class="text-size-10">קנו ערכה</div>
               </div>
             </div>
           </div>
@@ -349,7 +349,7 @@
                 type="button"
                 [disabled]="showEditPack"
                 (click)="flip()"
-                matTooltip="הקלפים יתהפכו לצידם השני"
+                matTooltip="הקלפים יתהפכו מצד אחד לצד שני"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -370,7 +370,7 @@
                 type="button"
                 [disabled]="showEditPack"
                 (click)="toggleRandomCardsModal()"
-                matTooltip="המערכת תשלוף קלף אקראי"
+                matTooltip="שליפה אקראית של קלף מהערכה"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -388,7 +388,7 @@
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 btn-1 btn-height-35 rounded-full"
                 (click)="createCommomLink()"
-                matTooltip="יצירת קישור לעבודה משותפת"
+                matTooltip="הזמנת משתתפים נוספים לערכה"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -409,7 +409,7 @@
                 type="button"
                 [disabled]="showEditPack"
                 (click)="shuffle()"
-                matTooltip="ערבוב הקלפים"
+                matTooltip="שינוי סדר הקלפים"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -430,7 +430,7 @@
                 type="button"
                 *ngIf="!commonLink"
                 (click)="editPack()"
-                matTooltip="הורדה קלפים מהערכה באופן זמני"
+                matTooltip="הסרת קלפים ספציפיים מהערכה רק לסשן הנוכחי."
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"

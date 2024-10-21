@@ -83,7 +83,7 @@
             <app-filters
               class="col-span-1"
               [imageSrc]="'/assets/New/home-page/cards/0.svg'"
-              [buttonText]="'המועדפים עלי'"
+              [buttonText]="'המועדפים שלי'"
               [filterText]="''"
               (categoryClick)="toggleIsFavSelected()"
               [isActive]="isfavSelected"
@@ -112,7 +112,7 @@
             class="text-right"
             style="font-weight: 700; font-size: 12px; margin-right: 0.5rem"
           >
-            {{ "pages.all-packs-page-new.content.favorites" | translate }}
+            {{ "pages.all-packs-page-new.content.subject" | translate }}
           </div>
           <div class="grid grid-cols-11 me-4 pt-2">
             <app-filters
@@ -190,14 +190,8 @@
             </div>
           </div>
           <div
-            class="text-right border-black h-[90%]"
+            class="text-right"
             style="padding-inline: 10px"
-            [ngClass]="{
-              'sm:border-r-2':
-                langDirectionService.currentLangDirection == 'ltr',
-              'sm:border-l-2':
-                langDirectionService.currentLangDirection != 'ltr'
-            }"
           >
             <div
               *ngIf="!isMobileScreen"
@@ -276,16 +270,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="!isMobileScreen" class="w-[7%] border-black h-[90%]">
-          <div class="h-8">&nbsp;</div>
-          <app-filters
-            [imageSrc]="'/assets/New/home-page/cards/undo.svg'"
-            [buttonText]="'איפוס חיפוש'"
-            [filterText]="''"
-            (categoryClick)="handleResetClick()"
-          >
-          </app-filters>
         </div>
       </div>
     </div>

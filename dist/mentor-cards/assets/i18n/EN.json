@@ -30,6 +30,7 @@
       "title": "All Packs Page",
       "content": {
         "favorites": "My Favorites",
+        "subject": "Meeting Subject",
         "allPacks": "All Packs",
         "cardTypes": "Card Types",
         "cardDisplayTypes": "Card Display Types",
@@ -1231,7 +1232,7 @@
                 "label2": "cards"
               },
               {
-                "value": "+5700",
+                "value": "+7800",
                 "label1": "users",
                 "label2": "on the site"
               },
