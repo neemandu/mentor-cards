@@ -18,7 +18,7 @@ export class HomePageClientsComponent implements AfterViewInit {
     };
 
     let countUp1 = new CountUp('countUp1', 40, options);
-    let countUp2 = new CountUp('countUp2', 5700, options);
+    let countUp2 = new CountUp('countUp2', 7800, options);
     let countUp3 = new CountUp('countUp3', 300, options);
 
     const observer = new IntersectionObserver((entries) => {

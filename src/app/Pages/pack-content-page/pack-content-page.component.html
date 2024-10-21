@@ -209,7 +209,11 @@
                     height="25"
                   />
                 </button>
+                <button 
+                (click)="openGuideBook()"
+              >
                 <div class="text-size-10">ספר הדרכה</div>
+              </button>
               </div>
 
               <div
@@ -242,7 +246,11 @@
                     height="25"
                   />
                 </button>
+                <button
+                  (click)="openAboutDialog()"
+                >
                 <div class="text-size-10">היוצר</div>
+              </button>
               </div>
 
               <div
@@ -260,7 +268,11 @@
                     height="30"
                   />
                 </button>
+                <button
+                  (click)="redirect()"
+                >
                 <div class="text-size-10">קנו ערכה</div>
+              </button>
               </div>
             </div>
           </div>
@@ -2035,7 +2047,7 @@
       <div class="random-content" style="height: 80%">
         <button
           class="btn btn-light"
-          [disabled]="randomCardIndex == cards.length - 1"
+          [disabled]="randomCardIndex == cards[0]?.cardsImages.length - 1"
           (click)="changeRandomCard(1)"
         >
           <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
@@ -2044,8 +2056,8 @@
           class="card-view"
           style="height: 69vh"
           loading="eager"
-          src="{{ cards[randomCardIndex].frontImgUrl }}"
-          data-src="{{ cards[randomCardIndex].frontImgUrl }}"
+          src="{{ cards[0]?.cardsImages[randomCardIndex].frontImgUrl }}"
+          data-src="{{ cards[0]?.cardsImages[randomCardIndex].frontImgUrl }}"
           alt="Random card from the pack"
         />
         <button

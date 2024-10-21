@@ -141,7 +141,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     },
     { text: 'סיג האוויר איתו אתה יוצא מהפגישה שלנו.' },
     { text: 'אין צורך בשאלה, אני אקח את זה מכאן' },
-    { text: 'אני רוצה לכתוב שאלה משלי!' },
+    { text: 'אני רוצה לכתוב שאלה משלי (לחצו כאן כדי לכתוב שאלה משלכם)' },
     {
       text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות',
       icon: '/assets/New/pack-view/book-icon.svg',

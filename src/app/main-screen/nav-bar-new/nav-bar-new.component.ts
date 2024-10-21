@@ -351,7 +351,7 @@ export class NavBarNewComponent implements OnInit {
   // }
 
   filterOptions() {
-    const filterValue = this.freeTextFilterSelected.toLowerCase();
+    const filterValue = this.freeTextFilterSelected.toLowerCase().trim();
 
     if (filterValue) {
       this.filteredOptions = this.allOptions.filter((tag) =>

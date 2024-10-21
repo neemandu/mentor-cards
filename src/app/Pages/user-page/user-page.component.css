@@ -16,6 +16,7 @@ mat-icon {
 
 p {
   font-size: medium;
+  align-self: center;
 }
 
 h1 {
