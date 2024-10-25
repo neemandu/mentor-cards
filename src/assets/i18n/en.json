@@ -42,7 +42,8 @@
         "arabic": "عربية",
         "english": "English",
         "hebrew": "עברית",
-        "packsForYourMeeting": "These are the packs suitable for your meeting",
+        "packsForYourMeeting": "For us, these are the most suitable packs for your topic :)",
+        "packsForYourMeetingDescription": "Take inspiration and ideas from our training materials!",
         "category": "Category",
         "resetFilters": "Reset Filters"
       },
@@ -1097,7 +1098,10 @@
             "title2": "A home for digital card sets",
             "description1": "Welcome to the right era, the space where projective work cards are digital.",
             "description2": "At Mentor-Cards you will find digital card sets on any subject and for any need, as well as guidebooks, activation ideas, and inspiring guiding questions. All this is divided by categories and goals: group meetings, personal meetings, process work, with groups and more.",
-            "description3": "If you belong to the professions of therapy, guidance, coaching, management, educators, lecturers, or simply people who love working with people – Mentor-Cards is your winning card."
+            "description3": "If you belong to the professions of therapy, guidance, coaching, management, educators, lecturers, or simply people who love working with people – Mentor-Cards is your winning card.",
+            "image1alt": "Efficient",
+            "image2alt": "Available everywhere",
+            "image3alt": "Ecological"
           }
         },
         "cards": {
@@ -1164,6 +1168,10 @@
           "component": "app-home-page-how-to-use",
           "content": {
             "title": "How to use Mentor-Cards?",
+            "subtitle": "Mentor-Cards is the place that gives you access to dozens of card sets at any time and anywhere:",
+            "description1": "-In 1*1 personal meetings using a mobile phone or tablet",
+            "description2": "-In 1*1 online meetings via screen sharing",
+            "description3": "-On a school campus, in group guidance",
             "follow-us": {
               "text": "Want to get more tips and ideas? Follow us",
               "social-icons": [
@@ -1258,7 +1266,7 @@
         "partners": {
           "content": {
             "title1": "Organizations and partners",
-            "description1": "The people behind",
+            "description1": "Mentor-Cards",
             "description2": "the cards",
             "description3": "Hi, nice to meet you, Yarden Stampu and Dudi Neman, people who dream and mostly fulfill, partners in the way and the vision. Out of a desire to enable growth and development for thousands of therapists and coaches in Israel and around the world, we built a friendly and super intuitive platform for our users, where they can work with cards in front of their clients. All this in online meetings exactly in the same way they used to in face-to-face meetings, with guidebooks full of explanations and examples. With one significant difference – without carrying, without effort, without feeling like dinosaurs. 😊",
             "description4": "And no less important, with a lot of room for our service and the desire to be your address for anything or any card.",
@@ -1293,7 +1301,7 @@
             "title": "Talk to us in cards",
             "description": "We will be happy to serve you on any topic!",
             "form": {
-              "name-label": "Name",
+              "name-label": "Full Name",
               "phone-label": "Phone",
               "email-label": "Email",
               "message-label": "How can we help?",

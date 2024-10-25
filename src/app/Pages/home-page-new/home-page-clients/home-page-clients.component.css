@@ -1,5 +1,28 @@
 .gradient-text {
-    background: linear-gradient(90deg, #E67C73, #7986CB);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #e67c73, #7986cb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 640px) {
+  .mobile-text-wrap {
+    word-break: break-word;
+
+    ::ng-deep span {
+      display: inline-block;
+
+      &::after {
+        content: "\A";
+        white-space: pre;
+      }
+
+      &:not(:last-child)::after {
+        content: ",\A";
+      }
+    }
+
+    ::ng-deep span:nth-child(n + 2)::before {
+      content: " ";
+    }
+  }
 }

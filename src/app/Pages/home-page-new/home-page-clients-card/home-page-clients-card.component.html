@@ -13,7 +13,7 @@
                     <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
                 </div>
             </div> -->
-      <div class="col-span-1 mt-8 mb-12">
+      <div class="col-span-1 mt-8 mb-12 flex-wrap contents">
         <div *ngFor="let item of clientList | slice : 10 : 15" class="mt-8">
           <img
             [src]="item.image"
@@ -53,7 +53,7 @@
         {{ "pages.home-page.sections.clients-card.content.title2" | translate }}
       </div>
 
-      <div class="text-white sm:w-[35vw] mt-8 text-center">
+      <div class="text-white sm:w-[40vw] mt-8 text-center text-lg">
         {{
           "pages.home-page.sections.clients-card.content.description1"
             | translate

@@ -67,7 +67,7 @@
       <button
         *ngIf="item.name === 'pages.nav.navbar.digital-courses'"
         (click)="openNewTab()"
-        class="text-black hover:cursor-pointer mx-2"
+        class="text-black hover:cursor-pointer mx-4"
         (mouseenter)="hover(item)"
         (mouseleave)="leave(item)"
         (touchstart)="hover(item)"
@@ -185,7 +185,7 @@
         mat-menu-item
         [matMenuTriggerFor]="userMenu"
       >
-        <mat-icon id="account_circle">account_circle</mat-icon>
+        <img src="/assets/New/nav-bar/user-loged.svg" alt="user image" />
       </button>
     </div>
 
@@ -228,12 +228,12 @@
         {{ "pages.nav.navbar.admin" | translate }}
       </div>
     </button>
-    <mat-divider *ngIf="loggedIn"></mat-divider>
+    <!-- <mat-divider *ngIf="loggedIn"></mat-divider>
     <button mat-menu-item *ngIf="loggedIn" (click)="openEnterCouponCodeModal()">
       <div style="font-weight: 700; font-size: 13px">
         {{ "pages.nav.navbar.coupon-codes" | translate }}
       </div>
-    </button>
+    </button> -->
   </div>
 </mat-menu>
 

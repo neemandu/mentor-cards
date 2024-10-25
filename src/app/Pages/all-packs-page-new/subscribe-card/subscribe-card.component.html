@@ -1,19 +1,22 @@
-<div class="rounded-xl w-44 h-64 p-3 relative bg-[#3d3a3b]" [dir]="langDirectionService.currentLangDirection">
-    <div class=" flex items-center justify-center mx-auto flex-col">
-        <img src="/assets/New/cards/crown.svg" alt="">
-        <div class=" text-lg text-white font-bold mt-2">מעל 40 ערכות קלפים</div>
-        <div class=" text-lg text-white font-bold">בלחיצת כפתור!</div>
+<div
+  class="rounded-xl w-44 h-64 p-3 relative bg-[#3d3a3b]"
+  [dir]="langDirectionService.currentLangDirection"
+>
+  <div class="flex items-center justify-center mx-auto flex-col text-center">
+    <img src="/assets/New/cards/crown.svg" alt="" />
+    <div class="text-lg text-white font-bold mt-2">מעל 40 ערכות קלפים</div>
+    <div class="text-lg text-white font-bold">בלחיצת כפתור!</div>
 
-        <div class=" text-white font-bold mt-2">רק 45 ש”ח לחודש </div>
-        <div class=" text-white font-bold">וכל זה שלך!</div>
-        <div>
-
-            <button class="py-2 bg-[#7986CB] rounded-full px-3 text-white font-bold mt-2 sub-button"
-                (click)="navigateTo('/price-page')">
-                בואו נעשה את זה
-            </button>
-        </div>
-
+    <div class="text-white font-bold mt-2">רק 45 ש”ח לחודש</div>
+    <div class="text-white font-bold">וכל זה שלך!</div>
+    <div>
+      <button
+        class="py-2 bg-[#7986CB] rounded-full px-3 text-white font-bold mt-2 sub-button"
+        (click)="navigateTo('/price-page')"
+      >
+        בואו נעשה את זה
+      </button>
     </div>
+  </div>
 </div>
 <!-- {{ 'pages.home-page.sections.hero.content.button-2-text' | translate }} -->

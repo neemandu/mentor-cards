@@ -43,7 +43,8 @@
         "arabic": "Arábica",
         "english": "Inglés",
         "hebrew": "hebreo",
-        "packsForYourMeeting": "Estas son evaluaciones adecuadas para su reunión.",
+         "packsForYourMeeting": "לדעתנו, אלה ערכות הקלפים המתאימות ביותר לנושא שבחרתם :)",
+        "packsForYourMeetingDescription": "קחו השראה ורעיונות מספרי ההדרכה!",
         "category": "categoría",
         "resetFilters": "Restablecer filtros"
       },
@@ -1121,7 +1122,10 @@
             "title2": "Hogar de las barajas digitales",
             "description1": "Bienvenido a la era adecuada, el espacio donde las tarjetas de trabajo proyectivas son digitales.",
             "description2": "En Mentor-Cards encontrarás juegos de tarjetas digitales sobre cualquier tema y para cualquier necesidad, así como libros de instrucciones, ideas para activación y preguntas orientativas para inspirarte. Todo esto está dividido por categorías y objetivos: reuniones grupales, reuniones individuales, trabajo por procesos, frente a grupos y mucho más.",
-            "description3": "Ya sea que pertenezca a profesiones asistenciales, de orientación, de formación, de gestión, de educadores, de conferenciantes o simplemente a personas a las que les guste trabajar con personas, Mentor-Cards es su baza."
+            "description3": "Ya sea que pertenezca a profesiones asistenciales, de orientación, de formación, de gestión, de educadores, de conferenciantes o simplemente a personas a las que les guste trabajar con personas, Mentor-Cards es su baza.",
+            "image1alt": "Eficiente",
+            "image2alt": "Disponible en todas partes",
+            "image3alt": "Ecológico"
           }
         },
         "cards": {
@@ -1188,6 +1192,10 @@
           "component": "página-de-inicio-de-la-aplicación-cómo-usar",
           "content": {
             "title": "¿Cómo utilizar las Tarjetas de Mentor?",
+            "subtitle": "Mentor-Cards es el lugar que te da acceso a docenas de juegos de tarjetas en cualquier momento y en cualquier lugar:",
+            "description1": "-En reuniones personales 1*1 usando un teléfono móvil o tablet",
+            "description2": "-En reuniones 1*1 online a través de la pantalla compartida",
+            "description3": "-En un campus escolar, en orientación grupal",
             "follow-us": {
               "text": "¿Quieres más consejos e ideas? Síganos",
               "social-icons": [
@@ -1281,8 +1289,8 @@
         },
         "partners": {
           "content": {
-            "title1": "organizaciones y socios",
-            "description1": "La gente detrás de mí",
+            "title1": "Organizaciones y socios",
+            "description1": "Mentor-Cards",
             "description2": "las cartas",
             "description3": "Hola muy lindo Jordan Stampo y mi tio Naman, personas que sueñan y sobre todo lo hacen realidad, comparten el camino y la visión. Con el deseo de permitir el desarrollo y el crecimiento de miles de terapeutas y formadores en Israel y en todo el mundo, hemos creado una plataforma amigable y súper intuitiva para nuestros usuarios, donde pueden trabajar con tarjetas frente a sus clientes. Todo en las reuniones online es exactamente igual que en las presenciales, con manuales de instrucciones llenos de explicaciones y ejemplos. Con una diferencia significativa: sin cargar, sin esforzarse, sin sentirse como dinosaurios.😊",
             "description4": "Y no menos importante, con mucho espacio para nuestro servicio y con ganas de ser tu domicilio para cualquier cosa o una tarjeta.",
@@ -1317,7 +1325,7 @@
             "title": "Hablanos con tarjetas",
             "description": "¡Estaremos encantados de atenderte en cualquier asunto!",
             "form": {
-              "name-label": "Nombre",
+              "name-label": "Nombre completo",
               "phone-label": "teléfono",
               "email-label": "correo",
               "message-label": "¿Cómo podemos ayudar?",

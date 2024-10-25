@@ -1,43 +1,111 @@
 <div class="mt-8">
-    <div class="sm:text-4xl text-2xl font-bold text-center">
-        {{ 'pages.home-page.sections.how-to-use.content.title' | translate }}
-    </div>
+  <div class="sm:text-4xl text-2xl font-bold text-center">
+    {{ "pages.home-page.sections.how-to-use.content.title" | translate }}
+  </div>
+  <div class="text-center text-lg">
+    {{ "pages.home-page.sections.how-to-use.content.subtitle" | translate }}
+  </div>
+  <div class="text-center">
+    {{ "pages.home-page.sections.how-to-use.content.description1" | translate }}
+  </div>
+  <div class="text-center">
+    {{ "pages.home-page.sections.how-to-use.content.description2" | translate }}
+  </div>
+  <div class="text-center">
+    {{ "pages.home-page.sections.how-to-use.content.description3" | translate }}
+  </div>
 
-    <div class="flex flex-col sm:flex-row gap-8 justify-center w-[90vw] mx-auto mt-8  space-y-4">
-        <div *ngFor="let video of videos" class="video-container mx-2 relative flex items-center" >
-            <img [src]="video.thumbnail" class="video-thumbnail" [hidden]="video.isPlaying" height="60vh" style="border-radius: 20px;">
-            <button class="play-button absolute top-1/2 left-1/2 " (click)="playVideo(video)" [hidden]="video.isPlaying"><mat-icon class="white-icon" style="height: 3rem !important; width: 3rem;">play_arrow</mat-icon></button>
-            <video #videoPlayer controls [src]="video.src" class="video-player max-h-[50vh] rounded-2xl" [hidden]="!video.isPlaying">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        
+  <div
+    class="flex flex-col sm:flex-row gap-8 justify-center w-[90vw] mx-auto mt-8 space-y-4"
+  >
+    <div
+      *ngFor="let video of videos"
+      class="video-container mx-2 relative flex items-center"
+    >
+      <img
+        [src]="video.thumbnail"
+        class="video-thumbnail"
+        [hidden]="video.isPlaying"
+        height="60vh"
+        style="border-radius: 20px"
+      />
+      <button
+        class="play-button absolute top-1/2 left-1/2"
+        (click)="playVideo(video)"
+        [hidden]="video.isPlaying"
+      >
+        <mat-icon
+          class="white-icon"
+          style="height: 3rem !important; width: 3rem"
+          >play_arrow</mat-icon
+        >
+      </button>
+      <video
+        #videoPlayer
+        controls
+        [src]="video.src"
+        class="video-player max-h-[50vh] rounded-2xl"
+        [hidden]="!video.isPlaying"
+      >
+        Your browser does not support the video tag.
+      </video>
     </div>
+  </div>
 
-    <div class="text-xl font-bold text-center mt-4">
-        {{ 'pages.home-page.sections.how-to-use.content.follow-us.text' | translate }}
-    </div>
+  <div class="text-xl font-bold text-center mt-4">
+    {{
+      "pages.home-page.sections.how-to-use.content.follow-us.text" | translate
+    }}
+  </div>
 
-    <div class="flex justify-center gap-4 mt-8">
-        <a href="https://www.tiktok.com/@mentor.cards" target="_blank">
-            <img src="/assets/New/home-page/icons/tik-tok-pink.svg" alt="tik-tok image" class="h-7 w-7"
-                (mouseover)="changeImageSrc($event, 'tik-tok')" (mouseout)="resetImageSrc($event, 'tik-tok')" />
-        </a>
-        <a href="https://www.facebook.com/groups/mentorcards/" target="_blank">
-            <img src="/assets/New/home-page/icons/fb-pink.svg" alt="fb image" class="h-7 w-7"
-                (mouseover)="changeImageSrc($event, 'fb')" (mouseout)="resetImageSrc($event, 'fb')" />
-        </a>
-        <a href="https://www.instagram.com/mentor_cards/" target="_blank">
-            <img src="/assets/New/home-page/icons/insta-pink.svg" alt="insta image" class="h-7 w-7"
-                (mouseover)="changeImageSrc($event, 'insta')" (mouseout)="resetImageSrc($event, 'insta')" />
-        </a>
-        <a href="https://www.youtube.com/channel/UCt3Ol6TXXUOLNiJaQLonDqw/" target="_blank">
-            <img src="/assets/New/home-page/icons/you-tube-pink.svg" alt="you-tube" class="h-7 w-7"
-                (mouseover)="changeImageSrc($event, 'you-tube')" (mouseout)="resetImageSrc($event, 'you-tube')" />
-        </a>
-        <a href="https://wa.me/message/X6D63C5I4ENMO1" target="_blank">
-            <img src="/assets/New/home-page/icons/w-app-pink.svg" alt="whats-app" class="h-7 w-7"
-                (mouseover)="changeImageSrc($event, 'w-app')" (mouseout)="resetImageSrc($event, 'w-app')" />
-        </a>
-    </div>
+  <div class="flex justify-center gap-4 mt-8">
+    <a href="https://www.tiktok.com/@mentor.cards" target="_blank">
+      <img
+        src="/assets/New/home-page/icons/tik-tok-pink.svg"
+        alt="tik-tok image"
+        class="h-7 w-7"
+        (mouseover)="changeImageSrc($event, 'tik-tok')"
+        (mouseout)="resetImageSrc($event, 'tik-tok')"
+      />
+    </a>
+    <a href="https://www.facebook.com/groups/mentorcards/" target="_blank">
+      <img
+        src="/assets/New/home-page/icons/fb-pink.svg"
+        alt="fb image"
+        class="h-7 w-7"
+        (mouseover)="changeImageSrc($event, 'fb')"
+        (mouseout)="resetImageSrc($event, 'fb')"
+      />
+    </a>
+    <a href="https://www.instagram.com/mentor_cards/" target="_blank">
+      <img
+        src="/assets/New/home-page/icons/insta-pink.svg"
+        alt="insta image"
+        class="h-7 w-7"
+        (mouseover)="changeImageSrc($event, 'insta')"
+        (mouseout)="resetImageSrc($event, 'insta')"
+      />
+    </a>
+    <a
+      href="https://www.youtube.com/channel/UCt3Ol6TXXUOLNiJaQLonDqw/"
+      target="_blank"
+    >
+      <img
+        src="/assets/New/home-page/icons/you-tube-pink.svg"
+        alt="you-tube"
+        class="h-7 w-7"
+        (mouseover)="changeImageSrc($event, 'you-tube')"
+        (mouseout)="resetImageSrc($event, 'you-tube')"
+      />
+    </a>
+    <a href="https://wa.me/message/X6D63C5I4ENMO1" target="_blank">
+      <img
+        src="/assets/New/home-page/icons/w-app-pink.svg"
+        alt="whats-app"
+        class="h-7 w-7"
+        (mouseover)="changeImageSrc($event, 'w-app')"
+        (mouseout)="resetImageSrc($event, 'w-app')"
+      />
+    </a>
+  </div>
 </div>

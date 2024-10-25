@@ -4,14 +4,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home-page-clients-card',
   templateUrl: './home-page-clients-card.component.html',
-  styleUrls: ['./home-page-clients-card.component.css']
+  styleUrls: ['./home-page-clients-card.component.css'],
 })
 export class HomePageClientsCardComponent implements OnInit {
+  constructor(public router: Router) {}
 
-  constructor(public router: Router) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   clientList = [
     { name: 'Client 1', image: '/assets/New/home-page/clients/1.png' },
@@ -28,7 +26,6 @@ export class HomePageClientsCardComponent implements OnInit {
     { name: 'Client 12', image: '/assets/New/home-page/clients/3.png' },
     { name: 'Client 13', image: '/assets/New/home-page/clients/4.png' },
     { name: 'Client 14', image: '/assets/New/home-page/clients/1.png' },
-    { name: 'Client 15', image: '/assets/New/home-page/clients/5.png' },
     { name: 'Client 16', image: '/assets/New/home-page/clients/6.png' },
     { name: 'Client 17', image: '/assets/New/home-page/clients/7.png' },
     { name: 'Client 18', image: '/assets/New/home-page/clients/8.png' },
@@ -39,12 +36,9 @@ export class HomePageClientsCardComponent implements OnInit {
     { name: 'Client 23', image: '/assets/New/home-page/clients/12.png' },
     { name: 'Client 24', image: '/assets/New/home-page/clients/13.png' },
     { name: 'Client 25', image: '/assets/New/home-page/clients/1.png' },
-
-
-  ]
+  ];
 
   navigateTo(route: string) {
     this.router.navigateByUrl(route);
   }
-  
 }

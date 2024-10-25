@@ -16,6 +16,9 @@
   }
 }
 
+.contents {
+  display: contents;
+}
 @media (min-width: 640px) {
   .sm\:border-r-2 {
     border-right-width: 2px;

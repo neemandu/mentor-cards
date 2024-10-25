@@ -194,7 +194,7 @@
             <h2 class="font-bold mb-0 text-start" *ngIf="!id">
               {{ "pages.packContent.defaultName" | translate }}
             </h2>
-            <h3 class="font-bold mb-0 text-start">Mentor-Cards</h3>
+            <h3 class="font-bold mb-0 text-start">{{ pack.ownerName }}</h3>
 
             <div class="flex gap-4 c-gap">
               <div class="justify-center flex flex-col items-center">
@@ -209,11 +209,9 @@
                     height="25"
                   />
                 </button>
-                <button 
-                (click)="openGuideBook()"
-              >
-                <div class="text-size-10">ספר הדרכה</div>
-              </button>
+                <button (click)="openGuideBook()">
+                  <div class="text-size-10">ספר הדרכה</div>
+                </button>
               </div>
 
               <div
@@ -246,11 +244,9 @@
                     height="25"
                   />
                 </button>
-                <button
-                  (click)="openAboutDialog()"
-                >
-                <div class="text-size-10">היוצר</div>
-              </button>
+                <button (click)="openAboutDialog()">
+                  <div class="text-size-10">היוצר</div>
+                </button>
               </div>
 
               <div
@@ -268,11 +264,9 @@
                     height="30"
                   />
                 </button>
-                <button
-                  (click)="redirect()"
-                >
-                <div class="text-size-10">קנו ערכה</div>
-              </button>
+                <button (click)="redirect()">
+                  <div class="text-size-10">קנו ערכה</div>
+                </button>
               </div>
             </div>
           </div>
@@ -2142,7 +2136,7 @@
               >{{ item?.index }}</span
             >
             <img
-              class="position-absolute"
+              class="position-absolute bg-white rounded-full p-1"
               style="left: 8px; top: 25px"
               src="../../../assets/icons/zoomPlus.png"
               (click)="cardSelected(item.card, item.index, true)"
@@ -2165,7 +2159,7 @@
             />
             <img
               src="../../../assets/icons/black_cross.png"
-              class="absolute"
+              class="absolute bg-white rounded-full p-1"
               style="top: 25px; right: 12px"
               (click)="removeImage(item)"
             />
