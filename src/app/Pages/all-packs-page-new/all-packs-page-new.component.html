@@ -112,7 +112,7 @@
               [imageSrc]="'/assets/New/home-page/cards/13.svg'"
               [buttonText]="'לכל הערכות'"
               [filterText]="''"
-              (categoryClick)="handleCategoryClick($event)"
+              (categoryClick)="handleAllPacksClick()"
             >
             </app-filters>
             <!-- [isActive]="'' === selectedCardFilter" -->
@@ -122,14 +122,14 @@
               [buttonText]="filter.buttonText"
               [filterText]="filter.filterText"
               [isActive]="filter.filterText === selectedCardFilter"
-              (categoryClick)="handleCategoryClick($event)"
+              (categoryClick)="handleCategoryClick(filter.filterText)"
               class="col-span-1"
             >
             </app-filters>
           </div>
         </div>
 
-        <div *ngIf="!isMobileScreen" class="w-[24%] flex items-start h-[100%]">
+        <div *ngIf="!isMobileScreen" class="w-[24%] flex items-center h-[100%]">
           <div
             class="text-right border-black h-[90%]"
             style="padding-inline: 10px"
@@ -312,7 +312,7 @@
             </div>
           </div>
           <div
-            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
+            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4 bg-black"
           >
             &nbsp;
           </div>

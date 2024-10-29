@@ -174,7 +174,7 @@
                 height="25"
                 class=""
               />
-              <div class="text-white text-center">2</div>
+              <div class="text-white text-center">{{ pack.likesCounter }}</div>
             </div>
             <div class="absolute z-8 text-center bottom-2 right-4">
               <img
@@ -184,7 +184,7 @@
                 height="30"
                 class=""
               />
-              <div class="text-white text-center">2</div>
+              <div class="text-white text-center">{{ pack.cards.length }}</div>
             </div>
           </div>
           <div class="ms-4">
@@ -199,7 +199,7 @@
             <div class="flex gap-4 c-gap">
               <div class="justify-center flex flex-col items-center">
                 <button
-                  class="w-10 h-8 flex items-center justify-center py-2"
+                  class="!w-12 h-8 flex items-center justify-center py-2"
                   (click)="openGuideBook()"
                 >
                   <img
@@ -218,7 +218,7 @@
                 class="justify-center flex flex-col items-center"
                 *ngIf="pack.videoUrl"
               >
-                <button class="w-10 h-8 flex items-center justify-center py-2">
+                <button class="!w-12 h-8 flex items-center justify-center py-2">
                   <img
                     src="/assets/New/pack-view/play-icon.svg"
                     alt=""
@@ -234,7 +234,7 @@
                 *ngIf="pack?.about && !unauthorized"
               >
                 <button
-                  class="w-10 h-8 flex items-center justify-center py-2"
+                  class="!w-12 h-8 flex items-center justify-center py-2"
                   (click)="openAboutDialog()"
                 >
                   <img
@@ -254,7 +254,7 @@
                 *ngIf="pack.isHardCopyAvailable && !unauthorized"
               >
                 <button
-                  class="w-10 h-8 flex items-center justify-center py-2"
+                  class="!w-12 h-8 flex items-center justify-center py-2"
                   (click)="redirect()"
                 >
                   <img
@@ -320,10 +320,14 @@
           <!-- Drop-down  -->
           <div class="dropdown section-drop-down">
             <div
-              class="dropdown-select position-relative"
+              class="dropdown-select position-relative overflow-hidden"
               (click)="toggleDropdown()"
             >
-              <span class="selected-option text-xl">{{ selectedOption }}</span>
+              <span
+                class="selected-option text-xl truncate"
+                matTooltip="{{ selectedOption }}"
+                >{{ selectedOption }}</span
+              >
               <span class="dropdown-icon">▼</span>
             </div>
             <div class="dropdown-options" [class.show]="isDropdownOpen">
@@ -342,7 +346,7 @@
                   width="25"
                   height="25"
                 />
-                {{ option.text }}
+                {{ isEditing && isEditingOption === index ? "" : option.text }}
               </div>
             </div>
           </div>
@@ -358,7 +362,7 @@
                 matTooltip="הקלפים יתהפכו מצד אחד לצד שני"
               >
                 <div
-                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/rotate-icon.svg"
@@ -368,7 +372,7 @@
                     class="img-shuffle"
                   />
                 </div>
-                <div class="text-xs mb-1 text-xxs">הפוך קלפים</div>
+                <div class="mb-1 text-xs">הפוך קלפים</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 btn-2 btn-height-35 rounded-full"
@@ -379,7 +383,7 @@
                 matTooltip="שליפה אקראית של קלף מהערכה"
               >
                 <div
-                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/info-icon.svg"
@@ -389,7 +393,7 @@
                     class="img-info"
                   />
                 </div>
-                <div class="text-xs mb-1 text-xxs">קלף אקראי</div>
+                <div class="mb-1 text-xs">קלף אקראי</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 btn-1 btn-height-35 rounded-full"
@@ -397,7 +401,7 @@
                 matTooltip="הזמנת משתתפים נוספים לערכה"
               >
                 <div
-                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/link-icon.svg"
@@ -407,7 +411,7 @@
                     class="img-link"
                   />
                 </div>
-                <div class="text-xs mb-1 text-xxs">עבודה משותפת</div>
+                <div class="mb-1 text-xs">עבודה משותפת</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-20 btn-4 btn-height-35 rounded-full"
@@ -418,7 +422,7 @@
                 matTooltip="שינוי סדר הקלפים"
               >
                 <div
-                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/shuffle-icon.svg"
@@ -428,7 +432,7 @@
                     class="img-hand"
                   />
                 </div>
-                <div class="text-xs mb-1 text-xxs">ערבב</div>
+                <div class="mb-1 text-xs">ערבב</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 btn-1 btn-height-35 rounded-full"
@@ -439,7 +443,7 @@
                 matTooltip="הסרת קלפים ספציפיים מהערכה רק לסשן הנוכחי."
               >
                 <div
-                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/pen-icon.svg"
@@ -449,7 +453,7 @@
                     class="img-pen"
                   />
                 </div>
-                <div class="text-xs mb-1 text-xxs">עריכת הערכה</div>
+                <div class="mb-1 text-xs">עריכת הערכה</div>
               </button>
             </div>
           </div>
@@ -462,7 +466,7 @@
     <aside class="aside-bar" *ngIf="pack?.cards?.length > 1">
       <ul>
         <h1 style="font-size: 15px" class="m-0">עבודה תהליכית / לפי נושאים</h1>
-        <p style="font-size: 7px" class="m-0">
+        <p style="font-size: 12px" class="m-0">
           בחרו את הנושאים אותם תרצו להציג או להסתיר
         </p>
         <button
@@ -546,11 +550,12 @@
   </div>
 
   <ng-container *ngIf="id != 90">
+    <!-- Todo  -->
     <div class="d-flex flex-column align-items-center cards-container">
       <div
         *ngIf="pack && !showEditPack"
         [transition-group]="'flip-list'"
-        class="d-flex flex-row justify-content-center flex-wrap"
+        class="d-flex flex-row justify-content-center flex-wrap scrollable-content"
       >
         <div
           *ngFor="let card of cardImages; let i = index"
@@ -1357,7 +1362,6 @@
                         <img
                           src="../../../assets/icons/flipDoubleSideImg.png"
                           alt="Expand data"
-                          width="20px"
                           style="width: auto"
                         />
                       </button>
@@ -2068,8 +2072,14 @@
 
 <!-- TODO -->
 <footer
-  class="footer"
-  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id != '90'"
+  *ngIf="
+    (multiSelectCard.length > 0 || selectedOption) &&
+    id === '90' &&
+    showFooterContainer
+  "
+  [ngClass]="{
+    footer: true
+  }"
 >
   <div class="footer-container">
     <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
@@ -2171,13 +2181,19 @@
 </footer>
 
 <footer
-  class="footer"
-  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id === '90'"
+  *ngIf="
+    (multiSelectCard.length > 0 || selectedOption) &&
+    id != '90' &&
+    showFooterContainer
+  "
+  [ngClass]="{
+    footer: true
+  }"
 >
   <div class="footer-container">
-    <div class="w-100" *ngIf="multiSelectCard.length > 0">
+    <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
       <img src="../../../assets/icons/black_cross.png" />
-    </div>
+    </div> -->
     <span
       class="selected-option"
       *ngIf="

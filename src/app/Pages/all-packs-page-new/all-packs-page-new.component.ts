@@ -27,6 +27,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { UserLoginDialogComponent } from '../all-packs-page/user-login-dialog/user-login-dialog.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { AiChatComponent } from './ai-chat/ai-chat.component';
+import { TranslateService } from '@ngx-translate/core';
 
 interface CategoryPack {
   category: string;
@@ -179,7 +180,8 @@ export class AllPacksPageNewComponent implements OnInit {
     private mixpanelService: MixpanelService,
     public langDirectionService: LangDirectionService,
     private breakpointObserver: BreakpointObserver,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private translateService: TranslateService
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.isLoading = true;
@@ -190,20 +192,51 @@ export class AllPacksPageNewComponent implements OnInit {
   onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
     if (scrollContainer) {
       const { clientX } = event;
-      const { offsetWidth, scrollLeft, scrollWidth, clientWidth } =
-        scrollContainer;
+      const { scrollWidth, clientWidth } = scrollContainer;
       const boundary = 0.1 * clientWidth; // 10% from the edges
       const maxScrollLeft = scrollWidth - clientWidth;
       const mouseX = clientX - scrollContainer.getBoundingClientRect().left;
-      if (clientX < 100) {
-        const newScrollLeft = scrollLeft - this.scrollSpeed;
-        scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
-      } else if (
-        clientX > clientWidth - boundary &&
-        scrollLeft < maxScrollLeft
-      ) {
-        const newScrollLeft = scrollLeft + this.scrollSpeed;
-        scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
+
+      // Check if the container is in RTL mode
+      const isRtl = getComputedStyle(scrollContainer).direction === 'rtl';
+
+      // Handle different browser behaviors in RTL mode
+      let scrollLeft = scrollContainer.scrollLeft;
+      if (isRtl) {
+        if (scrollLeft < 0) {
+          // Chrome/Safari case: scrollLeft is negative in RTL
+          scrollLeft = Math.abs(scrollLeft);
+        } else {
+          // Firefox case: scrollLeft starts from 0 and goes positive
+          scrollLeft = scrollWidth - clientWidth - scrollLeft;
+        }
+      }
+
+      if (isRtl) {
+        // Handle RTL scrolling
+        if (mouseX < boundary && scrollLeft < maxScrollLeft) {
+          // Scroll right if mouse is within the left boundary (since it's RTL)
+          const newScrollLeft = scrollLeft + this.scrollSpeed;
+          scrollContainer.scrollLeft = -Math.min(newScrollLeft, maxScrollLeft);
+        } else if (mouseX > clientWidth - boundary && scrollLeft > 0) {
+          // Scroll left if mouse is within the right boundary (since it's RTL)
+          const newScrollLeft = scrollLeft - this.scrollSpeed;
+          scrollContainer.scrollLeft = -Math.max(newScrollLeft, 0);
+        }
+      } else {
+        // Handle LTR scrolling
+        if (mouseX < boundary && scrollLeft > 0) {
+          // Scroll left if mouse is within the left boundary
+          const newScrollLeft = scrollLeft - this.scrollSpeed;
+          scrollContainer.scrollLeft = Math.max(newScrollLeft, 0);
+        } else if (
+          mouseX > clientWidth - boundary &&
+          scrollLeft < maxScrollLeft
+        ) {
+          // Scroll right if mouse is within the right boundary
+          const newScrollLeft = scrollLeft + this.scrollSpeed;
+          scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
+        }
       }
     }
   }
@@ -351,18 +384,26 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   handleFilterChange(filter: string) {
+    // Reset all filters
+    this.isfavSelected = false;
+    this.selectedCardFilter = '';
+
     if (filter === 'fav') {
-      this.toggleIsFavSelected();
-    } else if (filter === 'category') {
-      this.isfavSelected = false;
-      this.handleCategoryClick('');
+      this.isfavSelected = true; // Activate favorite filter
+    } else {
+      this.selectedCardFilter = filter; // Activate the selected filter
     }
   }
 
   handleCategoryClick(category: string) {
+    // Reset the "favorites" selection
+    this.isfavSelected = false;
+
+    // Set the selected category as the active filter
     this.selectOption(category);
     this.selectedCardFilter = category;
   }
+
   ngAfterViewInit() {
     this.router.queryParams.subscribe((params) => {
       let filter = params['filter'];
@@ -376,7 +417,21 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   toggleIsFavSelected() {
-    this.isfavSelected = !this.isfavSelected;
+    if (this.isfavSelected) {
+      this.isfavSelected = false;
+    } else {
+      this.isfavSelected = true;
+      this.selectedCardFilter = '';
+    }
+  }
+
+  handleAllPacksClick() {
+    this.isfavSelected = false;
+    this.selectedCardFilter = '';
+    this.freeTextFilterSelected = '';
+    this.showCategoryLine = true;
+
+    this.getAllPacks(true);
   }
 
   ngOnInit() {
@@ -445,6 +500,9 @@ export class AllPacksPageNewComponent implements OnInit {
       this.placeholderText = 'איך אפשר לעזור?';
     }
     //this.getAllPacks();
+    this.translateService.onLangChange.subscribe((event) => {
+      this.handleLanguageChange(event.lang);
+    });
   }
 
   initializeLanguage(): void {
@@ -666,6 +724,13 @@ export class AllPacksPageNewComponent implements OnInit {
     this.stopGenerateOptions = true;
     this.filteredOptions = [];
     this.filterPacks();
+  }
+
+  private handleLanguageChange(lang: string): void {
+    localStorage.setItem('packsLanguage', lang);
+    this.filterOption.language = lang;
+    localStorage.setItem('packsLanguageLocalStorage', lang);
+    this.getAllPacks(false); // Update packs to reflect the new language filter
   }
 
   categoryFilter(): void {

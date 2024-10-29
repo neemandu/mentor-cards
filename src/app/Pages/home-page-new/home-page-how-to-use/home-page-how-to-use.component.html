@@ -20,14 +20,14 @@
   >
     <div
       *ngFor="let video of videos"
-      class="video-container mx-2 relative flex items-center"
+      class="video-container mx-2 relative flex items-center justify-center"
     >
       <img
         [src]="video.thumbnail"
         class="video-thumbnail"
         [hidden]="video.isPlaying"
         height="60vh"
-        style="border-radius: 20px"
+        style="border-radius: 20px; height: 30rem"
       />
       <button
         class="play-button absolute top-1/2 left-1/2"

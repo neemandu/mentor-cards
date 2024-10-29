@@ -1,6 +1,6 @@
 .scroll-container {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: auto;
   position: relative;
 }
 
@@ -37,7 +37,6 @@
   right: 0;
 }
 
-
 .large-radio {
   transform: scale(1.5);
   /* Adjust the scale value as needed */
@@ -57,13 +56,12 @@
   align-items: center;
 }
 
-
 .message-bubble p {
   margin-bottom: 0;
 }
 
 .message-bubble::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 100%;
@@ -117,7 +115,7 @@
 }
 
 .message-bubble::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 100%;
@@ -132,7 +130,6 @@
   margin-right: 10px;
 }
 
-
 @media (min-width: 640px) {
   .content-ltr {
     width: 1800px !important;
@@ -142,7 +139,6 @@
   .content-rtl {
     width: 1500px !important;
     height: 8.5rem !important;
-
   }
 }
 

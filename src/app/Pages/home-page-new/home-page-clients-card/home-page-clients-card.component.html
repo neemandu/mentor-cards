@@ -13,7 +13,7 @@
                     <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
                 </div>
             </div> -->
-      <div class="col-span-1 mt-8 mb-12 flex-wrap contents">
+      <div class="col-span-1 mt-8 mb-12 flex-wrap contents sm:block">
         <div *ngFor="let item of clientList | slice : 10 : 15" class="mt-8">
           <img
             [src]="item.image"

@@ -287,23 +287,35 @@ li span {
 /* Custom drop-down CSS */
 .dropdown {
   position: relative;
-  width: 100%;
+  width: 80vw;
+  margin-inline: auto;
   font-family: Arial, sans-serif;
 }
 
 .dropdown-select {
   padding: 10px;
   border: none;
-  border-bottom: 2px solid #e67c73;
+  border-bottom: 2px solid #e67c73; /* The red line */
   cursor: pointer;
-  height: 50px;
   background-color: transparent;
+  text-align: center;
+  position: relative; /* Relative positioning for dropdown-options */
+  min-height: 50px; /* Allow for multiple lines if needed */
+}
+
+.selected-option {
+  display: block; /* Ensures it takes up full width */
+  font-weight: 600;
+  max-width: 100%;
+  word-wrap: break-word; /* Allow the text to wrap within the container */
+  overflow-wrap: break-word; /* Handle word wrapping */
+  white-space: normal; /* Allows the text to wrap to the next line */
   text-align: center;
 }
 
 .dropdown-options {
   position: absolute;
-  top: calc(100% + 5px);
+  top: calc(100% + 5px); /* Dropdown appears below the dropdown select */
   left: 0;
   width: 100%;
   background-color: white;
@@ -313,6 +325,8 @@ li span {
   display: none;
   z-index: 1000;
   text-align: start;
+  max-height: 300px; /* Set a maximum height for better control */
+  overflow-y: auto; /* Add scroll for long lists */
 }
 
 .dropdown-option {
@@ -320,25 +334,25 @@ li span {
   padding: 10px;
   cursor: pointer;
   gap: 10px;
+  white-space: normal; /* Allow text to wrap */
+  overflow-wrap: break-word; /* Handle word wrapping */
+  word-break: break-word;
 }
 
 .dropdown-option:hover {
   font-weight: bold;
+  background-color: #f5f5f5; /* Highlight background on hover for better UX */
 }
 
 .dropdown-options.show {
   display: block;
 }
 
-.icon {
-  margin-left: 10px;
-  font-size: 16px;
-}
-
 .dropdown-icon {
   position: absolute;
-  left: -5px;
-  bottom: 8px;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* End Drop-down CSS Here */
@@ -703,7 +717,7 @@ app-card.scrollableCard {
   }
 
   .btn-1 {
-    width: 70px;
+    width: 100px;
   }
   .btn-2 {
     width: 50px;
@@ -728,7 +742,7 @@ app-card.scrollableCard {
   }
 
   .section-drop-down {
-    width: 100% !important;
+    width: 80vw !important;
     padding-left: 20px;
   }
 
@@ -877,6 +891,7 @@ app-card.scrollableCard {
 
   .zoom-button {
     background: #7a7a7a;
+    opacity: 60%;
     border: none;
     border-radius: 25px;
     width: 34px;
@@ -1586,4 +1601,21 @@ img {
   font-size: 18px;
   font-weight: bold;
   text-align: center;
+}
+
+.scrollable-content {
+  height: calc(100vh - 20rem);
+  overflow-y: auto;
+  padding: 20px; /* Add padding as needed */
+}
+
+/* Optionally, to hide the scrollbar but keep functionality */
+.scrollable-content {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

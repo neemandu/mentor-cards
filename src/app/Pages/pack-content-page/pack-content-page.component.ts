@@ -101,6 +101,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   aspectRatio: number = this.imageWidth / this.imageHeight;
   containerPadding: number = 2;
   overFlowCardContainerHeight: number = 340;
+  showFooterContainer: boolean = false;
 
   categoryBaseArray = [];
   categoryScreen: boolean = false;
@@ -164,6 +165,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       // Make only the second-to-last option editable
       this.isEditing = true;
       this.isEditingOption = index;
+      option;
 
       // Set the selected option for display and editing
       this.selectedOption = option.text;
@@ -815,10 +817,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
    */
   editPack(): void {
     this.mixpanelService.track('ActionButtonClicked', {
-      Action: 'Edit pack',
+      Action: this.showEditPack ? 'End edit pack' : 'Edit pack',
       'Pack id': this.id,
       'Pack name': this.pack?.name,
     });
+
     if (!this.showEditPack) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -834,10 +837,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       );
       this.dialog.open(DynamicDialogYesNoComponent, dialogConfig);
       this.showEditPack = true;
+      this.showFooterContainer = false; // Hide footer-container
       this.flipped = true;
       this.selectedCards = [];
+      console.log('edit pack', this.showEditPack);
     } else {
       this.showEditPack = false;
+      this.showFooterContainer = true; // Show footer-container again
       this.flipped = true;
     }
   }
@@ -909,11 +915,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   createCommomLink(): void {
-    this.mixpanelService.track('ActionButtonClicked', {
-      Action: 'Create Common Link',
-      'Pack id': this.id,
-      'Pack name': this.pack?.name,
-    });
+    // this.mixpanelService.track('ActionButtonClicked', {
+    //   Action: 'Create Common Link',
+    //   'Pack id': this.id,
+    //   'Pack name': this.pack?.name,
+    // });
 
     this.api.MakeCommonLink({ packId: this.id }).then((data) => {
       const url = window.location.href + '?link=' + data;

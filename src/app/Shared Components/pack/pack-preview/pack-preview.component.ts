@@ -16,6 +16,7 @@ import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { AboutAuthorComponent } from '../about-author/about-author.component';
 import { Platform } from '@angular/cdk/platform';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
+import { PackDataService } from 'src/app/Services/pack-data.service';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -44,7 +45,8 @@ export class PackPreviewComponent implements OnInit {
     private ngZone: NgZone,
     private mixpanel: MixpanelService,
     private platform: Platform,
-    public langDirectionService: LangDirectionService
+    public langDirectionService: LangDirectionService,
+    private packDataService: PackDataService
   ) {}
 
   ngOnInit(): void {
@@ -54,12 +56,14 @@ export class PackPreviewComponent implements OnInit {
       this.closeDialog();
     });
     const ls = localStorage.getItem('packsToOpenAutomatically');
+    console.log('Top questions retrieved:', ls);
     const packsToOpenAutomatically = ls ? ls.split(',') : [];
     if (
       packsToOpenAutomatically.includes(this.data.pack.id) &&
       this.data.pack.cards.length !== 0
-    )
+    ) {
       this.navigateToPackView(true);
+    }
 
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
@@ -95,6 +99,12 @@ export class PackPreviewComponent implements OnInit {
 
     if (this.platform.ANDROID || this.platform.IOS) {
       this.isMobile = true;
+    }
+
+    // Set top questions in PackDataService
+    if (this.data.pack.topQuestions) {
+      this.packDataService.setTopQuestions(this.data.pack.topQuestions);
+      console.log('Top questions set:', this.data.pack.topQuestions);
     }
   }
 
