@@ -287,8 +287,7 @@ li span {
 /* Custom drop-down CSS */
 .dropdown {
   position: relative;
-  width: 80vw;
-  margin-inline: auto;
+  width: 100%;
   font-family: Arial, sans-serif;
 }
 
@@ -692,6 +691,28 @@ app-card.scrollableCard {
 }
 
 @media screen and (max-width: 768px) {
+  .dropdown-options {
+    position: fixed; /* Use fixed positioning for better control */
+    top: 20%; /* Position the dropdown options at a visible area */
+    left: 5%;
+    width: 90%;
+    max-height: 60vh; /* Limit the dropdown height for better visibility */
+    overflow-y: auto; /* Allow scrolling */
+    z-index: 2000; /* Keep it above all other elements */
+  }
+
+  .dropdown-select {
+    padding: 10px; /* Keep padding for consistency */
+    font-size: 8px; /* Adjust font size for mobile */
+    min-height: 60px;
+  }
+
+  .selected-option {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+  }
+
   ::ng-deep .cdk-overlay-pane {
     max-width: 80vw !important;
   }
