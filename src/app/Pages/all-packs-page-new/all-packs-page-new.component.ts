@@ -187,7 +187,7 @@ export class AllPacksPageNewComponent implements OnInit {
     this.isLoading = true;
     this.checkScreenSize();
   }
-  private scrollSpeed = 10;
+  private scrollSpeed = 5;
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
     if (scrollContainer) {
