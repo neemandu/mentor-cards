@@ -11,7 +11,7 @@ export class CardComponent implements OnInit {
   @Input() selected: boolean = false;
   @Input() mobileView: boolean = false;
   @Input() index: number;
-  @Input() flipped: boolean = false;
+  @Input() flipped: boolean = true;
   @Output() cardSelectedEmmiter: EventEmitter<any> = new EventEmitter();
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   @Input() imageWidth: number = 160;
@@ -34,11 +34,11 @@ export class CardComponent implements OnInit {
   calculateNewDimensions() {
     if (
       this.cardContent &&
-      this.cardContent.backImgUrl &&
+      this.cardContent.frontImgUrl &&
       !this.flipBoxInnerInCat
     ) {
       const img = new Image();
-      img.src = this.cardContent.backImgUrl;
+      img.src = this.cardContent.frontImgUrl;
       img.onload = () => {
         this.originalDimensions.width = img.width;
         this.originalDimensions.height = img.height;
