@@ -101,7 +101,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   aspectRatio: number = this.imageWidth / this.imageHeight;
   containerPadding: number = 2;
   overFlowCardContainerHeight: number = 340;
-  showFooterContainer: boolean = false;
+  showFooterContainer: boolean = true;
 
   categoryBaseArray = [];
   categoryScreen: boolean = false;
@@ -488,7 +488,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     console.log(card, index);
     this.singleCategoryBaseCard = false;
     if (flag) {
-      // debugger;
+      debugger;
       this.singleCardCheck = true;
       if (this.multipileChecked) {
         if (this.selectedCards.includes(card)) {

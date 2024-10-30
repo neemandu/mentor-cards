@@ -518,17 +518,13 @@
         <div
           class="d-flex overflow-cards"
           *ngIf="categoryOpenStates[i]"
-          [ngStyle]="
-            !flipped
-              ? { height: imageHeight + 'px' }
-              : { height: imageHeight + 'px' }
-          "
+          [ngStyle]="!flipped ? { height: imageHeight + 'px' } : {}"
         >
           <app-card
             [ngStyle]="
               !flipped
                 ? { width: imageWidth + 'px', height: imageHeight + 'px' }
-                : { width: imageWidth + 'px', height: imageHeight + 'px' }
+                : {}
             "
             [imageWidth]="imageWidth"
             [imageHeight]="imageHeight"
@@ -2081,9 +2077,6 @@
     id === '90' &&
     showFooterContainer
   "
-  [ngClass]="{
-    footer: true
-  }"
 >
   <div class="footer-container">
     <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
@@ -2190,9 +2183,6 @@
     id != '90' &&
     showFooterContainer
   "
-  [ngClass]="{
-    footer: true
-  }"
 >
   <div class="footer-container">
     <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
