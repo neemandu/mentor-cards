@@ -199,7 +199,7 @@
             <div class="flex gap-4 c-gap">
               <div class="justify-center flex flex-col items-center">
                 <button
-                  class="!w-12 h-8 flex items-center justify-center py-2"
+                  class="w-10 h-8 flex items-center justify-center py-2"
                   (click)="openGuideBook()"
                 >
                   <img
@@ -218,7 +218,7 @@
                 class="justify-center flex flex-col items-center"
                 *ngIf="pack.videoUrl"
               >
-                <button class="!w-12 h-8 flex items-center justify-center py-2">
+                <button class="w-10 h-8 flex items-center justify-center py-2">
                   <img
                     src="/assets/New/pack-view/play-icon.svg"
                     alt=""
@@ -234,7 +234,7 @@
                 *ngIf="pack?.about && !unauthorized"
               >
                 <button
-                  class="!w-12 h-8 flex items-center justify-center py-2"
+                  class="w-10 h-8 flex items-center justify-center py-2"
                   (click)="openAboutDialog()"
                 >
                   <img
@@ -254,7 +254,7 @@
                 *ngIf="pack.isHardCopyAvailable && !unauthorized"
               >
                 <button
-                  class="!w-12 h-8 flex items-center justify-center py-2"
+                  class="w-10 h-8 flex items-center justify-center py-2"
                   (click)="redirect()"
                 >
                   <img
@@ -320,14 +320,10 @@
           <!-- Drop-down  -->
           <div class="dropdown section-drop-down">
             <div
-              class="dropdown-select position-relative overflow-hidden"
+              class="dropdown-select position-relative"
               (click)="toggleDropdown()"
             >
-              <span
-                class="selected-option text-xl truncate"
-                matTooltip="{{ selectedOption }}"
-                >{{ selectedOption }}</span
-              >
+              <span class="selected-option text-xl">{{ selectedOption }}</span>
               <span class="dropdown-icon">▼</span>
             </div>
             <div class="dropdown-options" [class.show]="isDropdownOpen">
@@ -346,7 +342,7 @@
                   width="25"
                   height="25"
                 />
-                {{ isEditing && isEditingOption === index ? "" : option.text }}
+                {{ option.text }}
               </div>
             </div>
           </div>
@@ -362,7 +358,7 @@
                 matTooltip="הקלפים יתהפכו מצד אחד לצד שני"
               >
                 <div
-                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/rotate-icon.svg"
@@ -372,7 +368,7 @@
                     class="img-shuffle"
                   />
                 </div>
-                <div class="mb-1 text-xs">הפוך קלפים</div>
+                <div class="text-xs mb-1 text-xxs">הפוך קלפים</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 btn-2 btn-height-35 rounded-full"
@@ -383,7 +379,7 @@
                 matTooltip="שליפה אקראית של קלף מהערכה"
               >
                 <div
-                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/info-icon.svg"
@@ -393,7 +389,7 @@
                     class="img-info"
                   />
                 </div>
-                <div class="mb-1 text-xs">קלף אקראי</div>
+                <div class="text-xs mb-1 text-xxs">קלף אקראי</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 btn-1 btn-height-35 rounded-full"
@@ -401,7 +397,7 @@
                 matTooltip="הזמנת משתתפים נוספים לערכה"
               >
                 <div
-                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/link-icon.svg"
@@ -411,7 +407,7 @@
                     class="img-link"
                   />
                 </div>
-                <div class="mb-1 text-xs">עבודה משותפת</div>
+                <div class="text-xs mb-1 text-xxs">עבודה משותפת</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-20 btn-4 btn-height-35 rounded-full"
@@ -422,7 +418,7 @@
                 matTooltip="שינוי סדר הקלפים"
               >
                 <div
-                  class="!w-12 h-8 flex items-center justify-center py-2 padding-none"
+                  class="w-10 h-8 flex items-center justify-center py-2 padding-none"
                 >
                   <img
                     src="/assets/New/pack-view/shuffle-icon.svg"
@@ -432,7 +428,7 @@
                     class="img-hand"
                   />
                 </div>
-                <div class="mb-1 text-xs">ערבב</div>
+                <div class="text-xs mb-1 text-xxs">ערבב</div>
               </button>
               <button
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-28 btn-1 btn-height-35 rounded-full"
@@ -550,12 +546,11 @@
   </div>
 
   <ng-container *ngIf="id != 90">
-    <!-- Todo  -->
     <div class="d-flex flex-column align-items-center cards-container">
       <div
         *ngIf="pack && !showEditPack"
         [transition-group]="'flip-list'"
-        class="d-flex flex-row justify-content-center flex-wrap scrollable-content"
+        class="d-flex flex-row justify-content-center flex-wrap"
       >
         <div
           *ngFor="let card of cardImages; let i = index"
@@ -1362,6 +1357,7 @@
                         <img
                           src="../../../assets/icons/flipDoubleSideImg.png"
                           alt="Expand data"
+                          width="20px"
                           style="width: auto"
                         />
                       </button>
@@ -2072,11 +2068,8 @@
 
 <!-- TODO -->
 <footer
-  *ngIf="
-    (multiSelectCard.length > 0 || selectedOption) &&
-    id === '90' &&
-    showFooterContainer
-  "
+  class="footer"
+  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id != '90'"
 >
   <div class="footer-container">
     <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
@@ -2178,16 +2171,13 @@
 </footer>
 
 <footer
-  *ngIf="
-    (multiSelectCard.length > 0 || selectedOption) &&
-    id != '90' &&
-    showFooterContainer
-  "
+  class="footer"
+  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id === '90'"
 >
   <div class="footer-container">
-    <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
+    <div class="w-100" *ngIf="multiSelectCard.length > 0">
       <img src="../../../assets/icons/black_cross.png" />
-    </div> -->
+    </div>
     <span
       class="selected-option"
       *ngIf="
