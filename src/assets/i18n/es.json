@@ -65,6 +65,14 @@
         "איפוס חיפוש": "Restablecer búsqueda"
       }
     },
+    "pack-preview": {
+      "book-icon": "Impresión",
+      "print-pack-description": "También puedes comprar una versión impresa",
+      "about-author": "Acerca de:",
+      "go-to-creator-website": "Ir al sitio web del creador",
+      "sign-in-sign-up": "Iniciar sesión/Registrarse",
+      "enter-pack": "Entrar a la baraja"
+    },
     "about-us": {
       "title": "Las Mentor-Cards nos apoyan",
       "introduction-full": {

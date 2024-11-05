@@ -66,6 +66,14 @@
         "איפוס חיפוש": "איפוס חיפוש"
       }
     },
+    "pack-preview": {
+      "book-icon": "הדפסת ערכה",
+      "print-pack-description": "ניתן לרכוש גם ערכה מודפסת",
+      "about-author": "אודות:",
+      "go-to-creator-website": "למעבר לאתר הבית של היוצר",
+      "sign-in-sign-up": "התחברות/הרשמה",
+      "enter-pack": "כניסה לערכה"
+    },
     "about-us": {
       "title": "Mentor-Cards עמוד עלינו",
       "introduction-full": {

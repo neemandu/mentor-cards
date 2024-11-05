@@ -16,6 +16,12 @@
   }
 }
 
+@media (min-width: 640px) {
+  .sm\:w-86 {
+    width: 20rem /* 320px */;
+  }
+}
+
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;

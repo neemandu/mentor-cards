@@ -342,7 +342,7 @@
                   width="25"
                   height="25"
                 />
-                {{ option.text }}
+                {{ isEditing && isEditingOption === index ? "" : option.text }}
               </div>
             </div>
           </div>
@@ -2076,6 +2076,7 @@
 <footer
   class="footer"
   *ngIf="(multiSelectCard.length > 0 || selectedOption) && id != '90'"
+  [ngStyle]="{ display: showEditPack ? 'none' : 'flex' }"
 >
   <div class="footer-container">
     <!-- <div class="w-100" *ngIf="multiSelectCard.length > 0">
@@ -2099,7 +2100,7 @@
       </div>
 
       <div
-        *ngIf="multiSelectCard.length > 0"
+        *ngIf="multiSelectCard.length && !isEditing"
         class="button-box-mbl hideItDesktop"
       >
         <button class="show-all-mbl" (click)="showAllInDialog()">
@@ -2145,6 +2146,8 @@
               class="position-absolute bg-white rounded-full p-1"
               style="left: 8px; top: 25px"
               src="../../../assets/icons/zoomPlus.png"
+              width="25px"
+              height="25px"
               (click)="cardSelected(item.card, item.index, true)"
             />
             <img
@@ -2167,6 +2170,8 @@
               src="../../../assets/icons/black_cross.png"
               class="absolute bg-white rounded-full p-1"
               style="top: 25px; right: 12px"
+              width="25px"
+              height="25px"
               (click)="removeImage(item)"
             />
           </div>

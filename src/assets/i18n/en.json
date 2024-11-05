@@ -64,6 +64,14 @@
         "איפוס חיפוש": "Reset Search"
       }
     },
+    "pack-preview": {
+      "book-icon": "Printing",
+      "print-pack-description": "You can also purchase a printed version",
+      "about-author": "About:",
+      "go-to-creator-website": "Go to the creator's website",
+      "sign-in-sign-up": "Sign In/Sign Up",
+      "enter-pack": "Enter Pack"
+    },
     "about-us": {
       "title": "Mentor-Cards About Us Page",
       "introduction-full": {

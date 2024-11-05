@@ -65,6 +65,14 @@
         "איפוס חיפוש": "Сбросить поиск"
       }
     },
+    "pack-preview": {
+      "book-icon": "Печать",
+      "print-pack-description": "Вы можете также приобрести печатную версию",
+      "about-author": "О:",
+      "go-to-creator-website": "Перейти на сайт создателя",
+      "sign-in-sign-up": "Вход/Регистрация",
+      "enter-pack": "Вход в колоду"
+    },
     "about-us": {
       "title": "Карты наставников помогают нам",
       "introduction-full": {

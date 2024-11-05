@@ -65,6 +65,14 @@
         "איפוס חיפוש": "إعادة ضبط البحث"
       }
     },
+     "pack-preview": {
+      "book-icon": "الطبع",
+      "print-pack-description": "يمكنك شراء الطبع أيضا",
+      "about-author": "عن:",
+      "go-to-creator-website": "الانتقال إلى موقع المنشأ",
+      "sign-in-sign-up": "تسجيل الدخول/التسجيل",
+      "enter-pack": "الدخول إلى الحزمة"
+    },
     "about-us": {
       "title": "بطاقات الإرشاد تقف علينا",
       "introduction-full": {
