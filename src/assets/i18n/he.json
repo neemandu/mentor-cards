@@ -1337,7 +1337,7 @@
             "title": "דברו אלינו בקלפים",
             "description": "נשמח לתת לכם שירות בכל נושא!",
             "form": {
-              "name-label": "שירלי to שם מלא",
+              "name-label": "שם מלא",
               "phone-label": "טלפון",
               "email-label": "מייל",
               "message-label": "איך נוכל לעזור?",
