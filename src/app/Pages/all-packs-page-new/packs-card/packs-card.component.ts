@@ -108,8 +108,8 @@ export class PacksCardComponent implements OnInit, OnDestroy {
             setTimeout(() => {
               const dialogConfig = new MatDialogConfig();
               dialogConfig.autoFocus = true;
-              dialogConfig.maxWidth = isMobile ? '90vw' : '520px';
-              dialogConfig.maxHeight = isMobile ? '60vh' : '500px';
+              dialogConfig.maxWidth = isMobile ? '90vw' : '620px';
+              dialogConfig.maxHeight = isMobile ? '60vh' : '600px';
               if (!isMobile) {
                 dialogConfig.position = dialogPosition;
               }

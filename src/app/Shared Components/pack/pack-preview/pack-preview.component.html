@@ -22,7 +22,9 @@
             alt="User Avatar"
             class="w-6 h-6"
           />
-          <div class="text-center font-bold">ספר הדרכה</div>
+          <div class="text-center font-bold">
+            {{ "pages.pack-preview.book-icon" | translate }}
+          </div>
         </div>
         <div class="flex items-center justify-end mb-2 flex-col">
           <img
@@ -43,7 +45,7 @@
       </div>
     </div>
     <!-- Images -->
-    <div class="relative h-60 sm:w-96 w-60 mx-auto">
+    <div class="relative h-60 sm:w-86 w-60 mx-auto">
       <div class="absolute top-0 left-0 sm:w-40 w-32 h-56 transform z-10">
         <img
           [src]="data.pack.cardsPreview[0]"
@@ -91,7 +93,9 @@
             alt="User Avatar"
             style="width: 24px; height: 24px"
           />
-          <div>ניתן לרכוש גם ערכה מודפסת</div>
+          <div>
+            {{ "pages.pack-preview.print-pack-description" | translate }}
+          </div>
         </div>
       </div>
     </div>
@@ -117,7 +121,7 @@
   <!-- Description -->
   <p
     [ngClass]="isExpland ? '' : 'line-clamp-2 overflow-hidden'"
-    class="text-sm text-right"
+    class="text-sm"
   >
     {{ data.pack.description }}
   </p>
@@ -126,9 +130,13 @@
     <div class="about-author">
       <div class="about-author-text categories-tags">
         <p class="text-sm mb-4 text-right">
-          <span class="font-bold"> אודות: </span>{{ data.pack.about.text }}
+          <span class="font-bold">
+            {{ "pages.pack-preview.about-author" | translate }}: </span
+          >{{ data.pack.about.text }}
         </p>
-        <button (click)="redirect()">למעבר לאתר הבית של היוצר</button>
+        <button (click)="redirect()">
+          {{ "pages.pack-preview.go-to-creator-website" | translate }}
+        </button>
       </div>
     </div>
   </div>
@@ -142,7 +150,7 @@
         type="button"
         (click)="signInSignUp()"
       >
-        התחברות/הרשמה
+        {{ "pages.pack-preview.sign-in-sign-up" | translate }}
       </button>
     </div>
 
@@ -157,7 +165,7 @@
           type="button"
           (click)="navigateToPackView()"
         >
-          כניסה לערכה
+          {{ "pages.pack-preview.enter-pack" | translate }}
         </button>
       </div>
 
