@@ -22,6 +22,7 @@ import {
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { PacksCardService } from './packs-card.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-packs-card',
@@ -38,12 +39,14 @@ export class PacksCardComponent implements OnInit, OnDestroy {
   isFavCard: boolean = false;
   private cardOpenSubscription: Subscription;
   private hoverTimeout: any;
+  isCardOpen: boolean = false;
 
   constructor(
     public langDirectionService: LangDirectionService,
     private userAuthService: UserAuthService,
     public dialog: MatDialog,
-    private cardStateService: PacksCardService
+    private cardStateService: PacksCardService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +77,9 @@ export class PacksCardComponent implements OnInit, OnDestroy {
     const dialogMaxWidth = window.innerWidth * 0.6; // 60vw
     const dialogMaxHeight = window.innerHeight * 0.7; // 70vh
 
+    // Define bottomThreshold - e.g., 80% of viewport height
+    const bottomThreshold = window.innerHeight * 0.9;
+
     // Calculate initial top and left to center the dialog over the div
     let left = divCenterX - dialogMaxWidth / 2;
     let top = divCenterY - dialogMaxHeight / 2;
@@ -85,10 +91,19 @@ export class PacksCardComponent implements OnInit, OnDestroy {
       left = window.innerWidth - dialogMaxWidth - 20; // Add some padding from the right edge
     }
 
-    if (top < 0) {
-      top = 20; // Add some padding from the top
-    } else if (top + dialogMaxHeight > window.innerHeight) {
-      top = window.innerHeight - dialogMaxHeight - 20; // Add some padding from the bottom edge
+    if (rect.bottom > bottomThreshold) {
+      // If card is near the bottom, show tooltip and adjust dialog position
+      top = window.innerHeight - dialogMaxHeight - 20;
+      this.snackBar.open(this.getScrollMessage(), '', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+      this.isCardOpen = true;
+    } else {
+      // For cards in the middle, center the dialog vertically
+      top = rect.top + rect.height / 2 - dialogMaxHeight / 2;
+      this.isCardOpen = false;
     }
 
     // Set dialog position using the adjusted values
@@ -103,7 +118,7 @@ export class PacksCardComponent implements OnInit, OnDestroy {
         .getCardOpenState()
         .pipe(take(1))
         .subscribe((isOpen) => {
-          if (!isOpen) {
+          if (!isOpen && !this.isCardOpen) {
             this.cardStateService.setCardOpen(true);
             setTimeout(() => {
               const dialogConfig = new MatDialogConfig();
@@ -134,6 +149,20 @@ export class PacksCardComponent implements OnInit, OnDestroy {
     // Check if any card is currently open
   }
 
+  private getScrollMessage(): string {
+    // Get current language from your language service
+    const currentLang = this.langDirectionService.currentLang;
+
+    const messages: { [key: string]: string } = {
+      en: 'Scroll down a little bit to see it',
+      he: 'גלול מטה מעט כדי לראות',
+      ar: 'قم بالتمرير لأسفل قليلاً لرؤيته',
+      es: 'Desplázate un poco hacia abajo para verlo',
+      fr: 'Faites défiler un peu vers le bas pour le voir',
+    };
+
+    return messages[currentLang] || messages['en']; // Fallback to English if language not found
+  }
   onMouseEnter(event: any): void {
     // Start hover timer when mouse enters
     this.openPreviewDialog(event);

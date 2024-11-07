@@ -1258,13 +1258,16 @@
           "content": {
             "title1": "tantos equipos,",
             "title2": "tan poco tiempo",
-            "description1": "La mayoría de nosotros pedimos nuestra comida a través de una aplicación, leemos nuestros libros digitalmente. Era sólo cuestión de tiempo que las tarjetas de tratamiento",
+             "description1": "La mayoría de nosotros pedimos nuestra comida a través de una aplicación, leemos nuestros libros digitalmente. Era sólo cuestión de tiempo que las tarjetas de tratamiento",
             "description2": "Los productos desechables se unirán a la forma en que nos gusta consumir nuestros productos y pasarán a ser online.",
             "description3": "Mentor-Cards es un paraíso digital para usted: innumerables conjuntos de tarjetas, tutoriales e inspiración en una variedad actualizada que se adapta a cada uno de los clientes.",
             "description4": "o tus objetivos.",
             "description5": "¡Simplemente conéctese a su teléfono móvil, computadora o tableta desde cualquier lugar de Israel o del mundo y disfrute de una experiencia de usuario amigable y sencilla que ya conoce! simple",
             "description6": "Quizás aún no esté en las cartas...",
-            "statistics": [
+            "description8":"¡Simplemente conéctese a su teléfono móvil, computadora o tableta desde cualquier lugar de Israel o del mundo y disfrute de una experiencia de usuario amigable y sencilla que ya conoce! simple",
+            "description9":"Quizás aún no esté en las cartas...",
+           
+              "statistics": [
               {
                 "value": "+40",
                 "label1": "Equipos",

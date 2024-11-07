@@ -264,6 +264,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.setPack(
         this.cardsService.allPacks.find((pack) => pack.id === this.id)
       );
+      console.log('this.pack', this.pack);
+      let topQuestions = this.pack?.topQuestions;
+      if (topQuestions) {
+        const formattedQuestions = topQuestions.map((q) =>
+          typeof q === 'string' ? { text: q } : q
+        );
+        this.options = [...formattedQuestions, ...this.options];
+      }
+      console.log('this.options', this.options);
       console.log('loading pack from service');
     } else {
       console.log('fetching pack');
@@ -272,6 +281,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.setPack(
         this.cardsService.allPacks.find((pack) => pack.id === this.id)
       );
+      let topQuestions = this.pack?.topQuestions;
+
+      if (topQuestions) {
+        const formattedQuestions = topQuestions.map((q) =>
+          typeof q === 'string' ? { text: q } : q
+        );
+        this.options = [...formattedQuestions, ...this.options];
+      }
+
+      console.log('this.options', this.options);
     }
   }
 

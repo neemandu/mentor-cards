@@ -285,7 +285,7 @@
               | translate
           }}
         </div>
-        <div class="all-packs-view__section flex justify-between mb-16">
+        <div class="all-packs-view__section flex justify-between">
           <div
             class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
           >
@@ -312,7 +312,7 @@
             </div>
           </div>
           <div
-            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4 bg-black"
+            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
           >
             &nbsp;
           </div>
@@ -401,7 +401,10 @@
             class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
             (mousemove)="onMouseMove($event, allPacksScrollContainer)"
           >
-            <div *ngFor="let packInfo of categoryPacks.packs; let j = index">
+            <div
+              *ngFor="let packInfo of categoryPacks.packs; let j = index"
+              class="relative"
+            >
               <app-packs-card
                 [backgroundColor]="cardsColors[j % cardsColors.length].color"
                 [packInfo]="packInfo"

@@ -779,4 +779,8 @@ export class AllPacksPageNewComponent implements OnInit {
       this.queryParamSubscription.unsubscribe();
     }
   }
+
+  isScrollable(element: HTMLElement): boolean {
+    return element.scrollWidth > element.clientWidth;
+  }
 }
