@@ -1,3 +1,15 @@
 .packs-image:hover {
     cursor: pointer;
 }
+
+.width-44 {
+    width: 11rem;
+    height: 16rem;
+}
+
+@media (min-width: 640px) { 
+    .width-44 {
+        width: 11rem;
+        height: 16rem;
+    }
+}

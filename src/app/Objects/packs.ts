@@ -61,6 +61,7 @@ export class PackContent {
   language: string;
   videoUrl: string;
   isHardCopyAvailable: string;
+  isReadingGuidebookAMust : boolean;
 
   constructor() {}
 

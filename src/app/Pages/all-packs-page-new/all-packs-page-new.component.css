@@ -138,6 +138,11 @@
   margin-right: 10px;
 }
 
+.grid-column-12 {
+  grid-template-columns: repeat(12, minmax(0, 95px));
+}
+
+
 @media (min-width: 640px) {
   .content-ltr {
     width: 1800px !important;

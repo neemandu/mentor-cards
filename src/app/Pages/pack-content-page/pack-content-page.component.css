@@ -687,6 +687,13 @@ app-card.scrollableCard {
   right: 50px;
 }
 
+.text-red {
+  
+  p {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 1024px) {
 }
 
@@ -763,12 +770,14 @@ app-card.scrollableCard {
   }
 
   .section-drop-down {
-    width: 80vw !important;
-    padding-left: 20px;
+    width: 100vw !important;
+    margin-right: -6px;
+    /* padding-left: 20px; */
   }
 
   .background-white {
     background-color: white;
+
   }
 
   .flip-box-inner {
@@ -836,6 +845,14 @@ app-card.scrollableCard {
 
   .mobile-bg {
     background-color: #f8f9fa;
+  }
+
+  .text-red {
+    background-color: #E67C73;
+    p {
+      display: flex;
+      font-size: 14px;
+    }
   }
 
   .multi-card-mobile {

@@ -25,4 +25,8 @@
       content: " ";
     }
   }
+
+  .text-adjustment-mobile {
+    padding: 0px 30px;
+  }
 }

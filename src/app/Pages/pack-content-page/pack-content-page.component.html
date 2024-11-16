@@ -317,6 +317,11 @@
             (closeDialog)="closeDialog()"
           ></top-questions-dialog>
 
+           <!-- isReadingGuidebookAMust  -->
+          <div *ngIf="pack?.isReadingGuidebookAMust" class="dropdown section-drop-down text-red d-flex justify-center">
+              <p>מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו</p>
+          </div>
+           
           <!-- Drop-down  -->
           <div class="dropdown section-drop-down">
             <div
@@ -468,7 +473,7 @@
     <aside class="aside-bar" *ngIf="pack?.cards?.length > 1">
       <ul>
         <h1 style="font-size: 15px" class="m-0">עבודה תהליכית / לפי נושאים</h1>
-        <p style="font-size: 12px" class="m-0">
+        <p style="font-size: 25px" class="m-0">
           בחרו את הנושאים אותם תרצו להציג או להסתיר
         </p>
         <button
@@ -2187,7 +2192,7 @@
 >
   <div class="footer-container">
     <div class="w-100" *ngIf="multiSelectCard.length > 0">
-      <img src="../../../assets/icons/black_cross.png" />
+      <!-- <img src="../../../assets/icons/black_cross.png" /> -->
     </div>
     <span
       class="selected-option"

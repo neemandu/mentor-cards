@@ -1,47 +1,36 @@
 <div
   class="sm:grid sm:grid-cols-3 bg-[#3d3a3b] rounded-3xl mx-2-sm-mx-10 mt-12"
 >
-  <div class="col-span-1 flex justify-center items-center">
-    <div class="grid sm:grid-cols-5 grid-cols-3 w-full mx-10 gap-4">
-      <!-- <div class="col-span-1 mt-8 mb-12">
-                <div *ngFor="let item of clientList | slice:0:5" class="mt-8">
-                    <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
-                </div>
-            </div>
-            <div class="col-span-1 mb-12">
-                <div *ngFor="let item of clientList | slice:5:10" class="mt-8">
-                    <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl">
-                </div>
-            </div> -->
-      <div class="col-span-1 mt-8 mb-12 flex-wrap contents sm:block">
-        <div *ngFor="let item of clientList | slice : 10 : 15" class="mt-8">
-          <img
-            [src]="item.image"
-            alt=""
-            class="w-full object-cover rounded-3xl"
-          />
-        </div>
+<div class="col-span-1 flex justify-center items-center">
+  <div class="grid sm:grid-cols-5 grid-cols-3 w-full mx-10 gap-4">
+    <div class="col-span-1 mt-8 mb-12">
+      <div *ngFor="let item of clientList | slice:0:4" class="mt-8">
+        <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl" />
       </div>
-      <div class="col-span-1 mb-12 hidden sm:block">
-        <div *ngFor="let item of clientList | slice : 15 : 20" class="mt-8">
-          <img
-            [src]="item.image"
-            alt=""
-            class="w-full object-cover rounded-3xl"
-          />
-        </div>
+    </div>
+    <div class="col-span-1 mt-6 mb-10">
+      <div *ngFor="let item of clientList | slice:4:8" class="mt-8">
+        <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl" />
       </div>
-      <div class="col-span-1 mt-8 mb-12 hidden sm:block">
-        <div *ngFor="let item of clientList | slice : 20 : 25" class="mt-8">
-          <img
-            [src]="item.image"
-            alt=""
-            class="w-full object-cover rounded-3xl"
-          />
-        </div>
+    </div>
+    <div class="col-span-1 mt-8 mb-12">
+      <div *ngFor="let item of clientList | slice:8:12" class="mt-8">
+        <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl" />
+      </div>
+    </div>
+    <div class="col-span-1 mt-8 mb-12">
+      <div *ngFor="let item of clientList | slice:12:16" class="mt-8">
+        <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl" />
+      </div>
+    </div>
+    <div class="col-span-1 mt-8 mb-12">
+      <div *ngFor="let item of clientList | slice:16:20" class="mt-8">
+        <img [src]="item.image" alt="" class="w-full object-cover rounded-3xl" />
       </div>
     </div>
   </div>
+</div>
+
 
   <div class="col-span-1 flex justify-center items-center">
     <div class="w-full">
