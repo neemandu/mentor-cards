@@ -2,10 +2,12 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
+  ElementRef,
   HostListener,
   NgZone,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import {
   MatDialog,
@@ -47,6 +49,9 @@ import { bool } from 'aws-sdk/clients/signer';
   styleUrls: ['./pack-content-page.component.css'],
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
+
+  @ViewChild('dropdownInput') dropdownInput    : ElementRef;
+
   Subscription: Subscription = new Subscription();
   id: any;
   pack: PackContent;
@@ -78,10 +83,14 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   // For DropDown
   isDropdownOpen = false;
-  selectedOption: string = 'כתבו או בחרו שאלה להתבוננות והעמקה';
+  defaultOption: string = 'כתבו או בחרו שאלה להתבוננות והעמקה';
+  selectedOption: string;
+
   isEditing = false;
   isEditingOption: number | null = null;
   selectedIndex: number;
+
+  showInputFieldInDropDown : boolean = false;
 
   // Category
   categoriesCard: any;
@@ -103,8 +112,19 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   overFlowCardContainerHeight: number = 340;
   showFooterContainer: boolean = true;
 
+  categoryFlipped : boolean = false;
   categoryBaseArray = [];
   categoryScreen: boolean = false;
+
+  isScrolled = 0;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Check the vertical scroll position
+    this.isScrolled = window.scrollY ;
+  }
+
+
   constructor(
     public route: ActivatedRoute,
     private cardsService: CardsService,
@@ -168,14 +188,36 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
       // Set the selected option for display and editing
       this.selectedOption = option.text;
+      this.isDropdownOpen = false;
+      this.selectedOption = null;
+      this.showInputFieldInDropDown = true;
+      setTimeout(() => {
+      this.dropdownInput.nativeElement.focus();
+      }, ); 
+      
     } else {
+      this.showInputFieldInDropDown = false;
       this.selectedOption = option.text;
       this.isDropdownOpen = false;
       this.isEditing = false;
       this.isEditingOption = null;
+      this.defaultOption = this.selectedOption;
     }
   }
 
+
+  updateOptionArray() :void {
+    const newText = this.dropdownInput.nativeElement.value;
+    this.options[this.options.length - 2] = {
+  
+      text: newText,
+    };
+    this.isEditing = false;
+    this.dropdownInput.nativeElement.value = "";
+    this.isDropdownOpen = false;
+  }
+
+  
   // Method to save the edited option
   saveEdit(option: { text: string }, index: number) {
     if (this.isEditing && this.isEditingOption === index) {

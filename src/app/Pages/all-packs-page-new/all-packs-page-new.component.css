@@ -139,7 +139,14 @@
 }
 
 .grid-column-12 {
-  grid-template-columns: repeat(12, minmax(0, 95px));
+  grid-template-columns: repeat(12, minmax(0, 92px));
+}
+
+.reading-book { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 

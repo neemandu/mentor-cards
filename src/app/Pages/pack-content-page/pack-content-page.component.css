@@ -694,6 +694,10 @@ app-card.scrollableCard {
   }
 }
 
+.width-75 {
+  width: 65%;
+}
+
 @media screen and (max-width: 1024px) {
 }
 
@@ -1076,6 +1080,13 @@ app-card.scrollableCard {
   .one-cards-landscape {
     height: auto !important;
   }
+
+  .sticky-header {
+    position: fixed;
+    top: 0px;
+    z-index: 4;
+  }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -1090,6 +1101,7 @@ app-card.scrollableCard {
   .category-container {
     width: 44%;
   }
+
 }
 
 @media screen and (max-width: 480px) {
@@ -1329,26 +1341,30 @@ app-card.scrollableCard {
 
 .two-cards-landscape,
 .rotated-two-cards-landscape {
-  height: calc(100vw / 3.5) !important;
+  /* height: calc(100vw / 3.5) !important;
   width: 100% !important;
   max-width: 80vw;
-  margin-inline: 3vw;
+  margin-inline: 3vw; */
   /* margin-top: 12vh;
   margin-bottom: 12vh; */
+  width: auto;
+  height: 50vh;
 }
 
 .three-cards-landscape,
 .rotated-three-cards-landscape {
-  width: auto;
-  height: calc(40vh);
+  /* width: auto;
+  height: calc(40vh); */
   /* margin-top: 12vh;
   margin-bottom: 12vh; */
+  width: auto;
+  height: 50vh;
 }
 
 .four-cards-landscape,
 .rotated-four-cards-landscape {
   width: auto;
-  height: 30vh;
+  height: 50vh;
   /* margin-top: 12vh;
   margin-bottom: 12vh; */
 }
@@ -1356,7 +1372,7 @@ app-card.scrollableCard {
 .five-cards-landscape,
 .rotated-five-cards-landscape {
   width: auto;
-  height: 25vh;
+  height: 50vh;
   /* margin-top: 12vh;
   margin-bottom: 12vh; */
 }

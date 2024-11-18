@@ -335,11 +335,11 @@
           <div
             class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4"
           >
-            {{ allCategoryPacks[0]?.category }}
+            {{ allCategoryPacks[0]?.category | translate }}
           </div>
           <div
             #allPacksScrollContainer
-            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 sm:mb-16 mb-8"
+            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 sm:mb-16 mb-8"
             (mousemove)="onMouseMove($event, allPacksScrollContainer)"
           >
             <div
@@ -367,7 +367,7 @@
           </div>
           <div
             #allPacksScrollContainer
-            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
+            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
             (mousemove)="onMouseMove($event, allPacksScrollContainer)"
           >
             <app-subscribe-card *ngIf="!isLoading"></app-subscribe-card>
@@ -389,16 +389,23 @@
           class="all-packs-view__section flex flex-col sm:flex-row justify-between"
           *ngFor="let categoryPacks of allCategoryPacks; let i = index"
         >
-          <div
-            *ngIf="i > 0 && categoryPacks?.category"
-            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4"
-          >
-            {{ categoryPacks?.category }}
+        <div
+        *ngIf="i > 0 && categoryPacks?.category"
+        class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book"
+        >
+          {{ categoryPacks?.category | translate }}
+          <div *ngIf="categoryPacks?.isReadingGuidebookAMust" class="d-flex justify-center align-items-center" style="flex-direction: column;">
+            <span>
+              <img src="../../../assets/icons/Default.png">
+            </span>
+            <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות</p>
           </div>
+        </div>
+
           <div
             *ngIf="categoryPacks && i > 0"
             #allPacksScrollContainer
-            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 sm:ms-0 mb-16"
+            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
             (mousemove)="onMouseMove($event, allPacksScrollContainer)"
           >
             <div

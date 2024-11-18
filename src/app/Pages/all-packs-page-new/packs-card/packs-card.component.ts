@@ -66,87 +66,134 @@ export class PacksCardComponent implements OnInit, OnDestroy {
     this.userAuthService.addRemoveFavorite(this.packInfo.id);
   }
 
+  // openPreviewDialog(event: any): void {
+  //   const rect = this.targetDiv.nativeElement.getBoundingClientRect();
+
+  //   // Calculate the center of the div
+  //   const divCenterX = rect.left + rect.width / 2;
+  //   const divCenterY = rect.top + rect.height / 2;
+
+  //   // Assuming the dialog has maxWidth and maxHeight defined as 60vw and 70vh,
+  //   const dialogMaxWidth = window.innerWidth * 0.6; // 60vw
+  //   const dialogMaxHeight = window.innerHeight * 0.7; // 70vh
+
+  //   // Define bottomThreshold - e.g., 80% of viewport height
+  //   const bottomThreshold = window.innerHeight * 0.9;
+
+  //   // Calculate initial top and left to center the dialog over the div
+  //   let left = divCenterX - dialogMaxWidth / 2;
+  //   let top = divCenterY - dialogMaxHeight / 2;
+
+  //   // Adjust the position to ensure the dialog stays within the viewport boundaries
+  //   if (left < 0) {
+  //     left = 20; // Add some padding from the edge
+  //   } else if (left + dialogMaxWidth > window.innerWidth) {
+  //     left = window.innerWidth - dialogMaxWidth - 20; // Add some padding from the right edge
+  //   }
+
+  //   if (rect.bottom > bottomThreshold) {
+  //     // If card is near the bottom, show tooltip and adjust dialog position
+  //     top = window.innerHeight - dialogMaxHeight - 20;
+  //     this.snackBar.open(this.getScrollMessage(), '', {
+  //       duration: 2000,
+  //       horizontalPosition: 'center',
+  //       verticalPosition: 'bottom',
+  //     });
+  //     this.isCardOpen = true;
+  //   } else {
+  //     // For cards in the middle, center the dialog vertically
+  //     top = rect.top + rect.height / 2 - dialogMaxHeight / 2;
+  //     this.isCardOpen = false;
+  //   }
+
+  //   // Set dialog position using the adjusted values
+  //   const dialogPosition: DialogPosition = {
+  //     left: `${left}px`,
+  //     top: `${top}px`,
+  //   };
+
+  //   const isMobile = window.innerWidth <= 768;
+  //   this.hoverTimeout = setTimeout(() => {
+  //     this.cardStateService
+  //       .getCardOpenState()
+  //       .pipe(take(1))
+  //       .subscribe((isOpen) => {
+  //         if (!isOpen && !this.isCardOpen) {
+  //           this.cardStateService.setCardOpen(true);
+  //           setTimeout(() => {
+  //             const dialogConfig = new MatDialogConfig();
+  //             dialogConfig.autoFocus = true;
+  //             dialogConfig.maxWidth = isMobile ? '90vw' : '620px';
+  //             dialogConfig.maxHeight = isMobile ? '60vh' : '600px';
+  //             if (!isMobile) {
+  //               dialogConfig.position = dialogPosition;
+  //             }
+  //             const data: previewData = {
+  //               pack: this.packInfo,
+  //               showButtons: false,
+  //             };
+  //             dialogConfig.data = data;
+
+  //             const dialogRef = this.dialog.open(
+  //               PackPreviewComponent,
+  //               dialogConfig
+  //             );
+  //             const dialogSub = dialogRef.afterClosed().subscribe(() => {
+  //               dialogSub.unsubscribe();
+  //               this.cardStateService.setCardOpen(false);
+  //             });
+  //           }, 0);
+  //         }
+  //       });
+  //   }, 700);
+  //   // Check if any card is currently open
+  // }
+
   openPreviewDialog(event: any): void {
     const rect = this.targetDiv.nativeElement.getBoundingClientRect();
 
     // Calculate the center of the div
     const divCenterX = rect.left + rect.width / 2;
     const divCenterY = rect.top + rect.height / 2;
-
-    // Assuming the dialog has maxWidth and maxHeight defined as 60vw and 70vh,
+  
+    // Assuming the dialog has maxWidth and maxHeight defined as 60vw and 70vh, 
+    // we need to calculate the offset to center the dialog over the div
     const dialogMaxWidth = window.innerWidth * 0.6; // 60vw
     const dialogMaxHeight = window.innerHeight * 0.7; // 70vh
-
-    // Define bottomThreshold - e.g., 80% of viewport height
-    const bottomThreshold = window.innerHeight * 0.9;
-
-    // Calculate initial top and left to center the dialog over the div
-    let left = divCenterX - dialogMaxWidth / 2;
-    let top = divCenterY - dialogMaxHeight / 2;
-
-    // Adjust the position to ensure the dialog stays within the viewport boundaries
-    if (left < 0) {
-      left = 20; // Add some padding from the edge
-    } else if (left + dialogMaxWidth > window.innerWidth) {
-      left = window.innerWidth - dialogMaxWidth - 20; // Add some padding from the right edge
-    }
-
-    if (rect.bottom > bottomThreshold) {
-      // If card is near the bottom, show tooltip and adjust dialog position
-      top = window.innerHeight - dialogMaxHeight - 20;
-      this.snackBar.open(this.getScrollMessage(), '', {
-        duration: 2000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-      });
-      this.isCardOpen = true;
-    } else {
-      // For cards in the middle, center the dialog vertically
-      top = rect.top + rect.height / 2 - dialogMaxHeight / 2;
-      this.isCardOpen = false;
-    }
-
-    // Set dialog position using the adjusted values
+  
+    // Calculate the top and left to center the dialog over the div
     const dialogPosition: DialogPosition = {
-      left: `${left}px`,
-      top: `${top}px`,
+      left: `${divCenterX - dialogMaxWidth / 4}px`,
+      top: `${divCenterY - dialogMaxHeight / 5}px`
     };
 
     const isMobile = window.innerWidth <= 768;
-    this.hoverTimeout = setTimeout(() => {
-      this.cardStateService
-        .getCardOpenState()
-        .pipe(take(1))
-        .subscribe((isOpen) => {
-          if (!isOpen && !this.isCardOpen) {
-            this.cardStateService.setCardOpen(true);
-            setTimeout(() => {
-              const dialogConfig = new MatDialogConfig();
-              dialogConfig.autoFocus = true;
-              dialogConfig.maxWidth = isMobile ? '90vw' : '620px';
-              dialogConfig.maxHeight = isMobile ? '60vh' : '600px';
-              if (!isMobile) {
-                dialogConfig.position = dialogPosition;
-              }
-              const data: previewData = {
-                pack: this.packInfo,
-                showButtons: false,
-              };
-              dialogConfig.data = data;
-
-              const dialogRef = this.dialog.open(
-                PackPreviewComponent,
-                dialogConfig
-              );
-              const dialogSub = dialogRef.afterClosed().subscribe(() => {
-                dialogSub.unsubscribe();
-                this.cardStateService.setCardOpen(false);
-              });
-            }, 0);
-          }
-        });
-    }, 700);
+    this.hoverTimeout = setTimeout(() => {  
+      this.cardStateService.getCardOpenState().pipe(take(1)).subscribe(isOpen => {
+        if (!isOpen) {
+          this.cardStateService.setCardOpen(true);
+          setTimeout(() => {
+            const dialogConfig = new MatDialogConfig();
+            dialogConfig.autoFocus = true;
+            dialogConfig.maxWidth = isMobile ? '90vw' : '480px'
+            dialogConfig.maxHeight = isMobile ? '60vh' : '460px'; 
+            if ( !isMobile ){
+              dialogConfig.position = dialogPosition;
+            }
+            const data: previewData = { pack: this.packInfo, showButtons: false };
+            dialogConfig.data = data;
+  
+            const dialogRef = this.dialog.open(PackPreviewComponent, dialogConfig);
+            const dialogSub = dialogRef.afterClosed().subscribe(() => {
+              dialogSub.unsubscribe();
+              this.cardStateService.setCardOpen(false);
+            });
+          }, 0);
+        }
+      });
+    },700);
     // Check if any card is currently open
+
   }
 
   private getScrollMessage(): string {
