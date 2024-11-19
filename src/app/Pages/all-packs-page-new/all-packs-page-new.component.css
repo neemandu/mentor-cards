@@ -149,6 +149,39 @@
   align-items: center;
 }
 
+.pos-relative {
+  position: relative;
+}
+
+.arrow-left {
+  left: 0;
+  top: 39%;
+  position: absolute;
+  background: #3b3b3b;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  color: #a8a8a8;
+
+}
+
+.arrow-right {
+  left: -25px;
+  top: 35%;
+  position: absolute;
+  background: #3b3b3b;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  color: #a8a8a8;
+
+}
+.middle {
+  width: 90%;
+  overflow: hidden;
+  /*will change this to hidden later to deny scolling to user*/
+  white-space: nowrap;
+}
 
 @media (min-width: 640px) {
   .content-ltr {

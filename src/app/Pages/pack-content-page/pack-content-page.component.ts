@@ -177,31 +177,36 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   // Update selectOption method
   selectOption(option: { text: string; icon?: string }, index: number) {
     const lastOption = this.options[this.options.length - 1];
+    const specialOption = 'אין צורך בשאלה, אני אקח את זה מכאן'; // The specific option to exclude
+  
     if (option === lastOption) {
       this.openGuideBook();
-    }
-
-    if (index === this.options.length - 2) {
+    } else if (option.text === specialOption) {
+      // Do not set this option as selected
+      this.showInputFieldInDropDown = false;
+      this.isDropdownOpen = false;
+      this.isEditing = false;
+      this.isEditingOption = null;
+      // Optionally reset selectedOption or leave it unchanged
+      this.selectedOption = null; // Prevent it from being displayed
+    } else if (index === this.options.length - 2) {
       // Make only the second-to-last option editable
       this.isEditing = true;
       this.isEditingOption = index;
-
-      // Set the selected option for display and editing
       this.selectedOption = option.text;
       this.isDropdownOpen = false;
       this.selectedOption = null;
       this.showInputFieldInDropDown = true;
       setTimeout(() => {
-      this.dropdownInput.nativeElement.focus();
-      }, ); 
-      
+        this.dropdownInput.nativeElement.focus();
+      }, 0);
     } else {
       this.showInputFieldInDropDown = false;
       this.selectedOption = option.text;
+      this.defaultOption = this.selectedOption;
       this.isDropdownOpen = false;
       this.isEditing = false;
       this.isEditingOption = null;
-      this.defaultOption = this.selectedOption;
     }
   }
 

@@ -28,6 +28,7 @@ import { UserLoginDialogComponent } from '../all-packs-page/user-login-dialog/us
 import { MatMenuTrigger } from '@angular/material/menu';
 import { AiChatComponent } from './ai-chat/ai-chat.component';
 import { TranslateService } from '@ngx-translate/core';
+import { element } from 'protractor';
 
 interface CategoryPack {
   category: string;
@@ -80,7 +81,7 @@ export class AllPacksPageNewComponent implements OnInit {
   categoriesToShow: number = 5;
   isPageLoaded: boolean = false;
   isfavSelected: boolean = false;
-
+ readingBookCategoryArray
   //Filters
   showCategoryLine: boolean = true;
   freeTextFilterSelected: string = '';
@@ -168,6 +169,14 @@ export class AllPacksPageNewComponent implements OnInit {
   ];
   selectedCardFilter: string = '';
   @ViewChild('settingsMenuTrigger') settingsMenuTrigger: MatMenuTrigger;
+  @ViewChildren('widgetsContent', { read: ElementRef }) public widgetsContent: QueryList<ElementRef>;
+
+  @ViewChild('packScrollContainer1') packScrollContainer1: ElementRef;
+  @ViewChild('packScrollContainer2') packScrollContainer2: ElementRef;
+  @ViewChild('packScrollContainer3') packScrollContainer3: ElementRef;
+  @ViewChild('packScrollContainer4') packScrollContainer4: ElementRef;
+
+
   constructor(
     private cardsService: CardsService,
     private overlaySpinnerService: OverlaySpinnerService,
@@ -257,6 +266,16 @@ export class AllPacksPageNewComponent implements OnInit {
 
   initializeFilteredOptions() {
     // Extract names
+    console.log(this.allPacks, 'All packs');
+    this.readingBookCategoryArray  = [];
+    this.allPacks.forEach(element => {
+      if ( element.isReadingGuidebookAMust == true ) {
+        this.readingBookCategoryArray.push(element);
+      }
+    })
+
+    console.log("Is reading book Must", this.readingBookCategoryArray );
+
     const allTags = this.allPacks.reduce((acc, pack) => {
       return acc.concat(pack.tags);
     }, []);
@@ -503,6 +522,7 @@ export class AllPacksPageNewComponent implements OnInit {
     this.translateService.onLangChange.subscribe((event) => {
       this.handleLanguageChange(event.lang);
     });
+
   }
 
   initializeLanguage(): void {
@@ -548,6 +568,7 @@ export class AllPacksPageNewComponent implements OnInit {
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
+
         // this.sortPacks();
       } else {
         this.cardsService.allPacksReadyEmmiter.subscribe(() => {
@@ -572,6 +593,7 @@ export class AllPacksPageNewComponent implements OnInit {
       });
       console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
+
     }
   }
 
@@ -587,7 +609,7 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   setAllCategoryPacksToShow(): void {
-    console.log('setAllCategoryPacksToShow');
+    console.log('setAllCategoryPacksToShow', this.allCategoryPacks);
     this.allCategoryPacks = this.allCategories
       .filter((category) => {
         if (
@@ -783,4 +805,64 @@ export class AllPacksPageNewComponent implements OnInit {
   isScrollable(element: HTMLElement): boolean {
     return element.scrollWidth > element.clientWidth;
   }
+
+  public scrollRight(i: number): void {
+    console.log(i)
+    const element = this.widgetsContent.toArray()[i - 1]?.nativeElement;
+    if (element) {
+      element.scrollTo({ left: element.scrollLeft + 150, behavior: 'smooth' });
+    }
+  }
+
+  public scrollLeft(i: number): void {
+    console.log(i)
+    const element = this.widgetsContent.toArray()[i - 1]?.nativeElement;
+    if (element) {
+      element.scrollTo({ left: element.scrollLeft - 150, behavior: 'smooth' });
+    }
+  }
+
+
+  scrollLeftWithRef(containerNumber:number) {
+    switch (containerNumber) {
+      case 1:
+        this.packScrollContainer1.nativeElement.scrollTo({ left: (this.packScrollContainer1.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+        break;
+        case 2:
+          this.packScrollContainer2.nativeElement.scrollTo({ left: (this.packScrollContainer2.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+          break;
+          case 3:
+            this.packScrollContainer3.nativeElement.scrollTo({ left: (this.packScrollContainer3.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+            break;
+            case 4:
+              this.packScrollContainer4.nativeElement.scrollTo({ left: (this.packScrollContainer4.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+              break;
+    
+      default:
+        break;
+    }
+    
+  }
+
+  scrollRightWithRef(containerNumber:Number) {
+    switch (containerNumber) {
+      case 1:
+        this.packScrollContainer1.nativeElement.scrollTo({ left: (this.packScrollContainer1.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+        break;
+        case 2:
+          this.packScrollContainer2.nativeElement.scrollTo({ left: (this.packScrollContainer2.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+          break;
+          case 3:
+            this.packScrollContainer3.nativeElement.scrollTo({ left: (this.packScrollContainer3.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+            break;
+            case 4:
+              this.packScrollContainer4.nativeElement.scrollTo({ left: (this.packScrollContainer4.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+              break;
+    
+      default:
+        break;
+    }
+  }
+
+
 }

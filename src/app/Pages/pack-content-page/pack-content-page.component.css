@@ -500,8 +500,17 @@ app-card.scrollableCard {
     display: none; /* For Chrome, Safari, and Opera */
   }
 }
+
 .width-50vw {
   width: 50vw;
+}
+
+.scroll-visible {
+  overflow-x: visible !important;
+}
+
+.scroll-hidden {
+  overflow: hidden !important;
 }
 
 .object-fit {
@@ -679,6 +688,7 @@ app-card.scrollableCard {
 
 .Icon-90 {
   margin-left: 25px;
+  margin-bottom: 10px;
 }
 
 .flipDoubleSideIcon {

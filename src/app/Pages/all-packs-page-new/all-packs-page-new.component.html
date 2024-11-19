@@ -285,16 +285,18 @@
               | translate
           }}
         </div>
-        <div class="all-packs-view__section flex justify-between">
+        <div class="all-packs-view__section flex justify-between pos-relative">
           <div
             class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
           >
             &nbsp;
+          <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(1)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+
           </div>
+
           <div
-            #packScrollContainer
-            class="scroller overflow-x-scroll w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
-            (mousemove)="onMouseMove($event, packScrollContainer)"
+            #packScrollContainer1
+            class="middle w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
           >
             <div
               *ngFor="let packInfo of allPacks; let j = index"
@@ -316,6 +318,8 @@
           >
             &nbsp;
           </div>
+
+          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(1)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
       </div>
 
@@ -329,18 +333,21 @@
         class="mt-2 sm:mt-16"
       >
         <div
-          class="all-packs-view__section flex flex-col sm:flex-row justify-between"
+          class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
           *ngIf="allCategoryPacks[0]"
         >
           <div
-            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4"
+            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 pos-relative"
           >
             {{ allCategoryPacks[0]?.category | translate }}
+          <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(2)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+
           </div>
+
           <div
-            #allPacksScrollContainer
-            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 sm:mb-16 mb-8"
-            (mousemove)="onMouseMove($event, allPacksScrollContainer)"
+            #packScrollContainer2
+            class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 sm:mb-16 mb-8"
+            
           >
             <div
               *ngFor="let packInfo of allCategoryPacks[0].packs; let j = index"
@@ -355,20 +362,25 @@
               </app-packs-card>
             </div>
           </div>
+
+          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(2)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
         <div
-          class="all-packs-view__section flex flex-col sm:flex-row justify-between"
+          class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
         >
           <div
             *ngIf="!isLoading"
-            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4"
+            class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 pos-relative"
           >
             כל הערכות
+          <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(3)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+
           </div>
+
           <div
-            #allPacksScrollContainer
-            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
-            (mousemove)="onMouseMove($event, allPacksScrollContainer)"
+            #packScrollContainer3
+            class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+            
           >
             <app-subscribe-card *ngIf="!isLoading"></app-subscribe-card>
             <div *ngFor="let packInfo of allPacks; let k = index">
@@ -383,58 +395,67 @@
               </app-packs-card>
             </div>
           </div>
+
+          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(3)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
 
         <div
-          class="all-packs-view__section flex flex-col sm:flex-row justify-between"
+          class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
           *ngFor="let categoryPacks of allCategoryPacks; let i = index"
         >
         <div
         *ngIf="i > 0 && categoryPacks?.category"
-        class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book"
+        class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book pos-relative"
         >
-          {{ categoryPacks?.category | translate }}
+          {{ categoryPacks?.category | translate }} 
           <div *ngIf="categoryPacks?.isReadingGuidebookAMust" class="d-flex justify-center align-items-center" style="flex-direction: column;">
             <span>
               <img src="../../../assets/icons/Default.png">
             </span>
             <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות</p>
           </div>
+        <button class="arrow-right" *ngIf="i > 0 && categoryPacks?.category" (click)="scrollRight(i)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+        </div>
+        
+
+        <div
+          *ngIf="categoryPacks && i > 0"
+          [id]="'packCard' + i"
+          class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+          #widgetsContent
+        >
+          <div
+            *ngFor="let packInfo of categoryPacks.packs; let j = index"
+            class="relative"
+          >
+            <app-packs-card
+              [backgroundColor]="cardsColors[j % cardsColors.length].color"
+              [packInfo]="packInfo"
+              [index]="j"
+              [lastIndex]="categoryPacks.packs?.length - 1"
+              (loaded)="packLoaded()"
+            >
+            </app-packs-card>
+          </div>
         </div>
 
-          <div
-            *ngIf="categoryPacks && i > 0"
-            #allPacksScrollContainer
-            class="scroller flex overflow-x-scroll w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
-            (mousemove)="onMouseMove($event, allPacksScrollContainer)"
-          >
-            <div
-              *ngFor="let packInfo of categoryPacks.packs; let j = index"
-              class="relative"
-            >
-              <app-packs-card
-                [backgroundColor]="cardsColors[j % cardsColors.length].color"
-                [packInfo]="packInfo"
-                [index]="j"
-                [lastIndex]="categoryPacks.packs?.length - 1"
-                (loaded)="packLoaded()"
-              >
-              </app-packs-card>
-            </div>
-          </div>
+        <button class="arrow-left" *ngIf="i > 0 && categoryPacks?.category" (click)="scrollLeft(i)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
       </div>
 
+
       <div *ngIf="isfavSelected" class="mt-2 sm:mt-16">
-        <div class="all-packs-view__section flex justify-between mb-16">
+        <div class="all-packs-view__section flex justify-between mb-16 pos-relative">
           <div
-            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
+            class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4 pos-relative"
           >
             &nbsp;
+          <button class="arrow-right"  (click)="scrollRightWithRef(packScrollContainer4)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+
           </div>
           <div
-            #allFavPackScrollContainer
-            class="scroller w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+            #packScrollContainer4
+            class="middle w-[100%] gap-4 grid custom-grid-cols-8 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
             (mousemove)="onMouseMove($event, allFavPackScrollContainer)"
           >
             <div
@@ -456,8 +477,53 @@
           >
             &nbsp;
           </div>
+          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(packScrollContainer4)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
       </div>
+
+      <div
+      *ngIf="!isLoading"
+      class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
+    >
+    <div
+  
+    class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book pos-relative"
+    >
+      {{ 'ערכותממוקדותנושא' | translate }} 
+      <div  class="d-flex justify-center align-items-center" style="flex-direction: column;">
+        <span>
+          <img src="../../../assets/icons/Default.png">
+        </span>
+        <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות</p>
+      </div>
+    <button class="arrow-right"  *ngIf="!isLoading" (click)="scrollRightWithRef(5)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+    
+
+    <div
+      *ngIf="readingBookCategoryArray?.length > 0"
+      #container5
+      class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+      #widgetsContent
+    >
+      <div
+        *ngFor="let packInfo of readingBookCategoryArray; let j = index"
+        class="relative"
+      >
+        <app-packs-card
+          [backgroundColor]="cardsColors[j % cardsColors.length].color"
+          [packInfo]="packInfo"
+          [index]="j"
+          [lastIndex]="readingBookCategoryArray?.length - 1"
+          (loaded)="packLoaded()"
+        >
+        </app-packs-card>
+      </div>
+    </div>
+
+    <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(5)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    </div>
+
     </div>
   </div>
   <app-home-page-footer></app-home-page-footer>
