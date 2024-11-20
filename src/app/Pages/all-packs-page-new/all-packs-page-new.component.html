@@ -109,7 +109,7 @@
           <div class="grid grid-column-12 me-4 pt-2">
             <app-filters
               class="col-span-1"
-              [imageSrc]="'/assets/New/home-page/cards/13.svg'"
+              [imageSrc]="'/assets/New/home-page/cards/12.svg'"
               [buttonText]="'לכל הערכות'"
               [filterText]="''"
               (categoryClick)="handleAllPacksClick()"
@@ -284,6 +284,7 @@
             "pages.all-packs-page-new.content.packsForYourMeetingDescription"
               | translate
           }}
+  
         </div>
         <div class="all-packs-view__section flex justify-between pos-relative">
           <div
@@ -316,6 +317,7 @@
           <div
             class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
           >
+          
             &nbsp;
           </div>
 
@@ -339,8 +341,8 @@
           <div
             class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 pos-relative"
           >
-            {{ allCategoryPacks[0]?.category | translate }}
-          <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(2)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+            {{ allCategoryPacks[0]?.category | translate }}     
+          <button class="arrow-right"  *ngIf="!isLoading && allCategoryPacks[0].packs.length > 6 || isMobileScreen"  (click)="scrollRightWithRef(2)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
           </div>
 
@@ -363,7 +365,7 @@
             </div>
           </div>
 
-          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(2)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button class="arrow-left"  *ngIf="!isLoading && allCategoryPacks[0].packs.length > 6 || isMobileScreen"  (click)="scrollLeftWithRef(2)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
         <div
           class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
@@ -372,8 +374,9 @@
             *ngIf="!isLoading"
             class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 pos-relative"
           >
-            כל הערכות
-          <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(3)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+            <!-- כל הערכות -->
+            {{ 'all estimates' | translate }}
+            <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(3)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
           </div>
 
@@ -407,14 +410,14 @@
         *ngIf="i > 0 && categoryPacks?.category"
         class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book pos-relative"
         >
-          {{ categoryPacks?.category | translate }} 
+          {{ categoryPacks?.category | translate }} 6
           <div *ngIf="categoryPacks?.isReadingGuidebookAMust" class="d-flex justify-center align-items-center" style="flex-direction: column;">
             <span>
               <img src="../../../assets/icons/Default.png">
             </span>
             <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות</p>
           </div>
-        <button class="arrow-right" *ngIf="i > 0 && categoryPacks?.category" (click)="scrollRight(i)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+        <button class="arrow-right" *ngIf="i > 0 && categoryPacks?.packs.length > 6 || isMobileScreen" (click)="scrollRight(i)"><mat-icon>keyboard_arrow_right</mat-icon></button>
         </div>
         
 
@@ -439,7 +442,7 @@
           </div>
         </div>
 
-        <button class="arrow-left" *ngIf="i > 0 && categoryPacks?.category" (click)="scrollLeft(i)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+        <button class="arrow-left" *ngIf="i > 0 && categoryPacks?.packs.length > 6 || isMobileScreen" (click)="scrollLeft(i)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
       </div>
 
@@ -449,6 +452,7 @@
           <div
             class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4 pos-relative"
           >
+          5
             &nbsp;
           <button class="arrow-right"  (click)="scrollRightWithRef(packScrollContainer4)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
@@ -482,29 +486,28 @@
       </div>
 
       <div
-      *ngIf="!isLoading"
+      *ngIf="!isLoading && readingBookCategoryArray?.length > 0"
       class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
     >
     <div
   
     class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book pos-relative"
     >
-      {{ 'ערכותממוקדותנושא' | translate }} 
+      {{ 'ערכותממוקדותנושא' | translate }}  7
       <div  class="d-flex justify-center align-items-center" style="flex-direction: column;">
         <span>
           <img src="../../../assets/icons/Default.png">
         </span>
         <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות</p>
       </div>
-    <button class="arrow-right"  *ngIf="!isLoading" (click)="scrollRightWithRef(5)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+    <button class="arrow-right"  *ngIf="!isLoading && readingBookCategoryArray?.length > 6 || isMobileScreen" (click)="scrollRightWithRef(5)"><mat-icon>keyboard_arrow_right</mat-icon></button>
     </div>
     
 
     <div
       *ngIf="readingBookCategoryArray?.length > 0"
-      #container5
+      #packScrollContainer5
       class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
-      #widgetsContent
     >
       <div
         *ngFor="let packInfo of readingBookCategoryArray; let j = index"
@@ -521,7 +524,7 @@
       </div>
     </div>
 
-    <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(5)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button class="arrow-left"  *ngIf="!isLoading && readingBookCategoryArray?.length > 6 || isMobileScreen"  (click)="scrollLeftWithRef(5)"><mat-icon>keyboard_arrow_left</mat-icon></button>
     </div>
 
     </div>

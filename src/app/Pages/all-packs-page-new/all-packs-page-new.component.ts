@@ -175,6 +175,7 @@ export class AllPacksPageNewComponent implements OnInit {
   @ViewChild('packScrollContainer2') packScrollContainer2: ElementRef;
   @ViewChild('packScrollContainer3') packScrollContainer3: ElementRef;
   @ViewChild('packScrollContainer4') packScrollContainer4: ElementRef;
+  @ViewChild('packScrollContainer5') packScrollContainer5: ElementRef;
 
 
   constructor(
@@ -190,7 +191,7 @@ export class AllPacksPageNewComponent implements OnInit {
     public langDirectionService: LangDirectionService,
     private breakpointObserver: BreakpointObserver,
     private activatedRoute: ActivatedRoute,
-    private translateService: TranslateService
+    private translateService: TranslateService,
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.isLoading = true;
@@ -331,10 +332,15 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   async handlePacksLanguageChange(lang: string) {
+    window.location.reload();
     localStorage.removeItem('packsLanguage');
     localStorage.setItem('packsLanguage', lang);
     this.filterOption.language = lang;
     localStorage.setItem('packsLanguageLocalStorage', lang);
+
+    // Change the language fo the translation
+    this.translateService.use(lang);
+    
     this.cardsService.allPacksReadyEmmiter.subscribe(() => {
       this.setAllPacksData();
       this.setAllCategoryPacksToShow();
@@ -826,17 +832,20 @@ export class AllPacksPageNewComponent implements OnInit {
   scrollLeftWithRef(containerNumber:number) {
     switch (containerNumber) {
       case 1:
-        this.packScrollContainer1.nativeElement.scrollTo({ left: (this.packScrollContainer1.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+        this.packScrollContainer1?.nativeElement.scrollTo({ left: (this.packScrollContainer1?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
         break;
         case 2:
-          this.packScrollContainer2.nativeElement.scrollTo({ left: (this.packScrollContainer2.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+          this.packScrollContainer2?.nativeElement.scrollTo({ left: (this.packScrollContainer2?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
           break;
           case 3:
-            this.packScrollContainer3.nativeElement.scrollTo({ left: (this.packScrollContainer3.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+            this.packScrollContainer3?.nativeElement.scrollTo({ left: (this.packScrollContainer3?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
             break;
             case 4:
-              this.packScrollContainer4.nativeElement.scrollTo({ left: (this.packScrollContainer4.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+              this.packScrollContainer4?.nativeElement.scrollTo({ left: (this.packScrollContainer4?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
               break;
+              case 5:
+                this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+                break;
     
       default:
         break;
@@ -847,17 +856,20 @@ export class AllPacksPageNewComponent implements OnInit {
   scrollRightWithRef(containerNumber:Number) {
     switch (containerNumber) {
       case 1:
-        this.packScrollContainer1.nativeElement.scrollTo({ left: (this.packScrollContainer1.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+        this.packScrollContainer1?.nativeElement.scrollTo({ left: (this.packScrollContainer1?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
         break;
         case 2:
-          this.packScrollContainer2.nativeElement.scrollTo({ left: (this.packScrollContainer2.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+          this.packScrollContainer2?.nativeElement.scrollTo({ left: (this.packScrollContainer2?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
           break;
           case 3:
-            this.packScrollContainer3.nativeElement.scrollTo({ left: (this.packScrollContainer3.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+            this.packScrollContainer3?.nativeElement.scrollTo({ left: (this.packScrollContainer3?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
             break;
             case 4:
-              this.packScrollContainer4.nativeElement.scrollTo({ left: (this.packScrollContainer4.nativeElement.scrollLeft + 150), behavior: 'smooth' });
+              this.packScrollContainer4?.nativeElement.scrollTo({ left: (this.packScrollContainer4?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
               break;
+              case 5:
+                this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
+                break;
     
       default:
         break;

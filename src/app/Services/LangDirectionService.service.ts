@@ -20,7 +20,7 @@ export class LangDirectionService {
     }
 
     translate.onLangChange.subscribe((event) => {
-      this.currentLangDirection = event.lang === 'he' ? 'rtl' : 'ltr';
+      // this.currentLangDirection = event.lang === 'he' ? 'rtl' : 'ltr';
       this.currentLang = event.lang;
     });
   }
