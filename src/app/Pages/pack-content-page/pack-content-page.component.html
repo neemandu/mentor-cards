@@ -1924,7 +1924,7 @@
             />
           </button>
         </div>
-        <p class="drop-down">{{ this.selectedOption }}</p>
+        <p class="drop-down" *ngIf="selectedOption !== 'אין צורך בשאלה, אני אקח את זה מכאן'">{{ this.selectedOption }}</p>
         <div [class.single-side-card]="selectedCards.length > 1">
           <div
             [class.single-card]="selectedCards.length == 1"
