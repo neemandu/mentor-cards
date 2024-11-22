@@ -199,3 +199,29 @@
   border: 2px solid #e67c73; /* Adjust the border style and color as needed */
   border-radius: 4px; /* Adjust the border radius as needed */
 }
+
+
+@media screen and (max-width: 768px) {
+
+  .arrow-left,
+  .arrow-right {
+    position: absolute;
+    background: #3b3b3b;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    color: #a8a8a8;
+    z-index: 10; /* Ensure the arrows appear above other content */
+  }
+
+  .arrow-left {
+    left: 0;
+    top: 50%;
+  }
+
+  .arrow-right {
+    left: 21rem;
+    top: 10rem;
+  }
+
+}
