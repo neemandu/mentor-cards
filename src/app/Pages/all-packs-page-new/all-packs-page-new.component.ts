@@ -462,20 +462,20 @@ export class AllPacksPageNewComponent implements OnInit {
 
   ngOnInit() {
 
-    const observer = setInterval(() => {
-      for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
-        // Check if the container is available
-        if (this[`packScrollContainer${containerNumber}`]?.nativeElement) {
-          console.log(`Inside the onInit for container ${containerNumber}`);
+    // const observer = setInterval(() => {
+    //   for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
+    //     // Check if the container is available
+    //     if (this[`packScrollContainer${containerNumber}`]?.nativeElement) {
+    //       console.log(`Inside the onInit for container ${containerNumber}`);
           
-          // Clear the interval after containers are found
-          clearInterval(observer);
+    //       // Clear the interval after containers are found
+    //       clearInterval(observer);
     
-          // Update the scroll buttons for all containers
-          this.updateScrollButtons(containerNumber);
-        }
-      }
-    }, 10000);
+    //       // Update the scroll buttons for all containers
+    //       this.updateScrollButtons(containerNumber);
+    //     }
+    //   }
+    // }, 1000);
 
     const observers = setInterval(() => {
       if (this.widgetsContent && this.widgetsContent.toArray().length > 0) {
@@ -484,7 +484,7 @@ export class AllPacksPageNewComponent implements OnInit {
         // Call the scroll button updates for each container dynamically
         this.updateScrollButtonswidgets();
       }
-    }, 1000);
+    }, 100);
 
     this.queryParamSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
@@ -627,6 +627,7 @@ export class AllPacksPageNewComponent implements OnInit {
       this.cardsService.getAllPacks();
 
     }
+    
   }
 
   setAllPacksData(): void {
@@ -660,6 +661,21 @@ export class AllPacksPageNewComponent implements OnInit {
         );
         if (packs.length != 0) return { category: category, packs: packs };
       });
+
+      const observer = setInterval(() => {
+        for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
+          // Check if the container is available
+          if (this[`packScrollContainer${containerNumber}`]?.nativeElement) {
+            console.log(`Inside the onInit for container ${containerNumber}`);
+            
+            // Clear the interval after containers are found
+            clearInterval(observer);
+      
+            // Update the scroll buttons for all containers
+            this.updateScrollButtons(containerNumber);
+          }
+        }
+      }, 100);
   }
 
   // @HostListener('document:click', ['$event'])

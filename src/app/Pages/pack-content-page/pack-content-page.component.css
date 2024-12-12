@@ -766,6 +766,30 @@ app-card.scrollableCard {
       width: 30px;
       height: 30px;
   }
+
+
+  .single-side-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    max-width: 90vw;
+    padding-bottom: 2vw;
+    white-space: nowrap;
+    grid-gap: 10px;
+    gap: 0rem;
+    overflow-x: auto;
+  }
+  
+  .min-width-auto {
+    min-height: auto !important;
+    min-width: auto !important;
+  }
+  
+  /* Hide scrollbar for Webkit browsers */
+  .single-side-card::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
