@@ -69,17 +69,16 @@
         class="w-[1350px] content-ltr mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center"
       >
         <div
-          *ngIf="!isMobileScreen"
-          class="w-[6%] border-black h-[90%] px-2"
+          class="w-[6%] border-black h-[90%] px-2 favourite-icon"
           [ngClass]="{
             'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr',
             'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'
           }"
         >
-          <div class="text-center" style="font-weight: 700; font-size: 12px">
-            <!-- {{ "pages.all-packs-page-new.content.favorites" | translate }} -->
+          <!-- <div class="text-center" style="font-weight: 700; font-size: 12px">
+            {{ "pages.all-packs-page-new.content.favorites" | translate }}
             &nbsp;
-          </div>
+          </div> -->
           <div class="grid grid-cols-1 w-full justify-between pt-2">
             <app-filters
               class="col-span-1"
@@ -93,12 +92,14 @@
           </div>
         </div>
         <div
-          class="h-[90%] sm:w-[60%] w-[100%] border-black"
-          [ngClass]="{
+          class="h-[90%] sm:w-[60%] w-[100%] border-black"                           
+        >
+        <!-- 
+        [ngClass]="{
             'sm:border-r-2': langDirectionService.currentLangDirection == 'ltr',
             'sm:border-l-2': langDirectionService.currentLangDirection != 'ltr'
           }"
-        >
+        -->
           <div
             *ngIf="!isMobileScreen"
             class="text-right"
@@ -129,10 +130,11 @@
           </div>
         </div>
 
-        <div *ngIf="!isMobileScreen" class="w-[24%] flex items-center h-[100%]">
+        <div *ngIf="!isMobileScreen" class="w-[24%] flex h-[100%]">
           <div
             class="text-right border-black h-[90%]"
-            style="padding-inline: 10px"
+            style="padding-inline: 10px; display: flex; flex-direction: column; gap: 10px; border-right: 2px solid black;
+"
             [ngClass]="{
               'sm:border-r-2':
                 langDirectionService.currentLangDirection == 'ltr',
@@ -140,7 +142,7 @@
                 langDirectionService.currentLangDirection != 'ltr'
             }"
           >
-            <div style="font-weight: 700; font-size: 12px; margin-bottom: 10px">
+            <div style="font-weight: 700; font-size: 12px">
               {{ "pages.all-packs-page-new.content.cardTypes" | translate }}
             </div>
             <div style="font-size: 12px">
@@ -148,7 +150,7 @@
                 "pages.all-packs-page-new.content.cardDisplayTypes" | translate
               }}
             </div>
-            <div class="flex gap-4 mt-4">
+            <div class="flex gap-4">
               <div>
                 <input
                   type="checkbox"
@@ -190,10 +192,10 @@
               </div>
             </div>
           </div>
-          <div class="text-right" style="padding-inline: 10px">
+          <div class="text-right" style="padding-inline: 10px; display: flex; flex-direction: column; gap: 10px;">
             <div
               *ngIf="!isMobileScreen"
-              style="font-weight: 700; font-size: 12px; margin-bottom: 10px"
+              style="font-weight: 700; font-size: 12px;"
             >
               {{
                 "pages.all-packs-page-new.content.meetingLanguage" | translate
@@ -205,7 +207,7 @@
                   | translate
               }}
             </div>
-            <div class="flex gap-4 mt-4">
+            <div class="flex gap-4">
               <div>
                 <input
                   type="radio"
@@ -291,7 +293,7 @@
             class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4"
           >
             &nbsp;
-          <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(1)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+          <button class="arrow-right"  *ngIf="!isLoading && scrollStates[1]?.canScrollRight"  (click)="scrollRightWithRef(1)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
           </div>
 
@@ -321,7 +323,7 @@
             &nbsp;
           </div>
 
-          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(1)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button class="arrow-left"  *ngIf="!isLoading && scrollStates[1]?.canScrollLeft"  (click)="scrollLeftWithRef(1)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
       </div>
 
@@ -342,13 +344,13 @@
             class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 pos-relative"
           >
             {{ allCategoryPacks[0]?.category | translate }}     
-          <button class="arrow-right"  *ngIf="!isLoading && allCategoryPacks[0].packs.length > 6 || isMobileScreen"  (click)="scrollRightWithRef(2)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+          <button class="arrow-right"  *ngIf="scrollStates[2]?.canScrollRight && !isLoading && allCategoryPacks[0].packs.length > 6 || isMobileScreen"  (click)="scrollRightWithRef(2)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
           </div>
 
           <div
             #packScrollContainer2
-            class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 sm:mb-16 mb-8"
+            class="middle scroller overflow-x-scroll flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 sm:mb-16 mb-8"
             
           >
             <div
@@ -365,7 +367,7 @@
             </div>
           </div>
 
-          <button class="arrow-left"  *ngIf="!isLoading && allCategoryPacks[0].packs.length > 6 || isMobileScreen"  (click)="scrollLeftWithRef(2)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button class="arrow-left"  *ngIf="scrollStates[2]?.canScrollLeft && !isLoading && allCategoryPacks[0].packs.length > 6 || isMobileScreen"  (click)="scrollLeftWithRef(2)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
         <div
           class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
@@ -376,17 +378,18 @@
           >
             <!-- כל הערכות -->
             {{ 'all estimates' | translate }}
-            <button class="arrow-right"  *ngIf="!isLoading"  (click)="scrollRightWithRef(3)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+            <button class="arrow-right"  *ngIf="!isLoading && scrollStates[3]?.canScrollRight"  (click)="scrollRightWithRef(3)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
           </div>
 
           <div
             #packScrollContainer3
-            class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+            class="middle scroller overflow-x-scroll flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+
             
           >
             <app-subscribe-card *ngIf="!isLoading"></app-subscribe-card>
-            <div *ngFor="let packInfo of allPacks; let k = index">
+            <div *ngFor="let packInfo of allPacks; let k = index" style="width:600px; height: 100px;">
               <app-packs-card
                 [backgroundColor]="cardsColors[k % cardsColors.length].color"
                 class=""
@@ -399,7 +402,7 @@
             </div>
           </div>
 
-          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(3)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button class="arrow-left"  *ngIf="!isLoading && scrollStates[3]?.canScrollLeft"  (click)="scrollLeftWithRef(3)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
 
         <div
@@ -407,7 +410,7 @@
           *ngFor="let categoryPacks of allCategoryPacks; let i = index"
         >
         <div
-        *ngIf="i > 0 && categoryPacks?.category"
+        *ngIf=" categoryPacks?.category"
         class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book pos-relative"
         >
           {{ categoryPacks?.category | translate }} 
@@ -417,14 +420,14 @@
             </span>
             <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות</p>
           </div>
-        <button class="arrow-right" *ngIf="i > 0 && categoryPacks?.packs.length > 6 || isMobileScreen" (click)="scrollRight(i)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+        <button class="arrow-right" *ngIf=" (canScrollRight[i] && categoryPacks?.packs.length > 6)|| isMobileScreen" (click)="scrollRight(i)"><mat-icon>keyboard_arrow_right</mat-icon></button>
         </div>
         
 
         <div
-          *ngIf="categoryPacks && i > 0"
+          *ngIf="categoryPacks "
           [id]="'packCard' + i"
-          class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+          class="middle scroller overflow-x-scroll flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
           #widgetsContent
         >
           <div
@@ -442,7 +445,7 @@
           </div>
         </div>
 
-        <button class="arrow-left" *ngIf="i > 0 && categoryPacks?.packs.length > 6 || isMobileScreen" (click)="scrollLeft(i)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+        <button class="arrow-left" *ngIf="(canScrollLeft[i] && categoryPacks?.packs.length > 6) || isMobileScreen" (click)="scrollLeft(i)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
       </div>
 
@@ -454,7 +457,7 @@
           >
           5
             &nbsp;
-          <button class="arrow-right"  (click)="scrollRightWithRef(packScrollContainer4)"><mat-icon>keyboard_arrow_right</mat-icon></button>
+          <button class="arrow-right" *ngIf="!isLoading && scrollStates[4]?.canScrollRight" (click)="scrollRightWithRef(4)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
           </div>
           <div
@@ -481,11 +484,12 @@
           >
             &nbsp;
           </div>
-          <button class="arrow-left"  *ngIf="!isLoading"  (click)="scrollLeftWithRef(packScrollContainer4)"><mat-icon>keyboard_arrow_left</mat-icon></button>
+          <button class="arrow-left"  *ngIf="!isLoading && scrollStates[4]?.canScrollLeft"  (click)="scrollLeftWithRef(4)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
       </div>
 
-      <div
+      <!-- TODO : Remove this Category Bacause of Duplication -->
+    <!-- <div
       *ngIf="!isLoading && readingBookCategoryArray?.length > 0"
       class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
     >
@@ -507,7 +511,7 @@
     <div
       *ngIf="readingBookCategoryArray?.length > 0"
       #packScrollContainer5
-      class="middle flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+      class="middle scroller overflow-x-scroll flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
     >
       <div
         *ngFor="let packInfo of readingBookCategoryArray; let j = index"
@@ -525,7 +529,7 @@
     </div>
 
     <button class="arrow-left"  *ngIf="!isLoading && readingBookCategoryArray?.length > 6 || isMobileScreen"  (click)="scrollLeftWithRef(5)"><mat-icon>keyboard_arrow_left</mat-icon></button>
-    </div>
+    </div> -->
 
     </div>
   </div>

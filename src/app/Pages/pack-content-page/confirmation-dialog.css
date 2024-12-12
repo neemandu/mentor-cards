@@ -1,0 +1,63 @@
+.dialog-header {
+  display: flex;
+  justify-content: right;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+.hero-button {
+  padding: 0.5rem 2rem; 
+  background-color: #7986CB; 
+  border-radius: 9999px;
+  color: white; 
+  font-weight: bold;
+  font-size: 1.125rem; 
+}
+
+.hero-button-2 {
+  padding: 0.5rem 2rem; 
+  background-color: #E67C73; 
+  border-radius: 9999px;
+  color: white; 
+  font-weight: bold;
+  font-size: 1.125rem; 
+}
+
+@media screen and (max-width: 768px) {
+
+  .hero-button {
+    padding: 0.7rem 0.1rem; 
+    background-color: #7986CB; 
+    border-radius: 9999px;
+    color: white; 
+    font-weight: normal;
+    font-size: 1.125rem; 
+  }
+
+  .hero-button-2 {
+    padding: 0.7rem 0.1rem; 
+    background-color: #E67C73; 
+    border-radius: 9999px;
+    color: white; 
+    font-weight: normal;
+    font-size: 1.125rem; 
+  }
+
+}

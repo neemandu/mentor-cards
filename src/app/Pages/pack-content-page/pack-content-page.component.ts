@@ -42,6 +42,7 @@ import { Platform } from '@angular/cdk/platform';
 import { HttpClient } from '@angular/common/http';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { bool } from 'aws-sdk/clients/signer';
+import { confirmationDialogueComponent } from './confirmation-dialog';
 
 @Component({
   selector: 'app-pack-content-page',
@@ -174,44 +175,42 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  // Update selectOption method
-  selectOption(option: { text: string; icon?: string }, index: number) {
+  selectOption(option: { text: string; icon?: string }, index: number): void {
     const lastOption = this.options[this.options.length - 1];
     if (option === lastOption) {
       this.openGuideBook();
-    }
-    if (index === this.options.length - 2) {
-      // Make only the second-to-last option editable
+    } else if (index === this.options.length - 2) {
       this.isEditing = true;
       this.isEditingOption = index;
-      // Set the selected option for display and editing
       this.selectedOption = option.text;
-      this.isDropdownOpen = false;
-      this.selectedOption = null;
       this.showInputFieldInDropDown = true;
       setTimeout(() => {
-      this.dropdownInput.nativeElement.focus();
-      }, );
+        this.dropdownInput.nativeElement.focus();
+      });
     } else {
-      this.showInputFieldInDropDown = false;
       this.selectedOption = option.text;
+      this.defaultOption = this.selectedOption;
       this.isDropdownOpen = false;
       this.isEditing = false;
       this.isEditingOption = null;
-      this.defaultOption = this.selectedOption;
+      this.showInputFieldInDropDown = false;
     }
   }
 
 
-  updateOptionArray() :void {
-    const newText = this.dropdownInput.nativeElement.value;
-    this.options[this.options.length - 2] = {
-  
-      text: newText,
-    };
+  updateOptionArray(): void {
+    const newText = this.dropdownInput.nativeElement.value.trim();
+    if (newText) {
+      this.options[this.options.length - 2] = {
+        text: newText,
+      };
+      this.defaultOption = newText; // Set the edited option as the selected option
+      this.selectedOption = newText; // Reflect the change in the displayed selected option
+    }
     this.isEditing = false;
     this.dropdownInput.nativeElement.value = "";
     this.isDropdownOpen = false;
+    this.showInputFieldInDropDown = false;
   }
 
   
@@ -782,6 +781,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   get sortedCards() {
+
     return this.sortCardsByCategory(this.multiSelectCard);
   }
 
@@ -803,6 +803,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     const firstCardIndex = this.sortedCards.findIndex(
       (card) => card.category === item.category
     );
+    console.log('cards', this.multiSelectCard)
 
     return index === firstCardIndex;
   }
@@ -992,6 +993,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       Link: this.pack?.about.link,
     });
     window.open(this.pack?.about.link, '_blank');
+  }
+
+  confirmationDialogue() : void {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.width = '50%';
+    dialogConfig.data = { redirect: () => this.redirect() }; // Pass the redirect method
+    this.dialog.open(confirmationDialogueComponent, dialogConfig);
   }
 
   ngOnDestroy(): void {

@@ -8,6 +8,7 @@ import {
   ViewChildren,
   AfterViewInit,
   QueryList,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -177,7 +178,6 @@ export class AllPacksPageNewComponent implements OnInit {
   @ViewChild('packScrollContainer4') packScrollContainer4: ElementRef;
   @ViewChild('packScrollContainer5') packScrollContainer5: ElementRef;
 
-
   constructor(
     private cardsService: CardsService,
     private overlaySpinnerService: OverlaySpinnerService,
@@ -192,64 +192,65 @@ export class AllPacksPageNewComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
     this.isLoading = true;
     this.checkScreenSize();
   }
   private scrollSpeed = 5;
-  @HostListener('mousemove', ['$event'])
-  onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
-    if (scrollContainer) {
-      const { clientX } = event;
-      const { scrollWidth, clientWidth } = scrollContainer;
-      const boundary = 0.1 * clientWidth; // 10% from the edges
-      const maxScrollLeft = scrollWidth - clientWidth;
-      const mouseX = clientX - scrollContainer.getBoundingClientRect().left;
+  // @HostListener('mousemove', ['$event'])
+  // onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
+  //   if (scrollContainer) {
+  //     const { clientX } = event;
+  //     const { scrollWidth, clientWidth } = scrollContainer;
+  //     const boundary = 0.1 * clientWidth; // 10% from the edges
+  //     const maxScrollLeft = scrollWidth - clientWidth;
+  //     const mouseX = clientX - scrollContainer.getBoundingClientRect().left;
 
-      // Check if the container is in RTL mode
-      const isRtl = getComputedStyle(scrollContainer).direction === 'rtl';
+  //     // Check if the container is in RTL mode
+  //     const isRtl = getComputedStyle(scrollContainer).direction === 'rtl';
 
-      // Handle different browser behaviors in RTL mode
-      let scrollLeft = scrollContainer.scrollLeft;
-      if (isRtl) {
-        if (scrollLeft < 0) {
-          // Chrome/Safari case: scrollLeft is negative in RTL
-          scrollLeft = Math.abs(scrollLeft);
-        } else {
-          // Firefox case: scrollLeft starts from 0 and goes positive
-          scrollLeft = scrollWidth - clientWidth - scrollLeft;
-        }
-      }
+  //     // Handle different browser behaviors in RTL mode
+  //     let scrollLeft = scrollContainer.scrollLeft;
+  //     if (isRtl) {
+  //       if (scrollLeft < 0) {
+  //         // Chrome/Safari case: scrollLeft is negative in RTL
+  //         scrollLeft = Math.abs(scrollLeft);
+  //       } else {
+  //         // Firefox case: scrollLeft starts from 0 and goes positive
+  //         scrollLeft = scrollWidth - clientWidth - scrollLeft;
+  //       }
+  //     }
 
-      if (isRtl) {
-        // Handle RTL scrolling
-        if (mouseX < boundary && scrollLeft < maxScrollLeft) {
-          // Scroll right if mouse is within the left boundary (since it's RTL)
-          const newScrollLeft = scrollLeft + this.scrollSpeed;
-          scrollContainer.scrollLeft = -Math.min(newScrollLeft, maxScrollLeft);
-        } else if (mouseX > clientWidth - boundary && scrollLeft > 0) {
-          // Scroll left if mouse is within the right boundary (since it's RTL)
-          const newScrollLeft = scrollLeft - this.scrollSpeed;
-          scrollContainer.scrollLeft = -Math.max(newScrollLeft, 0);
-        }
-      } else {
-        // Handle LTR scrolling
-        if (mouseX < boundary && scrollLeft > 0) {
-          // Scroll left if mouse is within the left boundary
-          const newScrollLeft = scrollLeft - this.scrollSpeed;
-          scrollContainer.scrollLeft = Math.max(newScrollLeft, 0);
-        } else if (
-          mouseX > clientWidth - boundary &&
-          scrollLeft < maxScrollLeft
-        ) {
-          // Scroll right if mouse is within the right boundary
-          const newScrollLeft = scrollLeft + this.scrollSpeed;
-          scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
-        }
-      }
-    }
-  }
+  //     if (isRtl) {
+  //       // Handle RTL scrolling
+  //       if (mouseX < boundary && scrollLeft < maxScrollLeft) {
+  //         // Scroll right if mouse is within the left boundary (since it's RTL)
+  //         const newScrollLeft = scrollLeft + this.scrollSpeed;
+  //         scrollContainer.scrollLeft = -Math.min(newScrollLeft, maxScrollLeft);
+  //       } else if (mouseX > clientWidth - boundary && scrollLeft > 0) {
+  //         // Scroll left if mouse is within the right boundary (since it's RTL)
+  //         const newScrollLeft = scrollLeft - this.scrollSpeed;
+  //         scrollContainer.scrollLeft = -Math.max(newScrollLeft, 0);
+  //       }
+  //     } else {
+  //       // Handle LTR scrolling
+  //       if (mouseX < boundary && scrollLeft > 0) {
+  //         // Scroll left if mouse is within the left boundary
+  //         const newScrollLeft = scrollLeft - this.scrollSpeed;
+  //         scrollContainer.scrollLeft = Math.max(newScrollLeft, 0);
+  //       } else if (
+  //         mouseX > clientWidth - boundary &&
+  //         scrollLeft < maxScrollLeft
+  //       ) {
+  //         // Scroll right if mouse is within the right boundary
+  //         const newScrollLeft = scrollLeft + this.scrollSpeed;
+  //         scrollContainer.scrollLeft = Math.min(newScrollLeft, maxScrollLeft);
+  //       }
+  //     }
+  //   }
+  // }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -460,6 +461,31 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const observer = setInterval(() => {
+      for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
+        // Check if the container is available
+        if (this[`packScrollContainer${containerNumber}`]?.nativeElement) {
+          console.log(`Inside the onInit for container ${containerNumber}`);
+          
+          // Clear the interval after containers are found
+          clearInterval(observer);
+    
+          // Update the scroll buttons for all containers
+          this.updateScrollButtons(containerNumber);
+        }
+      }
+    }, 10000);
+
+    const observers = setInterval(() => {
+      if (this.widgetsContent && this.widgetsContent.toArray().length > 0) {
+        console.log("Inside the onInit");
+        clearInterval(observers);
+        // Call the scroll button updates for each container dynamically
+        this.updateScrollButtonswidgets();
+      }
+    }, 1000);
+
     this.queryParamSubscription = this.activatedRoute.queryParams.subscribe(
       (params) => {
         // Access queryParams here
@@ -784,11 +810,11 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogWidth = '40vw'; // default width
+    let dialogWidth = '45vw'; // default width
 
     // Check if the screen size is small (mobile)
     if (this.breakpointObserver.isMatched(Breakpoints.XSmall)) {
-      dialogWidth = '80vw'; // width for mobile screens
+      dialogWidth = '90vw'; // width for mobile screens
     }
 
     const dialogRef = this.dialog.open(UserLoginDialogComponent, {
@@ -812,69 +838,154 @@ export class AllPacksPageNewComponent implements OnInit {
     return element.scrollWidth > element.clientWidth;
   }
 
+  public canScrollLeft: boolean[] = [];
+  public canScrollRight: boolean[] = [];
+
+  // @ViewChildren('widgetsContent', { read: ElementRef }) public widgetsContent: QueryList<ElementRef>;
+
   public scrollRight(i: number): void {
-    console.log(i)
-    const element = this.widgetsContent.toArray()[i - 1]?.nativeElement;
+    const element = this.widgetsContent.toArray()[i]?.nativeElement;
     if (element) {
-      element.scrollTo({ left: element.scrollLeft + 150, behavior: 'smooth' });
+      element.scrollTo({ left: element.scrollLeft + 500, behavior: 'smooth' });
+      // Update the button visibility after scrolling
+      this.updateScrollButtonswidgets();
     }
   }
-
+  
   public scrollLeft(i: number): void {
-    console.log(i)
-    const element = this.widgetsContent.toArray()[i - 1]?.nativeElement;
+    const element = this.widgetsContent.toArray()[i]?.nativeElement;
     if (element) {
-      element.scrollTo({ left: element.scrollLeft - 150, behavior: 'smooth' });
+      element.scrollTo({ left: element.scrollLeft - 500, behavior: 'smooth' });
+      // Update the button visibility after scrolling
+      this.updateScrollButtonswidgets();
     }
+  }
+  
+  // Update the scroll buttons visibility for each container
+  private updateScrollButtonswidgets(): void {
+    this.widgetsContent.toArray().forEach((element, i) => {
+      const container = element.nativeElement;
+      const isRTL = getComputedStyle(container).direction === 'rtl';
+      const normalizedScrollLeft = isRTL
+        ? container.scrollWidth - container.clientWidth + container.scrollLeft
+        : container.scrollLeft;
+      const buffer = 1;
+  
+      // Dynamically update the scroll buttons visibility
+      this.canScrollLeft[i] = normalizedScrollLeft > buffer;
+      this.canScrollRight[i] = normalizedScrollLeft < container.scrollWidth - container.clientWidth - buffer;
+    });
   }
 
 
-  scrollLeftWithRef(containerNumber:number) {
-    switch (containerNumber) {
-      case 1:
-        this.packScrollContainer1?.nativeElement.scrollTo({ left: (this.packScrollContainer1?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
-        break;
-        case 2:
-          this.packScrollContainer2?.nativeElement.scrollTo({ left: (this.packScrollContainer2?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
-          break;
-          case 3:
-            this.packScrollContainer3?.nativeElement.scrollTo({ left: (this.packScrollContainer3?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
-            break;
-            case 4:
-              this.packScrollContainer4?.nativeElement.scrollTo({ left: (this.packScrollContainer4?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
-              break;
-              case 5:
-                this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
-                break;
+  // scrollLeftWithRef(containerNumber:number) {
+  //   switch (containerNumber) {
+  //     case 1:
+  //       this.packScrollContainer1?.nativeElement.scrollTo({ left: (this.packScrollContainer1?.nativeElement.scrollLeft - 600), behavior: 'smooth' });
+  //       break;
+  //       case 2:
+  //         this.packScrollContainer2?.nativeElement.scrollTo({ left: (this.packScrollContainer2?.nativeElement.scrollLeft - 600), behavior: 'smooth' });
+  //         break;
+  //         case 3:
+  //           this.packScrollContainer3?.nativeElement.scrollTo({ left: (this.packScrollContainer3?.nativeElement.scrollLeft - 300), behavior: 'smooth' });
+  //           setTimeout(() => this.updateScrollButtons(), 300);
+  //           break;
+  //           case 4:
+  //             this.packScrollContainer4?.nativeElement.scrollTo({ left: (this.packScrollContainer4?.nativeElement.scrollLeft - 600), behavior: 'smooth' });
+  //             break;
+  //             case 5:
+  //               this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 600), behavior: 'smooth' });
+  //               break;
     
-      default:
-        break;
-    }
+  //     default:
+  //       break;
+  //   }
     
+  // }
+
+  // scrollRightWithRef(containerNumber:Number) {
+  //   switch (containerNumber) {
+  //     case 1:
+  //       this.packScrollContainer1?.nativeElement.scrollTo({ left: (this.packScrollContainer1?.nativeElement.scrollLeft + 600), behavior: 'smooth' });
+  //       break;
+  //       case 2:
+  //         this.packScrollContainer2?.nativeElement.scrollTo({ left: (this.packScrollContainer2?.nativeElement.scrollLeft + 600), behavior: 'smooth' });
+  //         break;
+  //         case 3:
+  //           this.packScrollContainer3?.nativeElement.scrollTo({ left: (this.packScrollContainer3?.nativeElement.scrollLeft + 300), behavior: 'smooth' });
+  //           setTimeout(() => this.updateScrollButtons(), 300);
+  //           break;
+  //           case 4:
+  //             this.packScrollContainer4?.nativeElement.scrollTo({ left: (this.packScrollContainer4?.nativeElement.scrollLeft + 600), behavior: 'smooth' });
+  //             break;
+  //             case 5:
+  //               this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 600), behavior: 'smooth' });
+  //               break;
+    
+  //     default:
+  //       break;
+  //   }
+  // }
+
+
+  scrollStates: { [key: number]: { canScrollLeft: boolean; canScrollRight: boolean } } = {
+    1: { canScrollLeft: false, canScrollRight: false },
+    2: { canScrollLeft: false, canScrollRight: false },
+    3: { canScrollLeft: false, canScrollRight: false },
+    4: { canScrollLeft: false, canScrollRight: false },
+  };
+
+  scrollLeftWithRef(containerNumber: number) {
+    const container = this[`packScrollContainer${containerNumber}`]?.nativeElement;
+    if (!container) return;
+    const isRTL = getComputedStyle(container).direction === 'rtl';
+    const scrollAmount = isRTL
+      ? container.scrollLeft - 500 // For RTL, reduce scrollLeft
+      : container.scrollLeft + 500; // For LTR, increase scrollLeft
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth',
+    });
+    setTimeout(() => this.updateScrollButtons(containerNumber), 300);
+  }
+  scrollRightWithRef(containerNumber: number) {
+    const container = this[`packScrollContainer${containerNumber}`]?.nativeElement;
+    if (!container) return;
+    const isRTL = getComputedStyle(container).direction === 'rtl';
+    const scrollAmount = isRTL
+      ? container.scrollLeft + 500 // For RTL, increase scrollLeft
+      : container.scrollLeft - 500; // For LTR, decrease scrollLeft
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth',
+    });
+    setTimeout(() => this.updateScrollButtons(containerNumber), 300);
   }
 
-  scrollRightWithRef(containerNumber:Number) {
-    switch (containerNumber) {
-      case 1:
-        this.packScrollContainer1?.nativeElement.scrollTo({ left: (this.packScrollContainer1?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
-        break;
-        case 2:
-          this.packScrollContainer2?.nativeElement.scrollTo({ left: (this.packScrollContainer2?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
-          break;
-          case 3:
-            this.packScrollContainer3?.nativeElement.scrollTo({ left: (this.packScrollContainer3?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
-            break;
-            case 4:
-              this.packScrollContainer4?.nativeElement.scrollTo({ left: (this.packScrollContainer4?.nativeElement.scrollLeft + 150), behavior: 'smooth' });
-              break;
-              case 5:
-                this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 150), behavior: 'smooth' });
-                break;
-    
-      default:
-        break;
-    }
+  
+  private updateScrollButtons(containerNumber: number): void {
+    const element = this[`packScrollContainer${containerNumber}`]?.nativeElement;
+    if (!element) return;
+  
+    const isRTL = getComputedStyle(element).direction === 'rtl';
+    const normalizedScrollLeft = isRTL
+      ? element.scrollWidth - element.clientWidth + element.scrollLeft
+      : element.scrollLeft;
+    const buffer = 1;
+  
+    this.scrollStates[containerNumber].canScrollLeft = normalizedScrollLeft > buffer;
+    this.scrollStates[containerNumber].canScrollRight =
+      normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;
   }
+
+  // private updateScrollButtons(): void {
+  //   const element = this.packScrollContainer3?.nativeElement;
+  //   this.canScrollRight = (element.scrollLeft * -1) > 0;
+  //   const scrollLeft = element.scrollLeft * -1
+  //   this.canScrollLeft = scrollLeft < element.scrollWidth + element.clientWidth;
+  //   console.log(this.canScrollLeft, 'Left' );
+  //   console.log(this.canScrollRight, 'Right' );
+  // }
 
 
 }

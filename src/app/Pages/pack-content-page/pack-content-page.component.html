@@ -167,24 +167,28 @@
               class="rounded-sm mb-2"
             />
             <div class="absolute z-8 text-center bottom-2 left-4">
-              <img
-                src="/assets/New/pack-view/heart-icon.svg"
+              <span class="icons-bg">
+                <img
+                src="/assets/New/pack-view/heartIconBlack.svg"
                 alt=""
                 width="25"
                 height="25"
                 class=""
-              />
+                />
+              </span>
               <div class="text-white text-center">{{ pack.likesCounter }}</div>
             </div>
             <div class="absolute z-8 text-center bottom-2 right-4">
-              <img
-                src="/assets/New/pack-view/card-icon.png"
+              <span class="icons-bg">
+                <img
+                src="/assets/New/pack-view/cardIconBlack.svg"
                 alt=""
                 width="30"
                 height="30"
                 class=""
-              />
-              <div class="text-white text-center">{{ pack.cards.length }}</div>
+                />
+              </span>
+              <div class="text-white text-center">{{ cardImages?.length }}</div>
             </div>
           </div>
           <div class="ms-4">
@@ -255,7 +259,7 @@
               >
                 <button
                   class="w-10 h-8 flex items-center justify-center py-2"
-                  (click)="redirect()"
+                  (click)="confirmationDialogue()"
                 >
                   <img
                     src="/assets/New/pack-view/cart-icon.png"
@@ -264,7 +268,7 @@
                     height="30"
                   />
                 </button>
-                <button (click)="redirect()">
+                <button (click)="confirmationDialogue()">
                   <div class="text-size-10">קנו ערכה</div>
                 </button>
               </div>
@@ -318,7 +322,7 @@
           ></top-questions-dialog>
 
            <!-- isReadingGuidebookAMust  -->
-          <div *ngIf="pack?.isReadingGuidebookAMust" class="text-red d-flex justify-center">
+          <div *ngIf="pack?.isReadingGuidebookAMust" class="text-red text-center d-flex justify-center">
               <p>מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו</p>
           </div>
            
@@ -457,7 +461,7 @@
                     class="img-pen"
                   />
                 </div>
-                <div class="mb-1 text-xs">עריכת הערכה</div>
+                <div class="mb-1 text-xs text-size">עריכת הערכה</div>
               </button>
             </div>
           </div>
@@ -1228,7 +1232,7 @@
                             'rotated-four-cards-landscape':
                               selectedCards.length == 4 && card.rotation !== 0,
                             'rotated-five-cards-landscape':
-                              selectedCards.length == 5 && card.rotation !== 0
+                              selectedCards.length >= 5 && card.rotation !== 0
                           }"
                           src="{{ card.backImgUrl || card.card.backImgUrl }}"
                           data-src="{{
@@ -1651,6 +1655,8 @@
                             flip: !card.flipped
                           }"
                           class="category-base-flip"
+                          style="height: 378px;"
+
                         >
                           <div class="flip-box-front">
                             <img
@@ -1699,14 +1705,15 @@
                               (contextmenu)="onRightClick()"
                               [ngStyle]="
                                 !singleCardCheck
-                                  ? { height: '376px', width: 'auto' }
+                                  ? { height: '300px', width: 'auto' }
                                   : { width: '588' }
                               "
                               [class.card-default]="!singleCardCheck"
                             />
                           </div>
-                          <div class="flip-box-back">
+                          <div class="flip-box-back" style="height: 378px;">
                             <img
+                              style="object-fit: cover;"
                               class="p-0 card-image-mobile"
                               loading="eager"
                               [ngClass]="{
@@ -1929,7 +1936,8 @@
           <div
             [class.single-card]="selectedCards.length == 1"
             *ngFor="let card of selectedCards"
-            style="display: block"
+            class="single-side"
+            style=""
           >
             <div
               *ngIf="!card.isPortrait"
@@ -2179,13 +2187,23 @@
             />
             <img
               *ngIf="
-                (item.card.frontImgUrl && flipped) || !item.card.backImgUrl
+                (item.card.frontImgUrl && flipped)
               "
               class="img-box"
               alt="Mentor-cards unique cards design for the front of the card"
               [src]="item?.card.frontImgUrl"
               data-src="{{ cardContent?.frontImgUrl }}"
             />
+
+            <img
+             *ngIf="
+               !item.card.backImgUrl
+             "
+             class="img-box"
+             alt="Mentor-cards unique cards design for the front of the card"
+             src="/assets/Mentor-Cards-Back.png"
+           />
+
             <img
               src="../../../assets/icons/black_cross.png"
               class="absolute bg-white rounded-full p-1"

@@ -527,7 +527,7 @@ app-card.scrollableCard {
   padding-bottom: 2vw;
   white-space: nowrap;
   grid-gap: 10px;
-  gap: 10px;
+  gap: 0rem;
   overflow-x: auto;
 }
 
@@ -709,7 +709,63 @@ app-card.scrollableCard {
   width: 65%;
 }
 
+.icons-bg {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+ }
+
+ .single-side {
+  display: block; 
+  margin-right: 5rem;
+ }
+
+
+ 
+ 
+
 @media screen and (max-width: 1024px) {
+}
+
+/* Landscape orientation styles */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+
+  .multi-card-mobile .drop-down {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .multi-card-mobile img.card-image-mobile {
+    width: auto !important;
+    max-width: 30vw; 
+    height: auto;
+  }
+
+  .multi-card-mobile .right-90-icon {
+    width: auto !important; 
+    margin-top: 5px;
+  }
+
+  .multi-card-mobile .single-card {
+    flex: 1 1 auto;
+  }
+
+  .multi-card-mobile .single-side-card {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+  }
+
+  .Icon-90 {
+      /* margin-left: 25px; */
+      margin-top: -7px;
+      width: 30px;
+      height: 30px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -763,10 +819,10 @@ app-card.scrollableCard {
     width: 100px;
   }
   .btn-2 {
-    width: 50px;
+    width: 75px;
   }
   .btn-4 {
-    width: 61px;
+    width: 70px;
   }
 
   .padding-zero {
@@ -809,30 +865,35 @@ app-card.scrollableCard {
     padding: 0;
     height: 12px;
     width: 12px;
+    margin-top: 8px;
   }
 
   .img-hand {
     padding: 0;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
+    margin-top: 4px;
   }
 
   .img-link {
     padding: 0;
     height: 11px;
     width: 31px;
+    margin-top: 7px;
   }
 
   .img-info {
     padding: 0;
     width: 8px;
     height: 15px;
+    margin-top: 5px;
   }
 
   .img-shuffle {
     padding: 0;
     height: 15px;
     width: 32px;
+    margin-top: 8px;
   }
 
   .btn-height-35 {
@@ -1098,6 +1159,13 @@ app-card.scrollableCard {
     z-index: 4;
   }
 
+  .text-size {
+    font-size: 0.6rem !important;
+  }
+
+  .single-side {
+    margin-right: 0.5rem;
+   }
 }
 
 @media screen and (max-width: 600px) {
@@ -1575,7 +1643,7 @@ img {
   transition: transform 0.8s;
   transform-style: preserve-3d;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   min-height: 225px;
 }

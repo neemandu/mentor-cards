@@ -843,7 +843,7 @@ video {
 }
 
 .w-44 {
-  width: 11rem;
+  /* width: 11rem; */
 }
 
 .w-5 {
@@ -1691,7 +1691,9 @@ button:focus {
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
+
 }
+
 
 @media (min-width: 1024px) {
 

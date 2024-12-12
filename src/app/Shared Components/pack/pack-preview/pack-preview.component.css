@@ -248,7 +248,7 @@ mat-icon {
 }
 
 .icons-container {
-  right: -45px;
+  right: -32px;
   top: 35px;
 }
 
@@ -258,6 +258,10 @@ mat-icon {
 }
 .h-60 {
   height: 14rem !important;
+}
+
+.modal-preview {
+  width: 448px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -305,7 +309,44 @@ mat-icon {
     padding: unset;
   }
 
+  .modal-preview {
+    width: 290px;
+  }
+
+  .icons-container {
+    right: -62px;
+    top: 35px;
+  }
+
+  .image-container {
+    left: -26px;
+    top: 17px;
+  }
+  .text-size {
+    font-size: 0.8rem;
+  }
+
+  .user {
+    position: relative;
+    left: 25px;
+  }
+
+  .hero-button {
+    margin-left: -20px;
+  }
   
+  .hero-button-mobile {
+    margin-top: -11px;
+    margin-left: -20px;
+  }
+
+  .mt-2 {
+    margin-top: 0px !important; 
+  }
+
+  .mb-2 {
+    margin-bottom: 0px !important;
+  }
 }
 
 @media screen and (max-width: 480px) {

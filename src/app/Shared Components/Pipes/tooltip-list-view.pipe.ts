@@ -21,3 +21,16 @@ export class AmountOfPacksViewPipe implements PipeTransform {
   }
 
 }
+
+
+
+@Pipe({
+  name: 'lineBreak'
+ })
+ export class LineBreakPipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return value;
+    return value.replace(/,|\. /g, match => match.trim() + '<br />');
+  }
+ }
+ 

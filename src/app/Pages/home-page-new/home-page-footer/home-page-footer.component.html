@@ -26,7 +26,7 @@
             {{
               "pages.home-page.sections.footer.content.links.0.items.2.text"
                 | translate
-            }}
+            }} 
           </button>
         </li>
         <li>
@@ -34,7 +34,7 @@
             {{
               "pages.home-page.sections.footer.content.links.0.items.3.text"
                 | translate
-            }}
+            }} 
           </button>
         </li>
       </ul>
@@ -78,14 +78,14 @@
     <div class="flex justify-between sm:hidden mt-8">
       <div>
         <ul class="text-center space-y-4">
-          <li>
+          <li (click)="openSiteRulesModal()">
             {{
               "pages.home-page.sections.footer.content.mobile-links.0.text"
                 | translate
             }}
           </li>
           <li>
-            <button (click)="navigateTo('/home-page#contact-us-section')">
+            <button (click)="navigateTo('/all-packs-page')">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.1.text"
                   | translate
@@ -93,7 +93,7 @@
             </button>
           </li>
           <li>
-            <button (click)="navigateTo('/all-packs-page')">
+            <button (click)="openNewTab()">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.2.text"
                   | translate
@@ -101,7 +101,7 @@
             </button>
           </li>
           <li>
-            <button (click)="openNewTab()">
+            <button (click)="navigateTo('/price-page')">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.3.text"
                   | translate
@@ -109,7 +109,7 @@
             </button>
           </li>
           <li>
-            <button (click)="navigateTo('/price-page')">
+            <button (click)="navigateTo('/guide-page')">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.4.text"
                   | translate
@@ -120,14 +120,14 @@
       </div>
       <div>
         <ul class="text-center space-y-4">
-          <li>
+          <li (click)="navigateTo('/services')">
             {{
               "pages.home-page.sections.footer.content.mobile-links.5.text"
                 | translate
             }}
           </li>
           <li>
-            <button (click)="navigateTo('/guide-page')">
+            <button (click)="navigateTo('/about-page')">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.6.text"
                   | translate
@@ -135,7 +135,7 @@
             </button>
           </li>
           <li>
-            <button (click)="navigateTo('/services')">
+            <button (click)="navigateTo('/affiliates-page')">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.7.text"
                   | translate
@@ -151,7 +151,7 @@
             </button>
           </li>
           <li>
-            <button (click)="navigateTo('/affiliates-page')">
+            <button (click)="navigateTo('/home-page#contact-us-section')">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.9.text"
                   | translate
@@ -163,7 +163,7 @@
     </div>
     <div class="col-span-2 space-y-4">
       <div class="hidden sm:flex justify-start gap-4">
-        <button (click)="openSiteRulesModal()">
+        <button >
           {{
             "pages.home-page.sections.footer.content.mobile-links.0.text"
               | translate

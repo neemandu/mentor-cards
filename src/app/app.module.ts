@@ -115,7 +115,7 @@ import { PackContentPageComponent, PortraitWarningDialogComponent } from './Page
 import { RandomCardRevealDialogComponent } from './Pages/pack-content-page/random-card-reveal-dialog/random-card-reveal-dialog.component';
 import { CardComponent } from './Shared Components/card/card.component';
 import { PackComponent } from './Shared Components/pack/pack.component';
-import { AmountOfPacksViewPipe, TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
+import { AmountOfPacksViewPipe, LineBreakPipe, TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
 import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
 import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 import { DynamicDialogYesNoComponent } from './Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -182,6 +182,7 @@ import { AiChatComponent } from './Pages/all-packs-page-new/ai-chat/ai-chat.comp
 import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripple.directive';
 import { TopQuestionsCustomDialogComponent } from './Pages/pack-content-page/top-questions-dialog';
 import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-content-page-new.component';
+import { confirmationDialogueComponent } from './Pages/pack-content-page/confirmation-dialog';
 
 @NgModule({
   declarations: [
@@ -195,6 +196,7 @@ import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-
     PackContentPageComponent,
     TooltipListViewPipe,
     AmountOfPacksViewPipe,
+    LineBreakPipe,
     CardsRevealDialogComponent,
     TopQuestionsCustomDialogComponent,
     OverlaySpinnerComponent,
@@ -268,7 +270,8 @@ import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-
     FilterDialogComponent,
     AiChatComponent,
     GradientRippleDirective,
-    PackContentPageNewComponent
+    PackContentPageNewComponent,
+    confirmationDialogueComponent
   ],
   imports: [
     BrowserModule,

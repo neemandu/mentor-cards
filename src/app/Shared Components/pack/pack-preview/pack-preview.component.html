@@ -1,7 +1,6 @@
 <div
   [dir]="langDirectionService.currentLangDirection"
-  class="container-fluid"
-  style="width: 448px"
+  class="container-fluid modal-preview"
   (mouseleave)="closeDialog()"
 >
   <!-- <button (click)="closeDialog()" class="flex flex-row-reverse">
@@ -22,7 +21,7 @@
             alt="User Avatar"
             class="w-6 h-6"
           />
-          <div class="text-center font-bold">
+          <div class="text-center text-size font-bold">
             {{ "pages.pack-preview.book-icon" | translate }}
           </div>
         </div>
@@ -74,7 +73,7 @@
 
   <!-- User info -->
   <div class="flex justify-between mt-2">
-    <div class="flex items-center mb-2">
+    <div class="flex user items-center mb-2">
       <img
         [src]="
           data?.pack?.about?.imgUrl
@@ -122,6 +121,8 @@
   <p
     [ngClass]="isExpland ? '' : 'line-clamp-2 overflow-hidden'"
     class="text-sm"
+    [class.text-right]="langDirectionService.currentLang == 'he'"
+    [class.text-left]="langDirectionService.currentLang !== 'he'"
   >
     {{ data.pack.description }}
   </p>
@@ -129,12 +130,15 @@
   <div *ngIf="data.pack.about && isExpland">
     <div class="about-author">
       <div class="about-author-text categories-tags">
-        <p class="text-sm mb-4 text-right">
+        <p class="text-sm mb-4"
+        [class.text-right]="langDirectionService.currentLang == 'he'"
+        [class.text-left]="langDirectionService.currentLang !== 'he'"
+        >
           <span class="font-bold">
             {{ "pages.pack-preview.about-author" | translate }}: </span
           >{{ data.pack.about.text }}
         </p>
-        <button (click)="redirect()">
+        <button (click)="redirect()" style="color: blue;">
           {{ "pages.pack-preview.go-to-creator-website" | translate }}
         </button>
       </div>
@@ -175,7 +179,7 @@
         class="actions"
       >
         <button
-          class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg flex gap-4 items-center"
+          class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold  hero-button hero-button-mobile text-lg flex gap-4 items-center"
           type="button"
           (click)="navigate('/price-page')"
         >

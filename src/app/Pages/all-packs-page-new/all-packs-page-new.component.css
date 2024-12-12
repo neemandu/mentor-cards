@@ -178,10 +178,18 @@
 }
 .middle {
   width: 90%;
-  overflow: hidden;
+  overflow: scroll;
   /*will change this to hidden later to deny scolling to user*/
   white-space: nowrap;
 }
+
+.favourite-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+ }
+ 
 
 @media (min-width: 640px) {
   .content-ltr {
@@ -193,6 +201,12 @@
     width: 1500px !important;
     height: 8.5rem !important;
   }
+
+   
+  .favourite-icon {
+    border-left: 2px solid black;
+  }
+   
 }
 
 .filtered-card {
@@ -202,7 +216,7 @@
 
 
 @media screen and (max-width: 768px) {
-
+/* 
   .arrow-left,
   .arrow-right {
     position: absolute;
@@ -211,7 +225,7 @@
     width: 40px;
     border-radius: 50%;
     color: #a8a8a8;
-    z-index: 10; /* Ensure the arrows appear above other content */
+    z-index: 10; 
   }
 
   .arrow-left {
@@ -222,6 +236,28 @@
   .arrow-right {
     left: 21rem;
     top: 10rem;
+  } */
+
+  .arrow-left,
+  .arrow-right {
+    display: none;
+  }
+
+  .overflow-x-scroll {
+    overflow-x: scroll;
+  }
+
+  .scroll {
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
+  .ms-4 {
+    margin-inline-start: 0.2rem;
+  }
+
+  .middle {
+    width: 100%;
   }
 
 }

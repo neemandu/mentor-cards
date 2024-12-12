@@ -5,3 +5,19 @@
     background-size: 100% 100%;
     background-position: 0% 100%;
 }
+
+
+@media (max-width: 768px) { 
+    .w-44 {
+        width: 9.2rem !important;
+    }
+    .h-64 {
+        height: 13rem !important;
+    }
+
+    .text-lg {
+        font-size: 0.9rem;
+        line-height: 1.3rem;
+    }
+
+}
