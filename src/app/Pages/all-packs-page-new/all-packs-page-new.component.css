@@ -238,6 +238,10 @@
     top: 10rem;
   } */
 
+  .grid-column-12 {
+    grid-template-columns: repeat(12, minmax(0, 7rem));
+  }
+
   .arrow-left,
   .arrow-right {
     display: none;
