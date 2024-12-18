@@ -941,14 +941,16 @@
             [class.category-base-dialog]="!categoryScreen"
           >
 
-            <div *ngIf="!categoryScreen">
+            <div *ngIf="!categoryScreen" 
+            class="dialog-container-row"
+            
+            >
               <div
                 *ngFor="let card of selectedCards"
                 style="
                   display: flex;
                   flex-direction: column;
                   align-items: center;
-                  width: 50vw;
                 "
               >
 

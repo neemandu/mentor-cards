@@ -31,7 +31,7 @@
         data-src="{{ cardContent?.frontImgUrl }}"
         (contextmenu)="onRightClick()"
         [style.width.px]="cardContent?.frontNewDimensions?.width + flippedCardwidth || 300"
-        [style.height.px]="cardContent?.frontNewDimensions?.height && !flipped"
+        [style.height.px]="cardContent?.frontNewDimensions?.height"
       />
     </div>
   </div>

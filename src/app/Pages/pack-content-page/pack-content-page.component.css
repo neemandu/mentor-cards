@@ -491,7 +491,7 @@ app-card.scrollableCard {
 }
 .dialog-container {
   display: flex;
-  width: 50vw;
+  width: 100vw;
   overflow-x: auto;
   white-space: nowrap;
   /* Hide scrollbar */
@@ -503,7 +503,7 @@ app-card.scrollableCard {
 }
 
 .width-50vw {
-  width: 50vw;
+  width: 25vw;
 }
 
 .scroll-visible {
@@ -725,7 +725,10 @@ app-card.scrollableCard {
  }
 
 
- 
+
+ .dialog-container-row {
+  display: flex;
+ }
  
 
 @media screen and (max-width: 1024px) {
@@ -824,6 +827,10 @@ app-card.scrollableCard {
 
   .width-50vw {
     width: 350px;
+  }
+
+  .dialog-container-row {
+    display: block;
   }
 
   .grid-display {
@@ -1024,7 +1031,7 @@ app-card.scrollableCard {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1;
   }
 
   .zoom-button {
