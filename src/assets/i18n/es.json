@@ -17,7 +17,9 @@
         "קלפי מילה": "Tarjetas de palabras",
         "קלפי תמונה + מילה": "Tarjetas ilustradas + palabra",
         "קלפי מסרים": "Tarjetas de mensaje",
-        "קלפי ערכים": "Tarjetas de valor"
+        "קלפי ערכים": "Tarjetas de valor",
+        "ערכות ממוקדות נושא" : "Kits temáticos enfocados",
+        "1ערכות ממוקדות נושא" : "Se recomienda leer el manual de instrucciones antes de comenzar a trabajar con los kits."
       },
       "my-favorites": "Mis favoritos",
       "header": "",
@@ -68,7 +70,7 @@
     "pack-preview": {
       "book-icon": "Impresión",
       "print-pack-description": "También puedes comprar una versión impresa",
-      "about-author": "Acerca de:",
+      "about-author": "Acerca de",
       "go-to-creator-website": "Ir al sitio web del creador",
       "sign-in-sign-up": "Iniciar sesión/Registrarse",
       "enter-pack": "Entrar a la baraja"

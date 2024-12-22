@@ -1,34 +1,40 @@
-<div class="flex justify-between gap-4 items-start mt-8 flex-col md:flex-row">
-    <div class="md:m-10 my-10 mx-auto">
-        <img src="/assets/New/home-page/kid.png" alt="user image" class="md:ms-8 mx-auto pl-4" />
+<div class="flex flex-col md:flex-row justify-between gap-4 items-center mt-8">
+    <!-- First Image -->
+    <div class="md:w-[30%] w-full">
+      <img src="/assets/New/home-page/2.jpg" alt="user image" style="height: 600px; margin: 50px; object-fit: contain;"  />
     </div>
-    <div class="2xl:-me-32 mx-auto">
-        <div class="sm:text-4xl text-2xl font-bold text-center">
-            {{ 'pages.home-page.sections.try-this.content.title2' | translate }}
+  
+    <!-- Text Block -->
+    <div class="md:w-[30%] w-full mx-auto text-center">
+      <div class="sm:text-4xl text-2xl font-bold">
+        {{ 'pages.home-page.sections.try-this.content.title2' | translate }}
+      </div>
+      <div class="justify-center">
+        <div class="md:w-full w-[90%] text-md font-bold mt-8 mx-auto">
+          {{ 'pages.home-page.sections.try-this.content.description1' | translate }}<br>
+          {{ 'pages.home-page.sections.try-this.content.description2' | translate }}
         </div>
-        <div class="justify-center">
-            <div class="md:w-[35vw] w-[90vw] text-center text-md font-bold mt-8 mx-auto">
-                {{ 'pages.home-page.sections.try-this.content.description1' | translate }}<br>
-                {{ 'pages.home-page.sections.try-this.content.description2' | translate }}
-            </div>
-            <div class="md:w-[30vw] w-[90vw] text-center text-md font-bold mt-8 mx-auto">
-                {{ 'pages.home-page.sections.try-this.content.description3' | translate }}
-            </div>
-            <div class="md:w-[30vw] w-[90vw] text-center text-xl font-bold mt-8 mx-auto">
-                {{ 'pages.home-page.sections.try-this.content.description4' | translate }}
-            </div>
-            <div class="md:w-[30vw] w-[90vw] text-center text-md font-bold mt-8 mx-auto">
-                {{ 'pages.home-page.sections.try-this.content.description5' | translate }}<br>
-                {{ 'pages.home-page.sections.try-this.content.description6' | translate }}
-            </div>
-            <div class="flex justify-center mt-4" (click)="navigateTo('/all-packs-page')">
-                <button class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold try-this-button text-lg">
-                    {{ 'pages.home-page.sections.try-this.content.button.text' | translate }}
-                </button>
-            </div>
+        <div class="md:w-full w-[90%] text-md font-bold mt-8 mx-auto">
+          {{ 'pages.home-page.sections.try-this.content.description3' | translate }}
         </div>
+        <div class="md:w-full w-[90%] text-xl font-bold mt-8 mx-auto">
+          {{ 'pages.home-page.sections.try-this.content.description4' | translate }}
+        </div>
+        <div class="md:w-full w-[90%] text-md font-bold mt-8 mx-auto">
+          {{ 'pages.home-page.sections.try-this.content.description5' | translate }}<br>
+          {{ 'pages.home-page.sections.try-this.content.description6' | translate }}
+        </div>
+        <div class="flex justify-center mt-4" (click)="navigateTo('/all-packs-page')">
+          <button class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold try-this-button text-lg">
+            {{ 'pages.home-page.sections.try-this.content.button.text' | translate }}
+          </button>
+        </div>
+      </div>
     </div>
-    <div>
-        <img src="/assets/New/home-page/try-this-1.png" alt="user image" />
+  
+    <!-- Second Image -->
+    <div class="md:w-[30%] w-full">
+      <img src="/assets/New/home-page/lap1.jpg" alt="user image" class="mx-auto w-full" />
     </div>
-</div>
+  </div>
+  

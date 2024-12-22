@@ -17,7 +17,9 @@
         "קלפי מילה": "Word Cards",
         "קלפי תמונה + מילה": "Picture + Word Cards",
         "קלפי מסרים": "Message Cards",
-        "קלפי ערכים": "Value Cards"
+        "קלפי ערכים": "Value Cards",
+        "ערכות ממוקדות נושא" : "Focused Thematic Cards"        ,
+        "1ערכות ממוקדות נושא" : "It is recommended to read the instruction manual before starting to work with the kits."
       },
       "my-favorites": "My Favorites",
       "header": "",
@@ -67,7 +69,7 @@
     "pack-preview": {
       "book-icon": "Guide Book",
       "print-pack-description": "You can also purchase a printed version",
-      "about-author": "About:",
+      "about-author": "About",
       "go-to-creator-website": "Go to the creator's website",
       "sign-in-sign-up": "Sign In/Sign Up",
       "enter-pack": "Enter Pack"

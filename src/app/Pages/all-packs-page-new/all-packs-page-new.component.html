@@ -455,7 +455,6 @@
           <div
             class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4 pos-relative"
           >
-          5
             &nbsp;
           <button class="arrow-right" *ngIf="!isLoading && scrollStates[4]?.canScrollRight" (click)="scrollRightWithRef(4)"><mat-icon>keyboard_arrow_right</mat-icon></button>
 
@@ -488,28 +487,27 @@
         </div>
       </div>
 
-      <!-- TODO : Remove this Category Bacause of Duplication -->
     <div
-      *ngIf="!isLoading && readingBookCategoryArray?.length > 0"
+      *ngIf="!isLoading && readingBookCategoryArray?.length > 0 && !isfavSelected"
       class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
     >
     <div
   
     class="sm:items-center sm:w-56 w-full items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book pos-relative"
     >
-      {{ 'ערכותממוקדותנושא' | translate }} 
+      {{ "pages.all-packs-page.categories.ערכות ממוקדות נושא" | translate }} 
       <div  class="d-flex justify-center align-items-center" style="flex-direction: column;">
         <span>
           <img src="../../../assets/icons/Default.png">
         </span>
-        <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות</p>
+        <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">{{ "pages.all-packs-page.categories.1ערכות ממוקדות נושא" | translate }} </p>
       </div>
     <button class="arrow-right"  *ngIf="!isLoading && readingBookCategoryArray?.length > 6 || isMobileScreen" (click)="scrollRightWithRef(5)"><mat-icon>keyboard_arrow_right</mat-icon></button>
     </div>
     
 
     <div
-      *ngIf="readingBookCategoryArray?.length > 0"
+      *ngIf="readingBookCategoryArray?.length > 0 && !isfavSelected"
       #packScrollContainer5
       class="middle scroller overflow-x-scroll flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
     >
