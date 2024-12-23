@@ -537,7 +537,7 @@ export class AllPacksPageNewComponent implements OnInit {
       localStorage.getItem('isTrialPacksDialogOpen'),
       'isTrialPacksDialogOpen href'
     );
-    if (!this.userData || this.userData.status === 'NOPLAN') {
+    if (!this.userData || this.userData?.status === 'NOPLAN') {
       if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
         localStorage.setItem('isTrialPacksDialogOpen', 'true');
         console.log(
@@ -547,7 +547,7 @@ export class AllPacksPageNewComponent implements OnInit {
         this.openDialog();
       }
     }
-    if (this.userData.status === 'PLAN') {
+    if (this.userData?.status === 'PLAN') {
       this.placeholderText = 'איך אפשר לעזור?';
     }
     //this.getAllPacks();

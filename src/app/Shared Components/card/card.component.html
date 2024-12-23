@@ -1,6 +1,5 @@
 <div class="d-flex flex-column relative">
   <div [ngClass]="{ 'flip-box-inner': true, flip: flipped }" [class.min-height]="mobileView" 
-  [ngStyle]="!flipped ? { 'width': imageWidth + 'px', 'height': imageHeight + 'px' } : {}"
   >
     <div class="flip-box-front">
       <img
@@ -19,7 +18,6 @@
         data-src="{{ cardContent?.backImgUrl }}"
         [ngClass]="{ '': !selected, 'img-selected': selected }"
         (contextmenu)="onRightClick()"
-        [style.width.px]="imageWidth"
         [style.height.px]="imageHeight"
       />
     </div>
@@ -30,8 +28,7 @@
         src="{{ cardContent?.frontImgUrl }}"
         data-src="{{ cardContent?.frontImgUrl }}"
         (contextmenu)="onRightClick()"
-        [style.width.px]="cardContent?.frontNewDimensions?.width + flippedCardwidth || 300"
-        [style.height.px]="cardContent?.frontNewDimensions?.height"
+        [style.height.px]="imageHeight"
       />
     </div>
   </div>

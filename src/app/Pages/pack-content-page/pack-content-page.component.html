@@ -510,7 +510,7 @@
       >
         <div class="category-container">
           <p class="position-relative category-name">
-            {{ category.categoryName }}
+            {{ category.categoryName }}&nbsp;
             <span
               *ngIf="!categoryOpenStates[i]"
               class="position-absolute left-to-category"
@@ -531,9 +531,8 @@
         <div
         class="d-flex overflow-cards"
         *ngIf="categoryOpenStates[i]"
-        [ngStyle]="!flipped ? { height: imageHeight + 'px' } : {}"
       >
-      <div class="d-flex overflow-cards" [class.scroll-hidden]="!flipped" [class.scroll-visible]="flipped" *ngFor="let card of category.cardsImages; let i = index">
+      <div class="d-flex " [class.scroll-hidden]="!flipped" [class.scroll-visible]="flipped" *ngFor="let card of category.cardsImages; let i = index">
         <button
         *ngIf="showEditPack"
         mat-icon-button
@@ -543,17 +542,11 @@
         <mat-icon class="remove-icon">visibility_off</mat-icon>
       </button>
           <app-card
-            [ngStyle]="
-              !flipped
-                ? { width: imageWidth + 'px', height: imageHeight + 'px' }
-                : {}
-            "
             [imageWidth]="imageWidth"
             [imageHeight]="imageHeight"
             [flippedCardwidth]="flippedCardwidth"
             [flipBoxInnerInCat]="true"
-            [class.scrollableCard]="id == 90"
-            [ngClass]="{ clickable: true }"
+            [ngClass]="{ clickable: true, scrollableCardOrd: !flipped && !isDoubleSided,scrollableCard: flipped || isDoubleSided }"
             [cardContent]="card"
             [mobileView]="true"
             [selected]="selectedCards.includes(card)"
@@ -572,7 +565,7 @@
     </div>
   </div>
 
-  <ng-container *ngIf="id != 90 && id != 86">
+  <ng-container *ngIf="cards.length == 1">
     <div class="d-flex flex-column align-items-center cards-container">
       <div
         *ngIf="pack && !showEditPack"
@@ -917,7 +910,7 @@
           'selected-content-one-card': selectedCards.length == 1
         }"
       >
-        <ng-container *ngIf="isDoubleSided">
+        <ng-container>
           <div
             *ngIf="selectedCards.length > 1 || categoryBaseArray.length >= 1"
             style="display: flex; justify-content: flex-end"
@@ -2103,7 +2096,7 @@
 <!-- TODO -->
 <footer
   class="footer"
-  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id != '90'"
+  *ngIf="(multiSelectCard.length > 0 || selectedOption) && cards.length == 1"
   [ngStyle]="{ display: showEditPack ? 'none' : 'flex' }"
 >
   <div class="footer-container">
@@ -2221,7 +2214,7 @@
 
 <footer
   class="footer"
-  *ngIf="(multiSelectCard.length > 0 || selectedOption) && id === '90'"
+  *ngIf="(multiSelectCard.length > 0 || selectedOption) && (cards.length > 1)"
 >
   <div class="footer-container">
     <div class="w-100" *ngIf="multiSelectCard.length > 0">

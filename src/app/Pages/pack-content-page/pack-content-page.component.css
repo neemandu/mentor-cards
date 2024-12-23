@@ -414,12 +414,9 @@ li span {
 }
 
 .overflow-cards {
-  display: flex;
-  overflow-x: auto; /* Ensure the scrolling is allowed */
-  white-space: nowrap;
-  padding-bottom: 10px; /* Optional: Adds padding below the cards */
-  min-height: 340px;
-  padding-left: 190px;
+  overflow: scroll; /* Ensure the scrolling is allowed */
+  flex-wrap: wrap;
+  width: calc(100% - 220px);
   /* Hide scrollbar */
   /* Hide scrollbar */
   scrollbar-width: none; /* For Firefox */
@@ -429,6 +426,12 @@ li span {
 app-card.scrollableCard {
   flex: 0 0 auto;
   width: auto;
+  margin-right: 10px;
+}
+
+app-card.scrollableCardOrd {
+  flex: 0 0 auto;
+  width: 169px;
   margin-right: 10px;
 }
 
@@ -528,7 +531,8 @@ app-card.scrollableCard {
   white-space: nowrap;
   grid-gap: 10px;
   gap: 0rem;
-  overflow-x: auto;
+  overflow: scroll;
+  flex-wrap: wrap;
 }
 
 .min-width-auto {
@@ -645,7 +649,7 @@ app-card.scrollableCard {
 }
 
 .category-base-flip {
-  width: 471px;
+  width: auto;
 }
 
 .category-base-scrollbar {
@@ -654,6 +658,7 @@ app-card.scrollableCard {
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
   /* Hide scrollbar */
   scrollbar-width: none; /* For Firefox */
   -ms-overflow-style: none; /* For Internet Explorer and Edge */
@@ -721,13 +726,13 @@ app-card.scrollableCard {
 
  .single-side {
   display: block; 
-  margin-right: 5rem;
+  margin-right: 3rem;
  }
 
 
 
  .dialog-container-row {
-  display: flex;
+  flex-wrap: wrap;
  }
  
 
@@ -1421,7 +1426,7 @@ app-card.scrollableCard {
   height: calc(100vw / 3);
   /* max-width: 90%; */
   max-height: 90%;
-  overflow: hidden;
+  overflow: scroll;
   object-fit: cover;
 }
 .two-cards-landscape {
@@ -1586,6 +1591,8 @@ mat-icon {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
+  scrollbar-width: none; 
 }
 
 @media (orientation: landscape) and (max-height: 480px) {
@@ -1748,7 +1755,7 @@ img {
 }
 
 .grid-item {
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .grid-item img {

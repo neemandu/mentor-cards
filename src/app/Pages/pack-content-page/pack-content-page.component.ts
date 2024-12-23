@@ -287,11 +287,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.getFilteredCategories()?.forEach((_, index) => {
       this.categoryOpenStates[index] = true;
     });
-
-    if (this.id == 90) {
-      this.imageWidth = 300;
-      this.imageHeight = 300;
-    }
   }
 
   loadPack(): void {
@@ -491,41 +486,22 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   zoomIn() {
     if (!this.flipped) {
-      if (this.id == 90) {
-        this.cardWidth += 1;
-        this.cardHeight += 1.5; // Adjust proportionally
-        this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
-        this.imageHeight = this.imageWidth / this.aspectRatio;
-        this.overFlowCardContainerHeight = this.cardHeight + 12;
-      } else {
-        this.cardWidth += 1;
-        this.cardHeight += 1.5; // Adjust proportionally
-        this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
-        this.imageHeight = this.imageWidth / this.aspectRatio;
-        this.containerPadding += 10;
-      }
+      this.cardWidth += 1;
+      this.cardHeight += 1.5; // Adjust proportionally
+      this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
+      this.imageHeight = this.imageWidth / this.aspectRatio;
+      this.containerPadding += 10;
     } else if (this.flipped) {
       this.flippedCardwidth += 30;
     }
   }
   zoomOut() {
     if (!this.flipped) {
-      if (this.id == 90) {
-        this.cardWidth -= 1;
-        this.cardHeight -= 1.5;
-        this.imageWidth -= 16;
-        this.imageHeight = this.imageWidth / this.aspectRatio;
-        this.containerPadding += -10;
-      } else {
-        if (this.cardWidth > 1) {
-          // Ensure width doesn't go below 1
-          this.cardWidth -= 1;
+      this.cardWidth -= 1;
           this.cardHeight -= 1.5;
           this.imageWidth -= 16;
           this.imageHeight = this.imageWidth / this.aspectRatio;
           this.containerPadding += -10;
-        }
-      }
     } else if (this.flipped) {
       this.flippedCardwidth -= 30;
     }
@@ -591,7 +567,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         this.multiSelectCard.push(obj);
       }
     }
-    if (this.id === '90' && flag == false) {
+    if ((this.cards.length > 1) && flag == false) {
       this.categoryScreen = true;
       this.categoryBaseArray = [];
 
@@ -704,7 +680,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
     this.cdr.markForCheck();
     this.singleCategoryBaseCard = true;
-    if (this.id == 90) {
+    if (this.cards.length > 1) {
       this.categoryScreen = true;
       this.categoryBaseArray = [];
 
