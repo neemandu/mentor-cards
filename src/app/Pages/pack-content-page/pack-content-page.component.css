@@ -733,6 +733,7 @@ app-card.scrollableCardOrd {
 
  .dialog-container-row {
   flex-wrap: wrap;
+  display: flex;
  }
  
 
@@ -1679,7 +1680,6 @@ img {
 
 .flip-box-inner {
   transition: transform 0.8s;
-  transform-style: preserve-3d;
   display: flex;
   /* align-items: center; */
   justify-content: center;
@@ -1696,6 +1696,8 @@ img {
   /* Safari */
   backface-visibility: hidden;
   display: flex;
+  height: 80%;
+  width: 80%;
   justify-content: end;
 }
 
