@@ -141,7 +141,7 @@ export class CardsService {
     if (localStorage.getItem('packsLanguage') != null) {
       lang = localStorage.getItem('packsLanguage').toLowerCase();
     } else {
-      lang = 'ru';
+      lang = 'he';
     }
     const filterCondition = {
       or: [
@@ -158,8 +158,8 @@ export class CardsService {
 
     const fetchAllPacks = async () => {
       do {
+        console.log('fetching packspacks ...');
         const packs = await fetchPacks(nextToken);
-        // console.log('packs ...',packs);
         items = items.concat(packs.items);
         nextToken = packs.nextToken;
       } while (nextToken);
@@ -183,8 +183,8 @@ export class CardsService {
     };
 
     fetchAllPacks().catch((reject) => {
-      // console.log('reject');
-      // console.log(reject);
+      console.log('reject');
+      console.log(reject);
       this.overlaySpinnerService.changeOverlaySpinner(false);
       let snackBarRef = this._snackBar.open(
         'שגיאה במשיכת ערכות הקלפים, נסו שנית',
@@ -213,10 +213,11 @@ export class CardsService {
    */
   sortPacks(): void {
     this.allPacks?.sort((packA, packB) => {
-      //free packs
+      // Free packs
       if (packA.freeUntilDate > new Date()) return -1;
       if (packB.freeUntilDate > new Date()) return 1;
-      //favorites
+  
+      // Favorites
       if (
         this.favorites.includes(packA.id) &&
         this.favorites.includes(packB.id)
@@ -224,9 +225,14 @@ export class CardsService {
         return 0;
       if (this.favorites.includes(packA.id)) return -1;
       if (this.favorites.includes(packB.id)) return 1;
-      else return packA.categories[0].localeCompare(packB.categories[0]);
+  
+      // Alphabetical comparison of categories
+      const categoryA = packA.categories?.[0] ?? ''; // Use empty string if undefined
+      const categoryB = packB.categories?.[0] ?? ''; // Use empty string if undefined
+      return categoryA.localeCompare(categoryB);
     });
   }
+  
 
   // getCategoryColor(category: string): string {
   //   return this.categoryColor.get(category);

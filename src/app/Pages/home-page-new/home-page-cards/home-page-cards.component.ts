@@ -88,16 +88,19 @@ export class HomePageCardsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('ngOnInit');
     if (this.userAuthService.isLoggedIn) {
       this.userData = this.userAuthService.userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
+      console.log('getAllPacks isLoggedIn');
       this.getAllPacks(true);
     }
     else {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+          console.log('getAllPacks !isLoggedIn');
           this.getAllPacks(false);
           this.userData = userData;
           this.allFavorites = this.userAuthService.favorites;
