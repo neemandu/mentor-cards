@@ -138,18 +138,19 @@ button:focus {
 }
 
 .cards-grid {
-  display: flex;
-  flex-wrap: wrap;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 60px 20px;
-  justify-items: center;
+  display: flex; /* Flexbox layout */
+  flex-wrap: wrap; /* Allow wrapping to multiple rows */
+  gap: 60px 20px; /* Row and column spacing */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
   margin-top: 20px;
   margin-bottom: 100px;
 }
 
+
 .card-container {
   position: relative;
-  height: 300px; /* Fixed height */
+  height: 400px; /* Fixed height */
   display: flex;
   flex-direction: column;
   align-items: center;
