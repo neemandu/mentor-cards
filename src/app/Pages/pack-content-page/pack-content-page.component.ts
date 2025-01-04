@@ -561,7 +561,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         this.multiSelectCard.push(obj);
       }
     }
-    if ((this.cards.length > 1) && flag == false) {
+    
       this.categoryScreen = true;
       this.categoryBaseArray = [];
 
@@ -590,7 +590,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
       console.log(this.categoryBaseArray, 'Category Base Array');
       // Do whatever you need with categoryBaseArray here
-    }
+    
   }
 
   categoryBaseCardSelected(
@@ -712,6 +712,14 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.toggleChosenCardsModal();
   }
 
+  setAspectRatio(event: Event, card: any) {
+    const imgElement = event.target as HTMLImageElement;
+    const naturalWidth = imgElement.naturalWidth;
+    const naturalHeight = imgElement.naturalHeight;
+
+    card.aspectRatio = naturalWidth / naturalHeight;
+  }
+
   shuffle(): void {
     console.log('shuffling');
     this.mixpanelService.track('ActionButtonClicked', {
@@ -788,7 +796,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     if (isNaN(card.rotation)) {
       card.rotation = 0;
     }
-    card.rotation = (card.rotation + 90) % 360; // This will rotate the card 90 degrees clockwise on each click
+    card.rotation += 90;
     console.log('card:', card);
   }
 
@@ -803,8 +811,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         this.openPortraitToLandscapeAlert();
       }
       this.showSelectedCards = true;
+      document.body.style.overflow = 'hidden';
     } else {
       this.showSelectedCards = false;
+      document.body.style.overflow = '';
       if (!this.multipileChecked) this.selectedCards = [];
     }
   }
