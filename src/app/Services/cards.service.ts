@@ -164,16 +164,19 @@ export class CardsService {
         nextToken = packs.nextToken;
       } while (nextToken);
 
+
+      let new_categories = [];
       this.allPacks = items.map((pack) => {
         pack.categories.forEach((category) => {
-          if (!this.allCategories.includes(category))
-            this.allCategories.push(category);
+          if (!new_categories.includes(category))
+          new_categories.push(category);
         });
-        this.allCategories.sort((a, b) => {
+        new_categories.sort((a, b) => {
           return (
             this.categoriesOrder.indexOf(a) - this.categoriesOrder.indexOf(b)
           );
         });
+        this.allCategories = new_categories;
         return new PackContent().deseralize(pack);
       });
       console.log('allPacks ... here', this.allPacks);

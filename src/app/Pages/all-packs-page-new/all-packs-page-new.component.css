@@ -50,6 +50,7 @@
   border-top: none;
   border-left: none;
   border-right: none;
+  align-items: center;
 }
 
 .message-bubble {
@@ -153,32 +154,27 @@
   position: relative;
 }
 
+
+.arrow-right,
 .arrow-left {
-  left: 0;
-  top: 39%;
-  position: absolute;
   background: #3b3b3b;
   height: 40px;
   width: 40px;
   border-radius: 50%;
   color: #a8a8a8;
-
+  cursor: pointer;
+  z-index: 10;
 }
 
 .arrow-right {
-  left: -25px;
-  top: 35%;
-  position: absolute;
-  background: #3b3b3b;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  color: #a8a8a8;
+  right: 0; /* Position to the right */
+}
 
+.arrow-left {
+  left: 0; /* Position to the left */
 }
 .middle {
   width: 90%;
-  overflow: scroll;
   /*will change this to hidden later to deny scolling to user*/
   white-space: nowrap;
 }

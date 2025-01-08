@@ -44,6 +44,10 @@ export class AllPacksPageNewComponent implements OnInit {
   @ViewChild('videoPlayer') videoplayer: ElementRef;
   @ViewChild('filterText') filterTextInput: ElementRef;
   @ViewChildren('autocompleteOptions')
+  canScrollRight: boolean[] = [];
+  canScrollLeft: boolean[] = [];
+  canScrollRightBooks: boolean = false;
+  canScrollLeftBooks: boolean = true;
   autocompleteOptions: QueryList<MatOption>;
   isMobileScreen: boolean;
   placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
@@ -199,6 +203,8 @@ export class AllPacksPageNewComponent implements OnInit {
     this.checkScreenSize();
   }
   private scrollSpeed = 5;
+
+
   // @HostListener('mousemove', ['$event'])
   // onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
   //   if (scrollContainer) {
@@ -333,8 +339,8 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   async handlePacksLanguageChange(lang: string) {
-    window.location.reload();
-    localStorage.removeItem('packsLanguage');
+    //window.location.reload();
+    //localStorage.removeItem('packsLanguage');
     localStorage.setItem('packsLanguage', lang);
     this.filterOption.language = lang;
     localStorage.setItem('packsLanguageLocalStorage', lang);
@@ -431,6 +437,9 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.widgetsContent.forEach((widget, index) => {
+      this.updateScrollState(index, widget.nativeElement);
+    });
     this.router.queryParams.subscribe((params) => {
       let filter = params['filter'];
       if (filter) {
@@ -440,6 +449,36 @@ export class AllPacksPageNewComponent implements OnInit {
         // Rest of your code
       }
     });
+  }
+
+  updateScrollState(index: number, element: HTMLElement): void {
+
+    if (!element) return;
+  
+    const isRTL = getComputedStyle(element).direction === 'rtl';
+    const normalizedScrollLeft = isRTL
+      ? element.scrollWidth - element.clientWidth + element.scrollLeft
+      : element.scrollLeft;
+    const buffer = 1;
+  
+    this.canScrollLeft[index] = normalizedScrollLeft > buffer;
+    this.canScrollRight[index] =
+      normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;
+  }
+
+  updateScrollStateBooks(): void {
+    
+    const element = this.packScrollContainer5.nativeElement;
+  
+    const isRTL = getComputedStyle(element).direction === 'rtl';
+    const normalizedScrollLeft = isRTL
+      ? element.scrollWidth - element.clientWidth + element.scrollLeft
+      : element.scrollLeft;
+    const buffer = 1;
+  
+    this.canScrollLeftBooks = normalizedScrollLeft > buffer;
+    this.canScrollRightBooks =
+      normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;
   }
 
   toggleIsFavSelected() {
@@ -635,7 +674,7 @@ export class AllPacksPageNewComponent implements OnInit {
     this.allCategories = this.cardsService.allCategories.map(
       (category) => category
     );
-    console.log(this.allCategories);
+    console.log('this.allCategories', this.allCategories);
     this.allFavorites = this.userAuthService.favorites;
 
     this.isPageLoaded = true;
@@ -854,27 +893,30 @@ export class AllPacksPageNewComponent implements OnInit {
     return element.scrollWidth > element.clientWidth;
   }
 
-  public canScrollLeft: boolean[] = [];
-  public canScrollRight: boolean[] = [];
-
   // @ViewChildren('widgetsContent', { read: ElementRef }) public widgetsContent: QueryList<ElementRef>;
 
-  public scrollRight(i: number): void {
-    const element = this.widgetsContent.toArray()[i]?.nativeElement;
-    if (element) {
-      element.scrollTo({ left: element.scrollLeft + 500, behavior: 'smooth' });
-      // Update the button visibility after scrolling
-      this.updateScrollButtonswidgets();
-    }
+  scrollRight(index: number): void {
+    const element = this.widgetsContent.toArray()[index].nativeElement;
+    element.scrollBy({ left: 500, behavior: 'smooth' }); // Adjust scroll amount as needed
+    setTimeout(() => this.updateScrollState(index, element), 300); // Re-check state after scrolling
   }
-  
-  public scrollLeft(i: number): void {
-    const element = this.widgetsContent.toArray()[i]?.nativeElement;
-    if (element) {
-      element.scrollTo({ left: element.scrollLeft - 500, behavior: 'smooth' });
-      // Update the button visibility after scrolling
-      this.updateScrollButtonswidgets();
-    }
+
+  scrollLeftBooks(): void {
+    const element = this.packScrollContainer5.nativeElement;
+    element.scrollBy({ left: -500, behavior: 'smooth' }); // Adjust scroll amount as needed
+    setTimeout(() => this.updateScrollStateBooks(), 300); // Re-check state after scrolling
+  }
+
+  scrollRightBooks(): void {
+    const element = this.packScrollContainer5.nativeElement;
+    element.scrollBy({ left: 500, behavior: 'smooth' }); // Adjust scroll amount as needed
+    setTimeout(() => this.updateScrollStateBooks(), 300); // Re-check state after scrolling
+  }
+
+  scrollLeft(index: number): void {
+    const element = this.widgetsContent.toArray()[index].nativeElement;
+    element.scrollBy({ left: -500, behavior: 'smooth' }); // Adjust scroll amount as needed
+    setTimeout(() => this.updateScrollState(index, element), 300); // Re-check state after scrolling
   }
   
   // Update the scroll buttons visibility for each container
@@ -949,6 +991,7 @@ export class AllPacksPageNewComponent implements OnInit {
     2: { canScrollLeft: false, canScrollRight: false },
     3: { canScrollLeft: false, canScrollRight: false },
     4: { canScrollLeft: false, canScrollRight: false },
+    5: { canScrollLeft: false, canScrollRight: false },
   };
 
   scrollLeftWithRef(containerNumber: number) {
