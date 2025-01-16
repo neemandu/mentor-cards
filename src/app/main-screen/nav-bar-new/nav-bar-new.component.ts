@@ -56,11 +56,6 @@ export class NavBarNewComponent implements OnInit {
     },
     { name: 'pages.nav.navbar.faq', route: '/guide-page', placeholder: 'FAQ' },
     {
-      name: 'pages.nav.navbar.additional-services',
-      route: '/services',
-      placeholder: 'Additional Services',
-    },
-    {
       name: 'pages.nav.navbar.about-us',
       route: '/about-page',
       placeholder: 'About Us',

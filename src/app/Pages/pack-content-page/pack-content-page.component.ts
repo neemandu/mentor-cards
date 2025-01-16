@@ -639,7 +639,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   // TODO
-  removeImage(item: { index: number; category: string | null }): void {
+  removeImage(item: { index: number; category: string | null }): void {    
+    console.log('sssssssss');
+    console.log(item.index);
+    console.log(item.category);
     this.multiSelectCard = this.multiSelectCard.filter((card) => {
       if (item.category !== null) {
         return card.index !== item.index || card.category !== item.category;
@@ -647,9 +650,22 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         return card.index !== item.index;
       }
     });
+
+    this.categoryBaseArray = this.categoryBaseArray.map((cat) => {
+      if (cat.categoryName === item.category) {
+        return {
+          ...cat,
+          cards: cat.cards.filter((card) => card.index !== item.index),
+        };
+      }
+      return cat;
+    });
   }
 
   removeCategoryBaseImage(index: number, category: string): void {
+    console.log('sssssssss');
+    console.log(index);
+    console.log(category);
     this.categoryBaseArray = this.categoryBaseArray.map((cat) => {
       if (cat.categoryName === category) {
         return {
