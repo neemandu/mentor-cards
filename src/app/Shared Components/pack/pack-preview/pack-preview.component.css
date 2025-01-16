@@ -260,6 +260,11 @@ mat-icon {
   height: 14rem !important;
 }
 
+::ng-deep .custom-dialog .mat-dialog-container {
+  overflow: hidden !important;
+}
+
+
 .modal-preview {
   width: 448px;
 }

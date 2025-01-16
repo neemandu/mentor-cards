@@ -156,7 +156,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   // Option Array List
   options = [
     
-    { text: 'אין צורך בשאלה, אני אקח את זה מכאן' },
     { text: 'אני רוצה לכתוב שאלה משלי (לחצו כאן כדי לכתוב שאלה משלכם)' },
     {
       text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות',
