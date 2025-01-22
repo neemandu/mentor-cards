@@ -801,9 +801,8 @@
                 <img src="../../../assets/icons/right-90.svg" alt="Rotate"  />
               </button>
             </div>
-      
             <!-- Flipping Card -->
-            <div *ngIf="card.backImgUrl" class="flip-box" [class.flipped]="!flipped">
+            <div *ngIf="card.backImgUrl" class="flip-box" [ngClass]="{ flipped: card.flipped }">
               <!-- Front Side -->
               <div class="card-front">
                 <img

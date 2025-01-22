@@ -582,14 +582,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         // Push the card details into the cards array of the respective category
         categoryObj.cards.push({
           index: element.index,
+          flipped: !this.flipped,
           backImgUrl: element.card.backImgUrl,
           frontImgUrl: element.card.frontImgUrl,
         });
-      });
-
-      console.log(this.categoryBaseArray, 'Category Base Array');
-      // Do whatever you need with categoryBaseArray here
-    
+      });    
   }
 
   categoryBaseCardSelected(
@@ -639,10 +636,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   // TODO
-  removeImage(item: { index: number; category: string | null }): void {    
-    console.log('sssssssss');
-    console.log(item.index);
-    console.log(item.category);
+  removeImage(item: { index: number; category: string | null }): void {
     this.multiSelectCard = this.multiSelectCard.filter((card) => {
       if (item.category !== null) {
         return card.index !== item.index || card.category !== item.category;
@@ -663,9 +657,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   removeCategoryBaseImage(index: number, category: string): void {
-    console.log('sssssssss');
-    console.log(index);
-    console.log(category);
     this.categoryBaseArray = this.categoryBaseArray.map((cat) => {
       if (cat.categoryName === category) {
         return {
@@ -710,6 +701,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
         // Push the card details into the cards array of the respective category
         categoryObj.cards.push({
+          flipped: !this.flipped,
           index: element.index,
           backImgUrl: element.card.backImgUrl,
           frontImgUrl: element.card.frontImgUrl,
@@ -748,6 +740,14 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   flip(): void {
     this.flipped = !this.flipped;
+    console.log('flipped: ' + this.flipped);
+    this.categoryBaseArray.forEach(category => {
+      category.cards.forEach(card => {
+        card.flipped = this.flipped; 
+        this.flipCard = this.flipCard == 'inactive' ? 'active' : 'inactive';
+      })
+    });
+    
     this.selectedCards = [];
     if (this.flipped) {
       this.mixpanelService.track('ActionButtonClicked', {
@@ -836,7 +836,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   imgClick(event, card: Card): void {
     this.flipCard = this.flipCard == 'inactive' ? 'active' : 'inactive';
-    // card.flipped = !card.flipped;
     event.stopPropagation();
     this.cdr.detectChanges(); // manually trigger change detection
   }
