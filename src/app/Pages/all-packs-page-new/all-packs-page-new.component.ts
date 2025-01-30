@@ -51,6 +51,8 @@ export class AllPacksPageNewComponent implements OnInit {
   autocompleteOptions: QueryList<MatOption>;
   isMobileScreen: boolean;
   placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
+  packsAreLoaded: boolean = false;
+  userIsLoggedIn: boolean = false;
 
   Subscription: Subscription = new Subscription();
   filteredOptions = [];
@@ -353,7 +355,7 @@ export class AllPacksPageNewComponent implements OnInit {
       this.setAllCategoryPacksToShow();
       this.setAllFavPacksToShow();
       this.initializeFilteredOptions();
-      this.overlaySpinnerService.changeOverlaySpinner(false);
+      //this.overlaySpinnerService.changeOverlaySpinner(false);
       this.isLoading = false;
     });
     this.cardsService.getAllPacks();
@@ -499,6 +501,12 @@ export class AllPacksPageNewComponent implements OnInit {
     this.getAllPacks(true);
   }
 
+  turnOffSpinner(){
+    if(this.packsAreLoaded && this.userIsLoggedIn){
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+    }
+  }
+
   ngOnInit() {
 
     // const observer = setInterval(() => {
@@ -547,6 +555,7 @@ export class AllPacksPageNewComponent implements OnInit {
     });
 
     if (this.userAuthService.isLoggedIn) {
+      this.userIsLoggedIn = true;   
       this.userData = this.userAuthService.userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
@@ -555,14 +564,17 @@ export class AllPacksPageNewComponent implements OnInit {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+          this.userIsLoggedIn = true;   
           this.getAllPacks(false);
           this.userData = userData;
           this.allFavorites = this.userAuthService.favorites;
-          this.setAllFavPacksToShow();
+          this.setAllFavPacksToShow(); 
+
         })
       );
     }
 
+    setTimeout(() => this.turnOffSpinner(), 1000); // Re-check state after scrolling
     this.Subscription.add(
       this.userAuthService.favoritesChangeEmmiter.subscribe(
         (favorites: number[]) => {
@@ -576,6 +588,7 @@ export class AllPacksPageNewComponent implements OnInit {
       localStorage.getItem('isTrialPacksDialogOpen'),
       'isTrialPacksDialogOpen href'
     );
+
     if (!this.userData || this.userData?.status === 'NOPLAN') {
       if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
         localStorage.setItem('isTrialPacksDialogOpen', 'true');
@@ -637,9 +650,9 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
-        this.overlaySpinnerService.changeOverlaySpinner(false);
+        //this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
-
+        this.packsAreLoaded = true;   
         // this.sortPacks();
       } else {
         this.cardsService.allPacksReadyEmmiter.subscribe(() => {
@@ -647,8 +660,9 @@ export class AllPacksPageNewComponent implements OnInit {
           this.setAllCategoryPacksToShow();
           this.setAllFavPacksToShow();
           this.initializeFilteredOptions();
-          this.overlaySpinnerService.changeOverlaySpinner(false);
+          //this.overlaySpinnerService.changeOverlaySpinner(false);
           this.isLoading = false;
+          this.packsAreLoaded = true; 
         });
         this.cardsService.getAllPacks();
       }
@@ -659,8 +673,9 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
-        this.overlaySpinnerService.changeOverlaySpinner(false);
+        //this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
+        this.packsAreLoaded = true;   
       });
       console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();

@@ -49,6 +49,15 @@ export class PackPreviewComponent implements OnInit {
     private packDataService: PackDataService
   ) {}
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      const dialogElement = document.querySelector('.mat-dialog-container');
+      if (dialogElement) {
+        dialogElement.addEventListener('mouseleave', this.closeDialog);
+      }
+    });
+  }
+
   ngOnInit(): void {
     console.log('pack preview', this.data.pack);
     let sub = this.userAuthService.userDataEmmiter.subscribe(() => {
