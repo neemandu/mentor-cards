@@ -728,14 +728,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   shuffle(): void {
-    console.log('shuffling');
     this.mixpanelService.track('ActionButtonClicked', {
       Action: 'Shuffle',
       'Pack id': this.id,
       'Pack name': this.pack?.name,
     });
     this.selectedCards = [];
-    this.cardImages.sort(() => Math.random() - 0.5);
+    this.pack.cards.forEach(category => {
+      category.cardsImages.sort(() => Math.random() - 0.5);
+    })
   }
 
   flip(): void {

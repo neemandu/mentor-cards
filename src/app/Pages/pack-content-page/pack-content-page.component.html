@@ -787,8 +787,13 @@
       </p>
 
       <!-- Cards Grid -->
-      <div class="cards-grid">
-        <div *ngFor="let card of category.cards" class="card-container" 
+      <div class="cards-grid" 
+      [transition-group]="'flip-list'">
+        <div *ngFor="let card of category.cards" class="card-container"  transition-group-item
+        [ngClass]="{
+          'd-flex flex-column align-items-center shuffle': true,
+          'shuffle-item': !showEditPack
+        }"
         [ngStyle]="{ 'aspect-ratio': card.aspectRatio || '2 / 3' }">
           <div class="card-wrapper">
             <!-- Buttons Row -->

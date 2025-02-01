@@ -509,6 +509,7 @@ export class AllPacksPageNewComponent implements OnInit {
 
   ngOnInit() {
 
+    this.overlaySpinnerService.changeOverlaySpinner(true, "userData");
     // const observer = setInterval(() => {
     //   for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
     //     // Check if the container is available
@@ -557,6 +558,7 @@ export class AllPacksPageNewComponent implements OnInit {
     if (this.userAuthService.isLoggedIn) {
       this.userIsLoggedIn = true;   
       this.userData = this.userAuthService.userData;
+      this.overlaySpinnerService.changeOverlaySpinner(false, "userData");
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
       this.getAllPacks(true);
@@ -564,9 +566,11 @@ export class AllPacksPageNewComponent implements OnInit {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-          this.userIsLoggedIn = true;   
+          this.userIsLoggedIn = true;  
+          this.overlaySpinnerService.changeOverlaySpinner(false, "userData"); 
           this.getAllPacks(false);
           this.userData = userData;
+
           this.allFavorites = this.userAuthService.favorites;
           this.setAllFavPacksToShow(); 
 
@@ -650,7 +654,7 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
-        //this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
         this.packsAreLoaded = true;   
         // this.sortPacks();
@@ -660,7 +664,7 @@ export class AllPacksPageNewComponent implements OnInit {
           this.setAllCategoryPacksToShow();
           this.setAllFavPacksToShow();
           this.initializeFilteredOptions();
-          //this.overlaySpinnerService.changeOverlaySpinner(false);
+          this.overlaySpinnerService.changeOverlaySpinner(false);
           this.isLoading = false;
           this.packsAreLoaded = true; 
         });
