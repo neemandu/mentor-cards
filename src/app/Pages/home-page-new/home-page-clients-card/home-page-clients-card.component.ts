@@ -22,7 +22,7 @@ export class HomePageClientsCardComponent implements OnInit {
     { name: 'Client 17', image: '/assets/New/home-page/clients/2.png' },
     { name: 'Client 18', image: '/assets/New/home-page/clients/4.png' },
     { name: 'Client 20', image: '/assets/New/home-page/clients/9.png' },
-    { name: 'Client 21', image: '/assets/New/home-page/clients/005.jpeg' },
+    { name: 'Client 21', image: '/assets/New/home-page/clients/8.png' },
     { name: 'Client 22', image: '/assets/New/home-page/clients/11.png' },
     { name: 'Client 23', image: '/assets/New/home-page/clients/12.png' },
     { name: 'Client 002', image: '/assets/New/home-page/clients/002.jpg' },
