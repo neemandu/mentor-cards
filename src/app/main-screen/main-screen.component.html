@@ -14,4 +14,9 @@
   </div>
 </div>
 
+<div class="overlay" *ngIf="spinnersState.get('packs')">
+  <div class="spinner-wrapper">
+    <app-overlay-spinner></app-overlay-spinner>
+  </div>
+</div>
 <router-outlet></router-outlet>

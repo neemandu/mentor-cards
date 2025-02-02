@@ -648,8 +648,10 @@ export class AllPacksPageNewComponent implements OnInit {
    */
   getAllPacks(useCache: bool): void {
     console.log('useCache: ' + useCache);
+    this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
     if (useCache) {
       if (this.cardsService.allPacks) {
+        this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
@@ -657,9 +659,11 @@ export class AllPacksPageNewComponent implements OnInit {
         this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
         this.packsAreLoaded = true;   
+        this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
         // this.sortPacks();
       } else {
         this.cardsService.allPacksReadyEmmiter.subscribe(() => {
+          this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
           this.setAllPacksData();
           this.setAllCategoryPacksToShow();
           this.setAllFavPacksToShow();
@@ -667,11 +671,14 @@ export class AllPacksPageNewComponent implements OnInit {
           this.overlaySpinnerService.changeOverlaySpinner(false);
           this.isLoading = false;
           this.packsAreLoaded = true; 
+          this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
         });
         this.cardsService.getAllPacks();
       }
     } else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
+        
+        this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
         // console.log('getAllPacks finished!');
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
@@ -679,6 +686,7 @@ export class AllPacksPageNewComponent implements OnInit {
         this.initializeFilteredOptions();
         //this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
+        this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
         this.packsAreLoaded = true;   
       });
       console.log('cardsService.getAllPacks');
