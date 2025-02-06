@@ -188,7 +188,7 @@ if(!refId){
         console.log("Adding a new user...");
         await saveUser(userToInsert);
 
-        await addWelcomeEmailToMessageQueue(email, phone, fullName);
+        //await addWelcomeEmailToMessageQueue(email, phone, fullName);
     
         console.log("Done adding a new user...");
 
@@ -203,19 +203,19 @@ if(!refId){
                     user.externalPacksSubscriptions[i].subscriptionPlan);
             }
             console.log(endDate);
-            user.externalPacksSubscriptions[i].nextBillingDate = endDate;
+            user.externalPacksSubscriptions[i].nextBillingDate = endDate.toISOString();
         }
     }
     var subEndDate = null;
     if(user.subscription){
         if(!user.subscription.cancellationDate){
-            console.log('sub is canceled');
+            console.log('sub is not canceled');
             subEndDate = getBillingEndDateByUser(user.subscription.startDate,
                 user.subscription.subscriptionPlan);
-            user.subscription.nextBillingDate = subEndDate;
+            user.subscription.nextBillingDate = subEndDate.toISOString();
         }
         else{
-            console.log('sub is not canceled');
+            console.log('sub is canceled');
             user.subscription.nextBillingDate = null;
         }
     }

@@ -1,6 +1,7 @@
 type Mutation {
   makeCommonLink(input: CreateCommonLinkInput! ): String @function(name: "CreateCommonLink-${env}")
   createUser(input: CreateUserInput!): User @function(name: "CreateUser-${env}")
+  updateUser(input: UpdateUserInput!): Boolean @function(name: "UpdateUser-${env}")
   addCardsPack(input: addCardsPackInput!): Boolean @function(name: "AddCardsPack-${env}")
   changeCardsPack(input: changeCardsPackInput!): Boolean @function(name: "ChangeCardsPack-${env}")
   updateGroupUsersList(input: groupUsersListInput!): Boolean @function(name: "UpdateGroupUsersList-${env}")
@@ -15,6 +16,14 @@ type Mutation {
   IncrementPackEntries(input: cardPackIdInput!): Boolean @function(name: "IncrementPackEntries-${env}")
   getAffiliateData(input: userInput!): [User] @function(name: "GetAffiliateData-${env}")  
   createInvoice(input: InvoicesInput!): Boolean @function(name: "CreateInvoice-${env}")  
+  askTheAI(input: AiInput!): AiAnswer @function(name: "AskTheAI-${env}")  
+  getInvoicesFromS3(input: userInput!): [S3Item!]! @function(name: "GetInvoicesFromS3-${env}")  
+  GetAllAffiliatesData(input: userInput!): [Affiliate] @function(name: "GetAllAffiliatesData-${env}")  
+}
+
+type S3Item {
+    key: String!
+    data: String!
 }
 
 type CommonLink
@@ -77,6 +86,14 @@ type User
   myAffiliate: Affiliate @connection
   payments: [Payment]
   profession: String
+  AithreadId: String
+  AiConversations: [AiConversation]
+}
+
+type AiConversation{
+  question: String
+  answer: String
+  date: AWSDateTime
 }
 
 type Payment
@@ -256,7 +273,7 @@ type CardsPack
   description: String
   tags: [String]
   categories: [String]
-  cards(link: String): [Cards] @function(name: "GetCardsImages-${env}")
+  cards(link: String): [Category] @function(name: "GetCardsImages-${env}")
   cardsPreview: [String]
   groupsIds: [String]
   guideBook: [GuideBookElement]
@@ -277,11 +294,22 @@ type CardsPack
   language: String
   isActive: Boolean
   guidebookUrl: String
+  ownerName: String
+  numberOfCards: Int @function(name: "GetNumberOfCardsInPack-${env}") 
+  isHardCopyAvailable: Boolean
+  videoUrl: String
+  isReadingGuidebookAMust: Boolean
 }
 
 type UserUsage {
   user: String
   entries: Int
+}
+
+type Category {
+  categoryName: String
+  categoryStepNumber: Int
+  cardsImages: [Cards]
 }
 
 type Cards {
@@ -317,6 +345,7 @@ type ContactUsModel
   name: String
   content: String
   email: String
+  phone: String
 }
 
 type Invoices @model @auth(rules: [{ allow: groups, groups: ["Admins"] }]) {
@@ -364,6 +393,21 @@ input updatePaymentProgramInput {
   fullName: String
 }
 
+input AiInput {
+  question: String
+}
+
+type AiAnswer {
+  generalAnswer: String
+  recommendedPacks: [RecommendedPack]
+}
+
+type RecommendedPack {
+  packId: Int
+  reason: String
+  guide: String
+}
+
 input InvoicesInput {
   id: String
   email: String
@@ -399,6 +443,22 @@ input CreateUserInput {
   phone: String
   fullName: String
   affiliateId: String
+}
+
+input UpdateUserInput {
+  id: String!
+  username: String!
+  phone: String
+  status: String
+  numberOfPacksSubstitutions: Int
+  numberOfPlansSubstitutions: Int
+  groupId: String
+  numberOfUsedPacks: Int
+  groupRole: String
+  cancellationDate: AWSDateTime
+  providerTransactionId: String
+  fullName: String
+  profession: String
 }
 
 input CreateCommonLinkInput {

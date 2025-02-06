@@ -1,3 +1,18 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["morningApiKey","morningApiSecret"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
+
 /* Amplify Params - DO NOT EDIT
         API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
         API_CARDSPACKS_INVOICESTABLE_ARN
@@ -15,14 +30,6 @@ Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 	API_CARDSPACKS_USERTABLE_NAME
 	ENV
 	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
-	API_CARDSPACKS_INVOICESTABLE_ARN
-	API_CARDSPACKS_INVOICESTABLE_NAME
-	API_CARDSPACKS_USERTABLE_ARN
-	API_CARDSPACKS_USERTABLE_NAME
-	ENV
-	REGION
 Amplify Params - DO NOT EDIT */
 const { env } = require("process");
 var AWS = require("aws-sdk");
@@ -31,6 +38,42 @@ const s3 = new AWS.S3();
 const https = require('https'); 
 const pdf = require('html-pdf');
 
+
+async function getParam(key){
+    var { Parameters } = await (new AWS.SSM())
+    .getParameters({
+      Names: [key].map(secretName => process.env[secretName]),
+      WithDecryption: true,
+    })
+    .promise(); 
+  
+    return Parameters[0].Value; 
+  }
+
+  async function getMorningParam(){
+    var api_key = await getParam("morningApiKey");
+    var secret = await getParam("morningApiSecret");
+
+    const data = JSON.stringify({
+        id: api_key,
+        secret: secret
+      });
+  
+    
+    const options = {
+        hostname: 'api.greeninvoice.co.il',
+        port: 443,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+  
+    var response = await post(options, '/api/v1/account/token', data);
+    console.log("getMorningParam: " + response);
+    return response["token"];
+
+  }
 
 const post = (defaultOptions, path, payload) => new Promise((resolve, reject) => {
     console.log('post payload: ' + payload);
@@ -165,7 +208,7 @@ async function getUserByPayPalTxId(transaction_id){
         console.error("Unable to read users. Error JSON:", JSON.stringify(err, null, 2));
     });
     if(!currUser){
-        throw Error ('no such user with paypal transaction - ' + transaction_id);
+        //throw Error ('no such user with paypal transaction - ' + transaction_id);
     }
     return currUser;
 }
@@ -179,7 +222,7 @@ async function addToUnsubscribersList(email) {
         "lists_ToSubscribe": [927539]
     });
 
-    var bearerToken = await getParam();
+    var bearerToken = await getParam("smooveApiKey");
     
   const options = {
     hostname: 'rest.smoove.io',
@@ -198,6 +241,42 @@ async function addToUnsubscribersList(email) {
   console.log(msg);
   console.log("Send Email: sending POST End");
 }
+
+async function updateEmailList(email, amount, subDescription, invoiceRunningId, s3Url) {
+    const data = JSON.stringify({
+        "email": email,
+        "customFields": {
+            "i2": "PLAN",
+            "i4": subDescription.includes('חודש') ? 1 : (subDescription.includes('שנתי') ? 12 : -1),
+            "i6": parseInt(invoiceRunningId),
+            "i7": `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`,
+            "i8": amount,
+            "i9": s3Url,
+            "i10": subDescription,
+            "i11": -1
+        },
+        "lists_ToSubscribe": [927198]
+    });
+  
+    var bearerToken = await getParam("smooveApiKey");
+    
+    const options = {
+        hostname: 'rest.smoove.io',
+        port: 443,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${bearerToken}`
+        }
+    };
+  
+    var msg = await post(options, '/v1/Contacts?updateIfExists=true&restoreIfUnsubscribed=true', data);
+    console.log('msg');
+    console.log(msg);
+    console.log("Send Email: sending POST End");
+  }
+  
 
 async function createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId){
     var docClient = new AWS.DynamoDB.DocumentClient();
@@ -256,6 +335,71 @@ function getinvoiceRunningId() {
         req.end(); // Ensure the request is properly ended
     });
   }
+
+async function updateMorning(email, amount, description, fullName) {
+
+
+    var bearerToken = await getMorningParam();
+
+
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  
+    const data = JSON.stringify({
+        "description": description,
+        "type": amount,
+        "date": formattedDate,
+        "lang": "he",
+        "currency": "ILS",
+        "vatType": 0,
+        "signed": true,
+        "attachment": true,
+        "maxPayments": 1,
+        "client": {
+          "name": fullName,
+          "emails": [email],
+          "add": true,
+          "self": false
+        },
+        "income": [
+        {
+            "description": description,
+            "quantity": 1,
+            "price": amount,
+            "currency": "ILS",
+            "currencyRate": 1,
+            "vatType": 1
+        }
+        ],
+        "payment": [
+          {
+            "date": formattedDate,
+            "type": 5,
+            "price": amount,
+            "currency": "ILS",
+            "currencyRate": 1
+          }
+        ]
+      });
+  
+    
+    const options = {
+        hostname: 'api.greeninvoice.co.il',
+        port: 443,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${bearerToken}`
+        }
+    };
+  
+    var msg = await post(options, '/api/v1/documents', data);
+    console.log('updateMorning sending POST start');
+    console.log(msg);
+    console.log("updateMorning: sending POST End");
+
+}
 
 exports.handler = async (event) => {
     try{
@@ -354,6 +498,8 @@ exports.handler = async (event) => {
                             name = user.fullName;
                         }
                         await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
+                        await updateEmailList(user.email, amount, extraDesc, invoiceRunningId, "");
+                        await updateMorning(user.email, amount, extraDesc, user.fullName);
                     }
                 }
             }
@@ -373,11 +519,11 @@ exports.handler = async (event) => {
         await ses
         .sendEmail({
           Destination: {
-            ToAddresses: ["neemandu@gmail.com"],
+            ToAddresses: ["support@mentor-cards.com"],
           },
           Source: "support@mentor-cards.com",
           Message: {
-            Subject: { Data: 'Mentor-Cards: ERROR' },
+            Subject: { Data: 'Mentor-Cards: ERROR  (PayPalWebhookFunc)' },
             Body: {
               Text: { Data: `error: ${ex}` },
             },

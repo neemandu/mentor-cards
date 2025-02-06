@@ -52,17 +52,9 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "AffiliateBalanceHandler": {
+    "AskTheAI": {
       "build": true,
       "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        },
         {
           "attributes": [
             "GraphQLAPIIdOutput"
@@ -88,17 +80,9 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "CreateInvoice": {
+    "GetAffiliateData": {
       "build": true,
       "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "receiptsAPI"
-        },
         {
           "attributes": [
             "GraphQLAPIIdOutput"
@@ -110,7 +94,7 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
-    "GetAffiliateData": {
+    "GetAllAffiliatesData": {
       "build": true,
       "dependsOn": [
         {
@@ -135,7 +119,26 @@
         }
       ]
     },
+    "GetInvoicesFromS3": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "Invoices"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "GetNextBillingDate": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "GetNumberOfCardsInPack": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -164,35 +167,6 @@
           "resourceName": "cardspacks"
         }
       ]
-    },
-    "InvoiceHandler": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "ApiName",
-            "ApiId"
-          ],
-          "category": "api",
-          "resourceName": "receiptsAPI"
-        },
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "Invoices"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "cardspacks"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     },
     "NewAffiliateHandler": {
       "build": true,
@@ -226,6 +200,20 @@
         }
       ]
     },
+    "UpdateUser": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "cardspacks"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "mentorcards56dbf153PreSignup": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -233,14 +221,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_auth_mentorcards56dbf153_googleClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "mentorcards56dbf153"
-        }
-      ]
-    },
     "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
       "usedBy": [
         {
@@ -313,6 +293,30 @@
         }
       ]
     },
+    "AMPLIFY_function_AskTheAI_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AskTheAI"
+        }
+      ]
+    },
+    "AMPLIFY_function_AskTheAI_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AskTheAI"
+        }
+      ]
+    },
+    "AMPLIFY_function_AskTheAI_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AskTheAI"
+        }
+      ]
+    },
     "AMPLIFY_function_ChangeCardsPack_deploymentBucketName": {
       "usedBy": [
         {
@@ -358,30 +362,6 @@
         {
           "category": "function",
           "resourceName": "CreateCommonLink"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_receiptsUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateInvoice_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateInvoice"
         }
       ]
     },
@@ -433,6 +413,22 @@
         }
       ]
     },
+    "AMPLIFY_function_GetAllAffiliatesData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAllAffiliatesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetAllAffiliatesData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAllAffiliatesData"
+        }
+      ]
+    },
     "AMPLIFY_function_GetCardsImages_deploymentBucketName": {
       "usedBy": [
         {
@@ -481,6 +477,22 @@
         }
       ]
     },
+    "AMPLIFY_function_GetInvoicesFromS3_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetInvoicesFromS3"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetInvoicesFromS3_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetInvoicesFromS3"
+        }
+      ]
+    },
     "AMPLIFY_function_GetNextBillingDate_deploymentBucketName": {
       "usedBy": [
         {
@@ -510,6 +522,22 @@
         {
           "category": "function",
           "resourceName": "GetNextReceiptId"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNumberOfCardsInPack_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNumberOfCardsInPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNumberOfCardsInPack_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNumberOfCardsInPack"
         }
       ]
     },
@@ -574,38 +602,6 @@
         {
           "category": "function",
           "resourceName": "IncrementPackEntries"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_receiptsUrl": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
-        }
-      ]
-    },
-    "AMPLIFY_function_InvoiceHandler_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "InvoiceHandler"
         }
       ]
     },
@@ -705,7 +701,7 @@
         }
       ]
     },
-    "AMPLIFY_function_PayPalWebhookFunc_receiptsUrl": {
+    "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
       "usedBy": [
         {
           "category": "function",
@@ -713,7 +709,7 @@
         }
       ]
     },
-    "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
+    "AMPLIFY_function_PayPalWebhookFunc_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",
@@ -782,6 +778,22 @@
         {
           "category": "function",
           "resourceName": "UpdateSelectedCardPacks"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_UpdateUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "UpdateUser"
         }
       ]
     },

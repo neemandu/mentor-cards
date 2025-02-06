@@ -20,7 +20,6 @@ export type AmplifyDependentResourcesAttributes = {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "CreatedSNSRole": "string",
-      "GoogleWebClient": "string",
       "HostedUIDomain": "string",
       "OAuthMetadata": "string",
       "UserPoolArn": "string",
@@ -50,7 +49,7 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "AffiliateBalanceHandler": {
+    "AskTheAI": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -78,13 +77,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "CreateInvoice": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "CreateUser": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -100,6 +92,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "GetAffiliateData": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetAllAffiliatesData": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -127,6 +126,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "GetInvoicesFromS3": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "GetNextBillingDate": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -135,6 +141,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "GetNextReceiptId": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "GetNumberOfCardsInPack": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -163,13 +176,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "IncrementPackEntries": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "InvoiceHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -240,6 +246,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "UpdateSelectedCardPacks": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "UpdateUser": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
