@@ -148,12 +148,23 @@ export class AllPacksPageComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    this.router.queryParams.subscribe((params) => {
+      let filter = params['filter'];
+      if (filter) {
+        // console.log('filter:..............', filter);
+        this.selectOption(filter);
+        // Rest of your code
+      }
+    });
+  }
   ngOnInit() {
     this.router.queryParams.subscribe((params) => {
       const refId = params['ref'];
+
       if (refId) {
         localStorage.setItem('refId', refId);
-        console.log('refId ID stored:', refId);
+        // console.log('refId ID stored:', refId);
       }
     });
 
@@ -162,13 +173,13 @@ export class AllPacksPageComponent implements OnInit {
       'Page Title': 'all-packs-page',
     });
 
-    if(this.userAuthService.isLoggedIn){
+    if (this.userAuthService.isLoggedIn) {
       this.userData = this.userAuthService.userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
       this.getAllPacks(true);
     }
-    else{
+    else {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
@@ -188,12 +199,12 @@ export class AllPacksPageComponent implements OnInit {
         }
       )
     );
-    console.log('allpacks page sub 2');
-    console.log(localStorage.getItem('isTrialPacksDialogOpen'),'isTrialPacksDialogOpen href');
+    // console.log('allpacks page sub 2');
+    // console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'isTrialPacksDialogOpen href');
     if (!this.userData || this.userData.status === 'NOPLAN') {
       if (localStorage.getItem('isTrialPacksDialogOpen') === 'false') {
         localStorage.setItem('isTrialPacksDialogOpen', 'true');
-        console.log(localStorage.getItem('isTrialPacksDialogOpen'),'after set isTrialPacksDialogOpen href');
+        // console.log(localStorage.getItem('isTrialPacksDialogOpen'), 'after set isTrialPacksDialogOpen href');
         this.openDialog();
       }
     }
@@ -225,8 +236,8 @@ export class AllPacksPageComponent implements OnInit {
    * Retrive all packs
    */
   getAllPacks(useCache: bool): void {
-    console.log('useCache: '  + useCache);
-    if(useCache){
+    // console.log('useCache: ' + useCache);
+    if (useCache) {
       if (this.cardsService.allPacks) {
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
@@ -245,19 +256,19 @@ export class AllPacksPageComponent implements OnInit {
         this.cardsService.getAllPacks();
       }
     }
-    else{
+    else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
-        console.log('getAllPacks finished!');
+        // console.log('getAllPacks finished!');
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
       });
-      console.log('cardsService.getAllPacks');
+      // console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
     }
-    
+
   }
 
   setAllPacksData(): void {
@@ -265,7 +276,6 @@ export class AllPacksPageComponent implements OnInit {
     this.allCategories = this.cardsService.allCategories.map(
       (category) => category
     );
-    console.log(this.allCategories);
     this.allFavorites = this.userAuthService.favorites;
 
     this.isPageLoaded = true;
@@ -341,11 +351,11 @@ export class AllPacksPageComponent implements OnInit {
     }
     return this.cardsService.allPacks
       ? this.cardsService.allPacks
-          .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
-          .map((pack) => pack.name)
+        .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
+        .map((pack) => pack.name)
       : this.allPacks
-          .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
-          .map((pack) => pack.name);
+        .filter((pack) => this.allFavorites?.includes(parseInt(pack.id)))
+        .map((pack) => pack.name);
     // return this.cardsService.allPacks ? (this.cardsService.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name) : (this.allPacks.filter(pack => this.allFavorites.includes(pack.id))).map(pack => pack.name);
   }
 
@@ -426,19 +436,19 @@ export class AllPacksPageComponent implements OnInit {
 
   openDialog(): void {
     let dialogWidth = '40vw'; // default width
-  
+
     // Check if the screen size is small (mobile)
     if (this.breakpointObserver.isMatched(Breakpoints.XSmall)) {
       dialogWidth = '80vw'; // width for mobile screens
     }
-  
+
     const dialogRef = this.dialog.open(UserLoginDialogComponent, {
       width: dialogWidth,
       disableClose: true,
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
     });
   }
 

@@ -1,0 +1,17 @@
+.client-button {
+  text-decoration: none;
+  background-image: linear-gradient(90deg, #e67c73, #7986cb);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0% 100%;
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important
+  }
+
+}

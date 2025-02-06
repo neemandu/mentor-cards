@@ -1,0 +1,41 @@
+<div *ngIf="isOpen" class="fixed inset-0 mt-36 z-999 flex justify-center">
+  <div class="bg-[#FFF2F0] rounded-lg shadow-lg p-6 w-full max-w-md mx-4">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold">הקלידו את השאלה שלכם</h2>
+      <button (click)="onClose()" class="text-gray-500 hover:text-gray-700">
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div class="bg-white rounded-lg p-4 mb-4">
+      <p class="mb-2">
+        בחר קלף המחווה עבורך רגע בחיים שהיית רוצה לחזור אליו. מה התרגשה המיוחדת
+        שחווית ברגע הזה? מה למדת ממנו?
+      </p>
+      <p class="mb-2">
+        פתיחת מפגש: התבונן בתמונות המסגע ובחר את ׳מזג האוויר׳ אותו אתה מגיע
+        למפגש היום.
+      </p>
+      <p>סיום מפגש: בחר את ׳מזג האוויר׳ איתו אתה יוצא מהפגישה שלנו.</p>
+    </div>
+    <div class="flex justify-between items-center">
+      <button
+        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+      >
+        אני רוצה לכתוב שאלה משלי (לחצו כאן כדי לכתוב שאלה משלכם)
+      </button>
+    </div>
+  </div>
+</div>

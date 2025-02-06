@@ -80,8 +80,13 @@ export class AuthService {
       console.log("file: auth.service.ts ~ line 78 ~ socialSignIn ~ cred", cred)
       return Auth.currentAuthenticatedUser();
     }).then(user => {
-      // If success, the user object you passed in Auth.federatedSignIn
-      console.log("file: auth.service.ts ~ line 82 ~ socialSignIn ~ user", user)
+        // Fetch the user attributes
+      const { attributes } = user;
+      const firstName = attributes.given_name;
+      const lastName = attributes.family_name;
+
+      console.log("First Name:", firstName);
+      console.log("Last Name:", lastName);
     }).catch(e => {
       console.log("file: auth.service.ts ~ line 85 ~ socialSignIn ~ e", e)
     });

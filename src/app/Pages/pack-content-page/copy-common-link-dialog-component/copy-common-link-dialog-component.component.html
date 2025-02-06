@@ -10,12 +10,11 @@
         <mat-icon>content_copy</mat-icon><span>העתק </span>
       </button>
       <button mat-menu-item (click)="shareViaWhatsApp(data.linkUrl)">
-        
-        <img
-                    src="../../../assets/icons/whatsapp.png"
-                    alt="Whatsapp"
-                    style="height: 2vh; width: auto"
-                  /><span>WhatsApp </span>
+        <!-- <mat-icon>whatsapp</mat-icon><span>whatsapp</span> -->
+         <div style="display: flex; gap: 20px;">
+          <img src="../../../assets/icons/whatsapp.png" alt="Whatsapp" style="height: 4vh; width: auto; margin-top: 0.7rem;"/>
+          <span>וואטסאפ</span>
+         </div>
       </button>
       <button mat-menu-item (click)="shareViaEmail(data.linkUrl)">
         <mat-icon>email</mat-icon><span>אימייל </span>

@@ -1,4 +1,4 @@
-import { About } from "../API.service";
+import { About, Withdraw } from "../API.service";
 import { Subscription } from "./subscriptionPlans";
 
 export class UserData {
@@ -51,6 +51,7 @@ export class Affiliate{
     dateJoined: Date
     status: string 
     balance: number
+    withdraws: Withdraw[]
 
     constructor(input) {
         Object.assign(this, input);

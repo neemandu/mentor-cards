@@ -25,7 +25,7 @@ export class PackComponent implements OnInit, OnDestroy {
   Subscription: Subscription = new Subscription();
 
   @Input() packInfo: PackInfo;
-  @Input() orgName: string;
+  @Input() orgNasme: string;
   @Output() loaded: EventEmitter<any> = new EventEmitter<any>();
   // @Output() packChange: EventEmitter<any> = new EventEmitter<any>();
   fav: boolean = false;

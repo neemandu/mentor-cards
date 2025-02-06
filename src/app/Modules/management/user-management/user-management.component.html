@@ -1,0 +1,100 @@
+<div style="display: flex">
+    <input
+      style="
+        width: 10vw;
+        margin-top: 5vh;
+        margin-bottom: 2vh;
+        border: 1px solid #9a9696;
+        margin-inline: 3vw;
+        padding: 1vh;
+        border-radius: 5px;
+        text-align: right;
+      "
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="לחפש"
+    />
+</div>
+
+  <mat-table
+  [dataSource]="dataSource"
+  matSort
+  style="margin-inline: 3vw; margin-top: 2vh"
+>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef class="small-cell">
+      <div style="font-size: 1.1rem; text-align: center">
+        פעולות
+      </div></mat-header-cell
+    >
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+      class="small-cell"
+    >
+      <div class="flex">
+
+        <button
+         (click)="editItem(element.id)"
+          mat-button
+          style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+          matTooltip="ערוך"
+          [matTooltipClass]="{ 'tooltip-class': true }"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      <div style="font-size: 1.1rem; text-align: center">userName</div>
+    </mat-header-cell>
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >
+    {{element.username}}
+
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem; text-align: center">אימייל ליצירת קשר</div>
+    </mat-header-cell>
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      *matCellDef="let element"
+    >
+    {{element.email}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="phoneNumber">
+    <mat-header-cell *matHeaderCellDef>
+      <div style="font-size: 1.1rem; text-align: center">מספר טלפון</div>
+    </mat-header-cell>
+    <mat-cell
+      style="font-size: 0.9rem; text-align: center"
+      style="text-align: end"
+      *matCellDef="let element"
+    >
+    {{element.phone}}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumn"></mat-row>
+</mat-table>
+
+
+<div style="display: flex; justify-content: center">
+    <mat-paginator
+      dir="ltr"
+    [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+ </div>

@@ -1,0 +1,234 @@
+<div class="bg-[#f6d0cc] flex justify-center">
+  <div class="sm:grid sm:grid-cols-10 gap-4 w-[60vw] py-8">
+    <div class="col-span-4">
+      <img src="/assets/New/home-page/footer-logo.svg" alt="footer-3" />
+    </div>
+    <div class="col-span-2 sm:block hidden">
+      <ul class="text-right space-y-4">
+        <li>
+          <button (click)="navigateTo('/all-packs-page')">
+            {{
+              "pages.home-page.sections.footer.content.links.0.items.0.text"
+                | translate
+            }}
+          </button>
+        </li>
+        <li>
+          <button (click)="openNewTab()">
+            {{
+              "pages.home-page.sections.footer.content.links.0.items.1.text"
+                | translate
+            }}
+          </button>
+        </li>
+        <li>
+          <button (click)="navigateTo('/price-page')">
+            {{
+              "pages.home-page.sections.footer.content.links.0.items.2.text"
+                | translate
+            }} 
+          </button>
+        </li>
+        <li>
+          <button (click)="navigateTo('/guide-page')">
+            {{
+              "pages.home-page.sections.footer.content.links.0.items.3.text"
+                | translate
+            }} 
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="col-span-2 sm:block hidden">
+      <ul class="text-right space-y-4">
+        <li>
+          <button (click)="navigateTo('/services')">
+            {{
+              "pages.home-page.sections.footer.content.links.1.items.0.text"
+                | translate
+            }}
+          </button>
+        </li>
+        <li>
+          <button (click)="navigateTo('/about-page')">
+            {{
+              "pages.home-page.sections.footer.content.links.1.items.1.text"
+                | translate
+            }}
+          </button>
+        </li>
+        <li>
+          <button (click)="navigateTo('/affiliates-page')">
+            {{
+              "pages.home-page.sections.footer.content.links.1.items.2.text"
+                | translate
+            }}
+          </button>
+        </li>
+        <li>
+          <button (click)="navigateTo('/home-page#contact-us-section')">
+            {{
+              "pages.home-page.sections.footer.content.links.1.items.3.text"
+                | translate
+            }}
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="flex justify-between sm:hidden mt-8">
+      <div>
+        <ul class="text-center space-y-4">
+          <li (click)="openSiteRulesModal()">
+            {{
+              "pages.home-page.sections.footer.content.mobile-links.0.text"
+                | translate
+            }}
+          </li>
+          <li>
+            <button (click)="navigateTo('/all-packs-page')">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.1.text"
+                  | translate
+              }}
+            </button>
+          </li>
+          <li>
+            <button (click)="openNewTab()">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.2.text"
+                  | translate
+              }}
+            </button>
+          </li>
+          <li>
+            <button (click)="navigateTo('/price-page')">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.3.text"
+                  | translate
+              }}
+            </button>
+          </li>
+          <li>
+            <button (click)="navigateTo('/guide-page')">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.4.text"
+                  | translate
+              }}
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <ul class="text-center space-y-4">
+          <li (click)="navigateTo('/services')">
+            {{
+              "pages.home-page.sections.footer.content.mobile-links.5.text"
+                | translate
+            }}
+          </li>
+          <li>
+            <button (click)="navigateTo('/about-page')">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.6.text"
+                  | translate
+              }}
+            </button>
+          </li>
+          <li>
+            <button (click)="navigateTo('/affiliates-page')">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.7.text"
+                  | translate
+              }}
+            </button>
+          </li>
+          <li>
+            <button (click)="navigateTo('/about-page')">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.8.text"
+                  | translate
+              }}
+            </button>
+          </li>
+          <li>
+            <button (click)="navigateTo('/home-page#contact-us-section')">
+              {{
+                "pages.home-page.sections.footer.content.mobile-links.9.text"
+                  | translate
+              }}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-span-2 space-y-4">
+      <div class="hidden sm:flex justify-start gap-4">
+        <button >
+          {{
+            "pages.home-page.sections.footer.content.mobile-links.0.text"
+              | translate
+          }}
+        </button>
+      </div>
+      <div class="hidden sm:flex justify-start gap-4">
+        <button (click)="navigateTo('/home-page#contact-us-section')">
+          {{
+            "pages.home-page.sections.footer.content.mobile-links.9.text"
+              | translate
+          }}
+        </button>
+      </div>
+      <div class="sm:text-right text-right">
+        {{ "pages.home-page.sections.footer.content.contact" | translate }}
+      </div>
+      <div class="sm:text-right text-right">
+        {{ "pages.home-page.sections.footer.content.follow-us" | translate }}
+      </div>
+      <div class="flex justify-center sm:justify-start gap-4 mt-2">
+        <a href="https://www.tiktok.com/@mentor.cards" target="_blank">
+          <img
+            src="/assets/New/home-page/icons/tik-tok-black.svg"
+            alt="{{
+              'pages.home-page.sections.footer.content.social-icons.0.alt'
+                | translate
+            }}"
+            class="h-7"
+          />
+        </a>
+        <a href="https://www.facebook.com/groups/mentorcards/" target="_blank">
+          <img
+            src="/assets/New/home-page/icons/fb-black.svg"
+            alt="{{
+              'pages.home-page.sections.footer.content.social-icons.1.alt'
+                | translate
+            }}"
+            class="h-7"
+          />
+        </a>
+        <a href="https://www.instagram.com/mentor_cards/" target="_blank">
+          <img
+            src="/assets/New/home-page/icons/insta-black.svg"
+            alt="{{
+              'pages.home-page.sections.footer.content.social-icons.2.alt'
+                | translate
+            }}"
+            class="h-7"
+          />
+        </a>
+        <a
+          href="https://www.youtube.com/channel/UCt3Ol6TXXUOLNiJaQLonDqw/"
+          target="_blank"
+        >
+          <img
+            src="/assets/New/home-page/icons/you-tube-black.svg"
+            alt="{{
+              'pages.home-page.sections.footer.content.social-icons.3.alt'
+                | translate
+            }}"
+            class="h-7"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

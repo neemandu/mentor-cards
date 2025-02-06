@@ -12,13 +12,13 @@ import { SharedDialogsService } from '../Services/shared-dialogs.service';
 export class MainScreenComponent implements OnInit, OnDestroy {
 
   subs: Subscription = new Subscription();
-  showSpinner: boolean = true;
+  spinnersState: Map<string, boolean> = new Map();
 
   constructor(private overlaySpinnerService: OverlaySpinnerService, public dialog: MatDialog, private sharedDialogsService: SharedDialogsService) { }
 
   ngOnInit() {
-    this.subs.add(this.overlaySpinnerService.changeOverlaySpinnerEmmiter.subscribe((show: boolean) => {
-      this.showSpinner = show
+    this.subs.add(this.overlaySpinnerService.changeOverlaySpinnerEmmiter.subscribe((data: {component: string, show: boolean}) => {
+      this.spinnersState.set(data.component, data.show);
     }));
   }
 

@@ -6,16 +6,22 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LangDirectionService {
   currentLangDirection = 'rtl'; // default direction
+  currentLang = 'he'; // Add this property
 
   constructor(translate: TranslateService) {
-    translate.addLangs(['en', 'עב']);
-    translate.setDefaultLang('עב');
-    translate.use('עב');
+    translate.addLangs(['en', 'he']);
+    if (localStorage.getItem('lang')) {
+      const savedLang = localStorage.getItem('lang') as string;
+      translate.use(savedLang);
+      this.currentLang = savedLang;
+    } else {
+      translate.use('he');
+      this.currentLang = 'he';
+    }
 
-    // Listen for language changes
     translate.onLangChange.subscribe((event) => {
-      // Set text direction based on current language
-      this.currentLangDirection = event.lang === 'עב' ? 'rtl' : 'ltr';
+      // this.currentLangDirection = event.lang === 'he' ? 'rtl' : 'ltr';
+      this.currentLang = event.lang;
     });
   }
 }

@@ -38,12 +38,16 @@ import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/af
 import { ManageAffiliateComponent } from './Pages/manage-affiliate/manage-affiliate.component';
 import { AffiliateWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/affiliate-withdraws.component';
 import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-pop-up/print-pop-up.component';
+import { HomePageNewComponent } from './Pages/home-page-new/home-page-new.component';
+import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-page-new.component';
+import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-content-page-new.component';
+import { UserManagementComponent } from './Modules/management/user-management/user-management.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home-page', pathMatch: 'full' },
   {
     path: 'home-page',
-    component: HomePageComponent,
+    component: HomePageNewComponent,
   },
   {
     path: 'no-program-page',
@@ -59,15 +63,15 @@ const routes: Routes = [
     component: GroupManagementComponent,
     canActivate: [AuthGuardGroupManagementService],
   },
-  { path: 'all-packs-page', component: AllPacksPageComponent },
+  { path: 'all-packs-page', component: AllPacksPageNewComponent },
   { path: 'about-page', component: AboutPageComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'all-blogs', component: AllBlogsComponent },
   { path: 'detail/:slug', component: BlogDetailComponent },
   { path: 'affiliates-page', component: AffiliatesPageComponent },
   { path: 'affiliate-dashboard', component: AffiliatesDashboardPageComponent },
-  { path: 'affiliate-withdraws/:id', component: AffiliateWithdrawsComponent},
-  { path:'print', component: PrintPopUpComponent},
+  { path: 'affiliate-withdraws/:id', component: AffiliateWithdrawsComponent },
+  { path: 'print', component: PrintPopUpComponent },
   // { path: 'manage-affiliate', component: ManageAffiliateComponent },
 
   {
@@ -75,6 +79,10 @@ const routes: Routes = [
     component: PackContentPageComponent, //,
     //canActivate: [AuthGuardPackContentService],
   },
+  // {
+  //   path: 'pack-view/:id/',
+  //   component: PackContentPageNewComponent, //,
+  // },
   { path: 'example-pack', component: PackContentPageComponent },
   { path: 'guide-book', component: GuideBookComponent },
   {
@@ -122,6 +130,11 @@ const routes: Routes = [
     canActivate: [AuthGuardSiteContentManagementService],
   },
   {
+    path: 'user-management',
+    component: UserManagementComponent,
+    canActivate: [AuthGuardSiteContentManagementService],
+  },
+  {
     path: 'payment-programs-management',
     component: PaymentProgramsManagementComponent,
     canActivate: [AuthGuardSiteContentManagementService],
@@ -131,12 +144,16 @@ const routes: Routes = [
     component: ReceiptsManagementComponent,
     canActivate: [AuthGuardSiteContentManagementService],
   },
-  { path: '**', redirectTo: '/all-packs-page' },
+  // { path: '**', redirectTo: '/all-packs-page' },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+    RouterModule.forRoot(routes, {
+      anchorScrolling: 'enabled',
+      scrollPositionRestoration: 'enabled',
+      relativeLinkResolution: 'legacy',
+    }),
   ],
   exports: [RouterModule],
 })

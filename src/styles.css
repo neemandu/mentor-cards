@@ -1,8 +1,127 @@
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mx-2-sm-mx-10 {
+  margin-left: 0.5rem /* 8px */;
+  margin-right: 0.5rem /* 8px */;
+}
+
+@media (min-width: 640px) {
+  .mx-2-sm-mx-10 {
+    margin-left: 2.5rem /* 40px */;
+    margin-right: 2.5rem /* 40px */;
+  }
+}
+
+@media (min-width: 640px) {
+  .sm\:w-86 {
+    width: 20rem /* 320px */;
+  }
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.border-gray-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(75 85 99 / var(--tw-border-opacity)) /* #4b5563 */;
+}
+
+.w-10 {
+  width: 2.5rem /* 40px */;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contents {
+  display: contents;
+}
+@media (min-width: 640px) {
+  .sm\:border-r-2 {
+    border-right-width: 2px;
+  }
+}
+
+@media (min-width: 640px) {
+  .sm\:border-l-2 {
+    border-left-width: 2px;
+  }
+}
+.w-32 {
+  width: 8rem /* 128px */;
+}
+.border-b-1 {
+  border-bottom-width: 1px;
+}
+
+@media (min-width: 640px) {
+  .sm\:w-\[1590px\] {
+    width: 1590px;
+  }
+}
+
+@media (min-width: 1773px) {
+  .custom-grid-cols-8 {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) {
+  .sm\:mt-16 {
+    margin-top: 4rem /* 64px */;
+  }
+}
+
+.border-\[\#e67c73\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(230 124 115 / var(--tw-border-opacity));
+}
+.right-4 {
+  right: 1rem /* 16px */;
+}
+.-ms-72 {
+  margin-inline-start: -18rem /* -288px */;
+}
+.text-center {
+  text-align: center;
+}
+.border-\[\#e67c73\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(230 124 115 / var(--tw-border-opacity)) /* #e67c73 */;
+}
+.-ms-40 {
+  margin-inline-start: -10rem /* -160px */;
+}
+
+.text-xl {
+  font-size: 1.25rem /* 20px */;
+  line-height: 1.75rem /* 28px */;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-270 {
+  transform: rotate(270deg);
+}
+
 html,
 body {
   height: 100%;
-  font-family: 'rubik';
+  font-family: "Open Sans Hebrew", sans-serif;
   /* overflow-y: scroll!important; */
   /* -webkit-text-size-adjust: auto; */
 }
@@ -11,24 +130,26 @@ body {
   --main-color: #ffa800 !important;
   --main-color-light: #ffd37c !important;
   --main-color-dark: #c28100 !important;
-  --main-font-family: rubik;
+  /* --main-font-family: rubik; */
+  --main-font-family: "Open Sans Hebrew", sans-serif !important;
   --screen-s: 480px;
   --screen-m: 768px;
   --screen-l: 1024px;
   --bottom-nav-height: 3rem;
   --top-nav-height: 4rem;
-  --content-height: calc(100vh-3rem-4rem)
+  --content-height: calc(100vh-3rem-4rem);
 }
 
 body {
   margin: 0;
   /* font-family: Roboto, "Helvetica Neue", sans-serif; */
-  font-family: 'rubik' !important;
+  /* font-family: 'rubik' !important; */
+  font-family: "Open Sans Hebrew", sans-serif !important;
   background-color: #f8f9fa !important;
 }
 
 .item {
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 /* .item-hidden {
@@ -57,7 +178,7 @@ body {
 
 .rtl-snackbar {
   direction: rtl !important;
-  color: black !important; 
+  color: black !important;
   background-color: #feefd7 !important;
   border: 4px double #ffcf00 !important;
   min-width: 0 !important;
@@ -82,12 +203,105 @@ button:focus {
 }
 
 @font-face {
-  font-family: rubik;
-  src: url(\assets\Fonts\Rubik-VariableFont_wght.ttf) format("opentype");
+  font-family: Open Sans Hebrew;
+  /* src: url(\assets\Fonts\OpenSans-VariableFont_wdthwght.ttf) format("opentype"); */
 }
 
 ::ng-deep .tooltip-class {
   font-size: 0.8rem;
   direction: rtl;
   text-align: right;
+}
+
+.bg-\[\#ffe0d8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 224 216 / var(--tw-bg-opacity)) /* #ffe0d8 */;
+}
+
+.text-xs {
+  font-size: 0.75rem /* 14px */;
+  line-height: 0.95rem /* 20px */;
+}
+
+.h-8 {
+  height: 2rem /* 32px */;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.border-\[\#e98980\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(233 137 128 / var(--tw-border-opacity)) /* #e98980 */;
+}
+
+.z-999 {
+  z-index: 999;
+}
+
+.inset-0 {
+  inset: 0px;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.mt-36 {
+  margin-top: 9rem /* 144px */;
+}
+.object-cover {
+  object-fit: cover;
+}
+
+.inset-0 {
+  inset: 0px;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.grid {
+  display: grid;
+}
+.aspect-\[3\/4\] {
+  aspect-ratio: 3/4;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.relative {
+  position: relative;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.packs-card-preview {
+  .mat-dialog-container {
+    padding: 15px !important;
+  }
+}
+
+.bg-red-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity)) /* #dc2626 */;
 }

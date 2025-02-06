@@ -1,0 +1,57 @@
+.client-button:hover {
+  text-decoration: none;
+  background-image: linear-gradient(90deg, #e67c73, #7986cb);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0% 100%;
+}
+
+.home-page-partners-logo {
+  height: 120px;
+}
+
+.partner-image {
+  height: 35rem;
+  border-radius: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .home-page-partners-logo {
+    height: 60px;
+  }
+
+  .partner-image {
+    height: auto;
+    border-radius: 0.75rem;
+    object-fit: cover; width: 100%; height: 100%; max-width: none;
+  }
+
+  .signature-image {
+    width: 80%; 
+    height: 100%; 
+    
+  }
+
+  .mx-10 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .col-span-1 {
+    padding: 10px;
+  }
+}
+
+.logo-carousel {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-carousel img {
+  flex-shrink: 0;
+  width: 100%;
+  transition: transform 0.5s ease;
+}

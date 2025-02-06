@@ -12,19 +12,25 @@ import { NewEditNewsComponent } from 'src/app/Shared Components/Dialogs/new-edit
 import { NewEditOrganizationDialogComponent } from '../dialogs/new-edit-organization/new-edit-organization.component';
 import { OrgMembersDialogComponent } from '../dialogs/org-members-dialog/org-members-dialog.component';
 import { NewEditReceiptDialogComponent } from '../dialogs/new-edit-receipt-dialog/new-edit-receipt-dialog.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { EditUserDialogComponent } from './user-management/edit-dialog/edit-user-dialog.component';
+import { addPackDialogComponent } from './packs-management/add-dialog/add-dialog.component';
+
 
 import { ReceiptItemsPipe } from './receipts-management/receipt-items.pipe';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { EditPackDialogComponent } from './packs-management/edit-dialog/edit-dialog.component';
 
 
 
@@ -42,7 +48,11 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     NewEditNewsComponent,
     OrgMembersDialogComponent,
     NewEditReceiptDialogComponent,
-    NewEditOrganizationDialogComponent
+    NewEditOrganizationDialogComponent,
+    UserManagementComponent,
+    EditUserDialogComponent,
+    addPackDialogComponent,
+    EditPackDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -56,7 +66,9 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     MatExpansionModule,
     MatToolbarModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },

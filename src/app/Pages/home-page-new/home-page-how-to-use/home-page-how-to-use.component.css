@@ -1,0 +1,25 @@
+.white-icon {
+  color: white;
+  font-size: 50px;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.white-icon svg {
+  fill: white;
+}
+
+.video-thumbnail {
+  border-radius: 20px;
+  height: 27rem;
+  width: 18rem;
+  object-fit: cover;
+  /* max-width: 15vw; */
+}
+
+@media (max-width: 768px) {
+  .video-thumbnail {
+    border-radius: 20px;
+    height: 27rem;
+    width: 18rem;
+    object-fit: cover;
+  }
+}

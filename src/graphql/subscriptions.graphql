@@ -1,5 +1,4 @@
 # this is an auto generated file. This will be overwritten
-
 subscription OnCreateCommonLink {
   onCreateCommonLink {
     id
@@ -7,10 +6,8 @@ subscription OnCreateCommonLink {
     createdBy
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateCommonLink {
   onUpdateCommonLink {
     id
@@ -18,10 +15,8 @@ subscription OnUpdateCommonLink {
     createdBy
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteCommonLink {
   onDeleteCommonLink {
     id
@@ -29,10 +24,8 @@ subscription OnDeleteCommonLink {
     createdBy
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateAffiliate {
   onCreateAffiliate {
     id
@@ -52,14 +45,11 @@ subscription OnCreateAffiliate {
       currency
       paymentWay
       transactionId
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateAffiliate {
   onUpdateAffiliate {
     id
@@ -79,14 +69,11 @@ subscription OnUpdateAffiliate {
       currency
       paymentWay
       transactionId
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteAffiliate {
   onDeleteAffiliate {
     id
@@ -106,14 +93,11 @@ subscription OnDeleteAffiliate {
       currency
       paymentWay
       transactionId
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateCouponCodes {
   onCreateCouponCodes {
     id
@@ -130,18 +114,14 @@ subscription OnCreateCouponCodes {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateCouponCodes {
   onUpdateCouponCodes {
     id
@@ -158,18 +138,14 @@ subscription OnUpdateCouponCodes {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteCouponCodes {
   onDeleteCouponCodes {
     id
@@ -186,18 +162,14 @@ subscription OnDeleteCouponCodes {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateOrganizations {
   onCreateOrganizations {
     id
@@ -211,19 +183,15 @@ subscription OnCreateOrganizations {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     verifyPersonByEmail
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateOrganizations {
   onUpdateOrganizations {
     id
@@ -237,19 +205,15 @@ subscription OnUpdateOrganizations {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     verifyPersonByEmail
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteOrganizations {
   onDeleteOrganizations {
     id
@@ -263,19 +227,15 @@ subscription OnDeleteOrganizations {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     verifyPersonByEmail
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateOrganizationMembership {
   onCreateOrganizationMembership {
     id
@@ -286,14 +246,11 @@ subscription OnCreateOrganizationMembership {
       text
       imgUrl
       link
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateOrganizationMembership {
   onUpdateOrganizationMembership {
     id
@@ -304,14 +261,11 @@ subscription OnUpdateOrganizationMembership {
       text
       imgUrl
       link
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteOrganizationMembership {
   onDeleteOrganizationMembership {
     id
@@ -322,21 +276,17 @@ subscription OnDeleteOrganizationMembership {
       text
       imgUrl
       link
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateGroup {
   onCreateGroup {
     id
     groupUsers {
       email
       role
-      __typename
     }
     paymentProgram {
       id
@@ -357,30 +307,24 @@ subscription OnCreateGroup {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateGroup {
   onUpdateGroup {
     id
     groupUsers {
       email
       role
-      __typename
     }
     paymentProgram {
       id
@@ -401,30 +345,24 @@ subscription OnUpdateGroup {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteGroup {
   onDeleteGroup {
     id
     groupUsers {
       email
       role
-      __typename
     }
     paymentProgram {
       id
@@ -445,23 +383,18 @@ subscription OnDeleteGroup {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateMessageQueue {
   onCreateMessageQueue {
     id
@@ -474,10 +407,8 @@ subscription OnCreateMessageQueue {
     params
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateMessageQueue {
   onUpdateMessageQueue {
     id
@@ -490,10 +421,8 @@ subscription OnUpdateMessageQueue {
     params
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteMessageQueue {
   onDeleteMessageQueue {
     id
@@ -506,10 +435,8 @@ subscription OnDeleteMessageQueue {
     params
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateInvoices {
   onCreateInvoices {
     id
@@ -522,7 +449,6 @@ subscription OnCreateInvoices {
       itemName
       pricePerItem
       numberOfItems
-      __typename
     }
     businessName
     businessPhoneNumber
@@ -532,10 +458,8 @@ subscription OnCreateInvoices {
     s3Url
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateInvoices {
   onUpdateInvoices {
     id
@@ -548,7 +472,6 @@ subscription OnUpdateInvoices {
       itemName
       pricePerItem
       numberOfItems
-      __typename
     }
     businessName
     businessPhoneNumber
@@ -558,10 +481,8 @@ subscription OnUpdateInvoices {
     s3Url
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteInvoices {
   onDeleteInvoices {
     id
@@ -574,7 +495,6 @@ subscription OnDeleteInvoices {
       itemName
       pricePerItem
       numberOfItems
-      __typename
     }
     businessName
     businessPhoneNumber
@@ -584,10 +504,8 @@ subscription OnDeleteInvoices {
     s3Url
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateSubscriptionPlan {
   onCreateSubscriptionPlan {
     id
@@ -608,19 +526,15 @@ subscription OnCreateSubscriptionPlan {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     subscriptionProviderPlanId
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateSubscriptionPlan {
   onUpdateSubscriptionPlan {
     id
@@ -641,19 +555,15 @@ subscription OnUpdateSubscriptionPlan {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     subscriptionProviderPlanId
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteSubscriptionPlan {
   onDeleteSubscriptionPlan {
     id
@@ -674,49 +584,39 @@ subscription OnDeleteSubscriptionPlan {
         text
         imgUrl
         link
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
     subscriptionProviderPlanId
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateReceiptsId {
   onCreateReceiptsId {
     id
     counter
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateReceiptsId {
   onUpdateReceiptsId {
     id
     counter
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteReceiptsId {
   onDeleteReceiptsId {
     id
     counter
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateNews {
   onCreateNews {
     id
@@ -724,10 +624,8 @@ subscription OnCreateNews {
     order
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateNews {
   onUpdateNews {
     id
@@ -735,10 +633,8 @@ subscription OnUpdateNews {
     order
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteNews {
   onDeleteNews {
     id
@@ -746,10 +642,8 @@ subscription OnDeleteNews {
     order
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateCardsPack {
   onCreateCardsPack {
     id
@@ -758,9 +652,12 @@ subscription OnCreateCardsPack {
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
-      __typename
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -778,19 +675,12 @@ subscription OnCreateCardsPack {
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
-          __typename
         }
-        __typename
       }
-      __typename
     }
     name
     freeUntilDate
@@ -798,7 +688,6 @@ subscription OnCreateCardsPack {
       text
       imgUrl
       link
-      __typename
     }
     isOwnedByOrg
     brief
@@ -826,33 +715,32 @@ subscription OnCreateCardsPack {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     topQuestions
     usersUsage {
       user
       entries
-      __typename
     }
     isFree
     language
     isActive
     guidebookUrl
+    ownerName
+    numberOfCards
+    isHardCopyAvailable
+    videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateCardsPack {
   onUpdateCardsPack {
     id
@@ -861,9 +749,12 @@ subscription OnUpdateCardsPack {
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
-      __typename
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -881,19 +772,12 @@ subscription OnUpdateCardsPack {
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
-          __typename
         }
-        __typename
       }
-      __typename
     }
     name
     freeUntilDate
@@ -901,7 +785,6 @@ subscription OnUpdateCardsPack {
       text
       imgUrl
       link
-      __typename
     }
     isOwnedByOrg
     brief
@@ -929,33 +812,32 @@ subscription OnUpdateCardsPack {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     topQuestions
     usersUsage {
       user
       entries
-      __typename
     }
     isFree
     language
     isActive
     guidebookUrl
+    ownerName
+    numberOfCards
+    isHardCopyAvailable
+    videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteCardsPack {
   onDeleteCardsPack {
     id
@@ -964,9 +846,12 @@ subscription OnDeleteCardsPack {
     tags
     categories
     cards {
-      backImgUrl
-      frontImgUrl
-      __typename
+      categoryName
+      categoryStepNumber
+      cardsImages {
+        backImgUrl
+        frontImgUrl
+      }
     }
     cardsPreview
     groupsIds
@@ -984,19 +869,12 @@ subscription OnDeleteCardsPack {
                 name
                 subElements {
                   name
-                  __typename
                 }
-                __typename
               }
-              __typename
             }
-            __typename
           }
-          __typename
         }
-        __typename
       }
-      __typename
     }
     name
     freeUntilDate
@@ -1004,7 +882,6 @@ subscription OnDeleteCardsPack {
       text
       imgUrl
       link
-      __typename
     }
     isOwnedByOrg
     brief
@@ -1032,65 +909,62 @@ subscription OnDeleteCardsPack {
           text
           imgUrl
           link
-          __typename
         }
         createdAt
         updatedAt
-        __typename
       }
       subscriptionProviderPlanId
       createdAt
       updatedAt
-      __typename
     }
     topQuestions
     usersUsage {
       user
       entries
-      __typename
     }
     isFree
     language
     isActive
     guidebookUrl
+    ownerName
+    numberOfCards
+    isHardCopyAvailable
+    videoUrl
+    isReadingGuidebookAMust
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnCreateContactUsModel {
   onCreateContactUsModel {
     id
     name
     content
     email
+    phone
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnUpdateContactUsModel {
   onUpdateContactUsModel {
     id
     name
     content
     email
+    phone
     createdAt
     updatedAt
-    __typename
   }
 }
-
 subscription OnDeleteContactUsModel {
   onDeleteContactUsModel {
     id
     name
     content
     email
+    phone
     createdAt
     updatedAt
-    __typename
   }
 }

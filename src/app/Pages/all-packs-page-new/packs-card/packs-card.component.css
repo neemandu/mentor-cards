@@ -1,0 +1,41 @@
+.packs-image {
+    transform: rotate(-16.16deg); 
+    border-radius: 20px
+}
+
+::ng-deep .custom-dialog .mat-dialog-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  
+.packs-image:hover {
+    cursor: pointer;
+}
+
+.width-44 {
+    width: 11rem;
+    height: 16rem;
+}
+
+@media (min-width: 640px) { 
+    .width-44 {
+        width: 11rem;
+        height: 16rem;
+    }
+}
+
+@media (max-width: 768px) { 
+    .width-44 {
+        width: 9.2rem;
+        height: 13rem;
+    }
+
+    .packs-image {
+        transform: rotate(-16.16deg); 
+        border-radius: 20px;
+        width: 8rem;
+        margin-right: 12px;
+    
+    }
+}

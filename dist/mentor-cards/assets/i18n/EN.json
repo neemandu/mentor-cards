@@ -1,0 +1,1412 @@
+{
+  "pages": {
+    "all-packs-page": {
+      "title": "Mentor-Cards כל ערכות הקלפים",
+      "coupon-code-btn-1": "View courses",
+      "coupon-code-btn-2": "Our Digits>>>",
+      "mat-section-title": "Categories",
+      "categories": {
+        "ערכות להתנסות חופשית": "FREE TRIAL KITS",
+        "ערכות חדשות": "New Kits",
+        "ערכות VIP": "VIP Kits",
+        "נעים להכיר": "Nice to Meet",
+        "קלפי תמונה": "Picture Cards",
+        "הייטק": "Hi-Tech",
+        "קלפי שאלות": "Question Cards",
+        "קלפי חגים": "Holiday Cards",
+        "קלפי מילה": "Word Cards",
+        "קלפי תמונה + מילה": "Picture + Word Cards",
+        "קלפי מסרים": "Message Cards",
+        "קלפי ערכים": "Value Cards",
+        "ערכות ממוקדות נושא" : "Subject Oriented Cards"
+      },
+      "my-favorites": "My Favorites",
+      "header": "",
+      "sub-header": "When words run out, the cards come in",
+      "sub-header-2": "Find the card set that suits you",
+      "search-placeholder": "Search by meeting topic, creator of the kit, purpose of the activity and more...",
+      "new-search-placeholder": "What is the topic of your meeting? Look for a kit"
+    },
+    "all-packs-page-new": {
+      "title": "All Packs Page",
+      "content": {
+        "favorites": "My Favorites",
+        "subject": "Meeting Subject",
+        "allPacks": "All Packs",
+        "cardTypes": "Card Types",
+        "cardDisplayTypes": "Card Display Types",
+        "image": "Image",
+        "question": "Question",
+        "word": "Word",
+        "meetingLanguage": "Meeting Language",
+        "cardLanguageAndGuide": "Card Language and Guidebook",
+        "russian": "Русский",
+        "arabic": "عربية",
+        "english": "English",
+        "hebrew": "עברית",
+        "packsForYourMeeting": "These are the packs suitable for your meeting",
+        "category": "Category",
+        "resetFilters": "Reset Filters"
+      },
+      "filterText": {
+        "לכל הערכות": "All Packs",
+        "הכרות וחיבור": "Introduction and Connection",
+        "מערכות יחסים": "Relationships",
+        "ילדים ונוער": "Children and Youth",
+        "חיבור לעצמי": "Self-Connection",
+        "העצמה": "Empowerment",
+        "חגים": "Holidays",
+        "מנהיגות": "Leadership",
+        "חזון ומטרות": "Vision and Goals",
+        "קריירה": "Career",
+        "רגשות": "Emotions",
+        "משברים": "Crises",
+        "המועדפים שלי": "My Favorites",
+        "איפוס חיפוש": "Reset Search"
+      }
+    },
+    "about-us": {
+      "title": "Mentor-Cards About Us Page",
+      "introduction-full": {
+        "line1": "We at Mentor-Cards believe that the processes of introspection, growth, and development should take place in the best possible way",
+        "line2": "with minimal dependence on the environment and changing reality.",
+        "line3": "2020 will be remembered as a year that changed world orders in so many ways.",
+        "line4": "We experienced what it is to turn inward, and we acted as we knew in the unknown conditions that were created in our environment.",
+        "line5": "We trained ourselves for the new world. We continued to train and treat, and this time in front of the screens.",
+        "line6": "From this place, at this time, and with the joint thinking of senior coaches in the country and card experts - we established Mentor-Cards.",
+        "line7": "Mentor-Cards is a friendly platform for working with cards in digital and frontal meetings",
+        "line8": "with an emphasis on the best user experience.",
+        "line9": "Cards are among the most powerful tools in the worlds of coaching and therapy.",
+        "line10": "Cards shuffle, bypass the subconscious, open and develop.",
+        "line11": "Cards help us as professional process leaders to sharpen and specify the most suitable way for our client.",
+        "line12": "The world is changing and developing and we have chosen to grow with it.",
+        "line13": "We are glad that you chose to grow with us."
+      },
+      "introduction-partial": {
+        "line1": "Mentor-Cards is a friendly platform for working with cards in digital and frontal meetings",
+        "line2": "with an emphasis on the best user experience.",
+        "line3": "Cards are among the most powerful tools in the worlds of coaching and therapy.",
+        "line4": "Cards shuffle, bypass the subconscious, open and develop.",
+        "line5": "Cards help us as professional process leaders to sharpen and specify the most suitable way for our client.",
+        "line6": "The world is changing and developing and we have chosen to grow with it.",
+        "line7": "We are glad that you chose to grow with us."
+      },
+      "last-line": "Mentor-Cards Team",
+      "bio-content-1": {
+        "line1": "Dudi Neman",
+        "line2": "Co-founder and Technical Development Manager",
+        "line3": "35 years old from Meitar",
+        "line4": "Software Engineer M.Sc and EMBA in Business Administration.",
+        "line5": "Family man, entrepreneur, optimist, and high-performance coach."
+      },
+      "bio-content-2": {
+        "line1": "Yarden Stampu",
+        "line2": "Co-founder and Professional Content Manager",
+        "line3": "35 years old from Ramat Gan",
+        "line4": "Coach and developer of people and organizations.",
+        "line5": "MBA in Business Administration, group facilitator, and supervisor for coaches.",
+        "line6": "Versatile, brave, loyal to the good, breathes deeply."
+      },
+      "bio-content-3": {
+        "line1": "Yaniv Kanobel",
+        "line2": "Developer and Designer",
+        "line3": "29 years old from Be'er Sheva",
+        "line4": "Software and Information Systems Engineer B.Sc",
+        "line5": "Cooking enthusiast, photography, technology, and nature lover"
+      },
+      "Customers&collaborations": "Customers and collaborations"
+    },
+    "nav": {
+      "banner": {
+        "upgrade-now": "Upgrade Now",
+        "full-access": "Enjoy full access to all card packs on the site!"
+      },
+      "navbar": {
+        "home": "Home",
+        "signin-signup": "Sign In/Sign Up",
+        "all-card-packs": "All Card Packs",
+        "digital-courses": "Digital Courses",
+        "our-plans": "Our Plans",
+        "faq": "FAQ",
+        "additional-services": "Additional Services",
+        "about-us": "About Us",
+        "contact-us": "Contact Us",
+        "affiliates": "Affiliates Program",
+        "admin": "Admin",
+        "coupon-codes": "Do you have a discount code?"
+      },
+      "news-updates": "News and Updates",
+      "no-news-updates": "There are no news and new updates",
+      "user-menu": {
+        "user-details": "User Details",
+        "register-plan": "Register for a Plan",
+        "group-management": "Group Management",
+        "affiliate": "Affiliates Dashboard",
+        "logout": "Logout"
+      },
+      "tourMenu": {
+        "tourMainPage": "Tour of the main page",
+        "howToWorkWithCards": "How to work with the cards?"
+      },
+      "management-menu": {
+        "dashboard": "Dashboard",
+        "news-management": "News Management",
+        "guidebook-management": "Guidebook Management",
+        "coupon-codes-management": "Coupon Codes Management",
+        "orgs-management": "Organizations Management",
+        "packs-management": "Card Packs Management",
+        "payment-programs-management": "Payment Programs Management",
+        "receipts-management": "Receipts and Payments Management",
+        "users-management": "Users Management"
+      }
+    },
+    "login": {
+      "login-div": {
+        "login-form": {
+          "username": {
+            "label": "Email",
+            "errors": {
+              "userNotConfirmed": "User not confirmed. Please check your email to confirm your account in order to log in.",
+              "userNotFound": "User not found",
+              "LimitExceededException": "Too many login attempts. Please try again in 15 minutes.",
+              "email": "The email address is not valid, please try again."
+            }
+          },
+          "password": {
+            "label": "Password",
+            "errors": {
+              "usernamePwWrong": "Username or password is incorrect"
+            },
+            "visibility": {
+              "hide": "visibility_off",
+              "show": "visibility"
+            }
+          },
+          "login-button": "Login"
+        },
+        "social-login": {
+          "seperator": "or",
+          "social-media-login": {
+            "google-btn": "Login with Google"
+          }
+        }
+      },
+      "forgotPasswordForm": {
+        "form": {
+          "username": {
+            "label": "Email",
+            "errors": {
+              "userNotFound": "User not found",
+              "limitExceeded": "Too many attempts. Please wait and try again later",
+              "email": "The email address is not valid, please try again."
+            }
+          },
+          "confirmationCode": {
+            "label": "Enter the verification code you received",
+            "errors": {
+              "codeMismatch": "Verification code is incorrect"
+            }
+          },
+          "newPassword": {
+            "label": "New Password",
+            "hint": "At least 8 characters, must contain a digit, a lowercase and an uppercase letter (in English)",
+            "errors": {
+              "badPassword": "Invalid password, please try again"
+            }
+          },
+          "not-receive-code": "Didn't receive a code? Click here to get another code",
+          "submit-button": {
+            "submit-button": "Send me a verification code",
+            "save-new-password": "Save new password"
+          },
+          "confirmation-code-info": "*The verification code will be sent to the phone number with which you registered. If you registered without a mobile phone - the verification code will be sent to the email."
+        }
+      },
+      "confirmForm": {
+        "form": {
+          "username": {
+            "label": "Email"
+          },
+          "confirmationCode": {
+            "label": "Verification Code (sent via mobile message)",
+            "errors": {
+              "CodeMismatchException": "Code does not match the sent code, please try again",
+              "LimitExceededException": "Too many attempts. Please wait and try again later"
+            }
+          },
+          "not-receive-code": "Didn't receive a code? Click here to get another code",
+          "submit-button": "Confirm User"
+        }
+      },
+      "formFooter": {
+        "footerLogin": {
+          "firstTime": "First time with us?",
+          "forgotPassword": "Forgot password?"
+        },
+        "back": "Back"
+      }
+    },
+    "register": {
+      "form": {
+        "name-label": "Full Name",
+        "name-hint": "עב/English",
+        "phone-label": "Mobile Phone",
+        "phone-hint": "For example: 0501234567",
+        "phone-error": "Please enter numbers only",
+        "email-label": "Email",
+        "email-error-exists": "This email already exists in the system",
+        "email-confirm-label": "Confirm Email",
+        "email-confirm-error-notsame": "Email does not match",
+        "email-confirm-error-exists": "This email already exists in the system",
+        "password-label": "Password",
+        "password-error": "Invalid password, please try again. Must contain a digit, a lowercase and an uppercase letter (English only)",
+        "password-hint": "At least 8 characters, must contain a digit, a lowercase and an uppercase letter (in English)",
+        "password-confirm-label": "Confirm Password",
+        "password-confirm-error-notsame": "Password does not match",
+        "password-confirm-hint": "At least 8 characters, must contain a digit, a lowercase and an uppercase letter (in English)",
+        "allow-emails": "I agree to receive newsletters from Mentor-Cards",
+        "allow-emails-error": "You must check the box in order to register",
+        "submit-button": "Register"
+      },
+      "social-login": {
+        "seperator": "or",
+        "social-media-login": {
+          "google-btn": "Sign up with Google"
+        },
+        "formFooter": {
+          "existing-customer": "Existing customer?"
+        }
+      }
+    },
+    "user-related": {
+      "close-button": "highlight_off",
+      "tab-group": {
+        "login-tab": {
+          "label": "Login",
+          "sub-label": "Existing User"
+        },
+        "register-tab": {
+          "label": "Register",
+          "sub-label": "New User"
+        }
+      }
+    },
+    "main-screen": {
+      "title": "Mentor-Cards, the largest virtual card platform in Israel - Home page"
+    },
+    "contact-us": {
+      "title": "Mentor-Cards Contact Us Page",
+      "contact-form": {
+        "title": "Contact us and we'll be happy to assist you",
+        "form": {
+          "name-label": "Name",
+          "name-error-required": "Name is required",
+          "email-label": "Email",
+          "email-placeholder": "For example, name@example.com",
+          "email-error-valid": "Please enter a valid email",
+          "email-error-required": "Email is required",
+          "phone-error-required": "Phone number is required",
+          "content-label": "Content",
+          "content-error-required": "Content is required",
+          "submit-button": "Submit"
+        },
+        "emails": {
+          "title": "Our emails"
+        }
+      }
+    },
+    "group-management": {
+      "group-details-title": "Group Details",
+      "group-management-instructions-title": "Instructions for Group Management",
+      "add-new-user-instruction": "To add a new user to the group, click on 'Add User'",
+      "user-role-description": "'User'- Has access to card sets",
+      "admin-role-description": "'Admin'- Has access to card sets and has permissions to edit group users",
+      "no-admin-limit-instruction": "There is no limit to the number of admins in a group",
+      "edit-existing-user-instruction": "You can click on the pencil button in the table to edit an existing user",
+      "delete-existing-user-instruction": "You can click on the trash button to delete an existing user from the group",
+      "change-confirmation-instruction": "Any change will ask for confirmation and at the end it will be saved in the system",
+      "new-user-instructions-title": "Instructions for Adding New Users",
+      "new-user-registration-instruction": "Ask the new users to enter the site and register using the email address that was entered for them on this page",
+      "group-code-instruction": "On the main page of the site, ask the users to click on the button \"Are you part of a group?\" and enter the group code",
+      "start-using-cards-instruction": "The new users can start using the cards!",
+      "email-column-title": "Email",
+      "role-column-title": "Role",
+      "edit-column-title": "Edit",
+      "delete-column-title": "Delete",
+      "edit-icon-description": "edit",
+      "delete-icon-description": "delete",
+      "add-new-user-button": "Add User"
+    },
+    "plan-table": {
+      "plan-column-title": "Plan",
+      "start-date-column-title": "Start Date",
+      "update-date-column-title": "Update Date",
+      "next-billing-date-column-title": "Next Billing Date",
+      "billing-cycle-column-title": "Billing Cycle",
+      "price-column-title": "Price",
+      "price-column-description": "New Shekel",
+      "actions-column-title": "Actions",
+      "cancel-automatic-billing": "Cancel Automatic Billing",
+      "renew-vip-plan": "Renew VIP Plan",
+      "renew-home-plan": "Renew Home Plan"
+    },
+    "user-page": {
+      "user-details-title": "User Details",
+      "affiliate": "Affiliates Dashboard",
+      "name-label": "Name",
+      "email-label": "Email",
+      "registration-date-label": "Registration Date",
+      "plans-title": "Plans"
+    },
+    "price-page": {
+      "our-plans-title": "Our Plans",
+      "monthly-plan-title": "Monthly Plan",
+      "month-label": "Month",
+      "full-access-instruction": "Full access to dozens of card sets",
+      "variety-of-guides-instruction": "A huge variety of guidebooks, activity ideas, and guiding questions",
+      "connect-from-anywhere-instruction": "Can connect from anywhere in the world and any device - computer, mobile phone, tablet, projector, and more...",
+      "join-button-text": "Join >>",
+      "already-registered-button-text": "You are registered for this plan",
+      "popularMatCard": {
+        "title": "Life-Time Plan!",
+        "payment": "payment of",
+        "onceBold": "One-time",
+        "inTotal": "in total",
+        "benefits": {
+          "fullAccess": "Full access to dozens of card sets - for life!",
+          "futureAccess": "Access to all card sets that will be uploaded to the site in the future!",
+          "variety": "A huge variety of instruction books, activity ideas, and guiding questions",
+          "connectAnywhere": "Can connect from anywhere in the world and from any device - computer, mobile phone, tablet, projector, and more..."
+        },
+        "joinBtn": "Join >>",
+        "registeredBtn": "You are registered for this plan"
+      },
+      "orgsMatCard": {
+        "title": "Institutions and Organizations",
+        "content": "Now is the time to allow cards to enter your organizational environment and create a conversation that brings closer, promotes, and develops. Upgrade your organizational toolbox together with us. Talk to us and we will tailor the most cost-effective plan for you.",
+        "contactBtn": "Talk to us!"
+      },
+      "couponBtn": "To enter a benefit code click here"
+    },
+    "approvePurchaseDialog": {
+      "title": "Payment via PayPal or Credit Card",
+      "summery": {
+        "recurringPayment": "If you chose a plan with recurring payment (monthly/yearly/etc.) and not the Life-Time plan with a one-time payment, at the end of the plan period your account will be automatically charged for another period, we will remind you by email 7 days before the charge is made again.",
+        "cancelAutoCharge": "You can cancel the automatic charge at any time through the \"User Details\" area on the site and clicking on \"Cancel Automatic Charge\".",
+        "noRefunds": "No refunds will be given for payments for partial billing periods on the site.",
+        "bankCharges": "The bank may charge a transfer fee or conversion fee.",
+        "ageConfirmation": "Choosing to continue confirms that you are over 18 years old",
+        "termsAgreement": "and you agree to these terms.",
+        "lifeTimePlan": "In the Life-Time plan, access to the card sets on the site will be open as long as the site is operational and accessible to the public."
+      },
+      "paymentTitle": "Please choose a payment method:",
+      "paypalTooltip": "If there is an ad blocker in the browser, you need to disable it in order to make a payment"
+    },
+    "portraitWarningDialog": {
+      "content": {
+        "icon": "screen_rotation",
+        "message": "For the best user experience, it's recommended to switch to landscape view"
+      },
+      "actions": {
+        "buttonText": "Understood"
+      }
+    },
+    "packContent": {
+      "title": "Mentor-Cards Pack Content",
+      "packName": "{{ pack.name }}",
+      "defaultName": "The Animals Within Us",
+      "aboutAuthor": "(About the Pack Creator)",
+      "guideBook": "Guide Book",
+      "unauthorized": "You do not have sufficient permissions to view this pack",
+      "linkexpired": "This link is expired. Please create a new one.",
+      "actions": {
+        "multipleChoice": {
+          "showMultiple": "Show multiple cards",
+          "showSingle": "Show single card"
+        },
+        "mixCards": "Shuffle",
+        "flipCards": "Flip the cards",
+        "randomCard": "Show random card",
+        "editPack": {
+          "edit": "Edit",
+          "endEdit": "End editing"
+        },
+        "menuActions": "Actions",
+        "introduction": {
+          "attention": "Attention",
+          "list": {
+            "dozensOfPacks": "The site has dozens of card packs to choose from",
+            "over40Cards": "Each pack includes over 40 cards",
+            "guideBook": "All packs come with a guide book that includes guiding questions for using the cards",
+            "trialPeriod": "During the 14-day trial period, all card packs are at your disposal"
+          },
+          "actions": {
+            "register": "Register and start your trial period",
+            "notRegistered": "Haven't you registered for a plan yet?",
+            "alreadyRegistered": "You are already connected, what are you waiting for? Get to work :)",
+            "loginRegisterBtn": "Login/Register",
+            "registerPlanBtn": "Register for a plan",
+            "allPacksBtn": "To all packs"
+          }
+        }
+      },
+      "nav": {
+        "showChosenCards": "Show chosen cards",
+        "resetChoice": "Reset choice",
+        "cardsChosen": "cards chosen",
+        "resetPack": "Reset pack",
+        "endEditing": "End editing",
+        "hideCardBeforeIcon": "Clicking on the eye icon",
+        "hideCardAfterIcon": "will hide the card underneath"
+      }
+    },
+    "guide-page": {
+      "title": "Mentor-Cards Guide on Website Usage",
+      "layout": {
+        "buttons": {
+          "what-is-mentor-cards": "What is Mentor-Cards?",
+          "how-to-connect": "How to connect to the site?",
+          "how-to-enter-coupon-code": "How to enter a coupon code?",
+          "our-guide-books": "Our guide books",
+          "our-card-sets": "Our card sets",
+          "plans-prices-cancellations": "Plans, prices, and cancellations",
+          "key-principles-in-working-with-cards": "Key principles in working with cards",
+          "how-to-work-with-digital-card-set": "How to work with a digital card set?"
+        }
+      },
+      "content": {
+        "content1": {
+          "paragraph1": "Mentor-Cards is an innovative digital platform that allows coaches, mentors, and therapists from various fields to work with reflective cards online!",
+          "paragraph2": "Mentor-Cards has a huge variety of card sets, so you can match the card set to your client.",
+          "paragraph3": "You can connect to Mentor-Cards via computer, mobile phone, and tablet!"
+        },
+        "content4": {
+          "p1": "Each card set on the site comes with a unique guidebook for it.",
+          "p2": "To use the guidebook, select a card set and click on the \"Guidebook\" button located in the center of the page.",
+          "p3.1": "Guidebooks contain dozens of questions and ideas for various activities using the selected card set -",
+          "p3.2": "divided into the following topics:",
+          "li1": "Suggestions for one-on-one work",
+          "li2": "Suggestions for working with more than one card - process work",
+          "li3": "Suggestions for group work",
+          "li4": "Suggestions for working with word cards (in word card sets)",
+          "p4": "Also, there is a division for questions when the cards are revealed or hidden (each of the methods has its unique advantages).",
+          "h1": "How to use the guidebook during a meeting?",
+          "p5.1": "The guidebook interface is intelligently designed to allow only you to view the questions and ideas in a separate work window so that the participant .",
+          "p5.2": "Will only view the card set and not the book itself  p6 This allows you, the facilitators, to work comfortably with the guidebook during the meeting and write notes in the book itself during the meeting.",
+          "p7": "There is no need to memorize or remember the questions, everything appears in front of your eyes all the time!",
+          "pBold": "Instructions for using the ZOOM software (there are similar options in other video software such as: Skype, Teams and more):",
+          "ol1": "On the \"All Card Sets\" page, choose the card set you want to use.",
+          "ol2": "Click on the \"Guidebook\" button located on the upper left side of this page.",
+          "ol3": "In the ZOOM software, click on the - “SHARE” button located in the center of the ZOOM application and in its lower part.",
+          "ol4": "You should choose to share the screen for your browser where the card set is displayed. Note that the default option is to display the entire screen and we do not want that, but only your browser."
+        },
+        "content5": {
+          "p1": {
+            "b": "The card sets on the site are divided into different categories -",
+            "text1": "Picture cards, word cards, picture+word cards, question cards, message cards, and more.",
+            "br": "You can mark the desired category and display only the cards from that category on the 'All Card Sets' page."
+          },
+          "p2": {
+            "b": "The card sets on the site are constantly updated -",
+            "text": "We add new cards to existing sets and create additional collaborations with external creators to maintain a refreshing and dynamic experience for our customers."
+          },
+          "p3": {
+            "b1": "You can mark with - ",
+            "b2": "- the card sets you prefer",
+            "text": "and thus create a unique category of favorite card sets for you, which will be saved on the 'All Card Sets' page and displayed at the top of the page as long as you choose. Have you exhausted a particular card set? Remove the heart mark and choose a new favorite card set!"
+          },
+          "p4": {
+            "b": "The VIP category",
+            "text": "contains the card sets we chose for you from external creators - we also offer a digital solution for card set creators from the country and the world and choose for our customers the best sets!"
+          },
+          "p5": {
+            "b": "'Free Trial Sets' category -",
+            "text": "free and free access to selected card sets from various categories"
+          },
+          "p6": {
+            "b": "The 'Question Cards' category",
+            "text": "contains various card sets where you will find coaching questions, advancing, purposeful and empowering every process and every meeting."
+          },
+          "p7": {
+            "b": "The 'Picture Cards' category",
+            "text": "is built on the projection mechanism that allows the participant a large response space and the ability to express his inner world with various images and metaphors."
+          },
+          "p8": {
+            "b": "The 'Message Cards' category",
+            "text": "helps to start or end any meeting with a powerful message, for a correct process of drawing conclusions and significant insights."
+          },
+          "p9": {
+            "b": "The 'Holiday Cards' category",
+            "text": "was created because the wisdom of Kabbalah teaches us that every holiday is a gate in the dimension of time, which opens at a certain time of the year and influences us. The holidays are a great opportunity to integrate work with cards!"
+          }
+        },
+        "content6": {
+          "span1": "Join one of our programs and receive -",
+          "ul": {
+            "li1": {
+              "b": "A guidebook attached to each card set -",
+              "text": "Dozens of powerful questions and various suggestions for work."
+            },
+            "li2": {
+              "b": "Use all the capabilities -",
+              "text": "Open and hidden cards, random card selection, shuffling, multiple selection for procedural work, and more…"
+            },
+            "li3": {
+              "b": "Renewing and dynamic content -",
+              "text": "Additional card sets and new work techniques that are constantly updated by our in-house creators and external creators."
+            }
+          },
+          "span2": "We offer our customers 3 programs -",
+          "ol": {
+            "li1": {
+              "b": "Free program -",
+              "text": "Join our mentor community and enjoy free access to selected card sets."
+            },
+            "li2": {
+              "b": "Monthly program -",
+              "text": "Mainly recommended for use in point events, conferences, short workshops, one-time events, etc."
+            },
+            "li3": {
+              "b": "Annual program -",
+              "text": "The program is recommended for people who know and love to incorporate cards as part of their toolbox. Pay in advance for 12 months and enjoy a 30% discount! The payment is made once and all the site services are open for you for the next year."
+            }
+          },
+          "span3": "Cancellations",
+          "p1": "All site users enjoy free access at no cost to the card sets in the 'Free Trial Sets' category.",
+          "p2": "At the end of the program period, the program is automatically renewed for another period, we send an email 7 days before recharging.",
+          "p3": "You can cancel the automatic charge at any time through the \"User Details\" area on the site and click on \"Cancel Automatic Charge\".",
+          "p4": "No cash refunds will be given for partial billing periods on the site."
+        },
+        "content7": {
+          "p1": "The first step in introspection begins with a pause.",
+          "p2": "The pause allows us to ask ourselves questions, and to check whether we are in the right direction for us.",
+          "p3": "From introspection, conclusions can be drawn and a forward action plan can be built.",
+          "p4": "\"Cards Unfold\" - bypasses of consciousness, help us reach deeper layers within us.",
+          "p5": "Cards expand our point of view beyond our familiar comfort zone and offer us a variety of opportunities and new ways of thinking.",
+          "span": "Key principles in working with cards",
+          "ol1": {
+            "b": "Before each card draw, it is recommended to ask a question.",
+            "text1": "After drawing the card, allow time for the chooser to introspect the card and let the asked question resonate.",
+            "text2": "Do not rush to ask another question."
+          },
+          "ol2": {
+            "b": "The truth is in the eyes of the card chooser and therefore all answers are correct.",
+            "text1": "There is no good or bad outcome.",
+            "text2": "The way the card chooser relates to his cards, expresses his personal perception and beliefs.",
+            "text3": "It is right to allow full legitimacy to the choice and personal interpretation in order to create a safe space."
+          },
+          "ol3": {
+            "b": "The guidebook offered for each card set is only a recommendation,",
+            "text1": "It is not mandatory and we even encourage you, to write your own questions and ideas and therefore we have created a dedicated place in the guidebook where you can type things before the start of the meeting and even during it."
+          },
+          "ol4": {
+            "b": "At any given moment, a card can be added or replaced.",
+            "text1": "Before doing so, it is recommended to ask the card chooser - what in this card creates resistance in you?",
+            "text2": "What is the reason you did not connect to the card? There are no good or bad cards."
+          },
+          "ol5": {
+            "b": "The choice of cards is correct for the present time and describes the interpretation, feelings, existence, and spirit of the card chooser at this moment.",
+            "text": "At a different time or situation, a different reaction may arise."
+          }
+        },
+        "content8": {
+          "p1": "The moment you choose a card set to work with, you have 5 buttons at the top of the screen:",
+          "button": "Button -",
+          "p2_b": "\"Flip the cards\"",
+          "p2_text": "- By clicking on the button, you can choose which side of the cards will be visible.",
+          "p3_b": "\"Show number of cards\"",
+          "p3_text": "- By clicking on the button, you can mark up to 5 cards and display them in an enlarged form on the screen.",
+          "p4_b": "\"Shuffle\"",
+          "p4_text": "- Like in the \"real world\", clicking on the shuffle button changes the order of the cards.",
+          "p5_b": "\"Show random card\"",
+          "p5_text": "- By clicking on the button, a random card will be selected from the card set and displayed in an enlarged form on the screen.",
+          "p6_b": "\"Edit\"",
+          "p6_text": "- Allows hiding of specific cards. By clicking on the button, you can hide cards that you are not interested in working with at the current time. Once you exit the card system or refresh the page, all the cards you chose to hide will reappear.",
+          "p7_b": "\"Instruction book\"",
+          "p7_text": "- Opens in a separate screen. Contains a description of the specific card set, questions and ideas for one-on-one work, procedural work, and group work divided into visible or hidden cards."
+        },
+        "all-screens-img": "Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
+      },
+      "accordion": {
+        "mat-accordion": {
+          "mat-button": {
+            "btn1": "What is Mentor - Cards?",
+            "btn2": "How do you connect to the site?",
+            "btn3": "How to enter a benefit code?",
+            "btn4": "Our guide books",
+            "btn5": "Our card sets",
+            "btn6": "Plans, prices and cancellations",
+            "btn7": "Key principles in working with cards",
+            "btn8": "How to work with a digital card set"
+          },
+          "mat-expansion-panel1": {
+            "mat-panel-title": "What is Mentor - Cards?",
+            "p1": "Mentor-Cards is an innovative digital platform that allows mentors, coaches, and therapists from various fields to work with projective cards online!",
+            "p2": "Mentor-Cards has a huge variety of card sets, so you can tailor the card set to your client.",
+            "p3": "You can also find on the site card sets that we have created, as well as card sets of quality creators from outside."
+          },
+          "mat-expansion-panel2": {
+            "mat-panel-title": "How to connect to the site?",
+            "text": "On the upper right side - click on the \"Login/Register\" button. A window will open in the center of the screen with 2 options: register a new user or login an existing user. Choose to register a new user and fill in the details or choose a simple and quick login via Google."
+          },
+          "mat-expansion-panel3": {
+            "mat-panel-title": "How to enter a benefit code?",
+            "text": "In order to enter a benefit code, you need to login / register to the site. On the \"All Card Sets\" page, on the upper right side, there is a prominent orange button that says \"Do you have a benefit code?\". Clicking on the button opens a small window where you enter the benefit code you received. Click on \"OK\" and that's it, you got the benefit!"
+          },
+          "mat-expansion-panel4": {
+            "mat-panel-title": "Our guidebooks",
+            "p1_1": "Each card set on the site comes with a unique guidebook for it.",
+            "p1_2": "To use the guidebook, choose a card set and click on the \"Guidebook\" button located in the center of the page.",
+            "p1_3": "The guidebooks contain dozens of questions and ideas for various activities using the selected card set -",
+            "p1_4": "divided into the following topics:",
+            "ul": {
+              "li1": "Suggestions for one-on-one work",
+              "li2": "Suggestions for working with more than one card - procedural work",
+              "li3": "Suggestions for group work",
+              "li4": "Suggestions for working with word cards (in word card sets)"
+            },
+            "p2_1": "Also, there is a division for questions when the cards are visible or hidden (each of the methods has its unique advantages).",
+            "h1": "How to use the guidebook during a meeting?",
+            "p3_1": "The guidebook interface is smartly built to allow only you to view the questions and ideas in a separate work window so that the participant",
+            "p3_2": "will see only the card set and not the book itself.",
+            "p3_3": "This allows you, the guides, comfortable work in front of the guidebook during the meeting and writing notes in the book itself while the meeting.",
+            "p3_4": "There is no need to memorize or remember the questions, everything appears in front of your eyes all the time!",
+            "p_bold": "Instructions for using ZOOM software (there are similar options in other video software such as: Skype, Teams, etc.):",
+            "ol": {
+              "li1": "On the \"All Card Sets\" page, choose the card set you want to use.",
+              "li2": "Click on the \"Guidebook\" button located on the upper left side of this page.",
+              "li3": "In the ZOOM software, click on the - “SHARE” button located in the center of the ZOOM application and in its lower part.",
+              "li4": "You should choose to share the screen for your browser in which the card set is displayed. Note that the default option is to display the entire screen and we do not want that, just your browser."
+            }
+          },
+          "mat-expansion-panel5": {
+            "mat-panel-title": "Our card sets",
+            "p1_1_b": "The card sets on the site are divided into different categories -",
+            "p1_1": "Picture cards, word cards, picture+word cards, question cards, message cards, and more.",
+            "p1_2": "You can mark the desired category and display only the cards from that category on the 'All Card Sets' page.",
+            "p2_1_b": "The card sets on the site are constantly updated -",
+            "p2_1": "We add new cards to existing sets and create additional collaborations with external creators to maintain a refreshing and dynamic experience for our customer base.",
+            "p3_1_b": "You can mark with -",
+            "p3": "You can mark your favorite card sets, thus creating a unique category of favorite card sets for you, which will be saved on the \"All Card Sets\" page and displayed at the top of the page as long as you choose. Have you exhausted a certain card set? Remove the heart mark and choose a new favorite card set!",
+            "p4_1_b": "VIP category contains the card sets we chose for you from external creators -",
+            "p4_1": "We offer a digital solution also for card set creators from the country and the world and choose for our customers the best sets! Use of the card sets in this category for an additional fee.",
+            "p5_1_b": "'Sets for free trial' category -",
+            "p5_1": "Free and free access to selected card sets from various categories",
+            "p6_1_b": "Question card category",
+            "p6_1": "Contains various card sets where you will find coaching questions, promoting, targeting and empowering every process and every meeting.",
+            "p7_1_b": "Picture card category",
+            "p7_1": "Built on the projection mechanism that allows the participant a large response space and the ability to express his inner world with various images and metaphors.",
+            "p8_1_b": "Message card category",
+            "p8_1": "Helps to start or end any meeting with a powerful message, for the right process of drawing conclusions and significant insights.",
+            "p9_1_b": "Holiday card category",
+            "p9_1": "Was created because Kabbalah teaches us that every holiday is a gate in the dimension of time, which opens at a certain time of the year and influences us. The holidays are a great opportunity to work with cards!",
+            "p10_1": "VIP category contains the card sets we chose for you from external creators - we offer a digital solution also for card set creators from the country and the world and choose for our customers the best sets! Use of the card sets in this category for an additional fee."
+          },
+          "mat_expansion_panel6": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "Plans, Prices and Cancellations"
+            },
+            "join_our_plans": "Join one of our plans and get -",
+            "full_access": {
+              "bold": "Full unlimited access -",
+              "normal": "Enjoy all the card sets on the site."
+            },
+            "guide_book": {
+              "bold": "A guide book attached to each card set -",
+              "normal": "Dozens of powerful questions and diverse suggestions for work."
+            },
+            "all_capabilities": {
+              "bold": "Use all capabilities -",
+              "normal": "Open and hidden cards, random card selection, shuffling, multiple selection for process work and more..."
+            },
+            "dynamic_content": {
+              "bold": "Renewing and dynamic content -",
+              "normal": "Additional card sets and new work techniques that are updated regularly by our home creators and external creators."
+            },
+            "we_offer": "We offer our customers 3 plans -",
+            "free_plan": {
+              "bold": "Free plan -",
+              "normal": "Grants use of sets under 'Free Trial Sets'."
+            },
+            "monthly_plan": {
+              "bold": "Monthly plan -",
+              "normal": "Grants use of home card sets for a month."
+            },
+            "annual_plan": {
+              "bold": "Annual plan -",
+              "normal": "Pay in advance for 12 months and enjoy a discount on the price! Pay in advance."
+            },
+            "vip_plan": {
+              "bold": "VIP sets -",
+              "normal": "Quality card sets from external creators. Each card set can be purchased in a monthly or annual plan according to the price set by the card set creator. Mentor-Cards customers enjoy a fixed and special price starting from - 9.9 NIS per month."
+            },
+            "cancellations": "Cancellations",
+            "cancellation_policy": {
+              "part1": "All site users enjoy a trial period before choosing the plan.",
+              "part2": "At the end of the plan period, the plan is automatically renewed for another period, we send an email 7 days before performing the charge again.",
+              "part3": "You can cancel the automatic charge at any time through the \"User Details\" area on the site and clicking on \"Cancel Automatic Charge\".",
+              "part4": "No cash refunds will be given for payments for partial billing periods on the site."
+            }
+          },
+          "mat_expansion_panel7": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "Key Principles in Working with Cards"
+            },
+            "first_step": {
+              "part1": "The first step in introspection begins with a pause.",
+              "part2": "The pause allows us to ask ourselves questions, and to check whether we are in the right direction for us.",
+              "part3": "From introspection, it will be possible to draw conclusions and build a plan of action forward.",
+              "part4": "\"Cards reveal\" - bypassing consciousness, help us reach deeper layers within us.",
+              "part5": "Cards expand our point of view beyond the comfort zone we are familiar with and offer us a variety of opportunities and new ways of thinking."
+            },
+            "key_principles": "Key Principles in Working with Cards",
+            "principle1": {
+              "part1": "Before each card draw, it is recommended to ask a question.",
+              "part2": "After drawing the card, allow time for the chooser to introspect the card and for the question asked to resonate.",
+              "part3": "Do not rush to ask another question."
+            },
+            "principle2": {
+              "part1": "The truth is in the eyes of the card chooser and therefore all the answers are correct.",
+              "part2": "There is no good or bad outcome.",
+              "part3": "The way the card chooser relates to his cards, expresses his personal perception and beliefs.",
+              "part4": "It is right to allow full legitimacy for choice and personal interpretation in order to create a safe space."
+            },
+            "principle3": {
+              "part1": "The guidebook offered for each card set is only a recommendation,",
+              "part2": "It is not mandatory and we even encourage you, to write your own questions and ideas and therefore we have created a dedicated place in the guidebook where you can type things before the meeting starts and even during it."
+            },
+            "principle4": {
+              "part1": "At any given moment it is possible to add or replace a card.",
+              "part2": "Before doing so, it is recommended to ask the card chooser - what in this card creates resistance in you?",
+              "part3": "What is the reason you did not connect to the card? There are no good or bad cards."
+            },
+            "principle5": {
+              "part1": "The choice of cards is correct for the present time and describes the interpretation, feelings, existence, and spirit of the card chooser at this moment.",
+              "part2": "At a different time or situation, a different reaction may arise."
+            }
+          },
+          "mat_expansion_panel8": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "How to Work with a Digital Card Set?"
+            },
+            "button": "Button -",
+            "first_step": "Once you have chosen a card set to work with, you have 5 buttons at the top of the screen:",
+            "flip_cards_button": {
+              "bold": "\"Flip the Cards\" -",
+              "normal": "By clicking on the button, you can choose which side of the cards will be visible."
+            },
+            "display_number_cards_button": {
+              "bold": "\"Display Number of Cards\" -",
+              "normal": "By clicking on the button, you can mark up to 5 cards and display them in an enlarged form on the screen."
+            },
+            "shuffle_button": {
+              "bold": "\"Shuffle\" -",
+              "normal": "Like in the \"real world\", clicking on the shuffle button changes the order of the cards."
+            },
+            "display_random_card_button": {
+              "bold": "\"Display a Random Card\" -",
+              "normal": "By clicking on the button, a random card will be selected from the card set and displayed in an enlarged form on the screen."
+            },
+            "edit_button": {
+              "bold": "\"Edit\" -",
+              "normal": "Allows hiding of specific cards. By clicking on the button, you can hide cards that you do not want to work with at the current time. Once you exit the card set or refresh the page, all the cards you chose to hide will reappear."
+            },
+            "guidebook_button": {
+              "bold": "\"Guidebook\" -",
+              "normal": "Opens in a separate screen. Contains a description of the specific card set, questions and ideas for one-on-one work, process work and group work divided into visible or hidden cards."
+            }
+          }
+        }
+      }
+    },
+    "siteRules": {
+      "span": {
+        "text": "Copyright © 2021 Mentor-Cards. All rights reserved.",
+        "siteRulesLink": "(To the site rules)"
+      },
+      "siteRulesSm": "(To the site rules)"
+    },
+    "service-page": {
+      "title": "Mentor-Cards Guide on Website Usage",
+      "layout": {
+        "buttons": {
+          "button1": "Add a card set to Mentor-cards",
+          "button2": "Create a digital card set on your website",
+          "button3": "Develop a digital card set from end to end",
+          "button4": "Guides and Workshops"
+        }
+      },
+      "content1": {
+        "suitableForTitle": "Who is it suitable for?",
+        "suitableForDescription": "For existing card set owners who want to create a digital version on the Mentor-cards website.",
+        "whatDoYouGetTitle": "What do you get?",
+        "benefits": {
+          "adaptContentTitle": "Adapting content and strategy to digital",
+          "adaptContentDescription": "Our team will read your content and make adjustments to digital at the professional level (by mutual decision and if necessary).",
+          "premiumUserTitle": "Premium user",
+          "premiumUserDescription": "VIP user with no time limit to the Mentor-cards site that allows use of all card sets on our site.",
+          "digitalizationTitle": "Digitalization",
+          "digitalizationDescription": "Your card set is adapted to digital - mixing, drawing a random card, hidden cards, revealed, displaying a number of cards on the screen and more! Everything we open in the future for our card sets, we will also open for you.",
+          "creatorTitle": "About the creator",
+          "creatorDescription": "Personal and business presentation on the card set page permanently. Exposure to all Mentor-cards customers in the present and future.",
+          "networkLaunchTitle": "Network launch",
+          "networkLaunchDescription": "Launching the card set in the Facebook group, Instagram, and initiator mailing to all Mentor-cards customers in the past and present. A target audience of thousands of coaches, therapists, and group leaders will be exposed to your digital card set.",
+          "purchaseLinkTitle": "Link to purchase the card set",
+          "purchaseLinkDescription": "In the launch post and on the card set page on the site permanently there will be a link that refers customers to a selected page to purchase your card set."
+        },
+        "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+      },
+      "form": {
+        "nameLabel": "Name",
+        "nameError": "Must enter a name",
+        "emailLabel": "Email",
+        "emailPlaceholder": "For example, name@example.com",
+        "emailErrorInvalid": "Must enter a valid email",
+        "emailErrorRequired": "Must enter an email",
+        "contentLabel": "Content",
+        "contentError": "Must enter content",
+        "submitButton": "Send"
+      },
+      "content2": {
+        "suitableForTitle": "Who is it suitable for?",
+        "suitableForDescription": "For existing card set owners who want to create a digital version on their website.",
+        "whatDoYouGetTitle": "What do you get?",
+        "benefits": {
+          "adaptContentTitle": "Adapting content and strategy to digital",
+          "adaptContentDescription": "Our team will read your content and make adjustments to digital at the professional level (by mutual decision and if necessary).",
+          "digitalizationTitle": "Digitalization",
+          "digitalizationDescription": "Your card set is adapted to digital - mixing, drawing a random card, hidden cards, revealed, displaying a number of cards on the screen and more! We will adjust the size and content to your site and provide technical service and support for everything related to the use and operation of your card set.",
+          "copyrightTitle": "Copyright",
+          "copyrightDescription": "The copyrights belong to you, the final product is 100% yours.",
+          "customerInterfaceTitle": "Customer interface",
+          "customerInterfaceDescription": "We meet twice - a coordination meeting at the beginning of the process and a meeting towards the end of the process to present your complete card set in digital, our questions and your highlights."
+        },
+        "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+      },
+      "content3": {
+        "suitableForTitle": "Who is it suitable for?",
+        "suitableForDescription": "For those who still do not have a card set and want one!",
+        "whatDoYouGetTitle": "What do you get?",
+        "benefits": {
+          "createCardSetTitle": "Creating a \"zero\" card set",
+          "createCardSetDescription": "You send us examples and ideas that you have accumulated so far, we work with professional illustrators who will turn your idea into a real product!",
+          "adaptContentTitle": "Adapting content and strategy to digital",
+          "adaptContentDescription": "We choose together a unique name for the set, we write the description of the set (like the back of a book), and the highlight - the instruction book of the card set for full guidance of your target audience.",
+          "digitalizationTitle": "Digitalization",
+          "digitalizationDescription": "Your card set is adapted to digital - mixing, drawing a random card, hidden cards, revealed, displaying a number of cards on the screen and more! All the capabilities from \"the real world\" in your digital card set!",
+          "copyrightTitle": "Copyright",
+          "copyrightDescription": "The copyrights belong to you, the final product is 100% yours.",
+          "customerInterfaceTitle": "Customer interface",
+          "customerInterfaceDescription": "We meet three times - a coordination meeting at the beginning of the process, a middle meeting for accuracies, changes and adjustments, a meeting towards the end of the process to present your card set in digital, our questions and your highlights."
+        },
+        "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+      },
+      "content4": {
+        "workshop1": {
+          "workshopName": "Workshop Name",
+          "workshopDescription": "Everything you need to know about working with online casting cards",
+          "suitableForTitle": "Who is it suitable for?",
+          "suitableForDescription": "Colleges and schools, coaches, therapists, educators, group leaders and people who work with people.",
+          "whatDoYouGetTitle": "What do you get?",
+          "benefits": {
+            "keyPrinciples": "Key principles in working with casting cards.",
+            "existingOptions": "What are the existing options for working with online casting cards?",
+            "whenToUseCards": "When is it most recommended to incorporate cards into the guidance / coaching / treatment process?",
+            "examples": "Examples of questions and techniques for working with online cards.",
+            "jointExperience": "Joint experience - feeling how meaningful and powerful work with cards is.",
+            "resistance": "Types of resistance to working with cards and how to cope."
+          },
+          "workshopDuration": "The duration of the workshop is 3-5 hours depending on the number of participants"
+        },
+        "workshop2": {
+          "workshopName": "Workshop Name",
+          "workshopDescription": "Values as a connecting tool between employees and the organization",
+          "suitableForTitle": "Who is it suitable for?",
+          "suitableForDescription": "Private and public organizations, institutional bodies that aspire to create a connection between the management staff and the employees and the core values of the organization in a creative and experiential way.",
+          "whatDoYouGetTitle": "What do you get?",
+          "benefits": {
+            "valueDefinition": "Definition of the concept of value - what is a value and why is it important to know my leading values and those of the organization in which I work?",
+            "personalValues": "Personal acquaintance of each employee with his values and the establishment of his personal value ladder.",
+            "thinkingGroups": "Thinking groups: finding and defining the 5 core values of the organization through a card game (the hardest you played).",
+            "connectingValues": "How do we connect the values we found to the purpose and vision of the organization?",
+            "opposingValues": "What to do when an employee / colleague of mine acts contrary to values?"
+          },
+          "workshopDuration": "The duration of the workshop is 4-6 hours depending on the number of participants"
+        },
+        "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+      },
+      "contactForm": {
+        "form": {
+          "nameLabel": "Name",
+          "nameError": "Must enter a name",
+          "emailLabel": "Email",
+          "emailPlaceholder": "For example, name@example.com",
+          "emailErrorInvalid": "Must enter a valid email",
+          "emailErrorRequired": "Must enter an email",
+          "contentLabel": "Content",
+          "contentError": "Must enter content",
+          "submitButton": "Send"
+        }
+      },
+      "accordion": {
+        "workshop1": {
+          "workshopName": "Adding a card set to Mentor-cards",
+          "suitableForTitle": "Who is it suitable for?",
+          "suitableForDescription": "For owners of existing card sets who want to create a digital version on the Mentor-cards site.",
+          "whatDoYouGetTitle": "What do you get?",
+          "benefits": {
+            "adaptContentTitle": "Adapting content and strategy to digital",
+            "adaptContentDescription": "Our team will read your content and make adjustments to digital at the professional level (by mutual decision and if necessary).",
+            "premiumUserTitle": "Premium user",
+            "premiumUserDescription": "VIP user with no time limit to the Mentor-cards site that allows use of all card sets on our site.",
+            "digitalizationTitle": "Digitalization",
+            "digitalizationDescription": "Your card set is adapted to digital - mixing, drawing a random card, hidden cards, revealed, displaying a number of cards on the screen and more! Everything we will open in the future for our card sets, we will also open for you.",
+            "aboutTheCreatorTitle": "\"About the Creator\"",
+            "aboutTheCreatorDescription": "Personal and business presentation on the card set page permanently. Exposure to all Mentor-cards customers in the present and future.",
+            "networkLaunchTitle": "Network launches",
+            "networkLaunchDescription": "Launching the card set in the Facebook group, Instagram, and initiator mailing to all Mentor-cards customers in the past and present. A target audience of thousands of coaches, therapists and group leaders will be exposed to your digital card set.",
+            "purchaseLinkTitle": "Link to purchase the card set",
+            "purchaseLinkDescription": "In the launch post and on the card set page on the site permanently there will be a link that refers customers to the selected page to purchase your card set."
+          },
+          "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+        },
+        "workshop2": {
+          "workshopName": "Creating a digital card set on your site",
+          "suitableForTitle": "Who is it suitable for?",
+          "suitableForDescription": "For owners of existing card sets who want to create a digital version on their site.",
+          "whatDoYouGetTitle": "What do you get?",
+          "benefits": {
+            "adaptContentTitle": "Adapting content and strategy to digital",
+            "adaptContentDescription": "Our team will read your content and make adjustments to digital at the professional level (by mutual decision and if necessary).",
+            "digitalizationTitle": "Digitalization",
+            "digitalizationDescription": "Your card set is adapted to digital - mixing, drawing a random card, hidden cards, revealed, displaying a number of cards on the screen and more! We will adjust the size and content to your site and provide technical service and support for everything related to the use and operation of your card set.",
+            "copyrightTitle": "Copyright",
+            "copyrightDescription": "The copyrights belong to you, the final product is 100% yours.",
+            "customerInterfaceTitle": "Customer interface",
+            "customerInterfaceDescription": "We meet twice - an expectation coordination meeting at the beginning of the process and a meeting towards the end of the process to present your digital card set, our questions and your highlights."
+          },
+          "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+        },
+        "workshop3": {
+          "workshopName": "Developing a digital card set \"end to end\"",
+          "suitableForTitle": "Who is it suitable for?",
+          "suitableForDescription": "For those who still do not have a card set and want one!",
+          "whatDoYouGetTitle": "What do you get?",
+          "benefits": {
+            "createFromScratchTitle": "Creating a card set \"from scratch\"",
+            "createFromScratchDescription": "You send us examples and ideas that you have accumulated so far, we work with professional illustrators who will turn your idea into a real product!",
+            "adaptContentTitle": "Adapting content and strategy to digital",
+            "adaptContentDescription": "We choose together a unique name for the set, we write the description of the set (like the back of a book), and the headline - the instruction book of the card set for full guidance of your target audience.",
+            "digitalizationTitle": "Digitalization",
+            "digitalizationDescription": "The card set is adapted to digital - mixing, drawing a random card, hidden cards, revealed, displaying a number of cards on the screen and more! All the abilities from \"the real world\" in your digital card set!",
+            "copyrightTitle": "Copyright",
+            "copyrightDescription": "The copyrights belong to you, the final product is 100% yours.",
+            "customerInterfaceTitle": "Customer interface",
+            "customerInterfaceDescription": "We meet three times - an expectation coordination meeting at the beginning of the process, a middle meeting for accuracies, changes and adjustments, a meeting towards the end of the process to present your digital card set, our questions and your highlights."
+          },
+          "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+        },
+        "workshop4": {
+          "workshopName": "Workshops and Seminars",
+          "workshopDescription": "Name of the workshop",
+          "workshop1": {
+            "workshopName": "Everything you need to know about working with online projection cards",
+            "suitableForTitle": "Who is it suitable for?",
+            "suitableForDescription": "Colleges and schools, coaches, therapists, educators, group leaders and people who work with people.",
+            "whatDoYouGetTitle": "What do you get?",
+            "benefit1": "Key principles in working with projection cards.",
+            "benefit2": "What are the existing options for working with online projection cards?",
+            "benefit3": "When is it most recommended to incorporate cards into the guidance / coaching / treatment process?",
+            "benefit4": "Examples of questions and techniques for working with online cards.",
+            "benefit5": "Joint experience - feeling how much work with cards is significant and powerful.",
+            "benefit6": "Types of resistance to working with cards and how to cope.",
+            "workshopDuration": "The duration of the workshop is 3-5 hours depending on the number of participants",
+            "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+          },
+          "workshop2": {
+            "workshopName": "Values as a connecting tool between employees and the organization",
+            "suitableForTitle": "Who is it suitable for?",
+            "suitableForDescription": "Private and public organizations, institutional bodies that aspire to create a connection between the management staff and the employees and the core values of the organization in a creative and experiential way.",
+            "whatDoYouGetTitle": "What do you get?",
+            "benefit1": "Definition of the concept of value - what is a value and why is it important to know my leading values and those of the organization in which I work?",
+            "benefit2": "Personal acquaintance of each employee with his values and the establishment of his personal value ladder.",
+            "benefit3": "Thinking groups: finding and defining the 5 core values of the organization through a card game (the hardest you played).",
+            "benefit4": "How do we connect the values we found to the purpose and vision of the organization?",
+            "benefit5": "What do you do when an employee / colleague of mine acts contrary to values?",
+            "workshopDuration": "The duration of the workshop is 4-6 hours depending on the number of participants",
+            "getPriceQuote": "To get a price quote, leave details and we will get back to you"
+          }
+        }
+      }
+    },
+    "affiliates-page": {
+      "header": "Come be our partners!!",
+      "top-container-body": "Our affiliate program will allow you, in addition to additional and regular income, to receive professional tools from us, meetings with new customers, networking and business opportunities.",
+      "top-container-button": "Want to join?",
+      "card-container-header": "What does it mean in practice?",
+      "card-container-header-container": "Being our partners comes with many cool things: commissions from profits, fast support and personal attention, personal benefits for your customers, exposure to potential audience, and most importantly - joining our professional partners community!",
+      "card": {
+        "card2": {
+          "card-header": "Digital card set - on us!",
+          "card-container": "Do you have your own card set? We will create a digital version for you on our site with all your details! (Your copyrights are at the top of our priorities) + Direct link to purchase your physical card set!"
+        },
+        "card1": {
+          "card-header": "We share profits with you",
+          "card-container": "10% from system licenses for every paying customer who came through you"
+        },
+        "card4": {
+          "card-header": "We cultivate a community with you",
+          "card-container1": "Position yourself as an authority in our community",
+          "card-container2": "“Mentor-Cards”",
+          "card-container3": "Professional training, networking meetings and more treats!"
+        },
+        "card3": {
+          "card-header": "We help you grow",
+          "card-container1": "Free system license - all card sets open at no cost, for your professionalization in the system - Walk the Talk!",
+          "card-container2": "25% discount for those who register through you on their first payment"
+        }
+      },
+      "card-container-footer": "Who is the program intended for?",
+      "card-container-footer-container": "Personal coaches | Therapists | Educators | Managers | Card set owners",
+      "form": {
+        "title": "How to join?",
+        "body": "Super simple! Leave your details here and we will get back to you with all the details:",
+        "form": {
+          "firstname": "Last name",
+          "lastname": "First name",
+          "email": "Email",
+          "mobile": "Mobile",
+          "submit-button": "Talk to me"
+        }
+      },
+      "footer": "So what do you say, shall we be partners?"
+    },
+    "home-page": {
+      "bg-color": "#fcf4f2",
+      "sections": {
+        "hero": {
+          "component": "app-home-page-hero",
+          "content": {
+            "title": "When words run out, the cards come in",
+            "button-1-text": "Enter the card sets",
+            "button-2-text": "I want a subscription"
+          }
+        },
+        "sub-hero": {
+          "component": "app-home-page-sub-hero",
+          "content": {
+            "title1": "Mentor-Cards",
+            "title2": "A home for digital card sets",
+            "description1": "Welcome to the right era, the space where projective work cards are digital.",
+            "description2": "At Mentor-Cards you will find digital card sets on any subject and for any need, as well as guidebooks, activation ideas, and inspiring guiding questions. All this is divided by categories and goals: group meetings, personal meetings, process work, with groups and more.",
+            "description3": "If you belong to the professions of therapy, guidance, coaching, management, educators, lecturers, or simply people who love working with people – Mentor-Cards is your winning card."
+          }
+        },
+        "cards": {
+          "component": "app-home-page-cards",
+          "content": {
+            "title": "All Card Packs",
+            "search-placeholder": "What is the topic of your meeting? Look for a kit",
+            "cardsList": [
+              {
+                "content": "Acquaintance and Connection"
+              },
+              {
+                "content": "Relationship Systems"
+              },
+              {
+                "content": "Children and Youth"
+              },
+              {
+                "content": "Connection to Myself"
+              },
+              {
+                "content": "Leadership"
+              },
+              {
+                "content": "Vision and Goals"
+              },
+              {
+                "content": "Empowerment"
+              },
+              {
+                "content": "Holidays"
+              },
+              {
+                "content": "Career"
+              },
+              {
+                "content": "Emotions"
+              },
+              {
+                "content": "Crises"
+              },
+              {
+                "content": "For All Values"
+              }
+            ]
+          }
+        },
+        "try-this": {
+          "content": {
+            "title1": "Mentor-Cards -",
+            "title2": "This platform is your ace!",
+            "description1": "Mentor-Cards are much more than projective card sets.",
+            "description2": "In addition to full access to a huge database of constantly updated sets, you can enjoy a huge variety of guidebooks on various topics, activation ideas, and inspiring guiding questions. All this is divided by categories and goals: group meetings, personal meetings, process work, with groups and more.",
+            "description3": "From word cards to picture cards, from message cards to question cards, from opening cards to subconscious bypass cards – we have a set for every method!",
+            "description4": "Try it, you might fall in love",
+            "description5": "Two card sets are available for you to try, without a subscription and without commitment, offered with love.",
+            "description6": "Feel free to experience, try and discover how Mentor-Cards is everything you were looking for.",
+            "button": {
+              "text": "Try the sets for free"
+            }
+          }
+        },
+        "how-to-use": {
+          "component": "app-home-page-how-to-use",
+          "content": {
+            "title": "How to use Mentor-Cards?",
+            "follow-us": {
+              "text": "Want to get more tips and ideas? Follow us",
+              "social-icons": [
+                {
+                  "alt": "tik-tok image"
+                },
+                {
+                  "alt": "fb image"
+                },
+                {
+                  "alt": "insta image"
+                },
+                {
+                  "alt": "you-tube image"
+                },
+                {
+                  "alt": "whats-app image"
+                }
+              ]
+            }
+          }
+        },
+        "advantage": {
+          "content": {
+            "title1": "Sorry,",
+            "title2": "what's all the buzz",
+            "title3": "around projective cards?",
+            "description1": "If you are not yet addicted or familiar enough with all the goodness of working with projective cards, let's reveal some advantages",
+            "description2": "for you",
+            "description3": "or for your patients and clients:",
+            "advantages": [
+              {
+                "title1": "Cards peel and open",
+                "title2": "the subconscious",
+                "description1": "Our thinking brain is full of fears, limiting beliefs, and inhibitions. Cards are a projective tool that allows us to connect to the true desire that",
+                "description2": "is often well hidden in the depths of the subconscious. In other words – processes are shortened and discoveries are surprising."
+              },
+              {
+                "title1": "Mirror, mirror",
+                "title2": "on the wall",
+                "description": "Cards are much more than cards, they create an opportunity for indirect dialogue in sensitive places where it hurts too much to approach. A possible and gentle way for healing and recovery dialogue, an opportunity for significant closeness between the person and themselves."
+              },
+              {
+                "title1": "If you work with cards",
+                "title2": "you reach wonderful places",
+                "description": "Working with cards opens the heart and mind. Using cards makes every meeting unforgettable, dynamic, and interactive. The fun way to increase involvement in the process and success."
+              }
+            ]
+          }
+        },
+        "clients": {
+          "content": {
+            "title1": "So many sets,",
+            "title2": "so little time",
+            "description1": "Most of us order our food through an app, read books digitally. It was only a matter of time before therapeutic",
+            "description2": "projective cards would join the way we like to consume our products and go online.",
+            "description3": "Mentor-Cards is a digital paradise for you - countless card sets, guides, and inspiration in an up-to-date variety that suits each of your clients",
+            "description4": "or your goals.",
+            "description5": "Just connect to a mobile, computer, or tablet from anywhere in the country or the world and enjoy a friendly and easy user experience that you already know! Just",
+            "description6": "maybe not yet with cards...",
+            "statistics": [
+              {
+                "value": "+40",
+                "label1": "sets",
+                "label2": "cards"
+              },
+              {
+                "value": "+7800",
+                "label1": "users",
+                "label2": "on the site"
+              },
+              {
+                "value": "+300",
+                "label1": "ideas",
+                "label2": "for using cards"
+              }
+            ]
+          }
+        },
+        "clients-card": {
+          "content": {
+            "title1": "More partners, more cards,",
+            "title2": "more clients, more successes",
+            "description1": "Mentor-Cards is much more than an easy-to-use platform, ideas, and inspiration for digital card sets. Here is the stage and place to also include you and your sets in the picture.",
+            "description2": "Earn commissions, expand the customer circle, enjoy tutorials, nurture a community, and much more.",
+            "description3": "Do you have sets that everyone must work with, know and see? Come be our partners.",
+            "button": {
+              "text": "Join the action"
+            }
+          }
+        },
+        "partners": {
+          "content": {
+            "title1": "Organizations and partners",
+            "description1": "The people behind",
+            "description2": "the cards",
+            "description3": "Hi, nice to meet you, Yarden Stampu and Dudi Neman, people who dream and mostly fulfill, partners in the way and the vision. Out of a desire to enable growth and development for thousands of therapists and coaches in Israel and around the world, we built a friendly and super intuitive platform for our users, where they can work with cards in front of their clients. All this in online meetings exactly in the same way they used to in face-to-face meetings, with guidebooks full of explanations and examples. With one significant difference – without carrying, without effort, without feeling like dinosaurs. 😊",
+            "description4": "And no less important, with a lot of room for our service and the desire to be your address for anything or any card.",
+            "button": {
+              "text": "Read more about us"
+            }
+          }
+        },
+        "updates": {
+          "content": {
+            "title": "News and updates",
+            "description1": "We are constantly innovating and improving and our system is constantly being updated,",
+            "description2": "you should see what's new with us.",
+            "updates": [
+              {
+                "date": "(20.02.2024)",
+                "description": "We have added a new feature for interactive joint work on the site! Click on the link inside the card set, send it to others on WhatsApp and they have free access to the card set on the site for a whole 3 hours! Try it, it's genius :)"
+              },
+              {
+                "date": "(04.03.2024)",
+                "description": "We have renewed the emoji set! Now waiting for you in the set are 80 different and familiar emoji cards. Works wonderfully with children and teenagers, and of course, with adults :)"
+              },
+              {
+                "date": "(04.03.2024)",
+                "description": "Ahead of the Purim holiday, we have opened access to the mask set for everyone! 👹🤠🤡"
+              }
+            ]
+          }
+        },
+        "contact-us": {
+          "content": {
+            "title": "Talk to us in cards",
+            "description": "We will be happy to serve you on any topic!",
+            "form": {
+              "name-label": "Name",
+              "phone-label": "Phone",
+              "email-label": "Email",
+              "message-label": "How can we help?",
+              "submit-button": "Send"
+            }
+          }
+        },
+        "footer": {
+          "content": {
+            "contact": "support@mentor-cards.com",
+            "follow-us": "Follow our community for tips",
+            "social-icons": [
+              {
+                "alt": "tik-tok image"
+              },
+              {
+                "alt": "fb image"
+              },
+              {
+                "alt": "insta image"
+              },
+              {
+                "alt": "you-tube image"
+              }
+            ],
+            "links": [
+              {
+                "category": "main-links",
+                "items": [
+                  {
+                    "text": "Card Sets"
+                  },
+                  {
+                    "text": "Digital Courses"
+                  },
+                  {
+                    "text": "Our Plans"
+                  },
+                  {
+                    "text": "FAQ"
+                  }
+                ]
+              },
+              {
+                "category": "extra-links",
+                "items": [
+                  {
+                    "text": "Services"
+                  },
+                  {
+                    "text": "About"
+                  },
+                  {
+                    "text": "Affiliate Program"
+                  },
+                  {
+                    "text": "Accessibility Statement"
+                  }
+                ]
+              }
+            ],
+            "mobile-links": [
+              {
+                "text": "Site Policy"
+              },
+              {
+                "text": "Card Sets"
+              },
+              {
+                "text": "Digital Courses"
+              },
+              {
+                "text": "Our Plans"
+              },
+              {
+                "text": "FAQ"
+              },
+              {
+                "text": "Services"
+              },
+              {
+                "text": "About"
+              },
+              {
+                "text": "Affiliate Program"
+              },
+              {
+                "text": "Accessibility Statement"
+              },
+              {
+                "text": "Contact"
+              }
+            ],
+            "copyright": "© 2024 Mentor-Cards. All rights reserved."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "siteRules": {
+      "title": "All rights reserved to the creators of the site Mentor-Cards ©",
+      "summery": {
+        "rule1": "All information and/or display on the site including graphics, design, verbal presentation, trademarks, “logo” signs and their editing and presentation are the exclusive property of the site and may not be copied, duplicated, distributed, publicly displayed, transferred to a third party, published or used in any other way in the contents appearing on the site, unless the site has given its consent to do so in writing and in advance.",
+        "rule2": "The site will not be responsible for any direct or indirect damage, bodily, financial or other, caused to a person or a visitor to the site as a result of using the information appearing on the site.",
+        "rule3": "The information appearing on the site should be seen as auxiliary information only.",
+        "rule4": "Those interested in displaying content from this site or collaborations should contact Mentor-cards in writing and only after our written approval can you use the contents.",
+        "rule5": "Mentor-cards reserves copyright and all content of the site is original or has appropriate approvals.",
+        "rule6": "The availability of card packs and content may change from time to time."
+      }
+    }
+  },
+  "selectLanguageTooltip": "Select a language"
+}

@@ -1,20 +1,26 @@
-<title>{{'pages.all-packs-page.title' | translate}}</title>
+<title>{{ "pages.all-packs-page.title" | translate }}</title>
 <div id="content" [dir]="langDirectionService.currentLangDirection">
   <!-- <div *ngIf="langDirectionService.currentLangDirection == 'rtl'" id="filters" class="float-right"> -->
-    <div id="filters" ngClass="{{langDirectionService.currentLangDirection == 'rtl' ? 'float-right' : 'float-left'}}">
-    <button
-      id="couponCodeBtn"
-      type="button"
-      (click)="openNewTab()"
-    >
-  {{'pages.all-packs-page.coupon-code-btn-1' | translate}}<br> {{'pages.all-packs-page.coupon-code-btn-2' | translate}} </button>
-    <h3 id="filter-by-options-title">{{'pages.all-packs-page.mat-section-title' | translate}}</h3>
+  <div
+    id="filters"
+    ngClass="{{
+      langDirectionService.currentLangDirection == 'rtl'
+        ? 'float-right'
+        : 'float-left'
+    }}"
+  >
+    <button id="couponCodeBtn" type="button" (click)="openNewTab()">
+      {{ "pages.all-packs-page.coupon-code-btn-1" | translate }}<br />
+      {{ "pages.all-packs-page.coupon-code-btn-2" | translate }}
+    </button>
+    <h3 id="filter-by-options-title">
+      {{ "pages.all-packs-page.mat-section-title" | translate }}
+    </h3>
     <mat-selection-list
       #categories
       (selectionChange)="categoriesSelectedChange($event); filterPacks()"
       [dir]="langDirectionService.currentLangDirection"
     >
-
       <mat-list-option
         color="primary"
         disableRipple
@@ -23,7 +29,9 @@
         [value]="category"
       >
         <!-- <span> -->
-        <span style="margin-right: 10px;">  {{ 'pages.all-packs-page.categories.' + category | translate}} </span>
+        <span style="margin-right: 10px">
+          {{ "pages.all-packs-page.categories." + category | translate }}
+        </span>
         <!-- <div class="d-flex justify-content-end align-items-baseline category">
           <mat-icon class="category-color-dot" [style.color]="getCategoryColor(category)">
             circle
@@ -39,7 +47,9 @@
       </button> -->
     </mat-selection-list>
     <br />
-    <h3 id="filter-by-options-title" *ngIf="allFavPacks.length != 0">{{'pages.all-packs-page.my-Favorite'|translate}}</h3>
+    <h3 id="filter-by-options-title" *ngIf="allFavPacks.length != 0">
+      {{ "pages.all-packs-page.my-Favorite" | translate }}
+    </h3>
     <mat-selection-list
       #favorites
       (selectionChange)="favoritesSelectedChange($event); filterPacks()"
@@ -54,7 +64,7 @@
       </mat-list-option>
     </mat-selection-list>
   </div>
-  
+
   <!-- <div class="all-packs-view" #old>
     <div *ngIf="allOwnedPacks().length != 0">
       <h1 *ngIf="signedIn && !trialMonthExpDate" style="text-align: center; margin-left: 14rem;">ערכות הקלפים שלי</h1>
@@ -85,12 +95,27 @@
   </div> -->
   <!--test-->
   <div id="test" class="all-packs-view" #new>
-     <h1 class="header">"{{'pages.all-packs-page.sub-header' | translate}}"</h1>
-    <br /> 
+    <h1 class="header">
+      "{{ "pages.all-packs-page.sub-header" | translate }}"
+    </h1>
+    <br />
     <div class="searchbar">
-      <p style="text-align: center; font-size: X-large;padding-top: 0.5rem; padding-bottom:0.5rem; max-width: 90%;margin-bottom: -0.1rem;">{{'pages.all-packs-page.sub-header-2' | translate}}</p>
+      <p
+        style="
+          text-align: center;
+          font-size: X-large;
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+          max-width: 90%;
+          margin-bottom: -0.1rem;
+        "
+      >
+        {{ "pages.all-packs-page.sub-header-2" | translate }}
+      </p>
       <mat-form-field class="search">
-        <mat-label>{{'pages.all-packs-page.search-placeholder' | translate}}</mat-label>
+        <mat-label>{{
+          "pages.all-packs-page.search-placeholder" | translate
+        }}</mat-label>
         <input
           #filterText
           matInput
@@ -100,27 +125,46 @@
           (keyup)="filterOptions()"
           (keydown)="handleKeyDown($event)"
         />
-        <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0" class="autocomplete-options" id="autocomplete-options">
-          <mat-option *ngFor="let option of filteredOptions; let i = index"
-          (keydown)="handleKeyDown($event)" #autocompleteOptions (click)="selectOption(option)">
+        <div
+          *ngIf="!stopGenerateOptions && filteredOptions.length > 0"
+          class="autocomplete-options"
+          id="autocomplete-options"
+        >
+          <mat-option
+            *ngFor="let option of filteredOptions; let i = index"
+            (keydown)="handleKeyDown($event)"
+            #autocompleteOptions
+            (click)="selectOption(option)"
+          >
             {{ option }}
           </mat-option>
         </div>
       </mat-form-field>
     </div>
     <br /><br /><br />
-    <div class="d-flex flex-row flex-wrap card-section" *ngIf="!showCategoryLine">
-      <app-pack
-      class="pack"
-      *ngFor="let packInfo of allPacks"
-      [packInfo]="packInfo"
-      [orgName]="userData?.orgMembership?.name"
-      (loaded)="packLoaded()"
+    <div
+      class="d-flex flex-row flex-wrap card-section"
+      *ngIf="!showCategoryLine"
     >
-    </app-pack>
+      <app-pack
+        class="pack"
+        *ngFor="let packInfo of allPacks"
+        [packInfo]="packInfo"
+        [orgName]="userData?.orgMembership?.name"
+        (loaded)="packLoaded()"
+      >
+      </app-pack>
     </div>
-    <p style="font-size: x-large;text-align: center;" *ngIf="allPacks.length == 0 && isPageLoaded">מצטערים אך לא מצאנו משהו שעונה על החיפוש שלך...</p>
-    <div class="all-packs-view__section" *ngIf="showCategoryLine && allFavPacks.length != 0">
+    <p
+      style="font-size: x-large; text-align: center"
+      *ngIf="allPacks.length == 0 && isPageLoaded"
+    >
+      מצטערים אך לא מצאנו משהו שעונה על החיפוש שלך...
+    </p>
+    <div
+      class="all-packs-view__section border-b-2 border-gray-600"
+      *ngIf="showCategoryLine && allFavPacks.length != 0"
+    >
       <div
         class="category-line d-flex align-items-center justify-content-around"
       >
@@ -149,54 +193,110 @@
           class="category-line d-flex align-items-center justify-content-around"
         >
           <div class="first-line"></div>
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות להתנסות חופשית' && userData?.status === 'NOPLAN'"     
-          matTooltip="ערכות שנבחרו על ידי הצוות שלנו והגישה אליהן חופשית. ערכות אלו מתחלפות בכל תחילת חודש. "
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="
+              categoryPacks.category === 'ערכות להתנסות חופשית' &&
+              userData?.status === 'NOPLAN'
+            "
+            matTooltip="ערכות שנבחרו על ידי הצוות שלנו והגישה אליהן חופשית. ערכות אלו מתחלפות בכל תחילת חודש. "
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות להתנסות חופשית' && userData?.status === 'PLAN'"     
-          matTooltip="ערכות שנבחרו על ידי הצוות שלנו. ערכות אלו מתחלפות בכל תחילת חודש."
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="
+              categoryPacks.category === 'ערכות להתנסות חופשית' &&
+              userData?.status === 'PLAN'
+            "
+            matTooltip="ערכות שנבחרו על ידי הצוות שלנו. ערכות אלו מתחלפות בכל תחילת חודש."
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'ערכות VIP'"     
-          matTooltip="ערכות של יוצרים ואמנים מהעולם"
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="categoryPacks.category === 'ערכות VIP'"
+            matTooltip="ערכות של יוצרים ואמנים מהעולם"
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'נעים להכיר'"     
-          matTooltip="ערכות קלפי שאלות המתאימות לפעילויות היכרות שונות"
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="categoryPacks.category === 'נעים להכיר'"
+            matTooltip="ערכות קלפי שאלות המתאימות לפעילויות היכרות שונות"
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי תמונה'"     
-          matTooltip="בכל ערכה עשרות קלפי תמונות שונות, 
+          <h3
+            class="categrory-title"
+            *ngIf="categoryPacks.category === 'קלפי תמונה'"
+            matTooltip="בכל ערכה עשרות קלפי תמונות שונות, 
           תחת נושא אחד ספציפי."
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי שאלות'"     
-          matTooltip="בכל ערכה עשרות קלפי שאלות שונות, 
+          <h3
+            class="categrory-title"
+            *ngIf="categoryPacks.category === 'קלפי שאלות'"
+            matTooltip="בכל ערכה עשרות קלפי שאלות שונות, 
           מפתחות ומעצימות."
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי חגים'"     
-          matTooltip="ערכות קלפים המשלבות מוטיבים מחגי ישראל."
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="categoryPacks.category === 'קלפי חגים'"
+            matTooltip="ערכות קלפים המשלבות מוטיבים מחגי ישראל."
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי מילה'"     
-          matTooltip="ערכות קלפים עם מילים בלבד, תחת נושא אחד ספציפי."
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="categoryPacks.category === 'קלפי מילה'"
+            matTooltip="ערכות קלפים עם מילים בלבד, תחת נושא אחד ספציפי."
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category === 'קלפי מסרים'"     
-          matTooltip="ערכות קלפים עם משפטי השראה והעצמה. "
-          [matTooltipClass]="{ 'tooltip-class': true }">{{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="categoryPacks.category === 'קלפי מסרים'"
+            matTooltip="ערכות קלפים עם משפטי השראה והעצמה. "
+            [matTooltipClass]="{ 'tooltip-class': true }"
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
-          
-          <h3 class="categrory-title"  *ngIf="categoryPacks.category !== 'קלפי מסרים' 
-          && categoryPacks.category !== 'קלפי מילה'
-          && categoryPacks.category !== 'קלפי חגים'
-          && categoryPacks.category !== 'ערכות להתנסות חופשית'
-          && categoryPacks.category !== 'ערכות VIP'
-          && categoryPacks.category !== 'נעים להכיר'
-          && categoryPacks.category !== 'קלפי תמונה'
-          && categoryPacks.category !== 'קלפי שאלות'">
-            {{ categoryPacks.category }}</h3>
+          <h3
+            class="categrory-title"
+            *ngIf="
+              categoryPacks.category !== 'קלפי מסרים' &&
+              categoryPacks.category !== 'קלפי מילה' &&
+              categoryPacks.category !== 'קלפי חגים' &&
+              categoryPacks.category !== 'ערכות להתנסות חופשית' &&
+              categoryPacks.category !== 'ערכות VIP' &&
+              categoryPacks.category !== 'נעים להכיר' &&
+              categoryPacks.category !== 'קלפי תמונה' &&
+              categoryPacks.category !== 'קלפי שאלות'
+            "
+          >
+            {{ categoryPacks.category }}
+          </h3>
 
           <div class="second-line"></div>
         </div>
@@ -216,7 +316,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- <app-fb-chat></app-fb-chat> -->

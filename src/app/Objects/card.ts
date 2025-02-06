@@ -1,19 +1,25 @@
 export class Card {
-    frontImgUrl: string;
-    backImgUrl: string;
-    index: number;
-    flipped: boolean = false;
-    rotation: number = 0; // 0, 90, 180, 270
-    isPortrait: boolean = true;
+  categoryName: string;
+  categoryStepNumber: number;
+  cardsImages: cardsImages[];
+  index: number;
+  rotation: number;
+  constructor() {}
 
-    constructor() { }
+  deserialize(input: any) {
+    Object.assign(this, input);
+    return this;
+  }
+}
 
-    deseralize(input: any, packBackImgUrl: string) {
-        this.frontImgUrl = input.frontImgUrl;
-        if (input.backImgUrl)
-            this.backImgUrl = input.backImgUrl;
-        else if (packBackImgUrl)
-            this.backImgUrl = packBackImgUrl;
-        return this;
-    }
+export class cardsImages {
+  backImgUrl: string;
+  frontImgUrl: string;
+  rotation: number; // 0, 90, 180, 270
+  isPortrait: boolean;
+  flipped: boolean;
+  resizedHeight: number;
+  resizedWidth: number;
+  height: any;
+  frontNewDimensions?: { width: number; height: number }; // Add this line to the interface
 }

@@ -15,6 +15,8 @@ import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { AboutAuthorComponent } from '../about-author/about-author.component';
 import { Platform } from '@angular/cdk/platform';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
+import { PackDataService } from 'src/app/Services/pack-data.service';
 const millisecondsInMonth: number = 2505600000;
 
 @Component({
@@ -32,6 +34,7 @@ export class PackPreviewComponent implements OnInit {
   discount: number;
   neverShowAgain: boolean = false;
   isMobile: boolean = false;
+  isExpland: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: previewData,
@@ -41,21 +44,35 @@ export class PackPreviewComponent implements OnInit {
     public router: Router,
     private ngZone: NgZone,
     private mixpanel: MixpanelService,
-    private platform: Platform
-  ) { }
+    private platform: Platform,
+    public langDirectionService: LangDirectionService,
+    private packDataService: PackDataService
+  ) {}
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      const dialogElement = document.querySelector('.mat-dialog-container');
+      if (dialogElement) {
+        dialogElement.addEventListener('mouseleave', this.closeDialog);
+      }
+    });
+  }
 
   ngOnInit(): void {
+    console.log('pack preview', this.data.pack);
     let sub = this.userAuthService.userDataEmmiter.subscribe(() => {
       sub.unsubscribe();
       this.closeDialog();
     });
     const ls = localStorage.getItem('packsToOpenAutomatically');
+    console.log('Top questions retrieved:', ls);
     const packsToOpenAutomatically = ls ? ls.split(',') : [];
     if (
       packsToOpenAutomatically.includes(this.data.pack.id) &&
       this.data.pack.cards.length !== 0
-    )
+    ) {
       this.navigateToPackView(true);
+    }
 
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
     this.userData = this.userAuthService.userData;
@@ -66,7 +83,9 @@ export class PackPreviewComponent implements OnInit {
       if (this.yearlyPlan) {
         this.yearlyPlan['priceForMentorCardsMembers'] =
           Math.round(
-            this.yearlyPlan?.fullPrice * (1 - this.yearlyPlan?.discount / 100) * 10
+            this.yearlyPlan?.fullPrice *
+              (1 - this.yearlyPlan?.discount / 100) *
+              10
           ) / 10;
       }
 
@@ -77,13 +96,13 @@ export class PackPreviewComponent implements OnInit {
         this.monthlyPlan['priceForMentorCardsMembers'] =
           Math.round(
             this.monthlyPlan?.fullPrice *
-            (1 - this.monthlyPlan?.discount / 100) *
-            10
+              (1 - this.monthlyPlan?.discount / 100) *
+              10
           ) / 10;
       }
       this.discount = Math.round(
         (1 - this.yearlyPlan?.fullPrice / (this.monthlyPlan?.fullPrice * 12)) *
-        100
+          100
       );
     }
 
@@ -91,15 +110,19 @@ export class PackPreviewComponent implements OnInit {
       this.isMobile = true;
     }
 
+    // Set top questions in PackDataService
+    if (this.data.pack.topQuestions) {
+      this.packDataService.setTopQuestions(this.data.pack.topQuestions);
+      console.log('Top questions set:', this.data.pack.topQuestions);
+    }
   }
 
   redirect(): void {
-    this.mixpanel.track("RedirectToExternalCreator",
-      {
-        "Pack ID": this.data.pack.id,
-        "Pack name": this.data.pack?.name,
-        "Link": this.data.pack?.about.link
-      });
+    this.mixpanel.track('RedirectToExternalCreator', {
+      'Pack ID': this.data.pack.id,
+      'Pack name': this.data.pack?.name,
+      Link: this.data.pack?.about.link,
+    });
     window.open(this.data.pack.about.link, '_blank');
   }
 
@@ -110,6 +133,10 @@ export class PackPreviewComponent implements OnInit {
     // dialogConfig.maxWidth = '40vw';
     dialogConfig.data = this.data;
     this.dialog.open(AboutAuthorComponent, dialogConfig);
+  }
+
+  toggleIsExpand(): void {
+    this.isExpland = !this.isExpland;
   }
 
   navigateToPackView(exists): void {

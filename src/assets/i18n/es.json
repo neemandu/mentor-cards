@@ -1,0 +1,1457 @@
+{
+  "pages": {
+    "all-packs-page": {
+      "title": "Mentor-Cards Todos los juegos de cartas",
+      "coupon-code-btn-1": "Mira los cursos",
+      "coupon-code-btn-2": "Nuestros digitales >>>",
+      "mat-section-title": "categorias",
+      "categories": {
+        "ערכות להתנסות חופשית": "Kits para prueba gratuita",
+        "ערכות חדשות": "Nuevos kits",
+        "ערכות VIP": "kits vip",
+        "נעים להכיר": "Encantado de conocerlo",
+        "קלפי תמונה": "tarjetas ilustradas",
+        "הייטק": "Alta tecnología",
+        "קלפי שאלות": "Tarjetas de preguntas",
+        "קלפי חגים": "Tarjetas navideñas",
+        "קלפי מילה": "Tarjetas de palabras",
+        "קלפי תמונה + מילה": "Tarjetas ilustradas + palabra",
+        "קלפי מסרים": "Tarjetas de mensaje",
+        "קלפי ערכים": "Tarjetas de valor",
+        "ערכות ממוקדות נושא" : "Kits temáticos enfocados",
+        "1ערכות ממוקדות נושא" : "Se recomienda leer el manual de instrucciones antes de comenzar a trabajar con los kits."
+      },
+      "my-favorites": "Mis favoritos",
+      "header": "",
+      "sub-header": "Cuando terminan las palabras, entran las tarjetas.",
+      "sub-header-2": "Encuentra la baraja de cartas adecuada para ti",
+      "search-placeholder": "Busque por el tema de la reunión, el creador de la evaluación, el propósito de la actividad y más...",
+      "search-error-message": "Lo sentimos, pero no pudimos encontrar nada que coincida con tu búsqueda...",
+      "new-search-placeholder": "¿Cuál es el tema de su reunión? busca un equipo"
+    },
+    "all-packs-page-new": {
+      "title": "Página de todos los paquetes",
+      "content": {
+        "favorites": "mis excesos",
+        "allPacks": "Para todas las estimaciones",
+        "cardTypes": "tipo de tarjetas",
+        "cardDisplayTypes": "Mostrar tipos de tarjetas",
+        "image": "Imagen",
+        "question": "una pregunta",
+        "word": "Circuncisión",
+        "meetingLanguage": "el lenguaje del encuentro",
+        "cardLanguageAndGuide": "El idioma de las cartas y del libro de instrucciones.",
+        "russian": "ruso",
+        "arabic": "Arábica",
+        "english": "Inglés",
+        "hebrew": "hebreo",
+         "packsForYourMeeting": "לדעתנו, אלה ערכות הקלפים המתאימות ביותר לנושא שבחרתם :)",
+        "packsForYourMeetingDescription": "קחו השראה ורעיונות מספרי ההדרכה!",
+        "category": "categoría",
+        "resetFilters": "Restablecer filtros"
+      },
+      "filterText": {
+        "לכל הערכות": "Para todas las estimaciones",
+        "הכרות וחיבור": "Conocido y conexión",
+        "מערכות יחסים": "Relaciones",
+        "ילדים ונוער": "Niños y Jóvenes",
+        "חיבור לעצמי": "Conexión conmigo mismo",
+        "העצמה": "Empoderamiento",
+        "חגים": "vacaciones",
+        "מנהיגות": "liderazgo",
+        "חזון ומטרות": "Visión y objetivos",
+        "קריירה": "carrera",
+        "רגשות": "sentimientos",
+        "משברים": "crisis",
+        "המועדפים שלי": "mis favoritos",
+        "איפוס חיפוש": "Restablecer búsqueda"
+      }
+    },
+    "pack-preview": {
+      "book-icon": "Impresión",
+      "print-pack-description": "También puedes comprar una versión impresa",
+      "about-author": "Acerca de",
+      "go-to-creator-website": "Ir al sitio web del creador",
+      "sign-in-sign-up": "Iniciar sesión/Registrarse",
+      "enter-pack": "Entrar a la baraja"
+    },
+    "about-us": {
+      "title": "Las Mentor-Cards nos apoyan",
+      "introduction-full": {
+        "line1": "En Mentor-Cards creemos que los procesos de observación, crecimiento y desarrollo deben realizarse de la mejor manera posible.",
+        "line2": "con una mínima dependencia del entorno y de la realidad cambiante.",
+        "line3": "El año 2020 será recordado como un año que cambió el mundo de muchas maneras.",
+        "line4": "Experimentamos lo que es reunirse interiormente y actuamos como sabíamos en las condiciones desconocidas creadas a nuestro alrededor.",
+        "line5": "Nos adaptamos al nuevo mundo. Seguimos entrenando y tratando, esta vez frente a las pantallas.",
+        "line6": "Desde este lugar, en este momento y con el pensamiento conjunto de los entrenadores senior de Israel y los expertos en tarjetas, creamos Mentor-Cards.",
+        "line7": "Mentor-Cards es una plataforma amigable para trabajar con tarjetas en reuniones digitales y presenciales",
+        "line8": "con énfasis en la experiencia óptima del usuario.",
+        "line9": "Las tarjetas se encuentran entre las herramientas más poderosas en el mundo del entrenamiento y la terapia.",
+        "line10": "Las cartas se desprenden, pasan por alto el subconsciente, se abren y se desarrollan.",
+        "line11": "Las tarjetas nos ayudan como líderes del proceso profesional a perfeccionar y especificar la forma más adecuada para nuestro cliente.",
+        "line12": "El mundo cambia y se desarrolla y nosotros decidimos crecer con él.",
+        "line13": "Estamos felices de que haya elegido crecer junto con nosotros."
+      },
+      "introduction-partial": {
+        "line1": "Mentor-Cards es una plataforma amigable para trabajar con tarjetas en reuniones digitales y presenciales",
+        "line2": "con énfasis en la experiencia óptima del usuario.",
+        "line3": "Las tarjetas se encuentran entre las herramientas más poderosas en el mundo del entrenamiento y la terapia.",
+        "line4": "Las cartas se desprenden, pasan por alto el subconsciente, se abren y se desarrollan.",
+        "line5": "Las tarjetas nos ayudan como líderes del proceso profesional a perfeccionar y especificar la forma más adecuada para nuestro cliente.",
+        "line6": "El mundo cambia y se desarrolla y nosotros decidimos crecer con él.",
+        "line7": "Estamos felices de que haya elegido crecer junto con nosotros."
+      },
+      "last-line": "El equipo de Mentor-Cards",
+      "bio-content-1": {
+        "line1": "mi tio es leal",
+        "line2": "Cofundador y director de desarrollo técnico",
+        "line3": "35 años de Mitar",
+        "line4": "Ingeniero de Software M.Sc y EMBA en Administración de Empresas.",
+        "line5": "Hombre de familia, emprendedor, optimista y entrenador de alto rendimiento."
+      },
+      "bio-content-2": {
+        "line1": "Jordan Stampo",
+        "line2": "Cofundador y gestor de contenidos profesional",
+        "line3": "35 años de Ramat Gan",
+        "line4": "Forma y desarrolla personas y organizaciones.",
+        "line5": "MBA en administración de empresas, facilitador de grupos y supervisor de coaches.",
+        "line6": "Polifacético, valiente, leal al bien, respira hondo."
+      },
+      "bio-content-3": {
+        "line1": "Yaniv Knobel",
+        "line2": "Desarrollador y diseñador",
+        "line3": "29 años de Be'er Sheva",
+        "line4": "Ingeniero de Software y Sistemas de Información Lic.",
+        "line5": "Amante de la cocina, la fotografía, la tecnología y la naturaleza."
+      },
+      "Customers&collaborations": "Clientes y colaboraciones"
+    },
+    "nav": {
+      "banner": {
+        "upgrade-now": "Actualizar ahora",
+        "full-access": "¡Disfrute de acceso completo a todas las evaluaciones en el sitio!"
+      },
+      "navbar": {
+        "signin-signup": "iniciar sesión/registro",
+        "all-card-packs": "Todas las barajas de cartas",
+        "digital-courses": "Cursos digitales",
+        "our-plans": "nuestros planes",
+        "faq": "Preguntas comunes",
+        "additional-services": "Servicios extra",
+        "about-us": "sobre nosotros",
+        "contact-us": "Contáctenos",
+        "affiliates": "Programa de afiliación",
+        "admin": "Administración",
+        "coupon-codes": "¿Tienes un código de descuento?"
+      },
+      "news-updates": "Noticias y actualizaciones",
+      "no-news-updates": "No hay nuevas noticias ni actualizaciones.",
+      "user-menu": {
+        "user-details": "informacion del usuario",
+        "register-plan": "Registro para el programa.",
+        "group-management": "Manejo de grupo",
+        "affiliate": "Panel de socios",
+        "logout": "Desconectado"
+      },
+      "tour-menu": {
+        "tour-main-page": "Visita la página principal",
+        "how-to-work-with-cards": "¿Cómo se trabaja con las tarjetas?"
+      },
+      "management-menu": {
+        "dashboard": "Panel",
+        "news-management": "Noticias y actualizaciones",
+        "guidebook-management": "libros de instrucciones",
+        "coupon-codes-management": "Códigos de descuento",
+        "orgs-management": "organizaciones",
+        "packs-management": "barajas de cartas",
+        "payment-programs-management": "Paquetes de pago",
+        "receipts-management": "recibos y pagos",
+        "affiliate-management": "Socios"
+      }
+    },
+    "login": {
+      "login-div": {
+        "login-form": {
+          "username": {
+            "label": "Correo electrónico",
+            "errors": {
+              "userNotConfirmed": "Usuario no verificado. Tienes que ingresar el correo electrónico y verificar el usuario para poder conectarte.",
+              "userNotFound": "el usuario no existe",
+              "LimitExceededException": "Demasiados intentos de inicio de sesión. Inténtelo de nuevo en 15 minutos.",
+              "email": "La dirección de correo electrónico no es válida, inténtalo de nuevo."
+            }
+          },
+          "password": {
+            "label": "Una contraseña",
+            "errors": {
+              "usernamePwWrong": "Usuario o contraseña incorrectos"
+            },
+            "visibility": {
+              "hide": "visibilidad_apagada",
+              "show": "visibilidad"
+            }
+          },
+          "login-button": "Entrada"
+        },
+        "social-login": {
+          "seperator": "o",
+          "social-media-login": {
+            "google-btn": "Iniciar sesión con Google"
+          }
+        }
+      },
+      "forgotPasswordForm": {
+        "form": {
+          "username": {
+            "label": "Correo electrónico",
+            "errors": {
+              "userNotFound": "el usuario no existe",
+              "limitExceeded": "Demasiados intentos. Espera y vuelve a intentarlo más tarde.",
+              "email": "La dirección de correo electrónico no es válida, inténtalo de nuevo."
+            }
+          },
+          "confirmationCode": {
+            "label": "Ingresa el código de verificación que recibiste",
+            "errors": {
+              "codeMismatch": "código de verificación invalido"
+            }
+          },
+          "newPassword": {
+            "label": "Nueva contraseña",
+            "hint": "Al menos 8 caracteres, debe contener un número, una letra minúscula y una letra mayúscula (en inglés)",
+            "errors": {
+              "badPassword": "Contraseña no válida, inténtalo de nuevo"
+            }
+          },
+          "not-receive-code": "¿No recibiste un código? Haga clic aquí para obtener otro código",
+          "submit-button": {
+            "submit-button": "Me enviaron un codigo de verificacion",
+            "save-new-password": "Guardar una nueva contraseña"
+          },
+          "confirmation-code-info": "*El código de verificación se enviará al número de teléfono con el que te registraste. Si se registra sin un teléfono móvil, el código de verificación se enviará a su correo electrónico."
+        }
+      },
+      "confirmForm": {
+        "form": {
+          "username": {
+            "label": "Correo electrónico"
+          },
+          "confirmationCode": {
+            "label": "Código de verificación (enviado en un mensaje móvil)",
+            "errors": {
+              "CodeMismatchException": "El código no coincide con el código enviado, inténtalo de nuevo",
+              "LimitExceededException": "Demasiados intentos. Espera y vuelve a intentarlo más tarde."
+            }
+          },
+          "not-receive-code": "¿No recibiste un código? Haga clic aquí para obtener otro código",
+          "submit-button": "Autenticacion de usuario"
+        }
+      },
+      "formFooter": {
+        "footerLogin": {
+          "firstTime": "¿Primera vez con nosotros?",
+          "forgotPassword": "¿Has olvidado tu contraseña?"
+        },
+        "back": "devolver"
+      }
+    },
+    "register": {
+      "form": {
+        "name-label": "nombre completo",
+        "name-hint": "hebreo inglés",
+        "phone-label": "Teléfono móvil",
+        "phone-hint": "Por ejemplo: 0501234567",
+        "phone-error": "Por favor solo inserte numeros",
+        "email-label": "Correo electrónico",
+        "email-error-exists": "Este correo electrónico existe en el sistema.",
+        "email-confirm-label": "Verificacion de email",
+        "email-confirm-error-notsame": "el email no coincide",
+        "email-confirm-error-exists": "Este correo electrónico existe en el sistema.",
+        "password-label": "Una contraseña",
+        "password-error": "Contraseña no válida, inténtalo de nuevo. Debe contener un número, una letra minúscula y una letra mayúscula (solo en inglés)",
+        "password-hint": "Al menos 8 caracteres, debe contener un número, una letra minúscula y una mayúscula (en inglés)",
+        "password-confirm-label": "confirmar Contraseña",
+        "password-confirm-error-notsame": "Las contraseñas no coinciden",
+        "password-confirm-hint": "Al menos 8 caracteres, debe contener un número, una letra minúscula y una mayúscula (en inglés)",
+        "allow-emails": "Acepto recibir correos de Mentor-Cards",
+        "allow-emails-error": "Marque la casilla para registrarse",
+        "submit-button": "inscripción"
+      },
+      "social-login": {
+        "seperator": "o",
+        "social-media-login": {
+          "google-btn": "Regístrate con Google"
+        },
+        "formFooter": {
+          "existing-customer": "¿Cliente existente?"
+        }
+      }
+    },
+    "user-related": {
+      "close-button": "resaltado_apagado",
+      "tab-group": {
+        "login-tab": {
+          "label": "conexión",
+          "sub-label": "El usuario Existe"
+        },
+        "register-tab": {
+          "label": "inscripción",
+          "sub-label": "Nuevo Usuario"
+        }
+      }
+    },
+    "main-screen": {
+      "title": "Mentor-Cards, la plataforma de tarjetas virtuales más grande de Israel - página de inicio"
+    },
+    "contact-us": {
+      "title": "Página de contacto de Mentor-Cards",
+      "contact-form": {
+        "title": "Contáctanos y estaremos encantados de estar a tu servicio.",
+        "form": {
+          "name-label": "Nombre",
+          "name-error-required": "Debes ingresar un nombre",
+          "email-label": "correo",
+          "email-placeholder": "Por ejemplo nombre@ejemplo.com",
+          "email-error-valid": "Se debe ingresar un correo electrónico válido",
+          "email-error-required": "Se debe ingresar el correo electrónico",
+          "phone-error-required": "Debes ingresar un número de teléfono",
+          "content-label": "contenido",
+          "content-error-required": "Se debe ingresar el contenido",
+          "submit-button": "Enviar"
+        },
+        "emails": {
+          "title": "Nuestros correos electrónicos"
+        }
+      }
+    },
+    "group-management": {
+      "group-details-title": "Detalles del grupo",
+      "group-management-instructions-title": "Instrucciones para gestionar el grupo.",
+      "add-new-user-instruction": "Para agregar un nuevo usuario al grupo, haga clic en 'Agregar usuario'",
+      "user-role-description": "'Usuario' - tiene acceso a los conjuntos de tarjetas",
+      "admin-role-description": "'Administrador': tiene acceso a los conjuntos de tarjetas y tiene permisos para editar los usuarios del grupo.",
+      "no-admin-limit-instruction": "No hay límite para el número de gerentes en el grupo.",
+      "edit-existing-user-instruction": "Puede hacer clic en el botón del lápiz en la tabla para editar un usuario existente.",
+      "delete-existing-user-instruction": "Puede hacer clic en el botón de la papelera para eliminar un usuario existente del grupo.",
+      "change-confirmation-instruction": "Cada cambio solicitará verificación y al final quedará guardado en el sistema.",
+      "new-user-instructions-title": "Instrucciones para agregar nuevos usuarios",
+      "new-user-registration-instruction": "Solicite a los nuevos usuarios que ingresen al sitio y se registren utilizando la dirección de correo electrónico ingresada para ellos en esta página.",
+      "group-code-instruction": "En la página principal del sitio, solicite a los usuarios que hagan clic en el botón \"¿Eres parte de un grupo?\" e ingresa el código del grupo",
+      "start-using-cards-instruction": "¡Los nuevos usuarios pueden empezar a utilizar las tarjetas!",
+      "email-column-title": "Correo electrónico",
+      "role-column-title": "role",
+      "edit-column-title": "edición",
+      "delete-column-title": "supresión",
+      "edit-icon-description": "editar",
+      "delete-icon-description": "borrar",
+      "add-new-user-button": "Agregar un usuario"
+    },
+    "plan-table": {
+      "plan-column-title": "plan",
+      "start-date-column-title": "Fecha de inicio",
+      "update-date-column-title": "fecha de actualización",
+      "next-billing-date-column-title": "Próxima fecha de pago",
+      "billing-cycle-column-title": "Ciclo de facturación",
+      "price-column-title": "precio",
+      "actions-column-title": "operaciones",
+      "price-column-description": "Estadounidense",
+      "cancel-automatic-billing": "Para cancelar la facturación automática",
+      "renew-vip-plan": "Para renovar el programa del kit VIP",
+      "renew-home-plan": "Para renovar el plano de la casa."
+    },
+    "user-page": {
+      "user-details-title": "informacion del usuario",
+      "name-label": "Nombre",
+      "email-label": "correo",
+      "affiliate": "Panel de socios",
+      "registration-date-label": "Fecha de registro del sitio",
+      "plans-title": "planes"
+    },
+    "price-page": {
+      "our-plans-title": "nuestros planes",
+      "monthly-plan-title": "Plan mensual",
+      "yearly-plan-title": "Plan Anual",
+      "year-label": "dormir",
+      "month-label": "un mes",
+      "free-two-months-instruction": "¡Paga 10 meses y llévate dos meses de regalo!",
+      "full-access-instruction": "Acceso completo a docenas de barajas de cartas.",
+      "variety-of-guides-instruction": "Una gran variedad de libros instructivos, ideas de activación y preguntas orientadoras.",
+      "connect-from-anywhere-instruction": "Puedes conectarte desde cualquier parte del mundo y desde cualquier dispositivo: computadora, teléfono móvil, tableta, proyector y más...",
+      "join-button-text": "para unirse >>",
+      "already-registered-button-text": "Estás registrado en este programa.",
+      "popularMatCard": {
+        "title": "¡Programa de por vida!",
+        "payment": "pago",
+        "onceBold": "Una vez",
+        "inTotal": "en total",
+        "benefits": {
+          "fullAccess": "Acceso completo a docenas de barajas de cartas, ¡de por vida!",
+          "futureAccess": "¡Acceso a todos los conjuntos de tarjetas que se cargarán en el sitio en el futuro!",
+          "variety": "Una gran variedad de libros de formación, ideas de activación y preguntas orientadoras.",
+          "connectAnywhere": "Puedes conectarte desde cualquier parte del mundo y desde cualquier dispositivo: computadora, teléfono móvil, tableta, proyector y más..."
+        },
+        "joinBtn": "para unirse >>",
+        "registeredBtn": "Estás registrado en este programa."
+      },
+      "orgsMatCard": {
+        "title": "instituciones y organizaciones",
+        "content": "Este es el momento de permitir que las cartas entren en tu entorno organizacional y creen un diálogo que acerque, promueva y desarrolle. Actualice su caja de herramientas organizacional con nosotros. Hable con nosotros y le encontraremos el plan más asequible.",
+        "contactBtn": "¡Háblanos!"
+      },
+      "couponBtn": "Para ingresar un código de descuento, haga clic aquí"
+    },
+    "approvePurchaseDialog": {
+      "title": "Pago mediante PayPal o tarjeta de crédito",
+      "summery": {
+        "recurringPayment": "Si elige un plan con pago recurrente (mensual/anual/etc.) y no el plan Life-Time, con un pago único, al final del período del plan se le cargará automáticamente a su cuenta otro período, le recordarle por correo electrónico 7 días antes de la refacturación.",
+        "cancelAutoCharge": "Podrás cancelar el cargo automático en cualquier momento a través del área “datos de usuario” de la web y pulsando en “cancelar el cargo automático”.",
+        "noRefunds": "No se otorgarán reembolsos por pagos de períodos de facturación parciales en el sitio.",
+        "bankCharges": "El banco puede cobrar una tarifa de transferencia o una tarifa de conversión.",
+        "ageConfirmation": "La elección de continuar expresa su confirmación de que es mayor de 18 años.",
+        "termsAgreement": "y su aceptación de estos términos.",
+        "lifeTimePlan": "En el programa Life-Time, el acceso a los juegos de tarjetas en el sitio estará abierto siempre que el sitio esté funcionando y sea accesible al público."
+      },
+      "paymentTitle": "Por favor elija un método de pago:",
+      "paypalTooltip": "Si hay un bloqueador de publicidad en el navegador, se debe desactivar para poder realizar un pago."
+    },
+    "portraitWarningDialog": {
+      "content": {
+        "icon": "rotacion de pantalla",
+        "message": "Para una experiencia de usuario óptima, debe cambiar a una vista horizontal"
+      },
+      "actions": {
+        "buttonText": "me di cuenta"
+      }
+    },
+    "packContent": {
+      "title": "Mentor-Cards Contenido del juego de cartas",
+      "packName": "{{ nombre.paquete }}",
+      "defaultName": "Los animales dentro de nosotros",
+      "aboutAuthor": "(sobre el creador de la evaluación)",
+      "guideBook": "Libro de instrucciones",
+      "unauthorized": "No tienes permisos suficientes para ver este kit.",
+      "linkexpired": "El enlace al mazo ha caducado. Comuníquese con el administrador que distribuyó el enlace para obtener un nuevo enlace.",
+      "actions": {
+        "multipleChoice": {
+          "showMultiple": "Mostrar una cantidad de tarjetas",
+          "showSingle": "Mostrar una sola tarjeta"
+        },
+        "mixCards": "remover",
+        "flipCards": "Dar la vuelta a las cartas",
+        "randomCard": "Mostrar una tarjeta aleatoria",
+        "editPack": {
+          "edit": "edición",
+          "endEdit": "Fin de la edición"
+        },
+        "menuActions": "operaciones",
+        "introduction": {
+          "attention": "poner",
+          "list": {
+            "dozensOfPacks": "En el sitio hay docenas de juegos de tarjetas entre los que puedes elegir.",
+            "over40Cards": "Cada juego incluye más de 40 cartas.",
+            "guideBook": "Todos los kits vienen con una guía que incluye preguntas orientativas para usar las tarjetas.",
+            "trialPeriod": "Como parte de la prueba de 14 días, todos los conjuntos de cartas están a tu disposición"
+          },
+          "actions": {
+            "register": "Regístrate e inicia el periodo de prueba.",
+            "notRegistered": "¿Aún no te has registrado en el programa?",
+            "alreadyRegistered": "Ya estás conectado, ¿qué estás esperando? para el trabajo :)",
+            "loginRegisterBtn": "iniciar sesión/registro",
+            "registerPlanBtn": "para registrarse en el programa",
+            "allPacksBtn": "Para todas las estimaciones"
+          }
+        }
+      },
+      "nav": {
+        "showChosenCards": "Mostrar tarjetas seleccionadas",
+        "resetChoice": "Restablecer selección",
+        "cardsChosen": "Las cartas han sido seleccionadas.",
+        "resetPack": "kit de reinicio",
+        "endEditing": "Fin de la edición",
+        "hideCardBeforeIcon": "Al hacer clic en el icono del ojo",
+        "hideCardAfterIcon": "Esconde la tarjeta debajo"
+      },
+      "matMenu": {
+        "toggleCardDisplayModeButton": {
+          "true": "Mostrar una cantidad de tarjetas",
+          "false": "Mostrar una sola tarjeta"
+        },
+        "shuffleCardsButton": "remover",
+        "flipDeckButton": "Dar la vuelta a una baraja",
+        "showRandomCardButton": "Mostrar una tarjeta aleatoria",
+        "editPackButton": {
+          "true": "edición",
+          "false": "Fin de la edición"
+        }
+      }
+    },
+    "guide-page": {
+      "title": "Mentor-Cards Una página instructiva sobre el uso del sitio",
+      "layout": {
+        "buttons": {
+          "what-is-mentor-cards": "¿Qué es Mentor - Cardes?",
+          "how-to-connect": "¿Cómo se conecta al sitio?",
+          "how-to-enter-coupon-code": "¿Cómo se ingresa un código de descuento?",
+          "our-guide-books": "Nuestras guías",
+          "our-card-sets": "Nuestras barajas de cartas",
+          "plans-prices-cancellations": "Planes, precios y cancelaciones",
+          "key-principles-in-working-with-cards": "Principios clave al trabajar con tarjetas.",
+          "how-to-work-with-digital-card-set": "¿Cómo se trabaja con una baraja de cartas digital?"
+        }
+      },
+      "content": {
+        "content1": {
+          "paragraph1": "Mentor-Cards es una plataforma digital innovadora que permite a facilitadores, formadores y terapeutas de una variedad de campos trabajar con las tarjetas proyectivas en línea.",
+          "paragraph2": "Mentor-Cards tiene una gran variedad de juegos de cartas, por lo que puedes ajustar el juego de cartas a tu cliente.",
+          "paragraph3": "¡Puedes conectarte a Mentor-Cards a través de una computadora, teléfono móvil y tableta!"
+        },
+        "content4": {
+          "p1": "Cada juego de tarjetas del sitio viene con un libro de instrucciones exclusivo.",
+          "p2": "Para utilizar el libro de instrucciones, seleccione un conjunto de tarjetas y haga clic en el botón \"Libro de instrucciones\" ubicado en el centro de la página.",
+          "p3.1": "Los libros de instrucciones contienen decenas de preguntas e ideas para que las diferentes sesiones utilicen el juego de cartas elegido.",
+          "p3.2": "dividido en los siguientes temas:",
+          "li1": "Ofertas de trabajo individuales",
+          "li2": "Propuestas de trabajo con más de una tarjeta - proceso de trabajo",
+          "li3": "Sugerencias para trabajar en grupos",
+          "li4": "Sugerencias para trabajar con tarjetas de palabras (en conjuntos de tarjetas de palabras)",
+          "p4": "Además, existe una división en preguntas cuando las tarjetas están en estado visible u oculto (cada uno de los métodos tiene sus ventajas únicas).",
+          "h1": "¿Cómo se utiliza la guía durante una reunión?",
+          "p5.1": "La interfaz de la guía está construida de una manera inteligente que solo le permite a usted ver las preguntas e ideas en una ventana de trabajo separada para que el participante",
+          "p5.2": "Verá solo la baraja de cartas y no el libro en sí.",
+          "p6": "Esto les permite a ustedes, los facilitadores, trabajar cómodamente frente a la guía durante la reunión y escribir notas en el libro durante la reunión.",
+          "p7": "No es necesario memorizar ni recordar las preguntas, ¡todo aparece frente a tus ojos todo el tiempo!",
+          "pBold": "Instrucciones para usar el programa ZOOM (existen opciones similares en otros programas de video como: Skype, Teams y más):",
+          "ol1": "En la página \"Todos los mazos\", seleccione el mazo que desea utilizar.",
+          "ol2": "Haga clic en el botón \"Guía\" que se encuentra en la parte superior izquierda de esta página.",
+          "ol3": "En el software ZOOM, haga clic en el botón \"COMPARTIR\" que se encuentra en el centro de la aplicación ZOOM y en su parte inferior.",
+          "ol4": "Se debe seleccionar la pantalla compartida para su navegador donde se muestra la baraja de cartas. Tenga en cuenta que la opción predeterminada es mostrar la pantalla completa y no queremos eso, sino solo su navegador."
+        },
+        "content5": {
+          "p1": {
+            "b": "Los juegos de tarjetas del sitio se dividen en diferentes categorías:",
+            "text1": "Tarjetas con imágenes, tarjetas con palabras, tarjetas con imágenes y palabras, tarjetas con preguntas, tarjetas con mensajes y más.",
+            "br": "Puede marcar la categoría deseada y mostrar solo las tarjetas de esa categoría en la página de todos los conjuntos de tarjetas."
+          },
+          "p2": {
+            "b": "Los juegos de cartas en el sitio se actualizan constantemente.",
+            "text": "Agregamos nuevas tarjetas a conjuntos existentes y creamos colaboraciones adicionales con creadores externos para mantener una experiencia renovada y dinámica para nuestros clientes."
+          },
+          "p3": {
+            "b1": "se puede marcar con",
+            "b2": "- tus barajas de cartas favoritas",
+            "text": "Creando así una categoría de conjuntos de cartas favoritas exclusivas para usted, que se guardarán en la página \"Todos los conjuntos de cartas\" y se mostrarán en la parte superior de la página siempre que la elija. ¿Has agotado una determinada baraja de cartas? ¡Desmarca el corazón y elige una nueva baraja de cartas favorita!"
+          },
+          "p4": {
+            "b": "categoría vip",
+            "text": "Contiene los juegos de cartas que hemos elegido para usted entre creadores externos. Ofrecemos una solución digital también para creadores de juegos de cartas de Israel y el mundo y elegimos los mejores juegos para nuestros clientes."
+          },
+          "p5": {
+            "b": "Categoría 'Kits de prueba gratuitos' -",
+            "text": "Acceso libre y gratuito a conjuntos de tarjetas seleccionados de diferentes categorías."
+          },
+          "p6": {
+            "b": "Categoría de tarjetas de preguntas",
+            "text": "Contiene diferentes conjuntos de fichas en las que encontrarás preguntas formativas, promotoras, propositivas y potenciadoras de cada proceso y de cada reunión."
+          },
+          "p7": {
+            "b": "Categoría de tarjeta con imagen",
+            "text": "se basa en el mecanismo de proyección que permite al participante un gran espacio de respuesta y la capacidad de expresar su mundo interior con la ayuda de diversas imágenes y metáforas."
+          },
+          "p8": {
+            "b": "Categoría de tarjetas de mensaje",
+            "text": "Ayuda a iniciar o finalizar cada reunión con un mensaje potente, para un correcto proceso de extracción de conclusiones y insights significativos."
+          },
+          "p9": {
+            "b": "Categoría de tarjetas navideñas",
+            "text": "Fue creado porque la sabiduría de la Cabalá nos enseña que cada festividad es una puerta en la dimensión del tiempo, que se abre en una determinada época del año y nos afecta. ¡Las vacaciones son una gran oportunidad para combinar el trabajo con las tarjetas!"
+          }
+        },
+        "content6": {
+          "span1": "Únase a uno de nuestros programas y obtenga -",
+          "ul": {
+            "li1": {
+              "b": "Un libro de instrucciones adjunto a cada juego de tarjetas.",
+              "text": "Decenas de preguntas poderosas y propuestas diversas de trabajo."
+            },
+            "li2": {
+              "b": "Usa todas las habilidades -",
+              "text": "Cartas visibles y ocultas, elección de carta al azar, mezcla, selección múltiple para trabajo de proceso y más..."
+            },
+            "li3": {
+              "b": "Contenido renovado y dinámico -",
+              "text": "Conjuntos de tarjetas adicionales y nuevas técnicas de trabajo que nuestros creadores internos y externos actualizan periódicamente."
+            }
+          },
+          "span2": "Ofrecemos a nuestros clientes 3 planes -",
+          "ol": {
+            "li1": {
+              "b": "plan gratuito -",
+              "text": "Únase a nuestra comunidad de mentores y disfrute de acceso gratuito a barajas de cartas seleccionadas."
+            },
+            "li2": {
+              "b": "Plan mensual -",
+              "text": "Recomendado principalmente para su uso en eventos puntuales, congresos, talleres cortos, eventos puntuales, etc."
+            },
+            "li3": {
+              "b": "plan Anual -",
+              "text": "El programa se recomienda para personas que saben y les gusta combinar tarjetas como parte de su caja de herramientas. ¡Paga por adelantado durante 12 meses y disfruta de un 30% de descuento! El pago se realiza una vez y todos los servicios del sitio web están abiertos para usted durante un año."
+            }
+          },
+          "span3": "cancelaciones",
+          "p1": "Todos los usuarios del sitio web disfrutan de acceso gratuito a los juegos de tarjetas en la categoría \"juegos de prueba gratuitos\".",
+          "p2": "Al finalizar el período del plan, el plan se renueva automáticamente por otro período, enviamos un correo electrónico 7 días antes de la refacturación.",
+          "p3": "Podrás cancelar el cargo automático en cualquier momento a través del área “datos de usuario” de la web y pulsando en “cancelar el cargo automático”.",
+          "p4": "No se otorgarán reembolsos por pagos de períodos de facturación parciales en el sitio."
+        },
+        "content7": {
+          "p1": "El primer paso en la observación comienza con detenerse.",
+          "p2": "La parada nos permite hacernos preguntas y comprobar si vamos en la dirección correcta para nosotros.",
+          "p3": "A partir de la observación será posible sacar conclusiones y construir un plan de acción para el futuro.",
+          "p4": "\"Tarjetas de cartas\": derivaciones conscientes que nos ayudan a alcanzar niveles más profundos dentro de nosotros mismos.",
+          "p5": "Las tarjetas amplían nuestro punto de vista más allá de nuestra zona de confort familiar y nos ofrecen una gran cantidad de oportunidades y nuevas formas de pensar.",
+          "span": "Principios clave al trabajar con tarjetas.",
+          "ol1": {
+            "b": "Antes de cada sorteo de cartas se recomienda hacer una pregunta.",
+            "text1": "Una vez extraída la tarjeta, se debe dar tiempo al votante para mirar la tarjeta y repetir la pregunta formulada.",
+            "text2": "No se apresure a hacer otra pregunta."
+          },
+          "ol2": {
+            "b": "La verdad está en los ojos de quien elige la tarjeta y, por tanto, todas las respuestas son correctas.",
+            "text1": "No hay resultado bueno o malo.",
+            "text2": "La forma en que el que elige las cartas trata sus cartas expresa su percepción y creencias personales.",
+            "text3": "Es correcto permitir plena legitimidad para la elección y la interpretación personal con el fin de crear un espacio seguro."
+          },
+          "ol3": {
+            "b": "El libro de instrucciones que se ofrece para cada juego de cartas es sólo una recomendación,",
+            "text1": "No es obligatorio, e incluso te animamos, a escribir tus propias preguntas e ideas, por eso hemos creado un lugar designado para ello en la guía donde puedes escribir cosas antes del inicio de la reunión e incluso durante la misma."
+          },
+          "ol4": {
+            "b": "En cualquier momento podrás agregar o reemplazar una tarjeta.",
+            "text1": "Antes de hacer esto, se recomienda preguntarle al seleccionador de la tarjeta: ¿qué pasa con esta tarjeta que genera resistencia en usted?",
+            "text2": "¿Cuál es la razón por la que no te conectaste a la tarjeta? No hay cartas buenas o malas."
+          },
+          "ol5": {
+            "b": "La elección de las cartas es fiel al tiempo presente y describe la interpretación, los sentimientos, el ser y la mentalidad de quien elige la carta en este momento.",
+            "text": "En un momento o situación diferente, puede surgir una respuesta diferente."
+          }
+        },
+        "content8": {
+          "p1": "Una vez que haya elegido un conjunto de tarjetas con las que trabajar, tendrá 5 botones a su disposición en la parte superior de la pantalla:",
+          "button": "botón -",
+          "p2_b": "\"Da la vuelta a las cartas\"",
+          "p2_text": "- Pulsando el botón podrás elegir qué lado de las cartas será visible.",
+          "p3_b": "\"Muestre una cantidad de tarjetas\"",
+          "p3_text": "- Al presionar el botón, puede marcar hasta 5 tarjetas y mostrarlas ampliadas en la pantalla.",
+          "p4_b": "\"Mezclando\"",
+          "p4_text": "- Como en \"El mundo real\", al presionar un botón de barajar se cambia el orden de las cartas.",
+          "p5_b": "\"mostrar tarjeta aleatoria\"",
+          "p5_text": "- Al presionar el botón, se seleccionará una tarjeta aleatoria del conjunto de tarjetas y se mostrará de forma ampliada en la pantalla.",
+          "p6_b": "\"edición\"",
+          "p6_text": "- Permite ocultar tarjetas específicas. Al hacer clic en el botón, puede ocultar las tarjetas con las que no desea trabajar en el momento actual. Tan pronto como salgas del conjunto de tarjetas o actualices la página, todas las tarjetas que elegiste ocultar volverán a aparecer.",
+          "p7_b": "\"El libro de instrucciones\"",
+          "p7_text": "- se abrirá en una pantalla separada. Contiene la descripción del conjunto específico de tarjetas, preguntas e ideas para el trabajo individual, el trabajo de procesos y el trabajo en grupo divididos en tarjetas visibles u ocultas."
+        },
+        "all-screens-img": "Tableta portátil de escritorio y teléfono que muestran las capacidades de respuesta de las tarjetas Mentor"
+      },
+      "accordion": {
+        "mat-accordion": {
+          "mat-button": {
+            "btn1": "¿Qué es Mentor - Cardes?",
+            "btn2": "¿Cómo se conecta al sitio?",
+            "btn3": "¿Cómo se ingresa un código de descuento?",
+            "btn4": "Nuestras guías",
+            "btn5": "Nuestras barajas de cartas",
+            "btn6": "Planes, precios y cancelaciones",
+            "btn7": "Principios clave al trabajar con tarjetas.",
+            "btn8": "Cómo trabajar con una baraja de cartas digital"
+          },
+          "mat-expansion-panel1": {
+            "mat-panel-title": "¿Qué es Mentor - Cardes?",
+            "p1": "Mentor-Cards es una plataforma digital innovadora que permite a facilitadores, formadores y terapeutas de una variedad de campos trabajar con las tarjetas proyectivas en línea.",
+            "p2": "Mentor-Cards tiene una gran variedad de juegos de cartas, por lo que puedes ajustar el juego de cartas a tu cliente.",
+            "p3": "Puede encontrar en el sitio tanto juegos de cartas que creamos nosotros como juegos de cartas de creadores externos de calidad."
+          },
+          "mat-expansion-panel2": {
+            "mat-panel-title": "¿Cómo se conecta al sitio?",
+            "text": "En la parte superior derecha, haga clic en el botón \"Iniciar sesión/Registrarse\". Se abrirá una ventana en el centro de la pantalla con 2 opciones: registrar un nuevo usuario o iniciar sesión como usuario existente. Elija registrar un nuevo usuario y complete los detalles o elija un inicio de sesión simple y rápido a través de Google."
+          },
+          "mat-expansion-panel3": {
+            "mat-panel-title": "¿Cómo se ingresa un código de descuento?",
+            "text": "Para ingresar un código de descuento, debe iniciar sesión/registrarse en el sitio web. En la página \"todos los juegos de tarjetas\", en la parte superior derecha, hay un botón naranja destacado que dice \"¿Tiene un código de descuento?\". Al hacer clic en el botón se abre una pequeña ventana donde ingresa el código de descuento que recibió. Al hacer clic en \"Aceptar\" y listo, ¡obtuviste el beneficio!"
+          },
+          "mat-expansion-panel4": {
+            "mat-panel-title": "Nuestras guías",
+            "p1_1": "Cada juego de tarjetas del sitio viene con un libro de instrucciones exclusivo.",
+            "p1_2": "Para utilizar el libro de instrucciones, seleccione un conjunto de tarjetas y haga clic en el botón \"Libro de instrucciones\" ubicado en el centro de la página.",
+            "p1_3": "Los libros de instrucciones contienen decenas de preguntas e ideas para diferentes sesiones de uso del juego de tarjetas seleccionado:",
+            "p1_4": "dividido en los siguientes temas",
+            "ul": {
+              "li1": "Ofertas de trabajo individuales",
+              "li2": "Propuestas de trabajo con más de una tarjeta - proceso de trabajo",
+              "li3": "Sugerencias para trabajar en grupos",
+              "li4": "Sugerencias para trabajar con tarjetas de palabras (en conjuntos de tarjetas de palabras)"
+            },
+            "p2_1": "Además, existe una división en preguntas cuando las tarjetas están en estado visible u oculto (cada uno de los métodos tiene sus ventajas únicas).",
+            "h1": "¿Cómo se utiliza la guía durante una reunión?",
+            "p3_1": "La interfaz de la guía está construida de una manera inteligente que solo le permite a usted ver las preguntas e ideas en una ventana de trabajo separada para que el participante",
+            "p3_2": "Verá únicamente la baraja de cartas y no el libro en sí.",
+            "p3_3": "Esto les permite a ustedes, los facilitadores, trabajar cómodamente frente a la guía durante la reunión y escribir notas en el libro durante la reunión.",
+            "p3_4": "No es necesario memorizar ni recordar las preguntas, ¡todo aparece frente a tus ojos todo el tiempo!",
+            "p_bold": "Instrucciones para usar el programa ZOOM (existen opciones similares en otros programas de video como: Skype, Teams y más):",
+            "ol": {
+              "li1": "En la página \"Todos los mazos\", seleccione el mazo que desea utilizar.",
+              "li2": "Haga clic en el botón \"Guía\" que se encuentra en la parte superior izquierda de esta página.",
+              "li3": "En el software ZOOM, haga clic en el botón \"COMPARTIR\" que se encuentra en el centro de la aplicación ZOOM y en su parte inferior.",
+              "li4": "Se debe seleccionar la pantalla compartida para su navegador donde se muestra la baraja de cartas. Tenga en cuenta que la opción predeterminada es mostrar la pantalla completa y no queremos eso, sino solo su navegador."
+            }
+          },
+          "mat-expansion-panel5": {
+            "mat-panel-title": "Nuestras barajas de cartas",
+            "p1_1_b": "Los juegos de tarjetas del sitio se dividen en diferentes categorías:",
+            "p1_1": "Tarjetas con imágenes, tarjetas con palabras, tarjetas con imágenes y palabras, tarjetas con preguntas, tarjetas con mensajes y más.",
+            "p1_2": "Puede marcar la categoría deseada y mostrar solo las tarjetas de esa categoría en la página de todos los conjuntos de tarjetas.",
+            "p2_1_b": "Los juegos de cartas en el sitio se actualizan constantemente.",
+            "p2_1": "Agregamos nuevas tarjetas a conjuntos existentes y creamos colaboraciones adicionales con creadores externos para mantener una experiencia renovada y dinámica para nuestros clientes.",
+            "p3_1_b": "se puede marcar con",
+            "p3": "tus juegos de cartas favoritos y así crear una categoría de juegos de cartas favoritos exclusiva para ti, que se guardará en la página \"Todos los juegos de cartas\" y se mostrará en la parte superior de la página siempre que la elijas. ¿Has agotado una determinada baraja de cartas? ¡Desmarca el corazón y elige una nueva baraja de cartas favorita!",
+            "p4_1_b": "La categoría VIP contiene los conjuntos de cartas que hemos elegido para usted de creadores externos:",
+            "p4_1": "¡También ofrecemos una solución digital a los creadores de juegos de cartas de Israel y del mundo y elegimos los mejores juegos para nuestros clientes!",
+            "p5_1_b": "Categoría 'Kits de prueba gratuitos' -",
+            "p5_1": "Acceso libre y gratuito a conjuntos de tarjetas seleccionados de diferentes categorías.",
+            "p6_1_b": "Categoría de tarjetas de preguntas",
+            "p6_1": "Contiene diferentes conjuntos de fichas en las que encontrarás preguntas formativas, promotoras, propositivas y potenciadoras de cada proceso y de cada reunión.",
+            "p7_1_b": "Categoría de tarjeta con imagen",
+            "p7_1": "se basa en el mecanismo de proyección que permite al participante un gran espacio de respuesta y la capacidad de expresar su mundo interior con la ayuda de diversas imágenes y metáforas.",
+            "p8_1_b": "Categoría de tarjetas de mensaje",
+            "p8_1": "Ayuda a iniciar o finalizar cada reunión con un mensaje potente, para un correcto proceso de extracción de conclusiones y insights significativos.",
+            "p9_1_b": "Categoría de tarjetas navideñas",
+            "p9_1": "Fue creado porque la sabiduría de la Cabalá nos enseña que cada festividad es una puerta en la dimensión del tiempo, que se abre en una determinada época del año y nos afecta. ¡Las vacaciones son una gran oportunidad para combinar el trabajo con las tarjetas!",
+            "p10_1": "La categoría VIP contiene los juegos de cartas que hemos elegido para usted entre creadores externos. ¡Ofrecemos una solución digital también a los creadores de juegos de cartas de Israel y del mundo y elegimos los mejores juegos para nuestros clientes! El uso de los juegos de cartas de esta categoría tiene un coste adicional."
+          },
+          "mat_expansion_panel6": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "Planes, precios y cancelaciones"
+            },
+            "join_our_plans": "Únase a uno de nuestros programas y obtenga -",
+            "full_access": {
+              "bold": "Acceso completo ilimitado -",
+              "normal": "Disfrute de todos los juegos de cartas en el sitio."
+            },
+            "guide_book": {
+              "bold": "Un libro de instrucciones adjunto a cada juego de tarjetas.",
+              "normal": "Decenas de preguntas poderosas y propuestas diversas de trabajo."
+            },
+            "all_capabilities": {
+              "bold": "Usa todas las habilidades -",
+              "normal": "Cartas visibles y ocultas, elección de carta al azar, mezcla, selección múltiple para trabajo de proceso y más..."
+            },
+            "dynamic_content": {
+              "bold": "Contenido renovado y dinámico -",
+              "normal": "Conjuntos de tarjetas adicionales y nuevas técnicas de trabajo que nuestros creadores internos y externos actualizan periódicamente."
+            },
+            "we_offer": "Ofrecemos a nuestros clientes 3 planes -",
+            "free_plan": {
+              "bold": "plan gratuito -",
+              "normal": "Otorga el uso de kits en 'Kits para prueba gratuita'."
+            },
+            "monthly_plan": {
+              "bold": "Plan mensual -",
+              "normal": "Otorga el uso de los juegos de cartas de la casa durante un mes."
+            },
+            "annual_plan": {
+              "bold": "plan Anual -",
+              "normal": "¡Paga por adelantado durante 12 meses y disfruta de un descuento en el precio! Pagar por adelantado."
+            },
+            "vip_plan": {
+              "bold": "kits vip -",
+              "normal": "Conjuntos de cartas de calidad de creadores externos. Cada juego de tarjetas se puede comprar en un plan mensual o anual según el precio determinado por el creador del juego de tarjetas. Los clientes de Mentor-Cards disfrutan de un precio fijo y especial a partir de 9,9 NIS por mes."
+            },
+            "cancellations": "cancelaciones",
+            "cancellation_policy": {
+              "part1": "Todos los usuarios del sitio web se benefician de un período de prueba antes de elegir el programa.",
+              "part2": "Al finalizar el período del plan, el plan se renueva automáticamente por otro período, enviamos un correo electrónico 7 días antes de la refacturación.",
+              "part3": "Podrás cancelar el cargo automático en cualquier momento a través del área “datos de usuario” de la web y pulsando en “cancelar el cargo automático”.",
+              "part4": "No se otorgarán reembolsos por pagos de períodos de facturación parciales en el sitio."
+            }
+          },
+          "mat_expansion_panel7": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "Principios clave al trabajar con tarjetas."
+            },
+            "first_step": {
+              "part1": "El primer paso en la observación comienza con detenerse.",
+              "part2": "La parada nos permite hacernos preguntas y comprobar si vamos en la dirección correcta para nosotros.",
+              "part3": "A partir de la observación será posible sacar conclusiones y construir un plan de acción para el futuro.",
+              "part4": "\"Tarjetas de cartas\": derivaciones conscientes que nos ayudan a alcanzar niveles más profundos dentro de nosotros mismos.",
+              "part5": "Las tarjetas amplían nuestro punto de vista más allá de nuestra zona de confort familiar y nos ofrecen una gran cantidad de oportunidades y nuevas formas de pensar."
+            },
+            "key_principles": "Principios clave al trabajar con tarjetas.",
+            "principle1": {
+              "part1": "Antes de cada sorteo de cartas se recomienda hacer una pregunta.",
+              "part2": "Una vez extraída la tarjeta, se debe dar tiempo al votante para mirar la tarjeta y repetir la pregunta formulada.",
+              "part3": "No se apresure a hacer otra pregunta."
+            },
+            "principle2": {
+              "part1": "La verdad está en los ojos de quien elige la tarjeta y, por tanto, todas las respuestas son correctas.",
+              "part2": "No hay resultado bueno o malo.",
+              "part3": "La forma en que el que elige las cartas trata sus cartas expresa su percepción y creencias personales.",
+              "part4": "Es correcto permitir plena legitimidad para la elección y la interpretación personal con el fin de crear un espacio seguro."
+            },
+            "principle3": {
+              "part1": "El libro de instrucciones que se ofrece para cada juego de cartas es sólo una recomendación,",
+              "part2": "No es obligatorio, e incluso te animamos, a escribir tus propias preguntas e ideas, por eso hemos creado un lugar designado para ello en la guía donde puedes escribir cosas antes del inicio de la reunión e incluso durante la misma."
+            },
+            "principle4": {
+              "part1": "En cualquier momento podrás agregar o reemplazar una tarjeta.",
+              "part2": "Antes de hacer esto, se recomienda preguntarle al seleccionador de la tarjeta: ¿qué pasa con esta tarjeta que genera resistencia en usted?",
+              "part3": "¿Cuál es la razón por la que no te conectaste a la tarjeta? No hay cartas buenas o malas."
+            },
+            "principle5": {
+              "part1": "La elección de las cartas es fiel al tiempo presente y describe la interpretación, los sentimientos, el ser y la mentalidad de quien elige la carta en este momento.",
+              "part2": "En un momento o situación diferente, puede surgir una respuesta diferente."
+            }
+          },
+          "mat_expansion_panel8": {
+            "mat_expansion_panel_header": {
+              "mat_panel_title": "¿Cómo se trabaja con una baraja de cartas digital?"
+            },
+            "button": "botón -",
+            "first_step": "Una vez que haya elegido un conjunto de tarjetas con las que trabajar, tendrá 5 botones a su disposición en la parte superior de la pantalla:",
+            "flip_cards_button": {
+              "bold": "dale la vuelta a las cartas -",
+              "normal": "Al hacer clic en el botón puedes elegir qué lado de las tarjetas será visible."
+            },
+            "display_number_cards_button": {
+              "bold": "Muestre varias tarjetas -",
+              "normal": "Al presionar el botón, puede marcar hasta 5 tarjetas y mostrarlas ampliadas en la pantalla."
+            },
+            "shuffle_button": {
+              "bold": "Mezclando -",
+              "normal": "Como en \"El mundo real\", al presionar un botón para mezclar se cambia el orden de las cartas."
+            },
+            "display_random_card_button": {
+              "bold": "mostrar una tarjeta al azar -",
+              "normal": "Al presionar el botón, se seleccionará una tarjeta aleatoria del conjunto de tarjetas y se mostrará en forma ampliada en la pantalla."
+            },
+            "edit_button": {
+              "bold": "edición -",
+              "normal": "Permite ocultar tarjetas específicas. Al hacer clic en el botón, puede ocultar las tarjetas con las que no desea trabajar en el momento actual. Tan pronto como salgas del conjunto de tarjetas o actualices la página, todas las tarjetas que elegiste ocultar volverán a aparecer."
+            },
+            "guidebook_button": {
+              "bold": "el libro de instrucciones -",
+              "normal": "se abrirá en una pantalla separada. Contiene la descripción del conjunto específico de tarjetas, preguntas e ideas para el trabajo individual, el trabajo de procesos y el trabajo en grupo divididos en tarjetas visibles u ocultas."
+            }
+          }
+        }
+      }
+    },
+    "siteRules": {
+      "span": {
+        "text": "Copyright © 2021 Mentor-Cards. Reservados todos los derechos.",
+        "siteRulesLink": "(para las regulaciones del sitio web)"
+      },
+      "siteRulesSm": "(para las regulaciones del sitio web)"
+    },
+    "service-page": {
+      "title": "Mentor-Cards Una página instructiva sobre el uso del sitio",
+      "layout": {
+        "buttons": {
+          "button1": "Agregar un conjunto de tarjetas a Mentor-cards",
+          "button2": "Creando una baraja de cartas digital en tu sitio web",
+          "button3": "Desarrollo de una baraja de cartas digital de extremo a extremo",
+          "button4": "Tutoriales y talleres"
+        }
+      },
+      "content1": {
+        "suitableForTitle": "¿Para quién es adecuado?",
+        "suitableForDescription": "Para propietarios de juegos de tarjetas existentes que quieran crear una versión digital en el sitio web de Mentor-cards.",
+        "whatDoYouGetTitle": "¿Qué obtienes?",
+        "benefits": {
+          "adaptContentTitle": "Adaptación de contenidos y estrategia a lo digital",
+          "adaptContentDescription": "Nuestro equipo leerá tu contenido y realizará un ajuste digital a nivel profesional (por decisión conjunta y si es necesario).",
+          "premiumUserTitle": "Usuario Premium",
+          "premiumUserDescription": "Un miembro VIP ilimitado para el sitio Mentor-cards que otorga el uso de todos los juegos de tarjetas en nuestro sitio.",
+          "digitalizationTitle": "digitalización",
+          "digitalizationDescription": "Tu mazo de cartas está optimizado para lo digital: barajar, sacar una carta al azar, cartas ocultas y visibles, mostrar varias cartas en la pantalla y mucho más. Todo lo que abramos en el futuro para nuestros juegos de cartas, también lo abriremos para usted.",
+          "creatorTitle": "Sobre el creador",
+          "creatorDescription": "Presentación personal y empresarial en la página de la baraja de cartas periódicamente. Exposición a todos los clientes actuales y futuros de Mentor-cards.",
+          "networkLaunchTitle": "lanzamiento en redes",
+          "networkLaunchDescription": "El lanzamiento de la tarjeta en el grupo de Facebook, Instagram y el envío proactivo a todos los clientes actuales y pasados ​​de Mentor-cards. Un público objetivo de miles de formadores, terapeutas y facilitadores de grupos estará expuesto a su baraja de cartas digital.",
+          "purchaseLinkTitle": "Enlace para comprar el juego de cartas.",
+          "purchaseLinkDescription": "La publicación de lanzamiento y la página del conjunto de tarjetas en el sitio web tendrán regularmente un enlace que dirigirá a los clientes a una página seleccionada para comprar su conjunto de tarjetas."
+        },
+        "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+      },
+      "form": {
+        "nameLabel": "Nombre",
+        "nameError": "Debes ingresar un nombre",
+        "emailLabel": "correo",
+        "emailPlaceholder": "Por ejemplo nombre@ejemplo.com",
+        "emailErrorInvalid": "Se debe ingresar un correo electrónico válido",
+        "emailErrorRequired": "Se debe ingresar el correo electrónico",
+        "contentLabel": "contenido",
+        "contentError": "Se debe ingresar el contenido",
+        "submitButton": "Enviar"
+      },
+      "content2": {
+        "suitableForTitle": "¿Para quién es adecuado?",
+        "suitableForDescription": "Para propietarios de juegos de tarjetas existentes que quieran crear una versión digital en su sitio web.",
+        "whatDoYouGetTitle": "¿Qué obtienes?",
+        "benefits": {
+          "adaptContentTitle": "Adaptación de contenidos y estrategia a lo digital",
+          "adaptContentDescription": "Nuestro equipo leerá tu contenido y realizará un ajuste digital a nivel profesional (por decisión conjunta y si es necesario).",
+          "digitalizationTitle": "digitalización",
+          "digitalizationDescription": "Tu mazo de cartas está optimizado para lo digital: barajar, sacar una carta al azar, cartas ocultas y visibles, mostrar varias cartas en la pantalla y mucho más. Ajustaremos el tamaño y contenido de su sitio web y le brindaremos servicio y soporte técnico en todo lo relacionado con el uso y funcionamiento de su juego de tarjetas.",
+          "copyrightTitle": "Derechos de autor",
+          "copyrightDescription": "Los derechos de autor te pertenecen, el producto final es 100% tuyo.",
+          "customerInterfaceTitle": "interfaz de cliente",
+          "customerInterfaceDescription": "Nos reunimos dos veces: una reunión para coordinar las expectativas al comienzo del proceso y una reunión hacia el final del proceso para presentar el conjunto de tarjetas digitales Shlem.Khem, nuestras preguntas y sus aspectos más destacados."
+        },
+        "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+      },
+      "content3": {
+        "suitableForTitle": "¿Para quién es adecuado?",
+        "suitableForDescription": "¡Para aquellos que aún no tienen una baraja de cartas y quieren tener una!",
+        "whatDoYouGetTitle": "¿Qué obtienes?",
+        "benefits": {
+          "createCardSetTitle": "Creando una baraja de cartas \"desde cero\"",
+          "createCardSetDescription": "Envíanos muestras e ideas que hayas acumulado hasta ahora, ¡trabajamos con ilustradores profesionales que convertirán la idea en un producto real para ti!",
+          "adaptContentTitle": "Adaptación de contenidos y estrategia a lo digital",
+          "adaptContentDescription": "Juntos elegiremos un nombre único para el conjunto, escribiremos la descripción del conjunto (como la parte posterior de un libro) y lo más destacado: el libro de instrucciones del conjunto de tarjetas para una guía completa de su público objetivo.",
+          "digitalizationTitle": "digitalización",
+          "digitalizationDescription": "El juego de cartas está adaptado a lo digital: barajar, sacar una carta al azar, cartas ocultas y visibles, mostrar varias cartas en la pantalla y mucho más. ¡Todas las habilidades del \"mundo real\" en tu mazo de cartas digital!",
+          "copyrightTitle": "Derechos de autor",
+          "copyrightDescription": "Los derechos de autor te pertenecen, el producto final es 100% tuyo.",
+          "customerInterfaceTitle": "interfaz de cliente",
+          "customerInterfaceDescription": "Nos reunimos tres veces: una reunión para coordinar expectativas al inicio del proceso, una reunión intermedia para precisiones, cambios y ajustes, una reunión hacia el final del proceso para presentar su baraja de cartas digitalmente, nuestras preguntas y sus aspectos más destacados. ."
+        },
+        "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+      },
+      "content4": {
+        "workshop1": {
+          "workshopName": "El nombre del taller.",
+          "workshopDescription": "Todo lo que necesitas saber sobre cómo trabajar con tarjetas desechables online",
+          "suitableForTitle": "¿Para quién es adecuado?",
+          "suitableForDescription": "Colegios y escuelas, entrenadores, terapeutas, educadores, facilitadores de grupos y personas que trabajan con personas.",
+          "whatDoYouGetTitle": "¿Qué obtienes?",
+          "benefits": {
+            "keyPrinciples": "Principios clave al trabajar con tarjetas proyectivas.",
+            "existingOptions": "¿Cuáles son las opciones disponibles para trabajar con tarjetas desechables en línea?",
+            "whenToUseCards": "¿Cuándo es mejor integrar las tarjetas en el proceso de orientación/formación/tratamiento?",
+            "examples": "Ejemplos de preguntas y técnicas para trabajar con tarjetas online.",
+            "jointExperience": "Experiencia compartida: sentir lo significativo y poderoso que es trabajar con tarjetas.",
+            "resistance": "Tipos de objeciones al trabajar con tarjetas y cómo afrontarlas."
+          },
+          "workshopDuration": "La duración del taller es de 3-5 horas dependiendo del número de participantes."
+        },
+        "workshop2": {
+          "workshopName": "El nombre del taller.",
+          "workshopDescription": "Los valores como herramienta de conexión entre los empleados y la organización",
+          "suitableForTitle": "¿Para quién es adecuado?",
+          "suitableForDescription": "Organizaciones públicas y privadas, organismos institucionales que se esfuerzan por crear una conexión entre el personal directivo y los empleados y los valores fundamentales de la organización de una manera creativa y experiencial.",
+          "whatDoYouGetTitle": "¿Qué obtienes?",
+          "benefits": {
+            "valueDefinition": "Definir el concepto de valor: ¿qué es valor y por qué es importante conocer mis valores principales y la organización para la que trabajo?",
+            "personalValues": "Conocimiento individual de cada empleado de sus valores y establecimiento de su propia escala de valores.",
+            "thinkingGroups": "Thinkgroups: encontrar y definir los 5 valores fundamentales de la organización con la ayuda de un juego de cartas (el más difícil que jamás hayas jugado).",
+            "connectingValues": "¿Cómo se conectan los valores que encontramos con el objetivo y la visión de la organización?",
+            "opposingValues": "¿Qué haces cuando mi empleado/colega actúa en contra de mis valores?"
+          },
+          "workshopDuration": "La duración del taller es de 4-6 horas dependiendo del número de participantes."
+        },
+        "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+      },
+      "contactForm": {
+        "form": {
+          "nameLabel": "Nombre",
+          "nameError": "Debes ingresar un nombre",
+          "emailLabel": "correo",
+          "emailPlaceholder": "Por ejemplo nombre@ejemplo.com",
+          "emailErrorInvalid": "Se debe ingresar un correo electrónico válido",
+          "emailErrorRequired": "Se debe ingresar el correo electrónico",
+          "contentLabel": "contenido",
+          "contentError": "Se debe ingresar el contenido",
+          "submitButton": "Enviar"
+        }
+      },
+      "accordion": {
+        "workshop1": {
+          "workshopName": "Agregar un conjunto de tarjetas a Mentor-cards",
+          "suitableForTitle": "¿Para quién es adecuado?",
+          "suitableForDescription": "Para propietarios de juegos de tarjetas existentes que quieran crear una versión digital en el sitio web de Mentor-cards.",
+          "whatDoYouGetTitle": "¿Qué obtienes?",
+          "benefits": {
+            "adaptContentTitle": "Adaptación de contenidos y estrategia a lo digital",
+            "adaptContentDescription": "Nuestro equipo leerá tu contenido y realizará un ajuste digital a nivel profesional (por decisión conjunta y si es necesario).",
+            "premiumUserTitle": "Usuario Premium",
+            "premiumUserDescription": "Un miembro VIP ilimitado para el sitio Mentor-cards que otorga el uso de todos los juegos de tarjetas en nuestro sitio.",
+            "digitalizationTitle": "digitalización",
+            "digitalizationDescription": "Tu mazo de cartas está optimizado para lo digital: barajar, sacar una carta al azar, cartas ocultas y visibles, mostrar varias cartas en la pantalla y mucho más. Todo lo que abramos en el futuro para nuestros juegos de cartas, también lo abriremos para usted.",
+            "aboutTheCreatorTitle": "\"Acerca del Creador\"",
+            "aboutTheCreatorDescription": "Presentación personal y empresarial en la página de la baraja de cartas periódicamente. Exposición a todos los clientes actuales y futuros de Mentor-cards.",
+            "networkLaunchTitle": "lanzamiento en redes",
+            "networkLaunchDescription": "El lanzamiento de la tarjeta en el grupo de Facebook, Instagram y el envío proactivo a todos los clientes actuales y pasados ​​de Mentor-cards. Un público objetivo de miles de formadores, terapeutas y facilitadores de grupos estará expuesto a su baraja de cartas digital.",
+            "purchaseLinkTitle": "Enlace para comprar el juego de cartas.",
+            "purchaseLinkDescription": "La publicación de lanzamiento y la página del conjunto de tarjetas en el sitio web tendrán regularmente un enlace que dirigirá a los clientes a una página seleccionada para comprar su conjunto de tarjetas."
+          },
+          "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+        },
+        "workshop2": {
+          "workshopName": "Creando una baraja de cartas digital en tu sitio web",
+          "suitableForTitle": "¿Para quién es adecuado?",
+          "suitableForDescription": "Para propietarios de juegos de tarjetas existentes que quieran crear una versión digital en su sitio web.",
+          "whatDoYouGetTitle": "¿Qué obtienes?",
+          "benefits": {
+            "adaptContentTitle": "Adaptación de contenidos y estrategia a lo digital",
+            "adaptContentDescription": "Nuestro equipo leerá tu contenido y realizará un ajuste digital a nivel profesional (por decisión conjunta y si es necesario).",
+            "digitalizationTitle": "digitalización",
+            "digitalizationDescription": "Tu mazo de cartas está optimizado para lo digital: barajar, sacar una carta al azar, cartas ocultas y visibles, mostrar varias cartas en la pantalla y mucho más. Ajustaremos el tamaño y contenido de su sitio web y le brindaremos servicio y soporte técnico en todo lo relacionado con el uso y funcionamiento de su juego de tarjetas.",
+            "copyrightTitle": "Derechos de autor",
+            "copyrightDescription": "Los derechos de autor te pertenecen, el producto final es 100% tuyo.",
+            "customerInterfaceTitle": "interfaz de cliente",
+            "customerInterfaceDescription": "Nos reunimos dos veces: una reunión para coordinar las expectativas al comienzo del proceso y una reunión hacia el final del proceso para presentar su baraja de cartas digitalmente, nuestras preguntas y sus aspectos más destacados."
+          },
+          "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+        },
+        "workshop3": {
+          "workshopName": "Desarrollo de un conjunto de tarjetas digitales \"de extremo a extremo\"",
+          "suitableForTitle": "¿Para quién es adecuado?",
+          "suitableForDescription": "¡Para aquellos que aún no tienen una baraja de cartas y quieren tener una!",
+          "whatDoYouGetTitle": "¿Qué obtienes?",
+          "benefits": {
+            "createFromScratchTitle": "Creando una baraja de cartas \"desde cero\"",
+            "createFromScratchDescription": "Envíanos muestras e ideas que hayas acumulado hasta ahora, ¡trabajamos con ilustradores profesionales que convertirán la idea en un producto real para ti!",
+            "adaptContentTitle": "Adaptación de contenidos y estrategia a lo digital",
+            "adaptContentDescription": "Juntos elegiremos un nombre único para el conjunto, escribiremos la descripción del conjunto (como la parte posterior de un libro) y lo más destacado: el libro de instrucciones del conjunto de tarjetas para una guía completa de su público objetivo.",
+            "digitalizationTitle": "digitalización",
+            "digitalizationDescription": "El juego de cartas está adaptado a lo digital: barajar, sacar una carta al azar, cartas ocultas y visibles, mostrar varias cartas en la pantalla y mucho más. ¡Todas las habilidades del \"mundo real\" en tu mazo de cartas digital!",
+            "copyrightTitle": "Derechos de autor",
+            "copyrightDescription": "Los derechos de autor te pertenecen, el producto final es 100% tuyo.",
+            "customerInterfaceTitle": "interfaz de cliente",
+            "customerInterfaceDescription": "Nos reunimos tres veces: una reunión para coordinar expectativas al inicio del proceso, una reunión intermedia para precisiones, cambios y ajustes, una reunión hacia el final del proceso para presentar su baraja de cartas digitalmente, nuestras preguntas y sus aspectos más destacados. ."
+          },
+          "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+        },
+        "workshop4": {
+          "workshopName": "Tutoriales y talleres",
+          "workshopDescription": "El nombre del taller.",
+          "workshop1": {
+            "workshopName": "Todo lo que necesitas saber sobre cómo trabajar con tarjetas desechables online",
+            "suitableForTitle": "¿Para quién es adecuado?",
+            "suitableForDescription": "Colegios y escuelas, entrenadores, terapeutas, educadores, facilitadores de grupos y personas que trabajan con personas.",
+            "whatDoYouGetTitle": "¿Qué obtienes?",
+            "benefit1": "Principios clave al trabajar con tarjetas proyectivas.",
+            "benefit2": "¿Cuáles son las opciones disponibles para trabajar con tarjetas desechables en línea?",
+            "benefit3": "¿Cuándo es mejor integrar las tarjetas en el proceso de orientación/formación/tratamiento?",
+            "benefit4": "Ejemplos de preguntas y técnicas para trabajar con tarjetas online.",
+            "benefit5": "Experiencia compartida: sentir lo significativo y poderoso que es trabajar con tarjetas.",
+            "benefit6": "Tipos de objeciones al trabajar con tarjetas y cómo afrontarlas.",
+            "workshopDuration": "La duración del taller es de 3-5 horas dependiendo del número de participantes.",
+            "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+          },
+          "workshop2": {
+            "workshopName": "Los valores como herramienta de conexión entre los empleados y la organización",
+            "suitableForTitle": "¿Para quién es adecuado?",
+            "suitableForDescription": "Organizaciones públicas y privadas, organismos institucionales que se esfuerzan por crear una conexión entre el personal directivo y los empleados y los valores fundamentales de la organización de una manera creativa y experiencial.",
+            "whatDoYouGetTitle": "¿Qué obtienes?",
+            "benefit1": "Definir el concepto de valor: ¿qué es valor y por qué es importante conocer mis valores principales y la organización para la que trabajo?",
+            "benefit2": "Conocimiento individual de cada empleado de sus valores y establecimiento de su propia escala de valores.",
+            "benefit3": "Thinkgroups: encontrar y definir los 5 valores fundamentales de la organización con la ayuda de un juego de cartas (el más difícil que jamás hayas jugado).",
+            "benefit4": "¿Cómo se conectan los valores que encontramos con el objetivo y la visión de la organización?",
+            "benefit5": "¿Qué haces cuando mi empleado/colega actúa en contra de mis valores?",
+            "workshopDuration": "La duración del taller es de 4-6 horas dependiendo del número de participantes.",
+            "getPriceQuote": "Para recibir una cotización, deje los detalles y nos comunicaremos con usted"
+          }
+        }
+      }
+    },
+    "affiliates-page": {
+      "header": "¡¡Ven a ser nuestros socios!!",
+      "top-container-body": "El programa de socios le permitirá, además de ingresos adicionales y regulares, recibir de nuestra parte herramientas profesionales, reuniones con nuevos clientes, networking y oportunidades de negocio.",
+      "top-container-button": "¿Querer unirse?",
+      "card-container-header": "¿Qué significa esto realmente?",
+      "card-container-header-container": "Ser nuestro socio conlleva muchas cosas valiosas: comisiones sobre las ganancias, soporte rápido y atención personalizada, beneficios personales para sus clientes, plataformas para exposición frente a una audiencia potencial y, lo más importante, ¡unirse a nuestra comunidad de socios profesionales!",
+      "card": {
+        "card2": {
+          "card-header": "Juego de tarjetas digitales: ¡por nuestra cuenta!",
+          "card-container": "¿Tienes tu propia baraja de cartas? ¡Crearemos una versión digital para usted en nuestro sitio web! También obtendrá una plataforma para su presentación personal y comercial, y disfrutará de exposición a todos los clientes actuales y futuros. (Sus derechos de autor son nuestra prioridad)!"
+        },
+        "card1": {
+          "card-header": "Compartimos las ganancias contigo",
+          "card-container": "¡Por cada venta realizada a través de tu enlace único ganarás una comisión del 10%!"
+        },
+        "card4": {
+          "card-header": "Cultivando una comunidad contigo",
+          "card-container1": "Posicionamiento personal como autoridad profesional en la comunidad de Facebook.",
+          "card-container2": "“Tarjetas de mentor”",
+          "card-container3": "¡Formaciones profesionales, sesiones de networking y más delicias!"
+        },
+        "card3": {
+          "card-header": "Beneficios y más beneficios",
+          "card-container1": "Recibirá un usuario premium sin cargo durante todo el período de asociación, que le otorga el uso de todos los conjuntos de tarjetas en nuestro sitio, incluidas todas las funciones y capacidades tecnológicas.",
+          "card-container2": "Recibirás un código de descuento exclusivo del 25% para tus clientes al unirte a un plan mensual/anual."
+        }
+      },
+      "card-container-footer": "¿Para quién es el programa?",
+      "card-container-footer-container": "Entrenadores personales Cuidadores Educadores Gerentes tener barajas de cartas",
+      "form": {
+        "title": "¿Cómo te unes?",
+        "body": "¡Súper sencillo! Deja tus datos aquí y nos comunicaremos contigo con todos los detalles:",
+        "form": {
+          "firstname": "Apellido",
+          "lastname": "Nombre de pila",
+          "email": "correo",
+          "mobile": "portátil",
+          "submit-button": "Háblame"
+        }
+      },
+      "footer": "Entonces, ¿qué dices? ¿Seremos socios?"
+    },
+    "affiliates-dashboard-page": {
+      "header": "Socios",
+      "discount-body-text1": "El código de descuento para mis clientes.",
+      "discount-body-text2": "Tu enlace de distribución",
+      "discount-body-text3": "Comisión: 10%",
+      "discount-body-text4": ": Cerca de ingresos"
+    },
+    "home-page": {
+      "bg-color": "#fcf4f2",
+      "sections": {
+        "hero": {
+          "component": "héroe-de-la-página-de-inicio-de-la-aplicación",
+          "content": {
+            "title": "Cuando terminan las palabras, entran las tarjetas.",
+            "button-1-text": "Entrada a las barajas de cartas.",
+            "button-2-text": "quiero una suscripción"
+          }
+        },
+        "sub-hero": {
+          "component": "página-de-inicio-de-la-aplicación-sub-héroe",
+          "content": {
+            "title1": "Mentor - Kardes",
+            "title2": "Hogar de las barajas digitales",
+            "description1": "Bienvenido a la era adecuada, el espacio donde las tarjetas de trabajo proyectivas son digitales.",
+            "description2": "En Mentor-Cards encontrarás juegos de tarjetas digitales sobre cualquier tema y para cualquier necesidad, así como libros de instrucciones, ideas para activación y preguntas orientativas para inspirarte. Todo esto está dividido por categorías y objetivos: reuniones grupales, reuniones individuales, trabajo por procesos, frente a grupos y mucho más.",
+            "description3": "Ya sea que pertenezca a profesiones asistenciales, de orientación, de formación, de gestión, de educadores, de conferenciantes o simplemente a personas a las que les guste trabajar con personas, Mentor-Cards es su baza.",
+            "image1alt": "Eficiente",
+            "image2alt": "Disponible en todas partes",
+            "image3alt": "Ecológico"
+          }
+        },
+        "cards": {
+          "component": "tarjetas-de-la-página-de-inicio-de-la-aplicación",
+          "content": {
+            "title": "Todos los paquetes de cartas",
+            "search-placeholder": "¿Cuál es el tema de su reunión? buscar un equipo",
+            "cardsList": [
+              {
+                "content": "Conocido y conexión"
+              },
+              {
+                "content": "Relaciones"
+              },
+              {
+                "content": "Niños y Jóvenes"
+              },
+              {
+                "content": "Conexión conmigo mismo"
+              },
+              {
+                "content": "liderazgo"
+              },
+              {
+                "content": "Visión y objetivos"
+              },
+              {
+                "content": "Empoderamiento"
+              },
+              {
+                "content": "vacaciones"
+              },
+              {
+                "content": "carrera"
+              },
+              {
+                "content": "sentimientos"
+              },
+              {
+                "content": "crisis"
+              },
+              {
+                "content": "Para todas las estimaciones"
+              }
+            ]
+          }
+        },
+        "try-this": {
+          "content": {
+            "title1": "Tarjetas de mentor -",
+            "title2": "¡Esta plataforma es tu as!",
+            "description1": "Las cartas de mentor son mucho más que una baraja de cartas de descarte.",
+            "description2": "Además del acceso completo a una enorme base de datos de kits que se actualizan constantemente, puede disfrutar de una gran variedad de libros instructivos sobre diversos temas, ideas para activación y preguntas guía para inspirarse. Todo está dividido por categorías y finalidad: reuniones grupales, reuniones personales, trabajo de procesos, frente a grupos y mucho más.",
+            "description3": "Desde tarjetas con palabras hasta tarjetas con imágenes, desde tarjetas con mensajes hasta tarjetas con preguntas, desde tarjetas de apertura hasta tarjetas de derivación del subconsciente: ¡tenemos un kit para cada método!",
+            "description4": "Pruébalo, como mucho te enamorarás.",
+            "description5": "Tienes dos juegos de cartas para probar, sin suscripción y sin compromiso, servidas con cariño.",
+            "description6": "Estás invitado a experimentar, experimentar y descubrir cómo Mentor-Cards es todo lo que estabas buscando.",
+            "button": {
+              "text": "Pruebe los presupuestos gratuitos"
+            }
+          }
+        },
+        "how-to-use": {
+          "component": "página-de-inicio-de-la-aplicación-cómo-usar",
+          "content": {
+            "title": "¿Cómo utilizar las Tarjetas de Mentor?",
+            "subtitle": "Mentor-Cards es el lugar que te da acceso a docenas de juegos de tarjetas en cualquier momento y en cualquier lugar:",
+            "description1": "-En reuniones personales 1*1 usando un teléfono móvil o tablet",
+            "description2": "-En reuniones 1*1 online a través de la pantalla compartida",
+            "description3": "-En un campus escolar, en orientación grupal",
+            "follow-us": {
+              "text": "¿Quieres más consejos e ideas? Síganos",
+              "social-icons": [
+                {
+                  "alt": "imagen de tik tok"
+                },
+                {
+                  "alt": "imagen de facebook"
+                },
+                {
+                  "alt": "imagen instantánea"
+                },
+                {
+                  "alt": "imagen de youtube"
+                },
+                {
+                  "alt": "imagen de whatsapp"
+                }
+              ]
+            }
+          }
+        },
+        "advantage": {
+          "content": {
+            "title1": "Lo siento,",
+            "title2": "¿A qué se debe todo este revuelo?",
+            "title3": "alrededor de las cartas de descarte?",
+            "description1": "Aunque todavía no seas adicto o no estés suficientemente familiarizado con todas estas bondades de trabajar con cartas de descarte, te desvelamos algunas ventajas",
+            "description2": "para ti",
+            "description3": "O para sus pacientes y clientes:",
+            "advantages": [
+              {
+                "title1": "Las tarjetas se pelan y se abren.",
+                "title2": "el subconsciente",
+                "description1": "Nuestro cerebro pensante está lleno de miedos, creencias limitantes e inhibiciones. Las cartas son una herramienta proyectiva que nos permite conectarnos con el verdadero deseo de no",
+                "description2": "Una vez bien escondido en las profundidades del subconsciente. En otras palabras, los procesos se acortan y los descubrimientos son sorprendentes."
+              },
+              {
+                "title1": "mira mira",
+                "title2": "en la pared",
+                "description": "Las tarjetas son mucho más que tarjetas: crean una oportunidad para una conversación indirecta en lugares sensibles donde nos resulta demasiado doloroso acercarnos. Una manera posible y gentil de hablar de curación y recuperación, una oportunidad para un acercamiento significativo entre la persona y ella misma."
+              },
+              {
+                "title1": "Si trabaja con tarjetas",
+                "title2": "llegar a lugares maravillosos",
+                "description": "Trabajar con cartas abre el corazón y la mente. El uso de tarjetas hace que cada reunión sea inolvidable, dinámica e interactiva. La forma divertida de aumentar la implicación en el proceso y el éxito."
+              }
+            ]
+          }
+        },
+        "clients": {
+          "content": {
+            "title1": "tantos equipos,",
+            "title2": "tan poco tiempo",
+             "description1": "La mayoría de nosotros pedimos nuestra comida a través de una aplicación, leemos nuestros libros digitalmente. Era sólo cuestión de tiempo que las tarjetas de tratamiento",
+            "description2": "Los productos desechables se unirán a la forma en que nos gusta consumir nuestros productos y pasarán a ser online.",
+            "description3": "Mentor-Cards es un paraíso digital para usted: innumerables conjuntos de tarjetas, tutoriales e inspiración en una variedad actualizada que se adapta a cada uno de los clientes.",
+            "description4": "o tus objetivos.",
+            "description5": "¡Simplemente conéctese a su teléfono móvil, computadora o tableta desde cualquier lugar de Israel o del mundo y disfrute de una experiencia de usuario amigable y sencilla que ya conoce! simple",
+            "description6": "Quizás aún no esté en las cartas...",
+            "description8":"¡Simplemente conéctese a su teléfono móvil, computadora o tableta desde cualquier lugar de Israel o del mundo y disfrute de una experiencia de usuario amigable y sencilla que ya conoce! simple",
+            "description9":"Quizás aún no esté en las cartas...",
+           
+              "statistics": [
+              {
+                "value": "+40",
+                "label1": "Equipos",
+                "label2": "jugando a las cartas"
+              },
+              {
+                "value": "+7800",
+                "label1": "usuarios",
+                "label2": "en el sitio"
+              },
+              {
+                "value": "+300",
+                "label1": "ideas",
+                "label2": "para uso con tarjeta"
+              }
+            ]
+          }
+        },
+        "clients-card": {
+          "content": {
+            "title1": "Más socios, más tarjetas,",
+            "title2": "Más clientes, más éxitos",
+            "description1": "Mentor-Cards es mucho más que una plataforma fácil de usar, ideas e inspiración para mazos de cartas digitales. Aquí está el escenario y el lugar para que usted y sus evaluaciones entren en escena.",
+            "description2": "Gana comisiones, aumenta el círculo de clientes, disfruta de capacitaciones, cultiva una comunidad y mucho más.",
+            "description3": "¿Tiene kits con los que todos deben trabajar, conocer y ver? Ven y sé nuestros socios.",
+            "button": {
+              "text": "Participa en la acción"
+            }
+          }
+        },
+        "partners": {
+          "content": {
+            "title1": "Organizaciones y socios",
+            "description1": "Mentor-Cards",
+            "description2": "las cartas",
+            "description3": "Hola muy lindo Jordan Stampo y mi tio Naman, personas que sueñan y sobre todo lo hacen realidad, comparten el camino y la visión. Con el deseo de permitir el desarrollo y el crecimiento de miles de terapeutas y formadores en Israel y en todo el mundo, hemos creado una plataforma amigable y súper intuitiva para nuestros usuarios, donde pueden trabajar con tarjetas frente a sus clientes. Todo en las reuniones online es exactamente igual que en las presenciales, con manuales de instrucciones llenos de explicaciones y ejemplos. Con una diferencia significativa: sin cargar, sin esforzarse, sin sentirse como dinosaurios.😊",
+            "description4": "Y no menos importante, con mucho espacio para nuestro servicio y con ganas de ser tu domicilio para cualquier cosa o una tarjeta.",
+            "button": {
+              "text": "Lee más sobre nosotros"
+            }
+          }
+        },
+        "updates": {
+          "content": {
+            "title": "Noticias y actualizaciones",
+            "description1": "Estamos constantemente innovando y mejorando y nuestro sistema se actualiza constantemente,",
+            "description2": "Deberías ver las novedades con nosotros.",
+            "updates": [
+              {
+                "date": "(20.02.2024)",
+                "description": "¡Hemos agregado una nueva función para el trabajo conjunto interactivo en el sitio! Haga clic en el enlace dentro de una baraja de cartas, envíelo a otras personas por WhatsApp y tenga acceso gratuito a la baraja de cartas en el sitio web durante 3 horas completas. Pruébalo, es genial :)"
+              },
+              {
+                "date": "(03.04.2024)",
+                "description": "¡Hemos actualizado el conjunto de emojis! Ahora te esperan en el set 80 tarjetas emoji diferentes y populares. Funciona muy bien con niños y jóvenes y, por supuesto, con adultos :)"
+              },
+              {
+                "date": "(03.04.2024)",
+                "description": "¡En preparación para la festividad de Purim, hemos abierto el acceso a un kit de mascarillas para todos! 👹🤠🤡"
+              }
+            ]
+          }
+        },
+        "contact-us": {
+          "content": {
+            "title": "Hablanos con tarjetas",
+            "description": "¡Estaremos encantados de atenderte en cualquier asunto!",
+            "form": {
+              "name-label": "Nombre completo",
+              "phone-label": "teléfono",
+              "email-label": "correo",
+              "message-label": "¿Cómo podemos ayudar?",
+              "submit-button": "enviando"
+            }
+          }
+        },
+        "footer": {
+          "content": {
+            "contact": "soporte@mentor-cards.com",
+            "follow-us": "Sigue nuestra comunidad para obtener consejos",
+            "social-icons": [
+              {
+                "alt": "imagen de tik tok"
+              },
+              {
+                "alt": "imagen de facebook"
+              },
+              {
+                "alt": "imagen instantánea"
+              },
+              {
+                "alt": "imagen de youtube"
+              }
+            ],
+            "links": [
+              {
+                "category": "enlaces principales",
+                "items": [
+                  {
+                    "text": "barajas de cartas"
+                  },
+                  {
+                    "text": "Cursos digitales"
+                  },
+                  {
+                    "text": "nuestros planes"
+                  },
+                  {
+                    "text": "Preguntas comunes"
+                  }
+                ]
+              },
+              {
+                "category": "enlaces extra",
+                "items": [
+                  {
+                    "text": "Servicios"
+                  },
+                  {
+                    "text": "acerca de"
+                  },
+                  {
+                    "text": "Programa de afiliación"
+                  },
+                  {
+                    "text": "Declaración de accesibilidad"
+                  }
+                ]
+              }
+            ],
+            "mobile-links": [
+              {
+                "text": "Política del sitio"
+              },
+              {
+                "text": "barajas de cartas"
+              },
+              {
+                "text": "Cursos digitales"
+              },
+              {
+                "text": "nuestros planes"
+              },
+              {
+                "text": "Preguntas comunes"
+              },
+              {
+                "text": "Servicios"
+              },
+              {
+                "text": "acerca de"
+              },
+              {
+                "text": "Programa de afiliación"
+              },
+              {
+                "text": "Declaración de accesibilidad"
+              },
+              {
+                "text": "Contáctenos"
+              }
+            ],
+            "copyright": "© 2024 Mentor-Tarjetas. Reservados todos los derechos."
+          }
+        }
+      }
+    }
+  },
+  "all estimates": "Todas las estimaciones",
+  "components": {
+    "siteRules": {
+      "title": "Todos los derechos reservados a los creadores del sitio Mentor-Cards ©",
+      "summery": {
+        "rule1": "Toda la información y/o visualización en el sitio web, incluidos gráficos, diseño, presentación verbal, marcas comerciales, signos de \"logotipo\", así como la edición y presentación de estos, son propiedad exclusiva del sitio web y no pueden copiarse, reproducirse, distribuir, exhibir públicamente, ceder a terceros, publicar o utilizar de cualquier otra forma los contenidos que aparecen en el sitio web, a menos que el sitio web haya dado previamente su consentimiento por escrito.",
+        "rule2": "El sitio no será responsable de ningún daño directo o indirecto, físico, financiero o de otro tipo causado a una persona o visitante del sitio como resultado del uso de la información del sitio.",
+        "rule3": "La información contenida en el sitio web debe considerarse únicamente como información de referencia.",
+        "rule4": "Aquellos interesados ​​en mostrar contenido de este sitio web o colaboraciones deben comunicarse con Mentor-cards por escrito y solo después de nuestra aprobación por escrito podrán utilizar el contenido.",
+        "rule5": "Mentor-cards mantiene los derechos de autor y todo el contenido del sitio es original o tiene los permisos adecuados.",
+        "rule6": "La disponibilidad de los juegos de tarjetas y el contenido puede cambiar de vez en cuando."
+      }
+    }
+  },
+  "selectLanguageTooltip": "elige lengua",
+  "id": 91
+}

@@ -101,6 +101,8 @@ export type User = {
   myAffiliate?: Affiliate | null;
   payments?: Array<Payment | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
+  AiConversations?: Array<AiConversation | null> | null;
 };
 
 export type MonthlySubscription = {
@@ -157,7 +159,7 @@ export type CardsPack = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<Cards | null> | null;
+  cards?: Array<Category | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElement | null> | null;
@@ -178,8 +180,20 @@ export type CardsPack = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
+};
+
+export type Category = {
+  __typename: "Category";
+  categoryName?: string | null;
+  categoryStepNumber?: number | null;
+  cardsImages?: Array<Cards | null> | null;
 };
 
 export type Cards = {
@@ -250,6 +264,31 @@ export type Payment = {
   transactionId?: string | null;
 };
 
+export type AiConversation = {
+  __typename: "AiConversation";
+  question?: string | null;
+  answer?: string | null;
+  date?: string | null;
+};
+
+export type UpdateUserInput = {
+  id: string;
+  username: string;
+  phone?: string | null;
+  status?: string | null;
+  numberOfPacksSubstitutions?: number | null;
+  numberOfPlansSubstitutions?: number | null;
+  groupId?: string | null;
+  numberOfUsedPacks?: number | null;
+  groupRole?: string | null;
+  cancellationDate?: string | null;
+  providerTransactionId?: string | null;
+  fullName?: string | null;
+  profession?: string | null;
+  userOrgMembershipId?: string | null;
+  userMyAffiliateId?: string | null;
+};
+
 export type addCardsPackInput = {
   cardsPackId?: string | null;
 };
@@ -315,6 +354,29 @@ export type InvoicesInput = {
   pricePerItem?: number | null;
   numberOfItems?: number | null;
   invoiceType?: string | null;
+};
+
+export type AiInput = {
+  question?: string | null;
+};
+
+export type AiAnswer = {
+  __typename: "AiAnswer";
+  generalAnswer?: string | null;
+  recommendedPacks?: Array<RecommendedPack | null> | null;
+};
+
+export type RecommendedPack = {
+  __typename: "RecommendedPack";
+  packId?: number | null;
+  reason?: string | null;
+  guide?: string | null;
+};
+
+export type S3Item = {
+  __typename: "S3Item";
+  key: string;
+  data: string;
 };
 
 export type ModelCommonLinkConditionInput = {
@@ -713,7 +775,7 @@ export type CreateCardsPackInput = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<CardsInput | null> | null;
+  cards?: Array<CategoryInput | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElementInput | null> | null;
@@ -733,6 +795,17 @@ export type CreateCardsPackInput = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
+};
+
+export type CategoryInput = {
+  categoryName?: string | null;
+  categoryStepNumber?: number | null;
+  cardsImages?: Array<CardsInput | null> | null;
 };
 
 export type CardsInput = {
@@ -771,6 +844,11 @@ export type ModelCardsPackConditionInput = {
   language?: ModelStringInput | null;
   isActive?: ModelBooleanInput | null;
   guidebookUrl?: ModelStringInput | null;
+  ownerName?: ModelStringInput | null;
+  numberOfCards?: ModelIntInput | null;
+  isHardCopyAvailable?: ModelBooleanInput | null;
+  videoUrl?: ModelStringInput | null;
+  isReadingGuidebookAMust?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackConditionInput | null> | null;
   or?: Array<ModelCardsPackConditionInput | null> | null;
   not?: ModelCardsPackConditionInput | null;
@@ -782,7 +860,7 @@ export type UpdateCardsPackInput = {
   description?: string | null;
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
-  cards?: Array<CardsInput | null> | null;
+  cards?: Array<CategoryInput | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
   guideBook?: Array<GuideBookElementInput | null> | null;
@@ -802,6 +880,11 @@ export type UpdateCardsPackInput = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
 };
 
 export type DeleteCardsPackInput = {
@@ -866,12 +949,14 @@ export type UpdateContactUsModelInput = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
 };
 
 export type ModelContactUsModelConditionInput = {
   name?: ModelStringInput | null;
   content?: ModelStringInput | null;
   email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
   and?: Array<ModelContactUsModelConditionInput | null> | null;
   or?: Array<ModelContactUsModelConditionInput | null> | null;
   not?: ModelContactUsModelConditionInput | null;
@@ -883,6 +968,7 @@ export type ContactUsModel = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -991,6 +1077,7 @@ export type CreateContactUsModelInput = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
 };
 
 export type ModelCommonLinkFilterInput = {
@@ -1050,6 +1137,7 @@ export type ModelUserFilterInput = {
   entryDates?: ModelStringInput | null;
   refId?: ModelStringInput | null;
   profession?: ModelStringInput | null;
+  AithreadId?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -1239,6 +1327,11 @@ export type ModelCardsPackFilterInput = {
   language?: ModelStringInput | null;
   isActive?: ModelBooleanInput | null;
   guidebookUrl?: ModelStringInput | null;
+  ownerName?: ModelStringInput | null;
+  numberOfCards?: ModelIntInput | null;
+  isHardCopyAvailable?: ModelBooleanInput | null;
+  videoUrl?: ModelStringInput | null;
+  isReadingGuidebookAMust?: ModelBooleanInput | null;
   and?: Array<ModelCardsPackFilterInput | null> | null;
   or?: Array<ModelCardsPackFilterInput | null> | null;
   not?: ModelCardsPackFilterInput | null;
@@ -1255,6 +1348,7 @@ export type ModelContactUsModelFilterInput = {
   name?: ModelStringInput | null;
   content?: ModelStringInput | null;
   email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
   and?: Array<ModelContactUsModelFilterInput | null> | null;
   or?: Array<ModelContactUsModelFilterInput | null> | null;
   not?: ModelContactUsModelFilterInput | null;
@@ -1317,9 +1411,14 @@ export type CreateUserMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -1398,6 +1497,11 @@ export type CreateUserMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1505,9 +1609,14 @@ export type CreateUserMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -1586,6 +1695,11 @@ export type CreateUserMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1629,6 +1743,13 @@ export type CreateUserMutation = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
+  AiConversations?: Array<{
+    __typename: "AiConversation";
+    question?: string | null;
+    answer?: string | null;
+    date?: string | null;
+  } | null> | null;
 };
 
 export type AddCouponCodeMutation = {
@@ -1720,9 +1841,14 @@ export type GetAffiliateDataMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -1801,6 +1927,11 @@ export type GetAffiliateDataMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -1908,9 +2039,14 @@ export type GetAffiliateDataMutation = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -1989,6 +2125,11 @@ export type GetAffiliateDataMutation = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -2032,6 +2173,55 @@ export type GetAffiliateDataMutation = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
+  AiConversations?: Array<{
+    __typename: "AiConversation";
+    question?: string | null;
+    answer?: string | null;
+    date?: string | null;
+  } | null> | null;
+};
+
+export type AskTheAIMutation = {
+  __typename: "AiAnswer";
+  generalAnswer?: string | null;
+  recommendedPacks?: Array<{
+    __typename: "RecommendedPack";
+    packId?: number | null;
+    reason?: string | null;
+    guide?: string | null;
+  } | null> | null;
+};
+
+export type GetInvoicesFromS3Mutation = {
+  __typename: "S3Item";
+  key: string;
+  data: string;
+};
+
+export type GetAllAffiliatesDataMutation = {
+  __typename: "Affiliate";
+  id: string;
+  affiliateUrl?: string | null;
+  contactEmail?: string | null;
+  phoneNumber?: string | null;
+  websiteURL?: string | null;
+  paymentDetails?: string | null;
+  commissionPercentage?: number | null;
+  dateJoined?: string | null;
+  status?: string | null;
+  balance?: number | null;
+  withdraws?: Array<{
+    __typename: "Withdraw";
+    id: string;
+    date?: string | null;
+    amount?: number | null;
+    currency?: string | null;
+    paymentWay?: string | null;
+    transactionId?: string | null;
+  } | null> | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CreateCommonLinkMutation = {
@@ -2596,9 +2786,14 @@ export type CreateCardsPackMutation = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -2685,6 +2880,11 @@ export type CreateCardsPackMutation = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2697,9 +2897,14 @@ export type UpdateCardsPackMutation = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -2786,6 +2991,11 @@ export type UpdateCardsPackMutation = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2798,9 +3008,14 @@ export type DeleteCardsPackMutation = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -2887,6 +3102,11 @@ export type DeleteCardsPackMutation = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2939,6 +3159,7 @@ export type UpdateContactUsModelMutation = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -2949,6 +3170,7 @@ export type DeleteContactUsModelMutation = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3047,6 +3269,7 @@ export type CreateContactUsModelMutation = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -3124,9 +3347,14 @@ export type GetUserQuery = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -3205,6 +3433,11 @@ export type GetUserQuery = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3312,9 +3545,14 @@ export type GetUserQuery = {
       tags?: Array<string | null> | null;
       categories?: Array<string | null> | null;
       cards?: Array<{
-        __typename: "Cards";
-        backImgUrl?: string | null;
-        frontImgUrl?: string | null;
+        __typename: "Category";
+        categoryName?: string | null;
+        categoryStepNumber?: number | null;
+        cardsImages?: Array<{
+          __typename: "Cards";
+          backImgUrl?: string | null;
+          frontImgUrl?: string | null;
+        } | null> | null;
       } | null> | null;
       cardsPreview?: Array<string | null> | null;
       groupsIds?: Array<string | null> | null;
@@ -3393,6 +3631,11 @@ export type GetUserQuery = {
       language?: string | null;
       isActive?: boolean | null;
       guidebookUrl?: string | null;
+      ownerName?: string | null;
+      numberOfCards?: number | null;
+      isHardCopyAvailable?: boolean | null;
+      videoUrl?: string | null;
+      isReadingGuidebookAMust?: boolean | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -3436,6 +3679,13 @@ export type GetUserQuery = {
     transactionId?: string | null;
   } | null> | null;
   profession?: string | null;
+  AithreadId?: string | null;
+  AiConversations?: Array<{
+    __typename: "AiConversation";
+    question?: string | null;
+    answer?: string | null;
+    date?: string | null;
+  } | null> | null;
 };
 
 export type ListUsersQuery = {
@@ -3491,9 +3741,14 @@ export type ListUsersQuery = {
         tags?: Array<string | null> | null;
         categories?: Array<string | null> | null;
         cards?: Array<{
-          __typename: "Cards";
-          backImgUrl?: string | null;
-          frontImgUrl?: string | null;
+          __typename: "Category";
+          categoryName?: string | null;
+          categoryStepNumber?: number | null;
+          cardsImages?: Array<{
+            __typename: "Cards";
+            backImgUrl?: string | null;
+            frontImgUrl?: string | null;
+          } | null> | null;
         } | null> | null;
         cardsPreview?: Array<string | null> | null;
         groupsIds?: Array<string | null> | null;
@@ -3568,6 +3823,11 @@ export type ListUsersQuery = {
         language?: string | null;
         isActive?: boolean | null;
         guidebookUrl?: string | null;
+        ownerName?: string | null;
+        numberOfCards?: number | null;
+        isHardCopyAvailable?: boolean | null;
+        videoUrl?: string | null;
+        isReadingGuidebookAMust?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3675,9 +3935,14 @@ export type ListUsersQuery = {
         tags?: Array<string | null> | null;
         categories?: Array<string | null> | null;
         cards?: Array<{
-          __typename: "Cards";
-          backImgUrl?: string | null;
-          frontImgUrl?: string | null;
+          __typename: "Category";
+          categoryName?: string | null;
+          categoryStepNumber?: number | null;
+          cardsImages?: Array<{
+            __typename: "Cards";
+            backImgUrl?: string | null;
+            frontImgUrl?: string | null;
+          } | null> | null;
         } | null> | null;
         cardsPreview?: Array<string | null> | null;
         groupsIds?: Array<string | null> | null;
@@ -3752,6 +4017,11 @@ export type ListUsersQuery = {
         language?: string | null;
         isActive?: boolean | null;
         guidebookUrl?: string | null;
+        ownerName?: string | null;
+        numberOfCards?: number | null;
+        isHardCopyAvailable?: boolean | null;
+        videoUrl?: string | null;
+        isReadingGuidebookAMust?: boolean | null;
         createdAt: string;
         updatedAt: string;
       } | null> | null;
@@ -3795,6 +4065,13 @@ export type ListUsersQuery = {
       transactionId?: string | null;
     } | null> | null;
     profession?: string | null;
+    AithreadId?: string | null;
+    AiConversations?: Array<{
+      __typename: "AiConversation";
+      question?: string | null;
+      answer?: string | null;
+      date?: string | null;
+    } | null> | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -4219,9 +4496,14 @@ export type GetCardsPackQuery = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -4308,6 +4590,11 @@ export type GetCardsPackQuery = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4322,9 +4609,14 @@ export type ListCardsPacksQuery = {
     tags?: Array<string | null> | null;
     categories?: Array<string | null> | null;
     cards?: Array<{
-      __typename: "Cards";
-      backImgUrl?: string | null;
-      frontImgUrl?: string | null;
+      __typename: "Category";
+      categoryName?: string | null;
+      categoryStepNumber?: number | null;
+      cardsImages?: Array<{
+        __typename: "Cards";
+        backImgUrl?: string | null;
+        frontImgUrl?: string | null;
+      } | null> | null;
     } | null> | null;
     cardsPreview?: Array<string | null> | null;
     groupsIds?: Array<string | null> | null;
@@ -4407,6 +4699,11 @@ export type ListCardsPacksQuery = {
     language?: string | null;
     isActive?: boolean | null;
     guidebookUrl?: string | null;
+    ownerName?: string | null;
+    numberOfCards?: number | null;
+    isHardCopyAvailable?: boolean | null;
+    videoUrl?: string | null;
+    isReadingGuidebookAMust?: boolean | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -4419,6 +4716,7 @@ export type GetContactUsModelQuery = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -4431,6 +4729,7 @@ export type ListContactUsModelsQuery = {
     name?: string | null;
     content?: string | null;
     email?: string | null;
+    phone?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null>;
@@ -5129,9 +5428,14 @@ export type OnCreateCardsPackSubscription = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -5218,6 +5522,11 @@ export type OnCreateCardsPackSubscription = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5230,9 +5539,14 @@ export type OnUpdateCardsPackSubscription = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -5319,6 +5633,11 @@ export type OnUpdateCardsPackSubscription = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5331,9 +5650,14 @@ export type OnDeleteCardsPackSubscription = {
   tags?: Array<string | null> | null;
   categories?: Array<string | null> | null;
   cards?: Array<{
-    __typename: "Cards";
-    backImgUrl?: string | null;
-    frontImgUrl?: string | null;
+    __typename: "Category";
+    categoryName?: string | null;
+    categoryStepNumber?: number | null;
+    cardsImages?: Array<{
+      __typename: "Cards";
+      backImgUrl?: string | null;
+      frontImgUrl?: string | null;
+    } | null> | null;
   } | null> | null;
   cardsPreview?: Array<string | null> | null;
   groupsIds?: Array<string | null> | null;
@@ -5420,6 +5744,11 @@ export type OnDeleteCardsPackSubscription = {
   language?: string | null;
   isActive?: boolean | null;
   guidebookUrl?: string | null;
+  ownerName?: string | null;
+  numberOfCards?: number | null;
+  isHardCopyAvailable?: boolean | null;
+  videoUrl?: string | null;
+  isReadingGuidebookAMust?: boolean | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5430,6 +5759,7 @@ export type OnCreateContactUsModelSubscription = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5440,6 +5770,7 @@ export type OnUpdateContactUsModelSubscription = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5450,6 +5781,7 @@ export type OnDeleteContactUsModelSubscription = {
   name?: string | null;
   content?: string | null;
   email?: string | null;
+  phone?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -5524,8 +5856,13 @@ export class APIService {
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -5604,6 +5941,11 @@ export class APIService {
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
+              isHardCopyAvailable
+              videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -5712,8 +6054,13 @@ export class APIService {
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -5792,6 +6139,11 @@ export class APIService {
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
+              isHardCopyAvailable
+              videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -5835,6 +6187,13 @@ export class APIService {
             transactionId
           }
           profession
+          AithreadId
+          AiConversations {
+            __typename
+            question
+            answer
+            date
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -5844,6 +6203,18 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateUserMutation>response.data.createUser;
+  }
+  async UpdateUser(input: UpdateUserInput): Promise<boolean | null> {
+    const statement = `mutation UpdateUser($input: UpdateUserInput!) {
+        updateUser(input: $input)
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <boolean | null>response.data.updateUser;
   }
   async AddCardsPack(input: addCardsPackInput): Promise<boolean | null> {
     const statement = `mutation AddCardsPack($input: addCardsPackInput!) {
@@ -6131,8 +6502,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -6211,6 +6587,11 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
+              isHardCopyAvailable
+              videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -6319,8 +6700,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -6399,6 +6785,11 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
+              isHardCopyAvailable
+              videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -6442,6 +6833,13 @@ async GetSubscriptionPlansForOrgs(
             transactionId
           }
           profession
+          AithreadId
+          AiConversations {
+            __typename
+            question
+            answer
+            date
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -6463,6 +6861,84 @@ async GetSubscriptionPlansForOrgs(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <boolean | null>response.data.createInvoice;
+  }
+  async AskTheAI(input: AiInput): Promise<AskTheAIMutation> {
+    const statement = `mutation AskTheAI($input: AiInput!) {
+        askTheAI(input: $input) {
+          __typename
+          generalAnswer
+          recommendedPacks {
+            __typename
+            packId
+            reason
+            guide
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <AskTheAIMutation>response.data.askTheAI;
+  }
+  async GetInvoicesFromS3(
+    input: userInput
+  ): Promise<Array<GetInvoicesFromS3Mutation>> {
+    const statement = `mutation GetInvoicesFromS3($input: userInput!) {
+        getInvoicesFromS3(input: $input) {
+          __typename
+          key
+          data
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<GetInvoicesFromS3Mutation>>response.data.getInvoicesFromS3;
+  }
+  async GetAllAffiliatesData(
+    input: userInput
+  ): Promise<Array<GetAllAffiliatesDataMutation>> {
+    const statement = `mutation GetAllAffiliatesData($input: userInput!) {
+        GetAllAffiliatesData(input: $input) {
+          __typename
+          id
+          affiliateUrl
+          contactEmail
+          phoneNumber
+          websiteURL
+          paymentDetails
+          commissionPercentage
+          dateJoined
+          status
+          balance
+          withdraws {
+            __typename
+            id
+            date
+            amount
+            currency
+            paymentWay
+            transactionId
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <Array<GetAllAffiliatesDataMutation>>(
+      response.data.GetAllAffiliatesData
+    );
   }
   async CreateCommonLink(
     input: CreateCommonLinkInput,
@@ -7438,8 +7914,13 @@ async GetSubscriptionPlansForOrgs(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -7526,6 +8007,11 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
+          isHardCopyAvailable
+          videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -7555,8 +8041,13 @@ async GetSubscriptionPlansForOrgs(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -7643,6 +8134,11 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
+          isHardCopyAvailable
+          videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -7672,8 +8168,13 @@ async GetSubscriptionPlansForOrgs(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -7760,6 +8261,11 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
+          isHardCopyAvailable
+          videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -7876,6 +8382,7 @@ async GetSubscriptionPlansForOrgs(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -7902,6 +8409,7 @@ async GetSubscriptionPlansForOrgs(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -8096,6 +8604,7 @@ async GetSubscriptionPlansForOrgs(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -8220,8 +8729,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -8300,6 +8814,11 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
+              isHardCopyAvailable
+              videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -8408,8 +8927,13 @@ async GetSubscriptionPlansForOrgs(
               categories
               cards {
                 __typename
-                backImgUrl
-                frontImgUrl
+                categoryName
+                categoryStepNumber
+                cardsImages {
+                  __typename
+                  backImgUrl
+                  frontImgUrl
+                }
               }
               cardsPreview
               groupsIds
@@ -8488,6 +9012,11 @@ async GetSubscriptionPlansForOrgs(
               language
               isActive
               guidebookUrl
+              ownerName
+              numberOfCards
+              isHardCopyAvailable
+              videoUrl
+              isReadingGuidebookAMust
               createdAt
               updatedAt
             }
@@ -8531,6 +9060,13 @@ async GetSubscriptionPlansForOrgs(
             transactionId
           }
           profession
+          AithreadId
+          AiConversations {
+            __typename
+            question
+            answer
+            date
+          }
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -8601,8 +9137,13 @@ async GetSubscriptionPlansForOrgs(
                 categories
                 cards {
                   __typename
-                  backImgUrl
-                  frontImgUrl
+                  categoryName
+                  categoryStepNumber
+                  cardsImages {
+                    __typename
+                    backImgUrl
+                    frontImgUrl
+                  }
                 }
                 cardsPreview
                 groupsIds
@@ -8677,11 +9218,15 @@ async GetSubscriptionPlansForOrgs(
                 language
                 isActive
                 guidebookUrl
+                ownerName
+                numberOfCards
+                isHardCopyAvailable
+                videoUrl
+                isReadingGuidebookAMust
                 createdAt
                 updatedAt
               }
               cancellationDate
-              nextBillingDate
             }
             numberOfPacksSubstitutions
             lastPackSubstitutionDate
@@ -8785,8 +9330,13 @@ async GetSubscriptionPlansForOrgs(
                 categories
                 cards {
                   __typename
-                  backImgUrl
-                  frontImgUrl
+                  categoryName
+                  categoryStepNumber
+                  cardsImages {
+                    __typename
+                    backImgUrl
+                    frontImgUrl
+                  }
                 }
                 cardsPreview
                 groupsIds
@@ -8861,6 +9411,11 @@ async GetSubscriptionPlansForOrgs(
                 language
                 isActive
                 guidebookUrl
+                ownerName
+                numberOfCards
+                isHardCopyAvailable
+                videoUrl
+                isReadingGuidebookAMust
                 createdAt
                 updatedAt
               }
@@ -8904,6 +9459,13 @@ async GetSubscriptionPlansForOrgs(
               transactionId
             }
             profession
+            AithreadId
+            AiConversations {
+              __typename
+              question
+              answer
+              date
+            }
           }
           nextToken
         }
@@ -9635,10 +10197,15 @@ async GetSubscriptionPlansForOrgs(
           description
           tags
           categories
-          cards (link: $link){
+          cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -9725,6 +10292,11 @@ async GetSubscriptionPlansForOrgs(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
+          isHardCopyAvailable
+          videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -9739,7 +10311,7 @@ async GetSubscriptionPlansForOrgs(
     )) as any;
     return <GetCardsPackQuery>response.data.getCardsPack;
   }
-async ListCardsPacksForPreview(
+  async ListCardsPacksForPreview(
     filter?: ModelCardsPackFilterInput,
     limit?: number,
     nextToken?: string
@@ -9756,8 +10328,13 @@ async ListCardsPacksForPreview(
             categories
             cards {
               __typename
-              backImgUrl
-              frontImgUrl
+              categoryName
+              categoryStepNumber
+              cardsImages {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
             }
             cardsPreview
             groupsIds
@@ -9837,8 +10414,13 @@ async ListCardsPacksForPreview(
               entries
             }
             isFree
-            language
+            language          
+            ownerName
+            numberOfCards
+            isHardCopyAvailable
             isActive
+            videoUrl
+            isReadingGuidebookAMust
             createdAt
             updatedAt
           }
@@ -9879,8 +10461,13 @@ async ListCardsPacksForPreview(
             categories
             cards {
               __typename
-              backImgUrl
-              frontImgUrl
+              categoryName
+              categoryStepNumber
+              cardsImages {
+                __typename
+                backImgUrl
+                frontImgUrl
+              }
             }
             cardsPreview
             groupsIds
@@ -9963,6 +10550,11 @@ async ListCardsPacksForPreview(
             language
             isActive
             guidebookUrl
+            ownerName
+            numberOfCards
+            isHardCopyAvailable
+            videoUrl
+            isReadingGuidebookAMust
             createdAt
             updatedAt
           }
@@ -9992,6 +10584,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -10018,6 +10611,7 @@ async ListCardsPacksForPreview(
             name
             content
             email
+            phone
             createdAt
             updatedAt
           }
@@ -10096,13 +10690,12 @@ async ListCardsPacksForPreview(
     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteCommonLink">>
   >;
 
-  OnCreateAffiliateListener(
-    contactEmail?: string
-  ): Observable<
+  OnCreateAffiliateListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
-  > {
-    const statement = `subscription OnCreateAffiliate($contactEmail: String) {
-        onCreateAffiliate(contactEmail: $contactEmail) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateAffiliate {
+        onCreateAffiliate {
           __typename
           id
           affiliateUrl
@@ -10126,25 +10719,18 @@ async ListCardsPacksForPreview(
           createdAt
           updatedAt
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (contactEmail) {
-      gqlAPIServiceArguments.contactEmail = contactEmail;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      }`
+    )
   ) as Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAffiliate">>
   >;
-}
 
-  OnUpdateAffiliateListener(
-    contactEmail?: string
-  ): Observable<
+  OnUpdateAffiliateListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
-  > {
-    const statement = `subscription OnUpdateAffiliate($contactEmail: String) {
-        onUpdateAffiliate(contactEmail: $contactEmail) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateAffiliate {
+        onUpdateAffiliate {
           __typename
           id
           affiliateUrl
@@ -10168,25 +10754,18 @@ async ListCardsPacksForPreview(
           createdAt
           updatedAt
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (contactEmail) {
-      gqlAPIServiceArguments.contactEmail = contactEmail;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      }`
+    )
   ) as Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAffiliate">>
   >;
-}
 
-  OnDeleteAffiliateListener(
-    contactEmail?: string
-  ): Observable<
+  OnDeleteAffiliateListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
-  > {
-    const statement = `subscription OnDeleteAffiliate($contactEmail: String) {
-        onDeleteAffiliate(contactEmail: $contactEmail) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteAffiliate {
+        onDeleteAffiliate {
           __typename
           id
           affiliateUrl
@@ -10210,17 +10789,11 @@ async ListCardsPacksForPreview(
           createdAt
           updatedAt
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (contactEmail) {
-      gqlAPIServiceArguments.contactEmail = contactEmail;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
+      }`
+    )
   ) as Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAffiliate">>
   >;
-}
 
   OnCreateCouponCodesListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateCouponCodes">>
@@ -11112,8 +11685,13 @@ async ListCardsPacksForPreview(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -11200,6 +11778,11 @@ async ListCardsPacksForPreview(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
+          isHardCopyAvailable
+          videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -11223,8 +11806,13 @@ async ListCardsPacksForPreview(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -11311,6 +11899,11 @@ async ListCardsPacksForPreview(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
+          isHardCopyAvailable
+          videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -11334,8 +11927,13 @@ async ListCardsPacksForPreview(
           categories
           cards {
             __typename
-            backImgUrl
-            frontImgUrl
+            categoryName
+            categoryStepNumber
+            cardsImages {
+              __typename
+              backImgUrl
+              frontImgUrl
+            }
           }
           cardsPreview
           groupsIds
@@ -11422,6 +12020,11 @@ async ListCardsPacksForPreview(
           language
           isActive
           guidebookUrl
+          ownerName
+          numberOfCards
+          isHardCopyAvailable
+          videoUrl
+          isReadingGuidebookAMust
           createdAt
           updatedAt
         }
@@ -11444,6 +12047,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -11468,6 +12072,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }
@@ -11492,6 +12097,7 @@ async ListCardsPacksForPreview(
           name
           content
           email
+          phone
           createdAt
           updatedAt
         }

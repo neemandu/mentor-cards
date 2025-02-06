@@ -1,11 +1,8 @@
-
 amplify-authenticator {
   position: fixed;
   top: 0;
   width: 100%;
 }
-
-
 
 /* amplify-sign-up {
   position: absolute;
@@ -78,6 +75,18 @@ video {
     left: 59%;
   }
 }
+.h-\[60px\] {
+  height: 60px;
+}
+.mx-12 {
+  margin-left: 3rem /* 48px */;
+  margin-right: 3rem /* 48px */;
+}
+.px-12 {
+  padding-left: 3rem /* 48px */;
+  padding-right: 3rem /* 48px */;
+}
+
 
 /* https://css-tricks.com/snippets/css/shake-css-keyframe-animation/ */
 /* .toast:hover {

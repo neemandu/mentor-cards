@@ -1,14 +1,14 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+# /dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
 
 # dependencies
-/node_modules
+# /node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -82,10 +82,10 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
+# build/Release
 
 # Dependency directories
-node_modules/
+# node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -127,7 +127,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist
 
 # Gatsby files
 .cache/
@@ -136,7 +136,7 @@ dist
 # public
 
 # vuepress build output
-.vuepress/dist
+# .vuepress/dist
 
 # Serverless directories
 .serverless/
@@ -152,9 +152,9 @@ dist
 
 #amplify
 amplify/backend/awscloudformation
-build/
-dist/
-node_modules/
+# build/
+# dist/
+# node_modules/
 aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json

@@ -1,6 +1,6 @@
 h1,
 h2 {
-  font-family: "rubik";
+  font-family: "Open Sans Hebrew", sans-serif !important;
 }
 
 .nav {
@@ -10,12 +10,22 @@ h2 {
 
 app-card {
   margin: 10px 10px;
-  width: 10rem;
+  width: 100%;
   transition: transform 0.3s ease, translate 1s ease-in;
+}
+
+app-card.card-width {
+  width: 10rem;
 }
 
 app-card:hover {
   transform: scale(1.03);
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
+  gap: 10px;
 }
 
 /* Speed of shuffle */
@@ -26,6 +36,10 @@ app-card:hover {
 .nav-buttons {
   margin: 5px 10px 5px 0px;
   align-items: center;
+}
+
+.hideItDesktop {
+  display: none;
 }
 
 .cards-container {
@@ -105,6 +119,10 @@ button:focus {
   color: #717171;
 }
 
+.width-471 {
+  width: 471px !important;
+}
+
 .about-author-option-btn:hover {
   background: #e6aa3b;
 }
@@ -117,6 +135,110 @@ button:focus {
   opacity: 1;
   background: var(--main-color);
   color: white;
+}
+
+.cards-grid {
+  display: flex; /* Flexbox layout */
+  flex-wrap: wrap; /* Allow wrapping to multiple rows */
+  gap: 60px 20px; /* Row and column spacing */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+
+.card-container {
+  position: relative;
+  height: 400px; /* Fixed height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-buttons-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  z-index: 10;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.flip-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flip-box.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-image {
+  width: 100%; /* Ensure image fills container width */
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease, transform 0.6s;
+}
+
+.flip-button {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
+.flip-button img {
+  width: 30px; /* Adjust the icon size within the button */
+  height: 25px;
+}
+
+.index-circle {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.rotate-button {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.rotate-button img {
+  width: 30px; /* Adjust the icon size within the button */
+  height: auto;
 }
 
 /* .bottom-option-btn:disabled {
@@ -254,17 +376,937 @@ li span {
   border: none;
 }
 
+.grid-display {
+  display: grid;
+  grid-template-columns: 34% 1fr;
+}
+
+.section-drop-down {
+  width: 50% !important;
+}
 /* .reveal-card {
   animation: fadeIn 0.4s, slideUp 0.6s;
 } */
 
+/* Custom drop-down CSS */
+.dropdown {
+  position: relative;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown-select {
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #e67c73; /* The red line */
+  cursor: pointer;
+  background-color: transparent;
+  text-align: center;
+  position: relative; /* Relative positioning for dropdown-options */
+  min-height: 50px; /* Allow for multiple lines if needed */
+}
+
+.selected-option {
+  display: block; /* Ensures it takes up full width */
+  font-weight: 600;
+  max-width: 100%;
+  word-wrap: break-word; /* Allow the text to wrap within the container */
+  overflow-wrap: break-word; /* Handle word wrapping */
+  white-space: normal; /* Allows the text to wrap to the next line */
+  text-align: center;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: calc(100% + 5px); /* Dropdown appears below the dropdown select */
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+  text-align: start;
+  max-height: 300px; /* Set a maximum height for better control */
+  overflow-y: auto; /* Add scroll for long lists */
+}
+
+.dropdown-option {
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+  gap: 10px;
+  white-space: normal; /* Allow text to wrap */
+  overflow-wrap: break-word; /* Handle word wrapping */
+  word-break: break-word;
+}
+
+.dropdown-option:hover {
+  font-weight: bold;
+  background-color: #f5f5f5; /* Highlight background on hover for better UX */
+}
+
+.dropdown-options.show {
+  display: block;
+}
+
+.dropdown-icon {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* End Drop-down CSS Here */
+
+.z-8 {
+  z-index: 8;
+}
+
+.btn-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.download-button {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #ffffff;
+  justify-content: center;
+  align-items: center;
+}
+
+.drop-down {
+  max-width: 779px;
+  color: white;
+  font-weight: 600;
+  font-size: 38;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Aside bar */
+.aside-bar {
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  width: 219px;
+  padding: 60px 0px 10px 0px;
+}
+
+.aside-button {
+  width: 207px;
+  height: 47px;
+  background-color: #ffe0d8;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+.aside-container {
+  display: grid;
+  grid-template-columns: auto calc(100% - 10px);
+}
+
+.category-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-row {
+  border-bottom: 1px solid #e67c73;
+}
+
+.overflow-cards {
+  overflow: scroll; /* Ensure the scrolling is allowed */
+  flex-wrap: wrap;
+  width: calc(100% - 220px);
+  /* Hide scrollbar */
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+app-card.scrollableCard {
+  flex: 0 0 auto;
+  width: auto;
+  margin-right: 10px;
+}
+
+app-card.scrollableCardOrd {
+  flex: 0 0 auto;
+  width: 169px;
+  margin-right: 10px;
+}
+
+.category-name {
+  position: relative;
+  text-align: right;
+}
+
+.selected-category {
+  opacity: 30%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  min-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+.multi-card-container {
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  gap: 5px;
+  margin-left: 5px;
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+}
+.selected-card {
+  height: 100px;
+  margin-left: 10px;
+  display: inline-block;
+  width: 82px;
+  border-radius: 5px;
+}
+.multi-image {
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+}
+.category-img-box {
+  height: 82px;
+  width: 82px;
+  object-fit: cover;
+  margin-top: 20px;
+}
+.img-box {
+  height: 82px;
+  width: 82px;
+  object-fit: fill;
+}
+.dialog-container {
+  display: flex;
+  width: 100vw;
+  overflow-x: auto;
+  white-space: nowrap;
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+}
+
+.width-50vw {
+  width: 25vw;
+}
+
+.scroll-visible {
+  overflow-x: visible !important;
+}
+
+.scroll-hidden {
+  overflow: hidden !important;
+}
+
+.object-fit {
+  object-fit: cover;
+}
+
+.single-side-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  max-width: 90vw;
+  padding-bottom: 2vw;
+  white-space: nowrap;
+  grid-gap: 10px;
+  gap: 0rem;
+  overflow: scroll;
+  flex-wrap: wrap;
+}
+
+.min-width-auto {
+  min-height: auto !important;
+  min-width: auto !important;
+}
+
+/* Hide scrollbar for Webkit browsers */
+.single-side-card::-webkit-scrollbar {
+  display: none;
+}
+
+.show-all {
+  height: 35px;
+  width: 200px;
+  border-radius: 20px;
+  border: 1px solid #e67c73;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+.remove-all {
+  height: 35px;
+  width: 200px;
+  border-radius: 20px;
+  border: none;
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+.footer-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 97%;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+}
+.button-box {
+  border-left: 1px solid #e67c73;
+  padding: 20px;
+  margin-left: 5px;
+}
+
+.height-82 {
+  height: 82px;
+}
+.card-box {
+  display: flex;
+  width: 100%;
+}
+
+.zoom-control {
+  display: flex;
+  position: absolute;
+  left: 40px;
+  top: 10%;
+  gap: 10px;
+  z-index: 1;
+}
+.zoom-btn {
+  width: 35px;
+  height: 35px;
+}
+
+.category-title {
+  position: relative;
+  bottom: 14px;
+  right: 90px;
+}
+
+/* .single-card {
+  width: 600px;
+} */
+
+.single-card-img {
+  height: 829px !important;
+  width: 588px !important;
+}
+
+.card-default {
+  min-height: auto;
+  min-width: auto;
+}
+
+.zarori {
+  justify-content: center;
+  height: 600px;
+  width: 350px;
+}
+
+.category-base-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  border-bottom: 1px solid white;
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+}
+
+.category-base-flip {
+  width: auto;
+}
+
+.category-base-scrollbar {
+  width: calc(100% - 10px);
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  /* Hide scrollbar */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+}
+
+.category-base-footer {
+  display: flex;
+  flex-direction: row;
+}
+
+.category-base-card-container {
+  padding-left: 10px;
+  border-left: 1px solid #e67c73;
+  padding-right: 10px;
+  gap: 10px;
+  display: flex;
+}
+
+.category-location {
+  text-align: justify;
+}
+
+.icons-top {
+  width: 45%;
+}
+.category-base-download {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Icon-90 {
+  margin-left: 25px;
+  margin-bottom: 10px;
+}
+
+.flipDoubleSideIcon {
+  width: auto;
+  position: relative;
+  right: 50px;
+}
+
+.text-red {
+  
+  p {
+    display: none;
+  }
+}
+
+.width-75 {
+  width: 65%;
+}
+
+.icons-bg {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+ }
+
+ .single-side {
+  display: block; 
+  margin-right: 3rem;
+ }
+
+
+
+ .dialog-container-row {
+  flex-wrap: wrap;
+  display: flex;
+ }
+ 
+
 @media screen and (max-width: 1024px) {
 }
 
+/* Landscape orientation styles */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+
+  .multi-card-mobile .drop-down {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .multi-card-mobile img.card-image-mobile {
+    width: auto !important;
+    max-width: 30vw; 
+    height: auto;
+  }
+
+  .multi-card-mobile .right-90-icon {
+    width: auto !important; 
+    margin-top: 5px;
+  }
+
+  .multi-card-mobile .single-card {
+    flex: 1 1 auto;
+  }
+
+  .multi-card-mobile .single-side-card {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+  }
+
+  .Icon-90 {
+      /* margin-left: 25px; */
+      margin-top: -7px;
+      width: 30px;
+      height: 30px;
+  }
+
+
+  .single-side-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    max-width: 90vw;
+    padding-bottom: 2vw;
+    white-space: nowrap;
+    grid-gap: 10px;
+    gap: 0rem;
+    overflow-x: auto;
+  }
+  
+  .min-width-auto {
+    min-height: auto !important;
+    min-width: auto !important;
+  }
+  
+  /* Hide scrollbar for Webkit browsers */
+  .single-side-card::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .dropdown-options {
+    position: fixed; /* Use fixed positioning for better control */
+    top: 20%; /* Position the dropdown options at a visible area */
+    left: 5%;
+    width: 90%;
+    max-height: 60vh; /* Limit the dropdown height for better visibility */
+    overflow-y: auto; /* Allow scrolling */
+    z-index: 2000; /* Keep it above all other elements */
+  }
+
+  .dropdown-select {
+    padding: 10px; /* Keep padding for consistency */
+    font-size: 8px; /* Adjust font size for mobile */
+    min-height: 60px;
+  }
+
+  .selected-option {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+  }
+
   ::ng-deep .cdk-overlay-pane {
     max-width: 80vw !important;
   }
+  .category-base-download {
+    left: 21% !important;
+  }
+
+  .width-50vw {
+    width: 350px;
+  }
+
+  .dialog-container-row {
+    display: block;
+  }
+
+  .grid-display {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .text-xxs {
+    font-size: 0.48rem;
+  }
+
+  .text-size-10 {
+    font-size: 10px;
+  }
+
+  .btn-1 {
+    width: 100px;
+  }
+  .btn-2 {
+    width: 75px;
+  }
+  .btn-4 {
+    width: 70px;
+  }
+
+  .padding-zero {
+    padding: 0px;
+  }
+
+  .card-default {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  .padding-20 {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px !important;
+  }
+
+  .section-drop-down {
+    width: 100vw !important;
+    margin-right: -6px;
+    /* padding-left: 20px; */
+  }
+
+  .background-white {
+    background-color: white;
+
+  }
+
+  .flip-box-inner {
+    min-height: auto !important;
+  }
+
+  .flipDoubleSideIcon {
+    width: auto;
+    position: relative;
+    right: 10px;
+  }
+
+  .img-pen {
+    padding: 0;
+    height: 12px;
+    width: 12px;
+    margin-top: 8px;
+  }
+
+  .img-hand {
+    padding: 0;
+    height: 20px;
+    width: 20px;
+    margin-top: 4px;
+  }
+
+  .img-link {
+    padding: 0;
+    height: 11px;
+    width: 31px;
+    margin-top: 7px;
+  }
+
+  .img-info {
+    padding: 0;
+    width: 8px;
+    height: 15px;
+    margin-top: 5px;
+  }
+
+  .img-shuffle {
+    padding: 0;
+    height: 15px;
+    width: 32px;
+    margin-top: 8px;
+  }
+
+  .btn-height-35 {
+    text-align: center;
+    height: 35px;
+  }
+
+  .padding-none {
+    padding: 0px !important;
+  }
+  .c-gap {
+    grid-gap: 0.5rem !important;
+  }
+
+  .dropdown-icon {
+    position: absolute;
+    left: 3px;
+    bottom: 8px;
+  }
+
+  .dropdown-select {
+    margin-bottom: 10px;
+    height: 59px;
+  }
+
+  .mobile-bg {
+    background-color: #f8f9fa;
+  }
+
+  .text-red {
+    background-color: #E67C73;
+    p {
+      display: flex;
+      font-size: 14px;
+    }
+  }
+
+  .multi-card-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .right-90-icon {
+    height: 20px;
+    width: 20px !important;
+    /* margin-left: 35px;  */
+    margin-bottom: 5px;
+  }
+  .width-70 {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    font-size: 9px;
+  }
+
+  .width-30 {
+    width: 30%;
+  }
+
+  .Icon-90 {
+    margin-left: 12px;
+  }
+
+  .aside-bar {
+    display: none;
+  }
+
+  app-card.scrollableCard {
+    flex: 0 0 180px;
+    min-width: auto;
+    margin-right: 10px;
+  }
+
+  .overflow-cards {
+    max-width: 770px;
+  }
+  .category-name {
+    text-align: left;
+  }
+
+  .left-to-category {
+    left: -23px;
+  }
+
+  .category-container {
+    width: 50%;
+  }
+
+  .hideItMobile {
+    display: none;
+  }
+  .hideItDesktop {
+    display: flex;
+  }
+
+  .zoom-controls {
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .zoom-button {
+    background: #7a7a7a;
+    opacity: 60%;
+    border: none;
+    border-radius: 25px;
+    width: 34px;
+    height: 127px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+  }
+
+  .icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .zoom-icon {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .divider {
+    width: 26px; /* Adjust width of the divider line */
+    height: 1px; /* Adjust height of the divider line */
+    background: #fff;
+    margin: 27px 1px; /* Adjust spacing around the divider line */
+  }
+
+  .footer-container {
+    flex-direction: column;
+  }
+  .button-box-mbl {
+    border-left: 0px;
+    justify-content: left;
+    padding-left: 20px;
+    gap: 25px;
+  }
+  .multi-card-container {
+    max-height: 300px;
+    overflow: scroll;
+    /* width: 90%; */
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 1px;
+  }
+
+  .category-title {
+    position: relative;
+  }
+
+  .category-img-box {
+    height: 82px;
+    width: 82px;
+    object-fit: cover;
+    margin-top: 50px;
+  }
+
+  .show-all-mbl {
+    width: 104px;
+    height: 26px;
+    font-size: 11px;
+    border-radius: 20px;
+    border: 1px solid #e67c73;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 6px;
+  }
+  .remove-all-mbl {
+    height: 26px;
+    width: 65px;
+    border-radius: 20px;
+    border: 1px solid #e67c73;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 6px;
+  }
+  .card-box {
+    flex-direction: column;
+  }
+
+  .category-base-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .category-base-card-container {
+    border-left: 0px;
+    flex-wrap: wrap;
+  }
+
+  .category-location {
+    text-align: center;
+  }
+
+  .selected-option {
+    font-size: 14px;
+    text-align: center;
+  }
+  .card-image-mobile {
+    /* height: 300px !important;
+  width: 212px !important; */
+  }
+
+  .zarori {
+    height: auto !important;
+    width: auto !important;
+  }
+
+  .single-side-card {
+    flex-direction: column;
+    width: auto;
+  }
+
+  .index-icon {
+    height: 15px !important;
+    width: 15px !important;
+  }
+
+  .icons-top {
+    justify-content: space-between;
+  }
+
+  .margin-90 {
+    margin-right: 90px;
+  }
+  .category-base-dialog {
+    width: auto;
+    overflow-x: hidden;
+    white-space: normal;
+    scrollbar-width: none;
+  }
+
+  .one-cards-landscape {
+    height: auto !important;
+  }
+
+  .sticky-header {
+    position: fixed;
+    top: 0px;
+    z-index: 4;
+  }
+
+  .text-size {
+    font-size: 0.6rem !important;
+  }
+
+  .single-side {
+    margin-right: 0.5rem;
+   }
 }
 
 @media screen and (max-width: 600px) {
@@ -275,6 +1317,11 @@ li span {
   #menu-actions {
     display: inherit;
   }
+
+  .category-container {
+    width: 44%;
+  }
+
 }
 
 @media screen and (max-width: 480px) {
@@ -291,12 +1338,19 @@ li span {
   .cards-container {
     padding-bottom: 6rem;
   }
+  .category-container {
+    width: 32%;
+  }
 }
 
 @media screen and (max-width: 320px) {
   #guide-book-icon {
     display: none;
     color: var(--main-color);
+  }
+
+  .category-container {
+    width: 26%;
   }
 }
 
@@ -395,13 +1449,17 @@ li span {
   top: 0;
   width: 100%;
   height: 100%;
-  /* overflow: auto; */
-  background-color: rgb(0 0 0 / 60%);
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
 }
 
 /* Modal Content */
-.selected-cards-modal-content {
+.selected-cards-modal-content {  
+  position: relative;
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 90%;
   height: 100%;
   animation: fadeIn 0.4s, slideUp 0.4s;
 }
@@ -440,10 +1498,12 @@ li span {
   justify-content: center !important;
 }
 
+/* TODO */
 .card-view {
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin-top: 13px;
+  /* margin-top: 13px; */
+  padding-left: 10px;
 }
 
 /* 'rotated-one-cards': selectedCards.length == 1 && card.rotation !== 0,
@@ -472,68 +1532,73 @@ li span {
 
 .one-cards-landscape {
   position: relative;
-  height: calc(100vw / 2.5);
-  max-width: 90%;
+  height: calc(100vw / 3);
+  /* max-width: 90%; */
   max-height: 90%;
-  overflow: hidden;
+  overflow: scroll;
+  object-fit: cover;
 }
 .two-cards-landscape {
   /* width: calc(100vw /3.2); */
   height: calc(100vw / 3.5);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .three-cards-landscape {
   width: calc(100vw / 4);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .four-cards-landscape {
   width: calc(100vw / 5);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .five-cards-landscape {
   width: calc(100vw / 6);
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  /* margin-top: 5vh;
+  margin-bottom: 5vh; */
 }
 
 .two-cards-landscape,
 .rotated-two-cards-landscape {
-  height: calc(100vw / 3.5);
-  width: 100%;
+  /* height: calc(100vw / 3.5) !important;
+  width: 100% !important;
   max-width: 80vw;
-  margin-inline: 3vw;
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  margin-inline: 3vw; */
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
+  width: auto;
+  height: 50vh;
 }
 
 .three-cards-landscape,
 .rotated-three-cards-landscape {
+  /* width: auto;
+  height: calc(40vh); */
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
   width: auto;
-  height: calc(40vh);
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  height: 50vh;
 }
 
 .four-cards-landscape,
 .rotated-four-cards-landscape {
   width: auto;
-  height: 30vh;
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  height: 50vh;
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
 }
 
 .five-cards-landscape,
 .rotated-five-cards-landscape {
   width: auto;
-  height: 25vh;
-  margin-top: 12vh;
-  margin-bottom: 12vh;
+  height: 50vh;
+  /* margin-top: 12vh;
+  margin-bottom: 12vh; */
 }
 
 .one-cards,
@@ -564,7 +1629,8 @@ li span {
 
 .two-cards,
 .rotated-two-cards {
-  height: calc(100vw / 3);width: 100%;
+  height: calc(100vw / 3);
+  width: 100%;
   max-width: 80vw;
   /* width: calc(100vw / 5); */
   margin-inline: 6vw;
@@ -588,7 +1654,7 @@ li span {
 .rotated-five-cards {
   width: auto;
   height: 35vh;
-  margin-inline: 3vw
+  margin-inline: 3vw;
 }
 
 .remove-btn {
@@ -621,6 +1687,21 @@ mat-icon {
 
 .mat-icon-arrow:disabled {
   color: #747474;
+}
+
+/* .width-fixed {
+  width: 588px;
+  height: 829px;
+  object-fit: cover;
+} */
+
+.multi-card-without-cat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+  scrollbar-width: none; 
 }
 
 @media (orientation: landscape) and (max-height: 480px) {
@@ -707,9 +1788,8 @@ img {
 
 .flip-box-inner {
   transition: transform 0.8s;
-  transform-style: preserve-3d;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   min-height: 225px;
 }
@@ -723,6 +1803,10 @@ img {
   -webkit-backface-visibility: hidden;
   /* Safari */
   backface-visibility: hidden;
+  display: flex;
+  height: 80%;
+  width: 80%;
+  justify-content: end;
 }
 
 .flip-box-back {
@@ -730,6 +1814,10 @@ img {
   -webkit-backface-visibility: hidden;
   /* Safari */
   backface-visibility: hidden;
+  display: flex;
+  width: 80%;
+  height: 80%;
+  justify-content: center;
 }
 
 /* .badge {
@@ -754,7 +1842,6 @@ img {
   display: initial;
 } */
 
-
 .rotate-0 {
   transform: rotate(0deg);
 }
@@ -769,4 +1856,47 @@ img {
 
 .rotate-270 {
   transform: rotate(270deg);
+}
+
+.image-grid {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid-item {
+  overflow: scroll;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-item {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.scrollable-content {
+  height: calc(100vh - 20rem);
+  overflow-y: auto;
+  padding: 20px; /* Add padding as needed */
+}
+
+/* Optionally, to hide the scrollbar but keep functionality */
+.scrollable-content {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

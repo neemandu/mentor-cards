@@ -89,8 +89,8 @@
             <ul class="list-group list-group-flush"
               style="overflow: hidden; max-height: 0; transition: max-height 0.5s linear; transition-delay: 0s;">
               <li class="list-group-item" *ngFor="let question of subSubject.subElements; let k = index"
-                style="margin-left: 2vw; align-items: center; display: flex;">
-                <input style="margin-left: 1rem; margin-top: -0.6%;" type="checkbox" id={{i}}+{{j}}+{{k}}>
+                  style="margin-left: 2vw; align-items: center; display: flex;">
+                <span style="margin-right: 0.5rem; margin-left: 1rem;">&#8226;</span> <!-- This is the bullet symbol -->
                 <label for={{i}}+{{j}}+{{k}}>{{question.name}}</label>
               </li>
             </ul>

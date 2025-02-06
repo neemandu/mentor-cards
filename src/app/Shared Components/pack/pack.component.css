@@ -87,7 +87,7 @@ mat-icon {
 .pack-desc {
   text-align: center;
   margin-bottom: 0px;
-  font-family: "rubik";
+  font-family: 'Open Sans Hebrew', sans-serif !important;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

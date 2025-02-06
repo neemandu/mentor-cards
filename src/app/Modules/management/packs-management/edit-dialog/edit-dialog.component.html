@@ -1,0 +1,250 @@
+<form [formGroup]="createCardsPackForm">
+  <div>
+    <label for="id">ID:</label>
+    <input id="id" formControlName="id" type="text" disabled />
+  </div>
+
+  <div>
+    <label for="imgUrl">Image URL:</label>
+    <input id="imgUrl" formControlName="imgUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="description">תיאור הערכה:</label>
+    <textarea id="description" class="w-100" formControlName="description"></textarea>
+  </div>
+
+  <div formArrayName="tags">
+    <label>תגיות:</label>
+    <div *ngFor="let tag of tags.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="tags.removeAt(i)">הורד</button>
+    </div>
+    <button type="button" (click)="addTag()">הוסף תגית</button>
+  </div>
+
+  <div formArrayName="categories">
+    <label>Categories:</label>
+    <div *ngFor="let category of categories.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="categories.removeAt(i)">הורד</button>
+    </div>
+    <button type="button" (click)="addCategory()">הוסף קטגוריה</button>
+  </div>
+
+  <div formArrayName="cards">
+    <label>קלפים:</label>
+    <div *ngFor="let card of cards.controls; let i = index" [formGroupName]="i">
+      <div>
+        <label>שם הקטגוריה:</label>
+        <input formControlName="categoryName" type="text" />
+      </div>
+      <div>
+        <label>מספר קטגוריה:</label>
+        <input formControlName="categoryStepNumber" type="number" />
+      </div>
+      <div formArrayName="cardsImages">
+        <label>תמונות:</label>
+        <div
+          *ngFor="let image of card.get('cardsImages').controls; let j = index"
+          [formGroupName]="j"
+        >
+          <label>Back Image URL:</label>
+          <input formControlName="backImgUrl" type="text" />
+          <label>Front Image URL:</label>
+          <input formControlName="frontImgUrl" type="text" />
+          <button type="button" (click)="card.get('cardsImages').removeAt(j)">
+            הורד
+          </button>
+        </div>
+        <button
+          type="button"
+          (click)="
+            card
+              .get('cardsImages')
+              .push(fb.group({ backImgUrl: null, frontImgUrl: null }))
+          "
+        >
+          הוסף קלף
+        </button>
+      </div>
+      <button type="button" (click)="cards.removeAt(i)">הורד קטגוריה</button>
+    </div>
+    <button type="button" (click)="addCard()">הוסף קטגוריה</button>
+  </div>
+
+  <div formArrayName="cardsPreview">
+    <label>3 קלפים בפריביו:</label>
+    <div *ngFor="let preview of cardsPreview.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="cardsPreview.removeAt(i)">Remove</button>
+    </div>
+    <button type="button" (click)="addCardsPreview()">Add Cards Preview</button>
+  </div>
+
+
+
+  <div formArrayName="guideBook">
+    <label>ספר הדרכה:</label>
+    <div
+      *ngFor="let guide of guideBook.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div>
+        <label>Name:</label>
+        <input formControlName="name" type="text" />
+      </div>
+      <div formArrayName="subElements">
+        <label>Sub Elements:</label>
+        <div
+          *ngFor="let sub of guide.get('subElements').controls; let j = index"
+          [formGroupName]="j"
+        >
+          <label>Sub Name:</label>
+          <input formControlName="name" type="text" />
+          <button type="button" (click)="guide.get('subElements').removeAt(j)">
+            Remove Sub Element
+          </button>
+        </div>
+        <button
+          type="button"
+          (click)="
+            guide
+              .get('subElements')
+              .push(fb.group({ name: null, subElements: fb.array([]) }))
+          "
+        >
+          Add Sub Element
+        </button>
+      </div>
+      <button type="button" (click)="guideBook.removeAt(i)">
+        Remove GuideBook Element
+      </button>
+    </div>
+    <button type="button" (click)="addGuideBookElement()">
+      Add GuideBook Element
+    </button>
+  </div>
+
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" formControlName="name" type="text" />
+  </div>
+
+  <div>
+    <label for="freeUntilDate">חינם עד תאריך:</label>
+    <input id="freeUntilDate" formControlName="freeUntilDate" type="date" />
+  </div>
+
+  <div>
+    <label for="isOwnedByOrg">האם שייך לארגון:</label>
+    <input id="isOwnedByOrg" formControlName="isOwnedByOrg" type="checkbox" />
+  </div>
+
+  <div>
+    <label for="brief">Brief:</label>
+    <textarea id="brief" class="w-100" formControlName="brief"></textarea>
+  </div>
+
+  <div>
+    <label for="likesCounter">כמה לייקים?:</label>
+    <input id="likesCounter" formControlName="likesCounter" type="number" />
+  </div>
+
+  <div>
+    <label for="backImgUrl">URL לתמונה אחורית:</label>
+    <input id="backImgUrl" formControlName="backImgUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="isExternalPack">האם של יוצר חיצוני:</label>
+    <input
+      id="isExternalPack"
+      formControlName="isExternalPack"
+      type="checkbox"
+    />
+  </div>
+
+
+  <div formArrayName="topQuestions">
+    <label>טופ 5 שאלות:</label>
+    <div *ngFor="let question of topQuestions.controls; let i = index">
+      <input [formControlName]="i" type="text" />
+      <button type="button" (click)="topQuestions.removeAt(i)">הורד</button>
+    </div>
+    <button type="button" (click)="addTopQuestion()">הוסף שאלה</button>
+  </div>
+
+
+  <div>
+    <label for="isFree">האם חינמי?:</label>
+    <input id="isFree" formControlName="isFree" type="checkbox" />
+  </div>
+
+  <div>
+    <label for="language">שפה:</label>
+    <input id="language" formControlName="language" type="text" />
+  </div>
+
+  <div>
+    <label for="isActive">האם פעילe:</label>
+    <input id="isActive" formControlName="isActive" type="checkbox" />
+  </div>
+
+  <div>
+    <label for="guidebookUrl">URL לספר הדרכה:</label>
+    <input id="guidebookUrl" formControlName="guidebookUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="ownerName">בעלים:</label>
+    <input id="ownerName" formControlName="ownerName" type="text" />
+  </div>
+
+  <div>
+    <label for="isHardCopyAvailable">האם יש לערכה עותק קשיח:</label>
+    <input
+      id="isHardCopyAvailable"
+      formControlName="isHardCopyAvailable"
+      type="checkbox"
+    />
+  </div>
+
+  <div>
+    <label for="videoUrl">URL לוידאו:</label>
+    <input id="videoUrl" formControlName="videoUrl" type="text" />
+  </div>
+
+  <div>
+    <label for="isReadingGuidebookAMust">האם חובה לקרוא ספר הדרכה ?:</label>
+    <input
+      id="isReadingGuidebookAMust"
+      formControlName="isReadingGuidebookAMust"
+      type="checkbox"
+    />
+  </div>
+</form>
+
+<form [formGroup]="createCardsPackForm">
+  <!-- Other form controls -->
+
+  <div formGroupName="about">
+    <div>
+      <label for="aboutText">על המחבר:</label>
+      <textarea id="aboutText" class="w-100" formControlName="text"></textarea>
+    </div>
+
+    <div>
+      <label for="aboutImgUrl">URL תמונה של המחבר:</label>
+      <input id="aboutImgUrl" formControlName="imgUrl" type="text" />
+    </div>
+
+    <div>
+      <label for="aboutLink">קישור לקנייה:</label>
+      <input id="aboutLink" formControlName="link" type="text" />
+    </div>
+  </div>
+</form>
+
+
+<button type="submit" (click)="onSubmit()">שמור ערכה</button>

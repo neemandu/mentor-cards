@@ -277,19 +277,27 @@
         }
       ]
     },
-    "AMPLIFY_function_AffiliateBalanceHandler_deploymentBucketName": {
+    "AMPLIFY_function_AskTheAI_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AffiliateBalanceHandler"
+          "resourceName": "AskTheAI"
         }
       ]
     },
-    "AMPLIFY_function_AffiliateBalanceHandler_s3Key": {
+    "AMPLIFY_function_AskTheAI_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AffiliateBalanceHandler"
+          "resourceName": "AskTheAI"
+        }
+      ]
+    },
+    "AMPLIFY_function_AskTheAI_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AskTheAI"
         }
       ]
     },
@@ -702,6 +710,14 @@
       ]
     },
     "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "PayPalWebhookFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_PayPalWebhookFunc_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",

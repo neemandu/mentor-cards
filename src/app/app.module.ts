@@ -93,6 +93,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatSortModule} from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
+// import {DataTablesModule} from 'angular-datatables';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -114,7 +115,7 @@ import { PackContentPageComponent, PortraitWarningDialogComponent } from './Page
 import { RandomCardRevealDialogComponent } from './Pages/pack-content-page/random-card-reveal-dialog/random-card-reveal-dialog.component';
 import { CardComponent } from './Shared Components/card/card.component';
 import { PackComponent } from './Shared Components/pack/pack.component';
-import { AmountOfPacksViewPipe, TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
+import { AmountOfPacksViewPipe, LineBreakPipe, TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
 import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
 import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 import { DynamicDialogYesNoComponent } from './Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
@@ -144,7 +145,7 @@ import { BlogCardComponent } from './Shared Components/blog-card/blog-card.compo
 import { BlogDetailComponent } from './Pages/blog-detail/blog-detail.component';
 import { AllBlogsComponent } from './Pages/all-blogs/all-blogs.component';
 import { ReadTermsDialogComponent } from './Pages/price-page/read-terms-dialog/read-terms-dialog.component';
-import { SelectLanguageComponent } from './Pages/all-packs-page/select-language/select-language.component';
+import { SelectLanguageComponent } from './Pages/select-language/select-language.component';
 import { CopyCommonLinkDialogComponent } from './Pages/pack-content-page/copy-common-link-dialog-component/copy-common-link-dialog-component.component';
 import { AffiliatesPageComponent } from './Pages/affiliates-page/affiliates-page.component';
 import { AffiliatesDashboardPageComponent } from './Pages/affiliate-dashboard/affiliate-dashboard.component';
@@ -158,6 +159,30 @@ import { addDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EditDialogWithdrawsComponent } from './Pages/manage-affiliate/affiliate-withdraws/edit-dialog-withdraws/edit-dialog-withdraws.component';
 import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-pop-up/print-pop-up.component';
+import { HomePageNewComponent } from './Pages/home-page-new/home-page-new.component';
+import { NavBarNewComponent } from './main-screen/nav-bar-new/nav-bar-new.component';
+import { HomePageHeroComponent } from './Pages/home-page-new/home-page-hero/home-page-hero.component';
+import { HomePageSubHeroComponent } from './Pages/home-page-new/home-page-sub-hero/home-page-sub-hero.component';
+import { HomePageCardsComponent } from './Pages/home-page-new/home-page-cards/home-page-cards.component';
+import { HomePageTryThisComponent } from './Pages/home-page-new/home-page-try-this/home-page-try-this.component';
+import { HomePageHowToUseComponent } from './Pages/home-page-new/home-page-how-to-use/home-page-how-to-use.component';
+import { HomePageAdvantageComponent } from './Pages/home-page-new/home-page-advantage/home-page-advantage.component';
+import { HomePageClientsComponent } from './Pages/home-page-new/home-page-clients/home-page-clients.component';
+import { HomePageClientsCardComponent } from './Pages/home-page-new/home-page-clients-card/home-page-clients-card.component';
+import { HomePagePartnersComponent } from './Pages/home-page-new/home-page-partners/home-page-partners.component';
+import { HomePageUpdatesComponent } from './Pages/home-page-new/home-page-updates/home-page-updates.component';
+import { HomePageContactUsComponent } from './Pages/home-page-new/home-page-contact-us/home-page-contact-us.component';
+import { HomePageFooterComponent } from './Pages/home-page-new/home-page-footer/home-page-footer.component';
+import { AllPacksPageNewComponent } from './Pages/all-packs-page-new/all-packs-page-new.component';
+import { FiltersComponent } from './Pages/all-packs-page-new/filters/filters.component';
+import { PacksCardComponent } from './Pages/all-packs-page-new/packs-card/packs-card.component';
+import { SubscribeCardComponent } from './Pages/all-packs-page-new/subscribe-card/subscribe-card.component';
+import { FilterDialogComponent } from './Pages/all-packs-page-new/filter-dialog/filter-dialog.component';
+import { AiChatComponent } from './Pages/all-packs-page-new/ai-chat/ai-chat.component';
+import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripple.directive';
+import { TopQuestionsCustomDialogComponent } from './Pages/pack-content-page/top-questions-dialog';
+import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-content-page-new.component';
+import { confirmationDialogueComponent } from './Pages/pack-content-page/confirmation-dialog';
 
 @NgModule({
   declarations: [
@@ -171,7 +196,9 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
     PackContentPageComponent,
     TooltipListViewPipe,
     AmountOfPacksViewPipe,
+    LineBreakPipe,
     CardsRevealDialogComponent,
+    TopQuestionsCustomDialogComponent,
     OverlaySpinnerComponent,
     RandomCardRevealDialogComponent,
     TransitionGroupComponent,
@@ -222,6 +249,29 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
     addDialogWithdrawsComponent,
     EditDialogWithdrawsComponent,
     PrintPopUpComponent,
+    HomePageNewComponent,
+    NavBarNewComponent,
+    HomePageHeroComponent,
+    HomePageSubHeroComponent,
+    HomePageCardsComponent,
+    HomePageTryThisComponent,
+    HomePageHowToUseComponent,
+    HomePageAdvantageComponent,
+    HomePageClientsComponent,
+    HomePageClientsCardComponent,
+    HomePagePartnersComponent,
+    HomePageUpdatesComponent,
+    HomePageContactUsComponent,
+    HomePageFooterComponent,
+    AllPacksPageNewComponent,
+    FiltersComponent,
+    PacksCardComponent,
+    SubscribeCardComponent,
+    FilterDialogComponent,
+    AiChatComponent,
+    GradientRippleDirective,
+    PackContentPageNewComponent,
+    confirmationDialogueComponent
   ],
   imports: [
     BrowserModule,
@@ -235,6 +285,7 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
     PortalModule,
     ManagementModule,
     I18nModule,
+    // DataTablesModule,
     //Material
     MatButtonModule,
     MatIconModule,
@@ -285,8 +336,8 @@ import { PrintPopUpComponent } from './Pages/pack-content-page/guide-book/print-
     SocialAuthService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent,
+  entryComponents: [CardsRevealDialogComponent,TopQuestionsCustomDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent,
     PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
-    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent]
+    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent,AiChatComponent]
 })
 export class AppModule { }

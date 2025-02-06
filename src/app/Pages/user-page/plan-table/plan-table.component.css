@@ -1,12 +1,26 @@
 table {
-  width: 50vw;
+  width: 100%; /* Ensures the table scales to fit the screen */
   text-align: center;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 10px; /* Adds space within cells */
+  word-wrap: break-word; /* Ensures content breaks on smaller screens */
 }
 
 tr.mat-header-row, tr.mat-row {
-    border-bottom: 2px solid orange;
+  border-bottom: 1px solid #ccc;
 }
 
-th.mat-header-cell {
-  text-align: center;
+@media (max-width: 768px) {
+  table {
+    font-size: 14px; /* Reduces font size for mobile */
+  }
+  th.mat-header-cell, td.mat-cell {
+    padding: 5px; /* Reduces padding for smaller screens */
+  }
+}
+
+.mat-elevation-z8 {
+  overflow-x: auto; /* Adds horizontal scroll for smaller screens */
 }

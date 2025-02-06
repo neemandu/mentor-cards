@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home-page-how-to-use',
+  templateUrl: './home-page-how-to-use.component.html',
+  styleUrls: ['./home-page-how-to-use.component.css']
+})
+export class HomePageHowToUseComponent implements OnInit {
+
+  imgSrc = ''
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+  
+  changeImageSrc(event: any, imageName: string) {
+    event.target.src = `/assets/New/home-page/icons/${imageName}-blue.svg`;
+  }
+
+  resetImageSrc(event: any, imageName: string) {
+    event.target.src = `/assets/New/home-page/icons/${imageName}-pink.svg`;
+  }
+
+  videos = [
+    {
+        src: 'https://master-cards.s3.eu-west-2.amazonaws.com/videos/got+stuck.mp4',
+        thumbnail: 'https://master-cards.s3.eu-west-2.amazonaws.com/videos/image1.png',
+        isPlaying: false
+    },
+    {
+        src: 'https://master-cards.s3.eu-west-2.amazonaws.com/videos/workshops.mp4',
+        thumbnail: '/assets/New/home-page/how-to-use-2.png',
+        isPlaying: false
+    },
+    {
+        src: 'https://master-cards.s3.eu-west-2.amazonaws.com/videos/%D7%A2%D7%9D+%D7%95%D7%91%D7%9C%D7%99+%D7%9E%D7%A0%D7%98%D7%95%D7%A8+%D7%A7%D7%90%D7%A8%D7%93%D7%A1.mp4',
+        thumbnail: '/assets/New/home-page/mc111.png',
+        isPlaying: false
+    }
+];
+
+playVideo(video) {
+    video.isPlaying = true;
+}
+
+}

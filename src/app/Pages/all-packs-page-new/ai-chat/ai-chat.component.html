@@ -1,0 +1,25 @@
+<!-- ai-chat.component.html -->
+<div class="chat-container" [ngClass]="{'hide': hideChat}">
+  <div class="chat-box" [ngClass]="{'expanded': isExpanded}">
+    <div class="chat-message">
+      <button class="toggle-button" (click)="toggleExpand()" *ngIf="responses.length > 0">
+        <mat-icon>{{ isExpanded ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+      </button>
+      <p class="chat-text">קשה לבחור? רוצה להתייעץ?</p>
+    </div>
+    <div class="chat-response">
+      <p *ngFor="let response of responses">{{ response }}</p>
+    </div>
+    <div class="chat-input">
+      <button class="send-button" (click)="sendMessage()" [disabled]="userStatus !== 'PLAN'">
+        <mat-icon>send</mat-icon>
+      </button>
+      <input type="text" [(ngModel)]="userInput" (input)="showPlaceholder()" (focus)="hidePlaceholder()"
+        (blur)="showPlaceholder()" [disabled]="userStatus !== 'PLAN'" (keydown.enter)="sendMessage()">
+      <span class="placeholder-text" [class.hidden]="placeholderHidden">
+        {{ userStatus === 'PLAN' ? 'איך אפשר לעזור?' : 'הייעוץ זמין למנויים בלבד ' }}
+        <span *ngIf="userStatus != 'PLAN'" style="color: red;">❤</span>
+      </span>
+    </div>
+  </div>
+</div>

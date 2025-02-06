@@ -1,10 +1,22 @@
-<app-nav></app-nav>
+<!-- <app-nav></app-nav> -->
+<app-nav-bar-new></app-nav-bar-new>
 <title> {{ 'pages.main-screen.title' | translate }}</title>
 
-<div class="overlay" *ngIf="showSpinner">
+<div class="overlay" *ngIf="spinnersState.get('default')">
   <div class="spinner-wrapper">
     <app-overlay-spinner></app-overlay-spinner>
   </div>
 </div>
 
+<div class="overlay" *ngIf="spinnersState.get('userData')">
+  <div class="spinner-wrapper">
+    <app-overlay-spinner></app-overlay-spinner>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="spinnersState.get('packs')">
+  <div class="spinner-wrapper">
+    <app-overlay-spinner></app-overlay-spinner>
+  </div>
+</div>
 <router-outlet></router-outlet>

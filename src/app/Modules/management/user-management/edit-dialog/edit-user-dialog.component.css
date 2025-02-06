@@ -1,0 +1,85 @@
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="datetime-local"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  div[formArrayName] {
+    margin-bottom: 20px;
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  div[formGroupName] {
+    margin-bottom: 10px;
+  }
+  
+  div[formArrayName] label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+    }
+    
+    div[formArrayName] input {
+    margin-bottom: 10px;
+    }
+    
+    div[formArrayName] button {
+    background-color: #dc3545;
+    margin-left: 10px;
+    }
+    
+    div[formArrayName] button[type="button"] {
+    background-color: #28a745;
+    }
+    
+    button[type="submit"] {
+    background-color: #28a745;
+    width: 100%;
+    margin-top: 20px;
+    }
+    
+    button[type="submit"]
+    {
+    background-color: #218838;
+    }
