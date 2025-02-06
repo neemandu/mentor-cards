@@ -221,6 +221,14 @@
     }
   },
   "parameters": {
+    "AMPLIFY_auth_mentorcards56dbf153_googleClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "mentorcards56dbf153"
+        }
+      ]
+    },
     "AMPLIFY_function_AddCardsPack_deploymentBucketName": {
       "usedBy": [
         {
@@ -277,51 +285,19 @@
         }
       ]
     },
-    "AMPLIFY_function_AskTheAI_deploymentBucketName": {
+    "AMPLIFY_function_AffiliateBalanceHandler_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AskTheAI"
+          "resourceName": "AffiliateBalanceHandler"
         }
       ]
     },
-    "AMPLIFY_function_AskTheAI_s3Key": {
+    "AMPLIFY_function_AffiliateBalanceHandler_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "AskTheAI"
-        }
-      ]
-    },
-    "AMPLIFY_function_AskTheAI_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AskTheAI"
-        }
-      ]
-    },
-    "AMPLIFY_function_AskTheAI_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AskTheAI"
-        }
-      ]
-    },
-    "AMPLIFY_function_AskTheAI_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AskTheAI"
-        }
-      ]
-    },
-    "AMPLIFY_function_AskTheAI_secretsPathAmplifyAppId": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AskTheAI"
+          "resourceName": "AffiliateBalanceHandler"
         }
       ]
     },
@@ -373,6 +349,30 @@
         }
       ]
     },
+    "AMPLIFY_function_CreateInvoice_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateInvoice"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateInvoice_receiptsUrl": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateInvoice"
+        }
+      ]
+    },
+    "AMPLIFY_function_CreateInvoice_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "CreateInvoice"
+        }
+      ]
+    },
     "AMPLIFY_function_CreateUser_deploymentBucketName": {
       "usedBy": [
         {
@@ -418,22 +418,6 @@
         {
           "category": "function",
           "resourceName": "GetAffiliateData"
-        }
-      ]
-    },
-    "AMPLIFY_function_GetAllAffiliatesData_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "GetAllAffiliatesData"
-        }
-      ]
-    },
-    "AMPLIFY_function_GetAllAffiliatesData_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "GetAllAffiliatesData"
         }
       ]
     },
@@ -485,22 +469,6 @@
         }
       ]
     },
-    "AMPLIFY_function_GetInvoicesFromS3_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "GetInvoicesFromS3"
-        }
-      ]
-    },
-    "AMPLIFY_function_GetInvoicesFromS3_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "GetInvoicesFromS3"
-        }
-      ]
-    },
     "AMPLIFY_function_GetNextBillingDate_deploymentBucketName": {
       "usedBy": [
         {
@@ -530,22 +498,6 @@
         {
           "category": "function",
           "resourceName": "GetNextReceiptId"
-        }
-      ]
-    },
-    "AMPLIFY_function_GetNumberOfCardsInPack_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "GetNumberOfCardsInPack"
-        }
-      ]
-    },
-    "AMPLIFY_function_GetNumberOfCardsInPack_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "GetNumberOfCardsInPack"
         }
       ]
     },
@@ -709,7 +661,7 @@
         }
       ]
     },
-    "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
+    "AMPLIFY_function_PayPalWebhookFunc_receiptsUrl": {
       "usedBy": [
         {
           "category": "function",
@@ -717,7 +669,7 @@
         }
       ]
     },
-    "AMPLIFY_function_PayPalWebhookFunc_secretsPathAmplifyAppId": {
+    "AMPLIFY_function_PayPalWebhookFunc_s3Key": {
       "usedBy": [
         {
           "category": "function",
@@ -794,22 +746,6 @@
         {
           "category": "function",
           "resourceName": "UpdateSelectedCardPacks"
-        }
-      ]
-    },
-    "AMPLIFY_function_UpdateUser_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "UpdateUser"
-        }
-      ]
-    },
-    "AMPLIFY_function_UpdateUser_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "UpdateUser"
         }
       ]
     },

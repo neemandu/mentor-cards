@@ -20,6 +20,7 @@ export type AmplifyDependentResourcesAttributes = {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "CreatedSNSRole": "string",
+      "GoogleWebClient": "string",
       "HostedUIDomain": "string",
       "OAuthMetadata": "string",
       "UserPoolArn": "string",
@@ -43,13 +44,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "AddUserToEmailList": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "AskTheAI": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -98,13 +92,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "GetAllAffiliatesData": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "GetCardsImages": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -126,13 +113,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
-    "GetInvoicesFromS3": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
     "GetNextBillingDate": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
@@ -141,13 +121,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "GetNextReceiptId": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "GetNumberOfCardsInPack": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -246,13 +219,6 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "UpdateSelectedCardPacks": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    },
-    "UpdateUser": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
