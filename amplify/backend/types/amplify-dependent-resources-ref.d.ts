@@ -127,6 +127,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "GetNumberOfCardsInPack": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "GetProviderPlanId": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

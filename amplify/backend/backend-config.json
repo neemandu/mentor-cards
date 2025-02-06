@@ -501,6 +501,22 @@
         }
       ]
     },
+    "AMPLIFY_function_GetNumberOfCardsInPack_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNumberOfCardsInPack"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetNumberOfCardsInPack_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetNumberOfCardsInPack"
+        }
+      ]
+    },
     "AMPLIFY_function_GetProviderPlanId_deploymentBucketName": {
       "usedBy": [
         {

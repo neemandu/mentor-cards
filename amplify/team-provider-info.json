@@ -162,7 +162,10 @@
         "AskTheAI": {},
         "GetAllAffiliatesData": {},
         "GetInvoicesFromS3": {},
-        "GetNumberOfCardsInPack": {},
+        "GetNumberOfCardsInPack": {
+          "deploymentBucketName": "amplify-mentorcards-prod-133607-deployment",
+          "s3Key": "amplify-builds/GetNumberOfCardsInPack-577476454e5949786c53-build.zip"
+        },
         "UpdateUser": {}
       },
       "api": {
