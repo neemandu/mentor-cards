@@ -295,12 +295,14 @@ export class UserAuthService {
     if (this.userData.orgMembership) {
       if (this.userData.endOfTrialDate.getTime() <= new Date().getTime()) {
         const id = this.userData.orgMembership.id;
-        const cc = this.userData.couponCodes.find(
-          (coupon) => (coupon.organization && (coupon.organization.id = id))
-        );
-        if (cc.allowedCardsPacks?.length == 0) {
-          this.overlaySpinnerService.changeOverlaySpinner(false);
-          this.ngZone.run(() => this.router.navigate(['/company-pack-choise']));
+        if(this.userData.couponCodes){
+          const cc = this.userData.couponCodes.find(
+            (coupon) => (coupon.organization && (coupon.organization.id = id))
+          );
+          if (cc.allowedCardsPacks?.length == 0) {
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+            this.ngZone.run(() => this.router.navigate(['/company-pack-choise']));
+          }
         }
       }
     }
