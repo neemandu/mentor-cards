@@ -299,7 +299,7 @@ export class UserAuthService {
           const cc = this.userData.couponCodes.find(
             (coupon) => (coupon.organization && (coupon.organization.id = id))
           );
-          if (cc.allowedCardsPacks?.length == 0) {
+          if ((cc?.allowedCardsPacks?.length ?? 0) == 0) {
             this.overlaySpinnerService.changeOverlaySpinner(false);
             this.ngZone.run(() => this.router.navigate(['/company-pack-choise']));
           }
