@@ -301,7 +301,7 @@ export class UserAuthService {
           );
           if ((cc?.allowedCardsPacks?.length ?? 0) == 0) {
             this.overlaySpinnerService.changeOverlaySpinner(false);
-            this.ngZone.run(() => this.router.navigate(['/company-pack-choise']));
+            //this.ngZone.run(() => this.router.navigate(['/company-pack-choise']));
           }
         }
       }
