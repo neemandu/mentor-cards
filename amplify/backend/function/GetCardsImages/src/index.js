@@ -359,7 +359,7 @@ exports.handler = async (event, context, callback) => {
         for(var i = 0 ; i < length ; i++){ 
             var packs = user.externalPacksSubscriptions[i];
             console.log('External Pack');
-            for(var j = 0 ; j < packs.includedCardPacksIds.length ; j++){ 
+            if(packs.includedCardPacksIds){            for(var j = 0 ; j < packs.includedCardPacksIds.length ; j++){ 
                 var pack = packs.includedCardPacksIds[j];
                 if(pack.id == event.source['id']){
                     console.log('Found the Pack!');
@@ -383,6 +383,7 @@ exports.handler = async (event, context, callback) => {
                     }
                 }
             }
+        }
         }
     }
 

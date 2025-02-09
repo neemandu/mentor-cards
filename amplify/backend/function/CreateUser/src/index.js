@@ -200,10 +200,14 @@ if(!refId){
             if(user.externalPacksSubscriptions[i].cancellationDate == null){
                 console.log("Not canceled endDate");
                 endDate = getBillingEndDateByUser(user.externalPacksSubscriptions[i].startDate,
-                    user.externalPacksSubscriptions[i].subscriptionPlan);
+                    user.externalPacksSubscriptions[i].subscriptionPlan);                   
+                console.log(endDate);
+                user.externalPacksSubscriptions[i].nextBillingDate = endDate.toISOString();
             }
-            console.log(endDate);
-            user.externalPacksSubscriptions[i].nextBillingDate = endDate.toISOString();
+            else{                 
+                console.log('user canceled pack');
+                user.externalPacksSubscriptions[i].nextBillingDate = null;
+            }
         }
     }
     var subEndDate = null;
