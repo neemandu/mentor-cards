@@ -328,15 +328,13 @@
       </div>
 
       <div
-        *ngIf="
-          !isfavSelected &&
-          showCategoryLine &&
-          selectedFavorites.length == 0 &&
-          allCategoryPacks.length >= 0
+        *ngIf="allCategoryPacks.length >= 0
         "
         class="mt-2 sm:mt-16"
       >
-        <div
+        <div *ngIf="!isfavSelected &&
+        showCategoryLine &&
+        selectedFavorites.length == 0"
           class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
         >
           <div
@@ -373,7 +371,9 @@
           (click)="scrollLeftWithRef(3)"><mat-icon>keyboard_arrow_left</mat-icon></button>
         </div>
 
-        <div *ngIf="isfavSelected" class="mt-2 sm:mt-16">
+        <div  *ngIf="
+        isfavSelected &&
+        allFavPacks.length > 0" class="mt-2 sm:mt-16">
           <div class="all-packs-view__section flex justify-between mb-16 pos-relative">
             <div
               class="w-56 items-start mt-8 font-bold text-center align-middle flex justify-center mx-auto text-xl px-4 pos-relative"
@@ -474,7 +474,7 @@
         </button>
       </div>
 
-
+      <div *ngIf="!isfavSelected">
         <div
         class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
         *ngFor="let categoryPacks of allCategoryPacks; let i = index"
@@ -541,8 +541,8 @@
           <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
       </div>
-      
       </div>
+    </div>
 
 
    

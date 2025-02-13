@@ -34,6 +34,7 @@ export class CardsService {
   allCategories: string[] = [];
   favorites: any[] = [];
   categoriesOrder: string[] = [
+    'חדש באתר',
     'ערכות להתנסות חופשית',
     'ערכות חדשות',
     'VIP ערכות',

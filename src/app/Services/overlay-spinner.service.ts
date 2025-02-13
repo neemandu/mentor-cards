@@ -13,15 +13,11 @@ export class OverlaySpinnerService {
 
   // This method is used to show/hide the spinner for a specific component
   changeOverlaySpinner(show: boolean, callingComponent: string = 'default'): void {
-    console.log('start spinners', this.spinners);
-    console.log('callingComponent', callingComponent);
     if(!this.spinners.has(callingComponent)){
       this.spinners.set(callingComponent, false);
     }
 
     const currentState = this.spinners.get(callingComponent);
-    console.log('11 spinners', this.spinners);
-    console.log('11 currentState', currentState);
       
     // Only emit if the state is actually changing
     if (currentState !== show) {

@@ -478,26 +478,21 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   flippedCardwidth: number = 0;
 
   zoomIn() {
-    if (!this.flipped) {
-      this.cardWidth += 1;
-      this.cardHeight += 1.5; // Adjust proportionally
-      this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
-      this.imageHeight = this.imageWidth / this.aspectRatio;
-      this.containerPadding += 10;
-    } else if (this.flipped) {
-      this.flippedCardwidth += 30;
-    }
+    this.cardWidth += 1;
+    this.cardHeight += 1.5; // Adjust proportionally
+    this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
+    this.imageHeight = this.imageWidth / this.aspectRatio;
+    this.containerPadding += 10;
+    this.flippedCardwidth += 30;
+    this.containerPadding += 10;
   }
   zoomOut() {
-    if (!this.flipped) {
-      this.cardWidth -= 1;
-          this.cardHeight -= 1.5;
-          this.imageWidth -= 16;
-          this.imageHeight = this.imageWidth / this.aspectRatio;
-          this.containerPadding += -10;
-    } else if (this.flipped) {
-      this.flippedCardwidth -= 30;
-    }
+    this.cardWidth -= 1;
+    this.cardHeight -= 1.5;
+    this.imageWidth -= 16;
+    this.imageHeight = this.imageWidth / this.aspectRatio;
+    this.containerPadding += -10;
+    this.flippedCardwidth -= 30;
   }
 
   singleCardCheck: boolean = false;

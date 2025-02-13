@@ -137,6 +137,8 @@ export class UserAuthService {
       this.userData = new UserData().deseralize(value);
       this.isLoggedIn = true;
       this.favorites = this.userData.favouritePacks;
+      console.log('this.favorites',this.favorites);
+      console.log('this.userData',this.userData);
       this.subPlans = undefined;
       this.userDataEmmiter.emit(this.userData);
   

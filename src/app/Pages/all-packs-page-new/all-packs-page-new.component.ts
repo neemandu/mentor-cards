@@ -201,7 +201,6 @@ export class AllPacksPageNewComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    console.log('spinner default start!');
 
     this.isLoading = true;
     this.checkScreenSize();
@@ -489,8 +488,9 @@ export class AllPacksPageNewComponent implements OnInit {
     if (this.isfavSelected) {
       this.isfavSelected = false;
     } else {
-      this.isfavSelected = true;
       this.selectedCardFilter = '';
+      this.setAllFavPacksToShow();
+      this.isfavSelected = true;
     }
   }
 
@@ -640,67 +640,52 @@ export class AllPacksPageNewComponent implements OnInit {
   getAllPacks(useCache: bool): void {
     console.log('useCache: ' + useCache);
     this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
-    console.log('spinner packs start!');
     if (useCache) {
       if (this.cardsService.allPacks) {
         this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
         if(this.cardsService.isLoggedIn){          
           this.overlaySpinnerService.changeOverlaySpinner(true, "userDataLogin");
-          console.log('spinner userDataLogin start!');
         }
         else{
           this.overlaySpinnerService.changeOverlaySpinner(true, "userDataNotLogin");
-          console.log('spinner userDataNotLogin start!');
         }
-        console.log('spinner packs start!');
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        console.log('spinner default finish!');
         if(this.cardsService.isLoggedIn){          
           this.overlaySpinnerService.changeOverlaySpinner(false, "userDataLogin");
-          console.log('spinner userDataLogin finish!');
         }
         else{
           this.overlaySpinnerService.changeOverlaySpinner(false, "userDataNotLogin");
-          console.log('spinner userDataNotLogin finish!');
         }
         this.isLoading = false;
         this.packsAreLoaded = true;   
         this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
-        console.log('spinner packs finish!');
         // this.sortPacks();
       } else {
         this.cardsService.allPacksReadyEmmiter.subscribe(() => {
           this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
           if(this.cardsService.isLoggedIn){          
             this.overlaySpinnerService.changeOverlaySpinner(true, "userDataLogin");
-            console.log('spinner userDataLogin start!');
           }
           else{
             this.overlaySpinnerService.changeOverlaySpinner(true, "userDataNotLogin");
-            console.log('spinner userDataNotLogin start!');
           }
-          console.log('spinner packs start!');
           this.setAllPacksData();
           this.setAllCategoryPacksToShow();
           this.setAllFavPacksToShow();
           this.initializeFilteredOptions();
           this.overlaySpinnerService.changeOverlaySpinner(false);
-          console.log('spinner default finish!');
           this.isLoading = false;
           this.packsAreLoaded = true; 
           this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
-          console.log('spinner packs finish!');
           if(this.cardsService.isLoggedIn){          
             this.overlaySpinnerService.changeOverlaySpinner(false, "userDataLogin");
-            console.log('spinner userDataLogin finish!');
           }
           else{
             this.overlaySpinnerService.changeOverlaySpinner(false, "userDataNotLogin");
-            console.log('spinner userDataNotLogin finish!');
           }
         });
         this.cardsService.getAllPacks();
@@ -709,7 +694,6 @@ export class AllPacksPageNewComponent implements OnInit {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
         
         this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
-        console.log('spinner packs start!');
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
@@ -717,7 +701,6 @@ export class AllPacksPageNewComponent implements OnInit {
         //this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
         this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
-        console.log('spinner packs finish!');
         this.packsAreLoaded = true;   
       });
       console.log('cardsService.getAllPacks');
@@ -789,6 +772,7 @@ export class AllPacksPageNewComponent implements OnInit {
     this.allFavPacks = this.allPacks.filter((pack) =>
       this.allFavorites?.includes(parseInt(pack.id))
     );
+    console.log('this.allFavPacks', this.allFavPacks);
   }
 
   updateUserData(): void {
