@@ -30,6 +30,7 @@
   ],
   "secretNames": [
     "morningApiKey",
-    "morningApiSecret"
+    "morningApiSecret",
+    "smooveApiKey"
   ]
 }

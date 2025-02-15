@@ -1,11 +1,20 @@
-/*
+/* Amplify Params - DO NOT EDIT
+	API_CARDSPACKS_GRAPHQLAPIIDOUTPUT
+	API_CARDSPACKS_INVOICESTABLE_ARN
+	API_CARDSPACKS_INVOICESTABLE_NAME
+	API_CARDSPACKS_USERTABLE_ARN
+	API_CARDSPACKS_USERTABLE_NAME
+	ENV
+	REGION
+	STORAGE_INVOICES_BUCKETNAME
+Amplify Params - DO NOT EDIT *//*
 Use the following code to retrieve configured secrets from SSM:
 
 const aws = require('aws-sdk');
 
 const { Parameters } = await (new aws.SSM())
   .getParameters({
-    Names: ["morningApiKey","morningApiSecret"].map(secretName => process.env[secretName]),
+    Names: ["morningApiKey","morningApiSecret","smooveApiKey"].map(secretName => process.env[secretName]),
     WithDecryption: true,
   })
   .promise();
@@ -339,7 +348,7 @@ function getinvoiceRunningId() {
 async function updateMorning(email, amount, description, fullName) {
 
 
-    var bearerToken = await getMorningParam();
+    //var bearerToken = await getMorningParam();
 
 
     const now = new Date();
@@ -384,18 +393,17 @@ async function updateMorning(email, amount, description, fullName) {
   
     
     const options = {
-        hostname: 'api.greeninvoice.co.il',
+        hostname: 'https://hook.eu2.make.com/pumke91fl3jogn61o79v45568qsqpno2',
         port: 443,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${bearerToken}`
+            'Accept': 'application/json'
         }
     };
   
-    var msg = await post(options, '/api/v1/documents', data);
-    console.log('updateMorning sending POST start');
+    var msg = await post(options, '', data);
+    console.log('updateMorning via make.com sending POST start');
     console.log(msg);
     console.log("updateMorning: sending POST End");
 

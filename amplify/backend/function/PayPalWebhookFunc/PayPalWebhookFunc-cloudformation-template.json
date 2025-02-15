@@ -164,9 +164,6 @@
                 ]
               ]
             },
-            "receiptsUrl": {
-              "Ref": "receiptsUrl"
-            },
             "morningApiSecret": {
               "Fn::Join": [
                 "",
@@ -186,6 +183,31 @@
                     ]
                   },
                   "morningApiSecret"
+                ]
+              ]
+            },
+            "receiptsUrl": {
+              "Ref": "receiptsUrl"
+            },
+            "smooveApiKey": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "PayPalWebhookFunc"
+                      }
+                    ]
+                  },
+                  "smooveApiKey"
                 ]
               ]
             }
@@ -351,19 +373,15 @@
                 "dynamodb:Put*",
                 "dynamodb:Create*",
                 "dynamodb:BatchWriteItem",
-                "dynamodb:PartiQLInsert",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
                 "dynamodb:Query",
-                "dynamodb:PartiQLSelect",
                 "dynamodb:Update*",
                 "dynamodb:RestoreTable*",
-                "dynamodb:PartiQLUpdate",
-                "dynamodb:Delete*",
-                "dynamodb:PartiQLDelete"
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {
@@ -417,19 +435,15 @@
                 "dynamodb:Put*",
                 "dynamodb:Create*",
                 "dynamodb:BatchWriteItem",
-                "dynamodb:PartiQLInsert",
                 "dynamodb:Get*",
                 "dynamodb:BatchGetItem",
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "dynamodb:Scan",
                 "dynamodb:Query",
-                "dynamodb:PartiQLSelect",
                 "dynamodb:Update*",
                 "dynamodb:RestoreTable*",
-                "dynamodb:PartiQLUpdate",
-                "dynamodb:Delete*",
-                "dynamodb:PartiQLDelete"
+                "dynamodb:Delete*"
               ],
               "Resource": [
                 {
