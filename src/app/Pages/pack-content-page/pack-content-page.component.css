@@ -147,7 +147,6 @@ button:focus {
   margin-bottom: 100px;
 }
 
-
 .card-container {
   position: relative;
   height: 400px; /* Fixed height */
@@ -517,6 +516,10 @@ li span {
   border-bottom: 1px solid #e67c73;
 }
 
+.pack-content-page-cards {
+  display: flex !important;
+}
+
 .overflow-cards {
   overflow: scroll; /* Ensure the scrolling is allowed */
   flex-wrap: wrap;
@@ -808,7 +811,6 @@ app-card.scrollableCardOrd {
 }
 
 .text-red {
-  
   p {
     display: none;
   }
@@ -826,27 +828,23 @@ app-card.scrollableCardOrd {
   justify-content: center;
   align-items: center;
   background-color: white;
- }
+}
 
- .single-side {
-  display: block; 
+.single-side {
+  display: block;
   margin-right: 3rem;
- }
+}
 
-
-
- .dialog-container-row {
+.dialog-container-row {
   flex-wrap: wrap;
   display: flex;
- }
- 
+}
 
 @media screen and (max-width: 1024px) {
 }
 
 /* Landscape orientation styles */
 @media screen and (max-width: 768px) and (orientation: landscape) {
-
   .multi-card-mobile .drop-down {
     font-size: 14px;
     margin-bottom: 20px;
@@ -854,12 +852,12 @@ app-card.scrollableCardOrd {
 
   .multi-card-mobile img.card-image-mobile {
     width: auto !important;
-    max-width: 30vw; 
+    max-width: 30vw;
     height: auto;
   }
 
   .multi-card-mobile .right-90-icon {
-    width: auto !important; 
+    width: auto !important;
     margin-top: 5px;
   }
 
@@ -874,12 +872,11 @@ app-card.scrollableCardOrd {
   }
 
   .Icon-90 {
-      /* margin-left: 25px; */
-      margin-top: -7px;
-      width: 30px;
-      height: 30px;
+    /* margin-left: 25px; */
+    margin-top: -7px;
+    width: 30px;
+    height: 30px;
   }
-
 
   .single-side-card {
     display: flex;
@@ -893,16 +890,24 @@ app-card.scrollableCardOrd {
     gap: 0rem;
     overflow-x: auto;
   }
-  
+
   .min-width-auto {
     min-height: auto !important;
     min-width: auto !important;
   }
-  
+
   /* Hide scrollbar for Webkit browsers */
   .single-side-card::-webkit-scrollbar {
     display: none;
   }
+}
+
+.aside-bar-title {
+  font-size: 15px;
+}
+
+.aside-bar-p {
+  font-size: 15px;
 }
 
 @media screen and (max-width: 768px) {
@@ -989,7 +994,6 @@ app-card.scrollableCardOrd {
 
   .background-white {
     background-color: white;
-
   }
 
   .flip-box-inner {
@@ -1065,7 +1069,7 @@ app-card.scrollableCardOrd {
   }
 
   .text-red {
-    background-color: #E67C73;
+    background-color: #e67c73;
     p {
       display: flex;
       font-size: 14px;
@@ -1102,7 +1106,29 @@ app-card.scrollableCardOrd {
   }
 
   .aside-bar {
-    display: none;
+    /* display: none; */
+    width: 160px;
+    font-size: 10px;
+  }
+
+  .aside-bar-title {
+    font-size: 12px;
+  }
+
+  .aside-bar-p {
+    font-size: 11px;
+  }
+
+  .aside-bar ul {
+    font-size: 10px;
+  }
+
+  .aside-button {
+    width: 150px;
+  }
+
+  .pack-content-page-cards {
+    display: block !important;
   }
 
   app-card.scrollableCard {
@@ -1306,7 +1332,7 @@ app-card.scrollableCardOrd {
 
   .single-side {
     margin-right: 0.5rem;
-   }
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -1321,7 +1347,6 @@ app-card.scrollableCardOrd {
   .category-container {
     width: 44%;
   }
-
 }
 
 @media screen and (max-width: 480px) {
@@ -1455,7 +1480,7 @@ app-card.scrollableCardOrd {
 }
 
 /* Modal Content */
-.selected-cards-modal-content {  
+.selected-cards-modal-content {
   position: relative;
   margin: 20px auto;
   padding: 20px;
@@ -1701,7 +1726,7 @@ mat-icon {
   justify-content: center;
   align-items: center;
   overflow: scroll;
-  scrollbar-width: none; 
+  scrollbar-width: none;
 }
 
 @media (orientation: landscape) and (max-height: 480px) {

@@ -50,8 +50,7 @@ import { confirmationDialogueComponent } from './confirmation-dialog';
   styleUrls: ['./pack-content-page.component.css'],
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
-
-  @ViewChild('dropdownInput') dropdownInput    : ElementRef;
+  @ViewChild('dropdownInput') dropdownInput: ElementRef;
 
   Subscription: Subscription = new Subscription();
   id: any;
@@ -91,7 +90,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isEditingOption: number | null = null;
   selectedIndex: number;
 
-  showInputFieldInDropDown : boolean = false;
+  showInputFieldInDropDown: boolean = false;
 
   // Category
   categoriesCard: any;
@@ -113,7 +112,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   overFlowCardContainerHeight: number = 340;
   showFooterContainer: boolean = true;
 
-  categoryFlipped : boolean = false;
+  categoryFlipped: boolean = false;
   categoryBaseArray = [];
   categoryScreen: boolean = false;
 
@@ -122,9 +121,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     // Check the vertical scroll position
-    this.isScrolled = window.scrollY ;
+    this.isScrolled = window.scrollY;
   }
-
 
   constructor(
     public route: ActivatedRoute,
@@ -155,7 +153,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   // Option Array List
   options = [
-    
     { text: 'אני רוצה לכתוב שאלה משלי (לחצו כאן כדי לכתוב שאלה משלכם)' },
     {
       text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות',
@@ -190,7 +187,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
   updateOptionArray(): void {
     const newText = this.dropdownInput.nativeElement.value.trim();
     if (newText) {
@@ -201,12 +197,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.selectedOption = newText; // Reflect the change in the displayed selected option
     }
     this.isEditing = false;
-    this.dropdownInput.nativeElement.value = "";
+    this.dropdownInput.nativeElement.value = '';
     this.isDropdownOpen = false;
     this.showInputFieldInDropDown = false;
   }
 
-  
   // Method to save the edited option
   saveEdit(option: { text: string }, index: number) {
     if (this.isEditing && this.isEditingOption === index) {
@@ -555,33 +550,33 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         this.multiSelectCard.push(obj);
       }
     }
-    
-      this.categoryScreen = true;
-      this.categoryBaseArray = [];
 
-      this.multiSelectCard.forEach((element) => {
-        // Check if the category already exists in the categoryBaseArray
-        let categoryObj = this.categoryBaseArray.find(
-          (category) => category.categoryName === element.category
-        );
+    this.categoryScreen = true;
+    this.categoryBaseArray = [];
 
-        if (!categoryObj) {
-          // If the category does not exist, create a new one
-          categoryObj = {
-            categoryName: element.category,
-            cards: [],
-          };
-          this.categoryBaseArray.push(categoryObj);
-        }
+    this.multiSelectCard.forEach((element) => {
+      // Check if the category already exists in the categoryBaseArray
+      let categoryObj = this.categoryBaseArray.find(
+        (category) => category.categoryName === element.category
+      );
 
-        // Push the card details into the cards array of the respective category
-        categoryObj.cards.push({
-          index: element.index,
-          flipped: !this.flipped,
-          backImgUrl: element.card.backImgUrl,
-          frontImgUrl: element.card.frontImgUrl,
-        });
-      });    
+      if (!categoryObj) {
+        // If the category does not exist, create a new one
+        categoryObj = {
+          categoryName: element.category,
+          cards: [],
+        };
+        this.categoryBaseArray.push(categoryObj);
+      }
+
+      // Push the card details into the cards array of the respective category
+      categoryObj.cards.push({
+        index: element.index,
+        flipped: !this.flipped,
+        backImgUrl: element.card.backImgUrl,
+        frontImgUrl: element.card.frontImgUrl,
+      });
+    });
   }
 
   categoryBaseCardSelected(
@@ -729,21 +724,21 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       'Pack name': this.pack?.name,
     });
     this.selectedCards = [];
-    this.pack.cards.forEach(category => {
+    this.pack.cards.forEach((category) => {
       category.cardsImages.sort(() => Math.random() - 0.5);
-    })
+    });
   }
 
   flip(): void {
     this.flipped = !this.flipped;
     console.log('flipped: ' + this.flipped);
-    this.categoryBaseArray.forEach(category => {
-      category.cards.forEach(card => {
-        card.flipped = this.flipped; 
+    this.categoryBaseArray.forEach((category) => {
+      category.cards.forEach((card) => {
+        card.flipped = this.flipped;
         this.flipCard = this.flipCard == 'inactive' ? 'active' : 'inactive';
-      })
+      });
     });
-    
+
     this.selectedCards = [];
     if (this.flipped) {
       this.mixpanelService.track('ActionButtonClicked', {
@@ -770,7 +765,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   get sortedCards() {
-
     return this.sortCardsByCategory(this.multiSelectCard);
   }
 
@@ -792,7 +786,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     const firstCardIndex = this.sortedCards.findIndex(
       (card) => card.category === item.category
     );
-    console.log('cards', this.multiSelectCard)
+    console.log('cards', this.multiSelectCard);
 
     return index === firstCardIndex;
   }
@@ -985,7 +979,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     window.open(this.pack?.about.link, '_blank');
   }
 
-  confirmationDialogue() : void {
+  confirmationDialogue(): void {
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.width = '50%';
     dialogConfig.data = { redirect: () => this.redirect() }; // Pass the redirect method
