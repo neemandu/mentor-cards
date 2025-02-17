@@ -282,11 +282,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  
+
   loadPack(): void {
+
     this.isLoading = true;
     this.error = null;
-
-    if (this.cardsService.allPacks) {
+	if (this.cardsService.allPacks) {
       this.setPack(
         this.cardsService.allPacks.find((pack) => pack.id === this.id)
       );
@@ -301,23 +303,51 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       console.log('this.options', this.options);
       console.log('loading pack from service');
     } else {
-      console.log('fetching pack');
-      console.log('this.id', this.id);
-      console.log('this.commonLink', this.commonLink);
-      this.setPack(
-        this.cardsService.allPacks.find((pack) => pack.id === this.id)
-      );
-      let topQuestions = this.pack?.topQuestions;
+    this.api.GetCardsPack(this.id, this.commonLink.trim()).then(
+      (pack) => {
+        console.log('this.api.GetCardsPac 2');
+        console.log('pack', pack);
+        // console.log('hi');
+        this.pack = new PackContent().deseralize(pack);
+        console.log('this.pack', this.pack);
+        this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
+          ? true
+          : false;
+        if (this.pack.cards.length == 0) {
+          this.unauthorized = true;
+        }
+        this.cards = [...this.pack.cards];
+        this.isLoaded = true;
 
-      if (topQuestions) {
-        const formattedQuestions = topQuestions.map((q) =>
-          typeof q === 'string' ? { text: q } : q
+
+        console.log('this.setPack function');
+        this.setPack(this.pack);
+        console.log('this.pack', this.pack);
+        let topQuestions = this.pack?.topQuestions;
+        if (topQuestions) {
+          const formattedQuestions = topQuestions.map((q) =>
+            typeof q === 'string' ? { text: q } : q
+          );
+          this.options = [...formattedQuestions, ...this.options];
+        this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.mixpanelService.track('PageViewed', {
+          'Page Title': 'pack-content-page',
+          'Pack id': this.id,
+          'Pack name': this.pack?.name,
+        });
+      }},
+      (reject) => {
+        this.isLoaded = true;
+
+        console.log('errrror');
+        console.log(
+          'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
+          reject
         );
-        this.options = [...formattedQuestions, ...this.options];
+        this.overlaySpinnerService.changeOverlaySpinner(false);
       }
-
-      console.log('this.options', this.options);
-    }
+    );
+	}
   }
 
   setPack(pack: PackContent | undefined): void {

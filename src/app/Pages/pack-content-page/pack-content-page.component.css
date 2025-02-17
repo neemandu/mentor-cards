@@ -1113,7 +1113,9 @@ app-card.scrollableCardOrd {
 
   .overflow-cards {
     max-width: 770px;
+    width: auto;
   }
+
   .category-name {
     text-align: left;
   }
