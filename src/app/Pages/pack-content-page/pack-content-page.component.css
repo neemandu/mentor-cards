@@ -507,6 +507,11 @@ li span {
   grid-template-columns: auto calc(100% - 10px);
 }
 
+/* Add this new style */
+.aside-container:not(:has(.aside-bar)) {
+  display: block;
+}
+
 .category-section {
   display: flex;
   flex-direction: column;
@@ -521,13 +526,14 @@ li span {
 }
 
 .overflow-cards {
-  overflow: scroll; /* Ensure the scrolling is allowed */
+  overflow: scroll;
   flex-wrap: wrap;
   width: calc(100% - 220px);
-  /* Hide scrollbar */
-  /* Hide scrollbar */
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+/* Add this new style */
+:not(.aside-bar) + .overflow-cards {
+  width: 100%;
 }
 
 app-card.scrollableCard {
