@@ -911,6 +911,58 @@ app-card.scrollableCardOrd {
 }
 
 @media screen and (max-width: 768px) {
+  .aside-container {
+    display: block;
+  }
+
+  .aside-bar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background: white;
+    z-index: 999;
+    padding-top: 80px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .aside-bar.show {
+    display: block;
+    transform: translateX(0);
+  }
+
+  .hamburger-icon {
+    display: block;
+  }
+
+  /* Center the packs */
+  .overflow-cards {
+    width: 100% !important;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .pack-content-page-cards {
+    display: flex !important;
+    justify-content: center;
+  }
+
+  /* Overlay when menu is open */
+  .menu-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+  }
+
+  .menu-overlay.show {
+    display: block;
+  }
+
   .dropdown-options {
     position: fixed; /* Use fixed positioning for better control */
     top: 20%; /* Position the dropdown options at a visible area */
@@ -1926,4 +1978,74 @@ img {
 .scrollable-content::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+/* Add new hamburger menu styles */
+.mobile-menu {
+  display: none;
+}
+
+.hamburger-icon {
+  display: none;
+  z-index: 1000;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Modify existing media query */
+@media screen and (max-width: 768px) {
+  .aside-container {
+    display: block; /* Change from none to block */
+  }
+
+  .aside-bar {
+    display: none; /* Hide the default sidebar */
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background: white;
+    z-index: 999;
+    padding-top: 80px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .aside-bar.show {
+    display: block;
+    transform: translateX(0);
+  }
+
+  .hamburger-icon {
+    width: fit-content;
+  }
+
+  /* Center the packs */
+  .overflow-cards {
+    width: 100% !important;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .pack-content-page-cards {
+    display: flex !important;
+    justify-content: center;
+  }
+
+  /* Overlay when menu is open */
+  .menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+  }
+
+  .menu-overlay.show {
+    display: block;
+  }
 }

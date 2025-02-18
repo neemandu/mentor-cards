@@ -346,9 +346,38 @@
     </div>
   </div>
 
+  <!-- Add before the aside-container div -->
+  <button
+    class="hamburger-icon"
+    (click)="openMenu()"
+    [ngStyle]="{
+      display: isMenuOpen || !isMobile ? 'none' : 'block'
+    }"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div
+    class="menu-overlay"
+    [class.show]="isMenuOpen"
+    (click)="closeMenu()"
+    [ngStyle]="{
+      display: isMenuOpen && isMobile ? 'block' : 'none'
+    }"
+  ></div>
+
   <div [class.aside-container]="pack?.cards?.length > 1">
-    <aside class="aside-bar" *ngIf="pack?.cards?.length > 1">
+    <aside class="aside-bar" [class.show]="isMenuOpen">
       <ul>
+        <button
+          class="hamburger-icon"
+          (click)="closeMenu()"
+          [ngStyle]="{
+            display: isMenuOpen || isMobile ? 'block' : 'none'
+          }"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
         <h1 class="m-0 aside-bar-title">עבודה תהליכית / לפי נושאים</h1>
         <p class="m-0 aside-bar-p">
           ערכה זו מחולקת לקלפים בנושאים שונים. ניתן לבחור קלף מכל נושא להצגה על

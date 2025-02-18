@@ -124,6 +124,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.isScrolled = window.scrollY;
   }
 
+  isMenuOpen = false;
+
   constructor(
     public route: ActivatedRoute,
     private cardsService: CardsService,
@@ -277,13 +279,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  
-
   loadPack(): void {
-
     this.isLoading = true;
     this.error = null;
-	if (this.cardsService.allPacks) {
+    if (this.cardsService.allPacks) {
       this.setPack(
         this.cardsService.allPacks.find((pack) => pack.id === this.id)
       );
@@ -298,51 +297,51 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       console.log('this.options', this.options);
       console.log('loading pack from service');
     } else {
-    this.api.GetCardsPack(this.id, this.commonLink.trim()).then(
-      (pack) => {
-        console.log('this.api.GetCardsPac 2');
-        console.log('pack', pack);
-        // console.log('hi');
-        this.pack = new PackContent().deseralize(pack);
-        console.log('this.pack', this.pack);
-        this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
-          ? true
-          : false;
-        if (this.pack.cards.length == 0) {
-          this.unauthorized = true;
-        }
-        this.cards = [...this.pack.cards];
-        this.isLoaded = true;
+      this.api.GetCardsPack(this.id, this.commonLink.trim()).then(
+        (pack) => {
+          console.log('this.api.GetCardsPac 2');
+          console.log('pack', pack);
+          // console.log('hi');
+          this.pack = new PackContent().deseralize(pack);
+          console.log('this.pack', this.pack);
+          this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
+            ? true
+            : false;
+          if (this.pack.cards.length == 0) {
+            this.unauthorized = true;
+          }
+          this.cards = [...this.pack.cards];
+          this.isLoaded = true;
 
+          console.log('this.setPack function');
+          this.setPack(this.pack);
+          console.log('this.pack', this.pack);
+          let topQuestions = this.pack?.topQuestions;
+          if (topQuestions) {
+            const formattedQuestions = topQuestions.map((q) =>
+              typeof q === 'string' ? { text: q } : q
+            );
+            this.options = [...formattedQuestions, ...this.options];
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+            this.mixpanelService.track('PageViewed', {
+              'Page Title': 'pack-content-page',
+              'Pack id': this.id,
+              'Pack name': this.pack?.name,
+            });
+          }
+        },
+        (reject) => {
+          this.isLoaded = true;
 
-        console.log('this.setPack function');
-        this.setPack(this.pack);
-        console.log('this.pack', this.pack);
-        let topQuestions = this.pack?.topQuestions;
-        if (topQuestions) {
-          const formattedQuestions = topQuestions.map((q) =>
-            typeof q === 'string' ? { text: q } : q
+          console.log('errrror');
+          console.log(
+            'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
+            reject
           );
-          this.options = [...formattedQuestions, ...this.options];
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        this.mixpanelService.track('PageViewed', {
-          'Page Title': 'pack-content-page',
-          'Pack id': this.id,
-          'Pack name': this.pack?.name,
-        });
-      }},
-      (reject) => {
-        this.isLoaded = true;
-
-        console.log('errrror');
-        console.log(
-          'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
-          reject
-        );
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-      }
-    );
-	}
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+        }
+      );
+    }
   }
 
   setPack(pack: PackContent | undefined): void {
@@ -1019,6 +1018,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
+  }
+  closeMenu() {
+    this.isMenuOpen = false;
+    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+  }
+
+  openMenu() {
+    this.isMenuOpen = true;
+    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
   }
 }
 

@@ -1,6 +1,5 @@
 <div
-  (mouseenter)="onMouseEnter($event)"
-  (mouseleave)="onMouseLeave()"
+  (click)="openPreviewDialog($event)"
   #targetDiv
   class="rounded-xl width-44 p-3 relative"
   [dir]="langDirectionService.currentLangDirection"
@@ -37,11 +36,7 @@
         height: auto;
       "
     >
-      <img
-        [src]="packInfo.imgUrl"
-        alt=""
-        class="packs-image"
-      />
+      <img [src]="packInfo.imgUrl" alt="" class="packs-image" />
     </div>
     <div>
       <div class="mt-3" *ngIf="packInfo.isFree">
