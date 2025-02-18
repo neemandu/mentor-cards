@@ -10197,7 +10197,7 @@ async GetSubscriptionPlansForOrgs(
           description
           tags
           categories
-          cards {
+          cards (link: $link) {
             __typename
             categoryName
             categoryStepNumber

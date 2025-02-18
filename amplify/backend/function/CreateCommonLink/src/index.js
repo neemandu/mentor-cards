@@ -108,7 +108,7 @@ exports.handler = async (event) => {
 
     var user = await getUser(username);
 
-    if(user?.status != "PLAN"){
+    if(user?.status != "PLAN" && !user?.groupRole){
         return "";
     }
 

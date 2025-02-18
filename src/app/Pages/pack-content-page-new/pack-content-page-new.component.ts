@@ -141,8 +141,10 @@ export class PackContentPageNewComponent implements OnInit {
         'Pack name': this.pack?.name,
       });
     } else {
+      console.log('this.commonLink', this.commonLink);
       this.api.GetCardsPack(this.id, this.commonLink).then(
         (pack) => {
+          console.log('this.api.GetCardsPac');
           // console.log('hi');
           this.pack = new PackContent().deseralize(pack);
           this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
@@ -182,6 +184,7 @@ export class PackContentPageNewComponent implements OnInit {
   private loadPack() {
     this.api.GetCardsPack(this.id, this.commonLink).then(
       (pack) => {
+        console.log('this.api.GetCardsPac 2');
         // console.log('hi');
         this.pack = new PackContent().deseralize(pack);
         this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
