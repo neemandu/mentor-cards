@@ -19,26 +19,30 @@
             <div class="absolute z-8 text-center bottom-2 left-4">
               <span class="icons-bg">
                 <img
-                src="/assets/New/pack-view/heartIconBlack.svg"
-                alt=""
-                width="25"
-                height="25"
-                class=""
+                  src="/assets/New/pack-view/heartIconBlack.svg"
+                  alt=""
+                  width="25"
+                  height="25"
+                  class=""
                 />
               </span>
-              <div class="text-black text-center icons-bg">{{ pack.likesCounter }}</div>
+              <div class="text-black text-center icons-bg">
+                {{ pack.likesCounter }}
+              </div>
             </div>
             <div class="absolute z-8 text-center bottom-2 right-4">
               <span class="icons-bg">
                 <img
-                src="/assets/New/pack-view/black_cards.png"
-                alt=""
-                width="30"
-                height="30"
-                class=""
+                  src="/assets/New/pack-view/black_cards.png"
+                  alt=""
+                  width="30"
+                  height="30"
+                  class=""
                 />
               </span>
-              <div class="text-black text-center icons-bg">{{ cardImages?.length }}</div>
+              <div class="text-black text-center icons-bg">
+                {{ cardImages?.length }}
+              </div>
             </div>
           </div>
           <div class="ms-4">
@@ -142,7 +146,7 @@
           </div>
         </div>
 
-        <div class="mobile-bg" [class.sticky-header]="isScrolled > 170"> 
+        <div class="mobile-bg" [class.sticky-header]="isScrolled > 170">
           <div class="zoom-control hideItMobile">
             <button class="zoom-btn" (click)="zoomOut()">
               <div class="icon-container">
@@ -171,20 +175,36 @@
             (closeDialog)="closeDialog()"
           ></top-questions-dialog>
 
-           <!-- isReadingGuidebookAMust  -->
-          <div *ngIf="pack?.isReadingGuidebookAMust" class="text-red text-center d-flex justify-center">
-              <p>מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו</p>
+          <!-- isReadingGuidebookAMust  -->
+          <div
+            *ngIf="pack?.isReadingGuidebookAMust"
+            class="text-red text-center d-flex justify-center"
+          >
+            <p>מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו</p>
           </div>
-           
+
           <!-- Drop-down  -->
           <div class="dropdown section-drop-down">
             <div
               class="dropdown-select position-relative"
               (click)="toggleDropdown()"
             >
-              <span *ngIf="!showInputFieldInDropDown" class="selected-option text-xl">{{ defaultOption }}</span>
+              <span
+                *ngIf="!showInputFieldInDropDown"
+                class="selected-option text-xl"
+                >{{ defaultOption }}</span
+              >
               <span *ngIf="showInputFieldInDropDown">
-                <input #dropdownInput type="text" style="background-color: transparent; width: 100%; font-size: 20px;" (keydown.enter)="updateOptionArray()">
+                <input
+                  #dropdownInput
+                  type="text"
+                  style="
+                    background-color: transparent;
+                    width: 100%;
+                    font-size: 20px;
+                  "
+                  (keydown.enter)="updateOptionArray()"
+                />
               </span>
               <span class="dropdown-icon">▼</span>
             </div>
@@ -326,12 +346,43 @@
     </div>
   </div>
 
+  <!-- Add before the aside-container div -->
+  <button
+    class="hamburger-icon"
+    (click)="openMenu()"
+    [ngStyle]="{
+      display: isMenuOpen || !isMobile ? 'none' : 'block'
+    }"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div
+    class="menu-overlay"
+    [class.show]="isMenuOpen"
+    (click)="closeMenu()"
+    [ngStyle]="{
+      display: isMenuOpen && isMobile ? 'block' : 'none'
+    }"
+  ></div>
+
   <div [class.aside-container]="pack?.cards?.length > 1">
-    <aside class="aside-bar" *ngIf="pack?.cards?.length > 1">
+    <aside class="aside-bar" [class.show]="isMenuOpen">
       <ul>
-        <h1 style="font-size: 15px" class="m-0">עבודה תהליכית / לפי נושאים</h1>
-        <p style="font-size: 15px" class="m-0">
-          ערכה זו מחולקת לקלפים בנושאים שונים. ניתן לבחור קלף מכל נושא להצגה על המסך.         </p>
+        <button
+          class="hamburger-icon"
+          (click)="closeMenu()"
+          [ngStyle]="{
+            display: isMenuOpen || isMobile ? 'block' : 'none'
+          }"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <h1 class="m-0 aside-bar-title">עבודה תהליכית / לפי נושאים</h1>
+        <p class="m-0 aside-bar-p">
+          ערכה זו מחולקת לקלפים בנושאים שונים. ניתן לבחור קלף מכל נושא להצגה על
+          המסך.
+        </p>
         <button
           class="aside-button mb-1"
           style="background-color: #7986cb"
@@ -378,39 +429,44 @@
           </p>
         </div>
 
-        <div
-        class="d-flex overflow-cards"
-        *ngIf="categoryOpenStates[i]"
-      >
-      <div class="d-flex " [class.scroll-hidden]="!flipped" [class.scroll-visible]="flipped" *ngFor="let card of category.cardsImages; let i = index">
-        <button
-        *ngIf="showEditPack"
-        mat-icon-button
-        class="remove-btn"
-        (click)="removeCard(i)"
-      >
-        <mat-icon class="remove-icon">visibility_off</mat-icon>
-      </button>
-          <app-card
-            [imageWidth]="imageWidth"
-            [imageHeight]="imageHeight"
-            [flippedCardwidth]="flippedCardwidth"
-            [flipBoxInnerInCat]="true"
-            [ngClass]="{ clickable: true, scrollableCardOrd: !flipped && !isDoubleSided,scrollableCard: flipped || isDoubleSided }"
-            [cardContent]="card"
-            [mobileView]="true"
-            [selected]="selectedCards.includes(card)"
-            [index]="i + 1"
-            [flipped]="
-              flipped || (!multipileChecked && selectedCards.includes(card))
-            "
-            (click)="cardSelected(card, i + 1, false, category.categoryName)"
+        <div class="d-flex overflow-cards" *ngIf="categoryOpenStates[i]">
+          <div
+            class="pack-content-page-cards"
+            [class.scroll-hidden]="!flipped"
+            [class.scroll-visible]="flipped"
+            *ngFor="let card of category.cardsImages; let i = index"
           >
-            <!-- TODO -->
-          </app-card>
-      </div>
-
-      </div>
+            <button
+              *ngIf="showEditPack"
+              mat-icon-button
+              class="remove-btn"
+              (click)="removeCard(i)"
+            >
+              <mat-icon class="remove-icon">visibility_off</mat-icon>
+            </button>
+            <app-card
+              [imageWidth]="imageWidth"
+              [imageHeight]="imageHeight"
+              [flippedCardwidth]="flippedCardwidth"
+              [flipBoxInnerInCat]="true"
+              [ngClass]="{
+                clickable: true,
+                scrollableCardOrd: !flipped && !isDoubleSided,
+                scrollableCard: flipped || isDoubleSided
+              }"
+              [cardContent]="card"
+              [mobileView]="true"
+              [selected]="selectedCards.includes(card)"
+              [index]="i + 1"
+              [flipped]="
+                flipped || (!multipileChecked && selectedCards.includes(card))
+              "
+              (click)="cardSelected(card, i + 1, false, category.categoryName)"
+            >
+              <!-- TODO -->
+            </app-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -745,35 +801,26 @@
   </mat-menu>
 
   <div
-  *ngIf="showSelectedCards"
-  class="selected-cards-modal"
-  (click)="toggleChosenCardsModal()"
->
-  <!-- Modal Content -->
-  <div
-    class="selected-cards-modal-content position-relative"
-    (click)="$event.stopPropagation()"
+    *ngIf="showSelectedCards"
+    class="selected-cards-modal"
+    (click)="toggleChosenCardsModal()"
   >
-    <!-- Close Button -->
-    <button class="btn-close" (click)="toggleChosenCardsModal()">
-      <img
-        src="../../../assets/icons/Close_round.svg"
-        alt="Expand data"
-        width="20px"
-        style="height: 40px; width: 40px"
-      />
-    </button>
+    <!-- Modal Content -->
+    <div
+      class="selected-cards-modal-content position-relative"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Close Button -->
+      <button class="btn-close" (click)="toggleChosenCardsModal()">
+        <img
+          src="../../../assets/icons/Close_round.svg"
+          alt="Expand data"
+          width="20px"
+          style="height: 40px; width: 40px"
+        />
+      </button>
 
-    <!-- Modal Title -->
-    <p style="color: white;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;">{{ selectedOption }}</p>
-
-    <!-- Categories Loop -->
-    <ng-container *ngFor="let category of categoryBaseArray">
-      <!-- Category Name -->
+      <!-- Modal Title -->
       <p
         style="
           color: white;
@@ -783,74 +830,101 @@
           margin-top: 20px;
         "
       >
-        {{ category.categoryName }}
+        {{ selectedOption }}
       </p>
 
-      <!-- Cards Grid -->
-      <div class="cards-grid" 
-      [transition-group]="'flip-list'">
-        <div *ngFor="let card of category.cards" class="card-container"  transition-group-item
-        [ngClass]="{
-          'd-flex flex-column align-items-center shuffle': true,
-          'shuffle-item': !showEditPack
-        }"
-        [ngStyle]="{ 'aspect-ratio': card.aspectRatio || '2 / 3' }">
-          <div class="card-wrapper">
-            <!-- Buttons Row -->
-            <div class="card-buttons-row">
-              <button *ngIf="card.backImgUrl" class="flip-button" (click)="toggleFlipped(card)">
-                <img src="../../../assets/icons/flipDoubleSideImg.png" alt="Flip" />
-              </button>
-              <span class="index-circle">{{ card.index }}</span>
-              <button class="rotate-button" (click)="rotateCard(card)">
-                <img src="../../../assets/icons/right-90.svg" alt="Rotate"  />
-              </button>
-            </div>
-            <!-- Flipping Card -->
-            <div *ngIf="card.backImgUrl" class="flip-box" [ngClass]="{ flipped: card.flipped }">
-              <!-- Front Side -->
-              <div class="card-front">
-                <img
-                  [src]="card.frontImgUrl"
-                  alt="Card Front"
-                  class="card-image"
-                  [style.transform]="'rotate(' + card.rotation + 'deg)'"
-                  (load)="setAspectRatio($event, card)"
-                />
+      <!-- Categories Loop -->
+      <ng-container *ngFor="let category of categoryBaseArray">
+        <!-- Category Name -->
+        <p
+          style="
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+          "
+        >
+          {{ category.categoryName }}
+        </p>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid" [transition-group]="'flip-list'">
+          <div
+            *ngFor="let card of category.cards"
+            class="card-container"
+            transition-group-item
+            [ngClass]="{
+              'd-flex flex-column align-items-center shuffle': true,
+              'shuffle-item': !showEditPack
+            }"
+            [ngStyle]="{ 'aspect-ratio': card.aspectRatio || '2 / 3' }"
+          >
+            <div class="card-wrapper">
+              <!-- Buttons Row -->
+              <div class="card-buttons-row">
+                <button
+                  *ngIf="card.backImgUrl"
+                  class="flip-button"
+                  (click)="toggleFlipped(card)"
+                >
+                  <img
+                    src="../../../assets/icons/flipDoubleSideImg.png"
+                    alt="Flip"
+                  />
+                </button>
+                <span class="index-circle">{{ card.index }}</span>
+                <button class="rotate-button" (click)="rotateCard(card)">
+                  <img src="../../../assets/icons/right-90.svg" alt="Rotate" />
+                </button>
               </div>
-      
-              <!-- Back Side -->
-              <div class="card-back">
-                <img
-                  [src]="card.backImgUrl"
-                  alt="Card Back"
-                  class="card-image"
-                  [style.transform]="'rotate(' + card.rotation + 'deg)'"
-                  (load)="setAspectRatio($event, card)"
-                />
+              <!-- Flipping Card -->
+              <div
+                *ngIf="card.backImgUrl"
+                class="flip-box"
+                [ngClass]="{ flipped: card.flipped }"
+              >
+                <!-- Front Side -->
+                <div class="card-front">
+                  <img
+                    [src]="card.frontImgUrl"
+                    alt="Card Front"
+                    class="card-image"
+                    [style.transform]="'rotate(' + card.rotation + 'deg)'"
+                    (load)="setAspectRatio($event, card)"
+                  />
+                </div>
+
+                <!-- Back Side -->
+                <div class="card-back">
+                  <img
+                    [src]="card.backImgUrl"
+                    alt="Card Back"
+                    class="card-image"
+                    [style.transform]="'rotate(' + card.rotation + 'deg)'"
+                    (load)="setAspectRatio($event, card)"
+                  />
+                </div>
               </div>
-            </div>
-            
-            <div *ngIf="!card.backImgUrl">
-              <!-- Back Side -->
-              <div class="card-front">
-                <img
-                  [src]="card.frontImgUrl"
-                  alt="Card Front"
-                  class="card-image"
-                  [style.transform]="'rotate(' + card.rotation + 'deg)'"
-                  (load)="setAspectRatio($event, card)"
-                />
+
+              <div *ngIf="!card.backImgUrl">
+                <!-- Back Side -->
+                <div class="card-front">
+                  <img
+                    [src]="card.frontImgUrl"
+                    alt="Card Front"
+                    class="card-image"
+                    [style.transform]="'rotate(' + card.rotation + 'deg)'"
+                    (load)="setAspectRatio($event, card)"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
-  </div>
-
 
   <div *ngIf="showRandomCards" class="selected-cards-modal">
     <div class="selected-cards-modal-content">
@@ -862,10 +936,16 @@
           style="height: 40px; width: 40px"
         />
       </button>
-      <div class="random-content" style="height: 80% ;display: flex;
+      <div
+        class="random-content"
+        style="
+          height: 80%;
+          display: flex;
           height: 80%;
           flex-direction: column;
-          align-items: center;">
+          align-items: center;
+        "
+      >
         <button
           class="btn btn-light"
           [disabled]="randomCardIndex == cards[0]?.cardsImages.length - 1"
@@ -874,22 +954,26 @@
           <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
         </button>
 
-        <div *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && flipped">
+        <div
+          *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && flipped"
+        >
           <!-- Front Side -->
           <div>
             <img
-            style="height: 69vh"
+              style="height: 69vh"
               [src]="cards[0]?.cardsImages[randomCardIndex].frontImgUrl"
               alt="Card Front"
             />
           </div>
         </div>
-        
-        <div *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && !flipped">
+
+        <div
+          *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && !flipped"
+        >
           <!-- Front Side -->
           <div>
             <img
-            style="height: 69vh"
+              style="height: 69vh"
               [src]="cards[0]?.cardsImages[randomCardIndex].backImgUrl"
               alt="Card Front"
             />
@@ -900,7 +984,7 @@
           <!-- Back Side -->
           <div>
             <img
-            style="height: 69vh"
+              style="height: 69vh"
               [src]="cards[0]?.cardsImages[randomCardIndex].frontImgUrl"
               alt="Card Front"
             />
@@ -1004,9 +1088,7 @@
               data-src="{{ cardContent?.backImgUrl }}"
             />
             <img
-              *ngIf="
-                (item.card.frontImgUrl && flipped)
-              "
+              *ngIf="item.card.frontImgUrl && flipped"
               class="img-box"
               alt="Mentor-cards unique cards design for the front of the card"
               [src]="item?.card.frontImgUrl"
@@ -1014,13 +1096,11 @@
             />
 
             <img
-             *ngIf="
-               !item.card.backImgUrl
-             "
-             class="img-box"
-             alt="Mentor-cards unique cards design for the front of the card"
-             src="/assets/Mentor-Cards-Back.png"
-           />
+              *ngIf="!item.card.backImgUrl"
+              class="img-box"
+              alt="Mentor-cards unique cards design for the front of the card"
+              src="/assets/Mentor-Cards-Back.png"
+            />
 
             <img
               src="../../../assets/icons/black_cross.png"
@@ -1039,7 +1119,7 @@
 
 <footer
   class="footer"
-  *ngIf="(multiSelectCard.length > 0 || selectedOption) && (cards.length > 1)"
+  *ngIf="(multiSelectCard.length > 0 || selectedOption) && cards.length > 1"
 >
   <div class="footer-container">
     <div *ngIf="multiSelectCard.length > 0">

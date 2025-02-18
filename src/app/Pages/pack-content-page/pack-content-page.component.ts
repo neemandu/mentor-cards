@@ -50,8 +50,7 @@ import { confirmationDialogueComponent } from './confirmation-dialog';
   styleUrls: ['./pack-content-page.component.css'],
 })
 export class PackContentPageComponent implements OnInit, OnDestroy {
-
-  @ViewChild('dropdownInput') dropdownInput    : ElementRef;
+  @ViewChild('dropdownInput') dropdownInput: ElementRef;
 
   Subscription: Subscription = new Subscription();
   id: any;
@@ -91,7 +90,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   isEditingOption: number | null = null;
   selectedIndex: number;
 
-  showInputFieldInDropDown : boolean = false;
+  showInputFieldInDropDown: boolean = false;
 
   // Category
   categoriesCard: any;
@@ -113,7 +112,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   overFlowCardContainerHeight: number = 340;
   showFooterContainer: boolean = true;
 
-  categoryFlipped : boolean = false;
+  categoryFlipped: boolean = false;
   categoryBaseArray = [];
   categoryScreen: boolean = false;
 
@@ -122,9 +121,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     // Check the vertical scroll position
-    this.isScrolled = window.scrollY ;
+    this.isScrolled = window.scrollY;
   }
 
+  isMenuOpen = false;
 
   constructor(
     public route: ActivatedRoute,
@@ -155,7 +155,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
 
   // Option Array List
   options = [
-    
     { text: 'אני רוצה לכתוב שאלה משלי (לחצו כאן כדי לכתוב שאלה משלכם)' },
     {
       text: 'אשמח לראות את ספר ההדרכה לעוד רעיונות לשאלות',
@@ -190,7 +189,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-
   updateOptionArray(): void {
     const newText = this.dropdownInput.nativeElement.value.trim();
     if (newText) {
@@ -201,12 +199,11 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.selectedOption = newText; // Reflect the change in the displayed selected option
     }
     this.isEditing = false;
-    this.dropdownInput.nativeElement.value = "";
+    this.dropdownInput.nativeElement.value = '';
     this.isDropdownOpen = false;
     this.showInputFieldInDropDown = false;
   }
 
-  
   // Method to save the edited option
   saveEdit(option: { text: string }, index: number) {
     if (this.isEditing && this.isEditingOption === index) {
@@ -282,13 +279,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  
-
   loadPack(): void {
-
     this.isLoading = true;
     this.error = null;
-	if (this.cardsService.allPacks) {
+    if (this.cardsService.allPacks) {
       this.setPack(
         this.cardsService.allPacks.find((pack) => pack.id === this.id)
       );
@@ -303,51 +297,51 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       console.log('this.options', this.options);
       console.log('loading pack from service');
     } else {
-    this.api.GetCardsPack(this.id, this.commonLink.trim()).then(
-      (pack) => {
-        console.log('this.api.GetCardsPac 2');
-        console.log('pack', pack);
-        // console.log('hi');
-        this.pack = new PackContent().deseralize(pack);
-        console.log('this.pack', this.pack);
-        this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
-          ? true
-          : false;
-        if (this.pack.cards.length == 0) {
-          this.unauthorized = true;
-        }
-        this.cards = [...this.pack.cards];
-        this.isLoaded = true;
+      this.api.GetCardsPack(this.id, this.commonLink.trim()).then(
+        (pack) => {
+          console.log('this.api.GetCardsPac 2');
+          console.log('pack', pack);
+          // console.log('hi');
+          this.pack = new PackContent().deseralize(pack);
+          console.log('this.pack', this.pack);
+          this.isDoubleSided = pack.cards[0].cardsImages[0].backImgUrl
+            ? true
+            : false;
+          if (this.pack.cards.length == 0) {
+            this.unauthorized = true;
+          }
+          this.cards = [...this.pack.cards];
+          this.isLoaded = true;
 
+          console.log('this.setPack function');
+          this.setPack(this.pack);
+          console.log('this.pack', this.pack);
+          let topQuestions = this.pack?.topQuestions;
+          if (topQuestions) {
+            const formattedQuestions = topQuestions.map((q) =>
+              typeof q === 'string' ? { text: q } : q
+            );
+            this.options = [...formattedQuestions, ...this.options];
+            this.overlaySpinnerService.changeOverlaySpinner(false);
+            this.mixpanelService.track('PageViewed', {
+              'Page Title': 'pack-content-page',
+              'Pack id': this.id,
+              'Pack name': this.pack?.name,
+            });
+          }
+        },
+        (reject) => {
+          this.isLoaded = true;
 
-        console.log('this.setPack function');
-        this.setPack(this.pack);
-        console.log('this.pack', this.pack);
-        let topQuestions = this.pack?.topQuestions;
-        if (topQuestions) {
-          const formattedQuestions = topQuestions.map((q) =>
-            typeof q === 'string' ? { text: q } : q
+          console.log('errrror');
+          console.log(
+            'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
+            reject
           );
-          this.options = [...formattedQuestions, ...this.options];
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-        this.mixpanelService.track('PageViewed', {
-          'Page Title': 'pack-content-page',
-          'Pack id': this.id,
-          'Pack name': this.pack?.name,
-        });
-      }},
-      (reject) => {
-        this.isLoaded = true;
-
-        console.log('errrror');
-        console.log(
-          'file: pack-content-page.component.ts ~ line 96 ~ this.api.GetCardsPack ~ reject',
-          reject
-        );
-        this.overlaySpinnerService.changeOverlaySpinner(false);
-      }
-    );
-	}
+          this.overlaySpinnerService.changeOverlaySpinner(false);
+        }
+      );
+    }
   }
 
   setPack(pack: PackContent | undefined): void {
@@ -585,33 +579,33 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         this.multiSelectCard.push(obj);
       }
     }
-    
-      this.categoryScreen = true;
-      this.categoryBaseArray = [];
 
-      this.multiSelectCard.forEach((element) => {
-        // Check if the category already exists in the categoryBaseArray
-        let categoryObj = this.categoryBaseArray.find(
-          (category) => category.categoryName === element.category
-        );
+    this.categoryScreen = true;
+    this.categoryBaseArray = [];
 
-        if (!categoryObj) {
-          // If the category does not exist, create a new one
-          categoryObj = {
-            categoryName: element.category,
-            cards: [],
-          };
-          this.categoryBaseArray.push(categoryObj);
-        }
+    this.multiSelectCard.forEach((element) => {
+      // Check if the category already exists in the categoryBaseArray
+      let categoryObj = this.categoryBaseArray.find(
+        (category) => category.categoryName === element.category
+      );
 
-        // Push the card details into the cards array of the respective category
-        categoryObj.cards.push({
-          index: element.index,
-          flipped: !this.flipped,
-          backImgUrl: element.card.backImgUrl,
-          frontImgUrl: element.card.frontImgUrl,
-        });
-      });    
+      if (!categoryObj) {
+        // If the category does not exist, create a new one
+        categoryObj = {
+          categoryName: element.category,
+          cards: [],
+        };
+        this.categoryBaseArray.push(categoryObj);
+      }
+
+      // Push the card details into the cards array of the respective category
+      categoryObj.cards.push({
+        index: element.index,
+        flipped: !this.flipped,
+        backImgUrl: element.card.backImgUrl,
+        frontImgUrl: element.card.frontImgUrl,
+      });
+    });
   }
 
   categoryBaseCardSelected(
@@ -759,21 +753,21 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       'Pack name': this.pack?.name,
     });
     this.selectedCards = [];
-    this.pack.cards.forEach(category => {
+    this.pack.cards.forEach((category) => {
       category.cardsImages.sort(() => Math.random() - 0.5);
-    })
+    });
   }
 
   flip(): void {
     this.flipped = !this.flipped;
     console.log('flipped: ' + this.flipped);
-    this.categoryBaseArray.forEach(category => {
-      category.cards.forEach(card => {
-        card.flipped = this.flipped; 
+    this.categoryBaseArray.forEach((category) => {
+      category.cards.forEach((card) => {
+        card.flipped = this.flipped;
         this.flipCard = this.flipCard == 'inactive' ? 'active' : 'inactive';
-      })
+      });
     });
-    
+
     this.selectedCards = [];
     if (this.flipped) {
       this.mixpanelService.track('ActionButtonClicked', {
@@ -800,7 +794,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   get sortedCards() {
-
     return this.sortCardsByCategory(this.multiSelectCard);
   }
 
@@ -822,7 +815,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     const firstCardIndex = this.sortedCards.findIndex(
       (card) => card.category === item.category
     );
-    console.log('cards', this.multiSelectCard)
+    console.log('cards', this.multiSelectCard);
 
     return index === firstCardIndex;
   }
@@ -1015,7 +1008,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     window.open(this.pack?.about.link, '_blank');
   }
 
-  confirmationDialogue() : void {
+  confirmationDialogue(): void {
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.width = '50%';
     dialogConfig.data = { redirect: () => this.redirect() }; // Pass the redirect method
@@ -1025,6 +1018,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
+  }
+  closeMenu() {
+    this.isMenuOpen = false;
+    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+  }
+
+  openMenu() {
+    this.isMenuOpen = true;
+    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
   }
 }
 
