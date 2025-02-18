@@ -367,7 +367,16 @@
   ></div>
 
   <div [class.aside-container]="pack?.cards?.length > 1">
-    <aside class="aside-bar" [class.show]="isMenuOpen">
+    <aside
+      class="aside-bar"
+      [class.show]="isMenuOpen"
+      [ngStyle]="{
+        display:
+          pack?.cards?.length > 1 && categoriesCard && categoriesCard.length > 0
+            ? 'block'
+            : 'none'
+      }"
+    >
       <ul>
         <button
           class="hamburger-icon"
