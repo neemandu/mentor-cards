@@ -25,8 +25,8 @@ img {
   display: flex;
   align-items: center;
   min-height: 225px;
-  padding-right: 10px;
-  padding-left: 10px;
+  /* padding-right: 10px; */
+  /* padding-left: 10px; */
 }
 
 .flip {
@@ -57,7 +57,6 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-
   .min-height {
     min-height: 121px !important;
   }
