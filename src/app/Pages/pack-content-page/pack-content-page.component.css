@@ -2035,7 +2035,7 @@ img {
   }
 
   .pack-content-page-cards {
-    display: flex !important;
+    /* display: flex !important; */
     justify-content: center;
   }
 
