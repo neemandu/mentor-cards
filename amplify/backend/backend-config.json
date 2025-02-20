@@ -421,6 +421,22 @@
         }
       ]
     },
+    "AMPLIFY_function_GetAllAffiliatesData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAllAffiliatesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_GetAllAffiliatesData_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "GetAllAffiliatesData"
+        }
+      ]
+    },
     "AMPLIFY_function_GetCardsImages_deploymentBucketName": {
       "usedBy": [
         {

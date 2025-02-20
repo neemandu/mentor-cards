@@ -57,7 +57,15 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-
+  .flip-box-inner {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    min-height: 225px;
+    padding-right: 1px;
+    padding-left: 1px;
+  }
   .min-height {
     min-height: 121px !important;
   }

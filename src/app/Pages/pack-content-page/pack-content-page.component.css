@@ -2035,8 +2035,8 @@ img {
   }
 
   .pack-content-page-cards {
-    display: flex !important;
-    justify-content: center;
+  /* display: flex !important; */
+  justify-content: center;
   }
 
   /* Overlay when menu is open */

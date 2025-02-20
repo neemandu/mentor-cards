@@ -108,9 +108,9 @@ exports.handler = async (event) => {
 
             console.log("calculateTotalPayments for affiliate " + affiliate.affiliateUrl);
             const totalPayments = users
-                .map(user => user.payments.map(payment => parseFloat(payment.amount)))
-                .flat()
-                .reduce((total, amount) => total + amount, 0);
+            .map(user => user.payments ? user.payments.map(payment => parseFloat(payment.amount)) : [])
+            .flat()
+            .reduce((total, amount) => total + amount, 0);
 
             results.push({
                 id: affiliate.id,
