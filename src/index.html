@@ -1,69 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="he">
-
-<head>
-  <script> (function(){ var s = document.createElement('script'); var h = document.querySelector('head') || document.body; s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'; s.async = true; s.onload = function(){ acsbJS.init({ statementLink : '', footerHtml : '', hideMobile : false, hideTrigger : false, disableBgProcess : false, language : 'en', position : 'right', leadColor : '#146FF8', triggerColor : '#146FF8', triggerRadius : '50%', triggerPositionX : 'right', triggerPositionY : 'bottom', triggerIcon : 'people', triggerSize : 'bottom', triggerOffsetX : 20, triggerOffsetY : 20, mobile : { triggerSize : 'small', triggerPositionX : 'right', triggerPositionY : 'bottom', triggerOffsetX : 10, triggerOffsetY : 10, triggerRadius : '20' } }); }; h.appendChild(s); })(); </script>
-  
-<!-- Pendo-->
-<script>
-  (function(apiKey){
-      (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
-      v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
-          o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
-          y=e.createElement(n);y.async=!0;y.src='https://cdn.eu.pendo.io/agent/static/'+apiKey+'/pendo.js';
-          z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
-  })('67c2f887-549d-4ce5-594b-6c312ef61241');
-  </script>
-
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-P4G4K7J');</script>
-  <!-- End Google Tag Manager -->
-
-  <meta charset="utf-8">
-  <title>Mentor-Cards</title>
-  <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="/assets/Favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-<style>
-  #tidio-chat-iframe { bottom: -10px !important; right: 0px !important;}
-  @media only screen and (max-width: 980px) {
-   #tidio-chat-iframe { bottom: -10px !important;}
-  }
-  </style>
-</head>
-<script src="//code.tidio.co/idxvhpoglurio07tjavmtmsmf0pest2s.js" async></script>
-
-<body class="mat-typography">
-  
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4G4K7J"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
-  <!-- PayPal -->
-  <script
-    src="https://www.paypal.com/sdk/js?client-id=ATexiLPVEXofyqzisU9MT2NxlUum2Xvup6KZwHUskUj99T4snVB-Ny3xd1L851PMV48BhUI-JFXnNzkt&vault=true&intent=subscription"
-    data-sdk-integration-source="button-factory"></script>
-  <app-root></app-root>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script>
-    nl_pos = "bl";
-    nl_compact = "1";
-    nl_accordion = "1";
-    nl_contact = "n:Dudi Neeman|p:0549139859|u:support+d:mentor-cards.com";
+  <head>
+    <script>
+      (function () {
+        var s = document.createElement("script");
+        var h = document.querySelector("head") || document.body;
+        s.src = "https://acsbapp.com/apps/app/dist/js/app.js";
+        s.async = true;
+        s.onload = function () {
+          acsbJS.init({
+            statementLink: "",
+            footerHtml: "",
+            hideMobile: false,
+            hideTrigger: false,
+            disableBgProcess: false,
+            language: "en",
+            position: "right",
+            leadColor: "#146FF8",
+            triggerColor: "#146FF8",
+            triggerRadius: "50%",
+            triggerPositionX: "right",
+            triggerPositionY: "bottom",
+            triggerIcon: "people",
+            triggerSize: "bottom",
+            triggerOffsetX: 20,
+            triggerOffsetY: 20,
+            mobile: {
+              triggerSize: "small",
+              triggerPositionX: "right",
+              triggerPositionY: "bottom",
+              triggerOffsetX: 10,
+              triggerOffsetY: 10,
+              triggerRadius: "20",
+            },
+          });
+        };
+        h.appendChild(s);
+      })();
     </script>
-    <script src="/assets/nagishli/nagishli.js?v=2.3" charset="utf-8" defer></script>
-    <script defer src="https://app.fastbots.ai/embed.js" data-bot-id="clyslg82q0003r9bcs6rag4ws" async></script>
-</body>
 
+    <!-- Pendo-->
+    <script>
+      (function (apiKey) {
+        (function (p, e, n, d, o) {
+          var v, w, x, y, z;
+          o = p[d] = p[d] || {};
+          o._q = o._q || [];
+          v = ["initialize", "identify", "updateOptions", "pageLoad", "track"];
+          for (w = 0, x = v.length; w < x; ++w)
+            (function (m) {
+              o[m] =
+                o[m] ||
+                function () {
+                  o._q[m === v[0] ? "unshift" : "push"](
+                    [m].concat([].slice.call(arguments, 0))
+                  );
+                };
+            })(v[w]);
+          y = e.createElement(n);
+          y.async = !0;
+          y.src =
+            "https://cdn.eu.pendo.io/agent/static/" + apiKey + "/pendo.js";
+          z = e.getElementsByTagName(n)[0];
+          z.parentNode.insertBefore(y, z);
+        })(window, document, "script", "pendo");
+      })("67c2f887-549d-4ce5-594b-6c312ef61241");
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-P4G4K7J");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="utf-8" />
+    <title>Mentor-Cards</title>
+    <base href="/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/assets/Favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      #tidio-chat-iframe {
+        bottom: -10px !important;
+        right: 0px !important;
+      }
+      @media only screen and (max-width: 980px) {
+        #tidio-chat-iframe {
+          bottom: -10px !important;
+        }
+      }
+    </style>
+  </head>
+  <script
+    src="//code.tidio.co/idxvhpoglurio07tjavmtmsmf0pest2s.js"
+    async
+  ></script>
+
+  <body class="mat-typography">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-P4G4K7J"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- PayPal -->
+    <script
+      src="https://www.paypal.com/sdk/js?client-id=ATexiLPVEXofyqzisU9MT2NxlUum2Xvup6KZwHUskUj99T4snVB-Ny3xd1L851PMV48BhUI-JFXnNzkt&vault=true&intent=subscription"
+      data-sdk-integration-source="button-factory"
+    ></script>
+    <app-root></app-root>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      nl_pos = "bl";
+      nl_compact = "1";
+      nl_accordion = "1";
+      nl_contact = "n:Dudi Neeman|p:0549139859|u:support+d:mentor-cards.com";
+    </script>
+    <script
+      src="/assets/nagishli/nagishli.js?v=2.3"
+      charset="utf-8"
+      defer
+    ></script>
+    <script
+      defer
+      src="https://app.fastbots.ai/embed.js"
+      data-bot-id="clyslg82q0003r9bcs6rag4ws"
+      async
+    ></script>
+  </body>
 </html>

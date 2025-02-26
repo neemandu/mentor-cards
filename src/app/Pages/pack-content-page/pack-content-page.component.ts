@@ -111,6 +111,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   containerPadding: number = 2;
   overFlowCardContainerHeight: number = 340;
   showFooterContainer: boolean = true;
+  isGuideBookWarningHidden: boolean = false;
 
   categoryFlipped: boolean = false;
   categoryBaseArray = [];
@@ -202,6 +203,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.dropdownInput.nativeElement.value = '';
     this.isDropdownOpen = false;
     this.showInputFieldInDropDown = false;
+  }
+
+  hideGuideBookWarning() {
+    this.isGuideBookWarningHidden = true;
   }
 
   // Method to save the edited option
