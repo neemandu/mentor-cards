@@ -186,9 +186,6 @@
                 ]
               ]
             },
-            "receiptsUrl": {
-              "Ref": "receiptsUrl"
-            },
             "smooveApiKey": {
               "Fn::Join": [
                 "",
@@ -210,6 +207,9 @@
                   "smooveApiKey"
                 ]
               ]
+            },
+            "receiptsUrl": {
+              "Ref": "receiptsUrl"
             }
           }
         },

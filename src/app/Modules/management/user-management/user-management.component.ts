@@ -55,14 +55,20 @@ export class UserManagementComponent implements OnInit {
 
   getUsers(): void {
     this.overlaySpinnerService.changeOverlaySpinner(true);
-    this.apiService.ListUsers().then((res) => {
-      console.log(res)
-      this.userData = res.items;  
+    let nextToken = null;
+    let items = [];
+    const fetchAllUsers = async () => {
+      do {
+        console.log('fetching users ...');
+        const users = await this.apiService.ListUsers(null, 100, nextToken);
+        items = items.concat(users.items);
+        nextToken = users.nextToken;
+      } while (nextToken);
+      this.userData = items;
       this.dataSource = new MatTableDataSource(this.userData);
       this.dataSource.sort = this.sort;
       this.overlaySpinnerService.changeOverlaySpinner(false);
         
-        console.log(this.userData, 'here');
       (error) => {
         this.overlaySpinnerService.changeOverlaySpinner(false);
         console.log(
@@ -70,8 +76,15 @@ export class UserManagementComponent implements OnInit {
           error
         );
       }
+    }
 
+    fetchAllUsers().catch((reject) => {
+      console.log('reject');
+      console.log(reject);
+      this.overlaySpinnerService.changeOverlaySpinner(false);
+      
     });
+   
   }
 
   editItem(id: string) {

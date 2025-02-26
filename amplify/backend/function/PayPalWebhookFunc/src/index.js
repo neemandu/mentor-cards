@@ -94,12 +94,16 @@ const post = (defaultOptions, path, payload) => new Promise((resolve, reject) =>
         let buffer = "";
         res.on('data', chunk => buffer += chunk);
         res.on('end', () => {
-            var buf = "";
-            if(buffer != ""){
-                buf = JSON.parse(buffer);
+            try {
+                if (buffer.trim().startsWith('{') || buffer.trim().startsWith('[')) {
+                    resolve(JSON.parse(buffer)); 
+                } else {
+                    console.log("Response is not JSON:", buffer);
+                }
+            } catch (error) {
+                console.log("JSON Parse Error:", error, "Response:", buffer);
             }
-            resolve(buf);
-            });
+        });
     });
     req.on('error', e => reject(e.message));
     req.write(payload);
@@ -393,16 +397,14 @@ async function updateMorning(email, amount, description, fullName) {
   
     
     const options = {
-        hostname: 'https://hook.eu2.make.com/pumke91fl3jogn61o79v45568qsqpno2',
+        hostname: 'hook.eu2.make.com', // Only domain, no protocol or path
         port: 443,
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     };
   
-    var msg = await post(options, '', data);
+    const path = '/b96cw2cegqaiffmq2w62xbl7lxzgacdl';
+    var msg = await post(options, path, data);
     console.log('updateMorning via make.com sending POST start');
     console.log(msg);
     console.log("updateMorning: sending POST End");
