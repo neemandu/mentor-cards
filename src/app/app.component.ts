@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.chatBtnSub = this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd && this.chatButton) {
+        console.log(' this one is working ');
         if (val.url.includes('pack-view')) {
           this.chatButton.style.display = 'none';
           this.chatButton.style.pointerEvents = 'none';
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit {
         }
       }
       if (val instanceof NavigationEnd && this.aiChatButton) {
+        console.log(this.aiChatButton, 'is present');
         if (
           val.url.includes('all-packs-page') ||
           val.url.includes('home-page')

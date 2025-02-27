@@ -180,10 +180,22 @@
 
           <!-- isReadingGuidebookAMust  -->
           <div
-            *ngIf="pack?.isReadingGuidebookAMust"
-            class="text-red text-center d-flex justify-center"
+            *ngIf="
+              pack?.isReadingGuidebookAMust &&
+              userData &&
+              !isGuideBookWarningHidden
+            "
+            class="text-red text-center d-flex justify-center items-center gap-2"
           >
-            <p>מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו</p>
+            <p class="m-0">
+              מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו
+            </p>
+            <button
+              class="bg-transparent border-0 cursor-pointer mdhidden"
+              (click)="hideGuideBookWarning()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
           </div>
 
           <!-- Drop-down  -->

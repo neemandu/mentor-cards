@@ -2055,3 +2055,13 @@ img {
     display: block;
   }
 }
+
+.mdhidden {
+  display: block !important;
+}
+
+@media (min-width: 768px) {
+  .mdhidden {
+    display: none !important;
+  }
+}
