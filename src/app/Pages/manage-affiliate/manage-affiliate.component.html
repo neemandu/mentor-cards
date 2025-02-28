@@ -71,7 +71,11 @@
       <div class="flex">
         <button
           mat-button
-          style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+          style="
+            min-width: 0px !important;
+            padding: 0px !important;
+            margin-left: 5px !important;
+          "
           (click)="deleteItem(element.id)"
           matTooltip="מחק"
           [matTooltipClass]="{ 'tooltip-class': true }"
@@ -81,7 +85,11 @@
         </button>
         <button
           mat-button
-          style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+          style="
+            min-width: 0px !important;
+            padding: 0px !important;
+            margin-left: 5px !important;
+          "
           (click)="editItem(element.id)"
           matTooltip="ערוך"
           [matTooltipClass]="{ 'tooltip-class': true }"
@@ -95,9 +103,13 @@
         </button>
         <button
           mat-button
-          style="min-width: 0px !important;padding:0px !important; margin-left: 5px !important"
+          style="
+            min-width: 0px !important;
+            padding: 0px !important;
+            margin-left: 5px !important;
+          "
           (click)="clickWithdraws(element.id)"
-          matTooltip="צפה במשיכות"
+          matTooltip="צפה במשיכות"
           [matTooltipClass]="{ 'tooltip-class': true }"
         >
           <mat-icon> monetization_on</mat-icon>
@@ -131,13 +143,13 @@
   </ng-container>
 
   <ng-container matColumnDef="phoneNumber">
-    <mat-header-cell *matHeaderCellDef>
+    <mat-header-cell *matHeaderCellDef class="widder-width-cell">
       <div style="font-size: 1.1rem; text-align: center">מספר טלפון</div>
     </mat-header-cell>
     <mat-cell
       style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
-      style="text-align: end"
+      class="widder-width-cell"
     >
       {{ element.phoneNumber }}
     </mat-cell>
@@ -157,25 +169,26 @@
   </ng-container>
 
   <ng-container matColumnDef="paymentDetails">
-    <mat-header-cell *matHeaderCellDef class="wide-cell">
+    <mat-header-cell *matHeaderCellDef class="small-width-cell">
       <div style="font-size: 1.1rem; text-align: center">פרטי תשלום</div>
     </mat-header-cell>
     <mat-cell
       style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
-      class="wide-cell"
+      class="small-width-cell"
     >
       {{ element.paymentDetails }}
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="commissionPercentage">
-    <mat-header-cell *matHeaderCellDef>
+    <mat-header-cell *matHeaderCellDef class="small-width-cell">
       <div style="font-size: 1.1rem; text-align: center">אחוז העמלה</div>
     </mat-header-cell>
     <mat-cell
       style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
+      class="small-width-cell"
     >
       {{ element.commissionPercentage }}
     </mat-cell>
@@ -188,17 +201,18 @@
     <mat-cell
       style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
-    >{{ element.createdAt | date:"dd/MM/yyyy" }}
+      >{{ element.createdAt | date : "dd/MM/yyyy" }}
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="status">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="small-width-cell">
       <div style="font-size: 1.1rem; text-align: center">האם פעיל?</div>
     </mat-header-cell>
     <mat-cell
       style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
+      class="small-width-cell"
     >
       {{ element.status }}
     </mat-cell>
