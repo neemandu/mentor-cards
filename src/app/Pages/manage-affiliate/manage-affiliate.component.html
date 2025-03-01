@@ -226,7 +226,7 @@
       style="font-size: 0.9rem; text-align: center"
       *matCellDef="let element"
     >
-      {{ element.balance }}
+      {{ element.balance | number : "1.2-2" }}
     </mat-cell>
   </ng-container>
 
