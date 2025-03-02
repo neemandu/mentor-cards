@@ -30,6 +30,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AiChatComponent } from './ai-chat/ai-chat.component';
 import { TranslateService } from '@ngx-translate/core';
 import { element } from 'protractor';
+import { Platform } from '@angular/cdk/platform';
 
 interface CategoryPack {
   category: string;
@@ -88,7 +89,7 @@ export class AllPacksPageNewComponent implements OnInit {
   categoriesToShow: number = 5;
   isPageLoaded: boolean = false;
   isfavSelected: boolean = false;
- readingBookCategoryArray
+  readingBookCategoryArray;
   //Filters
   showCategoryLine: boolean = true;
   freeTextFilterSelected: string = '';
@@ -176,7 +177,8 @@ export class AllPacksPageNewComponent implements OnInit {
   ];
   selectedCardFilter: string = '';
   @ViewChild('settingsMenuTrigger') settingsMenuTrigger: MatMenuTrigger;
-  @ViewChildren('widgetsContent', { read: ElementRef }) public widgetsContent: QueryList<ElementRef>;
+  @ViewChildren('widgetsContent', { read: ElementRef })
+  public widgetsContent: QueryList<ElementRef>;
 
   @ViewChild('packScrollContainer1') packScrollContainer1: ElementRef;
   @ViewChild('packScrollContainer2') packScrollContainer2: ElementRef;
@@ -198,7 +200,8 @@ export class AllPacksPageNewComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private platform: Platform
   ) {
     this.overlaySpinnerService.changeOverlaySpinner(true);
 
@@ -206,7 +209,6 @@ export class AllPacksPageNewComponent implements OnInit {
     this.checkScreenSize();
   }
   private scrollSpeed = 5;
-
 
   // @HostListener('mousemove', ['$event'])
   // onMouseMove(event: MouseEvent, scrollContainer: HTMLElement): void {
@@ -278,14 +280,14 @@ export class AllPacksPageNewComponent implements OnInit {
   initializeFilteredOptions() {
     // Extract names
     console.log(this.allPacks, 'All packs');
-    this.readingBookCategoryArray  = [];
-    this.allPacks.forEach(element => {
-      if ( element.isReadingGuidebookAMust == true ) {
+    this.readingBookCategoryArray = [];
+    this.allPacks.forEach((element) => {
+      if (element.isReadingGuidebookAMust == true) {
         this.readingBookCategoryArray.push(element);
       }
-    })
+    });
 
-    console.log("Is reading book Must", this.readingBookCategoryArray );
+    console.log('Is reading book Must', this.readingBookCategoryArray);
 
     const allTags = this.allPacks.reduce((acc, pack) => {
       return acc.concat(pack.tags);
@@ -350,7 +352,7 @@ export class AllPacksPageNewComponent implements OnInit {
 
     // Change the language fo the translation
     this.translateService.use(lang);
-    
+
     this.cardsService.allPacksReadyEmmiter.subscribe(() => {
       this.setAllPacksData();
       this.setAllCategoryPacksToShow();
@@ -455,30 +457,28 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   updateScrollState(index: number, element: HTMLElement): void {
-
     if (!element) return;
-  
+
     const isRTL = getComputedStyle(element).direction === 'rtl';
     const normalizedScrollLeft = isRTL
       ? element.scrollWidth - element.clientWidth + element.scrollLeft
       : element.scrollLeft;
     const buffer = 1;
-  
+
     this.canScrollLeft[index] = normalizedScrollLeft > buffer;
     this.canScrollRight[index] =
       normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;
   }
 
   updateScrollStateBooks(): void {
-    
     const element = this.packScrollContainer5.nativeElement;
-  
+
     const isRTL = getComputedStyle(element).direction === 'rtl';
     const normalizedScrollLeft = isRTL
       ? element.scrollWidth - element.clientWidth + element.scrollLeft
       : element.scrollLeft;
     const buffer = 1;
-  
+
     this.canScrollLeftBooks = normalizedScrollLeft > buffer;
     this.canScrollRightBooks =
       normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;
@@ -504,15 +504,19 @@ export class AllPacksPageNewComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.platform.ANDROID || this.platform.IOS) {
+      this.isMobileScreen = true;
+    }
+
     // const observer = setInterval(() => {
     //   for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
     //     // Check if the container is available
     //     if (this[`packScrollContainer${containerNumber}`]?.nativeElement) {
     //       console.log(`Inside the onInit for container ${containerNumber}`);
-          
+
     //       // Clear the interval after containers are found
     //       clearInterval(observer);
-    
+
     //       // Update the scroll buttons for all containers
     //       this.updateScrollButtons(containerNumber);
     //     }
@@ -521,7 +525,7 @@ export class AllPacksPageNewComponent implements OnInit {
 
     const observers = setInterval(() => {
       if (this.widgetsContent && this.widgetsContent.toArray().length > 0) {
-        console.log("Inside the onInit");
+        console.log('Inside the onInit');
         clearInterval(observers);
         // Call the scroll button updates for each container dynamically
         this.updateScrollButtonswidgets();
@@ -550,7 +554,7 @@ export class AllPacksPageNewComponent implements OnInit {
     });
 
     if (this.userAuthService.isLoggedIn) {
-      this.userIsLoggedIn = true;   
+      this.userIsLoggedIn = true;
       this.userData = this.userAuthService.userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
@@ -559,13 +563,12 @@ export class AllPacksPageNewComponent implements OnInit {
       this.getAllPacks(true);
       this.Subscription.add(
         this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
-          this.userIsLoggedIn = true;  
+          this.userIsLoggedIn = true;
           this.getAllPacks(false);
           this.userData = userData;
 
           this.allFavorites = this.userAuthService.favorites;
-          this.setAllFavPacksToShow(); 
-
+          this.setAllFavPacksToShow();
         })
       );
     }
@@ -601,7 +604,6 @@ export class AllPacksPageNewComponent implements OnInit {
     this.translateService.onLangChange.subscribe((event) => {
       this.handleLanguageChange(event.lang);
     });
-
   }
 
   initializeLanguage(): void {
@@ -639,39 +641,54 @@ export class AllPacksPageNewComponent implements OnInit {
    */
   getAllPacks(useCache: bool): void {
     console.log('useCache: ' + useCache);
-    this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
+    this.overlaySpinnerService.changeOverlaySpinner(true, 'packs');
     if (useCache) {
       if (this.cardsService.allPacks) {
-        this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
-        if(this.cardsService.isLoggedIn){          
-          this.overlaySpinnerService.changeOverlaySpinner(true, "userDataLogin");
-        }
-        else{
-          this.overlaySpinnerService.changeOverlaySpinner(true, "userDataNotLogin");
+        this.overlaySpinnerService.changeOverlaySpinner(true, 'packs');
+        if (this.cardsService.isLoggedIn) {
+          this.overlaySpinnerService.changeOverlaySpinner(
+            true,
+            'userDataLogin'
+          );
+        } else {
+          this.overlaySpinnerService.changeOverlaySpinner(
+            true,
+            'userDataNotLogin'
+          );
         }
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         this.overlaySpinnerService.changeOverlaySpinner(false);
-        if(this.cardsService.isLoggedIn){          
-          this.overlaySpinnerService.changeOverlaySpinner(false, "userDataLogin");
-        }
-        else{
-          this.overlaySpinnerService.changeOverlaySpinner(false, "userDataNotLogin");
+        if (this.cardsService.isLoggedIn) {
+          this.overlaySpinnerService.changeOverlaySpinner(
+            false,
+            'userDataLogin'
+          );
+        } else {
+          this.overlaySpinnerService.changeOverlaySpinner(
+            false,
+            'userDataNotLogin'
+          );
         }
         this.isLoading = false;
-        this.packsAreLoaded = true;   
-        this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
+        this.packsAreLoaded = true;
+        this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
         // this.sortPacks();
       } else {
         this.cardsService.allPacksReadyEmmiter.subscribe(() => {
-          this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
-          if(this.cardsService.isLoggedIn){          
-            this.overlaySpinnerService.changeOverlaySpinner(true, "userDataLogin");
-          }
-          else{
-            this.overlaySpinnerService.changeOverlaySpinner(true, "userDataNotLogin");
+          this.overlaySpinnerService.changeOverlaySpinner(true, 'packs');
+          if (this.cardsService.isLoggedIn) {
+            this.overlaySpinnerService.changeOverlaySpinner(
+              true,
+              'userDataLogin'
+            );
+          } else {
+            this.overlaySpinnerService.changeOverlaySpinner(
+              true,
+              'userDataNotLogin'
+            );
           }
           this.setAllPacksData();
           this.setAllCategoryPacksToShow();
@@ -679,35 +696,37 @@ export class AllPacksPageNewComponent implements OnInit {
           this.initializeFilteredOptions();
           this.overlaySpinnerService.changeOverlaySpinner(false);
           this.isLoading = false;
-          this.packsAreLoaded = true; 
-          this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
-          if(this.cardsService.isLoggedIn){          
-            this.overlaySpinnerService.changeOverlaySpinner(false, "userDataLogin");
-          }
-          else{
-            this.overlaySpinnerService.changeOverlaySpinner(false, "userDataNotLogin");
+          this.packsAreLoaded = true;
+          this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
+          if (this.cardsService.isLoggedIn) {
+            this.overlaySpinnerService.changeOverlaySpinner(
+              false,
+              'userDataLogin'
+            );
+          } else {
+            this.overlaySpinnerService.changeOverlaySpinner(
+              false,
+              'userDataNotLogin'
+            );
           }
         });
         this.cardsService.getAllPacks();
       }
     } else {
       this.cardsService.allPacksReadyEmmiter.subscribe(() => {
-        
-        this.overlaySpinnerService.changeOverlaySpinner(true, "packs");
+        this.overlaySpinnerService.changeOverlaySpinner(true, 'packs');
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
         //this.overlaySpinnerService.changeOverlaySpinner(false);
         this.isLoading = false;
-        this.overlaySpinnerService.changeOverlaySpinner(false, "packs");
-        this.packsAreLoaded = true;   
+        this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
+        this.packsAreLoaded = true;
       });
       console.log('cardsService.getAllPacks');
       this.cardsService.getAllPacks();
-
     }
-    
   }
 
   setAllPacksData(): void {
@@ -742,20 +761,20 @@ export class AllPacksPageNewComponent implements OnInit {
         if (packs.length != 0) return { category: category, packs: packs };
       });
 
-      const observer = setInterval(() => {
-        for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
-          // Check if the container is available
-          if (this[`packScrollContainer${containerNumber}`]?.nativeElement) {
-            console.log(`Inside the onInit for container ${containerNumber}`);
-            
-            // Clear the interval after containers are found
-            clearInterval(observer);
-      
-            // Update the scroll buttons for all containers
-            this.updateScrollButtons(containerNumber);
-          }
+    const observer = setInterval(() => {
+      for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
+        // Check if the container is available
+        if (this[`packScrollContainer${containerNumber}`]?.nativeElement) {
+          console.log(`Inside the onInit for container ${containerNumber}`);
+
+          // Clear the interval after containers are found
+          clearInterval(observer);
+
+          // Update the scroll buttons for all containers
+          this.updateScrollButtons(containerNumber);
         }
-      }, 100);
+      }
+    }, 100);
   }
 
   // @HostListener('document:click', ['$event'])
@@ -960,7 +979,7 @@ export class AllPacksPageNewComponent implements OnInit {
     element.scrollBy({ left: -500, behavior: 'smooth' }); // Adjust scroll amount as needed
     setTimeout(() => this.updateScrollState(index, element), 300); // Re-check state after scrolling
   }
-  
+
   // Update the scroll buttons visibility for each container
   private updateScrollButtonswidgets(): void {
     this.widgetsContent.toArray().forEach((element, i) => {
@@ -970,13 +989,14 @@ export class AllPacksPageNewComponent implements OnInit {
         ? container.scrollWidth - container.clientWidth + container.scrollLeft
         : container.scrollLeft;
       const buffer = 1;
-  
+
       // Dynamically update the scroll buttons visibility
       this.canScrollLeft[i] = normalizedScrollLeft > buffer;
-      this.canScrollRight[i] = normalizedScrollLeft < container.scrollWidth - container.clientWidth - buffer;
+      this.canScrollRight[i] =
+        normalizedScrollLeft <
+        container.scrollWidth - container.clientWidth - buffer;
     });
   }
-
 
   // scrollLeftWithRef(containerNumber:number) {
   //   switch (containerNumber) {
@@ -996,11 +1016,11 @@ export class AllPacksPageNewComponent implements OnInit {
   //             case 5:
   //               this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 600), behavior: 'smooth' });
   //               break;
-    
+
   //     default:
   //       break;
   //   }
-    
+
   // }
 
   // scrollRightWithRef(containerNumber:Number) {
@@ -1021,14 +1041,15 @@ export class AllPacksPageNewComponent implements OnInit {
   //             case 5:
   //               this.packScrollContainer5?.nativeElement.scrollTo({ left: (this.packScrollContainer5?.nativeElement.scrollLeft - 600), behavior: 'smooth' });
   //               break;
-    
+
   //     default:
   //       break;
   //   }
   // }
 
-
-  scrollStates: { [key: number]: { canScrollLeft: boolean; canScrollRight: boolean } } = {
+  scrollStates: {
+    [key: number]: { canScrollLeft: boolean; canScrollRight: boolean };
+  } = {
     1: { canScrollLeft: false, canScrollRight: false },
     2: { canScrollLeft: false, canScrollRight: false },
     3: { canScrollLeft: false, canScrollRight: false },
@@ -1037,7 +1058,8 @@ export class AllPacksPageNewComponent implements OnInit {
   };
 
   scrollLeftWithRef(containerNumber: number) {
-    const container = this[`packScrollContainer${containerNumber}`]?.nativeElement;
+    const container =
+      this[`packScrollContainer${containerNumber}`]?.nativeElement;
     if (!container) return;
     const isRTL = getComputedStyle(container).direction === 'rtl';
     const scrollAmount = isRTL
@@ -1050,7 +1072,8 @@ export class AllPacksPageNewComponent implements OnInit {
     setTimeout(() => this.updateScrollButtons(containerNumber), 300);
   }
   scrollRightWithRef(containerNumber: number) {
-    const container = this[`packScrollContainer${containerNumber}`]?.nativeElement;
+    const container =
+      this[`packScrollContainer${containerNumber}`]?.nativeElement;
     if (!container) return;
     const isRTL = getComputedStyle(container).direction === 'rtl';
     const scrollAmount = isRTL
@@ -1063,18 +1086,19 @@ export class AllPacksPageNewComponent implements OnInit {
     setTimeout(() => this.updateScrollButtons(containerNumber), 300);
   }
 
-  
   private updateScrollButtons(containerNumber: number): void {
-    const element = this[`packScrollContainer${containerNumber}`]?.nativeElement;
+    const element =
+      this[`packScrollContainer${containerNumber}`]?.nativeElement;
     if (!element) return;
-  
+
     const isRTL = getComputedStyle(element).direction === 'rtl';
     const normalizedScrollLeft = isRTL
       ? element.scrollWidth - element.clientWidth + element.scrollLeft
       : element.scrollLeft;
     const buffer = 1;
-  
-    this.scrollStates[containerNumber].canScrollLeft = normalizedScrollLeft > buffer;
+
+    this.scrollStates[containerNumber].canScrollLeft =
+      normalizedScrollLeft > buffer;
     this.scrollStates[containerNumber].canScrollRight =
       normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;
   }
@@ -1087,6 +1111,4 @@ export class AllPacksPageNewComponent implements OnInit {
   //   console.log(this.canScrollLeft, 'Left' );
   //   console.log(this.canScrollRight, 'Right' );
   // }
-
-
 }
