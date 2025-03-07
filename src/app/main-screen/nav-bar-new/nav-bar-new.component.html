@@ -1,24 +1,14 @@
-<section
-  class="flex justify-between mx-4 nav-height sm:justify-between items-center mt-2 sm:mt-0"
->
+<section class="flex justify-between mx-4 nav-height sm:justify-between items-center mt-2 sm:mt-0">
   <div class="flex h-10">
     <div dir="rtl" class="flex items-center justify-between">
       <button class="sm:hidden block" [matMenuTriggerFor]="allButtons">
         <mat-icon class="menu-icon">menu</mat-icon>
       </button>
-      <button
-        *ngIf="!loggedIn"
-        class="hidden sm:flex items-center"
-        (click)="signInSignUp()"
-      >
+      <button *ngIf="!loggedIn" class="hidden sm:flex items-center" (click)="signInSignUp()">
         <img src="/assets/New/nav-bar/user.svg" alt="user image" />
         <span class="text-[#e67c73] ms-2"> כניסה </span>
       </button>
-      <button
-        *ngIf="loggedIn"
-        [matMenuTriggerFor]="userMenu"
-        class="hidden sm:flex"
-      >
+      <button *ngIf="loggedIn" [matMenuTriggerFor]="userMenu" class="hidden sm:flex">
         <img src="/assets/New/nav-bar/user-loged.svg" alt="user image" />
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
@@ -28,97 +18,53 @@
         <mat-label>{{
           "pages.all-packs-page.new-search-placeholder" | translate
         }}</mat-label>
-        <input
-          #filterText
-          matInput
-          type="text"
-          autocomplete="off"
-          [(ngModel)]="freeTextFilterSelected"
-          (keyup)="filterOptions()"
-          (keydown)="handleKeyDown($event)"
-        />
-        <div
-          *ngIf="!stopGenerateOptions && filteredOptions.length > 0"
-          class="autocomplete-options absolute z-40 bg-white"
-          id="autocomplete-options"
-        >
-          <mat-option
-            *ngFor="let option of filteredOptions; let i = index"
-            (keydown)="handleKeyDown($event)"
-            #autocompleteOptions
-            (click)="selectOption(option)"
-          >
+        <input #filterText matInput type="text" autocomplete="off" [(ngModel)]="freeTextFilterSelected"
+          (keyup)="filterOptions()" (keydown)="handleKeyDown($event)" />
+        <div *ngIf="!stopGenerateOptions && filteredOptions.length > 0"
+          class="autocomplete-options absolute z-40 bg-white" id="autocomplete-options">
+          <mat-option *ngFor="let option of filteredOptions; let i = index" (keydown)="handleKeyDown($event)"
+            #autocompleteOptions (click)="selectOption(option)">
             {{ option }}
           </mat-option>
         </div>
       </mat-form-field>
-      <img
-        src="/assets/New/nav-bar/search.svg"
-        alt="user image"
-        class="h-5 ms-2"
-      />
+      <img src="/assets/New/nav-bar/search.svg" alt="user image" class="h-5 ms-2" />
     </div>
   </div>
   <div class="hidden sm:flex align-middle items-center">
-    <div
-      *ngFor="let item of navBarItems"
-      class="flex items-center align-middle"
-    >
-      <button
-        *ngIf="item.name === 'pages.nav.navbar.digital-courses'"
-        (click)="openNewTab()"
-        class="text-black hover:cursor-pointer mx-4"
-        (mouseenter)="hover(item)"
-        (mouseleave)="leave(item)"
-        (touchstart)="hover(item)"
-        (touchend)="leave(item)"
-      >
+    <div *ngFor="let item of navBarItems" class="flex items-center align-middle">
+      <a href="https://mentor-cards.vp4.me/my-courses" target="_blank"
+        *ngIf="item.name === 'pages.nav.navbar.digital-courses'" class="text-reset mx-4 text-decoration-none"
+        (mouseenter)="hover(item)" (mouseleave)="leave(item)" (touchstart)="hover(item)" (touchend)="leave(item)">
         <div style="font-weight: 700; font-size: 13px">
           {{ item.name | translate }}
         </div>
-        <div
-          class="underline-on-hover"
-          [class.hidden]="!item.hovering && !isActive(item)"
-        >
+        <div class="underline-on-hover" [class.hidden]="!item.hovering && !isActive(item)">
           &nbsp;
         </div>
-        <div
-          class="no-underline-on-hover"
-          [class.hidden]="item.hovering && isActive(item)"
-        >
+        <div class="no-underline-on-hover" [class.hidden]="item.hovering && isActive(item)">
           &nbsp;
         </div>
-      </button>
-      <button
+      </a>
+      <a 
+        [routerLink]="item.route"
+        [fragment]="item.fragment ? item.fragment : null"
         *ngIf="item.name != 'pages.nav.navbar.digital-courses'"
-        class="text-black hover:cursor-pointer mx-2"
-        (click)="navigateTo(item.route)"
-        (mouseenter)="hover(item)"
-        (mouseleave)="leave(item)"
-        (touchstart)="hover(item)"
-        (touchend)="leave(item)"
-      >
+        class="text-reset text-decoration-none mx-2 block" 
+        (mouseenter)="hover(item)" (mouseleave)="leave(item)"
+        (touchstart)="hover(item)" (touchend)="leave(item)">
         <div style="font-weight: 700; font-size: 13px">
           {{ item.name | translate }}
         </div>
-        <div
-          class="underline-on-hover"
-          [class.hidden]="!item.hovering && !isActive(item)"
-        >
+        <div class="underline-on-hover" [class.hidden]="!item.hovering && !isActive(item)">
           &nbsp;
         </div>
-        <div
-          class="no-underline-on-hover"
-          [class.hidden]="item.hovering && isActive(item)"
-        >
+        <div class="no-underline-on-hover" [class.hidden]="item.hovering && isActive(item)">
           &nbsp;
         </div>
-      </button>
+      </a>
     </div>
-    <button
-      *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
-      [matMenuTriggerFor]="managementMenu"
-    >
+    <button *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'" [matMenuTriggerFor]="managementMenu">
       <div style="font-weight: 700; font-size: 13px">
         {{ "pages.nav.navbar.admin" | translate }}
 
@@ -129,20 +75,10 @@
   <div class="display-none">
     <app-select-language></app-select-language>
   </div>
-  <div
-    class="lg:me-40"
-    mat-button
-    matRipple
-    appGradientRipple
-    (click)="navigate('/home-page')"
-  >
-    <div class="w-32">
-      <img
-        id="logo-name"
-        src="/assets/New/nav-bar/logo.png"
-        alt="Mentor-Cards full logo"
-      />
-    </div>
+  <div class="lg:me-40" mat-button matRipple appGradientRipple>
+    <a routerLink="/home-page" class="w-32 flex">
+      <img id="logo-name" src="/assets/New/nav-bar/logo.png" alt="Mentor-Cards full logo" />
+    </a>
   </div>
   <div></div>
 </section>
@@ -153,11 +89,8 @@
     <div class="line"></div>
     <ul id="news-list">
       <li class="news-list-item" *ngFor="let n of news">
-        <span class="news-list-data"
-          >{{ n.message }}
-          <span class="news-list-date"
-            >({{ n.createdAt | date : "dd.MM.yyyy" }})</span
-          >
+        <span class="news-list-data">{{ n.message }}
+          <span class="news-list-date">({{ n.createdAt | date : "dd.MM.yyyy" }})</span>
         </span>
       </li>
       <li class="news-list-item" *ngIf="news?.length == 0">
@@ -170,60 +103,52 @@
 <mat-menu #allButtons="matMenu">
   <div style="width: 48vw">
     <div class="flex justify-center mt-2">
-      <button
-        *ngIf="!loggedIn"
-        class="flex items-center w-24"
-        (click)="signInSignUp()"
-      >
+      <button *ngIf="!loggedIn" class="flex items-center w-24" (click)="signInSignUp()">
         <img src="/assets/New/nav-bar/user.svg" alt="user image" />
         <span class="text-[#e67c73] ms-2"> כניסה </span>
       </button>
-      <button
-        id="user-drop-down"
-        *ngIf="loggedIn"
-        class="btn navbar-btn"
-        mat-menu-item
-        [matMenuTriggerFor]="userMenu"
-      >
+      <button id="user-drop-down" *ngIf="loggedIn" class="btn navbar-btn" mat-menu-item [matMenuTriggerFor]="userMenu">
         <img src="/assets/New/nav-bar/user-loged.svg" alt="user image" />
       </button>
     </div>
 
     <div class="align-middle items-center">
-      <div
-        *ngFor="let item of navBarItems; let i = index"
-        class="flex justify-center items-center align-middle border-[#7986cb]"
-        ngClass="{{
+      <div *ngFor="let item of navBarItems; let i = index"
+        class="flex justify-center items-center align-middle border-[#7986cb]" ngClass="{{
           i === navBarItems.length - 1 ? 'border-b-0' : 'border-b-1'
-        }}"
-      >
-        <button
-          *ngIf="item.name === 'pages.nav.navbar.digital-courses'"
-          (click)="openNewTab()"
-          class="text-black hover:cursor-pointer mx-2 mt-2"
-        >
+        }}">
+        <a 
+          *ngIf="item.name === 'pages.nav.navbar.digital-courses'" 
+          [href]="'https://mentor-cards.vp4.me/my-courses'"
+          target="_blank" 
+          class="text-reset text-decoration-none mx-2 mt-2">
           <div style="font-weight: 700; font-size: 13px; margin-bottom: 5px">
             {{ item.name | translate }}
           </div>
-        </button>
-        <button
-          *ngIf="item.name != 'pages.nav.navbar.digital-courses'"
-          (click)="navigateTo(item.route)"
-          routerLinkActive="active"
-          class="text-black hover:cursor-pointer mx-2 mt-2"
-        >
+        </a>
+        <a 
+          *ngIf="item.name === 'pages.nav.navbar.contact-us'"
+          [routerLink]="item.route" 
+          [fragment]="item.fragment"
+          [href]="item.route + item.fragment" 
+          class="text-reset text-decoration-none mx-2 mt-2">
           <div style="font-weight: 700; font-size: 13px; margin-bottom: 5px">
             {{ item.name | translate }}
           </div>
-        </button>
+        </a>
+        <a 
+          *ngIf="item.name !== 'pages.nav.navbar.digital-courses' && item.name !== 'pages.nav.navbar.contact-us'" 
+          [routerLink]="item.route"
+          class="text-reset text-decoration-none mx-2 mt-2">
+          <div style="font-weight: 700; font-size: 13px; margin-bottom: 5px">
+            {{ item.name | translate }}
+          </div>
+        </a>
       </div>
     </div>
 
-    <button
-      mat-menu-item
-      *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
-      [matMenuTriggerFor]="managementMenu"
-    >
+    <button mat-menu-item *ngIf="loggedIn && userAttributes?.groupRole === 'SUPER_USER'"
+      [matMenuTriggerFor]="managementMenu">
       <div style="font-weight: 700; font-size: 13px">
         {{ "pages.nav.navbar.admin" | translate }}
       </div>
@@ -238,130 +163,69 @@
 </mat-menu>
 
 <mat-menu #userMenu="matMenu">
-  <button mat-menu-item *ngIf="loggedIn" (click)="navigate('/user-page')">
+  <a class="text-reset text-decoration-none" [routerLink]="'/user-page'" mat-menu-item *ngIf="loggedIn">
     {{ "pages.nav.user-menu.user-details" | translate }}
-  </button>
-  <button
-    mat-menu-item
-    *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'"
-    (click)="navigate('/price-page')"
-  >
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/price-page'" mat-menu-item *ngIf="loggedIn && userAttributes?.status === 'NOPLAN'">
     {{ "pages.nav.user-menu.register-plan" | translate }}
-  </button>
+  </a>
 
-  <button
-    mat-menu-item
-    *ngIf="loggedIn && userAttributes?.myAffiliate"
-    (click)="navigate('/affiliate-dashboard')"
-  >
+  <a class="text-reset text-decoration-none" [routerLink]="'/affiliate-dashboard'" mat-menu-item *ngIf="loggedIn && userAttributes?.myAffiliate">
     {{ "pages.nav.user-menu.affiliate" | translate }}
-  </button>
-  <button
-    mat-menu-item
-    type="button"
-    *ngIf="
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/group-management'" mat-menu-item *ngIf="
       loggedIn &&
       userAttributes?.groupId &&
       (userAttributes?.groupRole === 'ADMIN' ||
         userAttributes?.groupRole === 'SUPER_USER')
-    "
-    (click)="navigate('/group-management')"
-  >
+    ">
     {{ "pages.nav.user-menu.group-management" | translate }}
-  </button>
+  </a>
   <button mat-menu-item *ngIf="loggedIn" (click)="logout()">
     {{ "pages.nav.user-menu.logout" | translate }}
   </button>
 </mat-menu>
 
 <mat-menu #tourMenu="matMenu" backdropClass="mat-menu">
-  <button mat-menu-item (click)="navigate('/all-packs-page')" *ngIf="showTour">
-    <div>{{ "pages.nav.tour-menu.tour-main-page" | translate }}</div>
-  </button>
-  <button mat-menu-item (click)="navigate('/pack-view/50')" *ngIf="showTour">
-    <div>{{ "pages.nav.tour-menu.how-to-work-with-cards" | translate }}</div>
-  </button>
+  <a class="text-reset text-decoration-none" [routerLink]="'/all-packs-page'" mat-menu-item *ngIf="showTour">
+    {{ "pages.nav.tour-menu.tour-main-page" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/pack-view/50'" mat-menu-item *ngIf="showTour">
+    {{ "pages.nav.tour-menu.how-to-work-with-cards" | translate }}
+  </a>
 </mat-menu>
 
 <mat-menu #managementMenu="matMenu" backdropClass="mat-menu">
-  <button
-    mat-menu-item
-    (click)="navigate('/dashboard')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>{{ "pages.nav.management-menu.dashboard" | translate }}</div>
-  </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/news-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>{{ "pages.nav.news-updates" | translate }}</div>
-  </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/guide-book-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>
-      {{ "pages.nav.management-menu.guidebook-management" | translate }}
-    </div>
-  </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/coupon-codes-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>
-      {{ "pages.nav.management-menu.coupon-codes-management" | translate }}
-    </div>
-  </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/orgs-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>{{ "pages.nav.management-menu.orgs-management" | translate }}</div>
-  </button>
+  <a class="text-reset text-decoration-none" [routerLink]="'/dashboard'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.dashboard" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/news-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.news-updates" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/guide-book-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.guidebook-management" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/coupon-codes-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.coupon-codes-management" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/orgs-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.orgs-management" | translate }}
+  </a>
 
-  <button
-    mat-menu-item
-    (click)="navigate('/payment-programs-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>
-      {{ "pages.nav.management-menu.payment-programs-management" | translate }}
-    </div>
-  </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/receipts-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>{{ "pages.nav.management-menu.receipts-management" | translate }}</div>
-  </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/affiliate-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>
-      {{ "pages.nav.management-menu.affiliate-management" | translate }}
-    </div>
-  </button>
+  <a class="text-reset text-decoration-none" [routerLink]="'/payment-programs-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.payment-programs-management" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/receipts-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.receipts-management" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/affiliate-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.affiliate-management" | translate }}
+  </a>
 
-  <button
-    mat-menu-item
-    (click)="navigate('/packs-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>{{ "pages.nav.management-menu.packs-management" | translate }}</div>
-  </button>
-  <button
-    mat-menu-item
-    (click)="navigate('/user-management')"
-    *ngIf="userAttributes?.groupRole === 'SUPER_USER'"
-  >
-    <div>ניהול משתמשים</div>
-  </button>
+  <a class="text-reset text-decoration-none" [routerLink]="'/packs-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    {{ "pages.nav.management-menu.packs-management" | translate }}
+  </a>
+  <a class="text-reset text-decoration-none" [routerLink]="'/user-management'" mat-menu-item *ngIf="userAttributes?.groupRole === 'SUPER_USER'">
+    ניהול משתמשים
+  </a>
 </mat-menu>

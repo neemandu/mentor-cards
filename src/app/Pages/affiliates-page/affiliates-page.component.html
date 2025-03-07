@@ -5,9 +5,9 @@
       <p class="body">
         {{ "pages.affiliates-page.top-container-body" | translate }}
       </p>
-      <button class="button" (click)="scrollToFormContainer()">
+      <a href="/affiliates-page#form" class="button text-decoration-none">
         {{ "pages.affiliates-page.top-container-button" | translate }}
-      </button>
+      </a>
     </div>
   </div>
   <div class="card-container">
@@ -92,7 +92,7 @@
       </p>
     </div>
   </div>
-  <div #formContainer class="form-container">
+  <div #formContainer id="form" class="form-container">
     <div class="form-header">
       <div class="title">
         {{ "pages.affiliates-page.form.title" | translate }}
