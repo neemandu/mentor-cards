@@ -349,19 +349,19 @@ function getinvoiceRunningId() {
     });
   }
 
-async function updateMorning(email, amount, description, fullName) {
+async function updateMorning(email, amount, description, fullName, datePart) {
 
 
     //var bearerToken = await getMorningParam();
 
 
     const now = new Date();
-    const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    //const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   
     const data = JSON.stringify({
         "description": description,
         "type": amount,
-        "date": formattedDate,
+        "date": datePart,
         "lang": "he",
         "currency": "ILS",
         "vatType": 0,
@@ -386,7 +386,7 @@ async function updateMorning(email, amount, description, fullName) {
         ],
         "payment": [
           {
-            "date": formattedDate,
+            "date": datePart,
             "type": 5,
             "price": amount,
             "currency": "ILS",
@@ -418,6 +418,8 @@ exports.handler = async (event) => {
         console.log(event);
         var paypal_body = JSON.parse(event.body);
         var event_type = paypal_body.event_type;
+        var create_time = paypal_body.create_time;
+        var datePart = create_time.split('T')[0];
         var transaction_id = "";
         var id = "";
         var user_id_mydb = "";
@@ -509,7 +511,7 @@ exports.handler = async (event) => {
                         }
                         await createInvoiceRecord(user, name, amount, subscription, extraDesc, invoiceRunningId);
                         await updateEmailList(user.email, amount, extraDesc, invoiceRunningId, "");
-                        await updateMorning(user.email, amount, extraDesc, user.fullName);
+                        await updateMorning(user.email, amount, extraDesc, user.fullName, datePart);
                     }
                 }
             }
