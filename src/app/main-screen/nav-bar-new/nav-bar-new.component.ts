@@ -67,7 +67,8 @@ export class NavBarNewComponent implements OnInit {
     },
     {
       name: 'pages.nav.navbar.contact-us',
-      route: '/home-page#contact-us-section',
+      route: '/home-page',
+      fragment: 'contact-us-section',
       placeholder: 'Contact Us',
     },
   ].map((item) => ({ ...item, hovering: false }));
