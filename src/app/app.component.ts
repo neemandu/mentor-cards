@@ -25,12 +25,17 @@ export class AppComponent implements OnInit {
   showLogin: boolean = false;
   chatBtnSub: Subscription;
   chatButton: any;
+  aiChatButton: any;
 
-  constructor(private router: Router, public langDirectionService: LangDirectionService) {}
+  constructor(
+    private router: Router,
+    public langDirectionService: LangDirectionService
+  ) {}
 
   ngOnInit() {
     this.chatBtnSub = this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd && this.chatButton) {
+        console.log(' this one is working ');
         if (val.url.includes('pack-view')) {
           this.chatButton.style.display = 'none';
           this.chatButton.style.pointerEvents = 'none';
@@ -39,9 +44,23 @@ export class AppComponent implements OnInit {
           this.chatButton.style.pointerEvents = 'auto';
         }
       }
+      if (val instanceof NavigationEnd && this.aiChatButton) {
+        console.log(this.aiChatButton, 'is present');
+        if (
+          val.url.includes('all-packs-page') ||
+          val.url.includes('home-page')
+        ) {
+          this.aiChatButton.style.display = 'block';
+          this.aiChatButton.style.pointerEvents = 'auto';
+        } else {
+          this.aiChatButton.style.display = 'none';
+          this.aiChatButton.style.pointerEvents = 'none';
+        }
+      }
     });
     setTimeout(() => {
       this.chatButton = document.getElementById('tidio-chat');
+      this.aiChatButton = document.getElementById('chat-widget-push-to-talk');
     }, 1500);
   }
 

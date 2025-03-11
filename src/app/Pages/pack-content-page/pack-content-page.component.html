@@ -55,7 +55,10 @@
             <h3 class="font-bold mb-0 text-start">{{ pack.ownerName }}</h3>
 
             <div class="flex gap-4 c-gap">
-              <div class="justify-center flex flex-col items-center">
+              <div
+                class="justify-center flex flex-col items-center"
+                *ngIf="userData"
+              >
                 <button
                   class="w-10 h-8 flex items-center justify-center py-2"
                   (click)="openGuideBook()"
@@ -177,10 +180,22 @@
 
           <!-- isReadingGuidebookAMust  -->
           <div
-            *ngIf="pack?.isReadingGuidebookAMust"
-            class="text-red text-center d-flex justify-center"
+            *ngIf="
+              pack?.isReadingGuidebookAMust &&
+              userData &&
+              !isGuideBookWarningHidden
+            "
+            class="text-red text-center d-flex justify-center items-center gap-2"
           >
-            <p>מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו</p>
+            <p class="m-0">
+              מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו
+            </p>
+            <button
+              class="bg-transparent border-0 cursor-pointer mdhidden"
+              (click)="hideGuideBookWarning()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
           </div>
 
           <!-- Drop-down  -->
@@ -194,7 +209,10 @@
                 class="selected-option text-xl"
                 >{{ defaultOption }}</span
               >
-              <span *ngIf="showInputFieldInDropDown">
+              <span
+                *ngIf="showInputFieldInDropDown"
+                class="flex gap-2 items-center"
+              >
                 <input
                   #dropdownInput
                   type="text"
@@ -205,10 +223,24 @@
                   "
                   (keydown.enter)="updateOptionArray()"
                 />
+                <button
+                  (click)="updateOptionArray()"
+                  class="sm:hidden"
+                  style="
+                    font-size: 20px !important;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                  "
+                >
+                  שמור
+                </button>
               </span>
               <span class="dropdown-icon">▼</span>
             </div>
-            <div class="dropdown-options" [class.show]="isDropdownOpen">
+            <div
+              class="dropdown-options"
+              [class.show]="isDropdownOpen && !isEditing"
+            >
               <div
                 [contentEditable]="isEditing && isEditingOption === index"
                 class="dropdown-option"
@@ -277,6 +309,7 @@
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 btn-1 btn-height-35 rounded-full"
                 (click)="createCommomLink()"
                 matTooltip="הזמנת משתתפים נוספים לערכה"
+                *ngIf="userData"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"

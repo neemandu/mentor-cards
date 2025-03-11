@@ -117,13 +117,15 @@ export class PackPreviewComponent implements OnInit {
     }
   }
 
-  redirect(): void {
+  redirect(): string {
     this.mixpanel.track('RedirectToExternalCreator', {
       'Pack ID': this.data.pack.id,
       'Pack name': this.data.pack?.name,
       Link: this.data.pack?.about.link,
     });
-    window.open(this.data.pack.about.link, '_blank');
+
+    return this.data.pack.about.link
+    // window.open(this.data.pack.about.link, '_blank');
   }
 
   openAboutDialog(): void {
