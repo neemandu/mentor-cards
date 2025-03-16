@@ -184,13 +184,12 @@
       <mat-card-content class="orgs"> {{ "pages.price-page.orgsMatCard.content" | translate }}  
       </mat-card-content>
       <mat-card-actions>
-        <button
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="navigate('/contact-us')"
+        <a
+          routerLink="/contact-us"
+          class="popular-purchase-btn purchase-btn flex justify-center text-decoration-none"
         >
         {{ "pages.price-page.orgsMatCard.contactBtn" | translate }}  
-        </button>
+        </a>
       </mat-card-actions>
     </mat-card>
   </div>      

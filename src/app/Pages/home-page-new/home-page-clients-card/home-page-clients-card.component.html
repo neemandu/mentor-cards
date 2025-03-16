@@ -69,15 +69,14 @@
         }}
       </div>
       <div class="flex justify-center">
-        <button
-          (click)="navigateTo('/affiliates-page')"
+        <a [routerLink]="'/affiliates-page'"
           class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold client-button text-lg mt-8 mb-24 text-center"
         >
           {{
             "pages.home-page.sections.clients-card.content.button.text"
               | translate
           }}
-        </button>
+        </a>
       </div>
     </div>
   </div>

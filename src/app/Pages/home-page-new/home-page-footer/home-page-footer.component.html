@@ -6,157 +6,160 @@
     <div class="col-span-2 sm:block hidden">
       <ul class="text-right space-y-4">
         <li>
-          <button (click)="navigateTo('/all-packs-page')">
+          <a class="text-reset text-decoration-none" [routerLink]="'/all-packs-page'">
             {{
               "pages.home-page.sections.footer.content.links.0.items.0.text"
                 | translate
             }}
-          </button>
+          </a>
         </li>
         <li>
-          <button (click)="openNewTab()">
+          <a class="text-reset text-decoration-none" href="https://mentor-cards.vp4.me/my-courses" target="_blank">
             {{
               "pages.home-page.sections.footer.content.links.0.items.1.text"
                 | translate
             }}
-          </button>
+          </a>
         </li>
         <li>
-          <button (click)="navigateTo('/price-page')">
+          <a class="text-reset text-decoration-none" [routerLink]="'/price-page'">
             {{
               "pages.home-page.sections.footer.content.links.0.items.2.text"
                 | translate
             }} 
-          </button>
+          </a>
         </li>
         <li>
-          <button (click)="navigateTo('/guide-page')">
+          <a class="text-reset text-decoration-none" [routerLink]="'/guide-page'">
             {{
               "pages.home-page.sections.footer.content.links.0.items.3.text"
                 | translate
             }} 
-          </button>
+          </a>
         </li>
       </ul>
     </div>
     <div class="col-span-2 sm:block hidden">
       <ul class="text-right space-y-4">
         <li>
-          <button (click)="navigateTo('/services')">
+          <a class="text-reset text-decoration-none" [routerLink]="'/services'">
             {{
               "pages.home-page.sections.footer.content.links.1.items.0.text"
                 | translate
             }}
-          </button>
+          </a>
         </li>
         <li>
-          <button (click)="navigateTo('/about-page')">
+          <a class="text-reset text-decoration-none" [routerLink]="'/about-page'">
             {{
               "pages.home-page.sections.footer.content.links.1.items.1.text"
                 | translate
             }}
-          </button>
+          </a>
         </li>
         <li>
-          <button (click)="navigateTo('/affiliates-page')">
+          <a class="text-reset text-decoration-none" [routerLink]="'/affiliates-page'">
             {{
               "pages.home-page.sections.footer.content.links.1.items.2.text"
                 | translate
             }}
-          </button>
+          </a>
         </li>
         <li>
-          <button (click)="navigateTo('/home-page#contact-us-section')">
+          <a class="text-reset text-decoration-none" [routerLink]="'/home-page'" [fragment]="'contact-us-section'">
             {{
               "pages.home-page.sections.footer.content.links.1.items.3.text"
                 | translate
             }}
-          </button>
+          </a>
         </li>
       </ul>
     </div>
     <div class="flex justify-between sm:hidden mt-8">
       <div>
         <ul class="text-center space-y-4">
-          <li (click)="openSiteRulesModal()">
+          <li class="cursor-pointer" (click)="openSiteRulesModal()">
             {{
               "pages.home-page.sections.footer.content.mobile-links.0.text"
                 | translate
             }}
           </li>
           <li>
-            <button (click)="navigateTo('/all-packs-page')">
+            <a class="text-reset text-decoration-none" [routerLink]="'/all-packs-page'">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.1.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
           <li>
-            <button (click)="openNewTab()">
+            <a class="text-reset text-decoration-none" href="https://mentor-cards.vp4.me/my-courses" target="_blank">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.2.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
           <li>
-            <button (click)="navigateTo('/price-page')">
+            <a class="text-reset text-decoration-none" [routerLink]="'/price-page'">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.3.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
           <li>
-            <button (click)="navigateTo('/guide-page')">
+            <a class="text-reset text-decoration-none" [routerLink]="'/guide-page'">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.4.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
         </ul>
       </div>
       <div>
         <ul class="text-center space-y-4">
-          <li (click)="navigateTo('/services')">
-            {{
+          <li>
+            <a class="text-reset text-decoration-none" [routerLink]="'/services'">
+              {{
               "pages.home-page.sections.footer.content.mobile-links.5.text"
                 | translate
             }}
+            </a>
+            
           </li>
           <li>
-            <button (click)="navigateTo('/about-page')">
+            <a class="text-reset text-decoration-none" [routerLink]="'/about-page'">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.6.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
           <li>
-            <button (click)="navigateTo('/affiliates-page')">
+            <a class="text-reset text-decoration-none" [routerLink]="'/affiliates-page'">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.7.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
           <li>
-            <button (click)="navigateTo('/about-page')">
+            <a class="text-reset text-decoration-none" [routerLink]="'/about-page'">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.8.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
           <li>
-            <button (click)="navigateTo('/home-page#contact-us-section')">
+            <a class="text-reset text-decoration-none" [routerLink]="'/home-page'" [fragment]="'contact-us-section'">
               {{
                 "pages.home-page.sections.footer.content.mobile-links.9.text"
                   | translate
               }}
-            </button>
+            </a>
           </li>
         </ul>
       </div>
@@ -171,15 +174,17 @@
         </button>
       </div>
       <div class="hidden sm:flex justify-start gap-4">
-        <button (click)="navigateTo('/home-page#contact-us-section')">
+        <a href="/home-page#contact-us-section" class="text-reset text-decoration-none" [routerLink]="'/home-page'" [fragment]="'contact-us-section'">
           {{
             "pages.home-page.sections.footer.content.mobile-links.9.text"
               | translate
           }}
-        </button>
+        </a>
       </div>
       <div class="sm:text-right text-right">
-        {{ "pages.home-page.sections.footer.content.contact" | translate }}
+        <a class="text-reset text-decoration-none" [href]="'mailto:' + ('pages.home-page.sections.footer.content.contact' | translate)">
+          {{ "pages.home-page.sections.footer.content.contact" | translate }}
+        </a>
       </div>
       <div class="sm:text-right text-right">
         {{ "pages.home-page.sections.footer.content.follow-us" | translate }}
