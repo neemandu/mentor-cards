@@ -986,44 +986,44 @@
       >
         <button
           class="btn btn-light"
-          [disabled]="randomCardIndex == cards[0]?.cardsImages.length - 1"
+          [disabled]="randomCardIndex == randomSelectedCard?.cardsImages.length - 1"
           (click)="changeRandomCard(1)"
         >
           <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
         </button>
 
         <div
-          *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && flipped"
+          *ngIf="randomSelectedCard.cardsImages[randomCardIndex].backImgUrl && flipped"
         >
           <!-- Front Side -->
           <div>
             <img
               style="height: 69vh"
-              [src]="cards[0]?.cardsImages[randomCardIndex].frontImgUrl"
+              [src]="randomSelectedCard?.cardsImages[randomCardIndex].frontImgUrl"
               alt="Card Front"
             />
           </div>
         </div>
 
         <div
-          *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && !flipped"
+          *ngIf="randomSelectedCard.cardsImages[randomCardIndex].backImgUrl && !flipped"
         >
           <!-- Front Side -->
           <div>
             <img
               style="height: 69vh"
-              [src]="cards[0]?.cardsImages[randomCardIndex].backImgUrl"
+              [src]="randomSelectedCard?.cardsImages[randomCardIndex].backImgUrl"
               alt="Card Front"
             />
           </div>
         </div>
 
-        <div *ngIf="!cards[0].cardsImages[randomCardIndex].backImgUrl">
+        <div *ngIf="!randomSelectedCard.cardsImages[randomCardIndex].backImgUrl">
           <!-- Back Side -->
           <div>
             <img
               style="height: 69vh"
-              [src]="cards[0]?.cardsImages[randomCardIndex].frontImgUrl"
+              [src]="randomSelectedCard?.cardsImages[randomCardIndex].frontImgUrl"
               alt="Card Front"
             />
           </div>
