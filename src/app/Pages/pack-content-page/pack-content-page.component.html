@@ -977,21 +977,33 @@
       <div
         class="random-content"
         style="
-          height: 80%;
           display: flex;
-          height: 80%;
+          height: 90%;
           flex-direction: column;
           align-items: center;
         "
       >
         <button
-          class="btn btn-light"
-          [disabled]="randomCardIndex == randomSelectedCard?.cardsImages.length - 1"
-          (click)="changeRandomCard(1)"
+        class="justify-center flex flex-col items-center border-2 border-[#e67c73] bg-[#ffe0d8] w-28 btn-2 btn-height-35 rounded-full"
+        id="randomCard"
+        type="button"
+        [disabled]="showEditPack"
+        (click)="shuffle()"
+        matTooltip="שליפה אקראית של קלף מהערכה"
         >
-          <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
+          <div
+        class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+      >
+        <img
+          src="/assets/New/pack-view/info-icon.svg"
+          alt=""
+          width="15"
+          height="15"
+          class="img-info"
+        />
+          </div>
+            <div class="text-xs mb-1 text-xxs">קלף אקראי</div>
         </button>
-
         <div
           *ngIf="randomSelectedCard.cardsImages[randomCardIndex].backImgUrl && flipped"
         >
@@ -1028,13 +1040,23 @@
             />
           </div>
         </div>
-        <button
+        <div class="selected-cards-modal-btns">
+          <button
+          class="btn btn-light"
+          [disabled]="randomCardIndex == randomSelectedCard?.cardsImages.length - 1"
+          (click)="changeRandomCard(1)"
+        >
+          <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
+        </button>
+
+          <button
           class="btn btn-light"
           [disabled]="randomCardIndex == 0"
           (click)="changeRandomCard(-1)"
         >
           <mat-icon class="btn-icon mat-icon-arrow">chevron_left</mat-icon>
         </button>
+        </div>
       </div>
     </div>
   </div>

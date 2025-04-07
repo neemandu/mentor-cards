@@ -752,6 +752,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   shuffle(): void {
+    const previousRandomIndex = this.randomCardIndex;
+
     this.randomSelectedCard = null;
     
     if (!this.selectedCategory) {  
@@ -761,13 +763,19 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.randomSelectedCard = {...this.selectedCategory} as Card;
     }
 
+    this.randomCardIndex =  Math.floor(Math.random() * this.randomSelectedCard.cardsImages.length);
+
+    if (previousRandomIndex === this.randomCardIndex && this.randomSelectedCard.cardsImages.length > 1) {
+      this.shuffle();
+      return;
+    }
+    
     this.mixpanelService.track('ActionButtonClicked', {
       Action: 'Shuffle',
       'Pack id': this.id,
       'Pack name': this.pack?.name,
     });
     this.selectedCards = [];
-    
     this.randomSelectedCard.cardsImages.sort(() => Math.random() - 0.5);
   }
 
@@ -887,10 +895,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       'Pack name': this.pack?.name,
     });
     if (this.showRandomCards) {
+      document.documentElement.style.overflow='auto';
       this.showRandomCards = false;
     } else {
       this.shuffle();
       this.sleep(500).then(() => {
+        document.documentElement.style.overflow='hidden';
         this.showRandomCards = true;
       });
     }
@@ -1029,6 +1039,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    document.documentElement.style.overflow='auto';
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }
