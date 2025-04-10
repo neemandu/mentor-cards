@@ -8,6 +8,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core';
 import {
   MatDialog,
@@ -49,8 +50,9 @@ import { confirmationDialogueComponent } from './confirmation-dialog';
   templateUrl: './pack-content-page.component.html',
   styleUrls: ['./pack-content-page.component.css'],
 })
-export class PackContentPageComponent implements OnInit, OnDestroy {
+export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dropdownInput') dropdownInput: ElementRef;
+  @ViewChild('packWrapper') packWrapper?: ElementRef<HTMLDivElement>;
 
   Subscription: Subscription = new Subscription();
   id: any;
@@ -143,7 +145,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     private platform: Platform,
     private http: HttpClient,
     public langDirectionService: LangDirectionService,
-    private mixpanel: MixpanelService
+    private mixpanel: MixpanelService,
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -282,6 +284,25 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.getFilteredCategories()?.forEach((_, index) => {
       this.categoryOpenStates[index] = true;
     });
+    
+  }
+  ngAfterViewInit() {
+    if (this.packWrapper) {
+      this.calculateCard();
+    }
+    
+  }
+
+  calculateCard() {
+    const ratioDifference = this.imageHeight - this.imageWidth;
+    const widthContent = this.packWrapper.nativeElement.clientWidth;
+    const paddingX = 40;
+    const calculateRowCount = Math.floor(widthContent / ( this.imageWidth + paddingX));
+    const widthCard = ((widthContent / calculateRowCount) - paddingX);
+
+    this.imageWidth = widthCard;
+    this.imageHeight = widthCard + ratioDifference;
+    this.aspectRatio = this.imageWidth / this.imageHeight;
   }
 
   loadPack(): void {
@@ -507,8 +528,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   flippedCardwidth: number = 0;
 
   zoomIn() {
-    this.cardWidth += 1;
-    this.cardHeight += 1.5; // Adjust proportionally
+    console.log(this.packWrapper.nativeElement, 'zoom');
+    
     this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
     this.imageHeight = this.imageWidth / this.aspectRatio;
     this.containerPadding += 10;
@@ -516,8 +537,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.containerPadding += 10;
   }
   zoomOut() {
-    this.cardWidth -= 1;
-    this.cardHeight -= 1.5;
+
     this.imageWidth -= 16;
     this.imageHeight = this.imageWidth / this.aspectRatio;
     this.containerPadding += -10;
