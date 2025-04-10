@@ -442,75 +442,83 @@
       </ul>
     </aside>
 
-    <div *ngIf="pack?.cards?.length > 1">
-      <div
-        class="category-row mb-2 d-flex flex-column"
-        *ngFor="let category of getFilteredCategories(); let i = index"
-      >
-        <div class="category-container">
-          <p class="position-relative category-name">
-            {{ category.categoryName }}&nbsp;
-            <span
-              *ngIf="!categoryOpenStates[i]"
-              class="position-absolute left-to-category"
-              (click)="toggle(i, true)"
-            >
-              <img src="./../../../assets/icons/icondropopen.png" alt="" />
-            </span>
-            <span
-              *ngIf="categoryOpenStates[i]"
-              class="position-absolute left-to-category"
-              (click)="toggle(i, false)"
-            >
-              <img src="./../../../assets/icons/icondropclose.png" alt="" />
-            </span>
-          </p>
-        </div>
-
-        <div class="d-flex overflow-cards" *ngIf="categoryOpenStates[i]">
-          <div
-            class="pack-content-page-cards"
-            [class.scroll-hidden]="!flipped"
-            [class.scroll-visible]="flipped"
-            *ngFor="let card of category.cardsImages; let i = index"
-          >
-            <button
-              *ngIf="showEditPack"
-              mat-icon-button
-              class="remove-btn"
-              (click)="removeCard(i)"
-            >
-              <mat-icon class="remove-icon">visibility_off</mat-icon>
-            </button>
-            <app-card
-              [imageWidth]="imageWidth"
-              [imageHeight]="imageHeight"
-              [flippedCardwidth]="flippedCardwidth"
-              [flipBoxInnerInCat]="true"
-              [ngClass]="{
-                clickable: true,
-                scrollableCardOrd: !flipped && !isDoubleSided,
-                scrollableCard: flipped || isDoubleSided
-              }"
-              [cardContent]="card"
-              [mobileView]="true"
-              [selected]="selectedCards.includes(card)"
-              [index]="i + 1"
-              [flipped]="
-                flipped || (!multipileChecked && selectedCards.includes(card))
-              "
-              (click)="cardSelected(card, i + 1, false, category.categoryName)"
-            >
-              <!-- TODO -->
-            </app-card>
+    <ng-container *ngIf="pack?.cards?.length > 1">
+      <div>
+        <div
+          class="category-row mb-2 d-flex flex-column"
+          *ngFor="let category of getFilteredCategories(); let i = index"
+        >
+          <div class="category-container">
+            <p class="position-relative category-name">
+              {{ category.categoryName }}&nbsp;
+              <span
+                *ngIf="!categoryOpenStates[i]"
+                class="position-absolute left-to-category"
+                (click)="toggle(i, true)"
+              >
+                <img src="./../../../assets/icons/icondropopen.png" alt="" />
+              </span>
+              <span
+                *ngIf="categoryOpenStates[i]"
+                class="position-absolute left-to-category"
+                (click)="toggle(i, false)"
+              >
+                <img src="./../../../assets/icons/icondropclose.png" alt="" />
+              </span>
+            </p>
+          </div>
+          <div #packWrapper>
+            <div style="row-gap: 20px; padding-bottom: 20px;" class="d-flex flex-row justify-content-center flex-wrap" *ngIf="categoryOpenStates[i]" [transition-group]="'flip-list'">
+              <div
+                class="pack-content-page-cards"
+                [class.scroll-hidden]="!flipped"
+                [class.scroll-visible]="flipped"
+                *ngFor="let card of category.cardsImages; let i = index"
+                [ngClass]="{
+                  'd-flex flex-column shuffle': true,
+                  'shuffle-item': !showEditPack
+                }"
+                transition-group-item
+              >
+                <button
+                  *ngIf="showEditPack"
+                  mat-icon-button
+                  class="remove-btn"
+                  (click)="removeCard(i)"
+                >
+                  <mat-icon class="remove-icon">visibility_off</mat-icon>
+                </button>
+                <app-card
+                  [imageWidth]="imageWidth"
+                  [imageHeight]="imageHeight"
+                  [flippedCardwidth]="flippedCardwidth"
+                  [flipBoxInnerInCat]="true"
+                  [ngClass]="{
+                    clickable: true,
+                    scrollableCardOrd: !flipped && !isDoubleSided,
+                    scrollableCard: flipped || isDoubleSided
+                  }"
+                  [cardContent]="card"
+                  [mobileView]="true"
+                  [selected]="selectedCards.includes(card)"
+                  [index]="i + 1"
+                  [flipped]="
+                    flipped || (!multipileChecked && selectedCards.includes(card))
+                  "
+                  (click)="cardSelected(card, i + 1, false, category.categoryName)"
+                >
+                  <!-- TODO -->
+                </app-card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 
   <ng-container *ngIf="cards.length == 1">
-    <div class="d-flex flex-column align-items-center cards-container">
+    <div #packWrapper class="d-flex flex-column align-items-center cards-container">
       <div
         *ngIf="pack && !showEditPack"
         [transition-group]="'flip-list'"
@@ -527,8 +535,8 @@
           <app-card
             [ngStyle]="
               !flipped
-                ? { width: cardWidth + 'rem', height: cardHeight + 'rem' }
-                : {}
+                ? {}
+                : {margin: '10px 0'}
             "
             [imageWidth]="imageWidth"
             [imageHeight]="imageHeight"

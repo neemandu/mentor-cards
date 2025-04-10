@@ -9,14 +9,10 @@ h2 {
 }
 
 app-card {
-  margin: 10px 10px;
   width: 100%;
   transition: transform 0.3s ease, translate 1s ease-in;
 }
 
-app-card.card-width {
-  width: 10rem;
-}
 
 app-card:hover {
   transform: scale(1.03);
