@@ -467,49 +467,47 @@
               </span>
             </p>
           </div>
-          <div #packWrapper>
-            <div style="row-gap: 20px; padding-bottom: 20px;" class="d-flex flex-row justify-content-center flex-wrap" *ngIf="categoryOpenStates[i]" [transition-group]="'flip-list'">
-              <div
-                class="pack-content-page-cards"
-                [class.scroll-hidden]="!flipped"
-                [class.scroll-visible]="flipped"
-                *ngFor="let card of category.cardsImages; let i = index"
-                [ngClass]="{
-                  'd-flex flex-column shuffle': true,
-                  'shuffle-item': !showEditPack
-                }"
-                transition-group-item
+          <div style="row-gap: 20px; padding-bottom: 20px;" class="d-flex flex-row flex-wrap pack-content-page-wrapper" *ngIf="categoryOpenStates[i]" [transition-group]="'flip-list'">
+            <div
+              class="pack-content-page-cards"
+              [class.scroll-hidden]="!flipped"
+              [class.scroll-visible]="flipped"
+              *ngFor="let card of category.cardsImages; let i = index"
+              [ngClass]="{
+                'd-flex flex-column shuffle': true,
+                'shuffle-item': !showEditPack
+              }"
+              transition-group-item
+            >
+              <button
+                *ngIf="showEditPack"
+                mat-icon-button
+                class="remove-btn"
+                (click)="removeCard(i)"
               >
-                <button
-                  *ngIf="showEditPack"
-                  mat-icon-button
-                  class="remove-btn"
-                  (click)="removeCard(i)"
-                >
-                  <mat-icon class="remove-icon">visibility_off</mat-icon>
-                </button>
-                <app-card
-                  [imageWidth]="imageWidth"
-                  [imageHeight]="imageHeight"
-                  [flippedCardwidth]="flippedCardwidth"
-                  [flipBoxInnerInCat]="true"
-                  [ngClass]="{
-                    clickable: true,
-                    scrollableCardOrd: !flipped && !isDoubleSided,
-                    scrollableCard: flipped || isDoubleSided
-                  }"
-                  [cardContent]="card"
-                  [mobileView]="true"
-                  [selected]="selectedCards.includes(card)"
-                  [index]="i + 1"
-                  [flipped]="
-                    flipped || (!multipileChecked && selectedCards.includes(card))
-                  "
-                  (click)="cardSelected(card, i + 1, false, category.categoryName)"
-                >
-                  <!-- TODO -->
-                </app-card>
-              </div>
+                <mat-icon class="remove-icon">visibility_off</mat-icon>
+              </button>
+              <app-card
+                [imageWidth]="imageWidth"
+                [imageHeight]="imageHeight"
+                [flippedCardwidth]="flippedCardwidth"
+                [flipBoxInnerInCat]="true"
+                [ngClass]="{
+                  clickable: true,
+                  scrollableCardOrd: !flipped && !isDoubleSided,
+                  scrollableCard: flipped || isDoubleSided
+                }"
+                [cardContent]="card"
+                [mobileView]="true"
+                [selected]="selectedCards.includes(card)"
+                [index]="i + 1"
+                [flipped]="
+                  flipped || (!multipileChecked && selectedCards.includes(card))
+                "
+                (click)="cardSelected(card, i + 1, false, category.categoryName)"
+              >
+                <!-- TODO -->
+              </app-card>
             </div>
           </div>
         </div>
@@ -522,7 +520,7 @@
       <div
         *ngIf="pack && !showEditPack"
         [transition-group]="'flip-list'"
-        class="d-flex flex-row justify-content-center flex-wrap"
+        class="d-flex flex-row pack-content-page-wrapper flex-wrap"
       >
         <div
           *ngFor="let card of cardImages; let i = index"

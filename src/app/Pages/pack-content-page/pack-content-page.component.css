@@ -517,6 +517,10 @@ li span {
   border-bottom: 1px solid #e67c73;
 }
 
+.pack-content-page-wrapper {
+  justify-content: space-around;
+}
+
 .pack-content-page-cards {
   display: flex !important;
 }

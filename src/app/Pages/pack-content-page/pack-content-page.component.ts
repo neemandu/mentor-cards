@@ -50,9 +50,8 @@ import { confirmationDialogueComponent } from './confirmation-dialog';
   templateUrl: './pack-content-page.component.html',
   styleUrls: ['./pack-content-page.component.css'],
 })
-export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PackContentPageComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownInput') dropdownInput: ElementRef;
-  @ViewChild('packWrapper') packWrapper?: ElementRef<HTMLDivElement>;
 
   Subscription: Subscription = new Subscription();
   id: any;
@@ -286,24 +285,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     });
     
   }
-  ngAfterViewInit() {
-    if (this.packWrapper) {
-      this.calculateCard();
-    }
-    
-  }
-
-  calculateCard() {
-    const ratioDifference = this.imageHeight - this.imageWidth;
-    const widthContent = this.packWrapper.nativeElement.clientWidth;
-    const paddingX = 40;
-    const calculateRowCount = Math.floor(widthContent / ( this.imageWidth + paddingX));
-    const widthCard = ((widthContent / calculateRowCount) - paddingX);
-
-    this.imageWidth = widthCard;
-    this.imageHeight = widthCard + ratioDifference;
-    this.aspectRatio = this.imageWidth / this.imageHeight;
-  }
 
   loadPack(): void {
     this.isLoading = true;
@@ -527,9 +508,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   }
   flippedCardwidth: number = 0;
 
-  zoomIn() {
-    console.log(this.packWrapper.nativeElement, 'zoom');
-    
+  zoomIn() { 
+    this.cardWidth += 1;
+    this.cardHeight += 1.5; // Adjust proportionally
     this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
     this.imageHeight = this.imageWidth / this.aspectRatio;
     this.containerPadding += 10;
@@ -537,7 +518,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     this.containerPadding += 10;
   }
   zoomOut() {
-
+    this.cardWidth -= 1;
+    this.cardHeight -= 1.5;
     this.imageWidth -= 16;
     this.imageHeight = this.imageWidth / this.aspectRatio;
     this.containerPadding += -10;
