@@ -53,8 +53,8 @@ export class CardComponent implements OnInit {
           const newWidth = this.newHeight * aspectRatio
           // You can adjust or use the newWidth and newHeight as needed
           this.cardContent.frontNewDimensions = {
-            width: newWidth,
-            height: this.newHeight,
+            width: 160,
+            height: 219,
           };
         } else { 
         this.originalDimensions.width = img.width;
@@ -62,7 +62,7 @@ export class CardComponent implements OnInit {
 
         const aspectRatio =
           this.originalDimensions.width / this.originalDimensions.height;
-        const newWidth = this.newHeight * aspectRatio;    
+        const newWidth = this.newHeight * aspectRatio;
         // You can adjust or use the newWidth and newHeight as needed
         this.cardContent.frontNewDimensions = {
           width: newWidth,
