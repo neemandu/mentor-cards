@@ -48,6 +48,10 @@ img {
   backface-visibility: hidden;
 }
 
+.flip-box-back img {
+  object-fit: cover;
+}
+
 .fixed-img {
   width: 100%;
   height: 300px;
