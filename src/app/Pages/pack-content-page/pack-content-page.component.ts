@@ -8,6 +8,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core';
 import {
   MatDialog,
@@ -143,7 +144,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     private platform: Platform,
     private http: HttpClient,
     public langDirectionService: LangDirectionService,
-    private mixpanel: MixpanelService
+    private mixpanel: MixpanelService,
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -282,6 +283,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.getFilteredCategories()?.forEach((_, index) => {
       this.categoryOpenStates[index] = true;
     });
+    
   }
 
   loadPack(): void {
@@ -506,7 +508,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
   flippedCardwidth: number = 0;
 
-  zoomIn() {
+  zoomIn() { 
     this.cardWidth += 1;
     this.cardHeight += 1.5; // Adjust proportionally
     this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
@@ -752,15 +754,31 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   shuffle(): void {
+    const previousRandomIndex = this.randomCardIndex;
+
+    this.randomSelectedCard = null;
+    
+    if (!this.selectedCategory) {  
+      const randomIndexCard = Math.floor(Math.random() * this.pack.cards.length);
+      this.randomSelectedCard = {... this.pack.cards[randomIndexCard]} as Card;
+    }else {
+      this.randomSelectedCard = {...this.selectedCategory} as Card;
+    }
+
+    this.randomCardIndex =  Math.floor(Math.random() * this.randomSelectedCard.cardsImages.length);
+
+    if (previousRandomIndex === this.randomCardIndex && this.randomSelectedCard.cardsImages.length > 1) {
+      this.shuffle();
+      return;
+    }
+    
     this.mixpanelService.track('ActionButtonClicked', {
       Action: 'Shuffle',
       'Pack id': this.id,
       'Pack name': this.pack?.name,
     });
     this.selectedCards = [];
-    this.pack.cards.forEach((category) => {
-      category.cardsImages.sort(() => Math.random() - 0.5);
-    });
+    this.randomSelectedCard.cardsImages.sort(() => Math.random() - 0.5);
   }
 
   flip(): void {
@@ -879,10 +897,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       'Pack name': this.pack?.name,
     });
     if (this.showRandomCards) {
+      document.documentElement.style.overflow='auto';
       this.showRandomCards = false;
     } else {
       this.shuffle();
       this.sleep(500).then(() => {
+        document.documentElement.style.overflow='hidden';
         this.showRandomCards = true;
       });
     }
@@ -1021,6 +1041,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    document.documentElement.style.overflow='auto';
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }
