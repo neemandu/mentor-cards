@@ -860,12 +860,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   toggleChosenCardsModal(): void {
     if (!this.showSelectedCards) {
       if (
-        !this.portraitToLandscapeAlertShown &&
+        !globalThis.portraitToLandscapeAlertShown &&
         this.selectedCards.length > 1 &&
         window.matchMedia('(orientation: portrait)').matches
       ) {
-        this.portraitToLandscapeAlertShown = true;
+        globalThis.portraitToLandscapeAlertShown = true;
         this.openPortraitToLandscapeAlert();
+        return;
       }
       this.showSelectedCards = true;
       document.body.style.overflow = 'hidden';
