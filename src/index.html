@@ -155,10 +155,14 @@
       defer
     ></script>
     <script
-      defer
-      src="https://app.fastbots.ai/embed.js"
-      data-bot-id="clyslg82q0003r9bcs6rag4ws"
-      async
-    ></script>
+    >
+    setTimeout(() => {
+      const chatBot = document.createElement('script');
+      chatBot.defer = true;
+      chatBot.src="https://app.fastbots.ai/embed.js";
+      chatBot.setAttribute('data-bot-id', 'clyslg82q0003r9bcs6rag4ws')
+      document.body.appendChild(chatBot);
+    },5000);
+  </script>
   </body>
 </html>
