@@ -872,6 +872,7 @@
           font-weight: bold;
           text-align: center;
           margin-top: 20px;
+          line-height: 1.2;
         "
       >
         {{ selectedOption }}
@@ -1274,9 +1275,8 @@
                     "
                   />
                   <img
-                    [class.height-82]="card?.category"
                     class="img-box"
-                    *ngIf="!card?.backImgUrl"
+                    *ngIf="!card?.backImgUrl && !flipped"
                     alt="Mentor-cards unique cards design for the back of the card"
                     src="/assets/Mentor-Cards-Back.png"
                   />
@@ -1289,13 +1289,6 @@
                   />
                   <img
                     *ngIf="card.frontImgUrl && flipped"
-                    class="img-box"
-                    alt="Mentor-cards unique cards design for the frontImgUrl of the card"
-                    [src]="card?.frontImgUrl"
-                    data-src="{{ card?.frontImgUrl }}"
-                  />
-                  <img
-                    *ngIf="!card.backImgUrl"
                     class="img-box"
                     alt="Mentor-cards unique cards design for the frontImgUrl of the card"
                     [src]="card?.frontImgUrl"
