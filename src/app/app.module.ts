@@ -183,6 +183,7 @@ import { GradientRippleDirective } from './main-screen/nav-bar-new/gradient-ripp
 import { TopQuestionsCustomDialogComponent } from './Pages/pack-content-page/top-questions-dialog';
 import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-content-page-new.component';
 import { confirmationDialogueComponent } from './Pages/pack-content-page/confirmation-dialog';
+import { TelephoneInputComponent } from './Modules/telephone-input/telephone-input.component';
 
 @NgModule({
   declarations: [
@@ -271,7 +272,8 @@ import { confirmationDialogueComponent } from './Pages/pack-content-page/confirm
     AiChatComponent,
     GradientRippleDirective,
     PackContentPageNewComponent,
-    confirmationDialogueComponent
+    confirmationDialogueComponent,
+    TelephoneInputComponent
   ],
   imports: [
     BrowserModule,
