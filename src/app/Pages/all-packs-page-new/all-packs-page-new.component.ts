@@ -718,10 +718,11 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
-        this.initializeFilteredOptions();
-        //this.overlaySpinnerService.changeOverlaySpinner(false);
+        this.initializeFilteredOptions();          
+        if (this.allPacks[0].cards.length) {
+          this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
+        }
         this.isLoading = false;
-        this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
         this.packsAreLoaded = true;
       });
       console.log('cardsService.getAllPacks');
