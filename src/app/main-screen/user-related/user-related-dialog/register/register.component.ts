@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { telephoneInputValidator } from 'src/app/Modules/telephone-input/telephone-input.validator';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { AuthService, NewUser } from 'src/app/Services/auth.service';
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
     name: ['', Validators.required],
     // lastName: ['', Validators.required],
     // phone: ['', [Validators.required, Validators.pattern(/^05\d{1}?\d{7}$/)]],
-    phone: ['', [Validators.required, Validators.pattern(/^[+]{0,1}\d{10,15}/)]],
+    phone: ['', [Validators.required, telephoneInputValidator]],
     username: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
     usernameConfirm: ['', [Validators.required, Validators.email]],
@@ -72,14 +73,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onSignupSubmit(): void {
+    const phone = this.registerForm.get("phone").value;
     this.overlaySpinnerService.changeOverlaySpinner(true);
     // this.registerForm.disable();
     var user: NewUser = {
       "fullName": this.registerForm.get("name").value,
-      "phone": `+972${this.registerForm.get("phone").value}`,
+      "phone": `${phone.dialCode}${phone.number}`,
       "email": this.registerForm.get("username").value.toLowerCase(),
       "password": this.registerForm.get("password").value,
     }
+
     this.amplifyAuthService.signUp(user).then(data => {
       this.mixpanel.track("SignUp", {"Full name": user.fullName,
                                     "Phone": user.phone,

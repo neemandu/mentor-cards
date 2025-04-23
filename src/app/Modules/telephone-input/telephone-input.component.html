@@ -1,0 +1,16 @@
+<input
+      type="tel"
+      autocomplete="tel"
+      class="iti__tel-input"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      (change)="handleChange()"
+      inputMode="numeric"
+      #phoneInput
+      [value]="value"
+      [placeholder]="placeholder"
+      [maxLength]="maxLength"
+      [placeholder]="placeholder"
+      [required]="required"
+      [disabled]="disabled"
+    />

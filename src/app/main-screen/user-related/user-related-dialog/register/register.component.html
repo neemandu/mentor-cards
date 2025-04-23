@@ -8,11 +8,10 @@
           <mat-hint>{{ 'pages.register.form.name-hint' | translate }}</mat-hint>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>{{ 'pages.register.form.phone-label' | translate }}</mat-label>
-          <input autocomplete="tel" formControlName="phone" matInput inputmode="numeric">
+          <mat-label class="label-phone">{{ 'pages.register.form.phone-label' | translate }}</mat-label>
+          <app-telephone-input formControlName="phone" matInput></app-telephone-input>
           <mat-hint>{{ 'pages.register.form.phone-hint' | translate }}</mat-hint>
-          <mat-error *ngIf="registerForm.controls.phone.errors">{{ 'pages.register.form.phone-error' | translate }}
-          </mat-error>
+          <mat-error *ngIf="registerForm.controls.phone.errors">{{ 'pages.register.form.phone-error' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>{{ 'pages.register.form.email-label' | translate }}</mat-label>
