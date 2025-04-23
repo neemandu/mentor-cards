@@ -25,9 +25,6 @@ export class AppComponent implements OnInit {
   title = 'amplify-angular-auth';
   showLogin: boolean = false;
   chatBtnSub: Subscription;
-  chatButton: any;
-  aiChatButton: any;
-  aiChatWelcomeMessage: HTMLElement;
 
   constructor(
     private router: Router,
@@ -35,8 +32,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.router.url, 'this.router.url');
-    
     this.chatBtnSub = this.router.events.pipe(filter(route => route instanceof NavigationEnd)).subscribe((val) => {
       console.log(val, 'val');
       const chatButton = document.getElementById('tidio-chat');
