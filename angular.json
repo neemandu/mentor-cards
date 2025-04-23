@@ -30,8 +30,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/nagishli.js",
-              "src/nagishli",
               "src/nl-files"
             ],
             "styles": [
