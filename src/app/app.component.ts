@@ -8,6 +8,7 @@ import { OverlaySpinnerService } from './Services/overlay-spinner.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LangDirectionService } from './Services/LangDirectionService.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +25,6 @@ export class AppComponent implements OnInit {
   title = 'amplify-angular-auth';
   showLogin: boolean = false;
   chatBtnSub: Subscription;
-  chatButton: any;
-  aiChatButton: any;
 
   constructor(
     private router: Router,
@@ -33,35 +32,48 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.chatBtnSub = this.router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd && this.chatButton) {
+    this.chatBtnSub = this.router.events.pipe(filter(route => route instanceof NavigationEnd)).subscribe((val) => {
+      console.log(val, 'val');
+      const chatButton = document.getElementById('tidio-chat');
+      const aiChatButton = document.getElementById('chat-widget-push-to-talk');
+      const aiChatWelcomeMessage = document.getElementById('welcomeMessages')
+      
+      if (val instanceof NavigationEnd && chatButton ) {
         console.log(' this one is working ');
         if (val.url.includes('pack-view')) {
-          this.chatButton.style.display = 'none';
-          this.chatButton.style.pointerEvents = 'none';
+          chatButton.style.display = 'none';
+          chatButton.style.pointerEvents = 'none';
         } else {
-          this.chatButton.style.display = 'block';
-          this.chatButton.style.pointerEvents = 'auto';
+          chatButton.style.display = 'block';
+          chatButton.style.pointerEvents = 'auto';
         }
       }
-      if (val instanceof NavigationEnd && this.aiChatButton) {
-        console.log(this.aiChatButton, 'is present');
+      if (val instanceof NavigationEnd && aiChatButton) {
+        console.log(aiChatButton, 'is present');
         if (
-          val.url.includes('all-packs-page') ||
-          val.url.includes('home-page')
+          val.url.includes('pack-view')
         ) {
-          this.aiChatButton.style.display = 'block';
-          this.aiChatButton.style.pointerEvents = 'auto';
+          aiChatButton.style.display = 'none';
+          aiChatButton.style.pointerEvents = 'none';
         } else {
-          this.aiChatButton.style.display = 'none';
-          this.aiChatButton.style.pointerEvents = 'none';
+          aiChatButton.style.display = 'block';
+          aiChatButton.style.pointerEvents = 'auto';
+        }
+      }
+
+      if (val instanceof NavigationEnd && aiChatWelcomeMessage) {
+        if (
+          val.url.includes('pack-view')
+        ) {
+          aiChatWelcomeMessage.style.display = 'none';
+          aiChatWelcomeMessage.style.pointerEvents = 'none';
+        } else {
+          aiChatWelcomeMessage.style.display = 'block';
+          aiChatWelcomeMessage.style.pointerEvents = 'auto';
+         
         }
       }
     });
-    setTimeout(() => {
-      this.chatButton = document.getElementById('tidio-chat');
-      this.aiChatButton = document.getElementById('chat-widget-push-to-talk');
-    }, 1500);
   }
 
   ngOnDestroy() {
