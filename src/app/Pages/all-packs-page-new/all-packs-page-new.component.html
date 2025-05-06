@@ -275,6 +275,69 @@
     </div>
 
     <div id="test" class="all-packs-view" #new>
+      <div
+          *ngIf="!userIsLoggedIn"
+          class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
+        >
+         <!-- Category Title -->
+         <div
+          class="sm:items-center sm:w-56 w-full items-start font-bold text-center align-middle flex justify-center mx-auto text-3xl sm:text-xl px-1 sm:px-4 reading-book pos-relative"
+        >
+           {{ categoryPackTree?.category | translate }}
+         <div
+           *ngIf="categoryPackTree?.isReadingGuidebookAMust"
+           class="d-flex justify-center align-items-center"
+           style="flex-direction: column;"
+         >
+           <span>
+             <img src="../../../assets/icons/Default.png" />
+           </span>
+           <p style="font-size: 10.6px; line-height: normal; margin-top: 6px;">
+             מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם הערכות
+           </p>
+         </div>
+        </div>
+     
+       <!-- Scrollable Content -->
+       
+         <!-- Right Arrow -->
+         <button
+           class="arrow-right"
+            *ngIf="canScrollRightCategoriesFree || isMobileScreen"
+           (click)="scrollRightCategoriesFree(0)"
+         >
+           <mat-icon>keyboard_arrow_right</mat-icon>
+         </button>
+
+       <div
+         class="middle scroller overflow-x-scroll flex w-[100%] gap-4 mt-4 sm:mt-0 ms-4 md:ms-8 mb-16"
+         #packScrollContainer6
+         (scroll)="updateScrollStateCategoryFree()"
+       >
+         <div
+           *ngFor="let packInfo of categoryPackTree.packs; let j = index"
+           class="relative"
+         >
+           <app-packs-card
+             [backgroundColor]="cardsColors[j % cardsColors.length].color"
+             [packInfo]="packInfo"
+             [index]="j"
+             [lastIndex]="categoryPackTree.packs?.length - 1"
+             (loaded)="packLoaded()"
+           >
+           </app-packs-card>
+         </div>
+       </div>
+     
+       <!-- Left Arrow -->
+       <button
+         class="arrow-left"
+         *ngIf="canScrollLeftCategoriesFree || isMobileScreen"
+         (click)="scrollLeftCategoriesFree()"
+       >
+         <mat-icon>keyboard_arrow_left</mat-icon>
+       </button>
+      </div>
       <div *ngIf="!showCategoryLine && !isfavSelected" class="mt-2 sm:mt-16">
         <div class="mt-8 sm:text-4xl text-2xl text-center font-bold">
           {{
@@ -409,7 +472,6 @@
             <button class="arrow-left"  *ngIf="!isLoading && scrollStates[4]?.canScrollLeft"  (click)="scrollLeftWithRef(4)"><mat-icon>keyboard_arrow_left</mat-icon></button>
           </div>
         </div>
-  
         <div
         *ngIf="!isLoading && !selectedCardFilter && (readingBookCategoryArray?.length > 0) && !isfavSelected"
         class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
