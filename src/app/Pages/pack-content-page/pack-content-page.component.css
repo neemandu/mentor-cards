@@ -1754,7 +1754,6 @@ app-card.scrollableCardOrd {
 }
 
 .remove-btn {
-  margin-bottom: -15px;
   animation: fadeIn 0.4s, slideUp 0.4s;
 }
 
