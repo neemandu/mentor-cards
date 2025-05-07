@@ -791,9 +791,8 @@ export class AllPacksPageNewComponent implements OnInit {
 
     this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack.packs.every(pack=> pack.isFree));
 
-    if (!this.userIsLoggedIn || this.userData.status === 'NOPLAN' && !this.userData.groupRole) {
-      this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack.category !== this.categoryPackTree.category)
-    }   
+    this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack.category !== this.categoryPackTree.category);
+    
     const observer = setInterval(() => {
       for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
         // Check if the container is available
