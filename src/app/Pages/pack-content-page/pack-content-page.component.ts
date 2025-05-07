@@ -617,8 +617,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
         frontImgUrl: element.card.frontImgUrl,
       });
     });
-    console.log(this.cards, card, 'this.cards card');
-    console.log(this.contentCards, 'this.contentCards');
+
     const cardPackContents = document.querySelectorAll('.pack-content-page-wrapper');
     const cardPackContent = cardPackContents[cardPackContents.length - 1];
 
