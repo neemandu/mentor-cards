@@ -738,9 +738,17 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
         this.initializeFilteredOptions();
-        setTimeout(() => {
+        const packs = this.allPacks.filter(pack => pack.cards.length);
+        if (this.userIsLoggedIn && packs.length) {
+          setTimeout(() => {
+            this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
+          }, 2000);
+        }
+
+        if (!this.userIsLoggedIn) {
           this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
-        }, 5000)
+          
+        }
         this.isLoading = false;
         this.packsAreLoaded = true;
       });
@@ -782,7 +790,8 @@ export class AllPacksPageNewComponent implements OnInit {
       });
 
     this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack.packs.every(pack=> pack.isFree));
-    if (!this.userIsLoggedIn) {
+
+    if (!this.userIsLoggedIn || this.userData.status === 'NOPLAN' && !this.userData.groupRole) {
       this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack.category !== this.categoryPackTree.category)
     }   
     const observer = setInterval(() => {

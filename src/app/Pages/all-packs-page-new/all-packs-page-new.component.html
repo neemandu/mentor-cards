@@ -276,7 +276,7 @@
 
     <div id="test" class="all-packs-view" #new>
       <div
-          *ngIf="!userIsLoggedIn"
+          *ngIf="!userIsLoggedIn || userData.status === 'NOPLAN' && !userData.groupRole"
           class="all-packs-view__section flex flex-col sm:flex-row justify-between pos-relative"
         >
          <!-- Category Title -->
