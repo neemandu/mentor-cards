@@ -73,6 +73,30 @@ export class AppComponent implements OnInit {
          
         }
       }
+      if (aiChatButton) {
+        return;
+      }
+      if (val instanceof NavigationEnd ) {
+        setTimeout(() => {
+          const aiChatButton = document.getElementById('chat-widget-push-to-talk');
+          const aiChatWelcomeMessage = document.getElementById('welcomeMessages');
+          console.log(aiChatButton, 'aiChatButton');
+          
+          
+          if (val.url.includes('pack-view')) {
+            aiChatWelcomeMessage.style.display = 'none';
+            aiChatWelcomeMessage.style.pointerEvents = 'none';
+            aiChatButton.style.display = 'none';
+            aiChatButton.style.pointerEvents = 'none';           
+          } else {
+            aiChatButton.style.display = 'block';
+            aiChatButton.style.pointerEvents = 'auto';
+            aiChatWelcomeMessage.style.display = 'block';
+            aiChatWelcomeMessage.style.pointerEvents = 'auto';
+          }
+
+        }, 5700);
+      }
     });
   }
 
