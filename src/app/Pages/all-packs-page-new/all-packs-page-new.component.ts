@@ -789,8 +789,7 @@ export class AllPacksPageNewComponent implements OnInit {
         if (packs.length != 0) return { category: category, packs: packs };
       });
 
-    this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack.packs.every(pack=> pack.isFree));
-
+    this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack.packs.every(pack=> pack.isFree && !pack.isExternalPack));
     this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack.category !== this.categoryPackTree.category);
     
     const observer = setInterval(() => {
