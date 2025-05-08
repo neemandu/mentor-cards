@@ -790,9 +790,6 @@ export class AllPacksPageNewComponent implements OnInit {
       });
 
     this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack.packs.every(pack=> pack.isFree && !pack.isExternalPack));
-      console.log(this.categoryPackTree, 'this.categoryPackTree');
-      console.log(this.allCategoryPacks, 'this.allCategoryPacks');
-      
     this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack.category !== this.categoryPackTree.category);
     
     const observer = setInterval(() => {
