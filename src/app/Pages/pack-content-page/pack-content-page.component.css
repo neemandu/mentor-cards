@@ -525,6 +525,7 @@ li span {
 
 .pack-content-page-cards {
   display: flex !important;
+  align-items: center;
 }
 
 .overflow-cards {

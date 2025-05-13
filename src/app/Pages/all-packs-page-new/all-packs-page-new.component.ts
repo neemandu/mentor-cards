@@ -742,12 +742,11 @@ export class AllPacksPageNewComponent implements OnInit {
         if (this.userIsLoggedIn && packs.length) {
           setTimeout(() => {
             this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
-          }, 2000);
+          }, 5000);
         }
 
         if (!this.userIsLoggedIn) {
           this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
-          
         }
         this.isLoading = false;
         this.packsAreLoaded = true;
