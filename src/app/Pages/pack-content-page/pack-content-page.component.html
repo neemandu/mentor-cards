@@ -442,7 +442,7 @@
     </aside>
 
     <ng-container *ngIf="pack?.cards?.length > 1">
-      <div>
+      <div #contentCards>
         <div
           class="category-row mb-2 d-flex flex-column"
           *ngFor="let category of getFilteredCategories(); let i = index"
@@ -515,7 +515,7 @@
   </div>
 
   <ng-container *ngIf="cards.length == 1">
-    <div #packWrapper class="d-flex flex-column align-items-center cards-container">
+    <div #contentCards class="d-flex flex-column align-items-center cards-container">
       <div
         *ngIf="pack && !showEditPack"
         [transition-group]="'flip-list'"
@@ -1016,7 +1016,7 @@
           <!-- Front Side -->
           <div>
             <img
-              style="height: 69vh"
+              style="max-height: 69vh"
               [src]="randomSelectedCard?.cardsImages[randomCardIndex].frontImgUrl"
               alt="Card Front"
             />
@@ -1029,7 +1029,7 @@
           <!-- Front Side -->
           <div>
             <img
-              style="height: 69vh"
+              style="max-height: 69vh"
               [src]="randomSelectedCard?.cardsImages[randomCardIndex].backImgUrl"
               alt="Card Front"
             />
@@ -1040,7 +1040,7 @@
           <!-- Back Side -->
           <div>
             <img
-              style="height: 69vh"
+              style="max-height: 69vh"
               [src]="randomSelectedCard?.cardsImages[randomCardIndex].frontImgUrl"
               alt="Card Front"
             />
@@ -1089,7 +1089,7 @@
           <img src="../../../assets/icons/zoomPlus.png" />
           הצגת הקלפים שבחרתם
         </button>
-        <button class="remove-all" (click)="multiSelectCard = []">
+        <button class="remove-all" (click)="resetCategoryFooter()">
           <img src="../../../assets/icons/undo.png" />
           איפוס בחירה
         </button>
@@ -1107,7 +1107,7 @@
           הצגת הקלפים
         </button>
 
-        <button class="remove-all-mbl" (click)="multiSelectCard = []">
+        <button class="remove-all-mbl" (click)="resetCategoryFooter()">
           <img
             src="../../../assets/icons/undo.png"
             style="width: 11px; height: 11px"
@@ -1162,7 +1162,7 @@
             />
 
             <img
-              *ngIf="!item.card.backImgUrl"
+              *ngIf="!item.card.backImgUrl && !flipped"
               class="img-box"
               alt="Mentor-cards unique cards design for the front of the card"
               src="/assets/Mentor-Cards-Back.png"
@@ -1275,7 +1275,7 @@
                   />
                   <img
                     class="img-box"
-                    *ngIf="!card?.backImgUrl && !flipped"
+                    *ngIf="!card.backImgUrl && !flipped"
                     alt="Mentor-cards unique cards design for the back of the card"
                     src="/assets/Mentor-Cards-Back.png"
                   />

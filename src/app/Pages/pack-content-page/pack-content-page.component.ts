@@ -50,8 +50,9 @@ import { confirmationDialogueComponent } from './confirmation-dialog';
   templateUrl: './pack-content-page.component.html',
   styleUrls: ['./pack-content-page.component.css'],
 })
-export class PackContentPageComponent implements OnInit, OnDestroy {
+export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewInit  {
   @ViewChild('dropdownInput') dropdownInput: ElementRef;
+  @ViewChild('contentCards') contentCards: ElementRef<HTMLElement>;
 
   Subscription: Subscription = new Subscription();
   id: any;
@@ -153,6 +154,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.userData = userData;
     });
     this.userData = this.userAuthService.userData;
+  }
+  ngAfterViewInit(): void {
+   
   }
 
   // Option Array List
@@ -613,6 +617,26 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         frontImgUrl: element.card.frontImgUrl,
       });
     });
+
+    const cardPackContents = document.querySelectorAll('.pack-content-page-wrapper');
+    const cardPackContent = cardPackContents[cardPackContents.length - 1];
+
+    const cardPackHeight = cardPackContent.clientHeight;
+    const columnCount = Math.round(cardPackHeight / 225);
+    const cardsLength = this.cards.length > 0 ? this.cards.length - 1 : this.cards.length;
+    const lastCards =  this.cards[cardsLength];
+    const cardsImagesCount = lastCards.cardsImages.length;
+    const rowCount = Math.ceil(cardsImagesCount / columnCount);
+    const remainder = cardsImagesCount % rowCount;
+    const lastRowCardIndex = remainder > 0 ? cardsImagesCount - remainder : cardsImagesCount - rowCount;
+
+    setTimeout(() => {
+      this.contentCards.nativeElement.style.paddingBottom = document.querySelector('footer').clientHeight + 'px';
+
+      if (lastRowCardIndex < index) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    })
   }
 
   categoryBaseCardSelected(
@@ -659,6 +683,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.categoryBaseArray = [];
     this.multiSelectCard = [];
     console.log(this.categoryBaseArray);
+    console.log(this.contentCards, 'this.contentCards');
+    
+    this.contentCards.nativeElement.style.paddingBottom = '';
   }
 
   // TODO

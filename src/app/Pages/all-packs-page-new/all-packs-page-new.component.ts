@@ -49,6 +49,8 @@ export class AllPacksPageNewComponent implements OnInit {
   canScrollLeft: boolean[] = [];
   canScrollRightBooks: boolean = false;
   canScrollLeftBooks: boolean = true;
+  canScrollRightCategoriesFree: boolean = false;
+  canScrollLeftCategoriesFree: boolean = false;
   autocompleteOptions: QueryList<MatOption>;
   isMobileScreen: boolean;
   placeholderText: string = 'הייעוץ זמין למנויים בלבד ❤';
@@ -69,6 +71,7 @@ export class AllPacksPageNewComponent implements OnInit {
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
+  categoryPackTree: CategoryPack;
   categoriesOrder: string[] = [
     'ערכות להתנסות חופשית',
     'קלפי תמונה',
@@ -185,6 +188,7 @@ export class AllPacksPageNewComponent implements OnInit {
   @ViewChild('packScrollContainer3') packScrollContainer3: ElementRef;
   @ViewChild('packScrollContainer4') packScrollContainer4: ElementRef;
   @ViewChild('packScrollContainer5') packScrollContainer5: ElementRef;
+  @ViewChild('packScrollContainer6') packScrollContainer6: ElementRef;
 
   constructor(
     private cardsService: CardsService,
@@ -484,6 +488,21 @@ export class AllPacksPageNewComponent implements OnInit {
       normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;
   }
 
+  updateScrollStateCategoryFree(): void {
+    const element = this.packScrollContainer6.nativeElement;
+
+    const isRTL = getComputedStyle(element).direction === 'rtl';
+    const normalizedScrollLeft = isRTL
+      ? element.scrollWidth - element.clientWidth + element.scrollLeft
+      : element.scrollLeft;
+    const buffer = 1;
+
+    this.canScrollLeftCategoriesFree = normalizedScrollLeft > buffer;
+    this.canScrollRightCategoriesFree =
+      normalizedScrollLeft < element.scrollWidth - element.clientWidth - buffer;      
+  }
+
+
   toggleIsFavSelected() {
     if (this.isfavSelected) {
       this.isfavSelected = false;
@@ -718,8 +737,15 @@ export class AllPacksPageNewComponent implements OnInit {
         this.setAllPacksData();
         this.setAllCategoryPacksToShow();
         this.setAllFavPacksToShow();
-        this.initializeFilteredOptions();          
-        if (this.allPacks[0].cards.length) {
+        this.initializeFilteredOptions();
+        const packs = this.allPacks.filter(pack => pack.cards.length);
+        if (this.userIsLoggedIn && packs.length) {
+          setTimeout(() => {
+            this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
+          }, 5000);
+        }
+
+        if (!this.userIsLoggedIn) {
           this.overlaySpinnerService.changeOverlaySpinner(false, 'packs');
         }
         this.isLoading = false;
@@ -762,6 +788,9 @@ export class AllPacksPageNewComponent implements OnInit {
         if (packs.length != 0) return { category: category, packs: packs };
       });
 
+    this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack.packs.every(pack=> pack.isFree && !pack.isExternalPack));
+    this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack.category !== this.categoryPackTree.category);
+    
     const observer = setInterval(() => {
       for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
         // Check if the container is available
@@ -971,6 +1000,18 @@ export class AllPacksPageNewComponent implements OnInit {
 
   scrollRightBooks(): void {
     const element = this.packScrollContainer5.nativeElement;
+    element.scrollBy({ left: 500, behavior: 'smooth' }); // Adjust scroll amount as needed
+    setTimeout(() => this.updateScrollStateBooks(), 300); // Re-check state after scrolling
+  }
+
+  scrollLeftCategoriesFree(): void {
+    const element = this.packScrollContainer6.nativeElement;
+    element.scrollBy({ left: -500, behavior: 'smooth' }); // Adjust scroll amount as needed
+    setTimeout(() => this.updateScrollStateBooks(), 300); // Re-check state after scrolling
+  }
+
+  scrollRightCategoriesFree(): void {
+    const element = this.packScrollContainer6.nativeElement;
     element.scrollBy({ left: 500, behavior: 'smooth' }); // Adjust scroll amount as needed
     setTimeout(() => this.updateScrollStateBooks(), 300); // Re-check state after scrolling
   }
