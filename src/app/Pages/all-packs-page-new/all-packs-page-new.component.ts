@@ -71,7 +71,7 @@ export class AllPacksPageNewComponent implements OnInit {
   allPacks: PackContent[] = [];
   allFavPacks: PackContent[] = [];
   allCategoryPacks: CategoryPack[] = [];
-  categoryPackTree: CategoryPack;
+  categoryPackTree: CategoryPack = undefined;
   categoriesOrder: string[] = [
     'ערכות להתנסות חופשית',
     'קלפי תמונה',
@@ -788,8 +788,8 @@ export class AllPacksPageNewComponent implements OnInit {
         if (packs.length != 0) return { category: category, packs: packs };
       });
 
-    this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack.packs.every(pack=> pack.isFree && !pack.isExternalPack));
-    this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack.category !== this.categoryPackTree.category);
+    this.categoryPackTree = this.allCategoryPacks.find(categoryPack => categoryPack?.packs.every(pack=> pack.isFree && !pack.isExternalPack));
+    this.allCategoryPacks = this.allCategoryPacks.filter(categoryPack => categoryPack?.category !== this.categoryPackTree?.category);
     
     const observer = setInterval(() => {
       for (let containerNumber = 1; containerNumber <= 4; containerNumber++) {
