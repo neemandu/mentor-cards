@@ -315,14 +315,14 @@
          (scroll)="updateScrollStateCategoryFree()"
        >
          <div
-           *ngFor="let packInfo of categoryPackTree.packs; let j = index"
+           *ngFor="let packInfo of categoryPackTree?.packs; let j = index"
            class="relative"
          >
            <app-packs-card
              [backgroundColor]="cardsColors[j % cardsColors.length].color"
              [packInfo]="packInfo"
              [index]="j"
-             [lastIndex]="categoryPackTree.packs?.length - 1"
+             [lastIndex]="categoryPackTree?.packs?.length - 1"
              (loaded)="packLoaded()"
            >
            </app-packs-card>
