@@ -150,38 +150,6 @@ export class PacksCardComponent implements OnInit, OnDestroy {
   // }
 
   openPreviewDialog(event: any): void {
-    const rect = this.targetDiv.nativeElement.getBoundingClientRect();
-  
-    // Calculate the center of the div
-    const divCenterX = rect.left + rect.width / 2;
-    const divCenterY = rect.top + rect.height / 2;
-  
-    // Assuming the dialog has maxWidth and maxHeight defined as 60vw and 70vh
-    const dialogMaxWidth = window.innerWidth * 0.2; // 60vw
-    const dialogMaxHeight = window.innerHeight * 0.3; // 70vh
-  
-    // Calculate the initial position to center the dialog over the div
-    let dialogLeft = divCenterX - dialogMaxWidth / 2;
-    let dialogTop = divCenterY - dialogMaxHeight / 2;
-  
-    // Adjust position to stay within viewport
-    if (dialogLeft < 0) {
-      dialogLeft = 10; // Small padding from the left edge
-    } else if (dialogLeft + dialogMaxWidth > window.innerWidth) {
-      dialogLeft = window.innerWidth - dialogMaxWidth - 10; // Padding from the right edge
-    }
-  
-    if (dialogTop < 0) {
-      dialogTop = 10; // Small padding from the top edge
-    } else if (dialogTop + dialogMaxHeight > window.innerHeight) {
-      dialogTop = window.innerHeight - dialogMaxHeight - 10; // Padding from the bottom edge
-    }
-  
-    const dialogPosition: DialogPosition = {
-      left: `${dialogLeft}px`,
-      top: `${dialogTop}px`,
-    };
-  
     const isMobile = window.innerWidth <= 768;
     this.hoverTimeout = setTimeout(() => {
       this.cardStateService.getCardOpenState().pipe(take(1)).subscribe((isOpen) => {
@@ -193,9 +161,6 @@ export class PacksCardComponent implements OnInit, OnDestroy {
             dialogConfig.maxWidth = isMobile ? '90vw' : '480px';
             dialogConfig.panelClass = 'custom-dialog';
             dialogConfig.maxHeight = isMobile ? '60vh' : '460px';
-            if (!isMobile) {
-              dialogConfig.position = dialogPosition;
-            }
             const data: previewData = { pack: this.packInfo, showButtons: false };
             dialogConfig.data = data;
   
