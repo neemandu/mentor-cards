@@ -33,10 +33,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.chatBtnSub = this.router.events.pipe(filter(route => route instanceof NavigationEnd)).subscribe((val) => {
-      console.log(val, 'val');
       const chatButton = document.getElementById('tidio-chat');
-      const aiChatButton = document.getElementById('chat-widget-push-to-talk');
-      const aiChatWelcomeMessage = document.getElementById('welcomeMessages')
+      // const aiChatButton = document.getElementById('chat-widget-push-to-talk');
+      // const aiChatWelcomeMessage = document.getElementById('welcomeMessages')
       
       if (val instanceof NavigationEnd && chatButton ) {
         console.log(' this one is working ');
@@ -48,59 +47,60 @@ export class AppComponent implements OnInit {
           chatButton.style.pointerEvents = 'auto';
         }
       }
-      if (val instanceof NavigationEnd && aiChatButton) {
-        console.log(aiChatButton, 'is present');
-        if (
-          val.url.includes('pack-view')
-        ) {
-          aiChatButton.style.display = 'none';
-          aiChatButton.style.pointerEvents = 'none';
-        } else {
-          aiChatButton.style.display = 'block';
-          aiChatButton.style.pointerEvents = 'auto';
-        }
-      }
+      // if (val instanceof NavigationEnd && aiChatButton) {
+      //   console.log(aiChatButton, 'is present');
+      //   if (
+      //     val.url.includes('pack-view')
+      //   ) {
+      //     aiChatButton.style.display = 'none';
+      //     aiChatButton.style.pointerEvents = 'none';
+      //   } else {
+      //     aiChatButton.style.display = 'block';
+      //     aiChatButton.style.pointerEvents = 'auto';
+      //   }
+      // }
 
-      if (val instanceof NavigationEnd && aiChatWelcomeMessage) {
-        if (
-          val.url.includes('pack-view')
-        ) {
-          aiChatWelcomeMessage.style.display = 'none';
-          aiChatWelcomeMessage.style.pointerEvents = 'none';
-        } else {
-          aiChatWelcomeMessage.style.display = 'block';
-          aiChatWelcomeMessage.style.pointerEvents = 'auto';
+      // if (val instanceof NavigationEnd && aiChatWelcomeMessage) {
+      //   if (
+      //     val.url.includes('pack-view')
+      //   ) {
+      //     aiChatWelcomeMessage.style.display = 'none';
+      //     aiChatWelcomeMessage.style.pointerEvents = 'none';
+      //   } else {
+      //     aiChatWelcomeMessage.style.display = 'block';
+      //     aiChatWelcomeMessage.style.pointerEvents = 'auto';
          
-        }
-      }
-      if (aiChatButton) {
-        return;
-      }
+      //   }
+      // }
 
-      if (val instanceof NavigationEnd) {
-        setTimeout(() => {
-          const aiChatButton = document.getElementById('chat-widget-push-to-talk');
+      // if (aiChatButton) {
+      //   return;
+      // }
 
-          if (val.url.includes('pack-view') && aiChatButton) {
-            aiChatButton.style.display = 'none';
-            aiChatButton.style.pointerEvents = 'none';
-          } else {
-            aiChatButton.style.display = 'block';
-            aiChatButton.style.pointerEvents = 'auto';
-          }
-        }, 5500);
+      // if (val instanceof NavigationEnd) {
+      //   setTimeout(() => {
+      //     const aiChatButton = document.getElementById('chat-widget-push-to-talk');
 
-        setTimeout(() => {
-          const aiChatWelcomeMessage = document.getElementById('welcomeMessages');
-          if (val.url.includes('pack-view') && aiChatWelcomeMessage) {
-            aiChatWelcomeMessage.style.display = 'none';
-            aiChatWelcomeMessage.style.pointerEvents = 'none';
-          } else {
-            aiChatWelcomeMessage.style.display = 'block';
-            aiChatWelcomeMessage.style.pointerEvents = 'auto';
-          }
-        }, 5700)
-      }
+      //     if (val.url.includes('pack-view') && aiChatButton) {
+      //       aiChatButton.style.display = 'none';
+      //       aiChatButton.style.pointerEvents = 'none';
+      //     } else {
+      //       aiChatButton.style.display = 'block';
+      //       aiChatButton.style.pointerEvents = 'auto';
+      //     }
+      //   }, 5500);
+
+      //   setTimeout(() => {
+      //     const aiChatWelcomeMessage = document.getElementById('welcomeMessages');
+      //     if (val.url.includes('pack-view') && aiChatWelcomeMessage) {
+      //       aiChatWelcomeMessage.style.display = 'none';
+      //       aiChatWelcomeMessage.style.pointerEvents = 'none';
+      //     } else {
+      //       aiChatWelcomeMessage.style.display = 'block';
+      //       aiChatWelcomeMessage.style.pointerEvents = 'auto';
+      //     }
+      //   }, 5700)
+      // }
     });
   }
 
