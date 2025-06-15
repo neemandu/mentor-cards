@@ -175,7 +175,7 @@
 
       <div
         id="logged-in-has-no-program"
-        *ngIf="!data.pack.isFree && userData.status === 'NOPLAN' && !userData.groupRole"
+        *ngIf="!data.pack.isFree && userData.status === 'NOPLAN' && !userData.groupRole && !userData?.orgMembership?.trialPeriodInDays"
         class="actions"
       >
         <a
