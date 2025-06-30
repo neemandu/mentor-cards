@@ -8,6 +8,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  AfterViewInit,
 } from '@angular/core';
 import {
   MatDialog,
@@ -49,8 +50,9 @@ import { confirmationDialogueComponent } from './confirmation-dialog';
   templateUrl: './pack-content-page.component.html',
   styleUrls: ['./pack-content-page.component.css'],
 })
-export class PackContentPageComponent implements OnInit, OnDestroy {
+export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewInit  {
   @ViewChild('dropdownInput') dropdownInput: ElementRef;
+  @ViewChild('contentCards') contentCards: ElementRef<HTMLElement>;
 
   Subscription: Subscription = new Subscription();
   id: any;
@@ -111,6 +113,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   containerPadding: number = 2;
   overFlowCardContainerHeight: number = 340;
   showFooterContainer: boolean = true;
+  isGuideBookWarningHidden: boolean = false;
 
   categoryFlipped: boolean = false;
   categoryBaseArray = [];
@@ -142,7 +145,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     private platform: Platform,
     private http: HttpClient,
     public langDirectionService: LangDirectionService,
-    private mixpanel: MixpanelService
+    private mixpanel: MixpanelService,
   ) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
@@ -151,6 +154,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       this.userData = userData;
     });
     this.userData = this.userAuthService.userData;
+  }
+  ngAfterViewInit(): void {
+   
   }
 
   // Option Array List
@@ -202,6 +208,10 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.dropdownInput.nativeElement.value = '';
     this.isDropdownOpen = false;
     this.showInputFieldInDropDown = false;
+  }
+
+  hideGuideBookWarning() {
+    this.isGuideBookWarningHidden = true;
   }
 
   // Method to save the edited option
@@ -277,6 +287,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.getFilteredCategories()?.forEach((_, index) => {
       this.categoryOpenStates[index] = true;
     });
+    
   }
 
   loadPack(): void {
@@ -501,7 +512,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
   flippedCardwidth: number = 0;
 
-  zoomIn() {
+  zoomIn() { 
     this.cardWidth += 1;
     this.cardHeight += 1.5; // Adjust proportionally
     this.imageWidth += 16; // Scale by 16px, consistent with 1rem = 16px
@@ -606,6 +617,26 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
         frontImgUrl: element.card.frontImgUrl,
       });
     });
+
+    const cardPackContents = document.querySelectorAll('.pack-content-page-wrapper');
+    const cardPackContent = cardPackContents[cardPackContents.length - 1];
+
+    const cardPackHeight = cardPackContent.clientHeight;
+    const columnCount = Math.round(cardPackHeight / 225);
+    const cardsLength = this.cards.length > 0 ? this.cards.length - 1 : this.cards.length;
+    const lastCards =  this.cards[cardsLength];
+    const cardsImagesCount = lastCards.cardsImages.length;
+    const rowCount = Math.ceil(cardsImagesCount / columnCount);
+    const remainder = cardsImagesCount % rowCount;
+    const lastRowCardIndex = remainder > 0 ? cardsImagesCount - remainder : cardsImagesCount - rowCount;
+
+    setTimeout(() => {
+      this.contentCards.nativeElement.style.paddingBottom = document.querySelector('footer').clientHeight + 'px';
+
+      if (lastRowCardIndex < index) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    })
   }
 
   categoryBaseCardSelected(
@@ -652,6 +683,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
     this.categoryBaseArray = [];
     this.multiSelectCard = [];
     console.log(this.categoryBaseArray);
+    console.log(this.contentCards, 'this.contentCards');
+    
+    this.contentCards.nativeElement.style.paddingBottom = '';
   }
 
   // TODO
@@ -747,15 +781,31 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   shuffle(): void {
+    const previousRandomIndex = this.randomCardIndex;
+
+    this.randomSelectedCard = null;
+    
+    if (!this.selectedCategory) {  
+      const randomIndexCard = Math.floor(Math.random() * this.pack.cards.length);
+      this.randomSelectedCard = {... this.pack.cards[randomIndexCard]} as Card;
+    }else {
+      this.randomSelectedCard = {...this.selectedCategory} as Card;
+    }
+
+    this.randomCardIndex =  Math.floor(Math.random() * this.randomSelectedCard.cardsImages.length);
+
+    if (previousRandomIndex === this.randomCardIndex && this.randomSelectedCard.cardsImages.length > 1) {
+      this.shuffle();
+      return;
+    }
+    
     this.mixpanelService.track('ActionButtonClicked', {
       Action: 'Shuffle',
       'Pack id': this.id,
       'Pack name': this.pack?.name,
     });
     this.selectedCards = [];
-    this.pack.cards.forEach((category) => {
-      category.cardsImages.sort(() => Math.random() - 0.5);
-    });
+    this.randomSelectedCard.cardsImages.sort(() => Math.random() - 0.5);
   }
 
   flip(): void {
@@ -837,12 +887,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   toggleChosenCardsModal(): void {
     if (!this.showSelectedCards) {
       if (
-        !this.portraitToLandscapeAlertShown &&
+        !globalThis.portraitToLandscapeAlertShown &&
         this.selectedCards.length > 1 &&
         window.matchMedia('(orientation: portrait)').matches
       ) {
-        this.portraitToLandscapeAlertShown = true;
+        globalThis.portraitToLandscapeAlertShown = true;
         this.openPortraitToLandscapeAlert();
+        return;
       }
       this.showSelectedCards = true;
       document.body.style.overflow = 'hidden';
@@ -874,10 +925,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
       'Pack name': this.pack?.name,
     });
     if (this.showRandomCards) {
+      document.documentElement.style.overflow='auto';
       this.showRandomCards = false;
     } else {
       this.shuffle();
       this.sleep(500).then(() => {
+        document.documentElement.style.overflow='hidden';
         this.showRandomCards = true;
       });
     }
@@ -1016,6 +1069,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    document.documentElement.style.overflow='auto';
     this.popoutService.closePopoutModal();
     this.Subscription.unsubscribe();
   }

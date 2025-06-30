@@ -9,14 +9,10 @@ h2 {
 }
 
 app-card {
-  margin: 10px 10px;
   width: 100%;
   transition: transform 0.3s ease, translate 1s ease-in;
 }
 
-app-card.card-width {
-  width: 10rem;
-}
 
 app-card:hover {
   transform: scale(1.03);
@@ -172,11 +168,14 @@ button:focus {
 }
 
 .flip-box {
-  position: absolute;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s ease;
+}
+
+.flip-box .card-front {
+  position: absolute;
 }
 
 .flip-box.flipped {
@@ -185,7 +184,6 @@ button:focus {
 
 .card-front,
 .card-back {
-  position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -503,8 +501,8 @@ li span {
 }
 
 .aside-container {
-  display: grid;
-  grid-template-columns: auto calc(100% - 10px);
+  display: flex;
+  gap: 10px;
 }
 
 /* Add this new style */
@@ -521,14 +519,19 @@ li span {
   border-bottom: 1px solid #e67c73;
 }
 
+.pack-content-page-wrapper {
+  justify-content: space-around;
+}
+
 .pack-content-page-cards {
   display: flex !important;
+  align-items: center;
 }
 
 .overflow-cards {
-  overflow: scroll;
+  overflow: auto;
   flex-wrap: wrap;
-  width: calc(100% - 220px);
+  flex: 1 1 auto;
 }
 
 /* Add this new style */
@@ -1415,6 +1418,10 @@ app-card.scrollableCardOrd {
     font-size: medium;
   }
 
+  .card-container {
+    height: auto;
+  }
+  
   .bottom-nav-edit {
     justify-content: center;
     flex-direction: column-reverse;
@@ -1529,7 +1536,7 @@ app-card.scrollableCardOrd {
 .selected-cards-modal {
   display: block;
   position: fixed;
-  z-index: 10;
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
@@ -1547,6 +1554,11 @@ app-card.scrollableCardOrd {
   max-width: 90%;
   height: 100%;
   animation: fadeIn 0.4s, slideUp 0.4s;
+}
+
+.selected-cards-modal-btns {
+  display: flex;
+  gap: 160px;
 }
 
 @keyframes fadeIn {
@@ -1743,7 +1755,6 @@ app-card.scrollableCardOrd {
 }
 
 .remove-btn {
-  margin-bottom: -15px;
   animation: fadeIn 0.4s, slideUp 0.4s;
 }
 
@@ -2031,6 +2042,7 @@ img {
   .overflow-cards {
     width: 100% !important;
     margin: 0 auto;
+    column-gap: 10px;
     justify-content: center;
   }
 
@@ -2053,5 +2065,15 @@ img {
 
   .menu-overlay.show {
     display: block;
+  }
+}
+
+.mdhidden {
+  display: block !important;
+}
+
+@media (min-width: 768px) {
+  .mdhidden {
+    display: none !important;
   }
 }

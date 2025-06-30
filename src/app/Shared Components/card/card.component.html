@@ -1,7 +1,7 @@
 <div class="d-flex flex-column relative">
   <div [ngClass]="{ 'flip-box-inner': true, flip: flipped }"  [class.min-height]="mobileView" 
   >
-    <div class="flip-box-front">
+    <div class="flip-box-front" [ngClass]="{'flip-box-absolute': flipped }">
       <img
         *ngIf="!cardContent?.backImgUrl"
         alt="Mentor-cards unique cards design for the back of the card"
@@ -21,7 +21,7 @@
         [style.height.px]="imageHeight"
       />
     </div>
-    <div class="flip-box-back " style="width: auto;">
+    <div class="flip-box-back" [ngClass]="{'flip-box-absolute': !flipped }" style="width: auto;">
       <img
         loading="eager"
         [ngClass]="{ '': !selected, 'img-selected': selected }"

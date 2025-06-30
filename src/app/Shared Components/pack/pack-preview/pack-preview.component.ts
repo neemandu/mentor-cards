@@ -47,7 +47,9 @@ export class PackPreviewComponent implements OnInit {
     private platform: Platform,
     public langDirectionService: LangDirectionService,
     private packDataService: PackDataService
-  ) {}
+  ) {
+    this.userData = this.userAuthService.userData;
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -75,7 +77,6 @@ export class PackPreviewComponent implements OnInit {
     }
 
     this.trialPeriodDate = this.userAuthService.getTrialPeriodExpDate();
-    this.userData = this.userAuthService.userData;
     if (this.data.pack.subscriptionPlans) {
       this.yearlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el?.billingCycleInMonths === 12
@@ -92,6 +93,8 @@ export class PackPreviewComponent implements OnInit {
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el?.billingCycleInMonths === 1
       );
+      console.log(this.monthlyPlan, 'this.monthlyPlan');
+      
       if (this.monthlyPlan) {
         this.monthlyPlan['priceForMentorCardsMembers'] =
           Math.round(
@@ -117,13 +120,15 @@ export class PackPreviewComponent implements OnInit {
     }
   }
 
-  redirect(): void {
+  redirect(): string {
     this.mixpanel.track('RedirectToExternalCreator', {
       'Pack ID': this.data.pack.id,
       'Pack name': this.data.pack?.name,
       Link: this.data.pack?.about.link,
     });
-    window.open(this.data.pack.about.link, '_blank');
+
+    return this.data.pack.about.link
+    // window.open(this.data.pack.about.link, '_blank');
   }
 
   openAboutDialog(): void {

@@ -24,10 +24,10 @@
           {{ 'pages.home-page.sections.try-this.content.description5' | translate }}<br>
           {{ 'pages.home-page.sections.try-this.content.description6' | translate }}
         </div>
-        <div class="flex justify-center mt-4" (click)="navigateTo('/all-packs-page')">
-          <button class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold try-this-button text-lg">
+        <div class="flex justify-center mt-4">
+          <a [routerLink]="'/all-packs-page'" class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold try-this-button text-lg">
             {{ 'pages.home-page.sections.try-this.content.button.text' | translate }}
-          </button>
+          </a>
         </div>
       </div>
     </div>

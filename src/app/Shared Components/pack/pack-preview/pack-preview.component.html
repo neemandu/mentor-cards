@@ -138,9 +138,9 @@
             {{ "pages.pack-preview.about-author" | translate }}: </span
           >{{ data.pack.about.text }}
         </p>
-        <button (click)="redirect()" style="color: blue;">
+        <a target="_blank" [href]="redirect()" style="color: blue;" >
           {{ "pages.pack-preview.go-to-creator-website" | translate }}
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -161,7 +161,7 @@
     <div id="logged-in" *ngIf="userData">
       <div
         id="pack-owned"
-        *ngIf="data.pack.cards && data.pack.cards.length !== 0"
+        *ngIf="data.pack.cards"
         class="actions"
       >
         <button
@@ -175,13 +175,12 @@
 
       <div
         id="logged-in-has-no-program"
-        *ngIf="!data.pack.cards || data.pack.cards.length === 0"
+        *ngIf="!data.pack.isFree && userData.status === 'NOPLAN' && !userData.groupRole && !userData?.orgMembership?.trialPeriodInDays"
         class="actions"
       >
-        <button
+        <a
+          routerLink="/price-page"
           class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold  hero-button hero-button-mobile text-lg flex gap-4 items-center"
-          type="button"
-          (click)="navigate('/price-page')"
         >
           <div>שדרגו למנוי</div>
           <img
@@ -189,7 +188,7 @@
             alt="User Avatar"
             class="w-6 h-4"
           />
-        </button>
+        </a>
       </div>
     </div>
 

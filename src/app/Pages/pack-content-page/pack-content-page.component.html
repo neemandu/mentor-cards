@@ -55,7 +55,9 @@
             <h3 class="font-bold mb-0 text-start">{{ pack.ownerName }}</h3>
 
             <div class="flex gap-4 c-gap">
-              <div class="justify-center flex flex-col items-center">
+              <div
+                class="justify-center flex flex-col items-center"
+              >
                 <button
                   class="w-10 h-8 flex items-center justify-center py-2"
                   (click)="openGuideBook()"
@@ -177,10 +179,22 @@
 
           <!-- isReadingGuidebookAMust  -->
           <div
-            *ngIf="pack?.isReadingGuidebookAMust"
-            class="text-red text-center d-flex justify-center"
+            *ngIf="
+              pack?.isReadingGuidebookAMust &&
+              userData &&
+              !isGuideBookWarningHidden
+            "
+            class="text-red text-center d-flex justify-center items-center gap-2"
           >
-            <p>מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו</p>
+            <p class="m-0">
+              מומלץ לקרוא את ספר ההדרכה טרם תחילת עבודה עם ערכה זו
+            </p>
+            <button
+              class="bg-transparent border-0 cursor-pointer mdhidden"
+              (click)="hideGuideBookWarning()"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
           </div>
 
           <!-- Drop-down  -->
@@ -194,7 +208,10 @@
                 class="selected-option text-xl"
                 >{{ defaultOption }}</span
               >
-              <span *ngIf="showInputFieldInDropDown">
+              <span
+                *ngIf="showInputFieldInDropDown"
+                class="flex gap-2 items-center"
+              >
                 <input
                   #dropdownInput
                   type="text"
@@ -205,10 +222,24 @@
                   "
                   (keydown.enter)="updateOptionArray()"
                 />
+                <button
+                  (click)="updateOptionArray()"
+                  class="sm:hidden"
+                  style="
+                    font-size: 20px !important;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                  "
+                >
+                  שמור
+                </button>
               </span>
               <span class="dropdown-icon">▼</span>
             </div>
-            <div class="dropdown-options" [class.show]="isDropdownOpen">
+            <div
+              class="dropdown-options"
+              [class.show]="isDropdownOpen && !isEditing"
+            >
               <div
                 [contentEditable]="isEditing && isEditingOption === index"
                 class="dropdown-option"
@@ -277,6 +308,7 @@
                 class="justify-center flex flex-col items-center border-2 border-[#e67c73] w-32 btn-1 btn-height-35 rounded-full"
                 (click)="createCommomLink()"
                 matTooltip="הזמנת משתתפים נוספים לערכה"
+                *ngIf="userData"
               >
                 <div
                   class="w-10 h-8 flex items-center justify-center py-2 padding-none"
@@ -409,79 +441,85 @@
       </ul>
     </aside>
 
-    <div *ngIf="pack?.cards?.length > 1">
-      <div
-        class="category-row mb-2 d-flex flex-column"
-        *ngFor="let category of getFilteredCategories(); let i = index"
-      >
-        <div class="category-container">
-          <p class="position-relative category-name">
-            {{ category.categoryName }}&nbsp;
-            <span
-              *ngIf="!categoryOpenStates[i]"
-              class="position-absolute left-to-category"
-              (click)="toggle(i, true)"
-            >
-              <img src="./../../../assets/icons/icondropopen.png" alt="" />
-            </span>
-            <span
-              *ngIf="categoryOpenStates[i]"
-              class="position-absolute left-to-category"
-              (click)="toggle(i, false)"
-            >
-              <img src="./../../../assets/icons/icondropclose.png" alt="" />
-            </span>
-          </p>
-        </div>
-
-        <div class="d-flex overflow-cards" *ngIf="categoryOpenStates[i]">
-          <div
-            class="pack-content-page-cards"
-            [class.scroll-hidden]="!flipped"
-            [class.scroll-visible]="flipped"
-            *ngFor="let card of category.cardsImages; let i = index"
-          >
-            <button
-              *ngIf="showEditPack"
-              mat-icon-button
-              class="remove-btn"
-              (click)="removeCard(i)"
-            >
-              <mat-icon class="remove-icon">visibility_off</mat-icon>
-            </button>
-            <app-card
-              [imageWidth]="imageWidth"
-              [imageHeight]="imageHeight"
-              [flippedCardwidth]="flippedCardwidth"
-              [flipBoxInnerInCat]="true"
+    <ng-container *ngIf="pack?.cards?.length > 1">
+      <div #contentCards>
+        <div
+          class="category-row mb-2 d-flex flex-column"
+          *ngFor="let category of getFilteredCategories(); let i = index"
+        >
+          <div class="category-container">
+            <p class="position-relative category-name">
+              {{ category.categoryName }}&nbsp;
+              <span
+                *ngIf="!categoryOpenStates[i]"
+                class="position-absolute left-to-category"
+                (click)="toggle(i, true)"
+              >
+                <img src="./../../../assets/icons/icondropopen.png" alt="" />
+              </span>
+              <span
+                *ngIf="categoryOpenStates[i]"
+                class="position-absolute left-to-category"
+                (click)="toggle(i, false)"
+              >
+                <img src="./../../../assets/icons/icondropclose.png" alt="" />
+              </span>
+            </p>
+          </div>
+          <div style="row-gap: 20px; padding-bottom: 20px;" class="d-flex flex-row flex-wrap pack-content-page-wrapper" *ngIf="categoryOpenStates[i]" [transition-group]="'flip-list'">
+            <div
+              class="pack-content-page-cards"
+              [class.scroll-hidden]="!flipped"
+              [class.scroll-visible]="flipped"
+              *ngFor="let card of category.cardsImages; let i = index"
               [ngClass]="{
-                clickable: true,
-                scrollableCardOrd: !flipped && !isDoubleSided,
-                scrollableCard: flipped || isDoubleSided
+                'd-flex flex-column shuffle': true,
+                'shuffle-item': !showEditPack
               }"
-              [cardContent]="card"
-              [mobileView]="true"
-              [selected]="selectedCards.includes(card)"
-              [index]="i + 1"
-              [flipped]="
-                flipped || (!multipileChecked && selectedCards.includes(card))
-              "
-              (click)="cardSelected(card, i + 1, false, category.categoryName)"
+              transition-group-item
             >
-              <!-- TODO -->
-            </app-card>
+              <button
+                *ngIf="showEditPack"
+                mat-icon-button
+                class="remove-btn"
+                (click)="removeCard(i)"
+              >
+                <mat-icon class="remove-icon">visibility_off</mat-icon>
+              </button>
+              <app-card
+                [imageWidth]="imageWidth"
+                [imageHeight]="imageHeight"
+                [flippedCardwidth]="flippedCardwidth"
+                [flipBoxInnerInCat]="true"
+                [ngClass]="{
+                  clickable: true,
+                  scrollableCardOrd: !flipped && !isDoubleSided,
+                  scrollableCard: flipped || isDoubleSided
+                }"
+                [cardContent]="card"
+                [mobileView]="true"
+                [selected]="selectedCards.includes(card)"
+                [index]="i + 1"
+                [flipped]="
+                  flipped || (!multipileChecked && selectedCards.includes(card))
+                "
+                (click)="cardSelected(card, i + 1, false, category.categoryName)"
+              >
+                <!-- TODO -->
+              </app-card>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 
   <ng-container *ngIf="cards.length == 1">
-    <div class="d-flex flex-column align-items-center cards-container">
+    <div #contentCards class="d-flex flex-column align-items-center cards-container">
       <div
         *ngIf="pack && !showEditPack"
         [transition-group]="'flip-list'"
-        class="d-flex flex-row justify-content-center flex-wrap"
+        class="d-flex flex-row pack-content-page-wrapper flex-wrap"
       >
         <div
           *ngFor="let card of cardImages; let i = index"
@@ -494,8 +532,8 @@
           <app-card
             [ngStyle]="
               !flipped
-                ? { width: cardWidth + 'rem', height: cardHeight + 'rem' }
-                : {}
+                ? {}
+                : {margin: '10px 0'}
             "
             [imageWidth]="imageWidth"
             [imageHeight]="imageHeight"
@@ -833,6 +871,7 @@
           font-weight: bold;
           text-align: center;
           margin-top: 20px;
+          line-height: 1.2;
         "
       >
         {{ selectedOption }}
@@ -944,64 +983,86 @@
       <div
         class="random-content"
         style="
-          height: 80%;
           display: flex;
-          height: 80%;
+          height: 90%;
           flex-direction: column;
           align-items: center;
         "
       >
         <button
+        class="justify-center flex flex-col items-center border-2 border-[#e67c73] bg-[#ffe0d8] w-28 btn-2 btn-height-35 rounded-full"
+        id="randomCard"
+        type="button"
+        [disabled]="showEditPack"
+        (click)="shuffle()"
+        matTooltip="שליפה אקראית של קלף מהערכה"
+        >
+          <div
+        class="w-10 h-8 flex items-center justify-center py-2 padding-none"
+      >
+        <img
+          src="/assets/New/pack-view/info-icon.svg"
+          alt=""
+          width="15"
+          height="15"
+          class="img-info"
+        />
+          </div>
+            <div class="text-xs mb-1 text-xxs">קלף אקראי</div>
+        </button>
+        <div
+          *ngIf="randomSelectedCard.cardsImages[randomCardIndex].backImgUrl && flipped"
+        >
+          <!-- Front Side -->
+          <div>
+            <img
+              style="max-height: 69vh"
+              [src]="randomSelectedCard?.cardsImages[randomCardIndex].frontImgUrl"
+              alt="Card Front"
+            />
+          </div>
+        </div>
+
+        <div
+          *ngIf="randomSelectedCard.cardsImages[randomCardIndex].backImgUrl && !flipped"
+        >
+          <!-- Front Side -->
+          <div>
+            <img
+              style="max-height: 69vh"
+              [src]="randomSelectedCard?.cardsImages[randomCardIndex].backImgUrl"
+              alt="Card Front"
+            />
+          </div>
+        </div>
+
+        <div *ngIf="!randomSelectedCard.cardsImages[randomCardIndex].backImgUrl">
+          <!-- Back Side -->
+          <div>
+            <img
+              style="max-height: 69vh"
+              [src]="randomSelectedCard?.cardsImages[randomCardIndex].frontImgUrl"
+              alt="Card Front"
+            />
+          </div>
+        </div>
+        <div class="selected-cards-modal-btns">
+          <button
           class="btn btn-light"
-          [disabled]="randomCardIndex == cards[0]?.cardsImages.length - 1"
+          [disabled]="randomCardIndex == randomSelectedCard?.cardsImages.length - 1"
           (click)="changeRandomCard(1)"
         >
           <mat-icon class="btn-icon mat-icon-arrow">chevron_right</mat-icon>
         </button>
 
-        <div
-          *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && flipped"
-        >
-          <!-- Front Side -->
-          <div>
-            <img
-              style="height: 69vh"
-              [src]="cards[0]?.cardsImages[randomCardIndex].frontImgUrl"
-              alt="Card Front"
-            />
-          </div>
-        </div>
-
-        <div
-          *ngIf="cards[0].cardsImages[randomCardIndex].backImgUrl && !flipped"
-        >
-          <!-- Front Side -->
-          <div>
-            <img
-              style="height: 69vh"
-              [src]="cards[0]?.cardsImages[randomCardIndex].backImgUrl"
-              alt="Card Front"
-            />
-          </div>
-        </div>
-
-        <div *ngIf="!cards[0].cardsImages[randomCardIndex].backImgUrl">
-          <!-- Back Side -->
-          <div>
-            <img
-              style="height: 69vh"
-              [src]="cards[0]?.cardsImages[randomCardIndex].frontImgUrl"
-              alt="Card Front"
-            />
-          </div>
-        </div>
-        <button
+          <button
           class="btn btn-light"
           [disabled]="randomCardIndex == 0"
           (click)="changeRandomCard(-1)"
         >
           <mat-icon class="btn-icon mat-icon-arrow">chevron_left</mat-icon>
         </button>
+        </div>
       </div>
     </div>
   </div>
@@ -1028,7 +1089,7 @@
           <img src="../../../assets/icons/zoomPlus.png" />
           הצגת הקלפים שבחרתם
         </button>
-        <button class="remove-all" (click)="multiSelectCard = []">
+        <button class="remove-all" (click)="resetCategoryFooter()">
           <img src="../../../assets/icons/undo.png" />
           איפוס בחירה
         </button>
@@ -1046,7 +1107,7 @@
           הצגת הקלפים
         </button>
 
-        <button class="remove-all-mbl" (click)="multiSelectCard = []">
+        <button class="remove-all-mbl" (click)="resetCategoryFooter()">
           <img
             src="../../../assets/icons/undo.png"
             style="width: 11px; height: 11px"
@@ -1101,7 +1162,7 @@
             />
 
             <img
-              *ngIf="!item.card.backImgUrl"
+              *ngIf="!item.card.backImgUrl && !flipped"
               class="img-box"
               alt="Mentor-cards unique cards design for the front of the card"
               src="/assets/Mentor-Cards-Back.png"
@@ -1213,9 +1274,8 @@
                     "
                   />
                   <img
-                    [class.height-82]="card?.category"
                     class="img-box"
-                    *ngIf="!card?.backImgUrl"
+                    *ngIf="!card.backImgUrl && !flipped"
                     alt="Mentor-cards unique cards design for the back of the card"
                     src="/assets/Mentor-Cards-Back.png"
                   />
@@ -1228,13 +1288,6 @@
                   />
                   <img
                     *ngIf="card.frontImgUrl && flipped"
-                    class="img-box"
-                    alt="Mentor-cards unique cards design for the frontImgUrl of the card"
-                    [src]="card?.frontImgUrl"
-                    data-src="{{ card?.frontImgUrl }}"
-                  />
-                  <img
-                    *ngIf="!card.backImgUrl"
                     class="img-box"
                     alt="Mentor-cards unique cards design for the frontImgUrl of the card"
                     [src]="card?.frontImgUrl"
