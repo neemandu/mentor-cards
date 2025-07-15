@@ -121,6 +121,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
   isScrolled = 0;
 
+  packageHistory?: {
+    id?: string | null, 
+    removedCards?: cardsImages[] | null, 
+    selectedIndex?: number | null, 
+    option?: { text: string; icon?: string } | null
+  } = {
+    id: null,
+    removedCards: null,
+    selectedIndex: null,
+    option: null,
+  };
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     // Check the vertical scroll position
@@ -174,10 +186,15 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   selectOption(option: { text: string; icon?: string }, index: number): void {
+        
     const lastOption = this.options[this.options.length - 1];
+    this.packageHistory.option = this.options[index];
+    this.packageHistory.selectedIndex = index;
+
     if (option === lastOption) {
       this.openGuideBook();
     } else if (index === this.options.length - 2) {
+      this.packageHistory.option = option;
       this.isEditing = true;
       this.isEditingOption = index;
       this.selectedOption = option.text;
@@ -215,7 +232,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   // Method to save the edited option
-  saveEdit(option: { text: string }, index: number) {
+  saveEdit(option: { text: string }, index: number) { 
     if (this.isEditing && this.isEditingOption === index) {
       // Get the editable content
       const editedText = (
@@ -224,12 +241,14 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
         ) as HTMLElement
       )?.textContent?.trim();
 
-      if (editedText) {
+      if (editedText || option.text) {
+        
         // Update the option with the edited text
-        this.options[index].text = editedText;
+        this.options[index].text = option.text || editedText;
+        this.packageHistory.option = this.options[index];
 
         // Update the selectedOption to reflect the change
-        this.selectedOption = editedText;
+        this.selectedOption = this.options[index].text;
       }
 
       // Close the edit mode
@@ -259,6 +278,34 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     if (this.platform.ANDROID || this.platform.IOS) {
       this.isMobile = true;
     }
+
+    const urlPage = new URL(window.location.href);
+    const queryParams = urlPage.searchParams;    
+
+    this.packageHistory.id = this.id;
+
+    if (queryParams.has('removedCards')) {
+      this.packageHistory.removedCards = JSON.parse(
+        queryParams.get('removedCards')
+      );
+    }
+
+    if (queryParams.has('selectedIndex')) {
+      this.packageHistory.selectedIndex = parseInt(
+        queryParams.get('selectedIndex')
+      );
+    }
+
+    if (queryParams.has('option')) {
+      const option = JSON.parse(queryParams.get('option'));
+      
+      this.packageHistory.option = {
+        text: option.text,
+        icon: option.icon || undefined,
+      };
+    }
+    
+
     this.route.queryParams.subscribe((params) => {
       this.commonLink = params['link'];
       // console.log('link:', this.commonLink);
@@ -325,6 +372,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
           this.isLoaded = true;
 
           console.log('this.setPack function');
+          this.removedCards = this.packageHistory.removedCards || [];
           this.setPack(this.pack);
           console.log('this.pack', this.pack);
           let topQuestions = this.pack?.topQuestions;
@@ -340,6 +388,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
               'Pack name': this.pack?.name,
             });
           }
+          if (this.packageHistory.selectedIndex && this.packageHistory.selectedIndex !== 3) {
+            this.selectOption(this.options[this.packageHistory.selectedIndex], this.packageHistory.selectedIndex); 
+          }
+
+          if (this.packageHistory.selectedIndex === 3) {
+            this.selectOption(this.packageHistory.option, this.packageHistory.selectedIndex); 
+            this.showInputFieldInDropDown = false;
+            this.defaultOption = this.packageHistory.option.text;
+          }
+
         },
         (reject) => {
           this.isLoaded = true;
@@ -360,6 +418,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
       this.pack = pack;
       this.cards = [...this.pack.cards];
       this.cardImages = this.pack.cards[0]?.cardsImages || [];
+      this.cardImages = this.cardImages?.filter(cardImage => {        
+        return !this.removedCards.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
+      });
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
       this.unauthorized = this.pack.cards.length === 0;
       if (this.pack.cards.length > 1) {
@@ -985,6 +1046,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   removeCard(index: number): void {
     const removed = this.cardImages.splice(index, 1);
     this.removedCards = [...this.removedCards, ...removed];
+
+    this.packageHistory.removedCards = this.removedCards;
   }
 
   openGuideBook(): void {
@@ -1044,10 +1107,22 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
       'Pack name': this.pack?.name,
     });
 
+    const queryParams = new URLSearchParams();
+
+    if (this.packageHistory.removedCards) {
+      queryParams.set('removedCards', JSON.stringify(this.packageHistory.removedCards));
+    }
+    if (this.packageHistory.selectedIndex) {
+      queryParams.set('selectedIndex', JSON.stringify(this.packageHistory.selectedIndex));
+    }
+    if (this.packageHistory.option) {
+      queryParams.set('option', JSON.stringify(this.packageHistory.option));
+    }
+
     this.api.MakeCommonLink({ packId: this.id }).then((data) => {
       const url = window.location.href + '?link=' + data;
       this.dialog.open(CopyCommonLinkDialogComponent, {
-        data: { linkUrl: url },
+        data: { linkUrl: url + '&' + queryParams.toString() },
       });
     });
   }
