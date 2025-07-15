@@ -123,7 +123,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
   packageHistory?: {
     id?: string | null, 
-    removedCards?: cardsImages[] | null, 
+    removedCards?: string[] | null, 
     selectedIndex?: number | null, 
     option?: { text: string; icon?: string } | null
   } = {
@@ -286,18 +286,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
     if (queryParams.has('removedCards')) {
       this.packageHistory.removedCards = JSON.parse(
-        queryParams.get('removedCards')
+        window.atob(queryParams.get('removedCards'))
       );
     }
 
     if (queryParams.has('selectedIndex')) {
       this.packageHistory.selectedIndex = parseInt(
-        queryParams.get('selectedIndex')
+        window.atob(queryParams.get('selectedIndex'))
       );
     }
 
     if (queryParams.has('option')) {
-      const option = JSON.parse(queryParams.get('option'));
+      const option = JSON.parse(decodeURIComponent(escape(window.atob(queryParams.get('option')))));
       
       this.packageHistory.option = {
         text: option.text,
@@ -372,7 +372,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
           this.isLoaded = true;
 
           console.log('this.setPack function');
-          this.removedCards = this.packageHistory.removedCards || [];
+          if (this.packageHistory.removedCards.length) {
+            this.removedCards = this.packageHistory.removedCards.map(card => {
+              const image = this.pack.cards[0]?.cardsImages[0]
+              return {
+                ...image,
+                frontImgUrl: card,
+              }
+            }); 
+          } 
+          
           this.setPack(this.pack);
           console.log('this.pack', this.pack);
           let topQuestions = this.pack?.topQuestions;
@@ -1047,7 +1056,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     const removed = this.cardImages.splice(index, 1);
     this.removedCards = [...this.removedCards, ...removed];
 
-    this.packageHistory.removedCards = this.removedCards;
+    this.packageHistory.removedCards = this.removedCards.map(card => card.frontImgUrl);
   }
 
   openGuideBook(): void {
@@ -1110,13 +1119,13 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     const queryParams = new URLSearchParams();
 
     if (this.packageHistory.removedCards) {
-      queryParams.set('removedCards', JSON.stringify(this.packageHistory.removedCards));
+      queryParams.set('removedCards', window.btoa(JSON.stringify(this.packageHistory.removedCards)));
     }
     if (this.packageHistory.selectedIndex) {
-      queryParams.set('selectedIndex', JSON.stringify(this.packageHistory.selectedIndex));
+      queryParams.set('selectedIndex', window.btoa(JSON.stringify(this.packageHistory.selectedIndex)));
     }
     if (this.packageHistory.option) {
-      queryParams.set('option', JSON.stringify(this.packageHistory.option));
+      queryParams.set('option', window.btoa(unescape(encodeURIComponent(JSON.stringify(this.packageHistory.option)))));
     }
 
     this.api.MakeCommonLink({ packId: this.id }).then((data) => {
