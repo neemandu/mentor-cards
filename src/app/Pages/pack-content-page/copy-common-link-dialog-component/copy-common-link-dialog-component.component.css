@@ -1,10 +1,25 @@
 .dialog-content {
     text-align: center;
-    direction: rtl;
+    max-width: 700px;
   }
 
-  .custom-menu .mat-menu-item {
-    text-align: right; /* Aligns text to the right */
-    display: flex;
-    justify-content: flex-end; /* Aligns content to the right in flex containers */
-  }
+.custom-menu .mat-menu-item {
+  text-align: right; /* Aligns text to the right */
+  display: flex;
+  justify-content: flex-end; /* Aligns content to the right in flex containers */
+}
+
+.link-text {
+  overflow: hidden;
+  max-width: 645px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  font: 500 20px / 32px Roboto, Helvetica Neue, sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 16px;
+}
+.content {
+  display: flex;
+}
