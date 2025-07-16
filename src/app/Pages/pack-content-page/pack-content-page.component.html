@@ -482,7 +482,7 @@
                 *ngIf="showEditPack"
                 mat-icon-button
                 class="remove-btn"
-                (click)="removeCard(i)"
+                (click)="removeCard(i, category.categoryStepNumber)"
               >
                 <mat-icon class="remove-icon">visibility_off</mat-icon>
               </button>
