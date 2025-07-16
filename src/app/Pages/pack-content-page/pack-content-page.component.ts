@@ -331,9 +331,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }, 300);
 
-    this.getFilteredCategories()?.forEach((_, index) => {
-      this.categoryOpenStates[index] = true;
-    });
+    console.log(this.categoryOpenStates, "this.categoryOpenStates");
+    
     
   }
 
@@ -372,9 +371,9 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
           this.isLoaded = true;
 
           console.log('this.setPack function');
-          if (this.packageHistory.removedCards.length) {
+          if (this.packageHistory.removedCards?.length) {
             this.removedCards = this.packageHistory.removedCards.map(card => {
-              const image = this.pack.cards[0]?.cardsImages[0]
+              const image = this.cards[0]?.cardsImages[0]
               return {
                 ...image,
                 frontImgUrl: card,
@@ -425,18 +424,40 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   setPack(pack: PackContent | undefined): void {
     if (pack) {
       this.pack = pack;
-      this.cards = [...this.pack.cards];
-      this.cardImages = this.pack.cards[0]?.cardsImages || [];
-      this.cardImages = this.cardImages?.filter(cardImage => {        
-        return !this.removedCards.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
-      });
+      console.log(pack, 'pack');
+      
+      this.cards = [...this.pack.cards];      
+      this.cardImages = this.pack.cards[0]?.cardsImages ? [...this.pack.cards[0]?.cardsImages] : [];
+      if (this.removedCards.length) {
+        this.cardImages = this.cardImages?.filter(cardImage => {        
+          return !this.removedCards?.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
+        });
+      }
+      
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
       this.unauthorized = this.pack.cards.length === 0;
       if (this.pack.cards.length > 1) {
-        this.categoriesCard = this.pack.cards;
+          if (this.removedCards?.length) {
+            this.categoriesCard = this.pack.cards.map((card) => {
+            const cardImages = card.cardsImages.filter((cardImage) => {
+              return !this.removedCards?.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
+            });
+
+            return {
+              ...card,
+              cardsImages: cardImages,
+            }
+          }); 
+        } else {
+          this.categoriesCard = JSON.parse(JSON.stringify(this.pack.cards));
+        }
+        // this.categoriesCard = this.pack.cards;
         console.log(this.categoriesCard, 'cards here');
       }
       console.log(this.cardImages);
+      this.getFilteredCategories()?.forEach((_, index) => {
+        this.categoryOpenStates[index] = true;
+      });
     } else {
       this.error = 'Pack not found';
     }
@@ -525,7 +546,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
           this.selectedCategory.categoryStepNumber
       );
     }
-    return this.categoriesCard;
+    return [...this.categoriesCard];
   }
 
   showAll() {
@@ -1047,13 +1068,32 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
   // cardImages
   resetEditPack(): void {
-    this.cardImages = [...this.cardImages, ...this.removedCards];
+    if (this.categoriesCard?.length) {
+      console.log(this.pack.cards,' this.pack.cards');
+      
+      this.categoriesCard = JSON.parse(JSON.stringify(this.pack.cards));
+      console.log(this.categoriesCard, 'this.categoriesCard');
+      console.log(this.cards , "this.cards");
+      
+      
+    } else {
+      this.cardImages = [...this.cardImages, ...this.removedCards];
+    }
     this.removedCards = [];
     this.editPack();
   }
 
-  removeCard(index: number): void {
-    const removed = this.cardImages.splice(index, 1);
+  removeCard(index: number, stepNumber?:number): void {
+    console.log(this.categoriesCard, 'this.categoriesCard');
+    
+    let removed = [];
+    const findCategory = this.categoriesCard?.find(card => card.categoryStepNumber === stepNumber);
+    if (findCategory) {
+      removed = findCategory.cardsImages.splice(index, 1);
+    } else {
+      removed = this.cardImages.splice(index, 1);
+    }
+
     this.removedCards = [...this.removedCards, ...removed];
 
     this.packageHistory.removedCards = this.removedCards.map(card => card.frontImgUrl);
