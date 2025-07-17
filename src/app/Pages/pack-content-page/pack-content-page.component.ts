@@ -186,15 +186,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   selectOption(option: { text: string; icon?: string }, index: number): void {
-        
     const lastOption = this.options[this.options.length - 1];
-    this.packageHistory.option = this.options[index];
     this.packageHistory.selectedIndex = index;
 
     if (option === lastOption) {
       this.openGuideBook();
     } else if (index === this.options.length - 2) {
-      this.packageHistory.option = option;
       this.isEditing = true;
       this.isEditingOption = index;
       this.selectedOption = option.text;
@@ -203,6 +200,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
         this.dropdownInput.nativeElement.focus();
       });
     } else {
+      this.packageHistory.option = this.options[index];
       this.selectedOption = option.text;
       this.defaultOption = this.selectedOption;
       this.isDropdownOpen = false;
@@ -220,6 +218,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
       };
       this.defaultOption = newText; // Set the edited option as the selected option
       this.selectedOption = newText; // Reflect the change in the displayed selected option
+      this.packageHistory.option = this.options[this.packageHistory.selectedIndex];
     }
     this.isEditing = false;
     this.dropdownInput.nativeElement.value = '';
@@ -396,11 +395,12 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
               'Pack name': this.pack?.name,
             });
           }
-          if (this.packageHistory.selectedIndex && this.packageHistory.selectedIndex !== 3) {
+          const penultLength = this.options.length - 2;
+          if (this.packageHistory.selectedIndex && this.packageHistory.selectedIndex !== penultLength) {
             this.selectOption(this.options[this.packageHistory.selectedIndex], this.packageHistory.selectedIndex); 
           }
 
-          if (this.packageHistory.selectedIndex === 3) {
+          if (this.packageHistory.selectedIndex === penultLength) {
             this.selectOption(this.packageHistory.option, this.packageHistory.selectedIndex); 
             this.showInputFieldInDropDown = false;
             this.defaultOption = this.packageHistory.option.text;
@@ -546,7 +546,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
           this.selectedCategory.categoryStepNumber
       );
     }
-    return [...this.categoriesCard];
+    return this.categoriesCard;
   }
 
   showAll() {
@@ -1161,7 +1161,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     if (this.packageHistory.removedCards) {
       queryParams.set('removedCards', window.btoa(JSON.stringify(this.packageHistory.removedCards)));
     }
-    if (this.packageHistory.selectedIndex) {
+    if (this.packageHistory.selectedIndex !== null) {
       queryParams.set('selectedIndex', window.btoa(JSON.stringify(this.packageHistory.selectedIndex)));
     }
     if (this.packageHistory.option) {
