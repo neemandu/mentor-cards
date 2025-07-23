@@ -66,6 +66,7 @@ export class PackPreviewComponent implements OnInit {
       sub.unsubscribe();
       this.closeDialog();
     });
+    
     const ls = localStorage.getItem('packsToOpenAutomatically');
     console.log('Top questions retrieved:', ls);
     const packsToOpenAutomatically = ls ? ls.split(',') : [];
@@ -93,7 +94,6 @@ export class PackPreviewComponent implements OnInit {
       this.monthlyPlan = this.data.pack.subscriptionPlans.find(
         (el) => el?.billingCycleInMonths === 1
       );
-      console.log(this.monthlyPlan, 'this.monthlyPlan');
       
       if (this.monthlyPlan) {
         this.monthlyPlan['priceForMentorCardsMembers'] =
