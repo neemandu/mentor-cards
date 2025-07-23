@@ -161,7 +161,7 @@
     <div id="logged-in" *ngIf="userData">
       <div
         id="pack-owned"
-        *ngIf="data.pack.cards"
+        *ngIf="data.pack.cards?.length"
         class="actions"
       >
         <button
@@ -175,7 +175,7 @@
 
       <div
         id="logged-in-has-no-program"
-        *ngIf="!data.pack.isFree && userData.status === 'NOPLAN' && !userData.groupRole && !userData?.orgMembership?.trialPeriodInDays"
+        *ngIf="(!data.pack.isFree && userData.status === 'NOPLAN' && !userData.groupRole && !userData?.orgMembership?.trialPeriodInDays) || !data.pack.cards?.length"
         class="actions"
       >
         <a
