@@ -226,14 +226,23 @@ async function getUserByPayPalTxId(transaction_id){
     return currUser;
 }
 
-async function addToUnsubscribersList(email) {
-    const body = JSON.stringify({
+async function addToUnsubscribersList(email, billingCycleInMonths) {
+    var list = billingCycleInMonths == 1 ? 1051763 : (billingCycleInMonths == 12 ? 1051764 : -1);
+ 
+    const bodyObject = {
         "email": email,
         "customFields": {
-            "i2": "NO_PLAN"
+          "i2": "NO_PLAN"
         },
         "lists_ToSubscribe": [927539]
-    });
+      };
+
+    if (list === -1) {
+        bodyObject["lists_ToUnsubscribe"] = [list];
+    }
+
+    
+    const body = JSON.stringify(bodyObject);
 
     var bearerToken = await getParam("smooveApiKey");
     
@@ -256,6 +265,7 @@ async function addToUnsubscribersList(email) {
 }
 
 async function updateEmailList(email, amount, subDescription, invoiceRunningId, s3Url) {
+    var list = subDescription.includes('חודש') ? 1051763 : (subDescription.includes('שנתי') ? 1051764 : 927198)
     const data = JSON.stringify({
         "email": email,
         "customFields": {
@@ -268,7 +278,7 @@ async function updateEmailList(email, amount, subDescription, invoiceRunningId, 
             "i10": subDescription,
             "i11": -1
         },
-        "lists_ToSubscribe": [927198]
+        "lists_ToSubscribe": [927198, list]
     });
   
     var bearerToken = await getParam("smooveApiKey");
@@ -457,17 +467,17 @@ exports.handler = async (event) => {
                     if(!user){
                         user = await getUserByPayPalTxId(transaction_id);
                     }
-        
+                    var subscription = getSubByTxID(user, transaction_id);
                     if(user && event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
                         await cancelUserSubscription(user, transaction_id);
-                        await addToUnsubscribersList(user.email, user.phone, user.fullName);
+                        await addToUnsubscribersList(user.email, subscription.subscriptionPlan.billingCycleInMonths);
                     }
                     else if(user && event_type == "PAYMENT.SALE.COMPLETED"){
                         var amount = paypal_body.resource.amount.total;
                         if(!user.payments){
                             user.payments = [];
                         } 
-                        var subscription = getSubByTxID(user, transaction_id);
+                        
                         var now = new Date().toISOString();
                         let paymentId = user.id+"_"+id;
         

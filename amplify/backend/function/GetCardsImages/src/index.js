@@ -297,7 +297,7 @@ exports.handler = async (event, context, callback) => {
          return event.source['cards'];
      }
  
-    if(!isExternalPack && user){
+    if(user){
         console.log('Checking if its a free trial period');
         var allPackagesDate = new Date();
         //var trialPeriodInDays = 14;
