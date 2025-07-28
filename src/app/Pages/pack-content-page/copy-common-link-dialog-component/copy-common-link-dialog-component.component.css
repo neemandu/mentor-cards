@@ -10,15 +10,7 @@
 }
 
 .link-text {
-  overflow: hidden;
-  max-width: 645px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  line-clamp: 1;
-  font: 500 20px / 32px Roboto, Helvetica Neue, sans-serif;
-  letter-spacing: normal;
-  margin: 0 0 16px;
+  @apply text-xl overflow-hidden max-w-[645px];
 }
 .content {
   display: flex;
