@@ -1426,6 +1426,9 @@
         "rule5": "Mentor-cards reserves copyright and all content of the site is original or has appropriate approvals.",
         "rule6": "The availability of card packs and content may change from time to time."
       }
+    },
+    "dialogs": {
+      "commonLink": "Send to participants"
     }
   },
   "selectLanguageTooltip": "Select a language"
