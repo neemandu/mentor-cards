@@ -27,7 +27,7 @@
                 />
               </span>
               <div class="text-black text-center icons-bg">
-                {{ pack.likesCounter }}
+                {{ pack?.likesCounter }}
               </div>
             </div>
             <div class="absolute z-8 text-center bottom-2 right-4">
@@ -482,7 +482,7 @@
                 *ngIf="showEditPack"
                 mat-icon-button
                 class="remove-btn"
-                (click)="removeCard(i)"
+                (click)="removeCard(i, category.categoryStepNumber)"
               >
                 <mat-icon class="remove-icon">visibility_off</mat-icon>
               </button>

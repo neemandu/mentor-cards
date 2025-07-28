@@ -1,10 +1,17 @@
 .dialog-content {
     text-align: center;
-    direction: rtl;
+    max-width: 700px;
   }
 
-  .custom-menu .mat-menu-item {
-    text-align: right; /* Aligns text to the right */
-    display: flex;
-    justify-content: flex-end; /* Aligns content to the right in flex containers */
-  }
+.custom-menu .mat-menu-item {
+  text-align: right; /* Aligns text to the right */
+  display: flex;
+  justify-content: flex-end; /* Aligns content to the right in flex containers */
+}
+
+.link-text {
+  @apply text-xl overflow-hidden max-w-[645px];
+}
+.content {
+  display: flex;
+}

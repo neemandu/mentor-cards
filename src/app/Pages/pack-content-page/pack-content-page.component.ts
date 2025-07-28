@@ -121,6 +121,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
   isScrolled = 0;
 
+  packageHistory?: {
+    id?: string | null, 
+    removedCards?: string[] | null, 
+    selectedIndex?: number | null, 
+    option?: { text: string; icon?: string } | null
+  } = {
+    id: null,
+    removedCards: null,
+    selectedIndex: null,
+    option: null,
+  };
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     // Check the vertical scroll position
@@ -175,6 +187,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
   selectOption(option: { text: string; icon?: string }, index: number): void {
     const lastOption = this.options[this.options.length - 1];
+    this.packageHistory.selectedIndex = index;
+
     if (option === lastOption) {
       this.openGuideBook();
     } else if (index === this.options.length - 2) {
@@ -186,6 +200,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
         this.dropdownInput.nativeElement.focus();
       });
     } else {
+      this.packageHistory.option = this.options[index];
       this.selectedOption = option.text;
       this.defaultOption = this.selectedOption;
       this.isDropdownOpen = false;
@@ -203,6 +218,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
       };
       this.defaultOption = newText; // Set the edited option as the selected option
       this.selectedOption = newText; // Reflect the change in the displayed selected option
+      this.packageHistory.option = this.options[this.packageHistory.selectedIndex];
     }
     this.isEditing = false;
     this.dropdownInput.nativeElement.value = '';
@@ -215,7 +231,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   // Method to save the edited option
-  saveEdit(option: { text: string }, index: number) {
+  saveEdit(option: { text: string }, index: number) { 
     if (this.isEditing && this.isEditingOption === index) {
       // Get the editable content
       const editedText = (
@@ -224,12 +240,14 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
         ) as HTMLElement
       )?.textContent?.trim();
 
-      if (editedText) {
+      if (editedText || option.text) {
+        
         // Update the option with the edited text
-        this.options[index].text = editedText;
+        this.options[index].text = option.text || editedText;
+        this.packageHistory.option = this.options[index];
 
         // Update the selectedOption to reflect the change
-        this.selectedOption = editedText;
+        this.selectedOption = this.options[index].text;
       }
 
       // Close the edit mode
@@ -259,6 +277,34 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     if (this.platform.ANDROID || this.platform.IOS) {
       this.isMobile = true;
     }
+
+    const urlPage = new URL(window.location.href);
+    const queryParams = urlPage.searchParams;    
+
+    this.packageHistory.id = this.id;
+
+    if (queryParams.has('removedCards')) {
+      this.packageHistory.removedCards = JSON.parse(
+        window.atob(queryParams.get('removedCards'))
+      );
+    }
+
+    if (queryParams.has('selectedIndex')) {
+      this.packageHistory.selectedIndex = parseInt(
+        window.atob(queryParams.get('selectedIndex'))
+      );
+    }
+
+    if (queryParams.has('option')) {
+      const option = JSON.parse(decodeURIComponent(escape(window.atob(queryParams.get('option')))));
+      
+      this.packageHistory.option = {
+        text: option.text,
+        icon: option.icon || undefined,
+      };
+    }
+    
+
     this.route.queryParams.subscribe((params) => {
       this.commonLink = params['link'];
       // console.log('link:', this.commonLink);
@@ -284,9 +330,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     }, 300);
 
-    this.getFilteredCategories()?.forEach((_, index) => {
-      this.categoryOpenStates[index] = true;
-    });
+    console.log(this.categoryOpenStates, "this.categoryOpenStates");
+    
     
   }
 
@@ -325,6 +370,16 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
           this.isLoaded = true;
 
           console.log('this.setPack function');
+          if (this.packageHistory.removedCards?.length) {
+            this.removedCards = this.packageHistory.removedCards.map(card => {
+              const image = this.cards[0]?.cardsImages[0]
+              return {
+                ...image,
+                frontImgUrl: card,
+              }
+            }); 
+          } 
+          
           this.setPack(this.pack);
           console.log('this.pack', this.pack);
           let topQuestions = this.pack?.topQuestions;
@@ -340,6 +395,17 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
               'Pack name': this.pack?.name,
             });
           }
+          const penultLength = this.options.length - 2;
+          if (this.packageHistory.selectedIndex && this.packageHistory.selectedIndex !== penultLength) {
+            this.selectOption(this.options[this.packageHistory.selectedIndex], this.packageHistory.selectedIndex); 
+          }
+
+          if (this.packageHistory.selectedIndex === penultLength) {
+            this.selectOption(this.packageHistory.option, this.packageHistory.selectedIndex); 
+            this.showInputFieldInDropDown = false;
+            this.defaultOption = this.packageHistory.option.text;
+          }
+
         },
         (reject) => {
           this.isLoaded = true;
@@ -358,15 +424,40 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   setPack(pack: PackContent | undefined): void {
     if (pack) {
       this.pack = pack;
-      this.cards = [...this.pack.cards];
-      this.cardImages = this.pack.cards[0]?.cardsImages || [];
+      console.log(pack, 'pack');
+      
+      this.cards = [...this.pack.cards];      
+      this.cardImages = this.pack.cards[0]?.cardsImages ? [...this.pack.cards[0]?.cardsImages] : [];
+      if (this.removedCards.length) {
+        this.cardImages = this.cardImages?.filter(cardImage => {        
+          return !this.removedCards?.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
+        });
+      }
+      
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
       this.unauthorized = this.pack.cards.length === 0;
       if (this.pack.cards.length > 1) {
-        this.categoriesCard = this.pack.cards;
+          if (this.removedCards?.length) {
+            this.categoriesCard = this.pack.cards.map((card) => {
+            const cardImages = card.cardsImages.filter((cardImage) => {
+              return !this.removedCards?.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
+            });
+
+            return {
+              ...card,
+              cardsImages: cardImages,
+            }
+          }); 
+        } else {
+          this.categoriesCard = JSON.parse(JSON.stringify(this.pack.cards));
+        }
+        // this.categoriesCard = this.pack.cards;
         console.log(this.categoriesCard, 'cards here');
       }
       console.log(this.cardImages);
+      this.getFilteredCategories()?.forEach((_, index) => {
+        this.categoryOpenStates[index] = true;
+      });
     } else {
       this.error = 'Pack not found';
     }
@@ -977,14 +1068,35 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
   // cardImages
   resetEditPack(): void {
-    this.cardImages = [...this.cardImages, ...this.removedCards];
+    if (this.categoriesCard?.length) {
+      console.log(this.pack.cards,' this.pack.cards');
+      
+      this.categoriesCard = JSON.parse(JSON.stringify(this.pack.cards));
+      console.log(this.categoriesCard, 'this.categoriesCard');
+      console.log(this.cards , "this.cards");
+      
+      
+    } else {
+      this.cardImages = [...this.cardImages, ...this.removedCards];
+    }
     this.removedCards = [];
     this.editPack();
   }
 
-  removeCard(index: number): void {
-    const removed = this.cardImages.splice(index, 1);
+  removeCard(index: number, stepNumber?:number): void {
+    console.log(this.categoriesCard, 'this.categoriesCard');
+    
+    let removed = [];
+    const findCategory = this.categoriesCard?.find(card => card.categoryStepNumber === stepNumber);
+    if (findCategory) {
+      removed = findCategory.cardsImages.splice(index, 1);
+    } else {
+      removed = this.cardImages.splice(index, 1);
+    }
+
     this.removedCards = [...this.removedCards, ...removed];
+
+    this.packageHistory.removedCards = this.removedCards.map(card => card.frontImgUrl);
   }
 
   openGuideBook(): void {
@@ -1044,10 +1156,22 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
       'Pack name': this.pack?.name,
     });
 
+    const queryParams = new URLSearchParams();
+
+    if (this.packageHistory.removedCards) {
+      queryParams.set('removedCards', window.btoa(JSON.stringify(this.packageHistory.removedCards)));
+    }
+    if (this.packageHistory.selectedIndex !== null) {
+      queryParams.set('selectedIndex', window.btoa(JSON.stringify(this.packageHistory.selectedIndex)));
+    }
+    if (this.packageHistory.option) {
+      queryParams.set('option', window.btoa(unescape(encodeURIComponent(JSON.stringify(this.packageHistory.option)))));
+    }
+
     this.api.MakeCommonLink({ packId: this.id }).then((data) => {
       const url = window.location.href + '?link=' + data;
       this.dialog.open(CopyCommonLinkDialogComponent, {
-        data: { linkUrl: url },
+        data: { linkUrl: url + '&' + queryParams.toString() },
       });
     });
   }
