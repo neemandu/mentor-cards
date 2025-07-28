@@ -1,9 +1,9 @@
 <div class="dialog-content">
   <h1>הקישור נוצר בהצלחה!</h1>
-  <div class="content">
-    <p class="link-text">
-      {{ data.linkUrl }}
-    </p>
+  <div class="content justify-center items-center mb-4">
+    <a href={{data.linkUrl}} target="_blank" class="link-text">
+      {{ "components.dialogs.commonLink" | translate }}
+    </a>
      <button mat-icon-button [matMenuTriggerFor]="shareMenu" matTooltip="שתף">
       <mat-icon>share</mat-icon>
     </button>
