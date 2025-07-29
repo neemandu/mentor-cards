@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { SharedDialogsService } from 'src/app/Services/shared-dialogs.service';
 
 @Component({
@@ -9,7 +10,11 @@ import { SharedDialogsService } from 'src/app/Services/shared-dialogs.service';
 })
 export class HomePageFooterComponent implements OnInit {
 
-  constructor(private router: Router,private sharedDialogsService: SharedDialogsService) { }
+  constructor(
+    private router: Router,
+    private sharedDialogsService: SharedDialogsService,  
+    public langDirectionService: LangDirectionService
+  ) { }
 
   ngOnInit(): void {
   }
