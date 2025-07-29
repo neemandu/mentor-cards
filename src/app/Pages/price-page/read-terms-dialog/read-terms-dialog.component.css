@@ -101,7 +101,7 @@ mat-icon {
     color: white;
     border-color: white;
     font-weight: 500;
-    font-family: var(--main-font-family);
+
     font-size: large;
     transition: color .15s ease-in-out, background-color .15s ease-in-out;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  

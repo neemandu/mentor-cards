@@ -4,7 +4,7 @@
   [dir]="langDirectionService.currentLangDirection"
   class="bg-[#fcf4f2] min-h-screen"
 >
-  <div class="min-h-screen">
+  <div class="min-h-screen" dir="rtl">
     <div
       class="flex justify-between bg-[#f3f9f9] mt-4 w-full px-4 pt-2"
       *ngIf="isMobileScreen"
@@ -65,7 +65,6 @@
     >
       <div
         id="content"
-        [dir]="langDirectionService.currentLangDirection"
         class="w-[1350px] content-ltr mx-auto shadow-xl bg-[#f3f9f9] rounded-b-2xl flex items-center"
       >
         <div

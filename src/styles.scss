@@ -1,9 +1,13 @@
 @use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
-
-
 @include mat.core();
+
+$my-font: '"Open Sans Hebrew", sans-serif';
+
+$typography-config: mat.define-typography-config(
+  $font-family: $my-font,
+);
 
 $custom-primary: (
   50: #fff8e1,
@@ -21,35 +25,45 @@ $custom-primary: (
   A400: #ffc400,
   A700: #ffab00,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
     500: white,
     600: white,
     700: white,
     800: white,
     900: white,
-    A100: $black-87-opacity,
-    A200: $black-87-opacity,
-    A400: $black-87-opacity,
-    A700: $black-87-opacity,
+    A100: rgba(0, 0, 0, 0.87),
+    A200: rgba(0, 0, 0, 0.87),
+    A400: rgba(0, 0, 0, 0.87),
+    A700: rgba(0, 0, 0, 0.87)
   )
 );
 
 $my-app-primary: mat.define-palette($custom-primary);
-$my-app-accent:  mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$my-app-warn:    mat.define-palette(mat.$red-palette);
+$my-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-app-warn: mat.define-palette(mat.$red-palette);
 
-$my-app-theme: mat.define-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+$my-app-theme: mat.define-light-theme((
+  color: (
+    primary: $my-app-primary,
+    accent: $my-app-accent,
+    warn: $my-app-warn
+  ),
+  typography: $typography-config
+));
+
+@include mat.all-component-themes($my-app-theme);
+
+@include mat.typography-hierarchy($typography-config);
 
 .mat-form-field-appearance-fill .mat-form-field-flex::before,
 .mat-form-field-appearance-fill .mat-form-field-flex::after {
-  background-color: map-get($my-app-primary, 500);
+  background-color: mat.get-color-from-palette($my-app-primary, 500);
 }
 
-
-
-
-@include mat.all-component-themes($my-app-theme);
+:root {
+  font-family: $my-font;
+}
