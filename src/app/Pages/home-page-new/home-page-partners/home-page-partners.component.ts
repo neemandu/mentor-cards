@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page-partners.component.css'],
 })
 export class HomePagePartnersComponent implements OnInit, OnDestroy {
+  @Input() isPricePage: boolean = false;
   constructor(public router: Router) {}
 
   logos = [
