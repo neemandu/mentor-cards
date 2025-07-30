@@ -526,7 +526,8 @@
   </div>
 
   <!-- All Plan Features Comparison Section -->
-  <div class="bg-[#fcf4f2] py-16">
+  <!-- Desktop/Web View (hidden on mobile) -->
+  <div class="hidden md:block bg-[#fcf4f2] py-16">
     <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 80rem">
       <div class="text-center mb-12" style="border-bottom: 1px solid #7e7e7e">
         <h2 class="text-3xl font-bold mb-4">All plan features</h2>
@@ -768,6 +769,13 @@
         </table>
       </div>
     </div>
+  </div>
+
+  <!-- Mobile View (shown only on mobile) -->
+  <div class="block md:hidden">
+    <app-mobile-features-comparison
+      [monthlyPrice]="monthlyPrice"
+    ></app-mobile-features-comparison>
   </div>
   <div style="margin-top: 2rem">
     <app-home-page-partners [isPricePage]="true"></app-home-page-partners>

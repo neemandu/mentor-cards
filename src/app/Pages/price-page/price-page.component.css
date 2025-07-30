@@ -277,3 +277,22 @@ label span {
   font-size: 2.25rem /* 36px */;
   line-height: 2.5rem /* 40px */;
 }
+
+/* Responsive visibility classes */
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .md\:block {
+    display: block;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+}
