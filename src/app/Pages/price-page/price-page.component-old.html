@@ -1,0 +1,212 @@
+<div id="content" class="d-flex flex-column align-items-center" [dir]="langDirectionService.currentLangDirection">
+  <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
+  <img
+    id="top-image"
+    src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
+    alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
+  />
+  <span id="title" *ngIf="!userData?.orgMembership"> {{ "pages.price-page.our-plans-title" | translate }}</span
+  >
+  <br />
+</div>
+<div style="text-align: center" [dir]="langDirectionService.currentLangDirection">
+  <div *ngIf="subPlans" class="program-cards">
+    <mat-card>
+      <mat-card-title>  {{ "pages.price-page.monthly-plan-title" | translate }}</mat-card-title>
+      <mat-card-content>
+        <br>
+        <p class="price-line">
+          {{ "pages.price-page.month-label" | translate }} /
+          <span class="price-number"
+            >₪{{
+              monthlySubscription.fullPrice /
+                monthlySubscription?.billingCycleInMonths
+            }}</span
+          >
+        </p>
+        <br />
+        <ul>
+          <li>
+            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
+            <li>
+              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
+            <li>
+              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          id="monthlySubscription"
+          *ngIf="userSingedIn &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
+          "
+          class="popular-purchase-btn purchase-btn"
+          type="button"
+          (click)="checkFreePeriod(monthlySubscription.id)"
+        >
+        {{ "pages.price-page.join-button-text" | translate }}  
+        </button>
+        <button
+          *ngIf="userSingedIn &&
+            userData?.status === 'PLAN' &&
+            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
+          "
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+      {{ "pages.price-page.already-registered-button-text" | translate }}  
+        </button>
+        <button
+        *ngIf="!userSingedIn"
+        class="popular-purchase-btn purchase-btn"
+        type="button"
+        (click)="signInSignUp()">
+        {{ "pages.price-page.join-button-text" | translate }}  
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card id="popular-mat-card">
+      <mat-card-title>  {{ "pages.price-page.yearly-plan-title" | translate }}</mat-card-title>
+      <mat-card-content>
+        <br>
+        <p class="price-line">
+          {{ "pages.price-page.year-label" | translate }} /
+          <span class="price-number"
+            >₪{{
+              yearlySubscription.fullPrice
+            }}</span
+          >
+        </p>
+        <br />
+        <ul>
+          <li>
+            {{ "pages.price-page.free-two-months-instruction" | translate }}    </li>
+          <li>
+            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
+            <li>
+              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
+            <li>
+              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          id="monthlySubscription"
+          *ngIf="userSingedIn &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
+          "
+          class="popular-purchase-btn purchase-btn"
+          type="button"
+          (click)="checkFreePeriod(yearlySubscription.id)"
+        >
+        {{ "pages.price-page.join-button-text" | translate }}  
+        </button>
+        <button
+          *ngIf="userSingedIn &&
+            userData?.status === 'PLAN' &&
+            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12
+          "
+          class="disabled-btn purchase-btn"
+          type="button"
+          disabled
+        >
+      {{ "pages.price-page.already-registered-button-text" | translate }}  
+        </button>
+        <button
+        *ngIf="!userSingedIn"
+        class="popular-purchase-btn purchase-btn"
+        type="button"
+        (click)="signInSignUp()">
+        {{ "pages.price-page.join-button-text" | translate }}  
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <!--<mat-card id="popular-mat-card">
+      <mat-card-title>   {{ "pages.price-page.popularMatCard.title" | translate }}   </mat-card-title>
+      <mat-card-content>
+        <br>
+        <p class="price-line">
+          {{ "pages.price-page.popularMatCard.payment" | translate }}  <b><u>  {{ "pages.price-page.popularMatCard.onceBold" | translate }}  </u></b>  {{ "pages.price-page.popularMatCard.inTotal" | translate }}
+          <span class="price-number"
+            >₪{{
+             yearlySubscription.fullPrice
+            }}
+          </span>
+        </p>
+        <br />     
+        <ul>
+          <li>חודשיים מתנה!</li>
+          <li>
+            {{ "pages.price-page.popularMatCard.benefits.fullAccess" | translate }}     </li>
+            <li>
+              {{ "pages.price-page.popularMatCard.benefits.futureAccess" | translate }}         </li>
+            <li>
+              {{ "pages.price-page.popularMatCard.benefits.variety" | translate }}      </li>
+            <li>
+              {{ "pages.price-page.popularMatCard.benefits.connectAnywhere" | translate }}  
+            </li>
+        </ul></mat-card-content>
+      <mat-card-actions>
+        <button
+          *ngIf="userSingedIn &&
+            (userData?.status === 'NOPLAN' ||
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
+          "
+          class="popular-purchase-btn purchase-btn"
+          (click)="checkFreePeriod(yearlySubscription.id)"
+        >
+        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}  
+        </button>
+        <button
+          *ngIf="userSingedIn &&
+            userData?.status === 'PLAN' &&
+            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
+          "
+          class="disabled-btn purchase-btn"
+          disabled
+        >
+        {{ "pages.price-page.popularMatCard.registeredBtn" | translate }}  
+        </button>
+        <button
+        *ngIf="!userSingedIn"
+        class="popular-purchase-btn purchase-btn"
+        (click)="signInSignUp()">
+        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}     
+        </button>
+      </mat-card-actions>
+    </mat-card>  -->
+ 
+    <mat-card>
+      <mat-card-title>     {{ "pages.price-page.orgsMatCard.title" | translate }}   </mat-card-title>
+      <mat-card-content class="orgs"> {{ "pages.price-page.orgsMatCard.content" | translate }}  
+      </mat-card-content>
+      <mat-card-actions>
+        <a
+          routerLink="/contact-us"
+          class="popular-purchase-btn purchase-btn flex justify-center text-decoration-none"
+        >
+        {{ "pages.price-page.orgsMatCard.contactBtn" | translate }}  
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>      
+  <br><br>
+<button class="coupon"
+id="couponCodeBtn"
+type="button"
+(click)="openEnterCouponCodeModal()"
+>
+{{ "pages.price-page.couponBtn" | translate }}  
+</button><br>
+  <img
+    id="payment-img"
+    alt="Logos of how to pay"
+    src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
+    alt="Secure Payment"
+  />
+</div>
+
+<app-information-bar></app-information-bar>
