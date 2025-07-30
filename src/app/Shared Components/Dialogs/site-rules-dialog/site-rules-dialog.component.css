@@ -3,12 +3,10 @@ mat-icon {
 }
 
 [dir = "rtl"] {
-  font-family: 'Open Sans Hebrew', sans-serif;
   text-align: right;
 }
 
 [dir = "ltr"] {
-  font-family: 'Open Sans Hebrew', sans-serif;
   text-align: left;
 }
 

@@ -2,12 +2,6 @@ mat-icon {
   font-family: 'Material Icons';
 }
 
-* {
-  font-family: 'Open Sans Hebrew', sans-serif;
-  direction: rtl;
-  text-align: right;
-}
-
 mat-toolbar {
   margin-top: -10px;
   background-color: transparent;
