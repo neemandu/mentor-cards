@@ -3,7 +3,7 @@
 
 @include mat.core();
 
-$my-font: '"Open Sans Hebrew", sans-serif';
+$my-font: "Open Sans", sans-serif;
 
 $typography-config: mat.define-typography-config(
   $font-family: $my-font,
@@ -64,6 +64,17 @@ $my-app-theme: mat.define-light-theme((
   background-color: mat.get-color-from-palette($my-app-primary, 500);
 }
 
+// @font-face {
+//   font-family: 'Open Sans Hebrew';
+//   font-style: normal;
+//   font-weight: 300 800;
+//   font-stretch: 100%;
+//   font-display: swap;
+//   src: url(https://fonts.gstatic.com/s/opensans/v43/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu1aB.woff2) format('woff2');
+//   unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+// }
+
 :root {
   font-family: $my-font;
+  // unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
 }

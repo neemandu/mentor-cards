@@ -18,7 +18,6 @@
 .mat-card-title {
     text-align: center;
     margin-top: 1%;
-    font-family: 'Open Sans Hebrew', sans-serif;
 }
 
 .mat-card {
@@ -40,18 +39,13 @@
     text-align: center;
     font-size: xx-large;
     margin-top: 1%;
-    font-family: 'Open Sans Hebrew', sans-serif;
+
   }
 
   #subTitle {
     text-align: center;
     font-size: x-large;
     margin-top: 1%;
-    font-family: 'Open Sans Hebrew', sans-serif;
-  }
-  
-  h1 {
-    font-family: 'Open Sans Hebrew', sans-serif;
   }
   
   #line {
