@@ -1,213 +1,1101 @@
-<div id="content" class="d-flex flex-column align-items-center" [dir]="langDirectionService.currentLangDirection">
-  <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
-  <img
-    id="top-image"
-    src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
-    alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
-  />
-  <span id="title" *ngIf="!userData?.orgMembership"> {{ "pages.price-page.our-plans-title" | translate }}</span
-  >
-  <br />
-</div>
-<div style="text-align: center" [dir]="langDirectionService.currentLangDirection">
-  <div *ngIf="subPlans" class="program-cards">
-    <mat-card>
-      <mat-card-title>  {{ "pages.price-page.monthly-plan-title" | translate }}</mat-card-title>
-      <mat-card-content>
-        <br>
-        <p class="price-line">
-          {{ "pages.price-page.month-label" | translate }} /
-          <span class="price-number"
-            >₪{{
-              monthlySubscription.fullPrice /
-                monthlySubscription?.billingCycleInMonths
-            }}</span
+<div>
+  <div class="md:h-[72vh] h-[50vh]">
+    <div class="hero-container">
+      <div class="flex justify-center h-[100%] items-center flex-col">
+        <div
+          class="2xl:text-8xl xl:text-7xl lg:text-6xl md:text-5xl text-4xl font-bold text-white"
+        >
+          <div
+            style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25)"
+            class="text-center w-[80vw]"
           >
-        </p>
-        <br />
-        <ul>
-          <li>
-            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
-            <li>
-              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
-            <li>
-              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          id="monthlySubscription"
-          *ngIf="userSingedIn &&
-            (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
-          "
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="checkFreePeriod(monthlySubscription.id)"
-        >
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-        <button
-          *ngIf="userSingedIn &&
-            userData?.status === 'PLAN' &&
-            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
-          "
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-      {{ "pages.price-page.already-registered-button-text" | translate }}  
-        </button>
-        <button
-        *ngIf="!userSingedIn"
-        class="popular-purchase-btn purchase-btn"
-        type="button"
-        (click)="signInSignUp()">
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card id="popular-mat-card">
-      <mat-card-title>  {{ "pages.price-page.yearly-plan-title" | translate }}</mat-card-title>
-      <mat-card-content>
-        <br>
-        <p class="price-line">
-          {{ "pages.price-page.year-label" | translate }} /
-          <span class="price-number"
-            >₪{{
-              yearlySubscription.fullPrice
-            }}</span
-          >
-        </p>
-        <br />
-        <ul>
-          <li>
-            {{ "pages.price-page.free-two-months-instruction" | translate }}    </li>
-          <li>
-            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
-            <li>
-              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
-            <li>
-              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          id="monthlySubscription"
-          *ngIf="userSingedIn &&
-            (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
-          "
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="checkFreePeriod(yearlySubscription.id)"
-        >
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-        <button
-          *ngIf="userSingedIn &&
-            userData?.status === 'PLAN' &&
-            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12
-          "
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-      {{ "pages.price-page.already-registered-button-text" | translate }}  
-        </button>
-        <button
-        *ngIf="!userSingedIn"
-        class="popular-purchase-btn purchase-btn"
-        type="button"
-        (click)="signInSignUp()">
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <!--<mat-card id="popular-mat-card">
-      <mat-card-title>   {{ "pages.price-page.popularMatCard.title" | translate }}   </mat-card-title>
-      <mat-card-content>
-        <br>
-        <p class="price-line">
-          {{ "pages.price-page.popularMatCard.payment" | translate }}  <b><u>  {{ "pages.price-page.popularMatCard.onceBold" | translate }}  </u></b>  {{ "pages.price-page.popularMatCard.inTotal" | translate }}
-          <span class="price-number"
-            >₪{{
-             yearlySubscription.fullPrice
-            }}
-          </span>
-        </p>
-        <br />     
-        <ul>
-          <li>חודשיים מתנה!</li>
-          <li>
-            {{ "pages.price-page.popularMatCard.benefits.fullAccess" | translate }}     </li>
-            <li>
-              {{ "pages.price-page.popularMatCard.benefits.futureAccess" | translate }}         </li>
-            <li>
-              {{ "pages.price-page.popularMatCard.benefits.variety" | translate }}      </li>
-            <li>
-              {{ "pages.price-page.popularMatCard.benefits.connectAnywhere" | translate }}  
-            </li>
-        </ul></mat-card-content>
-      <mat-card-actions>
-        <button
-          *ngIf="userSingedIn &&
-            (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
-          "
-          class="popular-purchase-btn purchase-btn"
-          (click)="checkFreePeriod(yearlySubscription.id)"
-        >
-        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}  
-        </button>
-        <button
-          *ngIf="userSingedIn &&
-            userData?.status === 'PLAN' &&
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
-          "
-          class="disabled-btn purchase-btn"
-          disabled
-        >
-        {{ "pages.price-page.popularMatCard.registeredBtn" | translate }}  
-        </button>
-        <button
-        *ngIf="!userSingedIn"
-        class="popular-purchase-btn purchase-btn"
-        (click)="signInSignUp()">
-        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}     
-        </button>
-      </mat-card-actions>
-    </mat-card>  -->
- 
-    <mat-card>
-      <mat-card-title>     {{ "pages.price-page.orgsMatCard.title" | translate }}   </mat-card-title>
-      <mat-card-content class="orgs"> {{ "pages.price-page.orgsMatCard.content" | translate }}  
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="navigate('/contact-us')"
-        >
-        {{ "pages.price-page.orgsMatCard.contactBtn" | translate }}  
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>      
-  <br><br>
-<button class="coupon"
-id="couponCodeBtn"
-type="button"
-(click)="openEnterCouponCodeModal()"
->
-{{ "pages.price-page.couponBtn" | translate }}  
-</button><br>
-  <img
-    id="payment-img"
-    alt="Logos of how to pay"
-    src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
-    alt="Secure Payment"
-  />
-</div>
+            Mentor Cards - <br />
+            Our Plans & Pricing
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<app-information-bar></app-information-bar>
+  <div class="bg-[#fcf4f2] flex justify-center items-center">
+    <div class="mx-auto text-center text-lg my-4 font-bold">
+      Instant access to digital card decks and rich guidebooks. <br />
+      Create real impact with a single click
+    </div>
+  </div>
+
+  <!-- Billing Toggle Section -->
+  <div
+    class="bg-[#fcf4f2] flex justify-center items-center billing-toggle-container"
+  >
+    <div class="flex items-center space-x-4">
+      <span
+        class="text-gray-700 font-medium"
+        [class.text-gray-900]="!isAnnualBilling"
+        >Monthly</span
+      >
+
+      <div class="relative inline-block h-6" style="width: 48px">
+        <input
+          type="checkbox"
+          id="billing-toggle"
+          [(ngModel)]="isAnnualBilling"
+          (ngModelChange)="onBillingToggleChange()"
+          class="sr-only"
+        />
+        <label
+          for="billing-toggle"
+          class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+          [class.bg-[#e67c73]]="isAnnualBilling"
+        >
+          <span
+            class="block h-4 w-4 rounded-full bg-white shadow transform transition-transform duration-200 ease-in-out mt-1 ml-1"
+            [class.translate-x-10]="isAnnualBilling"
+          ></span>
+        </label>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <span
+          class="text-gray-700 font-medium"
+          [class.text-gray-900]="isAnnualBilling"
+          >Annual (Save 17%)</span
+        >
+        <span
+          class="gredient-effect text-white text-xs font-medium px-2 py-1 rounded-full"
+        >
+          2 months free
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Cards Section -->
+  <div class="bg-[#fcf4f2]" style="padding-top: 2rem; padding-bottom: 2rem">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 80rem">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Basic Plan -->
+        <div
+          class="pricing-card bg-white shadow-lg p-8 relative"
+          style="margin-top: 2rem; border-radius: 20px"
+        >
+          <div class="text-left">
+            <h3
+              class="mb-2"
+              style="font-size: 2rem; color: #212529; font-weight: 800"
+            >
+              Basic
+            </h3>
+            <p class="mb-6" style="color: #7e7e7e">
+              Get Value, at Your Own Pace
+            </p>
+            <p class="text-sm mb-4" style="color: #212529">
+              For those just starting out, looking to explore, practice, and be
+              inspired
+            </p>
+
+            <div class="mb-6">
+              <span class="text-4xl font-bold text-gray-900">Free</span>
+              /mo
+            </div>
+
+            <button
+              class="w-full bg-white border-[#e67c73] rounded-full hover:bg-[#e67c73] text-[#e67c73] font-semibold py-2 px-6 transition-colors duration-200"
+              style="border-width: 1px; font-size: 1rem"
+              (click)="signInSignUp()"
+            >
+              Start
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <h4 class="text-gray-900 mb-4" style="font-weight: 500">
+              Includes:
+            </h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Free access to two digital card decks, including two complete
+                  guidebooks</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Real-world online features – visible/hidden card display,
+                  solo/group invites, and more</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Membership in the Mentor Community – peer sharing,
+                  inspiration, discussions, and learning events</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Participation in open public training sessions</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Monthly email with curated field content – ideas, activities,
+                  and inspiration</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MentorPro Plan -->
+        <div
+          class="pricing-card shadow-lg p-8 relative border-2 transform scale-105"
+          style="background-color: #eef1ff; border-radius: 20px"
+        >
+          <div class="text-left">
+            <div class="flex justify-start items-start mb-2">
+              <h3
+                class="mb-2"
+                style="
+                  font-size: 2rem;
+                  color: #212529;
+                  font-weight: 800;
+                  margin-right: 0.5rem;
+                "
+              >
+                MentorPro
+              </h3>
+              <div
+                class="gredient-effect rounded-full text-white px-3 py-1 text-sm font-medium"
+              >
+                Most Popular
+              </div>
+            </div>
+            <p class="mb-6" style="color: #7e7e7e">Professional Plan</p>
+            <p class="text-sm mb-4" style="color: #212529">
+              For those who lead, teach, create, and inspire
+            </p>
+
+            <div class="mb-4">
+              <span class="text-4xl font-bold text-gray-900">{{
+                monthlyPrice
+              }}</span>
+              /mo
+            </div>
+            <div class="text-sm text-gray-400 line-through">₪69/mo</div>
+            <div
+              class="mb-6 flex justify-start items-center gap-4"
+              *ngIf="isAnnualBilling"
+            >
+              <span
+                class="gredient-effect text-white px-2 py-1 rounded-full text-xs ml-2"
+              >
+                Save ₪138
+              </span>
+              <p class="text-xs text-gray-500 p-0 m-0">by billing annually</p>
+            </div>
+
+            <button
+              class="w-full bg-[#e67c73] hover:bg-[#d96459] text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200"
+              (click)="
+                checkFreePeriod(
+                  isAnnualBilling
+                    ? yearlySubscription?.id
+                    : monthlySubscription?.id
+                )
+              "
+            >
+              Start
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <h4 class="text-gray-800 mb-4" style="font-weight: 500">
+              Includes:
+            </h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Full access to 40+ digital card decks – including new and
+                  exclusive sets</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Professional guidebooks with curated questions, activity
+                  instructions, and real-world examples</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >A 1-on-1 session with a Mentor Cards expert to tailor the
+                  platform to your specific needs</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Access to Mentor Pro events – training sessions focused on
+                  business and professional development</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Active membership and exposure in the Mentor Community –
+                  connections, creator showcases, and peer engagement</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Full access to a digital learning library with workshops and
+                  training sessions to deepen your practice with cards and
+                  beyond</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Exclusive professional email series – topic-based updates,
+                  hands-on tools, and best practices</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Priority access to events, discounts, closed courses, and
+                  special opportunities</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mentor Teams Plan -->
+        <div
+          class="pricing-card bg-white shadow-lg p-8 relative"
+          style="margin-top: 2rem; border-radius: 20px"
+        >
+          <div class="text-left">
+            <h3
+              class="mb-2"
+              style="font-size: 2rem; color: #212529; font-weight: 800"
+            >
+              Mentor Teams
+            </h3>
+            <p class="mb-6" style="color: #7e7e7e">
+              For Organizations, Institutions & Teams
+            </p>
+            <p class="text-sm mb-6" style="color: #212529">
+              Whether it's staff training, professional enrichment, or
+              integrating cards-based methods into existing programs –
+            </p>
+            <p class="text-sm mb-8" style="color: #212529">
+              Mentor Cards helps upgrade your organizational toolbox with depth,
+              connection, and meaningful impact.
+            </p>
+
+            <button
+              class="w-full bg-white border-[#e67c73] rounded-full hover:bg-[#e67c73] text-[#e67c73] font-semibold py-2 px-6 transition-colors duration-200"
+              (click)="contactUsForTeams()"
+              style="border-width: 1px"
+            >
+              Contact us to schedule a call
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <h4 class="font-semibold text-gray-900 mb-4">Includes:</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Multi-user license and tailored onboarding – with role-based
+                  permissions and access</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Professional support and training – across the generic,
+                  organizational, and facilitation domains</span
+                >
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600"
+                  >Flexible payment and invoicing options for
+                  organizations</span
+                >
+              </li>
+            </ul>
+
+            <div class="mt-6 text-center">
+              <p class="text-sm text-gray-500 italic">
+                We'll be happy to build the best plan for your team
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="
+          margin-top: 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <button
+          class="w-fit bg-[#e67c73] hover:bg-[#d96459] text-white font-semibold rounded-full transition-colors duration-200"
+          (click)="contactUsForTeams()"
+          style="border-width: 1px; padding: 0.5rem 1rem"
+        >
+          Have a promo code?
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Plan Features Comparison Section -->
+  <div class="bg-[#fcf4f2] py-16">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 80rem">
+      <div class="text-center mb-12" style="border-bottom: 1px solid #7e7e7e">
+        <h2 class="text-3xl font-bold mb-4">All plan features</h2>
+      </div>
+
+      <div class="overflow-x-auto features-table-container">
+        <table class="w-full features-table">
+          <!-- Table Header -->
+          <thead>
+            <tr>
+              <th class="text-left py-4 pr-8 w-1/2"></th>
+              <th class="text-center py-4 px-4 w-1/4">
+                <div class="font-bold text-lg text-gray-900">Basic</div>
+                <div class="text-sm mt-1" style="color: #7e7e7e">Free</div>
+              </th>
+              <th class="text-center py-4 px-4 w-1/4">
+                <div class="font-bold text-lg text-gray-900">MentorPro</div>
+                <div class="text-sm mt-1" style="color: #7e7e7e">
+                  {{ monthlyPrice }}
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <!-- Table Body -->
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Access to two digital card decks + 2 full guidebooks
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Full use of platform features: hidden/visible cards, solo/group
+                invites, random draw, and more
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Mentor Community membership: sharing, inspiration, advice, and
+                selected learning events
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Monthly email with curated inspiration from the field
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Full access to all card decks on the platform (40+)
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Access to recorded trainings and professional learning sessions
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                In-depth guidebooks with exercises, questions, and examples
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Participation in MentorPro events – learning, creator showcases,
+                professional networking
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Advanced professional email series by topics and domains
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Marketing exposure, business tools, and personal/professional
+                development resources
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                Priority access to events, discounts, and special offers
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td class="py-4 pr-8 text-gray-700">
+                1-on-1 onboarding session with a Mentor Cards expert
+              </td>
+              <td class="py-4 px-4 text-center">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-center">
+                <img
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class="mx-auto"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top: 2rem">
+    <app-home-page-partners [isPricePage]="true"></app-home-page-partners>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-[#fcf4f2] py-16">
+    <div
+      class="mx-auto px-4 sm:px-6 lg:px-8"
+      style="max-width: 80rem; padding-top: 2rem"
+    >
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Frequently Asked Questions
+        </h2>
+        <div class="w-24 h-1 bg-[#e67c73] mx-auto"></div>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[1]"
+          [style.background-color]="faqOpen[1] ? '#fcf4f2' : ''"
+        >
+          <button
+            class="w-full px-6 py-2 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#e67c73] focus:ring-opacity-50"
+            (click)="toggleFaq(1)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              Why use digital card decks? What's the advantage?
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[1] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div class="px-6 pb-4" *ngIf="faqOpen[1]">
+            <p class="text-gray-600 leading-relaxed">
+              Digital card decks offer instant accessibility, no physical wear,
+              easy sharing with remote teams, and enhanced features like
+              randomization, hidden/visible modes, and real-time collaboration.
+              Plus, you get access to a growing library of decks without storage
+              concerns.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[2]"
+          [style.background-color]="faqOpen[2] ? '#fcf4f2' : ''"
+        >
+          <button
+            class="w-full px-6 py-2 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#e67c73] focus:ring-opacity-50"
+            (click)="toggleFaq(2)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              What's the difference between Community Membership and a Mentor
+              Pro subscription?
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[2] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div class="px-6 pb-4" *ngIf="faqOpen[2]">
+            <div class="text-gray-600 leading-relaxed">
+              <p class="mb-3">
+                <strong>Community Membership</strong> is free and open to all.
+                You get a taste of our world: two digital card decks,
+                guidebooks, full access to platform features, open integrated
+                sessions, and a monthly newsletter with fresh content—a great
+                start, implemented easily.
+              </p>
+              <p>
+                <strong>Mentor Pro</strong> is our professional subscription for
+                those who guide, create, teach and want to excel. All the above,
+                plus professional workshops and skills, with encouraging
+                sessions, professional training workshops, a platform to
+                showcase your creations, and everything you need to make your
+                experience as a facilitator truly memorable, creative, and
+                impactful.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[3]"
+          [style.background-color]="faqOpen[3] ? '#fcf4f2' : ''"
+        >
+          <button
+            class="w-full px-6 py-2 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#e67c73] focus:ring-opacity-50"
+            (click)="toggleFaq(3)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              I'm already part of the community—why should I upgrade to Mentor
+              Pro?
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[3] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div class="px-6 pb-4" *ngIf="faqOpen[3]">
+            <p class="text-gray-600 leading-relaxed">
+              Mentor Pro unlocks the full potential of the platform with 40+
+              card decks, professional guidebooks, exclusive training sessions,
+              business development resources, priority support, and networking
+              opportunities. If you're serious about facilitation and leadership
+              development, it's the natural next step.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[4]"
+          [style.background-color]="faqOpen[4] ? '#fcf4f2' : ''"
+        >
+          <button
+            class="w-full px-6 py-2 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#e67c73] focus:ring-opacity-50"
+            (click)="toggleFaq(4)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              Can I cancel my subscription at any time?
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[4] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div class="px-6 pb-4" *ngIf="faqOpen[4]">
+            <p class="text-gray-600 leading-relaxed">
+              Yes, absolutely! You can cancel your Mentor Pro subscription at
+              any time through your account settings. You'll continue to have
+              access to all Pro features until the end of your current billing
+              period, and then you'll automatically return to the free Community
+              Membership level.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[5]"
+          [style.background-color]="faqOpen[5] ? '#fcf4f2' : ''"
+        >
+          <button
+            class="w-full px-6 py-2 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#e67c73] focus:ring-opacity-50"
+            (click)="toggleFaq(5)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              I've created my own card deck—can I feature it on the site?
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[5] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div class="px-6 pb-4" *ngIf="faqOpen[5]">
+            <p class="text-gray-600 leading-relaxed">
+              We love supporting creators in our community! Mentor Pro members
+              get opportunities to showcase their work through our creator
+              spotlight programs and community events. We also review
+              high-quality custom decks for potential inclusion in our platform
+              library. Contact us to discuss your creation!
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[6]"
+          [style.background-color]="faqOpen[6] ? '#fcf4f2' : ''"
+        >
+          <button
+            class="w-full px-6 py-2 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#e67c73] focus:ring-opacity-50"
+            (click)="toggleFaq(6)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              I'm working in an organization—do you offer a customized plan?
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[6] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div class="px-6 pb-4" *ngIf="faqOpen[6]">
+            <p class="text-gray-600 leading-relaxed">
+              Yes! Our Mentor Teams plan is designed specifically for
+              organizations, institutions, and teams. We offer multi-user
+              licenses, custom onboarding, role-based permissions, dedicated
+              support, and flexible payment options. Contact us to discuss your
+              organization's specific needs and we'll create the perfect plan
+              for your team.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 7 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[7]"
+          [style.background-color]="faqOpen[7] ? '#fcf4f2' : ''"
+        >
+          <button
+            class="w-full px-6 py-2 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[#e67c73] focus:ring-opacity-50"
+            (click)="toggleFaq(7)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              What if I'm not sure which deck to choose or how to use it?
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[7] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div class="px-6 pb-4" *ngIf="faqOpen[7]">
+            <div class="text-gray-600 leading-relaxed">
+              <p class="mb-3">
+                That's precisely why we're here as Mentor Cards, so you don't
+                have to guess—we provide smart tools and human support to guide
+                you confidently.
+              </p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li>
+                  Start with our <strong>intelligent search engine</strong>:
+                  filter decks by location purpose, card type (image, word, or
+                  creation), or common keywords like "empowerment,"
+                  "self-esteem."
+                </li>
+                <li>
+                  Each deck comes with
+                  <strong>a professional guidebook</strong>—including ideas,
+                  guiding questions, and satisfaction examples.
+                </li>
+                <li>
+                  <strong>The Mentor Community</strong> is ready to answer
+                  questions and share inspiration based on real world
+                  experience.
+                </li>
+                <li>
+                  <strong>Mentor Pro</strong> members also receive a one-on-one
+                  onboarding session with an expert to help you confidently
+                  design to your specific needs.
+                </li>
+                <li>
+                  Unsure? Just reach out via chat, email, or through the
+                  community. You're never alone in this journey.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-home-page-footer></app-home-page-footer>
+</div>
