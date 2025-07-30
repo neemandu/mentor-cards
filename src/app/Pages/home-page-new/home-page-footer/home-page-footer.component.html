@@ -1,4 +1,4 @@
-<div class="bg-[#f6d0cc] flex justify-center">
+<div class="bg-[#f6d0cc] flex justify-center" [dir]="langDirectionService.currentLangDirection">
   <div class="sm:grid sm:grid-cols-10 gap-4 w-[60vw] py-8">
     <div class="col-span-4">
       <img src="/assets/New/home-page/footer-logo.svg" alt="footer-3" />
@@ -165,7 +165,7 @@
       </div>
     </div>
     <div class="col-span-2 space-y-4">
-      <div class="hidden sm:flex justify-start gap-4">
+      <div class="hidden site">
         <button >
           {{
             "pages.home-page.sections.footer.content.mobile-links.0.text"
@@ -173,7 +173,7 @@
           }}
         </button>
       </div>
-      <div class="hidden sm:flex justify-start gap-4">
+      <div class="hidden site">
         <a href="/home-page#contact-us-section" class="text-reset text-decoration-none" [routerLink]="'/home-page'" [fragment]="'contact-us-section'">
           {{
             "pages.home-page.sections.footer.content.mobile-links.9.text"
@@ -189,7 +189,7 @@
       <div class="sm:text-right text-right">
         {{ "pages.home-page.sections.footer.content.follow-us" | translate }}
       </div>
-      <div class="flex justify-center sm:justify-start gap-4 mt-2">
+      <div class="social">
         <a href="https://www.tiktok.com/@mentor.cards" target="_blank">
           <img
             src="/assets/New/home-page/icons/tik-tok-black.svg"

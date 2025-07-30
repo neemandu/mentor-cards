@@ -1,0 +1,23 @@
+.site {
+    @apply sm:flex gap-4;
+}
+
+[dir="rtl"] .site {
+    @apply justify-start;
+}
+
+[dir="ltr"] .site {
+    @apply justify-end;
+}
+
+.social {
+    @apply flex justify-center gap-4 mt-2;
+}
+
+[dir="rtl"] .social {
+    @apply sm:justify-start;
+}
+
+[dir="ltr"] .social {
+    @apply sm:justify-end;
+}

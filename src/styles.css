@@ -121,7 +121,6 @@
 html,
 body {
   height: 100%;
-  font-family: "Open Sans Hebrew", sans-serif;
   /* overflow-y: scroll!important; */
   /* -webkit-text-size-adjust: auto; */
 }
@@ -131,7 +130,6 @@ body {
   --main-color-light: #ffd37c !important;
   --main-color-dark: #c28100 !important;
   /* --main-font-family: rubik; */
-  --main-font-family: "Open Sans Hebrew", sans-serif !important;
   --screen-s: 480px;
   --screen-m: 768px;
   --screen-l: 1024px;
@@ -142,9 +140,6 @@ body {
 
 body {
   margin: 0;
-  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
-  /* font-family: 'rubik' !important; */
-  font-family: "Open Sans Hebrew", sans-serif !important;
   background-color: #f8f9fa !important;
 }
 
@@ -200,11 +195,6 @@ body {
 *:focus,
 button:focus {
   outline: none !important;
-}
-
-@font-face {
-  font-family: Open Sans Hebrew;
-  /* src: url(\assets\Fonts\OpenSans-VariableFont_wdthwght.ttf) format("opentype"); */
 }
 
 ::ng-deep .tooltip-class {

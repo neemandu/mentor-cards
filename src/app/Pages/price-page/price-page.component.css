@@ -1,7 +1,6 @@
 #content {
   text-align: center;
   align-items: center;
-  font-family: var(--main-font-family);
   /* direction: rtl!important; */
 }
 
@@ -9,7 +8,6 @@
 #couponCodeBtn {  
   text-align: center;
   align-items: center;
-  font-family: var(--main-font-family);
   align-self: center;
   min-height: 2rem;
   font-size: larger;
@@ -76,7 +74,6 @@ p {
 .popular-purchase-btn {
   text-align: center;
   align-items: center;
-  font-family: var(--main-font-family);
   align-self: center;
   min-height: 3rem;
   font-size: x-large;
@@ -182,7 +179,6 @@ ul li::before {
   color: white;
   border-color: white;
   font-weight: 500;
-  font-family: var(--main-font-family);
   font-size: large;
   transition: color .15s ease-in-out, background-color .15s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;  
@@ -223,7 +219,6 @@ mat-card-actions {
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;
   border-radius: 10px;
-  font-family: var(--main-font-family);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -237,7 +232,6 @@ mat-card-actions {
   transition: transform 0.5s ease, margin 0.5s ease, box-shadow 0.5s ease;
   border: 2px var(--main-color) solid;
   border-radius: 10px;
-  font-family: var(--main-font-family);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

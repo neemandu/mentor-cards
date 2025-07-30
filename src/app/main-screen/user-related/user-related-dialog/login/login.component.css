@@ -1,5 +1,4 @@
 * {
-  font-family: 'Open Sans Hebrew', sans-serif;
   --white: #fff;
   --google-blue: hwb(217 26% 4%);
   --google-blue-hover: hwb(217 26% 10%);
@@ -59,7 +58,6 @@
 }
 
 a {
-  /* font-family: 'Open Sans Hebrew', sans-serif; */
   font-size: 1rem;
   margin: 1% 0%;
 }
