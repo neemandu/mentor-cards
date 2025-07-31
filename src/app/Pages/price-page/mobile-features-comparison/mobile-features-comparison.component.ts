@@ -10,66 +10,68 @@ export class MobileFeaturesComparisonComponent {
 
   features = [
     {
-      title: 'Access to two digital card decks + 2 full guidebooks',
+      titleKey: 'pages.price-page.features-comparison.features.two-decks',
       basic: true,
       mentorPro: true,
     },
     {
-      title:
-        'Full use of platform features: hidden/visible cards, solo/group invites, random draw, and more',
+      titleKey:
+        'pages.price-page.features-comparison.features.platform-features',
       basic: true,
       mentorPro: true,
     },
     {
-      title:
-        'Mentor Community membership: sharing, inspiration, advice, and selected learning events',
+      titleKey:
+        'pages.price-page.features-comparison.features.community-membership',
       basic: true,
       mentorPro: true,
     },
     {
-      title: 'Monthly email with curated inspiration from the field',
+      titleKey: 'pages.price-page.features-comparison.features.monthly-email',
       basic: true,
       mentorPro: true,
     },
     {
-      title: 'Full access to all card decks on the platform (40+)',
+      titleKey: 'pages.price-page.features-comparison.features.all-decks',
       basic: false,
       mentorPro: true,
     },
     {
-      title: 'Access to recorded trainings and professional learning sessions',
+      titleKey:
+        'pages.price-page.features-comparison.features.recorded-trainings',
       basic: false,
       mentorPro: true,
     },
     {
-      title: 'In-depth guidebooks with exercises, questions, and examples',
+      titleKey:
+        'pages.price-page.features-comparison.features.in-depth-guidebooks',
       basic: false,
       mentorPro: true,
     },
     {
-      title:
-        'Participation in MentorPro events – learning, creator showcases, professional networking',
+      titleKey:
+        'pages.price-page.features-comparison.features.mentor-pro-events',
       basic: false,
       mentorPro: true,
     },
     {
-      title: 'Advanced professional email series by topics and domains',
+      titleKey: 'pages.price-page.features-comparison.features.advanced-email',
       basic: false,
       mentorPro: true,
     },
     {
-      title:
-        'Marketing exposure, business tools, and personal/professional development resources',
+      titleKey: 'pages.price-page.features-comparison.features.marketing-tools',
       basic: false,
       mentorPro: true,
     },
     {
-      title: 'Priority access to events, discounts, and special offers',
+      titleKey: 'pages.price-page.features-comparison.features.priority-access',
       basic: false,
       mentorPro: true,
     },
     {
-      title: '1-on-1 onboarding session with a Mentor Cards expert',
+      titleKey:
+        'pages.price-page.features-comparison.features.onboarding-session',
       basic: false,
       mentorPro: true,
     },

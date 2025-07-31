@@ -1,6 +1,8 @@
 <div class="bg-[#fcf4f2] py-8 px-4">
   <div class="text-center mb-8">
-    <h2 class="text-2xl font-bold mb-4 text-gray-900">All plan features</h2>
+    <h2 class="text-2xl font-bold mb-4 text-gray-900">
+      {{ "pages.price-page.features-comparison.title" | translate }}
+    </h2>
   </div>
 
   <!-- Mobile Features List Layout -->
@@ -12,11 +14,20 @@
     <div class="p-4">
       <div class="grid grid-cols-2 gap-4 text-center">
         <div>
-          <div class="font-bold text-lg text-gray-900">Basic</div>
-          <div class="text-sm text-gray-500 mt-1">Free</div>
+          <div class="font-bold text-lg text-gray-900">
+            {{ "pages.price-page.features-comparison.basic-title" | translate }}
+          </div>
+          <div class="text-sm text-gray-500 mt-1">
+            {{ "pages.price-page.features-comparison.basic-price" | translate }}
+          </div>
         </div>
         <div>
-          <div class="font-bold text-lg text-gray-900">MentorPro</div>
+          <div class="font-bold text-lg text-gray-900">
+            {{
+              "pages.price-page.features-comparison.mentor-pro-title"
+                | translate
+            }}
+          </div>
           <div class="text-sm text-gray-500 mt-1">{{ monthlyPrice }}/mo</div>
         </div>
       </div>
@@ -28,7 +39,7 @@
         <!-- Feature Title -->
         <div class="mb-3">
           <p class="text-sm text-gray-900 font-medium leading-tight">
-            {{ feature.title }}
+            {{ feature.titleKey | translate }}
           </p>
         </div>
 

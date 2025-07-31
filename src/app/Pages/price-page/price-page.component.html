@@ -9,8 +9,8 @@
             style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25)"
             class="text-center w-[80vw]"
           >
-            Mentor Cards - <br />
-            Our Plans & Pricing
+            {{ "pages.price-page.hero.title" | translate }} <br />
+            {{ "pages.price-page.hero.subtitle" | translate }}
           </div>
         </div>
       </div>
@@ -19,8 +19,8 @@
 
   <div class="bg-[#fcf4f2] flex justify-center items-center">
     <div class="mx-auto text-center text-lg my-4 font-bold">
-      Instant access to digital card decks and rich guidebooks. <br />
-      Create real impact with a single click
+      {{ "pages.price-page.hero-description.line1" | translate }} <br />
+      {{ "pages.price-page.hero-description.line2" | translate }}
     </div>
   </div>
 
@@ -32,7 +32,7 @@
       <span
         class="text-gray-700 font-medium"
         [class.text-gray-900]="!isAnnualBilling"
-        >Monthly</span
+        >{{ "pages.price-page.billing.monthly" | translate }}</span
       >
 
       <div class="relative inline-block h-6" style="width: 48px">
@@ -59,12 +59,12 @@
         <span
           class="text-gray-700 font-medium"
           [class.text-gray-900]="isAnnualBilling"
-          >Annual (Save 17%)</span
+          >{{ "pages.price-page.billing.annual" | translate }}</span
         >
         <span
           class="gredient-effect text-white text-xs font-medium px-2 py-1 rounded-full"
         >
-          2 months free
+          {{ "pages.price-page.billing.save-badge" | translate }}
         </span>
       </div>
     </div>
@@ -80,18 +80,21 @@
           style="margin-top: 2rem; border-radius: 20px"
         >
           <div class="text-left">
-            <h3 class="mb-2 heading-text" style="color: #212529">Basic</h3>
+            <h3 class="mb-2 heading-text" style="color: #212529">
+              {{ "pages.price-page.plans.basic.title" | translate }}
+            </h3>
             <p class="mb-6" style="color: #7e7e7e">
-              Get Value, at Your Own Pace
+              {{ "pages.price-page.plans.basic.subtitle" | translate }}
             </p>
             <p class="text-sm mb-4" style="color: #212529">
-              For those just starting out, looking to explore, practice, and be
-              inspired
+              {{ "pages.price-page.plans.basic.description" | translate }}
             </p>
 
             <div class="mb-6">
-              <span class="text-4xl font-bold text-gray-900">Free</span>
-              /mo
+              <span class="text-4xl font-bold text-gray-900">{{
+                "pages.price-page.plans.basic.price" | translate
+              }}</span>
+              {{ "pages.price-page.plans.basic.price-period" | translate }}
             </div>
 
             <button
@@ -99,13 +102,13 @@
               style="border-width: 1px; font-size: 1rem"
               (click)="signInSignUp()"
             >
-              Start
+              {{ "pages.price-page.plans.basic.button" | translate }}
             </button>
           </div>
 
           <div class="mt-8">
             <h4 class="text-gray-900 mb-4" style="font-weight: 500">
-              Includes:
+              {{ "pages.price-page.plans.basic.features-title" | translate }}
             </h4>
             <ul class="space-y-3">
               <li class="flex items-start">
@@ -120,10 +123,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Free access to two digital card decks, including two complete
-                  guidebooks</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.free-access"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -137,10 +140,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Real-world online features – visible/hidden card display,
-                  solo/group invites, and more</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.platform-features"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -154,10 +157,9 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Membership in the Mentor Community – peer sharing,
-                  inspiration, discussions, and learning events</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.community" | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -171,9 +173,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Participation in open public training sessions</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.training-sessions"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -187,10 +190,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Monthly email with curated field content – ideas, activities,
-                  and inspiration</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.monthly-email"
+                    | translate
+                }}</span>
               </li>
             </ul>
           </div>
@@ -207,26 +210,30 @@
                 class="mb-2 heading-text"
                 style="color: #212529; margin-right: 0.5rem"
               >
-                MentorPro
+                {{ "pages.price-page.plans.mentor-pro.title" | translate }}
               </h3>
               <div
                 class="gredient-effect rounded-full text-white px-3 py-1 text-sm font-medium"
               >
-                Most Popular
+                {{ "pages.price-page.plans.mentor-pro.badge" | translate }}
               </div>
             </div>
-            <p class="mb-6" style="color: #7e7e7e">Professional Plan</p>
+            <p class="mb-6" style="color: #7e7e7e">
+              {{ "pages.price-page.plans.mentor-pro.subtitle" | translate }}
+            </p>
             <p class="text-sm mb-4" style="color: #212529">
-              For those who lead, teach, create, and inspire
+              {{ "pages.price-page.plans.mentor-pro.description" | translate }}
             </p>
 
             <div class="mb-4">
               <span class="text-4xl font-bold text-gray-900">{{
                 monthlyPrice
               }}</span>
-              /mo
+              {{ "pages.price-page.plans.mentor-pro.price-period" | translate }}
             </div>
-            <div class="text-sm text-gray-400 line-through">₪69/mo</div>
+            <div class="text-sm text-gray-400 line-through">
+              {{ "pages.price-page.plans.mentor-pro.old-price" | translate }}
+            </div>
             <div
               class="mb-6 flex justify-start items-center gap-4"
               *ngIf="isAnnualBilling"
@@ -234,9 +241,16 @@
               <span
                 class="gredient-effect text-white px-2 py-1 rounded-full text-xs ml-2"
               >
-                Save ₪138
+                {{
+                  "pages.price-page.plans.mentor-pro.save-amount" | translate
+                }}
               </span>
-              <p class="text-xs text-gray-500 p-0 m-0">by billing annually</p>
+              <p class="text-xs text-gray-500 p-0 m-0">
+                {{
+                  "pages.price-page.plans.mentor-pro.save-description"
+                    | translate
+                }}
+              </p>
             </div>
 
             <button
@@ -249,13 +263,15 @@
                 )
               "
             >
-              Start
+              {{ "pages.price-page.plans.mentor-pro.button" | translate }}
             </button>
           </div>
 
           <div class="mt-8">
             <h4 class="text-gray-800 mb-4" style="font-weight: 500">
-              Includes:
+              {{
+                "pages.price-page.plans.mentor-pro.features-title" | translate
+              }}
             </h4>
             <ul class="space-y-3">
               <li class="flex items-start">
@@ -270,10 +286,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Full access to 40+ digital card decks – including new and
-                  exclusive sets</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.full-access"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -287,10 +303,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Professional guidebooks with curated questions, activity
-                  instructions, and real-world examples</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.professional-guidebooks"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -304,10 +320,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >A 1-on-1 session with a Mentor Cards expert to tailor the
-                  platform to your specific needs</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.onboarding"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -321,10 +337,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Access to Mentor Pro events – training sessions focused on
-                  business and professional development</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.pro-events"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -338,10 +354,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Active membership and exposure in the Mentor Community –
-                  connections, creator showcases, and peer engagement</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.community-membership"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -355,11 +371,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Full access to a digital learning library with workshops and
-                  training sessions to deepen your practice with cards and
-                  beyond</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.learning-library"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -373,10 +388,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Exclusive professional email series – topic-based updates,
-                  hands-on tools, and best practices</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.professional-email"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -390,10 +405,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Priority access to events, discounts, closed courses, and
-                  special opportunities</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.priority-access"
+                    | translate
+                }}</span>
               </li>
             </ul>
           </div>
@@ -406,18 +421,20 @@
         >
           <div class="text-left">
             <h3 class="mb-2 heading-text" style="color: #212529">
-              Mentor Teams
+              {{ "pages.price-page.plans.mentor-teams.title" | translate }}
             </h3>
             <p class="mb-6" style="color: #7e7e7e">
-              For Organizations, Institutions & Teams
+              {{ "pages.price-page.plans.mentor-teams.subtitle" | translate }}
             </p>
             <p class="text-sm mb-6" style="color: #212529">
-              Whether it's staff training, professional enrichment, or
-              integrating cards-based methods into existing programs –
+              {{
+                "pages.price-page.plans.mentor-teams.description1" | translate
+              }}
             </p>
             <p class="text-sm mb-8" style="color: #212529">
-              Mentor Cards helps upgrade your organizational toolbox with depth,
-              connection, and meaningful impact.
+              {{
+                "pages.price-page.plans.mentor-teams.description2" | translate
+              }}
             </p>
 
             <button
@@ -425,12 +442,16 @@
               (click)="contactUsForTeams()"
               style="border-width: 1px"
             >
-              Contact us to schedule a call
+              {{ "pages.price-page.plans.mentor-teams.button" | translate }}
             </button>
           </div>
 
           <div class="mt-8">
-            <h4 class="font-semibold text-gray-900 mb-4">Includes:</h4>
+            <h4 class="font-semibold text-gray-900 mb-4">
+              {{
+                "pages.price-page.plans.mentor-teams.features-title" | translate
+              }}
+            </h4>
             <ul class="space-y-3">
               <li class="flex items-start">
                 <svg
@@ -444,10 +465,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Multi-user license and tailored onboarding – with role-based
-                  permissions and access</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-teams.features.multi-user"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -461,10 +482,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Professional support and training – across the generic,
-                  organizational, and facilitation domains</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-teams.features.support"
+                    | translate
+                }}</span>
               </li>
               <li class="flex items-start">
                 <svg
@@ -478,16 +499,18 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600"
-                  >Flexible payment and invoicing options for
-                  organizations</span
-                >
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-teams.features.payment"
+                    | translate
+                }}</span>
               </li>
             </ul>
 
             <div class="mt-6 text-center">
               <p class="text-sm text-gray-500 italic">
-                We'll be happy to build the best plan for your team
+                {{
+                  "pages.price-page.plans.mentor-teams.footer-note" | translate
+                }}
               </p>
             </div>
           </div>
@@ -506,7 +529,7 @@
           (click)="contactUsForTeams()"
           style="border-width: 1px; padding: 0.5rem 1rem"
         >
-          Have a promo code?
+          {{ "pages.price-page.promo-code-button" | translate }}
         </button>
       </div>
     </div>
@@ -517,7 +540,9 @@
   <div class="hidden md:block bg-[#fcf4f2] py-16">
     <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 80rem">
       <div class="text-center mb-12" style="border-bottom: 1px solid #7e7e7e">
-        <h2 class="text-3xl font-bold mb-4">All plan features</h2>
+        <h2 class="text-3xl font-bold mb-4">
+          {{ "pages.price-page.features-comparison.title" | translate }}
+        </h2>
       </div>
 
       <div class="overflow-x-auto features-table-container">
@@ -527,11 +552,26 @@
             <tr>
               <th class="text-left py-4 pr-8 w-1/2"></th>
               <th class="text-center py-4 px-4 w-1/4">
-                <div class="font-bold text-lg text-gray-900">Basic</div>
-                <div class="text-sm mt-1" style="color: #7e7e7e">Free</div>
+                <div class="font-bold text-lg text-gray-900">
+                  {{
+                    "pages.price-page.features-comparison.basic-title"
+                      | translate
+                  }}
+                </div>
+                <div class="text-sm mt-1" style="color: #7e7e7e">
+                  {{
+                    "pages.price-page.features-comparison.basic-price"
+                      | translate
+                  }}
+                </div>
               </th>
               <th class="text-center py-4 px-4 w-1/4">
-                <div class="font-bold text-lg text-gray-900">MentorPro</div>
+                <div class="font-bold text-lg text-gray-900">
+                  {{
+                    "pages.price-page.features-comparison.mentor-pro-title"
+                      | translate
+                  }}
+                </div>
                 <div class="text-sm mt-1" style="color: #7e7e7e">
                   {{ monthlyPrice }}
                 </div>
@@ -543,7 +583,10 @@
           <tbody class="divide-y divide-gray-100">
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Access to two digital card decks + 2 full guidebooks
+                {{
+                  "pages.price-page.features-comparison.features.two-decks"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <img
@@ -563,8 +606,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Full use of platform features: hidden/visible cards, solo/group
-                invites, random draw, and more
+                {{
+                  "pages.price-page.features-comparison.features.platform-features"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <img
@@ -584,8 +629,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Mentor Community membership: sharing, inspiration, advice, and
-                selected learning events
+                {{
+                  "pages.price-page.features-comparison.features.community-membership"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <img
@@ -605,7 +652,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Monthly email with curated inspiration from the field
+                {{
+                  "pages.price-page.features-comparison.features.monthly-email"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <img
@@ -625,7 +675,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Full access to all card decks on the platform (40+)
+                {{
+                  "pages.price-page.features-comparison.features.all-decks"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -641,7 +694,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Access to recorded trainings and professional learning sessions
+                {{
+                  "pages.price-page.features-comparison.features.recorded-trainings"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -657,7 +713,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                In-depth guidebooks with exercises, questions, and examples
+                {{
+                  "pages.price-page.features-comparison.features.in-depth-guidebooks"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -673,8 +732,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Participation in MentorPro events – learning, creator showcases,
-                professional networking
+                {{
+                  "pages.price-page.features-comparison.features.mentor-pro-events"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -690,7 +751,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Advanced professional email series by topics and domains
+                {{
+                  "pages.price-page.features-comparison.features.advanced-email"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -706,8 +770,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Marketing exposure, business tools, and personal/professional
-                development resources
+                {{
+                  "pages.price-page.features-comparison.features.marketing-tools"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -723,7 +789,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                Priority access to events, discounts, and special offers
+                {{
+                  "pages.price-page.features-comparison.features.priority-access"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -739,7 +808,10 @@
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
               <td class="py-4 pr-8 text-gray-700">
-                1-on-1 onboarding session with a Mentor Cards expert
+                {{
+                  "pages.price-page.features-comparison.features.onboarding-session"
+                    | translate
+                }}
               </td>
               <td class="py-4 px-4 text-center">
                 <span class="feature-dash">−</span>
@@ -776,7 +848,7 @@
     >
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">
-          Frequently Asked Questions
+          {{ "pages.price-page.faq.title" | translate }}
         </h2>
       </div>
 
@@ -792,7 +864,10 @@
             (click)="toggleFaq(1)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
-              Why use digital card decks? What's the advantage?
+              {{
+                "pages.price-page.faq.questions.digital-cards.question"
+                  | translate
+              }}
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -810,11 +885,10 @@
           </button>
           <div class="px-6 pb-4" *ngIf="faqOpen[1]">
             <p class="text-gray-600 leading-relaxed">
-              Digital card decks offer instant accessibility, no physical wear,
-              easy sharing with remote teams, and enhanced features like
-              randomization, hidden/visible modes, and real-time collaboration.
-              Plus, you get access to a growing library of decks without storage
-              concerns.
+              {{
+                "pages.price-page.faq.questions.digital-cards.answer"
+                  | translate
+              }}
             </p>
           </div>
         </div>
@@ -830,8 +904,10 @@
             (click)="toggleFaq(2)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
-              What's the difference between Community Membership and a Mentor
-              Pro subscription?
+              {{
+                "pages.price-page.faq.questions.community-vs-pro.question"
+                  | translate
+              }}
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -850,20 +926,16 @@
           <div class="px-6 pb-4" *ngIf="faqOpen[2]">
             <div class="text-gray-600 leading-relaxed">
               <p class="mb-3">
-                <strong>Community Membership</strong> is free and open to all.
-                You get a taste of our world: two digital card decks,
-                guidebooks, full access to platform features, open integrated
-                sessions, and a monthly newsletter with fresh content—a great
-                start, implemented easily.
+                {{
+                  "pages.price-page.faq.questions.community-vs-pro.answer1"
+                    | translate
+                }}
               </p>
               <p>
-                <strong>Mentor Pro</strong> is our professional subscription for
-                those who guide, create, teach and want to excel. All the above,
-                plus professional workshops and skills, with encouraging
-                sessions, professional training workshops, a platform to
-                showcase your creations, and everything you need to make your
-                experience as a facilitator truly memorable, creative, and
-                impactful.
+                {{
+                  "pages.price-page.faq.questions.community-vs-pro.answer2"
+                    | translate
+                }}
               </p>
             </div>
           </div>
@@ -880,8 +952,9 @@
             (click)="toggleFaq(3)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
-              I'm already part of the community—why should I upgrade to Mentor
-              Pro?
+              {{
+                "pages.price-page.faq.questions.upgrade.question" | translate
+              }}
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -899,11 +972,7 @@
           </button>
           <div class="px-6 pb-4" *ngIf="faqOpen[3]">
             <p class="text-gray-600 leading-relaxed">
-              Mentor Pro unlocks the full potential of the platform with 40+
-              card decks, professional guidebooks, exclusive training sessions,
-              business development resources, priority support, and networking
-              opportunities. If you're serious about facilitation and leadership
-              development, it's the natural next step.
+              {{ "pages.price-page.faq.questions.upgrade.answer" | translate }}
             </p>
           </div>
         </div>
@@ -919,7 +988,7 @@
             (click)="toggleFaq(4)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
-              Can I cancel my subscription at any time?
+              {{ "pages.price-page.faq.questions.cancel.question" | translate }}
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -937,11 +1006,7 @@
           </button>
           <div class="px-6 pb-4" *ngIf="faqOpen[4]">
             <p class="text-gray-600 leading-relaxed">
-              Yes, absolutely! You can cancel your Mentor Pro subscription at
-              any time through your account settings. You'll continue to have
-              access to all Pro features until the end of your current billing
-              period, and then you'll automatically return to the free Community
-              Membership level.
+              {{ "pages.price-page.faq.questions.cancel.answer" | translate }}
             </p>
           </div>
         </div>
@@ -957,7 +1022,10 @@
             (click)="toggleFaq(5)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
-              I've created my own card deck—can I feature it on the site?
+              {{
+                "pages.price-page.faq.questions.custom-deck.question"
+                  | translate
+              }}
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -975,11 +1043,9 @@
           </button>
           <div class="px-6 pb-4" *ngIf="faqOpen[5]">
             <p class="text-gray-600 leading-relaxed">
-              We love supporting creators in our community! Mentor Pro members
-              get opportunities to showcase their work through our creator
-              spotlight programs and community events. We also review
-              high-quality custom decks for potential inclusion in our platform
-              library. Contact us to discuss your creation!
+              {{
+                "pages.price-page.faq.questions.custom-deck.answer" | translate
+              }}
             </p>
           </div>
         </div>
@@ -995,7 +1061,10 @@
             (click)="toggleFaq(6)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
-              I'm working in an organization—do you offer a customized plan?
+              {{
+                "pages.price-page.faq.questions.organization.question"
+                  | translate
+              }}
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -1013,12 +1082,9 @@
           </button>
           <div class="px-6 pb-4" *ngIf="faqOpen[6]">
             <p class="text-gray-600 leading-relaxed">
-              Yes! Our Mentor Teams plan is designed specifically for
-              organizations, institutions, and teams. We offer multi-user
-              licenses, custom onboarding, role-based permissions, dedicated
-              support, and flexible payment options. Contact us to discuss your
-              organization's specific needs and we'll create the perfect plan
-              for your team.
+              {{
+                "pages.price-page.faq.questions.organization.answer" | translate
+              }}
             </p>
           </div>
         </div>
@@ -1034,7 +1100,10 @@
             (click)="toggleFaq(7)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
-              What if I'm not sure which deck to choose or how to use it?
+              {{
+                "pages.price-page.faq.questions.deck-choice.question"
+                  | translate
+              }}
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -1053,35 +1122,41 @@
           <div class="px-6 pb-4" *ngIf="faqOpen[7]">
             <div class="text-gray-600 leading-relaxed">
               <p class="mb-3">
-                That's precisely why we're here as Mentor Cards, so you don't
-                have to guess—we provide smart tools and human support to guide
-                you confidently.
+                {{
+                  "pages.price-page.faq.questions.deck-choice.answer-intro"
+                    | translate
+                }}
               </p>
               <ul class="list-disc pl-5 space-y-1">
                 <li>
-                  Start with our <strong>intelligent search engine</strong>:
-                  filter decks by location purpose, card type (image, word, or
-                  creation), or common keywords like "empowerment,"
-                  "self-esteem."
+                  {{
+                    "pages.price-page.faq.questions.deck-choice.point1"
+                      | translate
+                  }}
                 </li>
                 <li>
-                  Each deck comes with
-                  <strong>a professional guidebook</strong>—including ideas,
-                  guiding questions, and satisfaction examples.
+                  {{
+                    "pages.price-page.faq.questions.deck-choice.point2"
+                      | translate
+                  }}
                 </li>
                 <li>
-                  <strong>The Mentor Community</strong> is ready to answer
-                  questions and share inspiration based on real world
-                  experience.
+                  {{
+                    "pages.price-page.faq.questions.deck-choice.point3"
+                      | translate
+                  }}
                 </li>
                 <li>
-                  <strong>Mentor Pro</strong> members also receive a one-on-one
-                  onboarding session with an expert to help you confidently
-                  design to your specific needs.
+                  {{
+                    "pages.price-page.faq.questions.deck-choice.point4"
+                      | translate
+                  }}
                 </li>
                 <li>
-                  Unsure? Just reach out via chat, email, or through the
-                  community. You're never alone in this journey.
+                  {{
+                    "pages.price-page.faq.questions.deck-choice.point5"
+                      | translate
+                  }}
                 </li>
               </ul>
             </div>
