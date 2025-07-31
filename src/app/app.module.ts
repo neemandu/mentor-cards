@@ -7,50 +7,54 @@ import { Amplify } from 'aws-amplify';
 import awsConfig from '../aws-exports';
 
 const isLocalhost = Boolean(
-  window.location.hostname === "localhost" ||
-  // [::1] is the IPv6 localhost address.
-  window.location.hostname === "[::1]" ||
-  // 127.0.0.1/8 is considered localhost for IPv4.
-  window.location.hostname.match(
-    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-  )
+  window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.1/8 is considered localhost for IPv4.
+    window.location.hostname.match(
+      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+    )
 );
 
 const isDev = Boolean(
-  window.location.hostname === "dev.d15egmtmsipj3q.amplifyapp.com");
+  window.location.hostname === 'dev.d15egmtmsipj3q.amplifyapp.com'
+);
 
-const isProd = Boolean(
-    window.location.hostname === "www.mentor-cards.com");
+const isProd = Boolean(window.location.hostname === 'www.mentor-cards.com');
 
-    
-const redirectSignIn = "http://localhost:4200/all-packs-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/,https://www.mentor-cards.com/all-packs-page/";
-const redirectSignOut = "http://localhost:4200/home-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/,https://www.mentor-cards.com/home-page/";
- 
+const redirectSignIn =
+  'http://localhost:4200/all-packs-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/,https://www.mentor-cards.com/all-packs-page/';
+const redirectSignOut =
+  'http://localhost:4200/home-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/,https://www.mentor-cards.com/home-page/';
 
 // Assuming you have two redirect URIs, and the first is for localhost and second is for production
-const [
-  localRedirectSignIn,
-  devRedirectSignIn,
-  productionRedirectSignIn,
-] = redirectSignIn.split(",");
+const [localRedirectSignIn, devRedirectSignIn, productionRedirectSignIn] =
+  redirectSignIn.split(',');
 
-const [
-  localRedirectSignOut,
-  devRedirectSignOut,
-  productionRedirectSignOut,
-] = redirectSignOut.split(",");
-       
+const [localRedirectSignOut, devRedirectSignOut, productionRedirectSignOut] =
+  redirectSignOut.split(',');
+
 const oauth = {
-  "domain": isProd ? "mentor-cards-prod.auth.eu-west-2.amazoncognito.com" : "mentor-cards-dev.auth.eu-west-2.amazoncognito.com",
-  "redirectSignIn": isLocalhost ? localRedirectSignIn : (isDev ? devRedirectSignIn : productionRedirectSignIn),
-  "redirectSignOut": isLocalhost ? localRedirectSignOut : (isDev ? devRedirectSignOut : productionRedirectSignOut),
-  "responseType": "code"
+  domain: isProd
+    ? 'mentor-cards-prod.auth.eu-west-2.amazoncognito.com'
+    : 'mentor-cards-dev.auth.eu-west-2.amazoncognito.com',
+  redirectSignIn: isLocalhost
+    ? localRedirectSignIn
+    : isDev
+    ? devRedirectSignIn
+    : productionRedirectSignIn,
+  redirectSignOut: isLocalhost
+    ? localRedirectSignOut
+    : isDev
+    ? devRedirectSignOut
+    : productionRedirectSignOut,
+  responseType: 'code',
 };
 
 const updatedAwsConfig = {
   ...awsConfig,
-  oauth: oauth
-}
+  oauth: oauth,
+};
 
 Amplify.configure(updatedAwsConfig);
 //Auth.configure(updatedAwsConfig)
@@ -90,8 +94,8 @@ import { PortalModule } from '@angular/cdk/portal';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatPaginatorModule} from '@angular/material/paginator';
-import { MatSortModule} from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { I18nModule } from './Modules/i18n/i18n.module';
 // import {DataTablesModule} from 'angular-datatables';
 //Components
@@ -111,12 +115,22 @@ import { AllPacksPageComponent } from './Pages/all-packs-page/all-packs-page.com
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { NoProgramPageComponent } from './Pages/no-program-page/no-program-page.component';
 import { CardsRevealDialogComponent } from './Pages/pack-content-page/cards-reveal-dialog/cards-reveal-dialog.component';
-import { PackContentPageComponent, PortraitWarningDialogComponent } from './Pages/pack-content-page/pack-content-page.component';
+import {
+  PackContentPageComponent,
+  PortraitWarningDialogComponent,
+} from './Pages/pack-content-page/pack-content-page.component';
 import { RandomCardRevealDialogComponent } from './Pages/pack-content-page/random-card-reveal-dialog/random-card-reveal-dialog.component';
 import { CardComponent } from './Shared Components/card/card.component';
 import { PackComponent } from './Shared Components/pack/pack.component';
-import { AmountOfPacksViewPipe, LineBreakPipe, TooltipListViewPipe } from './Shared Components/Pipes/tooltip-list-view.pipe';
-import { TransitionGroupComponent, TransitionGroupItemDirective } from './Pages/pack-content-page/transition-group';
+import {
+  AmountOfPacksViewPipe,
+  LineBreakPipe,
+  TooltipListViewPipe,
+} from './Shared Components/Pipes/tooltip-list-view.pipe';
+import {
+  TransitionGroupComponent,
+  TransitionGroupItemDirective,
+} from './Pages/pack-content-page/transition-group';
 import { PackPreviewComponent } from './Shared Components/pack/pack-preview/pack-preview.component';
 import { DynamicDialogYesNoComponent } from './Shared Components/Dialogs/dynamic-dialog-yes-no/dynamic-dialog-yes-no.component';
 import { UserPageComponent } from './Pages/user-page/user-page.component';
@@ -125,7 +139,10 @@ import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new
 import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
-import { GuideBookComponent, PopupDialogComponent } from './Pages/pack-content-page/guide-book/guide-book.component';
+import {
+  GuideBookComponent,
+  PopupDialogComponent,
+} from './Pages/pack-content-page/guide-book/guide-book.component';
 import { SiteRulesDialogComponent } from './Shared Components/Dialogs/site-rules-dialog/site-rules-dialog.component';
 import { PricePageComponent } from './Pages/price-page/price-page.component';
 import { GuidePageComponent } from './Pages/guide-page/guide-page.component';
@@ -184,6 +201,7 @@ import { TopQuestionsCustomDialogComponent } from './Pages/pack-content-page/top
 import { PackContentPageNewComponent } from './Pages/pack-content-page-new/pack-content-page-new.component';
 import { confirmationDialogueComponent } from './Pages/pack-content-page/confirmation-dialog';
 import { TelephoneInputComponent } from './Modules/telephone-input/telephone-input.component';
+import { MobileFeaturesComparisonComponent } from './Pages/price-page/mobile-features-comparison/mobile-features-comparison.component';
 
 @NgModule({
   declarations: [
@@ -273,7 +291,8 @@ import { TelephoneInputComponent } from './Modules/telephone-input/telephone-inp
     GradientRippleDirective,
     PackContentPageNewComponent,
     confirmationDialogueComponent,
-    TelephoneInputComponent
+    TelephoneInputComponent,
+    MobileFeaturesComparisonComponent,
   ],
   imports: [
     BrowserModule,
@@ -316,10 +335,10 @@ import { TelephoneInputComponent } from './Modules/telephone-input/telephone-inp
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatDatepickerModule
-
+    MatDatepickerModule,
   ],
-  providers: [AuthService,
+  providers: [
+    AuthService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -327,19 +346,33 @@ import { TelephoneInputComponent } from './Modules/telephone-input/telephone-inp
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('190819062590-9t1orgtvli8t5k0orkv885gg7h9hpjlp.apps.googleusercontent.com') // your client id
+            provider: new GoogleLoginProvider(
+              '190819062590-9t1orgtvli8t5k0orkv885gg7h9hpjlp.apps.googleusercontent.com'
+            ), // your client id
           },
         ],
         onError: (err) => {
           console.error(err);
-        }
+        },
       } as SocialAuthServiceConfig,
     },
-    SocialAuthService
+    SocialAuthService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CardsRevealDialogComponent,TopQuestionsCustomDialogComponent, RandomCardRevealDialogComponent, UserRelatedDialogComponent,
-    PackPreviewComponent, NewEditGroupUserDialogComponent, EnterGroupIdDialogComponent, PostPurchaseSummeryDialogComponent,
-    GuideBookComponent, SiteRulesDialogComponent, ApprovePurchaseDialogComponent, PortraitWarningDialogComponent,AiChatComponent]
+  entryComponents: [
+    CardsRevealDialogComponent,
+    TopQuestionsCustomDialogComponent,
+    RandomCardRevealDialogComponent,
+    UserRelatedDialogComponent,
+    PackPreviewComponent,
+    NewEditGroupUserDialogComponent,
+    EnterGroupIdDialogComponent,
+    PostPurchaseSummeryDialogComponent,
+    GuideBookComponent,
+    SiteRulesDialogComponent,
+    ApprovePurchaseDialogComponent,
+    PortraitWarningDialogComponent,
+    AiChatComponent,
+  ],
 })
-export class AppModule { }
+export class AppModule {}
