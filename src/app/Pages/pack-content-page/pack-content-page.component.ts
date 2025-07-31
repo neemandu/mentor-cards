@@ -424,33 +424,29 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
   setPack(pack: PackContent | undefined): void {
     if (pack) {
       this.pack = pack;
-      console.log(pack, 'pack');
-      
       this.cards = [...this.pack.cards];      
-      this.cardImages = this.pack.cards[0]?.cardsImages ? [...this.pack.cards[0]?.cardsImages] : [];
-      if (this.removedCards.length) {
-        this.cardImages = this.cardImages?.filter(cardImage => {        
-          return !this.removedCards?.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
-        });
+      this.cardImages = this.pack.cards[0]?.cardsImages || [];
+      if (this.removedCards.length && this.cardImages) {
+        for (let i = this.cardImages.length - 1; i >= 0; i--) {
+          const cardImage = this.cardImages[i];
+          const isRemoved = this.removedCards.some(removeCard => removeCard.frontImgUrl === cardImage.frontImgUrl);
+          if (isRemoved) {
+            this.cardImages.splice(i, 1);
+          }
+        }
       }
       
       this.isDoubleSided = this.cardImages[0]?.backImgUrl ? true : false;
       this.unauthorized = this.pack.cards.length === 0;
       if (this.pack.cards.length > 1) {
           if (this.removedCards?.length) {
-            this.categoriesCard = this.pack.cards.map((card) => {
-            const cardImages = card.cardsImages.filter((cardImage) => {
-              return !this.removedCards?.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
-            });
-
-            return {
-              ...card,
-              cardsImages: cardImages,
-            }
-          }); 
-        } else {
-          this.categoriesCard = JSON.parse(JSON.stringify(this.pack.cards));
-        }
+           this.pack.cards.forEach((card) => {
+              card.cardsImages = card.cardsImages.filter((cardImage) => {
+                return !this.removedCards?.find(removeCard => cardImage.frontImgUrl === removeCard.frontImgUrl);
+              });
+            });  
+          }
+        this.categoriesCard = this.pack.cards;
         // this.categoriesCard = this.pack.cards;
         console.log(this.categoriesCard, 'cards here');
       }
@@ -878,7 +874,7 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     
     if (!this.selectedCategory) {  
       const randomIndexCard = Math.floor(Math.random() * this.pack.cards.length);
-      this.randomSelectedCard = {... this.pack.cards[randomIndexCard]} as Card;
+      this.randomSelectedCard = {...this.pack.cards[randomIndexCard]} as Card;
     }else {
       this.randomSelectedCard = {...this.selectedCategory} as Card;
     }
@@ -1085,7 +1081,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
   removeCard(index: number, stepNumber?:number): void {
     console.log(this.categoriesCard, 'this.categoriesCard');
-    
     let removed = [];
     const findCategory = this.categoriesCard?.find(card => card.categoryStepNumber === stepNumber);
     if (findCategory) {
@@ -1157,6 +1152,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     });
 
     const queryParams = new URLSearchParams();
+
+    debugger;
 
     if (this.packageHistory.removedCards) {
       queryParams.set('removedCards', window.btoa(JSON.stringify(this.packageHistory.removedCards)));
