@@ -172,3 +172,19 @@
     font-size: 1rem;
   }
 }
+
+.divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(243 244 246 / var(--tw-divide-opacity)) /* #f3f4f6 */;
+}
+
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+/* Make odd feature items have white background */
+.divide-y > div:nth-child(odd) {
+  background-color: white;
+}

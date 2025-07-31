@@ -28,7 +28,7 @@
   <div
     class="bg-[#fcf4f2] flex justify-center items-center billing-toggle-container"
   >
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-4 flex-row md:flex-col">
       <span
         class="text-gray-700 font-medium"
         [class.text-gray-900]="!isAnnualBilling"
@@ -80,12 +80,7 @@
           style="margin-top: 2rem; border-radius: 20px"
         >
           <div class="text-left">
-            <h3
-              class="mb-2"
-              style="font-size: 2rem; color: #212529; font-weight: 800"
-            >
-              Basic
-            </h3>
+            <h3 class="mb-2 heading-text" style="color: #212529">Basic</h3>
             <p class="mb-6" style="color: #7e7e7e">
               Get Value, at Your Own Pace
             </p>
@@ -209,13 +204,8 @@
           <div class="text-left">
             <div class="flex justify-start items-start mb-2">
               <h3
-                class="mb-2"
-                style="
-                  font-size: 2rem;
-                  color: #212529;
-                  font-weight: 800;
-                  margin-right: 0.5rem;
-                "
+                class="mb-2 heading-text"
+                style="color: #212529; margin-right: 0.5rem"
               >
                 MentorPro
               </h3>
@@ -415,10 +405,7 @@
           style="margin-top: 2rem; border-radius: 20px"
         >
           <div class="text-left">
-            <h3
-              class="mb-2"
-              style="font-size: 2rem; color: #212529; font-weight: 800"
-            >
+            <h3 class="mb-2 heading-text" style="color: #212529">
               Mentor Teams
             </h3>
             <p class="mb-6" style="color: #7e7e7e">
@@ -777,7 +764,7 @@
       [monthlyPrice]="monthlyPrice"
     ></app-mobile-features-comparison>
   </div>
-  <div style="margin-top: 2rem">
+  <div style="padding-top: 2rem" class="bg-[#fcf4f2]">
     <app-home-page-partners [isPricePage]="true"></app-home-page-partners>
   </div>
 
@@ -791,7 +778,6 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-4">
           Frequently Asked Questions
         </h2>
-        <div class="w-24 h-1 bg-[#e67c73] mx-auto"></div>
       </div>
 
       <div class="space-y-4">
