@@ -35,7 +35,7 @@
         >{{ "pages.price-page.billing.monthly" | translate }}</span
       >
 
-      <div class="relative inline-block h-6" style="width: 48px">
+      <div class="relative inline-block w-12 h-6">
         <input
           type="checkbox"
           id="billing-toggle"
@@ -45,12 +45,12 @@
         />
         <label
           for="billing-toggle"
-          class="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+          class="block w-12 h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"
           [class.bg-[#e67c73]]="isAnnualBilling"
         >
           <span
-            class="block h-4 w-4 rounded-full bg-white shadow transform transition-transform duration-200 ease-in-out mt-1 ml-1"
-            [class.translate-x-10]="isAnnualBilling"
+            class="block w-5 h-5 rounded-full bg-white shadow transform transition-transform duration-200 ease-in-out absolute top-0.5 left-0.5"
+            [class.translate-x-6]="isAnnualBilling"
           ></span>
         </label>
       </div>
