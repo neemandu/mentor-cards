@@ -139,6 +139,7 @@ import { NewEditGroupUserDialogComponent } from './Shared Components/Dialogs/new
 import { EnterGroupIdDialogComponent } from './Pages/no-program-page/enter-group-id-dialog/enter-group-id-dialog.component';
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { PostPurchaseSummeryDialogComponent } from './Shared Components/Dialogs/post-purchase-summery-dialog/post-purchase-summery-dialog.component';
+import { FacebookWelcomeDialogComponent } from './Shared Components/Dialogs/facebook-welcome-dialog/facebook-welcome-dialog.component';
 import {
   GuideBookComponent,
   PopupDialogComponent,
@@ -237,6 +238,7 @@ import { MobileFeaturesComparisonComponent } from './Pages/price-page/mobile-fea
     EnterGroupIdDialogComponent,
     ContactUsComponent,
     PostPurchaseSummeryDialogComponent,
+    FacebookWelcomeDialogComponent,
     GuideBookComponent,
     SiteRulesDialogComponent,
     PricePageComponent,
@@ -368,6 +370,7 @@ import { MobileFeaturesComparisonComponent } from './Pages/price-page/mobile-fea
     NewEditGroupUserDialogComponent,
     EnterGroupIdDialogComponent,
     PostPurchaseSummeryDialogComponent,
+    FacebookWelcomeDialogComponent,
     GuideBookComponent,
     SiteRulesDialogComponent,
     ApprovePurchaseDialogComponent,

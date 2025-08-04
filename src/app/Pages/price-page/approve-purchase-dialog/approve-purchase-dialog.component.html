@@ -7,39 +7,76 @@
         <mat-icon>highlight_off</mat-icon>
     </button>
 </mat-toolbar> -->
-<div mat-dialog-title style="text-align: center">
+<div
+  mat-dialog-title
+  style="
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  "
+>
   <button class="iconButton" mat-icon-button (click)="closeDialog()">
     <mat-icon>highlight_off</mat-icon>
   </button>
   <span id="title">{{ "pages.approvePurchaseDialog.title" | translate }} </span>
 </div>
 <div class="line"></div>
-<div id="summery" mat-dialog-content>
+<div
+  id="summery"
+  mat-dialog-content
+  [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
+  [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
+>
+  <div
+    [innerHTML]="'pages.approvePurchaseDialog.summery.intro' | translate"
+  ></div>
   <ul>
-    <!-- <li>
-            החיוב יתחיל ב-{{data.paymentStartDate | date:'d/M/y'}}, בסוף תקופת הניסיון בחינם, ויתחדש אוטומטית מדי חודש.
-        </li> -->
+    <li
+      [innerHTML]="
+        'pages.approvePurchaseDialog.summery.recurringPayment' | translate
+      "
+    ></li>
+    <li
+      [innerHTML]="
+        'pages.approvePurchaseDialog.summery.autoRenewal' | translate
+      "
+    ></li>
+    <li
+      [innerHTML]="
+        'pages.approvePurchaseDialog.summery.cancelAutoCharge' | translate
+      "
+    ></li>
+    <li
+      [innerHTML]="'pages.approvePurchaseDialog.summery.noRefunds' | translate"
+    ></li>
+    <li
+      [innerHTML]="
+        'pages.approvePurchaseDialog.summery.bankCharges' | translate
+      "
+    ></li>
     <li>
-      {{ "pages.approvePurchaseDialog.summery.recurringPayment" | translate }}
-    </li>
-    <li> {{ "pages.approvePurchaseDialog.summery.cancelAutoCharge" | translate }}
-    </li>
-    <li> {{ "pages.approvePurchaseDialog.summery.noRefunds" | translate }}</li>
-
-    <li>{{ "pages.approvePurchaseDialog.summery.bankCharges" | translate }}</li>
-    <li>
-      ​{{ "pages.approvePurchaseDialog.summery.ageConfirmation" | translate }}<a
+      <span
+        [innerHTML]="
+          'pages.approvePurchaseDialog.summery.ageConfirmation' | translate
+        "
+      ></span>
+      <a
         (click)="openSiteRulesModal()"
-        > ​{{ "pages.approvePurchaseDialog.summery.termsAgreement" | translate }}</a
-      >
+        [innerHTML]="
+          'pages.approvePurchaseDialog.summery.termsAgreement' | translate
+        "
+      ></a>
     </li>
-    <li>{{ "pages.approvePurchaseDialog.summery.lifeTimePlan" | translate }}
-    </li>
-    <!-- <li>
-            לסיום הרכישה באמצעות <b>PayPal או ע"י כרטיס אשראי</b> לחץ על כפתור ה PayPal.
-        </li> -->
+    <li
+      [innerHTML]="
+        'pages.approvePurchaseDialog.summery.lifeTimePlan' | translate
+      "
+    ></li>
   </ul>
-  <p id="payment-title">{{ "pages.approvePurchaseDialog.paymentTitle" | translate }}</p>
+  <p id="payment-title">
+    {{ "pages.approvePurchaseDialog.paymentTitle" | translate }}
+  </p>
 </div>
 <div mat-dialog-actions>
   <div

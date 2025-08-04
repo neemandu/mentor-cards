@@ -28,7 +28,7 @@
   <div
     class="bg-[#fcf4f2] flex justify-center items-center billing-toggle-container"
   >
-    <div class="flex items-center space-x-4 flex-row md:flex-col">
+    <div class="flex items-center space-x-2 flex-row md:flex-col">
       <span
         class="text-gray-700 font-medium mx-2"
         [class.text-gray-900]="!isAnnualBilling"
@@ -281,7 +281,11 @@
             <div class="flex justify-start items-start mb-2">
               <h3
                 class="mb-2 heading-text"
-                style="color: #212529; margin-right: 0.5rem"
+                style="
+                  color: #212529;
+                  margin-right: 0.5rem;
+                  margin-left: 0.5rem;
+                "
               >
                 {{ "pages.price-page.plans.mentor-pro.title" | translate }}
               </h3>
@@ -408,6 +412,7 @@
                 }}</span>
               </li>
               <li
+                *ngIf="isAnnualBilling"
                 class="flex items-start"
                 [class.text-right]="
                   langDirectionService.currentLangDirection === 'rtl'
@@ -427,10 +432,13 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                <span class="text-sm text-gray-600">{{
-                  "pages.price-page.plans.mentor-pro.features.onboarding"
-                    | translate
-                }}</span>
+                <span
+                  class="text-sm text-gray-600"
+                  [innerHTML]="
+                    'pages.price-page.plans.mentor-pro.features.onboarding'
+                      | translate
+                  "
+                ></span>
               </li>
               <li
                 class="flex items-start"
@@ -737,13 +745,22 @@
                 class="py-4 pr-8 w-1/2"
               ></th>
               <th class="text-center py-4 px-4 w-1/4">
-                <div class="font-bold text-lg text-gray-900">
+                <div
+                  class="font-bold text-lg text-gray-900"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
                   {{
                     "pages.price-page.features-comparison.basic-title"
                       | translate
                   }}
                 </div>
-                <div class="text-sm mt-1" style="color: #7e7e7e">
+                <div
+                  class="text-sm mt-1"
+                  style="color: #7e7e7e"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
                   {{
                     "pages.price-page.features-comparison.basic-price"
                       | translate
@@ -751,13 +768,22 @@
                 </div>
               </th>
               <th class="text-center py-4 px-4 w-1/4">
-                <div class="font-bold text-lg text-gray-900">
+                <div
+                  class="font-bold text-lg text-gray-900"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
                   {{
                     "pages.price-page.features-comparison.mentor-pro-title"
                       | translate
                   }}
                 </div>
-                <div class="text-sm mt-1" style="color: #7e7e7e">
+                <div
+                  class="text-sm mt-1"
+                  style="color: #7e7e7e"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
                   {{ monthlyPrice }} {{ pricePeriod }}
                 </div>
               </th>
@@ -767,7 +793,11 @@
           <!-- Table Body -->
           <tbody class="divide-y divide-gray-100">
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.two-decks"
                     | translate
@@ -790,7 +820,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.platform-features"
                     | translate
@@ -813,7 +847,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.community-membership"
                     | translate
@@ -836,7 +874,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.monthly-email"
                     | translate
@@ -859,7 +901,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.all-decks"
                     | translate
@@ -878,7 +924,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.recorded-trainings"
                     | translate
@@ -897,7 +947,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.in-depth-guidebooks"
                     | translate
@@ -916,7 +970,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.mentor-pro-events"
                     | translate
@@ -935,7 +993,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.advanced-email"
                     | translate
@@ -954,7 +1016,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.marketing-tools"
                     | translate
@@ -973,7 +1039,11 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.priority-access"
                     | translate
@@ -992,21 +1062,65 @@
             </tr>
 
             <tr class="hover:bg-gray-50 transition-colors duration-150">
-              <td class="py-4 pr-8 text-gray-700">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
                 {{
                   "pages.price-page.features-comparison.features.onboarding-session"
                     | translate
                 }}
               </td>
-              <td class="py-4 px-4 text-center">
-                <span class="feature-dash">−</span>
+              <td class="py-4 px-4 text-center relative">
+                <div class="flex items-center justify-center">
+                  <span class="feature-dash">−</span>
+                  <div class="tooltip-container">
+                    <svg
+                      class="info-icon"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                    <div
+                      class="tooltip-content"
+                      [class.tooltip-left]="
+                        langDirectionService.currentLang !== 'he'
+                      "
+                      [class.tooltip-right]="
+                        langDirectionService.currentLang === 'he'
+                      "
+                    >
+                      {{
+                        "pages.price-page.features-comparison.features.onboarding-session-tooltip"
+                          | translate
+                      }}
+                      <div
+                        class="tooltip-arrow"
+                        [class.tooltip-arrow-left]="
+                          langDirectionService.currentLang !== 'he'
+                        "
+                        [class.tooltip-arrow-right]="
+                          langDirectionService.currentLang === 'he'
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                </div>
               </td>
               <td class="py-4 px-4 text-center">
                 <img
+                  *ngIf="isAnnualBilling"
                   src="./../../../assets/correct.png"
                   alt="icon"
                   class="mx-auto"
                 />
+                <span *ngIf="!isAnnualBilling" class="feature-dash">−</span>
               </td>
             </tr>
           </tbody>
@@ -1020,6 +1134,7 @@
     <app-mobile-features-comparison
       [monthlyPrice]="monthlyPrice"
       [pricePeriod]="pricePeriod"
+      [isAnnualBilling]="isAnnualBilling"
     ></app-mobile-features-comparison>
   </div>
   <div style="padding-top: 2rem" class="bg-[#fcf4f2]">
@@ -1033,9 +1148,9 @@
       style="max-width: 80rem; padding-top: 2rem"
     >
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+        <div class="sm:text-4xl text-2xl font-bold text-black mb-4">
           {{ "pages.price-page.faq.title" | translate }}
-        </h2>
+        </div>
       </div>
 
       <div class="space-y-4">
@@ -1074,12 +1189,23 @@
               ></path>
             </svg>
           </button>
-          <div class="px-6 pb-4" *ngIf="faqOpen[1]">
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[1]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
             <p class="text-gray-600 leading-relaxed">
-              {{
-                "pages.price-page.faq.questions.digital-cards.answer"
-                  | translate
-              }}
+              <span
+                [innerHTML]="
+                  'pages.price-page.faq.questions.digital-cards.answer'
+                    | translate
+                "
+              ></span>
             </p>
           </div>
         </div>
@@ -1099,11 +1225,14 @@
             "
             (click)="toggleFaq(2)"
           >
-            <span class="font-medium text-gray-900" style="font-size: 1rem">
-              {{
-                "pages.price-page.faq.questions.community-vs-pro.question"
+            <span
+              class="font-medium text-gray-900"
+              style="font-size: 1rem"
+              [innerHTML]="
+                'pages.price-page.faq.questions.community-vs-pro.question'
                   | translate
-              }}
+              "
+            >
             </span>
             <svg
               class="w-5 h-5 text-gray-500 transition-all duration-200"
@@ -1119,14 +1248,24 @@
               ></path>
             </svg>
           </button>
-          <div class="px-6 pb-4" *ngIf="faqOpen[2]">
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[2]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
             <div class="text-gray-600 leading-relaxed">
-              <p class="mb-3">
-                {{
-                  "pages.price-page.faq.questions.community-vs-pro.answer1"
+              <p
+                class="mb-3"
+                [innerHTML]="
+                  'pages.price-page.faq.questions.community-vs-pro.answer1'
                     | translate
-                }}
-              </p>
+                "
+              ></p>
               <p>
                 {{
                   "pages.price-page.faq.questions.community-vs-pro.answer2"
@@ -1171,7 +1310,16 @@
               ></path>
             </svg>
           </button>
-          <div class="px-6 pb-4" *ngIf="faqOpen[3]">
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[3]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
             <p class="text-gray-600 leading-relaxed">
               {{ "pages.price-page.faq.questions.upgrade.answer" | translate }}
             </p>
@@ -1210,7 +1358,16 @@
               ></path>
             </svg>
           </button>
-          <div class="px-6 pb-4" *ngIf="faqOpen[4]">
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[4]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
             <p class="text-gray-600 leading-relaxed">
               {{ "pages.price-page.faq.questions.cancel.answer" | translate }}
             </p>
@@ -1252,7 +1409,16 @@
               ></path>
             </svg>
           </button>
-          <div class="px-6 pb-4" *ngIf="faqOpen[5]">
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[5]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
             <p class="text-gray-600 leading-relaxed">
               {{
                 "pages.price-page.faq.questions.custom-deck.answer" | translate
@@ -1296,7 +1462,16 @@
               ></path>
             </svg>
           </button>
-          <div class="px-6 pb-4" *ngIf="faqOpen[6]">
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[6]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
             <p class="text-gray-600 leading-relaxed">
               {{
                 "pages.price-page.faq.questions.organization.answer" | translate
@@ -1340,7 +1515,16 @@
               ></path>
             </svg>
           </button>
-          <div class="px-6 pb-4" *ngIf="faqOpen[7]">
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[7]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
             <div class="text-gray-600 leading-relaxed">
               <p class="mb-3">
                 {{
@@ -1349,36 +1533,36 @@
                 }}
               </p>
               <ul class="list-disc pl-5 space-y-1">
-                <li>
-                  {{
-                    "pages.price-page.faq.questions.deck-choice.point1"
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point1'
                       | translate
-                  }}
-                </li>
-                <li>
-                  {{
-                    "pages.price-page.faq.questions.deck-choice.point2"
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point2'
                       | translate
-                  }}
-                </li>
-                <li>
-                  {{
-                    "pages.price-page.faq.questions.deck-choice.point3"
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point3'
                       | translate
-                  }}
-                </li>
-                <li>
-                  {{
-                    "pages.price-page.faq.questions.deck-choice.point4"
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point4'
                       | translate
-                  }}
-                </li>
-                <li>
-                  {{
-                    "pages.price-page.faq.questions.deck-choice.point5"
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point5'
                       | translate
-                  }}
-                </li>
+                  "
+                ></li>
               </ul>
             </div>
           </div>

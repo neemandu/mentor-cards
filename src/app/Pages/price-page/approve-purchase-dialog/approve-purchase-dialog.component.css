@@ -1,5 +1,5 @@
 mat-icon {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
 }
 
 mat-toolbar {
@@ -24,7 +24,7 @@ a {
 }
 
 .line {
-  background-color: #ffa800;
+  background-color: #e67c73;
   width: auto;
   height: 3px;
   margin-bottom: 1rem;
