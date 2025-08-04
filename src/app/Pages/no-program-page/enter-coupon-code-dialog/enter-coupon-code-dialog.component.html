@@ -1,32 +1,63 @@
-<mat-toolbar class="d-flex justify-content-between">
-    <span class="title">הזנת קוד הטבה</span>
-    <button class="iconButton" mat-icon-button (click)="closeDialog()">
-        <mat-icon style="font-family: 'Material Icons';">highlight_off</mat-icon>
+<div class="coupon-dialog-container">
+  <div class="dialog-header">
+    <button class="close-button" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
     </button>
-</mat-toolbar>
-<div class="line"></div>
-<mat-dialog-content>
-    <form class="d-flex flex-column" [formGroup]="userForm">
-        <mat-form-field>
-            <mat-label>קוד הטבה</mat-label>
-            <input type="text" matInput formControlName="couponCode" cdkFocusInitial>
-            <mat-error *ngIf="formControls.couponCode.hasError('noSuchCoupon')">
-                קוד הטבה זה לא קיים
-            </mat-error>
-            <mat-error *ngIf="formControls.couponCode.hasError('userHasCoupon')">
-                קוד ההטבה כבר הוזן
-            </mat-error>
-            <mat-error *ngIf="formControls.couponCode.hasError('userAlreadyInOrganization')">
-                קוד הטבה עבור אירגון זה כבר פעיל
-            </mat-error>
-            <mat-error *ngIf="formControls.couponCode.hasError('notInOrganization')">
-                כתובת המייל שלך אינה נמצאת במאגרי המידע שברשותינו. אנא פנו לאיש הקשר באירגונכם
-            </mat-error>
-        </mat-form-field>
-    </form>
-</mat-dialog-content>
+    <span class="dialog-title">יש לך קוד הטבה?</span>
+  </div>
 
-<div class="buttons" mat-dialog-actions>
-    <button id="enterCouponCode" class="action-button" type="button" (click)="enterGroup()"
-        [disabled]="userForm.invalid || !inGroup">אישור</button>
+  <div class="dialog-content">
+    <form class="coupon-form" [formGroup]="userForm">
+      <div class="input-container">
+        <input
+          type="text"
+          class="coupon-input"
+          formControlName="couponCode"
+          placeholder=""
+          cdkFocusInitial
+        />
+        <div class="error-messages" *ngIf="formControls.couponCode.errors">
+          <div
+            class="error-message"
+            *ngIf="formControls.couponCode.hasError('noSuchCoupon')"
+          >
+            קוד הטבה זה לא קיים
+          </div>
+          <div
+            class="error-message"
+            *ngIf="formControls.couponCode.hasError('userHasCoupon')"
+          >
+            קוד ההטבה כבר הוזן
+          </div>
+          <div
+            class="error-message"
+            *ngIf="
+              formControls.couponCode.hasError('userAlreadyInOrganization')
+            "
+          >
+            קוד הטבה עבור אירגון זה כבר פעיל
+          </div>
+          <div
+            class="error-message"
+            *ngIf="formControls.couponCode.hasError('notInOrganization')"
+          >
+            כתובת המייל שלך אינה נמצאת במאגרי המידע שברשותינו. אנא פנו לאיש הקשר
+            באירגונכם
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="dialog-actions">
+    <button
+      id="enterCouponCode"
+      class="update-price-button"
+      type="button"
+      (click)="enterGroup()"
+      [disabled]="userForm.invalid || !inGroup"
+    >
+      עדכן מחיר
+    </button>
+  </div>
 </div>
