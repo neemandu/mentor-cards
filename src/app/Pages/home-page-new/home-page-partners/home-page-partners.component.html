@@ -2,6 +2,8 @@
   <div
     class="text-black sm:text-4xl text-2xl font-bold text-center"
     [ngClass]="isPricePage ? '' : 'mt-24 '"
+    [class.text-left]="langDirectionService.currentLang !== 'he'"
+    [class.text-right]="langDirectionService.currentLang === 'he'"
   >
     {{ "pages.home-page.sections.partners.content.title1" | translate }}
   </div>

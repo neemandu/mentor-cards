@@ -1,0 +1,68 @@
+<div
+  mat-dialog-title
+  style="
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  "
+>
+  <button class="iconButton" mat-icon-button (click)="closeDialog()">
+    <mat-icon>highlight_off</mat-icon>
+  </button>
+  <span id="title">{{ "facebookWelcomeDialog.title" | translate }}</span>
+</div>
+<div class="line"></div>
+<div
+  id="content"
+  mat-dialog-content
+  [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
+  [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
+>
+  <div class="intro">
+    {{ "facebookWelcomeDialog.intro" | translate }}
+  </div>
+
+  <div class="benefits-section">
+    <p class="benefits-title">
+      {{ "facebookWelcomeDialog.benefits" | translate }}
+    </p>
+    <ul>
+      <li>
+        <mat-icon class="checkmark">check_circle</mat-icon>
+        {{ "facebookWelcomeDialog.benefit1" | translate }}
+      </li>
+      <li>
+        <mat-icon class="checkmark">check_circle</mat-icon>
+        {{ "facebookWelcomeDialog.benefit2" | translate }}
+      </li>
+      <li>
+        <mat-icon class="checkmark">check_circle</mat-icon>
+        {{ "facebookWelcomeDialog.benefit3" | translate }}
+      </li>
+      <li>
+        <mat-icon class="checkmark">check_circle</mat-icon>
+        {{ "facebookWelcomeDialog.benefit4" | translate }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="last-line">
+    {{ "facebookWelcomeDialog.lastLine" | translate }}
+  </div>
+</div>
+
+<div mat-dialog-actions class="actions">
+  <button class="facebook-button" type="button" (click)="openFacebookGroup()">
+    <mat-icon>facebook</mat-icon>
+    {{ "facebookWelcomeDialog.facebookButton" | translate }}
+  </button>
+
+  <button
+    class="continue-button"
+    type="button"
+    (click)="navigate('/all-packs-page')"
+  >
+    {{ "facebookWelcomeDialog.continueButton" | translate }}
+  </button>
+</div>

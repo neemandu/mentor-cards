@@ -30,15 +30,19 @@
   </div>
 </div> -->
 
-<div style="border-radius: 15px; padding: 10px">
+<div style="border-radius: 15px; padding: 20px">
   <div
     style="display: flex; justify-content: space-between; align-items: center"
   >
     <button (click)="closeDialog()">
       <mat-icon>highlight_off</mat-icon>
     </button>
-    <span style="font-size: 1.2rem; font-weight: 600">
-      תשלום באמצעות PayPal או כרטיס אשראי
+    <span
+      style="font-size: 1.2rem; font-weight: 600"
+      [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
+      [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
+    >
+      תשלום באמצעות כרטיס אשראי או PayPal
     </span>
   </div>
   <div class="line"></div>
@@ -47,7 +51,7 @@
       'text-right': langDirectionService.currentLangDirection === 'rtl',
       'text-left': langDirectionService.currentLangDirection === 'ltr'
     }"
-    style="margin-top: 20px; display: flex; align-items: center"
+    style="margin-top: 20px; display: flex; align-items: center; gap: 10px"
     [ngStyle]="{
       'flex-direction':
         langDirectionService.currentLangDirection === 'rtl'
