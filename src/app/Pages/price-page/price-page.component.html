@@ -30,7 +30,7 @@
   >
     <div class="flex items-center space-x-4 flex-row md:flex-col">
       <span
-        class="text-gray-700 font-medium"
+        class="text-gray-700 font-medium mx-2"
         [class.text-gray-900]="!isAnnualBilling"
         >{{ "pages.price-page.billing.monthly" | translate }}</span
       >
@@ -49,8 +49,21 @@
           [class.bg-[#e67c73]]="isAnnualBilling"
         >
           <span
-            class="block w-5 h-5 rounded-full bg-white shadow transform transition-transform duration-200 ease-in-out absolute top-0.5 left-0.5"
-            [class.translate-x-6]="isAnnualBilling"
+            class="block w-5 h-5 rounded-full bg-white shadow transform transition-transform duration-200 ease-in-out absolute top-0.5"
+            [class.left-0\.5]="
+              langDirectionService.currentLangDirection === 'ltr'
+            "
+            [class.right-0\.5]="
+              langDirectionService.currentLangDirection === 'rtl'
+            "
+            [class.translate-x-6]="
+              isAnnualBilling &&
+              langDirectionService.currentLangDirection === 'ltr'
+            "
+            [class.-translate-x-6]="
+              isAnnualBilling &&
+              langDirectionService.currentLangDirection === 'rtl'
+            "
           ></span>
         </label>
       </div>
@@ -62,7 +75,7 @@
           >{{ "pages.price-page.billing.annual" | translate }}</span
         >
         <span
-          class="gredient-effect text-white text-xs font-medium px-2 py-1 rounded-full"
+          class="gredient-effect text-white text-xs font-medium px-2 py-1 rounded-full mx-2"
         >
           {{ "pages.price-page.billing.save-badge" | translate }}
         </span>
@@ -79,7 +92,14 @@
           class="pricing-card bg-white shadow-lg p-8 relative"
           style="margin-top: 2rem; border-radius: 20px"
         >
-          <div class="text-left">
+          <div
+            [class.text-left]="
+              langDirectionService.currentLangDirection === 'ltr'
+            "
+            [class.text-right]="
+              langDirectionService.currentLangDirection === 'rtl'
+            "
+          >
             <h3 class="mb-2 heading-text" style="color: #212529">
               {{ "pages.price-page.plans.basic.title" | translate }}
             </h3>
@@ -94,7 +114,9 @@
               <span class="text-4xl font-bold text-gray-900">{{
                 "pages.price-page.plans.basic.price" | translate
               }}</span>
-              {{ "pages.price-page.plans.basic.price-period" | translate }}
+              <span class="text-2xl font-bold text-gray-900">
+                {{ "pages.price-page.plans.basic.price-period" | translate }}
+              </span>
             </div>
 
             <button
@@ -107,11 +129,27 @@
           </div>
 
           <div class="mt-8">
-            <h4 class="text-gray-900 mb-4" style="font-weight: 500">
+            <h4
+              class="text-gray-900 mb-4"
+              style="font-weight: 500"
+              [ngClass]="{
+                'text-right mr-10':
+                  langDirectionService.currentLangDirection === 'rtl',
+                'text-left': langDirectionService.currentLangDirection === 'ltr'
+              }"
+            >
               {{ "pages.price-page.plans.basic.features-title" | translate }}
             </h4>
             <ul class="space-y-3">
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -128,7 +166,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -145,7 +191,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -161,7 +215,15 @@
                   "pages.price-page.plans.basic.features.community" | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -178,7 +240,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -204,7 +274,10 @@
           class="pricing-card shadow-lg p-8 relative border-2 transform scale-105"
           style="background-color: #eef1ff; border-radius: 20px"
         >
-          <div class="text-left">
+          <div
+            [class.text-left]="langDirectionService.currentLang !== 'he'"
+            [class.text-right]="langDirectionService.currentLang === 'he'"
+          >
             <div class="flex justify-start items-start mb-2">
               <h3
                 class="mb-2 heading-text"
@@ -229,7 +302,9 @@
               <span class="text-4xl font-bold text-gray-900">{{
                 monthlyPrice
               }}</span>
-              {{ "pages.price-page.plans.mentor-pro.price-period" | translate }}
+              <span class="text-4xl font-bold text-gray-900">
+                {{ pricePeriod }}</span
+              >
             </div>
             <div class="text-sm text-gray-400 line-through">
               {{ "pages.price-page.plans.mentor-pro.old-price" | translate }}
@@ -268,13 +343,29 @@
           </div>
 
           <div class="mt-8">
-            <h4 class="text-gray-800 mb-4" style="font-weight: 500">
+            <h4
+              class="text-gray-800 mb-4"
+              style="font-weight: 500"
+              [ngClass]="{
+                'text-right mr-10':
+                  langDirectionService.currentLangDirection === 'rtl',
+                'text-left': langDirectionService.currentLangDirection === 'ltr'
+              }"
+            >
               {{
                 "pages.price-page.plans.mentor-pro.features-title" | translate
               }}
             </h4>
             <ul class="space-y-3">
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -291,7 +382,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -308,7 +407,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -325,7 +432,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -342,7 +457,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -359,7 +482,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -376,7 +507,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -393,7 +532,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -419,7 +566,10 @@
           class="pricing-card bg-white shadow-lg p-8 relative"
           style="margin-top: 2rem; border-radius: 20px"
         >
-          <div class="text-left">
+          <div
+            [class.text-left]="langDirectionService.currentLang !== 'he'"
+            [class.text-right]="langDirectionService.currentLang === 'he'"
+          >
             <h3 class="mb-2 heading-text" style="color: #212529">
               {{ "pages.price-page.plans.mentor-teams.title" | translate }}
             </h3>
@@ -447,13 +597,28 @@
           </div>
 
           <div class="mt-8">
-            <h4 class="font-semibold text-gray-900 mb-4">
+            <h4
+              class="font-semibold text-gray-900 mb-4"
+              [ngClass]="{
+                'text-right mr-10':
+                  langDirectionService.currentLangDirection === 'rtl',
+                'text-left': langDirectionService.currentLangDirection === 'ltr'
+              }"
+            >
               {{
                 "pages.price-page.plans.mentor-teams.features-title" | translate
               }}
             </h4>
             <ul class="space-y-3">
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -470,7 +635,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -487,7 +660,15 @@
                     | translate
                 }}</span>
               </li>
-              <li class="flex items-start">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
                 <svg
                   class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
                   fill="#7986cb"
@@ -518,7 +699,7 @@
       </div>
       <div
         style="
-          margin-top: 2rem;
+          margin-top: 5rem;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -526,7 +707,7 @@
       >
         <button
           class="w-fit bg-[#e67c73] hover:bg-[#d96459] text-white font-semibold rounded-full transition-colors duration-200"
-          (click)="contactUsForTeams()"
+          (click)="openEnterCouponCodeModal()"
           style="border-width: 1px; padding: 0.5rem 1rem"
         >
           {{ "pages.price-page.promo-code-button" | translate }}
@@ -540,7 +721,7 @@
   <div class="hidden md:block bg-[#fcf4f2] py-16">
     <div class="mx-auto px-4 sm:px-6 lg:px-8" style="max-width: 80rem">
       <div class="text-center mb-12" style="border-bottom: 1px solid #7e7e7e">
-        <h2 class="text-3xl font-bold mb-4">
+        <h2 class="font-bold mb-4" style="font-weight: 700; font-size: 2rem">
           {{ "pages.price-page.features-comparison.title" | translate }}
         </h2>
       </div>
@@ -550,7 +731,11 @@
           <!-- Table Header -->
           <thead>
             <tr>
-              <th class="text-left py-4 pr-8 w-1/2"></th>
+              <th
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+                class="py-4 pr-8 w-1/2"
+              ></th>
               <th class="text-center py-4 px-4 w-1/4">
                 <div class="font-bold text-lg text-gray-900">
                   {{
@@ -573,7 +758,7 @@
                   }}
                 </div>
                 <div class="text-sm mt-1" style="color: #7e7e7e">
-                  {{ monthlyPrice }}
+                  {{ monthlyPrice }} {{ pricePeriod }}
                 </div>
               </th>
             </tr>
@@ -834,6 +1019,7 @@
   <div class="block md:hidden">
     <app-mobile-features-comparison
       [monthlyPrice]="monthlyPrice"
+      [pricePeriod]="pricePeriod"
     ></app-mobile-features-comparison>
   </div>
   <div style="padding-top: 2rem" class="bg-[#fcf4f2]">
@@ -860,7 +1046,12 @@
           [style.background-color]="faqOpen[1] ? '#fcf4f2' : ''"
         >
           <button
-            class="w-full px-6 py-2 text-left flex justify-between items-center"
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
             (click)="toggleFaq(1)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
@@ -900,7 +1091,12 @@
           [style.background-color]="faqOpen[2] ? '#fcf4f2' : ''"
         >
           <button
-            class="w-full px-6 py-2 text-left flex justify-between items-center"
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
             (click)="toggleFaq(2)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
@@ -948,7 +1144,12 @@
           [style.background-color]="faqOpen[3] ? '#fcf4f2' : ''"
         >
           <button
-            class="w-full px-6 py-2 text-left flex justify-between items-center"
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
             (click)="toggleFaq(3)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
@@ -984,7 +1185,12 @@
           [style.background-color]="faqOpen[4] ? '#fcf4f2' : ''"
         >
           <button
-            class="w-full px-6 py-2 text-left flex justify-between items-center"
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
             (click)="toggleFaq(4)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
@@ -1018,7 +1224,12 @@
           [style.background-color]="faqOpen[5] ? '#fcf4f2' : ''"
         >
           <button
-            class="w-full px-6 py-2 text-left flex justify-between items-center"
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
             (click)="toggleFaq(5)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
@@ -1057,7 +1268,12 @@
           [style.background-color]="faqOpen[6] ? '#fcf4f2' : ''"
         >
           <button
-            class="w-full px-6 py-2 text-left flex justify-between items-center"
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
             (click)="toggleFaq(6)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">
@@ -1096,7 +1312,12 @@
           [style.background-color]="faqOpen[7] ? '#fcf4f2' : ''"
         >
           <button
-            class="w-full px-6 py-2 text-left flex justify-between items-center"
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
             (click)="toggleFaq(7)"
           >
             <span class="font-medium text-gray-900" style="font-size: 1rem">

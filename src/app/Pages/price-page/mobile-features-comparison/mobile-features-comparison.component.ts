@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class MobileFeaturesComparisonComponent {
   @Input() monthlyPrice: string = '₪69';
+  @Input() pricePeriod: string = 'חודש';
 
   features = [
     {

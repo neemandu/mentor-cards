@@ -1,12 +1,12 @@
 mat-icon {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
 }
 
-[dir = "rtl"] {
+[dir="rtl"] {
   text-align: right;
 }
 
-[dir = "ltr"] {
+[dir="ltr"] {
   text-align: left;
 }
 
@@ -61,7 +61,7 @@ mat-toolbar {
 }
 
 .line {
-  background-color: #ffa800;
+  background-color: #e67c73;
   width: auto;
   height: 3px;
   margin-bottom: 1rem;
@@ -82,13 +82,13 @@ li {
   text-align: right;
 }
 
-[dir = "rtl"] ::ng-deep .tooltip-class {
+[dir="rtl"] ::ng-deep .tooltip-class {
   font-size: 0.8rem;
   direction: rtl;
   text-align: right;
 }
 
-[dir = "ltr"] ::ng-deep .tooltip-class {
+[dir="ltr"] ::ng-deep .tooltip-class {
   font-size: 0.8rem;
   direction: ltr;
   text-align: left;

@@ -1,17 +1,84 @@
+<!-- <div class="dialog-content-wrapper">
+  <div mat-dialog-title style="text-align: center">
+    <button class="iconButton" mat-icon-button (click)="closeDialog()">
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+    <span id="title">תשלום באמצעות PayPal או כרטיס אשראי</span>
+  </div>
+  <div class="line"></div>
+  <div id="summery" mat-dialog-content>
+    <input
+      type="checkbox"
+      id="termsCheckbox"
+      [(ngModel)]="termsAccepted"
+      name="termsAccepted"
+    />
+    <label for="termsCheckbox" style="font-size: medium"
+      >אני מאשר/ת שקראתי ומסכים/ה ל
+      <a (click)="openSiteRulesModal()">תנאים האלה</a> ומבין/ה שעלי לסמן תיבה זו
+      כדי להמשיך לתשלום מאובטח.</label
+    >
+  </div>
+  <div mat-dialog-actions>
+    <button
+      class="continue"
+      (click)="openApprovePurchaseDialog()"
+      [disabled]="!termsAccepted"
+    >
+      המשך לתשלום
+    </button>
+  </div>
+</div> -->
 
-<div class="dialog-content-wrapper">
-    <div mat-dialog-title style="text-align: center;">
-        <button class="iconButton" mat-icon-button (click)="closeDialog()">
-            <mat-icon>highlight_off</mat-icon>
-        </button>
-        <span id="title">תשלום באמצעות PayPal או כרטיס אשראי</span>
-    </div>
-    <div class="line"></div>
-    <div id='summery' mat-dialog-content>
-        <input type="checkbox" id="termsCheckbox" [(ngModel)]="termsAccepted" name="termsAccepted"/>
-        <label for="termsCheckbox" style="font-size: medium;">אני מאשר/ת שקראתי ומסכים/ה ל <a (click)="openSiteRulesModal()">תנאים האלה</a> ומבין/ה שעלי לסמן תיבה זו כדי להמשיך לתשלום מאובטח.</label>
-    </div>
-    <div mat-dialog-actions>
-        <button class="continue" (click)="openApprovePurchaseDialog()" [disabled]="!termsAccepted">המשך לתשלום</button>
-    </div>
-    </div>
+<div style="border-radius: 15px; padding: 10px">
+  <div
+    style="display: flex; justify-content: space-between; align-items: center"
+  >
+    <button (click)="closeDialog()">
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+    <span style="font-size: 1.2rem; font-weight: 600">
+      תשלום באמצעות PayPal או כרטיס אשראי
+    </span>
+  </div>
+  <div class="line"></div>
+  <div
+    [ngClass]="{
+      'text-right': langDirectionService.currentLangDirection === 'rtl',
+      'text-left': langDirectionService.currentLangDirection === 'ltr'
+    }"
+    style="margin-top: 20px; display: flex; align-items: center"
+    [ngStyle]="{
+      'flex-direction':
+        langDirectionService.currentLangDirection === 'rtl'
+          ? 'row-reverse'
+          : 'row'
+    }"
+  >
+    <input
+      type="checkbox"
+      id="termsCheckbox"
+      [(ngModel)]="termsAccepted"
+      name="termsAccepted"
+    />
+    <label for="termsCheckbox" style="font-size: medium; margin-right: 10px"
+      >אני מאשר/ת שקראתי ומסכים/ה ל
+      <a (click)="openSiteRulesModal()" style="color: #e67c73">תנאים האלה</a>
+      ומבין/ה שעלי לסמן תיבה זו כדי להמשיך לתשלום מאובטח.</label
+    >
+  </div>
+  <div mat-dialog-actions>
+    <button
+      [ngStyle]="{
+        'background-color': termsAccepted ? '#e67c73' : '#cacaca',
+        color: termsAccepted ? 'white' : '#666',
+        cursor: termsAccepted ? 'pointer' : 'not-allowed'
+      }"
+      class="w-full rounded-full py-2 text-lg font-semibold"
+      (click)="openApprovePurchaseDialog()"
+      [disabled]="!termsAccepted"
+    >
+      המשך לתשלום
+    </button>
+  </div>
+</div>

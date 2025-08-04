@@ -1,4 +1,4 @@
-mat-icon {
+/* mat-icon {
     font-family: 'Material Icons';
   }
   
@@ -9,7 +9,7 @@ mat-icon {
   
   .warning-text {
     color: red;
-    margin-bottom: 10px; /* Adjust spacing as needed */
+    margin-bottom: 10px; 
   }
   
   .red-text {
@@ -66,31 +66,29 @@ mat-icon {
 
 
   .checkbox {
-    display: inline-block; /* Allows the label to be sized according to its content */
-    max-width: 100%; /* Ensures the label does not exceed the width of its container */
-    word-wrap: break-word; /* Breaks long words to prevent overflow */
-    overflow-wrap: break-word; /* Ensures overflow text wraps into the next line */
+    display: inline-block;
+    max-width: 100%; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
     border-color: red;
     white-space: pre-wrap;
   }
 
   .label-disabled {
-    pointer-events: none; /* Disables all pointer events on the label */
-    opacity: 0.6; /* Optional: reduces the opacity to visually indicate disabled state */
+    pointer-events: none; 
+    opacity: 0.6; 
   }
 
   mat-dialog-actions {
     display: flex;
-    justify-content: center; /* Centers the button horizontally */
+    justify-content: center; 
   }
   
   .continue {
     margin-left: 10px;
     height: 39px;
     border-radius: 5px;
-    /* background: white; */
     border: solid 1px white;
-    /* color: #ffa800; */
     background: var(--main-color);
     color: white;
     border-color: white;
@@ -107,12 +105,12 @@ mat-icon {
 
 #summery {
   display: flex;
-  align-items: flex-start; /* Aligns the checkbox to the top of the label */
+  align-items: flex-start; 
 }
 
 #summery input[type="checkbox"] {
-  margin-top: 4px; /* Adjust this value as needed for finer alignment */
-  margin-left: 8px; /* Space between the checkbox and the label */
+  margin-top: 4px; 
+  margin-left: 8px; 
 }
 
 #summery label {
@@ -122,21 +120,21 @@ mat-icon {
   
 
   .continue:disabled {
-    background: #ccc; /* Example: a gray background for disabled state */
-    color: #666; /* Example: a darker text color for disabled state */
-    cursor: not-allowed; /* Shows a 'not allowed' cursor on hover */
-    box-shadow: none; /* Optionally remove box shadow in disabled state */
-    border: solid 1px #ccc; /* Example: change border color for disabled state */
+    background: #ccc; 
+    color: #666; 
+    cursor: not-allowed; 
+    box-shadow: none; 
+    border: solid 1px #ccc; 
   }
 
   @media screen and (max-width: 768px) {
     .mat-dialog-content {
       max-width: initial;
     }
-  
+
     .scrollable-content {
-      max-height: 400px; /* Adjust the height as needed */
-      overflow-y: auto; /* This will add a scrollbar if the content overflows */
+      max-height: 400px; 
+      overflow-y: auto; 
     }
   }
-  
+   */
