@@ -287,7 +287,11 @@ export class PricePageComponent implements OnInit {
   }
 
   get monthlyPrice(): string {
-    return this.isAnnualBilling ? '₪57.5' : '₪69';
+    return this.isAnnualBilling ? '₪690' : '₪69';
+  }
+
+  get pricePeriod(): string {
+    return this.isAnnualBilling ? 'שנה' : 'חודש';
   }
 
   get savings(): string {
