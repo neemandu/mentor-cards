@@ -273,6 +273,17 @@ export class PricePageComponent implements OnInit {
     });
   }
 
+  clickOnBasicPlanButton(): void {
+    // Check if user is logged in
+    if (this.loggedIn && this.userData) {
+      // User is logged in, redirect to all-packs-page
+      this.navigate('/all-packs-page');
+    } else {
+      // User is not logged in, show sign in modal
+      this.signInSignUp();
+    }
+  }
+
   onBillingToggleChange(): void {
     this.mixpanelService.track('ActionButtonClicked', {
       Action: 'BillingToggleChanged',
