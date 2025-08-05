@@ -381,6 +381,13 @@
         "annual": "Annual (Save 17%)",
         "save-badge": "2 months free"
       },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "month",
+        "annual-period": "year",
+        "savings": "Save ₪138"
+      },
       "plans": {
         "basic": {
           "title": "Basic",

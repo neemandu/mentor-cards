@@ -381,6 +381,13 @@
         "annual": "Ежегодно (Экономия 17%)",
         "save-badge": "2 месяца бесплатно"
       },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "месяц",
+        "annual-period": "год",
+        "savings": "Сэкономьте ₪138"
+      },
       "plans": {
         "basic": {
           "title": "Базовый",

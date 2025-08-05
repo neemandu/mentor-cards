@@ -382,6 +382,13 @@
         "annual": "שנתי (חסכו 17%)",
         "save-badge": "חודשיים חינם"
       },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "חודש",
+        "annual-period": "שנה",
+        "savings": "חסכו ₪138"
+      },
       "plans": {
         "basic": {
           "title": "Basic",

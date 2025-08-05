@@ -381,6 +381,13 @@
         "annual": "سنوي (وفر 17%)",
         "save-badge": "شهران مجاناً"
       },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "شهر",
+        "annual-period": "سنة",
+        "savings": "وفر ₪138"
+      },
       "plans": {
         "basic": {
           "title": "أساسي",

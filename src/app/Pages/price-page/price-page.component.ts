@@ -16,6 +16,7 @@ import { ApprovePurchaseDialogComponent } from './approve-purchase-dialog/approv
 import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { ReadTermsDialogComponent } from './read-terms-dialog/read-terms-dialog.component';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
+import { TranslateService } from '@ngx-translate/core';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInTwoWeeks: number = 1209600000;
 
@@ -55,7 +56,8 @@ export class PricePageComponent implements OnInit {
     private overlaySpinnerService: OverlaySpinnerService,
     public dialog: MatDialog,
     private mixpanelService: MixpanelService,
-    public langDirectionService: LangDirectionService
+    public langDirectionService: LangDirectionService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -298,15 +300,21 @@ export class PricePageComponent implements OnInit {
   }
 
   get monthlyPrice(): string {
-    return this.isAnnualBilling ? '₪690' : '₪69';
+    return this.isAnnualBilling
+      ? this.translateService.instant('pages.price-page.pricing.annual-price')
+      : this.translateService.instant('pages.price-page.pricing.monthly-price');
   }
 
   get pricePeriod(): string {
-    return this.isAnnualBilling ? 'שנה' : 'חודש';
+    return this.isAnnualBilling
+      ? this.translateService.instant('pages.price-page.pricing.annual-period')
+      : this.translateService.instant(
+          'pages.price-page.pricing.monthly-period'
+        );
   }
 
   get savings(): string {
     if (!this.isAnnualBilling) return '';
-    return 'Save ₪138';
+    return this.translateService.instant('pages.price-page.pricing.savings');
   }
 }
