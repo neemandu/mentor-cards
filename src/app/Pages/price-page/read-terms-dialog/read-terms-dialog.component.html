@@ -65,7 +65,13 @@
       [(ngModel)]="termsAccepted"
       name="termsAccepted"
     />
-    <label for="termsCheckbox" style="font-size: medium; margin-right: 10px"
+    <label
+      for="termsCheckbox"
+      style="font-size: medium; margin-right: 5px"
+      [ngClass]="{
+        'text-right': langDirectionService.currentLangDirection === 'rtl',
+        'text-left': langDirectionService.currentLangDirection === 'ltr'
+      }"
       >אני מאשר/ת שקראתי ומסכים/ה ל
       <a (click)="openSiteRulesModal()" style="color: #e67c73">תנאים האלה</a>
       ומבין/ה שעלי לסמן תיבה זו כדי להמשיך לתשלום מאובטח.</label

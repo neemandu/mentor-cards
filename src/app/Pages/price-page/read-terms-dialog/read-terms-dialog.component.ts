@@ -58,6 +58,8 @@ export class ReadTermsDialogComponent implements OnInit {
       ApprovePurchaseDialogComponent,
       dialogConfig
     );
+
+    this.closeDialog();
     var dialogSub = dialogRef.afterClosed().subscribe((res) => {
       dialogSub.unsubscribe();
       if (res) {

@@ -14,7 +14,8 @@
           <img
             [src]="logos[currentLogoIndex].src"
             [alt]="logos[currentLogoIndex].alt"
-            class="h-[60px] w-auto object-contain home-page-partners-logo"
+            class="w-auto object-contain home-page-partners-logo"
+            [ngClass]="isPricePage ? 'h-[40px] ' : 'h-[60px] '"
           />
         </div>
       </ng-container>
