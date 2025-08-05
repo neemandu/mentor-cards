@@ -518,6 +518,13 @@
       "paymentTitle": "Please choose a payment method:",
       "paypalTooltip": "If there is an ad blocker in the browser, you need to disable it in order to make a payment"
     },
+    "readTermsDialog": {
+      "title": "Payment via Credit Card or PayPal",
+      "termsText": "I confirm that I have read and agree to",
+      "termsLink": "these terms",
+      "termsDescription": "and understand that I must check this box to continue to secure payment.",
+      "continueButton": "Continue to Payment"
+    },
     "portraitWarningDialog": {
       "content": {
         "icon": "screen_rotation",

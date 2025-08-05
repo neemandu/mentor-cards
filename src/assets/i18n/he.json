@@ -521,6 +521,13 @@
       "paymentTitle": "אנא בחרו אמצעי תשלום:",
       "paypalTooltip": "אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"
     },
+    "readTermsDialog": {
+      "title": "תשלום באמצעות כרטיס אשראי או PayPal",
+      "termsText": "אני מאשר/ת שקראתי ומסכים/ה ל",
+      "termsLink": "תנאים האלה",
+      "termsDescription": "ומבין/ה שעלי לסמן תיבה זו כדי להמשיך לתשלום מאובטח.",
+      "continueButton": "המשך לתשלום"
+    },
     "portraitWarningDialog": {
       "content": {
         "icon": "screen_rotation",

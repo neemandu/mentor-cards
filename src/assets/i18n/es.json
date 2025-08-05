@@ -517,6 +517,13 @@
       "paymentTitle": "Por favor elija un método de pago:",
       "paypalTooltip": "Si hay un bloqueador de publicidad en el navegador, se debe desactivar para poder realizar un pago."
     },
+    "readTermsDialog": {
+      "title": "Pago mediante tarjeta de crédito o PayPal",
+      "termsText": "Confirmo que he leído y acepto",
+      "termsLink": "estos términos",
+      "termsDescription": "y entiendo que debo marcar esta casilla para continuar al pago seguro.",
+      "continueButton": "Continuar al pago"
+    },
     "portraitWarningDialog": {
       "content": {
         "icon": "rotacion de pantalla",

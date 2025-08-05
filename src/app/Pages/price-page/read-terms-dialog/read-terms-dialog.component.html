@@ -1,35 +1,3 @@
-<!-- <div class="dialog-content-wrapper">
-  <div mat-dialog-title style="text-align: center">
-    <button class="iconButton" mat-icon-button (click)="closeDialog()">
-      <mat-icon>highlight_off</mat-icon>
-    </button>
-    <span id="title">תשלום באמצעות PayPal או כרטיס אשראי</span>
-  </div>
-  <div class="line"></div>
-  <div id="summery" mat-dialog-content>
-    <input
-      type="checkbox"
-      id="termsCheckbox"
-      [(ngModel)]="termsAccepted"
-      name="termsAccepted"
-    />
-    <label for="termsCheckbox" style="font-size: medium"
-      >אני מאשר/ת שקראתי ומסכים/ה ל
-      <a (click)="openSiteRulesModal()">תנאים האלה</a> ומבין/ה שעלי לסמן תיבה זו
-      כדי להמשיך לתשלום מאובטח.</label
-    >
-  </div>
-  <div mat-dialog-actions>
-    <button
-      class="continue"
-      (click)="openApprovePurchaseDialog()"
-      [disabled]="!termsAccepted"
-    >
-      המשך לתשלום
-    </button>
-  </div>
-</div> -->
-
 <div
   style="border-radius: 15px; padding: 20px"
   [dir]="langDirectionService.currentLangDirection"
@@ -42,7 +10,7 @@
       [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
       [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
     >
-      תשלום באמצעות כרטיס אשראי או PayPal
+      {{ "pages.readTermsDialog.title" | translate }}
     </span>
     <button (click)="closeDialog()">
       <mat-icon>highlight_off</mat-icon>
@@ -75,9 +43,11 @@
         'text-right': langDirectionService.currentLangDirection === 'rtl',
         'text-left': langDirectionService.currentLangDirection === 'ltr'
       }"
-      >אני מאשר/ת שקראתי ומסכים/ה ל
-      <a (click)="openSiteRulesModal()" style="color: #e67c73">תנאים האלה</a>
-      ומבין/ה שעלי לסמן תיבה זו כדי להמשיך לתשלום מאובטח.</label
+      >{{ "pages.readTermsDialog.termsText" | translate }}
+      <a (click)="openSiteRulesModal()" style="color: #e67c73">{{
+        "pages.readTermsDialog.termsLink" | translate
+      }}</a>
+      {{ "pages.readTermsDialog.termsDescription" | translate }}</label
     >
   </div>
   <div mat-dialog-actions>
@@ -91,7 +61,7 @@
       (click)="openApprovePurchaseDialog()"
       [disabled]="!termsAccepted"
     >
-      המשך לתשלום
+      {{ "pages.readTermsDialog.continueButton" | translate }}
     </button>
   </div>
 </div>
