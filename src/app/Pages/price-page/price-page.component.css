@@ -277,6 +277,28 @@ label span {
   line-height: 2.5rem /* 40px */;
 }
 
+/* Responsive text sizing */
+@media (min-width: 768px) {
+  .md\:text-5xl {
+    font-size: 3rem /* 48px */;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:text-6xl {
+    font-size: 3.75rem /* 60px */;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:text-7xl {
+    font-size: 4.5rem /* 72px */;
+    line-height: 1;
+  }
+}
+
 /* Responsive visibility classes */
 .hidden {
   display: none;
@@ -406,4 +428,8 @@ strong {
 
 .tooltip-arrow-right {
   right: 1rem;
+}
+
+.text-end {
+  text-align: end;
 }
