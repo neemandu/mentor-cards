@@ -16,6 +16,10 @@ export class HomePagePartnersComponent implements OnInit, OnDestroy {
 
   logos = [
     {
+      src: '../../../assets/About images/Clients/logo2.png',
+      alt: 'logo 2',
+    },
+    {
       src: '../../../assets/About images/Clients/maccabi.png',
       alt: 'Maccabi logo',
     },
