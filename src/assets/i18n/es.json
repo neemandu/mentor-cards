@@ -381,6 +381,13 @@
         "annual": "Anual (Ahorra 17%)",
         "save-badge": "2 meses gratis"
       },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "mes",
+        "annual-period": "año",
+        "savings": "Ahorra ₪138"
+      },
       "plans": {
         "basic": {
           "title": "Básico",
@@ -509,6 +516,13 @@
       },
       "paymentTitle": "Por favor elija un método de pago:",
       "paypalTooltip": "Si hay un bloqueador de publicidad en el navegador, se debe desactivar para poder realizar un pago."
+    },
+    "readTermsDialog": {
+      "title": "Pago mediante tarjeta de crédito o PayPal",
+      "termsText": "Confirmo que he leído y acepto",
+      "termsLink": "estos términos",
+      "termsDescription": "y entiendo que debo marcar esta casilla para continuar al pago seguro.",
+      "continueButton": "Continuar al pago"
     },
     "portraitWarningDialog": {
       "content": {
@@ -1549,5 +1563,17 @@
     }
   },
   "selectLanguageTooltip": "elige lengua",
-  "id": 91
+  "id": 91,
+  "facebookWelcomeDialog": {
+      "title": "Solo un paso más - para completar tu experiencia con Mentor Cards",
+      "intro": "Te has unido a Mentor Cards - ahora es el momento de unirte a la comunidad que vive y respira tarjetas y crecimiento personal.",
+      "benefits": "En nuestro grupo de Facebook, serás el primero en descubrir:",
+      "benefit1": "Nuevos mazos de tarjetas",
+      "benefit2": "Técnicas sorprendentes para trabajar con mazos existentes",
+      "benefit3": "Sesiones de aprendizaje, tutoriales y ofertas exclusivas",
+      "benefit4": "Ideas, inspiración e historias reales de otros mentores",
+      "lastLine": "Así es como mantienes la experiencia viva, evolucionando y conectada a una verdadera comunidad profesional.",
+      "facebookButton": "Únete a la Comunidad de Facebook",
+      "continueButton": "Continuar"
+    }
 }

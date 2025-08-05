@@ -66,11 +66,14 @@
                     'pages.price-page.features-comparison.features.onboarding-session'
                   "
                   class="tooltip-container"
+                  #tooltipContainer
                 >
                   <svg
                     class="info-icon"
                     fill="currentColor"
                     viewBox="0 0 20 20"
+                    (mouseenter)="positionTooltip($event.target.closest('.tooltip-container'), $event.target.closest('.tooltip-container').querySelector('.tooltip-content'))"
+                    (touchstart)="positionTooltip($event.target.closest('.tooltip-container'), $event.target.closest('.tooltip-container').querySelector('.tooltip-content')); $event.preventDefault()"
                   >
                     <path
                       fill-rule="evenodd"

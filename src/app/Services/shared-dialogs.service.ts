@@ -39,7 +39,7 @@ export class SharedDialogsService {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = packSelected;
-    dialogConfig.maxWidth = '500px';
+    dialogConfig.maxWidth = '600px';
     const dialogRef = this.dialog.open(
       FacebookWelcomeDialogComponent,
       dialogConfig

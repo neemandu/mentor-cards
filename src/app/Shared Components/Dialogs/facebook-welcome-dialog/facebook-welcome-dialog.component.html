@@ -1,68 +1,113 @@
-<div
-  mat-dialog-title
-  style="
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  "
->
-  <button class="iconButton" mat-icon-button (click)="closeDialog()">
-    <mat-icon>highlight_off</mat-icon>
-  </button>
-  <span id="title">{{ "facebookWelcomeDialog.title" | translate }}</span>
-</div>
-<div class="line"></div>
-<div
-  id="content"
-  mat-dialog-content
-  [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
-  [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
->
-  <div class="intro">
-    {{ "facebookWelcomeDialog.intro" | translate }}
-  </div>
-
-  <div class="benefits-section">
-    <p class="benefits-title">
-      {{ "facebookWelcomeDialog.benefits" | translate }}
-    </p>
-    <ul>
-      <li>
-        <mat-icon class="checkmark">check_circle</mat-icon>
-        {{ "facebookWelcomeDialog.benefit1" | translate }}
-      </li>
-      <li>
-        <mat-icon class="checkmark">check_circle</mat-icon>
-        {{ "facebookWelcomeDialog.benefit2" | translate }}
-      </li>
-      <li>
-        <mat-icon class="checkmark">check_circle</mat-icon>
-        {{ "facebookWelcomeDialog.benefit3" | translate }}
-      </li>
-      <li>
-        <mat-icon class="checkmark">check_circle</mat-icon>
-        {{ "facebookWelcomeDialog.benefit4" | translate }}
-      </li>
-    </ul>
-  </div>
-
-  <div class="last-line">
-    {{ "facebookWelcomeDialog.lastLine" | translate }}
-  </div>
-</div>
-
-<div mat-dialog-actions class="actions">
-  <button class="facebook-button" type="button" (click)="openFacebookGroup()">
-    <mat-icon>facebook</mat-icon>
-    {{ "facebookWelcomeDialog.facebookButton" | translate }}
-  </button>
-
-  <button
-    class="continue-button"
-    type="button"
-    (click)="navigate('/all-packs-page')"
+<div [dir]="langDirectionService.currentLangDirection" style="margin: 10px">
+  <div
+    mat-dialog-title
+    style="display: flex; justify-content: space-between; align-items: center"
+    [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
+    [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
   >
-    {{ "facebookWelcomeDialog.continueButton" | translate }}
-  </button>
+    <span id="title">{{ "facebookWelcomeDialog.title" | translate }}</span>
+    <button class="iconButton" mat-icon-button (click)="closeDialog()">
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+  </div>
+  <div
+    id="content"
+    mat-dialog-content
+    [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
+    [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
+  >
+    <div class="intro">
+      {{ "facebookWelcomeDialog.intro" | translate }}
+    </div>
+
+    <div
+      class="benefits-section"
+      [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
+      [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
+    >
+      <p
+        class="benefits-title"
+        [class.text-left]="langDirectionService.currentLangDirection === 'ltr'"
+        [class.text-right]="langDirectionService.currentLangDirection === 'rtl'"
+      >
+        {{ "facebookWelcomeDialog.benefits" | translate }}
+      </p>
+      <ul>
+        <li
+          [class.text-left]="
+            langDirectionService.currentLangDirection === 'ltr'
+          "
+          [class.text-right]="
+            langDirectionService.currentLangDirection === 'rtl'
+          "
+        >
+          <img src="assets/Check.png" alt="check" />
+          {{ "facebookWelcomeDialog.benefit1" | translate }}
+        </li>
+        <li
+          [class.text-left]="
+            langDirectionService.currentLangDirection === 'ltr'
+          "
+          [class.text-right]="
+            langDirectionService.currentLangDirection === 'rtl'
+          "
+        >
+          <img src="assets/Check.png" alt="check" />
+          {{ "facebookWelcomeDialog.benefit2" | translate }}
+        </li>
+        <li
+          [class.text-left]="
+            langDirectionService.currentLangDirection === 'ltr'
+          "
+          [class.text-right]="
+            langDirectionService.currentLangDirection === 'rtl'
+          "
+        >
+          <img src="assets/Check.png" alt="check" />
+          {{ "facebookWelcomeDialog.benefit3" | translate }}
+        </li>
+        <li
+          [class.text-left]="
+            langDirectionService.currentLangDirection === 'ltr'
+          "
+          [class.text-right]="
+            langDirectionService.currentLangDirection === 'rtl'
+          "
+        >
+          <img src="assets/Check.png" alt="check" />
+          {{ "facebookWelcomeDialog.benefit4" | translate }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="last-line">
+      {{ "facebookWelcomeDialog.lastLine" | translate }}
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="actions">
+    <button
+      class="w-full rounded-full"
+      type="button"
+      (click)="openFacebookGroup()"
+      style="
+        background-color: #e67c73;
+        color: white;
+        font-weight: 500;
+        font-size: 16px;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        justify-content: center;
+        &:hover {
+          background-color: #f17d72;
+        }
+      "
+    >
+      <img src="assets/icons/fb.png" alt="facebook" />
+      {{ "facebookWelcomeDialog.facebookButton" | translate }}
+    </button>
+  </div>
 </div>

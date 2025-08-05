@@ -226,6 +226,44 @@
   padding: 0.5rem 0.75rem;
   white-space: nowrap;
   z-index: 10;
+  max-width: 250px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Smart positioning for mobile - show below if not enough space above */
+@media (max-height: 600px) {
+  .tooltip-content {
+    bottom: auto;
+    top: 100%;
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+  }
+  
+  .tooltip-arrow {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: #1f2937;
+  }
+}
+
+/* Alternative positioning for very small screens */
+@media (max-height: 400px) {
+  .tooltip-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: auto;
+    margin: 0;
+    z-index: 1000;
+    max-width: 90vw;
+  }
+  
+  .tooltip-arrow {
+    display: none;
+  }
 }
 
 .tooltip-container:hover .tooltip-content {

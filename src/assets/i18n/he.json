@@ -382,6 +382,13 @@
         "annual": "שנתי (חסכו 17%)",
         "save-badge": "חודשיים חינם"
       },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "חודש",
+        "annual-period": "שנה",
+        "savings": "חסכו ₪138"
+      },
       "plans": {
         "basic": {
           "title": "Basic",
@@ -513,6 +520,13 @@
 },
       "paymentTitle": "אנא בחרו אמצעי תשלום:",
       "paypalTooltip": "אם קיים חוסם פרסומות בדפדפן, יש לבטל אותו על מנת לבצע תשלום"
+    },
+    "readTermsDialog": {
+      "title": "תשלום באמצעות כרטיס אשראי או PayPal",
+      "termsText": "אני מאשר/ת שקראתי ומסכים/ה ל",
+      "termsLink": "תנאים האלה",
+      "termsDescription": "ומבין/ה שעלי לסמן תיבה זו כדי להמשיך לתשלום מאובטח.",
+      "continueButton": "המשך לתשלום"
     },
     "portraitWarningDialog": {
       "content": {
@@ -1572,5 +1586,17 @@
       "continueButton": "אישור"
     }
   },
-  "selectLanguageTooltip": "בחר שפה"
+  "selectLanguageTooltip": "בחר שפה",
+  "facebookWelcomeDialog": {
+    "title": "רק עוד צעד אחד - כדי להפוך את החוויה שלך במנטור קארדס למושלמת",
+    "intro": "הצטרפת למנטור קארדס - עכשיו זה הזמן להצטרף לקהילה שחיה ונושמת קלפים והתפתחות.",
+    "benefits": "בקבוצת הפייסבוק שלנו מתפרסמים לפני כולם:",
+    "benefit1": "ערכות קלפים חדשות",
+    "benefit2": "טכניקות מפתיעות לעבודה עם קלפים קיימים",
+    "benefit3": "מפגשי למידה, הדרכות, והטבות בלעדיות",
+    "benefit4": "רעיונות, שיתופים והשראה ממנטורים כמוך",
+    "lastLine": "זו הדרך להשאיר את החוויה חיה, מתפתחת ומחוברת לקהילה אמיתית.",
+    "facebookButton": "הצטרפו לקהילת הפייסבוק",
+    "continueButton": "המשך"
+  }
 }
