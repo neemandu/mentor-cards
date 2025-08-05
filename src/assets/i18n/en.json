@@ -1550,5 +1550,17 @@
       "continueButton": "Continue"
     }
   },
-  "selectLanguageTooltip": "Select a language"
+  "selectLanguageTooltip": "Select a language",
+     "facebookWelcomeDialog": {
+      "title": "Just one more step – to complete your Mentor Cards experience",
+      "intro": "You've joined Mentor Cards – now it's time to join the community that lives and breathes cards and personal growth.",
+      "benefits": "In our Facebook group, you'll be the first to discover:",
+      "benefit1": "New card decks",
+      "benefit2": "Surprising techniques for working with existing decks",
+      "benefit3": "Learning sessions, tutorials, and exclusive offers",
+      "benefit4": "Ideas, inspiration, and real stories from fellow mentors",
+      "lastLine": "This is how you keep the experience alive, evolving, and connected to a true professional community.",
+      "facebookButton": "Join Facebook Community",
+      "continueButton": "Continue"
+    }
 }

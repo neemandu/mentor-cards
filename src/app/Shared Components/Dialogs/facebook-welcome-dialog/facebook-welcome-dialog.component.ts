@@ -29,10 +29,7 @@ export class FacebookWelcomeDialogComponent implements OnInit {
 
   openFacebookGroup(): void {
     // Open Facebook group in new tab - Replace with your actual Facebook group URL
-    window.open(
-      'https://www.facebook.com/groups/YOUR_FACEBOOK_GROUP_ID',
-      '_blank'
-    );
+    window.open('https://www.facebook.com/groups/mentorcards', '_blank');
     // After opening Facebook, close this dialog
     this.closeDialog();
   }
