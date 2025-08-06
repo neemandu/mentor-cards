@@ -368,34 +368,141 @@
       "plans-title": "Plans"
     },
     "price-page": {
-      "our-plans-title": "Our Plans",
-      "monthly-plan-title": "Monthly Plan",
-      "month-label": "Month",
-      "full-access-instruction": "Full access to dozens of card sets",
-      "variety-of-guides-instruction": "A huge variety of guidebooks, activity ideas, and guiding questions",
-      "connect-from-anywhere-instruction": "Can connect from anywhere in the world and any device - computer, mobile phone, tablet, projector, and more...",
-      "join-button-text": "Join >>",
-      "already-registered-button-text": "You are registered for this plan",
-      "popularMatCard": {
-        "title": "Life-Time Plan!",
-        "payment": "payment of",
-        "onceBold": "One-time",
-        "inTotal": "in total",
-        "benefits": {
-          "fullAccess": "Full access to dozens of card sets - for life!",
-          "futureAccess": "Access to all card sets that will be uploaded to the site in the future!",
-          "variety": "A huge variety of instruction books, activity ideas, and guiding questions",
-          "connectAnywhere": "Can connect from anywhere in the world and from any device - computer, mobile phone, tablet, projector, and more..."
+      "hero": {
+        "title": "Mentor Cards",
+        "subtitle": "Our Plans & Pricing"
+      },
+      "hero-description": {
+        "line1": "Instant access to digital card decks and rich guidebooks.",
+        "line2": "Create real impact with a single click"
+      },
+      "billing": {
+        "monthly": "Monthly",
+        "annual": "Annual (Save 17%)",
+        "save-badge": "2 months free"
+      },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "month",
+        "annual-period": "year",
+        "savings": "Save ₪138"
+      },
+      "plans": {
+        "basic": {
+          "title": "Basic",
+          "subtitle": "Get Value, at Your Own Pace",
+          "description": "For those just starting out, looking to explore, practice, and be inspired",
+          "price": "Free",
+          "price-period": "/forever",
+          "button": "Start",
+          "features-title": "Includes:",
+          "features": {
+            "free-access": "Free access to two digital card decks, including two complete guidebooks",
+            "platform-features": "Full use of platform features: hidden/visible cards, solo/group invites, random draw, and more",
+            "community": "Mentor Community membership: sharing, inspiration, advice, and selected learning events",
+            "training-sessions": "Access to recorded trainings and professional learning sessions",
+            "monthly-email": "Monthly email with curated inspiration from the field"
+          }
         },
-        "joinBtn": "Join >>",
-        "registeredBtn": "You are registered for this plan"
+        "mentor-pro": {
+          "title": "MentorPro",
+          "badge": "Most Popular",
+          "subtitle": "Professional Plan",
+          "description": "For those who lead, teach, create, and inspire",
+          "price-period": "/mo",
+          "old-price": "₪69/mo",
+          "save-amount": "Save ₪138",
+          "save-description": "by billing annually",
+          "button": "Start",
+          "features-title": "Includes:",
+          "features": {
+            "full-access": "Full access to 40+ digital card decks – including new and exclusive sets",
+            "professional-guidebooks": "Professional guidebooks with curated questions, activity instructions, and real-world examples",
+            "onboarding": "A 1-on-1 session with a Mentor Cards expert (included only in yearly subscription)<br>Available for purchase in monthly plan with subsidized cost",
+            "pro-events": "Access to Mentor Pro events – training sessions focused on business and professional development",
+            "community-membership": "Active membership and exposure in the Mentor Community – connections, creator showcases, and peer engagement",
+            "learning-library": "Full access to a digital learning library with workshops and training sessions to deepen your practice with cards and beyond",
+            "professional-email": "Exclusive professional email series – topic-based updates, hands-on tools, and best practices",
+            "priority-access": "Priority access to events, discounts, closed courses, and special opportunities"
+          }
+        },
+        "mentor-teams": {
+          "title": "Mentor Teams",
+          "subtitle": "For Organizations, Institutions & Teams",
+          "description1": "Whether it's staff training, professional enrichment, or integrating cards-based methods into existing programs –",
+          "description2": "Mentor Cards helps upgrade your organizational toolbox with depth, connection, and meaningful impact.",
+          "button": "Contact us to schedule a call",
+          "features-title": "Includes:",
+          "features": {
+            "multi-user": "Multi-user license and tailored onboarding – with role-based permissions and access",
+            "support": "Professional support and training – across the generic, organizational, and facilitation domains",
+            "payment": "Flexible payment and invoicing options for organizations"
+          },
+          "footer-note": "We'll be happy to build the best plan for your team"
+        }
       },
-      "orgsMatCard": {
-        "title": "Institutions and Organizations",
-        "content": "Now is the time to allow cards to enter your organizational environment and create a conversation that brings closer, promotes, and develops. Upgrade your organizational toolbox together with us. Talk to us and we will tailor the most cost-effective plan for you.",
-        "contactBtn": "Talk to us!"
+      "promo-code-button": "Have a promo code?",
+      "features-comparison": {
+        "title": "All plan features",
+        "basic-title": "Basic",
+        "basic-price": "Free",
+        "mentor-pro-title": "MentorPro",
+        "features": {
+          "two-decks": "Access to two digital card decks + 2 full guidebooks",
+          "platform-features": "Full use of platform features: hidden/visible cards, solo/group invites, random draw, and more",
+          "community-membership": "Mentor Community membership: sharing, inspiration, advice, and selected learning events",
+          "monthly-email": "Monthly email with curated inspiration from the field",
+          "all-decks": "Full access to all card decks on the platform (40+)",
+          "recorded-trainings": "Access to recorded trainings and professional learning sessions",
+          "in-depth-guidebooks": "In-depth guidebooks with exercises, questions, and examples",
+          "mentor-pro-events": "Participation in MentorPro events – learning, creator showcases, professional networking",
+          "advanced-email": "Advanced professional email series by topics and domains",
+          "marketing-tools": "Marketing exposure, business tools, and personal/professional development resources",
+          "priority-access": "Priority access to events, discounts, and special offers",
+          "onboarding-session": "1-on-1 onboarding session with a Mentor Cards expert",
+          "onboarding-session-tooltip": "1-on-1 session included in yearly plan, available for purchase with subsidized cost in monthly plan"
+        }
       },
-      "couponBtn": "To enter a benefit code click here"
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "questions": {
+          "digital-cards": {
+            "question": "Why use digital card decks? What's the advantage?",
+            "answer": "Digital card decks change the game and give you freedom. No more struggling with physical decks, forgetting to bring materials, or realizing you're missing the right tools. With a Mentor Cards subscription, you have immediate access to 40+ professional card decks—any device, any time, anywhere. And there's more: every deck features a **\"Collaborative Mode\" button** —just one click opens this deck for **unlimited collaborators** , who can join and interact with you live—from phones, tablets, or desktops, anywhere in the world. This isn't a replacement for physical cards—it's the next level. Always available, always ready, always at your command."
+          },
+          "community-vs-pro": {
+            "question": "What's the difference between Community Membership and a Mentor Pro subscription?",
+            "answer1": "Community Membership is free and open to all. You get a taste of our world: two digital card decks, guidebooks, full access to platform features, open inspiration sessions, and a monthly newsletter with fresh content—a great start, implemented easily.",
+            "answer2": "Mentor Pro is our professional subscription for those who guide processes and work with people. You'll receive full access to dozens of card decks, advanced guidebooks, a personal onboarding session, professional training workshops, a platform to showcase your creations—and everything you need to make your presence as a facilitator truly memorable, creative, and impactful."
+          },
+          "upgrade": {
+            "question": "I'm already part of the community—why should I upgrade to Mentor Pro?",
+            "answer": "Mentor Pro is designed for those ready to take their work to the next level. The community provides inspiration, but true impact comes from having access to **all** the tools: dozens of expert decks, rich guidebooks, ready-to-use exercises, and up-to-date insights from the field. Plus, you'll join professional workshops, gain exposure, and build a strong, visible presence in the mentor world. Mentor Pro means more tools—and a bigger stage."
+          },
+          "cancel": {
+            "question": "Can I cancel my subscription at any time?",
+            "answer": "Absolutely. You can cancel automatic payments at any time through your account settings on our site. No long-term commitments—so there's no need to explain yourself. Important: Once a payment is processed, it cannot be refunded retroactively. You'll receive a reminder before your subscription renews to ensure you're in control."
+          },
+          "custom-deck": {
+            "question": "I've created my own card deck—can I feature it on the site?",
+            "answer": "Definitely! We believe every creator has a unique voice—and at Mentor Cards, they deserve a stage. Any community member can submit a deck and receive support to upload it to the platform. Your deck will get a dedicated page, appear in our \"New on the site\" section, and be promoted to thousands of mentors. You can also lead a community session and share your creative story. This option is open to everyone—but Mentor Pro subscribers receive **significant discounts** on publishing and promotional support."
+          },
+          "organization": {
+            "question": "I'm working in an organization—do you offer a customized plan?",
+            "answer": "Yes, we do. Mentor Cards offers tailored solutions for institutions, nonprofits, healthcare organizations, education systems, and welfare services. You'll receive a multi-user license, professional guidance for teams, onboarding support, and integration options for existing programs. Just reach out to us—we'll happily build the best plan for your needs."
+          },
+          "deck-choice": {
+            "question": "What if I'm not sure which deck to choose or how to use it?",
+            "answer-intro": "That's precisely why we're here. At Mentor Cards, you don't have to guess—we provide smart tools and human support to guide you confidently:",
+            "point1": "Our platform features an intelligent search engine—filter decks by meeting purpose, card type (image, word, values, etc.), creator's name, or common keywords like \"empowerment\" or \"self-esteem.\"",
+            "point2": "Each deck comes with a professional guidebook—including ideas, guiding questions, and hands-on examples.",
+            "point3": "The Mentor Community is ready to answer questions and share inspiration based on real-world experiences.",
+            "point4": "Mentor Pro members also receive a one-on-one onboarding session with an expert to tailor deck choices and workshop designs to your specific needs.",
+            "point5": "Unsure? Just reach out via chat, email, or through the community. You're never alone in this journey."
+          }
+        }
+      }
     },
     "approvePurchaseDialog": {
       "title": "Payment via PayPal or Credit Card",
@@ -410,6 +517,13 @@
       },
       "paymentTitle": "Please choose a payment method:",
       "paypalTooltip": "If there is an ad blocker in the browser, you need to disable it in order to make a payment"
+    },
+    "readTermsDialog": {
+      "title": "Payment via Credit Card or PayPal",
+      "termsText": "I confirm that I have read and agree to",
+      "termsLink": "these terms",
+      "termsDescription": "and understand that I must check this box to continue to secure payment.",
+      "continueButton": "Continue to Payment"
     },
     "portraitWarningDialog": {
       "content": {
@@ -506,7 +620,7 @@
           "pBold": "Instructions for using the ZOOM software (there are similar options in other video software such as: Skype, Teams and more):",
           "ol1": "On the \"All Card Sets\" page, choose the card set you want to use.",
           "ol2": "Click on the \"Guidebook\" button located on the upper left side of this page.",
-          "ol3": "In the ZOOM software, click on the - “SHARE” button located in the center of the ZOOM application and in its lower part.",
+          "ol3": "In the ZOOM software, click on the - \"SHARE\" button located in the center of the ZOOM application and in its lower part.",
           "ol4": "You should choose to share the screen for your browser where the card set is displayed. Note that the default option is to display the entire screen and we do not want that, but only your browser."
         },
         "content5": {
@@ -684,7 +798,7 @@
             "ol": {
               "li1": "On the \"All Card Sets\" page, choose the card set you want to use.",
               "li2": "Click on the \"Guidebook\" button located on the upper left side of this page.",
-              "li3": "In the ZOOM software, click on the - “SHARE” button located in the center of the ZOOM application and in its lower part.",
+              "li3": "In the ZOOM software, click on the - \"SHARE\" button located in the center of the ZOOM application and in its lower part.",
               "li4": "You should choose to share the screen for your browser in which the card set is displayed. Note that the default option is to display the entire screen and we do not want that, just your browser."
             }
           },
@@ -1066,7 +1180,7 @@
         "card4": {
           "card-header": "We cultivate a community with you",
           "card-container1": "Position yourself as an authority in our community",
-          "card-container2": "“Mentor-Cards”",
+          "card-container2": "\\\"Mentor-Cards\\\"",
           "card-container3": "Professional training, networking meetings and more treats!"
         },
         "card3": {
@@ -1419,7 +1533,7 @@
     "siteRules": {
       "title": "All rights reserved to the creators of the site Mentor-Cards ©",
       "summery": {
-        "rule1": "All information and/or display on the site including graphics, design, verbal presentation, trademarks, “logo” signs and their editing and presentation are the exclusive property of the site and may not be copied, duplicated, distributed, publicly displayed, transferred to a third party, published or used in any other way in the contents appearing on the site, unless the site has given its consent to do so in writing and in advance.",
+        "rule1": "All information and/or display on the site including graphics, design, verbal presentation, trademarks, \"logo\" signs and their editing and presentation are the exclusive property of the site and may not be copied, duplicated, distributed, publicly displayed, transferred to a third party, published or used in any other way in the contents appearing on the site, unless the site has given its consent to do so in writing and in advance.",
         "rule2": "The site will not be responsible for any direct or indirect damage, bodily, financial or other, caused to a person or a visitor to the site as a result of using the information appearing on the site.",
         "rule3": "The information appearing on the site should be seen as auxiliary information only.",
         "rule4": "Those interested in displaying content from this site or collaborations should contact Mentor-cards in writing and only after our written approval can you use the contents.",
@@ -1429,7 +1543,31 @@
     },
     "dialogs": {
       "commonLink": "Send to participants"
+    },
+    "facebookWelcomeDialog": {
+      "title": "Just one more step - to get the maximum benefit from Mentor Cards!",
+      "intro": "Joining Mentor Cards – now is the time to become part of our community and experience working with cards and knowledge specialization.",
+      "benefits": "In our Facebook group you will find everything:",
+      "benefit1": "Updates on new cards",
+      "benefit2": "Advanced technologies for working with existing cards",
+      "benefit3": "Learning sessions, training, and exclusive features",
+      "benefit4": "Sharing and conversations with connected mentors",
+      "lastLine": "This is the way to create the most engaging, open, and connected experience to a real community.",
+      "facebookButton": "Join Our Facebook Community",
+      "continueButton": "Continue"
     }
   },
-  "selectLanguageTooltip": "Select a language"
+  "selectLanguageTooltip": "Select a language",
+     "facebookWelcomeDialog": {
+      "title": "Just one more step – to complete your Mentor Cards experience",
+      "intro": "You've joined Mentor Cards – now it's time to join the community that lives and breathes cards and personal growth.",
+      "benefits": "In our Facebook group, you'll be the first to discover:",
+      "benefit1": "New card decks",
+      "benefit2": "Surprising techniques for working with existing decks",
+      "benefit3": "Learning sessions, tutorials, and exclusive offers",
+      "benefit4": "Ideas, inspiration, and real stories from fellow mentors",
+      "lastLine": "This is how you keep the experience alive, evolving, and connected to a true professional community.",
+      "facebookButton": "Join Facebook Community",
+      "continueButton": "Continue"
+    }
 }

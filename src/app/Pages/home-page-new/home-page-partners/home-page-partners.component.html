@@ -1,5 +1,10 @@
-<div>
-  <div class="text-black sm:text-4xl text-2xl font-bold mt-24 text-center">
+<div [ngClass]="isPricePage ? 'bg-[#fcf4f2]' : ''">
+  <div
+    class="text-black sm:text-4xl text-2xl font-bold text-center"
+    [ngClass]="isPricePage ? '' : 'mt-24 '"
+    [class.text-left]="langDirectionService.currentLang !== 'he'"
+    [class.text-right]="langDirectionService.currentLang === 'he'"
+  >
     {{ "pages.home-page.sections.partners.content.title1" | translate }}
   </div>
   <div class="px-4">
@@ -9,7 +14,8 @@
           <img
             [src]="logos[currentLogoIndex].src"
             [alt]="logos[currentLogoIndex].alt"
-            class="h-[60px] w-auto object-contain home-page-partners-logo"
+            class="w-auto object-contain home-page-partners-logo"
+            [ngClass]="isPricePage ? 'h-[30px] ' : 'h-[60px] '"
           />
         </div>
       </ng-container>
@@ -25,35 +31,42 @@
   </div>
 </div>
 
-  <!-- <div class="col-span-1 flex justify-center items-center"></div> -->
-  <div class="col-span-1 flex justify-center items-center">
-    <div class="w-full mx-12">
-      <div
+<!-- <div class="col-span-1 flex justify-center items-center"></div> -->
+<div class="col-span-1 flex justify-center items-center" *ngIf="!isPricePage">
+  <div class="w-full mx-12">
+    <div
       class="text-whblackite sm:text-4xl text-2xl font-bold sm:mt-24 mt-8 text-center"
-      [innerHTML]="'pages.home-page.sections.partners.content.description1' | translate | lineBreak"
+      [innerHTML]="
+        'pages.home-page.sections.partners.content.description1'
+          | translate
+          | lineBreak
+      "
     ></div>
     <div
-      class="text-black w-full  text-center sm:text-base text-md font-bold"
-      [innerHTML]="'pages.home-page.sections.partners.content.description3' | translate | lineBreak"
+      class="text-black w-full text-center sm:text-base text-md font-bold"
+      [innerHTML]="
+        'pages.home-page.sections.partners.content.description3'
+          | translate
+          | lineBreak
+      "
     ></div>
-      <div
-      class="col-span-1 flex justify-center items-center"
-    >
+    <div class="col-span-1 flex justify-center items-center">
       <img
-        style="height:100px"
+        style="height: 100px"
         src="/assets/New/home-page/signature.png"
         alt="Signature"
         class="signature-image"
       />
     </div>
-      <div class="flex justify-center">
-        <a [routerLink]="'/about-page'"
-          class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold client-button text-lg mt-8 mb-20 text-center"
-        >
-          {{
-            "pages.home-page.sections.partners.content.button.text" | translate
-          }}
-        </a>
-      </div>
+    <div class="flex justify-center">
+      <button
+        class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold client-button text-lg mt-8 mb-20 text-center"
+        (click)="handleClick()"
+      >
+        {{
+          "pages.home-page.sections.partners.content.button.text" | translate
+        }}
+      </button>
     </div>
   </div>
+</div>

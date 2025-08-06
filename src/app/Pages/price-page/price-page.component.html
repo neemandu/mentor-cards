@@ -1,212 +1,1507 @@
-<div id="content" class="d-flex flex-column align-items-center" [dir]="langDirectionService.currentLangDirection">
-  <!-- <h1>מצטרפים לתכנית ונהנים מעד 30% הנחה!</h1> -->
-  <img
-    id="top-image"
-    src="https://master-cards.s3.eu-west-2.amazonaws.com/responsive.png"
-    alt="Desktop laptop tablet and phone showing Mentor-cards responsive abilities"
-  />
-  <span id="title" *ngIf="!userData?.orgMembership"> {{ "pages.price-page.our-plans-title" | translate }}</span
-  >
-  <br />
-</div>
-<div style="text-align: center" [dir]="langDirectionService.currentLangDirection">
-  <div *ngIf="subPlans" class="program-cards">
-    <mat-card>
-      <mat-card-title>  {{ "pages.price-page.monthly-plan-title" | translate }}</mat-card-title>
-      <mat-card-content>
-        <br>
-        <p class="price-line">
-          {{ "pages.price-page.month-label" | translate }} /
-          <span class="price-number"
-            >₪{{
-              monthlySubscription.fullPrice /
-                monthlySubscription?.billingCycleInMonths
-            }}</span
-          >
-        </p>
-        <br />
-        <ul>
-          <li>
-            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
-            <li>
-              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
-            <li>
-              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          id="monthlySubscription"
-          *ngIf="userSingedIn &&
-            (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 1)
-          "
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="checkFreePeriod(monthlySubscription.id)"
+<div>
+  <div class="md:h-[72vh] h-[50vh]">
+    <div class="hero-container">
+      <div class="flex justify-center h-[100%] items-center flex-col">
+        <div
+          style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25)"
+          class="text-center w-[80vw] xl:text-7xl lg:text-6xl md:text-5xl text-4xl font-bold text-white"
         >
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-        <button
-          *ngIf="userSingedIn &&
-            userData?.status === 'PLAN' &&
-            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 1
-          "
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-      {{ "pages.price-page.already-registered-button-text" | translate }}  
-        </button>
-        <button
-        *ngIf="!userSingedIn"
-        class="popular-purchase-btn purchase-btn"
-        type="button"
-        (click)="signInSignUp()">
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card id="popular-mat-card">
-      <mat-card-title>  {{ "pages.price-page.yearly-plan-title" | translate }}</mat-card-title>
-      <mat-card-content>
-        <br>
-        <p class="price-line">
-          {{ "pages.price-page.year-label" | translate }} /
-          <span class="price-number"
-            >₪{{
-              yearlySubscription.fullPrice
-            }}</span
-          >
-        </p>
-        <br />
-        <ul>
-          <li>
-            {{ "pages.price-page.free-two-months-instruction" | translate }}    </li>
-          <li>
-            {{ "pages.price-page.full-access-instruction" | translate }}    </li>
-            <li>
-              {{ "pages.price-page.variety-of-guides-instruction" | translate }}           </li>
-            <li>
-              {{ "pages.price-page.connect-from-anywhere-instruction" | translate }}         </li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          id="monthlySubscription"
-          *ngIf="userSingedIn &&
-            (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
-          "
-          class="popular-purchase-btn purchase-btn"
-          type="button"
-          (click)="checkFreePeriod(yearlySubscription.id)"
-        >
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-        <button
-          *ngIf="userSingedIn &&
-            userData?.status === 'PLAN' &&
-            userData.subscription?.subscriptionPlan?.billingCycleInMonths == 12
-          "
-          class="disabled-btn purchase-btn"
-          type="button"
-          disabled
-        >
-      {{ "pages.price-page.already-registered-button-text" | translate }}  
-        </button>
-        <button
-        *ngIf="!userSingedIn"
-        class="popular-purchase-btn purchase-btn"
-        type="button"
-        (click)="signInSignUp()">
-        {{ "pages.price-page.join-button-text" | translate }}  
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <!--<mat-card id="popular-mat-card">
-      <mat-card-title>   {{ "pages.price-page.popularMatCard.title" | translate }}   </mat-card-title>
-      <mat-card-content>
-        <br>
-        <p class="price-line">
-          {{ "pages.price-page.popularMatCard.payment" | translate }}  <b><u>  {{ "pages.price-page.popularMatCard.onceBold" | translate }}  </u></b>  {{ "pages.price-page.popularMatCard.inTotal" | translate }}
-          <span class="price-number"
-            >₪{{
-             yearlySubscription.fullPrice
-            }}
-          </span>
-        </p>
-        <br />     
-        <ul>
-          <li>חודשיים מתנה!</li>
-          <li>
-            {{ "pages.price-page.popularMatCard.benefits.fullAccess" | translate }}     </li>
-            <li>
-              {{ "pages.price-page.popularMatCard.benefits.futureAccess" | translate }}         </li>
-            <li>
-              {{ "pages.price-page.popularMatCard.benefits.variety" | translate }}      </li>
-            <li>
-              {{ "pages.price-page.popularMatCard.benefits.connectAnywhere" | translate }}  
-            </li>
-        </ul></mat-card-content>
-      <mat-card-actions>
-        <button
-          *ngIf="userSingedIn &&
-            (userData?.status === 'NOPLAN' ||
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths != 12)
-          "
-          class="popular-purchase-btn purchase-btn"
-          (click)="checkFreePeriod(yearlySubscription.id)"
-        >
-        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}  
-        </button>
-        <button
-          *ngIf="userSingedIn &&
-            userData?.status === 'PLAN' &&
-            userData?.subscription?.subscriptionPlan?.billingCycleInMonths == 12
-          "
-          class="disabled-btn purchase-btn"
-          disabled
-        >
-        {{ "pages.price-page.popularMatCard.registeredBtn" | translate }}  
-        </button>
-        <button
-        *ngIf="!userSingedIn"
-        class="popular-purchase-btn purchase-btn"
-        (click)="signInSignUp()">
-        {{ "pages.price-page.popularMatCard.joinBtn" | translate }}     
-        </button>
-      </mat-card-actions>
-    </mat-card>  -->
- 
-    <mat-card>
-      <mat-card-title>     {{ "pages.price-page.orgsMatCard.title" | translate }}   </mat-card-title>
-      <mat-card-content class="orgs"> {{ "pages.price-page.orgsMatCard.content" | translate }}  
-      </mat-card-content>
-      <mat-card-actions>
-        <a
-          routerLink="/contact-us"
-          class="popular-purchase-btn purchase-btn flex justify-center text-decoration-none"
-        >
-        {{ "pages.price-page.orgsMatCard.contactBtn" | translate }}  
-        </a>
-      </mat-card-actions>
-    </mat-card>
-  </div>      
-  <br><br>
-<button class="coupon"
-id="couponCodeBtn"
-type="button"
-(click)="openEnterCouponCodeModal()"
->
-{{ "pages.price-page.couponBtn" | translate }}  
-</button><br>
-  <img
-    id="payment-img"
-    alt="Logos of how to pay"
-    src="https://master-cards.s3.eu-west-2.amazonaws.com/paypal.png"
-    alt="Secure Payment"
-  />
-</div>
+          {{ "pages.price-page.hero.title" | translate }} <br />
+          {{ "pages.price-page.hero.subtitle" | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-[#fcf4f2] flex justify-center items-center">
+    <div class="text-center text-lg my-4 font-bold">
+      {{ "pages.price-page.hero-description.line1" | translate }} <br />
+      {{ "pages.price-page.hero-description.line2" | translate }}
+    </div>
+  </div>
 
-<app-information-bar></app-information-bar>
+  <!-- Billing Toggle Section -->
+  <div
+    class="bg-[#fcf4f2] flex justify-center items-center billing-toggle-container"
+  >
+    <div class="flex items-center space-x-2 flex-row md:flex-col">
+      <span
+        class="text-gray-700 font-medium mx-2"
+        [class.text-gray-900]="!isAnnualBilling"
+        >{{ "pages.price-page.billing.monthly" | translate }}</span
+      >
+
+      <div class="relative inline-block w-12 h-6">
+        <input
+          type="checkbox"
+          id="billing-toggle"
+          [(ngModel)]="isAnnualBilling"
+          (ngModelChange)="onBillingToggleChange()"
+          class="sr-only"
+        />
+        <label
+          for="billing-toggle"
+          class="block w-12 h-6 rounded-full bg-gray-300 cursor-pointer transition-colors duration-200 ease-in-out"
+          [class.bg-[#e67c73]]="isAnnualBilling"
+        >
+          <span
+            class="block w-5 h-5 rounded-full bg-white shadow transform transition-transform duration-200 ease-in-out absolute top-0.5"
+            [class.left-0\.5]="
+              langDirectionService.currentLangDirection === 'ltr'
+            "
+            [class.right-0\.5]="
+              langDirectionService.currentLangDirection === 'rtl'
+            "
+            [class.translate-x-6]="
+              isAnnualBilling &&
+              langDirectionService.currentLangDirection === 'ltr'
+            "
+            [class.-translate-x-6]="
+              isAnnualBilling &&
+              langDirectionService.currentLangDirection === 'rtl'
+            "
+          ></span>
+        </label>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <span
+          class="text-gray-700 font-medium"
+          [class.text-gray-900]="isAnnualBilling"
+          >{{ "pages.price-page.billing.annual" | translate }}</span
+        >
+        <span
+          class="gredient-effect text-white text-xs font-medium px-2 py-1 rounded-full mx-2"
+        >
+          {{ "pages.price-page.billing.save-badge" | translate }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Cards Section -->
+  <div class="bg-[#fcf4f2]" style="padding-top: 2rem; padding-bottom: 2rem">
+    <div class="px-4 sm:px-6 lg:px-8 mx-auto" style="max-width: 80rem">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Basic Plan -->
+        <div
+          class="pricing-card bg-white shadow-lg p-8 relative"
+          style="margin-top: 2rem; border-radius: 20px"
+        >
+          <div
+            [class.text-left]="
+              langDirectionService.currentLangDirection === 'ltr'
+            "
+            [class.text-right]="
+              langDirectionService.currentLangDirection === 'rtl'
+            "
+          >
+            <h3 class="mb-2 heading-text" style="color: #212529">
+              {{ "pages.price-page.plans.basic.title" | translate }}
+            </h3>
+            <p class="mb-6" style="color: #7e7e7e">
+              {{ "pages.price-page.plans.basic.subtitle" | translate }}
+            </p>
+            <p class="text-sm mb-4" style="color: #212529">
+              {{ "pages.price-page.plans.basic.description" | translate }}
+            </p>
+
+            <div class="mb-6">
+              <span class="text-4xl font-bold text-gray-900">{{
+                "pages.price-page.plans.basic.price" | translate
+              }}</span>
+              <span class="text-2xl font-bold text-gray-900">
+                {{ "pages.price-page.plans.basic.price-period" | translate }}
+              </span>
+            </div>
+
+            <button
+              class="w-full bg-white border-[#e67c73] rounded-full hover:bg-[#e67c73] text-[#e67c73] font-semibold py-2 px-6 transition-colors duration-200"
+              style="border-width: 1px; font-size: 1rem"
+              (click)="clickOnBasicPlanButton()"
+            >
+              {{ "pages.price-page.plans.basic.button" | translate }}
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <h4
+              class="text-gray-900 mb-4"
+              style="font-weight: 500"
+              [ngClass]="{
+                'text-right mr-10':
+                  langDirectionService.currentLangDirection === 'rtl',
+                'text-left': langDirectionService.currentLangDirection === 'ltr'
+              }"
+            >
+              {{ "pages.price-page.plans.basic.features-title" | translate }}
+            </h4>
+            <ul class="space-y-3">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.free-access"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.platform-features"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.community" | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.training-sessions"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.basic.features.monthly-email"
+                    | translate
+                }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MentorPro Plan -->
+        <div
+          class="pricing-card shadow-lg p-8 relative border-2 transform scale-105"
+          style="background-color: #eef1ff; border-radius: 20px"
+        >
+          <div
+            [class.text-left]="langDirectionService.currentLang !== 'he'"
+            [class.text-right]="langDirectionService.currentLang === 'he'"
+          >
+            <div class="flex justify-start items-start mb-2">
+              <h3
+                class="mb-2 heading-text"
+                style="
+                  color: #212529;
+                  margin-right: 0.5rem;
+                  margin-left: 0.5rem;
+                "
+              >
+                {{ "pages.price-page.plans.mentor-pro.title" | translate }}
+              </h3>
+              <div
+                class="gredient-effect rounded-full text-white px-3 py-1 text-sm font-medium"
+              >
+                {{ "pages.price-page.plans.mentor-pro.badge" | translate }}
+              </div>
+            </div>
+            <p class="mb-6" style="color: #7e7e7e">
+              {{ "pages.price-page.plans.mentor-pro.subtitle" | translate }}
+            </p>
+            <p class="text-sm mb-4" style="color: #212529">
+              {{ "pages.price-page.plans.mentor-pro.description" | translate }}
+            </p>
+
+            <div class="mb-4">
+              <span class="text-4xl font-bold text-gray-900">{{
+                monthlyPrice
+              }}</span>
+              <span class="text-2xl font-bold text-gray-900">
+                {{ pricePeriod }}</span
+              >
+            </div>
+            <div
+              class="mb-6 flex justify-start items-center gap-4"
+              *ngIf="isAnnualBilling"
+            >
+              <span
+                class="gredient-effect text-white px-2 py-1 rounded-full text-xs ml-2"
+              >
+                {{
+                  "pages.price-page.plans.mentor-pro.save-amount" | translate
+                }}
+              </span>
+              <p class="text-xs text-gray-500 p-0 m-0">
+                {{
+                  "pages.price-page.plans.mentor-pro.save-description"
+                    | translate
+                }}
+              </p>
+            </div>
+
+            <button
+              class="w-full bg-[#e67c73] hover:bg-[#d96459] text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200"
+              (click)="
+                checkFreePeriod(
+                  isAnnualBilling
+                    ? yearlySubscription?.id
+                    : monthlySubscription?.id
+                )
+              "
+            >
+              {{ "pages.price-page.plans.mentor-pro.button" | translate }}
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <h4
+              class="text-gray-800 mb-4"
+              style="font-weight: 500"
+              [ngClass]="{
+                'text-right mr-10':
+                  langDirectionService.currentLangDirection === 'rtl',
+                'text-left': langDirectionService.currentLangDirection === 'ltr'
+              }"
+            >
+              {{
+                "pages.price-page.plans.mentor-pro.features-title" | translate
+              }}
+            </h4>
+            <ul class="space-y-3">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.full-access"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.professional-guidebooks"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                *ngIf="isAnnualBilling"
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span
+                  class="text-sm text-gray-600"
+                  [innerHTML]="
+                    'pages.price-page.plans.mentor-pro.features.onboarding'
+                      | translate
+                  "
+                ></span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.pro-events"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.community-membership"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.learning-library"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.professional-email"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-pro.features.priority-access"
+                    | translate
+                }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mentor Teams Plan -->
+        <div
+          class="pricing-card bg-white shadow-lg p-8 relative"
+          style="margin-top: 2rem; border-radius: 20px"
+        >
+          <div
+            [class.text-left]="langDirectionService.currentLang !== 'he'"
+            [class.text-right]="langDirectionService.currentLang === 'he'"
+          >
+            <h3 class="mb-2 heading-text" style="color: #212529">
+              {{ "pages.price-page.plans.mentor-teams.title" | translate }}
+            </h3>
+            <p class="mb-6" style="color: #7e7e7e">
+              {{ "pages.price-page.plans.mentor-teams.subtitle" | translate }}
+            </p>
+            <p class="text-sm mb-6" style="color: #212529">
+              {{
+                "pages.price-page.plans.mentor-teams.description1" | translate
+              }}
+            </p>
+            <p class="text-sm mb-8" style="color: #212529">
+              {{
+                "pages.price-page.plans.mentor-teams.description2" | translate
+              }}
+            </p>
+
+            <button
+              class="w-full bg-white border-[#e67c73] rounded-full hover:bg-[#e67c73] text-[#e67c73] font-semibold py-2 px-6 transition-colors duration-200"
+              (click)="contactUsForTeams()"
+              style="border-width: 1px"
+            >
+              {{ "pages.price-page.plans.mentor-teams.button" | translate }}
+            </button>
+          </div>
+
+          <div class="mt-8">
+            <h4
+              class="font-semibold text-gray-900 mb-4"
+              [ngClass]="{
+                'text-right mr-10':
+                  langDirectionService.currentLangDirection === 'rtl',
+                'text-left': langDirectionService.currentLangDirection === 'ltr'
+              }"
+            >
+              {{
+                "pages.price-page.plans.mentor-teams.features-title" | translate
+              }}
+            </h4>
+            <ul class="space-y-3">
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-teams.features.multi-user"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-teams.features.support"
+                    | translate
+                }}</span>
+              </li>
+              <li
+                class="flex items-start"
+                [class.text-right]="
+                  langDirectionService.currentLangDirection === 'rtl'
+                "
+                [class.text-left]="
+                  langDirectionService.currentLangDirection === 'ltr'
+                "
+              >
+                <svg
+                  class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0"
+                  fill="#7986cb"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="text-sm text-gray-600">{{
+                  "pages.price-page.plans.mentor-teams.features.payment"
+                    | translate
+                }}</span>
+              </li>
+            </ul>
+
+            <div class="mt-6 text-center">
+              <p class="text-sm text-gray-500 italic">
+                {{
+                  "pages.price-page.plans.mentor-teams.footer-note" | translate
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="
+          margin-top: 5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <button
+          class="w-fit bg-[#e67c73] hover:bg-[#d96459] text-white font-semibold rounded-full transition-colors duration-200"
+          (click)="openEnterCouponCodeModal()"
+          style="border-width: 1px; padding: 0.5rem 1rem"
+        >
+          {{ "pages.price-page.promo-code-button" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Plan Features Comparison Section -->
+  <!-- Desktop/Web View (hidden on mobile) -->
+  <div class="hidden md:block bg-[#fcf4f2] py-16">
+    <div class="px-4 sm:px-6 lg:px-8 mx-auto" style="max-width: 80rem">
+      <div class="text-center mb-12" style="border-bottom: 1px solid #7e7e7e">
+        <h2 class="font-bold mb-4" style="font-weight: 700; font-size: 2rem">
+          {{ "pages.price-page.features-comparison.title" | translate }}
+        </h2>
+      </div>
+
+      <div class="overflow-x-auto features-table-container">
+        <table class="w-full features-table">
+          <!-- Table Header -->
+          <thead>
+            <tr>
+              <th
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+                class="py-4 pr-8 w-1/2"
+              ></th>
+              <th class="text-center py-4 px-4 w-1/4">
+                <div
+                  class="font-bold text-lg text-gray-900"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
+                  {{
+                    "pages.price-page.features-comparison.basic-title"
+                      | translate
+                  }}
+                </div>
+                <div
+                  class="text-sm mt-1"
+                  style="color: #7e7e7e"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
+                  {{
+                    "pages.price-page.features-comparison.basic-price"
+                      | translate
+                  }}
+                </div>
+              </th>
+              <th class="text-center py-4 px-4 w-1/4">
+                <div
+                  class="font-bold text-lg text-gray-900"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
+                  {{
+                    "pages.price-page.features-comparison.mentor-pro-title"
+                      | translate
+                  }}
+                </div>
+                <div
+                  class="text-sm mt-1"
+                  style="color: #7e7e7e"
+                  [class.text-left]="langDirectionService.currentLang !== 'he'"
+                  [class.text-right]="langDirectionService.currentLang === 'he'"
+                >
+                  {{ monthlyPrice }} {{ pricePeriod }}
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <!-- Table Body -->
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.two-decks"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.platform-features"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.community-membership"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.monthly-email"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.all-decks"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.recorded-trainings"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.in-depth-guidebooks"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.mentor-pro-events"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.advanced-email"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.marketing-tools"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.priority-access"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start">
+                <span class="feature-dash">−</span>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img src="./../../../assets/correct.png" alt="icon" class="" />
+              </td>
+            </tr>
+
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+              <td
+                class="py-4 pr-8 text-gray-700"
+                [class.text-left]="langDirectionService.currentLang !== 'he'"
+                [class.text-right]="langDirectionService.currentLang === 'he'"
+              >
+                {{
+                  "pages.price-page.features-comparison.features.onboarding-session"
+                    | translate
+                }}
+              </td>
+              <td class="py-4 px-4 text-start relative">
+                <div class="flex items-center justify-start">
+                  <span class="feature-dash">−</span>
+                  <div class="tooltip-container">
+                    <svg
+                      class="info-icon"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                    <div
+                      class="tooltip-content"
+                      [class.tooltip-left]="
+                        langDirectionService.currentLang !== 'he'
+                      "
+                      [class.tooltip-right]="
+                        langDirectionService.currentLang === 'he'
+                      "
+                    >
+                      {{
+                        "pages.price-page.features-comparison.features.onboarding-session-tooltip"
+                          | translate
+                      }}
+                      <div
+                        class="tooltip-arrow"
+                        [class.tooltip-arrow-left]="
+                          langDirectionService.currentLang !== 'he'
+                        "
+                        [class.tooltip-arrow-right]="
+                          langDirectionService.currentLang === 'he'
+                        "
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="py-4 px-4 text-start">
+                <img
+                  *ngIf="isAnnualBilling"
+                  src="./../../../assets/correct.png"
+                  alt="icon"
+                  class=""
+                />
+                <span *ngIf="!isAnnualBilling" class="feature-dash">−</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile View (shown only on mobile) -->
+  <div class="block md:hidden">
+    <app-mobile-features-comparison
+      [monthlyPrice]="monthlyPrice"
+      [pricePeriod]="pricePeriod"
+      [isAnnualBilling]="isAnnualBilling"
+    ></app-mobile-features-comparison>
+  </div>
+  <div style="padding-top: 2rem" class="bg-[#fcf4f2]">
+    <app-home-page-partners [isPricePage]="true"></app-home-page-partners>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="bg-[#fcf4f2] py-16">
+    <div
+      class="px-4 sm:px-6 lg:px-8 mx-auto"
+      style="max-width: 80rem; padding-top: 2rem"
+    >
+      <div class="text-center mb-12">
+        <div class="sm:text-4xl text-2xl font-bold text-black mb-4">
+          {{ "pages.price-page.faq.title" | translate }}
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[1]"
+          [style.background-color]="faqOpen[1] ? '#fcf4f2' : ''"
+        >
+          <button
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
+            (click)="toggleFaq(1)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              {{
+                "pages.price-page.faq.questions.digital-cards.question"
+                  | translate
+              }}
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[1] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[1]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
+            <p class="text-gray-600 leading-relaxed">
+              <span
+                [innerHTML]="
+                  'pages.price-page.faq.questions.digital-cards.answer'
+                    | translate
+                "
+              ></span>
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[2]"
+          [style.background-color]="faqOpen[2] ? '#fcf4f2' : ''"
+        >
+          <button
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
+            (click)="toggleFaq(2)"
+          >
+            <span
+              class="font-medium text-gray-900"
+              style="font-size: 1rem"
+              [innerHTML]="
+                'pages.price-page.faq.questions.community-vs-pro.question'
+                  | translate
+              "
+            >
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[2] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[2]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
+            <div class="text-gray-600 leading-relaxed">
+              <p
+                class="mb-3"
+                [innerHTML]="
+                  'pages.price-page.faq.questions.community-vs-pro.answer1'
+                    | translate
+                "
+              ></p>
+              <p>
+                {{
+                  "pages.price-page.faq.questions.community-vs-pro.answer2"
+                    | translate
+                }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[3]"
+          [style.background-color]="faqOpen[3] ? '#fcf4f2' : ''"
+        >
+          <button
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
+            (click)="toggleFaq(3)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              {{
+                "pages.price-page.faq.questions.upgrade.question" | translate
+              }}
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[3] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[3]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
+            <p class="text-gray-600 leading-relaxed">
+              {{ "pages.price-page.faq.questions.upgrade.answer" | translate }}
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[4]"
+          [style.background-color]="faqOpen[4] ? '#fcf4f2' : ''"
+        >
+          <button
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
+            (click)="toggleFaq(4)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              {{ "pages.price-page.faq.questions.cancel.question" | translate }}
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[4] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[4]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
+            <p class="text-gray-600 leading-relaxed">
+              {{ "pages.price-page.faq.questions.cancel.answer" | translate }}
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[5]"
+          [style.background-color]="faqOpen[5] ? '#fcf4f2' : ''"
+        >
+          <button
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
+            (click)="toggleFaq(5)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              {{
+                "pages.price-page.faq.questions.custom-deck.question"
+                  | translate
+              }}
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[5] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[5]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
+            <p class="text-gray-600 leading-relaxed">
+              {{
+                "pages.price-page.faq.questions.custom-deck.answer" | translate
+              }}
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[6]"
+          [style.background-color]="faqOpen[6] ? '#fcf4f2' : ''"
+        >
+          <button
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
+            (click)="toggleFaq(6)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              {{
+                "pages.price-page.faq.questions.organization.question"
+                  | translate
+              }}
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[6] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[6]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
+            <p class="text-gray-600 leading-relaxed">
+              {{
+                "pages.price-page.faq.questions.organization.answer" | translate
+              }}
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 7 -->
+        <div
+          class="rounded-lg"
+          [class.bg-white]="faqOpen[7]"
+          [style.background-color]="faqOpen[7] ? '#fcf4f2' : ''"
+        >
+          <button
+            [class]="
+              'w-full px-6 py-2 flex justify-between items-center ' +
+              (langDirectionService.currentLang !== 'he'
+                ? 'text-left'
+                : 'text-right')
+            "
+            (click)="toggleFaq(7)"
+          >
+            <span class="font-medium text-gray-900" style="font-size: 1rem">
+              {{
+                "pages.price-page.faq.questions.deck-choice.question"
+                  | translate
+              }}
+            </span>
+            <svg
+              class="w-5 h-5 text-gray-500 transition-all duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                [attr.d]="faqOpen[7] ? 'M5 12h14' : 'M12 5v14m-7-7h14'"
+              ></path>
+            </svg>
+          </button>
+          <div
+            class="px-6 pb-4"
+            *ngIf="faqOpen[7]"
+            [ngStyle]="{
+              'text-align':
+                langDirectionService.currentLangDirection === 'rtl'
+                  ? 'right'
+                  : 'left'
+            }"
+          >
+            <div class="text-gray-600 leading-relaxed">
+              <p class="mb-3">
+                {{
+                  "pages.price-page.faq.questions.deck-choice.answer-intro"
+                    | translate
+                }}
+              </p>
+              <ul class="list-disc pl-5 space-y-1">
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point1'
+                      | translate
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point2'
+                      | translate
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point3'
+                      | translate
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point4'
+                      | translate
+                  "
+                ></li>
+                <li
+                  [innerHTML]="
+                    'pages.price-page.faq.questions.deck-choice.point5'
+                      | translate
+                  "
+                ></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-home-page-footer></app-home-page-footer>
+</div>

@@ -180,3 +180,11 @@ mat-progress-bar {
 [dir = "ltr"] #formFooter {
   direction: ltr;
 }
+
+.label-phone {
+  padding-right: 84px;
+}
+
+.mat-focused .label-phone {
+  padding-right: 0px;
+}

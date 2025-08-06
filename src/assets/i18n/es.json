@@ -368,43 +368,146 @@
       "plans-title": "planes"
     },
     "price-page": {
-      "our-plans-title": "nuestros planes",
-      "monthly-plan-title": "Plan mensual",
-      "yearly-plan-title": "Plan Anual",
-      "year-label": "dormir",
-      "month-label": "un mes",
-      "free-two-months-instruction": "¡Paga 10 meses y llévate dos meses de regalo!",
-      "full-access-instruction": "Acceso completo a docenas de barajas de cartas.",
-      "variety-of-guides-instruction": "Una gran variedad de libros instructivos, ideas de activación y preguntas orientadoras.",
-      "connect-from-anywhere-instruction": "Puedes conectarte desde cualquier parte del mundo y desde cualquier dispositivo: computadora, teléfono móvil, tableta, proyector y más...",
-      "join-button-text": "para unirse >>",
-      "already-registered-button-text": "Estás registrado en este programa.",
-      "popularMatCard": {
-        "title": "¡Programa de por vida!",
-        "payment": "pago",
-        "onceBold": "Una vez",
-        "inTotal": "en total",
-        "benefits": {
-          "fullAccess": "Acceso completo a docenas de barajas de cartas, ¡de por vida!",
-          "futureAccess": "¡Acceso a todos los conjuntos de tarjetas que se cargarán en el sitio en el futuro!",
-          "variety": "Una gran variedad de libros de formación, ideas de activación y preguntas orientadoras.",
-          "connectAnywhere": "Puedes conectarte desde cualquier parte del mundo y desde cualquier dispositivo: computadora, teléfono móvil, tableta, proyector y más..."
+      "hero": {
+        "title": "Mentor Cards",
+        "subtitle": "Nuestros Planes y Precios"
+      },
+      "hero-description": {
+        "line1": "Acceso instantáneo a mazos de cartas digitales y guías enriquecidas.",
+        "line2": "Crea un impacto real con un solo clic"
+      },
+      "billing": {
+        "monthly": "Mensual",
+        "annual": "Anual (Ahorra 17%)",
+        "save-badge": "2 meses gratis"
+      },
+      "pricing": {
+        "monthly-price": "₪69",
+        "annual-price": "₪690",
+        "monthly-period": "mes",
+        "annual-period": "año",
+        "savings": "Ahorra ₪138"
+      },
+      "plans": {
+        "basic": {
+          "title": "Básico",
+          "subtitle": "Obtén Valor, a Tu Ritmo",
+          "description": "Para aquellos que están empezando, buscando explorar, practicar e inspirarse",
+          "price": "Gratis",
+          "price-period": "/mes",
+          "button": "Comenzar",
+          "features-title": "Incluye:",
+          "features": {
+            "free-access": "Acceso gratuito a dos mazos de cartas digitales, incluyendo dos guías completas",
+            "platform-features": "Características online del mundo real - visualización de cartas visible/oculta, invitaciones individuales/grupales, y más",
+            "community": "Membresía en la Comunidad Mentor - compartir entre pares, inspiración, discusiones y eventos de aprendizaje",
+            "training-sessions": "Participación en sesiones de entrenamiento públicas abiertas",
+            "monthly-email": "Email mensual con contenido curado del campo - ideas, actividades e inspiración"
+          }
         },
-        "joinBtn": "para unirse >>",
-        "registeredBtn": "Estás registrado en este programa."
+        "mentor-pro": {
+          "title": "MentorPro",
+          "badge": "Más Popular",
+          "subtitle": "Plan Profesional",
+          "description": "Para quienes lideran, enseñan, crean e inspiran",
+          "price-period": "/mes",
+          "old-price": "₪69/mes",
+          "save-amount": "Ahorra ₪138",
+          "save-description": "con facturación anual",
+          "button": "Comenzar",
+          "features-title": "Incluye:",
+          "features": {
+            "full-access": "Acceso completo a más de 40 mazos de cartas digitales – incluyendo sets nuevos y exclusivos",
+            "professional-guidebooks": "Guías profesionales con preguntas curadas, instrucciones de actividades y ejemplos del mundo real",
+            "onboarding": "Una sesión 1 a 1 con un experto de Mentor Cards para adaptar la plataforma a tus necesidades específicas",
+            "pro-events": "Acceso a eventos de Mentor Pro – sesiones de entrenamiento enfocadas en desarrollo empresarial y profesional",
+            "community-membership": "Membresía activa y exposición en la Comunidad de Mentores – conexiones, vitrinas de creadores y participación entre pares",
+            "learning-library": "Acceso completo a una biblioteca de aprendizaje digital con talleres y sesiones de entrenamiento para profundizar tu práctica con cartas y más",
+            "professional-email": "Serie de correos profesionales exclusiva – actualizaciones por temas, herramientas prácticas y mejores prácticas",
+            "priority-access": "Acceso prioritario a eventos, descuentos, cursos cerrados y oportunidades especiales"
+          }
+        },
+        "mentor-teams": {
+          "title": "Mentor Teams",
+          "subtitle": "Para Organizaciones, Instituciones y Equipos",
+          "description1": "Ya sea entrenamiento de personal, enriquecimiento profesional o integración de métodos basados en cartas en programas existentes –",
+          "description2": "Mentor Cards ayuda a actualizar tu caja de herramientas organizacional con profundidad, conexión e impacto significativo.",
+          "button": "Contáctanos para programar una llamada",
+          "features-title": "Incluye:",
+          "features": {
+            "multi-user": "Licencia multiusuario e incorporación personalizada – con permisos y acceso basados en roles",
+            "support": "Soporte y entrenamiento profesional – en los dominios genéricos, organizacionales y de facilitación",
+            "payment": "Opciones de pago y facturación flexibles para organizaciones"
+          },
+          "footer-note": "Estaremos encantados de construir el mejor plan para tu equipo"
+        }
       },
-      "orgsMatCard": {
-        "title": "instituciones y organizaciones",
-        "content": "Este es el momento de permitir que las cartas entren en tu entorno organizacional y creen un diálogo que acerque, promueva y desarrolle. Actualice su caja de herramientas organizacional con nosotros. Hable con nosotros y le encontraremos el plan más asequible.",
-        "contactBtn": "¡Háblanos!"
+      "promo-code-button": "¿Tienes un código promocional?",
+      "features-comparison": {
+        "title": "Todas las características de los planes",
+        "basic-title": "Básico",
+        "basic-price": "Gratis",
+        "mentor-pro-title": "MentorPro",
+        "features": {
+          "two-decks": "Acceso a dos mazos de cartas digitales + 2 guías completas",
+          "platform-features": "Uso completo de las características de la plataforma: cartas ocultas/visibles, invitaciones individuales/grupales, sorteo aleatorio y más",
+          "community-membership": "Membresía de la Comunidad de Mentores: compartir, inspiración, consejos y eventos de aprendizaje seleccionados",
+          "monthly-email": "Correo mensual con inspiración curada del campo",
+          "all-decks": "Acceso completo a todos los mazos de cartas en la plataforma (40+)",
+          "recorded-trainings": "Acceso a entrenamientos grabados y sesiones de aprendizaje profesional",
+          "in-depth-guidebooks": "Guías en profundidad con ejercicios, preguntas y ejemplos",
+          "mentor-pro-events": "Participación en eventos MentorPro – aprendizaje, vitrinas de creadores, networking profesional",
+          "advanced-email": "Serie de correos profesionales avanzados por temas y dominios",
+          "marketing-tools": "Exposición de marketing, herramientas empresariales y recursos de desarrollo personal/profesional",
+          "priority-access": "Acceso prioritario a eventos, descuentos y ofertas especiales",
+          "onboarding-session": "Sesión de incorporación 1-a-1 con un experto de Mentor Cards"
+        }
       },
-      "couponBtn": "Para ingresar un código de descuento, haga clic aquí"
+      "faq": {
+        "title": "Preguntas Frecuentes",
+        "questions": {
+          "digital-cards": {
+            "question": "¿Por qué usar mazos de cartas digitales? ¿Cuál es la ventaja?",
+            "answer": "Los mazos de cartas digitales ofrecen accesibilidad instantánea, sin desgaste físico, fácil intercambio con equipos remotos y características mejoradas como aleatorización, modos ocultos/visibles y colaboración en tiempo real. Además, obtienes acceso a una biblioteca creciente de mazos sin preocupaciones de almacenamiento."
+          },
+          "community-vs-pro": {
+            "question": "¿Cuál es la diferencia entre Membresía Comunitaria y una suscripción Mentor Pro?",
+            "answer1": "<strong>Membresía Comunitaria</strong> es gratuita y abierta para todos. Obtienes una muestra de nuestro mundo: dos mazos de cartas digitales, guías, acceso completo a características de la plataforma, sesiones integradas abiertas y un boletín mensual con contenido fresco—un gran comienzo, implementado fácilmente.",
+            "answer2": "<strong>Mentor Pro</strong> es nuestra suscripción profesional para aquellos que guían, crean, enseñan y quieren sobresalir. Todo lo anterior, más talleres y habilidades profesionales, con sesiones alentadoras, talleres de entrenamiento profesional, una plataforma para mostrar tus creaciones y todo lo que necesitas para hacer tu experiencia como facilitador verdaderamente memorable, creativa e impactante."
+          },
+          "upgrade": {
+            "question": "Ya soy parte de la comunidad—¿por qué debería actualizar a Mentor Pro?",
+            "answer": "Mentor Pro desbloquea todo el potencial de la plataforma con más de 40 mazos de cartas, guías profesionales, sesiones de entrenamiento exclusivas, recursos de desarrollo empresarial, soporte prioritario y oportunidades de networking. Si eres serio sobre facilitación y desarrollo de liderazgo, es el siguiente paso natural."
+          },
+          "cancel": {
+            "question": "¿Puedo cancelar mi suscripción en cualquier momento?",
+            "answer": "¡Sí, absolutamente! Puedes cancelar tu suscripción Mentor Pro en cualquier momento a través de la configuración de tu cuenta. Continuarás teniendo acceso a todas las características Pro hasta el final de tu período de facturación actual, y luego volverás automáticamente al nivel gratuito de Membresía Comunitaria."
+          },
+          "custom-deck": {
+            "question": "He creado mi propio mazo de cartas—¿puedo presentarlo en el sitio?",
+            "answer": "¡Nos encanta apoyar a los creadores en nuestra comunidad! Los miembros de Mentor Pro obtienen oportunidades para mostrar su trabajo a través de nuestros programas de spotlight de creadores y eventos comunitarios. También revisamos mazos personalizados de alta calidad para posible inclusión en nuestra biblioteca de plataforma. ¡Contáctanos para discutir tu creación!"
+          },
+          "organization": {
+            "question": "Trabajo en una organización—¿ofrecen un plan personalizado?",
+            "answer": "¡Sí! Nuestro plan Mentor Teams está diseñado específicamente para organizaciones, instituciones y equipos. Ofrecemos licencias multiusuario, incorporación personalizada, permisos basados en roles, soporte dedicado y opciones de pago flexibles. Contáctanos para discutir las necesidades específicas de tu organización y crearemos el plan perfecto para tu equipo."
+          },
+          "deck-choice": {
+            "question": "¿Qué pasa si no estoy seguro de qué mazo elegir o cómo usarlo?",
+            "answer-intro": "Precisamente por eso estamos aquí como Mentor Cards, para que no tengas que adivinar—proporcionamos herramientas inteligentes y soporte humano para guiarte con confianza.",
+            "point1": "Comienza con nuestro <strong>motor de búsqueda inteligente</strong>: filtra mazos por propósito de ubicación, tipo de carta (imagen, palabra o creación), o palabras clave comunes como \\\"empoderamiento\\\", \\\"autoestima\\\".",
+            "point2": "Cada mazo viene con <strong>una guía profesional</strong>—incluyendo ideas, preguntas guía y ejemplos de satisfacción.",
+            "point3": "<strong>La Comunidad de Mentores</strong> está lista para responder preguntas y compartir inspiración basada en experiencia del mundo real.",
+            "point4": "Los miembros de <strong>Mentor Pro</strong> también reciben una sesión de incorporación uno-a-uno con un experto para ayudarte a diseñar con confianza según tus necesidades específicas.",
+            "point5": "¿No estás seguro? Solo contáctanos vía chat, correo o a través de la comunidad. Nunca estás solo en este viaje."
+          }
+        }
+      }
     },
     "approvePurchaseDialog": {
       "title": "Pago mediante PayPal o tarjeta de crédito",
       "summery": {
         "recurringPayment": "Si elige un plan con pago recurrente (mensual/anual/etc.) y no el plan Life-Time, con un pago único, al final del período del plan se le cargará automáticamente a su cuenta otro período, le recordarle por correo electrónico 7 días antes de la refacturación.",
-        "cancelAutoCharge": "Podrás cancelar el cargo automático en cualquier momento a través del área “datos de usuario” de la web y pulsando en “cancelar el cargo automático”.",
+        "cancelAutoCharge": "Podrás cancelar el cargo automático en cualquier momento a través del área \"datos de usuario\" de la web y pulsando en \"cancelar el cargo automático\".",
         "noRefunds": "No se otorgarán reembolsos por pagos de períodos de facturación parciales en el sitio.",
         "bankCharges": "El banco puede cobrar una tarifa de transferencia o una tarifa de conversión.",
         "ageConfirmation": "La elección de continuar expresa su confirmación de que es mayor de 18 años.",
@@ -413,6 +516,13 @@
       },
       "paymentTitle": "Por favor elija un método de pago:",
       "paypalTooltip": "Si hay un bloqueador de publicidad en el navegador, se debe desactivar para poder realizar un pago."
+    },
+    "readTermsDialog": {
+      "title": "Pago mediante tarjeta de crédito o PayPal",
+      "termsText": "Confirmo que he leído y acepto",
+      "termsLink": "estos términos",
+      "termsDescription": "y entiendo que debo marcar esta casilla para continuar al pago seguro.",
+      "continueButton": "Continuar al pago"
     },
     "portraitWarningDialog": {
       "content": {
@@ -600,7 +710,7 @@
           "span3": "cancelaciones",
           "p1": "Todos los usuarios del sitio web disfrutan de acceso gratuito a los juegos de tarjetas en la categoría \"juegos de prueba gratuitos\".",
           "p2": "Al finalizar el período del plan, el plan se renueva automáticamente por otro período, enviamos un correo electrónico 7 días antes de la refacturación.",
-          "p3": "Podrás cancelar el cargo automático en cualquier momento a través del área “datos de usuario” de la web y pulsando en “cancelar el cargo automático”.",
+          "p3": "Podrás cancelar el cargo automático en cualquier momento a través del área \"datos de usuario\" de la web y pulsando en \"cancelar el cargo automático\".",
           "p4": "No se otorgarán reembolsos por pagos de períodos de facturación parciales en el sitio."
         },
         "content7": {
@@ -770,7 +880,7 @@
             "cancellation_policy": {
               "part1": "Todos los usuarios del sitio web se benefician de un período de prueba antes de elegir el programa.",
               "part2": "Al finalizar el período del plan, el plan se renueva automáticamente por otro período, enviamos un correo electrónico 7 días antes de la refacturación.",
-              "part3": "Podrás cancelar el cargo automático en cualquier momento a través del área “datos de usuario” de la web y pulsando en “cancelar el cargo automático”.",
+              "part3": "Podrás cancelar el cargo automático en cualquier momento a través del área \"datos de usuario\" de la web y pulsando en \"cancelar el cargo automático\".",
               "part4": "No se otorgarán reembolsos por pagos de períodos de facturación parciales en el sitio."
             }
           },
@@ -1083,7 +1193,7 @@
         "card4": {
           "card-header": "Cultivando una comunidad contigo",
           "card-container1": "Posicionamiento personal como autoridad profesional en la comunidad de Facebook.",
-          "card-container2": "“Tarjetas de mentor”",
+          "card-container2": "\\\"Tarjetas de mentor\\\"",
           "card-container3": "¡Formaciones profesionales, sesiones de networking y más delicias!"
         },
         "card3": {
@@ -1453,5 +1563,17 @@
     }
   },
   "selectLanguageTooltip": "elige lengua",
-  "id": 91
+  "id": 91,
+  "facebookWelcomeDialog": {
+      "title": "Solo un paso más - para completar tu experiencia con Mentor Cards",
+      "intro": "Te has unido a Mentor Cards - ahora es el momento de unirte a la comunidad que vive y respira tarjetas y crecimiento personal.",
+      "benefits": "En nuestro grupo de Facebook, serás el primero en descubrir:",
+      "benefit1": "Nuevos mazos de tarjetas",
+      "benefit2": "Técnicas sorprendentes para trabajar con mazos existentes",
+      "benefit3": "Sesiones de aprendizaje, tutoriales y ofertas exclusivas",
+      "benefit4": "Ideas, inspiración e historias reales de otros mentores",
+      "lastLine": "Así es como mantienes la experiencia viva, evolucionando y conectada a una verdadera comunidad profesional.",
+      "facebookButton": "Únete a la Comunidad de Facebook",
+      "continueButton": "Continuar"
+    }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 
 @Component({
   selector: 'app-home-page-partners',
@@ -7,9 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page-partners.component.css'],
 })
 export class HomePagePartnersComponent implements OnInit, OnDestroy {
-  constructor(public router: Router) {}
+  @Input() isPricePage: boolean = false;
+  constructor(
+    public router: Router,
+    public langDirectionService: LangDirectionService
+  ) {}
 
   logos = [
+    {
+      src: '../../../assets/About images/Clients/logo2.png',
+      alt: 'logo 2',
+    },
     {
       src: '../../../assets/About images/Clients/maccabi.png',
       alt: 'Maccabi logo',

@@ -23,13 +23,15 @@
   .partner-image {
     height: auto;
     border-radius: 0.75rem;
-    object-fit: cover; width: 100%; height: 100%; max-width: none;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    max-width: none;
   }
 
   .signature-image {
-    width: 80%; 
-    height: 100%; 
-    
+    width: 80%;
+    height: 100%;
   }
 
   .mx-10 {
@@ -54,4 +56,16 @@
   flex-shrink: 0;
   width: 100%;
   transition: transform 0.5s ease;
+}
+
+.h-\[40px\] {
+  height: 40px;
+}
+
+.h-\[60px\] {
+  height: 60px;
+}
+
+.h-\[30px\] {
+  height: 30px;
 }
