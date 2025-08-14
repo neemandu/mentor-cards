@@ -154,7 +154,7 @@ typings/
 amplify/backend/awscloudformation
 # build/
 # dist/
-# node_modules/
+node_modules/
 aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
