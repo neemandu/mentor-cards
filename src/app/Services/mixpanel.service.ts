@@ -33,7 +33,7 @@ export class MixpanelService {
       }
       properties["LogRocket SessionId"] = sessionURL;
     });
-    mixpanel.track(EventTypes[eventName], properties);
+    mixpanel.track(EventTypes[eventName] as string, properties);
   }
 
   identify(userId: string): void {

@@ -418,16 +418,18 @@ exports.handler = async (event, context, callback) => {
         }
         console.log('User does not own this pack');
     
-        console.log('Check if user canceled but paid for the rest of the period');
-        if(user &&    // canceled subscription but before billing cycle ended
-           user.status == "NOPLAN" && 
-           user.cancellationDate != null && 
-           now < getBillingEndDate(user)
-        ){
-            console.log('getBillingEndDate');
-            return event.source['cards'];
-        }
-        console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
-        return [];
-    }    
+        
+    }  
+    
+    console.log('Check if user canceled but paid for the rest of the period');
+    if(user &&    // canceled subscription but before billing cycle ended
+       user.status == "NOPLAN" && 
+       user.cancellationDate != null && 
+       now < getBillingEndDate(user)
+    ){
+        console.log('getBillingEndDate');
+        return event.source['cards'];
+    }
+    console.log('User ' + username + ' is not authorized to view package: ' + event.source['id']);
+    return [];
 };
