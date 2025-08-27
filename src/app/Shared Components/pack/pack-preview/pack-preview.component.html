@@ -138,7 +138,7 @@
             {{ "pages.pack-preview.about-author" | translate }}: </span
           >{{ data.pack.about.text }}
         </p>
-        <a target="_blank" [href]="redirect()" style="color: blue;" >
+        <a href="#" (click)="redirect($event)" style="color: blue;" >
           {{ "pages.pack-preview.go-to-creator-website" | translate }}
         </a>
       </div>
