@@ -1211,8 +1211,12 @@
           "component": "app-home-page-hero",
           "content": {
             "title": "When words run out, the cards come in",
-            "button-1-text": "Try the card decks for free",
-            "button-2-text": "I want a subscription"
+            "guest-link-red": "Try the Free Decks",
+            "guest-link-blue": "Join Mentor-PRO",
+            "no-plan-link-red": "Explore the Decks Waiting for You",
+            "no-plan-link-blue": "Upgrade to Mentor-PRO",
+            "plan-link-red": "See What’s New",
+            "plan-link-blue": "Access All Your Decks"
           }
         },
         "sub-hero": {
