@@ -6,6 +6,9 @@
     "resolveJsonModule": true,
     "outDir": "./dist/out-tsc",
     "allowSyntheticDefaultImports": true,
+    "paths": {
+      "amazon-cognito-identity-js": ["node_modules/amazon-cognito-identity-js"]
+    },
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -17,9 +20,6 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
   },
-  "exclude": [
-    "**/node_modules/amazon-cognito-identity-js"
-  ]
 }
