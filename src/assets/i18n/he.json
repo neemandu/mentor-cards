@@ -1235,8 +1235,12 @@
           "component": "app-home-page-hero",
           "content": {
             "title": "האתר הרשמי לערכות קלפים דיגיטליות",
-            "button-1-text": "נסו את הערכות חינם",
-            "button-2-text": "אני רוצה מנוי"
+            "guest-link-red": "נסו את הערכות חינם",
+            "guest-link-blue": "הצטרפו ל-Mentor-PRO",
+            "no-plan-link-red": "גלו את הערכות שמחכות לכם",
+            "no-plan-link-blue": "שדרגו ל-Mentor-PRO",
+            "plan-link-red": "גלו מה חדש באתר",
+            "plan-link-blue": "גשו לכל הערכות שלכם"
           }
         },
         "sub-hero": {

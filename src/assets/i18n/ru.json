@@ -1231,8 +1231,12 @@
           "component": "приложение-главная-страница-герой",
           "content": {
             "title": "Когда слова закончены, карточки уходят.",
-            "button-1-text": "Вход в колоды карт",
-            "button-2-text": "я хочу подписку",
+            "guest-link-red": "Try the Free Decks",
+            "guest-link-blue": "Join Mentor-PRO",
+            "no-plan-link-red": "Explore the Decks Waiting for You",
+            "no-plan-link-blue": "Upgrade to Mentor-PRO",
+            "plan-link-red": "See What’s New",
+            "plan-link-blue": "Access All Your Decks",
             "image1alt": "Эффективный",
             "image2alt": "Доступен везде",
             "image3alt": "Экологичный"

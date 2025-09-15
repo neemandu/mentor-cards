@@ -8,11 +8,11 @@
                     </div>
                 </div>
                 <div class="flex flex-col text-center sm:flex-row gap-8 mt-8">
-                    <a class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg w-72 text-nowrap" [routerLink]="'/all-packs-page'">
-                        {{ 'pages.home-page.sections.hero.content.button-1-text' | translate }}
+                    <a class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg text-nowrap" [routerLink]="'/all-packs-page'">
+                        {{ redLink() | translate }}
                     </a>
-                    <a class="py-2 bg-[#7986CB] rounded-full px-8 text-white font-bold hero-button text-lg w-72 text-nowrap" [routerLink]="'/price-page'">
-                        {{ 'pages.home-page.sections.hero.content.button-2-text' | translate }}
+                    <a class="py-2 bg-[#7986CB] rounded-full px-8 text-white font-bold hero-button text-lg  text-nowrap" [routerLink]="'/price-page'">
+                       {{ blueLink() | translate }}
                     </a>
                 </div>
             </div>
