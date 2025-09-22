@@ -51,4 +51,7 @@ export class HomePageHeroComponent implements OnInit {
     return ButtonTranslationsName.blue[userStatus];
   }
 
+  getBlueLinkRoute(): string {
+    return this.userAuthService?.userData?.status === UserStatus.PLAN ? '/all-packs-page' : '/price-page';
+  }
 }
