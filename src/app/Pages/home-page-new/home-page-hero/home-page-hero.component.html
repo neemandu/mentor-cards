@@ -9,10 +9,10 @@
                 </div>
                 <div class="flex flex-col text-center sm:flex-row gap-8 mt-8">
                     <a class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg text-nowrap" [routerLink]="'/all-packs-page'">
-                        {{ redLink() | translate }}
+                        {{ redLink | translate }}
                     </a>
-                    <a class="py-2 bg-[#7986CB] rounded-full px-8 text-white font-bold hero-button text-lg  text-nowrap" [routerLink]="getBlueLinkRoute()">
-                       {{ blueLink() | translate }}
+                    <a class="py-2 bg-[#7986CB] rounded-full px-8 text-white font-bold hero-button text-lg  text-nowrap" [routerLink]="blueLinkRoute">
+                       {{ blueLink | translate }}
                     </a>
                 </div>
             </div>

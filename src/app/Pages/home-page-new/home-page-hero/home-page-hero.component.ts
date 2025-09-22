@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserData } from 'src/app/Objects/user-related';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 
 enum UserStatus {
@@ -27,31 +28,36 @@ const ButtonTranslationsName = {
   styleUrls: ['./home-page-hero.component.css']
 })
 export class HomePageHeroComponent implements OnInit {
-
+  blueLinkRoute: string = "";
+  userStatus: UserStatus;
+  
   constructor(
     private userAuthService: UserAuthService, 
     public router: Router
   ) {
   }
+  
 
   ngOnInit(): void {
+    this.userAuthService.userDataEmmiter.subscribe(() => {
+      this.userStatus = (this.userAuthService?.userData?.status ?? UserStatus.GUEST) as UserStatus;
+      this.blueLinkRoute = this.getBlueLinkRoute();
+    });
   }
 
   navigateTo(route: string) {
     this.router.navigateByUrl(route);
   }
 
-  redLink(): string {
-    const userStatus = (this.userAuthService?.userData?.status ?? UserStatus.GUEST) as UserStatus;
-    return ButtonTranslationsName.red[userStatus];
+  get redLink(): string {
+    return ButtonTranslationsName.red[this.userStatus];
   }
 
-  blueLink(): string {
-    const userStatus = (this.userAuthService?.userData?.status ?? UserStatus.GUEST) as UserStatus;
-    return ButtonTranslationsName.blue[userStatus];
+  get blueLink(): string {    
+    return ButtonTranslationsName.blue[this.userStatus];
   }
 
-  getBlueLinkRoute(): string {
+  private getBlueLinkRoute(): string {
     return this.userAuthService?.userData?.status === UserStatus.PLAN ? '/all-packs-page' : '/price-page';
   }
 }
