@@ -3,23 +3,11 @@
 
 const awsmobile = {
     "aws_project_region": "eu-west-2",
-    "aws_cognito_identity_pool_id": "eu-west-2:a021593d-3371-4c8d-9d42-5bc45ad6a2b3",
+    "aws_cognito_identity_pool_id": "eu-west-2:133ae13b-7de0-464d-9a38-4ba2097f7a5e" ,
     "aws_cognito_region": "eu-west-2",
     "aws_user_pools_id": "eu-west-2_JXCusST7A",
     "aws_user_pools_web_client_id": "3737ho2r7qnr67nnpo8s8pts",
-    "oauth": {
-        "domain": "mentor-cards-dev.auth.eu-west-2.amazoncognito.com",
-        "scope": [
-            "phone",
-            "email",
-            "openid",
-            "profile",
-            "aws.cognito.signin.user.admin"
-        ],
-        "redirectSignIn": "http://localhost:4200/all-packs-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/all-packs-page/,https://www.mentor-cards.com/all-packs-page/",
-        "redirectSignOut": "http://localhost:4200/home-page/,https://dev.d15egmtmsipj3q.amplifyapp.com/home-page/,https://www.mentor-cards.com/home-page/",
-        "responseType": "code"
-    },
+    "oauth": { },
     "federationTarget": "COGNITO_USER_POOLS",
     "aws_cognito_username_attributes": [
         "EMAIL"
@@ -45,20 +33,18 @@ const awsmobile = {
     "aws_appsync_region": "eu-west-2",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
     "aws_appsync_apiKey": "da2-2zjhcj5okvethdgdl4svnxmykm",
-    "aws_cloud_logic_custom": [
+    "aws_cloud_logic_custom": [ 
         {
             "name": "PayPalWebhookAPI",
             "endpoint": "https://vgi4o66wki.execute-api.eu-west-2.amazonaws.com/dev",
             "region": "eu-west-2"
         },
-        {
+        { 
             "name": "receiptsAPI",
             "endpoint": "https://ik3h3etb5j.execute-api.eu-west-2.amazonaws.com/dev",
             "region": "eu-west-2"
         }
     ],
-    "aws_user_files_s3_bucket": "invoices214725-dev",
-    "aws_user_files_s3_bucket_region": "eu-west-2"
 };
 
 
