@@ -44,6 +44,9 @@ import { HttpClient } from '@angular/common/http';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { bool } from 'aws-sdk/clients/signer';
 import { confirmationDialogueComponent } from './confirmation-dialog';
+import { environment } from 'src/environments/environment';
+
+const QRB_PATH = 'https://qrb.be/api/link/add?link='
 
 @Component({
   selector: 'app-pack-content-page',
@@ -1153,8 +1156,6 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
     const queryParams = new URLSearchParams();
 
-    debugger;
-
     if (this.packageHistory.removedCards) {
       queryParams.set('removedCards', window.btoa(JSON.stringify(this.packageHistory.removedCards)));
     }
@@ -1166,9 +1167,18 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     }
 
     this.api.MakeCommonLink({ packId: this.id }).then((data) => {
-      const url = window.location.href + '?link=' + data;
-      this.dialog.open(CopyCommonLinkDialogComponent, {
-        data: { linkUrl: url + '&' + queryParams.toString() },
+      const url = window.location.href + '?link=' + data + '&' + queryParams.toString();
+      fetch(QRB_PATH + url, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ environment.qrb_token,
+        }
+      })
+      .then(response => response.json())
+      .then(qrb_data => {
+        this.dialog.open(CopyCommonLinkDialogComponent, {
+          data: { linkUrl: qrb_data.link },
+        });
       });
     });
   }
