@@ -22,4 +22,7 @@
       "dom"
     ],
   },
+  "exclude": [
+    "scripts"
+  ]
 }
