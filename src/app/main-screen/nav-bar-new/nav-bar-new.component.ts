@@ -60,11 +60,11 @@ export class NavBarNewComponent implements OnInit {
       route: '/about-page',
       placeholder: 'About Us',
     },
-    {
-      name: 'pages.nav.navbar.affiliates',
-      route: '/affiliates-page',
-      placeholder: 'Affiliates',
-    },
+    // {
+    //   name: 'pages.nav.navbar.affiliates',
+    //   route: '/affiliates-page',
+    //   placeholder: 'Affiliates',
+    // },
     {
       name: 'pages.nav.navbar.contact-us',
       route: '/home-page',
