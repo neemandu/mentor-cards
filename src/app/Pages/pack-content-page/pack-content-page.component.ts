@@ -1168,7 +1168,8 @@ export class PackContentPageComponent implements OnInit, OnDestroy, AfterViewIni
 
     this.api.MakeCommonLink({ packId: this.id }).then((data) => {
       const url = window.location.href + '?link=' + data + '&' + queryParams.toString();
-      fetch(QRB_PATH + url, {
+      const encodeUrl = encodeURIComponent(url);
+      fetch(QRB_PATH + encodeUrl, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ environment.qrb_token,
