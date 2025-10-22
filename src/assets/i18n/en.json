@@ -134,7 +134,7 @@
         "home": "Home",
         "signin-signup": "Sign In/Sign Up",
         "all-card-packs": "All Card Packs",
-        "digital-courses": "Digital Courses",
+        "digital-courses": "Academy",
         "our-plans": "Our Plans",
         "faq": "FAQ",
         "additional-services": "Additional Services",
@@ -1466,7 +1466,7 @@
                     "text": "Card Sets"
                   },
                   {
-                    "text": "Digital Courses"
+                    "text": "Academy"
                   },
                   {
                     "text": "Our Plans"
@@ -1502,7 +1502,7 @@
                 "text": "Card Sets"
               },
               {
-                "text": "Digital Courses"
+                "text": "Academy"
               },
               {
                 "text": "Our Plans"
