@@ -452,7 +452,7 @@
         "features": {
           "two-decks": "גישה לשתי ערכות קלפים דיגיטליות + 2 ספרי הדרכה",
           "platform-features": "שימוש בכל הפיצ’רים: קלפים סמויים/גלויים, הזמנת יחיד/קבוצה לערכה, שליפת קלף אקראי ועוד",
-          "community-membership": "חברות בקהילת Mentor: התייעצויות מצקועיות, שיתופים, השראה",
+          "community-membership": "חברות בקהילת Mentor: התייעצויות מקצועיות, שיתופים, השראה",
           "monthly-email": "מערך דיוור חודשי עם השראה מהשטח",
           "all-decks": "גישה מלאה לכל ערכות הקלפים באתר (40+), כולל גישה לערכות חדשות",
           "recorded-trainings": "גישה למאגר הדרכות מוקלטות ומפגשי למידה מקצועיים",
@@ -1236,9 +1236,9 @@
           "content": {
             "title": "האתר הרשמי לערכות קלפים דיגיטליות",
             "guest-link-red": "נסו את הערכות חינם",
-            "guest-link-blue": "הצטרפו ל-Mentor-PRO",
+            "guest-link-blue": "הצטרפו ל-MentorPro",
             "no-plan-link-red": "גלו את הערכות שמחכות לכם",
-            "no-plan-link-blue": "שדרגו ל-Mentor-PRO",
+            "no-plan-link-blue": "שדרגו ל-MentorPro",
             "plan-link-red": "גלו מה חדש באתר",
             "plan-link-blue": "גשו לכל הערכות שלכם"
           }
@@ -1588,6 +1588,15 @@
       "lastLine": "זו הדרך להקהיל את החוויה הכי, הנפתחת והמחוברת לקהילה אמיתית.",
       "facebookButton": "הצטרפו לקהילת הפייסבוק",
       "continueButton": "אישור"
+    },
+    "subscribeCard": {
+      "noplanTitle": "הצטרפו לקהילת המנטורים",
+      "noplanSubTitle": "בלחיצת כפתור אחת!",
+      "noplanDescription": "גישה מלאה לכל הערכות, ההדרכות וההטבות.",
+      "noplanLinkText": " הצטרפו עכשיו",
+      "planTitle": "ברוכים הבאים, מנטורים!",
+      "planDescription": "עולם ההשראה והכלים של Mentor Cards פתוח בפניכם.",
+      "planLinkText": "גלו מה חדש באתר"
     }
   },
   "selectLanguageTooltip": "בחר שפה",

@@ -2,19 +2,19 @@
   class="rounded-xl w-44 h-64 p-3 relative bg-[#3d3a3b]"
   [dir]="langDirectionService.currentLangDirection"
 >
-  <div class="flex items-center justify-center mx-auto flex-col text-center">
+  <div class="flex items-center justify-center mx-auto flex-col text-center" style="white-space: normal !important;">
     <img src="/assets/New/cards/crown.svg" alt="" />
-    <div class="text-lg text-white font-bold mt-2">מעל 40 ערכות קלפים</div>
-    <div class="text-lg text-white font-bold">בלחיצת כפתור!</div>
+    <p class="text-lg text-white font-bold mt-1 w-full"> {{ subscribeTitle | translate }}</p>
+    <p *ngIf="!!subscribeSubTitle" class="text-xs text-white font-bold"> {{ subscribeSubTitle | translate }}</p>
 
-    <div class="text-white font-bold mt-2">רק 45 ש”ח לחודש</div>
-    <div class="text-white font-bold">וכל זה שלך!</div>
+    <p class="text-white text-xs font-bold mt-1 whitespace-normal">{{ subscribeDescription | translate }}</p>
     <div>
       <a
-        routerLink="/price-page"
-        class="py-2 bg-[#7986CB] rounded-full px-3 text-white font-bold mt-2 sub-button block"
+        [routerLink]="subscribeRoute"
+        [fragment]="subscribeFragment"
+        class="py-2 bg-[#7986CB] text-xs whitespace-nowrap rounded-full px-3 text-white font-bold mt-1 sub-button block"
       >
-        בואו נעשה את זה
+        {{subscribeLinkText | translate }}
       </a>
     </div>
   </div>

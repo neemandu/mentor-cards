@@ -1212,9 +1212,9 @@
           "content": {
             "title": "When words run out, the cards come in",
             "guest-link-red": "Try the Free Decks",
-            "guest-link-blue": "Join Mentor-PRO",
+            "guest-link-blue": "Join MentorPro",
             "no-plan-link-red": "Explore the Decks Waiting for You",
-            "no-plan-link-blue": "Upgrade to Mentor-PRO",
+            "no-plan-link-blue": "Upgrade to MentorPro",
             "plan-link-red": "See What’s New",
             "plan-link-blue": "Access All Your Decks"
           }
@@ -1559,6 +1559,15 @@
       "lastLine": "This is the way to create the most engaging, open, and connected experience to a real community.",
       "facebookButton": "Join Our Facebook Community",
       "continueButton": "Continue"
+    },
+    "subscribeCard": {
+      "noplanTitle": "Join the Mentor Community",
+      "noplanSubTitle": "With just one click!",
+      "noplanDescription": "Get full access to all decks, guides, and exclusive perks.",
+      "noplanLinkText": "Join Mentor PRO",
+      "planTitle": "Welcome, Mentors!",
+      "planDescription": "The world of inspiration and tools at Mentor Cards is open to you.",
+      "planLinkText": "Discover What’s New"
     }
   },
   "selectLanguageTooltip": "Select a language",
