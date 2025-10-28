@@ -1559,6 +1559,15 @@
       "lastLine": "This is the way to create the most engaging, open, and connected experience to a real community.",
       "facebookButton": "Join Our Facebook Community",
       "continueButton": "Continue"
+    },
+    "subscribeCard": {
+      "noplanTitle": "Join the Mentor Community",
+      "noplanSubTitle": "With just one click!",
+      "noplanDescription": "Get full access to all decks, guides, and exclusive perks.",
+      "noplanLinkText": "Join Mentor PRO",
+      "planTitle": "Welcome, Mentors!",
+      "planDescription": "The world of inspiration and tools at Mentor Cards is open to you.",
+      "planLinkText": "Discover What’s New"
     }
   },
   "selectLanguageTooltip": "Select a language",

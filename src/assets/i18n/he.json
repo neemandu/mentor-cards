@@ -1588,6 +1588,15 @@
       "lastLine": "זו הדרך להקהיל את החוויה הכי, הנפתחת והמחוברת לקהילה אמיתית.",
       "facebookButton": "הצטרפו לקהילת הפייסבוק",
       "continueButton": "אישור"
+    },
+    "subscribeCard": {
+      "noplanTitle": "הצטרפו לקהילת המנטורים",
+      "noplanSubTitle": "בלחיצת כפתור אחת!",
+      "noplanDescription": "גישה מלאה לכל הערכות, ההדרכות וההטבות.",
+      "noplanLinkText": " Mentor PRO – הצטרפו עכשיו",
+      "planTitle": "ברוכים הבאים, מנטורים!",
+      "planDescription": "עולם ההשראה והכלים של Mentor Cards פתוח בפניכם.",
+      "planLinkText": "גלו מה חדש באתר"
     }
   },
   "selectLanguageTooltip": "בחר שפה",
