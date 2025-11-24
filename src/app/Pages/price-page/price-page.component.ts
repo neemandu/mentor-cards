@@ -34,7 +34,7 @@ export class PricePageComponent implements OnInit {
   userData: UserData;
   Subscription: Subscription = new Subscription();
   loggedIn: boolean = false;
-  isAnnualBilling: boolean = true; // Default to annual billing
+  isAnnualBilling: boolean = false; // Default to annual billing
 
   // FAQ functionality
   faqOpen: { [key: number]: boolean } = {};
@@ -65,18 +65,14 @@ export class PricePageComponent implements OnInit {
     this.mixpanelService.track('PageViewed', { 'Page Title': 'price-page' });
     this.overlaySpinnerService.changeOverlaySpinner(true);
 
-    this.Subscription.add(
-      this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
+    this.userAuthService.userDataEmmiter.subscribe((userData: UserData) => {
         this.loggedIn = userData ? true : false;
         this.userData = userData;
-      })
-    );
+    })
 
-    this.Subscription.add(
-      this.userAuthService.subPlansEmmiter.subscribe(() => {
+    this.userAuthService.subPlansEmmiter.subscribe(() => {
         this.getSubscriptionPlans();
-      })
-    );
+    })
     if (this.userAuthService.subPlans) {
       this.getSubscriptionPlans();
     }
@@ -88,7 +84,6 @@ export class PricePageComponent implements OnInit {
 
   getSubscriptionPlans(): void {
     this.subPlans = this.userAuthService.subPlans;
-
     this.monthlySubscription = this.subPlans.find(
       (plan) => plan?.billingCycleInMonths == 1
     );
@@ -142,7 +137,7 @@ export class PricePageComponent implements OnInit {
     return new Date(new Date().getTime() + millisecondsInTwoWeeks);
   }
 
-  get userSingedIn() {
+  get userSingedIn() {    
     this.userData = this.userAuthService.userData;
     this.loggedIn = this.userData ? true : false;
     return this.userData;
@@ -277,7 +272,7 @@ export class PricePageComponent implements OnInit {
 
   clickOnBasicPlanButton(): void {
     // Check if user is logged in
-    if (this.loggedIn && this.userData) {
+    if (this.userSingedIn && this.loggedIn ) {
       // User is logged in, redirect to all-packs-page
       this.navigate('/all-packs-page');
     } else {
