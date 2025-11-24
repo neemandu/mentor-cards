@@ -24,8 +24,8 @@ const ButtonTranslationsName = {
   styleUrls: ['./home-page-hero.component.css']
 })
 export class HomePageHeroComponent implements OnInit {
-  blueLinkRoute: string = "";
-  userStatus: UserPlan;
+  blueLinkRoute = '/price-page';
+  userStatus = UserPlan.GUEST;
   
   constructor(
     private userAuthService: UserAuthService, 
@@ -54,6 +54,6 @@ export class HomePageHeroComponent implements OnInit {
   }
 
   private getBlueLinkRoute(): string {
-    return this.userAuthService?.userData?.status === UserPlan.PLAN ? '/all-packs-page' : '/price-page';
+    return this.userStatus  === UserPlan.PLAN ? '/all-packs-page' : '/price-page';
   }
 }
