@@ -34,7 +34,7 @@ export class PricePageComponent implements OnInit {
   userData: UserData;
   Subscription: Subscription = new Subscription();
   loggedIn: boolean = false;
-  isAnnualBilling: boolean = true; // Default to annual billing
+  isAnnualBilling: boolean = false; // Default to annual billing
 
   // FAQ functionality
   faqOpen: { [key: number]: boolean } = {};
