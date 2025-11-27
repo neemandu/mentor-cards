@@ -11,18 +11,12 @@
                     </div>
                 </div>
                 <div class="hero__buttons">
-                    <a class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg text-nowrap" [routerLink]="blueLinkRoute">
+                    <a class="py-2 bg-[#E67C73] text-center rounded-full px-8 text-white font-bold hero-button text-lg text-nowrap" [routerLink]="blueLinkRoute">
                         {{ 'pages.home-page.sections.hero.content.joinNow' | translate }}
                     </a>
                     <!-- <a class="py-2 bg-[#7986CB] rounded-full px-8 text-white font-bold hero-button text-lg  text-nowrap" [routerLink]="blueLinkRoute">
                        {{ blueLink | translate }}
                     </a> -->
-                </div>
-                <p class="text-white font-bold text-center text-base mt-2" style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25);">
-                    {{ 'pages.home-page.sections.hero.content.datePeriod' | translate }}
-                </p>
-                <div class="hero__gift" [lang]="langDirectionService.currentLang">
-                    <img [src]="langDirectionService.currentLang === 'he' ? '/assets/images/gift-he.png' : '/assets/images/gift-en.png'" alt="Gift image" width="208" height="208" class="w-52 h-52 object-contain" />
                 </div>
                 <p class="text-white font-bold text-center text-base mt-2" style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25);">
                     {{ 'pages.home-page.sections.hero.content.datePeriod' | translate }}
