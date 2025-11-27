@@ -1234,9 +1234,7 @@
         "hero": {
           "component": "app-home-page-hero",
           "content": {
-            "title": "מבצע ל 4 ימים בלבד!",
-            "subtitle": "מצטרפים למנוי שנתי ומקבלים את ערכת קלפי \"נקודת מבט\" במתנה עד הבית",
-            "datePeriod": "תאריכי המבצע 28.11 - 1.12",
+            "title": "האתר הרשמי לערכות קלפים דיגיטליות",
             "guest-link-red": "נסו את הערכות חינם",
             "guest-link-blue": "הצטרפו ל-MentorPro",
             "no-plan-link-red": "גלו את הערכות שמחכות לכם",

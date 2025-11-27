@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserData } from 'src/app/Objects/user-related';
-import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { UserAuthService } from 'src/app/Services/user-auth.service';
 import { UserPlan } from 'src/types/user';
 
@@ -30,8 +29,7 @@ export class HomePageHeroComponent implements OnInit {
   
   constructor(
     private userAuthService: UserAuthService, 
-    public router: Router,
-    public langDirectionService: LangDirectionService,
+    public router: Router
   ) {
   }
   
