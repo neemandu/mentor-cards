@@ -7,7 +7,7 @@
 }
 
 .hero {
-    @apply h-[72vh];
+    @apply h-screen;
 }
 
 .hero__gift {
