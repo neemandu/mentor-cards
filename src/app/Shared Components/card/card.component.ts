@@ -18,8 +18,10 @@ export class CardComponent implements OnInit {
   @Input() imageHeight: number = 219;
   @Input() flipBoxInnerInCat: boolean = false;
   @Input() flippedCardwidth: number;
+  @Input() globalCardBack: string;
 
   isMobileScreen : boolean;
+  cardBack = '/assets/Mentor-Cards-Back.png';
   constructor() {}
 
   newHeight: number = 300;
@@ -31,6 +33,13 @@ export class CardComponent implements OnInit {
   ngOnInit() {
     // console.log('_______',this.cardContent);
     this.calculateNewDimensions();
+    if (this.globalCardBack) {
+      this.cardBack = this.globalCardBack;
+    }
+    
+    if (this.cardContent.backImgUrl) {
+      this.cardBack = this.cardContent.backImgUrl;
+    }
   }
 
   calculateNewDimensions() {

@@ -496,6 +496,7 @@
                   scrollableCardOrd: !flipped && !isDoubleSided,
                   scrollableCard: flipped || isDoubleSided
                 }"
+                [globalCardBack]="pack?.backImgUrl"
                 [cardContent]="card"
                 [mobileView]="true"
                 [selected]="selectedCards.includes(card)"
