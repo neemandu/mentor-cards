@@ -3,19 +3,9 @@
   >
     <div class="flip-box-front" [ngClass]="{'flip-box-absolute': flipped }">
       <img
-        *ngIf="!cardContent?.backImgUrl"
-        alt="Mentor-cards unique cards design for the back of the card"
-        src="/assets/Mentor-Cards-Back.png"
-        [ngClass]="{ '': !selected, 'img-selected': selected }"
-        (contextmenu)="onRightClick()"
-        [style.width.px]="imageWidth"
-        [style.height.px]="imageHeight"
-      />
-      <img
-        *ngIf="cardContent?.backImgUrl"
         alt="Mentor-cards unique cards design for the back of the card" 
-        src="{{ cardContent?.backImgUrl }}"
-        data-src="{{ cardContent?.backImgUrl }}"
+        src="{{ cardBack }}"
+        data-src="{{ cardBack }}"
         [ngClass]="{ '': !selected, 'img-selected': selected }"
         (contextmenu)="onRightClick()"
         [style.height.px]="imageHeight"
