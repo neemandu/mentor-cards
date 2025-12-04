@@ -1,32 +1,14 @@
 .hero-container {
-    background-image: url(/assets/images/black-friday-background.png);
+    background-image: url(./../../../../assets/New/home-page/hero-image.svg);
     height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center top;
-}
-
-.hero {
-    @apply h-screen;
-}
-
-.hero__gift {
-    @apply flex justify-start md:justify-end h-52 w-full;
-}
-
-.hero__gift[lang="en"] {
-    @apply justify-end md:justify-start;
-}
-
-.hero__buttons {
-    @apply flex gap-8 flex-col sm:flex-row justify-center mt-8;
+    background-position: center center;
 }
 
 @media screen and (max-width: 768px) {
     .hero-container {
-        background-image: url(/assets/images/black-friday-background.png);
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-image: url(./../../../../assets/New/home-page/hero-image-mobile.svg);
     }
 
 }

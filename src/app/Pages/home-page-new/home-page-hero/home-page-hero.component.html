@@ -1,28 +1,19 @@
 <div>
-    <div class="hero">
-        <div class="hero-container flex justify-center items-center flex-col">
-            <div>
+    <div class="md:h-[72vh] h-[50vh]">
+        <div class="hero-container">
+            <div class="flex justify-center h-[100%] items-center flex-col">
                 <div class="2xl:text-8xl  xl:text-7xl lg:text-6xl md:text-5xl text-4xl font-bold text-white">
                     <div style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25);" class="text-center w-[80vw]">
                         {{ 'pages.home-page.sections.hero.content.title' | translate }}
                     </div>
-                    <div style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25);" class="text-center w-[80vw]">
-                        {{ 'pages.home-page.sections.hero.content.subtitle' | translate }}
-                    </div>
                 </div>
-                <div class="hero__buttons">
-                    <a class="py-2 bg-[#E67C73] text-center rounded-full px-8 text-white font-bold hero-button text-lg text-nowrap" [routerLink]="blueLinkRoute">
-                        {{ 'pages.home-page.sections.hero.content.joinNow' | translate }}
+                <div class="flex flex-col text-center sm:flex-row gap-8 mt-8">
+                    <a class="py-2 bg-[#E67C73] rounded-full px-8 text-white font-bold hero-button text-lg text-nowrap" [routerLink]="'/all-packs-page'">
+                        {{ redLink | translate }}
                     </a>
-                    <!-- <a class="py-2 bg-[#7986CB] rounded-full px-8 text-white font-bold hero-button text-lg  text-nowrap" [routerLink]="blueLinkRoute">
+                    <a class="py-2 bg-[#7986CB] rounded-full px-8 text-white font-bold hero-button text-lg  text-nowrap" [routerLink]="blueLinkRoute">
                        {{ blueLink | translate }}
-                    </a> -->
-                </div>
-                <p class="text-white font-bold text-center text-base mt-2" style="text-shadow: 4px 5px 5px rgba(0, 0, 0, 0.25);">
-                    {{ 'pages.home-page.sections.hero.content.datePeriod' | translate }}
-                </p>
-                <div class="hero__gift" [lang]="langDirectionService.currentLang">
-                    <img [src]="langDirectionService.currentLang === 'he' ? '/assets/images/gift-he.png' : '/assets/images/gift-en.png'" alt="Gift image" width="208" height="208" class="w-52 h-52 object-contain" />
+                    </a>
                 </div>
             </div>
         </div>

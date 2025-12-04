@@ -577,7 +577,7 @@ export class AllPacksPageNewComponent implements OnInit {
       this.userData = this.userAuthService.userData;
       this.allFavorites = this.userAuthService.favorites;
       this.setAllFavPacksToShow();
-      this.getAllPacks(true);
+      this.getAllPacks(false);
     } else {
       this.getAllPacks(true);
       this.Subscription.add(
