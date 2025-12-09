@@ -436,8 +436,10 @@ exports.handler = async (event) => {
         var shouldProcess = true;
 
         if(event_type == "BILLING.SUBSCRIPTION.CANCELLED" || 
-            event_type == "PAYMENT.SALE.COMPLETED"){
-                if(event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+            event_type == "PAYMENT.SALE.COMPLETED" || 
+            event_type == "BILLING.SUBSCRIPTION.PAYMENT.FAILED"){
+                if(event_type == "BILLING.SUBSCRIPTION.CANCELLED" || 
+                    event_type == "BILLING.SUBSCRIPTION.PAYMENT.FAILED"){
                     transaction_id = paypal_body.resource.id;
         
                     // Liftetime plan - we should not cancel for our customers.
@@ -468,7 +470,8 @@ exports.handler = async (event) => {
                         user = await getUserByPayPalTxId(transaction_id);
                     }
                     var subscription = getSubByTxID(user, transaction_id);
-                    if(user && event_type == "BILLING.SUBSCRIPTION.CANCELLED"){
+                    if(user && event_type == "BILLING.SUBSCRIPTION.CANCELLED" || 
+                        event_type == "BILLING.SUBSCRIPTION.PAYMENT.FAILED"){
                         await cancelUserSubscription(user, transaction_id);
                         await addToUnsubscribersList(user.email, subscription.subscriptionPlan.billingCycleInMonths);
                     }
