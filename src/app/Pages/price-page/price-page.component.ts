@@ -17,6 +17,8 @@ import { MixpanelService } from 'src/app/Services/mixpanel.service';
 import { ReadTermsDialogComponent } from './read-terms-dialog/read-terms-dialog.component';
 import { LangDirectionService } from 'src/app/Services/LangDirectionService.service';
 import { TranslateService } from '@ngx-translate/core';
+import { PlanSubscription  } from 'src/types';
+import { EnterCouponCodeDialogComponent } from '../no-program-page/enter-coupon-code-dialog/enter-coupon-code-dialog.component';
 const millisecondsInMonth: number = 2505600000;
 const millisecondsInTwoWeeks: number = 1209600000;
 
@@ -35,7 +37,6 @@ export class PricePageComponent implements OnInit {
   Subscription: Subscription = new Subscription();
   loggedIn: boolean = false;
   isAnnualBilling: boolean = false; // Default to annual billing
-
   // FAQ functionality
   faqOpen: { [key: number]: boolean } = {};
 
@@ -46,6 +47,10 @@ export class PricePageComponent implements OnInit {
   lifeTimeSubscription: SubscriptionPlan;
   halfYearlySubscriptionPercentage: number;
   yearlySubscriptionPercentage: number;
+  differenceAnnual = 0;
+  defaultPriceMonthly = 69;
+  defaultPriceYearly = 690;
+  symbolCurrency = '₪';
 
   constructor(
     public _snackBar: MatSnackBar,
@@ -85,20 +90,22 @@ export class PricePageComponent implements OnInit {
   getSubscriptionPlans(): void {
     this.subPlans = this.userAuthService.subPlans;
     this.monthlySubscription = this.subPlans.find(
-      (plan) => plan?.billingCycleInMonths == 1
+      (plan) => plan?.billingCycleInMonths === PlanSubscription.MONTHLY
     );
     // console.log("file: price-page.component.ts ~ line 93 ~ getSubscriptionPlans ~ this.monthlySubscrition", this.monthlySubscription)
     this.halfYearlySubscription = this.subPlans.find(
-      (plan) => plan?.billingCycleInMonths == 6
+      (plan) => plan?.billingCycleInMonths === PlanSubscription.HALF_YEARLY
     );
     // console.log("file: price-page.component.ts ~ line 95 ~ getSubscriptionPlans ~ this.halfYearlySubscrition", this.halfYearlySubscription)
     this.yearlySubscription = this.subPlans.find(
-      (plan) => plan?.billingCycleInMonths == 12
+      (plan) => plan?.billingCycleInMonths === PlanSubscription.YEARLY
     );
     // console.log("file: price-page.component.ts ~ line 97 ~ getSubscriptionPlans ~ this.yearlySubscrition", this.yearlySubscription)
     this.lifeTimeSubscription = this.subPlans.find(
-      (plan) => plan?.billingCycleInMonths == 1200
+      (plan) => plan?.billingCycleInMonths === PlanSubscription.LIFETIME
     );
+
+    this.differenceAnnual = this.monthlySubscription.fullPrice * PlanSubscription.YEARLY - this.yearlySubscription.fullPrice;
 
     this.halfYearlySubscriptionPercentage = Math.round(
       100 -
@@ -117,12 +124,36 @@ export class PricePageComponent implements OnInit {
 
   openEnterCouponCodeModal(): void {
     this.mixpanelService.track('ButtonClicked', { Name: 'Enter Coupon code' });
-    if (this.userData) {
-      this.userAuthService.openEnterCouponCodeModal();
+    if (this.userSingedIn && this.loggedIn) {
+      this._openCouponCodeDialog();
     } else {
       this.userAuthService.showSignInModal();
     }
   }
+
+  private _openCouponCodeDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    const dialog = this.dialog.open(
+      EnterCouponCodeDialogComponent,
+      dialogConfig
+    );
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result === 'done') {
+        this._snackBar.open('קוד ההטבה הוזן בהצלחה!', '', {
+          duration: 1000,
+          panelClass: ['rtl-snackbar'],
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    });
+  }
+
+
   public navigate(path: string): void {
     // console.log(path)
     this.ngZone.run(() => this.router.navigate([path]));
@@ -295,9 +326,12 @@ export class PricePageComponent implements OnInit {
   }
 
   get monthlyPrice(): string {
+    const monthlyPrice = this.monthlySubscription?.fullPrice ?? this.defaultPriceMonthly;
+    const yearlyPrice = this.yearlySubscription?.fullPrice ?? this.defaultPriceYearly;
+
     return this.isAnnualBilling
-      ? this.translateService.instant('pages.price-page.pricing.annual-price')
-      : this.translateService.instant('pages.price-page.pricing.monthly-price');
+      ? this.symbolCurrency + yearlyPrice
+      : this.symbolCurrency + monthlyPrice;
   }
 
   get pricePeriod(): string {
@@ -310,6 +344,6 @@ export class PricePageComponent implements OnInit {
 
   get savings(): string {
     if (!this.isAnnualBilling) return '';
-    return this.translateService.instant('pages.price-page.pricing.savings');
+    return this.symbolCurrency + this.differenceAnnual.toString();
   }
 }
