@@ -22,7 +22,7 @@ export class EventTypes {
 export class MixpanelService {
 
   constructor() { 
-    mixpanel.init('1cffb95f74ebf57e272eb712a6cfcf78', {ignore_dnt: true}); 
+    mixpanel.init('1cffb95f74ebf57e272eb712a6cfcf78', {ignore_dnt: true, api_host: 'https://api-eu.mixpanel.com'});
   }
 
 
