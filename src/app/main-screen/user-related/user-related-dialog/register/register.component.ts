@@ -35,9 +35,9 @@ export class RegisterComponent implements OnInit {
   // showLoading: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthService,
-    private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService,
-    private mixpanel: MixpanelService,
-    public langDirectionService: LangDirectionService) { }
+              private overlaySpinnerService: OverlaySpinnerService, private amplifyAuthService: AuthService,
+              private mixpanel: MixpanelService,
+              public langDirectionService: LangDirectionService) { }
 
   ngOnInit(): void {
   }
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
 
   /**
    * (yaniv knobel @ intel . com) -> yanivknobel@intel.com
-   * @param form - form to clean username space out of 
+   * @param form - form to clean username space out of
    */
   trimSpacesEmail(form): void {
     if (form.controls['username'].value !== '')
@@ -78,21 +78,21 @@ export class RegisterComponent implements OnInit {
     // this.registerForm.disable();
     var user: NewUser = {
       "fullName": this.registerForm.get("name").value,
-      "phone": `${phone.dialCode}${phone.number}`,
+      "phone": this.toE164Phone(phone),
       "email": this.registerForm.get("username").value.toLowerCase(),
       "password": this.registerForm.get("password").value,
     }
 
     this.amplifyAuthService.signUp(user).then(data => {
       this.mixpanel.track("SignUp", {"Full name": user.fullName,
-                                    "Phone": user.phone,
-                                    "Email": user.email});
+        "Phone": user.phone,
+        "Email": user.email});
       this.overlaySpinnerService.changeOverlaySpinner(false);
       this.userAuthService._snackBar.open(
         `הרשמה מוצלחת!`, '', {
-        duration: 10000,
-        panelClass: ['rtl-snackbar']
-      });
+          duration: 10000,
+          panelClass: ['rtl-snackbar']
+        });
       this.registeredEmitter.emit({ email: user.email, password: user.password })
       // console.log("file: register.component.ts ~ line 67 ~ this.userAuthService.signUp ~ data", data)
     }, error => {
@@ -107,5 +107,22 @@ export class RegisterComponent implements OnInit {
 
   signInWithGoogle() {
     this.amplifyAuthService.signInWithGoogle();
+  }
+
+  /**
+   * Builds a proper E.164 phone number (e.g. +380961952966) from the telephone-input value.
+   * Guards against a bad/unsynced dialCode by falling back to the raw concatenation only if parsing fails.
+   */
+  private toE164Phone(phone: { number: string; countryCode: string; dialCode: string }): string {
+    try {
+      // @ts-ignore
+      const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+      const parsed = phoneUtil.parse(phone.number, phone.countryCode);
+      // @ts-ignore
+      return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.E164);
+    } catch (e) {
+      console.log('toE164Phone: failed to parse via libphonenumber, falling back to raw concat', e);
+      return `${phone.dialCode}${phone.number}`;
+    }
   }
 }

@@ -70,7 +70,7 @@ export class TelephoneInputComponent implements OnInit, OnDestroy, AfterViewInit
   focused: boolean = false;
   controlType = 'intl-phone';
   autofilled?: boolean;
-  dialCode: string = `+050`;
+  dialCode: string = ``;
   countryCode: string;
 
   @HostBinding() id = `${this.controlType}`;
@@ -100,7 +100,7 @@ export class TelephoneInputComponent implements OnInit, OnDestroy, AfterViewInit
         fetch('https://ipapi.co/json')
           .then(res => res.json())
           .then(data => callback(data.country_code))
-          .catch(() => callback('he'));
+          .catch(() => callback('il'));
       }
     });
 
@@ -151,13 +151,9 @@ export class TelephoneInputComponent implements OnInit, OnDestroy, AfterViewInit
     this.stateChanges.next();
   }
 
-  onCountryChange = () => {    
-    const iso2 = this.intlTelInputInstance.getSelectedCountryData().iso2;
-    const dialCode = this.intlTelInputInstance.getSelectedCountryData().dialCode;
-
-    this.dialCode = `+${dialCode}`;
+  onCountryChange = () => {
+    this.syncSelectedCountry();
     this.stateChanges.next();
-    this.countryCode = iso2;
 
     try {
       // @ts-ignore
@@ -173,7 +169,21 @@ export class TelephoneInputComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   handleChange() {
+    this.syncSelectedCountry();
     this.value = this.phoneInput.nativeElement.value;
+  }
+
+  /**
+   * Re-reads the currently selected country straight from the intl-tel-input widget.
+   * Auto-detected country selection (geoIP) doesn't reliably raise `countrychange`,
+   * so relying only on that event left dialCode/countryCode stuck on stale defaults.
+   */
+  private syncSelectedCountry(): void {
+    const countryData = this.intlTelInputInstance?.getSelectedCountryData();
+    if (countryData?.dialCode) {
+      this.countryCode = countryData.iso2;
+      this.dialCode = `+${countryData.dialCode}`;
+    }
   }
 
   // ControlValueAccessor
